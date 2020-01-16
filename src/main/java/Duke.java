@@ -2,8 +2,9 @@ import java.awt.desktop.SystemSleepEvent;
 import java.util.Scanner;
 
 public class Duke {
-    public static void greet(){
+    public static void greet(String logo){
         System.out.println("    ____________________________________________________________");
+        System.out.println(logo);
         System.out.println("\tHello! I'm Renzo");
         System.out.println("\tWhat can I do for you? Please enter your command:");
         System.out.println("    ____________________________________________________________");
@@ -31,14 +32,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " _____    _____   __   _   ______  _____  \n"
-                +"|  _  \\  | ____| |  \\ | | |___  / /  _  \\ \n"
-                +"| |_| |  | |__   |   \\| |    / /  | | | | \n"
-                +"|  _  /  |  __|  | |\\   |   / /   | | | | \n"
-                +"| | \\ \\  | |___  | | \\  |  / /__  | |_| | \n"
-                +"|_|  \\_\\ |_____| |_|  \\_| /_____| \\_____/ \n";
-        System.out.println(logo);
-        greet();
+        String logo = "\t _____    _____   __   _   ______  _____  \n"
+                +"\t|  _  \\  | ____| |  \\ | | |___  / /  _  \\ \n"
+                +"\t| |_| |  | |__   |   \\| |    / /  | | | | \n"
+                +"\t|  _  /  |  __|  | |\\   |   / /   | | | | \n"
+                +"\t| | \\ \\  | |___  | | \\  |  / /__  | |_| | \n"
+                +"\t|_|  \\_\\ |_____| |_|  \\_| /_____| \\_____/ \n";
+        //System.out.println(logo);
+        greet(logo);
 
         /* Enable to get command from Command Line */
         Scanner scanner = new Scanner(System.in);
