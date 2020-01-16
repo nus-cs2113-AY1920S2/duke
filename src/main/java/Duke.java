@@ -18,6 +18,13 @@ public class Duke {
         System.out.println();
     }
 
+    public static void exit(){
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Bye! See you next time :)");
+        System.out.println("    ____________________________________________________________");
+        System.exit(0);
+    }
+
     public static void main(String[] args) {
         String logo = "      _   _    _   _ U _____ u             \n"
                     + "     |'| |'|U |\"|u| |\\| ___\"|/    ___      \n"
@@ -36,5 +43,6 @@ public class Duke {
             echo(cmd);
             cmd = scanner.nextLine();
         }
+        exit();
     }
 }
