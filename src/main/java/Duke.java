@@ -30,7 +30,7 @@ public class Duke {
 
         if(str.equals("bye")){
             System.out.println("____________________________________________________________");
-            System.out.println("bye");
+            System.out.println("Bye. Hope to see you again soon!");
             System.out.println("____________________________________________________________");
         }else {
             System.out.println(str);
