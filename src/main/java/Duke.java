@@ -10,5 +10,19 @@ public class Duke {
                 + "#       #     # #       #     #\n"
                 + "#        #####  #        #####\n";
         System.out.println("Hello from\n" + logo);
+
+        System.out.println("What can I do for you?");
+        
+        Scanner temp = new Scanner(System.in);
+        String cmd = temp.nextLine();
+
+        while (!cmd.equals("bye")) {
+            lineBreak();
+            System.out.println("\t"+cmd);
+            lineBreak();
+            System.out.println();
+            cmd = temp.nextLine();
+
+        }
     }
 }
