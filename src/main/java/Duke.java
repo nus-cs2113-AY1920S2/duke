@@ -19,7 +19,9 @@ public class Duke {
     }
 
     public static void echoInput(String input) {
+        System.out.println("----------");
         System.out.println(input);
+        System.out.println("----------");
     }
 
     public static void main(String[] args) {
@@ -30,8 +32,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         String userInput = inputScanner.nextLine();
 
-        while(!userInput.equals("bye") ) {
-        // while(userInput != "bye" || userInput != "Bye") {
+        while(!userInput.equals("bye") && !userInput.equals("Bye")) {
             echoInput(userInput);
             System.out.println("Anything else? Remember that you can leave by typing 'bye'.");
             userInput = inputScanner.nextLine();
