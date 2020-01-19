@@ -10,4 +10,9 @@ public class Duke {
         System.out.println("How can I help you today?");
         System.out.println("_________________________________________________");
     }
+
+    private static void printByeMessage() {
+        System.out.println("Goodbye");
+        System.out.println("_________________________________________________");
+    }
 }
