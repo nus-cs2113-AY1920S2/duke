@@ -1,4 +1,4 @@
-import java.util.Scanner
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
@@ -30,6 +30,7 @@ public class Duke {
 
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println(String.format("%50s","Bye, "+ name + ". Hope to see you again soon!"));
+                System.out.println("===================================================");
                 break;
             } else {
                 System.out.println(String.format("%50s",input));
