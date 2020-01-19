@@ -22,18 +22,21 @@ public class Duke {
         System.out.println(input);
     }
 
-
     public static void main(String[] args) {
         intro();
 
-        // Prepre for first input
+        // Prepare for first input
         Scanner inputScanner = new Scanner(System.in);
         System.out.println("What can I do for you?");
         String userInput = inputScanner.nextLine();
 
-        while(args[0] != "bye" || args[0] != "Bye") {
+        while(!userInput.equals("bye") ) {
+        // while(userInput != "bye" || userInput != "Bye") {
             echoInput(userInput);
-
+            System.out.println("Anything else? Remember that you can leave by typing 'bye'.");
+            userInput = inputScanner.nextLine();
         }
+
+        System.out.println("Goodbye!");
     }
 }
