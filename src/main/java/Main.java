@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+
 	public static int taskCounter = 1;
 
 	public static void readInput(Scanner sc, Duke duke) {

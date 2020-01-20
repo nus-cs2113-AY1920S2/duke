@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class Duke {
 	private final List<Task> taskList;
-	
+
 	private Duke(List<Task> newTaskList) {
 		this.taskList = newTaskList;
 	}
