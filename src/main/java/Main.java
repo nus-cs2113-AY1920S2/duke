@@ -2,14 +2,20 @@ import java.util.Scanner;
 
 public class Main {
 	
-	public static void readCommand(Scanner sc, Duke duke) {
+	public static void readInput(Scanner sc, Duke duke) {
 		while (sc.hasNext()) {
-			String command = sc.next();
-			if (command.equals("bye")) {
-				System.out.println("Bye. Hope to see you again soon!");
+			String input = sc.nextLine();
+			
+			switch(input) {
+			case "list":
+				duke.printList();
 				break;
+			case "bye": 
+				duke.printOutput("Bye. Hope to see you again soon!");
+				break;
+			default: 
+				duke.addText(input);
 			}
-			System.out.println(duke.printLine(command));
 		}
 	}
 	
@@ -18,7 +24,7 @@ public class Main {
 		Duke duke = new Duke();
 		
 		System.out.println(duke);
-		readCommand(sc, duke);
+		readInput(sc, duke);
 		
 		sc.close();
 	}
