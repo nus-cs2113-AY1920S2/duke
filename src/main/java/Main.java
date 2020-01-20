@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-	public static int taskIdCounter = 1;
+	public static int taskCounter = 1;
 
 	public static void readInput(Scanner sc, Duke duke) {
 		while(sc.hasNextLine()) {
@@ -21,8 +21,8 @@ public class Main {
 				duke.printEcho("Bye. Hope to see you again soon!");
 				break;
 			default: 
-				duke = duke.addTask(taskIdCounter, input);
-				taskIdCounter++;
+				duke = duke.addTask(taskCounter, input);
+				taskCounter++;
 			}
 		}
 	}

@@ -55,7 +55,7 @@ public class Duke {
 		printBorder();
 		
 		System.out.println("\nHere are the tasks "
-				+ "in your list:");
+				+ "in your list: ");
 		
 		this.taskList
 			.stream()
