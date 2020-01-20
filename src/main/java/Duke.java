@@ -21,7 +21,7 @@ public class Duke {
     private static Vector<Task> list = new Vector<>();
 
     private void printList() {
-        System.out.println("Sure! Lumi shall print out your list!\n");
+        System.out.println("Sure! Lumi shall print out your list!");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i+1 + ". " + list.get(i).getTaskStatus());
         }
@@ -33,6 +33,28 @@ public class Duke {
         System.out.println("Alright, Lumi has added: " + input + "!\n");
     }
 
+    private boolean isValidDoneInput(String input) {
+        String[] words = input.split(" ");
+        // Checks if input contains two words
+        if (words.length != 2) {
+            return false;
+        }
+        // Checks if first word is done
+        if (!words[0].toLowerCase().equals("done")) {
+            return false;
+        }
+        // Checks if second word is a valid list number
+        return words[1].matches("\\d+") && Integer.parseInt(words[1]) <= list.size();
+    }
+
+    private void doTask(String input) {
+        String[] words = input.split(" ");
+        int listNumber = Integer.parseInt(words[1]);
+        list.get(listNumber-1).isDone = true;
+        System.out.println("Well done! Lumi marks this task as completed!\n" +
+                list.get(listNumber-1).getTaskStatus() + "\n");
+    }
+
     private void readInput() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -41,13 +63,17 @@ public class Duke {
         } else if (input.toLowerCase().equals("list")) {
             printList();
         } else {
-            addToList(input);
+            if (isValidDoneInput(input)) {
+                doTask(input);
+            } else {
+                addToList(input);
+            }
         }
         readInput();
     }
 
     private void runChat() {
-        System.out.println("Initializing LumiChat v0.0.1.1...\n\n" +
+        System.out.println("Initializing LumiChat v0.0.1.4...\n\n" +
                 "LumiChat is now ready.\n\n " +
                 "Hey, I'm Lumi!\n How may I assist you today?\n");
 
