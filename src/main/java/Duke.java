@@ -3,18 +3,33 @@ import java.util.Vector;
 
 public class Duke {
 
-    private static Vector list = new Vector();
+    public static class Task {
+        protected String task;
+        protected boolean isDone;
+
+        public Task(String task) {
+            this.task = task;
+            this.isDone = false;
+        }
+
+        public String getTaskStatus() {
+            String icon = isDone ? "\u2713" : "\u2718";
+            return ("[" + icon + "] " + task);
+        }
+    }
+
+    private static Vector<Task> list = new Vector<>();
 
     private void printList() {
         System.out.println("Sure! Lumi shall print out your list!\n");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(i+1 + ". " + list.get(i));
+            System.out.println(i+1 + ". " + list.get(i).getTaskStatus());
         }
         System.out.println();
     }
 
     private void addToList(String input) {
-        list.add(input);
+        list.add(new Task(input));
         System.out.println("Alright, Lumi has added: " + input + "!\n");
     }
 
