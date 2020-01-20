@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
     	Scanner sc = new Scanner(System.in);
-    	ArrayList<String> list = new ArrayList<>();
+    	ArrayList<Task> list = new ArrayList<>();
         String name = "**Rick**";
         String line = "____________________________________________________________";
         System.out.println(line);
@@ -18,23 +18,38 @@ public class Duke {
         		break;
         	} else if (str.equals("list")) {
         		if (list.size() == 0) {
-        			msg = "list is empty";
+        			msg += "list is empty";
         		} else {
+        			msg += "Here are the tasks in your list:" + '\n';
         			int counter = 1;
-        			for (String s : list) {
-        				msg += counter + ".  " + s;
+        			for (Task s : list) {
+        				msg += "    " + counter + ". " + s.toString();
         				counter++;
-        				msg += '\n' + "  ";
+        				msg += '\n';
         			}
         		}
-        	} else {
-        		list.add(str);
+        	} else if (str.split(" ")[0].equals("done")) {
+        		int index = Integer.valueOf(str.split(" ")[1]);
+        		if (index > list.size()) {
+        			msg += "No such task!";
+        		} else if (list.get(index - 1).isDone) {
+        			msg += "Task is already completed!";
+        		} else {
+        			list.get(index - 1).markAsDone();
+        			msg += "Nice! I've marked this task as done: " + '\n';
+        			msg += "    " + list.get(index - 1).toString();
+        		}
+        	}
+        	else {
+        		Task task = new Task(str);
+        		list.add(task);
         		msg += "added: " + str;
         	}
         	System.out.println(line);
         	System.out.println(msg);
         	System.out.println(line + '\n');
         }
+        sc.close();
         System.out.println(line);
         System.out.println("  Bye. Hope to see you again soon!");
         System.out.println(line);
