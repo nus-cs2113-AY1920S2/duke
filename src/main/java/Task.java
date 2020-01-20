@@ -38,12 +38,12 @@ public class Task {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-	    if (obj == this) {
+	public boolean equals(Object object) {
+	    if (object == this) {
 	    	return true;
 	    } 
-	    if (obj instanceof Task) {
-	      Task task = (Task) obj;
+	    if (object instanceof Task) {
+	      Task task = (Task) object;
 	      	return task.taskId == this.taskId;
 	    }
 	    return false;
