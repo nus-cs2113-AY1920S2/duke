@@ -8,16 +8,24 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
 
         Scanner input = new Scanner(System.in);
+        String[] buffer = new String[100];
+        int counter = 0;
 
-        while(true){
+        while(true) {
             String s = input.nextLine();
             System.out.println("    ____________________________________________________________");
-            if (s.contains("bye")){
+            if (s.equalsIgnoreCase("bye")){
                 System.out.println("    Bye. Hope to see you soon!");
                 System.out.println("    ____________________________________________________________");
                 break;
+            } else if(s.equalsIgnoreCase("list")) {
+                for(int i = 0; i < counter; i++) {
+                    System.out.println("    " + (i+1) + ". " + buffer[i]);
+                }
             } else {
-                System.out.println("    " + s);
+                buffer[counter] = s;
+                System.out.println("    added: " + buffer[counter]);
+                counter++;
             }
             System.out.println("    ____________________________________________________________");
         }
