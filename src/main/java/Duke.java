@@ -1,9 +1,21 @@
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Duke {
 
-    private void echoInput(String input) {
-        System.out.println(input + "\n");
+    private static Vector list = new Vector();
+
+    private void printList() {
+        System.out.println("Sure! Lumi shall print out your list!\n");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i+1 + ". " + list.get(i));
+        }
+        System.out.println();
+    }
+
+    private void addToList(String input) {
+        list.add(input);
+        System.out.println("Alright, Lumi has added: " + input + "!\n");
     }
 
     private void readInput() {
@@ -11,10 +23,12 @@ public class Duke {
         String input = scanner.nextLine();
         if (input.toLowerCase().equals("bye")) {
             return;
+        } else if (input.toLowerCase().equals("list")) {
+            printList();
         } else {
-            echoInput(input);
-            readInput();
+            addToList(input);
         }
+        readInput();
     }
 
     private void runChat() {
@@ -37,7 +51,7 @@ public class Duke {
                 " | | |__  | |  |  || | | | | __| | |_ | | |___ | |  |  || |     |   | | |\n" +
                 " | | |__\\ | |     || | | | ||\\__\\| |_\\| | |___\\| |  |  || |  |  |   | | |\n" +
                 "  \\|_____| \\|_____| \\|_|_|_| \\|______| \\|_____| \\|__|__| \\|__|__|    \\|_|\n";
-        System.out.println("Welcome to " + logo);
+        System.out.println("Welcome to\n" + logo);
 
         Duke chatBot = new Duke();
         chatBot.runChat();
