@@ -50,9 +50,13 @@ public class Duke {
     private void doTask(String input) {
         String[] words = input.split(" ");
         int listNumber = Integer.parseInt(words[1]);
-        list.get(listNumber-1).isDone = true;
-        System.out.println("Well done! Lumi marks this task as completed!\n" +
-                list.get(listNumber-1).getTaskStatus() + "\n");
+        if (list.get(listNumber-1).isDone) {
+            System.out.println("Hey!! Lumi already marked <" + list.get(listNumber-1).task + "> as completed!\n");
+        } else {
+            list.get(listNumber - 1).isDone = true;
+            System.out.println("Well done! Lumi marks this task as completed!\n" +
+                    list.get(listNumber - 1).getTaskStatus() + "\n");
+        }
     }
 
     private void readInput() {
