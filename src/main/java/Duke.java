@@ -18,9 +18,9 @@ public class Duke {
     }
 
     private void runChat() {
-        System.out.println("Initializing Asterisk v0.0.1.1...\n\n" +
-                "Asterisk ChatBot is now ready.\n\n " +
-                "Hey, I'm Asterisk!\n How may I assist you today?\n");
+        System.out.println("Initializing LumiChat v0.0.1.1...\n\n" +
+                "LumiChat is now ready.\n\n " +
+                "Hey, I'm Lumi!\n How may I assist you today?\n");
 
         readInput();
 
@@ -28,12 +28,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo =
+                "  __       _______  _______  ________  _______  _______  _______  ________\n" +
+                " |\\_\\     |\\___\\__\\|\\ __\\__\\|\\ ______\\|\\______\\|\\___\\__\\|\\______\\|\\ ______\\\n" +
+                " | | |    | |  |  || |  |  | \\|__   _|| |  ___|| |  |  || |     | \\|__   _|\n" +
+                " | | |    | |  |  || |  |  |   | | |  | | |    | |  |  || |  |  |   | | |\n" +
+                " | | |    | |  |  || |     |   | | |  | | |    | |     || |     |   | | |\n" +
+                " | | |__  | |  |  || | | | | __| | |_ | | |___ | |  |  || |     |   | | |\n" +
+                " | | |__\\ | |     || | | | ||\\__\\| |_\\| | |___\\| |  |  || |  |  |   | | |\n" +
+                "  \\|_____| \\|_____| \\|_|_|_| \\|______| \\|_____| \\|__|__| \\|__|__|    \\|_|\n";
+        System.out.println("Welcome to " + logo);
 
         Duke chatBot = new Duke();
         chatBot.runChat();
