@@ -25,15 +25,24 @@ public class Duke {
         System.out.println(String.format("%50s","Hello " + name + ", Anything I can help you with? "));
         System.out.println("===================================================");
 
-        while (true){
-            String input = sc.nextLine();
+        String[] stringArray = new String[100];
+        int counter = 0;
 
-            if (input.equalsIgnoreCase("bye")) {
+        while (true) {
+            String input = sc.nextLine();
+            if (input.equalsIgnoreCase("list")) {
+                for (int i = 1; i <= counter; i++) {
+                    System.out.println(i +". "+ stringArray[i]);
+                }
+                System.out.println("===================================================");
+            } else if (input.equalsIgnoreCase("bye")) {
                 System.out.println(String.format("%50s","Bye, "+ name + ". Hope to see you again soon!"));
                 System.out.println("===================================================");
                 break;
             } else {
-                System.out.println(String.format("%50s",input));
+                counter ++;
+                System.out.println(String.format("%50s","added: "+ input));
+                stringArray[counter] = input;
                 System.out.println("===================================================");
             }
         }
