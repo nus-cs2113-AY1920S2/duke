@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static ArrayList<String> tasks;
+    private ArrayList<String> tasks;
 
     public Duke() {
         this.tasks = new ArrayList<String>();
