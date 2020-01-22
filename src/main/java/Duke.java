@@ -14,6 +14,8 @@ public class Duke {
         while (true) {
             String str = sc.nextLine();
             String msg = "  ";
+            // to do: split each command into diff methods so as not to 
+            // clutter up the main method
             if (str.equals("bye")) {
                 // exits the program
                 break;
@@ -42,6 +44,26 @@ public class Duke {
                     msg += "Nice! I've marked this task as done: " + '\n';
                     msg += "    " + list.get(index - 1).toString();
                 }
+            } else if (str.split(" ")[0].equals("todo")) {
+            	Task todo = new ToDo(str.substring(5));
+            	list.add(todo);
+            	msg += "Got it. I've added this task: " + '\n';
+            	msg += "    " + todo.toString() + '\n';
+            	msg += "  Now you have " + list.size() + " task(s) in the list.";
+            } else if (str.split(" ")[0].equals("deadline")) {
+            	int ind1 = str.indexOf('/');
+            	Task deadline = new Deadline(str.substring(9, ind1 - 1), str.substring(ind1 + 4));
+            	list.add(deadline);
+            	msg += "Got it. I've added this task: " + '\n';
+            	msg += "    " + deadline.toString() + '\n';
+            	msg += "  Now you have " + list.size() + " task(s) in the list.";
+            } else if (str.split(" ")[0].equals("event")) {
+            	int ind1 = str.indexOf('/');
+            	Task event = new Event(str.substring(6, ind1 - 1), str.substring(ind1 + 4));
+            	list.add(event);
+            	msg += "Got it. I've added this task: " + '\n';
+            	msg += "    " + event.toString() + '\n';
+            	msg += "  Now you have " + list.size() + " task(s) in the list.";
             }
             else {
                 // adds a task to the list
