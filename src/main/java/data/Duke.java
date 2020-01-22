@@ -40,4 +40,12 @@ public class Duke {
                 || (other instanceof Duke // instanceof handles nulls
                 && this.allTasks.equals(((Duke) other).allTasks));
     }
+
+    /**
+     * Set target index task as done.
+     */
+    public void doneTask(int doneId) {
+        //find the task
+        allTasks.getInternalList().get(doneId).setDone(true);
+    }
 }

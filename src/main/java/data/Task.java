@@ -31,6 +31,14 @@ public class Task {
         isDone = done;
     }
 
+    public char getChar(){
+        char isDone;
+        if (this.isDone){
+            return '✓';
+        } else {
+            return '✗';
+        }
+    }
     /**
      * Returns true if both persons have the same identity fields (name and telephone).
      */

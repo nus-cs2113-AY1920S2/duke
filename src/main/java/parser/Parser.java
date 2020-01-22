@@ -24,7 +24,11 @@ public class Parser {
 
         //split the user input, command word and the description
         final String commandWord = userInput;
-        switch (commandWord){
+        final String []commandWordFirstPart = commandWord.split(" ");
+        switch (commandWordFirstPart[0]){
+        //done
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(commandWord);
         //list
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -37,9 +41,24 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandWord full user input string
+     * @return the AddCommand obj constructed on the user input
+     */
     private Command prepareAdd(String commandWord) {
-        //System.out.println("succ");
         return new AddCommand(new Task(commandWord));
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandWord full user input string
+     * @return the DoneCommand obj constructed on the user input
+     */
+    private Command prepareDone (String commandWord) {
+        return new DoneCommand(Integer.valueOf(commandWord.substring(5)));
     }
 
 }
