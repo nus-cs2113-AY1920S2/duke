@@ -1,16 +1,17 @@
 
 public class Task {
-	private final String taskName;
-	private final int taskId;
-	private boolean isDone;
+	protected final String taskName;
+	protected final int taskId;
+	protected boolean isDone;
+	public static int taskCounter = 1;
 	
-	private Task(int taskId, String taskName, boolean isDone) {
+	protected Task(int taskId, String taskName, boolean isDone) {
 		this.taskId = taskId;
 		this.taskName = taskName;
 		this.isDone = isDone;
 	}
 	
-	public Task(int taskId, String taskName) {
+	protected Task(int taskId, String taskName) {
 		this.taskId = taskId;
 		this.taskName = taskName;
 		this.isDone = false;
@@ -30,7 +31,8 @@ public class Task {
 	
 	public String taskWithSymbol() {
 		return ((this.isDone) ? "[✓]" : "[✗]")
-				+ " " + this.taskName;
+				+ " " 
+				+ this.taskName;
 	}
 	
 	public Task makeDone() {

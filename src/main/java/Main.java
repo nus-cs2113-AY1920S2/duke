@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-
-	public static int taskCounter = 1;
-
+	
 	public static void readInput(Scanner sc, Duke duke) {
 		while(sc.hasNextLine()) {
 			String input = sc.nextLine();
@@ -11,19 +9,29 @@ public class Main {
 			String command = argsArray[0];
 			
 			switch(command) {
+			case "todo": 
+				duke = duke.processToDosInput(input).addToDos();
+				Task.taskCounter++;
+				break;
+			case "deadline":
+				duke = duke.processDeadlinesInput(input).addDeadlines();
+				Task.taskCounter++;
+				break;
+			case "event": 
+				duke = duke.processEventsInput(input).addEvents();
+				Task.taskCounter++;
+				break;
 			case "done": 
-				int taskId = Integer.parseInt(argsArray[1]);
-				duke = duke.completeTask(taskId);
+				duke = duke.completeTask(Integer.parseInt(argsArray[1]));
 				break;
 			case "list":
 				duke.printList();
 				break;
 			case "bye": 
-				duke.printEcho("Bye. Hope to see you again soon!");
+				duke.printOutput("Bye. Hope to see you again soon!");
 				break;
-			default: 
-				duke = duke.addTask(taskCounter, input);
-				taskCounter++;
+			default:
+				duke.printOutput(input);
 			}
 		}
 	}
