@@ -6,7 +6,7 @@ public class Duke {
         String cmd;
         boolean isAsking = true;
         Scanner input = new Scanner(System.in);
-        String[] tasks = new String[100];
+        Task[] list = new Task[100];
         int count = 0;
         do {
             cmd = input.nextLine();
@@ -14,11 +14,18 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 isAsking = false;
             } else if (cmd.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int x = 0; x < count; x++) {
-                    System.out.println((x+1) + ". " + tasks[x]);
+                    System.out.println((x+1) + ".[" + list[x].getStatus() + "] " + list[x].getDescription());
                 }
+            } else if (cmd.contains("done")) {
+                String[] phrases = cmd.split(" ");
+                int index = Integer.parseInt(phrases[1]);
+                list[index-1].markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  [" + list[index-1].getStatus() + "] " + list[index-1].getDescription());
             } else {
-                tasks[count] = cmd;
+                list[count] = new Task(cmd);
                 count += 1;
                 System.out.println("added: " + cmd);
             }
