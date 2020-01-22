@@ -17,6 +17,7 @@ public class Duke {
         String cmd = temp.nextLine();
 
         String[] data = new String[100];
+        Boolean[] done = new Boolean[100];
         int i = 0;
 
         while (!cmd.equals("bye")) {
@@ -24,12 +25,20 @@ public class Duke {
             if (cmd.equals("list")) {
                 int j = 1;
                 for (int k = 0; k<i; ++k) {
-                    System.out.println("\t" + j + ". " + data[k]);
+                    String stat = done[k] ? "[✓] " : "[✗] ";
+                    System.out.println("\t" + j + ". " + stat + data[k]);
                     j++;
                 }
             }
+            else if (cmd.contains("done")){
+                int option = Integer.parseInt(cmd.substring(cmd.length()-1));
+                done[option-1] = true;
+                System.out.println("\tNice! I've marked this task as done:");
+                System.out.println("\t" + "[✓] " + data[option-1]);
+            }
             else {
                 System.out.println("\tadded: "+cmd);
+                done[i] = false;
                 data[i++] = cmd;
             }
             
