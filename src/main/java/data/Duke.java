@@ -6,6 +6,12 @@ public class Duke {
     public Duke() {
         this.allTasks = new TaskList();
     }
+
+    public TaskList getTaskList() {
+        return allTasks;
+    }
+
+
     /**
      * Adds a person to the address book.
      */

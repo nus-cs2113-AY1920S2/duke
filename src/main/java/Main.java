@@ -34,7 +34,15 @@ public class Main {
 
 
     private void executeCommand(Command command) {
+
+        /**
+         * Supplies the data the command will operate on.
+         */
         command.setData(duke);
+
+        /**
+         * Execute according to the command itself
+         */
         command.execute();
     }
 

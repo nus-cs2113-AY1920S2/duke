@@ -1,10 +1,7 @@
 package parser;
 
 
-import commands.AddCommand;
-import commands.Command;
-import commands.ExitCommand;
-import commands.IncorrectCommand;
+import commands.*;
 import data.Task;
 
 import java.util.Scanner;
@@ -28,6 +25,9 @@ public class Parser {
         //split the user input, command word and the description
         final String commandWord = userInput;
         switch (commandWord){
+        //list
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
         //exit
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -41,4 +41,5 @@ public class Parser {
         //System.out.println("succ");
         return new AddCommand(new Task(commandWord));
     }
+
 }

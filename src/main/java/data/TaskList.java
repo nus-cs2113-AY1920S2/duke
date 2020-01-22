@@ -25,6 +25,11 @@ public class TaskList implements Iterable<Task> {
         return false;
     }
 
+
+    public List<Task> getInternalList() {
+        return internalList;
+    }
+
     /**
      * Adds a person to the list.
      */
