@@ -16,9 +16,23 @@ public class Duke {
         Scanner temp = new Scanner(System.in);
         String cmd = temp.nextLine();
 
+        String[] data = new String[100];
+        int i = 0;
+
         while (!cmd.equals("bye")) {
             lineBreak();
-            System.out.println("\t"+cmd);
+            if (cmd.equals("list")) {
+                int j = 1;
+                for (int k = 0; k<i; ++k) {
+                    System.out.println("\t" + j + ". " + data[k]);
+                    j++;
+                }
+            }
+            else {
+                System.out.println("\tadded: "+cmd);
+                data[i++] = cmd;
+            }
+            
             lineBreak();
             System.out.println();
             cmd = temp.nextLine();
