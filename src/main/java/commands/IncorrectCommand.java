@@ -11,11 +11,16 @@ public class IncorrectCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public CommandResult execute() {
+        echo();
+        //for future implement
+        //return new CommandResult(feedbackToUser);
+        return null;
+    }
+
+    private void echo(){
         System.out.println(Messages.DIVIDER);
         System.out.println("  "+feedbackToUser);
         System.out.println(Messages.DIVIDER);
-        //for future implement
-        //return new CommandResult(feedbackToUser);
     }
 }

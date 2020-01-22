@@ -1,18 +1,18 @@
 import commands.Command;
 import commands.ExitCommand;
+import data.Duke;
 import parser.Parser;
 import ui.TextUi;
-
 import java.util.Scanner;
 
-public class Duke {
+public class Main {
 
-
+    Duke duke = new Duke();
     private TextUi ui;
 
     public static void main(String[] args) {
 
-        new Duke().run();
+        new Main().run();
 
     }
 
@@ -32,7 +32,9 @@ public class Duke {
         } while (!ExitCommand.isExit(command));
     }
 
+
     private void executeCommand(Command command) {
+        command.setData(duke);
         command.execute();
     }
 

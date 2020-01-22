@@ -1,11 +1,14 @@
 package parser;
 
 
+import commands.AddCommand;
 import commands.Command;
 import commands.ExitCommand;
 import commands.IncorrectCommand;
+import data.Task;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
 
 
 /**
@@ -14,8 +17,10 @@ import java.util.Scanner;
 public class Parser {
 
     /**
-     * encapsulate user's input into a Command object
-     * input: user input, return : Command 泛型
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
      */
 
     public Command parseCommand(String userInput) {
@@ -26,10 +31,14 @@ public class Parser {
         //exit
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-        //echo
+        //add
         default:
-            return new IncorrectCommand(commandWord);
+            return prepareAdd(commandWord);
         }
     }
 
+    private Command prepareAdd(String commandWord) {
+        //System.out.println("succ");
+        return new AddCommand(new Task(commandWord));
+    }
 }

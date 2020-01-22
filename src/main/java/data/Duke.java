@@ -1,0 +1,37 @@
+package data;
+
+public class Duke {
+    private TaskList allTasks;
+
+    public Duke() {
+        this.allTasks = new TaskList();
+    }
+    /**
+     * Adds a person to the address book.
+     */
+    public void addTask(Task toAdd) {
+        allTasks.add(toAdd);
+    }
+
+    /**
+     * Returns true if an equivalent person exists in the address book.
+     */
+    public boolean containsTask(Task key) {
+        return allTasks.contains(key);
+    }
+
+
+    /**
+     * Clears all persons and tags from the address book.
+     */
+    public void clear() {
+        allTasks.clear();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Duke // instanceof handles nulls
+                && this.allTasks.equals(((Duke) other).allTasks));
+    }
+}

@@ -1,12 +1,21 @@
 package commands;
 
-public abstract class Command {
+import data.Duke;
 
+public abstract class Command {
+    protected Duke duke;
     public String COMMAND_WORD;
     //constructor
     public Command() {
     }
 
-    public abstract void execute () ;
+    /**
+     * Supplies the data the command will operate on.
+     */
+    public void setData(Duke duke) {
+        this.duke = duke;
+    }
+
+    public abstract CommandResult execute () ;
 
 }

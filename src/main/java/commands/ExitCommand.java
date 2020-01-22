@@ -9,8 +9,9 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Task List as requested ...";
 
     @Override
-    public void execute() {
+    public CommandResult execute() {
         TextUi.showFarewellMessage();
+        return null;
     }
 
     public static boolean isExit(Command command) {
