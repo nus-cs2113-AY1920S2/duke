@@ -6,13 +6,21 @@ public class Duke {
         String cmd;
         boolean isAsking = true;
         Scanner input = new Scanner(System.in);
+        String[] tasks = new String[100];
+        int count = 0;
         do {
             cmd = input.nextLine();
             if (cmd.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 isAsking = false;
+            } else if (cmd.equals("list")) {
+                for (int x = 0; x < count; x++) {
+                    System.out.println((x+1) + ". " + tasks[x]);
+                }
             } else {
-                System.out.println(cmd);
+                tasks[count] = cmd;
+                count += 1;
+                System.out.println("added: " + cmd);
             }
         } while (isAsking);
     }
