@@ -1,32 +1,40 @@
+import commands.Command;
+import commands.ExitCommand;
+import parser.Parser;
 import ui.TextUi;
 
 import java.util.Scanner;
 
 public class Duke {
 
-    private static void runCommandLoopUntilExitCommand() {
 
-        final String exit_command = "bye";
-        Scanner sc = new Scanner(System.in);
-        String command_word = sc.nextLine();
-
-        while (!command_word.equals(exit_command)) {
-            TextUi.echo(command_word);
-            command_word = sc.nextLine();
-        }
-    }
-
-
+    private TextUi ui;
 
     public static void main(String[] args) {
 
-        TextUi.showWelcomeMessage();
+        new Duke().run();
 
-        runCommandLoopUntilExitCommand();
-
-        TextUi.showFarewellMessage();
     }
 
+    private void run(){
+        TextUi.showWelcomeMessage();
+        runCommandLoopUntilExitCommand();
+    }
+
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            String userCommandText = scanner.nextLine();
+            //process from String to command
+            command = new Parser().parseCommand(userCommandText);;
+            executeCommand(command);
+        } while (!ExitCommand.isExit(command));
+    }
+
+    private void executeCommand(Command command) {
+        command.execute();
+    }
 
 
 }
