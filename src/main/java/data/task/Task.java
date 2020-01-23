@@ -1,18 +1,26 @@
-package data;
+package data.task;
 
 public class Task {
 
     //protected int index;
     protected String taskDescription;
     protected boolean isDone;
+    protected char taskType;
 
     public Task() {
     }
 
+
     public Task(String taskDescription) {
 
         this.taskDescription = taskDescription;
-        isDone = false;
+        this.isDone = false;
+    }
+
+    public Task(String taskDescription, char taskType) {
+        this.taskDescription = taskDescription;
+        this.taskType = taskType;
+        this.isDone = false;
     }
 
     public String getTaskDescription() {
@@ -39,6 +47,11 @@ public class Task {
             return '✗';
         }
     }
+
+    public char getTaskType() {
+        return taskType;
+    }
+
     /**
      * Returns true if both persons have the same identity fields (name and telephone).
      */

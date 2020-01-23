@@ -1,5 +1,8 @@
 package data;
 
+import data.task.Task;
+import data.task.TaskList;
+
 public class Duke {
     private TaskList allTasks;
 

@@ -1,12 +1,10 @@
 package commands;
 
-import data.Task;
-
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_DONE = "  Nice! I've marked this task as done: \n"+
-            "   [✓] %s";
+            "  [✓] %s";
 
     private final int toDoneIndex;
 

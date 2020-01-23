@@ -25,6 +25,7 @@ public class Main {
         Command command;
         Scanner scanner = new Scanner(System.in);
         do {
+            //read in user input
             String userCommandText = scanner.nextLine();
             //process from String to command
             command = new Parser().parseCommand(userCommandText);;

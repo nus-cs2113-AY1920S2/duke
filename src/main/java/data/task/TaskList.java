@@ -1,4 +1,6 @@
-package data;
+package data.task;
+
+import data.task.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;

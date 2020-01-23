@@ -2,10 +2,8 @@ package parser;
 
 
 import commands.*;
-import data.Task;
-
-import java.util.Scanner;
-import java.util.regex.Matcher;
+import data.task.Task;
+import data.task.TodoTask;
 
 
 /**
@@ -22,10 +20,26 @@ public class Parser {
 
     public Command parseCommand(String userInput) {
 
-        //split the user input, command word and the description
+        /**
+         * split the user input, command word and the description
+         * commandWord stores the whole user input
+         * commandWordFirstPart [0] stores the Command Word
+         * description stores additional information
+         */
         final String commandWord = userInput;
         final String []commandWordFirstPart = commandWord.split(" ");
+
+        /**
+         * further split the user input, get the secondary part, the description
+         */
+        final String commandWordDescription = commandWord.substring(commandWordFirstPart[0].length());
+
+        //operates according to different command word
         switch (commandWordFirstPart[0]){
+
+        //add.todo task
+        case AddTodoCommand.COMMAND_WORD:
+            return prepareAddTodo(commandWordDescription);
         //done
         case DoneCommand.COMMAND_WORD:
             return prepareDone(commandWord);
@@ -37,7 +51,8 @@ public class Parser {
             return new ExitCommand();
         //add
         default:
-            return prepareAdd(commandWord);
+            //return prepareAddTodo(commandWord);
+            return null;
         }
     }
 
@@ -47,8 +62,8 @@ public class Parser {
      * @param commandWord full user input string
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAdd(String commandWord) {
-        return new AddCommand(new Task(commandWord));
+    private Command prepareAddTodo(String commandWord) {
+        return new AddTodoCommand(new TodoTask(commandWord));
     }
 
     /**
@@ -58,7 +73,7 @@ public class Parser {
      * @return the DoneCommand obj constructed on the user input
      */
     private Command prepareDone (String commandWord) {
-        return new DoneCommand(Integer.valueOf(commandWord.substring(5)));
+        return new DoneCommand(Integer.parseInt(commandWord.substring(5)));
     }
 
 }
