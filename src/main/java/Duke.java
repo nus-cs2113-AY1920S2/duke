@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static String[] instruction(String dukeCommand, String[] Actions, int actionCount){
+    public static Task[] instruction(String dukeCommand, Task[] Tasks){
         System.out.println("____________________________________________________________");
         if (dukeCommand.equals("greet")) {
             System.out.println("Hello! I'm Duke\n" +
@@ -11,9 +11,9 @@ public class Duke {
         }else if (dukeCommand.equals("list")) {
             //print out everything in the list
             int count = 1;
-            for (String Action: Actions) {
-                if (count <= actionCount) {
-                    System.out.println(count + ": " + Action);
+            for (Task task: Tasks) {
+                if (count <= Task.getTotalTask()) {
+                    System.out.println(count + ": " + task.getDescription());
                     count++;
                 } else {
                     break;
@@ -21,8 +21,9 @@ public class Duke {
             }
         }
         else{
-            System.out.println(dukeCommand + "\n");
-            Actions[actionCount] = dukeCommand;
+            System.out.println("added: " + dukeCommand + "\n");
+            Task newTask = new Task(dukeCommand);
+            Tasks[Task.getTotalTask() - 1] = newTask;
         }
         /*else{
             System.out.println("____________________________________________________________");
@@ -30,13 +31,11 @@ public class Duke {
             System.out.println("____________________________________________________________");
         }*/
         System.out.println("____________________________________________________________");
-        return Actions;
+        return Tasks;
     }
     public static void main(String[] args) {
 
-        int actionCount = 0;
-
-        String[] Actions = new String[100];
+        Task[] Tasks = new Task[100];
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -44,18 +43,15 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        instruction("greet",Actions,actionCount);
+        instruction("greet",Tasks);
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
         while (!line.equals("bye")) {
-            instruction(line, Actions,actionCount);
-            if(!line.equals("list") && !line.equals("greet")) {
-                actionCount++;
-            }
+            instruction(line, Tasks);
             line = in.nextLine();
         }
-        instruction("bye",Actions,actionCount);
+        instruction("bye",Tasks);
 
     }
 }
