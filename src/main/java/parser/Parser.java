@@ -2,6 +2,7 @@ package parser;
 
 
 import commands.*;
+import data.task.DeadlineTask;
 import data.task.Task;
 import data.task.TodoTask;
 
@@ -36,10 +37,12 @@ public class Parser {
 
         //operates according to different command word
         switch (commandWordFirstPart[0]){
-
-        //add.todo task
+        //add deadline task
+        case AddDeadlineCommand.COMMAND_WORD:
+            return prepareAddDeadlineTask(commandWordDescription);
+        //add todo task
         case AddTodoCommand.COMMAND_WORD:
-            return prepareAddTodo(commandWordDescription);
+            return prepareAddTodoTask(commandWordDescription);
         //done
         case DoneCommand.COMMAND_WORD:
             return prepareDone(commandWord);
@@ -59,11 +62,23 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param commandWord full user input string
+     * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddTodo(String commandWord) {
-        return new AddTodoCommand(new TodoTask(commandWord));
+    private Command prepareAddDeadlineTask(String commandDescription) {
+        //split the commandDescription to task and deadline
+        String [] temp = commandDescription.split("/");
+        return new AddDeadlineCommand(new DeadlineTask(temp[0],temp[1]));
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandDescription full user input string (without the command Action)
+     * @return the AddCommand obj constructed on the user input
+     */
+    private Command prepareAddTodoTask(String commandDescription) {
+        return new AddTodoCommand(new TodoTask(commandDescription));
     }
 
     /**

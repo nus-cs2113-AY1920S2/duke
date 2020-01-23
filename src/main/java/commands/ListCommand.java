@@ -1,13 +1,17 @@
 package commands;
 
 import common.Messages;
+import data.task.DeadlineTask;
+import data.task.Task;
+import data.task.TodoTask;
 
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_USAGE = "Here are the tasks in your list:";
     public static final String MESSAGE_EMPTY_LIST = "There is no current task in the list!";
-    public static final String MESSAGE_LIST = "  %d. [%c][%c] %s";
+    public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
+    public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
 
     public ListCommand() {
 
@@ -35,13 +39,32 @@ public class ListCommand extends Command {
      */
     public void printAllTasks(){
         for (int i = 1; i <= duke.getTaskList().getInternalList().size() ; i++) {
-            System.out.println(String.format(
-                    MESSAGE_LIST,
-                    i,
-                    duke.getTaskList().getInternalList().get(i-1).getTaskType(),
-                    duke.getTaskList().getInternalList().get(i-1).getChar(),
-                    duke.getTaskList().getInternalList().get(i-1).getTaskDescription()));
+            Task task = duke.getTaskList().getInternalList().get(i-1);
+            if (task instanceof TodoTask) {
+                printTodoTask((TodoTask) task, i);
+            } else if (task instanceof DeadlineTask) {
+                printDeadlineTask((DeadlineTask) task, i);
+            }
         }
+    }
+
+    public void printTodoTask(TodoTask todoTask, int index){
+        System.out.println(String.format(
+                MESSAGE_TODO_LIST,
+                index,
+                todoTask.getTaskType(),
+                todoTask.getChar(),
+                todoTask.getTaskDescription()));
+    }
+
+    public void printDeadlineTask(DeadlineTask deadlineTask, int index){
+        System.out.println(String.format(
+                MESSAGE_DEADLINE_LIST,
+                index,
+                deadlineTask.getTaskType(),
+                deadlineTask.getChar(),
+                deadlineTask.getTaskDescription(),
+                deadlineTask.getTaskDeadline()));
     }
 
 }

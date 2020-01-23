@@ -7,22 +7,19 @@ public class AddTodoCommand extends AddCommand {
     public static final String COMMAND_WORD = "todo";
     public static final char COMMAND_TYPE = 'T';
 
-    private final Task toDo;
+    private final Task toDoTask;
 
-    public AddTodoCommand(Task toDo) {
-        this.toDo = toDo;
+    public AddTodoCommand(Task toDoTask) {
+        this.toDoTask = toDoTask;
     }
 
     @Override
     public CommandResult execute() {
-        duke.addTask(toDo);
-
-
+        duke.addTask(toDoTask);
         return new CommandResult(String.format(
-                MESSAGE_SUCCESS,
+                MESSAGE_TODO_SUCCESS,
                 COMMAND_TYPE,
-                toDo.getChar(),
-                toDo.getTaskDescription()));
+                toDoTask.getChar(),
+                toDoTask.getTaskDescription()));
     }
-
 }
