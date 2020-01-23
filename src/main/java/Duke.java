@@ -13,15 +13,14 @@ public class Duke {
         System.out.println("What can i do for you?");
         System.out.println("____________________________________________________________");
 
-        String[] tasksList = new String[100];
-        int taskCount = 0;
+        Task[] tasks = new Task[100];
         Scanner in = new Scanner(System.in);
         while (true) {
             String userInput = in.nextLine();
             if (userInput.toLowerCase().equals("list")) {
                 System.out.println("____________________________________________________________");
-                for (int i = 0; i < taskCount; ++i) {
-                    System.out.println((i+1) + ". " + tasksList[i]);
+                for (int i = 0; i < Task.getTaskCount(); ++i) {
+                    System.out.println((i+1) + "." + tasks[i].getStatusIcon() + tasks[i].getDescription());
                 }
                 System.out.println("____________________________________________________________");
             } else if (userInput.toLowerCase().equals("blah")) {
@@ -35,13 +34,13 @@ public class Duke {
                 break;
             } else if (userInput.toLowerCase().startsWith("done")) {
                 System.out.println("____________________________________________________________");
-                int doneTaskIndex =  Integer.parseInt(userInput.substring(5));
-                tasksList[--doneTaskIndex] = tasksList[doneTaskIndex].replace("[\u2718] ", "[\u2713] ");
+                int doneTaskIndex =  Integer.parseInt(userInput.substring(5)) - 1;
+                tasks[doneTaskIndex].markAsDone();
                 System.out.println("\tNice! I've marked this task as done: ");
-                System.out.println("\t\t" + tasksList[doneTaskIndex]);
+                System.out.println("\t\t" + tasks[doneTaskIndex].getStatusIcon() + tasks[doneTaskIndex].getDescription());
                 System.out.println("____________________________________________________________");
             } else {
-                tasksList[taskCount++] = "[\u2718] "+ userInput;
+                tasks[Task.getTaskCount()] = new Task(userInput);
                 System.out.println("____________________________________________________________");
                 System.out.println("\tadded: " + userInput);
                 System.out.println("____________________________________________________________");
