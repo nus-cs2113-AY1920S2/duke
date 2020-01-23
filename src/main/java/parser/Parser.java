@@ -3,6 +3,7 @@ package parser;
 
 import commands.*;
 import data.task.DeadlineTask;
+import data.task.EventTask;
 import data.task.Task;
 import data.task.TodoTask;
 
@@ -37,6 +38,9 @@ public class Parser {
 
         //operates according to different command word
         switch (commandWordFirstPart[0]){
+        //add event task
+        case AddEventCommand.COMMAND_WORD:
+            return prepareAddEventTask(commandWordDescription);
         //add deadline task
         case AddDeadlineCommand.COMMAND_WORD:
             return prepareAddDeadlineTask(commandWordDescription);
@@ -57,6 +61,18 @@ public class Parser {
             //return prepareAddTodo(commandWord);
             return null;
         }
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandDescription full user input string (without the command Action)
+     * @return the AddCommand obj constructed on the user input
+     */
+    private Command prepareAddEventTask(String commandDescription) {
+        //split the commandDescription to task and start time
+        String [] temp = commandDescription.split("/");
+        return new AddEventCommand(new EventTask(temp[0],temp[1]));
     }
 
     /**

@@ -2,6 +2,7 @@ package commands;
 
 import common.Messages;
 import data.task.DeadlineTask;
+import data.task.EventTask;
 import data.task.Task;
 import data.task.TodoTask;
 
@@ -12,6 +13,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_EMPTY_LIST = "There is no current task in the list!";
     public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
+    public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
 
     public ListCommand() {
 
@@ -44,6 +46,8 @@ public class ListCommand extends Command {
                 printTodoTask((TodoTask) task, i);
             } else if (task instanceof DeadlineTask) {
                 printDeadlineTask((DeadlineTask) task, i);
+            } else if( task instanceof EventTask) {
+                printEventTask((EventTask) task, i);
             }
         }
     }
@@ -65,6 +69,16 @@ public class ListCommand extends Command {
                 deadlineTask.getChar(),
                 deadlineTask.getTaskDescription(),
                 deadlineTask.getTaskDeadline()));
+    }
+
+    public void printEventTask(EventTask eventTask, int index){
+        System.out.println(String.format(
+                MESSAGE_EVENT_LIST,
+                index,
+                eventTask.getTaskType(),
+                eventTask.getChar(),
+                eventTask.getTaskDescription(),
+                eventTask.getTaskStartTime()));
     }
 
 }
