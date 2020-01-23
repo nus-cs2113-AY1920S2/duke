@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Duke {
 
-    static List<String> dukeList = new ArrayList<String>();
+    static List<Task> taskList = new ArrayList<Task>();
 
     private static void intro()
     {
@@ -30,8 +30,9 @@ public class Duke {
 
     private static void printList() {
         System.out.println("----------");
-        for (int i = 0; i < dukeList.size(); i++) {
-            System.out.println(i+1 + ". " + dukeList.get(i));
+        for (int i = 0; i < taskList.size(); i++) {
+            String desc = taskList.get(i).getDescription();
+            System.out.println(i+1 + ". [" + taskList.get(i).getStatusIcon() + "] " + desc);
         }
         System.out.println("----------");
     }
@@ -48,8 +49,12 @@ public class Duke {
 
             if (userInput.equals("list")) {
                 printList();
+            } else if (userInput.startsWith("done")) {
+                String taskId = userInput.replaceAll("[^0-9]", ""); // Parse ID
+                System.out.println(taskId);
+                taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
             } else {
-                dukeList.add(userInput); // Add task to list of things
+                taskList.add(new Task(userInput)); // Add task to list of things
                 formatPrint("Added: " + userInput);
             }
 
