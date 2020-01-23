@@ -33,12 +33,20 @@ public class Duke {
                 System.out.println("\tBye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 break;
+            } else if (userInput.toLowerCase().startsWith("done")) {
+                System.out.println("____________________________________________________________");
+                int doneTaskIndex =  Integer.parseInt(userInput.substring(5));
+                tasksList[--doneTaskIndex] = tasksList[doneTaskIndex].replace("[\u2718] ", "[\u2713] ");
+                System.out.println("\tNice! I've marked this task as done: ");
+                System.out.println("\t\t" + tasksList[doneTaskIndex]);
+                System.out.println("____________________________________________________________");
             } else {
-                tasksList[taskCount++] = userInput;
+                tasksList[taskCount++] = "[\u2718] "+ userInput;
                 System.out.println("____________________________________________________________");
                 System.out.println("\tadded: " + userInput);
                 System.out.println("____________________________________________________________");
             }
         }
+        in.close();
     }
 }
