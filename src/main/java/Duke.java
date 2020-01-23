@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static int listCounter = 0;
+    private static String[] listToDo = new String[102];
+
     // let statement be printed at center
     public static void print(String str) {
         int left = (60 - str.length()) / 2;
@@ -35,6 +38,27 @@ public class Duke {
         System.out.println();
     }
 
+    public static void add(String cmd){
+        listToDo[listCounter] = cmd;
+        listCounter++;
+        System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+        print("Added: " + cmd);
+        System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+    }
+
+    public static void list(){
+        System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+        int eventCounter = 1;
+        for(String event: listToDo){
+            if(event == null){
+                break;
+            }
+            print(eventCounter + ". " + event);
+            eventCounter++;
+        }
+        System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+    }
+
     public static void exit(){
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         print("Bye! See you next time :)");
@@ -50,7 +74,11 @@ public class Duke {
         String cmd = scanner.nextLine();
 
         while(!cmd.equals("bye")){
-            echo(cmd);
+            if(cmd.equals("list")){
+                list();
+            } else {
+                add(cmd);
+            }
             cmd = scanner.nextLine();
         }
         exit();
