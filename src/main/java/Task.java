@@ -16,8 +16,8 @@ public class Task {
         return description;
     }
 
-    public void setDone(boolean done) {
-        isDone = true;
+    public void setDone() {
+        this.isDone = true;
     }
 
     public static int getTotalTask() {
