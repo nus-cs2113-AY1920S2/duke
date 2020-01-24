@@ -9,7 +9,7 @@ public class ChattyChatBot {
         String name = "Chatty Chat Bot";
         System.out.println("Hello from " + name);
 
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         while (true) {
             String userInput = SCANNER.nextLine();
@@ -18,10 +18,16 @@ public class ChattyChatBot {
                 break;
             } else if (userInput.equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i));
+                    Task task = tasks.get(i);
+                    System.out.println((i + 1) + ". [" + task.getStatusIcon() + "] " + task.getDescription());
                 }
+            } else if (userInput.matches("done [0-9]+")) {
+                int taskIdx = Integer.parseInt(userInput.split(" ")[1]);
+                Task task = tasks.get(taskIdx - 1);
+                task.markAsDone();
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
             } else {
-                tasks.add(userInput);
+                tasks.add(new Task(userInput));
                 System.out.println("added: " + userInput);
             }
         }
