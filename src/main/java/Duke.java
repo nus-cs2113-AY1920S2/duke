@@ -3,16 +3,22 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         printWelcomeBanner();
+
         Scanner scanner = new Scanner(System.in);
+        ToDoList list = new ToDoList();
+
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("bye")) {
                 printByeMessage();
                 break;
+            } else if (input.toLowerCase().equals("list")) {
+                list.viewList();
+                System.out.println("_________________________________________________");
             } else {
-                // echo user's input
-                System.out.println(input);
+                // add user input to list
+                list.addToList(input);
                 System.out.println("_________________________________________________");
             }
         }
