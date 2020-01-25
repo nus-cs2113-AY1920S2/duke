@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -10,7 +12,25 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+
+        while (true) {
+            String line;
+            Scanner input = new Scanner(System.in);
+            line = input.nextLine();
+
+            if (line.equalsIgnoreCase("bye")) {
+                System.out.println("____________________________________________________________");
+                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("____________________________________________________________");
+                break;
+            }
+
+            System.out.println("____________________________________________________________");
+            System.out.println(line);
+            System.out.println("____________________________________________________________");
+
+        }
+
+
     }
 }
