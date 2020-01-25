@@ -6,7 +6,7 @@ public class Duke {
         System.out.println("    ...................................................");
     }
 
-    public static void startMessage() {
+    public static void printStartMessage() {
         br();
         String logo =
                 "        ┌┬┐┌─┐┌─┐┬┌─\n" +
@@ -17,7 +17,7 @@ public class Duke {
         br();
     }
 
-    public static void endMessage() {
+    public static void printEndMessage() {
         br();
         System.out.println("     Goodbye, see you in the seventh dimension!");
         System.out.println("                   *       +\n" +
@@ -34,27 +34,32 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        startMessage();
+        printStartMessage();
 
         String command = " ";
         String[] list = new String[100];
-        int num_items = 0;
-        boolean [] is_done = new boolean[100];
-        Arrays.fill(is_done, false);
+        int numItems = 0;
+        boolean [] isDone = new boolean[100];
+        Arrays.fill(isDone, false);
 
         while (true) {
             command = input.nextLine();
-            if (command.equals("bye")) break;
+            if (command.equals("bye")) {
+                break;
+            }
             String[] words = command.split(" ");
 
             switch(words[0]) {
             case "list":
                 br();
                 System.out.println("\t Dook will list your tasks now:");
-                for (int i=0; i<num_items; i++) {
+                for (int i=0; i<numItems; i++) {
                     String marker;
-                    if (is_done[i]) marker = "✓";
-                    else marker = "✗";
+                    if (isDone[i]) {
+                        marker = "✓";
+                    } else {
+                        marker = "✗";
+                    }
                     int num = i+1;
                     System.out.print("\t " + num + ". " + "[" + marker + "] ");
                     System.out.println(list[i]);
@@ -64,18 +69,18 @@ public class Duke {
             case "done":
                 br();
                 System.out.println("\t Dun dun dun dun! This task is done:");
-                int item_code = Integer.parseInt(words[1]); item_code--;            // -1 for zero-based indexing
-                is_done[item_code] = true;
-                System.out.println("\t   [" + "✓" + "] " + list[item_code]);
+                int itemCode = Integer.parseInt(words[1]); itemCode--;            // -1 for zero-based indexing
+                isDone[itemCode] = true;
+                System.out.println("\t   [" + "✓" + "] " + list[itemCode]);
                 br();
                 break;
             default:
-                list[num_items] = command; num_items++;
+                list[numItems] = command; numItems++;
                 br(); System.out.println("     added: " + command); br();
                 break;
             }
         }
 
-        endMessage();
+        printEndMessage();
     }
 }
