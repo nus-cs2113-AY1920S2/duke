@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final int MAX_TASKS_COUNT = 100;
-    private static String[] tasks = new String[MAX_TASKS_COUNT];
+    private static Task[] tasks = new Task[MAX_TASKS_COUNT];
     private static int indexOfTasks = 0;
 
     public static void main(String[] args) {
@@ -30,6 +30,12 @@ public class Duke {
             } else if (input.equals("list")) {
                 // list all tasks
                 listTasks();
+            } else if (input.split(" ")[0].equals("done")) {
+                // mark a task as done
+                System.out.println("\tNice! I've marked this task as done:");
+                int indexOfTasks = Integer.parseInt(input.split(" ")[1]) - 1;
+                tasks[indexOfTasks].setDone(true);
+                System.out.println("\t" + tasks[indexOfTasks]);
             } else {
                 // add stuff to String[] tasks
                 addTask(input);
@@ -47,11 +53,11 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
     }
 
-    public static void addTask(String task) {
+    public static void addTask(String taskDescription) {
         if (indexOfTasks < MAX_TASKS_COUNT) {
-            tasks[indexOfTasks] = task;
+            tasks[indexOfTasks] = new Task(taskDescription);
             indexOfTasks++;
-            System.out.println("\tadded: " + task);
+            System.out.println("\tadded: " + taskDescription);
         }
     }
 
