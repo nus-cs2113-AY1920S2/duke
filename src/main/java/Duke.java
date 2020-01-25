@@ -10,17 +10,23 @@ public class Duke {
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine();
-            if (input.toLowerCase().equals("bye")) {
+            String inputLC = input.toLowerCase();
+            if (inputLC.equals("bye")) {
+                // end duke program
                 printByeMessage();
                 break;
-            } else if (input.toLowerCase().equals("list")) {
+            } else if (inputLC.equals("list")) {
+                // list all existing tasks and task statuses
                 list.viewList();
-                printDividerLine();
+            } else if (inputLC.startsWith("done ")){
+                // mark a task as done
+                int taskIndex = Character.getNumericValue(input.charAt(5)) - 1;
+                list.markAsDone(taskIndex);
             } else {
                 // add user input to list
                 list.addToList(input);
-                printDividerLine();
             }
+            printDividerLine();
         }
     }
 
