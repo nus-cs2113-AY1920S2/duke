@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static String[] list = new String[100];
-    private static int sizeOfList = 0;
+    private static TaskManager taskManager = new TaskManager();
 
     public static void printSpaces(int numberOfSpaces){
         while(numberOfSpaces > 0){
@@ -17,41 +16,42 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    public static void printWithIndentation(String line){
+        printSpaces(5);
+        System.out.println(line);
+    }
+
     public static void welcomeMessage(){
         printLine();
-        printSpaces(5);
-        System.out.println("Hello! I'm Duke");
-        printSpaces(5);
-        System.out.println("What can I do for you?");
+        printWithIndentation("Hello! I'm Duke");
+        printWithIndentation("What can I do for you?");
         printLine();
         System.out.println();
     }
 
     public static void byeMessage(){
         printLine();
-        printSpaces(5);
-        System.out.println("Bye. Hope to see you again soon!");
+        printWithIndentation("Bye. Hope to see you again soon!");
         printLine();
     }
 
-    public static void displayList(){
+    public static void printInvalidIndex(){
         printLine();
-        for(int i = 1; i <= sizeOfList; i++){
-            printSpaces(5);
-            System.out.println( i + ". " + list[i-1]);
-        }
+        printWithIndentation("Invalid Command (done x : x should be a valid integer index)");
         printLine();
     }
 
-    public static void addToList(String command){
-        list[sizeOfList] = command;
+    public static void printInvalidInteger(){
         printLine();
-        printSpaces(5);
-        System.out.println("added: " + command );
+        printWithIndentation("Invalid Command (done x : x should be an integer)");
         printLine();
-        sizeOfList++;
     }
 
+    private static void printEmptyLine() {
+        printLine();
+        printWithIndentation("You have entered a empty line, Please enter a valid command");
+        printLine();
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -59,12 +59,37 @@ public class Duke {
         String command;
         command = sc.nextLine();
         while(!command.equals("bye")){
-            switch(command) {
+            String[] commandSplit = command.split(" ",2);
+            String commandType = commandSplit[0];
+            switch(commandType) {
             case "list":
-                displayList();
+                taskManager.listTasks();
+                break;
+            case "":
+                printEmptyLine();
+                break;
+            case "done":
+                int taskNumber;
+                try{
+                    taskNumber = Integer.parseInt(commandSplit[1]);
+                    taskNumber--;                           // Convert to 0-based index
+                    if(taskManager.checkIndexValidity(taskNumber)){
+                        if(taskManager.tasks.get(taskNumber).isDone){
+                            taskManager.printAlreadyDone(taskNumber);
+                        } else {
+                            taskManager.maskTaskAsDone(taskNumber);
+                        }
+                    } else {
+                        printInvalidIndex();
+                    }
+                }
+                catch(NumberFormatException e){
+                    printInvalidInteger();
+                }
+
                 break;
             default:
-                addToList(command);
+                taskManager.addTask(command);
                 break;
             }
             System.out.println();
