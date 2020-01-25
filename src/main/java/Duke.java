@@ -15,19 +15,23 @@ public class Duke {
                 break;
             } else if (input.toLowerCase().equals("list")) {
                 list.viewList();
-                System.out.println("_________________________________________________");
+                printDividerLine();
             } else {
                 // add user input to list
                 list.addToList(input);
-                System.out.println("_________________________________________________");
+                printDividerLine();
             }
         }
+    }
+
+    private static void printDividerLine() {
+        System.out.println("_________________________________________________");
     }
 
     // am I supposed to declare helper functions this way?
     // seems abit dodgy
     private static void printWelcomeBanner() {
-        System.out.println("_________________________________________________");
+        printDividerLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -35,11 +39,11 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("This is\n" + logo);
         System.out.println("How can I help you today?");
-        System.out.println("_________________________________________________");
+        printDividerLine();
     }
 
     private static void printByeMessage() {
         System.out.println("Goodbye");
-        System.out.println("_________________________________________________");
+        printDividerLine();
     }
 }
