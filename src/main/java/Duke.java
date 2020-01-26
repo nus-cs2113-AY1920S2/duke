@@ -29,9 +29,10 @@ public class Duke {
         int taskCount = 0;
 
         sayIntro();
-        //Level-1: run echo command loop, break on input "bye"
+        
         while (true){
-            System.out.print(">>>");  //easier to identify lines input by user (a la Python)  
+            //easier to identify lines input by user (a la Python)  
+            System.out.print(">>>");
             String line;
             Scanner in = new Scanner(System.in);
 
@@ -41,6 +42,12 @@ public class Duke {
             } 
             //Level-2: add list functionality
             else if (line.equals("list")) {
+                if (taskCount == 0){
+                    System.out.println("\t____________________________________________________________\n"
+                        + "\tThe list is empty." + System.lineSeparator()
+                        + "\t____________________________________________________________");
+                    continue;
+                }
                 System.out.println( "\t____________________________________________________________\n");
                 for (int i=0; i<taskCount;i++){
                     System.out.println("\t" + Integer.toString(i+1) + ". " + taskList[i]);
