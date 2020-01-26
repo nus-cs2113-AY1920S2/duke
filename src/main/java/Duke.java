@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int counter = 0;
 
         while(true) {
@@ -31,19 +31,31 @@ public class Duke {
 
             else if (line.equalsIgnoreCase("list")) {
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < counter; i++){
                     System.out.print(i+1 + ". ");
-                    System.out.println(tasks[i]);
-
+                    System.out.print(tasks[i].getStatusIcon());
+                    System.out.println(tasks[i].description);
                 }
                 System.out.println("____________________________________________________________");
 
             }
 
-            else{
-                tasks[counter] = line;
+            else if (line.startsWith("done")){
+
+                String strNumber = line.substring(5);
+                int number = Integer.parseInt(strNumber);
+                tasks[number-1].markAsDone();
                 System.out.println("____________________________________________________________");
-                System.out.println("added: "+ line);
+                System.out.println("Nice! I've marked this task as done: " + tasks[number-1].description);
+                System.out.println("____________________________________________________________");
+            }
+
+            else{
+                Task t = new Task(line);
+                tasks[counter] = t;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: "+ t.description);
                 System.out.println("____________________________________________________________");
                 counter += 1;
             }
