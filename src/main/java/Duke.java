@@ -25,7 +25,7 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        String[] taskList = new String[100];
+        Task[] taskList = new Task[100];
         int taskCount = 0;
 
         sayIntro();
@@ -33,31 +33,55 @@ public class Duke {
         while (true){
             //easier to identify lines input by user (a la Python)  
             System.out.print(">>>");
-            String line;
+            String userInput;
             Scanner in = new Scanner(System.in);
 
-            line = in.nextLine();
-            if (line.equals("bye")){
+            userInput = in.nextLine();
+            String[] tokenizedInput = userInput.split(" ");
+            if (tokenizedInput[0].equals("bye")){
                 break;
-            } 
-            //Level-2: add list functionality
-            else if (line.equals("list")) {
+            } else if (tokenizedInput[0].equals("list")) {     //Level-2: add list functionality
+                //empty list
                 if (taskCount == 0){
                     System.out.println("\t____________________________________________________________\n"
-                        + "\tThe list is empty." + System.lineSeparator()
-                        + "\t____________________________________________________________");
+                    + "\tThe list is empty." + System.lineSeparator()
+                    + "\t____________________________________________________________");
                     continue;
                 }
-                System.out.println( "\t____________________________________________________________\n");
+                //non-empty list enters this loop
+                System.out.println("\t____________________________________________________________\n");
                 for (int i=0; i<taskCount;i++){
-                    System.out.println("\t" + Integer.toString(i+1) + ". " + taskList[i]);
+                    System.out.println("\t" + Integer.toString(i+1)
+                    + ".[" + taskList[i].getStatusIcon() + "] " + taskList[i].getDescription());
                 }
                 System.out.println("\t____________________________________________________________");
+            } else if(tokenizedInput[0].equals("done")) {       //Level-3: add MarkAsDone functionality
+                int queryNumber = Integer.parseInt(tokenizedInput[1]);
+
+                //handle out of range done input
+                if (queryNumber < 1 || queryNumber > taskCount){
+                    System.out.println("\t____________________________________________________________\n"
+                    + "\tInvalid task number." + System.lineSeparator()
+                    + "\t____________________________________________________________");
+                    continue;
+                }
+                //handle tasks already marked done
+                if (taskList[queryNumber-1].getIsDone()){
+                    System.out.println("\t____________________________________________________________\n"
+                    + "\tThis task has already been marked completed." + System.lineSeparator()
+                    + "\t____________________________________________________________");
+                    continue;
+                }
+                taskList[queryNumber-1].markAsDone();
+                System.out.println("\t____________________________________________________________\n"
+                + "\tGreat job! I've marked this task as done:\n" + "\t" + Integer.toString(queryNumber) 
+                + ".[" + taskList[queryNumber-1].getStatusIcon() + "] " + taskList[queryNumber-1].getDescription() 
+                + "\n\t____________________________________________________________");
             } else{
-                taskList[taskCount] = line;
+                taskList[taskCount] = new Task(userInput);
                 taskCount++;
                 System.out.println( "\t____________________________________________________________\n\t"
-                + "added: " + line + System.lineSeparator()
+                + "added: " + userInput + System.lineSeparator()
                 + "\t____________________________________________________________");
             }
         }
