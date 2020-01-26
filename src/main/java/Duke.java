@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,7 +14,10 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
-        while (true) {
+        String[] tasks = new String[100];
+        int counter = 0;
+
+        while(true) {
             String line;
             Scanner input = new Scanner(System.in);
             line = input.nextLine();
@@ -25,10 +29,24 @@ public class Duke {
                 break;
             }
 
-            System.out.println("____________________________________________________________");
-            System.out.println(line);
-            System.out.println("____________________________________________________________");
+            else if (line.equalsIgnoreCase("list")) {
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < counter; i++){
+                    System.out.print(i+1 + ". ");
+                    System.out.println(tasks[i]);
 
+                }
+                System.out.println("____________________________________________________________");
+
+            }
+
+            else{
+                tasks[counter] = line;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: "+ line);
+                System.out.println("____________________________________________________________");
+                counter += 1;
+            }
         }
 
 
