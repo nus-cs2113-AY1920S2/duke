@@ -2,6 +2,13 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /** Number of tasks in the list **/
+    static String[] tasks = new String[100];
+
+    /** Counter of how many tasks there are **/
+    static int taskCounter = 0;
+
+
     /**
      * Prints horizontal line for chat bot
      */
@@ -56,13 +63,43 @@ public class Duke {
     /**
      * Repeats whatever message it receives
      *
-     * @param echo Message to print
+     * @param msg Message to print
      */
-    public static void replayBack (String echo) {
+    public static void replayBack (String msg) {
         printLine(false);
-        System.out.println("\t" + echo);
+        System.out.println("\t" + msg);
         printLine(true);
-        System.out.println();
+    }
+
+    /**
+     * Adds task to the tasks array
+     *
+     * @param task Task to add to the list
+     */
+    public static void addTask (String task) {
+        if (taskCounter < 100) {
+            tasks[taskCounter++] = task;
+
+            String msg = "added: " + task;
+            replayBack(msg);
+        }
+    }
+
+
+    /**
+     *  Prints the tasks that are currently in the list
+     */
+    public static void printTaskList () {
+        String msg = "";
+        for ( int i = 0; i < taskCounter; i++ ) {
+
+            if ( i == taskCounter - 1 ) {
+                msg += (i + 1) + ". " + tasks[i];
+                continue;
+            }
+            msg += (i + 1) + ". " + tasks[i] + System.lineSeparator() + "\t";
+        }
+        replayBack(msg);
     }
 
     public static void main(String[] args) {
@@ -76,12 +113,14 @@ public class Duke {
         while (!userResponse.equals("bye")) {
             userResponse = input.nextLine();
 
-            if (!userResponse.equals("bye")) {
-                replayBack(userResponse);
+            if (userResponse.equals("list")) {
+                printTaskList();
+            } else if (!userResponse.equals("bye")) {
+                addTask(userResponse);
             }
+
         }
 
         displayFarewell();
-
     }
 }
