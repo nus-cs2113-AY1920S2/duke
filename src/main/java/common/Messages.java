@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * Container for user visible messages.
+ */
 public class Messages {
     public static final String DIVIDER = "===================================================";
     public static final String MESSAGE_WELCOME = "  Hello! I'm Duke\n  What can I do for you?";

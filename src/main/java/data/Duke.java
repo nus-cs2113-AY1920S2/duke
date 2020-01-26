@@ -3,9 +3,16 @@ package data;
 import data.task.Task;
 import data.task.TaskList;
 
+/**
+ * Represents the entire address book. Contains the data of the address book.
+ */
 public class Duke {
+
     private TaskList allTasks;
 
+    /**
+     * Creates an empty address book.
+     */
     public Duke() {
         this.allTasks = new TaskList();
     }

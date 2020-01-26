@@ -6,6 +6,9 @@ import data.task.EventTask;
 import data.task.Task;
 import data.task.TodoTask;
 
+/**
+ * Lists all persons in the address book to the user.
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
@@ -28,7 +31,6 @@ public class ListCommand extends Command {
      */
     public CommandResult execute() {
         System.out.println(Messages.DIVIDER);
-        System.out.println(MESSAGE_USAGE);
         if (duke.getTaskList().getInternalList().size()>0){
             printAllTasks();
         } else {
