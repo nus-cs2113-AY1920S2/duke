@@ -9,7 +9,9 @@ import data.task.TodoTask;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = "Here are the tasks in your list:";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Displays all tasks in the DUKE system as a list with index numbers.\n"
+            + "    Example: " + COMMAND_WORD;
     public static final String MESSAGE_EMPTY_LIST = "There is no current task in the list!";
     public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";

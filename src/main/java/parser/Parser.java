@@ -2,9 +2,11 @@ package parser;
 
 
 import commands.*;
+import commands.add.AddDeadlineCommand;
+import commands.add.AddEventCommand;
+import commands.add.AddTodoCommand;
 import data.task.DeadlineTask;
 import data.task.EventTask;
-import data.task.Task;
 import data.task.TodoTask;
 
 
@@ -56,10 +58,10 @@ public class Parser {
         //exit
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-        //add
+        //help and default
+        case HelpCommand.COMMAND_WORD:
         default:
-            //return prepareAddTodo(commandWord);
-            return null;
+            return new HelpCommand();
         }
     }
 

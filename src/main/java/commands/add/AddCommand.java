@@ -1,8 +1,10 @@
-package commands;
+package commands.add;
 
-import data.task.Task;
+import commands.Command;
 
-public abstract class AddCommand extends Command{
+public abstract class AddCommand extends Command {
+
+
 
     public static final String MESSAGE_TODO_SUCCESS = "Got it. I've added this task: \n  [%c][%c] %s";
     public static final String MESSAGE_DEADLINE_SUCCESS = "Got it. I've added this task: \n  [%c][%c] %s (%s)";

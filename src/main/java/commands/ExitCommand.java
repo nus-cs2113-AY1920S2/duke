@@ -1,8 +1,13 @@
 package commands;
 
-import ui.TextUi;
+
+/**
+ * Terminates the program.
+ */
 
 public class ExitCommand extends Command {
+
+
 
     public ExitCommand() {
 
@@ -11,6 +16,8 @@ public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
     public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "  Bye. Hope to see you again soon!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
+            + "      Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute() {
