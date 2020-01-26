@@ -89,12 +89,12 @@ public class Duke {
      * Marks the specific task as done if constraints are met.
      *
      * @param taskIndex The task index in the array. Must be within
-     *                  the range of available tasks
+     *                  the range of available tasks.
      */
-    public static void markTaskAsDone (int taskIndex ) {
+    public static void markTaskAsDone (int taskIndex) {
 
         String msg;
-        if ( taskIndex <= 0 || taskCounter == 0) {
+        if (taskIndex <= 0 || taskCounter == 0) {
             msg = "Well...I cannot mark something that doesn't exist as done >:(";
 
         } else if (taskIndex > taskCounter) {
@@ -135,7 +135,7 @@ public class Duke {
         replayBack(msg);
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
 
         Scanner input = new Scanner(System.in);
 
