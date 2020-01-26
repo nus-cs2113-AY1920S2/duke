@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    Task newTask;
+    private Task newTask;
     private ArrayList<Task> tasks;
 
     public Duke() {
