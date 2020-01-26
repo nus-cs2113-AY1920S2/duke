@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class Duke {
 
     /** Number of tasks in the list **/
-    static String[] tasks = new String[100];
+    static Task[] tasks = new Task[100];
 
     /** Counter of how many tasks there are **/
     static int taskCounter = 0;
 
 
     /**
-     * Prints horizontal line for chat bot
+     * Prints horizontal line for chat bot.
      */
     public static void printLine (boolean hasNewline) {
         System.out.println("  ________________________________________________________________");
@@ -21,7 +21,7 @@ public class Duke {
     }
 
     /**
-     * Prints logo for the bot
+     * Prints logo for the bot.
      */
     public static void printLogo () {
 
@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Greets user
+     * Greets user.
      */
     public static void greetUser () {
         String name = "Zapato";
@@ -52,7 +52,7 @@ public class Duke {
     }
 
     /**
-     * Displays farewell message
+     * Displays farewell message.
      */
     public static void displayFarewell () {
         printLine(false);
@@ -61,9 +61,9 @@ public class Duke {
     }
 
     /**
-     * Repeats whatever message it receives
+     * Repeats whatever message it receives.
      *
-     * @param msg Message to print
+     * @param msg Message to print.
      */
     public static void replayBack (String msg) {
         printLine(false);
@@ -72,17 +72,49 @@ public class Duke {
     }
 
     /**
-     * Adds task to the tasks array
+     * Adds task to the tasks array.
      *
-     * @param task Task to add to the list
+     * @param task Task to add to the list.
      */
     public static void addTask (String task) {
         if (taskCounter < 100) {
-            tasks[taskCounter++] = task;
+            tasks[taskCounter++] = new Task(task);
 
             String msg = "added: " + task;
             replayBack(msg);
         }
+    }
+
+    /**
+     * Marks the specific task as done if constraints are met.
+     *
+     * @param taskIndex The task index in the array. Must be within
+     *                  the range of available tasks
+     */
+    public static void markTaskAsDone (int taskIndex ) {
+
+        String msg;
+        if ( taskIndex <= 0 || taskCounter == 0) {
+            msg = "Well...I cannot mark something that doesn't exist as done >:(";
+
+        } else if (taskIndex > taskCounter) {
+            msg = "Sorry, but you only have " + taskCounter + " tasks :'(";
+
+        } else {
+
+            if (!tasks[taskIndex - 1].getCompletionStatus()) {
+                tasks[taskIndex - 1].setTaskAsDone();
+
+                msg = "Okay! Marked this task as done :) :" + System.lineSeparator() + "\t\t" +
+                        tasks[taskIndex - 1].getStatusIcon() + " " + tasks[taskIndex - 1].getDescription();
+
+            } else {
+                msg = "The task: " + System.lineSeparator() + "\t\t\u2023 " + tasks[taskIndex - 1].getDescription() +
+                        System.lineSeparator() + "\t" + "has already been marked as done before";
+            }
+        }
+
+        replayBack(msg);
     }
 
 
@@ -94,10 +126,11 @@ public class Duke {
         for ( int i = 0; i < taskCounter; i++ ) {
 
             if ( i == taskCounter - 1 ) {
-                msg += (i + 1) + ". " + tasks[i];
+                msg += (i + 1) + "." + tasks[i].getStatusIcon() + " " + tasks[i].getDescription();
                 continue;
             }
-            msg += (i + 1) + ". " + tasks[i] + System.lineSeparator() + "\t";
+            msg += (i + 1) + "." + tasks[i].getStatusIcon() + " " + tasks[i].getDescription() + System.lineSeparator() + "\t";
+
         }
         replayBack(msg);
     }
@@ -115,8 +148,14 @@ public class Duke {
 
             if (userResponse.equals("list")) {
                 printTaskList();
+
+            } else if (userResponse.contains("done")) {
+                int taskIndex = Integer.parseInt(userResponse.substring(userResponse.indexOf(" ") + 1));
+                markTaskAsDone(taskIndex);
+
             } else if (!userResponse.equals("bye")) {
                 addTask(userResponse);
+
             }
 
         }
