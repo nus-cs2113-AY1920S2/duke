@@ -2,7 +2,14 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /**
+     * List of all tasks added by the user
+     */
     private static Task[] taskList;
+
+    /**
+     * Number of tasks in taskList
+     */
     private static int numTasks;
 
     public static void main(String[] args) {
