@@ -10,6 +10,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
         boolean isExit = false;
+        String[] list = new String[100];
+        int itemCount = 0;
         do {
             Scanner in = new Scanner(System.in);
             String input = in.nextLine();
@@ -24,9 +26,18 @@ public class Duke {
                         + "        __/ |     \n"
                         + "       |___/      \n");
                 isExit = true;
-            } else {
+            } else if(input.equals("list")) {
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    " + input);
+                for(int i = 0; i < itemCount; ++i) {
+                    System.out.println("    " + (i+1) + ". " + list[i]);
+                }
+                System.out.println("    ____________________________________________________________");
+            }
+            else {
+                System.out.println("    ____________________________________________________________");
+                list[itemCount] = input;
+                itemCount++;
+                System.out.println("    added: " + input);
                 System.out.println("    ____________________________________________________________");
             }
         } while (isExit == false);
