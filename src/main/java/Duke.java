@@ -20,22 +20,29 @@ public class Duke {
     }
 
     private static int processCommand(String command, Task[] tasks, int taskNum) {
-        if (command.equals("bye")) {
+        String[] commands = command.split(" ");
+        switch (commands[0]) {
+        case "bye":
             bye();
             return taskNum;
-        } else if (command.equals("list")) {
+        case "list":
             listTasks(tasks, taskNum);
             return taskNum;
-        } else {
+        case "done":
+            int taskID = Integer.parseInt(commands[1]);
+            markAsDone(tasks, taskID);
+            return taskNum;
+        default:
             addTasks(command, tasks, taskNum);
-            return ++taskNum;
+            return taskNum + 1;
         }
     }
 
     private static void listTasks(Task[] tasks, int taskNum) {
         System.out.println(lineDivider);
+        System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < taskNum; ++i) {
-            System.out.printf("     %d. %s\n", i, tasks[i].getTaskDescription());
+            System.out.printf("     %d.[%s] %s\n", i, tasks[i].getStatusIcon(), tasks[i].getTaskDescription());
         }
         System.out.println(lineDivider);
     }
@@ -45,6 +52,14 @@ public class Duke {
         tasks[taskNum] = currentTask;
         System.out.println(lineDivider);
         System.out.printf("     added: %s\n", command);
+        System.out.println(lineDivider);
+    }
+
+    private static void markAsDone(Task[] tasks, int taskID) {
+        tasks[taskID].markAsDone();
+        System.out.println(lineDivider);
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.printf("       [\u2713] %s\n", tasks[taskID].getTaskDescription());
         System.out.println(lineDivider);
     }
     
