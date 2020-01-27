@@ -1,10 +1,11 @@
+import main.java.Task;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Duke {
-    private static String[] listOfTasks = new String[101];
     private static int counter = 0;
+    private static Task[] listOfTasks =  new Task[100];
     public static void main(String[] args) {
+        Task[] listOfTasks = new Task[100];
         String logo = "  ____        _        \n"
                 + " |  _ \\ _   _| | _____ \n"
                 + " | | | | | | | |/ / _ \\\n"
@@ -24,6 +25,8 @@ public class Duke {
                 break;
             } else if (line.equals("list")) {
                 showAllTasks();
+            } else if (line.contains("done")){
+                markTaskAsDone(line);
             } else {
                 storeTaskIntoList(line);
             }
@@ -43,21 +46,36 @@ public class Duke {
         printLine();
     }
 
-    public static void storeTaskIntoList(String task) {
-        listOfTasks[counter] = task;
+    public static void storeTaskIntoList(String line) {
+        listOfTasks[counter] = new Task(line);
         printLine();
-        System.out.println(" added: " + task);
+        System.out.println(" added: " + line);
         printLine();
         counter += 1;
     }
 
     public static void showAllTasks() {
         printLine();
+        System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < counter; i += 1) {
             System.out.print(" ");
             System.out.print(i+1);
-            System.out.println(". " + listOfTasks[i]);
+            System.out.print(".[" + listOfTasks[i].getStatusIcon() + "] ");
+            System.out.println(listOfTasks[i].getDescription());
         }
+        printLine();
+    }
+
+    public static void markTaskAsDone(String line) {
+        int dividerPosition = line.indexOf("done");
+        String number = line.substring(dividerPosition+5, line.length());
+        int taskNumber = Integer.parseInt(number);
+        listOfTasks[taskNumber-1].markAsDone();
+        printLine();
+        System.out.println(" Nice! I've marked this task as done:");
+        System.out.print(" ");
+        System.out.print("  [" + listOfTasks[taskNumber-1].getStatusIcon() + "] ");
+        System.out.println(listOfTasks[taskNumber-1].getDescription());
         printLine();
     }
 }
