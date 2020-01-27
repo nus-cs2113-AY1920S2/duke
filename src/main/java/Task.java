@@ -2,14 +2,16 @@ public class Task {
 
     private String name;
     private int taskNumber;
+    private boolean isDone;
 
     public Task(String name, int taskNumber) {
         this.name = name;
         this.taskNumber = taskNumber;
+        isDone = false;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDone(boolean done) {
+        isDone = done;
     }
 
     public int getTaskNumber() {
@@ -21,7 +23,11 @@ public class Task {
     }
 
     public void printTask() {
-        System.out.println("    " + taskNumber + ". " + name);
+        System.out.println("    " + taskNumber + ". [" + getStatusIcon() + "] " + name);
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
 }
