@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int maxCmd = 100;
@@ -17,6 +18,9 @@ public class Duke {
         String userCmd = "";
         String[] cmdArr = new String[maxCmd];
         int cmdCounter = 0;
+        int numOfTasks = 0;
+
+        ArrayList<Task> taskArrList = new ArrayList<>();
 
         while (continueRun == true){
             System.out.println("==========================");
@@ -25,24 +29,62 @@ public class Duke {
 
             System.out.println("You have typed: " +userCmd);
 
+            //end program
             if (userCmd.toLowerCase().equals("bye")){
                 System.out.println("Bye. Hope to see you again!");
                 continueRun = false;
+                break;
             }
+            //List commands -->not updated
             else if (userCmd.toLowerCase().equals("list")){
-                System.out.println("Current command list: ");
+                System.out.println("Current task list: ");
 
-                for (int i = 0; i < cmdCounter; i++){
-                    int cmdNum = i + 1;
-                    System.out.println( cmdNum +". " +cmdArr[i]);
+                if (taskArrList.size() == 0) {
+                    System.out.println("List is empty!");
+                }
+
+                else {
+                    for (Task t : taskArrList) {
+                        System.out.println(t.getTaskID() +". [" + t.getStatusIcon() +"] " +t.getTaskName());
+                    }
                 }
             }
-            else{
-                cmdArr[cmdCounter] = userCmd;
-                cmdCounter++;
+            //Mark task as done
+            else if (userCmd.contains("done")){
+                String[] splitCmd = userCmd.split(" ");
+                int completedTask = 0;
+                try {
+                    completedTask = Integer.parseInt(splitCmd[1]);
+                }
+                catch (Exception e){
+                    System.out.println("Incorrect syntax! Try again");
+                    continue;
+                }
 
-                System.out.println("Text added: " +userCmd);
+                if (completedTask > taskArrList.size()){
+                    System.out.println("Task not found!");
+                }
+                else {
+                    //TODO: update to task via taskID instead of array index
+                    Task temp = taskArrList.get(completedTask-1); //get index not IF
+                    //todo: need to check if already completed?
+                    temp.setDone();
+
+                    System.out.println("I've marked this task as done:");
+                    System.out.println("[" + temp.getStatusIcon() + "] " + temp.getTaskName());
+                }
             }
+            //Add commands
+            else{
+                numOfTasks++;
+                Task newTask = new Task(numOfTasks, userCmd);
+                taskArrList.add(newTask);
+                System.out.println("Task added: " +userCmd);
+            }
+
+
+
+
         }
     }
 }
