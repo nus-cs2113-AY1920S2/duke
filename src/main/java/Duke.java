@@ -7,7 +7,7 @@ public class Duke {
             "Type \"list\" to display your items\n" +
             "Type \"bye\" to exit";
     private static final String byeMessage = "Leaving so soon? :(";
-    private static ArrayList<String> items;
+    private static ArrayList<Task> tasks;
 
     private static void printMessagePretty(String message) {
         String lineSeparator = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -18,14 +18,17 @@ public class Duke {
 
     private static void printItems() {
         String itemsString = "";
-        for (int i = 0; i < items.size(); i++) {
-            itemsString += String.format("%d) %s%s", i + 1, items.get(i), i == items.size() - 1 ? "" : "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            String lineEnd = i == tasks.size() - 1 ? "" : "\n";
+            itemsString += String.format("%d) [%s] %s%s", i + 1, currentTask.getStatusIcon(),
+                    currentTask.getDescription(), lineEnd);
         }
         printMessagePretty(itemsString);
     }
 
     public static void main(String[] args) {
-        items = new ArrayList<String>();
+        tasks = new ArrayList<Task>();
         Scanner scannerObject = new Scanner(System.in);
         String userInput = "";
 
@@ -36,9 +39,18 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 printItems();
+            } else if (userInput.startsWith("done")) {
+                // Should do some more error checking here... maybe later
+                int index = Integer.parseInt(userInput.substring(5)) - 1;
+                Task chosenTask = tasks.get(index);
+                chosenTask.setIsDone(true);
+                String doneMessage = chosenTask.getDescription() + "\n" +
+                        "has been marked as done! [" + chosenTask.getStatusIcon() + "]";
+                printMessagePretty(doneMessage);
             } else {
-                items.add(userInput);
-                printMessagePretty("added: " + userInput);
+                Task newTask = new Task(userInput);
+                tasks.add(newTask);
+                printMessagePretty("added: " + newTask.getDescription());
             }
         }
         printMessagePretty(byeMessage);
