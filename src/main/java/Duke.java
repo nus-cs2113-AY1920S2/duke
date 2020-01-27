@@ -14,7 +14,7 @@ public class Duke {
                 + "\t____________________________________________________________\n");
 
 
-        String[] taskList = new String[100];
+        Task[] taskList = new Task[100];
         int taskCount = 0;
         Scanner in = new Scanner(System.in);
         String line = in.nextLine();
@@ -22,11 +22,21 @@ public class Duke {
             if(line.equals("list")){
                 System.out.println("\t____________________________________________________________");
                 for(int i=0; i<taskCount; ++i){
-                    System.out.println("\t" + i + ". " + taskList[i]);
+                    Task t = taskList[i];
+                    System.out.println("\t" + i + ".[" + t.getStatusIcon() + "] " + t.description);
                 }
                 System.out.println("\t____________________________________________________________\n");
+            }else if(line.startsWith("done")){
+                int taskNum = Integer.parseInt(line.substring(5,6));
+                Task t=taskList[taskNum];
+                t.markAsDone();
+                System.out.println("\t____________________________________________________________\n"
+                +"\t Nice! I've marked this task as done:\n"
+                +"\t" + "  [" + t.getStatusIcon() + "] " + t.description + "\n"
+                +"\t____________________________________________________________\n");
             }else{
-                taskList[taskCount] = line;
+                Task t = new Task(line);
+                taskList[taskCount] = t;
                 taskCount++;
                 System.out.println("\t____________________________________________________________\n"
                         + "\t added: " + line + "\n"
