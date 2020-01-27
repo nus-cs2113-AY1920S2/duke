@@ -3,25 +3,10 @@ import java.util.Vector;
 
 public class Duke {
 
-    public static class Task {
-        protected String task;
-        protected boolean isDone;
-
-        public Task(String task) {
-            this.task = task;
-            this.isDone = false;
-        }
-
-        public String getTaskStatus() {
-            String icon = isDone ? "\u2713" : "\u2718";
-            return ("[" + icon + "] " + task);
-        }
-    }
-
     private static Vector<Task> list = new Vector<>();
 
     private void printList() {
-        System.out.println("Sure! Lumi shall print out your list!");
+        System.out.println("  Sure! Lumi shall print out your list!");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i+1 + ". " + list.get(i).getTaskStatus());
         }
@@ -30,7 +15,7 @@ public class Duke {
 
     private void addToList(String input) {
         list.add(new Task(input));
-        System.out.println("Alright, Lumi has added: " + input + "!\n");
+        System.out.println("  Alright, Lumi has added: " + input + "!\n");
     }
 
     private boolean isValidDoneInput(String input) {
@@ -51,10 +36,10 @@ public class Duke {
         String[] words = input.split(" ");
         int listNumber = Integer.parseInt(words[1]);
         if (list.get(listNumber-1).isDone) {
-            System.out.println("Hey!! Lumi already marked <" + list.get(listNumber-1).task + "> as completed!\n");
+            System.out.println("  Hey!! Lumi already marked <" + list.get(listNumber-1).task + "> as completed!\n");
         } else {
             list.get(listNumber - 1).isDone = true;
-            System.out.println("Well done! Lumi marks this task as completed!\n" +
+            System.out.println("  Well done! Lumi marks this task as completed!\n" +
                     list.get(listNumber - 1).getTaskStatus() + "\n");
         }
     }
@@ -63,6 +48,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if (input.toLowerCase().equals("bye")) {
+            scanner.close();
             return;
         } else if (input.toLowerCase().equals("list")) {
             printList();
@@ -78,12 +64,12 @@ public class Duke {
 
     private void runChat() {
         System.out.println("Initializing LumiChat v0.0.1.4...\n\n" +
-                "LumiChat is now ready.\n\n " +
-                "Hey, I'm Lumi!\n How may I assist you today?\n");
+                "LumiChat is now ready.\n\n" +
+                "  Hey, I'm Lumi!\n  How may I assist you today?\n");
 
         readInput();
 
-        System.out.println("Bye! See you again soon!");
+        System.out.println("  Bye! See you again soon!");
     }
 
     public static void main(String[] args) {
