@@ -1,42 +1,70 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String lineDivider = "____________________________________________________________";
+    private static final String logo = "          __ __      _           __                          \n" +
+            "     /\\  /_ /_ |    (_)         / _|                         \n" +
+            "    /  \\  | || |_ __ _ ___  ___| |_ ___  _ __ _ __ ___   ___ \n" +
+            "   / /\\ \\ | || | '__| / __|/ _ \\  _/ _ \\| '__| '_ ` _ \\ / _ \\\n" +
+            "  / ____ \\| || | |  | \\__ \\  __/ || (_) | |  | | | | | |  __/\n" +
+            " /_/    \\_\\_||_|_|  |_|___/\\___|_| \\___/|_|  |_| |_| |_|\\___|\n";
+    private static final String lineDivider = "    ____________________________________________________________";
     private static final String indentation = "     ";
-    private static final String greetingWords = indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?";
-    private static final String byeWords = "Bye. Hope to see you again soon!";
+    private static final String greetingWords = "     Hello! I'm Duke\n     What can I do for you?";
+    private static final String byeWords = "     Bye. Hope to see you again soon!";
 
     private static void greet() {
         System.out.println(logo);
+        System.out.println(lineDivider);
         System.out.println(greetingWords);
+        System.out.println(lineDivider);
     }
 
-    private static void echo(String command) {
+    private static int processCommand(String command, Task[] tasks, int taskNum) {
+        if (command.equals("bye")) {
+            bye();
+            return taskNum;
+        } else if (command.equals("list")) {
+            listTasks(tasks, taskNum);
+            return taskNum;
+        } else {
+            addTasks(command, tasks, taskNum);
+            return ++taskNum;
+        }
+    }
+
+    private static void listTasks(Task[] tasks, int taskNum) {
         System.out.println(lineDivider);
-        System.out.println(indentation + command);
+        for (int i = 0; i < taskNum; ++i) {
+            System.out.printf("     %d. %s\n", i, tasks[i].getTaskDescription());
+        }
+        System.out.println(lineDivider);
+    }
+
+    private static void addTasks(String command, Task[] tasks, int taskNum) {
+        Task currentTask = new Task(command);
+        tasks[taskNum] = currentTask;
+        System.out.println(lineDivider);
+        System.out.printf("     added: %s\n", command);
         System.out.println(lineDivider);
     }
     
     private static void bye() {
         System.out.println(lineDivider);
-        System.out.println(indentation + byeWords);
+        System.out.println(byeWords);
         System.out.println(lineDivider);
     }
 
     public static void main(String[] args) {
+        Task[] tasks = new Task[100];
+        int taskNum = 0;
+
         greet();
 
+        String command;
         Scanner s  = new Scanner(System.in);
-        String command = s.nextLine();
-        while (!command.equals("bye")) {
-            echo(command);
+        do {
             command = s.nextLine();
-        }
-        bye();
+            taskNum = processCommand(command, tasks, taskNum);
+        } while (!command.equals("bye"));
     }
 }
