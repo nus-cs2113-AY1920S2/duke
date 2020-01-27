@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,21 +7,34 @@ public class Duke {
     private static Scanner in = new Scanner(System.in);
 
     private static void botResponse(String userInput) {
-        ArrayList<String> userList = new ArrayList<String>();
+        ArrayList<Task> userList = new ArrayList<Task>();
 
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 System.out.print(lines);
                 if (userList.size() == 0) {
                     System.out.println("No items added!");
+                } else {
+                    System.out.println("Here are the tasks in your list:");
                 }
                 for (int i=0; i<userList.size(); i++) {
                     Integer index = i+1;
-                    System.out.println(index + ". " + userList.get(i));
+                    System.out.println(index + ".[" + userList.get(i).getStatusIcon() + "] " + userList.get(i).getDescription());
                 }
                 System.out.print(lines);
-            } else {
-                userList.add(userInput);
+            } else if (userInput.indexOf("done ") != -1) {
+                System.out.print(lines);
+                System.out.println("Nice! I've marked this task as done:");
+                String[] words = userInput.split(" ");
+                Integer doneIndex = Integer.parseInt((words[1]));
+                doneIndex--;    // decrement doneIndex from one-based indexing to zero-based indexing to access ArrayList using it
+                userList.get(doneIndex).setIsDone(true);
+                System.out.println("[" + userList.get(doneIndex).getStatusIcon() + "] " + userList.get(doneIndex).getDescription());
+                System.out.print(lines);
+            }
+            else {
+                Task newTask = new Task(userInput);
+                userList.add(newTask);
                 System.out.print(lines + "added: " + userInput + "\n" + lines);
             }
             userInput = in.nextLine();
