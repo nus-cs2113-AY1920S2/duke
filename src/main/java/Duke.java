@@ -4,6 +4,18 @@ public class Duke {
         return "[" + item.getStatusIcon() + "] " + item.description;
     }
 
+    public static void printTaskList(Task[] taskList, int counter){
+        for (int i = 0; i < counter; i++) {
+            System.out.println(i + 1 + ". " + printItemDescription(taskList[i]));
+        }
+    }
+
+    public static void markTaskAsDone(Task[] taskList, String cmd){
+        int index = Integer.parseInt(cmd.substring(cmd.length() - 1)) - 1;
+        taskList[index].setDone();
+        System.out.println("Nice! I've marked this task as done: " + printItemDescription(taskList[index]));
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,30 +24,24 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___| ";
         System.out.println(logo + " says hello :)");
         System.out.println("\nWhat can i do for you?");
+        Task[] taskList = new Task[100];
+        int counter = 0;
         Scanner myObj = new Scanner(System.in);
         String cmd;
-        Task[] toAdd = new Task[100];
-        int counter = 0;
-        do {
-            cmd = myObj.nextLine();
-            if (!cmd.equals("bye")) {
-                if (cmd.equals("list")) {
-                    for (int i = 0; i < counter; i++) {
-                        System.out.println(i + 1 + ". " + printItemDescription(toAdd[i]));
-                    }
-                } else if (cmd.substring(0,4).equals("done")) {
-                    int index = Integer.parseInt(cmd.substring(cmd.length() - 1)) - 1;
-                    toAdd[index].setDone();
-                    System.out.println("Nice! I've marked this task as done: " + printItemDescription(toAdd[index]));
-                }else{
-                    Task t = new Task(cmd);
-                    toAdd[counter] = t;
-                    counter++;
-                    System.out.println("added: " + cmd);
-                }
-            } else {
-                System.out.println("Bye bye! Talk to me again soon!");
+        cmd = myObj.nextLine();
+        while (!cmd.equals("bye")) {
+            if (cmd.equals("list")) {
+                printTaskList(taskList, counter);
+            } else if (cmd.substring(0,4).equals("done")) {
+                markTaskAsDone(taskList, cmd);
+            }else{
+                Task item = new Task(cmd);
+                taskList[counter] = item;
+                counter++;
+                System.out.println("added: " + cmd);
             }
-        } while (!cmd.equals("bye"));
+            cmd = myObj.nextLine();
+        }
+        System.out.println("Bye bye! Talk to me again soon!");
     }
 }
