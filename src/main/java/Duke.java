@@ -1,4 +1,3 @@
-import java.awt.desktop.SystemSleepEvent;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,19 +15,46 @@ public class Duke {
         System.out.println("\tHere are the tasks in your list:");
         int numberOfTasks = Task.getNumberOfTasks();
         for (int i = 1; i <= numberOfTasks; i++) {
-            System.out.println("\t" + tasks[i].getID() + ". " + tasks[i].getName());
+            System.out.println("\t" + tasks[i].getID() + "." + tasks[i].getStatusIcon() + " " + tasks[i].getName());
         }
         System.out.println("    ____________________________________________________________");
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
     public static void addTask(String taskName, Task[] tasks){
-        System.out.println("    ____________________________________________________________");
         Task newTask = new Task(taskName);
         tasks[newTask.getID()] = newTask;
+        System.out.println("    ____________________________________________________________");
         System.out.println("\tadded: " + newTask.getName());
         System.out.println("    ____________________________________________________________");
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+    }
+
+    public static void markAsDone(String command, Task[] tasks){
+        int taskID = getIdFromCommand(command);
+
+        /* Exit if enter a wrong task id */
+        if (taskID > Task.getNumberOfTasks() || taskID < 1){
+            System.out.println("    ____________________________________________________________");
+            System.out.println("\tWrong Number!");
+            System.out.println("    ____________________________________________________________");
+            System.out.println("\nPlease enter your command again or enter \"bye\" to exit:");
+            return;
+        }
+
+        Task markedTask = tasks[taskID];
+        markedTask.markAsDone();
+        System.out.println("    ____________________________________________________________");
+        System.out.println("\tI've marked this task as done: ");
+        System.out.println("\t" + markedTask.getStatusIcon() + markedTask.getName());
+        System.out.println("    ____________________________________________________________");
+        System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+    }
+
+    public static int getIdFromCommand(String command){
+        String[] words = command.split("\\s+");
+        int ID = Integer.parseInt(words[1]);
+        return ID;
     }
 
     public static void bye(){
@@ -62,11 +88,14 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
 
+        /* Process command */
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                list(tasks);
+            } else if (command.contains("done")) {
+                markAsDone(command, tasks);
             } else {
-                addTask(command,tasks);
+                addTask(command, tasks);
             }
             command = scanner.nextLine();
         }

@@ -27,12 +27,12 @@ public class Task {
         return id;
     }
 
-    public void setIsDone(){
+    public void markAsDone(){
         this.isDone = true;
     }
 
-    public boolean getIsDone(){
-        return isDone;
+    public String getStatusIcon(){
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
     public static int getNumberOfTasks(){
