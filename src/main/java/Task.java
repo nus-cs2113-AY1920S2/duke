@@ -37,5 +37,4 @@ public class Task {
     public static int getTaskNum(){
         return taskNum;
     }
-
 }
