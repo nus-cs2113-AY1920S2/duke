@@ -1,4 +1,4 @@
-package data;
+package data.exceptions;
 
 public abstract class InvalidInputException extends Exception{
     /**

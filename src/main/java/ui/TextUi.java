@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class TextUi {
 
+    public static final int DISPLAYED_INDEX_OFFSET = 1;
+
     //display welcome message
     public static void showWelcomeMessage (){
         System.out.println(Messages.DIVIDER);

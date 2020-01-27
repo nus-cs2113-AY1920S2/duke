@@ -1,5 +1,6 @@
 package data.task;
 
+import data.exceptions.TaskNotFoundException;
 import data.task.Task;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,6 +44,13 @@ public class TaskList implements Iterable<Task> {
      */
     public void clear() {
         internalList.clear();
+    }
+
+    public void remove(Task toRemove) throws TaskNotFoundException{
+        final boolean personFoundAndDeleted = internalList.remove(toRemove);
+        if (!personFoundAndDeleted) {
+            throw new TaskNotFoundException();
+        }
     }
 
     @Override

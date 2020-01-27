@@ -1,5 +1,6 @@
 package data;
 
+import data.exceptions.TaskNotFoundException;
 import data.task.Task;
 import data.task.TaskList;
 
@@ -36,6 +37,15 @@ public class Duke {
         return allTasks.contains(key);
     }
 
+    /**
+     * Removes the equivalent person from the list.
+     *
+     * @throws TaskNotFoundException if no such person could be found in the list.
+     */
+    public void removeTask(Task toRemove) throws TaskNotFoundException {
+        allTasks.remove(toRemove);
+    }
+
 
     /**
      * Clears all persons and tags from the address book.
@@ -58,4 +68,15 @@ public class Duke {
         //find the task
         allTasks.getInternalList().get(doneId).setDone(true);
     }
+
+    /**
+     * Removes the equivalent person from the address book.
+     *
+     * @throws TaskNotFoundException if no such Person could be found.
+     */
+    public void removePerson(Task toRemove) throws TaskNotFoundException {
+        allTasks.remove(toRemove);
+    }
+
+
 }
