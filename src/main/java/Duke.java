@@ -44,7 +44,7 @@ public class Duke {
     }
 
     public static void commandMode(String input,Scanner in){
-        Task[] taskList = new Task[50];
+        TaskList taskList = new TaskList();
         int taskNum = 0;
         input = in.nextLine().trim().toLowerCase();
         while(!input.equals("bye")){
@@ -52,7 +52,7 @@ public class Duke {
             if(input.startsWith("done")){
                 int dividePosition = input.indexOf(" ");
                 int taskIndex = Integer.parseInt(input.substring(dividePosition+1));
-                Task cur_task = taskList[taskIndex-1];
+                Task cur_task = taskList.getOneTask(taskIndex-1);
                 cur_task.setTaskStatus("[\u2713]");
                 System.out.println("    Congratulations! You have just finished this task:");
                 System.out.println("    "+cur_task.getTaskStatus()+cur_task.getTaskName());
@@ -60,10 +60,10 @@ public class Duke {
             else if(!input.equals("list")) {
                 input = input.replaceAll("i want to ","");
                 System.out.println("    added: "+input);
-                taskList[taskNum++] = new Task(input);
+                taskList.append(new Task(input));
             }
             else
-                printTaskList(Arrays.copyOf(taskList,taskNum));
+                taskList.printTaskList();
             System.out.println("    ________________________________");
             input = in.nextLine().trim().toLowerCase();
         }
@@ -74,14 +74,6 @@ public class Duke {
         System.out.println("    ________________________________");
         System.out.println("    Don't leave me alone! Please come back soon!");
         System.out.println("    ________________________________");
-    }
-
-    public static void printTaskList(Task[] taskList){
-        int index = 0;
-        for(Task task:taskList){
-            index++;
-            System.out.println("    "+index+"."+task.getTaskStatus()+task.getTaskName());
-        }
     }
 
 }
