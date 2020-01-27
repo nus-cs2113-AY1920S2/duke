@@ -6,6 +6,7 @@ public class Duke {
     private static String lines = "____________________________________________________________\n";
     private static Scanner in = new Scanner(System.in);
 
+    //TODO edge cases: user inputs done followed by a non integer, user inputs done followed by an out of range integer.
     private static void botResponse(String userInput) {
         ArrayList<Task> userList = new ArrayList<Task>();
 
