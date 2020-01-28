@@ -1,28 +1,24 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        }
-
-        public void taskDone() {
-            this.isDone = true;
-        }
-    }
-
     public static void main(String[] args) {
-        String logo = "Nyan\n";
+        String logo = "    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
+                "    ░░░░░░░░░░▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄░░░░░░░░░\n" +
+                "    ░░░░░░░░▄▀░░░░░░░░░░░░▄░░░░░░░▀▄░░░░░░░\n" +
+                "    ░░░░░░░░█░░▄░░░░▄░░░░░░░░░░░░░░█░░░░░░░\n" +
+                "    ░░░░░░░░█░░░░░░░░░░░░▄█▄▄░░▄░░░█░▄▄▄░░░\n" +
+                "    ░▄▄▄▄▄░░█░░░░░░▀░░░░▀█░░▀▄░░░░░█▀▀░██░░\n" +
+                "    ░██▄▀██▄█░░░▄░░░░░░░██░░░░▀▀▀▀▀░░░░██░░\n" +
+                "    ░░▀██▄▀██░░░░░░░░▀░██▀░░░░░░░░░░░░░▀██░\n" +
+                "    ░░░░▀████░▀░░░░▄░░░██░░░▄█░░░░▄░▄█░░██░\n" +
+                "    ░░░░░░░▀█░░░░▄░░░░░██░░░░▄░░░▄░░▄░░░██░\n" +
+                "    ░░░░░░░▄█▄░░░░░░░░░░░▀▄░░▀▀▀▀▀▀▀▀░░▄▀░░\n" +
+                "    ░░░░░░█▀▀█████████▀▀▀▀████████████▀░░░░\n" +
+                "    ░░░░░░████▀░░███▀░░░░░░▀███░░▀██▀░░░░░░\n" +
+                "    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n";
         System.out.println("    ____________________________________________________________");
-        System.out.print("    Hello! I'm " + logo);
+        System.out.print(logo);
+        System.out.println("    Hello Nyan Cat here!");
         System.out.println("    ____________________________________________________________");
 
         Scanner input = new Scanner(System.in);
@@ -41,11 +37,17 @@ public class Duke {
                 for (int i = 0; i < counter; i++) {
                     System.out.println("    " + (i + 1) + ".[" + buffer[i].getStatusIcon() + "] " + buffer[i].description);
                 }
-            } else if (s.equalsIgnoreCase("done")){
-                int num = input.nextInt() - 1;
-                buffer[num].taskDone();
-                System.out.println("    Nice! I've marked this task as done:");
-                System.out.println("      [" + buffer[num].getStatusIcon() + "] " + buffer[num].description);
+            } else if (s.equalsIgnoreCase("done")) {
+                try {
+                    int num = input.nextInt() - 1;
+                    buffer[num].taskDone();
+                    System.out.println("    Nice! I've marked this task as done:");
+                    System.out.println("      [" + buffer[num].getStatusIcon() + "] " + buffer[num].description);
+                }catch(NullPointerException e) {
+                    System.out.println("    Warning: Given Index is out of bound");
+                }catch(Exception e) {
+                    System.out.println("    Warning: Some Other exception");
+                }
             } else {
                 s = s + input.nextLine();
                 buffer[counter] = new Task(s);
