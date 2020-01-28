@@ -1,8 +1,18 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = "***John***";
-        System.out.println("Hello! I'm " + logo);
-        System.out.println("What can I do for you?");
-        System.out.println("Bye. Hope to see you again soon!");
+        String userInput;
+        System.out.println("Hey! I am " + logo);
+        System.out.println("What would you like to do?");
+
+        Scanner in = new Scanner(System.in);
+        userInput = in.nextLine();
+        while(!userInput.equals("bye")){
+            System.out.println(userInput);
+            userInput = in.nextLine();
+        }
+        System.out.println("Bye. Hope to see you soon!");
     }
 }
