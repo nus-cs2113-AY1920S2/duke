@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    /**
+     * Prints the partition between each user response interaction
+     */
     public static void printNewLine(){
         String NEW_LINE = "____________________________________________________________";
         System.out.println(NEW_LINE);
@@ -21,7 +24,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "What can I do for you?\n");
 
         String userInput;
-
+        
         do {
             System.out.print("USER:");
             userInput = myScanner.nextLine();
@@ -55,6 +58,7 @@ public class Duke {
                 }
                 break;
             default:
+                // add Task to myList
                 myList.add(new Task(userInput));
                 System.out.println("Added: " + userInput);
             }
