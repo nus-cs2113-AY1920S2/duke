@@ -34,28 +34,34 @@ public class Duke {
                 break;
             case "list":
                 for (int i = 0; i < myList.size(); i++){
-                    System.out.println((i+1) + ". " + myList.get(i).getStatusIcon() + " " + myList.get(i).getDescription());
+                    String listResponseMessage = String.format("%d. %s %s", (i + 1),
+                            myList.get(i).getStatusIcon(), myList.get(i).getDescription());
+                    System.out.println(listResponseMessage);
                 }
-                printNewLine();
                 break;
             case "done":
+                // bounds checking
                 if(command.length < 2){
                     System.out.println("Enter an index to be marked done!");
                 }else if(Integer.parseInt(command[1]) > myList.size() || Integer.parseInt(command[1]) <= 0){
                     System.out.println("Item requested is out of range! Try another item.");
                 }else{
                     int itemIndexRequested = Integer.parseInt(command[1]) - 1;
+
                     myList.get(itemIndexRequested).markAsDone();
-                    System.out.println("Item [" + command[1] + ". " + myList.get(itemIndexRequested).getDescription() + "] marked as done!");
+                    String doneResponseMessage = String.format("Item [%s. %s] marked as done!",
+                            command[1], myList.get(itemIndexRequested).getDescription());
+                    System.out.println(doneResponseMessage);
                 }
                 break;
             default:
                 myList.add(new Task(userInput));
                 System.out.println("Added: " + userInput);
-                printNewLine();
             }
+            printNewLine();
         }while(!userInput.equals("bye"));
 
         System.out.println("Exiting DUKE\n" + logo);
+        myScanner.close();
     }
 }
