@@ -17,13 +17,21 @@ public class Duke {
         String userName = myScanner.nextLine();
         System.out.println("Hi "+ userName + "!" + " What can i do for you?");
         System.out.println("____________________________________________________________");
+        String[] inputArray = new String[100];
+        int size = 0;
         while(true){
-            String functions = myScanner.nextLine();
-            if(functions.equals("bye")){
+            String input = myScanner.nextLine();
+            if(input.equals("bye")){
                 break;
             }
+            else if(input.equals("list")){
+                for(int i = 0; i < size; i++){
+                    System.out.println(i+1 + "." + inputArray[i] +"\n");
+                }
+            }
             else{
-                System.out.println("Running " + functions);
+                inputArray[size++] = input;
+                System.out.println("Storing " + input);
                 System.out.println("Please wait for a moment...");
             }
         }
