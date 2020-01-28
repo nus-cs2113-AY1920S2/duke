@@ -1,11 +1,9 @@
-import main.java.Task;
 import java.util.Scanner;
 
 public class Duke {
     private static int counter = 0;
     private static Task[] listOfTasks =  new Task[100];
     public static void main(String[] args) {
-        Task[] listOfTasks = new Task[100];
         String logo = "  ____        _        \n"
                 + " |  _ \\ _   _| | _____ \n"
                 + " | | | | | | | |/ / _ \\\n"
@@ -24,8 +22,8 @@ public class Duke {
                 exitFromApp();
                 break;
             } else if (line.equals("list")) {
-                showAllTasks();
-            } else if (line.contains("done")){
+                listAllTasks();
+            } else if (line.contains("done")) {
                 markTaskAsDone(line);
             } else {
                 storeTaskIntoList(line);
@@ -54,7 +52,7 @@ public class Duke {
         counter += 1;
     }
 
-    public static void showAllTasks() {
+    public static void listAllTasks() {
         printLine();
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < counter; i += 1) {
@@ -68,8 +66,7 @@ public class Duke {
 
     public static void markTaskAsDone(String line) {
         int dividerPosition = line.indexOf("done");
-        String number = line.substring(dividerPosition+5, line.length());
-        int taskNumber = Integer.parseInt(number);
+        int taskNumber = Integer.parseInt(line.substring(dividerPosition+5, line.length()));
         listOfTasks[taskNumber-1].markAsDone();
         printLine();
         System.out.println(" Nice! I've marked this task as done:");

@@ -1,5 +1,3 @@
-package main.java;
-
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -13,12 +11,8 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void markAsDone() {
