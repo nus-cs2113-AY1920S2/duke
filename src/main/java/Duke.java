@@ -27,9 +27,8 @@ public class Duke {
             } else if (x.startsWith("done")){
                 String IndexOfItem = x.substring(5);
                 int ID = Integer.valueOf(IndexOfItem) - 1;
-                tasklist[ID].markAsdone();
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(IndexOfItem);
+                System.out.println(tasklist[ID].markAsdone());
             } else {
                 System.out.println("added: " + x);
                 tasklist[index] = new Task(x);

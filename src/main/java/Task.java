@@ -12,8 +12,9 @@ public class Task {
     }
 
 
-    public void markAsdone () {
+    public String markAsdone () {
         this.isDone = true;
+        return ("[" + this.getStatusIcon() + "] "+ this.description);
     }
 
 
