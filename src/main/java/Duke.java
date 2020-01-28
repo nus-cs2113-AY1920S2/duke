@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,12 +17,24 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String input;
+        List<String> texts = new ArrayList<String>();
+        int counter = 0;
 
         do {
             input = sc.nextLine();
-            System.out.println("____________________________________________________________");
-            System.out.println(input);
-            System.out.println("____________________________________________________________");
+            if (input.equals("list")) {
+                System.out.println("____________________________________________________________");
+                for (String text : texts) {
+                    System.out.println(text);
+                }
+                System.out.println("____________________________________________________________");
+            } else {
+                counter++;
+                texts.add(counter + ". " + input);
+                System.out.println("____________________________________________________________");
+                System.out.println("added: " + input);
+                System.out.println("____________________________________________________________");
+            }
         } while (!input.equals("bye"));
 
 
