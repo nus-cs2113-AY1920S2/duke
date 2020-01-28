@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<String> taskList = new ArrayList<String>();
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
@@ -17,8 +17,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         greeting();
         chat();
-
-
     }
 
     private static String readCommand() throws IOException {
@@ -60,7 +58,11 @@ public class Duke {
         } else if (str.equals("list")) {
             listTask();
             chat();
-        } else {
+        }else if (str.contains("done")) {
+            markDone(str);
+            listTask();
+            chat();
+        }else {
             System.out.println(str);
             System.out.println("____________________________________________________________");
             chat();
@@ -72,22 +74,26 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println("Please add tasks");
         System.out.println("____________________________________________________________");
-        String newTask = readCommand();
-        if (newTask.equals("bye")) {
+        String str = readCommand();
+        if (str.equals("bye")) {
             bye();
-        } else {
-            addTask(newTask);
+        }else if (str.contains("done")) {
+            System.out.println("Mark task done");
+            markDone(str);
+            addTaskScreen();
+        }else if (str.equals("list")) {
+            listTask();
+            addTaskScreen();
+        }else {
+            addTask(str);
             addTaskScreen();
         }
     }
 
-    public static void addTask(String newTask) {
-        if (newTask.equals("list")) {
-            listTask();
-        } else {
-            taskList.add(newTask);
-            System.out.println("added : " + newTask);
-        }
+    public static void addTask(String newTask) throws IOException {
+        Task task = new Task(newTask);
+        taskList.add(task);
+        System.out.println("added : " + newTask);
     }
 
     public static void listTask() {
@@ -95,12 +101,28 @@ public class Duke {
         int i = 0;
         while (i < taskList.size()) {
             int j = i + 1;
-            System.out.println(j + " ." + taskList.get(i));
+            System.out.println(j + " ." + "[" +  taskList.get(i).getStatusIcon() + "]" + taskList.get(i).displayTask());
             i++;
         }
 
         System.out.println("____________________________________________________________");
     }
+
+    public  static  void markDone(String str){
+        int dividerPosition = str.indexOf(" ");
+        String index = str.substring(dividerPosition+1);
+        int i = Integer.parseInt(index);
+        System.out.println(i);
+        if(i == 0){
+            System.out.println("____________________________________________________________");
+            System.out.println("Invalid index");
+            System.out.println("____________________________________________________________");
+        }else{
+            taskList.get(i-1).markDone();
+        }
+        listTask();
+    }
+
 
 }
 
