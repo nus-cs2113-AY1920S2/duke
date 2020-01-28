@@ -10,14 +10,30 @@ public class Duke {
 
         String line;
         Scanner in = new Scanner(System.in);
+        String[] storage = new String[100];
+        int listCount = 0;
 
-        System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?" + System.lineSeparator());
+        System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?");
         line = in.nextLine();
         while (!line.equals("bye")) {
-            System.out.println(line + System.lineSeparator());
-            line = in.nextLine();
+            if (!line.equals("list")) {
+                storage[listCount] = line;
+                System.out.println("added: " + line);
+                listCount++;
+            } else {
+                if (listCount == 0) {
+                    System.out.println("There is nothing on the list.");
+                } else {
+                    for (int i = 0; i < listCount; i++) {
+                        System.out.println(i+1 + ". " + storage[i]);
+                    }
+                }
+            }
+                line = in.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
+
+
 
 
     }
