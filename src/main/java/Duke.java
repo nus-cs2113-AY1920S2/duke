@@ -8,7 +8,7 @@ public class Duke {
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(greeting);
 
-        String[] tasklist = new String[100];
+        Task[] tasklist = new Task[100];
 
         Scanner scanner = new Scanner(System.in);
         int flag = 0;
@@ -22,11 +22,17 @@ public class Duke {
             } else if (x.equals("list")){
                 for (int i = 1; i <= index; i++) {
                     System.out.print(i);
-                    System.out.print(". " + tasklist[i-1] + "\n");
+                    System.out.print(".[" + tasklist[i-1].getStatusIcon() + "] " + tasklist[i-1].description + "\n");
                 }
+            } else if (x.startsWith("done")){
+                String IndexOfItem = x.substring(5);
+                int ID = Integer.valueOf(IndexOfItem) - 1;
+                tasklist[ID].markAsdone();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(IndexOfItem);
             } else {
                 System.out.println("added: " + x);
-                tasklist[index] = x;
+                tasklist[index] = new Task(x);
                 index++;
             }
         }
