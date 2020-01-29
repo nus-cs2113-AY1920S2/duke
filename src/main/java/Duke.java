@@ -17,17 +17,18 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
-        String input;
         List<Task> tasks = new ArrayList<Task>();
-
+        Boolean exitProgram = false;
 
         do {
-            input = sc.nextLine();
+            String input = sc.nextLine();
             String[] inputArray = input.split(" ");
+
             System.out.println("____________________________________________________________");
-            if (inputArray[0].equals("list")) {
-                int counter = 0;
+
+            if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
+                int counter = 0;
                 for (Task task : tasks) {
                     counter++;
                     System.out.println(counter + ".[" + task.getStatusIcon() + "] " + task);
@@ -37,18 +38,18 @@ public class Duke {
                 doneTask.isDone = true;
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("[" + doneTask.getStatusIcon() + "] " + doneTask);
+            } else if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                exitProgram = true;
             } else {
-                Task dummy = new Task(input);
-                tasks.add(dummy);
-                System.out.println("added: " + dummy);
+                Task newTask = new Task(input);
+                tasks.add(newTask);
+                System.out.println("added: " + newTask);
             }
+
             System.out.println("____________________________________________________________");
-        } while (!input.equals("bye"));
 
-
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+        } while (!exitProgram);
 
     }
 }
