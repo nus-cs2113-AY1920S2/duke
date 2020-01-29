@@ -1,20 +1,12 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
+    public static final int CAPACITY = 100;
 
-        Task[] tasks = new Task[100];
+    public static void main(String[] args) {
+        printWelcomeMessage();
+
+        Task[] tasks = new Task[CAPACITY];
         int counter = 0;
 
         while(true) {
@@ -27,9 +19,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 break;
-            }
-
-            else if (line.equalsIgnoreCase("list")) {
+            } else if (line.equalsIgnoreCase("list")) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < counter; i++){
@@ -39,19 +29,14 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
 
-            }
-
-            else if (line.startsWith("done")){
-
+            } else if (line.startsWith("done")) {
                 String strNumber = line.substring(5);
                 int number = Integer.parseInt(strNumber);
                 tasks[number-1].markAsDone();
                 System.out.println("____________________________________________________________");
                 System.out.println("Nice! I've marked this task as done: " + tasks[number-1].description);
                 System.out.println("____________________________________________________________");
-            }
-
-            else{
+            } else {
                 Task t = new Task(line);
                 tasks[counter] = t;
                 System.out.println("____________________________________________________________");
@@ -60,7 +45,18 @@ public class Duke {
                 counter += 1;
             }
         }
+    }
 
-
+    private static void printWelcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("____________________________________________________________");
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+        System.out.println("____________________________________________________________");
     }
 }
