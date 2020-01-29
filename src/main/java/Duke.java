@@ -20,14 +20,37 @@ public class Duke {
         while (!userInput.equals("bye")) {
             System.out.println(System.lineSeparator());
             String[] splitUserInput = userInput.split(" ");
-            if (splitUserInput[0].equals("list") && numberOfActions > 0) {
-                for (int i = 0; i < numberOfActions; i++) {
-                    System.out.println(
-                            Integer.toString(i + 1) + ". " + taskList[i].toString());
+            Task newTask;
+            switch (splitUserInput[0].toLowerCase()) {
+            case "todo":
+                newTask = new Todo(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+                taskList[numberOfActions] = newTask;
+                numberOfActions = numberOfActions + 1;
+                System.out.println("Got it. I've added this task: " + newTask.toString());
+                break;
+            case "deadline":
+                newTask = new Deadline(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+                taskList[numberOfActions] = newTask;
+                numberOfActions = numberOfActions + 1;
+                System.out.println("Got it. I've added this task: " + newTask.toString());
+                break;
+            case "event":
+                newTask = new Event(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+                taskList[numberOfActions] = newTask;
+                numberOfActions = numberOfActions + 1;
+                System.out.println("Got it. I've added this task: " + newTask.toString());
+                break;
+            case "list":
+                if (numberOfActions > 0) {
+                    for (int i = 0; i < numberOfActions; i++) {
+                        System.out.println(
+                                Integer.toString(i + 1) + ". " + taskList[i].toString());
+                    }
+                } else if (numberOfActions == 0) {
+                    System.out.println("Nothing yet");
                 }
-            } else if (splitUserInput[0].equals("list") && numberOfActions == 0) {
-                System.out.println("Nothing yet");
-            } else if (splitUserInput[0].equals("done")) {
+                break;
+            case "done":
                 int actionListNumber = Integer.parseInt(splitUserInput[1]);
                 if ((actionListNumber - 1) > numberOfActions || actionListNumber == 0) {
                     System.out.println("Out of range");
@@ -36,27 +59,14 @@ public class Duke {
                     System.out.println(
                             "Nice! I marked this as done: " + taskList[actionListNumber - 1].toString());
                 }
-            } else {
-                Task newTask;
-                switch (splitUserInput[0]) {
-                case "todo":
-                    newTask = new Todo(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-                    break;
-                case "deadline":
-                    newTask = new Deadline(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-                    break;
-                case "event":
-                    newTask = new Event(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-                    break;
-                default:
-                    newTask = new Task(userInput);
-                    break;
-                }
+                break;
+            default:
+                newTask = new Task(userInput);
                 taskList[numberOfActions] = newTask;
                 numberOfActions = numberOfActions + 1;
                 System.out.println("Got it. I've added this task: " + newTask.toString());
+                break;
             }
-
             System.out.println("What else do you want to do?");
             userInput = myInput.nextLine();
         }
