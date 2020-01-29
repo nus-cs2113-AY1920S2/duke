@@ -14,7 +14,8 @@ public class Duke {
             if (line.startsWith("done")) {
                 int index = Integer.parseInt(line.substring(5)) - 1;
                 taskList.get(index).markAsDone();
-                System.out.println("Nice! I've marked this task as done: " + System.lineSeparator() + "[" + taskList.get(index).checkIfDone() + "] " + taskList.get(index).action);
+                System.out.println("Nice! I've marked this task as done: " + System.lineSeparator()
+                        + "[" + taskList.get(index).checkIfDone() + "] " + taskList.get(index).action);
             } else if (line.equals("list")) {
                 if (taskList.size() == 0) {
                     System.out.println("There is nothing on the list.");
