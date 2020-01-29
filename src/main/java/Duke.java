@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Duke {
@@ -14,14 +15,26 @@ public class Duke {
                         " What can I do for you?\n" +
                 "____________________________________________________________");
 
+        String[] list = new String[100];
+        int index = 0;
+
         Scanner scanner = new Scanner(System.in);
-        String inputString = scanner.nextLine();
-        System.out.println("  " + inputString + "\n" +
-                "____________________________________________________________");
+        String inputString = "";
         while(!inputString.equals("bye bye")) {
             inputString = scanner.nextLine();
-            System.out.println("  " + inputString + "\n" +
-                    "____________________________________________________________");
+            if(inputString.equals("list")){
+                for(int i = 0; i < index; i++) {
+                    System.out.print(i+1);
+                    System.out.println(". " + list[i]);
+                }
+            }
+            else {
+                list[index] = inputString;
+                index++;
+                System.out.println("  added: " + inputString + "\n" +
+                        "____________________________________________________________");
+            }
+
         }
         System.out.println(" Bye. Hope to see you again soon!\n" +
                 "____________________________________________________________");
