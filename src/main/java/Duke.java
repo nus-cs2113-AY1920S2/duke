@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+//todo: modularise code
 public class Duke {
-    public static final int maxCmd = 100;
+    public static final int MAX_COMMANDS = 100;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,13 +17,12 @@ public class Duke {
 
         boolean continueRun = true;
         String userCmd = "";
-        String[] cmdArr = new String[maxCmd];
-        int cmdCounter = 0;
+        String[] cmdArr = new String[MAX_COMMANDS];
         int numOfTasks = 0;
 
         ArrayList<Task> taskArrList = new ArrayList<>();
 
-        while (continueRun == true){
+        while (continueRun){
             System.out.println("==========================");
             System.out.println("What can I do for you?");
             userCmd = sc.nextLine();
