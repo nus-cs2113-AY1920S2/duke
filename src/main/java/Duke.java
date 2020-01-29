@@ -14,27 +14,35 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+        System.out.println("____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
         String input;
-        List<String> texts = new ArrayList<String>();
-        int counter = 0;
+        List<Task> tasks = new ArrayList<Task>();
+
 
         do {
             input = sc.nextLine();
-            if (input.equals("list")) {
-                System.out.println("____________________________________________________________");
-                for (String text : texts) {
-                    System.out.println(text);
+            String[] inputArray = input.split(" ");
+            System.out.println("____________________________________________________________");
+            if (inputArray[0].equals("list")) {
+                int counter = 0;
+                System.out.println("Here are the tasks in your list:");
+                for (Task task : tasks) {
+                    counter++;
+                    System.out.println(counter + ".[" + task.getStatusIcon() + "] " + task);
                 }
-                System.out.println("____________________________________________________________");
+            } else if (inputArray[0].equals("done")) {
+                Task doneTask = tasks.get(Integer.parseInt(inputArray[1]) - 1);
+                doneTask.isDone = true;
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + doneTask.getStatusIcon() + "] " + doneTask);
             } else {
-                counter++;
-                texts.add(counter + ". " + input);
-                System.out.println("____________________________________________________________");
-                System.out.println("added: " + input);
-                System.out.println("____________________________________________________________");
+                Task dummy = new Task(input);
+                tasks.add(dummy);
+                System.out.println("added: " + dummy);
             }
+            System.out.println("____________________________________________________________");
         } while (!input.equals("bye"));
 
 
