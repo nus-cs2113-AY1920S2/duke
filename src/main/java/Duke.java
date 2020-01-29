@@ -3,22 +3,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    static class Task{
-        protected String action;
-        protected boolean isDone;
-
-        public Task(String action){
-            this.action=action;
-            this.isDone=false;
-        }
-        public String getStatus(){
-            String temp=this.isDone ? "\u2713" : "\u2718";
-            return temp;
-        }
-        public void done(){
-            this.isDone=true;
-        }
-    }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         List<Task> l1= new ArrayList<Task>();
