@@ -1,6 +1,6 @@
 public class Task {
-    private String description;
-    private boolean isCompleted;
+    protected String description;
+    protected boolean isCompleted;
 
     public Task(String description) {
         this.description = description;
@@ -21,5 +21,10 @@ public class Task {
 
     public void markAsDone() {
         isCompleted = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatus() + "] " + description;
     }
 }
