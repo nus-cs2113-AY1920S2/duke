@@ -2,6 +2,14 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static final String welcomeMessage = "Hello! I'm KJ\nHow can I help you today?";
+
+    private static final String completeMessage = "Nice! I've marked this task as done:";
+
+    private static final String byeMessage = "Bye. Hope to see you again soon!";
+
+    private static final String listMessage = "Here are the tasks in your list:";
+
     private static final int MAXIMUM_TASKS = 100;
 
     private static boolean shouldContinue;
@@ -77,7 +85,7 @@ public class Duke {
         String[] phrases = command.split(" ");
         int index = Integer.parseInt(phrases[1]);
         instructions[index-1].markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(completeMessage);
         System.out.println("  " + instructions[index-1]);
     }
 
@@ -87,14 +95,14 @@ public class Duke {
     }
 
     private static void listTasks() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println(listMessage);
         for (int i = 0; i < count; i++) {
             System.out.println((i+1) + "." + instructions[i]);
         }
     }
 
     private static void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(byeMessage);
         shouldContinue = false;
     }
 
@@ -110,12 +118,11 @@ public class Duke {
     }
 
     private static void confirmTask() {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + instructions[count-1]);
-        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n  " + instructions[count-1] + "\n"
+            + "Now you have " + count + " tasks in the list.");
     }
 
     private static void displayWelcome() {
-        System.out.println("Hello! I'm KJ\n" + "How can I help you today?");
+        System.out.println(welcomeMessage);
     }
 }
