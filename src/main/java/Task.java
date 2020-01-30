@@ -1,14 +1,14 @@
 public class Task {
-    private boolean isDone;
-    private String description;
+    protected boolean isDone;
+    protected String description;
 
-    Task(String description) {
+    public Task(String description) {
         setDescription(description);
         setIsDone(false);
     }
 
     // From the website
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
