@@ -59,7 +59,7 @@ public class Duke {
         tasks[taskID].markAsDone();
         System.out.println(lineDivider);
         System.out.println("     Nice! I've marked this task as done:");
-        System.out.printf("       [\u2713] %s\n", tasks[taskID].getTaskDescription());
+        System.out.printf("       [%s] %s\n", tasks[taskID].getStatusIcon(), tasks[taskID].getTaskDescription());
         System.out.println(lineDivider);
     }
     

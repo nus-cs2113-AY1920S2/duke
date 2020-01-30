@@ -1,6 +1,8 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String yesIcon = "\u2713";
+    protected  String noIcon = "\u2718";
 
     public Task(String description) {
         this.description = description;
@@ -8,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? yesIcon : noIcon); //return tick or X symbols
     }
 
     public String getTaskDescription() {
