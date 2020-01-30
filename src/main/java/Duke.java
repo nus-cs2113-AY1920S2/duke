@@ -4,86 +4,108 @@ import java.util.Vector;
 public class Duke {
 
     private static Vector<Task> list = new Vector<>();
+    private static Printer printer = new Printer();
 
-    private void printList() {
-        System.out.println("  Sure! Lumi shall print out your list!");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(i+1 + ". " + list.get(i).getTaskStatus());
-        }
-        System.out.println();
-    }
-
-    private void addToList(String input) {
-        list.add(new Task(input));
-        System.out.println("  Alright, Lumi has added: " + input + "!\n");
-    }
-
-    private boolean isValidDoneInput(String input) {
-        String[] words = input.split(" ");
-        // Checks if input contains two words
+    private boolean isValidDoneInput(String[] words) {
         if (words.length != 2) {
-            return false;
-        }
-        // Checks if first word is done
-        if (!words[0].toLowerCase().equals("done")) {
             return false;
         }
         // Checks if second word is a valid list number
         return words[1].matches("\\d+") && Integer.parseInt(words[1]) <= list.size();
     }
 
-    private void doTask(String input) {
-        String[] words = input.split(" ");
-        int listNumber = Integer.parseInt(words[1]);
-        if (list.get(listNumber-1).isDone) {
-            System.out.println("  Hey!! Lumi already marked <" + list.get(listNumber-1).task + "> as completed!\n");
+    private void doTask(String[] words) {
+        if (!isValidDoneInput(words)) {
+            return;
+        }
+        int listNumber = Integer.parseInt(words[1]) - 1;
+        if (list.get(listNumber).isDone) {
+            System.out.println("  Hey!! Lumi already marked <" + list.get(listNumber).task + "> as completed!\n");
         } else {
-            list.get(listNumber - 1).isDone = true;
+            list.get(listNumber).isDone = true;
             System.out.println("  Well done! Lumi marks this task as completed!\n" +
-                    list.get(listNumber - 1).getTaskStatus() + "\n");
+                    list.get(listNumber).getTaskStatus() + "\n");
+        }
+    }
+
+    private void addToDo(String input) {
+        int indexOfTask = "todo ".length();
+        String task = input.substring(indexOfTask);
+
+        list.add(new ToDo(task));
+        printer.printAddTaskMessage(list);
+    }
+
+    private void addDeadline(String input) {
+        int indexOfTask = "deadline ".length();
+        int endIndexOfTask = input.indexOf(" /by ");
+        int indexOfDeadline = endIndexOfTask + " /by ".length();
+        String task = input.substring(indexOfTask, endIndexOfTask);
+        String deadline = input.substring(indexOfDeadline);
+
+        list.add(new Deadline(task, deadline));
+        printer.printAddTaskMessage(list);
+    }
+
+    private void addEvent(String input) {
+        int indexOfTask = "event".length() + 1;
+        int endIndexOfTask = input.indexOf(" /at ");
+        int indexOfEvent = endIndexOfTask + " /at ".length();
+        String task = input.substring(indexOfTask, endIndexOfTask);
+        String duration = input.substring(indexOfEvent);
+
+        list.add(new Event(task, duration));
+        printer.printAddTaskMessage(list);
+    }
+
+
+    private void completeAction(String input) {
+        String[] words = input.split(" ");
+
+        switch (words[0].toLowerCase()) {
+        case "done":
+            doTask(words);
+            break;
+        case "todo":
+            addToDo(input);
+            break;
+        case "deadline":
+            addDeadline(input);
+            break;
+        case "event":
+            addEvent(input);
+            break;
+        default:
+            printer.printInvalidAction();
+            break;
         }
     }
 
     private void readInput() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (input.toLowerCase().equals("bye")) {
-            scanner.close();
-            return;
-        } else if (input.toLowerCase().equals("list")) {
-            printList();
-        } else {
-            if (isValidDoneInput(input)) {
-                doTask(input);
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.toLowerCase().equals("bye")) {
+                scanner.close();
+                return;
+            } else if (input.toLowerCase().equals("list")) {
+                printer.printList(list);
             } else {
-                addToList(input);
+                completeAction(input);
             }
         }
-        readInput();
     }
 
     private void runChat() {
-        System.out.println("Initializing LumiChat v0.0.1.4...\n\n" +
-                "LumiChat is now ready.\n\n" +
-                "  Hey, I'm Lumi!\n  How may I assist you today?\n");
+        printer.printWelcomeMessage();
+        printer.printLoadMessage();
 
         readInput();
 
-        System.out.println("  Bye! See you again soon!");
+        printer.printExitMessage();
     }
 
     public static void main(String[] args) {
-        String logo =
-                "  __       _______  _______  ________  _______  _______  _______  ________\n" +
-                " |\\_\\     |\\___\\__\\|\\ __\\__\\|\\ ______\\|\\______\\|\\___\\__\\|\\______\\|\\ ______\\\n" +
-                " | | |    | |  |  || |  |  | \\|__   _|| |  ___|| |  |  || |     | \\|__   _|\n" +
-                " | | |    | |  |  || |  |  |   | | |  | | |    | |  |  || |  |  |   | | |\n" +
-                " | | |    | |  |  || |     |   | | |  | | |    | |     || |     |   | | |\n" +
-                " | | |__  | |  |  || | | | | __| | |_ | | |___ | |  |  || |     |   | | |\n" +
-                " | | |__\\ | |     || | | | ||\\__\\| |_\\| | |___\\| |  |  || |  |  |   | | |\n" +
-                "  \\|_____| \\|_____| \\|_|_|_| \\|______| \\|_____| \\|__|__| \\|__|__|    \\|_|\n";
-        System.out.println("Welcome to\n" + logo);
-
         Duke chatBot = new Duke();
         chatBot.runChat();
     }
