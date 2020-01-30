@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    public static final int OFFSITE_OF_TIME = 4;
+    public static final int MAX_NUMBER_OF_TASKS = 100;
+
     public static void greet(String logo){
         System.out.println("    ____________________________________________________________");
         System.out.println(logo);
@@ -15,17 +19,56 @@ public class Duke {
         System.out.println("\tHere are the tasks in your list:");
         int numberOfTasks = Task.getNumberOfTasks();
         for (int i = 1; i <= numberOfTasks; i++) {
-            System.out.println("\t" + tasks[i].getID() + "." + tasks[i].getStatusIcon() + " " + tasks[i].getName());
+            System.out.println("\t" + tasks[i].getID() + "." + tasks[i].toString());
         }
         System.out.println("    ____________________________________________________________");
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
-    public static void addTask(String taskName, Task[] tasks){
-        Task newTask = new Task(taskName);
+    public static Todo processToDoDescription(String description){
+        return new Todo(description.replace("todo ",""));
+    }
+
+    public static Deadline processDeadlineDescription(String description){
+        String deadlineDescription = description.replace("deadline ","");
+        int indexOfBy = deadlineDescription.indexOf("/by");
+        int nameStartIndex = 0;
+        int nameEndIndex = indexOfBy - 1;
+        int timeStartIndex = indexOfBy + OFFSITE_OF_TIME;
+        String name = deadlineDescription.substring(nameStartIndex, nameEndIndex);
+        String time = deadlineDescription.substring(timeStartIndex);
+        return new Deadline(name, time);
+    }
+
+    public static Event processEventDescription(String description){
+        String eventDescription = description.replace("event ","");
+        int indexOfAt = eventDescription.indexOf("/at");
+        int nameStartIndex = 0;
+        int nameEndIndex = indexOfAt - 1;
+        int timeStartIndex = indexOfAt + OFFSITE_OF_TIME;
+        String name = eventDescription.substring(nameStartIndex, nameEndIndex);
+        String time = eventDescription.substring(timeStartIndex);
+        return new Event(name, time);
+    }
+
+    public static void addTask(String description, Task[] tasks){
+        Task newTask;
+
+        if (description.contains("todo")){
+            newTask = processToDoDescription(description);
+        } else if (description.contains("deadline")){
+            newTask = processDeadlineDescription(description);
+        } else if (description.contains("event")){
+            newTask = processEventDescription(description);
+        } else {
+            newTask = new Task(description);
+        }
+
         tasks[newTask.getID()] = newTask;
         System.out.println("    ____________________________________________________________");
-        System.out.println("\tadded: " + newTask.getName());
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t" + newTask.toString());
+        System.out.printf("\tNow you have %d task(s) in the list\n", Task.getNumberOfTasks());
         System.out.println("    ____________________________________________________________");
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
@@ -53,8 +96,7 @@ public class Duke {
 
     public static int getIdFromCommand(String command){
         String[] words = command.split("\\s+");
-        int ID = Integer.parseInt(words[1]);
-        return ID;
+        return Integer.parseInt(words[1]);
     }
 
     public static void bye(){
@@ -65,7 +107,7 @@ public class Duke {
 
     public static void echo(String command){
         System.out.println("    ____________________________________________________________");
-        System.out.println("\t"+command);
+        System.out.println("\t" + command);
         System.out.println("    ____________________________________________________________");
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
@@ -78,8 +120,8 @@ public class Duke {
                 +"\t| | \\ \\  | |___  | | \\  |  / /__  | |_| | \n"
                 +"\t|_|  \\_\\ |_____| |_|  \\_| /_____| \\_____/ \n";
 
-        /* Max number of tasks is 100 (task's index starts with 1) */
-        Task[] tasks = new Task[101];
+
+        Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
 
         /* Greet to user */
         greet(logo);

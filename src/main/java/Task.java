@@ -1,7 +1,8 @@
 public class Task {
-    private String name;
-    private int id;
-    private boolean isDone;
+    protected String name;
+    protected int id;
+    protected String taskType;
+    protected boolean isDone;
     private static int numberOfTasks = 0;
 
     public Task(){
@@ -37,6 +38,15 @@ public class Task {
 
     public static int getNumberOfTasks(){
         return numberOfTasks;
+    }
+
+    public String getTaskType(){
+        return null;
+    }
+
+    @Override
+    public String toString(){
+        return getStatusIcon() + " " + name;
     }
 
 }
