@@ -10,11 +10,7 @@ public class Task {
     }
 
     public char getDone() {
-        if (isDone) {
-            return '✓';
-        } else {
-            return '✗';
-        }
+        return isDone ? '✓' : '✗';
     }
 
     public void setDone(boolean status) {
