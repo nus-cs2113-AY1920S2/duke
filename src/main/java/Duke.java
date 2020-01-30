@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class Duke {
-    private static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -31,18 +31,26 @@ public class Duke {
 
     public static void addList(String line){
         printLine();
-        if (line.equals("bye")){
+        if(line.equals("bye")){
             System.out.println("\tBye. Hope to see you again soon!");
         }
-        else if (line.equals("list")){
+        else if(line.equals("list")) {
+            System.out.println("\tHere are the tasks in your list:");
             int currentCount = 0;
             while(currentCount < taskCount){
-                System.out.println("\t" + Integer.toString(currentCount+1) + ". " + tasks[currentCount]);
+                System.out.println("\t" + currentCount+1 + ".["
+                        + tasks[currentCount].getStatusIcon() + "] " + tasks[currentCount].getDescription());
                 currentCount++;
             }
         }
+        else if(line.startsWith("done")) {
+            int doneCount = Integer.parseInt(line.substring(5)) - 1;
+            tasks[doneCount].markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("  [\u2713] " + tasks[doneCount].getDescription());
+        }
         else{
-            tasks[taskCount] = line;
+            tasks[taskCount] = new Task(line);
             taskCount++;
             System.out.println("\tadded: " + line);
         }
