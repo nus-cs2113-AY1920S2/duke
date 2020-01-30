@@ -53,18 +53,25 @@ public class Duke {
 
     public static void addTask(String description, Task[] tasks){
         Task newTask;
+        boolean isToDo = description.contains("todo");
+        boolean isDeadline = description.contains("deadline");
+        boolean isEvent = description.contains("event");
 
-        if (description.contains("todo")){
+        if (isToDo){
             newTask = processToDoDescription(description);
-        } else if (description.contains("deadline")){
+        } else if (isDeadline){
             newTask = processDeadlineDescription(description);
-        } else if (description.contains("event")){
+        } else if (isEvent){
             newTask = processEventDescription(description);
         } else {
             newTask = new Task(description);
         }
 
         tasks[newTask.getID()] = newTask;
+        printAddedTask(newTask);
+    }
+
+    public static void printAddedTask(Task newTask) {
         System.out.println("    ____________________________________________________________");
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t" + newTask.toString());
@@ -77,21 +84,30 @@ public class Duke {
         int taskID = getIdFromCommand(command);
 
         /* Exit if enter a wrong task id */
-        if (taskID > Task.getNumberOfTasks() || taskID < 1){
-            System.out.println("    ____________________________________________________________");
-            System.out.println("\tWrong Number!");
-            System.out.println("    ____________________________________________________________");
-            System.out.println("\nPlease enter your command again or enter \"bye\" to exit:");
+        boolean isWrongID = taskID > Task.getNumberOfTasks() || taskID < 1;
+        if (isWrongID){
+            printIdOutOfRangeError();
             return;
         }
 
-        Task markedTask = tasks[taskID];
-        markedTask.markAsDone();
+        Task taskToBeMarked = tasks[taskID];
+        taskToBeMarked.markAsDone();
+        printMarkedTask(taskToBeMarked);
+    }
+
+    public static void printMarkedTask(Task markedTask) {
         System.out.println("    ____________________________________________________________");
         System.out.println("\tI've marked this task as done: ");
         System.out.println("\t" + markedTask.getStatusIcon() + markedTask.getName());
         System.out.println("    ____________________________________________________________");
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+    }
+
+    public static void printIdOutOfRangeError() {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("\tWrong Number!");
+        System.out.println("    ____________________________________________________________");
+        System.out.println("\nPlease enter your command again or enter \"bye\" to exit:");
     }
 
     public static int getIdFromCommand(String command){
@@ -113,6 +129,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
+        /* A logo for Renzo */
         String logo = "\t _____    _____   __   _   ______  _____  \n"
                 +"\t|  _  \\  | ____| |  \\ | | |___  / /  _  \\ \n"
                 +"\t| |_| |  | |__   |   \\| |    / /  | | | | \n"
@@ -131,6 +149,13 @@ public class Duke {
         String command = scanner.nextLine();
 
         /* Process command */
+        processCommand(tasks, scanner, command);
+
+        /* Exit */
+        bye();
+    }
+
+    public static void processCommand(Task[] tasks, Scanner scanner, String command) {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                list(tasks);
@@ -141,8 +166,5 @@ public class Duke {
             }
             command = scanner.nextLine();
         }
-
-        /* Exit */
-        bye();
     }
 }
