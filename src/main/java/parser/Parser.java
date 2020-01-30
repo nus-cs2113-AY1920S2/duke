@@ -10,7 +10,6 @@ import data.exceptions.ParseException;
 import data.task.DeadlineTask;
 import data.task.EventTask;
 import data.task.TodoTask;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,14 +27,14 @@ public class Parser {
      * @return the command based on the user input
      */
 
+    /**
+     * split the user input, command word and the description
+     * commandWord stores the whole user input
+     * commandWordFirstPart [0] stores the Command Word
+     * description stores additional information
+     */
     public Command parseCommand(String userInput) {
 
-        /**
-         * split the user input, command word and the description
-         * commandWord stores the whole user input
-         * commandWordFirstPart [0] stores the Command Word
-         * description stores additional information
-         */
         final String commandWord = userInput;
         final String []commandWordFirstPart = commandWord.split(" ");
 

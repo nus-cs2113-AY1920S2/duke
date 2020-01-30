@@ -9,12 +9,10 @@ import java.util.Scanner;
 public class Main {
 
     Duke duke = new Duke();
-    private TextUi ui;
+    //private TextUi ui;
 
     public static void main(String[] args) {
-
         new Main().run();
-
     }
 
     private void run(){

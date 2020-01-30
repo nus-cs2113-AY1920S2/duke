@@ -1,6 +1,7 @@
 package data.task;
 
 public class DeadlineTask extends Task{
+
     private String taskDeadline;
 
     public DeadlineTask() {

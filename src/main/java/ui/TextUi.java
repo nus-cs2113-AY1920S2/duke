@@ -2,9 +2,6 @@ package ui;
 
 import common.Messages;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
 
 public class TextUi {
 
@@ -31,10 +28,4 @@ public class TextUi {
         System.out.println(Messages.DIVIDER);
     }
 
-//    public String getUserCommand() {
-//
-//        String fullInputLine = scanner.nextLine();
-//        //System.out.println("[Command entered:" + fullInputLine + "]");;
-//        return fullInputLine;
-//    }
 }
