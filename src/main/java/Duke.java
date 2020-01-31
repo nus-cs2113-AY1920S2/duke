@@ -35,11 +35,6 @@ public class Duke {
         Printer.printLines();
     }
 
-    //this one can put in Task.java
-    public static void storeInList(Task userInput) {
-        myList.storeTasks(userInput);
-    }
-
     public static Task readFromUser() {
         Scanner in = new Scanner(System.in);
         String userInput;
@@ -50,26 +45,38 @@ public class Duke {
         return task;
     }
 
-    public static String parseCommand(String description) {
-        String[] parseStorage = description.split(" ");
-        return parseStorage[0];
+    public static String[] parseCommand(String description) {
+        String[] commands = description.split(" ");
+        return commands;
     }
 
     public static void echoUntilBye() {
         boolean isBye = false;
         while (!isBye) {
             Task task = readFromUser();
-            String command = parseCommand(task.description);
+            String[] commands = parseCommand(task.description);
+            String command = commands[0];
             switch (command) {
             case "bye":
                 isBye = true;
                 exits();
                 continue;
             case "list":
-                myList.getTasks();
+                myList.displayTasks();
                 continue;
+            case "done":
+                int index = Integer.parseInt(commands[1]);
+                Task t = myList.getTask(index);
+                if (Task.isValid(t)) {
+                    t.markAsDone();
+                    Printer.printConfirmationMessage(t);
+                } else {
+                    Printer.printError();
+                }
+                continue;
+
             default:
-                storeInList(task);
+                myList.storeTasks(task);
                 Printer.printConfirmationMessage(task.description);
             }
         }
