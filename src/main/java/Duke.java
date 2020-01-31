@@ -12,8 +12,8 @@ public class Duke {
         Scanner myInput = initializeScanner();
         String userInput = getUserInput(myInput);
         while (isNotBye(userInput)) {
-            String[] splitUserInput = splitUserInput(userInput);
-            numberOfTasks = doTaskAndUpdateTaskListNumber(taskList, numberOfTasks, userInput, splitUserInput);
+            String[] splitUserInput = splitTheUserInput(userInput);
+            numberOfTasks = doTaskAndGetNewNumberOfTasks(taskList, numberOfTasks, userInput, splitUserInput);
             userInput = getNextUserInput(myInput);
         }
         displayGoodbye();
@@ -29,13 +29,11 @@ public class Duke {
     }
 
     private static String getNextUserInput(Scanner myInput) {
-        String userInput;
         System.out.println("What else do you want to do?");
-        userInput = myInput.nextLine();
-        return userInput;
+        return myInput.nextLine();
     }
 
-    private static String[] splitUserInput(String userInput) {
+    private static String[] splitTheUserInput(String userInput) {
         System.out.println(System.lineSeparator());
         return userInput.split(" ");
     }
@@ -52,29 +50,30 @@ public class Duke {
         return new Task[MAX_TASKS];
     }
 
-    private static int doTaskAndUpdateTaskListNumber(Task[] taskList, int numberOfActions, String userInput, String[] splitUserInput) {
+    private static int doTaskAndGetNewNumberOfTasks(Task[] taskList, int numberOfTasks, String userInput,
+                                                    String[] splitUserInput) {
         Task newTask;
         switch (splitUserInput[0].toLowerCase()) {
         case "todo":
-            numberOfActions = addTodoToList(taskList, numberOfActions, userInput);
+            numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
             break;
         case "deadline":
-            numberOfActions = addDeadlineToList(taskList, numberOfActions, userInput);
+            numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
             break;
         case "event":
-            numberOfActions = addEventToList(taskList, numberOfActions, userInput);
+            numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
             break;
         case "list":
-            displayList(taskList, numberOfActions);
+            displayList(taskList, numberOfTasks);
             break;
         case "done":
-            markTaskAsDone(taskList, numberOfActions, splitUserInput[1]);
+            markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
             break;
         default:
-            numberOfActions = addDefaultTaskToList(taskList, numberOfActions, userInput);
+            numberOfTasks = addDefaultTaskToList(taskList, numberOfTasks, userInput);
             break;
         }
-        return numberOfActions;
+        return numberOfTasks;
     }
 
     private static int addDefaultTaskToList(Task[] taskList, int numberOfActions, String userInput) {
