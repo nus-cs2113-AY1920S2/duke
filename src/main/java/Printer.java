@@ -32,12 +32,13 @@ public class Printer {
         printLines();
     }
 
-    public static void printTasks(List<String> myList) {
     public static void printTasks(List<Task> myList) {
         printLines();
         for (int i = 0; i < myList.size(); i ++) {
             printIndentation();
-            System.out.printf("%d. %s\n", i + 1, myList.get(i));
+            Task temp = myList.get(i);
+            String symbol = temp.getStatusIcon();
+            System.out.printf("%d.[%s] %s\n", i + 1, symbol ,temp.getDescription());
         }
         printLines();
     }
