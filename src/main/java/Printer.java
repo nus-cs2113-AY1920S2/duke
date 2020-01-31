@@ -33,6 +33,7 @@ public class Printer {
     }
 
     public static void printTasks(List<String> myList) {
+    public static void printTasks(List<Task> myList) {
         printLines();
         for (int i = 0; i < myList.size(); i ++) {
             printIndentation();
