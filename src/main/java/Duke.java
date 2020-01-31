@@ -22,25 +22,18 @@ public class Duke {
 
     static List<String> myList = new ArrayList<>();
 
-    public static void printIndentation() {
-        System.out.print("    ");
-    }
-
-    public static void greets() {
-        printIndentation();
-        System.out.println("Hello! I'm Duke");
-        printIndentation();
-        System.out.println("What can I do for you?");
-    }
-
-    public static void printLines() {
-        printIndentation();
-        System.out.println("---------------------------------------");
+    public static void start() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        Printer.printStart(logo);
     }
 
     public static void exits() {
-        printIndentation();
-        System.out.println("Bye. Hope to see you again soon!");
+        Printer.printIndentation();
+        Printer.printBye();
     }
 
     public static void storeInList(String userInput) {
@@ -61,26 +54,20 @@ public class Duke {
             if (text.equals("bye")) {
                 break;
             }
-            printLines();
-            printIndentation();
-            System.out.println("Added: " + text);
-            printLines();
+            Printer.printLines();
+            Printer.printIndentation();
+            Printer.printConfirmationMessage(text);
+            Printer.printLines();
         }
         exits();
     }
 
     public static void main(String[] args) {
-        //new Duke();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printLines();
-        greets();
-        printLines();
+        start();
+        Printer.printLines();
+        Printer.printGreetings();
+        Printer.printLines();
         echoUntilBye();
-        printLines();
+        Printer.printLines();
     }
 }
