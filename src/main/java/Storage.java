@@ -8,7 +8,7 @@ public class Storage {
         myList.add(task);
     }
 
-    public void getTasks() {
+    public void displayTasks() {
         Printer.printTasks(myList);
     }
 }
