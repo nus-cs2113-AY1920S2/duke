@@ -65,12 +65,16 @@ public class Duke {
                 myTasks.displayTasks();
                 continue;
             case "done":
-                int index = Integer.parseInt(commands[1]);
-                Task t = myTasks.getTask(index);
-                if (Task.isValid(t)) {
-                    t.markAsDone();
-                    Printer.printConfirmationMessage(t);
-                } else {
+                try {
+                    int index = Integer.parseInt(commands[1]);
+                    Task t = myTasks.getTask(index);
+                    if (Task.isValid(t)) {
+                        t.markAsDone();
+                        Printer.printConfirmationMessage(t);
+                    } else {
+                        Printer.printError();
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
                     Printer.printError();
                 }
                 continue;
