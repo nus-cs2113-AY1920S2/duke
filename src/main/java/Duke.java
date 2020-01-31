@@ -10,17 +10,14 @@
  *  helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
  *  in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
  *
- *  @file/s: Duke.java Printer.java*
+ *  @file/s: Duke.java Printer.java* Storage.java*
  *  @author: Tan Zheng Fu Justin
  */
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-
-    static List<String> myList = new ArrayList<>();
+    static Storage myList = new Storage();
 
     public static void start() {
         String logo = " ____        _        \n"
@@ -32,34 +29,41 @@ public class Duke {
     }
 
     public static void exits() {
+        Printer.printLines();
         Printer.printIndentation();
         Printer.printBye();
+        Printer.printLines();
     }
 
     public static void storeInList(String userInput) {
-        myList.add(userInput);
+        myList.storeTasks(userInput);
     }
 
     public static String readFromUser() {
-        String userInput;
         Scanner in = new Scanner(System.in);
+        String userInput;
+
         userInput = in.nextLine();
-        storeInList(userInput);
+
         return userInput;
     }
 
     public static void echoUntilBye() {
         while (true) {
-            String text = readFromUser();
-            if (text.equals("bye")) {
+            String userInput = readFromUser();
+            switch (userInput) {
+            case "bye":
+                exits();
                 break;
+            case "list":
+                myList.getTasks();
+                continue;
+            default:
+                storeInList(userInput);
+                Printer.printConfirmationMessage(userInput);
+                continue;
             }
-            Printer.printLines();
-            Printer.printIndentation();
-            Printer.printConfirmationMessage(text);
-            Printer.printLines();
         }
-        exits();
     }
 
     public static void main(String[] args) {
@@ -68,6 +72,5 @@ public class Duke {
         Printer.printGreetings();
         Printer.printLines();
         echoUntilBye();
-        Printer.printLines();
     }
 }
