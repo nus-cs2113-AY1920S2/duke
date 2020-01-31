@@ -15,11 +15,13 @@ public class Task {
         return description;
     }
 
+    public String getTypeIcon() {
+        return "";
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
-    public String getTypeIcon() {
-        return "";
-    }
+
 }

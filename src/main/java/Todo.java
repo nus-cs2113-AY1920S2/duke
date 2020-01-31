@@ -4,7 +4,6 @@ public class Todo extends Task {
         super(description);
     }
 
-
     @Override
     public String getTypeIcon() {
         return "[T]";
