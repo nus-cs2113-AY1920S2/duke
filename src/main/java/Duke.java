@@ -3,14 +3,20 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static final int MAX_TASKS = 100;
-    public static int numberOfTasks = 0;
+    public static final int MAX_NO_OF_TASKS = 100;
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
+    public static final String LIST = "list";
+    public static final String DONE = "done";
+    public static final int INITIAL_NO_OF_TASKS = 0;
 
     public static void main(String[] args) {
         displayHello();
         Task[] taskList = initializeTaskList();
         Scanner myInput = initializeScanner();
         String userInput = getUserInput(myInput);
+        int numberOfTasks = INITIAL_NO_OF_TASKS;
         while (isNotBye(userInput)) {
             String[] splitUserInput = splitTheUserInput(userInput);
             numberOfTasks = doTaskAndGetNewNumberOfTasks(taskList, numberOfTasks, userInput, splitUserInput);
@@ -47,26 +53,25 @@ public class Duke {
     }
 
     private static Task[] initializeTaskList() {
-        return new Task[MAX_TASKS];
+        return new Task[MAX_NO_OF_TASKS];
     }
 
     private static int doTaskAndGetNewNumberOfTasks(Task[] taskList, int numberOfTasks, String userInput,
                                                     String[] splitUserInput) {
-        Task newTask;
         switch (splitUserInput[0].toLowerCase()) {
-        case "todo":
+        case TODO:
             numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
             break;
-        case "deadline":
+        case DEADLINE:
             numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
             break;
-        case "event":
+        case EVENT:
             numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
             break;
-        case "list":
+        case LIST:
             displayList(taskList, numberOfTasks);
             break;
-        case "done":
+        case DONE:
             markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
             break;
         default:
@@ -76,13 +81,11 @@ public class Duke {
         return numberOfTasks;
     }
 
-    private static int addDefaultTaskToList(Task[] taskList, int numberOfActions, String userInput) {
+    private static int addDefaultTaskToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Task(userInput);
-        taskList[numberOfActions] = newTask;
-        numberOfActions = numberOfActions + 1;
-        System.out.println("Got it. I've added this task: " + newTask.toString());
-        return numberOfActions;
+        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        return numberOfTasks;
     }
 
     private static void markTaskAsDone(Task[] taskList, int numberOfActions, String s) {
@@ -107,31 +110,33 @@ public class Duke {
         }
     }
 
-    private static int addEventToList(Task[] taskList, int numberOfActions, String userInput) {
+    private static int addEventToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Event(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-        taskList[numberOfActions] = newTask;
-        numberOfActions = numberOfActions + 1;
-        System.out.println("Got it. I've added this task: " + newTask.toString());
-        return numberOfActions;
+        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        return numberOfTasks;
     }
 
-    private static int addDeadlineToList(Task[] taskList, int numberOfActions, String userInput) {
+    private static int addDeadlineToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Deadline(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-        taskList[numberOfActions] = newTask;
-        numberOfActions = numberOfActions + 1;
-        System.out.println("Got it. I've added this task: " + newTask.toString());
-        return numberOfActions;
+        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        return numberOfTasks;
     }
 
-    private static int addTodoToList(Task[] taskList, int numberOfActions, String userInput) {
+    private static int addTodoToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Todo(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-        taskList[numberOfActions] = newTask;
-        numberOfActions = numberOfActions + 1;
+        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        return numberOfTasks;
+    }
+
+    private static int addToList(Task newTask, Task[] taskList, int numberOfTasks) {
+        taskList[numberOfTasks] = newTask;
+        numberOfTasks = numberOfTasks + 1;
         System.out.println("Got it. I've added this task: " + newTask.toString());
-        return numberOfActions;
+        return numberOfTasks;
+
     }
 
     private static void displayGoodbye() {
@@ -149,7 +154,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    public static String[] splitTaskDescription(String input) {
+    private static String[] splitTaskDescription(String input) {
         String[] returnSplit = new String[2];
         if (!input.contains("/")) {
             returnSplit[0] = input.split(" ", 2)[1];
