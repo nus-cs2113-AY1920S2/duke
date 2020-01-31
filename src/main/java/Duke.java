@@ -69,9 +69,13 @@ public class Duke {
         if (type.equals("todo")) {
             tasks[indexOfTasks] = new ToDo(description);
         } else if (type.equals("deadline")) {
-            tasks[indexOfTasks] = new Deadline(description);
+            String[] cmdArgs = new String[2];
+            cmdArgs = processArgs(description);
+            tasks[indexOfTasks] = new Deadline(cmdArgs[0], cmdArgs[1]);
         } else if (type.equals("event")) {
-            tasks[indexOfTasks] = new Event(description);
+            String[] cmdArgs = new String[2];
+            cmdArgs = processArgs(description);
+            tasks[indexOfTasks] = new Event(cmdArgs[0], cmdArgs[1]);
         }
 
         Task.incrementTaskCount();
@@ -95,5 +99,12 @@ public class Duke {
             System.out.printf("\t%d.%s", i+1, tasks[i]);
             System.out.println();
         }
+    }
+
+    private static String[] processArgs(String s) {
+        String[] tokens = s.split("/");
+        tokens[0] = tokens[0].trim();
+        tokens[1] = tokens[1].substring(tokens[1].indexOf(' ') + 1);
+        return tokens;
     }
 }
