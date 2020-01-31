@@ -1,26 +1,42 @@
-import java.util.Scanner; //object takes in user input
+//Scanner object takes in user input
+import java.util.Scanner;
 
 public class Duke {
+    private static String curlyLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static String underscoredLine = "\t____________________________________________________________";
 
-    public static void sayIntro(){
-         String introMessage = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
-        + "Hello! I'm Duke\n"
-        + "What can I do for you?\n"
-        + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        + System.lineSeparator();
+    private static void sayIntro(){
+        String introMessage = curlyLine + System.lineSeparator() + "Hello! I'm Duke\n"
+        + "What can I do for you?\n" + curlyLine + System.lineSeparator();
 
         System.out.println(introMessage);
     }
 
-    public static void sayGoodbye(){
-        String goodbyeMessage = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-        + "Bye! Hope to see you again soon\n"
-        + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        + System.lineSeparator();
+    private static void sayGoodbye(){
+        String goodbyeMessage = curlyLine + System.lineSeparator() + "Bye! Hope to see you again soon\n" 
+        + curlyLine + System.lineSeparator();
         String goodbyeMessage2 = "********************CONNECTION TERMINATED********************";
 
         System.out.println(goodbyeMessage);
         System.out.println(goodbyeMessage2);
+    }
+
+    public static String[] splitUserInput(String originalInput){
+        String[] returnValue = new String[2];
+        if (originalInput.contains(" /")){
+            String[] separatedSections = originalInput.split(" /");
+            // get description part of userInput without the command word
+            returnValue[0] = separatedSections[0].split(" ", 2)[1];
+            // get additional remark part of userInput
+            returnValue[1] = separatedSections[1];
+            return returnValue;
+        } else {
+            // get description part of userInput without the command word
+            returnValue[0] = originalInput.trim().split(" ", 2)[1];
+            // remark column is an empty string
+            returnValue[1] = "";
+            return returnValue;
+        }
     }
 
     public static void main(String[] args) {
@@ -30,62 +46,75 @@ public class Duke {
 
         sayIntro();
         
-        while (true){
-            //easier to identify lines input by user (a la Python)  
+        while (true) {
+            //easier to identify lines input by user (per Python)
             System.out.print(">>>");
             String userInput;
             Scanner in = new Scanner(System.in);
 
             userInput = in.nextLine();
             String[] tokenizedInput = userInput.split(" ");
-            if (tokenizedInput[0].equals("bye")){
+            if (tokenizedInput[0].equals("bye")) {
                 break;
-            } else if (tokenizedInput[0].equals("list")) {     //Level-2: add list functionality
-                //empty list
+            } else if (tokenizedInput[0].equals("list")) {     
+                //if list empty, inform user and await next command
                 if (taskCount == 0){
-                    System.out.println("\t____________________________________________________________\n"
-                    + "\tThe list is empty." + System.lineSeparator()
-                    + "\t____________________________________________________________");
+                    System.out.println(underscoredLine + System.lineSeparator() + "\tThe list is empty." 
+                    + System.lineSeparator() + underscoredLine);
                     continue;
                 }
-                //non-empty list enters this loop
-                System.out.println("\t____________________________________________________________\n");
+                //if list non-empty, print out all existing tasks
+                System.out.println(underscoredLine + System.lineSeparator());
                 for (int i=0; i<taskCount;i++){
-                    System.out.println("\t" + Integer.toString(i+1)
-                    + ".[" + taskList[i].getStatusIcon() + "] " + taskList[i].getDescription());
+                    System.out.println("\t" + Integer.toString(i+1) + "." + taskList[i].toString());
                 }
-                System.out.println("\t____________________________________________________________");
-            } else if(tokenizedInput[0].equals("done")) {       //Level-3: add MarkAsDone functionality
+                System.out.println(underscoredLine);
+            } else if (tokenizedInput[0].equals("done")) {       
                 int queryNumber = Integer.parseInt(tokenizedInput[1]);
 
-                //handle out of range done input
+                //handle case where user inputs non-existing task number to mark as done
                 if (queryNumber < 1 || queryNumber > taskCount){
-                    System.out.println("\t____________________________________________________________\n"
-                    + "\tInvalid task number." + System.lineSeparator()
-                    + "\t____________________________________________________________");
+                    System.out.println(underscoredLine + System.lineSeparator() + "\tInvalid task number." + 
+                    System.lineSeparator() + underscoredLine);
                     continue;
                 }
-                //handle tasks already marked done
+                //handle case where user tries to mark as done an already completed task
                 if (taskList[queryNumber-1].getIsDone()){
-                    System.out.println("\t____________________________________________________________\n"
-                    + "\tThis task has already been marked completed." + System.lineSeparator()
-                    + "\t____________________________________________________________");
+                    System.out.println(underscoredLine + System.lineSeparator()
+                    + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
                     continue;
                 }
                 taskList[queryNumber-1].markAsDone();
-                System.out.println("\t____________________________________________________________\n"
-                + "\tGreat job! I've marked this task as done:\n" + "\t" + Integer.toString(queryNumber) 
-                + ".[" + taskList[queryNumber-1].getStatusIcon() + "] " + taskList[queryNumber-1].getDescription() 
-                + "\n\t____________________________________________________________");
-            } else{
-                taskList[taskCount] = new Task(userInput);
+                System.out.println(underscoredLine + System.lineSeparator() + "\tGreat job! I've marked this task as done:\n" 
+                + "\t" + Integer.toString(queryNumber) + ".[" + taskList[queryNumber-1].getStatusIcon() + "] "
+                + taskList[queryNumber-1].getDescription() + System.lineSeparator() + underscoredLine);
+            } else {
+                Task newTask;
+                switch (tokenizedInput[0]) {
+                case ("todo"):
+                    newTask = new Todo(splitUserInput(userInput)[0], splitUserInput(userInput)[1]);
+                    break;
+                case ("deadline"):
+                    newTask = new Deadline(splitUserInput(userInput)[0], splitUserInput(userInput)[1]);
+                    break;
+                case ("event"):
+                    newTask = new Event(splitUserInput(userInput)[0], splitUserInput(userInput)[1]);
+                    break;
+                default:
+                    newTask = new Task(userInput);
+                    break;
+                }
+
+                taskList[taskCount] = newTask;
                 taskCount++;
-                System.out.println( "\t____________________________________________________________\n\t"
-                + "added: " + userInput + System.lineSeparator()
-                + "\t____________________________________________________________");
+                System.out.println(underscoredLine + System.lineSeparator() + "\tGot it. I've added this task: \n\t"
+                + newTask.toString() + System.lineSeparator() + "\tNow you have " + taskCount + " tasks in the list.\n" 
+                + underscoredLine);
             }
         }
 
         sayGoodbye();
     }
+
+
 }
