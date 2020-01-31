@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +15,9 @@ public class Duke {
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
 
     private static void greet() {
         System.out.println(LOGO);
@@ -23,6 +28,7 @@ public class Duke {
 
     private static void processCommand(TaskManager TaskMgr, String command) {
         String[] commands = command.split(" ");
+        String[] descriptions;
         switch (commands[0]) {
         case EXIT_COMMAND:
             bye();
@@ -34,9 +40,42 @@ public class Duke {
             int taskID = Integer.parseInt(commands[1]);
             TaskMgr.markAsDone(taskID);
             break;
+        case TODO_COMMAND:
+            descriptions = splitCommands(commands, TODO_COMMAND);
+            TaskMgr.addTasks(descriptions[0], TODO_COMMAND);
+            break;
+        case DEADLINE_COMMAND:
+            descriptions = splitCommands(commands, DEADLINE_COMMAND);
+            TaskMgr.addTasks(descriptions[0], descriptions[1], DEADLINE_COMMAND);
+            break;
+        case EVENT_COMMAND:
+            descriptions = splitCommands(commands, EVENT_COMMAND);
+            TaskMgr.addTasks(descriptions[0], descriptions[1], EVENT_COMMAND);
+            break;
         default:
+            // default will add to todo
             TaskMgr.addTasks(command);
         }
+    }
+
+    // I know this function sucks, but it is too late to think of a better one.
+    private static String[] splitCommands(String[] commands, String type) {
+        List<String> descriptionList = new ArrayList<>();
+        List<String> timeList = new ArrayList<>();
+        int i = 1;
+        while (i < commands.length && !commands[i].equals("/by") && !commands[i].equals("/at")) {
+            descriptionList.add(commands[i++]);
+        }
+        ++i;
+        while (i < commands.length) {
+            timeList.add(commands[i++]);
+        }
+        String description = String.join(" ", descriptionList);
+        String time = String.join(" ", timeList);
+        String[] descriptions = new String[2];
+        descriptions[0] = description;
+        descriptions[1] = time;
+        return descriptions;
     }
 
     private static void bye() {
