@@ -84,7 +84,7 @@ public class Duke {
     private static int addDefaultTaskToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Task(userInput);
-        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
 
@@ -113,21 +113,21 @@ public class Duke {
     private static int addEventToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Event(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
 
     private static int addDeadlineToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Deadline(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
 
     private static int addTodoToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
         newTask = new Todo(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
-        numberOfTasks = addToList(newTask,taskList, numberOfTasks);
+        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
 
