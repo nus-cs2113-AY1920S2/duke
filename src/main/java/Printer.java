@@ -31,6 +31,14 @@ public class Printer {
         System.out.println("Added: " + text);
         printLines();
     }
+    public static void printConfirmationMessage(Task task) {
+        printLines();
+        printIndentation();
+        System.out.printf("Nice! I've marked this task as done:\n");
+        printIndentation();
+        System.out.printf("  [%s] %s\n", task.getStatusIcon(), task.getDescription());
+        printLines();
+    }
 
     public static void printTasks(List<Task> myList) {
         printLines();
@@ -46,6 +54,13 @@ public class Printer {
                 System.out.printf("%d.[%s] %s\n", i + 1, symbol, temp.getDescription());
             }
         }
+        printLines();
+    }
+
+    public static void printError() {
+        printLines();
+        printIndentation();
+        System.out.println("Error.. ;-;");
         printLines();
     }
 }
