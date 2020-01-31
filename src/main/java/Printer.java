@@ -34,11 +34,17 @@ public class Printer {
 
     public static void printTasks(List<Task> myList) {
         printLines();
-        for (int i = 0; i < myList.size(); i ++) {
+        if (myList.isEmpty()) {
             printIndentation();
-            Task temp = myList.get(i);
-            String symbol = temp.getStatusIcon();
-            System.out.printf("%d.[%s] %s\n", i + 1, symbol ,temp.getDescription());
+            System.out.println("List is empty.");
+        }
+        else {
+            for (int i = 0; i < myList.size(); i++) {
+                printIndentation();
+                Task temp = myList.get(i);
+                String symbol = temp.getStatusIcon();
+                System.out.printf("%d.[%s] %s\n", i + 1, symbol, temp.getDescription());
+            }
         }
         printLines();
     }
