@@ -68,6 +68,10 @@ public class Duke {
 
         if (type.equals("todo")) {
             tasks[indexOfTasks] = new ToDo(description);
+        } else if (type.equals("deadline")) {
+            tasks[indexOfTasks] = new Deadline(description);
+        } else if (type.equals("event")) {
+            tasks[indexOfTasks] = new Event(description);
         }
 
         Task.incrementTaskCount();
