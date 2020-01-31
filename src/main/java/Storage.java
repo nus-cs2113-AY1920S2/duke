@@ -11,4 +11,13 @@ public class Storage {
     public void displayTasks() {
         Printer.printTasks(myList);
     }
+
+    public Task getTask(int index) {
+        try {
+            return myList.get(index - 1);
+        }
+        catch(Exception e) {
+            return null;
+        }
+    }
 }
