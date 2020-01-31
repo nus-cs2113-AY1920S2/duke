@@ -2,23 +2,23 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static String divider = "_________________________________________________";
+    public static final String DIVIDER = "_________________________________________________";
 
     public static void printTaskList(Task[] tasks, int numTasks) {
-        System.out.println(divider);
+        System.out.println(DIVIDER);
         System.out.println("Here are the tasks on your list: ");
         for (int i = 1; i < numTasks+1; i++) {
             String taskNum = Integer.toString(i);
-            System.out.println(taskNum + "." + tasks[i-1].getStatusIcon()+ tasks[i-1].getDescription());
+            System.out.println(taskNum + "." + tasks[i-1]);
         }
-        System.out.println(divider);
+        System.out.println(DIVIDER);
     }
 
     public static void printDoneTask(Task[] tasks, int taskNum) {
-        System.out.println(divider);
+        System.out.println(DIVIDER);
         System.out.println("Awesome! I've marked the following task as done:");
-        System.out.println(tasks[taskNum-1].getStatusIcon() + tasks[taskNum-1].getDescription());
-        System.out.println(divider);
+        System.out.println(tasks[taskNum-1]);
+        System.out.println(DIVIDER);
     }
 
     public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class Duke {
         //Welcome and sign out messages
         System.out.println("Bob the chatbot\n" + logo);
         System.out.println(welcomeMessage);
-        System.out.println(divider);
+        System.out.println(DIVIDER);
 
         Scanner command = new Scanner(System.in);
         String endCommand = "bye";
@@ -50,9 +50,9 @@ public class Duke {
             String userInput = command.nextLine();
             String[] words = userInput.split(" ");
             if (userInput.equals(endCommand)) {
-                System.out.println(divider);
+                System.out.println(DIVIDER);
                 System.out.println(endMessage);
-                System.out.println(divider);
+                System.out.println(DIVIDER);
                 break;
             } else if (userInput.equals(listCommand)) {
                 printTaskList(tasks, numTasks);
@@ -61,12 +61,12 @@ public class Duke {
                 tasks[taskNum-1].markAsDone();
                 printDoneTask(tasks, taskNum);
             } else {
-                System.out.println(divider);
+                System.out.println(DIVIDER);
                 Task t = new Task(userInput);
                 tasks[numTasks] = t;
                 numTasks++;
                 System.out.println("added: " + userInput);
-                System.out.println(divider);
+                System.out.println(DIVIDER);
             }
         }
     }
