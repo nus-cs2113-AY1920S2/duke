@@ -46,8 +46,7 @@ public class Printer {
         if (myList.isEmpty()) {
             printIndentation();
             System.out.println("List is empty.");
-        }
-        else {
+        } else {
             for (int i = 0; i < myList.size(); i++) {
                 printIndentation();
                 Task temp = myList.get(i);
