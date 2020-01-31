@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Printer {
     public static void printIndentation() {
         System.out.print("    ");
@@ -27,6 +29,15 @@ public class Printer {
         printLines();
         printIndentation();
         System.out.println("Added: " + text);
+        printLines();
+    }
+
+    public static void printTasks(List<String> myList) {
+        printLines();
+        for (int i = 0; i < myList.size(); i ++) {
+            printIndentation();
+            System.out.printf("%d. %s\n", i + 1, myList.get(i));
+        }
         printLines();
     }
 }
