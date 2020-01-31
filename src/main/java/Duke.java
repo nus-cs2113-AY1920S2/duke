@@ -1,19 +1,40 @@
 import java.util.Scanner;
 public class Duke {
-    public static String printItemDescription(Task item){
-        return "[" + item.getStatusIcon() + "] " + item.description;
-    }
-
     public static void printTaskList(Task[] taskList, int counter){
         for (int i = 0; i < counter; i++) {
-            System.out.println(i + 1 + ". " + printItemDescription(taskList[i]));
+            System.out.println(i + 1 + ". " + taskList[i].printObject());
         }
     }
 
     public static void markTaskAsDone(Task[] taskList, String cmd){
         int index = Integer.parseInt(cmd.substring(cmd.length() - 1)) - 1;
         taskList[index].setDone();
-        System.out.println("Nice! I've marked this task as done: " + printItemDescription(taskList[index]));
+        System.out.println("Nice! I've marked this task as done: " + taskList[index].printObject());
+    }
+
+    public static Todo createToDo(String cmd, int counter) {
+        Todo item = new Todo(cmd.substring(5));
+        System.out.println("Got it. I've added this task: " + item.printObject());
+        System.out.println("Now you have "+ (counter+1) +" tasks in the list.");
+        return item;
+    }
+
+    public static Event createEvent(String cmd, int counter) {
+        String eventDescription = cmd.substring(6, cmd.indexOf("/at")-1);
+        String eventDate = cmd.substring(cmd.indexOf("/at")+4);
+        Event item = new Event(eventDescription, eventDate);
+        System.out.println("Got it. I've added this task: " + item.printObject());
+        System.out.println("Now you have "+ (counter+1) +" tasks in the list.");
+        return item;
+    }
+
+    public static Deadline createDeadline(String cmd, int counter) {
+        String deadlineDesc = cmd.substring(9, cmd.indexOf("/by")-1);
+        String deadlineDate = cmd.substring(cmd.indexOf("/by")+4);
+        Deadline item = new Deadline(deadlineDesc, deadlineDate);
+        System.out.println("Got it. I've added this task: " + item.printObject());
+        System.out.println("Now you have "+ (counter+1) +" tasks in the list.");
+        return item;
     }
 
     public static void main(String[] args) {
@@ -34,11 +55,17 @@ public class Duke {
                 printTaskList(taskList, counter);
             } else if (cmd.substring(0,4).equals("done")) {
                 markTaskAsDone(taskList, cmd);
-            }else{
-                Task item = new Task(cmd);
-                taskList[counter] = item;
+            }else if (cmd.substring(0,4).equals("todo")){
+                taskList[counter] = createToDo(cmd, counter);
                 counter++;
-                System.out.println("added: " + cmd);
+            } else if (cmd.substring(0,5).equals("event")) {
+                taskList[counter] = createEvent(cmd, counter);
+                counter++;
+            } else if (cmd.substring(0,8).equals("deadline")) {
+                taskList[counter] = createDeadline(cmd, counter);
+                counter++;
+            } else {
+                System.out.printf("error :(");
             }
             cmd = myObj.nextLine();
         }
