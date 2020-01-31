@@ -19,14 +19,14 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String line = in.nextLine();
         while (!line.equals("bye")){
-            if(line.equals("list")){
+            if (line.equals("list")) {
                 System.out.println("\t____________________________________________________________");
                 for(int i=0; i<taskCount; ++i){
                     Task t = taskList[i];
                     System.out.println("\t" + i + ".[" + t.getStatusIcon() + "] " + t.description);
                 }
                 System.out.println("\t____________________________________________________________\n");
-            }else if(line.startsWith("done")){
+            } else if (line.startsWith("done")) {
                 int taskNum = Integer.parseInt(line.substring(5,6));
                 Task t=taskList[taskNum];
                 t.markAsDone();
@@ -34,7 +34,7 @@ public class Duke {
                 +"\t Nice! I've marked this task as done:\n"
                 +"\t" + "  [" + t.getStatusIcon() + "] " + t.description + "\n"
                 +"\t____________________________________________________________\n");
-            }else{
+            } else {
                 Task t = new Task(line);
                 taskList[taskCount] = t;
                 taskCount++;
