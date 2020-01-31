@@ -19,4 +19,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+    public static boolean isValid(Task task) {
+        return task != null;
+    }
+
 }
