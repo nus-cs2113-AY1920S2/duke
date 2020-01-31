@@ -23,7 +23,7 @@ public class Duke {
                 int done = Integer.parseInt(stringSplit[1]);
                 tasks[done].markAsDone();
                 System.out.println("     Nice! I've marked this task as done: ");
-                System.out.println("       [\u2713] " + tasks[done].getDescription());
+                System.out.println("       [\u2713] " + tasks[done].getDescription()); //return tick symbol
             } else {
                 tasks[count] = new Task(string);
                 System.out.println("     added: " + tasks[count].getDescription());

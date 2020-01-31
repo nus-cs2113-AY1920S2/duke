@@ -11,6 +11,7 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    // Not immutable version
     public void markAsDone() {
         this.isDone = true;
     }
