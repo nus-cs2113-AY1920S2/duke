@@ -1,3 +1,19 @@
+/**
+ *  CS2113T Semester 2 AY19/20
+ *  Individual Project
+ *
+ *  Project Duke is a educational software project designed to take you through
+ *  the steps of building a small software incrementally,
+ *  while applying as many Java and SE techniques as possible along the way.
+ *
+ *  The project aims to build a product named Duke, a Personal Assistant Chatbot that
+ *  helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
+ *  in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
+ *
+ *  @file/s: Duke.java Printer.java*
+ *  @author: Tan Zheng Fu Justin
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,11 +21,6 @@ import java.util.Scanner;
 public class Duke {
 
     static List<String> myList = new ArrayList<>();
-
-    //should i do this or initialized it directly on top?
-    //Duke() {
-        //myList = new ArrayList<String>();
-    //}
 
     public static void printIndentation() {
         System.out.print("    ");
