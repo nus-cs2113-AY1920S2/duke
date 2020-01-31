@@ -45,6 +45,9 @@ public class Parser {
 
         //operates according to different command word
         switch (commandWordFirstPart[0]){
+        //find task
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(commandWordDescription);
         //add event task
         case AddEventCommand.COMMAND_WORD:
             return prepareAddEventTask(commandWordDescription);
@@ -73,6 +76,17 @@ public class Parser {
         default:
             return new HelpCommand();
         }
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandDescription full user input string (without the command Action)
+     * @return the AddCommand obj constructed on the user input
+     */
+    private Command prepareFind(String commandDescription) {
+        //
+        return null;
     }
 
     /**
