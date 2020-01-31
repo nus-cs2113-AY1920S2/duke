@@ -49,19 +49,20 @@ public class Duke {
     }
 
     public static void echoUntilBye() {
-        while (true) {
+        boolean isBye = false;
+        while (!isBye) {
             String userInput = readFromUser();
             switch (userInput) {
             case "bye":
+                isBye = true;
                 exits();
-                break;
+                continue;
             case "list":
                 myList.getTasks();
                 continue;
             default:
                 storeInList(userInput);
                 Printer.printConfirmationMessage(userInput);
-                continue;
             }
         }
     }
