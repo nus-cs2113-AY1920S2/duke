@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static List<Task> dukeList = new ArrayList<Task>();
+    public static List<Task> taskList = new ArrayList<Task>();
     public static void doLine(){
         String line = "_".repeat(60);
         System.out.println("\t"+line);
@@ -19,7 +19,7 @@ public class Duke {
         doLine();
     }
     public static void addList(String text){
-        dukeList.add(new Task(text));
+        taskList.add(new Task(text));
         doLine();
         System.out.println("added: " +text);
         doLine();
@@ -28,8 +28,8 @@ public class Duke {
     public static void getList(){
         doLine();
         System.out.println("Here are the tasks in your list:");
-        for(int i =0; i<dukeList.size();i++){
-            System.out.println("\t"+(i+1)+".["+dukeList.get(i).getStatusIcon()+"] "+dukeList.get(i).getDescription() );
+        for(int i = 0; i< taskList.size(); i++){
+            System.out.println("\t"+(i+1)+".["+ taskList.get(i).getStatusIcon()+"] "+ taskList.get(i).getDescription() );
         }
         doLine();
     }
@@ -47,10 +47,10 @@ public class Duke {
             }else if(line.split(" ")[0].equals("done")){
                 if(line.split(" ")[1].matches("-?\\d+")){
                     try {
-                        dukeList.get(Integer.parseInt(line.split(" ")[1]) - 1).markAsDone();
+                        taskList.get(Integer.parseInt(line.split(" ")[1]) - 1).markAsDone();
                         doLine();
                         System.out.println("\tNice! I've marked this task as done:");
-                        System.out.println("\t\t[" + dukeList.get(Integer.parseInt(line.split(" ")[1]) - 1).getStatusIcon() + "] " + dukeList.get(Integer.parseInt(line.split(" ")[1]) - 1).getDescription());
+                        System.out.println("\t\t[" + taskList.get(Integer.parseInt(line.split(" ")[1]) - 1).getStatusIcon() + "] " + taskList.get(Integer.parseInt(line.split(" ")[1]) - 1).getDescription());
                     } catch (Exception e){
                         doLine();
                         System.out.println("Index Out of Bounds. Please input within List range.");
