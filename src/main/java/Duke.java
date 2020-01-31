@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String[] lines = new String[100];
-        boolean[] isDone = new boolean[100];
+        Task[] tasks = new Task[100];
         int count = 1;
         System.out.println("    ____________________________________________________________");
         System.out.println("    Hello! I'm Duke");
@@ -17,19 +16,18 @@ public class Duke {
             if (string.equals("list")) {
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 1; i < count; i++) {
-                    System.out.print("     " + (i) + ".[");
-                    System.out.print(isDone[i] ? "✓" : "✗");
-                    System.out.println("] " + lines[i]);
+                    System.out.print("     " + (i) + ".[" + tasks[i].getStatusIcon() + "] ");
+                    System.out.println(tasks[i].getDescription());
                 }
             } else if (stringSplit[0].equals("done")) {
                 int done = Integer.parseInt(stringSplit[1]);
-                isDone[done] = true;
+                tasks[done].markAsDone();
                 System.out.println("     Nice! I've marked this task as done: ");
-                System.out.println("       [✓] " + lines[done]);
+                System.out.println("       [\u2713] " + tasks[done].getDescription());
             } else {
-                lines[count] = string;
+                tasks[count] = new Task(string);
+                System.out.println("     added: " + tasks[count].getDescription());
                 count++;
-                System.out.println("     added: " + string);
             }
             System.out.println("    ____________________________________________________________");
             string = sc.nextLine();
