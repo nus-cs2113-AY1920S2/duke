@@ -3,36 +3,14 @@ import java.util.Scanner;
 public class Duke {
 
     private static int numTask = 0;
-
-    public static void printList(Task[] Task) {
-        System.out.println("Here are the tasks in your list: \n");
-        for (int i = 0; i < numTask; i++) {
-            System.out.println(i+1 + ". [" + Task[i].getStatusIcon() + "] " + Task[i].getDescription() + "\n");
-        }
-    }
+    private static String line = "____________________________________________________________\n";
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        String intro = "____________________________________________________________\n" +
-                " Hello! I'm Duke\n" +
-                " What can I do for you?\n" +
-                "____________________________________________________________\n";
-
-        String outro = "____________________________________________________________\n" +
-                " Bye. Hope to see you again soon!\n" +
-                "____________________________________________________________";
-
-        String line = "____________________________________________________________\n";
+        welcomeMessage();
+        introMessage();
 
         Task[] Tasks = new Task[100];
-
-        System.out.println(intro);
 
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
@@ -64,6 +42,58 @@ public class Duke {
             s = in.nextLine();
         }
 
+        outroMessage();
+    }
+
+    private static void outroMessage() {
+        String outro = "____________________________________________________________\n" +
+                " Bye. Hope to see you again soon!\n" +
+                "____________________________________________________________";
         System.out.println(outro);
+    }
+
+    private static void introMessage() {
+        String intro = "____________________________________________________________\n" +
+                " It is I, Bob!\n" +
+                " How may I spook you today?\n" +
+                "____________________________________________________________\n";
+
+        System.out.println(intro);
+    }
+
+    private static void welcomeMessage() {
+        String tos = "──────────▄▄▄▄▄▄▄▄▄▄▄──────────\n" +
+                "─────▄▄▀▀▀▀──────────▀▀▄▄──────\n" +
+                "───▄▀───────────────────▀▀▄────\n" +
+                "──█────────────────────────█───\n" +
+                "─█─────────────────────▄▀▀▀▀▀█▄\n" +
+                "█▀────────────────────█────▄███\n" +
+                "█─────────────────────█────▀███\n" +
+                "█─────▄▀▀██▀▄─────────█───────█\n" +
+                "█────█──████─█─────────▀▄▄▄▄▄█─\n" +
+                "█────█──▀██▀─█───────────────█─\n" +
+                "█────█───────█──────────────▄▀─\n" +
+                "█────▀▄─────▄▀──▄▄▄▄▄▄▄▄▄───█──\n" +
+                "█──────▀▀▀▀▀────█─█─█─█─█──▄▀──\n" +
+                "─█──────────────▀▄█▄█▄█▀──▄▀───\n" +
+                "──█──────────────────────▄▀────\n" +
+                "───▀▀▀▄──────────▄▄▄▄▄▄▀▀──────\n" +
+                "────▄▀─────────▀▀──▄▀──────────\n" +
+                "──▄▀───────────────█───────────\n" +
+                "─▄▀────────────────█──▄▀▀▀█▀▀▄─\n" +
+                "─█────█──█▀▀▀▄─────█▀▀────█──█─\n" +
+                "▄█────▀▀▀────█─────█────▀▀───█─\n" +
+                "█▀▄──────────█─────█▄────────█─\n" +
+                "█──▀▀▀▀▀█▄▄▄▄▀─────▀█▀▀▀▄▄▄▄▀──\n" +
+                "█───────────────────▀▄─────────\n";
+
+        System.out.println("What is up my dudes!\n" + tos);
+    }
+
+    public static void printList(Task[] Task) {
+        System.out.println("Here are the tasks in your list: \n");
+        for (int i = 0; i < numTask; i++) {
+            System.out.println(i+1 + ". [" + Task[i].getStatusIcon() + "] " + Task[i].getDescription() + "\n");
+        }
     }
 }
