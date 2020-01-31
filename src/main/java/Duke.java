@@ -30,15 +30,22 @@ public class Duke {
             } else if (input.equals("list")) {
                 // list all tasks
                 listTasks();
-            } else if (input.split(" ")[0].equals("done")) {
-                // mark a task as done
-                System.out.println("\tNice! I've marked this task as done:");
-                int indexOfTasks = Integer.parseInt(input.split(" ")[1]) - 1;
-                tasks[indexOfTasks].setDone(true);
-                System.out.println("\t" + tasks[indexOfTasks]);
             } else {
-                // add stuff to String[] tasks
-                addTask(input);
+                // input involves 2 phrases
+                int startIndexOfInput = input.indexOf(' ');
+                String cmdType = input.substring(0, startIndexOfInput).toLowerCase();
+                String cmdDescription = input.substring(startIndexOfInput + 1);
+
+                if (cmdType.equals("done")) {
+                    // mark a task as done
+                    System.out.println("\tNice! I've marked this task as done:");
+                    int indexOfTasks = Integer.parseInt(cmdDescription) - 1;
+                    tasks[indexOfTasks].setDone(true);
+                    System.out.println("\t" + tasks[indexOfTasks]);
+                } else {
+                    // add stuff to String[] tasks
+                    addTask(cmdType, cmdDescription);
+                }
             }
             printLine();
         } while (!input.equals("bye"));
@@ -53,17 +60,35 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
     }
 
-    public static void addTask(String taskDescription) {
-        if (indexOfTasks < MAX_TASKS_COUNT) {
-            tasks[indexOfTasks] = new Task(taskDescription);
-            indexOfTasks++;
-            System.out.println("\tadded: " + taskDescription);
+    public static void addTask(String type, String description) {
+        if (indexOfTasks >= MAX_TASKS_COUNT) {
+            // exit if task count has exceeded
+            return;
         }
+
+        if (type.equals("todo")) {
+            tasks[indexOfTasks] = new ToDo(description);
+        }
+
+        Task.incrementTaskCount();
+
+        // print status message
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t  " + tasks[indexOfTasks]);
+        printTaskCount();
+
+        indexOfTasks++;
+    }
+
+    public static void printTaskCount() {
+        System.out.printf("\tNow you have %d tasks in the list.%s",
+                Task.getTaskCount(), System.lineSeparator());
     }
 
     public static void listTasks() {
+        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < indexOfTasks; i++) {
-            System.out.printf("\t%d. %s", i+1, tasks[i]);
+            System.out.printf("\t%d.%s", i+1, tasks[i]);
             System.out.println();
         }
     }
