@@ -24,6 +24,9 @@ public class Printer {
     }
 
     public static void printConfirmationMessage(String text) {
+        printLines();
+        printIndentation();
         System.out.println("Added: " + text);
+        printLines();
     }
 }
