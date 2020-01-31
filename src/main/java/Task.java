@@ -1,7 +1,7 @@
 public class Task {
-    public int taskID;
-    public String description;
-    public boolean isDone;
+    protected int taskID;
+    protected String description;
+    protected boolean isDone;
 
     public Task(int taskID, String description, boolean isDone) {
         this.taskID = taskID;
@@ -15,5 +15,14 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+    }
+
+    public String getTaskType() {
+        return "[]";
+    }
+
+    @Override
+    public String toString() {
+        return (taskID + 1) + ". " + getStatusIcon() + " " + description;
     }
 }

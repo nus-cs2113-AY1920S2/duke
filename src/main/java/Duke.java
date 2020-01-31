@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     private static int taskCounter = 0;
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final int charLengthToSkip = 5;
 
     // let statement be printed at center
     public static void print(String str) {
@@ -15,7 +16,7 @@ public class Duke {
         System.out.println(buff);
     }
 
-    public static void greet(){
+    public static void greet() {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         print("  _   _    _   _ U _____ u             ");
         print(" |'| |'|U |\"|u| |\\| ___\"|/    ___      ");
@@ -31,7 +32,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void echo(String cmd){
+    public static void echo(String cmd) {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         print(cmd);
         System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
@@ -39,7 +40,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void add(String cmd){
+    public static void add(String cmd) {
         Task todo = new Task(taskCounter, cmd, false);
         tasks.add(todo);
         taskCounter++;
@@ -50,31 +51,72 @@ public class Duke {
         System.out.println();
     }
 
-    public static void done(int taskNumber){
-        tasks.get(taskNumber).setStatus();
+    private static void printTask(Task t) {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
-        print("Nice! I've marked this task as done: ");
-        print(tasks.get(taskNumber).getStatusIcon() + " " + tasks.get(taskNumber).description);
+        print("Got it. I've added this task: ");
+        print(t.toString());
+        print("Now you have " + taskCounter + " tasks in the list.");
         System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
         System.out.println("    What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
 
-    public static void list(){
+    public static void todo(String cmd) {
+        int startPosition = cmd.indexOf(" ");
+        String cmdTodo = cmd.substring(startPosition + 1, cmd.length());
+        Task todo = new Todo(taskCounter, cmdTodo, false);
+        tasks.add(todo);
+        taskCounter++;
+        printTask(todo);
+    }
+
+    public static void event(String cmd) {
+        int startPosition = cmd.indexOf(" ");
+        int timePosition = cmd.indexOf(" /at ");
+        String cmdEvent = cmd.substring(startPosition + 1, timePosition);
+        String cmdTime = cmd.substring(timePosition + charLengthToSkip, cmd.length());
+        Task event = new Event(taskCounter, cmdEvent, false, cmdTime);
+        tasks.add(event);
+        taskCounter++;
+        printTask(event);
+    }
+
+    public static void deadline(String cmd) {
+        int startPosition = cmd.indexOf(" ");
+        int timePosition = cmd.indexOf(" /by ");
+        String cmdDeadline = cmd.substring(startPosition + 1, timePosition);
+        String cmdTime = cmd.substring(timePosition + charLengthToSkip, cmd.length());
+        Task deadline = new Deadline(taskCounter, cmdDeadline, false, cmdTime);
+        tasks.add(deadline);
+        taskCounter++;
+        printTask(deadline);
+    }
+
+    public static void done(int taskNumber) {
+        tasks.get(taskNumber).setStatus();
+        System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+        print("Nice! I've marked this task as done: ");
+        print(tasks.get(taskNumber).getTaskType() + tasks.get(taskNumber).getStatusIcon() + " " + tasks.get(taskNumber).description);
+        System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println("    What can I do for you? Type 'bye' to exit.");
+        System.out.println();
+    }
+
+    public static void list() {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         print("Here are the tasks in your list:");
-        for(Task event: tasks){
-            if(event == null){
+        for(Task t: tasks){
+            if(t == null){
                 break;
             }
-            print((event.taskID + 1) + "." + event.getStatusIcon() + " " + event.description);
+            print(t.toString());
         }
         System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
         System.out.println("    What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
 
-    public static void exit(){
+    public static void exit() {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         print("Bye! See you next time :)");
         System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
@@ -88,13 +130,19 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String cmd = scanner.nextLine();
 
-        while(!cmd.equals("bye")){
-            if (cmd.equals("list")){
+        while(!cmd.equals("bye")) {
+            if (cmd.equals("list")) {
                 list();
-            } else if (cmd.length() > 4 && cmd.substring(0, 4).equals("done")){
+            } else if (cmd.length() > 4 && cmd.substring(0, 4).equals("todo")) {
+                todo(cmd);
+            } else if (cmd.length() > 5 && cmd.substring(0, 5).equals("event")) {
+                event(cmd);
+            } else if (cmd.length() > 8 && cmd.substring(0, 8).equals("deadline")) {
+                deadline(cmd);
+            } else if (cmd.length() > 4 && cmd.substring(0, 4).equals("done")) {
                 int spacePosition = cmd.indexOf(" ");
                 int taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1, cmd.length())) - 1;
-                if (taskNumber < taskCounter && taskNumber > -1){
+                if (taskNumber < taskCounter && taskNumber > -1) {
                     done(taskNumber);
                 } else {
                     System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
@@ -102,8 +150,6 @@ public class Duke {
                     System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
                     System.out.println("");
                 }
-            } else {
-                add(cmd);
             }
             cmd = scanner.nextLine();
         }
