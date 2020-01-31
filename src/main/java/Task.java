@@ -1,8 +1,8 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String yesIcon = "\u2713";
-    protected  String noIcon = "\u2718";
+    protected static final String yesIcon = "[\u2713]";
+    protected static final String noIcon = "[\u2718]";
 
     public Task(String description) {
         this.description = description;
@@ -19,5 +19,10 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return getStatusIcon() + " " + getTaskDescription();
     }
 }
