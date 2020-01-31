@@ -6,62 +6,77 @@ public class Duke {
     private static String line = "____________________________________________________________\n";
 
     public static void main(String[] args) {
+        printWelcomeMessage();
+        runChatbot();
+    }
 
-        welcomeMessage();
-        introMessage();
-
+    private static void runChatbot() {
         Task[] Tasks = new Task[100];
 
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
+        String arr[] = s.split(" ", 2);
 
-        while (!s.equals("bye")) {
-            if (s.equals(("list"))) {
-                System.out.println(line);
+        while (true) {
+            switch (arr[0]) {
+            case ("bye"):
+                printExitMessage();
+            case ("list"):
                 printList(Tasks);
-                System.out.println(line);
-            }
-            else if (s.startsWith("done ")) {
-                String subs = s.substring(5);
-                int result = Integer.parseInt(subs) - 1;
-                Tasks[result].setDone(true);
-                System.out.println(line);
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("[" + Tasks[result].getStatusIcon() + "] " + Tasks[result].getDescription());
-                System.out.println(line);
-            }
-            else {
-                System.out.println(line);
-                System.out.println("added: " + s);
-                System.out.println(line);
-                Task temp = new Task(s);
-                Tasks[numTask] = temp;
-                numTask++;
+                break;
+            case ("done"):
+                int taskNum = Integer.parseInt(arr[1]);
+                taskNum--;
+                Tasks[taskNum].setDone(true);
+                printDone(Tasks[taskNum]);
+                break;
+            case ("todo"):
+                Tasks[numTask] = new Todo(arr[1]);
+                printConfirm(Tasks[numTask]);
+                break;
+            case ("deadline"):
+                String arr2[] = arr[1].split("/by ", 2);
+                Tasks[numTask] = new Deadline(arr2[0], arr2[1]);
+                printConfirm(Tasks[numTask]);
+                break;
+            case ("event"):
+                arr2 = arr[1].split("/at ", 2);
+                Tasks[numTask] = new Event(arr2[0], arr2[1]);
+                printConfirm(Tasks[numTask]);
+                break;
             }
             in = new Scanner(System.in);
             s = in.nextLine();
+            arr = s.split(" ", 2);
         }
-
-        outroMessage();
     }
 
-    private static void outroMessage() {
-        String outro = "____________________________________________________________\n" +
-                " Bye. Hope to see you again soon!\n" +
-                "____________________________________________________________";
+    private static void printDone(Task task) {
+        System.out.println(line);
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("   " + task);
+        System.out.println(line);
+    }
+
+    private static void printConfirm(Task task) {
+        System.out.println(line);
+        System.out.println("Got it! I've added this task:");
+        System.out.println("   " + task);
+        int num = numTask + 1;
+        System.out.println("Now you have " + num + " task(s) in the list.");
+        System.out.println(line);
+        numTask++;
+    }
+
+    private static void printExitMessage() {
+        String outro = "Bye. Hope to see you again soon!";
+        System.out.println(line);
         System.out.println(outro);
+        System.out.println(line);
+        System.exit(0);
     }
 
-    private static void introMessage() {
-        String intro = "____________________________________________________________\n" +
-                " It is I, Bob!\n" +
-                " How may I spook you today?\n" +
-                "____________________________________________________________\n";
-
-        System.out.println(intro);
-    }
-
-    private static void welcomeMessage() {
+    private static void printWelcomeMessage() {
         String tos = "──────────▄▄▄▄▄▄▄▄▄▄▄──────────\n" +
                 "─────▄▄▀▀▀▀──────────▀▀▄▄──────\n" +
                 "───▄▀───────────────────▀▀▄────\n" +
@@ -88,12 +103,22 @@ public class Duke {
                 "█───────────────────▀▄─────────\n";
 
         System.out.println("What is up my dudes!\n" + tos);
+
+        String intro = "____________________________________________________________\n" +
+                " It is I, Bob!\n" +
+                " How may I spook you today?\n" +
+                "____________________________________________________________\n";
+
+        System.out.println(intro);
     }
 
     public static void printList(Task[] Task) {
+        System.out.println(line);
         System.out.println("Here are the tasks in your list: \n");
         for (int i = 0; i < numTask; i++) {
-            System.out.println(i+1 + ". [" + Task[i].getStatusIcon() + "] " + Task[i].getDescription() + "\n");
+            int num = i + 1;
+            System.out.println(num + ". " + Task[i]);
         }
+        System.out.println(line);
     }
 }
