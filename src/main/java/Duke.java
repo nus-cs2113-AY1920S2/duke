@@ -18,11 +18,12 @@ public class Duke {
                 case "bye" :
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
-                case "done":
-                    markedAsDone(userInput, userInputList);
-                    break;
                 default:
-                    addTask(userInput, userInputList);
+                    if (userInput.contains("done")) {
+                        markedAsDone(userInput, userInputList);
+                    } else {
+                        addTask(userInput, userInputList);
+                    }
                     break;
             }
         } while (!userInput.equalsIgnoreCase("bye"));
