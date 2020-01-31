@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private String by; // string containing deadline
+    private String by; // String containing deadline
 
     public String getBy() {
         return by;

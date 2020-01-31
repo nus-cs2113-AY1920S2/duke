@@ -1,6 +1,9 @@
 # Java build files
 *.class
 
+# Text-UI-Testing files
+text-ui-test/ACTUAL.TXT
+
 # IDEA files
 /.idea/
 /out/

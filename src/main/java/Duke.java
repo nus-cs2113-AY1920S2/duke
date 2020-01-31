@@ -1,6 +1,5 @@
 import java.util.Scanner;  // User input
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Duke {
@@ -32,8 +31,6 @@ public class Duke {
     private static void printList() {
         System.out.println("----------");
         for (int i = 0; i < taskList.size(); i++) {
-            //String desc = taskList.get(i).getDescription();
-            //System.out.println(i+1 + ". [" + taskList.get(i).getStatusIcon() + "] " + desc);
             System.out.println(i+1 + ". " + taskList.get(i));
         }
         System.out.println("----------");
@@ -47,15 +44,16 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         // Note: Scanner.next() reads until delimiter, Scanner.nextLine() reads until EOL
+        // If Scanner.next() is called first, then Scanner.nextline() reads from that point onwards
+        // e.g. if the user inputs: 'deadline read book \5pm', the two strings below will contain:
+        //      userCommand = 'deadline'
+        //      userParams  = 'read book \5pm'
         String userCommand = inputScanner.next(); // Read first word of input
         String userParams = inputScanner.nextLine(); // Get user input after first word
 
         // Main execution loop
         while(!userCommand.equals("bye") && !userCommand.equals("Bye")) {
             switch (userCommand) {
-            case "list":
-                printList();
-                break;
             case "todo":
                 taskList.add(new Todo(userParams));
                 formatPrint("Added todo:" + userParams);
@@ -75,16 +73,19 @@ public class Duke {
                 break;
             case "done":
                 String taskId = userParams.replaceAll("[^0-9]", ""); // Replace all except numbers
-                System.out.println(taskId);
                 taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
+                formatPrint("Marked task as done.");
+                break;
+            case "list":
+                printList();
                 break;
             default:
                 formatPrint("Sorry, I didn't recognize that command.");
             }
 
             System.out.println("You have " + taskList.size() + " task/s. (type 'list' to list your tasks)");
-
             System.out.println("Anything else? Remember that you can leave by typing 'bye'.");
+
             userCommand = inputScanner.next(); // Prepare for next user command
             userParams = inputScanner.nextLine(); // Get user input after first word
         }
