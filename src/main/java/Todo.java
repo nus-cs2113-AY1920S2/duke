@@ -1,20 +1,24 @@
 public class Todo {
-    private String name;
-    private boolean done;
+    private String description;
+    private boolean isDone;
 
-    public Todo(String name) {
-        this.done = false;
-        this.name = name;
+    public Todo(String description) {
+        this.isDone = false;
+        this.description = description;
     }
     private String isDone() {
-        return this.done ? "[✓] " : "[✗] ";
+        return this.isDone ? "[✓] " : "[✗] ";
     }
+
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t" + "[✓] " + this.name);
+        System.out.println("\t" + "[✓] " + this.description);
     }
-    public String listMe() {
-        return isDone() + this.name;
+    public char getTaskType() {
+        return 'T';
+    }
+    public String toString() {
+        return String.format("[%c]", getTaskType()) + isDone() + this.description;
     }
 }
