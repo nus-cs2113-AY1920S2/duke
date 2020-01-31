@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Duke {
 
     public static final int MAX_NO_OF_TASKS = 100;
