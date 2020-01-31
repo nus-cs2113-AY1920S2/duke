@@ -31,6 +31,7 @@ public class Printer {
         System.out.println("Added: " + text);
         printLines();
     }
+
     public static void printConfirmationMessage(Task task) {
         printLines();
         printIndentation();

@@ -3,21 +3,21 @@
  *  Individual Project
  *
  *  Project Duke is a educational software project designed to take you through
- *  the steps of building a small software incrementally,
- *  while applying as many Java and SE techniques as possible along the way.
+ *      the steps of building a small software incrementally,
+ *      while applying as many Java and SE techniques as possible along the way.
  *
  *  The project aims to build a product named Duke, a Personal Assistant Chatbot that
- *  helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
- *  in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
+ *      helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
+ *      in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
  *
- *  @file/s: Duke.java Printer.java* Storage.java*
+ *  @file/s: Duke.java Printer.java Storage.java Task.java
  *  @author: Tan Zheng Fu Justin
  */
 
 import java.util.Scanner;
 
 public class Duke {
-    static Storage myList = new Storage();
+    static Storage myTasks = new Storage();
 
     public static void start() {
         String logo = " ____        _        \n"
@@ -62,11 +62,11 @@ public class Duke {
                 exits();
                 continue;
             case "list":
-                myList.displayTasks();
+                myTasks.displayTasks();
                 continue;
             case "done":
                 int index = Integer.parseInt(commands[1]);
-                Task t = myList.getTask(index);
+                Task t = myTasks.getTask(index);
                 if (Task.isValid(t)) {
                     t.markAsDone();
                     Printer.printConfirmationMessage(t);
@@ -76,7 +76,7 @@ public class Duke {
                 continue;
 
             default:
-                myList.storeTasks(task);
+                myTasks.storeTasks(task);
                 Printer.printConfirmationMessage(task.description);
             }
         }
