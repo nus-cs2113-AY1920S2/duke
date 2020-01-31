@@ -13,7 +13,7 @@ public class Duke {
         System.out.println(formattedDate);
     }
 
-    public static void completeTask(ArrayList<Task> tasks, int index){
+    public static void completeTask(ArrayList<Task> tasks, int index) {
         index--; // index starts from 0, unlike list
         if ( (index < tasks.size()) || (index > 0)) { // check if out of bounce
             Task t = tasks.get(index);
@@ -46,19 +46,13 @@ public class Duke {
 
     public static void printHelp() {
         System.out.println("Commands: ");
-        System.out.println("List: lists all recorded tasks - usage: list");
-        System.out.println("Done: mark task as completed - usage: done <task number>");
-        System.out.println("New: add a new task - usage: new");
+        System.out.println("List: lists all recorded tasks \nusage: list\n");
+        System.out.println("Done: mark task as completed \nusage: done <task number>\n");
+        System.out.println("New: add a new task \nusage: new\n");
         System.out.println("");
     }
 
-    public static void addTask(ArrayList<Task> tasks, String newTask) {
-        Task t = new Task(newTask);
-        tasks.add(t);
-        System.out.println("added: " + newTask + "\n");
-    }
-
-    public static void main(String[] args) {
+    private static void printWelcomeMessage() {
         String logo =   "  ,--,       ,---,   .--.--.       ,---,        \n"
                 + ",--.'|    ,`--.' |  /  /    '.    '  .' \\       \n"
                 + "|  | :    |   :  : |  :  /`. /   /  ;    '.     \n"
@@ -77,6 +71,17 @@ public class Duke {
         System.out.println("____________________________________________________________\n\nCurrent time: ");
         getDateTime();
         System.out.println("____________________________________________________________");
+    }
+
+    public static void addTask(ArrayList<Task> tasks, String newTask) {
+        Task t = new Task(newTask);
+        tasks.add(t);
+        System.out.println("added: " + newTask + "\n");
+    }
+
+    public static void main(String[] args) {
+
+        printWelcomeMessage();
 
         ArrayList<Task> tasks = new ArrayList<Task>();
         int taskCounter = 0;
@@ -121,4 +126,6 @@ public class Duke {
 
         System.out.println("LISA: Bye, hope to see you again!");
     }
+
+
 }
