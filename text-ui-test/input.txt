@@ -1,0 +1,12 @@
+hi
+todo This is a todo task
+list
+event This is an event happening /at Feb 10th 2-4pm
+list
+deadline This is a task with deadline /by tomorrow 6pm
+list
+done 2
+list
+done 1
+list
+bye

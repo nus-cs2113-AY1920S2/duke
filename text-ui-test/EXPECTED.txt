@@ -1,0 +1,60 @@
+____________________________________________________________
+Hello from Chatty Chat Bot
+Glad to be at your service!
+____________________________________________________________
+____________________________________________________________
+I'm Chatty Chat Bot
+How may I help you?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[T][✘] This is a todo task
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✘] This is a todo task
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✘] This is a todo task
+2. [E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✘] This is a todo task
+2. [E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
+[E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✘] This is a todo task
+2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
+[T][✓] This is a todo task
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] This is a todo task
+2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
+Thanks for chatting with Chatty Chat Bot
+See you again soon!
+____________________________________________________________
