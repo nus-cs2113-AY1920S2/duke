@@ -1,8 +1,11 @@
 public class Task {
+
     // Stores the description of the task
     protected String description;
     // Denotes whether the task is done or not done
     protected boolean isDone;
+    // Used to denote type of task
+    protected char taskType;
 
     // Constructor
     public Task(String description) {
@@ -31,4 +34,7 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 
+    public void printDetails() {
+        PrintHelper.printWithIndentation("added: " + description );
+    }
 }

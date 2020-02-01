@@ -1,15 +1,44 @@
 import java.util.ArrayList;
 
 public class TaskManager {
+
     // Stores all the tasks provided
     ArrayList<Task> tasks = new ArrayList<Task>();
 
-    // Adds a new task with the description provided by the user
-    public void addTask(String description){
-        tasks.add(new Task(description));
+    // Adds a new task with the descriptionWithDetails provided by the user
+    public void addTask(String descriptionWithDetails){
+        TaskType taskType = findTaskType(descriptionWithDetails);
+        switch (taskType) {
+        case ToDo:
+            tasks.add(new ToDO(descriptionWithDetails));
+            break;
+        case Deadline:
+            tasks.add(new Deadline(descriptionWithDetails));
+            break;
+        case Event:
+            tasks.add(new Event(descriptionWithDetails));
+            break;
+        }
+
         PrintHelper.printLine();
-        PrintHelper.printWithIndentation("added: " + description );
+        PrintHelper.printWithIndentation("Got it. I've added this task: ");
+        PrintHelper.printWithIndentation(tasks.get(tasks.size()-1).getStatusWithDescription(),7);
+        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task" + (tasks.size() != 1?"s ":" ") + "in the list. ");
         PrintHelper.printLine();
+    }
+
+    private TaskType findTaskType(String description) {
+        String[] split = description.split(" ",2);
+        switch (split[0]) {
+        case "todo":
+
+            return TaskType.ToDo;
+        case "deadline":
+            return TaskType.Deadline;
+        case "event":
+            return TaskType.Event;
+        }
+        return null;
     }
 
     // Marks the task denoted by the task as done
