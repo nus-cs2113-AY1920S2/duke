@@ -10,21 +10,39 @@ import data.task.TaskList;
 public class Duke {
 
     private TaskList allTasks;
+    private TaskList qualifiedTasks;
 
     /**
      * Creates an empty address book.
      */
     public Duke() {
         this.allTasks = new TaskList();
+        this.qualifiedTasks = new TaskList();
     }
 
     public TaskList getTaskList() {
         return allTasks;
     }
 
+    public TaskList getQualifiedTasks() {
+        return qualifiedTasks;
+    }
 
     /**
-     * Adds a person to the address book.
+     * Search a key word int the whole list
+     */
+    public TaskList searchTask(String toSearch) {
+        for (Task task:allTasks
+             ) {
+            if (task.getTaskDescription().indexOf(toSearch) != -1){
+                qualifiedTasks.add(task);
+            }
+        }
+        return qualifiedTasks;
+    }
+
+    /**
+     * Adds a task to the task list.
      */
     public void addTask(Task toAdd) {
         allTasks.add(toAdd);
@@ -38,7 +56,7 @@ public class Duke {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the task from the list.
      *
      * @throws TaskNotFoundException if no such person could be found in the list.
      */
@@ -48,7 +66,7 @@ public class Duke {
 
 
     /**
-     * Clears all persons and tags from the address book.
+     * Clears all tasks from the task list.
      */
     public void clear() {
         allTasks.clear();
@@ -68,15 +86,4 @@ public class Duke {
         //find the task
         allTasks.getInternalList().get(doneId).setDone(true);
     }
-
-    /**
-     * Removes the equivalent person from the address book.
-     *
-     * @throws TaskNotFoundException if no such Person could be found.
-     */
-    public void removePerson(Task toRemove) throws TaskNotFoundException {
-        allTasks.remove(toRemove);
-    }
-
-
 }
