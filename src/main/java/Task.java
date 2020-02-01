@@ -27,4 +27,8 @@ public class Task {
         isDone = true;
     }
 
+    public int getTotalTasks() {
+        return totalTasks;
+    }
+
 }
