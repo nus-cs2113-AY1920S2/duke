@@ -22,7 +22,7 @@ public class ChattyChatBot {
 
     private static final String LINE_BREAK = "____________________________________________________________";
 
-    private static final String ADDED_TASK_CONFIRMATION = "Got it. I've added this task: ";
+    private static final String ADDED_TASK_CONFIRMATION = "Got it. I've added this task:";
     private static final String TASK_SUMMARY_FIRST_HALF = "Now you have ";
     private static final String TASK_SUMMARY_SECOND_HALF = " tasks in the list.";
 
@@ -31,8 +31,10 @@ public class ChattyChatBot {
 
         List<Task> tasks = new ArrayList<>();
 
-        String userInput = SCANNER.nextLine();
+        String userInput = "";
         do {
+            userInput = SCANNER.nextLine();
+
             System.out.println(LINE_BREAK);
 
             // Solution below adapted from: https://stackoverflow
@@ -56,14 +58,15 @@ public class ChattyChatBot {
             case EVENT_STRING:
                 addEventTask(tasks, array[1]);
                 break;
+            case BYE_STRING:
+                sendByeMessage();
+                break;
             default:
                 sendDefaultResponse();
             }
 
             System.out.println(LINE_BREAK);
-            userInput = SCANNER.nextLine();
         } while (!userInput.equals(BYE_STRING));
-        sendByeMessage();
     }
 
     private static void listAllTasks(List<Task> tasks) {
@@ -123,9 +126,7 @@ public class ChattyChatBot {
     }
 
     private static void sendByeMessage() {
-        System.out.println(LINE_BREAK);
         System.out.println("Thanks for chatting with " + BOT_NAME);
         System.out.println("See you again soon!");
-        System.out.println(LINE_BREAK);
     }
 }
