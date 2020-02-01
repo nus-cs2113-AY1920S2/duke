@@ -21,10 +21,66 @@ public class Duke {
         this.taskList = taskList;
         this.taskInfoList = taskInfoList;
     }
+    
+    private Duke(Duke oldDuke) {
+        this.taskList = oldDuke.taskList.stream()
+                .collect(Collectors.toList());
+       
+        this.taskInfoList = oldDuke.taskInfoList.stream()
+                .collect(Collectors.toList());
+    }
 
     public Duke() {
         this.taskList = new ArrayList<>();
         this.taskInfoList = new ArrayList<>();
+    }
+    
+    public Duke runCommand(String input) throws DukeException {
+        String[] argsArray = input.split(" ");
+        String command = argsArray[0];
+        
+        Duke tempDuke = this;
+        switch(command) {
+        case "todo": 
+            if (argsArray.length == 1) {
+                throw new DukeException("☹ OOPS!!! The description "
+                        + "of a todo cannot be empty.");
+            }
+            
+            tempDuke = this.processToDosInput(input).addToDos();
+            Task.taskCounter++;
+            break;
+        case "deadline":
+            if (argsArray.length == 1) {
+                throw new DukeException("☹ OOPS!!! The description "
+                        + "of a deadline cannot be empty.");
+            }
+            tempDuke = this.processDeadlinesInput(input).addDeadlines();
+            Task.taskCounter++;
+            break;
+        case "event":
+            if (argsArray.length == 1) {
+                throw new DukeException("☹ OOPS!!! The description "
+                        + "of an event cannot be empty.");
+            }
+            tempDuke = this.processEventsInput(input).addEvents();
+            Task.taskCounter++;
+            break;
+        case "done": 
+            tempDuke = this.completeTask(Integer.parseInt(argsArray[1]));
+            break;
+        case "list":
+            this.printList();
+            break;
+        case "bye": 
+            this.printOutput("Bye. Hope to see you again soon!");
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");                 
+        }
+
+        return new Duke(tempDuke);
     }
     
     public Duke processEventsInput(String input) {
@@ -215,6 +271,7 @@ public class Duke {
 
     public void printBorder() {
         System.out.println("_______________________"
+                + "________________________"
                 + "________________________");
     }
 
