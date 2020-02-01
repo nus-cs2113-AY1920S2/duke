@@ -11,10 +11,27 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String inputCommand = scanner.nextLine();
+        String[] listOfItems = new String[100];
+        int sizeOfList = 0;
         while (inputCommand.equals("bye") == false) {
-            System.out.println("____________________________________________________________");
-            System.out.println(inputCommand);
-            System.out.println("____________________________________________________________");
+
+            if (inputCommand.equals("list")) {
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < sizeOfList; i++) {
+                    int k = i + 1;
+                    System.out.println(" " + k + ". " + listOfItems[i]);
+                }
+                System.out.println("____________________________________________________________");
+
+            } else {
+                listOfItems[sizeOfList] = inputCommand;
+                System.out.println("____________________________________________________________");
+                System.out.println(" added: " + inputCommand);
+                System.out.println("____________________________________________________________");
+                sizeOfList++;
+
+            }
+
             inputCommand = scanner.nextLine();
         }
 
