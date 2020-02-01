@@ -7,13 +7,28 @@ public class Duke {
     private ToDo newToDo;
     private Event newEvent;
     private Deadline newDeadline;
-    private UI userInterface;
-    private Parser parser;
 
     public Duke() {
         this.tasks = new ArrayList<Task>();
-        userInterface = new UI();
-        parser = new Parser();
+    }
+
+    public void printLine() {
+        String boundary = " ======================================================================";
+        System.out.println(boundary);
+    }
+
+    public void printGreetingMessage() {
+        String firstGreetingMessage = " Hi! I am Duke, your next doooooorrrr friendly elf.....I mean bot";
+        String secondGreetingMessage = " How may Dukeeeeee help you today?";
+        String line = "_______________________________________________________________________";
+        System.out.println(firstGreetingMessage);
+        System.out.println(secondGreetingMessage);
+        System.out.println(line);
+    }
+
+    public void printLeavingMessage() {
+        String leavingMessage = " Bye! Duke is now a freeeeee elf again!!!!";
+        System.out.println(leavingMessage);
     }
 
     private void printList() {
@@ -139,29 +154,31 @@ public class Duke {
 
     private void run() {
         Scanner sc = new Scanner(System.in);
-        userInterface.printGreetingMessage();
+        printGreetingMessage();
         while (true) {
             String input = sc.nextLine().trim();
-            parser.updateInput(input);
-            userInterface.printLine();
-            if (parser.isBye()) {
-                userInterface.printLeavingMessage();
-                userInterface.printLine();
+            String removeTrailingSpaces = input.trim();
+            String [] words = removeTrailingSpaces.split(" ");
+            String firstWord = words[0].toLowerCase();
+            printLine();
+            if (firstWord.equals("bye")) {
+                printLeavingMessage();
+                printLine();
                 break;
-            } else if (parser.isList()) {
+            } else if (firstWord.equals("list")) {
                 list();
-            } else if (parser.isDone()) {
+            } else if (firstWord.equals("done")) {
                 getDoneExceptions (input);
-            } else if (parser.isToDo()) {
+            } else if (firstWord.equals("todo")) {
                 getToDoExceptions (input);
-            } else if (parser.isEvent()) {
+            } else if (firstWord.equals("event")) {
                 getEventExceptions(input);
-            } else if (parser.isDeadline()) {
+            } else if (firstWord.equals("deadline")) {
                 getDeadlineExceptions(input);
             } else {
                 System.out.println(" Duke does not understand your command! Can you repeat again?");
             }
-            userInterface.printLine();
+            printLine();
         }
         sc.close();
     }
