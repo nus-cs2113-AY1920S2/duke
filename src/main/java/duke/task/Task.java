@@ -1,3 +1,4 @@
+package duke.task;
 
 public class Task {
     protected final String taskName;
@@ -31,7 +32,7 @@ public class Task {
 
     public String taskWithSymbol() {
         return ((this.isDone) ? "[✓]" : "[✗]")
-                + " " 
+                + "   " 
                 + this.taskName;
     }
 

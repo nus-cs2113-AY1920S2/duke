@@ -1,15 +1,16 @@
+package duke.task;
 
-public class Events extends Task {
+public class Deadlines extends Task {
     private final String dateTime;
 
-    private Events(int taskId, String taskName, 
+    private Deadlines(int taskId, String taskName, 
             String dateTime, boolean isDone) {
 
         super(taskId, taskName, isDone);
         this.dateTime = dateTime;
     }
 
-    public Events(int taskId, String taskName, String dateTime) {
+    public Deadlines(int taskId, String taskName, String dateTime) {
         super(taskId, taskName);
         this.dateTime = dateTime;
     }
@@ -20,23 +21,23 @@ public class Events extends Task {
 
     @Override
     public String taskWithSymbol() {
-        return "[E]" 
+        return "[D]" 
                 + ((this.isDone) ? "[✓]" : "[✗]")
-                + " " 
+                + "   " 
                 + this.taskName;
     }
 
     @Override
-    public Events makeDone() {
-        return new Events(this.taskId, this.taskName, 
+    public Deadlines makeDone() {
+        return new Deadlines(this.taskId, this.taskName, 
                 this.dateTime, true);
     }
 
     @Override
     public String toString() {
         return this.taskId 
-                + "."  
+                + "." 
                 + this.taskWithSymbol()
-                + " (at: " + this.dateTime + ")";
+                + " (by: " + this.dateTime + ")";
     }
 }
