@@ -28,15 +28,16 @@ public class FindCommand extends Command {
         this.key = commandDescription;
     }
 
-
     @Override
     public CommandResult execute() {
+        System.out.println(Messages.DIVIDER);
         qualifiedTasks = duke.searchTask(key);
         if (qualifiedTasks.getInternalList().isEmpty()){
             return new CommandResult(MESSAGE_EMPTY_LIST);
         } else {
             Messages.printAllTasks(qualifiedTasks);
         }
+        System.out.println(Messages.DIVIDER);
         return null;
     }
 
