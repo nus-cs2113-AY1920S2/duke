@@ -12,12 +12,12 @@ public class Duke {
         this.tasks = new ArrayList<Task>();
     }
 
-    public void printLine() {
+    private void printLine() {
         String boundary = " ======================================================================";
         System.out.println(boundary);
     }
 
-    public void printGreetingMessage() {
+    private void printGreetingMessage() {
         String firstGreetingMessage = " Hi! I am Duke, your next doooooorrrr friendly elf.....I mean bot";
         String secondGreetingMessage = " How may Dukeeeeee help you today?";
         String line = "_______________________________________________________________________";
@@ -26,7 +26,7 @@ public class Duke {
         System.out.println(line);
     }
 
-    public void printLeavingMessage() {
+    private void printLeavingMessage() {
         String leavingMessage = " Bye! Duke is now a freeeeee elf again!!!!";
         System.out.println(leavingMessage);
     }
