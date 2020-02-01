@@ -24,11 +24,11 @@ public class Duke {
             }
 
             switch(command) {
-            // Lists all the tasks
+            // List all the tasks
             case "list":
                 listTasks(tasks, numTasks);
                 break;
-            // Marks a task as done
+            // Mark a task as done
             case "done":
                 br();
                 System.out.println("\t Dun dun dun dun! This task is done:");
@@ -38,48 +38,44 @@ public class Duke {
                 System.out.println("\t   " + tasks[taskIdx]);
                 br();
                 break;
-            // Adds a to-do task
-            case "todo":
-                Task t = new Todo(words);
+            // Add a task
+            default:
+                Task t;
+
+                // Parse input to obtain text and timeDescriptor
+                String timeDescriptor = "";
+                String text = "";
+                int slashPos = words.indexOf('/');
+                if (slashPos != -1) {
+                    timeDescriptor = words.substring(slashPos+4);
+                    text = words.substring(0, slashPos);
+                }
+
+                if (command.equals("todo")) {
+                    t = new Todo(words);
+                } else if (command.equals("deadline")) {
+                    t = new Deadline(text, timeDescriptor);
+                } else {
+                    t = new Event(text, timeDescriptor);
+                }
                 tasks[numTasks] = t;
                 numTasks++;
 
-                br();
-                System.out.println("\t Dook has added task: ");
-                System.out.println("\t  " + t);
-                System.out.println("\t " + numTasks + " task(s) in the list now!");
-                br();
-                break;
-            // Adds a deadline task
-            case "deadline":
-                String by = words.substring(words.indexOf('/')+4);
-                String text = words.substring(0, words.indexOf('/'));
-                t = new Deadline(text, by);
-                tasks[numTasks] = t;
-                numTasks++;
-                br();
-                System.out.println("\t Dook has added task: ");
-                System.out.println("\t  " + t);
-                System.out.println(numTasks + " tasks in the list now!");
-                br();
-                break;
-            // Adds an event task
-            case "event":
-                String at = words.substring(words.indexOf('/')+4);
-                text = words.substring(0, words.indexOf('/'));
-                t = new Event(text, at);
-                tasks[numTasks] = t;
-                numTasks++;
-                br();
-                System.out.println("\t Dook has added task: ");
-                System.out.println("\t  " + t);
-                System.out.println(numTasks + " tasks in the list now!");
-                br();
+                printAddedTaskMessage(t, numTasks);
                 break;
             }
         }
 
         printEndMessage();
+    }
+
+    /** Prints the message that is displayed after a task is added */
+    private static void printAddedTaskMessage(Task t, int numTasks) {
+        br();
+        System.out.println("\t Dook has added task: ");
+        System.out.println("\t  " + t);
+        System.out.println("\t " + numTasks + " task(s) in the list now!");
+        br();
     }
 
     /** Prints all tasks in the list */
