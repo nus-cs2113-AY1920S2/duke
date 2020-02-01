@@ -1,9 +1,17 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+enum TaskInfo {
+    TASKNAME,
+    DATETIME;
+    
+    public final int index = ordinal();
+}
 
 public class Duke {
     private final List<Task> taskList;
@@ -18,7 +26,7 @@ public class Duke {
         this.taskList = new ArrayList<>();
         this.taskInfoList = new ArrayList<>();
     }
-
+    
     public Duke processEventsInput(String input) {
         String[] argsArray = input.split(" ");
         int splitIndex = 0;
@@ -106,8 +114,8 @@ public class Duke {
     }
 
     public Duke addEvents() {
-        String taskName = this.taskInfoList.get(0);
-        String dateTime = this.taskInfoList.get(1);
+        String taskName = this.taskInfoList.get(TaskInfo.TASKNAME.index);
+        String dateTime = this.taskInfoList.get(TaskInfo.DATETIME.index);
         Events events = new Events(Task.taskCounter, taskName, dateTime);
         this.taskList.add(events);
 
@@ -120,12 +128,12 @@ public class Duke {
     }
 
     public Duke addDeadlines() {
-        String taskName = this.taskInfoList.get(0);
-        String dateTime = this.taskInfoList.get(1);
+        String taskName = this.taskInfoList.get(TaskInfo.TASKNAME.index);
+        String dateTime = this.taskInfoList.get(TaskInfo.DATETIME.index);
         Deadlines deadlines = new Deadlines(Task.taskCounter,
                 taskName, dateTime);
-
         this.taskList.add(deadlines);
+        
         List<Task> newTaskList = this.taskList.stream()
                 .collect(Collectors.toList());
 
@@ -135,7 +143,7 @@ public class Duke {
     }
 
     public Duke addToDos() {
-        String taskName = this.taskInfoList.get(0);
+        String taskName = this.taskInfoList.get(TaskInfo.TASKNAME.index);
         ToDos todos = new ToDos(Task.taskCounter, taskName);
         this.taskList.add(todos);
 
