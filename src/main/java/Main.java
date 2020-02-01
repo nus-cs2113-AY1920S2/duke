@@ -15,7 +15,7 @@ public class Main {
                 System.err.println(e);
             }
         }
-
+        
         sc.close();
     }
 }
