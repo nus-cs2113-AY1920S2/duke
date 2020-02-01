@@ -10,13 +10,9 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
-
-    public String getDescription() {
-        return description;
-    }
-
+    
     public void markAsDone() {
         this.isDone = true;
     }
@@ -24,4 +20,16 @@ public class Task {
     public static int getTaskCount() {
         return taskCount;
     }
+    
+    @Override
+    public String toString() {
+        return getStatusIcon() + " " + description;
+    }
+    //Solution below adapted from https://www.baeldung.com/java-add-character-to-string
+    protected String stringBuilder(String input) {
+        StringBuilder sb = new StringBuilder(input);
+        sb.insert(3,":");
+        return sb.toString();
+    }
+
 }
