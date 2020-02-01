@@ -59,6 +59,7 @@ public class Duke {
                 formatPrint("Added todo:" + userParams);
                 break;
             case "deadline":
+                // Fallthrough
             case "event":
                 int delimIndex = userParams.indexOf("/"); // Duke uses / to define where the date starts
                 String desc = userParams.substring(0, delimIndex); // Get description substring (before /)
@@ -72,7 +73,7 @@ public class Duke {
                 }
                 break;
             case "done":
-                String taskId = userParams.replaceAll("[^0-9]", ""); // Replace all except numbers
+                String taskId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
                 taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
                 formatPrint("Marked task as done.");
                 break;
