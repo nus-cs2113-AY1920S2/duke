@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -13,5 +14,9 @@ public class Task {
 
     public void updateTask(){
         this.isDone = true;
+    }
+
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 }
