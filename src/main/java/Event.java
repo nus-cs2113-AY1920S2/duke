@@ -12,14 +12,12 @@ public class Event extends Task {
 
     // Abstracts out the description from the user given input and returns it
     private static String getDescription(String descriptionWithPeriod) {
-        descriptionWithPeriod = descriptionWithPeriod.substring(6);
         String[] split = descriptionWithPeriod.split("/",2);
         return split[0];
     }
 
     // Abstracts out the period from the user given input and returns it
     private static String getPeriod(String descriptionWithPeriod) {
-        descriptionWithPeriod = descriptionWithPeriod.substring(6);
         String[] split = descriptionWithPeriod.split("/",2);
         return (split[1].split(" ",2))[1];
     }

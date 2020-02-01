@@ -12,14 +12,12 @@ public class Deadline extends Task{
 
     // Abstracts out the description from the user given input and returns it
     private static String getDescription(String descriptionWithDeadline) {
-        descriptionWithDeadline = descriptionWithDeadline.substring(9);
         String[] split = descriptionWithDeadline.split("/",2);
         return split[0];
     }
 
     // Abstracts out the deadline from the user given input and returns it
     private static String getDeadline(String descriptionWithDeadline) {
-        descriptionWithDeadline = descriptionWithDeadline.substring(9);
         String[] split = descriptionWithDeadline.split("/",2);
         return (split[1].split(" ",2))[1];
     }

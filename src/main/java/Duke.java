@@ -8,6 +8,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         PrintHelper.printWelcomeMessage();
+
         String command;
         // Read command entered by user
         command = sc.nextLine();
@@ -24,18 +25,35 @@ public class Duke {
                 PrintHelper.printEmptyLineAlert();
                 break;
             case "done":
-                // Marks task mentioned by user as done
-                taskManager.markTask(commandSplit[1]);
+                if (commandSplit.length == 1){
+                    PrintHelper.printInvalidIntegerAlert();
+                } else {
+                    // Marks task mentioned by user as done
+                    taskManager.markTask(commandSplit[1]);
+                }
+                break;
+            case "todo":
+                // Adds the task specified by the user to the list
+                taskManager.addTask(TaskType.ToDo, commandSplit[1]);
+                break;
+            case "deadline":
+                // Adds the task specified by the user to the list
+                taskManager.addTask(TaskType.Deadline, commandSplit[1]);
+                break;
+            case "event":
+                // Adds the task specified by the user to the list
+                taskManager.addTask(TaskType.Event, commandSplit[1]);
                 break;
             default:
-                // Adds the task specified by the user to the list
-                taskManager.addTask(command);
+                // Invalid Command
+                PrintHelper.printInvalidCommand();
                 break;
             }
             System.out.println();
             // Read next command entered by user
             command = sc.nextLine();
         }
+
         PrintHelper.printByeMessage();
     }
 }
