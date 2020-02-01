@@ -9,6 +9,7 @@ public class ToDos extends Task {
         super(taskId, taskName);
     }
 
+    @Override
     public String taskWithSymbol() {
         return "[T]" 
                 + ((this.isDone) ? "[✓]" : "[✗]")
