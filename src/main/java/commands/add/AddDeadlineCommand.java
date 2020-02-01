@@ -22,24 +22,8 @@ public class AddDeadlineCommand extends AddCommand {
     public CommandResult execute() {
         duke.addTask(deadlineTask);
         //according to the data format
-        if (deadlineTask.getTaskDeadlineDate()!=null){
-            String timeString = String.format("%s %s %s",
-                    Month.valueOf(deadlineTask.getTaskDeadlineDate().getMonthValue()),
-                    deadlineTask.getTaskDeadlineDate().getDayOfMonth(),
-                    deadlineTask.getTaskDeadlineDate().getYear());
-            return new CommandResult(String.format(
-                    MESSAGE_DEADLINE_SUCCESS,
-                    COMMAND_TYPE,
-                    deadlineTask.getChar(),
-                    deadlineTask.getTaskDescription(),
-                    timeString));
-        } else {
-            return new CommandResult(String.format(
-                    MESSAGE_DEADLINE_SUCCESS,
-                    COMMAND_TYPE,
-                    deadlineTask.getChar(),
-                    deadlineTask.getTaskDescription(),
-                    deadlineTask.getTaskDeadline()));
-        }
+        return new CommandResult(String.format(
+                MESSAGE_DEADLINE_SUCCESS,
+                deadlineTask.getTaskInformation()));
     }
 }
