@@ -1,13 +1,13 @@
 public class Deadline extends Task{
 
     // Stores information about deadline of task
-    private String deadline;
+    private String by;
 
     // Overloaded Constructor
     public Deadline(String descriptionWithDeadline){
         super(getDescription(descriptionWithDeadline));
         taskType = 'D';
-        this.deadline = getDeadline(descriptionWithDeadline);
+        this.by = getDeadline(descriptionWithDeadline);
     }
 
     // Abstracts out the description from the user given input and returns it
@@ -23,13 +23,13 @@ public class Deadline extends Task{
     }
 
     // Returns the deadline in required format
-    public String getDeadline(){
-        return "(by: " + deadline + ")";
+    public String getBy(){
+        return "(by: " + by + ")";
     }
 
     // Returns the task's type and status along with it's description as a string
     @Override
     public String getStatusWithDescription(){
-        return "[" + this.taskType + "]" + super.getStatusWithDescription() + getDeadline();
+        return "[" + this.taskType + "]" + super.getStatusWithDescription() + getBy();
     }
 }

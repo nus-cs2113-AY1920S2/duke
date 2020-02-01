@@ -1,15 +1,16 @@
 public class PrintHelper {
 
-    public static final String INVALID_COMMAND_MESSAGE = "Invalid command, Please type a valid command";
-    public static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid format of declaration for event (event .......  /at ......)";
-    public static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid format of declaration for deadline (deadline .......  /by ......)";
-    public static final String DASHED_LINE = "__________________________________________________________________________________________";
-    public static final String WELCOME_MESSAGE_LINE_1 = "Hello! I'm Duke";
-    public static final String WELCOME_MESSAGE_LINE_2 = "What can I do for you?";
-    public static final String EMPTY_LINE_ALERT_MESSAGE = "You have entered a empty line, Please enter a valid command";
-    public static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE = "Invalid Command (done x : x should be an integer)";
-    public static final String INVALID_ARRAY_INDEX_MESSAGE = "Invalid Command (done x : x should be a valid integer index)";
-    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command, Please type a valid command";
+    private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid format of declaration for event (event .......  /at ......)";
+    private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid format of declaration for deadline (deadline .......  /by ......)";
+    private static final String DASHED_LINE = "__________________________________________________________________________________________";
+    private static final String WELCOME_MESSAGE_LINE_1 = "Hello! I'm Duke";
+    private static final String WELCOME_MESSAGE_LINE_2 = "What can I do for you?";
+    private static final String EMPTY_LINE_ALERT_MESSAGE = "You have entered a empty line, Please enter a valid command";
+    private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE = "Invalid Command (done x : x should be an integer)";
+    private static final String INVALID_ARRAY_INDEX_MESSAGE = "Invalid Command (done x : x should be a valid integer index)";
+    private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String INVALID_TODO_FORMAT_MESSAGE = "Invalid format of declaration for todo (todo .......)";
 
     // Prints the number of spaces requested by the user
     public static void printSpaces(int numberOfSpaces){
@@ -96,4 +97,10 @@ public class PrintHelper {
         printLine();
     }
 
+    // Prints a message to alert the user didn't follow the correct format to create a todo
+    public static void printInvalidToDoAlert() {
+        printLine();
+        printWithIndentation(INVALID_TODO_FORMAT_MESSAGE);
+        printLine();
+    }
 }
