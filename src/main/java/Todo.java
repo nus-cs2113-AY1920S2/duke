@@ -12,8 +12,8 @@ public class Todo {
 
     public void setDone() {
         this.isDone = true;
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t" + "[✓] " + this.description);
+        System.out.println("  Nice! I've marked this task as done:");
+        System.out.println("  " + "[✓] " + this.description);
     }
     public char getTaskType() {
         return 'T';

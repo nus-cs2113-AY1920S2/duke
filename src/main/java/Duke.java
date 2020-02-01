@@ -1,15 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke implements Logo {
     public static void main(String[] args) {
-        String logo = "######  #     # ######  #     #\n"
-                + "#     # #     # #     # #     #\n"
-                + "#     # #     # #     # #     #\n"
-                + "######  #     # ######  #     #\n"
-                + "#       #     # #       #     #\n"
-                + "#       #     # #       #     #\n"
-                + "#        #####  #        #####\n";
+
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
 
@@ -18,14 +12,13 @@ public class Duke {
 
         ArrayList<Todo> todos = new ArrayList<Todo>();
 
-
         while (!cmd.equals("bye")) {
             lineBreak();
 
             if (cmd.equals("list")) {
-                System.out.println("\tHere are the tasks in your list:");
+                System.out.println("  Here are the tasks in your list:");
                 for (int k = 1; k<=todos.size(); ++k) {
-                    System.out.println("\t\t" + k + ". " + todos.get(k-1));
+                    System.out.println("    " + k + ". " + todos.get(k-1));
                 }
             }
             else if (cmd.contains("done")){
@@ -54,9 +47,9 @@ public class Duke {
                 default:
                     System.out.println("Error");
                 }
-                System.out.println("\tGot it. I've added this task:");
-                System.out.println("\t\t " + todos.get(todos.size()-1));
-                System.out.println("\tNow you have " + todos.size() + " tasks in the list.");
+                System.out.println("  Got it. I've added this task:");
+                System.out.println("     " + todos.get(todos.size()-1));
+                System.out.println("  Now you have " + todos.size() + " tasks in the list.");
             }
             
             lineBreak();
@@ -65,11 +58,11 @@ public class Duke {
 
         }
         lineBreak();
-        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println("  Bye. Hope to see you again soon!");
         lineBreak();
     }
 
-    public static void lineBreak() {
-        System.out.println("\t____________________________________________________________");
+    public final static void lineBreak() {
+        System.out.println("  ____________________________________________________________");
     }
 }
