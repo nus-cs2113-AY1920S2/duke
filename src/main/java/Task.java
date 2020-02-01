@@ -37,7 +37,4 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 
-    public void printDetails() {
-        PrintHelper.printWithIndentation("added: " + description );
-    }
 }

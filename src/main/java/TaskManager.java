@@ -5,9 +5,7 @@ public class TaskManager {
     public static final String TASK_ALREADY_SET_ALERT = "Task was already set as done";
     public static final String TASK_MARKED_MESSAGE = "Nice! I've marked this task as done:";
     public static final String LIST_TASKS_MESSAGE = "Here are the tasks in your list:";
-    public static final String LIST_EMPTY_ALERT = "The list is empty";
-    public static final String DEADLINE_SPECIFIER = "/by ";
-    public static final String PERIOD_SPECIFIER = "/at ";
+    public static final String LIST_EMPTY_MESSAGE = "The list is empty";
     public static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
 
     // Stores all the tasks provided
@@ -20,43 +18,23 @@ public class TaskManager {
             tasks.add(new ToDo(descriptionWithDetails));
             break;
         case Deadline:
-            if (descriptionWithDetails.contains(DEADLINE_SPECIFIER) ) {
-                tasks.add(new Deadline(descriptionWithDetails));
-            } else {
-                // Wrong format used to add a deadline
-                PrintHelper.printInvalidDeadlineAlert();
-                return;
-            }
+            tasks.add(new Deadline(descriptionWithDetails));
             break;
         case Event:
-            if (descriptionWithDetails.contains(PERIOD_SPECIFIER) ) {
-                tasks.add(new Event(descriptionWithDetails));
-            } else {
-                // Wrong format used to add an event
-                PrintHelper.printInvalidEventAlert();
-                return;
-            }
+            tasks.add(new Event(descriptionWithDetails));
             break;
         }
+        printLatestTaskAndTotalNumberOfTasks();
+    }
 
+    // Prints details about the latest task added along with
+    // the total number of tasks present in the list
+    private void printLatestTaskAndTotalNumberOfTasks() {
         PrintHelper.printLine();
         PrintHelper.printWithIndentation(TASK_ADDED_MESSAGE);
         PrintHelper.printWithIndentation(tasks.get(tasks.size()-1).getStatusWithDescription(),7);
         PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task" + (tasks.size() != 1?"s ":" ") + "in the list.");
         PrintHelper.printLine();
-    }
-
-    private TaskType findTaskType(String description) {
-        String[] split = description.split(" ",2);
-        switch (split[0]) {
-        case "todo":
-            return TaskType.ToDo;
-        case "deadline":
-            return TaskType.Deadline;
-        case "event":
-            return TaskType.Event;
-        }
-        return null;
     }
 
     // Marks the task denoted by the task as done
@@ -67,26 +45,22 @@ public class TaskManager {
             taskNumber = Integer.parseInt(taskIndex);
             // Convert to 0-based index
             taskNumber--;
-            if (!checkIndexValidity(taskNumber)) {
-                // Invalid Array Index
+            boolean isValidIndex = checkIndexValidity(taskNumber);
+            if (!isValidIndex) {
                 PrintHelper.printInvalidIndexAlert();
             } else if (tasks.get(taskNumber).isDone) {
-                // Task was already set as done
                 printAsAlreadyDone(taskNumber);
             } else {
-                // Mark task as done
                 markTaskAsDone(taskNumber);
             }
         } catch (NumberFormatException e) {
-            // Index entered isn't an integer
-            PrintHelper.printInvalidIntegerAlert();
+            PrintHelper.printIndexNotIntegerAlert();
         }
     }
 
     // Marks the task denoted by a valid task index as done and prints the corresponding message
     public void markTaskAsDone(int taskNumber){
         tasks.get(taskNumber).markAsDone();
-
         PrintHelper.printLine();
         PrintHelper.printWithIndentation(TASK_MARKED_MESSAGE);
         PrintHelper.printWithIndentation(tasks.get(taskNumber).getStatusWithDescription(),7);
@@ -95,12 +69,11 @@ public class TaskManager {
 
     // Lists all the tasks provided by user so far
     public void listTasks(){
+        boolean isEmpty = (tasks.size() == 0);
         PrintHelper.printLine();
-        if (tasks.size() == 0) {
-            // Handle case when list is empty
-            PrintHelper.printWithIndentation(LIST_EMPTY_ALERT);
+        if (isEmpty) {
+            PrintHelper.printWithIndentation(LIST_EMPTY_MESSAGE);
         } else {
-            // Handle case when list isn't empty
             PrintHelper.printWithIndentation(LIST_TASKS_MESSAGE);
             for (int i = 0; i < tasks.size(); i++) {
                 PrintHelper.printWithIndentation((i + 1) + ". " + tasks.get(i).getStatusWithDescription());
@@ -119,7 +92,8 @@ public class TaskManager {
 
     // Checks if the provided integer is a valid task index
     public boolean checkIndexValidity(int index){
-        return index >= 0 && index < tasks.size();
+        boolean isPositive = index >= 0, isLessThanSize = index < tasks.size();
+        return isPositive && isLessThanSize;
     }
 
 }
