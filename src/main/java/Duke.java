@@ -10,7 +10,7 @@ public class Duke {
     public static final String DONE = "done";
     public static final int INITIAL_NO_OF_TASKS = 0;
 
-    public static void main(String[] args) throws InvalidTaskException, MissingDescriptonException {
+    public static void main(String[] args) {
         displayHello();
         Task[] taskList = initializeTaskList();
         Scanner myInput = initializeScanner();
@@ -56,35 +56,33 @@ public class Duke {
     }
 
     private static int doTaskAndGetNewNumberOfTasks(Task[] taskList, int numberOfTasks, String userInput,
-                                                    String[] splitUserInput)
-            throws InvalidTaskException, MissingDescriptonException {
+                                                    String[] splitUserInput) {
 
 
-        switch (splitUserInput[0].toLowerCase()) {
-        case TODO:
-            numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
-            break;
-        case DEADLINE:
-            numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
-            break;
-        case EVENT:
-            numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
-            break;
-        case LIST:
-            displayList(taskList, numberOfTasks);
-            break;
-        case DONE:
-            markTaskAsDone(taskList, numberOfTasks, splitUserInput);
-            break;
-        default:
-            displayNoSuchTaskError();
-            break;
+        try {
+            validateTask(splitUserInput, userInput);
+            switch (splitUserInput[0].toLowerCase()) {
+            case TODO:
+                numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
+                break;
+            case DEADLINE:
+                numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
+                break;
+            case EVENT:
+                numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
+                break;
+            case LIST:
+                displayList(taskList, numberOfTasks);
+                break;
+            case DONE:
+                markTaskAsDone(taskList, numberOfTasks, splitUserInput);
+                break;
+            default:
+                break;
+            }
+        } catch (InvalidTaskException | MissingDescriptonException | MissingDoneNumberFieldException | MissingTimeFieldException m) {
+            System.out.println("Exception occurred: " + m);
         }
-//        } catch (InvalidTaskException | MissingDescriptonException m) {
-//            System.out.println("Exception occurred: " + m);
-//        } catch (ArrayIndexOutOfBoundsException m) {
-//            System.out.println("Done's number field is empty!");
-//        }
 
 
         return numberOfTasks;
@@ -102,15 +100,31 @@ public class Duke {
         System.out.println("Input is invalid. No such task!");
     }
 
-    private static void validateIfSuchTaskIsAllowed(String[] splitUserInput)
-            throws InvalidTaskException, MissingDescriptonException {
+    private static void validateTask(String[] splitUserInput, String userInput)
+            throws InvalidTaskException, MissingDescriptonException, MissingDoneNumberFieldException,
+            MissingTimeFieldException {
 
-
-        if (!splitUserInput[0].toLowerCase().equals(TODO)) {
+        String temp = splitUserInput[0].toLowerCase();
+        if (!temp.equals(TODO) && !temp.equals(EVENT) &&
+                !temp.toLowerCase().equals(DEADLINE) && !temp.toLowerCase().equals(DONE) &&
+                !temp.equals(LIST)) {
             throw new InvalidTaskException("Input is invalid. No such task");
-        }
-        if (splitTheUserInput(splitUserInput[0]).length == 1) {
-            throw new MissingDescriptonException("Missing description!");
+        } else {
+            if (temp.toLowerCase().equals(DONE) && splitUserInput.length == 1) {
+                throw new MissingDoneNumberFieldException("Done's number field is empty!");
+            } else if (isDescriptionBlank(splitTaskDescription(userInput)) && !temp.equals(LIST)) {
+                throw new MissingDescriptonException("Missing description!");
+            } else if (temp.equals(TODO) || temp.equals(EVENT) || temp.toLowerCase().equals(DEADLINE)) {
+                String[] splitArray = splitTaskDescription(userInput);
+                if (splitArray[2].equals("yes")) {
+                    String obtainedTime = splitArray[1];
+                    String[] timeCheck = obtainedTime.split(" ", 2);
+                    if (timeCheck.length == 1 || timeCheck[1].isBlank()) {
+                        throw new MissingTimeFieldException("Missing time!");
+                    }
+                }
+
+            }
         }
 
 
@@ -214,25 +228,27 @@ public class Duke {
     }
 
     private static String[] splitTaskDescription(String input) {
-        String[] returnSplit = new String[2];
+        String[] returnSplit = new String[3];
         if (!input.contains("/")) {
             String[] obtainedDescription = input.split(" ", 2);
-            if (obtainedDescription[1].isBlank()) {
+            if (obtainedDescription.length == 1 || obtainedDescription[1].isBlank()) {
                 returnSplit[0] = "";
             } else {
                 returnSplit[0] = obtainedDescription[1].trim();
             }
             returnSplit[1] = "";
+            returnSplit[2] = "";
             return returnSplit;
         }
         String[] obtainedSplit = input.split("/");
         String[] obtainedDescription = obtainedSplit[0].split(" ", 2);
-        if (obtainedDescription[1].isBlank()) {
+        if (obtainedDescription.length == 1 || obtainedDescription[1].isBlank()) {
             returnSplit[0] = "";
             returnSplit[1] = "";
         } else {
             returnSplit[0] = obtainedDescription[1].trim();
             returnSplit[1] = obtainedSplit[1].trim();
+            returnSplit[2] = "yes";
         }
         return returnSplit;
     }
