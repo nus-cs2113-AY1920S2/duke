@@ -1,3 +1,4 @@
+import java.sql.SQLTransactionRollbackException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +19,8 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String DEADLINE_TIME_DELIMITER = " /by ";
+    private static final String EVENT_TIME_DELIMITER = " /at ";
 
     private static void greet() {
         System.out.println(LOGO);
@@ -26,10 +29,12 @@ public class Duke {
         System.out.println(LINE_DIVIDER);
     }
 
-    private static void processCommand(TaskManager TaskMgr, String command) {
-        String[] commands = command.split(" ");
-        String[] descriptions;
-        switch (commands[0]) {
+    private static void processUserInput(TaskManager TaskMgr, String userInput) {
+        String command = extractCommand(userInput);
+        String taskInfo = extractTaskInfo(userInput);
+        String taskTime;
+        String taskDescriptions;
+        switch (command) {
         case EXIT_COMMAND:
             bye();
             break;
@@ -37,45 +42,58 @@ public class Duke {
             TaskMgr.listTasks();
             break;
         case DONE_COMMAND:
-            int taskID = Integer.parseInt(commands[1]);
-            TaskMgr.markAsDone(taskID);
+            int doneTaskID = extractDoneTaskID(userInput);
+            TaskMgr.markAsDone(doneTaskID);
             break;
         case TODO_COMMAND:
-            descriptions = splitCommands(commands, TODO_COMMAND);
-            TaskMgr.addTasks(descriptions[0], TODO_COMMAND);
+            TaskMgr.addTasks(taskInfo, TODO_COMMAND);
             break;
         case DEADLINE_COMMAND:
-            descriptions = splitCommands(commands, DEADLINE_COMMAND);
-            TaskMgr.addTasks(descriptions[0], descriptions[1], DEADLINE_COMMAND);
+            taskDescriptions = extractTaskDescription(taskInfo, DEADLINE_TIME_DELIMITER);
+            taskTime = extractTaskTime(taskInfo, DEADLINE_TIME_DELIMITER);
+            TaskMgr.addTasks(taskDescriptions, taskTime, DEADLINE_COMMAND);
             break;
         case EVENT_COMMAND:
-            descriptions = splitCommands(commands, EVENT_COMMAND);
-            TaskMgr.addTasks(descriptions[0], descriptions[1], EVENT_COMMAND);
+            taskDescriptions = extractTaskDescription(taskInfo, EVENT_TIME_DELIMITER);
+            taskTime = extractTaskTime(taskInfo, EVENT_TIME_DELIMITER);
+            TaskMgr.addTasks(taskDescriptions, taskTime, EVENT_COMMAND);
             break;
         default:
             // default will add to todo
-            TaskMgr.addTasks(command);
+            TaskMgr.addTasks(userInput);
         }
     }
 
-    // I know this function sucks, but it is too late to think of a better one.
-    private static String[] splitCommands(String[] commands, String type) {
-        List<String> descriptionList = new ArrayList<>();
-        List<String> timeList = new ArrayList<>();
-        int i = 1;
-        while (i < commands.length && !commands[i].equals("/by") && !commands[i].equals("/at")) {
-            descriptionList.add(commands[i++]);
+    private static String extractCommand(String userInput) {
+        int spaceIndex = userInput.indexOf(' ');
+        if (spaceIndex == -1) {
+            return userInput;
         }
-        ++i;
-        while (i < commands.length) {
-            timeList.add(commands[i++]);
+        return userInput.substring(0, spaceIndex);
+    }
+
+    private static String extractTaskInfo(String userInput) {
+        int spaceIndex = userInput.indexOf(' ');
+        if (spaceIndex == -1) {
+            return userInput;
         }
-        String description = String.join(" ", descriptionList);
-        String time = String.join(" ", timeList);
-        String[] descriptions = new String[2];
-        descriptions[0] = description;
-        descriptions[1] = time;
-        return descriptions;
+        return userInput.substring(spaceIndex+1);
+    }
+
+    private static String extractTaskTime(String taskInfo, String delimiter) {
+        int taskTimeIndex = taskInfo.indexOf(delimiter) + delimiter.length();
+        return taskInfo.substring(taskTimeIndex);
+    }
+
+    private static String extractTaskDescription(String taskInfo, String delimiter) {
+        int taskTimeIndex = taskInfo.indexOf(delimiter);
+        return taskInfo.substring(0, taskTimeIndex);
+    }
+
+    private static int extractDoneTaskID(String userInput) {
+        int taskIDIndex = userInput.indexOf(" ")+1;
+        String doneTaskIDString = userInput.substring(taskIDIndex);
+        return Integer.parseInt(doneTaskIDString);
     }
 
     private static void bye() {
@@ -89,11 +107,11 @@ public class Duke {
 
         greet();
 
-        String command;
+        String input;
         Scanner s  = new Scanner(System.in);
         do {
-            command = s.nextLine();
-            processCommand(TaskMgr, command);
-        } while (!command.equals(EXIT_COMMAND));
+            input = s.nextLine();
+            processUserInput(TaskMgr, input);
+        } while (!input.equals(EXIT_COMMAND));
     }
 }
