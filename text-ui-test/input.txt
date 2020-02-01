@@ -1,0 +1,13 @@
+todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+deadline return book by Monday
+list
+event class meeting at Tue 12-2pm
+done 1
+done
+done 0
+done two
+done 1
+list
+bye
