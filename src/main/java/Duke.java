@@ -66,7 +66,6 @@ public class Duke {
         String[] firstProcess = new String[MAXIMUM_CAPACITY];
         firstProcess = command.split(" ", 2);
         String firstCommand = firstProcess[0];
-        //System.out.println(Arrays.toString(a));
         try {
             if(firstCommand.equals("bye")){
                 doFarewell();
