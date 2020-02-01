@@ -43,15 +43,14 @@ public class Duke {
 
         Task[] taskList = new Task[100];
         int taskCount = 0;
+        String userInput;
+        Scanner in = new Scanner(System.in);
 
         sayIntro();
+        //easier to identify lines input by user (per Python)
+        System.out.print(">>>");
         
-        while (true) {
-            //easier to identify lines input by user (per Python)
-            System.out.print(">>>");
-            String userInput;
-            Scanner in = new Scanner(System.in);
-
+        while (in.hasNextLine()) {
             userInput = in.nextLine();
             String[] tokenizedInput = userInput.split(" ");
             if (tokenizedInput[0].equals("bye")) {
@@ -61,6 +60,7 @@ public class Duke {
                 if (taskCount == 0){
                     System.out.println(underscoredLine + System.lineSeparator() + "\tThe list is empty." 
                     + System.lineSeparator() + underscoredLine);
+                    System.out.print(">>>");
                     continue;
                 }
                 //if list non-empty, print out all existing tasks
@@ -76,12 +76,14 @@ public class Duke {
                 if (queryNumber < 1 || queryNumber > taskCount){
                     System.out.println(underscoredLine + System.lineSeparator() + "\tInvalid task number." + 
                     System.lineSeparator() + underscoredLine);
+                    System.out.print(">>>");
                     continue;
                 }
                 //handle case where user tries to mark as done an already completed task
                 if (taskList[queryNumber-1].getIsDone()){
                     System.out.println(underscoredLine + System.lineSeparator()
                     + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
+                    System.out.print(">>>");
                     continue;
                 }
                 taskList[queryNumber-1].markAsDone();
@@ -111,6 +113,7 @@ public class Duke {
                 + newTask.toString() + System.lineSeparator() + "\tNow you have " + taskCount + " tasks in the list.\n" 
                 + underscoredLine);
             }
+            System.out.print(">>>");
         }
 
         sayGoodbye();
