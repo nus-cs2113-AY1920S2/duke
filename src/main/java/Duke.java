@@ -20,8 +20,9 @@ public class Duke {
     }
 
     public static Event createEvent(String cmd, int counter) {
-        String eventDescription = cmd.substring(6, cmd.indexOf("/at")-1);
-        String eventDate = cmd.substring(cmd.indexOf("/at")+4);
+        int indexOfAt = cmd.indexOf("/at");
+        String eventDescription = cmd.substring(6, indexOfAt-1);
+        String eventDate = cmd.substring(indexOfAt+4);
         Event item = new Event(eventDescription, eventDate);
         System.out.println("Got it. I've added this task: " + item.printObject());
         System.out.println("Now you have "+ (counter+1) +" tasks in the list.");
@@ -29,8 +30,9 @@ public class Duke {
     }
 
     public static Deadline createDeadline(String cmd, int counter) {
-        String deadlineDesc = cmd.substring(9, cmd.indexOf("/by")-1);
-        String deadlineDate = cmd.substring(cmd.indexOf("/by")+4);
+        int indexOfBy = cmd.indexOf("/by");
+        String deadlineDesc = cmd.substring(9, indexOfBy-1);
+        String deadlineDate = cmd.substring(indexOfBy+4);
         Deadline item = new Deadline(deadlineDesc, deadlineDate);
         System.out.println("Got it. I've added this task: " + item.printObject());
         System.out.println("Now you have "+ (counter+1) +" tasks in the list.");
