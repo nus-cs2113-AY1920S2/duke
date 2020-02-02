@@ -6,6 +6,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
+    public static final int LENGTH_DEADLINE = 9;
+    public static final int LENGTH_EVENT = 6;
+    public static final int LENGTH_TODO = 5;
+
+
+
     public static void getDateTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -16,13 +22,13 @@ public class Duke {
     public static void completeTask(ArrayList<Task> tasks, int taskIndex) {
         taskIndex--; // index starts from 0, unlike listing number
         if ( (taskIndex < tasks.size()) || (taskIndex > 0)) { // check if out of bounce
-            Task t = tasks.get(taskIndex);
-            if (t.getStatus()) { // check if already completed
+            Task currentTask = tasks.get(taskIndex);
+            if (currentTask.getStatus()) { // check if already completed
                 System.out.println("Task already completed!\n");
             } else {
-                t.markAsDone();
+                currentTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + t.getStatusIcon() + "] " + t.getDescription() + "\n");
+                System.out.println( "["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + "\n");
             }
         } else {
             System.out.println("Error: No such index in use\n");
@@ -37,7 +43,7 @@ public class Duke {
             System.out.println("No tasks at the moment!");
         } else {
             for (Task currentTask : tasks) {
-                System.out.println("[" + currentTask.getStatusIcon() + "] " + count + ". " + currentTask.getDescription());
+                System.out.println("["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + count + ". " + currentTask.getDescription());
                 count++;
             }
         }
@@ -48,7 +54,7 @@ public class Duke {
         System.out.println("Commands: ");
         System.out.println("List: lists all recorded tasks \nusage: list\n");
         System.out.println("Done: mark task as completed \nusage: done <task number>\n");
-        System.out.println("New: add a new task \nusage: new\n");
+        System.out.println("To add new task, just type it out \nAvoid using other keywords as the first word\n");
         System.out.println("");
     }
 
@@ -73,10 +79,30 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void addTask(ArrayList<Task> tasks, String newTask) {
-        Task t = new Task(newTask);
-        tasks.add(t);
-        System.out.println("added: " + newTask + "\n");
+    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+        String itemName = taskDescription.substring(LENGTH_DEADLINE);
+        Task newTask = new Deadline(itemName);
+        tasks.add(newTask);
+        printAddedMessage(newTask, taskCounter);
+    }
+
+    public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+        String itemName = taskDescription.substring(LENGTH_EVENT);
+        Task newTask = new Event(itemName);
+        tasks.add(newTask);
+        printAddedMessage(newTask, taskCounter);
+    }
+
+    public static void addTodo(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+        String itemName = taskDescription.substring(LENGTH_TODO);
+        Task newTask = new ToDo(itemName);
+        tasks.add(newTask);
+        printAddedMessage(newTask, taskCounter);
+    }
+
+    public static void printAddedMessage(Task task, int taskCounter) {
+        System.out.println("The following task has been added\n[" + task.getTaskType() +"][" + task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println("\nYou've got " + taskCounter + " task(s) in the list!\n");
     }
 
     public static void main(String[] args) {
@@ -111,8 +137,20 @@ public class Duke {
             case "help":
                 printHelp();
                 break;
+            case "todo":
+                taskCounter++;
+                addTodo(tasks, userCommand, taskCounter);
+                break;
+            case "event":
+                taskCounter++;
+                addEvent(tasks, userCommand, taskCounter);
+                break;
+            case "deadline":
+                taskCounter++;
+                addDeadline(tasks, userCommand, taskCounter);
+                break;
             default:
-                addTask(tasks, userCommand);
+                System.out.println("Please add the task type\n");
             }
             // end of current listening loop, preparing next command
             userCommand = input.nextLine();
