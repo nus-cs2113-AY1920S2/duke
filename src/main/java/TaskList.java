@@ -27,7 +27,8 @@ public class TaskList {
         int index = 0;
         for(Task task:taskList){
             index++;
-            System.out.println("    "+index+"."+task.getTaskStatus()+task.getTaskName());
+            String prefix = "    "+index+".";
+            System.out.println(prefix+task.showTaskInfo());
         }
     }
 }

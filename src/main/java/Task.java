@@ -2,16 +2,14 @@ public class Task {
     private static int taskNum = 0;
     private String taskStatus;
     private String taskName;
-
-    public Task(){
-        this("");
-    }
+    protected String taskType;
+    public static final String NOT_DONE = "[\u2717]";
+    public static final String DONE = "[\u2713]";
 
     public Task(String taskName){
         setTaskName(taskName);
-        if(!taskName.equals(""))
-            setTaskNum(Task.taskNum+1);
-        setTaskStatus("[\u2717]");
+        setTaskStatus(NOT_DONE);
+        taskNum++;
     }
 
     public static void setTaskNum(int taskNum){
@@ -34,7 +32,16 @@ public class Task {
         return this.taskStatus;
     }
 
+    public String getTaskType(){
+        return this.taskType;
+    }
+
     public static int getTaskNum(){
         return taskNum;
+    }
+
+    public String showTaskInfo(){
+        String info = this.getTaskType()+this.getTaskStatus()+" "+this.getTaskName();
+        return info;
     }
 }
