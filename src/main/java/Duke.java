@@ -1,41 +1,67 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static Task[] instruction(String dukeCommand, Task[] Tasks, int tasknum){
+    public static Task[] instruction(String dukeCommand, Task[] Tasks, String commandDescription){
         System.out.println("____________________________________________________________");
-        if (dukeCommand.equals("greet")) {
-            System.out.println("Hello! I'm Duke\n" +
-                    " What can I do for you?");
-        }else if (dukeCommand.equals("bye")) {
+        switch(dukeCommand) {
+        case "greet":
+            System.out.println("Hello! I'm Duke\n" + " What can I do for you?");
+            break;
+        case "bye":
             System.out.println("Bye. Hope to see you again soon!");
-        }else if (dukeCommand.equals("list")) {
-            //print out everything in the list
+            break;
+        case "list":
             System.out.println("Here are the tasks in your list:");
-            int count = 1;
-            for (Task task: Tasks) {
-                if (count <= Task.getTotalTask()) {
-                    System.out.println(count + ".[" + task.getStatusIcon() + "]" + task.getDescription());
-                    count++;
-                } else {
-                    break;
-                }
+            for (int i = 0; i < Task.getTotalTask(); i++) {
+                    System.out.println(Tasks[i].getTaskNum() + ". " + Tasks[i]);
             }
-        } else if  (dukeCommand.equals("done")) {
-            tasknum--;
-            System.out.println("Nice! I've marked this task as done: ");
-            Tasks[tasknum].setDone();
-            System.out.println(tasknum + ".[" + Tasks[tasknum].getStatusIcon() + "]" + Tasks[tasknum].getDescription());
-        } else if (dukeCommand.equals("Invalid")) {
+            break;
+        case "done":
+            int taskNum = Integer.parseInt(commandDescription) - 1;
+            if (taskNum < Task.getTotalTask()) {
+                System.out.println("Nice! I've marked this task as done: ");
+                Tasks[taskNum].setDone(true);
+                System.out.println(Tasks[taskNum]);
+            }else{
+                System.out.println("Duke cannot find this task");
+            }
+            break;
+        case "todo":
+            Todo todo = new Todo(commandDescription,"T");
+            System.out.println("Got it. I've added this task:\n " + todo);
+            printTotalTask();
+            Tasks[Task.getTotalTask() - 1] = todo;
+            break;
+        case "deadline":
+            String[] deadlineDetails = commandDescription.split("/by");
+            Deadline deadline = new Deadline(deadlineDetails[0],deadlineDetails[1]);
+            System.out.println("Got it. I've added this task:\n " + deadline);
+            printTotalTask();
+            Tasks[Task.getTotalTask() - 1] = deadline;
+            break;
+        case "event":
+            String[] eventDetails = commandDescription.split("/at");
+            Event event = new Event(eventDetails[0],eventDetails[1]);
+            System.out.println("Got it. I've added this task:\n " + event);
+            printTotalTask();
+            Tasks[Task.getTotalTask() - 1] = event;
+            break;
+        default:
             System.out.println("Duke cannot understand your command.\n");
-        }
-        else{
-            System.out.println("added: " + dukeCommand + "\n");
-            Task newTask = new Task(dukeCommand);
-            Tasks[Task.getTotalTask() - 1] = newTask;
+            break;
         }
         System.out.println("____________________________________________________________");
         return Tasks;
     }
+
+    private static void printTotalTask() {
+        if (Task.getTotalTask() < 2){
+            System.out.println("Now you have " + Task.getTotalTask() + " task in the list");
+        } else {
+            System.out.println("Now you have " + Task.getTotalTask() + " tasks in the list");
+        }
+    }
+
     public static void main(String[] args) {
 
         Task[] Tasks = new Task[100];
@@ -46,23 +72,20 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        instruction("greet",Tasks,0);
+        instruction("greet",Tasks,"");
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
         while (!line.equals("bye")) {
-            String[] requests = line.split(" ");
-            if (requests[0].equals("done") && Integer.parseInt(requests[1]) < Task.getTotalTask()) {
-                instruction(requests[0], Tasks, Integer.parseInt(requests[1]));
-            } else if(requests[0].equals("done") && !(Integer.parseInt(requests[1]) < Task.getTotalTask())) {
-                instruction("Invalid", Tasks, 0);
-            }
-            else {
-                instruction(line, Tasks, 0);
+            String[] requests = line.split(" ",2);
+            if(requests.length > 1) {
+                instruction(requests[0], Tasks,requests[1]);
+            } else {
+                instruction(requests[0],Tasks,"");
             }
             line = in.nextLine();
         }
-        instruction("bye",Tasks,0);
+        instruction("bye",Tasks,"");
 
     }
 }
