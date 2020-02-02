@@ -48,7 +48,7 @@ public class Duke {
         }
     }
 
-    public static void inputValidation(Task tasks[], String userCommand) {
+    public static void inputValidation(Task[] tasks, String userCommand) {
         String[] words = userCommand.split(" ");
         int spacesPadding = 1;
         int taskPadding = 4;
