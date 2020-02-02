@@ -13,10 +13,10 @@ public class Duke {
         System.out.println(formattedDate);
     }
 
-    public static void completeTask(ArrayList<Task> tasks, int index) {
-        index--; // index starts from 0, unlike list
-        if ( (index < tasks.size()) || (index > 0)) { // check if out of bounce
-            Task t = tasks.get(index);
+    public static void completeTask(ArrayList<Task> tasks, int taskIndex) {
+        taskIndex--; // index starts from 0, unlike listing number
+        if ( (taskIndex < tasks.size()) || (taskIndex > 0)) { // check if out of bounce
+            Task t = tasks.get(taskIndex);
             if (t.getStatus()) { // check if already completed
                 System.out.println("Task already completed!\n");
             } else {
@@ -90,42 +90,33 @@ public class Duke {
         String userCommand = input.nextLine();
 
         while (!userCommand.equals("bye")){
-            //System.out.println("LISA: "+ userCommand);
-
             String[] words = userCommand.split(" ");
-            int length = words.length;
-
-            if (length == 1) { //for user commands
-                switch (words[0]) {
-                case "list":
-                    printList(tasks);
+            int wordLength = words.length;
+            switch (words[0]) {
+            case "list":
+                printList(tasks);
+                break;
+            case "done":
+                if (wordLength != 2) {
+                    System.out.println("Wrong format for command \"done\"");
                     break;
-                case "done":
-                    System.out.println("What is the index of the completed task?");
-                    int index = input.nextInt();
-                    input.nextLine();
-                    completeTask(tasks, index);
-                    break;
-                case "new":
-                    System.out.println("Please input your new task:");
-                    String newTask = input.nextLine();
-                    addTask(tasks, newTask);
-                    break;
-                case "help":
-                    printHelp();
-                    break;
-                default:
-                    System.out.println("Command not recognised \n");
                 }
-            } else {
-                System.out.println("Command not recognised, please refer to the help guide.");
+                try {
+                    int index = Integer.parseInt(words[1]);
+                    completeTask(tasks, index);
+                } catch (Exception e) {
+                    System.out.println("Please input a valid number\n");
+                }
+                break;
+            case "help":
+                printHelp();
+                break;
+            default:
+                addTask(tasks, userCommand);
             }
-
+            // end of current listening loop, preparing next command
             userCommand = input.nextLine();
         }
-
         System.out.println("LISA: Bye, hope to see you again!");
     }
-
-
 }
