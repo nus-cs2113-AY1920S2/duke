@@ -8,11 +8,37 @@ public class ToDoList {
         this.numTasks = 0;
     }
 
-    public void addToList(String taskName) {
-        Task task = new Task(taskName);
+    public void addToList(String input) {
+        // input follows format <taskType> <taskName> /<date>
+        int spaceIndex = input.indexOf(" ");
+        int slashIndex = input.indexOf(" /", spaceIndex);
+
+        // split input into 3 main parts
+        String taskName, date = null;
+        String taskTypeLC = input.substring(0, spaceIndex).trim().toLowerCase();
+        if (slashIndex != -1) {
+            // -1 means that input does not contain a date
+            taskName = input.substring(spaceIndex + 1, slashIndex).trim();
+            date = input.substring(slashIndex + 4).trim();
+        } else {
+            taskName = input.substring(spaceIndex + 1).trim();
+        }
+
+        Task task;
+        if (taskTypeLC.equals("todo")) {
+            task = new ToDos(taskName);
+        } else if (taskTypeLC.equals("deadline")) {
+            task = new Deadlines(taskName, date);
+        } else {
+            // taskTypeLC == "event"
+            task = new Events(taskName, date);
+        }
+
         this.list[numTasks] = task;
         numTasks++;
-        System.out.println("added: " + taskName);
+        System.out.println("Task added: ");
+        System.out.println("  " + task);
+        System.out.println("You have " + numTasks + " tasks in the list");
     }
 
     public void viewList() {
@@ -21,7 +47,7 @@ public class ToDoList {
         } else {
             System.out.println("Quite a few tasks you got there");
             for (int i = 0; i < numTasks; ++i) {
-                System.out.printf("%3d.[%s] %s\n", i + 1, list[i].getStatusIcon(), list[i].description);
+                System.out.printf("%3d. %s\n", i + 1, list[i]);
             }
         }
     }
