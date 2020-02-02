@@ -20,12 +20,10 @@ public class Duke {
                 return;
             } else if (command.equals("list")){
                 manager.listTask();
+            } else if (command.startsWith("done")){
+                manager.markTask(Integer.parseInt(command.substring(5)));
             } else {
                 manager.addTask(command);
-                System.out.println("------------------------------------");
-                System.out.println("added: "+ command);
-                System.out.println("------------------------------------");
-                System.out.println();
             }
         }
     }
@@ -44,7 +42,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Welcome to\n" + logo);
         Duke duke = new Duke();
         duke.greet();
         duke.run();
