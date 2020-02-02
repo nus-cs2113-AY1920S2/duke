@@ -10,9 +10,10 @@ public class Task {
     /**
      * Creates a new Task with the given description
      * Default value for isDone is false
+     *
      * @param description of the Task created
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
         numberOfTasksInList++;
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * Get the status of isDone of the Task and returns an icon
+     *
      * @return tick or cross icon
      */
     public String getStatusIcon() {
@@ -33,23 +35,24 @@ public class Task {
     /**
      * Changes the boolean isDone to true
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public String getDescriptionInListFormat(){
+    public String getDescriptionInListFormat() {
         return String.format("%s %s", getStatusIcon(), getDescription());
     }
 
     /**
      * Print done response message
      */
-    public String getDoneResponseMessage(int itemIndexRequested){
+    public String getDoneResponseMessage(int itemIndexRequested) {
         return String.format("[%d. %s] marked as done!", itemIndexRequested, getDescription());
     }
 
     /**
      * get description of Task
+     *
      * @return description of Task
      */
     public String getDescription() {

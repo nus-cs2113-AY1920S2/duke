@@ -2,7 +2,7 @@ public class Events extends Task {
     protected String eventTime;
     protected String eventType;
 
-    public Events(String description, String time){
+    public Events(String description, String time) {
         super(description);
         this.eventTime = time;
         this.eventType = "[E]";

@@ -25,26 +25,27 @@ public class Duke {
             userInput = myScanner.nextLine();
             printNewLine();
 
-            String[] command = userInput.trim().split(" ");
+            String[] commands = userInput.trim().split(" ");
 
-            switch(command[0]){
+            switch (commands[0]) {
             case "bye":
                 break;
             case "list":
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < myList.size(); i++){
+                for (int i = 0; i < myList.size(); i++) {
                     System.out.println(String.format("%d. %s", i + 1,
                             myList.get(i).getDescriptionInListFormat()));
                 }
                 break;
             case "done":
                 // bounds checking
-                if(command.length < 2){
+                if (commands.length < 2) {
                     System.out.println("Enter an index to be marked done!");
-                }else if(Integer.parseInt(command[1]) > myList.size() || Integer.parseInt(command[1]) <= 0){
+                } else if (Integer.parseInt(commands[1]) > myList.size() ||
+                        Integer.parseInt(commands[1]) <= 0) {
                     System.out.println("Item requested is out of range! Try another item.");
-                }else{
-                    int itemIndexRequested = Integer.parseInt(command[1]) - 1;
+                } else {
+                    int itemIndexRequested = Integer.parseInt(commands[1]) - 1;
 
                     myList.get(itemIndexRequested).markAsDone();
                     System.out.println(myList.get(itemIndexRequested)
@@ -52,22 +53,22 @@ public class Duke {
                 }
                 break;
             case "todo":
-                if(command.length < 2){
+                if (commands.length < 2) {
                     System.out.println("Enter an item to be added");
-                }else{
+                } else {
                     // parsing userInput, remove first word "todo"
-                    String parsedUserInput = removeFirstWordOfUserInput(command);
+                    String parsedUserInput = removeFirstWordOfUserInputAndStringify(commands);
                     myList.add(new Todo(parsedUserInput.trim()));
                     printSuccessfulAddedMessage(myList.get(Task.getNumberOfTasksInList() - 1)
                             .getDescriptionInListFormat());
                     break;
                 }
             case "deadline":
-                if(command.length < 2){
+                if (commands.length < 2) {
                     System.out.println("Enter an item to be added");
-                }else{
+                } else {
                     // parsing userInput, remove first word "deadline"
-                    String stringifyUserInput = removeFirstWordOfUserInput(command);
+                    String stringifyUserInput = removeFirstWordOfUserInputAndStringify(commands);
                     String[] deadlineDetails;
 
                     // check for deadline
@@ -76,17 +77,17 @@ public class Duke {
                         myList.add(new Deadline(deadlineDetails[0].trim(), deadlineDetails[1].trim()));
                         printSuccessfulAddedMessage(myList.get(Task.getNumberOfTasksInList() - 1)
                                 .getDescriptionInListFormat());
-                    }else {
+                    } else {
                         System.out.println("Please enter a deadline for the task!");
                     }
                     break;
                 }
             case "event":
-                if(command.length < 2){
+                if (commands.length < 2) {
                     System.out.println("Enter an item to be added");
-                }else{
+                } else {
                     // parsing userInput, remove first word "event"
-                    String stringifyUserInput = removeFirstWordOfUserInput(command);
+                    String stringifyUserInput = removeFirstWordOfUserInputAndStringify(commands);
                     String[] eventDetails;
 
                     // check for time period
@@ -101,13 +102,13 @@ public class Duke {
                     break;
                 }
             default:
-                // add Task to myList
+                // add Task to myList - pre-Level 4
                 myList.add(new Task(userInput.trim()));
                 printSuccessfulAddedMessage(myList.get(Task.getNumberOfTasksInList() - 1)
                         .getDescriptionInListFormat());
             }
             printNewLine();
-        }while(!userInput.equals("bye"));
+        } while (!userInput.equals("bye"));
 
         System.out.println("Exiting DUKE\n" + LOGO);
         myScanner.close();
@@ -121,25 +122,23 @@ public class Duke {
 
     /**
      * Returns the user input in a String format without the first command
-     * @param command the command entered
-     * @return description of Task
+     * @param command the Array of split commands entered
+     * @return description of Task as a String
      */
-    private static String removeFirstWordOfUserInput(String[] command) {
+    private static String removeFirstWordOfUserInputAndStringify(String[] command) {
         // parsing userInput, remove first word
         String[] detailsOfTask = Arrays.copyOfRange(command, 1, command.length);
         StringBuilder sb = new StringBuilder();
         for (String word : detailsOfTask) {
             sb.append(word).append(" ");
         }
-        String stringifyUserInput = sb.toString();
-        // System.out.println(stringifyUserInput);
-        return stringifyUserInput;
+        return (sb.toString());
     }
 
     /**
      * Prints the partition between each user response interaction
      */
-    public static void printNewLine(){
+    public static void printNewLine() {
         String NEW_LINE = "____________________________________________________________";
         System.out.println(NEW_LINE);
     }
