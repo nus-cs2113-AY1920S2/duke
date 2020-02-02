@@ -38,7 +38,7 @@ public class ToDoList {
         numTasks++;
         System.out.println("Task added: ");
         System.out.println("  " + task);
-        System.out.println("You have " + numTasks + " tasks in the list");
+        System.out.println("You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in the list");
     }
 
     public void viewList() {
@@ -55,6 +55,6 @@ public class ToDoList {
     public void markAsDone(int index) {
         list[index].markAsDone();
         System.out.println("Well, that's one task down");
-        System.out.printf("   [%s] %s\n", list[index].getStatusIcon(), list[index].description);
+        System.out.println("  " + list[index]);
     }
 }
