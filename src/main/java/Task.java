@@ -23,4 +23,8 @@ public class Task {
     public boolean getIsDone() {
         return this.isDone;
     }
+
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription();
+    }
 }
