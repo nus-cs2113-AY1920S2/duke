@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
 public class Duke {
     public static void main(String[] args) {
         Scanner myScanner = new Scanner(System.in);
@@ -24,7 +23,7 @@ public class Duke {
         System.out.println("Task Name ----- Add task to your TO-DO list");
         System.out.println("list ----- Show your current TO-DO list");
         System.out.println("done [Task Number] ----- Mark task as completed in your TO-DO list");
-        
+
         Task [] t = new Task[101];
         int size = 1;
         while(true){
