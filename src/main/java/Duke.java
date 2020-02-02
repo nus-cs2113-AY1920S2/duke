@@ -14,39 +14,47 @@ public class Duke {
         Task[] Tasks = new Task[100];
 
         Scanner in = new Scanner(System.in);
-        String s = in.nextLine();
-        String arr[] = s.split(" ", 2);
+        String arr[] = getCommand(in);
 
         while (true) {
-            switch (arr[0]) {
-            case ("bye"):
-                printExitMessage();
-            case ("list"):
-                printList(Tasks);
-                break;
-            case ("done"):
-                int taskNum = Integer.parseInt(arr[1]);
-                taskNum--;
-                Tasks[taskNum].setDone(true);
-                printDone(Tasks[taskNum]);
-                break;
-            case ("todo"):
-                Tasks[numTask] = new Todo(arr[1]);
-                printConfirm(Tasks[numTask]);
-                break;
-            case ("deadline"):
-                String arr2[] = arr[1].split("/by ", 2);
-                Tasks[numTask] = new Deadline(arr2[0], arr2[1]);
-                printConfirm(Tasks[numTask]);
-                break;
-            case ("event"):
-                arr2 = arr[1].split("/at ", 2);
-                Tasks[numTask] = new Event(arr2[0], arr2[1]);
-                printConfirm(Tasks[numTask]);
-                break;
-            }
-            s = in.nextLine();
-            arr = s.split(" ", 2);
+            runCommand(arr, Tasks, in);
+            arr = getCommand(in);
+        }
+    }
+
+    private static String[] getCommand(Scanner in) {
+        String s = in.nextLine();
+        String arr[] = s.split(" ", 2);
+        return arr;
+    }
+
+    private static void runCommand(String[] arr, Task[] Tasks, Scanner in) {
+        switch (arr[0]) {
+        case ("bye"):
+            printExitMessage();
+        case ("list"):
+            printList(Tasks);
+            break;
+        case ("done"):
+            int taskNum = Integer.parseInt(arr[1]);
+            taskNum--;
+            Tasks[taskNum].setDone(true);
+            printDone(Tasks[taskNum]);
+            break;
+        case ("todo"):
+            Tasks[numTask] = new Todo(arr[1]);
+            printConfirm(Tasks[numTask]);
+            break;
+        case ("deadline"):
+            String arr2[] = arr[1].split("/by ", 2);
+            Tasks[numTask] = new Deadline(arr2[0], arr2[1]);
+            printConfirm(Tasks[numTask]);
+            break;
+        case ("event"):
+            arr2 = arr[1].split("/at ", 2);
+            Tasks[numTask] = new Event(arr2[0], arr2[1]);
+            printConfirm(Tasks[numTask]);
+            break;
         }
     }
 
