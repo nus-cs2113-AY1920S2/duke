@@ -1,11 +1,14 @@
 import java.util.Scanner;
 
-public class Duke {
-    public static Task[] instruction(String dukeCommand, Task[] Tasks, String commandDescription){
+public class Jan {
+
+    public static final int MAXIMUM_TASK = 100;
+
+    public static void executeInstruction(String command, Task[] Tasks, String commandDescription){
         System.out.println("____________________________________________________________");
-        switch(dukeCommand) {
+        switch(command) {
         case "greet":
-            System.out.println("Hello! I'm Duke\n" + " What can I do for you?");
+            System.out.println("Hello! I'm Jan\n" + " What can I do for you?");
             break;
         case "bye":
             System.out.println("Bye. Hope to see you again soon!");
@@ -13,7 +16,7 @@ public class Duke {
         case "list":
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < Task.getTotalTask(); i++) {
-                    System.out.println(Tasks[i].getTaskNum() + ". " + Tasks[i]);
+                System.out.println(Tasks[i].getTaskNum() + ". " + Tasks[i]);
             }
             break;
         case "done":
@@ -23,27 +26,27 @@ public class Duke {
                 Tasks[taskNum].setDone(true);
                 System.out.println(Tasks[taskNum]);
             }else{
-                System.out.println("Duke cannot find this task");
+                System.out.println("Jan cannot find this task");
             }
             break;
         case "todo":
             Todo todo = new Todo(commandDescription,"T");
             System.out.println("Got it. I've added this task:\n " + todo);
-            printTotalTask();
+            printCurrentTaskCount();
             Tasks[Task.getTotalTask() - 1] = todo;
             break;
         case "deadline":
             String[] deadlineDetails = commandDescription.split("/by");
             Deadline deadline = new Deadline(deadlineDetails[0],deadlineDetails[1]);
             System.out.println("Got it. I've added this task:\n " + deadline);
-            printTotalTask();
+            printCurrentTaskCount();
             Tasks[Task.getTotalTask() - 1] = deadline;
             break;
         case "event":
             String[] eventDetails = commandDescription.split("/at");
             Event event = new Event(eventDetails[0],eventDetails[1]);
             System.out.println("Got it. I've added this task:\n " + event);
-            printTotalTask();
+            printCurrentTaskCount();
             Tasks[Task.getTotalTask() - 1] = event;
             break;
         default:
@@ -51,10 +54,9 @@ public class Duke {
             break;
         }
         System.out.println("____________________________________________________________");
-        return Tasks;
     }
 
-    private static void printTotalTask() {
+    private static void printCurrentTaskCount() {
         if (Task.getTotalTask() < 2){
             System.out.println("Now you have " + Task.getTotalTask() + " task in the list");
         } else {
@@ -64,28 +66,31 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        Task[] Tasks = new Task[100];
+        Task[] Tasks = new Task[MAXIMUM_TASK];
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        instruction("greet",Tasks,"");
+        String logo = " ________     _____     _____     __\n"
+                + "|_____   |  /  ___  \\  |     \\   |  | \n"
+                + "      |  | |  /   \\  | |  |\\  \\  |  |\n"
+                + " __   |  | |  |___|  | |  | \\  \\ |  |\n"
+                + "|  |__|  | |   ___   | |  |  \\  \\|  |\n"
+                + "|________/ |__|   |__| |__|   \\_____|\n";
+        System.out.println(logo);
+        executeInstruction("greet",Tasks,"");
+
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
         while (!line.equals("bye")) {
             String[] requests = line.split(" ",2);
             if(requests.length > 1) {
-                instruction(requests[0], Tasks,requests[1]);
+                executeInstruction(requests[0], Tasks,requests[1]);
             } else {
-                instruction(requests[0],Tasks,"");
+                executeInstruction(requests[0],Tasks,"");
             }
             line = in.nextLine();
         }
-        instruction("bye",Tasks,"");
+
+        executeInstruction("bye",Tasks,"");
 
     }
 }
