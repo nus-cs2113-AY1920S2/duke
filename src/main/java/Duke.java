@@ -45,6 +45,7 @@ public class Duke {
                 printConfirm(Tasks[numTask]);
                 break;
             }
+            in = new Scanner(System.in);
             s = in.nextLine();
             arr = s.split(" ", 2);
         }
