@@ -4,33 +4,51 @@ public class Duke {
 
     public static final String DIVIDER = "_________________________________________________";
 
-    public static void printTaskList(Task[] tasks, int numTasks) {
-        System.out.println(DIVIDER);
-        System.out.println("Here are the tasks on your list: ");
-        for (int i = 1; i < numTasks+1; i++) {
-            String taskNum = Integer.toString(i);
-            System.out.println(taskNum + "." + tasks[i-1]);
+    public static void printIndividualTask(Task[] tasks, int taskNum) {
+        if (tasks[taskNum - 1].getTaskDescription().equals("todo")) {
+            System.out.println("Got it! You've added a todo task: ");
+            System.out.println(tasks[taskNum - 1]);
+            System.out.println(taskValidator(taskNum));
+        } else if (tasks[taskNum - 1].getTaskDescription().equals("deadline")) {
+            System.out.println("Got it! You've added a deadline task: ");
+            System.out.println(tasks[taskNum - 1]);
+            System.out.println(taskValidator(taskNum));
+        } else if (tasks[taskNum - 1].getTaskDescription().equals("event")) {
+            System.out.println("Got it! You've added an event task: ");
+            System.out.println(tasks[taskNum - 1]);
+            System.out.println(taskValidator(taskNum));
         }
-        System.out.println(DIVIDER);
+    }
+
+    public static void printTaskList(Task[] tasks) {
+        System.out.println("Here are the tasks on your list: ");
+        for (int i = 1; i < tasks.length + 1; i++) {
+            if (tasks[i-1] == null) {
+                break;
+            } else {
+                String taskNum = Integer.toString(i);
+                System.out.println(taskNum + "." + tasks[i - 1]);
+            }
+        }
     }
 
     public static void printDoneTask(Task[] tasks, int taskNum) {
-        System.out.println(DIVIDER);
+        tasks[taskNum-1].markAsDone();
         System.out.println("Awesome! I've marked the following task as done:");
         System.out.println(tasks[taskNum-1]);
-        System.out.println(DIVIDER);
     }
 
+
     public static String taskValidator(int numTasks) {
-        String totalTasks = Integer.toString(numTasks+1);
-        if (numTasks == 1) {
-            return "You now have " + totalTasks+ " task in the list!";
+        String totalTasks = Integer.toString(numTasks);
+        if (numTasks <= 1) {
+            return "You now have " + totalTasks + " task in the list!";
         } else {
             return "You now have " + totalTasks+ " tasks in the list!";
         }
     }
 
-    public static void inputValidation(Task tasks[], int numTasks, String userCommand) {
+    public static void inputValidation(Task tasks[], String userCommand) {
         String[] words = userCommand.split(" ");
         int spacesPadding = 1;
         int taskPadding = 4;
@@ -39,37 +57,34 @@ public class Duke {
         String deadlineCommand = "deadline";
         String eventCommand = "event";
         String completeCommand = "done";
+        String listCommand = "list";
 
         if (words[0].equals(todoCommand)) {
-            String todo = userCommand.substring(todoCommand.length() + spacesPadding);
-            tasks[numTasks] = new Todo(todo);
-            System.out.println("Got it! You've added a todo task: ");
-            System.out.println(tasks[numTasks]);
-            System.out.println(taskValidator(numTasks));
+            String todoTask = userCommand.substring(todoCommand.length() + spacesPadding);
+            Task todo = new Todo(todoTask);
+            tasks[todo.getTotalTasks()-1] = todo;
+            printIndividualTask(tasks,todo.getTotalTasks());
         } else if (words[0].equals(deadlineCommand)) {
             int indexOfBy = userCommand.indexOf("/by");
-            String task = userCommand.substring(deadlineCommand.length() + spacesPadding, indexOfBy - 1);
+            String deadlineTask = userCommand.substring(deadlineCommand.length() + spacesPadding, indexOfBy - 1);
             String byDate = userCommand.substring(indexOfBy + taskPadding);
-            tasks[numTasks] = new Deadline(task, byDate);
-            System.out.println("Got it! You've added a deadline task: ");
-            System.out.println(tasks[numTasks]);
-            System.out.println(taskValidator(numTasks));
+            Task deadline = new Deadline(deadlineTask, byDate);
+            tasks[deadline.getTotalTasks()-1] = deadline;
+            printIndividualTask(tasks,deadline.getTotalTasks());
         } else if (words[0].equals(eventCommand)) {
             int indexOfAt = userCommand.indexOf("/at");
-            String task = userCommand.substring(eventCommand.length() + spacesPadding, indexOfAt - 1);
+            String eventTask = userCommand.substring(eventCommand.length() + spacesPadding, indexOfAt - 1);
             String atDate = userCommand.substring(indexOfAt + taskPadding);
-            tasks[numTasks] = new Event(task, atDate);
-            System.out.println("Got it! You've added an event task: ");
-            System.out.println(tasks[numTasks]);
-            System.out.println(taskValidator(numTasks));
+            Task event = new Event(eventTask, atDate);
+            tasks[event.getTotalTasks()-1] = event;
+            printIndividualTask(tasks,event.getTotalTasks());
         } else if (words[0].equals(completeCommand)) {
             int taskNum = Integer.parseInt(words[1]);
-            tasks[taskNum-1].markAsDone();
             printDoneTask(tasks, taskNum);
+        } else if (words[0].equals(listCommand)) {
+            printTaskList(tasks);
         }
     }
-
-
 
     public static void main(String[] args) {
         String logo = ".______     ______   .______   \n"
@@ -90,8 +105,7 @@ public class Duke {
         String endMessage = "Bob thanks you for coming! See you again soon!";
 
         //Storing text
-        Task[] tasks = new Task[100]; //Array of objects
-        int numTasks = 0;
+        Task[] tasks = new Task[100];
 
         String listCommand = "list";
         String completeCommand = "done";
@@ -104,12 +118,9 @@ public class Duke {
                 System.out.println(endMessage);
                 System.out.println(DIVIDER);
                 break;
-            } else if (userInput.equals(listCommand)) {
-                printTaskList(tasks, numTasks);
             } else {
                 System.out.println(DIVIDER);
-                inputValidation(tasks, numTasks, userInput);
-                numTasks++;
+                inputValidation(tasks, userInput);
                 System.out.println(DIVIDER);
             }
         }

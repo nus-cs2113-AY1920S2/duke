@@ -2,10 +2,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected static int totalTasks = 0;
+    protected String taskDescription;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        taskDescription = "task";
         totalTasks++;
     }
 
@@ -30,5 +32,10 @@ public class Task {
     public int getTotalTasks() {
         return totalTasks;
     }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
 
 }
