@@ -52,20 +52,26 @@ public class Duke {
 
     public static void executeDone(String userIn, ArrayList<Task> l1) {
         String[] temp = getCommand(userIn);
-        int number = Integer.parseInt(temp[1]) - 1;
-        if(number>=l1.size()) {
+        if(temp.length>1) {
+            int number = Integer.parseInt(temp[1]) - 1;
+            if(number>=l1.size() || number<=0) {
+                System.out.println(LINE);
+                System.out.println("\t Task number provided is not valid. Press \"list\"to see");
+                System.out.println("\t the list of available task numbers");
+                System.out.println(LINE);
+                return;
+            }
+            Task tempTask = l1.get(number);
+            tempTask.done();
             System.out.println(LINE);
-            System.out.println("\t Task number provided is more than available tasks. Press ");
-            System.out.println("\"list\" to see the list of available task numbers");
+            System.out.println("\t Nice! I've marked this task as done:");
+            System.out.println("\t   "+tempTask.getTaskDescription());
             System.out.println(LINE);
-            return;
+        }else{
+            System.out.println(LINE);
+            System.out.println("\t Please enter the task number to be mark as done!");
+            System.out.println(LINE);
         }
-        Task tempTask = l1.get(number);
-        tempTask.done();
-        System.out.println(LINE);
-        System.out.println("\t Nice! I've marked this task as done:");
-        System.out.println("\t   "+tempTask.getTaskDescription());
-        System.out.println(LINE);
     }
 
     public static void updateTask(ArrayList<Task> l1, String userIn, String timing) {
