@@ -1,0 +1,18 @@
+todo borrow book
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+done 2
+list
+done 1
+done 3
+list
+deadline finish reading book /by  Sat maybe?
+todo i want to write a slash here /by doing sth like this
+list
+done 3
+done 4
+done 5
+list
+bye
