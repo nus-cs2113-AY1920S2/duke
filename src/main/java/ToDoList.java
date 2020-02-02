@@ -11,27 +11,24 @@ public class ToDoList {
     public void addToList(String input) {
         // input follows format <taskType> <taskName> /<date>
         int spaceIndex = input.indexOf(" ");
-        int slashIndex = input.indexOf(" /", spaceIndex);
 
-        // split input into 3 main parts
-        String taskName, date = null;
         String taskTypeLC = input.substring(0, spaceIndex).trim().toLowerCase();
-        if (slashIndex != -1) {
-            // -1 means that input does not contain a date
+        String taskName = null;
+        String date = null;
+        Task task = null;
+        if (taskTypeLC.equals("todo")) {
+            taskName = input.substring(spaceIndex + 1).trim();
+            task = new ToDos(taskName);
+        } else {
+            int slashIndex = input.indexOf(" /", spaceIndex);
             taskName = input.substring(spaceIndex + 1, slashIndex).trim();
             date = input.substring(slashIndex + 4).trim();
-        } else {
-            taskName = input.substring(spaceIndex + 1).trim();
-        }
-
-        Task task;
-        if (taskTypeLC.equals("todo")) {
-            task = new ToDos(taskName);
-        } else if (taskTypeLC.equals("deadline")) {
-            task = new Deadlines(taskName, date);
-        } else {
-            // taskTypeLC == "event"
-            task = new Events(taskName, date);
+            if (taskTypeLC.equals("deadline")) {
+                task = new Deadlines(taskName, date);
+            } else {
+                // taskType == event
+                task = new Events(taskName, date);
+            }
         }
 
         this.list[numTasks] = task;
