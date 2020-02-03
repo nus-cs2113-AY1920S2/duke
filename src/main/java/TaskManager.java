@@ -4,14 +4,10 @@ public class TaskManager {
     protected ArrayList<Task> tasks;
 
     public TaskManager() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
-    // Something to consider in the future is to put a from string constructor in tasks classes
-    // Then move validation into each class
-
     public void executeUserInput(String userInput) {
-        // Get the first word in the userInput
         String command;
         if (userInput.contains(" ")) {
             command = userInput.substring(0, userInput.indexOf(" "));
@@ -24,67 +20,32 @@ public class TaskManager {
             return;
         }
 
-        String description;
-        switch(command) {
-        case "list":
+        if (command.equals("list")) {
             listTasks();
-            break;
-        case "todo":
-            description = userInput.substring(userInput.indexOf(" ") + 1);
-            ToDo newTodo = new ToDo(description);
-            addTask(newTodo);
-            break;
-        case "deadline":
-            description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /by "));
-            String dueDateTime = userInput.substring(userInput.indexOf(" /by ") + 5);
-            Deadline newDeadline = new Deadline(description, dueDateTime);
-            addTask(newDeadline);
-            break;
-        case "event":
-            description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /at "));
-            String startEndDateTime = userInput.substring(userInput.indexOf(" /at ") + 5);
-            Event newEvent = new Event(description, startEndDateTime);
-            addTask(newEvent);
-            break;
-        default:
-            Ui.printPretty("Sorry, couldn't recognize this input format"); // Shouldn't reach here
+        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            Task newTask = TaskFactory.getTaskFromUserInput(command, userInput);
+            if (newTask == null) {
+                Ui.printPretty("Sorry, couldn't recognize this input format");
+            } else {
+                addTask(newTask);
+            }
+        } else {
+            Ui.printPretty("Sorry, couldn't recognize this input format");
         }
     }
 
     protected boolean validateInput(String command, String userInput) {
-        if (!command.equals("list") && !command.equals("todo") && !command.equals("deadline") &&
-                !command.equals("event")) {
-            return false;
+        if (command.equals("todo")) {
+            return ToDo.validateUserInput(userInput);
+        } else if (command.equals("deadline")) {
+            return Deadline.validateUserInput(userInput);
+        } else if (command.equals("event")) {
+            return Event.validateUserInput(userInput);
+        } else if (command.equals("list")) {
+            return true; // If command is list then anything after doesn't affect functionality
         }
 
-        if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            if (!userInput.contains(" ")) {
-                return false;
-            }
-        }
-
-        if (command.equals("deadline")) {
-            if (!userInput.contains(" /by ")) {
-                return false;
-            }
-
-            // Ensure there is a by time
-            if (userInput.indexOf(" /by ") + 5 > userInput.length() - 1) {
-                return false;
-            }
-        }
-
-        if (command.equals("event")) {
-            if (!userInput.contains(" /at ")) {
-                return false;
-            }
-
-            if (userInput.indexOf(" /at ") + 5 > userInput.length() - 1) {
-                return false;
-            }
-        }
-
-        return true;
+        return false; // Unrecognized command
     }
 
     protected void addTask(Task newTask) {

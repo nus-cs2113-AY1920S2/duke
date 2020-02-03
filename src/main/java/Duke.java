@@ -6,14 +6,11 @@ public class Duke {
         Ui.greet();
 
         TaskManager myTaskManager = new TaskManager();
-        String userInput;
-        while (true) {
+        String userInput = Ui.getNextLine();
+
+        while (!userInput.equals(END_STRING)) {
+            myTaskManager.executeUserInput(userInput);
             userInput = Ui.getNextLine();
-            if (userInput.equals(END_STRING)) {
-                break;
-            } else {
-                myTaskManager.executeUserInput(userInput);
-            }
         }
 
         Ui.sayGoodbye();

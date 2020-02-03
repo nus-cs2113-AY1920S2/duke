@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected boolean isDone;
     protected String description;
 
@@ -7,7 +7,7 @@ public class Task {
         setIsDone(false);
     }
 
-    // From the website
+    // getStatusIcon() is from the website
     protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -27,5 +27,4 @@ public class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-
 }
