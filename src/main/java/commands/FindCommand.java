@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_EMPTY_LIST = "Can not find any task description " +
             "contains this keyword";
 
-    protected String key;
+    protected String toSearch;
     protected TaskList qualifiedTasks;
 
     public FindCommand() {
@@ -25,20 +25,26 @@ public class FindCommand extends Command {
     }
 
     public FindCommand(String commandDescription) {
-        this.key = commandDescription;
+        this.toSearch = commandDescription;
     }
 
     @Override
     public CommandResult execute() {
         System.out.println(Messages.DIVIDER);
-        qualifiedTasks = duke.searchTask(key);
+        if (isQualifiedTasksEmpty()) return new CommandResult(MESSAGE_EMPTY_LIST);
+        System.out.println(Messages.DIVIDER);
+        qualifiedTasks.clear();
+        return null;
+    }
+
+    private boolean isQualifiedTasksEmpty() {
+        qualifiedTasks = duke.searchTask(toSearch);
         if (qualifiedTasks.getInternalList().isEmpty()){
-            return new CommandResult(MESSAGE_EMPTY_LIST);
+            return true;
         } else {
             Messages.printAllTasks(qualifiedTasks);
         }
-        System.out.println(Messages.DIVIDER);
-        return null;
+        return false;
     }
 
 }

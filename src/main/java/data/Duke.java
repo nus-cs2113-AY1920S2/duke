@@ -42,6 +42,14 @@ public class Duke {
     }
 
     /**
+     * clear the qualified task list after 'find'
+     * @param qualifiedTasks
+     */
+    public void clearQualifiedTasks(TaskList qualifiedTasks) {
+        qualifiedTasks.clear();
+    }
+
+    /**
      * Adds a task to the task list.
      */
     public void addTask(Task toAdd) {

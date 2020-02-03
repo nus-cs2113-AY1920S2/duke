@@ -1,2 +1,1 @@
-T|✗| read a book
-T|✗| book
+D|✗| return book |by Sunday
