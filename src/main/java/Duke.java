@@ -1,7 +1,9 @@
 import java.util.Scanner;
 public class Duke {
+
     private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
+    
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,7 +34,7 @@ public class Duke {
     public static void dukeResponde(String userResponde){
         printLine();
         if(userResponde.equals("bye")){
-            System.out.println("\tBye. Hope to see you again soon!");
+            sayBye();
         }
         else if(userResponde.equals("list")) {
             listTask();
@@ -51,12 +53,17 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    public static void sayBye(){
+        System.out.println("\tBye. Hope to see you again soon!");
+    }
+
     public static void listTask(){
         System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < taskCount; i++) {
             System.out.println("\t" + (i + 1) + "." + tasks[i]);
         }
     }
+
     public static void markAsDone(String userResponde){
         int doneCount = Integer.parseInt(userResponde.substring(5)) - 1;
         tasks[doneCount].markAsDone();
@@ -85,7 +92,6 @@ public class Duke {
         System.out.println("\tNow you have " + (taskCount+1) + " tasks in the list");
         taskCount++;
     }
-
 
 }
 

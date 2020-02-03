@@ -5,6 +5,7 @@ public class Task {
     public Task(){
 
     }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
