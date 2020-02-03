@@ -58,10 +58,6 @@ public class Duke {
         } else if (str.equals("list")) {
             listTask();
             chat();
-        }else if (str.contains("done")) {
-            markDone(str);
-            listTask();
-            chat();
         }else {
             System.out.println(str);
             System.out.println("____________________________________________________________");
@@ -77,40 +73,74 @@ public class Duke {
         String str = readCommand();
         if (str.equals("bye")) {
             bye();
-        }else if (str.contains("done")) {
+        } else if (str.contains("done")) {
             System.out.println("Mark task done");
             markDone(str);
             addTaskScreen();
-        }else if (str.equals("list")) {
+        } else if (str.equals("list")) {
             listTask();
             addTaskScreen();
-        }else {
-            addTask(str);
+        } else if ((str.contains("todo"))) {
+            int dividerPosition = str.indexOf(" ");
+            String task = str.substring(dividerPosition + 1);
+            ToDos newTask = new ToDos(task);
+            addTask(newTask);
+            addTaskScreen();
+        } else if ((str.contains("deadline"))) {
+            int dividerPosition = str.indexOf(" ");
+            int dividerPositionSlash = str.indexOf("/");
+            String task = str.substring(dividerPosition + 1 , dividerPositionSlash);
+            String by = str.substring(dividerPositionSlash + 4);
+            Deadlines newTask = new Deadlines(task,by);
+            addTask(newTask);
+            addTaskScreen();
+        } else if ((str.contains("event"))) {
+            int dividerPosition = str.indexOf(" ");
+            int dividerPositionSlash = str.indexOf("/");
+            String task = str.substring(dividerPosition + 1 , dividerPositionSlash);
+            String calender  = str.substring(dividerPositionSlash+4);
+            int dateAndTime = calender.indexOf(" ");
+            String date  = calender.substring(0, dateAndTime);
+            String time  = calender.substring(dateAndTime+1);
+            Events newTask = new Events(task,date,time);
+            addTask(newTask);
             addTaskScreen();
         }
+
+
     }
 
-    public static void addTask(String newTask) throws IOException {
-        Task task = new Task(newTask);
-        taskList.add(task);
+    public static void addTask(Task newTask) throws IOException {
+        System.out.println("Got it. I've added this task: " + newTask.description);
+        taskList.add(newTask);
         System.out.println("added : " + newTask);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list") ;
     }
 
-    public static void listTask() {
+    public static void listTask(){
         System.out.println("____________________________________________________________");
         int i = 0;
         while (i < taskList.size()) {
             int j = i + 1;
-            System.out.println(j + " ." + "[" +  taskList.get(i).getStatusIcon() + "]" + taskList.get(i).displayTask());
+            System.out.println(j + " ." +  taskList.get(i).toString() );
             i++;
         }
 
         System.out.println("____________________________________________________________");
     }
 
-    public  static  void markDone(String str){
+    public  static  void markDone(String str) throws IOException {
+        if(str.length() == 4){
+            System.out.println("____________________________________________________________");
+            System.out.println("Invalid input");
+            System.out.println("____________________________________________________________");
+            addTaskScreen();
+        }
+
         int dividerPosition = str.indexOf(" ");
         String index = str.substring(dividerPosition+1);
+
+
         int i = Integer.parseInt(index);
         System.out.println(i);
         if(i == 0){
