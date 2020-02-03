@@ -157,8 +157,7 @@ public class Duke {
         printGreetingMessage();
         while (true) {
             String input = sc.nextLine().trim();
-            String removeTrailingSpaces = input.trim();
-            String [] words = removeTrailingSpaces.split(" ");
+            String [] words = input.split(" ");
             String firstWord = words[0].toLowerCase();
             printLine();
             if (firstWord.equals("bye")) {
