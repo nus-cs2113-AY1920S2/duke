@@ -20,11 +20,10 @@ public class Duke {
         }
         int listNumber = Integer.parseInt(words[1]) - 1;
         if (list.get(listNumber).isDone) {
-            System.out.println("  Hey!! Lumi already marked <" + list.get(listNumber).task + "> as completed!\n");
+            printer.printAlreadyCompletedTaskMessage(list, listNumber);
         } else {
             list.get(listNumber).isDone = true;
-            System.out.println("  Well done! Lumi marks this task as completed!\n" +
-                    list.get(listNumber).getTaskStatus() + "\n");
+            printer.printCompleteTaskMessage(list, listNumber);
         }
     }
 

@@ -32,7 +32,7 @@ public class Printer {
 
     public void printInvalidAction() {
         System.out.println("  Sorry, Lumi has trouble understanding those words...");
-        System.out.println("  Please try again!");
+        System.out.println("  Please try again!\n");
     }
 
     public void printAddTaskMessage(Vector<Task> list) {
@@ -46,17 +46,30 @@ public class Printer {
         }
     }
 
+    public void printCompleteTaskMessage(Vector<Task> list, int listNumber) {
+        System.out.println("  Well done! Lumi marks this task as completed!");
+        printSpaces(8);
+        System.out.println(list.get(listNumber).getTaskStatus());
+        System.out.println();
+    }
+
+    public void printAlreadyCompletedTaskMessage(Vector<Task> list, int listNumber) {
+        System.out.println("  Hey!! Lumi already marked <" + list.get(listNumber).task + "> as completed!");
+        System.out.println();
+    }
+
+
     public void printList(Vector<Task> list) {
         System.out.println("  Sure! Lumi prints your list!");
 
         String listTop =
                 "    +---------+\n" +
-                "+---| L I S T |--------------------------------------+\n" +
-                "|   +---------+                                      |";
+                "+---| L I S T |------------------------------------------------+\n" +
+                "|   +---------+                                                |";
         String listLeft = "| ";
         String listRight = " |";
-        String listBottom = "+----------------------------------------------------+\n";
-        final int LIST_LENGTH = 50;
+        String listBottom = "+--------------------------------------------------------------+\n";
+        final int LIST_LENGTH = 60;
 
         System.out.println(listTop);
 
