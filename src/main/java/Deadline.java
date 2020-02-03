@@ -9,6 +9,6 @@ public class Deadline extends Task {
 
     @Override
     public String printObject() {
-        return ("[" + itemType + "][" + getStatusIcon() +"] "+ description + " (by: " + by + ")");
+        return ("[" + itemType + "][" + getStatusIcon() + "] "+ description + " (by: " + by + ")");
     }
 }
