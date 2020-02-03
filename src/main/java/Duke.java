@@ -9,15 +9,22 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?"); 
-        System.out.println(lines); 
-        String line; 
+        System.out.println(lines);
+
+
+        String line;
         String[] ls = new String[100]; 
         int items = 0; 
 
         do {
             Scanner in = new Scanner(System.in); 
             line = in.nextLine();
-            if (line.equals("list")) { 
+            line = line.trim();
+
+            if (line.equals("bye")) {
+                break;
+            } else if (line.equals("list")) {
+                System.out.println(lines);
                 for (int i = 0; i < items; i++) { 
                     System.out.println((i+1) + ". " +  ls[i]); 
                 }
@@ -26,7 +33,10 @@ public class Duke {
             System.out.println("added: " + line); 
             ls[items] = line;
             items++; 
-        }
+            }
+
+
+
         System.out.println(lines); 
         } while (!line.equals("bye"));
 
@@ -35,3 +45,5 @@ public class Duke {
 
     }
 }
+
+
