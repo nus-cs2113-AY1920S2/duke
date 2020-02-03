@@ -2,8 +2,14 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static int numTask = 0;
-    private static String line = "____________________________________________________________\n";
+    private static int NUM_OF_TASK = 0;
+    private static String LINE = "____________________________________________________________\n";
+    private static final String BYE_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String EVENT_COMMAND = "event";
+    private static final String DEADLINE_COMMAND = "deadline";
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -30,56 +36,56 @@ public class Duke {
 
     private static void runCommand(String[] arr, Task[] Tasks, Scanner in) {
         switch (arr[0]) {
-        case ("bye"):
+        case (BYE_COMMAND):
             printExitMessage();
-        case ("list"):
+        case (LIST_COMMAND):
             printList(Tasks);
             break;
-        case ("done"):
+        case (DONE_COMMAND):
             int taskNum = Integer.parseInt(arr[1]);
             taskNum--;
             Tasks[taskNum].setDone(true);
             printDone(Tasks[taskNum]);
             break;
-        case ("todo"):
-            Tasks[numTask] = new Todo(arr[1]);
-            printConfirm(Tasks[numTask]);
+        case (TODO_COMMAND):
+            Tasks[NUM_OF_TASK] = new Todo(arr[1]);
+            printConfirm(Tasks[NUM_OF_TASK]);
             break;
-        case ("deadline"):
+        case (DEADLINE_COMMAND):
             String arr2[] = arr[1].split("/by ", 2);
-            Tasks[numTask] = new Deadline(arr2[0], arr2[1]);
-            printConfirm(Tasks[numTask]);
+            Tasks[NUM_OF_TASK] = new Deadline(arr2[0], arr2[1]);
+            printConfirm(Tasks[NUM_OF_TASK]);
             break;
-        case ("event"):
+        case (EVENT_COMMAND):
             arr2 = arr[1].split("/at ", 2);
-            Tasks[numTask] = new Event(arr2[0], arr2[1]);
-            printConfirm(Tasks[numTask]);
+            Tasks[NUM_OF_TASK] = new Event(arr2[0], arr2[1]);
+            printConfirm(Tasks[NUM_OF_TASK]);
             break;
         }
     }
 
     private static void printDone(Task task) {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("   " + task);
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     private static void printConfirm(Task task) {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Got it! I've added this task:");
         System.out.println("   " + task);
-        int num = numTask + 1;
+        int num = NUM_OF_TASK + 1;
         System.out.println("Now you have " + num + " task(s) in the list.");
-        System.out.println(line);
-        numTask++;
+        System.out.println(LINE);
+        NUM_OF_TASK++;
     }
 
     private static void printExitMessage() {
         String outro = "Bye. Hope to see you again soon!";
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println(outro);
-        System.out.println(line);
+        System.out.println(LINE);
         System.exit(0);
     }
 
@@ -120,12 +126,13 @@ public class Duke {
     }
 
     public static void printList(Task[] Task) {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Here are the tasks in your list: \n");
-        for (int i = 0; i < numTask; i++) {
+        for (int i = 0; i < NUM_OF_TASK; i++) {
             int num = i + 1;
             System.out.println(num + ". " + Task[i]);
         }
-        System.out.println(line);
+        System.out.println(LINE);
     }
 }
+
