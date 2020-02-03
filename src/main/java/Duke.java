@@ -8,6 +8,7 @@ public class Duke {
     public static final int LENGTH_DEADLINE = 9;
     public static final int LENGTH_EVENT = 6;
     public static final int LENGTH_TODO = 5;
+    public static final int SIZE_DONE_COMMAND = 2;
 
     public static void getDateTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -134,7 +135,7 @@ public class Duke {
                 printList(tasks);
                 break;
             case "done":
-                if (wordLength != 2) {
+                if (wordLength != SIZE_DONE_COMMAND) {
                     System.out.println("Wrong format for command \"done\"");
                     break;
                 }

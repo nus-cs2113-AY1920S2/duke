@@ -32,8 +32,8 @@ public class Task {
         System.out.println("\nYou've got " + taskCounter + " task(s) in the list!\n");
     }
 
-    public void printListDetails(int count) {
-        System.out.println("["+ getTaskType() + "][" + getStatusIcon() + "] " + count + ". " + getDescription());
+    public void printListDetails(int taskCounter) {
+        System.out.println("["+ getTaskType() + "][" + getStatusIcon() + "] " + taskCounter + ". " + getDescription());
     }
 
 }
