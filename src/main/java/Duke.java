@@ -35,17 +35,18 @@ public class Duke {
             if (command.equals("list")) {
                 System.out.println("    Here are the tasks in your list:");
                 for (int i = 0; i < numTasks; i++) {
+                    System.out.print("    " + (i+1) + ".");
                     System.out.println(taskList[i].toString());
                 }
             } else if (cWord.equals("done")) {
                 String[] splitTask2 = command.split(" ");
                 int taskDoneNum = Integer.parseInt(splitTask2[1]);
-                if (taskDoneNum >= numTasks) {
+                if (taskDoneNum-1 >= numTasks) {
                     System.out.println("    You haven't done that many tasks yet!");
                 } else {
-                    taskList[taskDoneNum].setDone(true);
+                    taskList[taskDoneNum-1].setDone(true);
                     System.out.println("    Good work! I've marked this task as done!");
-                    System.out.println(taskList[taskDoneNum].toString());
+                    System.out.println(taskList[taskDoneNum-1].toString());
                 }
             } else if (cWord.equals("todo")){
                 Task t = new Todo(task, numTasks);

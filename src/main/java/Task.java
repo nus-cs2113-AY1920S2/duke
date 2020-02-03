@@ -54,7 +54,7 @@ public class Task {
      * Print task is specified format
      */
     public String toString() {
-        return "    " + taskNumber + ". [" + getStatusIcon() + "] " + name;
+        return "[" + getStatusIcon() + "] " + name;
     }
 
     /**
