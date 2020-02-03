@@ -53,8 +53,8 @@ public class Task {
     /**
      * Print task is specified format
      */
-    public void printTask() {
-        System.out.println("    " + taskNumber + ". [" + getStatusIcon() + "] " + name);
+    public String toString() {
+        return "    " + taskNumber + ". [" + getStatusIcon() + "] " + name;
     }
 
     /**

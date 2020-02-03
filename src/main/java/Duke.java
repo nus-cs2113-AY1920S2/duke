@@ -24,21 +24,52 @@ public class Duke {
 
         while (!command.equals("bye")) {
             System.out.println("____________________________________");
+
+            String[] splitTask = command.split(" ");
+            String cWord = splitTask[0];
+            String task = "";
+            for (int i = 1; i < splitTask.length; i++) {
+                task += " " + splitTask[i];
+            }
+
             if (command.equals("list")) {
                 System.out.println("    Here are the tasks in your list:");
                 for (int i = 0; i < numTasks; i++) {
-                    taskList[i].printTask();
+                    System.out.println(taskList[i].toString());
                 }
-            } else if (command.contains("done")) {
-                String[] splitTask = command.split(" ");
-                int taskDoneNum = Integer.parseInt(splitTask[1]);
+            } else if (cWord.equals("done")) {
+                String[] splitTask2 = command.split(" ");
+                int taskDoneNum = Integer.parseInt(splitTask2[1]);
                 if (taskDoneNum >= numTasks) {
                     System.out.println("    You haven't done that many tasks yet!");
                 } else {
                     taskList[taskDoneNum].setDone(true);
                     System.out.println("    Good work! I've marked this task as done!");
-                    taskList[taskDoneNum].printTask();
+                    System.out.println(taskList[taskDoneNum].toString());
                 }
+            } else if (cWord.equals("todo")){
+                Task t = new Todo(task, numTasks);
+                taskList[numTasks] = t;
+                numTasks++;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("    " + t.toString());
+                System.out.println("Now you have " + numTasks + " tasks in the list.");
+            } else if (cWord.equals("deadline")){
+                String[] splitTask2 = task.split("/by");
+                Task t = new Deadline(splitTask2[0], numTasks, splitTask2[1]);
+                taskList[numTasks] = t;
+                numTasks++;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("    " + t.toString());
+                System.out.println("Now you have " + numTasks + " tasks in the list.");
+            } else if (cWord.equals("event")){
+                String[] splitTask2 = task.split("/at");
+                Task t = new Event(splitTask2[0], numTasks, splitTask2[1]);
+                taskList[numTasks] = t;
+                numTasks++;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("    " + t.toString());
+                System.out.println("Now you have " + numTasks + " tasks in the list.");
             } else {
                 Task t = new Task(command, numTasks);
                 taskList[numTasks] = t;
