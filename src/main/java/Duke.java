@@ -51,30 +51,34 @@ public class Duke {
         System.out.println("Commands: ");
         System.out.println("List: lists all recorded tasks \nusage: list\n");
         System.out.println("Done: mark task as completed \nusage: done <task number>\n");
-        System.out.println("Todo: Tasks without date/time \nUsage: Todo <task> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Event: Event including date/time \nUsage: Event <task> /<date> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Deadline: Tasks including date/time \nUsage: Deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Todo: Tasks without date/time \nUsage: todo <task> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Event: Event including date/time \nUsage: event <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Deadline: Tasks including date/time \nUsage: deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
         System.out.println("");
     }
 
     private static void printWelcomeMessage() {
-        String logo =   "  ,--,       ,---,   .--.--.       ,---,        \n"
-                + ",--.'|    ,`--.' |  /  /    '.    '  .' \\       \n"
-                + "|  | :    |   :  : |  :  /`. /   /  ;    '.     \n"
-                + ":  : '    :   |  ' ;  |  |--`   :  :       \\    \n"
-                + "|  ' |    |   :  | |  :  ;_     :  |   /\\   \\   \n"
-                + "'  | |    '   '  ;  \\  \\    `.  |  :  ' ;.   : \n"
-                + "|  | :    |   |  |   `----.   \\ |  |  ;/  \\   \\ \n"
-                + "'  : |__  '   :  ;   __ \\  \\  | '  :  | \\  \\ ,' \n"
-                + "|  | '.'| |   |  '  /  /`--'  / |  |  '  '--'   \n"
-                + ";  :    ; '   :  | '--'.     /  |  :  : \n"
+        String logo =   "  ,--,       ,---,   .--.--.       ,---,\n"
+                + ",--.'|    ,`--.' |  /  /    '.    '  .' \\\n"
+                + "|  | :    |   :  : |  :  /`. /   /  ;    '.\n"
+                + ":  : '    :   |  ' ;  |  |--`   :  :       \\\n"
+                + "|  ' |    |   :  | |  :  ;_     :  |   /\\   \\\n"
+                + "'  | |    '   '  ;  \\  \\    `.  |  :  ' ;.   :\n"
+                + "|  | :    |   |  |   `----.   \\ |  |  ;/  \\   \\\n"
+                + "'  : |__  '   :  ;   __ \\  \\  | '  :  | \\  \\ ,'\n"
+                + "|  | '.'| |   |  '  /  /`--'  / |  |  '  '--'\n"
+                + ";  :    ; '   :  | '--'.     /  |  :  :\n"
                 + "|  ,   /  ;   |.'    `--'---'   |  | ,'\n"
-                + "---`-'   '---'                 `--''   \n";
+                + "---`-'   '---'                 `--''\n";
 
         System.out.println("\n" + logo + "\nYour Lifestyle Scheduling Assistant\n");
         System.out.println("type \"help\" for list of commands");
+        System.out.println("____________________________________________________________\n");
+        System.out.println("Everyday is a sunny day!");
+        /*
         System.out.println("____________________________________________________________\n\nCurrent time: ");
-        getDateTime();
+        getDateTime(); // due to testing purposes, will fail when coming timestamps
+        */
         System.out.println("____________________________________________________________");
     }
 
@@ -87,6 +91,7 @@ public class Duke {
             newTask.printAddDetails(taskCounter);
         } catch (Exception e) {
             System.out.println("Please input the date using the specified format");
+            taskCounter--;
         }
     }
 
@@ -99,6 +104,7 @@ public class Duke {
             newTask.printAddDetails(taskCounter);
         } catch (Exception e) {
             System.out.println("Please input the date using the specified format");
+            taskCounter--;
         }
     }
 

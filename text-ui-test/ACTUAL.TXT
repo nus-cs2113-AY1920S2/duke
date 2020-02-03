@@ -1,0 +1,50 @@
+
+  ,--,       ,---,   .--.--.       ,---,
+,--.'|    ,`--.' |  /  /    '.    '  .' \
+|  | :    |   :  : |  :  /`. /   /  ;    '.
+:  : '    :   |  ' ;  |  |--`   :  :       \
+|  ' |    |   :  | |  :  ;_     :  |   /\   \
+'  | |    '   '  ;  \  \    `.  |  :  ' ;.   :
+|  | :    |   |  |   `----.   \ |  |  ;/  \   \
+'  : |__  '   :  ;   __ \  \  | '  :  | \  \ ,'
+|  | '.'| |   |  '  /  /`--'  / |  |  '  '--'
+;  :    ; '   :  | '--'.     /  |  :  :
+|  ,   /  ;   |.'    `--'---'   |  | ,'
+---`-'   '---'                 `--''
+
+Your Lifestyle Scheduling Assistant
+
+type "help" for list of commands
+____________________________________________________________
+
+Everyday is a sunny day!
+____________________________________________________________
+The following task has been added:
+[T][?] add pie crust
+
+You've got 1 task(s) in the list!
+
+The following task has been added:
+[D][?] complete homework (by: now)
+
+You've got 2 task(s) in the list!
+
+The following task has been added:
+[E][?] tutorial (at: Tuesday 2pm)
+
+You've got 3 task(s) in the list!
+
+Listing tasks below:
+[T][?] 1. add pie crust
+[D][?] 2. complete homework (by: now)
+[E][?] 3. tutorial (by: Tuesday 2pm)
+
+Nice! I've marked this task as done:
+[D][?] complete homework
+
+Listing tasks below:
+[T][?] 1. add pie crust
+[D][?] 2. complete homework (by: now)
+[E][?] 3. tutorial (by: Tuesday 2pm)
+
+LISA: Bye, hope to see you again!
