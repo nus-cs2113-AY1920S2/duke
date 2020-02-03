@@ -15,4 +15,11 @@ public class Task {
         this.isDone=true;
     }
 
+    @Override
+    public String toString(){
+        String taskType="[K]";
+        String detail = taskType + " [" + isDone + "] " + description;
+        return detail;
+    }
+
 }
