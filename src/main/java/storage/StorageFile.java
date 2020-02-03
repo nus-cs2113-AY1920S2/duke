@@ -1,5 +1,6 @@
 package storage;
 import data.Duke;
+import data.exceptions.ParseException;
 import data.exceptions.StorageOperationException;
 import parser.EncodeToFile;
 
@@ -21,11 +22,21 @@ public class StorageFile {
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
     private Path filePath ;
 
+    /**
+     * default constructor (if the user does not specified file location
+     */
     public StorageFile() throws StorageOperationException {
         this(DEFAULT_STORAGE_FILEPATH);
         this.filePath = Paths.get(DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param filePath
+     * @throws StorageOperationException
+     * @retuen parsed storage file object
+     */
     public StorageFile(String filePath) throws StorageOperationException {
         this.filePath = Paths.get(filePath);
         if (!isValidPath(this.filePath)) {
@@ -33,6 +44,12 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param duke duke management system
+     * @throws StorageOperationException
+     */
     public void save(Duke duke) throws StorageOperationException {
         try {
             List<String> encodedDuke = EncodeToFile.encodeAllTasks(duke);
@@ -42,6 +59,12 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param filePath
+     * @return (boolean) if the filePath is valid, return true
+     */
     private static boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
     }

@@ -5,6 +5,7 @@ import data.task.Task;
 import ui.TextUi;
 
 public abstract class Command {
+
     protected Duke duke;
     public String COMMAND_WORD;
     private int targetIndex = -1;

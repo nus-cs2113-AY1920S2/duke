@@ -1,6 +1,6 @@
 package data.exceptions;
 
-public class TaskNotFoundException extends Exception {
+public class TaskNotFoundException extends NullPointerException {
     public TaskNotFoundException() {
     }
 

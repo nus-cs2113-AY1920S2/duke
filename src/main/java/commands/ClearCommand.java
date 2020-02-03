@@ -1,8 +1,8 @@
 package commands;
 
-/**
- * Clears the Task List.
- */
+
+/** Clears the Task List */
+
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";

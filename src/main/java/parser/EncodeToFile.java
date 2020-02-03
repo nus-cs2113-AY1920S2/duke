@@ -13,9 +13,8 @@ import java.util.List;
  */
 public class EncodeToFile {
 
-
     /**
-     * Encodes all the {@code Task} in the {@code duke} into a list of readable string presentation
+     * Encodes all the {@code Duke} in the {@code duke} into a list of readable string presentation
      * for storage.
      */
     public static List<String> encodeAllTasks(Duke duke) {
@@ -29,33 +28,66 @@ public class EncodeToFile {
      */
     private static String encodeTaskToString (Task task){
         StringBuilder encodedTaskBuilder = new StringBuilder();
-        //encode task type
-        encodedTaskBuilder = encodedTaskBuilder.append(String.valueOf(task.getTaskType()));
-        encodedTaskBuilder = encodedTaskBuilder.append("|");
-        //encode task status
-        encodedTaskBuilder = encodedTaskBuilder.append(String.valueOf(task.getChar()));
-        encodedTaskBuilder = encodedTaskBuilder.append("|");
-        //encode task name
-        encodedTaskBuilder = encodedTaskBuilder.append(task.getTaskDescription());
+        encodedTaskBuilder = getStringBuilder(task, encodedTaskBuilder);
         //encode start/end time (optional)
         switch (task.getTaskType()){
         case 'D':
-            encodedTaskBuilder = encodedTaskBuilder.append("|");
-            //up-casting
-            DeadlineTask dTask = (DeadlineTask) task;
-            encodedTaskBuilder = encodedTaskBuilder.append(dTask.getTaskDeadline());
+            encodedTaskBuilder = encodeDeadlineToStting((DeadlineTask) task, encodedTaskBuilder);
             break;
         case 'E':
-            encodedTaskBuilder = encodedTaskBuilder.append("|");
-            EventTask eTask = (EventTask) task;
-            encodedTaskBuilder = encodedTaskBuilder.append(eTask.getTaskStartTime());
-            encodedTaskBuilder = encodedTaskBuilder.append(eTask.getTaskEndTime());
+            encodedTaskBuilder = encodeEventToString((EventTask) task, encodedTaskBuilder);
             break;
         default:
         case 'T':
             break;
         }
         return encodedTaskBuilder.toString();
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param task
+     * @param encodedTaskBuilder
+     * @return encodedTaskBuilder
+     */
+    private static StringBuilder encodeEventToString(EventTask task, StringBuilder encodedTaskBuilder) {
+        encodedTaskBuilder = encodedTaskBuilder.append("|");
+        EventTask eTask = task;
+        encodedTaskBuilder = encodedTaskBuilder.append(eTask.getTaskStartTime());
+        encodedTaskBuilder = encodedTaskBuilder.append(eTask.getTaskEndTime());
+        return encodedTaskBuilder;
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param task
+     * @param encodedTaskBuilder
+     * @return encodedTaskBuilder
+     */
+    private static StringBuilder encodeDeadlineToStting(DeadlineTask task, StringBuilder encodedTaskBuilder) {
+        encodedTaskBuilder = encodedTaskBuilder.append("|");
+        //up-casting
+        DeadlineTask dTask = task;
+        encodedTaskBuilder = encodedTaskBuilder.append(dTask.getTaskDeadline());
+        return encodedTaskBuilder;
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param task
+     * @param encodedTaskBuilder
+     * @return encodedTaskBuilder
+     */
+    private static StringBuilder getStringBuilder(Task task, StringBuilder encodedTaskBuilder) {
+        encodedTaskBuilder = encodedTaskBuilder.append(String.valueOf(task.getTaskType()));
+        encodedTaskBuilder = encodedTaskBuilder.append("|");
+        encodedTaskBuilder = encodedTaskBuilder.append(String.valueOf(task.getChar()));
+        encodedTaskBuilder = encodedTaskBuilder.append("|");
+        encodedTaskBuilder = encodedTaskBuilder.append(task.getTaskDescription());
+        return encodedTaskBuilder;
     }
 
 }

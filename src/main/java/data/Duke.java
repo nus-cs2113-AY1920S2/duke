@@ -1,14 +1,16 @@
 package data;
 
+import data.exceptions.ParseException;
 import data.exceptions.TaskNotFoundException;
 import data.task.Task;
 import data.task.TaskList;
 
 /**
- * Represents the entire address book. Contains the data of the address book.
+ * Represents the duke system. Contains the data of the all tasks
  */
 public class Duke {
 
+    /* the tasks list within the system */
     private TaskList allTasks;
 
     /**
@@ -18,29 +20,38 @@ public class Duke {
         this.allTasks = new TaskList();
     }
 
+    /**
+     * Parses the given arguments string as a single index number.
+     *
+     * @return the task list
+     */
     public TaskList getTaskList() {
         return allTasks;
     }
 
-
     /**
-     * Adds a person to the address book.
+     * add a task
+     *
+     * @param toAdd target task
      */
     public void addTask(Task toAdd) {
         allTasks.add(toAdd);
     }
 
     /**
-     * Returns true if an equivalent person exists in the address book.
+     * check if contains the task
+     *
+     * @param toSearch target task
      */
-    public boolean containsTask(Task key) {
-        return allTasks.contains(key);
+    public boolean containsTask(Task toSearch) {
+        return allTasks.contains(toSearch);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * removes the task
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @param toRemove target task
+     * @throws TaskNotFoundException if target task does not exist
      */
     public void removeTask(Task toRemove) throws TaskNotFoundException {
         allTasks.remove(toRemove);
@@ -54,6 +65,12 @@ public class Duke {
         allTasks.clear();
     }
 
+    /**
+     * compare this task with other task
+     *
+     * @param other target task
+     * @return true if tasks are equal
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -63,8 +80,10 @@ public class Duke {
 
     /**
      * Set target index task as done.
+     * @param doneId target index
+     * @throws TaskNotFoundException if target task does not exist
      */
-    public void doneTask(int doneId) {
+    public void doneTask(int doneId) throws TaskNotFoundException {
         //find the task
         allTasks.getInternalList().get(doneId).setDone(true);
     }

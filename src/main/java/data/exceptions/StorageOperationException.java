@@ -1,6 +1,7 @@
 package data.exceptions;
 
 public class StorageOperationException extends Exception {
+
     public StorageOperationException() {
     }
 
