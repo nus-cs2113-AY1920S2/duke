@@ -2,10 +2,10 @@
 public class Task {
 
     /** Completion status for the task **/
-    private boolean isDone;
+    protected boolean isDone;
 
     /** Task description given by the user**/
-    private String description;
+    protected String description;
 
     public Task (String description) {
         this.description = description;
@@ -33,4 +33,8 @@ public class Task {
         this.isDone = true;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s", getStatusIcon(), description);
+    }
 }
