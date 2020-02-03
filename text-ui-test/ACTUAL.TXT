@@ -1,0 +1,61 @@
+Welcome to
+  __       _______  _______  ________  _______  _______  _______  ________
+ |\_\     |\___\__\|\ __\__\|\ ______\|\______\|\___\__\|\______\|\ ______\
+ | | |    | |  |  || |  |  | \|__   _|| |  ___|| |  |  || |     | \|__   _|
+ | | |    | |  |  || |  |  |   | | |  | | |    | |  |  || |  |  |   | | |
+ | | |__  | |  |  || |     | __| | |_ | | |___ | |     || |     |   | | |
+ | | |__\ | |     || | | | ||\__\| |_\| | |___\| |  |  || |  |  |   | | |
+  \|_____| \|_____| \|_|_|_| \|______| \|_____| \|__|__| \|__|__|    \|_|
+Initializing LumiChat v0.0.1.4...
+
+LumiChat is now ready.
+
+  Hey I'm Lumi!
+  How may I assist you today?
+
+  Sure! Lumi prints your list!
+    +---------+
++---| L I S T |--------------------------------------+
+|   +---------+                                      |
++----------------------------------------------------+
+| Total: 0 tasks                                     |
++----------------------------------------------------+
+
+  Alright, Lumi has added: read book!
+        [T][?] read book
+  You now have 1 task in Lumi's list!
+
+  Alright, Lumi has added: review code!
+        [D][?] review code (by: tomorrow)
+  You now have 2 tasks in Lumi's list!
+
+  Alright, Lumi has added: visit friend!
+        [E][?] visit friend (at: friend's house)
+  You now have 3 tasks in Lumi's list!
+
+  Sure! Lumi prints your list!
+    +---------+
++---| L I S T |--------------------------------------+
+|   +---------+                                      |
+| 1. [T][?] read book                               |
+| 2. [D][?] review code (by: tomorrow)              |
+| 3. [E][?] visit friend (at: friend's house)       |
++----------------------------------------------------+
+| Total: 3 tasks                                     |
++----------------------------------------------------+
+
+  Well done! Lumi marks this task as completed!
+[D][?] review code (by: tomorrow)
+
+  Sure! Lumi prints your list!
+    +---------+
++---| L I S T |--------------------------------------+
+|   +---------+                                      |
+| 1. [T][?] read book                               |
+| 2. [D][?] review code (by: tomorrow)              |
+| 3. [E][?] visit friend (at: friend's house)       |
++----------------------------------------------------+
+| Total: 3 tasks                                     |
++----------------------------------------------------+
+
+  Goodbye! Lumi will miss you!

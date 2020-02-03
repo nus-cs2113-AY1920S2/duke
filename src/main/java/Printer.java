@@ -37,7 +37,7 @@ public class Printer {
 
     public void printAddTaskMessage(Vector<Task> list) {
         System.out.println("  Alright, Lumi has added: " + list.lastElement().getTask() + "!");
-        printSpaces(10);
+        printSpaces(8);
         System.out.println(list.lastElement().getTaskStatus());
         if (list.size() == 1) {
             System.out.println("  You now have " + list.size() + " task in Lumi's list!\n");
@@ -56,7 +56,7 @@ public class Printer {
         String listLeft = "| ";
         String listRight = " |";
         String listBottom = "+----------------------------------------------------+\n";
-        int listLength = 50;
+        final int LIST_LENGTH = 50;
 
         System.out.println(listTop);
 
@@ -66,17 +66,17 @@ public class Printer {
 
             System.out.print(listLeft);
             System.out.print(listItem);
-            printSpaces(listLength-listItem.length()-1);
+            printSpaces(LIST_LENGTH-listItem.length()-1);
             System.out.println(listRight);
         }
 
         System.out.print(listBottom);
 
         // Print total number of tasks
-        String totalTaskString = "Total: " + list.size() + " tasks";
+        String totalTaskString = "Total: " + list.size() + (list.size() == 1 ? " task" : " tasks");
         System.out.print(listLeft);
         System.out.print(totalTaskString);
-        printSpaces(listLength-totalTaskString.length());
+        printSpaces(LIST_LENGTH-totalTaskString.length());
         System.out.println(listRight);
         System.out.println(listBottom);
     }
