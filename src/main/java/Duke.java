@@ -14,21 +14,30 @@ public class Duke {
             if (line.startsWith("done")) {
                 int index = Integer.parseInt(line.substring(5)) - 1;
                 taskList.get(index).markAsDone();
-                System.out.println("Nice! I've marked this task as done: " + System.lineSeparator()
-                        + "[" + taskList.get(index).checkIfDone() + "] " + taskList.get(index).action);
+                System.out.println("Nice! I've marked this task as done: " + System.lineSeparator() + taskList.get(index));
             } else if (line.equals("list")) {
                 if (taskList.size() == 0) {
                     System.out.println("There is nothing on the list.");
                 } else {
                     System.out.println("Here are the tasks in your list: ");
                     for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println(i+1 + ". [" + taskList.get(i).checkIfDone() + "] " + taskList.get(i).action);
+                        System.out.println(i + 1 + "." + taskList.get(i));
                     }
                 }
-            } else {
-                Task t = new Task(line);
+            } else if (line.startsWith("todo")) {
+                Task t = new Todo(line.substring(5));
                 taskList.add(t);
-                System.out.println("added: " + line);
+                System.out.println("Got it. I've added this task: " + System.lineSeparator() + t + System.lineSeparator() + "Now you have " + taskList.size() + " tasks in the list.");
+            } else if (line.startsWith("deadline")) {
+                int startOfDate = line.indexOf('/');
+                Task t = new Deadline(line.substring(9, startOfDate), line.substring(startOfDate + 4));
+                taskList.add(t);
+                System.out.println("Got it. I've added this task: " + System.lineSeparator() + t + System.lineSeparator() + "Now you have " + taskList.size() + " tasks in the list.");
+            } else if (line.startsWith("event")) {
+                int startOfDate = line.indexOf('/');
+                    Task t = new Event(line.substring(6, startOfDate), line.substring(startOfDate + 4));
+                    taskList.add(t);
+                System.out.println("Got it. I've added this task: " + System.lineSeparator() + t + System.lineSeparator() + "Now you have " + taskList.size() + " tasks in the list.");
             }
                 line = in.nextLine();
         }

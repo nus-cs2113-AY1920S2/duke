@@ -18,4 +18,9 @@ public class Task {
     public boolean markAsDone() {
         return isDone = true;
     }
+
+    @Override
+    public String toString() {
+        return "[" + checkIfDone() + "] " + action;
+    }
 }
