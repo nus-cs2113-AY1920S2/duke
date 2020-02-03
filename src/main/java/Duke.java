@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-	static ArrayList<Task> list = new ArrayList<>();
-	
-	public static String makeDone(String line) {
-		String msg = "";
-		// sets a specified task as done
+    static ArrayList<Task> list = new ArrayList<>();
+    
+    public static String makeDone(String line) {
+        String msg = "";
+        // sets a specified task as done
         int index = Integer.valueOf(line.split(" ")[1]);
         if (index > list.size()) {
             msg += "No such task!";
@@ -18,43 +18,43 @@ public class Duke {
             msg += "    " + list.get(index - 1).toString();
         }
         return msg;
-	}
-	
-	public static String addTodo(String line) {
-		String msg = "";
-		Task todo = new ToDo(line.substring(5));
-    	list.add(todo);
-    	msg += "Got it. I've added this task: " + '\n';
-    	msg += "    " + todo.toString() + '\n';
-    	msg += "  Now you have " + list.size() + " task(s) in the list.";
-    	return msg;
-	}
-	
-	public static String addDeadline(String line) {
-		String msg = "";
-		int ind1 = line.indexOf('/');
-    	Task deadline = new Deadline(line.substring(9, ind1 - 1), line.substring(ind1 + 4));
-    	list.add(deadline);
-    	msg += "Got it. I've added this task: " + '\n';
-    	msg += "    " + deadline.toString() + '\n';
-    	msg += "  Now you have " + list.size() + " task(s) in the list.";
-    	return msg;
-	}
-	
-	public static String addEvent(String line) {
-		String msg = "";
-		int ind1 = line.indexOf('/');
-    	Task event = new Event(line.substring(6, ind1 - 1), line.substring(ind1 + 4));
-    	list.add(event);
-    	msg += "Got it. I've added this task: " + '\n';
-    	msg += "    " + event.toString() + '\n';
-    	msg += "  Now you have " + list.size() + " task(s) in the list.";
-    	return msg;
-	}
-	
-	public static String list() {
-		String msg = "";
-		// accesses the list
+    }
+    
+    public static String addTodo(String line) {
+        String msg = "";
+        Task todo = new ToDo(line.substring(5));
+        list.add(todo);
+        msg += "Got it. I've added this task: " + '\n';
+        msg += "    " + todo.toString() + '\n';
+        msg += "  Now you have " + list.size() + " task(s) in the list.";
+        return msg;
+    }
+    
+    public static String addDeadline(String line) {
+        String msg = "";
+        int ind1 = line.indexOf('/');
+        Task deadline = new Deadline(line.substring(9, ind1 - 1), line.substring(ind1 + 4));
+        list.add(deadline);
+        msg += "Got it. I've added this task: " + '\n';
+        msg += "    " + deadline.toString() + '\n';
+        msg += "  Now you have " + list.size() + " task(s) in the list.";
+        return msg;
+    }
+    
+    public static String addEvent(String line) {
+        String msg = "";
+        int ind1 = line.indexOf('/');
+        Task event = new Event(line.substring(6, ind1 - 1), line.substring(ind1 + 4));
+        list.add(event);
+        msg += "Got it. I've added this task: " + '\n';
+        msg += "    " + event.toString() + '\n';
+        msg += "  Now you have " + list.size() + " task(s) in the list.";
+        return msg;
+    }
+    
+    public static String list() {
+        String msg = "";
+        // accesses the list
         if (list.size() == 0) {
             msg += "list is empty";
         } else {
@@ -67,8 +67,8 @@ public class Duke {
             }
         }
         return msg;
-	}	
-	
+    } 
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String name = "**Rick**";
@@ -88,11 +88,11 @@ public class Duke {
             } else if (str.split(" ")[0].equals("done")) {
                 msg += makeDone(str);
             } else if (str.split(" ")[0].equals("todo")) {
-            	msg += addTodo(str);
+                msg += addTodo(str);
             } else if (str.split(" ")[0].equals("deadline")) {
-            	msg += addDeadline(str);
+                msg += addDeadline(str);
             } else if (str.split(" ")[0].equals("event")) {
-            	msg += addEvent(str);
+                msg += addEvent(str);
             } else {
                 msg += "Unknown command";
             }
