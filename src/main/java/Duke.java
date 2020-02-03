@@ -53,12 +53,8 @@ public class Duke {
 
     public static void listTask(){
         System.out.println("\tHere are the tasks in your list:");
-        int currentCount = 0;
-        while(currentCount < taskCount) {
-            System.out.println("\t" + (currentCount + 1) + ".["
-                    + tasks[currentCount].getStatusIcon() + "] "
-                    + tasks[currentCount].getDescription());
-            currentCount++;
+        for(int i = 0; i < taskCount; i++) {
+            System.out.println("\t" + (i + 1) + "." + tasks[i]);
         }
     }
     public static void markAsDone(String userResponde){
@@ -69,9 +65,25 @@ public class Duke {
     }
 
     public static void addNewTask(String userResponde){
-        tasks[taskCount] = new Task(userResponde);
+        if(userResponde.startsWith("todo")){
+            tasks[taskCount] = new Todo(userResponde.substring(5));
+        }
+        else if(userResponde.startsWith("deadline")){
+            int dividerPosition = userResponde.indexOf(" /by");
+            String taskName = userResponde.substring(9,dividerPosition);
+            String deadlineTime = userResponde.substring(dividerPosition + 5);
+            tasks[taskCount] = new Deadline(taskName,deadlineTime);
+        }
+        else if(userResponde.startsWith("event")){
+            int dividerPosition = userResponde.indexOf(" /at");
+            String taskName = userResponde.substring(6,dividerPosition);
+            String deadlineTime = userResponde.substring(dividerPosition + 5);
+            tasks[taskCount] = new Event(taskName,deadlineTime);
+        }
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t  " + tasks[taskCount]);
+        System.out.println("\tNow you have " + (taskCount+1) + " tasks in the list");
         taskCount++;
-        System.out.println("\tadded: " + userResponde);
     }
 
 
