@@ -23,9 +23,17 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getTaskType(){
+    public String getTaskType() {
         return null;
     }
 
+    public void printAddDetails(int taskCounter) {
+        System.out.println("The following task has been added:\n[" + getTaskType() +"][" + getStatusIcon() + "] " + getDescription());
+        System.out.println("\nYou've got " + taskCounter + " task(s) in the list!\n");
+    }
+
+    public void printListDetails(int count) {
+        System.out.println("["+ getTaskType() + "][" + getStatusIcon() + "] " + count + ". " + getDescription());
+    }
 
 }

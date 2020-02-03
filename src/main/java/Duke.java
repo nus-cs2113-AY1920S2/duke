@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,8 +8,6 @@ public class Duke {
     public static final int LENGTH_DEADLINE = 9;
     public static final int LENGTH_EVENT = 6;
     public static final int LENGTH_TODO = 5;
-
-
 
     public static void getDateTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -43,7 +40,7 @@ public class Duke {
             System.out.println("No tasks at the moment!");
         } else {
             for (Task currentTask : tasks) {
-                System.out.println("["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + count + ". " + currentTask.getDescription());
+                currentTask.printListDetails(count);
                 count++;
             }
         }
@@ -54,7 +51,9 @@ public class Duke {
         System.out.println("Commands: ");
         System.out.println("List: lists all recorded tasks \nusage: list\n");
         System.out.println("Done: mark task as completed \nusage: done <task number>\n");
-        System.out.println("To add new task, just type it out \nAvoid using other keywords as the first word\n");
+        System.out.println("Todo: Tasks without date/time \nUsage: Todo <task> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Event: Event including date/time \nUsage: Event <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Deadline: Tasks including date/time \nUsage: Deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
         System.out.println("");
     }
 
@@ -80,30 +79,36 @@ public class Duke {
     }
 
     public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
-        String itemName = taskDescription.substring(LENGTH_DEADLINE);
-        Task newTask = new Deadline(itemName);
-        tasks.add(newTask);
-        printAddedMessage(newTask, taskCounter);
+        try {
+            String itemName = taskDescription.substring(LENGTH_DEADLINE);
+            String[] words = itemName.split("/");
+            Task newTask = new Deadline(words[0].trim(), words[1].trim());
+            tasks.add(newTask);
+            newTask.printAddDetails(taskCounter);
+        } catch (Exception e) {
+            System.out.println("Please input the date using the specified format");
+        }
     }
 
     public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
-        String itemName = taskDescription.substring(LENGTH_EVENT);
-        Task newTask = new Event(itemName);
-        tasks.add(newTask);
-        printAddedMessage(newTask, taskCounter);
+        try {
+            String itemName = taskDescription.substring(LENGTH_EVENT);
+            String[] words = itemName.split("/");
+            Task newTask = new Event(words[0].trim(), words[1].trim());
+            tasks.add(newTask);
+            newTask.printAddDetails(taskCounter);
+        } catch (Exception e) {
+            System.out.println("Please input the date using the specified format");
+        }
     }
 
     public static void addTodo(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
         String itemName = taskDescription.substring(LENGTH_TODO);
-        Task newTask = new ToDo(itemName);
+        Task newTask = new ToDo(itemName.trim());
         tasks.add(newTask);
-        printAddedMessage(newTask, taskCounter);
+        newTask.printAddDetails(taskCounter);
     }
 
-    public static void printAddedMessage(Task task, int taskCounter) {
-        System.out.println("The following task has been added\n[" + task.getTaskType() +"][" + task.getStatusIcon() + "] " + task.getDescription());
-        System.out.println("\nYou've got " + taskCounter + " task(s) in the list!\n");
-    }
 
     public static void main(String[] args) {
 
