@@ -18,4 +18,15 @@ public class Task {
     public void setIsCompleted() {
         this.isDone = true;
     }
+
+    public String getTaskInfo() {
+        return ("[" + getStatusIcon() + "] " + description);
+    }
+
+    public String justAddedText(int taskCount) {
+        return ("Got it. I've added this task:\n" +
+                TaskManager.MORE_INDENTATION + getTaskInfo() + "\n " +
+                TaskManager.INDENTATION +
+                "Now you have " + (taskCount+1) + " tasks in the list.");
+    }
 }
