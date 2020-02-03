@@ -20,6 +20,10 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    /** index suffix for done and delete command */
+    public static final int DELETE_INDEX = 7;
+    public static final int DONE_INDEX = 5;
+
     /**
      * Parses user input into command for execution.
      *
@@ -126,11 +130,20 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param commandWord full user input string
+     * @param args full user input string
      * @return the DoneCommand obj constructed on the user input
      */
-    private Command prepareDone (String commandWord) {
-        return new DoneCommand(Integer.parseInt(commandWord.substring(5)));
+    private Command prepareDone (String args) {
+        try {
+            final int targetIndex = parseArgsAsDisplayedIndex(args, DONE_INDEX);//get target index
+            return new DoneCommand(targetIndex);
+        } catch (ParseException pe) {
+            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        //return new DoneCommand(Integer.parseInt(commandWord.substring(5)));
     }
 
     /**
@@ -141,7 +154,7 @@ public class Parser {
      */
     private Command prepareDelete(String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);//get target index
+            final int targetIndex = parseArgsAsDisplayedIndex(args, DELETE_INDEX);//get target index
             return new DeleteCommand(targetIndex); //delete
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
@@ -158,12 +171,16 @@ public class Parser {
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
+    private int parseArgsAsDisplayedIndex(String args, int index) throws ParseException, NumberFormatException,
+            StringIndexOutOfBoundsException{
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            throw new ParseException("Could not find index number to parse");
+            throw new ParseException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        return Integer.parseInt(args.substring(7));
+        if (args.length() < index) {
+            throw new StringIndexOutOfBoundsException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+        return Integer.parseInt(args.substring(index));
     }
 
 }
