@@ -23,7 +23,6 @@ public class Duke {
             } else if (userData.toLowerCase().equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < Task.getListCount(); i += 1) {
-                    //System.out.println(i + 1 + ". " + "[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
                     System.out.println(i + 1 + ". " + tasks[i].toString());
                 }
             } else if (userData.toLowerCase().startsWith("done")) {
