@@ -13,7 +13,7 @@ public class Duke {
 
 
         String line;
-        String[] ls = new String[100]; 
+        Task[] tasks = new Task[100]; 
         int items = 0; 
 
         do {
@@ -25,13 +25,24 @@ public class Duke {
                 break;
             } else if (line.equals("list")) {
                 System.out.println(lines);
+                System.out.println("Here are the tasks in your list: "); 
                 for (int i = 0; i < items; i++) { 
-                    System.out.println((i+1) + ". " +  ls[i]); 
+                    System.out.println((i+1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description); 
                 }
+            } else if (line.contains("done")) { 
+                int line_length = line.length(); 
+                int number = line.charAt(line_length-1) - '0';
+                Task doneTask = tasks[number-1];
+                doneTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + doneTask.getStatusIcon() + "] " + doneTask.description);
+
+                
             } else { 
-            System.out.println(lines);  
+            System.out.println(lines); 
+            Task t = new Task(line);  
             System.out.println("added: " + line); 
-            ls[items] = line;
+            tasks[items] = t;
             items++; 
             }
 
