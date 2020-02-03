@@ -3,8 +3,8 @@ public class Task {
     private String taskStatus;
     private String taskName;
     protected String taskType;
-    public static final String NOT_DONE = "[\u2717]";
-    public static final String DONE = "[\u2713]";
+    public static final String NOT_DONE = "[\u00D7]";
+    public static final String DONE = "[\u221A]";
 
     public Task(String taskName){
         setTaskName(taskName);
