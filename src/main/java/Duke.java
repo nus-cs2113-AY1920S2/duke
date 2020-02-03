@@ -12,7 +12,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?\n");
 
-        Scanner scan = new Scanner( System.in );
+        Scanner scan = new Scanner(System.in);
         Task[] tasks = new Task[101];
         int count =0;
 
@@ -33,26 +33,32 @@ public class Duke {
                 System.out.println(tasks[index-1].toString());
             } else if (userData.toLowerCase().startsWith("deadline")) {
                 String[] removeDeadline = userData.split(" ", 2);
-                String[] newData = removeDeadline[1].split("/by");
+                String[] newData = removeDeadline[1].split(" /by ");
                 if(newData.length == 1){
                     System.out.println("Invalid command");
                 }else {
                     tasks[Task.getListCount()] = new Deadline(newData[0], newData[1]);
-                    System.out.println("Got it. I've added this task:" + System.lineSeparator() + tasks[Task.getListCount() - 1].toString() + System.lineSeparator() + "Now you have " + Task.getListCount() + " task(s) in the list.");
+                    System.out.println("Got it. I've added this task:" + System.lineSeparator()
+                            + tasks[Task.getListCount() - 1].toString() + System.lineSeparator()
+                            + "Now you have " + Task.getListCount() + " task(s) in the list.");
                 }
             } else if (userData.toLowerCase().startsWith("event")) {
                 String[] removeEvent = userData.split(" ", 2);
-                String[] newData = removeEvent[1].split("/at");
+                String[] newData = removeEvent[1].split(" /at ");
                 if(newData.length == 1){
                     System.out.println("Invalid command");
                 }else {
                     tasks[Task.getListCount()] = new Event(newData[0], newData[1]);
-                    System.out.println("Got it. I've added this task:" + System.lineSeparator() + tasks[Task.getListCount() - 1].toString() + System.lineSeparator() + "Now you have " + Task.getListCount() + " task(s) in the list.");
+                    System.out.println("Got it. I've added this task:" + System.lineSeparator()
+                            + tasks[Task.getListCount() - 1].toString() + System.lineSeparator()
+                            + "Now you have " + Task.getListCount() + " task(s) in the list.");
                 }
             } else if (userData.toLowerCase().startsWith("todo")) {
                 String[] removeTodo = userData.split(" ", 2);
                 tasks[Task.getListCount()] = new Todo(removeTodo[1]);
-                System.out.println("Got it. I've added this task:" + System.lineSeparator() + tasks[Task.getListCount() - 1].toString() + System.lineSeparator() + "Now you have " + Task.getListCount() + " task(s) in the list.");
+                System.out.println("Got it. I've added this task:" + System.lineSeparator()
+                        + tasks[Task.getListCount() - 1].toString() + System.lineSeparator()
+                        + "Now you have " + Task.getListCount() + " task(s) in the list.");
             }else{
                 System.out.println("Invalid command ");
             }
