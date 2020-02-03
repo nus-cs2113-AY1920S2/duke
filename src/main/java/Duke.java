@@ -17,50 +17,71 @@ public class Duke {
             System.out.println("____________________________________________________________");
 
             if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                int counter = 0;
-                for (Task task : tasks) {
-                    counter++;
-                    System.out.println(counter + ". " + task);
-                }
+                viewList(tasks);
             } else if (inputArray[0].equals("todo")) {
-                ToDo newToDo = new ToDo(inputArray[1]);
-                tasks.add(newToDo);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newToDo);
-                System.out.format("Now you have %d tasks in the list.\n", tasks.size());
+                addToDo(tasks, inputArray[1]);
             } else if (inputArray[0].equals("deadline")) {
-                String[] deadlineInfo = inputArray[1].split("/by ", 2);
-                Deadline newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                tasks.add(newDeadline);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newDeadline);
-                System.out.format("Now you have %d tasks in the list.\n", tasks.size());
+                addDeadline(tasks, inputArray[1]);
             } else if (inputArray[0].equals("event")) {
-                String[] eventInfo = inputArray[1].split("/at ", 2);
-                Event newEvent = new Event(eventInfo[0], eventInfo[1]);
-                tasks.add(newEvent);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newEvent);
-                System.out.format("Now you have %d tasks in the list.\n", tasks.size());
+                addEvent(tasks, inputArray[1]);
             } else if (inputArray[0].equals("done")) {
-                Task doneTask = tasks.get(Integer.parseInt(inputArray[1]) - 1);
-                doneTask.isDone = true;
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(doneTask);
+                markDone(tasks, inputArray[1]);
             } else if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                exitMessage();
                 exitProgram = true;
-            } else {
-                Task newTask = new Task(input);
-                tasks.add(newTask);
-                System.out.println("added: " + newTask);
             }
 
             System.out.println("____________________________________________________________");
 
         }
 
+    }
+
+    private static void markDone(List<Task> tasks, String s) {
+        int taskIndex = Integer.parseInt(s) - 1;
+        Task doneTask = tasks.get(taskIndex);
+        doneTask.isDone = true;
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(doneTask);
+    }
+
+    private static void exitMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void addEvent(List<Task> tasks, String s) {
+        String[] eventInfo = s.split("/at ", 2);
+        Event newEvent = new Event(eventInfo[0], eventInfo[1]);
+        tasks.add(newEvent);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newEvent);
+        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
+    }
+
+    private static void addDeadline(List<Task> tasks, String s) {
+        String[] deadlineInfo = s.split("/by ", 2);
+        Deadline newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+        tasks.add(newDeadline);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newDeadline);
+        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
+    }
+
+    private static void addToDo(List<Task> tasks, String description) {
+        ToDo newToDo = new ToDo(description);
+        tasks.add(newToDo);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newToDo);
+        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
+    }
+
+    private static void viewList(List<Task> tasks) {
+        System.out.println("Here are the tasks in your list:");
+        int counter = 0;
+        for (Task task : tasks) {
+            counter++;
+            System.out.println(counter + ". " + task);
+        }
     }
 
     private static void welcomeMessage() {
