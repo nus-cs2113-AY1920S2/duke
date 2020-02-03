@@ -24,4 +24,10 @@ public class Task {
     public static int getListCount() {
         return listCount;
     }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
 }
