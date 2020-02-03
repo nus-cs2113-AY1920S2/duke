@@ -11,13 +11,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         greet();
 
-        String responde;
+        String userResponde;
         Scanner in = new Scanner(System.in);
         do {
-            responde = in.nextLine();
-            addList(responde);
+            userResponde = in.nextLine();
+            dukeResponde(userResponde);
 
-        }while(!responde.equals("bye"));
+        }while(!userResponde.equals("bye"));
 
     }
 
@@ -29,37 +29,49 @@ public class Duke {
         System.out.println();
     }
 
-    public static void addList(String line){
+    public static void dukeResponde(String userResponde){
         printLine();
-        if(line.equals("bye")){
+        if(userResponde.equals("bye")){
             System.out.println("\tBye. Hope to see you again soon!");
         }
-        else if(line.equals("list")) {
-            System.out.println("\tHere are the tasks in your list:");
-            int currentCount = 0;
-            while(currentCount < taskCount){
-                System.out.println("\t" + currentCount+1 + ".["
-                        + tasks[currentCount].getStatusIcon() + "] " + tasks[currentCount].getDescription());
-                currentCount++;
-            }
+        else if(userResponde.equals("list")) {
+            listTask();
         }
-        else if(line.startsWith("done")) {
-            int doneCount = Integer.parseInt(line.substring(5)) - 1;
-            tasks[doneCount].markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  [\u2713] " + tasks[doneCount].getDescription());
+        else if(userResponde.startsWith("done")) {
+            markAsDone(userResponde);
         }
         else{
-            tasks[taskCount] = new Task(line);
-            taskCount++;
-            System.out.println("\tadded: " + line);
+            addNewTask(userResponde);
         }
         printLine();
         System.out.println();
     }
 
     public static void printLine(){
-        System.out.println("____________________________________________________________");
+        System.out.println("\t____________________________________________________________");
+    }
+
+    public static void listTask(){
+        System.out.println("\tHere are the tasks in your list:");
+        int currentCount = 0;
+        while(currentCount < taskCount) {
+            System.out.println("\t" + (currentCount + 1) + ".["
+                    + tasks[currentCount].getStatusIcon() + "] "
+                    + tasks[currentCount].getDescription());
+            currentCount++;
+        }
+    }
+    public static void markAsDone(String userResponde){
+        int doneCount = Integer.parseInt(userResponde.substring(5)) - 1;
+        tasks[doneCount].markAsDone();
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t  [\u2713] " + tasks[doneCount].getDescription());
+    }
+
+    public static void addNewTask(String userResponde){
+        tasks[taskCount] = new Task(userResponde);
+        taskCount++;
+        System.out.println("\tadded: " + userResponde);
     }
 
 
