@@ -50,7 +50,9 @@ public class Duke {
                     break;
 
                 case "done":
-                    int taskNumber = myScanner.nextInt();
+                    String l = line.replace(" ","");
+                    int taskNumber = Integer.parseInt(l);
+                    System.out.println(taskNumber);
                     tasks[taskNumber-1].markAsDone(tasks[taskNumber-1]);
                     System.out.println("____________________________________________________________");
                     System.out.println("Great job! I've marked this task as done in your planner:");
