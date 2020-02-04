@@ -4,10 +4,10 @@ package tasks;
  * tasks that need to be done before a specific date/time
  * e.g., submit report by 11/10/2019 5pm
  */
-public class TaskEvent extends Task {
+public class Event extends Task {
     protected String dateStr;
 
-    public TaskEvent(TaskType category, String taskName, String dateStr) {
+    public Event(TaskType category, String taskName, String dateStr) {
         super(category, taskName);
         this.category = 'E';
         this.dateStr = dateStr;
