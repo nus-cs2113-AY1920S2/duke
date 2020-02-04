@@ -73,7 +73,7 @@ public class Duke {
         String str = readCommand();
         if (str.equals("bye")) {
             bye();
-        } else if (str.contains("done")) {
+        } else if (!str.equals("done") && str.contains("done")) {
             System.out.println("Mark task done");
             markDone(str);
             addTaskScreen();
@@ -105,6 +105,11 @@ public class Duke {
             Events newTask = new Events(task,date,time);
             addTask(newTask);
             addTaskScreen();
+        } else if(str.equals("done")){
+            System.out.println("____________________________________________________________");
+            System.out.println("Invalid input");
+            System.out.println("____________________________________________________________");
+            addTaskScreen();
         }
 
 
@@ -130,13 +135,6 @@ public class Duke {
     }
 
     public  static  void markDone(String str) throws IOException {
-        if(str.length() == 4){
-            System.out.println("____________________________________________________________");
-            System.out.println("Invalid input");
-            System.out.println("____________________________________________________________");
-            addTaskScreen();
-        }
-
         int dividerPosition = str.indexOf(" ");
         String index = str.substring(dividerPosition+1);
         int i = Integer.parseInt(index);
