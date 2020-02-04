@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
 
 public class Duke {
     private static final String LIST_COMMAND = "list";
@@ -17,22 +15,25 @@ public class Duke {
     // a array to store user input task
     private static List<Task> tasks = new ArrayList<>();
 
-    private static void addTask(String input) {
+    private static void addTask(String command, String description) {
         Task task = null;
-        String description = null;
-        if (input.startsWith(TODO_COMMAND)) {
-            description = input.substring(TODO_COMMAND.length()).trim();
-            task = new Todo(description);
-        } else if(input.startsWith(DEADLINE_COMMAND)) {
-            int byPosition = input.indexOf(DEADLINE_MARKER);
-            description = input.substring(DEADLINE_COMMAND.length(), byPosition).trim();
-            String by = input.substring(byPosition + DEADLINE_MARKER.length()).trim();
-            task = new Deadline(description, by);
-        } else if (input.startsWith(EVENT_COMMAND)) { // Event
-            int atPosition = input.indexOf(EVENT_MARKER);
-            description = input.substring(EVENT_COMMAND.length(), atPosition).trim();
-            String at = input.substring(atPosition + EVENT_MARKER.length()).trim();
-            task = new Event(description, at);
+        String taskDescription = null;
+        switch (command) {
+        case TODO_COMMAND:
+            taskDescription = description.trim();
+            task = new Todo(taskDescription);
+            break;
+        case DEADLINE_COMMAND:
+            String[] taskBy = description.split(DEADLINE_MARKER);
+            taskDescription = taskBy[0].trim();
+            String by = taskBy[1].trim();
+            task = new Deadline(taskDescription, by);
+            break;
+        case EVENT_COMMAND:
+            String[] taskAt = description.split(EVENT_MARKER);
+            taskDescription = taskAt[0].trim();
+            String at = taskAt[1].trim();
+            task = new Event(taskDescription, at);
         }
 
         tasks.add(task);
@@ -43,8 +44,7 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 
-    private static void markAsDone(String input) {
-        int taskNumber = Integer.parseInt(input.substring(4).trim());
+    private static void markAsDone(int taskNumber) {
         Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
         System.out.println("Nice! I've marked this task as done:");
@@ -62,6 +62,34 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        displayWelcomeMessage();
+        
+        Scanner in = new Scanner(System.in);
+        String input = null;
+
+        do {
+            input = in.nextLine();
+            String[] split = input.split("\\s+", 2); // limit: the number of segments after split
+            String command = split[0];
+            
+            switch (command) {
+            case LIST_COMMAND:
+                listTasks();
+                break;
+            case DONE_COMMAND:
+                markAsDone(Integer.parseInt(split[1].trim()));
+                break;
+            case BYE_COMMAND:
+                displayExitMessage();
+                break;
+            default:
+                addTask(command, split[1]);
+                break;
+            }
+        } while (!input.equals(BYE_COMMAND));
+    }    
+
+    private static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -71,30 +99,9 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?\n");
+    }
 
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        // Scanner in = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
-        Scanner in = new Scanner(System.in);
-        String input = null;
-
-        do {
-            input = in.nextLine();
-            switch (input) {
-            case LIST_COMMAND:
-                listTasks();
-                break;
-            case BYE_COMMAND:
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            default:
-                if (input.startsWith(DONE_COMMAND)) {
-                    markAsDone(input);
-                    break;
-                } else {
-                    addTask(input);
-                    break;
-                }
-            }
-        } while (!input.equals(BYE_COMMAND));
+    private static void displayExitMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }

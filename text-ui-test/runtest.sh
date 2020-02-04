@@ -20,6 +20,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+# -Dfile.encoding=UTF-8 let the tick and cross icon appears properly
 java -Dfile.encoding=UTF-8 -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output
