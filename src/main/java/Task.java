@@ -22,4 +22,9 @@ public class Task {
     public static boolean isValid(Task task) {
         return task != null;
     }
+    public String toString() {
+        String symbol = getStatusIcon();
+        String toPrint = String.format("[%s] %s", symbol, this.description );
+        return toPrint;
+    }
 }

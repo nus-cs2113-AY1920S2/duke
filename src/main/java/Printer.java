@@ -50,8 +50,7 @@ public class Printer {
             for (int i = 0; i < myList.size(); i++) {
                 printIndentation();
                 Task temp = myList.get(i);
-                String symbol = temp.getStatusIcon();
-                System.out.printf("%d.[%s] %s\n", i + 1, symbol, temp.getDescription());
+                System.out.printf("%d. %s\n", i + 1, temp);
             }
         }
         printLines();
