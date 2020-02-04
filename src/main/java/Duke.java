@@ -5,19 +5,19 @@ public class Duke {
     public static final int MAX_NO_OF_TASKS = 100;
     public static final int MAX_SUBSTRING_FIELDS = 2;
     public static int taskCount = 0;
-    private static String taskNumber = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static String curlyLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static String underscoredLine = "\t____________________________________________________________";
 
     private static void sayIntro(){
-        String introMessage = taskNumber + System.lineSeparator() + "Hello! I'm Duke\n"
-        + "What can I do for you?\n" + taskNumber + System.lineSeparator();
+        String introMessage = curlyLine + System.lineSeparator() + "Hello! I'm Duke\n"
+        + "What can I do for you?\n" + curlyLine + System.lineSeparator();
 
         System.out.println(introMessage);
     }
 
     private static void sayGoodbye(){
-        String goodbyeMessage = taskNumber + System.lineSeparator() + "Bye! Hope to see you again soon\n"
-        + taskNumber + System.lineSeparator();
+        String goodbyeMessage = curlyLine + System.lineSeparator() + "Bye! Hope to see you again soon\n"
+        + curlyLine + System.lineSeparator();
         String goodbyeMessage2 = "********************CONNECTION TERMINATED********************";
 
         System.out.println(goodbyeMessage);
