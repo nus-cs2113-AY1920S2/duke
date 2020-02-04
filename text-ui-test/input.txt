@@ -1,0 +1,13 @@
+list
+done 1
+todo read book
+deadline finish project /by November 5th
+deadline return book by Sunday
+event project meeting /at Monday 5:00pm
+event orientation
+remove task 1 from the list
+done 1
+done 2
+done 2
+list
+bye

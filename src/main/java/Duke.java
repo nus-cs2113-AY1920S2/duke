@@ -31,6 +31,9 @@ public class Duke {
     /** Flag to check whether the main program should be running or not */
     private static boolean isProgramRunning = true;
 
+    /** Flag to avoid printing unnecessary output when debugging */
+    private static boolean inDebugMode = false;
+
 
     /**
      * Prints horizontal line for chat bot.
@@ -64,23 +67,25 @@ public class Duke {
      * Greets user.
      */
     public static void greetUser () {
-        String name = "Zapato";
 
-        printLine(false);
-        printLogo();
+        if (!inDebugMode) {
+            String name = "Zapato";
 
-        System.out.println("\tHello from " + name + ":)");
-        System.out.println("\tWhat can I do for you? (type \"help\" for more info)");
-        printLine(true);
+            printLine(false);
+            printLogo();
+
+            System.out.println("\tHello from " + name + ":)");
+            System.out.println("\tWhat can I do for you? (type \"help\" for more info)");
+            printLine(true);
+        }
+
     }
 
     /**
      * Displays farewell message.
      */
     public static void displayFarewell () {
-        printLine(false);
-        System.out.println("\tBye. Hope to see you soon :)!");
-        printLine(true);
+        replayBack("Bye! Hope to see you soon :)");
     }
 
     /**
@@ -89,6 +94,7 @@ public class Duke {
      * @param msg Message to print.
      */
     public static void replayBack (String msg) {
+
         printLine(false);
         System.out.println("\t" + msg);
         printLine(true);
@@ -103,7 +109,7 @@ public class Duke {
         if (taskCounter < MAX_TASK_NUM) {
             tasks[taskCounter++] = task;
 
-            String msg = "Okay! I have added the following task to your list: ";
+            String msg = "Okay! I have added the following task to your list:";
             msg += System.lineSeparator() + "\t\t\u2023" + task;
             msg += System.lineSeparator() + "\tNow you have " + (taskCounter) + " tasks in your list :)";
 
@@ -136,8 +142,8 @@ public class Duke {
                         tasks[taskIndex - 1];
 
             } else {
-                msg = "The task: " + System.lineSeparator() + "\t\t\u2023 " + tasks[taskIndex - 1] +
-                        "\t" + "has already been marked as done before";
+                msg = "The task:" + System.lineSeparator() + "\t\t\u2023 " + tasks[taskIndex - 1] +
+                        System.lineSeparator() + "\t" + "has already been marked as done before";
             }
         }
 
@@ -155,7 +161,7 @@ public class Duke {
             return;
         }
 
-        String msg = "Here is your list so far: " + System.lineSeparator() + System.lineSeparator();
+        String msg = "Here is your list so far:" + System.lineSeparator() + System.lineSeparator();
         for ( int i = 0; i < taskCounter; i++ ) {
 
             if ( i == taskCounter - 1 ) {
@@ -394,6 +400,10 @@ public class Duke {
 
 
     public static void main (String[] args) {
+
+        if (args.length > 0 && args[0].equals("1")) {
+            inDebugMode = true;
+        }
 
         greetUser();
 
