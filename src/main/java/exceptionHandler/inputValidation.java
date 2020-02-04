@@ -1,6 +1,6 @@
-import org.w3c.dom.ls.LSOutput;
+package exceptionHandler;
 
-public class DukeException {
+public class inputValidation {
     protected String defaultStr = "I couldn't process that: ";
     protected String doneNumErr = defaultStr + "Please indicate the item number without letters (i.e. done 2)";
     protected String doneParamCount = defaultStr + "Please indicate an item number (i.e. done 2)";
@@ -8,7 +8,7 @@ public class DukeException {
     protected String todoParamCount = defaultStr + "Please give me a todo detail";
     protected String eventDateMissing = defaultStr + "When is the event?";
     protected String eventMissingDesc = defaultStr + "I need more info!";
-    public DukeException() {
+    public inputValidation() {
 
     }
 
