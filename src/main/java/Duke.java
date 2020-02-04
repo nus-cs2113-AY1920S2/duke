@@ -3,8 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    public static final String EXITCOMMAND = "4";
     protected static List taskList = new LinkedList();
-
     public static void printIntro() {
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -21,30 +21,28 @@ public class Duke {
     }
     public static void executeTaskManager(String inst) {
         TaskManager manage = new TaskManager(taskList);
-        addTask add = new addTask(taskList);
-        deleteTask delete = new deleteTask(taskList);
-        printTasks print = new printTasks(taskList);
+        Scanner scan = new Scanner(System.in);
         if (inst.equals("1")) {
+            addTask add = new addTask(taskList);
             add.exe();
         } else if (inst.equals("2")) {
+            deleteTask delete = new deleteTask(taskList);
             delete.exe();
         } else if (inst.equals("3")) {
+            printTasks print = new printTasks(taskList);
             print.exe();
         } else {
             System.out.println("    Sorry I don't understand your command :(");
             manage.printInst();
         }
-
     }
     public static void main(String[] args) {
         TaskManager manage = new TaskManager(taskList);
-
         printIntro();
         Scanner scan = new Scanner(System.in);
         manage.printInst();
         String inst = scan.next();
-
-        while (!inst.equals("4")) {
+        while (!inst.equals(EXITCOMMAND)) {
             executeTaskManager(inst);
             inst = scan.next();
         }
