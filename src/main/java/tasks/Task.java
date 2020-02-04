@@ -1,32 +1,34 @@
+package tasks;
+
+/**
+ * Also known as ToDos: tasks without any date/time attached to it
+ * e.g., visit new theme park
+  */
 public class Task {
-    protected int taskID;
     protected String taskName;
     protected boolean isDone;
+    protected char category;
 
-    public Task(int taskID, String taskName) {
-        this.taskID = taskID;
+    public Task(TaskType category, String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.category = 'T';
+    }
+
+    public char getCategory() {
+        return category;
     }
 
     public String getStatusIcon(){
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public void markDone(int taskID){
+    public void markDone(){
         this.isDone = true;
     }
 
 
     /** Getters & Setters **/
-    public int getTaskID() {
-        return taskID;
-    }
-
-    public void setTaskID(int taskID) {
-        this.taskID = taskID;
-    }
-
     public String getTaskName() {
         return taskName;
     }
@@ -41,5 +43,9 @@ public class Task {
 
     public void setDone() {
         isDone = true;
+    }
+
+    public String toString() {
+        return ("[" +getCategory() +"][" + getStatusIcon() +"] " +getTaskName() );
     }
 }
