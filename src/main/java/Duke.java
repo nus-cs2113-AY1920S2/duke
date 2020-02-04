@@ -14,6 +14,7 @@ public class Duke {
 
         do {
             input = reader.nextLine();
+            input = initialInputProcessing(input);
             printLine();
             if (input.equals("bye")) {
                 // close the interpreter
@@ -40,6 +41,11 @@ public class Duke {
             }
             printLine();
         } while (!input.equals("bye"));
+    }
+
+    private static String initialInputProcessing(String input) {
+        input = input.trim();   // strip leading & trailing spaces
+        return input;
     }
 
     public static void printLine() {
