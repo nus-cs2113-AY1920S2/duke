@@ -23,7 +23,7 @@ public class Deadlines extends Task {
     public String taskWithSymbol() {
         return "[D]" 
                 + ((this.isDone) ? "[✓]" : "[✗]")
-                + "   " 
+                + " " 
                 + this.taskName;
     }
 

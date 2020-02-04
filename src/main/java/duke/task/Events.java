@@ -23,7 +23,7 @@ public class Events extends Task {
     public String taskWithSymbol() {
         return "[E]" 
                 + ((this.isDone) ? "[✓]" : "[✗]")
-                + "   " 
+                + " " 
                 + this.taskName;
     }
 

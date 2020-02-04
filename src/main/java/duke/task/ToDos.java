@@ -14,7 +14,7 @@ public class ToDos extends Task {
     public String taskWithSymbol() {
         return "[T]" 
                 + ((this.isDone) ? "[✓]" : "[✗]")
-                + "   " 
+                + " " 
                 + this.taskName;
     }
 
