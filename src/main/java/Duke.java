@@ -139,8 +139,6 @@ public class Duke {
 
         int dividerPosition = str.indexOf(" ");
         String index = str.substring(dividerPosition+1);
-
-
         int i = Integer.parseInt(index);
         System.out.println(i);
         if(i == 0){
