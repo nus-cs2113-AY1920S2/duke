@@ -41,6 +41,15 @@ public class Printer {
         printLines();
     }
 
+    public static void printConfirmationMessage(ToDo task) {
+        printLines();
+        printIndentation();
+        System.out.println("Got it. I've added this task:");
+        printIndentation();
+        System.out.println("  " + task);
+
+    }
+
     public static void printTasks(List<Task> myList) {
         printLines();
         if (myList.isEmpty()) {

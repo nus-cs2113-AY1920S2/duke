@@ -83,7 +83,7 @@ public class Duke {
                 String description = commands[1];
                 ToDo toDoTask = new ToDo(description);
                 myTasks.storeTasks(toDoTask);
-                Printer.printConfirmationMessage(toDoTask.description);
+                Printer.printConfirmationMessage(toDoTask);
                 continue;
 
             default:

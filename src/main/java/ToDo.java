@@ -7,7 +7,7 @@ public class ToDo extends Task {
     }
     public String toString() {
         String toPrint = super.toString();
-        toPrint = String.format("%s %s", this.icon, toPrint);
+        toPrint = String.format("%s%s", this.icon, toPrint);
         return toPrint;
     }
 }
