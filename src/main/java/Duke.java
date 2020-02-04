@@ -52,7 +52,7 @@ public class Duke {
         String userParams = inputScanner.nextLine(); // Get user input after first word
 
         // Main execution loop
-        while(!userCommand.equals("bye") && !userCommand.equals("Bye")) {
+        while(!userCommand.equalsIgnoreCase("bye")) {
             switch (userCommand) {
             case "todo":
                 taskList.add(new Todo(userParams));
@@ -82,6 +82,7 @@ public class Duke {
                 break;
             default:
                 formatPrint("Sorry, I didn't recognize that command.");
+                break;
             }
 
             System.out.println("You have " + taskList.size() + " task/s. (type 'list' to list your tasks)");
