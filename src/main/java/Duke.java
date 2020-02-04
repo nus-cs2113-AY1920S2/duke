@@ -3,19 +3,28 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         printGreeting();
-        echoCommands();
+        trackTasks();
         printExitMessage();
     }
 
-    private static void echoCommands() {
-        String line;
+    private static void trackTasks() {
+        String[] tasks = new String[100];
+        String input;
+        int taskCounter = 0;
         Scanner in = new Scanner(System.in);
         while(true) {
-            line = in.nextLine();
-            if (line.equals("bye")) {
+            input = in.nextLine();
+            if (input.equals("bye")) {
                 break;
+            } else if (input.equals("list")) {
+                for (int i = 0; i < taskCounter; i++) {
+                    System.out.println("    " + Integer.toString(i+1) + ". " + tasks[i]);
+                }
+            } else {
+                tasks[taskCounter] = input;
+                System.out.println("    added: " + input);
+                taskCounter++;
             }
-            System.out.println("    " + line);
         }
     }
 
