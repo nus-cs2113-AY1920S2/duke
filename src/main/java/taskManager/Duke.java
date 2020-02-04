@@ -1,4 +1,6 @@
+package taskManager;
 import java.util.Scanner;
+import exceptionHandler.inputValidation;
 public class Duke {
     private static int MAXIMUM_TASKS = 100;
 
@@ -42,7 +44,7 @@ public class Duke {
     }
 
     private static String cmdTypeIdentifier(String cmd, int taskCount) {
-        DukeException exception = new DukeException();
+        inputValidation exception = new inputValidation();
         if (cmd.equalsIgnoreCase("list")){
             return "LIST";
         } else if (cmd.substring(0,4).equalsIgnoreCase("done")) {
