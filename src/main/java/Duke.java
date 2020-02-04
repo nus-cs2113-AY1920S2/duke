@@ -17,6 +17,7 @@
 import java.util.Scanner;
 
 public class Duke {
+    public static final int LIMIT = 2;
     static Storage myTasks = new Storage();
 
     public static void start() {
@@ -46,7 +47,7 @@ public class Duke {
     }
 
     public static String[] parseCommand(String description) {
-        String[] commands = description.split(" ");
+        String[] commands = description.split(" ", LIMIT);
         return commands;
     }
 
@@ -77,6 +78,12 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Printer.printError();
                 }
+                continue;
+            case "todo":
+                String description = commands[1];
+                ToDo toDoTask = new ToDo(description);
+                myTasks.storeTasks(toDoTask);
+                Printer.printConfirmationMessage(toDoTask.description);
                 continue;
 
             default:
