@@ -12,9 +12,13 @@ public class Task {
     }
 
 
-    public String markAsdone () {
+    public String markAsDone () {
         this.isDone = true;
         return ("[" + this.getStatusIcon() + "] "+ this.description);
+    }
+
+    public String toString() {
+        return ("["+ this.getStatusIcon() + "] " + this.description);
     }
 
 
