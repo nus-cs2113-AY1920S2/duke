@@ -1,7 +1,11 @@
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void printIntro(){
+    protected static List taskList = new LinkedList();
+
+    public static void printIntro() {
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -15,27 +19,35 @@ public class Duke {
                 "    Bye. Hope to see you again soon!\n" +
                 "    ✻❊✽✼❉✱✲✾❃❋❈❆✿❀❁" );
     }
-    public static void executeTaskManager(){
-        TaskManager task = new TaskManager();
-        TaskManager.printInst();
-        Scanner scan = new Scanner(System.in);
-        String inst = scan.next();
-        while (!inst.equals("4")) {
-            TaskManager.exe(inst);
-            inst = scan.next();
+    public static void executeTaskManager(String inst) {
+        TaskManager manage = new TaskManager(taskList);
+        addTask add = new addTask(taskList);
+        deleteTask delete = new deleteTask(taskList);
+        printTasks print = new printTasks(taskList);
+        if (inst.equals("1")) {
+            add.exe();
+        } else if (inst.equals("2")) {
+            delete.exe();
+        } else if (inst.equals("3")) {
+            print.exe();
+        } else {
+            System.out.println("    Sorry I don't understand your command :(");
+            manage.printInst();
         }
+
     }
     public static void main(String[] args) {
+        TaskManager manage = new TaskManager(taskList);
+
         printIntro();
-        executeTaskManager();
-//        TaskManager task = new TaskManager();
-//        TaskManager.printInst();
-//        Scanner scan = new Scanner(System.in);
-//        String inst = scan.next();
-//        while (!inst.equals("4")) {
-//            TaskManager.exe(inst);
-//            inst = scan.next();
-//        }
+        Scanner scan = new Scanner(System.in);
+        manage.printInst();
+        String inst = scan.next();
+
+        while (!inst.equals("4")) {
+            executeTaskManager(inst);
+            inst = scan.next();
+        }
         printExit();
     }
 }
