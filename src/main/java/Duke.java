@@ -7,19 +7,10 @@ public class Duke {
 
     public static void main(String[] args) {
         String name = "Duke";
+        welcome(name);
+
         String input;
         Scanner reader = new Scanner(System.in);
-
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\tHello from\n" + logo);
-
-        printLine();
-        welcome(name);
-        printLine();
 
         do {
             input = reader.nextLine();
@@ -56,8 +47,17 @@ public class Duke {
     }
 
     public static void welcome(String name) {
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("\tHello from\n" + logo);
+
+        printLine();
         System.out.println("\tHello! I'm " + name);
         System.out.println("\tWhat can I do for you?");
+        printLine();
     }
 
     public static void addTask(String type, String description) {
@@ -96,7 +96,7 @@ public class Duke {
     public static void listTasks() {
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < indexOfTasks; i++) {
-            System.out.printf("\t%d.%s", i+1, tasks[i]);
+            System.out.printf("\t%d.%s", i + 1, tasks[i]);
             System.out.println();
         }
     }
