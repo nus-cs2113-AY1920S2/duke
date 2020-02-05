@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import duke.task.Task;
 import static misc.Messages.MESSAGE_COMMAND_LIST_TASK;
+import static misc.Messages.MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS;
 
 public class TaskList {
     public final int FIRST_ELEMENT_INDEX = 0;
@@ -35,7 +36,12 @@ public class TaskList {
         System.out.println("\n");
     }
     
-    public void completeTask(int taskId) {  
+    public void completeTask(int taskId) throws IndexOutOfBoundsException {  
+        if (taskId > this.tasks.size()) {
+            throw new IndexOutOfBoundsException(
+                    MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS);
+        }
+        
         List<Task> newTasks = this.tasks.stream()
                 .map(task -> {
                     return ((task.getTaskId() == taskId) ? task.makeDone() : task);
@@ -50,13 +56,14 @@ public class TaskList {
     public void addTask(Task task) {
         createAddTaskMessage(task);     
         this.tasks.add(task);
-        TaskList.taskIdCounter++;
+        TaskList.taskIdCounter++;       
     }
     
     public Task getTask(int taskId) {
         Task task = this.tasks
                 .stream()
                 .filter(x -> x.getTaskId() == taskId)
+                .map(x -> x.makeDone())
                 .collect(Collectors.toList())
                 .get(FIRST_ELEMENT_INDEX);
         return task;
