@@ -7,54 +7,31 @@ public class Duke implements Logo {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
 
-        Scanner temp = new Scanner(System.in);
-        String cmd = temp.nextLine();
-
-        ArrayList<Todo> todos = new ArrayList<Todo>();
+        Scanner input = new Scanner(System.in);
+        String cmd = input.nextLine();
+        Data data = new Data();
 
         while (!cmd.equals("bye")) {
             lineBreak();
 
             if (cmd.equals("list")) {
                 System.out.println("  Here are the tasks in your list:");
-                for (int k = 1; k<=todos.size(); ++k) {
-                    System.out.println("    " + k + ". " + todos.get(k-1));
+                for (int k = 1; k <= data.getSize(); ++k) {
+                    System.out.println("    " + k + ". " + data.printItem(k-1));
                 }
-            }
-            else if (cmd.contains("done")){
-                int option = Integer.parseInt(cmd.substring(cmd.length()-1));
-                todos.get(option-1).setDone();
-            }
-            else {
-                String taskType = cmd.substring(0, cmd.indexOf(" "));
-                String description;
 
-                switch (taskType) {
-                case "todo":
-                    description = cmd.substring(cmd.indexOf(" ")+1);
-                    todos.add(new Todo(description));
-                    break;
-                case "deadline":
-                    description = cmd.substring(cmd.indexOf(" ")+1, cmd.indexOf("/")-1);
-                    String by = cmd.substring(cmd.indexOf("/")+4);
-                    todos.add(new Deadline(description, by));
-                    break;
-                case "event":
-                    description = cmd.substring(cmd.indexOf(" ")+1, cmd.indexOf("/")-1);
-                    String at = cmd.substring(cmd.indexOf("/")+4);
-                    todos.add(new Event(description, at));
-                    break;
-                default:
-                    System.out.println("Error");
-                }
-                System.out.println("  Got it. I've added this task:");
-                System.out.println("     " + todos.get(todos.size()-1));
-                System.out.println("  Now you have " + todos.size() + " tasks in the list.");
+            } else if (cmd.contains("done")){
+                int option = Integer.parseInt(cmd.substring(cmd.length()-1));
+                data.setDone(option-1);
+
+            } else {
+                String taskType = cmd.substring(0, cmd.indexOf(" "));
+                Data.newTask(taskType, cmd);
             }
             
             lineBreak();
             System.out.println();
-            cmd = temp.nextLine();
+            cmd = input.nextLine();
 
         }
         lineBreak();

@@ -1,11 +1,13 @@
 public class Todo {
     private String description;
     private boolean isDone;
+    private final static char taskType = 'T';
 
     public Todo(String description) {
         this.isDone = false;
         this.description = description;
     }
+
     private String isDone() {
         return this.isDone ? "[✓] " : "[✗] ";
     }
@@ -15,9 +17,11 @@ public class Todo {
         System.out.println("  Nice! I've marked this task as done:");
         System.out.println("  " + "[✓] " + this.description);
     }
+
     public char getTaskType() {
-        return 'T';
+        return taskType;
     }
+
     public String toString() {
         return String.format("[%c]", getTaskType()) + isDone() + this.description;
     }
