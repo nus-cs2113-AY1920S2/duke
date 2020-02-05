@@ -13,7 +13,7 @@ public class ToDos extends Task {
     @Override
     public String taskWithSymbol() {
         return "[T]" 
-                + ((this.isDone) ? "[✓]" : "[✗]")
+                + ((this.isDone) ? Task.tickSymbol : Task.crossSymbol)
                 + " " 
                 + this.taskName;
     }

@@ -22,7 +22,7 @@ public class Events extends Task {
     @Override
     public String taskWithSymbol() {
         return "[E]" 
-                + ((this.isDone) ? "[✓]" : "[✗]")
+                + ((this.isDone) ? Task.tickSymbol : Task.crossSymbol)
                 + " " 
                 + this.taskName;
     }

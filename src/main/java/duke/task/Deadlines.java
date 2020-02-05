@@ -22,7 +22,7 @@ public class Deadlines extends Task {
     @Override
     public String taskWithSymbol() {
         return "[D]" 
-                + ((this.isDone) ? "[✓]" : "[✗]")
+                + ((this.isDone) ? Task.tickSymbol : Task.crossSymbol)
                 + " " 
                 + this.taskName;
     }
