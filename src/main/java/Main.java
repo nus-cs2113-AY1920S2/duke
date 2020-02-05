@@ -1,8 +1,11 @@
 import duke.Duke;
-import duke.exception.DukeException;
-import ui.Ui;
-import command.*;
+import duke.task.InvalidTaskArgumentException;
+import command.CommandResult;
+import command.ExitCommand;
+import command.InvalidCommandException;
+import command.Command;
 import parser.Parser;
+import ui.Ui;
 
 public class Main {
 
@@ -20,35 +23,36 @@ public class Main {
     }
     
     public void start(String[] args) {
-        try {
-            this.ui = new Ui();
-            this.duke = new Duke();
-            ui.displayWelcomeMessage();
-        } catch (DukeException e) {
-            ui.displayErrorMessage();
-        }
+        this.ui = new Ui();
+        this.duke = new Duke();
+        ui.displayWelcomeMessage();
     }
     
-    private void runCommandUntilExit() {
-        Command command;
-        do {
+    private void runCommandUntilExit() {                     
+        while (true) {
+            Command command;
             String commandText = ui.getCommand();
-            command = new Parser().parseCommand(commandText);       
             ui.displayBorder();
-            CommandResult output = executeCommand(command);
-            ui.displayOutputMessage(output);
-            ui.displayBorder();
-        } while (!ExitCommand.isExit(command));           
-    }
-    
-    private CommandResult executeCommand(Command command) {
-        try {
-            CommandResult output = command.execute(this.duke);    
-            return output;
-        } catch(Exception e) {
-            ui.displayMessage(e.getMessage());
-            throw new RuntimeException(e);
-        } 
+            
+            try {  
+                command = new Parser().parseCommand(commandText);
+                CommandResult output = command.execute(this.duke);
+                ui.displayOutputMessage(output);
+                
+                if (ExitCommand.isExit(command)) {
+                    break;
+                }
+
+            } catch (InvalidTaskArgumentException e) {                
+                ui.displayErrorMessage(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                ui.displayErrorMessage(e.getMessage());
+            } catch (InvalidCommandException e) {
+                ui.displayErrorMessage(e.getMessage());
+            } finally {
+                ui.displayBorder();
+            }
+        }
     }
     
     private void exit() {
