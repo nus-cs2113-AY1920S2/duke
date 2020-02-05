@@ -1,9 +1,11 @@
+package duke.task;
 
 public class Task {
     protected final String taskName;
     protected final int taskId;
     protected boolean isDone;
-    public static int taskCounter = 1;
+    protected static final String tickSymbol = "[✓]";
+    protected static final String crossSymbol = "[✗]";
 
     protected Task(int taskId, String taskName, boolean isDone) {
         this.taskId = taskId;
@@ -30,8 +32,8 @@ public class Task {
     }
 
     public String taskWithSymbol() {
-        return ((this.isDone) ? "[✓]" : "[✗]")
-                + " " 
+        return ((this.isDone) ? tickSymbol : crossSymbol)
+                + "   " 
                 + this.taskName;
     }
 

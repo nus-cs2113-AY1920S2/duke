@@ -8,4 +8,10 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 deadline do homework /by no idea :-p
 todo
+deadline finish eating
+event cooking class
+done 1
+done 2
+done 100
 blah
+bye
