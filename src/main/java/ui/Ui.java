@@ -5,11 +5,11 @@ import java.util.Scanner;
 import command.CommandResult;
 
 import static misc.Messages.MESSAGE_WELCOME;
-import static misc.Messages.MESSAGE_INVALID_COMMAND;
+import static misc.Messages.MESSAGE_COMMAND_RESULT_FAILURE;
 import static misc.Messages.MESSAGE_EXIT;
 
 public class Ui {
-    private static final String BORDER = "_______________________________________________________________________\n";
+    private static final String BORDER = "\n___________________________________________________________________________________________________________\n";
     private final Scanner sc;
     
     public Ui() {
@@ -22,13 +22,10 @@ public class Ui {
     }
     
     public void displayOutputMessage(CommandResult commandResult) {
-        displayMessage(commandResult.getCommandOutput());
+        String output = commandResult.getCommandOutput();
+        displayMessage(output);
     }
-    
-    public void displayErrorMessage() {
-        displayMessage(MESSAGE_INVALID_COMMAND);
-    }
-    
+        
     public void displayWelcomeMessage() {       
         displayMessage(MESSAGE_WELCOME);
     }
@@ -44,5 +41,16 @@ public class Ui {
 
     public void displayMessage(String message) {
         System.out.println(message);
+    }
+    
+    public void displayErrorMessage(String message) {
+        String output = "";
+        output += (MESSAGE_COMMAND_RESULT_FAILURE  
+                + "\n."
+                + "\n."
+                + "\n"
+                + message);
+        
+        System.err.println(output);              
     }
 }
