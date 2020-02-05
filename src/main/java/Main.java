@@ -58,5 +58,5 @@ public class Main {
     private void exit() {
         ui.displayExitMessage();
         System.exit(0);
-    }   
+    }       
 }
