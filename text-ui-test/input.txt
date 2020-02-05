@@ -1,0 +1,9 @@
+todo Assignments
+deadline Complete CS2113 Homework /by 2359
+event Dinner with friends /at 24 June
+list
+mark 1
+clear
+list
+clear
+exit
