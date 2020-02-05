@@ -28,6 +28,37 @@ public class Gui extends Application {
         parseUserInput();
     }
 
+    private AnchorPane setupAnchorPane(Stage stage) {
+        //Step 1. Setting up required components
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+        return mainLayout;
+    }
+
+    private void formatWindow(Stage stage, AnchorPane mainLayout) {
+        //Step 2. Formatting the window to look as expected
+        setStage(stage);
+        mainLayout.setPrefSize(400.0, 600.0);
+        setScrollPane();
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        userInput.setPrefWidth(325.0);
+        sendButton.setPrefWidth(55.0);
+        setAnchorPane();
+    }
+
     private void parseUserInput() {
         //Step 3. Add functionality to handle user input.
         //click button
@@ -53,18 +84,6 @@ public class Gui extends Application {
             handleUserInput();
         });
     }
-
-    private void formatWindow(Stage stage, AnchorPane mainLayout) {
-        //Step 2. Formatting the window to look as expected
-        setStage(stage);
-        mainLayout.setPrefSize(400.0, 600.0);
-        setScrollPane();
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
-        setAnchorPane();
-    }
-
 
     /**
      * Iteration 1:
@@ -97,6 +116,7 @@ public class Gui extends Application {
         userInput.clear();
     }
 
+    /** setup AnchorPane with parameters*/
     private void setAnchorPane() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -107,6 +127,7 @@ public class Gui extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
+    /** setup ScrollPane with parameters*/
     private void setScrollPane() {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -116,6 +137,7 @@ public class Gui extends Application {
         scrollPane.setFitToWidth(true);
     }
 
+    /** setup Stage with parameters*/
     private void setStage(Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -123,30 +145,9 @@ public class Gui extends Application {
         stage.setMinWidth(400.0);
     }
 
-    private AnchorPane setupAnchorPane(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        return mainLayout;
-    }
-
     /**
-     * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * @param input the full length of user input
      */
     private String getResponse(String input) {
         return "Duke heard: " + input;

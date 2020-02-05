@@ -2,13 +2,10 @@ import commands.Command;
 import commands.ExitCommand;
 import data.Duke;
 import data.exceptions.StorageOperationException;
-import javafx.scene.layout.Region;
 import parser.Parser;
 import storage.StorageFile;
 import ui.TextUi;
 import java.util.Scanner;
-
-
 
 public class Main{
 
@@ -17,7 +14,6 @@ public class Main{
 
     public Main() throws StorageOperationException {
     }
-
 
     public static void main(String[] args) throws StorageOperationException {
         new Main().run();
@@ -40,16 +36,21 @@ public class Main{
         } while (!ExitCommand.isExit(command));
     }
 
-
+    /**
+     * initialize the duke system, execute command and save the list to the file
+     * @param command the parsed Command object
+     */
     private void executeCommand(Command command) throws StorageOperationException {
         try {
-            //Supplies the data the command will operate on.
-            //if there is no file to load or the file is empty, setData will instantiate an empty task list
+            // supplies the data the command will operate on.
+            // if there is no file to load or the file is empty, setData will initialize a new duke system
             command.setData(duke);
             // Execute according to the command itself
             command.execute();
+            // save the duke to a file
             storage.save(duke);
         } catch (Exception ex) {
+            // the out layer exception handler
             System.out.println(ex);
         }
     }
