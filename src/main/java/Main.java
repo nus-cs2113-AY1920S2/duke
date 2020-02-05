@@ -133,8 +133,8 @@ public class Main extends Application{
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userPng)),
-                new DialogBox(dukeText, new ImageView(dukePng))
+                DialogBox.getUserDialog(userText, new ImageView(userPng)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukePng))
         );
         userInput.clear();
     }
