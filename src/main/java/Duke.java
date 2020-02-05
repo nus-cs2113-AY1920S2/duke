@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke implements Logo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
@@ -25,8 +25,11 @@ public class Duke implements Logo {
                 data.setDone(option-1);
 
             } else {
-                String taskType = cmd.substring(0, cmd.indexOf(" "));
-                Data.newTask(taskType, cmd);
+                try {
+                    Data.newTask(cmd);
+                } catch(DukeException e) {
+                    System.out.println(e);
+                }
             }
             
             lineBreak();
