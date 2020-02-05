@@ -75,29 +75,17 @@ public class Duke {
                 displayList(taskList, numberOfTasks);
                 break;
             case DONE:
-                markTaskAsDone(taskList, numberOfTasks, splitUserInput);
+                markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
                 break;
             default:
                 break;
             }
-        } catch (InvalidTaskException | MissingDescriptonException | MissingDoneNumberFieldException | MissingTimeFieldException m) {
+        } catch (InvalidTaskException | MissingDescriptonException | MissingDoneNumberFieldException | MissingTimeFieldException | NumberFormatException m) {
             System.out.println("Exception occurred: " + m);
         }
 
 
         return numberOfTasks;
-    }
-
-    private static void markTaskAsDone(Task[] taskList, int numberOfTasks, String[] splitUserInput) {
-        if (splitUserInput.length == 1) {
-            System.out.println("Done's number field is empty!");
-            return;
-        }
-        markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
-    }
-
-    private static void displayNoSuchTaskError() {
-        System.out.println("Input is invalid. No such task!");
     }
 
     private static void validateTask(String[] splitUserInput, String userInput)
@@ -110,12 +98,12 @@ public class Duke {
                 !temp.equals(LIST)) {
             throw new InvalidTaskException("Input is invalid. No such task");
         } else {
+            String[] splitArray = splitTaskDescription(userInput);
             if (temp.toLowerCase().equals(DONE) && splitUserInput.length == 1) {
                 throw new MissingDoneNumberFieldException("Done's number field is empty!");
-            } else if (isDescriptionBlank(splitTaskDescription(userInput)) && !temp.equals(LIST)) {
+            } else if (isDescriptionBlank(splitArray) && !temp.equals(LIST)) {
                 throw new MissingDescriptonException("Missing description!");
             } else if (temp.equals(TODO) || temp.equals(EVENT) || temp.toLowerCase().equals(DEADLINE)) {
-                String[] splitArray = splitTaskDescription(userInput);
                 if (splitArray[2].equals("yes")) {
                     String obtainedTime = splitArray[1];
                     String[] timeCheck = obtainedTime.split(" ", 2);
@@ -130,21 +118,20 @@ public class Duke {
 
     }
 
-    private static int addDefaultTaskToList(Task[] taskList, int numberOfTasks, String userInput) {
-        Task newTask;
-        newTask = new Task(userInput);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
-    }
-
-    private static void markTaskAsDone(Task[] taskList, int numberOfActions, String s) {
-        int actionListNumber = Integer.parseInt(s);
-        if (actionListNumber > numberOfActions || actionListNumber == 0) {
-            System.out.println("Out of range");
-        } else {
-            taskList[actionListNumber - 1].markAsDone();
-            System.out.println(
-                    "Nice! I marked this as done: " + taskList[actionListNumber - 1].toString());
+    private static void markTaskAsDone(Task[] taskList, int numberOfActions, String s) throws NumberFormatException{
+        try {
+            int actionListNumber = Integer.parseInt(s);
+            if (actionListNumber > numberOfActions || actionListNumber == 0) {
+                System.out.println("Out of range");
+            } else {
+                taskList[actionListNumber - 1].markAsDone();
+                System.out.println(
+                        "Nice! I marked this as done: " + taskList[actionListNumber - 1].toString());
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Done number field is not a number!");
         }
     }
 
@@ -161,12 +148,13 @@ public class Duke {
 
     private static int addEventToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        if (isDescriptionBlank(splitTaskDescription(userInput))) {
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
+        if (isDescriptionBlank(splitTaskDescriptionArray)) {
             displayNoDescriptionError();
             numberOfTasks = numberOfTasks;
             return numberOfTasks;
         }
-        newTask = new Event(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+        newTask = new Event(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
         numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
@@ -177,12 +165,13 @@ public class Duke {
 
     private static int addDeadlineToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        if (isDescriptionBlank(splitTaskDescription(userInput))) {
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
+        if (isDescriptionBlank(splitTaskDescriptionArray)) {
             displayNoDescriptionError();
             numberOfTasks = numberOfTasks;
             return numberOfTasks;
         }
-        newTask = new Deadline(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+        newTask = new Deadline(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
         numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
@@ -190,12 +179,13 @@ public class Duke {
 
     private static int addTodoToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        if (isDescriptionBlank(splitTaskDescription(userInput))) {
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
+        if (isDescriptionBlank(splitTaskDescriptionArray)) {
             displayNoDescriptionError();
             numberOfTasks = numberOfTasks;
             return numberOfTasks;
         }
-        newTask = new Todo(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+        newTask = new Todo(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
         numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
