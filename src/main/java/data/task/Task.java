@@ -1,5 +1,7 @@
 package data.task;
 
+import common.Messages;
+
 public class Task {
 
     //protected int index;
@@ -42,9 +44,9 @@ public class Task {
     public char getChar(){
         char isDone;
         if (this.isDone){
-            return '✓';
+            return Messages.DONE;
         } else {
-            return '✗';
+            return Messages.notDONE;
         }
     }
 
