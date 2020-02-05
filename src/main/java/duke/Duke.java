@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Deadline;
+
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
@@ -9,7 +13,7 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
         Task[] tasks = new Task[100];
         int counter = 0;
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
         Scanner input = new Scanner(System.in);
         boolean ifError = false;
@@ -39,7 +43,7 @@ public class Duke {
                     } else{
                         String[] splitString2 = splitString[1].split("/by", 2);
                         if (splitString2.length == 1) {
-                            System.out.println("Deadline requires to be separated by a '/by' statement");
+                            System.out.println("duke.Deadline requires to be separated by a '/by' statement");
                             ifError = true;
                         } else{
                             gotItMessage();
@@ -66,7 +70,7 @@ public class Duke {
                     } else {
                         String[] splitString2 = splitString[1].split("/at", 2);
                         if (splitString2.length == 1) {
-                            System.out.println("Event is required to be separated by a '/at' statement");
+                            System.out.println("duke.Event is required to be separated by a '/at' statement");
                             ifError = true;
                         } else {
                             gotItMessage();
@@ -79,7 +83,7 @@ public class Duke {
                 } else{
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     ifError = true;
-//                    tasks[counter] = new Task(next);
+//                    tasks[counter] = new duke.Task(next);
 //                    System.out.println("added: "+ next);
                 }
                 if (ifError == false) {
