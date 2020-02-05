@@ -1,5 +1,7 @@
 package parser;
 
+import static misc.Messages.MESSAGE_INVALID_COMMAND_RESULT;
+
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -9,10 +11,10 @@ import command.*;
 public class Parser {
     private final String[] prepositionArray = {"/by", "/at"};
     private final String commandType;
-    private final String taskInfo;
+    private final Optional<String> taskInfo;
     private final Optional<String> taskRequirement;
     
-    public Parser(String commandType, String taskInfo, Optional<String> taskRequirement) {
+    public Parser(String commandType, Optional<String> taskInfo, Optional<String> taskRequirement) {
         this.commandType = commandType;
         this.taskInfo = taskInfo;
         this.taskRequirement = taskRequirement;
@@ -20,7 +22,7 @@ public class Parser {
     
     public Parser() {
         this.commandType = "";
-        this.taskInfo = "";
+        this.taskInfo = Optional.empty();
         this.taskRequirement = Optional.empty();
     }
     
@@ -34,14 +36,24 @@ public class Parser {
             command = new ListCommand();
             break;
         case "done":
-            command = new DoneCommand(Integer.parseInt(parser.taskInfo));
+            command = new DoneCommand(Integer.parseInt(parser.taskInfo.get()));
             break;
         case "bye":
             command = new ExitCommand();
             break;
-        default: 
+        case "todo":
             command = new AddCommand(commandType, parser.taskInfo, parser.taskRequirement);
+            break;
+        case "deadline":
+            command = new AddCommand(commandType, parser.taskInfo, parser.taskRequirement);
+            break;
+        case "event":
+            command = new AddCommand(commandType, parser.taskInfo, parser.taskRequirement);
+            break;
+        default: 
+            throw new InvalidCommandException(MESSAGE_INVALID_COMMAND_RESULT);
         }
+        
         return command;
     }
     
@@ -75,7 +87,7 @@ public class Parser {
         if (hasPreposition(argsArray)) {
             prepositionIndex = getPrepositionIndex(argsArray);
             
-            // parse argsArray into taskInfo
+            // Parse argsArray into taskInfo
             for (int j = 1; j < prepositionIndex; j++) {
                 if (j != 1) {
                     taskInfo += (" " + argsArray[j]);
@@ -84,7 +96,7 @@ public class Parser {
                 }
             }
             
-            // parse argsArray into taskDescription
+            // Parse argsArray into taskDescription
             for (int k = prepositionIndex + 1; k < argsArray.length; k++) {
                 if (k > prepositionIndex + 1) {
                     taskRequirement += (" " + argsArray[k]);
@@ -101,13 +113,23 @@ public class Parser {
                 }
             }
         }
-                
+        
+        // Wrapping an optional to taskInfo string
+        Optional<String> taskInformation;
+        if (taskInfo.equals("")) {
+            taskInformation = Optional.empty();
+        } else {
+            taskInformation = Optional.ofNullable(taskInfo);
+        }
+        
+        // Wrapping an optional to taskRequirement string
         Optional<String> taskReq;
         if (taskRequirement.equals("")) {
             taskReq = Optional.empty();
         } else {
             taskReq = Optional.ofNullable(taskRequirement);
         }
-        return new Parser(commandType, taskInfo, taskReq); 
+        
+        return new Parser(commandType, taskInformation, taskReq); 
     }
 }
