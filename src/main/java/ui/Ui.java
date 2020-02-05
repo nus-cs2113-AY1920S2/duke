@@ -9,7 +9,7 @@ import static misc.Messages.MESSAGE_INVALID_COMMAND;
 import static misc.Messages.MESSAGE_EXIT;
 
 public class Ui {
-    private static final String BORDER = "_______________________________________________________________________";
+    private static final String BORDER = "_______________________________________________________________________\n";
     private final Scanner sc;
     
     public Ui() {
@@ -22,7 +22,7 @@ public class Ui {
     }
     
     public void displayOutputMessage(CommandResult commandResult) {
-       displayMessage(BORDER + ("/n" + commandResult.getCommandOutput() + "/n") + BORDER); 
+        displayMessage(commandResult.getCommandOutput());
     }
     
     public void displayErrorMessage() {
@@ -34,7 +34,12 @@ public class Ui {
     }
     
     public void displayExitMessage() {
+        this.sc.close();
         displayMessage(MESSAGE_EXIT);
+    }
+    
+    public void displayBorder() {
+        System.out.println(BORDER);
     }
 
     public void displayMessage(String message) {

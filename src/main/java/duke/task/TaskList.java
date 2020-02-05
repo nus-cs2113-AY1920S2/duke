@@ -3,20 +3,19 @@ package duke.task;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.Collections;
 
-import duke.task.*;
+import duke.task.Task;
+import static misc.Messages.MESSAGE_COMMAND_LIST_TASK;
 
 public class TaskList {
+    public final int FIRST_ELEMENT_INDEX = 0;
     public static int taskIdCounter = 1;
     private final List<Task> tasks;
     
-    private TaskList(List<Task> oldTasks) {
-        List<Task> newTasks = oldTasks.stream()
+    public TaskList(TaskList oldTaskList) {
+        this.tasks = oldTaskList.getTasks()
+                .stream()
                 .collect(Collectors.toList());
-        
-        this.tasks = newTasks;
     }
     
     public TaskList() {
@@ -27,21 +26,58 @@ public class TaskList {
         return this.tasks;
     }
     
-    public TaskList completeTask(int taskId) {
+    public void listTask() {
+        System.out.println(MESSAGE_COMMAND_LIST_TASK);
+        
+        this.tasks.stream()
+                .forEachOrdered(System.out::println);
+            
+        System.out.println("\n");
+    }
+    
+    public void completeTask(int taskId) {  
         List<Task> newTasks = this.tasks.stream()
                 .map(task -> {
-                    return ((task.getTaskId() == (taskId)) ? task.makeDone() : task);
+                    return ((task.getTaskId() == taskId) ? task.makeDone() : task);
                 })
                 .collect(Collectors.toList());
         
-        return new TaskList(newTasks);
+        createCompleteTaskMessage(taskId);
+        this.tasks.clear();
+        this.tasks.addAll(newTasks);
     }
     
-    public TaskList addTask(Task task) {
+    public void addTask(Task task) {
+        createAddTaskMessage(task);     
         this.tasks.add(task);
         TaskList.taskIdCounter++;
-        return new TaskList(this.tasks);
     }
     
+    public Task getTask(int taskId) {
+        Task task = this.tasks
+                .stream()
+                .filter(x -> x.getTaskId() == taskId)
+                .collect(Collectors.toList())
+                .get(FIRST_ELEMENT_INDEX);
+        return task;
+    }
     
+    public void createCompleteTaskMessage(int taskId) {
+        String output = ("Nice! I've marked this task as done:\n"
+                + "  " 
+                + getTask(taskId).taskWithSymbol()
+                + ("\n"));
+        System.out.println(output);
+    }
+    
+    public void createAddTaskMessage(Task task) {
+        String message = "";
+        message += ("Got it. I've added this task:\n"
+                + "  " 
+                + task
+                + "\nNow you have " 
+                + TaskList.taskIdCounter
+                + " tasks in the list.\n");
+        System.out.println(message);
+    }
 }

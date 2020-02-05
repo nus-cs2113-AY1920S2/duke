@@ -2,7 +2,9 @@ package command;
 
 import duke.Duke;
 import duke.exception.DukeException;
-import duke.task.*;
+
+import static misc.Messages.MESSAGE_COMMAND_RESULT_FAILURE;
+import static misc.Messages.MESSAGE_COMMAND_RESULT_SUCCESS;
 
 public class ListCommand extends Command {
   
@@ -13,9 +15,9 @@ public class ListCommand extends Command {
     public CommandResult execute(Duke duke) {
         try {
             duke.executeListCommand();
-            return new CommandResult("listing all the tasks...");
+            return new CommandResult(MESSAGE_COMMAND_RESULT_SUCCESS);
         } catch (DukeException e) {
-            return new CommandResult("Error in listing tasks");
+            return new CommandResult(MESSAGE_COMMAND_RESULT_FAILURE);
         }
     }
 }

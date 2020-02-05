@@ -1,7 +1,5 @@
 package command;
 
-import static misc.Messages.MESSAGE_INVALID_COMMAND_RESULT;
-
 import duke.Duke;
 import duke.exception.DukeException;
 
@@ -18,7 +16,6 @@ public class CommandResult extends Command {
    
     @Override
     public CommandResult execute(Duke duke) {
-        throw new DukeException(MESSAGE_INVALID_COMMAND_RESULT);
-    }
- 
+        throw new DukeException("commandResult error");
+    } 
 }

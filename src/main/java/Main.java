@@ -1,10 +1,6 @@
-import java.util.Scanner;
-
 import duke.Duke;
-import duke.exception.*;
-import duke.task.*;
+import duke.exception.DukeException;
 import ui.Ui;
-import misc.Messages;
 import command.*;
 import parser.Parser;
 
@@ -23,7 +19,6 @@ public class Main {
         exit();
     }
     
-    
     public void start(String[] args) {
         try {
             this.ui = new Ui();
@@ -36,37 +31,28 @@ public class Main {
     
     private void runCommandUntilExit() {
         Command command;
-        Duke duke = this.duke;
         do {
             String commandText = ui.getCommand();
-            command = new Parser().parseCommand(commandText);
-            CommandResult output = command.execute(duke);
+            command = new Parser().parseCommand(commandText);       
+            ui.displayBorder();
+            CommandResult output = executeCommand(command);
             ui.displayOutputMessage(output);
+            ui.displayBorder();
         } while (!ExitCommand.isExit(command));           
+    }
+    
+    private CommandResult executeCommand(Command command) {
+        try {
+            CommandResult output = command.execute(this.duke);    
+            return output;
+        } catch(Exception e) {
+            ui.displayMessage(e.getMessage());
+            throw new RuntimeException(e);
+        } 
     }
     
     private void exit() {
         ui.displayExitMessage();
         System.exit(0);
-    }
-    
-    
-    
-    /*
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Duke duke = new Duke();
-        System.out.println(duke);
-        
-        while (sc.hasNextLine()) {
-            try {
-                String input = sc.nextLine();
-                duke = duke.run(input);
-            } catch (DukeException e) {
-                System.err.println(e);
-            }
-        }
-        
-        sc.close();
-    } */
+    }   
 }

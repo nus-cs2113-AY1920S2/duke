@@ -3,7 +3,6 @@ package parser;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
-import java.util.Arrays;
 
 import command.*;
 
@@ -75,7 +74,6 @@ public class Parser {
              
         if (hasPreposition(argsArray)) {
             prepositionIndex = getPrepositionIndex(argsArray);
-
             
             // parse argsArray into taskInfo
             for (int j = 1; j < prepositionIndex; j++) {
@@ -103,8 +101,7 @@ public class Parser {
                 }
             }
         }
-        
-        
+                
         Optional<String> taskReq;
         if (taskRequirement.equals("")) {
             taskReq = Optional.empty();
