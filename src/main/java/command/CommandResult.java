@@ -1,7 +1,6 @@
 package command;
 
 import duke.Duke;
-import duke.exception.DukeException;
 
 public class CommandResult extends Command {
     public final String commandOutput;
@@ -16,6 +15,6 @@ public class CommandResult extends Command {
    
     @Override
     public CommandResult execute(Duke duke) {
-        throw new DukeException("commandResult error");
+        throw new IllegalStateException("Cannot execute a Command Result");
     } 
 }
