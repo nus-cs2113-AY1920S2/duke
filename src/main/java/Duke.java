@@ -29,7 +29,7 @@ public class Duke {
                 printSeparator();
                 System.out.println("Here are the tasks in your list");
                 for (int i=0; i<toDoList.size(); i++){
-                    System.out.println("1. " + toDoList.get(i).toString());
+                    System.out.println(i+1 + ". " + toDoList.get(i).toString());
                 }
                 printSeparator();
 
@@ -43,7 +43,7 @@ public class Duke {
                 toDoList.get(indexCompleted-1).markAsDone();
                 printSeparator();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + toDoList.get(indexCompleted-1).getStatusIcon() + "] " + toDoList.get(indexCompleted-1).toString());
+                System.out.println(toDoList.get(indexCompleted-1).toString());
                 printSeparator();
             }else if(userInput.startsWith("todo")) {                                                     //user adds into list
                 userInput = userInput.substring(5,userInput.length());
@@ -52,7 +52,28 @@ public class Duke {
                 printSeparator();
                 System.out.println("Okie dokes, \"" + userInput + "\" has been added to your to do list:");
                 System.out.println(t.toString());
-                System.out.println("Now there are " +  todoSize+1 + " in your list");
+                System.out.println("Now there are " +  (todoSize+1) + " in your list");
+                printSeparator();
+                todoSize++;
+            }else if (userInput.startsWith("deadline")){
+                userInput = userInput.substring(9,userInput.length());
+                Deadline d = new Deadline(userInput);
+                toDoList.add(d);
+                printSeparator();
+
+                System.out.println("Okie dokes, \"" + userInput + "\" has been added to your to do list:");
+                System.out.println(d.toString());
+                System.out.println("Now there are " +  (todoSize+1) + " in your list");
+                printSeparator();
+                todoSize++;
+            }else if (userInput.startsWith("event")){
+                userInput = userInput.substring(6,userInput.length());
+                Events e = new Events(userInput);
+                toDoList.add(e);
+                printSeparator();
+                System.out.println("Okie dokes, \"" + userInput + "\" has been added to your to do list:");
+                System.out.println(e.toString());
+                System.out.println("Now there are " +  (todoSize+1) + " in your list");
                 printSeparator();
                 todoSize++;
             }
