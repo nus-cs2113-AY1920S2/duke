@@ -141,6 +141,8 @@ public class Parser {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        } catch (StringIndexOutOfBoundsException nfe) {
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         //return new DoneCommand(Integer.parseInt(commandWord.substring(5)));
