@@ -1,5 +1,7 @@
+package Duke.Exception;
+
 public class MissingTimeFieldException extends Exception {
-    MissingTimeFieldException(String s) {
+    public MissingTimeFieldException(String s) {
         super(s);
     }
 }

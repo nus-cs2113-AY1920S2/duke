@@ -1,5 +1,7 @@
+package Duke.Exception;
+
 public class MissingDescriptonException extends Exception {
-    MissingDescriptonException(String s) {
+    public MissingDescriptonException(String s) {
         super(s);
     }
 

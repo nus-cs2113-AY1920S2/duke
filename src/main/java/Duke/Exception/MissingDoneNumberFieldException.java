@@ -1,5 +1,7 @@
+package Duke.Exception;
+
 public class MissingDoneNumberFieldException extends Exception {
-    MissingDoneNumberFieldException(String s) {
+    public MissingDoneNumberFieldException(String s) {
         super(s);
     }
 }

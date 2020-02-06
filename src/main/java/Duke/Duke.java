@@ -1,3 +1,14 @@
+package Duke;
+
+import Duke.Exception.InvalidTaskException;
+import Duke.Exception.MissingDescriptonException;
+import Duke.Exception.MissingDoneNumberFieldException;
+import Duke.Exception.MissingTimeFieldException;
+import Duke.TaskTypes.Deadline;
+import Duke.TaskTypes.Event;
+import Duke.TaskTypes.Task;
+import Duke.TaskTypes.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -214,7 +225,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke.Duke\nWhat can I do for you?");
     }
 
     private static String[] splitTaskDescription(String input) {
