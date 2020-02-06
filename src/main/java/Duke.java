@@ -10,32 +10,55 @@ public class Duke {
 
     private static final String listMessage = "Here are the tasks in your list:";
 
+    private static final String invalid = "Oops, I'm sorry but I don't know what that means :-(";
+
+    private static final String incomplete = "Uh-oh, I need more information to process that request :-(";
+
+    private static final String indexProblem = "It appears you have entered an invalid index :O";
+
+    private static final String formatProblem = "The format of your command is incorrect, please use:\n"
+            + "deadline (item) /by (time)\n" + "event (item) /at (time)";
+
     private static final int MAXIMUM_TASKS = 100;
 
     private static boolean shouldContinue;
 
     private static String command;
 
-    private static String action;
+    private static String[] phrases;
 
     private static Scanner input;
 
     private static Task[] instructions;
 
-    private static int count;
+    private static int instructionCount;
 
     public static void main(String[] args) {
         initDuke();
         displayWelcome();
         while (shouldContinue) {
             readInput();
-            setAction();
-            processCommand();
+            try {
+                processCommand();
+            } catch (InvalidInputException e) {
+                printError(invalid);
+            } catch (IncompleteInputException e) {
+                printError(incomplete);
+            } catch (NumberFormatException e) {
+                printError(indexProblem);
+            } catch (FormatErrorException e) {
+                printError(formatProblem);
+            } catch (OutOfBoundsException e) {
+                printError(indexProblem);
+            }
+
         }
     }
 
-    private static void processCommand() {
-        switch(action) {
+    private static void processCommand() throws InvalidInputException, IncompleteInputException, FormatErrorException,
+            OutOfBoundsException {
+        phrases = command.split(" ");
+        switch(phrases[0]) {
         case "bye":
             sayBye();
             break;
@@ -43,60 +66,79 @@ public class Duke {
             listTasks();
             break;
         case "done":
+            checkCompleteInput();
             completeTask();
             break;
         case "deadline":
-            setDeadline();
+            checkCompleteInput();
+            addDeadline();
             confirmTask();
             break;
         case "event":
-            createEvent();
+            checkCompleteInput();
+            addEvent();
             confirmTask();
             break;
         case "todo":
+            checkCompleteInput();
             addTodo();
             confirmTask();
             break;
+        default:
+            throw new InvalidInputException();
+        }
+    }
+
+    private static void printError(String s) {
+        System.out.println(s);
+    }
+
+    private static void checkCompleteInput() throws IncompleteInputException {
+        if (phrases.length == 1) {
+            throw new IncompleteInputException();
         }
     }
 
     private static void addTodo() {
-        String description = command.substring(5);
-        instructions[count] = new Todo(description);
-        count += 1;
+        String description = command.substring(phrases[0].length()+1);
+        instructions[instructionCount] = new Todo(description);
+        instructionCount += 1;
     }
 
-    private static void createEvent() {
+    private static void addEvent() throws FormatErrorException {
         int index = command.indexOf("/at");
-        String description = command.substring(6, index - 1);
+        if (index == -1) {
+            throw new FormatErrorException();
+        }
+        String description = command.substring(phrases[0].length()+1, index - 1);
         String duration = command.substring(index + 4);
-        instructions[count] = new Event(description, duration);
-        count += 1;
+        instructions[instructionCount] = new Event(description, duration);
+        instructionCount += 1;
     }
 
-    private static void setDeadline() {
+    private static void addDeadline() throws FormatErrorException {
         int index = command.indexOf("/by");
-        String description = command.substring(9, index - 1);
+        if (index == -1) {
+            throw new FormatErrorException();
+        }
+        String description = command.substring(phrases[0].length()+1, index - 1);
         String by = command.substring(index + 4);
-        instructions[count] = new Deadline(description, by);
-        count += 1;
+        instructions[instructionCount] = new Deadline(description, by);
+        instructionCount += 1;
     }
-    private static void completeTask() {
-        String[] phrases = command.split(" ");
+    private static void completeTask() throws OutOfBoundsException {
         int index = Integer.parseInt(phrases[1]);
+        if (index > instructionCount) {
+            throw new OutOfBoundsException();
+        }
         instructions[index-1].markAsDone();
         System.out.println(completeMessage);
         System.out.println("  " + instructions[index-1]);
     }
 
-    private static void setAction() {
-        String[] phrases = command.split(" ");
-        action = phrases[0];
-    }
-
     private static void listTasks() {
         System.out.println(listMessage);
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < instructionCount; i++) {
             System.out.println((i+1) + "." + instructions[i]);
         }
     }
@@ -114,12 +156,12 @@ public class Duke {
         shouldContinue = true;
         input = new Scanner(System.in);
         instructions = new Task[MAXIMUM_TASKS];
-        count = 0;
+        instructionCount = 0;
     }
 
     private static void confirmTask() {
-        System.out.println("Got it. I've added this task:\n  " + instructions[count-1] + "\n"
-            + "Now you have " + count + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n  " + instructions[instructionCount-1] + "\n"
+            + "Now you have " + instructionCount + " tasks in the list.");
     }
 
     private static void displayWelcome() {
