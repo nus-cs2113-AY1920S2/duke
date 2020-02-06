@@ -2,16 +2,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static ArrayList<Task> list = new ArrayList<>(); 
+    private static ArrayList<Task> list = new ArrayList<>();
+    private final static String name = "*Rick*";
+    private final static String line = "____________________________________________________________";
     
-    public static String makeDone(String line) {
+    public static String makeDone(String line) throws DukeException {
+        String[] cmds = line.split(" ");
+        if (cmds.length == 1) {
+            throw new DukeException("Oops!! Please specify a task.");
+        }
         String msg = "";
         // sets a specified task as done
-        int index = Integer.valueOf(line.split(" ")[1]);
-        if (index > list.size()) {
-            msg += "No such task!";
+        int index;
+        try {
+            index = Integer.valueOf(cmds[1]);
+        } catch (Exception exception) {
+            throw new DukeException("Oops!! Wrong format.");
+        }
+        if (index < 1) {
+            throw new DukeException("Oops!! Invalid task.");
+        } else if (index > list.size()) {
+            throw new DukeException("Oops!! No such task.");
         } else if (list.get(index - 1).isDone) {
-            msg += "Task is already completed!";
+            throw new DukeException("Oops!! Task is already completed.");
         } else {
             list.get(index - 1).markAsDone();
             msg += "Nice! I've marked this task as done: " + '\n';
@@ -20,43 +33,69 @@ public class Duke {
         return msg;
     }
     
-    public static String addTodo(String line) {
+    public static String addTodo(String line) throws DukeException {
+        String[] cmds = line.split(" ");
+        if (cmds.length == 1) {
+            throw new DukeException("Oops!! The description of a todo cannt be empty.");
+        }
         String msg = "";
-        Task todo = new ToDo(line.substring(5));
+        String description = line.substring(5);
+        Task todo = new ToDo(description);
         list.add(todo);
-        msg += "Got it. I've added this task: " + '\n';
-        msg += "    " + todo.toString() + '\n';
-        msg += "  Now you have " + list.size() + " task(s) in the list.";
+        msg = outputMessage(todo);
         return msg;
     }
     
-    public static String addDeadline(String line) {
+    public static String addDeadline(String line) throws DukeException {
+        String[] cmds = line.split(" ");
+        if (cmds.length == 1) {
+            throw new DukeException("Oops!! The description of a deadline cannt be empty.");
+        }
         String msg = "";
-        int ind1 = line.indexOf('/');
-        Task deadline = new Deadline(line.substring(9, ind1 - 1), line.substring(ind1 + 4));
-        list.add(deadline);
-        msg += "Got it. I've added this task: " + '\n';
-        msg += "    " + deadline.toString() + '\n';
-        msg += "  Now you have " + list.size() + " task(s) in the list.";
+        try {
+            int index = line.indexOf('/');
+            String description = line.substring(9, index - 1);
+            String time = line.substring(index + 4);
+            Task deadline = new Deadline(description, time);
+            list.add(deadline);
+            msg = outputMessage(deadline);
+        } catch (StringIndexOutOfBoundsException exception) {
+            throw new DukeException("Oops!! Wrong format.");
+        }
         return msg;
     }
     
-    public static String addEvent(String line) {
+    public static String addEvent(String line) throws DukeException {
+        String[] cmds = line.split(" ");
+        if (cmds.length == 1) {
+            throw new DukeException("Oops!! The description of an event cannt be empty.");
+        }
         String msg = "";
-        int ind1 = line.indexOf('/');
-        Task event = new Event(line.substring(6, ind1 - 1), line.substring(ind1 + 4));
-        list.add(event);
-        msg += "Got it. I've added this task: " + '\n';
-        msg += "    " + event.toString() + '\n';
+        try {
+            int index = line.indexOf('/');
+            String description = line.substring(6, index - 1);
+            String time = line.substring(index + 4);
+            Task event = new Event(description, time);
+            list.add(event);
+            msg = outputMessage(event);
+        } catch (StringIndexOutOfBoundsException exception) {
+            throw new DukeException("Oops!! Wrong format.");
+        }
+        return msg;
+    }
+    
+    public static String outputMessage(Task task) {
+        String msg = "Got it. I've added this task: " + '\n';
+        msg += "    " + task.toString() + '\n';
         msg += "  Now you have " + list.size() + " task(s) in the list.";
         return msg;
     }
     
-    public static String list() {
+    public static String list() throws DukeException {
         String msg = "";
         // accesses the list
         if (list.size() == 0) {
-            msg += "list is empty";
+            throw new DukeException("Oops!! List is empty.");
         } else {
             msg += "Here are the tasks in your list:" + '\n';
             int counter = 1;
@@ -67,43 +106,60 @@ public class Duke {
             }
         }
         return msg;
-    } 
+    }
     
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String name = "**Rick**";
-        String line = "____________________________________________________________";
+    public static void goodbye() {
+        System.out.println(line);
+        System.out.println("  Bye. Hope to see you again soon!");
+        System.out.println(line);
+        System.exit(0);
+    }
+    
+    public static void greet() {
         System.out.println(line);
         System.out.println("  Hello! I'm " + name);
         System.out.println("  What can I do for you?");
         System.out.println(line + '\n');
-        while (true) {
+    }
+    
+    public static void main(String[] args) throws DukeException {
+        Scanner sc = new Scanner(System.in);
+        greet();
+        OuterLoop: while (true) {
             String str = sc.nextLine();
+            String cmd = str.split(" ")[0];
             String msg = "  ";
-            if (str.equals("bye")) {
-                // exits the program
-                break;
-            } else if (str.equals("list")) {
-                msg += list();
-            } else if (str.split(" ")[0].equals("done")) {
-                msg += makeDone(str);
-            } else if (str.split(" ")[0].equals("todo")) {
-                msg += addTodo(str);
-            } else if (str.split(" ")[0].equals("deadline")) {
-                msg += addDeadline(str);
-            } else if (str.split(" ")[0].equals("event")) {
-                msg += addEvent(str);
-            } else {
-                msg += "Unknown command";
+            try {
+                switch (cmd) {
+                    case "bye":
+                        // exits the program
+                        break OuterLoop;
+                    case "list":
+                        msg += list();
+                        break;
+                    case "done":
+                        msg += makeDone(str);
+                        break;
+                    case "todo":
+                        msg += addTodo(str);
+                        break;
+                    case "deadline":
+                        msg += addDeadline(str);
+                        break;
+                    case "event":
+                        msg += addEvent(str);
+                        break;
+                    default:
+                        throw new DukeException("Oops!! Unknown Command.");
+                }
+            } catch (DukeException exception) {
+                msg += exception.getMessage();
             }
             System.out.println(line);
             System.out.println(msg);
             System.out.println(line + '\n');
         }
         sc.close();
-        System.out.println(line);
-        System.out.println("  Bye. Hope to see you again soon!");
-        System.out.println(line);
-        System.exit(0);
+        goodbye();
     }
 }
