@@ -1,4 +1,5 @@
 package src.main.java;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -7,59 +8,67 @@ public class Duke {
 
     public static void main(String[] args) {
         greetUser();
-        String userInput = "";
         Task[] taskList = new Task[MAX_TASK_AMOUNT];
+        inputAndExecute(taskList);
+    }
+
+    private static void inputAndExecute(Task[] taskList) {
+        String userInput = "";
         do {
             userInput = scanInput();
             String[] userCommand = userInput.split(" ", 2);
-            switch (userCommand[0]) {
-                case "list":
-                    listTasks(taskList);
-                    break;
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                case "todo":
-                    addNewTodo(taskList, userCommand[1]);
-                    break;
-                case "deadline" :
-                    addNewDeadline(taskList, userCommand[1]);
-                    break;
-                case "event" :
-                    addNewEvent(taskList, userCommand[1]);
-                    break;
-                case "done":
-                    markedAsDone(userCommand[1], taskList);
-                    break;
-                default:
-                    addNewTask(userInput, taskList);
-                    break;
-            }
+            executeCommand(taskList, userInput, userCommand);
         } while (!userInput.equalsIgnoreCase("bye"));
     }
 
+    private static void executeCommand(Task[] taskList, String userInput, String[] userCommand) {
+        switch (userCommand[0]) {
+            case "list":
+                listTasks(taskList);
+                break;
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            case "todo":
+                addNewTodo(taskList, userCommand[1]);
+                break;
+            case "deadline":
+                addNewDeadline(taskList, userCommand[1]);
+                break;
+            case "event":
+                addNewEvent(taskList, userCommand[1]);
+                break;
+            case "done":
+                markedAsDone(userCommand[1], taskList);
+                break;
+            default:
+                addNewTask(userInput, taskList);
+                break;
+        }
+    }
+
     private static void addNewTask(String taskDescription, Task[] taskList) {
-        addTaskInList(new Task(taskDescription) , taskList);
+        addTaskInList(new Task(taskDescription), taskList);
         printAddedTask(taskList);
     }
 
     private static void addNewEvent(Task[] taskList, String s) {
         String[] taskDetails = s.split(" /at ", 2);
         Event event = new Event(taskDetails[0], taskDetails[1]);
-        addTaskInList(event , taskList);
+        addTaskInList(event, taskList);
         printAddedTask(taskList);
     }
 
     private static void addNewDeadline(Task[] taskList, String taskDescription) {
         String[] taskDetails = taskDescription.split(" /by ", 2);
         Deadline deadline = new Deadline(taskDetails[0], taskDetails[1]);
-        addTaskInList(deadline , taskList);
+        addTaskInList(deadline, taskList);
         printAddedTask(taskList);
     }
 
     private static void addNewTodo(Task[] taskList, String taskDescription) {
         Todo toDo = new Todo(taskDescription);
-        addTaskInList(toDo , taskList);
+        addTaskInList(toDo, taskList);
         printAddedTask(taskList);
     }
 
@@ -79,7 +88,7 @@ public class Duke {
     }
 
     private static void markedAsDone(String numberInput, Task[] taskList) {
-        int taskNumber = Integer.valueOf(numberInput) - 1;
+        int taskNumber = Integer.parseInt(numberInput) - 1;
         taskList[taskNumber].completedTask();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + taskList[taskNumber].toString());
