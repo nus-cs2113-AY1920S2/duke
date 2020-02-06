@@ -31,10 +31,4 @@ public class Task {
     public static int getTotalNumOfTasks() {
         return totalNumOfTasks;
     }
-/*
-    @Override
-    public String toString() {
-        return taskName;
-    }
- */
 }

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static ArrayList<Task> tasks = new ArrayList<Task>();
+    static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void printTasks() {
         System.out.println("Here are the tasks in your list:");
@@ -11,43 +11,42 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        String logo = " ____         _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+    public static void printLogo() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | __ __ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    }
+
+    public static void main(String[] args) {
+        printLogo();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
+            String[] splitUpInput = userInput.split(" ");
+            if (splitUpInput[0].equals("list")) {
                 printTasks();
-            } else if (userInput.length() > 4 && userInput.substring(0, 5).equals("done ")) {
+            } else if (splitUpInput[0].equals("done")) {
                 tasks.get(Integer.parseInt(Character.toString(
                         userInput.charAt(userInput.length() - 1))) - 1).setDone();
-            } else if (userInput.length() > 4 && userInput.substring(0, 5).equals("todo ")) {
+            } else if (splitUpInput[0].equals("todo")) {
                 Task task = new ToDo(userInput.substring(5));
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:\n  " + task.toString()
                         + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
-            } else if (userInput.length() > 8 && userInput.substring(0, 9).equals("deadline ")) {
+            } else if (splitUpInput[0].equals("deadline")) {
                 Task task = new Deadline(userInput.substring(9));
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:\n  " + task.toString()
                         + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
-            } else if (userInput.length() > 5 && userInput.substring(0, 6).equals("event ")) {
+            } else if (splitUpInput[0].equals("event")) {
                 Task task = new Event(userInput.substring(6));
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:\n  " + task.toString()
                         + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
-            } else {
-                /*Task task = new Task(userInput);
-                list.add(task);
-                System.out.println("Got it. I've added this task:\n  " + userInput
-                        + String.format("\nNow you have %d tasks in the list.", Task.getTaskCounter()));
-                 */
             }
             userInput = scan.nextLine(); 
         }
