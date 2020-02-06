@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static final int timingSpecifier = 4;
+
     private static final String welcomeMessage = "Hello! I'm KJ\nHow can I help you today?";
 
     private static final String completeMessage = "Nice! I've marked this task as done:";
@@ -122,7 +124,7 @@ public class Duke {
             throw new FormatErrorException();
         }
         String description = command.substring(phrases[0].length()+1, index - 1);
-        String duration = command.substring(index + 4);
+        String duration = command.substring(index + timingSpecifier);
         instructions[instructionCount] = new Event(description, duration);
         instructionCount += 1;
     }
@@ -133,7 +135,7 @@ public class Duke {
             throw new FormatErrorException();
         }
         String description = command.substring(phrases[0].length()+1, index - 1);
-        String by = command.substring(index + 4);
+        String by = command.substring(index + timingSpecifier);
         instructions[instructionCount] = new Deadline(description, by);
         instructionCount += 1;
     }
