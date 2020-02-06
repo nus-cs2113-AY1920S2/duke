@@ -1,14 +1,14 @@
 public class Todo extends Task {
-    public Todo(int taskID, String description, boolean isDone) {
-        super(taskID, description, isDone);
+    public Todo (int taskID, String description, boolean isDone) {
+        super (taskID, description, isDone);
     }
 
-    public String getTaskType() {
+    public String getTaskType () {
         return "[T]";
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return (super.taskID + 1) + ". [T]" + super.getStatusIcon() + " " + super.description;
     }
 }
