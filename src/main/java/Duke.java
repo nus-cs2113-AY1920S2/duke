@@ -4,24 +4,25 @@ public class Duke {
 
     public static final int OFFSITE_OF_TIME = 4;
     public static final int MAX_NUMBER_OF_TASKS = 100;
+    public static final String CUTTING_LINE = "    ____________________________________________________________";
 
     public static void greet(String logo){
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println(logo);
         System.out.println("\tHello! I'm Renzo");
         System.out.println("\tWhat can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
     public static void list(Task[] tasks){
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\tHere are the tasks in your list:");
         int numberOfTasks = Task.getNumberOfTasks();
         for (int i = 1; i <= numberOfTasks; i++) {
             System.out.println("\t" + tasks[i].getID() + "." + tasks[i].toString());
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
@@ -99,11 +100,11 @@ public class Duke {
     }
 
     public static void printAddedTask(Task newTask) {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t" + newTask.toString());
         System.out.printf("\tNow you have %d task(s) in the list\n", Task.getNumberOfTasks());
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
@@ -123,17 +124,17 @@ public class Duke {
     }
 
     public static void printMarkedTask(Task markedTask) {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\tI've marked this task as done: ");
         System.out.println("\t" + markedTask.getStatusIcon() + markedTask.getName());
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
     public static void printIdOutOfRangeError() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\tWrong Number!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command again or enter \"bye\" to exit:");
     }
 
@@ -143,15 +144,15 @@ public class Duke {
     }
 
     public static void bye(){
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
     }
 
     public static void echo(String command){
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\t" + command);
-        System.out.println("    ____________________________________________________________");
+        System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
