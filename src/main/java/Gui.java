@@ -1,3 +1,6 @@
+import commands.Command;
+import commands.CommandResult;
+import data.exceptions.StorageOperationException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import parser.Parser;
 
 public class Gui extends Application {
 
@@ -20,6 +24,7 @@ public class Gui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private CommandResult commandResult;
 
     @Override
     public void start(Stage stage) {
@@ -59,8 +64,8 @@ public class Gui extends Application {
         setAnchorPane();
     }
 
+    /** Step 3. Add functionality to handle user input. */
     private void parseUserInput() {
-        //Step 3. Add functionality to handle user input.
         //click button
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -77,11 +82,19 @@ public class Gui extends Application {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (StorageOperationException e) {
+                System.out.println(e);
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (StorageOperationException e) {
+                System.out.println(e);
+            }
         });
     }
 
@@ -104,10 +117,11 @@ public class Gui extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws StorageOperationException {
         //user box
         Label userText = new Label(userInput.getText());
         //duke response
+        //construct a label with the response
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userPng)),
@@ -119,10 +133,8 @@ public class Gui extends Application {
     /** setup AnchorPane with parameters*/
     private void setAnchorPane() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
@@ -132,7 +144,6 @@ public class Gui extends Application {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
     }
@@ -149,7 +160,12 @@ public class Gui extends Application {
      * Replace this stub with your completed method.
      * @param input the full length of user input
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    private String getResponse(String input) throws StorageOperationException {
+//        Command command;
+//////        command = new Parser().parseCommand(input);
+//////        commandResult = Main.executeCommand(command);
+//////        return commandResult.feedbackToUser;
+        return "dummy";
     }
+
 }
