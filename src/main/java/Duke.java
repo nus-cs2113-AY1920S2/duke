@@ -25,12 +25,25 @@ public class Duke {
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
-    public static Todo processToDoDescription(String description){
-        return new Todo(description.replace("todo ",""));
+    public static Todo processToDoDescription(String description) throws DukeException{
+        /*Process Todo Exception */
+        TestDukeException testTodoException = new TestDukeException(description);
+        testTodoException.throwToDoException();
+
+        /*Set up a new Todo Task */
+        int lengthOfTodo = 5;       //including a space
+        String todoDescription = description.substring(lengthOfTodo);
+        return new Todo(todoDescription);
     }
 
-    public static Deadline processDeadlineDescription(String description){
-        String deadlineDescription = description.replace("deadline ","");
+    public static Deadline processDeadlineDescription(String description) throws DukeException{
+        /*Process Deadline Exception */
+        TestDukeException testDeadlineException = new TestDukeException(description);
+        testDeadlineException.throwDeadlineException();
+
+        /*Set up a new Deadline Task */
+        int lengthOfDeadline = 9;   //including a space
+        String deadlineDescription = description.substring(lengthOfDeadline);
         int indexOfBy = deadlineDescription.indexOf("/by");
         int nameStartIndex = 0;
         int nameEndIndex = indexOfBy - 1;
@@ -40,8 +53,14 @@ public class Duke {
         return new Deadline(name, time);
     }
 
-    public static Event processEventDescription(String description){
-        String eventDescription = description.replace("event ","");
+    public static Event processEventDescription(String description) throws DukeException{
+        /*Process Event Exception */
+        TestDukeException testEventException = new TestDukeException(description);
+        testEventException.throwEventException();
+
+        /*Set up a new Event Task */
+        int lengthOfEvent = 6;      //including a space
+        String eventDescription = description.substring(lengthOfEvent);
         int indexOfAt = eventDescription.indexOf("/at");
         int nameStartIndex = 0;
         int nameEndIndex = indexOfAt - 1;
@@ -53,22 +72,30 @@ public class Duke {
 
     public static void addTask(String description, Task[] tasks){
         Task newTask;
-        boolean isToDo = description.contains("todo");
-        boolean isDeadline = description.contains("deadline");
-        boolean isEvent = description.contains("event");
+        String words[] = description.split(" ");
+        String taskType = words[0];
+        boolean isToDo = taskType.equalsIgnoreCase("todo");
+        boolean isDeadline = taskType.equalsIgnoreCase("deadline");
+        boolean isEvent = taskType.equalsIgnoreCase("event");
 
-        if (isToDo){
-            newTask = processToDoDescription(description);
-        } else if (isDeadline){
-            newTask = processDeadlineDescription(description);
-        } else if (isEvent){
-            newTask = processEventDescription(description);
-        } else {
-            newTask = new Task(description);
+        TestDukeException testDukeException = new TestDukeException(description);
+        try {
+            if (isToDo) {
+                newTask = processToDoDescription(description);
+            } else if (isDeadline) {
+                newTask = processDeadlineDescription(description);
+            } else if (isEvent) {
+                newTask = processEventDescription(description);
+            } else {
+                testDukeException.throwTaskTypeException();
+                newTask = null;
+            }
+            tasks[newTask.getID()] = newTask;
+            printAddedTask(newTask);
+        } catch (DukeException dukeException){
+            System.out.println(dukeException.getMessage());
         }
 
-        tasks[newTask.getID()] = newTask;
-        printAddedTask(newTask);
     }
 
     public static void printAddedTask(Task newTask) {
