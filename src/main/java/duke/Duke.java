@@ -1,3 +1,14 @@
+package duke;
+
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateFormatException;
+import duke.exception.NoDateException;
+import duke.exception.NoDescException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;  // User input
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +60,7 @@ public class Duke {
         case "deadline":
             // Fallthrough
         case "event":
-            int delimIndex = userParams.indexOf("/"); // Duke uses / to define where the date starts
+            int delimIndex = userParams.indexOf("/"); // duke.Duke uses / to define where the date starts
 
             // If String.indexOf returns -1, the character has not been found
             if (delimIndex == -1) {
