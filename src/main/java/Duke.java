@@ -57,44 +57,81 @@ public class Duke {
 
     private static int doTaskAndGetNewNumberOfTasks(Task[] taskList, int numberOfTasks, String userInput,
                                                     String[] splitUserInput) {
-        switch (splitUserInput[0].toLowerCase()) {
-        case TODO:
-            numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
-            break;
-        case DEADLINE:
-            numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
-            break;
-        case EVENT:
-            numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
-            break;
-        case LIST:
-            displayList(taskList, numberOfTasks);
-            break;
-        case DONE:
-            markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
-            break;
-        default:
-            numberOfTasks = addDefaultTaskToList(taskList, numberOfTasks, userInput);
-            break;
+
+
+        try {
+            validateTask(splitUserInput, userInput);
+            switch (splitUserInput[0].toLowerCase()) {
+            case TODO:
+                numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
+                break;
+            case DEADLINE:
+                numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
+                break;
+            case EVENT:
+                numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
+                break;
+            case LIST:
+                displayList(taskList, numberOfTasks);
+                break;
+            case DONE:
+                markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
+                break;
+            default:
+                break;
+            }
+        } catch (InvalidTaskException | MissingDescriptonException | MissingDoneNumberFieldException | MissingTimeFieldException | NumberFormatException m) {
+            System.out.println("Exception occurred: " + m);
         }
+
+
         return numberOfTasks;
     }
 
-    private static int addDefaultTaskToList(Task[] taskList, int numberOfTasks, String userInput) {
-        Task newTask;
-        newTask = new Task(userInput);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
-    }
+    private static void validateTask(String[] splitUserInput, String userInput)
+            throws InvalidTaskException, MissingDescriptonException, MissingDoneNumberFieldException,
+            MissingTimeFieldException {
 
-    private static void markTaskAsDone(Task[] taskList, int numberOfActions, String s) {
-        int actionListNumber = Integer.parseInt(s);
-        if ((actionListNumber - 1) > numberOfActions || actionListNumber == 0) {
-            System.out.println("Out of range");
+        String temp = splitUserInput[0].toLowerCase();
+        if (!temp.equals(TODO) && !temp.equals(EVENT) &&
+                !temp.toLowerCase().equals(DEADLINE) && !temp.toLowerCase().equals(DONE) &&
+                !temp.equals(LIST)) {
+            throw new InvalidTaskException("Input is invalid. No such task");
         } else {
-            taskList[actionListNumber - 1].markAsDone();
-            System.out.println(
-                    "Nice! I marked this as done: " + taskList[actionListNumber - 1].toString());
+            String[] splitArray = splitTaskDescription(userInput);
+            if (temp.toLowerCase().equals(DONE) && splitUserInput.length == 1) {
+                throw new MissingDoneNumberFieldException("Done's number field is empty!");
+            } else if (isDescriptionBlank(splitArray) && !temp.equals(LIST)) {
+                throw new MissingDescriptonException("Missing description!");
+            } else if (temp.equals(TODO) || temp.equals(EVENT) || temp.toLowerCase().equals(DEADLINE)) {
+                if (splitArray[2].equals("yes")) {
+                    String obtainedTime = splitArray[1];
+                    String[] timeCheck = obtainedTime.split(" ", 2);
+                    if (timeCheck.length == 1 || timeCheck[1].isBlank()) {
+                        throw new MissingTimeFieldException("Missing time!");
+                    }
+                }
+
+            }
+        }
+
+
+    }
+
+    private static void markTaskAsDone(Task[] taskList, int numberOfActions, String s) throws NumberFormatException{
+        try {
+            int actionListNumber = Integer.parseInt(s);
+            if (actionListNumber > numberOfActions || actionListNumber == 0) {
+                System.out.println("Out of range");
+            } else {
+                taskList[actionListNumber - 1].markAsDone();
+                System.out.println(
+                        "Nice! I marked this as done: " + taskList[actionListNumber - 1].toString());
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Done number field is not a number!");
         }
     }
 
@@ -111,21 +148,44 @@ public class Duke {
 
     private static int addEventToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        newTask = new Event(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
+        if (isDescriptionBlank(splitTaskDescriptionArray)) {
+            displayNoDescriptionError();
+            numberOfTasks = numberOfTasks;
+            return numberOfTasks;
+        }
+        newTask = new Event(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
         numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
+    }
+
+    private static boolean isDescriptionBlank(String[] strings) {
+        return strings[0].isBlank();
     }
 
     private static int addDeadlineToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        newTask = new Deadline(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
+        if (isDescriptionBlank(splitTaskDescriptionArray)) {
+            displayNoDescriptionError();
+            numberOfTasks = numberOfTasks;
+            return numberOfTasks;
+        }
+        newTask = new Deadline(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
         numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
 
+
     private static int addTodoToList(Task[] taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        newTask = new Todo(splitTaskDescription(userInput)[0], splitTaskDescription(userInput)[1]);
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
+        if (isDescriptionBlank(splitTaskDescriptionArray)) {
+            displayNoDescriptionError();
+            numberOfTasks = numberOfTasks;
+            return numberOfTasks;
+        }
+        newTask = new Todo(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
         numberOfTasks = addToList(newTask, taskList, numberOfTasks);
         return numberOfTasks;
     }
@@ -136,6 +196,10 @@ public class Duke {
         System.out.println("Got it. I've added this task: " + newTask.toString());
         return numberOfTasks;
 
+    }
+
+    private static void displayNoDescriptionError() {
+        System.out.println("Sorry! This task lack description!");
     }
 
     private static void displayGoodbye() {
@@ -154,16 +218,28 @@ public class Duke {
     }
 
     private static String[] splitTaskDescription(String input) {
-        String[] returnSplit = new String[2];
+        String[] returnSplit = new String[3];
         if (!input.contains("/")) {
-            returnSplit[0] = input.split(" ", 2)[1];
+            String[] obtainedDescription = input.split(" ", 2);
+            if (obtainedDescription.length == 1 || obtainedDescription[1].isBlank()) {
+                returnSplit[0] = "";
+            } else {
+                returnSplit[0] = obtainedDescription[1].trim();
+            }
             returnSplit[1] = "";
+            returnSplit[2] = "";
             return returnSplit;
         }
         String[] obtainedSplit = input.split("/");
         String[] obtainedDescription = obtainedSplit[0].split(" ", 2);
-        returnSplit[0] = obtainedDescription[1];
-        returnSplit[1] = obtainedSplit[1];
+        if (obtainedDescription.length == 1 || obtainedDescription[1].isBlank()) {
+            returnSplit[0] = "";
+            returnSplit[1] = "";
+        } else {
+            returnSplit[0] = obtainedDescription[1].trim();
+            returnSplit[1] = obtainedSplit[1].trim();
+            returnSplit[2] = "yes";
+        }
         return returnSplit;
     }
 
