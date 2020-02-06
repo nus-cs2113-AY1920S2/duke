@@ -1,3 +1,4 @@
+package duke.exception;
 import org.jetbrains.annotations.NotNull;
 
 public class FindDukeException extends Throwable {

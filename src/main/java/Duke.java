@@ -1,7 +1,13 @@
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import duke.task.Todo;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.exception.DukeException;
+import duke.exception.FindDukeException;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
