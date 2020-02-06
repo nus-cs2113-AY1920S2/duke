@@ -1,21 +1,22 @@
+import duke.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        greeting();
+        greetUser();
         chat();
     }
 
@@ -27,7 +28,7 @@ public class Duke {
         return str;
     }
 
-    public static void greeting() {
+    public static void greetUser() {
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you");
@@ -35,7 +36,7 @@ public class Duke {
 
     }
 
-    public static void bye() {
+    public static void finishConversation() {
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
@@ -43,13 +44,13 @@ public class Duke {
     }
 
 
-    public static void chat() throws IOException {
+    public static void chat() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
         String str = readCommand();
         System.out.println("____________________________________________________________");
 
         if (str.equals("bye")) {
-            bye();
+            finishConversation();
         } else if (str.equals("add task")) {
             System.out.println("____________________________________________________________");
             System.out.println("Please add no more than 100 tasks");
@@ -66,13 +67,14 @@ public class Duke {
     }
 
 
-    public static void addTaskScreen() throws IOException {
+    public static void addTaskScreen() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
         System.out.println("Please add tasks");
         System.out.println("____________________________________________________________");
         String str = readCommand();
+        wrongInputFormatError(str);
         if (str.equals("bye")) {
-            bye();
+            finishConversation();
         } else if (!str.equals("done") && str.contains("done")) {
             System.out.println("Mark task done");
             markDone(str);
@@ -81,12 +83,15 @@ public class Duke {
             listTask();
             addTaskScreen();
         } else if ((str.contains("todo"))) {
+            missingTaskError(str);
             int dividerPosition = str.indexOf(" ");
             String task = str.substring(dividerPosition + 1);
             ToDos newTask = new ToDos(task);
             addTask(newTask);
             addTaskScreen();
         } else if ((str.contains("deadline"))) {
+            missingTaskError(str);
+            missingDateTimeError(str);
             int dividerPosition = str.indexOf(" ");
             int dividerPositionSlash = str.indexOf("/");
             String task = str.substring(dividerPosition + 1 , dividerPositionSlash);
@@ -95,6 +100,8 @@ public class Duke {
             addTask(newTask);
             addTaskScreen();
         } else if ((str.contains("event"))) {
+            missingTaskError(str);
+            missingDateTimeError(str);
             int dividerPosition = str.indexOf(" ");
             int dividerPositionSlash = str.indexOf("/");
             String task = str.substring(dividerPosition + 1 , dividerPositionSlash);
@@ -104,11 +111,6 @@ public class Duke {
             String time  = calender.substring(dateAndTime+1);
             Events newTask = new Events(task,date,time);
             addTask(newTask);
-            addTaskScreen();
-        } else if(str.equals("done")){
-            System.out.println("____________________________________________________________");
-            System.out.println("Invalid input");
-            System.out.println("____________________________________________________________");
             addTaskScreen();
         }
 
@@ -150,6 +152,23 @@ public class Duke {
     }
 
 
+    public static void missingDateTimeError(String input) throws DukeException{
+        if(!input.contains("/")){
+            throw  new DukeException("OOPS!!!Please specify more details");
+        }
+    }
+
+    public static void missingTaskError(String input) throws DukeException{
+        if(input.equals("todo") || input.equals("deadline") || input.equals("event")){
+            throw  new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    public static void wrongInputFormatError(String input) throws DukeException{
+        if(!input.contains("todo") || !input.contains("deadline") || !input.contains("event")){
+            throw  new DukeException("OOPS!!!Wrong input format. Enter todo/deadline/event + task name");
+        }
+    }
 }
 
 
