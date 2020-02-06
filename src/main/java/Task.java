@@ -1,30 +1,33 @@
 public class Task {
-
-    protected boolean isDone;
-    protected String type;
     protected String description;
-    protected String by;
+    protected int index;
+    protected String type;
+    protected boolean isDone;
 
-
-    public Task(String description, String type) {
+    public Task(String description, int index) {
         this.description = description;
-        this.type = type;
+        this.index = index;
         this.isDone = false;
-        this.by = "";
     }
 
-    public String getDescription() { return description; }
-
-    public String getBy(){ return by; }
-
-    public String getType(){ return type; }
-
-    public void markDone(){ this.isDone = true; }
-
-    public void setBy(String by){ this.by = "  (" + by + ")"; }
-
-    public String getStatusIcon() {
-        return (isDone ? "[Y] " : "[N] "); //return tick or X symbols
+    public void setDone() {
+        isDone = true;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
+
+    protected final void setType(String type){
+        this.type = type;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return (index+1) + ". " + type;
+    }
 }

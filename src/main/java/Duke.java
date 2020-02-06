@@ -3,7 +3,8 @@ import java.util.Arrays;
 
 public class Duke {
     // Libary of common words
-    private static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
+    private static final int MAX_TASKS = 100;
     private static final String BOT_NAME = "E.D.I.T.H.";
     private static final String BOT_LOGO = "\n"
             + " _______         ______           _________        __________          __     __                \n"
@@ -15,7 +16,7 @@ public class Duke {
 
     private static final String USERNAME = "USER";
     private static final String MESSAGE_WELCOME = "\n\tHello! I'm " + BOT_NAME + "\n\tWhat can I do for you?";
-    private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!\n";
+    private static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
     private static final String LINE_DIVIDER = "\n\t____________________________________________________________";
     private static final String MESSAGE_INVALID_COMMAND = "\tInvalid Command. Please try again\n";
     private static final String COMMAND_ADD_WORD = "ADD";
@@ -43,14 +44,15 @@ public class Duke {
     public static final void displayLineDivider() {
         System.out.println(LINE_DIVIDER);
     }
-    public static final void displayNumberOfTasks(int Tasks) { System.out.print("\tNow you have " + Tasks + " tasks in the list.");  }
+    public static final void displayNumberOfTasks(int Tasks) { System.out.print("\tNow you have " + Tasks + " tasks in the list.");}
+    public static final void displayMarkedTask(int markedIndex){ System.out.print("\tYou have marked -- " + markedIndex);}
     private static void echoUserCommand(String userCommand) {  System.out.println("\t[Command entered: " + userCommand + "]"); }
     private static void exitProgram() {
         displayExitMessage();
     }
 
     public static void main(String[] args) {
-        Task task[] = new Task[100];
+        Task task[] = new Task[MAX_TASKS];
         int index = 0;
         int markIndex;
         String input;
@@ -84,31 +86,33 @@ public class Duke {
             }
             switch (commandType) {
                 case COMMAND_TODO_WORD:
-                    item = new Task(description, "T");
+                    item = new Todo(description, index);
+                    item.setType("[T]");
                     task[index] = item;
                     index++;
                     displayAcceptTask();
                     displayNumberOfTasks(index);
                     break;
                 case COMMAND_EVENT_WORD:
-                    item = new Task(description, "E");
+                    item = new Event(description, userCommand.substring(startIndexForEvent + 4), index);
+                    item.setType("[E]");
                     task[index] = item;
-                    task[index].setBy("at: " + userCommand.substring(startIndexForEvent + 4));
                     index++;
                     displayAcceptTask();
                     displayNumberOfTasks(index);
                     break;
                 case COMMAND_DEADLINE_WORD:
-                    item = new Task(description, "D");
+                    item = new Deadline(description, userCommand.substring(startIndexForDeadline + 4), index);
+                    item.setType("[D]");
                     task[index] = item;
-                    task[index].setBy("by: " + userCommand.substring(startIndexForDeadline + 4));
                     index++;
                     displayAcceptTask();
                     displayNumberOfTasks(index);
                     break;
                 case COMMAND_MARK_WORD:
                     markIndex = Integer.parseInt(description);
-                    task[markIndex - 1].markDone();
+                    task[markIndex - 1].setDone();
+                    displayMarkedTask(markIndex);
                     break;
                 case COMMAND_LIST_WORD:
                     if (index == 0) {
@@ -116,7 +120,8 @@ public class Duke {
                     } else {
                         System.out.print("\tHere are the tasks in your list:");
                         for (int i = 0; i < index; i++) {
-                            System.out.print("\n\t" + (i + 1) + ". [" + task[i].getType() + "]" + task[i].getStatusIcon() + task[i].getDescription() + task[i].getBy());
+                            //System.out.print("\n\t" + (i + 1) + ". [" + task[i].getType() + "]" + task[i].getStatusIcon() + task[i].getDescription() + task[i].getBy());
+                            System.out.print(task[i]);
                         }
                     }
                     break;
@@ -124,11 +129,12 @@ public class Duke {
                     if (index == 0) {
                         System.out.print("\tYour list is already empty!");
                     } else {
-                        item = new Task("", "");
+                        item = new Task("",0);
                         for (int i = 0; i < index; i++) {
                             task[i] = item;
                         }
                         index = 0;
+                        System.out.print("\tYour list is cleared!");
                     }
                     break;
                 case COMMAND_BYE_WORD:

@@ -35,18 +35,18 @@
 	[Command entered: list]
 	Here are the tasks in your list:
 	1. [T][N] Assignments
-	2. [D][N] Complete CS2113 Homework   (by: 2359)
-	3. [E][N] Dinner with friends   (at: 24 June)
+	2. [D][N] Complete CS2113 Homework 	(by: 2359)
+	3. [E][N] Dinner with friends 	(at: 24 June)
 	____________________________________________________________
 
 	____________________________________________________________
 	[Command entered: mark 1]
-
+	You have marked -- 1
 	____________________________________________________________
 
 	____________________________________________________________
 	[Command entered: clear]
-
+	Your list is cleared!
 	____________________________________________________________
 
 	____________________________________________________________
@@ -61,7 +61,6 @@
 
 	____________________________________________________________
 	[Command entered: exit]
-Bye. Hope to see you again soon!
-
+	Bye. Hope to see you again soon!
 
 	____________________________________________________________
