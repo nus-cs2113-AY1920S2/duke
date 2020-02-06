@@ -1,5 +1,4 @@
 import duke.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +16,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greetUser();
-        chat();
+        conversation();
     }
 
     private static String readCommand() throws IOException {
@@ -43,8 +42,7 @@ public class Duke {
 
     }
 
-
-    public static void chat() throws IOException, DukeException {
+    public static void conversation() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
         String str = readCommand();
         System.out.println("____________________________________________________________");
@@ -58,11 +56,11 @@ public class Duke {
             addTaskScreen();
         } else if (str.equals("list")) {
             listTask();
-            chat();
+            conversation();
         }else {
             System.out.println(str);
             System.out.println("____________________________________________________________");
-            chat();
+            conversation();
         }
     }
 
@@ -72,12 +70,12 @@ public class Duke {
         System.out.println("Please add tasks");
         System.out.println("____________________________________________________________");
         String str = readCommand();
-        wrongInputFormatError(str);
+
         if (str.equals("bye")) {
             finishConversation();
-        } else if (!str.equals("done") && str.contains("done")) {
-            System.out.println("Mark task done");
+        } else if (str.contains("done")) {
             markDone(str);
+            System.out.println("Mark task done");
             addTaskScreen();
         } else if (str.equals("list")) {
             listTask();
@@ -112,9 +110,9 @@ public class Duke {
             Events newTask = new Events(task,date,time);
             addTask(newTask);
             addTaskScreen();
+        }else{
+            wrongInputFormatError(str);
         }
-
-
     }
 
     public static void addTask(Task newTask) throws IOException {
@@ -136,18 +134,15 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public  static  void markDone(String str) throws IOException {
+    public  static  void markDone(String str) throws IOException, DukeException {
+        if(str.equals("done")){
+            missingIndexError();
+        }
         int dividerPosition = str.indexOf(" ");
         String index = str.substring(dividerPosition+1);
         int i = Integer.parseInt(index);
-        System.out.println(i);
-        if(i == 0){
-            System.out.println("____________________________________________________________");
-            System.out.println("Invalid index");
-            System.out.println("____________________________________________________________");
-        }else{
-            taskList.get(i-1).markDone();
-        }
+        markDoneError(i,taskList);
+        taskList.get(i-1).markDone();
         listTask();
     }
 
@@ -165,10 +160,21 @@ public class Duke {
     }
 
     public static void wrongInputFormatError(String input) throws DukeException{
-        if(!input.contains("todo") || !input.contains("deadline") || !input.contains("event")){
-            throw  new DukeException("OOPS!!!Wrong input format. Enter todo/deadline/event + task name");
+            throw  new DukeException("OOPS!!!Wrong input format.");
+        }
+
+    public static void markDoneError(int index, ArrayList<Task> taskList) throws DukeException{
+        if(index == 0){
+            throw  new DukeException("OOPS!!!Invalid input index");
+        }else if(index > taskList.size()){
+            throw  new DukeException("OOPS!!!Index out of range");
         }
     }
+
+    public static void missingIndexError() throws DukeException{
+        throw  new DukeException("OOPS!!! The index cannot be empty.");
+    }
+
 }
 
 
