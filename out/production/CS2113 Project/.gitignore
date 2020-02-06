@@ -1,0 +1,47 @@
+CS2113 Project.iml
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+out/production/CS2113 Project/CONTRIBUTORS.md
+out/production/CS2113 Project/CS2113 Project.iml
+out/production/CS2113 Project/Duke.class
+out/production/CS2113 Project/GradeHelper.class
+out/production/CS2113 Project/README.md
+out/production/CS2113 Project/WordComparator.class
+out/production/CS2113 Project/.idea/.gitignore
+out/production/CS2113 Project/.idea/misc.xml
+out/production/CS2113 Project/.idea/modules.xml
+out/production/CS2113 Project/.idea/vcs.xml
+out/production/CS2113 Project/docs/README.md
+out/production/CS2113 Project/META-INF/CS2113 Project.kotlin_module
+out/production/CS2113 Project/tutorials/gradleTutorial.md
+out/production/CS2113 Project/tutorials/javaFxTutorialPart1.md
+out/production/CS2113 Project/tutorials/javaFxTutorialPart2.md
+out/production/CS2113 Project/tutorials/javaFxTutorialPart3.md
+out/production/CS2113 Project/tutorials/javaFxTutorialPart4.md
+out/production/CS2113 Project/tutorials/textUiTestingTutorial.md
+out/production/CS2113 Project/tutorials/assets/DaDuke.png
+out/production/CS2113 Project/tutorials/assets/DaUser.png
+out/production/CS2113 Project/tutorials/assets/DialogBoxController.png
+out/production/CS2113 Project/tutorials/assets/DialogBoxesIteration2.png
+out/production/CS2113 Project/tutorials/assets/DialogBoxesIteration3.png
+out/production/CS2113 Project/tutorials/assets/DukeMockup.png
+out/production/CS2113 Project/tutorials/assets/DukeSceneGraph.png
+out/production/CS2113 Project/tutorials/assets/DukeSceneGraph.puml
+out/production/CS2113 Project/tutorials/assets/EchoNotScrolling.png
+out/production/CS2113 Project/tutorials/assets/FinalLayout.png
+out/production/CS2113 Project/tutorials/assets/GradleIcon.png
+out/production/CS2113 Project/tutorials/assets/HelloWorld.png
+out/production/CS2113 Project/tutorials/assets/ImportGradle.png
+out/production/CS2113 Project/tutorials/assets/JavaFxHierarchy.png
+out/production/CS2113 Project/tutorials/assets/JavaFxHierarchy.puml
+out/production/CS2113 Project/tutorials/assets/MainWindowController.png
+out/production/CS2113 Project/tutorials/assets/MockupButton.png
+out/production/CS2113 Project/tutorials/assets/MockupImageView.png
+out/production/CS2113 Project/tutorials/assets/MockupLabel.png
+out/production/CS2113 Project/tutorials/assets/MockupScrollPane.png
+out/production/CS2113 Project/tutorials/assets/MockupTextField.png
+out/production/CS2113 Project/tutorials/assets/NewEmptyProject.png
+out/production/CS2113 Project/tutorials/assets/RawLayout.png
+out/production/CS2113 Project/tutorials/assets/SceneBuilder.png
