@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class Duke {
         System.out.println();
     }
 
-    private static void printTask (Task t) {
+    private static void printTask (@NotNull Task t) {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("Got it. I've added this task: ");
         printInCenter(t.toString());
@@ -59,29 +61,38 @@ public class Duke {
         System.out.println();
     }
 
-    public static void todo (String cmd) {
+    public static void todo (String cmd) throws DukeException {
+        FindDukeException findTodoException = new FindDukeException(cmd);
+        findTodoException.toDoException();
+
         int startPosition = cmd.indexOf(" ");
-        String cmdTodo = cmd.substring(startPosition + 1, cmd.length());
+        String cmdTodo = cmd.substring(startPosition + 1);
         Task todo = new Todo(tasks.size(), cmdTodo, false);
         tasks.add(todo);
         printTask(todo);
     }
 
-    public static void event (String cmd) {
+    public static void event (String cmd) throws DukeException {
+        FindDukeException findEventException = new FindDukeException(cmd);
+        findEventException.eventException();
+
         int startPosition = cmd.indexOf(" ");
         int timePosition = cmd.indexOf(" /at ");
         String cmdEvent = cmd.substring(startPosition + 1, timePosition);
-        String cmdTime = cmd.substring(timePosition + charLengthToSkip, cmd.length());
+        String cmdTime = cmd.substring(timePosition + charLengthToSkip);
         Task event = new Event(tasks.size(), cmdEvent, false, cmdTime);
         tasks.add(event);
         printTask(event);
     }
 
-    public static void deadline (String cmd) {
+    public static void deadline (String cmd) throws DukeException {
+        FindDukeException findDeadlineException = new FindDukeException(cmd);
+        findDeadlineException.deadlineException();
+
         int startPosition = cmd.indexOf(" ");
         int timePosition = cmd.indexOf(" /by ");
         String cmdDeadline = cmd.substring(startPosition + 1, timePosition);
-        String cmdTime = cmd.substring(timePosition + charLengthToSkip, cmd.length());
+        String cmdTime = cmd.substring(timePosition + charLengthToSkip);
         Task deadline = new Deadline(tasks.size(), cmdDeadline, false, cmdTime);
         tasks.add(deadline);
         printTask(deadline);
@@ -113,7 +124,7 @@ public class Duke {
 
     public static void exit () {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
-        printInCenter("Bye! See you next time :)");
+        printInCenter("Bye! See you next time \uD83E\uDD17");
         System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
         System.exit(0);
     }
@@ -132,13 +143,31 @@ public class Duke {
                 list();
                 break;
             case "todo":
-                todo(cmd);
+                try {
+                    todo(cmd);
+                } catch (DukeException dukeException) {
+                    System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+                    printInCenter(dukeException.getMessage());
+                    System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+                }
                 break;
             case "event":
-                event(cmd);
+                try {
+                    event(cmd);
+                } catch (DukeException dukeException) {
+                    System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+                    printInCenter(dukeException.getMessage());
+                    System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+                }
                 break;
             case "deadline":
-                deadline(cmd);
+                try {
+                    deadline(cmd);
+                } catch (DukeException dukeException) {
+                    System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+                    printInCenter(dukeException.getMessage());
+                    System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+                }
                 break;
             case "done":
                 int spacePosition = cmd.indexOf(" ");
@@ -146,6 +175,14 @@ public class Duke {
                 done(taskNumber);
                 break;
             default:
+                try {
+                    FindDukeException findDukeException = new FindDukeException(cmd);
+                    findDukeException.undefinedTypeException();
+                } catch (DukeException dukeException) {
+                    System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+                    printInCenter(dukeException.getMessage());
+                    System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+                }
                 break;
             }
             cmd = scanner.nextLine();
