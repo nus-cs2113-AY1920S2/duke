@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.exception.DukeException;
+
 public class TestDukeException {
     private String message;
     private boolean isTodo ;
@@ -17,7 +21,7 @@ public class TestDukeException {
         isWrongType = !(isTodo || isDeadline || isEvent);
     }
 
-    public void throwToDoException() throws DukeException{
+    public void throwToDoException() throws DukeException {
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;
         if(isWrongLength && isTodo){

@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.TestDukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -26,7 +35,7 @@ public class Duke {
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
-    public static Todo processToDoDescription(String description) throws DukeException{
+    public static Todo processToDoDescription(String description) throws DukeException {
         /*Process Todo Exception */
         TestDukeException testTodoException = new TestDukeException(description);
         testTodoException.throwToDoException();
