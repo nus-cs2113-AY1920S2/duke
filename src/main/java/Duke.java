@@ -36,7 +36,7 @@ public class Duke {
         System.out.println("----------");
     }
 
-    private static void parseCommand(String userCommand, String userParams) throws NoDescException, NoDateException, InvalidDateFormatException {
+    private static void parseCommand(String userCommand, String userParams) throws NoDescException, NoDateException, InvalidDateFormatException, InvalidCommandException {
         switch (userCommand) {
         case "todo":
             // Check that description exists
@@ -82,8 +82,8 @@ public class Duke {
             printList();
             break;
         default:
-            formatPrint("Sorry, I didn't recognize that command.");
-            break;
+            throw new InvalidCommandException();
+            // Note: break statement not needed here because the exception is thrown by default, which stops flow
         }
     }
 
@@ -120,6 +120,8 @@ public class Duke {
                     formatPrint("event description /date");
                     break;
                 }
+            } catch (InvalidCommandException e) {
+                formatPrint("Sorry, I didn't recognize that command.");
             }
 
             System.out.println("You have " + taskList.size() + " task/s. (type 'list' to list your tasks)");
