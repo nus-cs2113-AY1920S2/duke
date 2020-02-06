@@ -4,6 +4,7 @@ public class Duke {
     private static final int MAX_TASKS_COUNT = 100;
     private static Task[] tasks = new Task[MAX_TASKS_COUNT];
     private static int indexOfTasks = 0;
+    private static String[] command = new String[2];
 
     public static void main(String[] args) {
         String name = "Duke";
@@ -14,38 +15,62 @@ public class Duke {
 
         do {
             input = reader.nextLine();
-            input = initialInputProcessing(input);
+            command = inputProcessing(input);
             printLine();
-            if (input.equals("bye")) {
+
+            switch (command[0]) {
+            case "bye":
                 // close the interpreter
                 System.out.println("\tBye. Hope to see you again soon!");
-            } else if (input.equals("list")) {
+                break;
+            case "list":
                 // list all tasks
                 listTasks();
-            } else {
-                // input involves 2 phrases
-                int startIndexOfInput = input.indexOf(' ');
-                String cmdType = input.substring(0, startIndexOfInput).toLowerCase();
-                String cmdDescription = input.substring(startIndexOfInput + 1);
-
-                if (cmdType.equals("done")) {
-                    // mark a task as done
-                    System.out.println("\tNice! I've marked this task as done:");
-                    int indexOfTasks = Integer.parseInt(cmdDescription) - 1;
-                    tasks[indexOfTasks].setDone(true);
-                    System.out.println("\t" + tasks[indexOfTasks]);
-                } else {
-                    // add stuff to String[] tasks
-                    addTask(cmdType, cmdDescription);
-                }
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                // add stuff to String[] tasks
+                addTask(command[0], command[1]);
+                break;
+            case "done":
+                // mark a task as done
+                System.out.println("\tNice! I've marked this task as done:");
+                int indexOfTasks = Integer.parseInt(command[1]) - 1;
+                tasks[indexOfTasks].setDone(true);
+                System.out.println("\t" + tasks[indexOfTasks]);
+                break;
+            default:
+                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+
             printLine();
-        } while (!input.equals("bye"));
+        } while (!command[0].equals("bye"));
     }
 
-    private static String initialInputProcessing(String input) {
+    /**
+     * Split first word from the rest of String.
+     * @param input: one-line string
+     * @return array of 2 String, [0]: first word, [1]: subsequent words.
+     */
+    private static String[] inputProcessing(String input) {
+        String[] output = new String[2];
+
         input = input.trim();   // strip leading & trailing spaces
-        return input;
+        int startIndexOfDescription = input.indexOf(' ');
+
+        if (startIndexOfDescription == -1) {
+            // only has 1 word
+            output[0] = input.toLowerCase();
+        } else {
+            // has 2 words
+            String cmdType = input.substring(0, startIndexOfDescription).toLowerCase();
+            String cmdDescription = input.substring(startIndexOfDescription + 1);
+            output[0] = cmdType;
+            output[1] = cmdDescription;
+        }
+
+        return output;
     }
 
     public static void printLine() {
