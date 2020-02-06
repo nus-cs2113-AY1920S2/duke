@@ -36,6 +36,57 @@ public class Duke {
         System.out.println("----------");
     }
 
+    private static void parseCommand(String userCommand, String userParams) throws NoDescException, NoDateException, InvalidDateFormatException {
+        switch (userCommand) {
+        case "todo":
+            // Check that description exists
+            if (userParams.trim().isEmpty()) {
+                throw new NoDescException();
+            }
+            taskList.add(new Todo(userParams));
+            formatPrint("Added todo:" + userParams);
+            break;
+        case "deadline":
+            // Fallthrough
+        case "event":
+            int delimIndex = userParams.indexOf("/"); // Duke uses / to define where the date starts
+
+            // If String.indexOf returns -1, the character has not been found
+            if (delimIndex == -1) {
+                throw new InvalidDateFormatException();
+            }
+
+            String desc = userParams.substring(0, delimIndex); // Get description substring (before /)
+            String date = userParams.substring(delimIndex+1, userParams.length()); // Get date substring (after /)
+
+            // Check that description and date exist
+            if (desc.trim().isEmpty()) {
+                throw new NoDescException();
+            } else if (date.trim().isEmpty()) {
+                    throw new NoDateException();
+                }
+            if (userCommand.equals("deadline")) {
+                taskList.add(new Deadline(desc, date));
+                formatPrint("Added task: " + desc + "| deadline: " + date);
+            } else {
+                taskList.add(new Event(desc, date));
+                formatPrint("Added event: " + desc + "| on/at: " + date);
+            }
+            break;
+        case "done":
+            String taskId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
+            taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
+            formatPrint("Marked task as done.");
+            break;
+        case "list":
+            printList();
+            break;
+        default:
+            formatPrint("Sorry, I didn't recognize that command.");
+            break;
+        }
+    }
+
     public static void main(String[] args) {
         intro();
 
@@ -53,36 +104,22 @@ public class Duke {
 
         // Main execution loop
         while(!userCommand.equalsIgnoreCase("bye")) {
-            switch (userCommand) {
-            case "todo":
-                taskList.add(new Todo(userParams));
-                formatPrint("Added todo:" + userParams);
-                break;
-            case "deadline":
-                // Fallthrough
-            case "event":
-                int delimIndex = userParams.indexOf("/"); // Duke uses / to define where the date starts
-                String desc = userParams.substring(0, delimIndex); // Get description substring (before /)
-                String date = userParams.substring(delimIndex+1, userParams.length()); // Get date substring (after /)
-                if (userCommand.equals("deadline")) {
-                    taskList.add(new Deadline(desc, date));
-                    formatPrint("Added task: " + desc + "| deadline: " + date);
-                } else {
-                    taskList.add(new Event(desc, date));
-                    formatPrint("Added event: " + desc + "| on/at: " + date);
+            try {
+                parseCommand(userCommand, userParams);
+            } catch (NoDescException e) {
+                formatPrint("Please input a description.");
+            } catch (NoDateException e) {
+                formatPrint("Please input a date.");
+            } catch (InvalidDateFormatException e) {
+                formatPrint("Invalid input method. Please input the task in the following format: ");
+                switch (userCommand) {
+                case "deadline":
+                    formatPrint("deadline description /date");
+                    break;
+                case "event":
+                    formatPrint("event description /date");
+                    break;
                 }
-                break;
-            case "done":
-                String taskId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
-                taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
-                formatPrint("Marked task as done.");
-                break;
-            case "list":
-                printList();
-                break;
-            default:
-                formatPrint("Sorry, I didn't recognize that command.");
-                break;
             }
 
             System.out.println("You have " + taskList.size() + " task/s. (type 'list' to list your tasks)");
