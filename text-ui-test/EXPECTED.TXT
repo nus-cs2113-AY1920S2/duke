@@ -75,12 +75,32 @@ Please enter your command or enter "bye" to exit:
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
+	Got it. I've added this task: 
+	[D][✘] finish homework (by: Friday Afternoon)
+	Now you have 6 task(s) in the list
+    ____________________________________________________________
+
+Please enter your command or enter "bye" to exit:
+    ____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][✘] borrow book
 	2.[D][✓] return book (by: Sunday)
 	3.[E][✓] project meeting (at: Mon 2-4pm)
 	4.[T][✘] buy books
 	5.[D][✘] finish project (by: Friday Morning)
+	6.[D][✘] finish homework (by: Friday Afternoon)
+    ____________________________________________________________
+
+Please enter your command or enter "bye" to exit:
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+    ____________________________________________________________
+	Here are the tasks in your list:
+	1.[T][✘] borrow book
+	2.[D][✓] return book (by: Sunday)
+	3.[E][✓] project meeting (at: Mon 2-4pm)
+	4.[T][✘] buy books
+	5.[D][✘] finish project (by: Friday Morning)
+	6.[D][✘] finish homework (by: Friday Afternoon)
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
