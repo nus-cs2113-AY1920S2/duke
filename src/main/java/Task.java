@@ -2,12 +2,12 @@ public class Task {
     protected String taskName;
     protected boolean isDone;
     protected int taskId;
-    protected static int taskCounter = 0;
+    protected static int totalNumOfTasks = 0;
 
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
-        this.taskId = ++this.taskCounter;
+        this.taskId = ++this.totalNumOfTasks;
     }
 
     public void setDone() {
@@ -28,8 +28,8 @@ public class Task {
         return taskName;
     }
 
-    public static int getTaskCounter() {
-        return taskCounter;
+    public static int getTotalNumOfTasks() {
+        return totalNumOfTasks;
     }
 /*
     @Override
