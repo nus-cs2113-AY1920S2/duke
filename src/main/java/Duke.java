@@ -26,7 +26,22 @@ public class Duke {
     private static final String COMMAND_ADD_WORD = "ADD";
     private static final String COMMAND_ADD_DESC = "Adds an item to the todo list";
     private static final String COMMAND_HELP_WORD = "HELP";
-    private static final String COMMAND_HELP_DESC = "Here's the help list\n1. Add\n2. List\n3. Mark";
+    private static final String COMMAND_HELP_DESC = "\n" +
+            "\tHere's the help list\n" +
+            "\t1. todo [Description]\n" +
+            "\t\tadd in a todo task, format ' todo [Description] '\n" +
+            "\t2. deadline\n" +
+            "\t\tadd in a deadline task, format ' deadline [Description] /by[Time] ' \n" +
+            "\t3. event\n" +
+            "\t\tadd in an event task, format ' event [Description] /at[Time] '\n" +
+            "\t4. list\n" +
+            "\t\tlist out all the tasks\n" +
+            "\t5. clear\n" +
+            "\t\tclear all items from task\n" +
+            "\t6. mark\n" +
+            "\t\tmark a task by its index, format ' mark [index] '\n" +
+            "\t7. bye\n" +
+            "\t\texit the program";
     public static final String COMMAND_LIST_WORD = "LIST";
     public static final String COMMAND_MARK_WORD = "MARK";
     public static final String COMMAND_DEADLINE_WORD = "DEADLINE";
@@ -168,6 +183,9 @@ public class Duke {
                         index = 0;
                         System.out.print("\tYour list is cleared!");
                     }
+                    break;
+                case COMMAND_HELP_WORD:
+                    displayHelpMenu();
                     break;
                 case COMMAND_BYE_WORD:
                 case COMMAND_EXIT_WORD:
