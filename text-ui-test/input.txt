@@ -1,12 +1,20 @@
-hi
+blahblah
 todo This is a todo task
+todo
 list
 event This is an event happening /at Feb 10th 2-4pm
+event
+event This is an event without a specified time
 list
 deadline This is a task with deadline /by tomorrow 6pm
+deadline
+deadline This is a deadline task without a specified deadline
 list
+done
+done -1
 done 2
 list
+done 100
 done 1
 list
 bye
