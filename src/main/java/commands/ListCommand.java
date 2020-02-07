@@ -29,7 +29,7 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         System.out.println(Messages.DIVIDER);
         if (duke.getTaskList().getInternalList().size()>0){
-            Messages.printAllTasks();
+            Messages.printAllTasks(duke.getTaskList());
         } else {
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
