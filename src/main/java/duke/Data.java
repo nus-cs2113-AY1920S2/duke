@@ -56,7 +56,7 @@ public class Data {
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        System.out.println("  Got it. I've added this duke.task:");
+        System.out.println("  Got it. I've added this task:");
         System.out.println("     " + todos.get(getSize() - 1));
         System.out.println("  Now you have " + getSize() + " tasks in the list.");
 
