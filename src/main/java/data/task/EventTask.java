@@ -7,14 +7,14 @@ public class EventTask extends Task{
     public EventTask() {
     }
 
-    public EventTask(String taskDescription, String taskStartTime) {
-        super(taskDescription, 'E');
+    public EventTask(int taskIndex, String taskDescription, String taskStartTime) {
+        super(taskIndex, taskDescription, 'E');
         this.taskStartTime = taskStartTime;
         //this.taskEndTime = taskEndTime;
     }
 
-    public EventTask(String taskDescription, String taskStartTime, String taskEndTime) {
-        super(taskDescription, 'E');
+    public EventTask(int taskIndex, String taskDescription, String taskStartTime, String taskEndTime) {
+        super(taskIndex, taskDescription, 'E');
         this.taskStartTime = taskStartTime;
         this.taskEndTime = taskEndTime;
     }

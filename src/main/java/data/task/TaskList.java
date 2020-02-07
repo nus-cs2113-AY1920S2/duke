@@ -53,6 +53,10 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    public int getNextTaskIndex(){
+        return internalList.size()+1;
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();

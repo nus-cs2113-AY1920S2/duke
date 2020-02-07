@@ -6,7 +6,6 @@ import data.task.*;
  * Container for user visible messages.
  */
 public class Messages {
-
     public static final char DONE = 'D';
     public static final char notDONE = 'N';
     public static final String DIVIDER = "===================================================";
@@ -19,7 +18,6 @@ public class Messages {
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
     public static StringBuilder taskListMessage = new StringBuilder();
-
 
     /**
      * Print all tasks in the task list

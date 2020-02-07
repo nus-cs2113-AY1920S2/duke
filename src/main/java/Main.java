@@ -166,7 +166,7 @@ public class Main extends Application {
     private String getResponse(String input) throws StorageOperationException {
         //construct a command from user input
         Command command;
-        command = new Parser().parseCommand(input);
+        command = new Parser().parseCommand(duke, input);
         commandResult = executeCommand(command);
         return commandResult.feedbackToUser;
     }
@@ -193,7 +193,7 @@ public class Main extends Application {
             //read in user input
             String userCommandText = scanner.nextLine();
             //construct a command from user input
-            command = new Parser().parseCommand(userCommandText);
+            command = new Parser().parseCommand(duke, userCommandText);
             executeCommand(command);
         } while (!ExitCommand.isExit(command));
     }

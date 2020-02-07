@@ -5,6 +5,7 @@ import common.Messages;
 public class Task {
 
     //protected int index;
+    protected int taskIndex;
     protected String taskDescription;
     protected boolean isDone;
     protected char taskType;
@@ -13,13 +14,13 @@ public class Task {
     }
 
 
-    public Task(String taskDescription) {
-
+    public Task(int taskIndex, String taskDescription) {
+        this.taskIndex = taskIndex;
         this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
-    public Task(String taskDescription, char taskType) {
+    public Task(int taskIndex,String taskDescription, char taskType) {
         this.taskDescription = taskDescription;
         this.taskType = taskType;
         this.isDone = false;
@@ -52,6 +53,14 @@ public class Task {
 
     public char getTaskType() {
         return taskType;
+    }
+
+    public int getTaskIndex() {
+        return taskIndex;
+    }
+
+    public void setTaskIndex(int taskIndex) {
+        this.taskIndex = taskIndex;
     }
 
     /**

@@ -6,6 +6,7 @@ import commands.add.AddDeadlineCommand;
 import commands.add.AddEventCommand;
 import commands.add.AddTodoCommand;
 import common.Messages;
+import data.Duke;
 import data.exceptions.ParseException;
 import data.task.DeadlineTask;
 import data.task.EventTask;
@@ -37,33 +38,33 @@ public class Parser {
      * commandWordFirstPart [0] stores the Command Word
      * description stores additional information
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(Duke duke, String userInput) {
         final String commandWord = userInput;
         final String []commandWordFirstPart = commandWord.split(" ");
         /** further split the user input, get the secondary part, the description */
         final String commandWordDescription = commandWord.substring(commandWordFirstPart[0].length());
         //operates according to different command word
-        return getCommand(commandWord, commandWordFirstPart, commandWordDescription);
+        return getCommand(duke.getTaskList().getNextTaskIndex(), commandWord, commandWordFirstPart, commandWordDescription);
     }
 
     /**
      * @param commandWordFirstPart, commandWordDescription the input String spited parts
      * @return parsed command
      */
-    private Command getCommand(String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
+    private Command getCommand(int nextTaskIndex, String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
         switch (commandWordFirstPart[0]){
         //find task
         case FindCommand.COMMAND_WORD:
             return new FindCommand(commandWordDescription);
         //add event task
         case AddEventCommand.COMMAND_WORD:
-            return prepareAddEventTask(commandWordDescription);
+            return prepareAddEventTask(nextTaskIndex, commandWordDescription);
         //add deadline task
         case AddDeadlineCommand.COMMAND_WORD:
-            return prepareAddDeadlineTask(commandWordDescription);
+            return prepareAddDeadlineTask(nextTaskIndex, commandWordDescription);
         //add todo task
         case AddTodoCommand.COMMAND_WORD:
-            return prepareAddTodoTask(commandWordDescription);
+            return prepareAddTodoTask(nextTaskIndex, commandWordDescription);
         //done
         case DoneCommand.COMMAND_WORD:
             return prepareDone(commandWord);
@@ -92,10 +93,10 @@ public class Parser {
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddEventTask(String commandDescription) {
+    private Command prepareAddEventTask(int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and start time
         String [] temp = commandDescription.split("/");
-        return new AddEventCommand(new EventTask(temp[0],temp[1]));
+        return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
     }
 
     /**
@@ -104,10 +105,10 @@ public class Parser {
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddDeadlineTask(String commandDescription) {
+    private Command prepareAddDeadlineTask(int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and deadline
         String [] temp = commandDescription.split("/");
-        return new AddDeadlineCommand(new DeadlineTask(temp[0],temp[1]));
+        return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
     }
 
     /**
@@ -116,8 +117,8 @@ public class Parser {
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddTodoTask(String commandDescription) {
-        return new AddTodoCommand(new TodoTask(commandDescription));
+    private Command prepareAddTodoTask(int nextTaskIndex, String commandDescription) {
+        return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
     }
 
     /**

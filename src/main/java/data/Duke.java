@@ -15,7 +15,7 @@ public class Duke {
     private TaskList qualifiedTasks;
 
     /**
-     * Creates an empty address book.
+     * Creates an empty duke taskList.
      */
     public Duke() {
         this.allTasks = new TaskList();
