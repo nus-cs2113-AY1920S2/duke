@@ -3,6 +3,7 @@ Hello from Chatty Chat Bot
 Glad to be at your service!
 ____________________________________________________________
 ____________________________________________________________
+Sorry, I can't help you with that yet
 I'm Chatty Chat Bot
 How may I help you?
 ____________________________________________________________
@@ -12,6 +13,9 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Sure, let me know what ToDo task you would like to add!
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
 1. [T][✘] This is a todo task
 ____________________________________________________________
@@ -19,6 +23,12 @@ ____________________________________________________________
 Got it. I've added this task:
 [E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
 Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Sure, let me know what Event task you would like to add!
+____________________________________________________________
+____________________________________________________________
+Please specify the time of your event
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -31,10 +41,22 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Sure, let me know what Deadline task you would like to add!
+____________________________________________________________
+____________________________________________________________
+Please specify the deadline of your task
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
 1. [T][✘] This is a todo task
 2. [E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
 3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
+Let me know which task you would like to mark as done?
+____________________________________________________________
+____________________________________________________________
+The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
 [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
@@ -44,6 +66,9 @@ Here are the tasks in your list:
 1. [T][✘] This is a todo task
 2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
 3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
+The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
 [T][✓] This is a todo task

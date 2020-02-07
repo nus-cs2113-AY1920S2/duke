@@ -27,16 +27,36 @@ public class ChattyChatBot {
                 listAllTasks(tasks);
                 break;
             case Constants.DONE_STRING:
-                markTaskAsDone(tasks, array[1]);
+                try {
+                    markTaskAsDone(tasks, array[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Let me know which task you would like to mark as done?");
+                }
                 break;
             case Constants.TODO_STRING:
-                addToDoTask(tasks, array[1]);
+                try {
+                    addToDoTask(tasks, array[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Sure, let me know what ToDo task you would like to add!");
+                }
                 break;
             case Constants.DEADLINE_STRING:
-                addDeadlineTask(tasks, array[1]);
+                try {
+                    addDeadlineTask(tasks, array[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Sure, let me know what Deadline task you would like to add!");
+                } catch (ChattyChatBotException e) {
+                    System.out.println("Please specify the deadline of your task");
+                }
                 break;
             case Constants.EVENT_STRING:
-                addEventTask(tasks, array[1]);
+                try {
+                    addEventTask(tasks, array[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Sure, let me know what Event task you would like to add!");
+                } catch (ChattyChatBotException e) {
+                    System.out.println("Please specify the time of your event");
+                }
                 break;
             case Constants.BYE_STRING:
                 sendByeMessage();
@@ -58,10 +78,16 @@ public class ChattyChatBot {
     }
 
     private static void markTaskAsDone(List<Task> tasks, String indexStr) {
-        int taskIdx = Integer.parseInt(indexStr);
-        Task task = tasks.get(taskIdx - 1);
-        task.markAsDone();
-        System.out.println(task.toString());
+        try {
+            int taskIdx = Integer.parseInt(indexStr);
+            Task task = tasks.get(taskIdx - 1);
+            task.markAsDone();
+            System.out.println(task.toString());
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid task number");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The number you entered does not match any task in your list");
+        }
     }
 
     private static void addToDoTask(List<Task> tasks, String description) {
@@ -73,27 +99,36 @@ public class ChattyChatBot {
         System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
     }
 
-    private static void addDeadlineTask(List<Task> tasks, String inputStr) {
-        String[] array = inputStr.split(Constants.BY_STRING);
-        Deadline newDeadlineTask = new  Deadline(array[0], array[1]);
-        tasks.add(newDeadlineTask);
+    private static void addDeadlineTask(List<Task> tasks, String inputStr) throws ChattyChatBotException {
+        try {
+            String[] array = inputStr.split(Constants.BY_STRING);
+            Deadline newDeadlineTask = new Deadline(array[0], array[1]);
+            tasks.add(newDeadlineTask);
 
-        System.out.println(Constants.ADDED_TASK_CONFIRMATION);
-        System.out.println(newDeadlineTask);
-        System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
+            System.out.println(Constants.ADDED_TASK_CONFIRMATION);
+            System.out.println(newDeadlineTask);
+            System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ChattyChatBotException();
+        }
     }
 
-    private static void addEventTask(List<Task> tasks, String inputStr) {
-        String[] array = inputStr.split(Constants.AT_STRING);
-        Event newEventTask = new Event(array[0], array[1]);
-        tasks.add(newEventTask);
+    private static void addEventTask(List<Task> tasks, String inputStr) throws ChattyChatBotException {
+        try {
+            String[] array = inputStr.split(Constants.AT_STRING);
+            Event newEventTask = new Event(array[0], array[1]);
+            tasks.add(newEventTask);
 
-        System.out.println(Constants.ADDED_TASK_CONFIRMATION);
-        System.out.println(newEventTask);
-        System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
+            System.out.println(Constants.ADDED_TASK_CONFIRMATION);
+            System.out.println(newEventTask);
+            System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ChattyChatBotException();
+        }
     }
 
     private static void sendDefaultResponse() {
+        System.out.println("Sorry, I can't help you with that yet");
         System.out.println("I'm " + Constants.BOT_NAME);
         System.out.println("How may I help you?");
     }
