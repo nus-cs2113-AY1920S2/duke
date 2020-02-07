@@ -1,10 +1,7 @@
 package common;
 
 import data.Duke;
-import data.task.DeadlineTask;
-import data.task.EventTask;
-import data.task.Task;
-import data.task.TodoTask;
+import data.task.*;
 
 /**
  * Container for user visible messages.
@@ -22,14 +19,12 @@ public class Messages {
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
 
-
     /**
      * Print all tasks in the task list
      */
-    public static void printAllTasks(){
-        Duke duke = null;
-        for (int i = 1; i <= duke.getTaskList().getInternalList().size() ; i++) {
-            Task task = duke.getTaskList().getInternalList().get(i-1);
+    public static void printAllTasks(TaskList tasklist){
+        for (int i = 1; i <= tasklist.getInternalList().size() ; i++) {
+            Task task = tasklist.getInternalList().get(i-1);
             if (task instanceof TodoTask) {
                 printTodoTask((TodoTask) task, i);
             } else if (task instanceof DeadlineTask) {
@@ -39,7 +34,6 @@ public class Messages {
             }
         }
     }
-
     public static void printTodoTask(TodoTask todoTask, int index){
         System.out.println(String.format(
                 MESSAGE_TODO_LIST,
@@ -68,5 +62,4 @@ public class Messages {
                 eventTask.getTaskDescription(),
                 eventTask.getTaskStartTime()));
     }
-
 }
