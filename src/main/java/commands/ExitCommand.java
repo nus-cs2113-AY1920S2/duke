@@ -1,6 +1,8 @@
 package commands;
 
 
+import common.Messages;
+
 /**
  * Terminates the program.
  */
@@ -12,17 +14,15 @@ public class ExitCommand extends Command {
     }
 
     public static final String COMMAND_WORD = "bye";
-
-    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "  Bye. Hope to see you again soon!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exit the program.\n"
             + "      Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(String.format(MESSAGE_EXIT_ACKNOWEDGEMENT));
+        return new CommandResult(String.format(Messages.MESSAGE_FAREWELL));
     }
 
     public static boolean isExit(Command command) {
-        return command instanceof ExitCommand; // instanceof returns false if it is null
+        return command instanceof ExitCommand;
     }
 }

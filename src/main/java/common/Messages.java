@@ -6,10 +6,11 @@ import data.task.*;
  * Container for user visible messages.
  */
 public class Messages {
+
     public static final char DONE = 'D';
     public static final char notDONE = 'N';
     public static final String DIVIDER = "===================================================";
-    public static final String MESSAGE_WELCOME = "  Hello! I'm Duke\n  What can I do for you?";
+    public static final String MESSAGE_WELCOME = "  Hello! I'm Kuri\n  What can I do for you?";
     public static final String MESSAGE_FAREWELL = "  Bye. Hope to see you again soon!";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";

@@ -11,6 +11,7 @@ public class TextUi {
     public static void showWelcomeMessage (){
         System.out.println(Messages.DIVIDER);
         System.out.println(Messages.MESSAGE_WELCOME);
+        //System.out.println(Messages.LOGO);
         System.out.println(Messages.DIVIDER);
     }
 
