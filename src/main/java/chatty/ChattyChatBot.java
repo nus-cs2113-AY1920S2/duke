@@ -1,10 +1,10 @@
 package chatty;
 
+import chatty.exception.ChattyChatBotException;
 import chatty.task.Deadline;
 import chatty.task.Event;
 import chatty.task.Task;
 import chatty.task.ToDo;
-import chatty.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
