@@ -1,4 +1,4 @@
-package chatty;
+package chatty.util;
 
 public class Constants {
     public static final String BOT_NAME = "Chatty Chat Bot";
