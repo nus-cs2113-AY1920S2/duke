@@ -1,5 +1,10 @@
 package chatty;
 
+import chatty.task.Deadline;
+import chatty.task.Event;
+import chatty.task.Task;
+import chatty.task.ToDo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package chatty;
+package chatty.task;
 
 public class ToDo extends Task {
 
