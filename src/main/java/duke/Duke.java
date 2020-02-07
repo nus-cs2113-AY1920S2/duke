@@ -2,10 +2,29 @@ package duke;
 
 import duke.Deadline;
 
+<<<<<<< .merge_file_a42228
+=======
+import java.io.FileWriter;
+import java.io.IOException;
+>>>>>>> .merge_file_a27160
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Duke {
-    public static void main(String[] args) {
+
+    private static void writeToFile(String filePath, ArrayList<Task> tasksToWrite) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        try {
+            for (int i = 0; i < tasksToWrite.size(); i++) {
+                String writtenString = String.format("%d. %s\n", i + 1, tasksToWrite.get(i).toString());
+                fw.write(writtenString);
+            }
+        } catch (IOException e){
+            System.out.println("Invalid path");
+        }
+        fw.close();
+    }
+    public static void main(String[] args) throws IOException {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -81,6 +100,7 @@ public class Duke {
 
                     }
 
+<<<<<<< .merge_file_a42228
                 } else if (splitString[0].equals("delete")){
                     if (splitString.length == 1) {
                         System.out.println("OOPS!!! The description of event cannot be empty");
@@ -92,6 +112,11 @@ public class Duke {
 
                         counter = counter - 2;
                     }
+=======
+                } else if (splitString[0].equals("save")){
+                    writeToFile("./duke.txt",tasks);
+                    counter = counter -1;
+>>>>>>> .merge_file_a27160
                 }
                 else{
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
