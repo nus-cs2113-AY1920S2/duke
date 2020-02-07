@@ -18,48 +18,55 @@ public class Messages {
     public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
+    public static StringBuilder taskListMessage = new StringBuilder();
+
 
     /**
      * Print all tasks in the task list
      */
-    public static void printAllTasks(TaskList tasklist){
+    public static String printAllTasks(TaskList tasklist){
+        String taskMessage = "";
+        taskListMessage = new StringBuilder(taskMessage);
         for (int i = 1; i <= tasklist.getInternalList().size() ; i++) {
             Task task = tasklist.getInternalList().get(i-1);
             if (task instanceof TodoTask) {
-                printTodoTask((TodoTask) task, i);
+                taskMessage = printTodoTask((TodoTask) task, i);
             } else if (task instanceof DeadlineTask) {
-                printDeadlineTask((DeadlineTask) task, i);
+                taskMessage = printDeadlineTask((DeadlineTask) task, i);
             } else if( task instanceof EventTask) {
-                printEventTask((EventTask) task, i);
+                taskMessage = printEventTask((EventTask) task, i);
             }
+            taskListMessage = taskListMessage.append(taskMessage).append("\n");
         }
+        return taskListMessage.toString();
     }
-    public static void printTodoTask(TodoTask todoTask, int index){
-        System.out.println(String.format(
+
+    public static String printTodoTask(TodoTask todoTask, int index){
+        return String.format(
                 MESSAGE_TODO_LIST,
                 index,
                 todoTask.getTaskType(),
                 todoTask.getChar(),
-                todoTask.getTaskDescription()));
+                todoTask.getTaskDescription());
     }
 
-    public static void printDeadlineTask(DeadlineTask deadlineTask, int index){
-        System.out.println(String.format(
+    public static String printDeadlineTask(DeadlineTask deadlineTask, int index){
+        return String.format(
                 MESSAGE_DEADLINE_LIST,
                 index,
                 deadlineTask.getTaskType(),
                 deadlineTask.getChar(),
                 deadlineTask.getTaskDescription(),
-                deadlineTask.getTaskDeadline()));
+                deadlineTask.getTaskDeadline());
     }
 
-    public static void printEventTask(EventTask eventTask, int index){
-        System.out.println(String.format(
+    public static String printEventTask(EventTask eventTask, int index){
+        return String.format(
                 MESSAGE_EVENT_LIST,
                 index,
                 eventTask.getTaskType(),
                 eventTask.getChar(),
                 eventTask.getTaskDescription(),
-                eventTask.getTaskStartTime()));
+                eventTask.getTaskStartTime());
     }
 }
