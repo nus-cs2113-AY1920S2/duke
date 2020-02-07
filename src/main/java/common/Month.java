@@ -19,7 +19,7 @@ public enum Month {
     Month(int i) {
         this.value = i;
     }
-    public static String valueOf(int month) {    //手写的从int到enum的转换函数
+    public static String valueOf(int month) {
         switch (month) {
         case 1:
             return "Jan";
