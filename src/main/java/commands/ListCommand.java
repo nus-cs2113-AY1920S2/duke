@@ -17,7 +17,7 @@ public class ListCommand extends Command {
             + "    Example: " + COMMAND_WORD;
     public static final String MESSAGE_EMPTY_LIST = "There is no current task in the list!";
     public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
-    public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
+    public static final String MESSAGE_DEADLINE_LIST = "  %d. %s";
     public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
 
     public ListCommand() {
@@ -69,10 +69,7 @@ public class ListCommand extends Command {
         System.out.println(String.format(
                 MESSAGE_DEADLINE_LIST,
                 index,
-                deadlineTask.getTaskType(),
-                deadlineTask.getChar(),
-                deadlineTask.getTaskDescription(),
-                deadlineTask.getTaskDeadline()));
+                deadlineTask.getTaskInformation()));
     }
 
     public void printEventTask(EventTask eventTask, int index){
