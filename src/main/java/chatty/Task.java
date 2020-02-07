@@ -1,3 +1,5 @@
+package chatty;
+
 public class Task {
     protected String description;
     protected boolean isDone;

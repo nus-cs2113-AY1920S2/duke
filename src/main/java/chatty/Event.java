@@ -1,3 +1,5 @@
+package chatty;
+
 public class Event extends Task {
 
     protected String eventPeriod;
