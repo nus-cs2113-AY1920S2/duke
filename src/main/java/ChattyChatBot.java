@@ -45,6 +45,8 @@ public class ChattyChatBot {
                     addDeadlineTask(tasks, array[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Sure, let me know what Deadline task you would like to add!");
+                } catch (ChattyChatBotException e) {
+                    System.out.println("Please specify the deadline of your task");
                 }
                 break;
             case Constants.EVENT_STRING:
@@ -52,6 +54,8 @@ public class ChattyChatBot {
                     addEventTask(tasks, array[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Sure, let me know what Event task you would like to add!");
+                } catch (ChattyChatBotException e) {
+                    System.out.println("Please specify the time of your event");
                 }
                 break;
             case Constants.BYE_STRING:
@@ -95,7 +99,7 @@ public class ChattyChatBot {
         System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
     }
 
-    private static void addDeadlineTask(List<Task> tasks, String inputStr) {
+    private static void addDeadlineTask(List<Task> tasks, String inputStr) throws ChattyChatBotException {
         try {
             String[] array = inputStr.split(Constants.BY_STRING);
             Deadline newDeadlineTask = new Deadline(array[0], array[1]);
@@ -105,11 +109,11 @@ public class ChattyChatBot {
             System.out.println(newDeadlineTask);
             System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please specify the deadline of your task");
+            throw new ChattyChatBotException();
         }
     }
 
-    private static void addEventTask(List<Task> tasks, String inputStr) {
+    private static void addEventTask(List<Task> tasks, String inputStr) throws ChattyChatBotException {
         try {
             String[] array = inputStr.split(Constants.AT_STRING);
             Event newEventTask = new Event(array[0], array[1]);
@@ -119,9 +123,9 @@ public class ChattyChatBot {
             System.out.println(newEventTask);
             System.out.println(Constants.TASK_SUMMARY_FIRST_HALF + tasks.size() + Constants.TASK_SUMMARY_SECOND_HALF);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please specify the time of your event");
+            throw new ChattyChatBotException();
         }
-     }
+    }
 
     private static void sendDefaultResponse() {
         System.out.println("Sorry, I can't help you with that yet");
