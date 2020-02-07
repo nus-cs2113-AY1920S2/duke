@@ -17,10 +17,7 @@ public class ListCommand extends Command {
             + "    Example: " + COMMAND_WORD;
     public static final String MESSAGE_EMPTY_LIST = "There is no current task in the list!";
 
-    public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
-    public static final String MESSAGE_DEADLINE_LIST = "  %d. %s";
-    public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
-
+    public static String taskListMessage;
 
     public ListCommand() {
 
@@ -34,11 +31,10 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         System.out.println(Messages.DIVIDER);
         if (duke.getTaskList().getInternalList().size()>0){
-            Messages.printAllTasks(duke.getTaskList());
+            taskListMessage = Messages.printAllTasks(duke.getTaskList());
+            return new CommandResult((taskListMessage));
         } else {
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
-        System.out.println(Messages.DIVIDER);
-        return null;
     }
 }

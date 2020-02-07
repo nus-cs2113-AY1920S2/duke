@@ -38,16 +38,19 @@ public class Parser {
      * description stores additional information
      */
     public Command parseCommand(String userInput) {
-
         final String commandWord = userInput;
         final String []commandWordFirstPart = commandWord.split(" ");
-
-        /**
-         * further split the user input, get the secondary part, the description
-         */
+        /** further split the user input, get the secondary part, the description */
         final String commandWordDescription = commandWord.substring(commandWordFirstPart[0].length());
-
         //operates according to different command word
+        return getCommand(commandWord, commandWordFirstPart, commandWordDescription);
+    }
+
+    /**
+     * @param commandWordFirstPart, commandWordDescription the input String spited parts
+     * @return parsed command
+     */
+    private Command getCommand(String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
         switch (commandWordFirstPart[0]){
         //find task
         case FindCommand.COMMAND_WORD:
@@ -134,8 +137,6 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException nfe) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        //return new DoneCommand(Integer.parseInt(commandWord.substring(5)));
     }
 
     /**
@@ -156,8 +157,7 @@ public class Parser {
     }
 
     /**
-     * Parses the given arguments string as a single index number.
-     *
+     * Parses the given arguments string as a single index number
      * @param args arguments string to parse as index number
      * @return the parsed index number
      * @throws ParseException if no region of the args string could be found for the index

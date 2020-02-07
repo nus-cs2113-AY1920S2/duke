@@ -1,27 +1,21 @@
 import commands.Command;
 import commands.CommandResult;
-import commands.ExitCommand;
-import data.Duke;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import parser.Parser;
-import storage.StorageFile;
-import ui.TextUi;
-import java.util.Scanner;
 
-public class Main extends Application {
-
+public class Gui extends Application {
 
     private Image userPng = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukePng = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -45,10 +39,13 @@ public class Main extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
+
         userInput = new TextField();
         sendButton = new Button("Send");
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -164,60 +161,11 @@ public class Main extends Application {
      * @param input the full length of user input
      */
     private String getResponse(String input) throws StorageOperationException {
-        //construct a command from user input
-        Command command;
-        command = new Parser().parseCommand(input);
-        commandResult = executeCommand(command);
-        return commandResult.feedbackToUser;
+//        Command command;
+//////        command = new Parser().parseCommand(input);
+//////        commandResult = Main.executeCommand(command);
+//////        return commandResult.feedbackToUser;
+        return "dummy";
     }
 
-    private StorageFile storage = new StorageFile();
-    Duke duke = new Duke();
-
-    public Main() throws StorageOperationException {
-    }
-
-    public static void main(String[] args) throws StorageOperationException {
-        new Main().run();
-    }
-
-    private void run() throws StorageOperationException {
-        TextUi.showWelcomeMessage();
-        runCommandLoopUntilExitCommand();
-    }
-
-    private void runCommandLoopUntilExitCommand() throws StorageOperationException {
-        Command command;
-        Scanner scanner = new Scanner(System.in);
-        do {
-            //read in user input
-            String userCommandText = scanner.nextLine();
-            //construct a command from user input
-            command = new Parser().parseCommand(userCommandText);
-            executeCommand(command);
-        } while (!ExitCommand.isExit(command));
-    }
-
-    /**
-     * initialize the duke system, execute command and save the list to the file
-     * @param command the parsed Command object
-     * @return commandResult that contains the execute output information
-     */
-    private CommandResult executeCommand(Command command) throws StorageOperationException {
-        try {
-            // supplies the data the command will operate on.
-            // if there is no file to load or the file is empty, setData will initialize a new duke system
-            command.setData(duke);
-            // Execute according to the command itself
-            commandResult = command.execute();
-            // save the duke to a file
-            storage.save(duke);
-        } catch (Exception ex) {
-            // the out layer exception handler
-            System.out.println(ex);
-        }
-        return commandResult;
-    }
 }
-
-
