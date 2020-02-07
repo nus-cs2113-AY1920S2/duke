@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Todo;
+
 public class Event extends Todo {
     private String at;
     private final static char taskType = 'E';

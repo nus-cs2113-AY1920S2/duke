@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Todo;
+
 public class Deadline extends Todo {
     private String by;
     private final static char taskType = 'D';
