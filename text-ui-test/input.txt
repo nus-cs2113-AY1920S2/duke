@@ -6,4 +6,14 @@ mark 1
 clear
 list
 clear
+deadline
+deadline to finish homework
+deadline to finish homework /by 2359
+event go out with friends
+event go out with friends /at 1st April
+todo
+todo lab report
+mark
+mark 2
+list
 exit

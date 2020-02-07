@@ -19,6 +19,10 @@ public class Duke {
     private static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
     private static final String LINE_DIVIDER = "\n\t____________________________________________________________";
     private static final String MESSAGE_INVALID_COMMAND = "\tInvalid Command. Please try again\n";
+    private static final String MESSAGE_DESC_EMPTY = "\tInvalid Command! Description cannot be empty!";
+    private static final String MESSAGE_BY_EMPTY = "\tInvalid Command! BY cannot be empty!";
+    private static final String MESSAGE_AT_EMPTY = "\tInvalid Command! AT cannot be empty!";
+    private static final String MESSAGE_MARK_EMPTY = "\tInvalid Command! Nothing is marked!";
     private static final String COMMAND_ADD_WORD = "ADD";
     private static final String COMMAND_ADD_DESC = "Adds an item to the todo list";
     private static final String COMMAND_HELP_WORD = "HELP";
@@ -35,6 +39,10 @@ public class Duke {
     public static final void displayWelcomeMessage() {System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER); }
     public static final void displayAcceptTask() { System.out.println("\tGot it. I've added this task: "); }
     public static final void displayInvalidCommand() { System.out.println(MESSAGE_INVALID_COMMAND); }
+    public static final void displayInvalidDescription() { System.out.print(MESSAGE_DESC_EMPTY);}
+    public static final void displayInvalidBy() { System.out.print(MESSAGE_BY_EMPTY);}
+    public static final void displayInvalidAt() { System.out.print(MESSAGE_AT_EMPTY);}
+    public static final void displayInvalidMark() { System.out.print(MESSAGE_MARK_EMPTY);}
     public static final void displayExitMessage() {
         System.out.println(MESSAGE_EXIT);
     }
@@ -86,6 +94,10 @@ public class Duke {
             }
             switch (commandType) {
                 case COMMAND_TODO_WORD:
+                    if (description == ""){
+                        displayInvalidDescription();
+                        break;
+                    }
                     item = new Todo(description, index);
                     item.setType("[T]");
                     task[index] = item;
@@ -94,6 +106,14 @@ public class Duke {
                     displayNumberOfTasks(index);
                     break;
                 case COMMAND_EVENT_WORD:
+                    if (description == ""){
+                        displayInvalidDescription();
+                        break;
+                    }
+                    if (startIndexForEvent == -1 ){
+                        displayInvalidAt();
+                        break;
+                    }
                     item = new Event(description, userCommand.substring(startIndexForEvent + 4), index);
                     item.setType("[E]");
                     task[index] = item;
@@ -102,6 +122,14 @@ public class Duke {
                     displayNumberOfTasks(index);
                     break;
                 case COMMAND_DEADLINE_WORD:
+                    if (description == "" ){
+                        displayInvalidDescription();
+                        break;
+                    }
+                    if (startIndexForDeadline == -1){
+                        displayInvalidBy();
+                        break;
+                    }
                     item = new Deadline(description, userCommand.substring(startIndexForDeadline + 4), index);
                     item.setType("[D]");
                     task[index] = item;
@@ -110,6 +138,10 @@ public class Duke {
                     displayNumberOfTasks(index);
                     break;
                 case COMMAND_MARK_WORD:
+                    if (description == "" ){
+                        displayInvalidMark();
+                        break;
+                    }
                     markIndex = Integer.parseInt(description);
                     task[markIndex - 1].setDone();
                     displayMarkedTask(markIndex);
