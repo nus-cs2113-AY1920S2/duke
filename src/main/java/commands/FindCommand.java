@@ -19,6 +19,7 @@ public class FindCommand extends Command {
 
     protected String toSearch;
     protected TaskList qualifiedTasks;
+    public static String taskListMessage;
 
     public FindCommand() {
         
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
         if (isQualifiedTasksEmpty()) return new CommandResult(MESSAGE_EMPTY_LIST);
         System.out.println(Messages.DIVIDER);
         qualifiedTasks.clear();
-        return null;
+        return new CommandResult(taskListMessage);
     }
 
     private boolean isQualifiedTasksEmpty() {
@@ -42,7 +43,7 @@ public class FindCommand extends Command {
         if (qualifiedTasks.getInternalList().isEmpty()){
             return true;
         } else {
-            Messages.printAllTasks(qualifiedTasks);
+            taskListMessage = Messages.printAllTasks(qualifiedTasks);
         }
         return false;
     }
