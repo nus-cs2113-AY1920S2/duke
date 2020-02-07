@@ -51,7 +51,7 @@ public class Parser {
         switch (commandWordFirstPart[0]){
         //find task
         case FindCommand.COMMAND_WORD:
-            return prepareFind(commandWordDescription);
+            return new FindCommand(commandWordDescription);
         //add event task
         case AddEventCommand.COMMAND_WORD:
             return prepareAddEventTask(commandWordDescription);
@@ -82,16 +82,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Parses user input into command for execution.
-     *
-     * @param commandDescription full user input string (without the command Action)
-     * @return the AddCommand obj constructed on the user input
-     */
-    private Command prepareFind(String commandDescription) {
-        //
-        return null;
-    }
 
     /**
      * Parses user input into command for execution.

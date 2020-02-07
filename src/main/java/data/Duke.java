@@ -12,12 +12,14 @@ public class Duke {
 
     /* the tasks list within the system */
     private TaskList allTasks;
+    private TaskList qualifiedTasks;
 
     /**
      * Creates an empty address book.
      */
     public Duke() {
         this.allTasks = new TaskList();
+        this.qualifiedTasks = new TaskList();
     }
 
     /**
@@ -29,10 +31,35 @@ public class Duke {
         return allTasks;
     }
 
+
+    public TaskList getQualifiedTasks() {
+        return qualifiedTasks;
+    }
+
     /**
-     * add a task
-     *
-     * @param toAdd target task
+     * Search a key word int the whole list
+     */
+    public TaskList searchTask(String toSearch) {
+        for (Task task:allTasks
+             ) {
+            if (task.getTaskDescription().indexOf(toSearch) != -1){
+                qualifiedTasks.add(task);
+            }
+        }
+        return qualifiedTasks;
+    }
+
+    /**
+     * clear the qualified task list after 'find'
+     * @param qualifiedTasks
+     */
+    public void clearQualifiedTasks(TaskList qualifiedTasks) {
+        qualifiedTasks.clear();
+    }
+
+    /**
+     * Adds a task to the task list.
+>>>>>>> branch-Level-9
      */
     public void addTask(Task toAdd) {
         allTasks.add(toAdd);
@@ -48,7 +75,6 @@ public class Duke {
     }
 
     /**
-     * removes the task
      *
      * @param toRemove target task
      * @throws TaskNotFoundException if target task does not exist
@@ -59,7 +85,7 @@ public class Duke {
 
 
     /**
-     * Clears all persons and tags from the address book.
+     * Clears all tasks from the task list.
      */
     public void clear() {
         allTasks.clear();
@@ -87,15 +113,4 @@ public class Duke {
         //find the task
         allTasks.getInternalList().get(doneId).setDone(true);
     }
-
-    /**
-     * Removes the equivalent person from the address book.
-     *
-     * @throws TaskNotFoundException if no such Person could be found.
-     */
-    public void removePerson(Task toRemove) throws TaskNotFoundException {
-        allTasks.remove(toRemove);
-    }
-
-
 }
