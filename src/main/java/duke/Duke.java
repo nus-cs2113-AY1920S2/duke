@@ -2,11 +2,10 @@ package duke;
 
 import duke.Deadline;
 
-<<<<<<< .merge_file_a42228
-=======
+
 import java.io.FileWriter;
 import java.io.IOException;
->>>>>>> .merge_file_a27160
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,12 +24,7 @@ public class Duke {
         fw.close();
     }
     public static void main(String[] args) throws IOException {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+
         ArrayList<Task> tasks = new ArrayList<Task>();
         int counter = 0;
         System.out.println("Hello! I'm duke.Duke");
@@ -100,7 +94,7 @@ public class Duke {
 
                     }
 
-<<<<<<< .merge_file_a42228
+
                 } else if (splitString[0].equals("delete")){
                     if (splitString.length == 1) {
                         System.out.println("OOPS!!! The description of event cannot be empty");
@@ -112,11 +106,10 @@ public class Duke {
 
                         counter = counter - 2;
                     }
-=======
                 } else if (splitString[0].equals("save")){
                     writeToFile("./duke.txt",tasks);
                     counter = counter -1;
->>>>>>> .merge_file_a27160
+
                 }
                 else{
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
