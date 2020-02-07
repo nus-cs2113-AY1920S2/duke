@@ -2,28 +2,29 @@ package Duke;
 
 import Duke.Exception.InvalidTaskException;
 import Duke.Exception.MissingDescriptonException;
-import Duke.Exception.MissingDoneNumberFieldException;
+import Duke.Exception.MissingNumberFieldException;
 import Duke.Exception.MissingTimeFieldException;
 import Duke.TaskTypes.Deadline;
 import Duke.TaskTypes.Event;
 import Duke.TaskTypes.Task;
 import Duke.TaskTypes.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static final int MAX_NO_OF_TASKS = 100;
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
     public static final String LIST = "list";
     public static final String DONE = "done";
+    public static final String DELETE = "delete";
     public static final int INITIAL_NO_OF_TASKS = 0;
 
     public static void main(String[] args) {
         displayHello();
-        Task[] taskList = initializeTaskList();
+        ArrayList<Task> taskList = initializeTaskList();
         Scanner myInput = initializeScanner();
         String userInput = getUserInput(myInput);
         int numberOfTasks = INITIAL_NO_OF_TASKS;
@@ -62,25 +63,25 @@ public class Duke {
         return new Scanner(System.in);
     }
 
-    private static Task[] initializeTaskList() {
-        return new Task[MAX_NO_OF_TASKS];
+    private static ArrayList<Task> initializeTaskList() {
+        return new ArrayList<>();
     }
 
-    private static int doTaskAndGetNewNumberOfTasks(Task[] taskList, int numberOfTasks, String userInput,
+    private static int doTaskAndGetNewNumberOfTasks(ArrayList<Task> taskList, int numberOfTasks, String userInput,
                                                     String[] splitUserInput) {
 
-
+        int currentNumberOfTasks = numberOfTasks;
         try {
             validateTask(splitUserInput, userInput);
             switch (splitUserInput[0].toLowerCase()) {
             case TODO:
-                numberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
+                currentNumberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
                 break;
             case DEADLINE:
-                numberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
+                currentNumberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
                 break;
             case EVENT:
-                numberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
+                currentNumberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
                 break;
             case LIST:
                 displayList(taskList, numberOfTasks);
@@ -88,30 +89,54 @@ public class Duke {
             case DONE:
                 markTaskAsDone(taskList, numberOfTasks, splitUserInput[1]);
                 break;
+            case DELETE:
+                currentNumberOfTasks = deleteTask(taskList, numberOfTasks, splitUserInput[1]);
+                break;
             default:
                 break;
             }
-        } catch (InvalidTaskException | MissingDescriptonException | MissingDoneNumberFieldException | MissingTimeFieldException | NumberFormatException m) {
+        } catch (InvalidTaskException | MissingDescriptonException | MissingNumberFieldException | MissingTimeFieldException | NumberFormatException m) {
             System.out.println("Exception occurred: " + m);
         }
 
 
-        return numberOfTasks;
+        return currentNumberOfTasks;
+    }
+
+    private static int deleteTask(ArrayList<Task> taskList, int numberOfTasks, String s) throws NumberFormatException {
+        try {
+            int currentNumberOfTasks = numberOfTasks;
+            int taskListNumber = Integer.parseInt(s);
+            if (taskListNumber > numberOfTasks || taskListNumber == 0) {
+                System.out.println("Out of range");
+            } else {
+                String removedTask = taskList.get(taskListNumber - 1).toString();
+                taskList.remove(taskListNumber - 1);
+                currentNumberOfTasks = currentNumberOfTasks - 1;
+                //taskList.get(taskListNumber - 1).markAsDone();
+                System.out.println(
+                        "Noted. I removed this task: " + System.lineSeparator() + removedTask + System.lineSeparator() +
+                                "Now you have " + currentNumberOfTasks + " tasks in the list");
+            }
+            return currentNumberOfTasks;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Delete number field is not a number!");
+        }
     }
 
     private static void validateTask(String[] splitUserInput, String userInput)
-            throws InvalidTaskException, MissingDescriptonException, MissingDoneNumberFieldException,
+            throws InvalidTaskException, MissingDescriptonException, MissingNumberFieldException,
             MissingTimeFieldException {
 
         String temp = splitUserInput[0].toLowerCase();
         if (!temp.equals(TODO) && !temp.equals(EVENT) &&
-                !temp.toLowerCase().equals(DEADLINE) && !temp.toLowerCase().equals(DONE) &&
-                !temp.equals(LIST)) {
+                !temp.equals(DEADLINE) && !temp.equals(DONE) &&
+                !temp.equals(LIST) && !temp.equals(DELETE)) {
             throw new InvalidTaskException("Input is invalid. No such task");
         } else {
             String[] splitArray = splitTaskDescription(userInput);
-            if (temp.toLowerCase().equals(DONE) && splitUserInput.length == 1) {
-                throw new MissingDoneNumberFieldException("Done's number field is empty!");
+            if ((temp.toLowerCase().equals(DONE) || temp.toLowerCase().equals(DELETE)) && splitUserInput.length == 1) {
+                throw new MissingNumberFieldException(temp.toLowerCase() + "'s number field is empty!");
             } else if (isDescriptionBlank(splitArray) && !temp.equals(LIST)) {
                 throw new MissingDescriptonException("Missing description!");
             } else if (temp.equals(TODO) || temp.equals(EVENT) || temp.toLowerCase().equals(DEADLINE)) {
@@ -129,88 +154,68 @@ public class Duke {
 
     }
 
-    private static void markTaskAsDone(Task[] taskList, int numberOfActions, String s) throws NumberFormatException{
+    private static void markTaskAsDone(ArrayList<Task> taskList, int numberOfTasks, String s)
+            throws NumberFormatException {
         try {
-            int actionListNumber = Integer.parseInt(s);
-            if (actionListNumber > numberOfActions || actionListNumber == 0) {
+            int taskListNumber = Integer.parseInt(s);
+            if (taskListNumber > numberOfTasks || taskListNumber == 0) {
                 System.out.println("Out of range");
             } else {
-                taskList[actionListNumber - 1].markAsDone();
+                taskList.get(taskListNumber - 1).markAsDone();
                 System.out.println(
-                        "Nice! I marked this as done: " + taskList[actionListNumber - 1].toString());
+                        "Nice! I marked this as done: " + taskList.get(taskListNumber - 1).toString());
             }
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             throw new NumberFormatException("Done number field is not a number!");
         }
     }
 
-    private static void displayList(Task[] taskList, int numberOfActions) {
+    private static void displayList(ArrayList<Task> taskList, int numberOfActions) {
         if (numberOfActions > 0) {
             for (int i = 0; i < numberOfActions; i++) {
                 System.out.println(
-                        Integer.toString(i + 1) + ". " + taskList[i].toString());
+                        Integer.toString(i + 1) + ". " + taskList.get(i).toString());
             }
         } else if (numberOfActions == 0) {
             System.out.println("Nothing yet");
         }
     }
 
-    private static int addEventToList(Task[] taskList, int numberOfTasks, String userInput) {
+    private static int addEventToList(ArrayList<Task> taskList, int numberOfTasks, String userInput) {
         Task newTask;
         String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
-        if (isDescriptionBlank(splitTaskDescriptionArray)) {
-            displayNoDescriptionError();
-            numberOfTasks = numberOfTasks;
-            return numberOfTasks;
-        }
         newTask = new Event(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
+        int currentNumberOfTasks = addToList(newTask, taskList, numberOfTasks);
+        return currentNumberOfTasks;
     }
 
     private static boolean isDescriptionBlank(String[] strings) {
         return strings[0].isBlank();
     }
 
-    private static int addDeadlineToList(Task[] taskList, int numberOfTasks, String userInput) {
+    private static int addDeadlineToList(ArrayList<Task> taskList, int numberOfTasks, String userInput) {
         Task newTask;
         String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
-        if (isDescriptionBlank(splitTaskDescriptionArray)) {
-            displayNoDescriptionError();
-            numberOfTasks = numberOfTasks;
-            return numberOfTasks;
-        }
         newTask = new Deadline(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
+        int currentNumberOfTasks = addToList(newTask, taskList, numberOfTasks);
+        return currentNumberOfTasks;
     }
 
 
-    private static int addTodoToList(Task[] taskList, int numberOfTasks, String userInput) {
+    private static int addTodoToList(ArrayList<Task> taskList, int numberOfTasks, String userInput) {
         Task newTask;
         String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
-        if (isDescriptionBlank(splitTaskDescriptionArray)) {
-            displayNoDescriptionError();
-            numberOfTasks = numberOfTasks;
-            return numberOfTasks;
-        }
         newTask = new Todo(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
+        int currentNumberOfTasks = addToList(newTask, taskList, numberOfTasks);
+        return currentNumberOfTasks;
     }
 
-    private static int addToList(Task newTask, Task[] taskList, int numberOfTasks) {
-        taskList[numberOfTasks] = newTask;
-        numberOfTasks = numberOfTasks + 1;
+    private static int addToList(Task newTask, ArrayList<Task> taskList, int numberOfTasks) {
+        taskList.add(newTask);
+        int currentNumberOfTasks = numberOfTasks + 1;
         System.out.println("Got it. I've added this task: " + newTask.toString());
-        return numberOfTasks;
+        return currentNumberOfTasks;
 
-    }
-
-    private static void displayNoDescriptionError() {
-        System.out.println("Sorry! This task lack description!");
     }
 
     private static void displayGoodbye() {
