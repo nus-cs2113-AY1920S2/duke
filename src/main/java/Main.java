@@ -45,13 +45,10 @@ public class Main extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -174,7 +171,6 @@ public class Main extends Application {
         return commandResult.feedbackToUser;
     }
 
-    //////
     private StorageFile storage = new StorageFile();
     Duke duke = new Duke();
 
