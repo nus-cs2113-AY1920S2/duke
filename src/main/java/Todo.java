@@ -11,8 +11,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getDescriptionInListFormat() {
-        return String.format("%s%s", getEventType(), super.getDescriptionInListFormat());
+    public String toString() {
+        return String.format("%s%s %s", getEventType(), super.getStatusIcon(), super.getDescription());
     }
 
     @Override

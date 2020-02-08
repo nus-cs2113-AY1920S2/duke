@@ -17,9 +17,9 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getDescriptionInListFormat() {
-        return String.format("%s%s%s", getEventType(),
-                super.getDescriptionInListFormat(), getDeadline());
+    public String toString() {
+        return String.format("%s%s %s%s", getEventType(),
+                super.getStatusIcon(), super.getDescription(), getDeadline());
     }
 
     @Override
