@@ -105,19 +105,19 @@ public class Duke {
 
     private static void printUserGreeting(String name) {
         System.out.println(DIVIDER);
-        System.out.println(String.format("%50s","Hello " + name + ", Anything I can help you with? "));
+        System.out.println(String.format("%50s","Hello " + name + ", Anything I can help you with?"));
         System.out.println(DIVIDER);
     }
 
     private static void printWelcomeMessage() {
-        String logo = " /$$   /$$                     /$$          \n"
-                +     "| $$  /$$/                    |__/          \n"
-                +     "| $$ /$$/   /$$$$$$   /$$$$$$$ /$$ /$$$$$$$ \n"
-                +     "| $$$$$/   /$$__  $$ /$$_____/| $$| $$__  $$ \n"
+        String logo = " /$$   /$$                     /$$\n"
+                +     "| $$  /$$/                    |__/\n"
+                +     "| $$ /$$/   /$$$$$$   /$$$$$$$ /$$ /$$$$$$$\n"
+                +     "| $$$$$/   /$$__  $$ /$$_____/| $$| $$__  $$\n"
                 +     "| $$  $$  | $$$$$$$$|  $$$$$$ | $$| $$  \\ $$\n"
                 +     "| $$\\  $$ | $$_____/ \\____  $$| $$| $$  | $$\n"
                 +     "| $$ \\  $$|  $$$$$$$ /$$$$$$$/| $$| $$  | $$\n"
-                +     "|__/  \\__/ \\_______/|_______/ |__/|__/  |__/ ";
+                +     "|__/  \\__/ \\_______/|_______/ |__/|__/  |__/";
 
         System.out.println("Hello from\n" + logo);
         System.out.println(DIVIDER);

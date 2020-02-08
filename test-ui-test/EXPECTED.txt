@@ -1,0 +1,54 @@
+Hello from
+ /$$   /$$                     /$$
+| $$  /$$/                    |__/
+| $$ /$$/   /$$$$$$   /$$$$$$$ /$$ /$$$$$$$
+| $$$$$/   /$$__  $$ /$$_____/| $$| $$__  $$
+| $$  $$  | $$$$$$$$|  $$$$$$ | $$| $$  \ $$
+| $$\  $$ | $$_____/ \____  $$| $$| $$  | $$
+| $$ \  $$|  $$$$$$$ /$$$$$$$/| $$| $$  | $$
+|__/  \__/ \_______/|_______/ |__/|__/  |__/
+===================================================
+                                 What's your name?
+===================================================
+        Hello kesin, Anything I can help you with?
+===================================================
+                     Got it. I've added this task:
+                                [T][✘] borrow book
+
+                     1 tasks in the list (â•¥_â•¥)
+===================================================
+                 Got it. I've added this deadline:
+                   [D][✘] return book (by: Monday)
+
+                     2 tasks in the list (â•¥_â•¥)
+===================================================
+                     Got it. I've added this task:
+                                      [T][✘] study
+
+                     3 tasks in the list (â•¥_â•¥)
+===================================================
+              Nice! I've marked this task as done:
+                                [T][✓] borrow book
+===================================================
+              Nice! I've marked this task as done:
+                   [D][✓] return book (by: Monday)
+===================================================
+                    Got it. I've added this event:
+         [E][✘] project meeting (at: Friday 2-4pm)
+
+                     4 tasks in the list (â•¥_â•¥)
+===================================================
+                 Got it. I've added this deadline:
+           [D][✘] report submission (by: Thursday)
+
+                     5 tasks in the list (â•¥_â•¥)
+===================================================
+                  Here are the tasks in your list:
+                             1. [T][✓] borrow book
+                2. [D][✓] return book (by: Monday)
+                                   3. [T][✘] study
+      4. [E][✘] project meeting (at: Friday 2-4pm)
+        5. [D][✘] report submission (by: Thursday)
+===================================================
+           Bye, kesin. Hope to see you again soon!
+===================================================

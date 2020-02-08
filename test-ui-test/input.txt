@@ -1,0 +1,10 @@
+kesin
+todo borrow book
+deadline return book /by Monday
+todo study
+done 1
+done 2
+event project meeting /at Friday 2-4pm
+deadline report submission /by Thursday
+list
+bye
