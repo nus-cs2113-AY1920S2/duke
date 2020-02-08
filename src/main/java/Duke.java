@@ -1,3 +1,6 @@
+import task.*;
+import exceptions.*;
+
 public class Duke {
     public static void main(String[] args) throws InvalidCommandException, MissingDescriptionException {
         UI.initUI();
@@ -32,7 +35,7 @@ public class Duke {
                     System.out.println("\t Dun dun dun dun! This task is done:");
                     int taskIdx = Integer.parseInt(words);
                     taskIdx--; // -1 for zero-based indexing
-                    tasks[taskIdx].isDone = true;
+                    tasks[taskIdx].setDone();
                     System.out.println("\t   " + tasks[taskIdx]);
                     UI.br();
                     break;
