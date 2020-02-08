@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
+import duke.print.PrintHelper;
+import duke.task.TaskManager;
+
 import java.util.Scanner;
 
 public class Duke {

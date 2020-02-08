@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Deadline extends Task{
 
     // Stores information about deadline of task

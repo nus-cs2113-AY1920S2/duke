@@ -1,3 +1,5 @@
+package duke.print;
+
 public class PrintHelper {
 
     private static final String INVALID_COMMAND_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
