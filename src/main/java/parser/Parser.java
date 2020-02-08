@@ -27,12 +27,8 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
-     *
      * @param userInput full user input string
      * @return the command based on the user input
-     */
-
-    /**
      * split the user input, command word and the description
      * commandWord stores the whole user input
      * commandWordFirstPart [0] stores the Command Word
@@ -89,7 +85,7 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
-     *
+     * @param nextTaskIndex the task ID for next task
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
@@ -101,7 +97,7 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
-     *
+     * @param nextTaskIndex the task ID for next task
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
@@ -113,7 +109,7 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
-     *
+     * @param nextTaskIndex the task ID for next task
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */

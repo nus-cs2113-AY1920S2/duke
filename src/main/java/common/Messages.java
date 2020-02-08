@@ -14,9 +14,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
     public static final String MESSAGE_TASK_NOT_IN_TASKLIST = "The Task could not be found in address book";
-    public static final String MESSAGE_TODO_LIST = "  %d. [%c][%c] %s";
-    public static final String MESSAGE_DEADLINE_LIST = "  %d. [%c][%c] %s (%s)";
-    public static final String MESSAGE_EVENT_LIST = "  %d. [%c][%c] %s (%s)";
+    public static final String MESSAGE_TODO_LIST = "  %d. [Id:%d][%c][%c] %s";
+    public static final String MESSAGE_DEADLINE_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_EVENT_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
     public static StringBuilder taskListMessage = new StringBuilder();
 
     /**
@@ -43,6 +43,7 @@ public class Messages {
         return String.format(
                 MESSAGE_TODO_LIST,
                 index,
+                todoTask.getTaskIndex(),
                 todoTask.getTaskType(),
                 todoTask.getChar(),
                 todoTask.getTaskDescription());
@@ -52,6 +53,7 @@ public class Messages {
         return String.format(
                 MESSAGE_DEADLINE_LIST,
                 index,
+                deadlineTask.getTaskIndex(),
                 deadlineTask.getTaskType(),
                 deadlineTask.getChar(),
                 deadlineTask.getTaskDescription(),
@@ -62,6 +64,7 @@ public class Messages {
         return String.format(
                 MESSAGE_EVENT_LIST,
                 index,
+                eventTask.getTaskIndex(),
                 eventTask.getTaskType(),
                 eventTask.getChar(),
                 eventTask.getTaskDescription(),

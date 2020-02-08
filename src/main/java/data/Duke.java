@@ -59,7 +59,6 @@ public class Duke {
 
     /**
      * Adds a task to the task list.
->>>>>>> branch-Level-9
      */
     public void addTask(Task toAdd) {
         allTasks.add(toAdd);
@@ -85,7 +84,8 @@ public class Duke {
 
 
     /**
-     * Clears all tasks from the task list.
+     * clears all tasks from the task list.
+     * call by clear function
      */
     public void clear() {
         allTasks.clear();

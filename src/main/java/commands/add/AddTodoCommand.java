@@ -21,6 +21,7 @@ public class AddTodoCommand extends AddCommand {
         duke.addTask(toDoTask);
         return new CommandResult(String.format(
                 MESSAGE_TODO_SUCCESS,
+                toDoTask.getTaskIndex(),
                 COMMAND_TYPE,
                 toDoTask.getChar(),
                 toDoTask.getTaskDescription()));

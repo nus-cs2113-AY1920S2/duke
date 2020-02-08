@@ -21,6 +21,7 @@ public class Task {
     }
 
     public Task(int taskIndex,String taskDescription, char taskType) {
+        this.taskIndex = taskIndex;
         this.taskDescription = taskDescription;
         this.taskType = taskType;
         this.isDone = false;
@@ -64,9 +65,9 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons have the same identity fields (name and telephone).
+     * Returns true if both tasks have the same identity fields (name and telephone).
      */
-    boolean isSamePerson(Task other) {
+    boolean isSameTask(Task other) {
         return (other == this)
                 || (other != null
                 && other.getTaskDescription().equals(this.getTaskDescription()));

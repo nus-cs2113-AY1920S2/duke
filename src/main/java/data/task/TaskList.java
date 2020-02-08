@@ -7,45 +7,55 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TaskList implements Iterable<Task> {
-
-    private final List<Task> internalList = new ArrayList<>();
+    /** contains the real list that stores the tasks*/
+    private final ArrayList<Task> internalList = new ArrayList<>();
 
     /**
-     * Constructs empty person list.
+     * Constructs empty task list.
      */
     public TaskList() {}
 
     /**
-     * Checks if the list contains an equivalent person as the given argument.
+     * Checks if the list contains an equivalent task as the given description.
+     * @param toCheck the task to-check
+     * @return true if the task exists
      */
     public boolean contains(Task toCheck) {
         for (Task p : internalList) {
-            if (p.isSamePerson(toCheck)) {
+            if (p.isSameTask(toCheck)) {
                 return true;
             }
         }
         return false;
     }
 
-
+    /**
+     * Returns the task list
+     */
     public List<Task> getInternalList() {
         return internalList;
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a task to the list.
+     * @param toAdd the task to-add
      */
     public void add(Task toAdd)  {
         internalList.add(toAdd);
     }
 
     /**
-     * Clears all persons in list.
+     * Clears all tasks in list.
      */
     public void clear() {
         internalList.clear();
     }
 
+    /**
+     * Adds a task to the list.
+     * @param toRemove the task to-remove
+     * @throws TaskNotFoundException if the to-remove task does not exist
+     */
     public void remove(Task toRemove) throws TaskNotFoundException{
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
@@ -53,8 +63,11 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * @return the next-to-add task index
+     */
     public int getNextTaskIndex(){
-        return internalList.size()+1;
+        return internalList.size();
     }
 
     @Override
