@@ -25,7 +25,7 @@ public class Duke {
     public static final int TASK_DEADLINE = 0;
     public static final int TASK_EVENT_AT = 0;
     public static final int DUKE_COMMAND = 0;
-//ghjghjg
+
     static Storage myTasks = new Storage();
 
     public static void start() {
