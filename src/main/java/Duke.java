@@ -1,17 +1,15 @@
-import java.util.Scanner;
-
 public class Duke {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        printStartMessage();
+        UI.initUI();
+        UI.printGreetMessage();
 
         String userInput;
         Task [] tasks = new Task [100];
         int numTasks = 0;
 
         while (true) {
-            // Get and parse user input
-            userInput = input.nextLine();
+            userInput = UI.getNextLine();
+
             // Exit if user says bye
             if (userInput.equals("bye")) {
                 break;
@@ -24,24 +22,20 @@ public class Duke {
             }
 
             switch(command) {
-            // List all the tasks
-            case "list":
+            case "list": // List all the tasks
                 listTasks(tasks, numTasks);
                 break;
-            // Mark a task as done
-            case "done":
-                br();
+            case "done": // Mark a task as done
+                UI.br();
                 System.out.println("\t Dun dun dun dun! This task is done:");
                 int taskIdx = Integer.parseInt(words);
                 taskIdx--; // -1 for zero-based indexing
                 tasks[taskIdx].isDone = true;
                 System.out.println("\t   " + tasks[taskIdx]);
-                br();
+                UI.br();
                 break;
-            // Add a task
-            default:
+            default: // Add a task
                 Task t;
-
                 // Parse input to obtain text and timeDescriptor
                 String timeDescriptor = "";
                 String text = "";
@@ -66,59 +60,27 @@ public class Duke {
             }
         }
 
-        printEndMessage();
+        UI.printEndMessage();
     }
 
     /** Prints the message that is displayed after a task is added */
     private static void printAddedTaskMessage(Task t, int numTasks) {
-        br();
+        UI.br();
         System.out.println("\t Dook has added task: ");
         System.out.println("\t  " + t);
         System.out.println("\t " + numTasks + " task(s) in the list now!");
-        br();
+        UI.br();
     }
 
     /** Prints all tasks in the list */
     private static void listTasks(Task[] tasks, int numTasks) {
-        br();
+        UI.br();
         System.out.println("\t Dook will list your tasks now:");
         for (int i=0; i<numTasks; i++) {
             int taskNum = i+1;
             System.out.println("\t " + taskNum + ". " + tasks[i]);
         }
-        br();
+        UI.br();
     }
 
-    /** Prints line divider */
-    private static void br () {
-        System.out.println("    ...................................................");
-    }
-
-    /** Prints the greeting message */
-    private static void printStartMessage() {
-        br();
-        String logo =
-                "        ┌┬┐┌─┐┌─┐┬┌─\n" +
-                "         │││ ││ │├┴┐\n" +
-                "        ─┴┘└─┘└─┘┴ ┴";
-        System.out.println("\t Hello! I am \n" + logo);
-        System.out.println("\t Does the human have a request today?");
-        br();
-    }
-
-    /** Prints the goodbye message */
-    private static void printEndMessage() {
-        br();
-        System.out.println("\t Goodbye, see you in the seventh dimension!");
-        System.out.println("                   *       +\n" +
-                "             '                  |\n" +
-                "         ()    .-.,=\"``\"=.    - o -\n" +
-                "               '=/_       \\     |\n" +
-                "            *   |  '=._    |\n" +
-                "                 \\     `=./`,        '\n" +
-                "              .   '=.__.=' `='      *\n" +
-                "     +                         +\n" +
-                "          O      *        '       .");
-        br();
-    }
 }
