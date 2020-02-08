@@ -1,0 +1,7 @@
+list
+todo homework
+deadline tutorials /by today
+done 2
+event lecture /at i-cube
+list
+bye
