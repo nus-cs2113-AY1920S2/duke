@@ -1,4 +1,9 @@
-import javax.sound.midi.SysexMessage;
+import Features.Deadline;
+import Features.Event;
+import Features.Task;
+import Features.Todo;
+import Exception.DukeException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -36,7 +41,7 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(userList.get(doneIndex));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("OOPS!! Task number " + words[1] + " is not within your list. type \"list\" for more info.");
+            System.out.println("OOPS!! Features.Task number " + words[1] + " is not within your list. type \"list\" for more info.");
         } catch (NumberFormatException e) {
             System.out.println("OOPS!! " + words[1] + " is not a valid task number");
         }
@@ -48,7 +53,7 @@ public class Duke {
         words.remove(0);
         String task = String.join(" ", words);
         if (task.length() == 0) {
-            throw new DukeException("Todo task name cannot be empty.");
+            throw new DukeException("Features.Todo task name cannot be empty.");
         }
         return new Todo (task);
     }

@@ -1,4 +1,4 @@
-package Feature;
+package Features;
 
 public class Task {
     protected String description;

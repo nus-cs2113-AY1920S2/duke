@@ -1,4 +1,4 @@
-package Feature;
+package Features;
 
 public class Todo extends Task {
     public Todo(String description) {
