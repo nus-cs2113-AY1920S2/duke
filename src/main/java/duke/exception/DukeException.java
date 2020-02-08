@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.print.PrintHelper;
+
 public class DukeException extends Exception {
     ExceptionType exceptionType;
 

@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
+import duke.print.PrintHelper;
+
 import java.util.ArrayList;
 
 public class TaskManager {
