@@ -1,5 +1,5 @@
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCommandException, MissingDescriptionException {
         UI.initUI();
         UI.printGreetMessage();
 
@@ -14,49 +14,76 @@ public class Duke {
             if (userInput.equals("bye")) {
                 break;
             }
-            String[] parsedInput = userInput.split(" ", 2);
-            String command = parsedInput[0];
-            String words = "";
-            if (parsedInput.length != 1) {
-                words = parsedInput[1];
-            }
 
-            switch(command) {
-            case "list": // List all the tasks
-                listTasks(tasks, numTasks);
-                break;
-            case "done": // Mark a task as done
-                UI.br();
-                System.out.println("\t Dun dun dun dun! This task is done:");
-                int taskIdx = Integer.parseInt(words);
-                taskIdx--; // -1 for zero-based indexing
-                tasks[taskIdx].isDone = true;
-                System.out.println("\t   " + tasks[taskIdx]);
-                UI.br();
-                break;
-            default: // Add a task
-                Task t;
-                // Parse input to obtain text and timeDescriptor
-                String timeDescriptor = "";
-                String text = "";
-                int slashPos = words.indexOf('/');
-                if (slashPos != -1) {
-                    timeDescriptor = words.substring(slashPos+4);
-                    text = words.substring(0, slashPos);
+            try {
+                String[] parsedInput = userInput.split(" ", 2);
+                String command = parsedInput[0];
+                String words = "";
+                if (parsedInput.length > 1) {
+                    words = parsedInput[1];
                 }
 
-                if (command.equals("todo")) {
-                    t = new Todo(words);
-                } else if (command.equals("deadline")) {
-                    t = new Deadline(text, timeDescriptor);
-                } else {
-                    t = new Event(text, timeDescriptor);
-                }
-                tasks[numTasks] = t;
-                numTasks++;
+                switch(command) {
+                case "list": // List all the tasks
+                    listTasks(tasks, numTasks);
+                    break;
+                case "done": // Mark a task as done
+                    UI.br();
+                    System.out.println("\t Dun dun dun dun! This task is done:");
+                    int taskIdx = Integer.parseInt(words);
+                    taskIdx--; // -1 for zero-based indexing
+                    tasks[taskIdx].isDone = true;
+                    System.out.println("\t   " + tasks[taskIdx]);
+                    UI.br();
+                    break;
+                default: // Add a task
+                    Task t;
+                    // Parse input to obtain text and timeDescriptor
+                    String timeDescriptor = "";
+                    String text = "";
+                    int slashPos = words.indexOf('/');
+                    if (slashPos != -1) {
+                        timeDescriptor = words.substring(slashPos + 4);
+                        text = words.substring(0, slashPos);
+                    }
 
-                printAddedTaskMessage(t, numTasks);
-                break;
+                    if (command.equals("todo")) {
+                        t = new Todo(words);
+                        if (words.equals("")) {
+                            throw new MissingDescriptionException();
+                        }
+                    } else if (command.equals("deadline")) {
+                        t = new Deadline(text, timeDescriptor);
+                        if (text.equals("") || timeDescriptor.equals("")) {
+                            throw new MissingDescriptionException();
+                        }
+                    } else if (command.equals("event")) {
+                        t = new Event(text, timeDescriptor);
+                        if (text.equals("") || timeDescriptor.equals("")) {
+                            throw new MissingDescriptionException();
+                        }
+                    } else {
+                        throw new InvalidCommandException();
+                    }
+
+                    tasks[numTasks] = t;
+                    numTasks++;
+
+                    printAddedTaskMessage(t, numTasks);
+                    break;
+                }
+            } catch (MissingDescriptionException e) {
+                UI.br();
+                System.out.println("\t ☹ OOPS!!! The task description cannot be empty.");
+                UI.br();
+            } catch (InvalidCommandException e) {
+                UI.br();
+                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                UI.br();
+            } catch (IndexOutOfBoundsException e) {
+                UI.br();
+                System.out.println("\t ☹ OOPS!!! The task description cannot be empty.");
+                UI.br();
             }
         }
 
