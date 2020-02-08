@@ -90,6 +90,16 @@ public class Duke {
                 Printer.printConfirmationMessage(toDoTask);
                 continue;
 
+            case "deadline":
+                String descriptionAndDate = commands.get(TASK_DESCRIPTION); //change constant name here TODO
+                List<String> separated = Parser.parseDescriptionAndDate(descriptionAndDate);
+                description = separated.get(TASK_DESCRIPTION);
+                dateLine = separated.get(TASK_DEADLINE);
+                Deadline deadlineTask = new Deadline(description, dateLine);
+                myTasks.storeTasks(deadlineTask);
+                Printer.printConfirmationMessage(deadlineTask);
+                continue;
+
             default:
                 myTasks.storeTasks(task);
                 Printer.printConfirmationMessage(task.description);
