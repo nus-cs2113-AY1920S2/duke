@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static final String DUKE_LOGO =
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+
     public static void main(String[] args) {
         printWelcomeBanner();
 
@@ -17,7 +24,7 @@ public class Duke {
                 break;
             } else if (inputLC.equals("list")) {
                 // list all existing tasks and task statuses
-                list.viewList();
+                list.printList();
             } else if (inputLC.startsWith("done ")){
                 // mark a task as done
                 int taskIndex = Character.getNumericValue(input.charAt(5)) - 1;
@@ -38,12 +45,7 @@ public class Duke {
     // seems abit dodgy
     private static void printWelcomeBanner() {
         printDividerLine();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("This is\n" + logo);
+        System.out.println("This is\n" + DUKE_LOGO);
         System.out.println("How can I help you today?");
         printDividerLine();
     }

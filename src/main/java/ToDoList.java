@@ -38,7 +38,7 @@ public class ToDoList {
         System.out.println("You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in the list");
     }
 
-    public void viewList() {
+    public void printList() {
         if (numTasks == 0) {
             System.out.println("Nice, nothing to see here");
         } else {
