@@ -77,16 +77,16 @@ public class Printer {
 
     public static void printTasks(List<Task> myList) {
         printLines();
+        printIndentation();
         if (myList.isEmpty()) {
-            printIndentation();
             System.out.println("List is empty (°ロ°) !");
-        } else {
-            System.out.println("Here's your list (◕‿◕)♡ ~ ");
-            for (int i = 0; i < myList.size(); i++) {
-                printIndentation();
-                Task temp = myList.get(i);
-                System.out.printf("%d. %s\n", i + 1, temp);
-            }
+            return;
+        }
+        System.out.println("Here's your list (◕‿◕)♡ ~ ");
+        for (int i = 0; i < myList.size(); i++) {
+            printIndentation();
+            Task temp = myList.get(i);
+            System.out.printf("%d. %s\n", i + 1, temp);
         }
         printLines();
     }
