@@ -1,22 +1,25 @@
-import task.TaskManager;
+package duke;
 
 import java.util.Scanner;
-import static util.Constants.*;
+
+import duke.util.TaskManager;
+import duke.exception.DukeException;
+
+// I know I shouldn't do this, but I am too tired now.
+import static duke.util.Constants.*;
 
 public class Duke {
 
     private static void greet() {
         System.out.println(LOGO);
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES+GREETING_WORD);
+        System.out.println(FIVE_SPACES + GREETING_WORD);
         System.out.println(LINE_DIVIDER);
     }
 
     private static void processUserInput(TaskManager TaskMgr, String userInput) {
         String command = extractCommand(userInput);
         String taskInfo = extractTaskInfo(userInput);
-        String taskTime;
-        String taskDescriptions;
         switch (command) {
         case EXIT_COMMAND:
             bye();
@@ -29,26 +32,36 @@ public class Duke {
             TaskMgr.markAsDone(doneTaskID);
             break;
         case TODO_COMMAND:
-            TaskMgr.addTasks(taskInfo, TODO_COMMAND);
+            TaskMgr.addTask(taskInfo, TODO_COMMAND);
             break;
         case DEADLINE_COMMAND:
-            taskDescriptions = extractTaskDescription(taskInfo, DEADLINE_TIME_DELIMITER);
-            taskTime = extractTaskTime(taskInfo, DEADLINE_TIME_DELIMITER);
-            TaskMgr.addTasks(taskDescriptions, taskTime, DEADLINE_COMMAND);
+            System.out.println(LINE_DIVIDER);
+            processTaskWithTime(TaskMgr, taskInfo, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND, DEADLINE_FORMAT_ERROR_MESSAGE);
             break;
         case EVENT_COMMAND:
-            taskDescriptions = extractTaskDescription(taskInfo, EVENT_TIME_DELIMITER);
-            taskTime = extractTaskTime(taskInfo, EVENT_TIME_DELIMITER);
-            TaskMgr.addTasks(taskDescriptions, taskTime, EVENT_COMMAND);
+            System.out.println(LINE_DIVIDER);
+            processTaskWithTime(TaskMgr, taskInfo, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
             break;
         default:
             respondToUnknownCommand();
         }
     }
 
+    private static void processTaskWithTime(TaskManager TaskMgr, String taskInfo, String timeDelimiter, String deadlineCommand, String formatErrorMessage) {
+        try {
+            String taskDescriptions = extractTaskDescription(taskInfo, timeDelimiter);
+            String taskTime = extractTaskTime(taskInfo, timeDelimiter);
+            TaskMgr.addTask(taskDescriptions, taskTime, deadlineCommand);
+        } catch (DukeException e) {
+            System.out.println(FIVE_SPACES+CRYING_FACE+ formatErrorMessage);
+        } finally {
+            System.out.println(LINE_DIVIDER);
+        }
+    }
+
     private static void respondToUnknownCommand() {
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES+CRYING_FACE+UNKNOWN_COMMAND_RESPONSE);
+        System.out.println(FIVE_SPACES + CRYING_FACE + UNKNOWN_COMMAND_RESPONSE);
         System.out.println(LINE_DIVIDER);
     }
 
@@ -63,9 +76,9 @@ public class Duke {
     private static String extractTaskInfo(String userInput) {
         int spaceIndex = userInput.indexOf(' ');
         if (spaceIndex == -1) {
-            return userInput;
+            return "";
         }
-        return userInput.substring(spaceIndex+1);
+        return userInput.substring(spaceIndex + 1);
     }
 
     private static String extractTaskTime(String taskInfo, String delimiter) {
@@ -73,13 +86,17 @@ public class Duke {
         return taskInfo.substring(taskTimeIndex);
     }
 
-    private static String extractTaskDescription(String taskInfo, String delimiter) {
+    private static String extractTaskDescription(String taskInfo, String delimiter) throws DukeException {
         int taskTimeIndex = taskInfo.indexOf(delimiter);
-        return taskInfo.substring(0, taskTimeIndex);
+        try {
+            return taskInfo.substring(0, taskTimeIndex);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException();
+        }
     }
 
     private static int extractDoneTaskID(String userInput) {
-        int taskIDIndex = userInput.indexOf(" ")+1;
+        int taskIDIndex = userInput.indexOf(" ") + 1;
         String doneTaskIDString = userInput.substring(taskIDIndex);
         try {
             return Integer.parseInt(doneTaskIDString);
@@ -90,7 +107,7 @@ public class Duke {
 
     private static void bye() {
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES+BYE_WORD);
+        System.out.println(FIVE_SPACES + BYE_WORD);
         System.out.println(LINE_DIVIDER);
     }
 
@@ -100,7 +117,7 @@ public class Duke {
         greet();
 
         String input;
-        Scanner s  = new Scanner(System.in);
+        Scanner s = new Scanner(System.in);
         do {
             input = s.nextLine();
             processUserInput(TaskMgr, input);

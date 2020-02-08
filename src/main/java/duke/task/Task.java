@@ -1,13 +1,19 @@
-package task;
-import static util.Constants.*;
+package duke.task;
+import duke.exception.DukeException;
+
+import static duke.util.Constants.*;
 
 public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+    public Task(String description) throws DukeException {
+        if (description.length() > 0) {
+            this.description = description;
+            this.isDone = false;
+        } else {
+            throw new DukeException();
+        }
     }
 
     public String getStatusIcon() {

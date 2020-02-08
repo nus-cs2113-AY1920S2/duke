@@ -1,4 +1,4 @@
-package util;
+package duke.util;
 
 public class Constants {
     public static final String LOGO = "          __ __      _           __                          \n" +
@@ -23,14 +23,17 @@ public class Constants {
     public static final String CRYING_FACE = "\u2639";
     public static final String UNKNOWN_COMMAND_RESPONSE = " OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String LIST_TASKS_PROMPT = "Here are the tasks in your list:";
-    public static final String DONE_TASKS_PROMPT = "Nice! I've marked this task as done:";
-    public static final String ADD_TASKS_PROMPT = "Got it. I've added this task:";
+    public static final String DONE_TASKS_PROMPT = "Nice! I've marked this duke.task as done:";
+    public static final String ADD_TASKS_PROMPT = "Got it. I've added this duke.task:";
     public static final String ADD_TASKS_POST_PROMPT = "Now you have %d tasks in the list.\n";
     public static final String LIST_SINGLE_TASK_MESSAGE = "%d.%s\n";
     public static final String ADD_SINGLE_TASK_MESSAGE = "%s\n";
     public static final String DONE_SINGLE_TASK_MESSAGE = "%s\n";
-    public static final String TASK_ID_NOT_EXIST_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task id provided does not exist!";
-    public static final String TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task id is not provided or invalid!";
+    public static final String TASK_ID_NOT_EXIST_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task id provided does not exist!";
+    public static final String TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task id is not provided or invalid!";
+    public static final String DEADLINE_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the deadline format is not correct!";
+    public static final String EVENT_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the event format is not correct!";
+    public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task description cannot be empty!";
     public static final String yesIcon = "[\u2713]";
     public static final String noIcon = "[\u2718]";
 }

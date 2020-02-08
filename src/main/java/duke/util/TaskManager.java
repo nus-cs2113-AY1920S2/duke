@@ -1,5 +1,11 @@
-package task;
-import static util.Constants.*;
+package duke.util;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+import static duke.util.Constants.*;
 
 public class TaskManager {
     private Task[] tasks;
@@ -32,28 +38,34 @@ public class TaskManager {
      *
      * @param args
      *
-     * task: addTasks(description) -> treat as todo
      * todo: addTasks(description, "todo")
      * deadline/event: addTasks(description, time, "deadline"/"event")
      */
-    public void addTasks(String... args) {
-        Task currentTask;
-        switch (args.length) {
-        case 1:
-        case 2:
-            // add todo
-            currentTask = new Todo(args[0]);
-            break;
-        default:
-            // add deadline/event
-            if (args[2].equals("deadline")) {
-                currentTask = new Deadline(args[0], args[1]);
-            } else {
-                currentTask = new Event(args[0], args[1]);
+    public void addTask(String... args) {
+        String taskDescription = args[0].trim();
+        try {
+            Task currentTask;
+            switch (args.length) {
+            case 2:
+                currentTask = new Todo(taskDescription);
+                break;
+            default:
+                // add deadline/event
+                if (args[2].equals("deadline")) {
+                    currentTask = new Deadline(taskDescription, args[1]);
+                } else {
+                    currentTask = new Event(taskDescription, args[1]);
+                }
+                break;
             }
-            break;
+            tasks[taskCount++] = currentTask;
+            printAddTaskSuccessfulPrompt(currentTask);
+        } catch (DukeException e) {
+            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
         }
-        tasks[taskCount++] = currentTask;
+    }
+
+    private void printAddTaskSuccessfulPrompt(Task currentTask) {
         System.out.println(LINE_DIVIDER);
         System.out.println(FIVE_SPACES+ADD_TASKS_PROMPT);
         System.out.printf(SEVEN_SPACES+ADD_SINGLE_TASK_MESSAGE, currentTask);
