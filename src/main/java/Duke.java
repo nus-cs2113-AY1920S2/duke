@@ -4,26 +4,23 @@ import java.util.Vector;
 public class Duke {
 
     private static Vector<Task> list = new Vector<>();
-    private static Printer printer = new Printer();
 
-    private boolean isValidDoneInput(String[] words) {
-        if (words.length != 2) {
-            return false;
+    private void doTask(String[] words) throws InvalidFormatException, InvalidListNumberException {
+        if (words.length > 2) {
+            throw new InvalidFormatException();
         }
-        // Checks if second word is a valid list number
-        return words[1].matches("\\d+") && Integer.parseInt(words[1]) <= list.size();
-    }
 
-    private void doTask(String[] words) {
-        if (!isValidDoneInput(words)) {
-            return;
-        }
         int listNumber = Integer.parseInt(words[1]) - 1;
+
+        if (listNumber < 1 || listNumber > list.size()) {
+            throw new InvalidListNumberException();
+        }
+
         if (list.get(listNumber).isDone) {
-            printer.printAlreadyCompletedTaskMessage(list, listNumber);
+            Printer.printAlreadyCompletedTaskMessage(list, listNumber);
         } else {
             list.get(listNumber).isDone = true;
-            printer.printCompleteTaskMessage(list, listNumber);
+            Printer.printCompleteTaskMessage(list, listNumber);
         }
     }
 
@@ -32,7 +29,7 @@ public class Duke {
         String task = input.substring(indexOfTask);
 
         list.add(new ToDo(task));
-        printer.printAddTaskMessage(list);
+        Printer.printAddTaskMessage(list);
     }
 
     private void addDeadline(String input) {
@@ -43,7 +40,7 @@ public class Duke {
         String deadline = input.substring(indexOfDeadline);
 
         list.add(new Deadline(task, deadline));
-        printer.printAddTaskMessage(list);
+        Printer.printAddTaskMessage(list);
     }
 
     private void addEvent(String input) {
@@ -54,16 +51,28 @@ public class Duke {
         String duration = input.substring(indexOfEvent);
 
         list.add(new Event(task, duration));
-        printer.printAddTaskMessage(list);
+        Printer.printAddTaskMessage(list);
     }
 
 
-    private void completeAction(String input) {
+    private void completeAction(String input) throws InvalidActionException {
         String[] words = input.split(" ");
+        String action = words[0].toLowerCase();
 
-        switch (words[0].toLowerCase()) {
+        switch (action) {
         case "done":
-            doTask(words);
+            try {
+                doTask(words);
+            } catch (InvalidFormatException e) {
+                System.out.println(ExceptionMessage.INVALID_DONE_FORMAT_MESSAGE);
+            } catch (InvalidListNumberException e) {
+                System.out.println(ExceptionMessage.INVALID_LIST_NUMBER_MESSAGE);
+                Printer.printList(list, false);
+            } catch (NumberFormatException e) {
+                System.out.println(ExceptionMessage.ILLEGAL_LIST_NUMBER_MESSAGE);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(ExceptionMessage.MISSING_LIST_NUMBER_MESSAGE);
+            }
             break;
         case "todo":
             addToDo(input);
@@ -75,8 +84,7 @@ public class Duke {
             addEvent(input);
             break;
         default:
-            printer.printInvalidAction();
-            break;
+            throw new InvalidActionException();
         }
     }
 
@@ -88,24 +96,29 @@ public class Duke {
                 scanner.close();
                 return;
             } else if (input.toLowerCase().equals("list")) {
-                printer.printList(list);
+                Printer.printList(list, true);
             } else {
-                completeAction(input);
+                try {
+                    completeAction(input);
+                } catch (InvalidActionException e) {
+                    System.out.println(ExceptionMessage.INVALID_ACTION_MESSAGE);
+                }
             }
         }
     }
 
     private void runChat() {
-        printer.printWelcomeMessage();
-        printer.printLoadMessage();
+        Printer.printWelcomeMessage();
+        Printer.printLoadMessage();
 
         readInput();
 
-        printer.printExitMessage();
+        Printer.printExitMessage();
     }
 
     public static void main(String[] args) {
         Duke chatBot = new Duke();
         chatBot.runChat();
+
     }
 }
