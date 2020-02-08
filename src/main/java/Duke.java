@@ -77,30 +77,50 @@ public class Duke {
 
             case "done":
                 int index = Integer.parseInt(commands.get(LIST_INDEX));
-                Task t = myTasks.getTask(index);
-                if (Task.isValid(t)) {
+                try {
+                    Task t = myTasks.getTask(index);
                     t.markAsDone();
                     Printer.printConfirmationMessage(t);
-                } else {
-                    Printer.printError();
+
+                } catch (IndexOutOfBoundsException e) {
+                    Printer.printError(); //TODO add custom error message when accessing OFB index
                 }
                 continue;
 
             case "todo":
-                description = commands.get(TASK_DESCRIPTION);
-                ToDo toDoTask = new ToDo(description);
-                myTasks.storeTasks(toDoTask);
-                Printer.printConfirmationMessage(toDoTask);
+                try {
+                    description = commands.get(TASK_DESCRIPTION);
+                    DukeExceptionHandler.isBlank(description);
+                    ToDo toDoTask = new ToDo(description);
+                    myTasks.storeTasks(toDoTask);
+                    Printer.printConfirmationMessage(toDoTask);
+
+                } catch (IndexOutOfBoundsException | BlankStringException e) {
+                    Printer.printError(); //TODO add custom error message empty string
+                }
                 continue;
 
             case "deadline":
-                descriptionAndDate = commands.get(TASK_DESCRIPTION_AND_DATE);
-                separated = Parser.parseDeadlineDate(descriptionAndDate);
-                description = separated.get(TASK_DESCRIPTION);
-                dateLine = separated.get(TASK_DEADLINE);
-                Deadline deadlineTask = new Deadline(description, dateLine);
-                myTasks.storeTasks(deadlineTask);
-                Printer.printConfirmationMessage(deadlineTask);
+                try {
+                    descriptionAndDate = commands.get(TASK_DESCRIPTION_AND_DATE);
+                    separated = Parser.parseDeadlineDate(descriptionAndDate);
+
+                    description = separated.get(TASK_DESCRIPTION);
+                    dateLine = separated.get(TASK_DEADLINE);
+                    description = description.trim();
+                    dateLine = dateLine.trim();
+
+                    DukeExceptionHandler.isBlank(description);
+                    DukeExceptionHandler.isBlank(dateLine);
+
+                    Deadline deadlineTask = new Deadline(description, dateLine);
+                    myTasks.storeTasks(deadlineTask);
+
+                    Printer.printConfirmationMessage(deadlineTask);
+
+                } catch (IndexOutOfBoundsException | BlankStringException e) {
+                    Printer.printError(); //TODO add custom error message empty string
+                }
                 continue;
 
             case "event":
@@ -114,8 +134,7 @@ public class Duke {
                 continue;
 
             default:
-                myTasks.storeTasks(task);
-                Printer.printConfirmationMessage(task.description);
+                Printer.printError();
             }
         }
     }

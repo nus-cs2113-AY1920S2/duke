@@ -9,7 +9,7 @@ public class Parser {
         return commands;
     }
 
-    public static List<String> parseDeadlineDate(String descriptionAndDate){
+    public static List<String> parseDeadlineDate(String descriptionAndDate)  {
         List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndDate.split(" /by ", Duke.LIMIT)));
         Collections.reverse(separated);
         return separated;

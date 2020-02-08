@@ -15,8 +15,8 @@ public class Storage {
     public Task getTask(int index) {
         try {
             return myTasks.get(index - 1);
-        } catch(Exception e) {
-            return null;
+        } catch(IndexOutOfBoundsException e) {
+            throw e;
         }
     }
     public static int getSize() {
