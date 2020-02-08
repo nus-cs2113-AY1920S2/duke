@@ -1,3 +1,5 @@
+import Exceptions.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +16,6 @@ public class Duke {
     public static final String MISSING_TIME_PERIOD = "Please enter a time period for the task!";
     public static final String ITEM_OUT_OF_RANGE = "Item requested is out of range! Try another item.";
     public static final String MISSING_ITEM_NUMBER = "Enter an item number to be marked done!";
-    public static final String INVALID_COMMANDS = "No such commands! Please enter a valid command!";
 
     public static void main(String[] args) {
         // Create Scanner object
@@ -34,47 +35,53 @@ public class Duke {
             case "bye":
                 break;
             case "list":
-                printListOfTasks(myList);
+                try {
+                    printListOfTasks(myList);
+                } catch (EmptyListException e) {
+                    System.out.println(e);
+                }
                 break;
             case "done":
                 try {
-                    markTaskAsDone(myList, commands);
+                    markTaskAsDone(myList, commands, userInput);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(ITEM_OUT_OF_RANGE);
                 } catch (NumberFormatException e) {
                     System.out.println(MISSING_ITEM_NUMBER);
+                } catch (MissingItemIndexException e) {
+                    System.out.println(e);
                 }
                 break;
             case "todo":
                 try {
-                    addNewToDo(myList, commands);
-                } catch (DukeException e) {
-                    System.out.println(MISSING_ITEM);
+                    addNewToDo(myList, commands, userInput);
+                } catch (MissingDescriptionException e) {
+                    System.out.println(e);
                 }
                 break;
             case "deadline":
                 try {
-                    addNewDeadline(myList, commands);
+                    addNewDeadline(myList, commands, userInput);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(MISSING_TIME_PERIOD);
-                } catch (DukeException e) {
-                    System.out.println(MISSING_ITEM);
+                } catch (MissingDescriptionException e) {
+                    System.out.println(e);
                 }
                 break;
             case "event":
                 try {
-                    addNewEvent(myList, commands);
+                    addNewEvent(myList, commands, userInput);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(MISSING_TIME_PERIOD);
-                } catch (DukeException e) {
-                    System.out.println(MISSING_ITEM);
+                } catch (MissingDescriptionException e) {
+                    System.out.println(e);
                 }
                 break;
             default:
                 try {
-                    throw new DukeException(INVALID_COMMANDS);
-                } catch (DukeException e) {
-                    System.out.println(INVALID_COMMANDS);
+                    throw new UnknownCommandException(userInput);
+                } catch (UnknownCommandException e) {
+                    System.out.println(e);
                 }
             }
             printNewLine();
@@ -83,50 +90,50 @@ public class Duke {
         cleanUpAndExit(myScanner);
     }
 
-    public static void addNewDeadline(ArrayList<Task> myList, String[] commands)
-            throws DukeException, IndexOutOfBoundsException {
+    public static void addNewDeadline(ArrayList<Task> myList, String[] commands, String userInput)
+            throws MissingDescriptionException, IndexOutOfBoundsException {
         if (isInvalidLength(commands)) {
-            throw new DukeException();
+            throw new MissingDescriptionException(userInput);
         } else {
             // parsing userInput, remove first word "deadline"
             String[] deadlineDetails = removeFirstWord(commands).split("/");
             myList.add(new Deadline(deadlineDetails[0].trim(), deadlineDetails[1].trim()));
-            printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1)
-                    .getDescriptionInListFormat());
+            printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1).toString());
         }
     }
 
-    public static void addNewToDo(ArrayList<Task> myList, String[] commands)
-            throws DukeException {
+    public static void addNewToDo(ArrayList<Task> myList, String[] commands, String userInput)
+            throws MissingDescriptionException {
         if (isInvalidLength(commands)) {
-            throw new DukeException();
+            throw new MissingDescriptionException(userInput);
         } else {
             String parsedUserInput = removeFirstWord(commands);
             myList.add(new Todo(parsedUserInput.trim()));
             // gets last newly added Task
-            printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1)
-                    .getDescriptionInListFormat());
+            printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1).toString());
         }
     }
 
-    public static void addNewEvent(ArrayList<Task> myList, String[] commands)
-            throws IndexOutOfBoundsException, DukeException {
+    public static void addNewEvent(ArrayList<Task> myList, String[] commands, String userInput)
+            throws IndexOutOfBoundsException, MissingDescriptionException{
         if (isInvalidLength(commands)) {
-            throw new DukeException();
+            throw new MissingDescriptionException(userInput);
         } else {
             // parsing userInput, remove first word "event"
             String[] eventDetails = removeFirstWord(commands).split("/");
 
             // testing IndexOutOfBoundsException
             myList.add(new Events(eventDetails[0].trim(), eventDetails[1].trim()));
-            printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1)
-                    .getDescriptionInListFormat());
+            printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1).toString());
 
         }
     }
 
-    public static void markTaskAsDone(ArrayList<Task> myList, String[] commands)
-            throws IndexOutOfBoundsException, NumberFormatException {
+    public static void markTaskAsDone(ArrayList<Task> myList, String[] commands, String userInput)
+            throws IndexOutOfBoundsException, NumberFormatException, MissingItemIndexException {
+        if (isInvalidLength(commands)){
+            throw new MissingItemIndexException(userInput);
+        }
         // testing NumberFormatException
         int itemIndexRequested = Integer.parseInt(commands[1]) - 1;
 
@@ -140,11 +147,17 @@ public class Duke {
         return commands.length < 2;
     }
 
-    public static void printListOfTasks(ArrayList<Task> myList) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < myList.size(); i++) {
-            System.out.println(String.format("%d. %s", i + 1,
-                    myList.get(i).getDescriptionInListFormat()));
+    public static void printListOfTasks(ArrayList<Task> myList)
+            throws EmptyListException {
+        if (myList.isEmpty()) {
+            // dummy argument
+            throw new EmptyListException("Empty list");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < myList.size(); i++) {
+                System.out.println(String.format("%d. %s", i + 1,
+                        myList.get(i).toString()));
+            }
         }
     }
 

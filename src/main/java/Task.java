@@ -3,7 +3,7 @@ import javax.print.DocFlavor;
 /**
  * Represents a Task in the list kept by Duke
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     private static int numberOfTasksInList;
@@ -39,16 +39,13 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getDescriptionInListFormat() {
-        return String.format("%s %s", getStatusIcon(), getDescription());
-    }
+    @Override
+    public abstract String toString();
 
     /**
      * Print done response message
      */
-    public String getDoneResponseMessage(int itemIndexRequested) {
-        return String.format("[%d. %s] marked as done!", itemIndexRequested, getDescription());
-    }
+    public abstract String getDoneResponseMessage(int itemIndexRequested);
 
     /**
      * get description of Task
