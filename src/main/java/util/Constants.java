@@ -29,6 +29,7 @@ public class Constants {
     public static final String LIST_SINGLE_TASK_MESSAGE = "%d.%s\n";
     public static final String ADD_SINGLE_TASK_MESSAGE = "%s\n";
     public static final String DONE_SINGLE_TASK_MESSAGE = "%s\n";
+    public static final String TASK_ID_NOT_EXIST_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task id provided does not exist!";
     public static final String yesIcon = "[\u2713]";
     public static final String noIcon = "[\u2718]";
 }
