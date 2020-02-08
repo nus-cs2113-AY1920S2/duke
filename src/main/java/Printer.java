@@ -64,6 +64,17 @@ public class Printer {
         printLines();
     }
 
+    public static void printConfirmationMessage(Event task) {
+        printLines();
+        printIndentation();
+        System.out.println("Huuu what a busy guy! I have marked this in your list~ <(￣︶￣)> :");
+        printIndentation();
+        System.out.println("  " + task);
+        printIndentation();
+        System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
+        printLines();
+    }
+
     public static void printTasks(List<Task> myList) {
         printLines();
         if (myList.isEmpty()) {

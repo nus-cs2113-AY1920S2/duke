@@ -9,8 +9,14 @@ public class Parser {
         return commands;
     }
 
-    public static List<String> parseDescriptionAndDate(String descriptionAndDate){
+    public static List<String> parseDeadlineDate(String descriptionAndDate){
         List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndDate.split(" /by ", Duke.LIMIT)));
+        Collections.reverse(separated);
+        return separated;
+    }
+
+    public static List<String> parseEventAt(String descriptionAndDate){
+        List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndDate.split(" /at ", Duke.LIMIT)));
         Collections.reverse(separated);
         return separated;
     }

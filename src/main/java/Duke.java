@@ -22,6 +22,7 @@ public class Duke {
     public static final int LIST_INDEX = 1;
     public static final int TASK_DESCRIPTION = 1;
     public static final int TASK_DEADLINE = 0;
+    public static final int TASK_EVENT_AT = 0;
     public static final int DUKE_COMMAND = 0;
 
     static Storage myTasks = new Storage();
@@ -60,6 +61,8 @@ public class Duke {
             String command = commands.get(DUKE_COMMAND);
             String description;
             String dateLine;
+            String descriptionAndDate;
+            List<String> separated;
 
             switch (command) {
             case "bye":
@@ -90,13 +93,23 @@ public class Duke {
                 continue;
 
             case "deadline":
-                String descriptionAndDate = commands.get(TASK_DESCRIPTION); //change constant name here TODO
-                List<String> separated = Parser.parseDescriptionAndDate(descriptionAndDate);
+                descriptionAndDate = commands.get(TASK_DESCRIPTION); //change constant name here TODO
+                separated = Parser.parseDeadlineDate(descriptionAndDate);
                 description = separated.get(TASK_DESCRIPTION);
                 dateLine = separated.get(TASK_DEADLINE);
                 Deadline deadlineTask = new Deadline(description, dateLine);
                 myTasks.storeTasks(deadlineTask);
                 Printer.printConfirmationMessage(deadlineTask);
+                continue;
+
+            case "event":
+                descriptionAndDate = commands.get(TASK_DESCRIPTION); //change constant name here TODO
+                separated = Parser.parseEventAt(descriptionAndDate);
+                description = separated.get(TASK_DESCRIPTION);
+                dateLine = separated.get(TASK_EVENT_AT);
+                Event eventTask = new Event(description, dateLine);
+                myTasks.storeTasks(eventTask);
+                Printer.printConfirmationMessage(eventTask);
                 continue;
 
             default:
