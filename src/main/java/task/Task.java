@@ -1,10 +1,9 @@
 package task;
+import static util.Constants.*;
 
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static final String yesIcon = "[\u2713]";
-    protected static final String noIcon = "[\u2718]";
 
     public Task(String description) {
         this.description = description;

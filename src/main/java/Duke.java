@@ -5,11 +5,10 @@ import static util.Constants.*;
 
 public class Duke {
 
-
     private static void greet() {
         System.out.println(LOGO);
         System.out.println(LINE_DIVIDER);
-        System.out.println(GREETING_WORD);
+        System.out.println(FIVE_SPACES+GREETING_WORD);
         System.out.println(LINE_DIVIDER);
     }
 
@@ -43,9 +42,14 @@ public class Duke {
             TaskMgr.addTasks(taskDescriptions, taskTime, EVENT_COMMAND);
             break;
         default:
-            // default will add to todo
-            TaskMgr.addTasks(userInput);
+            respondToUnknownCommand();
         }
+    }
+
+    private static void respondToUnknownCommand() {
+        System.out.println(LINE_DIVIDER);
+        System.out.println(FIVE_SPACES+CRYING_FACE+UNKNOWN_COMMAND_RESPONSE);
+        System.out.println(LINE_DIVIDER);
     }
 
     private static String extractCommand(String userInput) {
@@ -82,7 +86,7 @@ public class Duke {
 
     private static void bye() {
         System.out.println(LINE_DIVIDER);
-        System.out.println(BYE_WORD);
+        System.out.println(FIVE_SPACES+BYE_WORD);
         System.out.println(LINE_DIVIDER);
     }
 
