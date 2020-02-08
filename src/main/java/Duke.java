@@ -8,7 +8,7 @@ public class Duke {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static ToDoList tasks = new ToDoList();
+    private static TaskList tasks = new TaskList();
 
     public static void main(String[] args) {
         printWelcomeBanner();
@@ -43,13 +43,13 @@ public class Duke {
 
         case "list":
             // show all tasks in the list
-            tasks.printList();
+            tasks.showTasks();
             break;
 
         case "done":
             // mark a task as done
             int taskIndex = Character.getNumericValue(fullCommand.charAt(5)) - 1;
-            tasks.markAsDone(taskIndex);
+            tasks.markTaskAsDone(taskIndex);
             break;
 
         case "todo":
@@ -62,7 +62,7 @@ public class Duke {
                 throw new DukeException("The description of a todo cannot be empty");
             }
 
-            tasks.addToList(new ToDos(description));
+            tasks.addTask(new Todo(description));
             break;
 
         case "deadline":
@@ -80,7 +80,7 @@ public class Duke {
             }
             String deadlineName = deadlineInfo[0].trim();
             String deadlineDate = deadlineInfo[1].trim();
-            tasks.addToList(new Deadlines(deadlineName, deadlineDate));
+            tasks.addTask(new Deadline(deadlineName, deadlineDate));
             break;
 
         case "event":
@@ -98,7 +98,7 @@ public class Duke {
             }
             String eventName =eventInfo[0].trim();
             String eventDate=eventInfo[1].trim();
-            tasks.addToList(new Events(eventName, eventDate));
+            tasks.addTask(new Event(eventName, eventDate));
             break;
 
         default:

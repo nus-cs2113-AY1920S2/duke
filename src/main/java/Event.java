@@ -1,7 +1,7 @@
-public class Events extends Task {
+public class Event extends Task {
     protected String time;
 
-    Events(String description, String time) {
+    Event(String description, String time) {
         super(description);
         this.time = time;
     }
