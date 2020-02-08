@@ -29,7 +29,7 @@ public class Duke {
                 printList(tasks, taskNumber);
             } else if (command.equalsIgnoreCase("todo")) {
                 taskNumber++;
-                addToDoTask(tasks, taskNumber, parseInput);
+                addToDo(tasks, taskNumber, parseInput);
             } else if (command.equalsIgnoreCase("bye")) {
                 printByeMessage(name);
                 break;
@@ -40,7 +40,7 @@ public class Duke {
                 taskNumber++;
                 addDeadline(tasks, taskNumber, parseInput[1]);
             } else {
-                taskNumber ++;
+                taskNumber++;
                 System.out.println(String.format("%50s", "added: " + input));
                 tasks[taskNumber] = new Task(input);
                 System.out.println(DIVIDER);
@@ -58,9 +58,9 @@ public class Duke {
 
     private static void addDeadline(Task[] tasks, int taskNumber, String s) {
         System.out.println(String.format("%50s", "Got it. I've added this deadline:"));
-        String[] event = s.split("/by",2);
-        String time = event[1];//throw error if no time
-        tasks[taskNumber] = new Deadline(event[0], time);
+        String[] deadline = s.split("/by",2);
+        String time = deadline[1];//throw error if no time
+        tasks[taskNumber] = new Deadline(deadline[0], time);
         System.out.println(String.format("%50s", tasks[taskNumber]));
         System.out.println(String.format("\n%50s", taskNumber+" tasks in the list (╥_╥)"));
         System.out.println(DIVIDER);
@@ -76,7 +76,7 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    private static void addToDoTask(Task[] tasks, int taskNumber, String[] parseInput) {
+    private static void addToDo(Task[] tasks, int taskNumber, String[] parseInput) {
         System.out.println(String.format("%50s", "Got it. I've added this task:"));
         tasks[taskNumber] = new ToDo(parseInput[1]);
         System.out.println(String.format("%50s", tasks[taskNumber]));
