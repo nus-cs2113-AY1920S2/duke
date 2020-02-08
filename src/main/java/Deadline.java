@@ -1,10 +1,10 @@
-public class Deadline extends Task{
+public class Deadline extends Task {
     
     private String by;
     private final String TAG = "[D]";
     private final String OPEN_BRACKET = "(";
     private final String CLOSE_BRACKET = ")";
-
+    
     public Deadline(String description, String by) {
         super(description);
         this.by = OPEN_BRACKET + by + CLOSE_BRACKET;
@@ -16,5 +16,5 @@ public class Deadline extends Task{
         return TAG + super.toString() + by;
     }
     
-
+    
 }
