@@ -1,17 +1,19 @@
+package Task;
+
 import javax.print.DocFlavor;
 
 /**
- * Represents a Task in the list kept by Duke
+ * Represents a Task.Task in the list kept by Duke
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
     private static int numberOfTasksInList;
     /**
-     * Creates a new Task with the given description
+     * Creates a new Task.Task with the given description
      * Default value for isDone is false
      *
-     * @param description of the Task created
+     * @param description of the Task.Task created
      */
     public Task(String description) {
         this.description = description;
@@ -24,7 +26,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the status of isDone of the Task and returns an icon
+     * Get the status of isDone of the Task.Task and returns an icon
      *
      * @return tick or cross icon
      */
@@ -48,9 +50,9 @@ public abstract class Task {
     public abstract String getDoneResponseMessage(int itemIndexRequested);
 
     /**
-     * get description of Task
+     * get description of Task.Task
      *
-     * @return description of Task
+     * @return description of Task.Task
      */
     public String getDescription() {
         return description;
