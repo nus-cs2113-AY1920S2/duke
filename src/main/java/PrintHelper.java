@@ -1,6 +1,6 @@
 public class PrintHelper {
 
-    private static final String INVALID_COMMAND_MESSAGE = "Invalid command, Please type a valid command";
+    private static final String INVALID_COMMAND_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid format of declaration for event (event .......  /at ......)";
     private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid format of declaration for deadline (deadline .......  /by ......)";
     private static final String DASHED_LINE = "__________________________________________________________________________________________";
@@ -10,7 +10,7 @@ public class PrintHelper {
     private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE = "Invalid Command (done x : x should be an integer)";
     private static final String INVALID_ARRAY_INDEX_MESSAGE = "Invalid Command (done x : x should be a valid integer index)";
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String INVALID_TODO_FORMAT_MESSAGE = "Invalid format of declaration for todo (todo .......)";
+    private static final String INVALID_TODO_FORMAT_MESSAGE = "OOPS!!! The description of a todo cannot be empty.";
     private static final String SINGLE_SPACE = " ";
 
     // Prints the number of spaces requested by the user

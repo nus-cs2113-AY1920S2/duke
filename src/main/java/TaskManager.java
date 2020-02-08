@@ -7,6 +7,8 @@ public class TaskManager {
     public static final String LIST_TASKS_MESSAGE = "Here are the tasks in your list:";
     public static final String LIST_EMPTY_MESSAGE = "The list is empty";
     public static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
+    public static final String DEADLINE_SPECIFIER = "/by ";
+    public static final String PERIOD_SPECIFIER = "/at ";
 
     // Stores all the tasks provided
     ArrayList<Task> tasks = new ArrayList<Task>();
@@ -39,22 +41,19 @@ public class TaskManager {
 
     // Marks the task denoted by the task as done
     // Also handles exceptions in case the index provided isn't valid
-    public void markTask(String taskIndex){
+    public void markTask (String[] commandSplit) throws DukeException{
         int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(taskIndex);
-            // Convert to 0-based index
-            taskNumber--;
-            boolean isValidIndex = checkIndexValidity(taskNumber);
-            if (!isValidIndex) {
-                PrintHelper.printInvalidIndexAlert();
-            } else if (tasks.get(taskNumber).isDone) {
-                printAsAlreadyDone(taskNumber);
-            } else {
-                markTaskAsDone(taskNumber);
-            }
-        } catch (NumberFormatException e) {
-            PrintHelper.printIndexNotIntegerAlert();
+        if (commandSplit.length != 2){
+            throw new DukeException(ExceptionType.IndexDoneCommand);
+        }
+        String taskIndex = commandSplit[1];
+        taskNumber = Integer.parseInt(taskIndex);
+        // Convert to 0-based index
+        taskNumber--;
+        if (tasks.get(taskNumber).isDone) {
+            printAsAlreadyDone(taskNumber);
+        } else {
+            markTaskAsDone(taskNumber);
         }
     }
 
@@ -90,10 +89,55 @@ public class TaskManager {
         PrintHelper.printLine();
     }
 
-    // Checks if the provided integer is a valid task index
-    public boolean checkIndexValidity(int index){
-        boolean isPositive = index >= 0, isLessThanSize = index < tasks.size();
-        return isPositive && isLessThanSize;
+    // Instructs the task manager to add the Event task specified by the user
+    // to the list if the correct format is used
+    public void addEventTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException{
+        boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(PERIOD_SPECIFIER);
+        if (!isCorrectFormat) {
+            throw new DukeException(ExceptionType.InvalidEventDeclaration);
+        }
+        addTask(TaskType.Event, commandSplit[1]);
     }
 
+    // Instructs the task manager to add the Deadline task specified by the user
+    // to the list if the correct format is used
+    public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException{
+        boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(DEADLINE_SPECIFIER);
+        if (!isCorrectFormat) {
+           throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
+        }
+        addTask(TaskType.Deadline, commandSplit[1]);
+    }
+
+    // Instructs the task manager to add the ToDo task specified by the user
+    //  to the list if the correct format is used
+    public void addToDoTask(String[] commandSplit) {
+        try{
+            addTask(TaskType.ToDo, commandSplit[1]);
+        } catch (IndexOutOfBoundsException e) {
+            PrintHelper.printInvalidToDoFormat();
+        }
+    }
+
+    // Instructs the task manager to mark the task done if the correct format is used
+    public void markTaskAsDone(String[] commandSplit) {
+        try{
+            markTask(commandSplit);
+        } catch (DukeException invalidDoneCommand) {
+            invalidDoneCommand.printExceptionMessage();
+        } catch (NumberFormatException indexNotInteger) {
+            PrintHelper.printIndexNotIntegerAlert();
+        } catch (IndexOutOfBoundsException indexOutOfBounds){
+            PrintHelper.printInvalidIndexAlert();
+        }
+    }
+
+    // Instructs the task manager to list the tasks if the correct format is used
+    public void listTasks(boolean isCorrectFormat) {
+        if (isCorrectFormat) {
+            listTasks();
+        } else {
+            PrintHelper.printInvalidCommand();
+        }
+    }
 }
