@@ -15,4 +15,13 @@ done 3
 done 4
 done 5
 list
+todo
+deadline
+deadline   /by some time
+deadline  hello /by
+deadline    to-trim deadline      /by   to-trim date
+event
+event   /at  some time
+event  yes  no  /at
+event       to-trim event    /at   to-trim date
 bye

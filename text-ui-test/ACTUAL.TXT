@@ -78,5 +78,27 @@ _________________________________________________
   4. [D][?] finish reading book (by: Sat maybe?)
   5. [T][?] i want to write a slash here /by doing sth like this
 _________________________________________________
+> ☹ OOPS!!! The description of a todo cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of a deadline cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of a deadline cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of a deadline cannot be empty
+_________________________________________________
+> Task added: 
+  [D][?] to-trim deadline (by: to-trim date)
+You have 6 tasks in the list
+_________________________________________________
+> ☹ OOPS!!! The description and date of an event cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of an event cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of an event cannot be empty
+_________________________________________________
+> Task added: 
+  [E][?] to-trim event (at: to-trim date)
+You have 7 tasks in the list
+_________________________________________________
 > Goodbye
 _________________________________________________
