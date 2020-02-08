@@ -14,16 +14,15 @@
  * @author: Tan Zheng Fu Justin
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static final int LIMIT = 2;
-    public static final int LISTINDEX = 1;
-    public static final int TASKTODO = 1;
-    public static final int DUKECOMMAND = 0;
+    public static final int LIST_INDEX = 1;
+    public static final int TASK_DESCRIPTION = 1;
+    public static final int TASK_DEADLINE = 0;
+    public static final int DUKE_COMMAND = 0;
 
     static Storage myTasks = new Storage();
 
@@ -53,28 +52,27 @@ public class Duke {
         return task;
     }
 
-    public static List<String> parseCommand(String description) {
-        List<String> commands = new ArrayList<>();
-        commands = Arrays.asList(description.split(" ", LIMIT));
-        return commands;
-    }
-
     public static void echoUntilBye() {
         boolean isBye = false;
         while (!isBye) {
             Task task = readFromUser();
-            List<String> commands = parseCommand(task.description);
-            String command = commands.get(DUKECOMMAND);
+            List<String> commands = Parser.parseCommand(task.description);
+            String command = commands.get(DUKE_COMMAND);
+            String description;
+            String dateLine;
+
             switch (command) {
             case "bye":
                 isBye = true;
                 exits();
                 continue;
+
             case "list":
                 myTasks.displayTasks();
                 continue;
+
             case "done":
-                int index = Integer.parseInt(commands.get(LISTINDEX));
+                int index = Integer.parseInt(commands.get(LIST_INDEX));
                 Task t = myTasks.getTask(index);
                 if (Task.isValid(t)) {
                     t.markAsDone();
@@ -83,8 +81,9 @@ public class Duke {
                     Printer.printError();
                 }
                 continue;
+
             case "todo":
-                String description = commands.get(TASKTODO);
+                description = commands.get(TASK_DESCRIPTION);
                 ToDo toDoTask = new ToDo(description);
                 myTasks.storeTasks(toDoTask);
                 Printer.printConfirmationMessage(toDoTask);
