@@ -37,7 +37,7 @@ public class Printer {
         printIndentation();
         System.out.printf("Nice! I've marked this task as done:\n");
         printIndentation();
-        System.out.printf("  [%s] %s\n", task.getStatusIcon(), task.getDescription());
+        System.out.printf("  %s\n", task);
         printLines();
     }
 
@@ -47,6 +47,7 @@ public class Printer {
         System.out.println("Got it. I've added this task:");
         printIndentation();
         System.out.println("  " + task);
+        printLines();
 
     }
 

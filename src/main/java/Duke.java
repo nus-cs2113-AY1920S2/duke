@@ -14,6 +14,9 @@
  *  @author: Tan Zheng Fu Justin
  */
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -46,8 +49,9 @@ public class Duke {
         return task;
     }
 
-    public static String[] parseCommand(String description) {
-        String[] commands = description.split(" ", LIMIT);
+    public static List<String> parseCommand(String description) {
+        List<String> commands = new ArrayList<>();
+        commands = Arrays.asList(description.split(" ", LIMIT));
         return commands;
     }
 
@@ -55,8 +59,8 @@ public class Duke {
         boolean isBye = false;
         while (!isBye) {
             Task task = readFromUser();
-            String[] commands = parseCommand(task.description);
-            String command = commands[0];
+            List<String> commands = parseCommand(task.description);
+            String command = commands.get(0);
             switch (command) {
             case "bye":
                 isBye = true;
@@ -67,7 +71,7 @@ public class Duke {
                 continue;
             case "done":
                 try {
-                    int index = Integer.parseInt(commands[1]);
+                    int index = Integer.parseInt(commands.get(1));
                     Task t = myTasks.getTask(index);
                     if (Task.isValid(t)) {
                         t.markAsDone();
@@ -80,7 +84,7 @@ public class Duke {
                 }
                 continue;
             case "todo":
-                String description = commands[1];
+                String description = commands.get(1);
                 ToDo toDoTask = new ToDo(description);
                 myTasks.storeTasks(toDoTask);
                 Printer.printConfirmationMessage(toDoTask);
