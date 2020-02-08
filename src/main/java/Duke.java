@@ -21,6 +21,10 @@ import java.util.Scanner;
 
 public class Duke {
     public static final int LIMIT = 2;
+    public static final int LISTINDEX = 1;
+    public static final int TASKTODO = 1;
+    public static final int DUKECOMMAND = 0;
+
     static Storage myTasks = new Storage();
 
     public static void start() {
@@ -60,7 +64,7 @@ public class Duke {
         while (!isBye) {
             Task task = readFromUser();
             List<String> commands = parseCommand(task.description);
-            String command = commands.get(0);
+            String command = commands.get(DUKECOMMAND);
             switch (command) {
             case "bye":
                 isBye = true;
@@ -70,7 +74,7 @@ public class Duke {
                 myTasks.displayTasks();
                 continue;
             case "done":
-                int index = Integer.parseInt(commands.get(1));
+                int index = Integer.parseInt(commands.get(LISTINDEX));
                 Task t = myTasks.getTask(index);
                 if (Task.isValid(t)) {
                     t.markAsDone();
@@ -80,7 +84,7 @@ public class Duke {
                 }
                 continue;
             case "todo":
-                String description = commands.get(1);
+                String description = commands.get(TASKTODO);
                 ToDo toDoTask = new ToDo(description);
                 myTasks.storeTasks(toDoTask);
                 Printer.printConfirmationMessage(toDoTask);
