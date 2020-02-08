@@ -7,8 +7,7 @@ public class Duke {
 
     public static void main(String[] args) {
         printWelcomeMessage();
-        runChatBot(MAX_CAPACITY);
-    }
+        runChatBot(MAX_CAPACITY); }
 
     private static void runChatBot(int MAX_CAPACITY) {
         Scanner input = new Scanner(System.in);
@@ -18,7 +17,7 @@ public class Duke {
 
     private static void taskManager(Scanner input, Task[] Tasks) {
         int taskCounter = 0;
-        while(true) {
+        while (true) {
             String userInput = getInput(input.nextLine());
             String[] userCommands = userInput.split(" ", 2);
             if (userCommands[0].equalsIgnoreCase("bye")) {
@@ -28,13 +27,13 @@ public class Duke {
                 printList(Tasks, taskCounter);
             } else if (userCommands[0].equalsIgnoreCase("done")) {
                 printDone(userCommands, Tasks);
-            } else if(userCommands[0].equalsIgnoreCase("todo")) {
+            } else if (userCommands[0].equalsIgnoreCase("todo")) {
                 addTodo(Tasks, taskCounter, userCommands);
                 taskCounter ++;
-            } else if(userCommands[0].equalsIgnoreCase("event")) {
+            } else if (userCommands[0].equalsIgnoreCase("event")) {
                 addEvent(Tasks, taskCounter, userCommands[1]);
                 taskCounter++;
-            } else if(userCommands[0].equalsIgnoreCase("deadline")) {
+            } else if (userCommands[0].equalsIgnoreCase("deadline")) {
                 addDeadline(Tasks, taskCounter, userCommands[1]);
                 taskCounter++;
             } else {
@@ -56,7 +55,7 @@ public class Duke {
             String[] buffer = userCommand.split("/at", 2);
             Tasks[taskCounter] = new Event(buffer[0].trim(), buffer[1].trim());
             printTask(Tasks[taskCounter], taskCounter);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("    Error: Insufficient detail");
         }
     }
@@ -66,7 +65,7 @@ public class Duke {
             String[] buffer = userCommand.split("/by", 2);
             Tasks[taskCounter] = new DeadLine(buffer[0].trim(), buffer[1].trim());
             printTask(Tasks[taskCounter], taskCounter);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("    Error: Insufficient detail");
         }
     }
@@ -75,7 +74,7 @@ public class Duke {
         try {
             Tasks[taskCounter] = new Todo(userCommands[1]);
             printTask(Tasks[taskCounter], taskCounter);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("    Error: Insufficient detail");
         }
     }
@@ -86,9 +85,9 @@ public class Duke {
             Tasks[num].taskDone();
             System.out.println("    Nice! I've marked this task as done:");
             System.out.println("      " + Tasks[num]);
-        }catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("    Error: Given Index is out of bound");
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("    Error: Insufficient detail");
         }
     }
@@ -139,4 +138,3 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 }
-
