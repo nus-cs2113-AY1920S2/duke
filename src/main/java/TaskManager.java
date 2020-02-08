@@ -1,7 +1,11 @@
+import task.Deadlines;
+import task.Events;
+import task.Task;
+import task.ToDo;
+
 public class TaskManager {
-    protected static final int SIZELIMIT = 100;
+    protected static final int SIZE_LIMIT = 100;
     protected static final String INDENTATION = "      ";
-    protected static final String MORE_INDENTATION = "        ";
     protected static final String TASK_NAME_DIVIDER = " ";
     protected static final String TASK_DETAILS_DIVIDER = "/";
 
@@ -10,7 +14,7 @@ public class TaskManager {
     protected static int taskCount;
 
     public TaskManager() {
-        this.taskList = new Task[SIZELIMIT];
+        this.taskList = new Task[SIZE_LIMIT];
         this.taskCount = 0;
     }
 

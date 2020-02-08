@@ -1,6 +1,10 @@
+package task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected static final String INDENTATION = "      ";
+    protected static final String MORE_INDENTATION = "        ";
 
     public Task (String name) {
         this.description = name;
@@ -25,8 +29,8 @@ public class Task {
 
     public String justAddedText(int taskCount) {
         return ("Got it. I've added this task:\n" +
-                TaskManager.MORE_INDENTATION + getTaskInfo() + "\n " +
-                TaskManager.INDENTATION +
+                MORE_INDENTATION + getTaskInfo() + "\n " +
+                INDENTATION +
                 "Now you have " + (taskCount+1) + " tasks in the list.");
     }
 }

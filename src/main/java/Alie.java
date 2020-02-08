@@ -2,20 +2,20 @@ import java.util.Scanner;
 
 public class Alie {
     public static void main(String[] args) {
-        welcomeMsg();
+        printWelcomeMsg();
 
-        TaskManager thingsToDo = new TaskManager();
+        TaskManager checkList = new TaskManager();
         Scanner userInput = new Scanner(System.in);
         boolean haveMoreCmds = true;
 
         while (haveMoreCmds) {
-            header();
+            printHeader();
             String cmd = getUserInput(userInput);
-            haveMoreCmds = executeCmd(cmd, thingsToDo);
+            haveMoreCmds = executeCmd(cmd, checkList);
         }
     }
 
-    public static void welcomeMsg() {
+    public static void printWelcomeMsg() {
         String logo =
                           "    /\\       |        |   |‾‾‾‾‾    \n"
                         + "   /  \\      |        |   |         \n"
@@ -23,11 +23,11 @@ public class Alie {
                         + " /      \\    |        |   |         \n"
                         + "/        \\ . |_____ . | . |_____ .  \n";
         System.out.println("Hello from\n" + logo);
-        header();
+        printHeader();
         System.out.println("What would you like to do?");
     }
 
-    public static void header() {
+    public static void printHeader() {
         System.out.print("ALIE> ");
     }
 
