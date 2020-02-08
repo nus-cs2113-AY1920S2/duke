@@ -1,9 +1,13 @@
+package duke;
+
+import duke.task.Task;
+
 public class TaskList {
     // assume list holds a maximum of 100 tasks
     private Task[] list;
     private int numTasks;
 
-    TaskList() {
+    public TaskList() {
         this.list = new Task[100];
         this.numTasks = 0;
     }
@@ -11,7 +15,7 @@ public class TaskList {
     public void addTask(Task task) {
         this.list[numTasks] = task;
         numTasks++;
-        System.out.println("Task added: ");
+        System.out.println("Task added:");
         System.out.println("  " + task);
         System.out.println("You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in the list");
     }

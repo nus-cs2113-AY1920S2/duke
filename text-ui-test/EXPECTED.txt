@@ -8,18 +8,18 @@ This is
 
 How can I help you today?
 _________________________________________________
-> Task added: 
+> Task added:
   [T][?] borrow book
 You have 1 task in the list
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][?] borrow book
 _________________________________________________
-> Task added: 
+> Task added:
   [D][?] return book (by: Sunday)
 You have 2 tasks in the list
 _________________________________________________
-> Task added: 
+> Task added:
   [E][?] project meeting (at: Mon 2-4pm)
 You have 3 tasks in the list
 _________________________________________________
@@ -47,11 +47,11 @@ _________________________________________________
   2. [D][?] return book (by: Sunday)
   3. [E][?] project meeting (at: Mon 2-4pm)
 _________________________________________________
-> Task added: 
+> Task added:
   [D][?] finish reading book (by: Sat maybe?)
 You have 4 tasks in the list
 _________________________________________________
-> Task added: 
+> Task added:
   [T][?] i want to write a slash here /by doing sth like this
 You have 5 tasks in the list
 _________________________________________________
