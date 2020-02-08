@@ -51,7 +51,7 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) { //If arr[1] does not exist
                 System.out.println("Oops! Please include the task number.");
             } catch (NumberFormatException e) { //If arr[1] cannot be parsed as an Integer
-                System.out.println("Oops! Please include the task number instead of ~" + arr[1] + "~.");
+                System.out.println("Oops! Please include the task number instead of '" + arr[1] + "'.");
             } catch (NullPointerException e) { //If the task number given is more than num of tasks
                 System.out.println("Sorry but that task does not exist! Please try again.");
             }
@@ -97,9 +97,8 @@ public class Duke {
     private static void printConfirm(Task task) {
         System.out.println("Got it! I've added this task:");
         System.out.println("   " + task);
-        int num = NUM_OF_TASK + 1;
-        System.out.println("Now you have " + num + " task(s) in the list.");
         NUM_OF_TASK++;
+        System.out.println("Now you have " + NUM_OF_TASK + " task(s) in the list.");
     }
 
     private static void printExitMessage() {
