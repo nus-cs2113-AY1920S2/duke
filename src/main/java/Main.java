@@ -1,6 +1,7 @@
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
+import common.Messages;
 import data.Duke;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;
@@ -37,8 +38,13 @@ public class Main extends Application {
         AnchorPane mainLayout = setupAnchorPane(stage);
         formatWindow(stage, mainLayout);
         parseUserInput();
+        //isExit(stage, "aa");
     }
 
+    /**
+     * setup anchorPane with parameters
+     * @param stage stage
+     */
     private AnchorPane setupAnchorPane(Stage stage) {
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
@@ -56,6 +62,11 @@ public class Main extends Application {
         return mainLayout;
     }
 
+    /**
+     * setup Window with parameters
+     * @param stage stage
+     * @param mainLayout uninitialized anchorPane
+     */
     private void formatWindow(Stage stage, AnchorPane mainLayout) {
         //Step 2. Formatting the window to look as expected
         setStage(stage);
@@ -133,6 +144,12 @@ public class Main extends Application {
         userInput.clear();
     }
 
+    private void isExit(Stage stage, String outputToUser){
+        if (outputToUser.equals(Messages.MESSAGE_FAREWELL)){
+            stage.close();
+        }
+    }
+
     /** setup AnchorPane with parameters*/
     private void setAnchorPane() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -151,7 +168,10 @@ public class Main extends Application {
         scrollPane.setFitToWidth(true);
     }
 
-    /** setup Stage with parameters*/
+    /**
+     * setup Stage with parameters
+     * @param stage uninitialized stage
+     */
     private void setStage(Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -160,8 +180,8 @@ public class Main extends Application {
     }
 
     /**
-     * Replace this stub with your completed method.
      * @param input the full length of user input
+     * @return commandResult.feedbackToUser
      */
     private String getResponse(String input) throws StorageOperationException {
         //construct a command from user input

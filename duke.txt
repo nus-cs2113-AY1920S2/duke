@@ -1,2 +1,2 @@
-T|N| rea
-T|N| ff
+T|N| read a book
+T|N| find a book
