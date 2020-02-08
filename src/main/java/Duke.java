@@ -6,6 +6,7 @@ import tasks.Event;
 import tasks.TaskType;
 
 public class Duke {
+    // input: 2do<enter> error: java.lang.ArrayIndexOutOfBoundsException
     private static void addTask(String userCmd, ArrayList<Task> taskArrList) {
         String[] splitCmd = userCmd.split("todo ");
         String todoStr = splitCmd[1].trim();
@@ -38,7 +39,7 @@ public class Duke {
         try {
             completedTask = Integer.parseInt(splitCmd[1]);
         }
-        catch (Exception e){
+        catch (Exception e){ //java.lang.NumberFormatException
             System.out.println("Incorrect syntax! Try again");
             return;
         }
@@ -86,6 +87,17 @@ public class Duke {
         System.out.println("\t" +newEvent.toString() );
     }
 
+    public static void printHelp() {
+        String helpMsg = "Here is a list of things you can do: \n"
+                + "\ttodo:      tasks without a date/time (syntax: todo buy food)\n"
+                + "\tlist:      list your current tasks (syntax: list)\n"
+                + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday)\n"
+                + "\tevent:     tasks that start/end by a specific time (syntax: event food fare /at Mon 2-4pm)\n"
+                + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
+                + "\thelp:      launch the help screen (syntax: help)";
+        System.out.println(helpMsg);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean continueRun = true;
@@ -93,10 +105,10 @@ public class Duke {
         ArrayList<Task> taskArrList = new ArrayList<>();
 
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
         while (continueRun) {
@@ -131,13 +143,8 @@ public class Duke {
                 addEvent(userCmd, taskArrList);
             }
             else {
-                String helpMsg = "Wrong syntax!\n\n"
-                        + "Here is a list of things you can do: \n"
-                        + "\ttodo:      tasks without a date/time (syntax: todo buy food\n"
-                        + "\tlist:      list your current tasks (syntax: list)\n"
-                        + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday\n"
-                        + "\tevent:     tasks that start/end by a specific time (syntax: event food fare /at Mon 2-4pm";
-                System.out.println(helpMsg);
+                System.out.println("Wrong syntax!");
+                printHelp();
             }
         }
     }
