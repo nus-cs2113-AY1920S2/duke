@@ -10,7 +10,7 @@ public class Event extends Task {
         this.at = OPEN_BRACKET + at + CLOSE_BRACKET;
         this.at = stringBuilder(this.at);
     }
-
+    
     @Override
     public String toString() {
         return TAG + super.toString() + at;
