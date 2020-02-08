@@ -1,26 +1,10 @@
-import java.sql.SQLTransactionRollbackException;
-import java.util.ArrayList;
-import java.util.List;
+import task.TaskManager;
+
 import java.util.Scanner;
+import static util.Constants.*;
 
 public class Duke {
-    private static final String LOGO = "          __ __      _           __                          \n" +
-            "     /\\  /_ /_ |    (_)         / _|                         \n" +
-            "    /  \\  | || |_ __ _ ___  ___| |_ ___  _ __ _ __ ___   ___ \n" +
-            "   / /\\ \\ | || | '__| / __|/ _ \\  _/ _ \\| '__| '_ ` _ \\ / _ \\\n" +
-            "  / ____ \\| || | |  | \\__ \\  __/ || (_) | |  | | | | | |  __/\n" +
-            " /_/    \\_\\_||_|_|  |_|___/\\___|_| \\___/|_|  |_| |_| |_|\\___|\n";
-    private static final String LINE_DIVIDER = "    ____________________________________________________________";
-    private static final String GREETING_WORD = "     Hello! I'm A11riseforme\n     What can I do for you?";
-    private static final String BYE_WORD = "     Bye. Hope to see you again soon!";
-    private static final String EXIT_COMMAND = "bye";
-    private static final String LIST_COMMAND = "list";
-    private static final String DONE_COMMAND = "done";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String EVENT_COMMAND = "event";
-    private static final String DEADLINE_TIME_DELIMITER = " /by ";
-    private static final String EVENT_TIME_DELIMITER = " /at ";
+
 
     private static void greet() {
         System.out.println(LOGO);
