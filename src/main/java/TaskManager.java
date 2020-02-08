@@ -41,7 +41,7 @@ public class TaskManager {
 
     // Marks the task denoted by the task as done
     // Also handles exceptions in case the index provided isn't valid
-    public void markTask (String[] commandSplit) throws DukeException{
+    public void markTask (String[] commandSplit) throws DukeException {
         int taskNumber;
         if (commandSplit.length != 2){
             throw new DukeException(ExceptionType.IndexDoneCommand);
@@ -91,7 +91,7 @@ public class TaskManager {
 
     // Instructs the task manager to add the Event task specified by the user
     // to the list if the correct format is used
-    public void addEventTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException{
+    public void addEventTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(PERIOD_SPECIFIER);
         if (!isCorrectFormat) {
             throw new DukeException(ExceptionType.InvalidEventDeclaration);
@@ -101,7 +101,7 @@ public class TaskManager {
 
     // Instructs the task manager to add the Deadline task specified by the user
     // to the list if the correct format is used
-    public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException{
+    public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(DEADLINE_SPECIFIER);
         if (!isCorrectFormat) {
            throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
@@ -111,12 +111,11 @@ public class TaskManager {
 
     // Instructs the task manager to add the ToDo task specified by the user
     //  to the list if the correct format is used
-    public void addToDoTask(String[] commandSplit) {
-        try{
-            addTask(TaskType.ToDo, commandSplit[1]);
-        } catch (IndexOutOfBoundsException e) {
-            PrintHelper.printInvalidToDoFormat();
+    public void addToDoTask(String[] commandSplit) throws DukeException {
+        if (commandSplit.length == 1){
+            throw new DukeException(ExceptionType.InvalidToDoDeclaration);
         }
+        addTask(TaskType.ToDo, commandSplit[1]);
     }
 
     // Instructs the task manager to mark the task done if the correct format is used

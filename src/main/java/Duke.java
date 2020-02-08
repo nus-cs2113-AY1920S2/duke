@@ -20,14 +20,19 @@ public class Duke {
         PrintHelper.printWelcomeMessage();
         command = sc.nextLine();
         while (!command.equals(BYE_COMMAND)) {
-            executeCommand(command);
+            try {
+                executeCommand(command);
+            } catch (DukeException exception) {
+                exception.printExceptionMessage();
+            }
             command = sc.nextLine();
         }
+
         PrintHelper.printByeMessage();
     }
 
     // Executes the command entered by the user
-    private static void executeCommand(String command) {
+    private static void executeCommand(String command) throws DukeException {
         String[] commandSplit = command.split(" ",2);
         String commandType = commandSplit[0];
         boolean isOneWordCommand = commandSplit.length == 1 || commandSplit[1].isBlank();
@@ -35,9 +40,6 @@ public class Duke {
             switch (commandType) {
             case LIST_COMMAND:
                 taskManager.listTasks(isOneWordCommand);
-                break;
-            case EMPTY_COMMAND:
-                emptyCommand();
                 break;
             case DONE_COMMAND:
                 taskManager.markTaskAsDone(commandSplit);
@@ -51,9 +53,12 @@ public class Duke {
             case EVENT_COMMAND:
                 taskManager.addEventTask(commandSplit, isOneWordCommand);
                 break;
+            case EMPTY_COMMAND:
+                throw new DukeException(ExceptionType.EmptyCommand);
+                // break statement can't be reached if added
             default:
-                invalidCommand();
-                break;
+                throw new DukeException(ExceptionType.InvalidCommand);
+                // break statement can't be reached if added
             }
         } catch (DukeException dukeException) {
             dukeException.printExceptionMessage();
