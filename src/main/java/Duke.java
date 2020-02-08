@@ -1,17 +1,17 @@
 /**
- *  CS2113T Semester 2 AY19/20
- *  Individual Project
+ * CS2113T Semester 2 AY19/20
+ * Individual Project
+ * <p>
+ * Project Duke is a educational software project designed to take you through
+ * the steps of building a small software incrementally,
+ * while applying as many Java and SE techniques as possible along the way.
+ * <p>
+ * The project aims to build a product named Duke, a Personal Assistant Chatbot that
+ * helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
+ * in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
  *
- *  Project Duke is a educational software project designed to take you through
- *      the steps of building a small software incrementally,
- *      while applying as many Java and SE techniques as possible along the way.
- *
- *  The project aims to build a product named Duke, a Personal Assistant Chatbot that
- *      helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
- *      in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
- *
- *  @file/s: Duke.java Printer.java Storage.java Task.java
- *  @author: Tan Zheng Fu Justin
+ * @file/s: Duke.java Printer.java Storage.java Task.java
+ * @author: Tan Zheng Fu Justin
  */
 
 import java.util.ArrayList;
@@ -70,16 +70,12 @@ public class Duke {
                 myTasks.displayTasks();
                 continue;
             case "done":
-                try {
-                    int index = Integer.parseInt(commands.get(1));
-                    Task t = myTasks.getTask(index);
-                    if (Task.isValid(t)) {
-                        t.markAsDone();
-                        Printer.printConfirmationMessage(t);
-                    } else {
-                        Printer.printError();
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
+                int index = Integer.parseInt(commands.get(1));
+                Task t = myTasks.getTask(index);
+                if (Task.isValid(t)) {
+                    t.markAsDone();
+                    Printer.printConfirmationMessage(t);
+                } else {
                     Printer.printError();
                 }
                 continue;
