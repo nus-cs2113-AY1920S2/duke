@@ -48,6 +48,18 @@ public class Duke {
         }
     }
 
+    public static boolean isTask(String task) {
+        String todoCommand = "todo";
+        String deadlineCommand = "deadline";
+        String eventCommand = "event";
+
+        if (task.equals(todoCommand) || task.equals(deadlineCommand) || task.equals(eventCommand)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static void inputValidation(Task[] tasks, String userCommand) {
         String[] words = userCommand.split(" ");
         int spacesPadding = 1;
@@ -86,6 +98,16 @@ public class Duke {
         }
     }
 
+
+    public static void validateInput(String userInput) throws InvalidNumInput {
+        String[] words = userInput.split(" ");
+        if (words.length <= 1 && isTask(words[0])) {
+            throw new InvalidNumInput();
+        }
+    }
+
+
+
     public static void main(String[] args) {
         String logo = ".______     ______   .______   \n"
                 + "|   _  \\   /  __  \\  |   _  \\  \n"
@@ -113,6 +135,25 @@ public class Duke {
         while (true) {
             String userInput = command.nextLine();
             String[] words = userInput.split(" ");
+
+            try {
+                validateInput(userInput);
+                if (userInput.equals(endCommand)) {
+                    System.out.println(DIVIDER);
+                    System.out.println(endMessage);
+                    System.out.println(DIVIDER);
+                    break;
+                } else {
+                    System.out.println(DIVIDER);
+                    inputValidation(tasks, userInput);
+                    System.out.println(DIVIDER);
+                }
+            } catch (InvalidNumInput e) {
+                System.out.println(DIVIDER);
+                System.out.println("Too little");
+                System.out.println(DIVIDER);
+            }
+/*
             if (userInput.equals(endCommand)) {
                 System.out.println(DIVIDER);
                 System.out.println(endMessage);
@@ -122,7 +163,8 @@ public class Duke {
                 System.out.println(DIVIDER);
                 inputValidation(tasks, userInput);
                 System.out.println(DIVIDER);
-            }
+            }*/
+
         }
     }
 }
