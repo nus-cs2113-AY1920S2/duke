@@ -8,6 +8,7 @@ public class ToDoList {
         this.numTasks = 0;
     }
 
+   /*
     public void addToList(String input) {
         // input follows format <taskType> <taskName> /<date>
         int spaceIndex = input.indexOf(" ");
@@ -30,7 +31,8 @@ public class ToDoList {
                 task = new Events(taskName, date);
             }
         }
-
+         */
+    public void addToList(Task task) {
         this.list[numTasks] = task;
         numTasks++;
         System.out.println("Task added: ");
