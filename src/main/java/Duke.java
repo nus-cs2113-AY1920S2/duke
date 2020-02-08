@@ -81,7 +81,11 @@ public class Duke {
     private static int extractDoneTaskID(String userInput) {
         int taskIDIndex = userInput.indexOf(" ")+1;
         String doneTaskIDString = userInput.substring(taskIDIndex);
-        return Integer.parseInt(doneTaskIDString);
+        try {
+            return Integer.parseInt(doneTaskIDString);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     private static void bye() {

@@ -70,7 +70,10 @@ public class TaskManager {
             System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks[taskID]);
         } catch (NullPointerException e) {
             System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_EXIST_ERROR_MESSAGE);
-        } finally {
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
+        }
+        finally {
             System.out.println(LINE_DIVIDER);
         }
     }
