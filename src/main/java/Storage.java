@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private List<Task> myTasks = new ArrayList<>();
+    private static List<Task> myTasks = new ArrayList<>();
 
     public void storeTasks(Task task) {
         myTasks.add(task);
@@ -19,5 +19,8 @@ public class Storage {
         catch(Exception e) {
             return null;
         }
+    }
+    public static int getSize() {
+        return myTasks.size();
     }
 }
