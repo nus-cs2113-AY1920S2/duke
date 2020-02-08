@@ -24,29 +24,10 @@ public class Duke {
             try {
                 parseCommand(fullCommand);
             } catch (DukeException e) {
-                System.err.println(e.toString());
+                System.out.println(e.toString());
             } finally {
                 printDividerLine();
             }
-
-            /*
-            if (inputLC.equals("bye")) {
-                // end duke program
-                printByeMessage();
-                break;
-            } else if (inputLC.equals("list")) {
-                // list all existing tasks and task statuses
-                list.printList();
-            } else if (inputLC.startsWith("done ")){
-                // mark a task as done
-                int taskIndex = Character.getNumericValue(input.charAt(5)) - 1;
-                list.markAsDone(taskIndex);
-            } else {
-                // add user input to list
-                list.addToList(input);
-            }
-            printDividerLine();
-             */
         }
     }
 
@@ -87,24 +68,36 @@ public class Duke {
         case "deadline":
             // add deadline to tasks
             // input follows format <taskType> <taskName> /<date>
-            int byIndex = fullCommand.indexOf(" /by ");
-            if (byIndex < 0) {
+            String[] deadlineInfo = null;
+            try {
+                deadlineInfo = fullCommand.substring(9).trim().split(" /by ");
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("The description and date of a deadline cannot be empty");
             }
-            String deadlineName = fullCommand.substring(9, byIndex).trim();
-            String deadlineDate = fullCommand.substring(byIndex + 5).trim();
+
+            if (deadlineInfo.length != 2) {
+                throw new DukeException("The description and date of a deadline cannot be empty");
+            }
+            String deadlineName = deadlineInfo[0].trim();
+            String deadlineDate = deadlineInfo[1].trim();
             tasks.addToList(new Deadlines(deadlineName, deadlineDate));
             break;
 
         case "event":
             // add event to tasks
             // input follows format <taskType> <taskName> /<date>
-            int atIndex = fullCommand.indexOf(" /at ");
-            if (atIndex < 0) {
-                throw new DukeException("The description and date of a deadline cannot be empty");
+            String[] eventInfo = null;
+            try {
+                eventInfo = fullCommand.substring(6).trim().split(" /at ");
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("The description and date of an event cannot be empty");
             }
-            String eventName = fullCommand.substring(6, atIndex).trim();
-            String eventDate = fullCommand.substring(atIndex + 5).trim();
+
+            if (eventInfo.length != 2) {
+                throw new DukeException("The description and date of an event cannot be empty");
+            }
+            String eventName =eventInfo[0].trim();
+            String eventDate=eventInfo[1].trim();
             tasks.addToList(new Events(eventName, eventDate));
             break;
 
