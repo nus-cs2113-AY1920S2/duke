@@ -1,7 +1,10 @@
 list
 todo homework
 deadline tutorials /by today
+event
+deadline opps
 done 2
+add butterfly
 event lecture /at i-cube
 list
 bye
