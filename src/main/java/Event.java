@@ -7,7 +7,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDescription() {
+    public String showFullDescription() {
         return description + " (at: " + timePeriod + ")";
     }
 

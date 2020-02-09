@@ -11,7 +11,7 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public String getDescription() {
+    public String showFullDescription() {
         return description;
     }
 
@@ -22,6 +22,4 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-
-
 }

@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     private static int counter = 0;
-    private static Task[] listOfTasks =  new Task[100];
+    public static final int MAXIMUM_TASKS = 100;
+    private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
     private static final String logo = "  ____        _        \n"
                                  + " |  _ \\ _   _| | _____ \n"
                                  + " | | | | | | | |/ / _ \\\n"
@@ -112,7 +113,7 @@ public class Duke {
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + listOfTasks[counter-1].getTypeIcon()
                 +"[" + listOfTasks[counter-1].getStatusIcon() + "]"
-                + " " + listOfTasks[counter-1].getDescription());
+                + " " + listOfTasks[counter-1].showFullDescription());
         System.out.println(" Now you have " + counter + " tasks in the list.");
         printLine();
     }
@@ -123,7 +124,7 @@ public class Duke {
         for (int i = 0; i < counter; i += 1) {
             System.out.print(" " + (i+1) + "." + listOfTasks[i].getTypeIcon() + "["
                     + listOfTasks[i].getStatusIcon() + "] ");
-            System.out.println(listOfTasks[i].getDescription());
+            System.out.println(listOfTasks[i].showFullDescription());
         }
         printLine();
     }
@@ -135,7 +136,7 @@ public class Duke {
         printLine();
         System.out.println(" Nice! I've marked this task as done:");
         System.out.print("   [" + listOfTasks[taskNumber-1].getStatusIcon() + "] ");
-        System.out.println(listOfTasks[taskNumber-1].getDescription());
+        System.out.println(listOfTasks[taskNumber-1].showFullDescription());
         printLine();
     }
 }
