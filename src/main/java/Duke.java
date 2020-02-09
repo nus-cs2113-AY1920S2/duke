@@ -41,9 +41,10 @@ public class Duke {
         Task new_task;
 
         switch (instruction[0]) {
-        case "list":
+        case (LIST):
             printList(tasks);
             break;
+
         case (DONE):
             try {
                 int index = Integer.parseInt((inputString.substring(5)));
@@ -54,39 +55,61 @@ public class Duke {
                 System.out.println("This task does not exist!");
             }
             break;
-        case "todo":
-            new_task = new Todo(inputString.substring(5));
-            tasks[taskQty] = new_task;
-            taskQty += 1;
-            System.out.println( LINE +
-                    "  Ok! I've added this task. \n" +
-                    "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
-                    LINE);
+
+        case (TODO):
+            try {
+                new_task = new Todo(instruction[1]);
+                tasks[taskQty] = new_task;
+                taskQty += 1;
+                printAddMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no task specified!");
+            }
             break;
+
         case (DEADLINE):
-            int findSeparator = inputString.indexOf('/');
-            new_task = new Deadline(inputString.substring(9, findSeparator-1), inputString.substring(findSeparator+4));
-            tasks[taskQty] = new_task;
-            taskQty++;
-            System.out.println(" ____________________________________________________________\n" +
-                    "  Ok! I've added this task. \n" +
-                    "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
-                    "____________________________________________________________\n");
+            try {
+                int findSeparator = instruction[1].indexOf('/');
+                new_task = new Deadline(instruction[1].substring(0, findSeparator), instruction[1].substring(findSeparator + 1));
+                tasks[taskQty] = new_task;
+                taskQty++;
+                printAddMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no task specified!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please input task in the format: deadline task_name/deadline");
+            } catch (DukeException e) {
+                System.out.println("Task description or deadline field is empty.");
+            }
             break;
+
         case (EVENT):
-            int findSeparator2 = inputString.indexOf('/');
-            new_task = new Event(inputString.substring(6, findSeparator2-1), inputString.substring(findSeparator2+4));
-            tasks[taskQty] = new_task;
-            taskQty++;
-            System.out.println(" ____________________________________________________________\n" +
-                    "  Ok! I've added this task. \n" +
-                    "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
-                    "____________________________________________________________\n");
+            try {
+                int findSeparator = instruction[1].indexOf('/');
+                new_task = new Event(instruction[1].substring(0, findSeparator), instruction[1].substring(findSeparator + 1));
+                tasks[taskQty] = new_task;
+                taskQty++;
+                printAddMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no task specified!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please input task in the format: event task_name/event_date");
+            } catch (DukeException e) {
+                System.out.println("Task description or event date field is empty.");
+            }
             break;
+
         default:
-            System.out.println("huh?");
+            System.out.println("huh? I do not understand :(");
             break;
         }
         return inputString;
+    }
+
+    private static void printAddMessage() {
+        System.out.println(LINE +
+                "  Ok! I've added this task. \n" +
+                "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
+                LINE);
     }
 }
