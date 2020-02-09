@@ -29,7 +29,7 @@ public class Duke {
                 addEvent(command);
                 break;
             default:
-                System.out.println("Please give the type of the task.");
+                System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             printDividingLine();
             System.out.println("Do you have any other commands? ");
@@ -51,32 +51,45 @@ public class Duke {
     }
 
     private static void addEvent(String command){
-        String description=command.substring(command.indexOf(" ")+1,command.indexOf("/"));
-        String period=command.substring(command.indexOf("/at")+4);
-        tasks[taskCount]=new Event(description, period);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
-        taskCount++;
-        printNumOfTasks();
+        try{
+            String description=command.substring(command.indexOf(" "),command.indexOf("/"));
+            String period=command.substring(command.indexOf("/at")+4);
+            tasks[taskCount]=new Event(description, period);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[taskCount]);
+            taskCount++;
+            printNumOfTasks();
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+        }
     }
 
     private static void addDeadline(String command){
-        String description=command.substring(command.indexOf(" ")+1,command.indexOf("/"));
-        String by=command.substring(command.indexOf("/by")+4);
-        tasks[taskCount]=new Deadline(description,by);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
-        taskCount++;
-        printNumOfTasks();
+        try{
+            String description=command.substring(command.indexOf(" "),command.indexOf("/"));
+            String by=command.substring(command.indexOf("/by")+4);
+            tasks[taskCount]=new Deadline(description,by);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[taskCount]);
+            taskCount++;
+            printNumOfTasks();
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+
     }
 
-    private static void addToDo(String command) {
-        String description=command.substring(command.indexOf(" ")+1);
-        tasks[taskCount]=new ToDo(description);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
-        taskCount++;
-        printNumOfTasks();
+    private static void addToDo  (String command) {
+        try{
+            String description=command.substring(command.indexOf(" "));
+            tasks[taskCount]=new ToDo(description);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[taskCount]);
+            taskCount++;
+            printNumOfTasks();
+        } catch (StringIndexOutOfBoundsException e){
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
     }
 
     private static void doneTask(String command) {

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -16,10 +16,5 @@ public class Task {
     }
 
     @Override
-    public String toString(){
-        String taskType="[K]";
-        String detail = taskType + " [" + isDone + "] " + description;
-        return detail;
-    }
-
+    abstract public String toString();
 }
