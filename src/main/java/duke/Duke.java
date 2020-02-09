@@ -111,14 +111,15 @@ public class Duke {
     }
     
     private static void hasEmptyDescription(String commandWord, String commandArgs) throws DukeException {
-        if ((commandWord.equals(COMMAND_TODO_WORD) || commandWord.equals(COMMAND_DEADLINE_WORD) ||
-                commandWord.equals(COMMAND_EVENT_WORD)) && commandArgs.equals("")) {
+        if ((commandWord.equalsIgnoreCase(COMMAND_TODO_WORD) || commandWord.equalsIgnoreCase(COMMAND_DEADLINE_WORD) ||
+                commandWord.equalsIgnoreCase(COMMAND_EVENT_WORD)) && commandArgs.equals("")) {
             throw new DukeException(String.format(MISSING_DESCRIPTION_MESSAGE, commandWord));
+            
         }
     }
     
     private static void hasEmptyDate(String commandWord, String commandDate) throws DukeException {
-        if ((commandWord.equals(COMMAND_DEADLINE_WORD) || commandWord.equals(COMMAND_EVENT_WORD)) &&
+        if ((commandWord.equalsIgnoreCase(COMMAND_DEADLINE_WORD) || commandWord.equalsIgnoreCase(COMMAND_EVENT_WORD)) &&
                 commandDate.equals("")) {
             throw new DukeException(String.format(MISSING_DATE_MESSAGE, commandWord));
         }
@@ -182,9 +183,7 @@ public class Duke {
         try {
             throw new DukeException(COMMAND_BLAH_MESSAGE);
         } catch (DukeException e) {
-            System.out.println(DIVIDER);
             System.out.println(e);
-            System.out.println(DIVIDER);
         }
     }
     
