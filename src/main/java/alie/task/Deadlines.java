@@ -1,4 +1,4 @@
-package task;
+package alie.task;
 
 public class Deadlines extends Task {
     private String endDate;
@@ -8,6 +8,7 @@ public class Deadlines extends Task {
         endDate = date;
     }
 
+    @Override
     public String getTaskInfo() {
         return ("[D]" + super.getTaskInfo() + " (by: " + endDate + ")");
     }

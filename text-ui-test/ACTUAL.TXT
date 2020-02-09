@@ -1,0 +1,51 @@
+Hello from
+    /\       |        |   |‾‾‾‾‾ 
+   /  \      |        |   | 
+  /____\     |        |   |----     
+ /      \    |        |   |  
+/        \ . |_____ . | . |_____ . 
+ALIE> What would you like to do?
+ALIE> No tasks added yet
+ALIE>       Got it. I've added this task:
+        [T][?] read book
+      Now you have 1 tasks in the list.
+ALIE>       Got it. I've added this task:
+        [D][?] deadline return book (by: /by June 6th)
+      Now you have 2 tasks in the list.
+ALIE>       Got it. I've added this task:
+        [E][?] event project meeting (at: /at Aug 6th 2-4pm)
+      Now you have 3 tasks in the list.
+ALIE>       Got it. I've added this task:
+        [T][?] join sports club
+      Now you have 4 tasks in the list.
+ALIE>       Nice! I've marked this task as done:
+      [✓] read book
+ALIE>       Nice! I've marked this task as done:
+      [✓] join sports club
+ALIE>       Got it. I've added this task:
+        [T][?] borrow book
+      Now you have 5 tasks in the list.
+ALIE>       Here are the tasks in your list:
+       1.[T][?] read book
+       2.[D][?] deadline return book (by: /by June 6th)
+       3.[E][?] event project meeting (at: /at Aug 6th 2-4pm)
+       4.[T][?] join sports club
+       5.[T][?] borrow book
+ALIE>       Got it. I've added this task:
+        [D][?] deadline return book (by: /by Sunday)
+      Now you have 6 tasks in the list.
+ALIE>       Got it. I've added this task:
+        [E][?] event project meeting (at: /at Mon 2-4pm)
+      Now you have 7 tasks in the list.
+ALIE>       Got it. I've added this task:
+        [D][?] deadline do homework (by: /by no idea :-p)
+      Now you have 8 tasks in the list.
+ALIE> INVALID CMD ERROR: DESCRIPTION of TODO is missing.
+ALIE> INVALID CMD ERROR: Unable to execute "blah". Please try again with valid command.
+ALIE> INVALID CMD ERROR: DESCRIPTION and DATE of deadline is missing.
+ALIE> INVALID CMD ERROR: DESCRIPTION and DATE of event is missing.
+ALIE> INVALID CMD ERROR: INDEX provided is not a valid index.
+ALIE> INVALID CMD ERROR: To exit, use cmd: "bye".
+ALIE> INVALID CMD ERROR: Unable to append info to cmd: "list".
+ALIE> INVALID CMD ERROR: INDEX provided is not a valid index.
+ALIE> Bye-bye!
