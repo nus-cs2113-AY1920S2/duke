@@ -11,48 +11,61 @@ import java.util.Scanner;
 public class Duke {
 
     public static final String DIVIDER = "_________________________________________________";
+    public static final String DONE_COMMAND = "done";
+    public static final String LIST_COMMAND = "list";
+    public static final String TODO_COMMAND = "todo";
+    public static final String EVENT_COMMAND = "event";
+    public static final String DEADLINE_COMMAND = "deadline";
+    public static final String END_COMMAND = "bye";
+    public static final String END_MESSAGE = "Bob thanks you for coming! See you again soon!";
+
 
     public static void printIndividualTask(Task[] tasks, int taskNum) {
-        if (tasks[taskNum - 1].getTaskDescription().equals("todo")) {
+        if (tasks[taskNum - 1].getTaskDescription().equals(TODO_COMMAND)) {
             System.out.println("Got it! You've added a todo task: ");
             System.out.println(tasks[taskNum - 1]);
             System.out.println(taskValidator(taskNum));
-        } else if (tasks[taskNum - 1].getTaskDescription().equals("deadline")) {
+        } else if (tasks[taskNum - 1].getTaskDescription().equals(DEADLINE_COMMAND)) {
             System.out.println("Got it! You've added a deadline task: ");
             System.out.println(tasks[taskNum - 1]);
             System.out.println(taskValidator(taskNum));
-        } else if (tasks[taskNum - 1].getTaskDescription().equals("event")) {
+        } else if (tasks[taskNum - 1].getTaskDescription().equals(EVENT_COMMAND)) {
             System.out.println("Got it! You've added an event task: ");
             System.out.println(tasks[taskNum - 1]);
             System.out.println(taskValidator(taskNum));
         }
     }
 
-    public static void printTaskList(Task[] tasks) {
-        System.out.println("Here are the tasks on your list: ");
-        for (int i = 1; i < tasks.length + 1; i++) {
-            if (tasks[i-1] == null) {
-                break;
-            } else {
+    public static void printTaskList(Task[] tasks) throws EmptyListException {
+        int sizeofArray = getArraySize(tasks);
+        if (sizeofArray != 0) {
+            System.out.println("Here are the tasks on your list: ");
+            for (int i = 1; i < sizeofArray + 1; i++) {
                 String taskNum = Integer.toString(i);
                 System.out.println(taskNum + "." + tasks[i - 1]);
             }
+        } else {
+            throw new EmptyListException("There are no tasks in the list! Please add some tasks!");
         }
     }
 
+    public static int getArraySize(Task[] tasks) {
+        int sizeOfArray = 0;
+        for (int i = 0; i < tasks.length; i++) {
+            if (tasks[i] != null) {
+                sizeOfArray++;
+            } else {
+                return sizeOfArray;
+            }
+        }
+        return sizeOfArray;
+    }
+
     public static void executeDoneTask(Task[] tasks, String userInput) throws MissingTaskNumberException, MissingTaskNumberDescriptionException {
-        String doneCommand = "done";
-        if (!userInput.trim().equals(doneCommand)) {
+        if (!userInput.trim().equals(DONE_COMMAND)) {
             String[] words = userInput.split(" ");
             int taskNum = Integer.parseInt(words[1]);
-            int sizeOfArray = 0;
-            for (int i = 0; i < tasks.length; i++) {
-                if (tasks[i] != null) {
-                    sizeOfArray++;
-                } else {
-                    break;
-                }
-            }
+            int sizeOfArray = getArraySize(tasks);
             if (taskNum <= sizeOfArray) {
                 tasks[taskNum - 1].markAsDone();
                 System.out.println("Awesome! I've marked the following task as done:");
@@ -66,7 +79,6 @@ public class Duke {
     }
 
 
-
     public static String taskValidator(int numTasks) {
         String totalTasks = Integer.toString(numTasks);
         if (numTasks <= 1) {
@@ -78,9 +90,8 @@ public class Duke {
 
 
     public static void executeToDo(Task[] tasks, String userInput) throws MissingTaskException {
-        String todoCommand = "todo";
-        if (!userInput.trim().equals(todoCommand)) {
-            String todoTask = userInput.substring(todoCommand.length() + 1);
+        if (!userInput.trim().equals(TODO_COMMAND)) {
+            String todoTask = userInput.substring(TODO_COMMAND.length() + 1);
             Task todo = new Todo(todoTask);
             tasks[todo.getTotalTasks()-1] = todo;
             printIndividualTask(tasks,todo.getTotalTasks());
@@ -90,13 +101,12 @@ public class Duke {
     }
 
     public static void executeEvent(Task[] tasks, String userInput) throws MissingTaskException, MissingEventDateException {
-        String eventCommand = "event";
-        if (!userInput.trim().equals(eventCommand)) {
+        if (!userInput.trim().equals(EVENT_COMMAND)) {
             int indexOfAt = userInput.indexOf("/at");
             if (indexOfAt == -1) {
                 throw new MissingEventDateException("Please specify the date for event using \'at\'!");
             }
-            String eventTask = userInput.substring(eventCommand.length() + 1, indexOfAt - 1);
+            String eventTask = userInput.substring(EVENT_COMMAND.length() + 1, indexOfAt - 1);
             String atDate = userInput.substring(indexOfAt + "/at".length() + 1);
             Task event = new Event(eventTask, atDate);
             tasks[event.getTotalTasks()-1] = event;
@@ -107,13 +117,12 @@ public class Duke {
     }
 
     public static void executeDeadline(Task[] tasks, String userInput) throws MissingTaskException, MissingDeadlineDateException {
-        String deadlineCommand = "deadline";
-        if (!userInput.trim().equals(deadlineCommand)) {
+        if (!userInput.trim().equals(DEADLINE_COMMAND)) {
             int indexOfBy = userInput.indexOf("/by");
             if (indexOfBy == -1) {
                 throw new MissingDeadlineDateException("Please specify a deadline using \'/by\'!");
             }
-            String deadlineTask = userInput.substring(deadlineCommand.length() + 1, indexOfBy - 1);
+            String deadlineTask = userInput.substring(DEADLINE_COMMAND.length() + 1, indexOfBy - 1);
             String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
             Task deadline = new Deadline(deadlineTask, byDate);
             tasks[deadline.getTotalTasks()-1] = deadline;
@@ -124,48 +133,44 @@ public class Duke {
     }
 
     public static void getExecuteCommand(Task[] tasks, String userInput) throws UnknownInputException {
-        String deadlineCommand = "deadline";
-        String eventCommand = "event";
-        String todoCommand = "todo";
-        String completeCommand = "done";
-        String listCommand = "list";
-
         String[] words = userInput.split(" ");
 
-        if (words[0].equals(todoCommand)) {
+        if (words[0].equals(TODO_COMMAND)) {
             try {
                 executeToDo(tasks, userInput);
             } catch (DukeException err) {
                 System.out.println(err.toString());
             }
-        } else if (words[0].equals(deadlineCommand)) {
+        } else if (words[0].equals(DEADLINE_COMMAND)) {
             try {
                 executeDeadline(tasks, userInput);
             } catch (DukeException err) {
                 System.out.println(err.toString());
             }
-        } else if (words[0].equals(eventCommand)) {
+        } else if (words[0].equals(EVENT_COMMAND)) {
             try {
                 executeEvent(tasks, userInput);
             } catch (DukeException err) {
                 System.out.println(err.toString());
             }
-        } else if (words[0].equals(completeCommand)) {
+        } else if (words[0].equals(DONE_COMMAND)) {
             try {
                 executeDoneTask(tasks, userInput);
             } catch (DukeException err) {
                 System.out.println(err.toString());
             }
-        } else if (words[0].equals(listCommand)) {
-            printTaskList(tasks);
+        } else if (words[0].equals(LIST_COMMAND)) {
+            try {
+                printTaskList(tasks);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
         } else {
             throw new UnknownInputException("There is no such input!");
         }
     }
 
-
-
-    public static void main(String[] args) {
+    public static void initialisation() {
         String logo = ".______     ______   .______   \n"
                 + "|   _  \\   /  __  \\  |   _  \\  \n"
                 + "|  |_)  | |  |  |  | |  |_)  | \n"
@@ -174,26 +179,22 @@ public class Duke {
                 + "|______/   \\______/  |______/  \n";
         String welcomeMessage = "Hello human! I am Bob.\n" + "What can I do for you?";
 
-        //Welcome and sign out messages
         System.out.println("Bob the chatbot\n" + logo);
         System.out.println(welcomeMessage);
         System.out.println(DIVIDER);
+    }
 
+    public static void main(String[] args) {
+        initialisation();
         Scanner command = new Scanner(System.in);
-        String endCommand = "bye";
-        String endMessage = "Bob thanks you for coming! See you again soon!";
 
-        //Storing text
         Task[] tasks = new Task[100];
-
-        String listCommand = "list";
-        String completeCommand = "done";
 
         while (true) {
             String userInput = command.nextLine();
-            if (userInput.equals(endCommand)) {
+            if (userInput.equals(END_COMMAND)) {
                 System.out.println(DIVIDER);
-                System.out.println(endMessage);
+                System.out.println(END_MESSAGE);
                 System.out.println(DIVIDER);
                 break;
             } else {
