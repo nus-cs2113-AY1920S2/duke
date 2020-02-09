@@ -12,10 +12,10 @@ public class Duke {
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
             " listing";
     public  static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+
     public static void printError(String message){
         System.err.println(LINE + System.lineSeparator()+ message + System.lineSeparator() + LINE);
     }
-
     public static String[] getCommand(String inCommand) {
         inCommand = inCommand.trim();
         String[] temp = inCommand.split(" ");
