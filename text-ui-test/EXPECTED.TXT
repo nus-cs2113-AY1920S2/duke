@@ -24,6 +24,12 @@ ________________________________
     Now you have 3 tasks in the list
     ________________________________
     ________________________________
+    Invalid input!!! Please use '/' to split task name and its time description
+    ________________________________
+    ________________________________
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    ________________________________
+    ________________________________
     1.[T][¡Á] read book
     2.[E][¡Á] wash clothes (at: tonight)
     3.[D][¡Á] push my repo (by: monday)
@@ -39,6 +45,13 @@ ________________________________
     ________________________________
     Congratulations! You have just finished this task:
     [D][¡Ì] push my repo (by: monday)
+    ________________________________
+    ________________________________
+    Reffered task doesn't exist!!!
+    There are totally 3 tasks in the taskList
+    ________________________________
+    ________________________________
+    You have to point out which task to mark as done!!!
     ________________________________
     ________________________________
     1.[T][¡Ì] read book

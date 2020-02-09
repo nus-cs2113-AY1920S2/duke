@@ -2,10 +2,14 @@
 todo read book
 event wash clothes /at tonight
 deadline push my repo /by Monday
+event something
+haha blah
 list
 done 1
 done 2
 done 3
+done 4
+done
 list
 deadline improve code quality /by Tuseday
 list
