@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -76,6 +83,10 @@ public class Duke {
                 System.out.println(BORDER);
                 System.out.println("☹ OH NO!!! The description of a " + taskType + " cannot be empty! :o(");
                 System.out.println(BORDER);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(BORDER);
+                System.out.println("☹ OH NO!!! The description of a " + taskType + " cannot be empty! :o(");
+                System.out.println(BORDER);
             }
         }
     }
@@ -111,7 +122,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println(BORDER);
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm Duke.Duke");
         System.out.println("What can I do for you?");
         System.out.println(BORDER);
     }
