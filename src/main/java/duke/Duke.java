@@ -1,3 +1,15 @@
+package duke;
+
+import duke.exception.ExceptionMessage;
+import duke.exception.InvalidActionException;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidListNumberException;
+import duke.format.Printer;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -16,10 +28,10 @@ public class Duke {
             throw new InvalidListNumberException();
         }
 
-        if (list.get(listNumber).isDone) {
+        if (list.get(listNumber).getIsDone()) {
             Printer.printAlreadyCompletedTaskMessage(list, listNumber);
         } else {
-            list.get(listNumber).isDone = true;
+            list.get(listNumber).setIsDone(true);
             Printer.printCompleteTaskMessage(list, listNumber);
         }
     }
@@ -65,7 +77,6 @@ public class Duke {
         list.add(new Event(task, duration));
         Printer.printAddTaskMessage(list);
     }
-
 
     private void completeAction(String input) throws InvalidActionException {
         String[] words = input.split(" ");

@@ -1,4 +1,6 @@
-import org.w3c.dom.Text;
+package duke.format;
+
+import duke.task.Task;
 
 import java.util.Vector;
 
@@ -51,7 +53,7 @@ public class Printer {
 
     public static void printAlreadyCompletedTaskMessage(Vector<Task> list, int listNumber) {
         System.out.println(TextFormatter.ANGRY_FACE +
-        "Hey!! Lumi already marked <" + list.get(listNumber).task + "> as completed!" + System.lineSeparator());
+        "Hey!! Lumi already marked <" + list.get(listNumber).getTask() + "> as completed!" + System.lineSeparator());
     }
 
 
