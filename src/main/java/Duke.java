@@ -109,6 +109,7 @@ public class Duke {
                 dukeExceptions.printInvalidCommandException();
             }
         }catch (Exception e){
+            System.out.println(e);
             dukeExceptions.printInvalidCommandException();
         }
 
