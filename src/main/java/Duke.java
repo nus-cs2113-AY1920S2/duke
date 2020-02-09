@@ -5,7 +5,6 @@ public class Duke {
     private static final String DIVIDER = "____________________________________________________________";
     private static final String LS = System.lineSeparator();
     private static final String TAB = "\t";
-    private static final String EMPTY_STRING = "";
     
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke" + LS + "What can i do for you?";
     
@@ -141,7 +140,6 @@ public class Duke {
     }
     
     private static void displayAddMessage() {
-        
         System.out.println(DIVIDER);
         System.out.println(String.format(COMMAND_ADD_MESSAGE, tasks[Task.getTaskCount() - 1], Task.getTaskCount()));
         System.out.println(DIVIDER);
