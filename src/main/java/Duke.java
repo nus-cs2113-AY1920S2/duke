@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static Task[] tasks=new Task[100];;
+    private static Task[] tasks = new Task[100];;
     private static int taskCount = 0;
 
     public static void main(String[] args) {
@@ -11,28 +11,39 @@ public class Duke {
         String command=read.nextLine();
         while(!command.equals("bye")){
             printDividingLine();
-            switch(command) {
+            String commandType = commandDivider(command);
+            switch(commandType) {
             case "list":
                 listTasks();
                 break;
+            case "done":
+                doneTask(command);
+                break;
+            case "todo":
+                addToDo(command);
+                break;
+            case "deadline":
+                addDeadline(command);
+                break;
+            case "event":
+                addEvent(command);
+                break;
             default:
-                if(command.startsWith("done ")){
-                    doneTask(command);
-                }else if (command.startsWith("todo ")){
-                    addToDo(command);
-                }else if (command.startsWith("deadline ")){
-                    addDeadline(command);
-                }else if (command.startsWith("event ")){
-                    addEvent(command);
-                }else{
-                    System.out.println("Please give the type of the task.");
-                }
+                System.out.println("Please give the type of the task.");
             }
             printDividingLine();
             System.out.println("Do you have any other commands? ");
             command=read.nextLine();
         }
         exitMessage();
+    }
+
+    private static String commandDivider(String command){
+        if (command.contains(" ")){
+             return command.substring(0,command.indexOf(" "));
+        }else{
+            return command;
+        }
     }
 
     private static void printNumOfTasks(){
