@@ -36,12 +36,33 @@ public class Duke {
             case BYE_COMMAND:
                 displayExitMessage();
                 break;
+            case TODO_COMMAND:
+                try {
+                    addTodo(split[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    displayEmptyDescriptionMessage(command);
+                }
+                break;
+            case DEADLINE_COMMAND:
+                try {
+                    addDeadline(split[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    displayEmptyDescriptionMessage(command);
+                }
+                break;
+            case EVENT_COMMAND:
+                try {
+                    addEvent(split[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    displayEmptyDescriptionMessage(command);
+                }
+                break;
             default:
-                addTask(command, split[1]);
+                displayCommandNotFoundMessage();
                 break;
             }
         } while (!input.equals(BYE_COMMAND));
-    }    
+    }
 
     private static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
@@ -75,33 +96,44 @@ public class Duke {
     private static void displayExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
-
-    private static void addTask(String command, String description) {
-        Task task = null;
-        String taskDescription = null;
-        switch (command) {
-        case TODO_COMMAND:
-            taskDescription = description.trim();
-            task = new Todo(taskDescription);
-            break;
-        case DEADLINE_COMMAND:
-            String[] taskBy = description.split(DEADLINE_MARKER);
-            taskDescription = taskBy[0].trim();
-            String by = taskBy[1].trim();
-            task = new Deadline(taskDescription, by);
-            break;
-        case EVENT_COMMAND:
-            String[] taskAt = description.split(EVENT_MARKER);
-            taskDescription = taskAt[0].trim();
-            String at = taskAt[1].trim();
-            task = new Event(taskDescription, at);
-        }
-
+    
+    private static void addTodo(String description) {
+        String taskDescription = description.trim();
+        Task task = new Todo(taskDescription);
         tasks.add(task);
+        displayAddTaskMessage(task);
+    }
+    
+    private static void addDeadline(String description) {
+        String[] taskBy = description.split(DEADLINE_MARKER);
+        String taskDescription = taskBy[0].trim();
+        String by = taskBy[1].trim();
+        Task task = new Deadline(taskDescription, by);
+        tasks.add(task);
+        displayAddTaskMessage(task);
+    }
+    
+    private static void addEvent(String description) {
+        String[] taskAt = description.split(EVENT_MARKER);
+        String taskDescription = taskAt[0].trim();
+        String at = taskAt[1].trim();
+        Task task = new Event(taskDescription, at);
+        tasks.add(task);
+        displayAddTaskMessage(task);
+    }
 
+    private static void displayAddTaskMessage(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.print("  ");
         System.out.println(task);
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+    }
+
+    private static void displayCommandNotFoundMessage() {
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    private static void displayEmptyDescriptionMessage(String command) {
+        System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", command));
     }
 }
