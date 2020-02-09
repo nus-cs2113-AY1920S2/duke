@@ -7,9 +7,16 @@ import tasks.TaskType;
 
 public class Duke {
     // input: 2do<enter> error: java.lang.ArrayIndexOutOfBoundsException
-    private static void addTask(String userCmd, ArrayList<Task> taskArrList) {
-        String[] splitCmd = userCmd.split("todo ");
-        String todoStr = splitCmd[1].trim();
+    private static void addTask(String userCmd, ArrayList<Task> taskArrList) throws DukeException{
+        String todoStr;
+        try{
+            String[] splitCmd = userCmd.split("todo ");
+            todoStr = splitCmd[1].trim();
+        }
+        catch (Exception e){
+            throw new DukeException("DukeExcept");
+        }
+
 
         Task newTask = new Task(TaskType.TODO, todoStr);
         taskArrList.add(newTask);
@@ -30,6 +37,7 @@ public class Duke {
         }
     }
 
+    ////java.lang.NumberFormatException
     private static void markTaskDone(String userCmd, ArrayList<Task> taskArrList) {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");
@@ -39,7 +47,7 @@ public class Duke {
         try {
             completedTask = Integer.parseInt(splitCmd[1]);
         }
-        catch (Exception e){ //java.lang.NumberFormatException
+        catch (Exception e){
             System.out.println("Incorrect syntax! Try again");
             return;
         }
@@ -58,6 +66,7 @@ public class Duke {
         }
     }
 
+    //java.lang.ArrayIndexOutOfBoundsException
     private static void addDeadline(String userCmd, ArrayList<Task> taskArrList) {
         // Syntax: deadline return book /by Sunday
         String[] splitCmd = userCmd.split("/by ");
@@ -73,6 +82,7 @@ public class Duke {
         System.out.println("\t" +newDeadline.toString() );
     }
 
+    ////java.lang.ArrayIndexOutOfBoundsException
     private static void addEvent(String userCmd, ArrayList<Task> taskArrList) {
         // Syntax: event project meeting /at Mon 2-4pm
         String[] splitCmd = userCmd.split("/at ");
@@ -98,7 +108,7 @@ public class Duke {
         System.out.println(helpMsg);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean continueRun = true;
         String userCmd = "";
