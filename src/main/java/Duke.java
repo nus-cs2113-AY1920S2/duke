@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     private static int counter = 0;
     public static final int MAXIMUM_TASKS = 100;
+    public static final String[] VALID_COMMANDS = {"done","list","bye","todo","deadline","event"};
     private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
     private static final String logo = "  ____        _        \n"
                                  + " |  _ \\ _   _| | _____ \n"
@@ -37,12 +38,25 @@ public class Duke {
         return line;
     }
 
-    private static String getCommand(String line) {
+    private static String getCommand(String line) throws InvalidCommandException {
         int dividerPosition = line.indexOf(" ");
+        String command;
         if (dividerPosition != -1) {
-            return line.substring(0, dividerPosition);
+            command = line.substring(0, dividerPosition);
         } else {
-            return line;
+            command = line;
+        }
+        boolean isExists = false;
+        for (String temp: VALID_COMMANDS) {
+            if (temp.equals(command)) {
+                isExists = true;
+                break;
+            }
+        }
+        if (isExists) {
+            return command;
+        } else {
+            throw new InvalidCommandException();
         }
     }
 
@@ -53,15 +67,37 @@ public class Duke {
         System.exit(0);
     }
 
-    public static String getTaskInformation(String line) {
+    public static String getTaskInformation(String line) throws IndexOutOfBoundsException {
         int dividerPosition = line.indexOf(" ");
-        return line.substring(dividerPosition+1);
+        if (dividerPosition == -1) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            return line.substring(dividerPosition+1);
+        }
+    }
+
+    public static void handleInvalidCommand() {
+        printLine();
+        System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        printLine();
+    }
+
+    private static void handleIndexOutOfBounds(String command) {
+        printLine();
+        System.out.println(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
+        printLine();
     }
 
     private static void run() {
         while (true) {
             String line = getInput();
-            String command = getCommand(line);
+            String command;
+            try {
+                command = getCommand(line);
+            } catch (InvalidCommandException c) {
+                handleInvalidCommand();
+                continue;
+            }
             switch (command) {
             case "bye":
                 exitFromApp();
@@ -73,7 +109,13 @@ public class Duke {
                 markTaskAsDone(line);
                 break;
             default:
-                String taskInformation = getTaskInformation(line);
+                String taskInformation;
+                try {
+                    taskInformation = getTaskInformation(line);
+                } catch (IndexOutOfBoundsException b) {
+                    handleIndexOutOfBounds(command);
+                    continue;
+                }
                 storeTaskIntoList(taskInformation, command);
                 break;
             }
