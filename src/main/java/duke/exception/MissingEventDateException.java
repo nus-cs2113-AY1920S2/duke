@@ -1,8 +1,9 @@
-public class UnknownInputException extends DukeException {
+package duke.exception;
 
+public class MissingEventDateException extends DukeException {
     private String errorMsg;
 
-    public UnknownInputException(String errorMsg) {
+    public MissingEventDateException(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 

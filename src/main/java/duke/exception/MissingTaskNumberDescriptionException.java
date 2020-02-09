@@ -1,8 +1,9 @@
-public class MissingTaskException extends DukeException {
+package duke.exception;
 
+public class MissingTaskNumberDescriptionException extends DukeException {
     private String errorMsg;
 
-    public MissingTaskException(String errorMsg) {
+    public MissingTaskNumberDescriptionException(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 
@@ -10,6 +11,4 @@ public class MissingTaskException extends DukeException {
     public String toString() {
         return String.format("Sorry! %s", this.errorMsg);
     }
-
-
 }

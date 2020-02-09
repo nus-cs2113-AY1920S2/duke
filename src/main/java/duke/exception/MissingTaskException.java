@@ -1,7 +1,10 @@
-public class MissingDeadlineDateException extends DukeException {
+package duke.exception;
+
+public class MissingTaskException extends DukeException {
+
     private String errorMsg;
 
-    public MissingDeadlineDateException(String errorMsg) {
+    public MissingTaskException(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 
@@ -9,4 +12,6 @@ public class MissingDeadlineDateException extends DukeException {
     public String toString() {
         return String.format("Sorry! %s", this.errorMsg);
     }
+
+
 }
