@@ -1,6 +1,4 @@
 public class Task {
-    private static int taskCount;
-
     protected char type;
     protected String description;
     protected boolean isDone;
@@ -9,14 +7,6 @@ public class Task {
         setDescription(s);
         setDone(false);
         setType('-');   // default type
-    }
-
-    public static void incrementTaskCount() {
-        Task.taskCount += 1;
-    }
-
-    public static int getTaskCount() {
-        return Task.taskCount;
     }
 
     public char getType() {

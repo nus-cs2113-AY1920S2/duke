@@ -1,51 +1,63 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final int MAX_TASKS_COUNT = 100;
-    private static Task[] tasks = new Task[MAX_TASKS_COUNT];
-    private static int indexOfTasks = 0;
-    private static String[] command = new String[2];
-
     public static void main(String[] args) {
         String name = "Duke";
         welcome(name);
 
-        String input;
         Scanner reader = new Scanner(System.in);
+        String input;
+        String[] command = new String[2];
+        String taskType;
+        String taskDescription;
+        String[] taskDescriptionArgs;
+        String taskDescriptionBy;
+        String taskDescriptionAt;
+        TaskList tasks = new TaskList();
 
         do {
             input = reader.nextLine();
             command = inputProcessing(input);
+            taskType = command[0];
+            taskDescription = command[1];
             printLine();
 
-            switch (command[0]) {
+            switch (taskType) {
             case "bye":
                 // close the interpreter
                 System.out.println("\tBye. Hope to see you again soon!");
                 break;
             case "list":
-                // list all tasks
-                listTasks();
+                tasks.list();
                 break;
             case "todo":
+                tasks.add(new ToDo(taskDescription));
+                break;
             case "deadline":
+                taskDescriptionArgs = processArgs(taskDescription);
+                taskDescription = taskDescriptionArgs[0];
+                taskDescriptionBy = taskDescriptionArgs[1];
+                tasks.add(new Deadline(taskDescription, taskDescriptionBy));
+                break;
             case "event":
-                // add stuff to String[] tasks
-                addTask(command[0], command[1]);
+                taskDescriptionArgs = processArgs(taskDescription);
+                taskDescription = taskDescriptionArgs[0];
+                taskDescriptionAt = taskDescriptionArgs[1];
+                tasks.add(new Event(taskDescription, taskDescriptionAt));
                 break;
             case "done":
                 // mark a task as done
                 System.out.println("\tNice! I've marked this task as done:");
                 int indexOfTasks = Integer.parseInt(command[1]) - 1;
-                tasks[indexOfTasks].setDone(true);
-                System.out.println("\t" + tasks[indexOfTasks]);
+                tasks.setDoneByIndex(indexOfTasks);
+                System.out.println("\t" + tasks.getByIndex(indexOfTasks));
                 break;
             default:
                 System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             printLine();
-        } while (!command[0].equals("bye"));
+        } while (!taskType.equals("bye"));
     }
 
     /**
@@ -89,47 +101,6 @@ public class Duke {
         System.out.println("\tHello! I'm " + name);
         System.out.println("\tWhat can I do for you?");
         printLine();
-    }
-
-    public static void addTask(String type, String description) {
-        if (indexOfTasks >= MAX_TASKS_COUNT) {
-            // exit if task count has exceeded
-            return;
-        }
-
-        if (type.equals("todo")) {
-            tasks[indexOfTasks] = new ToDo(description);
-        } else if (type.equals("deadline")) {
-            String[] cmdArgs = new String[2];
-            cmdArgs = processArgs(description);
-            tasks[indexOfTasks] = new Deadline(cmdArgs[0], cmdArgs[1]);
-        } else if (type.equals("event")) {
-            String[] cmdArgs = new String[2];
-            cmdArgs = processArgs(description);
-            tasks[indexOfTasks] = new Event(cmdArgs[0], cmdArgs[1]);
-        }
-
-        Task.incrementTaskCount();
-
-        // print status message
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + tasks[indexOfTasks]);
-        printTaskCount();
-
-        indexOfTasks++;
-    }
-
-    public static void printTaskCount() {
-        System.out.printf("\tNow you have %d tasks in the list.%s",
-                Task.getTaskCount(), System.lineSeparator());
-    }
-
-    public static void listTasks() {
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 0; i < indexOfTasks; i++) {
-            System.out.printf("\t%d.%s", i + 1, tasks[i]);
-            System.out.println();
-        }
     }
 
     private static String[] processArgs(String s) {
