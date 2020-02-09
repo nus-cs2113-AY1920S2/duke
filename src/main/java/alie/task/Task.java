@@ -28,8 +28,8 @@ public abstract class Task {
     }
 
     public String justAddedText(int taskCount) {
-        return ("Got it. I've added this task:\n" +
-                MORE_INDENTATION + getTaskInfo() + "\n " +
+        return ("Got it. I've added this task:" + System.lineSeparator() +
+                MORE_INDENTATION + getTaskInfo() + System.lineSeparator() +
                 INDENTATION +
                 "Now you have " + (taskCount+1) + " tasks in the list.");
     }
