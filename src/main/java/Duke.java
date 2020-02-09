@@ -11,16 +11,19 @@ public class Duke {
             "\t available list of task numbers";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
             " listing";
-    public  static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+    public static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+    public static final String MULTIPLE_WHITE_SPACES= "\\s+";
+
     public static void printError(String message){
-        System.err.println(LINE + System.lineSeparator()+ message + System.lineSeparator() + LINE);
+        System.err.println(LINE + System.lineSeparator() + message + System.lineSeparator() + LINE);
     }
 
     public static String[] getCommand(String inCommand) {
         inCommand = inCommand.trim();
-        String[] temp = inCommand.split(" ");
+        String[] temp = inCommand.split(MULTIPLE_WHITE_SPACES);
         return temp;
     }
+
     public static void listCommands() {
         System.out.println(LINE);
         System.out.println("\t "+ Arrays.toString(COMMAND));
@@ -66,10 +69,11 @@ public class Duke {
             throw new IllegalDukeException(NO_TASK_NUMBER);
         }
     }
+
     public static String[] getTaskInfo(String userIn) throws IllegalDukeException{
         String[] temp = getCommand(userIn);
         if(temp.length==1){
-            throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + temp[0] +" cannot be empty.");
+            throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + temp[0] + " cannot be empty.");
         }
         String action = "";
         String timing = "";
@@ -92,6 +96,7 @@ public class Duke {
         temp2[1] = timing;
         return temp2;
     }
+
     public static void addTask(ArrayList<Task>l1, Task task){
         System.out.println(LINE);
         System.out.println("\t Got it. I've added this task:");
@@ -105,12 +110,14 @@ public class Duke {
         l1.add(todo);
         addTask(l1, todo);
     }
+
     public static void addDeadline(ArrayList<Task> l1, String[] taskInfo){
         Deadline deadline= new Deadline(taskInfo[0]);
         deadline.setBy(taskInfo[1]);
         l1.add(deadline);
         addTask(l1, deadline);
     }
+
     public static void addEvent(ArrayList<Task> l1, String[] taskInfo){
         Event event = new Event(taskInfo[0]);
         event.setAt(taskInfo[1]);
