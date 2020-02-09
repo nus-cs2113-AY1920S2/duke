@@ -73,6 +73,42 @@ Enter a command: Command entered: blah
 ____________________________________________________________
 I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
+Enter a command: Command entered: todo
+____________________________________________________________
+OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: deadline
+____________________________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: event
+____________________________________________________________
+OOPS!!! The description of a event cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: deadline return book
+____________________________________________________________
+OOPS!!! The date of a deadline cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: event read book
+____________________________________________________________
+OOPS!!! The date of a event cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: done 5
+____________________________________________________________
+Index is invalid
+____________________________________________________________
+Enter a command: Command entered: TODO
+____________________________________________________________
+OOPS!!! The description of a TODO cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: DEADLINE
+____________________________________________________________
+OOPS!!! The description of a DEADLINE cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: EVENT
+____________________________________________________________
+OOPS!!! The description of a EVENT cannot be empty.
+____________________________________________________________
 Enter a command: Command entered: bye
 ____________________________________________________________
 	Bye. Hope to see you again soon!

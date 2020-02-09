@@ -11,4 +11,13 @@ done 1
 done 3
 list
 blah
+todo
+deadline
+event
+deadline return book
+event read book
+done 5
+TODO
+DEADLINE
+EVENT
 bye
