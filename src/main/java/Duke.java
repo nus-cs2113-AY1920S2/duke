@@ -31,7 +31,15 @@ public class Duke {
                 listTasks();
                 break;
             case DONE_COMMAND:
-                markAsDone(Integer.parseInt(split[1].trim()));
+                try {
+                    markAsDone(Integer.parseInt(split[1].trim()));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    displayEmptyDescriptionMessage(command);
+                } catch (NumberFormatException e) {
+                    displayInvalidTaskNumberMessage();
+                } catch (ChatboxException e) {
+                    displayInvalidTaskNumberMessage();
+                }
                 break;
             case BYE_COMMAND:
                 displayExitMessage();
@@ -63,7 +71,7 @@ public class Duke {
             }
         } while (!input.equals(BYE_COMMAND));
     }
-
+    
     private static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -85,12 +93,19 @@ public class Duke {
         }
     }
 
-    private static void markAsDone(int taskNumber) {
+    private static void markAsDone(int taskNumber) throws ChatboxException {
+        if (taskNumber > tasks.size() || taskNumber <= 0) {
+            throw new ChatboxException();
+        }
         Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.print("  ");
         System.out.println(task);
+    }
+
+    private static void displayInvalidTaskNumberMessage() {
+        System.out.println("Please enter a valid task number~");
     }
 
     private static void displayExitMessage() {
