@@ -18,16 +18,6 @@ public class Output {
         displayMessage(msg);
     }
 
-    public void printMarkNegativeIndex() {
-        String msg = "Well...I cannot mark something that doesn't exist as done >:(";
-        displayMessage(msg);
-    }
-
-    public void printMarkGreaterThanIndex(int numberOfTasks) {
-        String msg = "Sorry, but you only have " + numberOfTasks + " tasks :'(";
-        displayMessage(msg);
-    }
-
     public void printMarkedTask(Task toPrint) {
         String msg = "Okay! Marked this task as done :) :" + System.lineSeparator() + "\t\t" +
                 toPrint;

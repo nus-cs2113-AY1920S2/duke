@@ -81,9 +81,19 @@ public class Duke {
      */
     public static void executeAddTodo (String userInput) {
 
-        String taskDescription = userInput.trim();
+        try {
 
-        taskManager.addTask(new Todo(taskDescription));
+            String taskDescription = userInput.trim();
+
+            if (taskDescription.length() == 0) {
+                throw new TaskException("Failed to add todo. Reason: missing description");
+            }
+
+            taskManager.addTask(new Todo(taskDescription));
+
+        } catch (TaskException e) {
+            printer.displayMessage(e.toString());
+        }
     }
 
     /**
@@ -93,9 +103,13 @@ public class Duke {
      *                  to mark as done
      */
     public static void executeDone (String userInput) {
-        int taskIndex = Integer.parseInt(userInput.substring(userInput.indexOf(" ") + 1));
+        int taskIndex = Integer.parseInt(userInput.substring(userInput.indexOf(" ") + 1)) - 1;
 
-        taskManager.markTaskAsDone(taskIndex);
+        try {
+            taskManager.markTaskAsDone(taskIndex);
+        } catch (TaskException e) {
+            printer.displayMessage(e.toString());
+        }
     }
 
     /**
@@ -133,34 +147,39 @@ public class Duke {
         String cmd = userResponse.split(" ")[0];
         userResponse = userResponse.replace(cmd, "");
 
-        if (cmd.equals(command.CMD_EXIT)) {
-            isProgramRunning = false;
-            return;
+        try {
 
-        } else if (cmd.equals(command.CMD_HELP)) {
-            executeHelp();
+            if (cmd.equals(command.CMD_EXIT)) {
+                isProgramRunning = false;
+                return;
 
-        } else if (cmd.equals(command.CMD_LIST)) {
-            executeListTasks();
+            } else if (cmd.equals(command.CMD_HELP)) {
+                executeHelp();
 
-        } else if (cmd.equals(command.CMD_DONE)) {
-            executeDone(userResponse);
+            } else if (cmd.equals(command.CMD_LIST)) {
+                executeListTasks();
 
-        } else if (cmd.equals(command.CMD_ADD_DEADLINE)) {
-            executeAddDeadline(userResponse);
+            } else if (cmd.equals(command.CMD_DONE)) {
+                executeDone(userResponse);
 
-        } else if (cmd.equals(command.CMD_ADD_EVENT)) {
-            executeAddEvent(userResponse);
+            } else if (cmd.equals(command.CMD_ADD_DEADLINE)) {
+                executeAddDeadline(userResponse);
 
-        } else if (cmd.equals(command.CMD_ADD_TODO)) {
-            executeAddTodo(userResponse);
+            } else if (cmd.equals(command.CMD_ADD_EVENT)) {
+                executeAddEvent(userResponse);
 
-        } else if (cmd.equals(command.CMD_CLEAR_WINDOW)) {
-            executeClearWindow();
-        }
-        else if (cmd.equals(command.CMD_DEBUG)) {
-            executeSpotBug();
-        } else {
+            } else if (cmd.equals(command.CMD_ADD_TODO)) {
+                executeAddTodo(userResponse);
+
+            } else if (cmd.equals(command.CMD_CLEAR_WINDOW)) {
+                executeClearWindow();
+            } else if (cmd.equals(command.CMD_DEBUG)) {
+                executeSpotBug();
+            } else {
+               throw new DukeException();
+            }
+
+        } catch (DukeException e) {
             printer.printInvalidCommand();
         }
 
@@ -197,7 +216,9 @@ public class Duke {
 
         init();
 
-        printer.greetUser();
+        if ( !(args.length > 0 && args[0].equals("1")) ) {
+            printer.greetUser();
+        }
 
         String userResponse;
 

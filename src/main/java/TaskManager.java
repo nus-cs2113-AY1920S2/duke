@@ -29,25 +29,39 @@ public class TaskManager {
      *
      * @param taskIndex The list number of the task to mark as done
      */
-    public void markTaskAsDone (int taskIndex) {
+    public void markTaskAsDone (int taskIndex) throws TaskException {
 
-        if (taskIndex <= 0 || tasks.size() == 0) {
-            printer.printMarkNegativeIndex();
+        if (tasks.isEmpty()) {
+            String msg = "Your list is empty... I cannot mark something that doesn't exist as done >:(";
+            throw new TaskException(msg);
+        }
 
-        } else if (taskIndex > tasks.size()) {
-            printer.printMarkGreaterThanIndex(tasks.size());
+        if (taskIndexOutOfBounds(taskIndex)) {
+            String msg = String.format("The task number %d doesn't exist. There %s only %d %s",
+                    taskIndex + 1, getNounDescriptor(), tasks.size(), getTaskNoun());
+            throw new TaskException(msg);
+        }
+
+        if (!tasks.get(taskIndex).getCompletionStatus()) {
+            tasks.get(taskIndex).setTaskAsDone();
+            printer.printMarkedTask(tasks.get(taskIndex));
 
         } else {
-
-            if (!tasks.get(taskIndex - 1).getCompletionStatus()) {
-                tasks.get(taskIndex - 1).setTaskAsDone();
-                printer.printMarkedTask(tasks.get(taskIndex - 1));
-
-            } else {
-                printer.printTaskAlreadyMarked(tasks.get(taskIndex - 1));
-
-            }
+            printer.printTaskAlreadyMarked(tasks.get(taskIndex));
         }
+
+    }
+
+    private boolean taskIndexOutOfBounds (int taskIndex) {
+        return (taskIndex >= tasks.size() || taskIndex < 0);
+    }
+
+    private String getTaskNoun () {
+        return (tasks.size() == 1) ? "task": "tasks";
+    }
+
+    private String getNounDescriptor () {
+        return (tasks.size() == 1) ? "is": "are";
     }
 
     /**
