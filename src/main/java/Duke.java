@@ -32,11 +32,31 @@ public class Duke {
         }
     }
 
-    public static void printDoneTask(Task[] tasks, int taskNum) {
-        tasks[taskNum-1].markAsDone();
-        System.out.println("Awesome! I've marked the following task as done:");
-        System.out.println(tasks[taskNum-1]);
+    public static void executeDoneTask(Task[] tasks, String userInput) throws MissingTaskNumberException, MissingTaskNumberDescriptionException {
+        String doneCommand = "done";
+        if (!userInput.trim().equals(doneCommand)) {
+            String[] words = userInput.split(" ");
+            int taskNum = Integer.parseInt(words[1]);
+            int sizeOfArray = 0;
+            for (int i = 0; i < tasks.length; i++) {
+                if (tasks[i] != null) {
+                    sizeOfArray++;
+                } else {
+                    break;
+                }
+            }
+            if (taskNum <= sizeOfArray) {
+                tasks[taskNum - 1].markAsDone();
+                System.out.println("Awesome! I've marked the following task as done:");
+                System.out.println(tasks[taskNum - 1]);
+            } else {
+                throw new MissingTaskNumberException("This task number does not exist on the list!");
+            }
+        } else {
+            throw new MissingTaskNumberException("Please add a task number to \'done\' to mark task as done!");
+        }
     }
+
 
 
     public static String taskValidator(int numTasks) {
@@ -48,17 +68,6 @@ public class Duke {
         }
     }
 
-    public static boolean isTask(String task) {
-        String todoCommand = "todo";
-        String deadlineCommand = "deadline";
-        String eventCommand = "event";
-
-        if (task.equals(todoCommand) || task.equals(deadlineCommand) || task.equals(eventCommand)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public static void executeToDo(Task[] tasks, String userInput) throws MissingTaskException {
         String todoCommand = "todo";
@@ -72,10 +81,13 @@ public class Duke {
         }
     }
 
-    public static void executeEvent(Task[] tasks, String userInput) throws MissingTaskException {
+    public static void executeEvent(Task[] tasks, String userInput) throws MissingTaskException, MissingEventDateException {
         String eventCommand = "event";
         if (!userInput.trim().equals(eventCommand)) {
             int indexOfAt = userInput.indexOf("/at");
+            if (indexOfAt == -1) {
+                throw new MissingEventDateException("Please specify the date for event using \'at\'!");
+            }
             String eventTask = userInput.substring(eventCommand.length() + 1, indexOfAt - 1);
             String atDate = userInput.substring(indexOfAt + "/at".length() + 1);
             Task event = new Event(eventTask, atDate);
@@ -86,10 +98,13 @@ public class Duke {
         }
     }
 
-    public static void executeDeadline(Task[] tasks, String userInput) throws MissingTaskException {
+    public static void executeDeadline(Task[] tasks, String userInput) throws MissingTaskException, MissingDeadlineDateException {
         String deadlineCommand = "deadline";
         if (!userInput.trim().equals(deadlineCommand)) {
             int indexOfBy = userInput.indexOf("/by");
+            if (indexOfBy == -1) {
+                throw new MissingDeadlineDateException("Please specify a deadline using \'/by\'!");
+            }
             String deadlineTask = userInput.substring(deadlineCommand.length() + 1, indexOfBy - 1);
             String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
             Task deadline = new Deadline(deadlineTask, byDate);
@@ -128,8 +143,11 @@ public class Duke {
                 System.out.println(err.toString());
             }
         } else if (words[0].equals(completeCommand)) {
-            int taskNum = Integer.parseInt(words[1]);
-            printDoneTask(tasks, taskNum);
+            try {
+                executeDoneTask(tasks, userInput);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
         } else if (words[0].equals(listCommand)) {
             printTaskList(tasks);
         } else {
@@ -165,10 +183,6 @@ public class Duke {
 
         while (true) {
             String userInput = command.nextLine();
-            String[] words = userInput.split(" ");
-
-
-
             if (userInput.equals(endCommand)) {
                 System.out.println(DIVIDER);
                 System.out.println(endMessage);
@@ -181,10 +195,6 @@ public class Duke {
                 } catch (DukeException err) {
                     System.out.println(err.toString());
                 }
-
-                /*
-                inputValidation(tasks, userInput); */
-
                 System.out.println(DIVIDER);
             }
 
