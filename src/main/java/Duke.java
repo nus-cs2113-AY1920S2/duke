@@ -2,38 +2,49 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static final String FORMAT_LINE = "------------------------------------";
+    public static final String GOODBYE = "Bye. Hope to see you again soon!";
+    public static final String INVALID = "This is an invalid command, please type a valid command";
+    public static final String GREETING = String.format("%s\n%s", "Hello, I'm Duke!", "What can I do for you?");
     private TaskManager manager = new TaskManager();
 
-    public void exit() {
-        System.out.println("------------------------------------");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("------------------------------------");
+    public static void printFormat(String str) {
+        System.out.println(FORMAT_LINE);
+        System.out.println(str);
+        System.out.println(FORMAT_LINE);
         System.out.println();
     }
 
-    public void run() {
+    public void exitDuke() {
+        printFormat(GOODBYE);
+    }
+
+    public void runDuke() {
         Scanner in = new Scanner(System.in);
         String command;
         while(in.hasNextLine()) {
             command = in.nextLine();
-            if(command.equals("bye")) {
+            String[] commands = command.split(" ", 2);
+            if(commands[0].equals("bye")) {
                 return;
-            } else if (command.equals("list")){
+            } else if (commands[0].equals("list")){
                 manager.listTask();
-            } else if (command.startsWith("done")){
-                manager.markTask(Integer.parseInt(command.substring(5)));
+            } else if (commands[0].equals("done")){
+                manager.markTask(Integer.parseInt(commands[1]));
+            } else if (commands[0].equals("todo")){
+                manager.addTodo(commands[1]);
+            } else if (commands[0].equals("deadline")) {
+                manager.addDeadline(commands[1]);
+            } else if (commands[0].equals("event")) {
+                manager.addEvent(commands[1]);
             } else {
-                manager.addTask(command);
+                printFormat(INVALID);
             }
         }
     }
 
     public void greet(){
-        System.out.println("------------------------------------");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("------------------------------------");
-        System.out.println();
+        printFormat(GREETING);
     }
 
     public static void main(String[] args) {
@@ -45,7 +56,7 @@ public class Duke {
         System.out.println("Welcome to\n" + logo);
         Duke duke = new Duke();
         duke.greet();
-        duke.run();
-        duke.exit();
+        duke.runDuke();
+        duke.exitDuke();
     }
 }
