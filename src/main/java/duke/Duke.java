@@ -11,14 +11,13 @@ import java.util.Scanner;
 public class Duke {
 
     public static final String DIVIDER = "    ____________________________________________________________";
-    public static final int MAX_CAPACITY = 100;
 
     public static void main(String[] args) {
         printWelcomeMessage();
-        runChatBot(MAX_CAPACITY);
+        runChatBot();
     }
 
-    private static void runChatBot(int MAX_CAPACITY) {
+    private static void runChatBot() {
         Scanner input = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
         taskManager(input, tasks);
