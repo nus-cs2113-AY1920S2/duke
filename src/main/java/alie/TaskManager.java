@@ -33,8 +33,8 @@ public class TaskManager {
         } else {
             System.out.println (INDENTATION + "Here are the tasks in your list:");
             for (int counter = 0; counter < taskCount; counter += 1) {
-                System.out.printf("%s %d.%s \n",
-                        INDENTATION, counter + 1, taskList[counter].getTaskInfo());
+                System.out.printf("%s %d.%s", INDENTATION, counter + 1,
+                        taskList[counter].getTaskInfo() + System.lineSeparator());
             }
         }
     }

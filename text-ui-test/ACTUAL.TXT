@@ -1,9 +1,10 @@
 Hello from
-    /\       |        |   |‾‾‾‾‾ 
-   /  \      |        |   | 
+    /\       |        |   |‾‾‾‾‾    
+   /  \      |        |   |         
   /____\     |        |   |----     
- /      \    |        |   |  
-/        \ . |_____ . | . |_____ . 
+ /      \    |        |   |         
+/        \ . |_____ . | . |_____ .  
+
 ALIE> What would you like to do?
 ALIE> No tasks added yet
 ALIE>       Got it. I've added this task:

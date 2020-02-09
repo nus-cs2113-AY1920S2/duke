@@ -8,6 +8,12 @@ import java.util.Scanner;
 
 public class Alie {
 
+    public static final String logo =
+            "    /\\       |        |   |‾‾‾‾‾    \n"
+                    + "   /  \\      |        |   |         \n"
+                    + "  /____\\     |        |   |----     \n"
+                    + " /      \\    |        |   |         \n"
+                    + "/        \\ . |_____ . | . |_____ .  \n";
     protected static final int DONE_CMD_LENGTH = 5;
     protected static final int TODO_CMD_LENGTH = 5;
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
@@ -31,12 +37,6 @@ public class Alie {
     }
 
     public static void printWelcomeMsg() {
-        String logo =
-                          "    /\\       |        |   |‾‾‾‾‾    \n"
-                        + "   /  \\      |        |   |         \n"
-                        + "  /____\\     |        |   |----     \n"
-                        + " /      \\    |        |   |         \n"
-                        + "/        \\ . |_____ . | . |_____ .  \n";
         System.out.println("Hello from\n" + logo);
         printHeader();
         System.out.println("What would you like to do?");
