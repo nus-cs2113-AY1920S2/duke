@@ -18,42 +18,64 @@ public class Duke {
         while(true) {
             String line;
             line = input.nextLine();
-            if (line.equalsIgnoreCase("bye")) {
-                printByeMessage();
-                break;
-            } else if (line.equalsIgnoreCase("list")) {
-                printList(tasks, taskCounter);
-            } else if (line.startsWith("todo")) {
-                line = line.substring(TODO);
-                Task t = new Todo(line);
-                tasks[taskCounter] = t;
-                printAcknowledgement(tasks[taskCounter], taskCounter);
-                taskCounter++;
-            } else if (line.startsWith("deadline")) {
-                String[] words = line.split("/");
-                String description = words[0].substring(DEADLINE);
-                String by = words[1].substring(DATE);
-                Task d = new Deadline(description, by);
-                tasks[taskCounter] = d;
-                printAcknowledgement(tasks[taskCounter], taskCounter);
-                taskCounter++;
-            } else if (line.startsWith("event")) {
-                String[] words = line.split("/");
-                String description = words[0].substring(EVENT);
-                String at = words[1].substring(DATE);
-                Task e = new Event(description, at);
-                tasks[taskCounter] = e;
-                printAcknowledgement(tasks[taskCounter], taskCounter);
-                taskCounter++;
-            } else if (line.startsWith("done")) {
-                String number = line.substring(DONE);
-                int taskNumber = Integer.parseInt(number);
-                tasks[taskNumber-1].markAsDone();
+            String[] sentence = line.split(" ");
+            String taskType = sentence[0].toLowerCase();
+            try {
+                switch(taskType) {
+                case "bye":
+                    printByeMessage();
+                    break;
+                case "list":
+                    printList(tasks, taskCounter);
+                    break;
+                case "todo":
+                    line = line.substring(TODO);
+                    Task t = new Todo(line);
+                    tasks[taskCounter] = t;
+                    printAcknowledgement(tasks[taskCounter], taskCounter);
+                    taskCounter++;
+                    break;
+                case "deadline":
+                    String[] deadlineWords = line.split("/");
+                    String deadlineDescription = deadlineWords[0].substring(DEADLINE);
+                    String by = deadlineWords[1].substring(DATE);
+                    Task d = new Deadline(deadlineDescription, by);
+                    tasks[taskCounter] = d;
+                    printAcknowledgement(tasks[taskCounter], taskCounter);
+                    taskCounter++;
+                    break;
+                case "event":
+                    String[] eventWords = line.split("/");
+                    String eventDescription = eventWords[0].substring(EVENT);
+                    String at = eventWords[1].substring(DATE);
+                    Task e = new Event(eventDescription, at);
+                    tasks[taskCounter] = e;
+                    printAcknowledgement(tasks[taskCounter], taskCounter);
+                    taskCounter++;
+                    break;
+                case "done":
+                    String number = line.substring(DONE);
+                    int taskNumber = Integer.parseInt(number);
+                    tasks[taskNumber - 1].markAsDone();
+                    System.out.println(BORDER);
+                    System.out.println("Nice! I've marked this task as done: " + tasks[taskNumber - 1].description);
+                    System.out.println(BORDER);
+                    break;
+                default:
+                    throw new DukeException();
+                }
+            } catch (DukeException e) {
                 System.out.println(BORDER);
-                System.out.println("Nice! I've marked this task as done: " + tasks[taskNumber-1].description);
+                System.out.println("☹ OH NO!!! I'm sorry, but I don't know what that means! :o(");
                 System.out.println(BORDER);
-            } else {
-                System.out.println("error");
+            } catch (NullPointerException e) {
+                System.out.println(BORDER);
+                System.out.println("☹ OH NO!!! There is no such task to be done! :o(");
+                System.out.println(BORDER);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println(BORDER);
+                System.out.println("☹ OH NO!!! The description of a " + taskType + " cannot be empty! :o(");
+                System.out.println(BORDER);
             }
         }
     }
