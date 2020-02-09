@@ -11,5 +11,4 @@ done 1
 done 3
 list
 blah
-find
 bye

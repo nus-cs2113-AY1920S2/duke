@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -174,7 +182,9 @@ public class Duke {
         try {
             throw new DukeException(COMMAND_BLAH_MESSAGE);
         } catch (DukeException e) {
+            System.out.println(DIVIDER);
             System.out.println(e);
+            System.out.println(DIVIDER);
         }
     }
     
