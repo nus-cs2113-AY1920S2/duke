@@ -12,14 +12,22 @@ public class Duke {
      */
     private static int numTasks;
 
-    public static void main(String[] args) {
-        taskList = new Task[100];
-        numTasks = 0;
+    /**
+     * Line that divides text
+     */
+    private static final String BAR = "____________________________________";
+
+    /**
+     * Maximum number of tasks
+     */
+    private static final int MAX_TASKS = 100;
+
+    public static void main(String[] args) throws DukeException {
         introduction();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         while (!command.equals("bye")) {
-            System.out.println("____________________________________");
+            System.out.println(BAR);
             String[] splitTask = command.split(" ");
             String cWord = splitTask[0];
             String task = "";
@@ -29,49 +37,67 @@ public class Duke {
             if (command.equals("list")) {
                 listCommand();
             } else if (cWord.equals("done")) {
-                doneCommand(command);
+                try {
+                    doneCommand(command);
+                } catch (DukeException e){
+                    System.out.println("    You must include the number of the completed task!");
+                }
             } else if (cWord.equals("todo")) {
-                todoCommand(task);
+                try {
+                    todoCommand(task);
+                } catch (DukeException e){
+                    System.out.println("    You must include what needs to be done!");
+                }
             } else if (cWord.equals("deadline")) {
-                deadlineCommand(task);
+                try {
+                    deadlineCommand(task);
+                } catch (DukeException e){
+                    System.out.println("    You must specify when the deadline is by!");
+                }
             } else if (cWord.equals("event")) {
-                eventCommand(task);
+                try {
+                    eventCommand(task);
+                } catch (DukeException e){
+                    System.out.println("    You must specify when the event is at!");
+                }
             } else {
-                genericCommand(command);
+                System.out.println("    I'm sorry! I don't know what that means :( ");
             }
-            System.out.println("____________________________________");
+            System.out.println(BAR);
             command = sc.nextLine();
         }
-        System.out.println("____________________________________");
-        System.out.println("    Bye! See ya next time :)");
-        System.out.println("____________________________________");
+        goodbye();
     }
 
     /**
-     * Any other command, treated as a to do
-     * @param command the task that needs to be added to list
+     * Goodbye text
      */
-    private static void genericCommand(String command) {
-        Task t = new Task(command, numTasks);
-        addTask(t);
-        System.out.println("    added: " + t.getName());
+    private static void goodbye() {
+        System.out.println(BAR);
+        System.out.println("    Bye! See ya next time :)");
+        System.out.println(BAR);
     }
 
     /**
      * The introduction command, which generates the introduction script
      */
     private static void introduction() {
-        System.out.println("____________________________________");
+        taskList = new Task[MAX_TASKS];
+        numTasks = 0;
+        System.out.println(BAR);
         System.out.println("    Hey! I'm Jamun");
         System.out.println("    How can I help you?");
-        System.out.println("____________________________________");
+        System.out.println(BAR);
     }
 
     /**
      * The event command, which adds a new event and when it is
      * @param task what the event is and when it is at, denoted by /at
      */
-    private static void eventCommand(String task) {
+    private static void eventCommand(String task) throws DukeException{
+        if (!task.contains("/at")) {
+            throw new DukeException();
+        }
         String[] splitTask2 = task.split("/at");
         Task t = new Event(splitTask2[0], numTasks, splitTask2[1]);
         addTask(t);
@@ -83,16 +109,19 @@ public class Duke {
      * @param t task to be printed
      */
     private static void printTask(Task t) {
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("    Got it. I've added this task: ");
         System.out.println("    " + t.toString());
-        System.out.println("Now you have " + numTasks + " tasks in the list.");
+        System.out.println("    Now you have " + numTasks + " tasks in the list.");
     }
 
     /**
      * The deadline command, which adds a new task and its deadline
      * @param task what the deadline is for and when it needs to be done by, denoted by /by
      */
-    private static void deadlineCommand(String task) {
+    private static void deadlineCommand(String task) throws DukeException {
+        if (!task.contains("/by")) {
+            throw new DukeException();
+        }
         String[] splitTask2 = task.split("/by");
         Task t = new Deadline(splitTask2[0], numTasks, splitTask2[1]);
         addTask(t);
@@ -112,7 +141,10 @@ public class Duke {
      * The to do command, which adds a new task to be done
      * @param task what needs to be done
      */
-    private static void todoCommand(String task) {
+    private static void todoCommand(String task) throws DukeException {
+        if (task.isEmpty()) {
+            throw new DukeException();
+        }
         Task t = new Todo(task, numTasks);
         addTask(t);
         printTask(t);
@@ -122,8 +154,11 @@ public class Duke {
      * The done command, which can mark and event as done or not
      * @param command the command that was done and the number of the command
      */
-    private static void doneCommand(String command) {
+    private static void doneCommand(String command) throws DukeException {
         String[] splitTask2 = command.split(" ");
+        if (splitTask2.length != 2) {
+            throw new DukeException();
+        }
         int taskDoneNum = Integer.parseInt(splitTask2[1]);
         if (taskDoneNum - 1 >= numTasks) {
             System.out.println("    You haven't done that many tasks yet!");
