@@ -1,28 +1,35 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import exceptions.DukeException;
 import tasks.Task;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskType;
 
+// TODO: Extract existing error handling to exceptions.DukeException where appropriate
+// TODO: Check for further modularisation
+
 public class Duke {
-    // input: 2do<enter> error: java.lang.ArrayIndexOutOfBoundsException
-    private static void addTask(String userCmd, ArrayList<Task> taskArrList) throws DukeException{
-        String todoStr;
-        try{
-            String[] splitCmd = userCmd.split("todo ");
-            todoStr = splitCmd[1].trim();
-        }
-        catch (Exception e){
-            throw new DukeException("DukeExcept");
-        }
-
-
-        Task newTask = new Task(TaskType.TODO, todoStr);
-        taskArrList.add(newTask);
-        System.out.println("Task added: " +todoStr);
+    /** Helper Functions Start **/
+    // TODO: Check if this method will help, may be unhelpful
+    private static String[] splitString(String[] strArr, String userCmd, String splitCase){
+        strArr = userCmd.split(splitCase);
+        return strArr;
     }
 
+    public static void printHelp() {
+        String helpMsg = "Here is a list of things you can do: \n"
+                + "\ttodo:      tasks without a date/time (syntax: todo buy food)\n"
+                + "\tlist:      list your current tasks (syntax: list)\n"
+                + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday)\n"
+                + "\tevent:     tasks that start/end by a specific time (syntax: event food fare /at Mon 2-4pm)\n"
+                + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
+                + "\thelp:      launch the help screen (syntax: help)";
+        System.out.println(helpMsg);
+    }
+
+    /** Duke Functions Start**/
     private static void listTasks(ArrayList<Task> taskArrList) {
         if (taskArrList.size() == 0) {
             System.out.println("List is empty!");
@@ -37,7 +44,7 @@ public class Duke {
         }
     }
 
-    ////java.lang.NumberFormatException
+    // java.lang.NumberFormatException
     private static void markTaskDone(String userCmd, ArrayList<Task> taskArrList) {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");
@@ -66,7 +73,24 @@ public class Duke {
         }
     }
 
-    //java.lang.ArrayIndexOutOfBoundsException
+    // input: 2do<enter> error: java.lang.ArrayIndexOutOfBoundsException
+    private static void addTask(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
+        String todoStr;
+        try{
+            String[] splitCmd = userCmd.split("todo ");
+            todoStr = splitCmd[1].trim();
+        }
+        catch (Exception e){
+            throw new DukeException("There must be a description for a todo task.");
+        }
+
+
+        Task newTask = new Task(TaskType.TODO, todoStr);
+        taskArrList.add(newTask);
+        System.out.println("Task added: " +todoStr);
+    }
+
+    // java.lang.ArrayIndexOutOfBoundsException
     private static void addDeadline(String userCmd, ArrayList<Task> taskArrList) {
         // Syntax: deadline return book /by Sunday
         String[] splitCmd = userCmd.split("/by ");
@@ -82,7 +106,7 @@ public class Duke {
         System.out.println("\t" +newDeadline.toString() );
     }
 
-    ////java.lang.ArrayIndexOutOfBoundsException
+    // java.lang.ArrayIndexOutOfBoundsException
     private static void addEvent(String userCmd, ArrayList<Task> taskArrList) {
         // Syntax: event project meeting /at Mon 2-4pm
         String[] splitCmd = userCmd.split("/at ");
@@ -97,17 +121,7 @@ public class Duke {
         System.out.println("\t" +newEvent.toString() );
     }
 
-    public static void printHelp() {
-        String helpMsg = "Here is a list of things you can do: \n"
-                + "\ttodo:      tasks without a date/time (syntax: todo buy food)\n"
-                + "\tlist:      list your current tasks (syntax: list)\n"
-                + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday)\n"
-                + "\tevent:     tasks that start/end by a specific time (syntax: event food fare /at Mon 2-4pm)\n"
-                + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
-                + "\thelp:      launch the help screen (syntax: help)";
-        System.out.println(helpMsg);
-    }
-
+    /** Main method Start **/
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean continueRun = true;
