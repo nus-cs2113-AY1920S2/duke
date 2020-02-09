@@ -1,4 +1,6 @@
-public class Task {
+package duke.task;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -14,6 +16,7 @@ public class Task {
     public void taskDone() {
         this.isDone = true;
     }
+
     @Override
     public String toString() {
         return ("[" + getStatusIcon() + "] " + description);
