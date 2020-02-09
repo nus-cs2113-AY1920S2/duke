@@ -12,27 +12,31 @@ public class Duke {
         while(!command.equals("bye")){
             printDividingLine();
             String commandType = commandDivider(command);
-            switch(commandType) {
-            case "list":
-                listTasks();
-                break;
-            case "done":
-                doneTask(command);
-                break;
-            case "todo":
-                addToDo(command);
-                break;
-            case "deadline":
-                addDeadline(command);
-                break;
-            case "event":
-                addEvent(command);
-                break;
-            default:
-                System.out.println("Please give the type of the task.");
+            try{
+                switch(commandType) {
+                case "list":
+                    listTasks();
+                    break;
+                case "done":
+                    doneTask(command);
+                    break;
+                case "todo":
+                    addToDo(command);
+                    break;
+                case "deadline":
+                    addDeadline(command);
+                    break;
+                case "event":
+                    addEvent(command);
+                    break;
+                default:
+                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                printDividingLine();
+                System.out.println("Do you have any other commands? ");
+            } catch (EmptyDescriptionException e){
+                System.out.println("Please re-enter your command with a description.");
             }
-            printDividingLine();
-            System.out.println("Do you have any other commands? ");
             command=read.nextLine();
         }
         exitMessage();
@@ -50,8 +54,12 @@ public class Duke {
         System.out.println("Now you have "+taskCount+" tasks in the list.");
     }
 
-    private static void addEvent(String command){
-        String description=command.substring(command.indexOf(" ")+1,command.indexOf("/"));
+    private static void addEvent(String command) throws EmptyDescriptionException {
+        if(command.indexOf(" ")==-1) {
+            System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new EmptyDescriptionException();
+        }
+        String description=command.substring(command.indexOf(" "),command.indexOf("/"));
         String period=command.substring(command.indexOf("/at")+4);
         tasks[taskCount]=new Event(description, period);
         System.out.println("Got it. I've added this task:");
@@ -60,8 +68,12 @@ public class Duke {
         printNumOfTasks();
     }
 
-    private static void addDeadline(String command){
-        String description=command.substring(command.indexOf(" ")+1,command.indexOf("/"));
+    private static void addDeadline(String command) throws EmptyDescriptionException {
+        if(command.indexOf(" ")==-1) {
+            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new EmptyDescriptionException();
+        }
+        String description=command.substring(command.indexOf(" "),command.indexOf("/"));
         String by=command.substring(command.indexOf("/by")+4);
         tasks[taskCount]=new Deadline(description,by);
         System.out.println("Got it. I've added this task:");
@@ -70,8 +82,12 @@ public class Duke {
         printNumOfTasks();
     }
 
-    private static void addToDo(String command) {
-        String description=command.substring(command.indexOf(" ")+1);
+    private static void addToDo  (String command) throws EmptyDescriptionException {
+        if(command.indexOf(" ")==-1) {
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new EmptyDescriptionException();
+        }
+        String description=command.substring(command.indexOf(" "));
         tasks[taskCount]=new ToDo(description);
         System.out.println("Got it. I've added this task:");
         System.out.println(tasks[taskCount]);
