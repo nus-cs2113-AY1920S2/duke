@@ -1,2 +1,2 @@
-public class ExplicitTimeDescription extends DukeException{
+public class InexplicitTimeDescription extends DukeException{
 }

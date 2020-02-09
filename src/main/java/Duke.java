@@ -27,6 +27,7 @@ public class Duke {
             default:
                 System.out.println("Unknown mode, please try again.");
                 input = getAndProcessInput(in);
+                break;
             }
         }
     }
@@ -87,19 +88,33 @@ public class Duke {
 
     private static void parseInputCommand(String input, TaskList taskList) {
         if(input.startsWith("done")){
-            int taskIndex = getTaskIndex(input);
-            Task cur_task = taskList.getOneTask(taskIndex-1);
-            cur_task.setTaskStatus(Task.DONE);
-            printTaskDoneInfo(cur_task);
-        }
-        else if(!input.equals("list")) {
+            try{
+                int taskIndex = getTaskIndex(input);
+                Task cur_task = taskList.getOneTask(taskIndex-1);
+                cur_task.setTaskStatus(Task.DONE);
+                printTaskDoneInfo(cur_task);
+            } catch (NumberFormatException e){
+                System.out.println("    You have to point out which task to mark as done!!!");
+            } catch (IndexOutOfBoundsException e){
+                System.out.println("    Reffered task doesn't exist!!!");
+                System.out.println("    There are totally "+Integer.toString(Task.getTaskNum())+" tasks in the taskList");
+            }
+        } else if(!input.equals("list")) {
             int dividePosition = input.indexOf(" ");
-            String type = input.substring(0,dividePosition);
-            String newTaskName = newSpecificTask(input, taskList, type);
-            showFeedback(newTaskName,taskList);
-        }
-        else
-            taskList.printTaskList();
+            try {
+                String type = input.substring(0,dividePosition);
+                String newTaskName = newSpecificTask(input, taskList, type);
+                showFeedback(newTaskName,taskList);
+            } catch(StringIndexOutOfBoundsException e){
+                System.out.println("    Invalid input! Cannot find description for a task event");
+                System.out.println("    Your input: "+input+".");
+                System.out.println("    Please use ' ' to split a task type and its description");
+            } catch (UnknownCommandException e) {
+                System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (InexplicitTimeDescription e){
+                System.out.println("    Invalid input!!! Please use '/' to split task name and its time description");
+            }
+        } else taskList.printTaskList();
     }
 
     private static void showFeedback(String newTaskName,TaskList taskList) {
@@ -107,23 +122,33 @@ public class Duke {
         System.out.println("    Now you have "+Integer.toString(taskList.getLenOfList())+" tasks in the list");
     }
 
-    private static String newSpecificTask(String input, TaskList taskList, String type) {
-        String newTaskName = new String();
+    private static String newSpecificTask(String input, TaskList taskList, String type) throws UnknownCommandException,InexplicitTimeDescription{
+        String newTaskName = "";
         switch (type){
         case "todo":
             newTaskName = getNewTodoName(input);
             taskList.append(new ToDo(newTaskName));
             break;
         case "deadline":
-            newTaskName = getDdlOrEventName(input);
+            try{
+                newTaskName = getDdlOrEventName(input);
+            } catch (InexplicitTimeDescription e){
+                throw e;
+            }
             String by = getByOrDate(input);
             taskList.append(new Deadline(newTaskName,by));
             break;
         case "event":
-            newTaskName = getDdlOrEventName(input);
+            try{
+                newTaskName = getDdlOrEventName(input);
+            } catch (InexplicitTimeDescription e){
+                throw e;
+            }
             String date = getByOrDate(input);
             taskList.append(new Event(newTaskName,date));
             break;
+        default:
+            throw new UnknownCommandException();
         }
         return newTaskName;
     }
@@ -133,10 +158,14 @@ public class Duke {
         return input;
     }
 
-    private static String getDdlOrEventName(String input){
+    private static String getDdlOrEventName(String input) throws InexplicitTimeDescription{
         String newName = input.replace("deadline ","").replace("event ","");
-        int cutPosition = newName.indexOf("/");
-        newName = newName.substring(0,cutPosition-1);
+        try{
+            int cutPosition = newName.indexOf("/");
+            newName = newName.substring(0,cutPosition-1);
+        } catch (StringIndexOutOfBoundsException e){
+            throw new InexplicitTimeDescription();
+        }
         return newName;
     }
 
@@ -147,8 +176,12 @@ public class Duke {
     }
 
 
-    private static int getTaskIndex(String input) {
+    private static int getTaskIndex(String input) throws NumberFormatException{
         int dividePosition = input.indexOf(" ");
-        return Integer.parseInt(input.substring(dividePosition+1));
+        try{
+            return Integer.parseInt(input.substring(dividePosition+1));
+        } catch(NumberFormatException e){
+            throw e;
+        }
     }
 }
