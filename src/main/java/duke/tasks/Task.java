@@ -1,7 +1,9 @@
+package duke.tasks;
+
+import static duke.utils.Constants.YES_ICON;
+import static duke.utils.Constants.NO_ICON;
+
 public class Task {
-    protected static final String YES_ICON = "\u2713";
-    protected static final String NO_ICON = "\u2718";
-    
     protected String description;
     protected boolean isDone;
 

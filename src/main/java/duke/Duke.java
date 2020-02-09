@@ -1,17 +1,25 @@
+package duke;
+
+import duke.exceptions.ChatboxException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
-    private static final String LIST_COMMAND = "list";
-    private static final String BYE_COMMAND = "bye";
-    private static final String DONE_COMMAND = "done";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String EVENT_COMMAND = "event";
-    private static final String DEADLINE_MARKER = "/by";
-    private static final String EVENT_MARKER = "/at";
+import static duke.utils.Constants.LIST_COMMAND;
+import static duke.utils.Constants.BYE_COMMAND;
+import static duke.utils.Constants.DONE_COMMAND;
+import static duke.utils.Constants.TODO_COMMAND;
+import static duke.utils.Constants.DEADLINE_COMMAND;
+import static duke.utils.Constants.EVENT_COMMAND;
+import static duke.utils.Constants.DEADLINE_MARKER;
+import static duke.utils.Constants.EVENT_MARKER;
 
+public class Duke {
     // a array to store user input task
     private static List<Task> tasks = new ArrayList<>();
     
