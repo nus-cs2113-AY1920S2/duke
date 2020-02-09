@@ -32,11 +32,31 @@ public class Duke {
         }
     }
 
-    public static void printDoneTask(Task[] tasks, int taskNum) {
-        tasks[taskNum-1].markAsDone();
-        System.out.println("Awesome! I've marked the following task as done:");
-        System.out.println(tasks[taskNum-1]);
+    public static void executeDoneTask(Task[] tasks, String userInput) throws MissingTaskNumberException, MissingTaskNumberDescriptionException {
+        String doneCommand = "done";
+        if (!userInput.trim().equals(doneCommand)) {
+            String[] words = userInput.split(" ");
+            int taskNum = Integer.parseInt(words[1]);
+            int sizeOfArray = 0;
+            for (int i = 0; i < tasks.length; i++) {
+                if (tasks[i] != null) {
+                    sizeOfArray++;
+                } else {
+                    break;
+                }
+            }
+            if (taskNum <= sizeOfArray) {
+                tasks[taskNum - 1].markAsDone();
+                System.out.println("Awesome! I've marked the following task as done:");
+                System.out.println(tasks[taskNum - 1]);
+            } else {
+                throw new MissingTaskNumberException("This task number does not exist on the list!");
+            }
+        } else {
+            throw new MissingTaskNumberException("Please add a task number to \'done\' to mark task as done!");
+        }
     }
+
 
 
     public static String taskValidator(int numTasks) {
@@ -48,43 +68,94 @@ public class Duke {
         }
     }
 
-    public static void inputValidation(Task[] tasks, String userCommand) {
-        String[] words = userCommand.split(" ");
-        int spacesPadding = 1;
-        int taskPadding = 4;
 
+    public static void executeToDo(Task[] tasks, String userInput) throws MissingTaskException {
         String todoCommand = "todo";
-        String deadlineCommand = "deadline";
-        String eventCommand = "event";
-        String completeCommand = "done";
-        String listCommand = "list";
-
-        if (words[0].equals(todoCommand)) {
-            String todoTask = userCommand.substring(todoCommand.length() + spacesPadding);
+        if (!userInput.trim().equals(todoCommand)) {
+            String todoTask = userInput.substring(todoCommand.length() + 1);
             Task todo = new Todo(todoTask);
             tasks[todo.getTotalTasks()-1] = todo;
             printIndividualTask(tasks,todo.getTotalTasks());
-        } else if (words[0].equals(deadlineCommand)) {
-            int indexOfBy = userCommand.indexOf("/by");
-            String deadlineTask = userCommand.substring(deadlineCommand.length() + spacesPadding, indexOfBy - 1);
-            String byDate = userCommand.substring(indexOfBy + taskPadding);
-            Task deadline = new Deadline(deadlineTask, byDate);
-            tasks[deadline.getTotalTasks()-1] = deadline;
-            printIndividualTask(tasks,deadline.getTotalTasks());
-        } else if (words[0].equals(eventCommand)) {
-            int indexOfAt = userCommand.indexOf("/at");
-            String eventTask = userCommand.substring(eventCommand.length() + spacesPadding, indexOfAt - 1);
-            String atDate = userCommand.substring(indexOfAt + taskPadding);
+        } else {
+            throw new MissingTaskException("Todo tasks cannot be empty!");
+        }
+    }
+
+    public static void executeEvent(Task[] tasks, String userInput) throws MissingTaskException, MissingEventDateException {
+        String eventCommand = "event";
+        if (!userInput.trim().equals(eventCommand)) {
+            int indexOfAt = userInput.indexOf("/at");
+            if (indexOfAt == -1) {
+                throw new MissingEventDateException("Please specify the date for event using \'at\'!");
+            }
+            String eventTask = userInput.substring(eventCommand.length() + 1, indexOfAt - 1);
+            String atDate = userInput.substring(indexOfAt + "/at".length() + 1);
             Task event = new Event(eventTask, atDate);
             tasks[event.getTotalTasks()-1] = event;
             printIndividualTask(tasks,event.getTotalTasks());
-        } else if (words[0].equals(completeCommand)) {
-            int taskNum = Integer.parseInt(words[1]);
-            printDoneTask(tasks, taskNum);
-        } else if (words[0].equals(listCommand)) {
-            printTaskList(tasks);
+        } else {
+            throw new MissingTaskException("Event tasks cannot be empty!");
         }
     }
+
+    public static void executeDeadline(Task[] tasks, String userInput) throws MissingTaskException, MissingDeadlineDateException {
+        String deadlineCommand = "deadline";
+        if (!userInput.trim().equals(deadlineCommand)) {
+            int indexOfBy = userInput.indexOf("/by");
+            if (indexOfBy == -1) {
+                throw new MissingDeadlineDateException("Please specify a deadline using \'/by\'!");
+            }
+            String deadlineTask = userInput.substring(deadlineCommand.length() + 1, indexOfBy - 1);
+            String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
+            Task deadline = new Deadline(deadlineTask, byDate);
+            tasks[deadline.getTotalTasks()-1] = deadline;
+            printIndividualTask(tasks,deadline.getTotalTasks());
+        } else {
+            throw new MissingTaskException("Deadline tasks cannot be empty!");
+        }
+    }
+
+    public static void getExecuteCommand(Task[] tasks, String userInput) throws UnknownInputException {
+        String deadlineCommand = "deadline";
+        String eventCommand = "event";
+        String todoCommand = "todo";
+        String completeCommand = "done";
+        String listCommand = "list";
+
+        String[] words = userInput.split(" ");
+
+        if (words[0].equals(todoCommand)) {
+            try {
+                executeToDo(tasks, userInput);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
+        } else if (words[0].equals(deadlineCommand)) {
+            try {
+                executeDeadline(tasks, userInput);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
+        } else if (words[0].equals(eventCommand)) {
+            try {
+                executeEvent(tasks, userInput);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
+        } else if (words[0].equals(completeCommand)) {
+            try {
+                executeDoneTask(tasks, userInput);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
+        } else if (words[0].equals(listCommand)) {
+            printTaskList(tasks);
+        } else {
+            throw new UnknownInputException("There is no such input!");
+        }
+    }
+
+
 
     public static void main(String[] args) {
         String logo = ".______     ______   .______   \n"
@@ -112,7 +183,6 @@ public class Duke {
 
         while (true) {
             String userInput = command.nextLine();
-            String[] words = userInput.split(" ");
             if (userInput.equals(endCommand)) {
                 System.out.println(DIVIDER);
                 System.out.println(endMessage);
@@ -120,9 +190,14 @@ public class Duke {
                 break;
             } else {
                 System.out.println(DIVIDER);
-                inputValidation(tasks, userInput);
+                try {
+                    getExecuteCommand(tasks, userInput);
+                } catch (DukeException err) {
+                    System.out.println(err.toString());
+                }
                 System.out.println(DIVIDER);
             }
+
         }
     }
 }
