@@ -7,7 +7,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getDescription() {
+    public String showFullDescription() {
         return description + " (by: " + dueDate + ")";
     }
 
@@ -15,5 +15,4 @@ public class Deadline extends Task {
     public String getTypeIcon() {
         return "[D]";
     }
-
 }
