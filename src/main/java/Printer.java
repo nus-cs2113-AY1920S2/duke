@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 import java.util.Vector;
 
 public class Printer {
@@ -28,11 +30,11 @@ public class Printer {
     }
 
     public static void printExitMessage() {
-        System.out.println("  Goodbye! Lumi will miss you!");
+        System.out.println(TextFormatter.SAD_FACE + "Goodbye! Lumi will miss you!");
     }
 
      public static void printAddTaskMessage(Vector<Task> list) {
-        System.out.println("  Alright, Lumi has added: " + list.lastElement().getTask() + "!");
+        System.out.println(TextFormatter.HAPPY_FACE + "Alright, Lumi has added: " + list.lastElement().getTask() + "!");
         System.out.println(TextFormatter.createSpaces(8) + list.lastElement().getTaskStatus());
         if (list.size() == 1) {
             System.out.println("  You now have " + list.size() + " task in Lumi's list!\n");
@@ -42,21 +44,21 @@ public class Printer {
     }
 
     public static void printCompleteTaskMessage(Vector<Task> list, int listNumber) {
-        System.out.println("  Well done! Lumi marks this task as completed!");
+        System.out.println(TextFormatter.HAPPY_FACE + "Well done! Lumi marks this task as completed!");
         System.out.println(TextFormatter.createSpaces(8) + list.get(listNumber).getTaskStatus() +
                 System.lineSeparator());
     }
 
     public static void printAlreadyCompletedTaskMessage(Vector<Task> list, int listNumber) {
-        System.out.println("  Hey!! Lumi already marked <" + list.get(listNumber).task + "> as completed!");
-        System.out.println();
+        System.out.println(TextFormatter.ANGRY_FACE +
+        "Hey!! Lumi already marked <" + list.get(listNumber).task + "> as completed!" + System.lineSeparator());
     }
 
 
     public static void printList(Vector<Task> list, boolean isStandardPrint) {
 
         if (isStandardPrint) {
-            System.out.println("  Sure! Lumi prints your list!");
+            System.out.println(TextFormatter.HAPPY_FACE + "Sure! Lumi prints your list!");
         }
 
         String listTop =

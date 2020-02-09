@@ -12,7 +12,7 @@ public class Duke {
 
         int listNumber = Integer.parseInt(words[1]) - 1;
 
-        if (listNumber < 1 || listNumber > list.size()) {
+        if (listNumber < 0 || listNumber >= list.size()) {
             throw new InvalidListNumberException();
         }
 
@@ -24,31 +24,43 @@ public class Duke {
         }
     }
 
-    private void addToDo(String input) {
+    private void addToDo(String input) throws InvalidFormatException {
         int indexOfTask = "todo ".length();
-        String task = input.substring(indexOfTask);
+        String task = input.substring(indexOfTask).trim();
+
+        if (task.length() == 0) {
+            throw new InvalidFormatException();
+        }
 
         list.add(new ToDo(task));
         Printer.printAddTaskMessage(list);
     }
 
-    private void addDeadline(String input) {
+    private void addDeadline(String input) throws InvalidFormatException {
         int indexOfTask = "deadline ".length();
         int endIndexOfTask = input.indexOf(" /by ");
         int indexOfDeadline = endIndexOfTask + " /by ".length();
-        String task = input.substring(indexOfTask, endIndexOfTask);
-        String deadline = input.substring(indexOfDeadline);
+        String task = input.substring(indexOfTask, endIndexOfTask).trim();
+        String deadline = input.substring(indexOfDeadline).trim();
+
+        if (task.length() == 0 || deadline.length() == 0) {
+            throw new InvalidFormatException();
+        }
 
         list.add(new Deadline(task, deadline));
         Printer.printAddTaskMessage(list);
     }
 
-    private void addEvent(String input) {
+    private void addEvent(String input) throws InvalidFormatException {
         int indexOfTask = "event".length() + 1;
         int endIndexOfTask = input.indexOf(" /at ");
         int indexOfEvent = endIndexOfTask + " /at ".length();
-        String task = input.substring(indexOfTask, endIndexOfTask);
-        String duration = input.substring(indexOfEvent);
+        String task = input.substring(indexOfTask, endIndexOfTask).trim();
+        String duration = input.substring(indexOfEvent).trim();
+
+        if (task.length() == 0 || duration.length() == 0) {
+            throw new InvalidFormatException();
+        }
 
         list.add(new Event(task, duration));
         Printer.printAddTaskMessage(list);
@@ -75,13 +87,31 @@ public class Duke {
             }
             break;
         case "todo":
-            addToDo(input);
+            try {
+                addToDo(input);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println(ExceptionMessage.INVALID_TODO_FORMAT_MESSAGE);
+            } catch (InvalidFormatException e) {
+                System.out.println(ExceptionMessage.MISSING_TODO_DESCRIPTION_MESSAGE);
+            }
             break;
         case "deadline":
-            addDeadline(input);
+            try {
+                addDeadline(input);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println(ExceptionMessage.INVALID_DEADLINE_FORMAT_MESSAGE);
+            } catch (InvalidFormatException e) {
+                System.out.println(ExceptionMessage.MISSING_DEADLINE_DESCRIPTION_MESSAGE);
+            }
             break;
         case "event":
-            addEvent(input);
+            try {
+                addEvent(input);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println(ExceptionMessage.INVALID_EVENT_FORMAT_MESSAGE);
+            } catch (InvalidFormatException e) {
+                System.out.println(ExceptionMessage.MISSING_EVENT_DESCRIPTION_MESSAGE);
+            }
             break;
         default:
             throw new InvalidActionException();
@@ -119,6 +149,5 @@ public class Duke {
     public static void main(String[] args) {
         Duke chatBot = new Duke();
         chatBot.runChat();
-
     }
 }
