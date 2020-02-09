@@ -11,15 +11,16 @@ public class Duke {
             "\t available list of task numbers";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
             " listing";
-    public  static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+    public static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+    public static final String MULTIPLE_WHITE_SPACES= "\\s+";
 
     public static void printError(String message){
-        System.err.println(LINE + System.lineSeparator()+ message + System.lineSeparator() + LINE);
+        System.err.println(LINE + System.lineSeparator() + message + System.lineSeparator() + LINE);
     }
 
     public static String[] getCommand(String inCommand) {
         inCommand = inCommand.trim();
-        String[] temp = inCommand.split(" ");
+        String[] temp = inCommand.split(MULTIPLE_WHITE_SPACES);
         return temp;
     }
 
@@ -72,7 +73,7 @@ public class Duke {
     public static String[] getTaskInfo(String userIn) throws IllegalDukeException{
         String[] temp = getCommand(userIn);
         if(temp.length==1){
-            throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + temp[0] +" cannot be empty.");
+            throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + temp[0] + " cannot be empty.");
         }
         String action = "";
         String timing = "";
