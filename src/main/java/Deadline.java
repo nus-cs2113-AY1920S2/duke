@@ -2,12 +2,12 @@ public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by) throws DukeException {
-        super(description);
+        super(description.trim());
         if(description.equals("") || by.equals(""))
         {
             throw new DukeException();
         }
-        this.by = by;
+        this.by = by.trim();
     }
 
     @Override

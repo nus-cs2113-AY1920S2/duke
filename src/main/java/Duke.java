@@ -25,18 +25,23 @@ public class Duke {
                         " What can I do for you?\n" + LINE);
 
         Scanner scanner = new Scanner(System.in);
-        String inputString = "";
+        //String inputString;
 
-        while (!inputString.equals("bye bye")) {
-            inputString = runCommands(scanner);
+        while (true) {
+            String inputString = scanner.nextLine();
+            if (inputString.equals("bye bye")) {
+                break;
+            } else {
+                runCommands(inputString);
+            }
         }
 
         System.out.println(" Bye. Hope to see you again soon!\n" + LINE);
     }
 
-    private static String runCommands(Scanner scanner) {
-        String inputString;
-        inputString = scanner.nextLine();
+    private static void runCommands(String inputString) {
+        //String inputString;
+        //inputString = scanner.nextLine();
         String instruction[] = inputString.split(" ", 2);
         Task new_task;
 
@@ -47,12 +52,20 @@ public class Duke {
 
         case (DONE):
             try {
-                int index = Integer.parseInt((inputString.substring(5)));
+                int index = Integer.parseInt((instruction[1]));
                 System.out.println(index);
-                tasks[index-1].markAsDone();
-                System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].description + "\n" + LINE);
+                if (tasks[index-1].isDone == false) {
+                    tasks[index-1].markAsDone();
+                    System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].description + "\n" + LINE);
+                } else {
+                    System.out.println("You have already done this task!");
+                }
             } catch (NullPointerException e) {
                 System.out.println("This task does not exist!");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("This task does not exist!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please specify a task number!");
             }
             break;
 
@@ -100,10 +113,16 @@ public class Duke {
             break;
 
         default:
-            System.out.println("huh? I do not understand :(");
+            System.out.println("huh? I do not understand :( \n" +
+                    "I can help you with the following: \n" +
+                    "[list] - lists tasks \n" +
+                    "[todo <task_name>] - adds a todo task \n" +
+                    "[deadline <task_name> / deadline] - adds a deadline task \n" +
+                    "[event <event_name> / event_date] - adds an event \n" +
+                    "[done <task_num>] - marks a task as done \n" +
+                    "[bye bye] - exits duke \n" + LINE);
             break;
         }
-        return inputString;
     }
 
     private static void printAddMessage() {
