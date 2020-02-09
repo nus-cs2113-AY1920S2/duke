@@ -1,7 +1,10 @@
-public class MissingTaskNumberException extends DukeException {
+package duke.exception;
+
+public class UnknownInputException extends DukeException {
+
     private String errorMsg;
 
-    public MissingTaskNumberException(String errorMsg) {
+    public UnknownInputException(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 

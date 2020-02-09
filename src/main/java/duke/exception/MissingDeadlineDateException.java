@@ -1,7 +1,9 @@
-public class MissingEventDateException extends DukeException {
+package duke.exception;
+
+public class MissingDeadlineDateException extends DukeException {
     private String errorMsg;
 
-    public MissingEventDateException(String errorMsg) {
+    public MissingDeadlineDateException(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 

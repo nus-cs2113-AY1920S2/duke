@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.Deadline;
+import duke.command.Event;
+import duke.command.Task;
+import duke.command.Todo;
+import duke.exception.*;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -53,7 +61,7 @@ public class Duke {
                 throw new MissingTaskNumberException("This task number does not exist on the list!");
             }
         } else {
-            throw new MissingTaskNumberException("Please add a task number to \'done\' to mark task as done!");
+            throw new MissingTaskNumberDescriptionException("Please add a task number to \'done\' to mark task as done!");
         }
     }
 
