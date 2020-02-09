@@ -1,6 +1,16 @@
 import java.util.List;
 
 public class Printer {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     public static void printIndentation() {
         System.out.print("    ");
     }
@@ -95,6 +105,58 @@ public class Printer {
         printLines();
         printIndentation();
         System.out.println("Error.. ٩(× ×)۶");
+        printLines();
+    }
+
+    public static void printEmptyDescriptionError(String command) {
+        printLines();
+        printIndentation();
+        System.out.println("Σ(°ロ°) The description of " + command + " cannot be empty!~ ٩(× ×)۶ ");
+    }
+
+    public static void printFormatError(String command) {
+        printLines();
+        printIndentation();
+        System.out.println("Σ(°ロ°) There seems to be some problem with the format of " + command + " !~ ٩(× ×)۶ ");
+
+    }
+
+    public static void printHint(String command) {
+        printIndentation();
+        System.out.printf("Here's a hint on how %s%s%s works:\n\n", ANSI_BLUE, command, ANSI_RESET);
+
+        printIndentation();
+        printIndentation();
+
+        switch(command) {
+        case "event":
+            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>(space)/at(space)<at>");
+            printIndentation();
+            printIndentation();
+            System.out.println("Example: " + ANSI_BLUE + "event" + ANSI_RESET + " team meeting /at 2 August 2-4pm");
+            break;
+
+        case "todo" :
+            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>");
+            printIndentation();
+            printIndentation();
+            System.out.println("Example: " + ANSI_BLUE + "todo" + ANSI_RESET + " read book");
+            break;
+
+        case "deadline":
+            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>(space)/by(space)<date>");
+            printIndentation();
+            printIndentation();
+            System.out.println("Example: " + ANSI_BLUE + "deadline" + ANSI_RESET + " read book /by Sunday");
+            break;
+        }
+        printLines();
+    }
+
+    public static void printUnknownCommandError(String command) {
+        printLines();
+        printIndentation();
+        System.out.printf("I'm sorry I don't understand this command: %s%s%s *(>д<)*\n", ANSI_RED, command, ANSI_RESET);
         printLines();
     }
 }

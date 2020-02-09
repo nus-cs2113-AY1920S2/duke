@@ -10,7 +10,6 @@
  * helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
  * in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
  *
- * @file/s: Duke.java Printer.java Storage.java Task.java
  * @author: Tan Zheng Fu Justin
  */
 
@@ -27,7 +26,6 @@ public class Duke {
     public static final int DUKE_COMMAND = 0;
 
     static Storage myTasks = new Storage();
-//test //test
 
     public static void start() {
         String logo = " ____        _        \n"
@@ -43,16 +41,16 @@ public class Duke {
         Printer.printIndentation();
         Printer.printBye();
         Printer.printLines();
+
+        System.exit(0);
     }
 
     public static Task readFromUser() {
         Scanner in = new Scanner(System.in);
-        String userInput;
 
-        userInput = in.nextLine();
-        Task task = new Task(userInput);
+        String userInput = in.nextLine();
 
-        return task;
+        return new Task(userInput);
     }
 
     public static void echoUntilBye() {
@@ -61,16 +59,20 @@ public class Duke {
             Task task = readFromUser();
             List<String> commands = Parser.parseCommand(task.description);
             String command = commands.get(DUKE_COMMAND);
+
+            String descriptionAndDeadline;
             String description;
-            String dateLine;
-            String descriptionAndDate;
+            String deadline;
+
+            String descriptionAndEventAt;
+            String eventAt;
+
             List<String> separated;
 
             switch (command) {
             case "bye":
                 isBye = true;
                 exits();
-                continue;
 
             case "list":
                 myTasks.displayTasks();
@@ -85,57 +87,70 @@ public class Duke {
 
                 } catch (IndexOutOfBoundsException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
-                }
-                continue;
+                } continue;
 
             case "todo":
                 try {
                     description = commands.get(TASK_DESCRIPTION);
+                    description = description.trim();
+
                     DukeExceptionHandler.isBlank(description);
+
                     ToDo toDoTask = new ToDo(description);
                     myTasks.storeTasks(toDoTask);
                     Printer.printConfirmationMessage(toDoTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
-                    Printer.printError(); //TODO add custom error message empty string
-                }
-                continue;
+                    Printer.printEmptyDescriptionError(command);
+                    Printer.printHint(command);
+                } continue;
 
             case "deadline":
                 try {
-                    descriptionAndDate = commands.get(TASK_DESCRIPTION_AND_DATE);
-                    separated = Parser.parseDeadlineDate(descriptionAndDate);
+                    descriptionAndDeadline = commands.get(TASK_DESCRIPTION_AND_DATE);
+                    separated = Parser.parseDeadlineDate(descriptionAndDeadline);
 
                     description = separated.get(TASK_DESCRIPTION);
-                    dateLine = separated.get(TASK_DEADLINE);
+                    deadline = separated.get(TASK_DEADLINE);
                     description = description.trim();
-                    dateLine = dateLine.trim();
+                    deadline = deadline.trim();
 
                     DukeExceptionHandler.isBlank(description);
-                    DukeExceptionHandler.isBlank(dateLine);
+                    DukeExceptionHandler.isBlank(deadline);
 
-                    Deadline deadlineTask = new Deadline(description, dateLine);
+                    Deadline deadlineTask = new Deadline(description, deadline);
                     myTasks.storeTasks(deadlineTask);
-
                     Printer.printConfirmationMessage(deadlineTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
-                    Printer.printError(); //TODO add custom error message empty string
-                }
-                continue;
+                    Printer.printFormatError(command);
+                    Printer.printHint(command);
+                } continue;
 
             case "event":
-                descriptionAndDate = commands.get(TASK_DESCRIPTION_AND_DATE);
-                separated = Parser.parseEventAt(descriptionAndDate);
-                description = separated.get(TASK_DESCRIPTION);
-                dateLine = separated.get(TASK_EVENT_AT);
-                Event eventTask = new Event(description, dateLine);
-                myTasks.storeTasks(eventTask);
-                Printer.printConfirmationMessage(eventTask);
-                continue;
+                try {
+                    descriptionAndEventAt = commands.get(TASK_DESCRIPTION_AND_DATE);
+                    separated = Parser.parseEventAt(descriptionAndEventAt);
+
+                    description = separated.get(TASK_DESCRIPTION);
+                    eventAt = separated.get(TASK_EVENT_AT);
+                    description = description.trim();
+                    eventAt = eventAt.trim();
+
+                    DukeExceptionHandler.isBlank(description);
+                    DukeExceptionHandler.isBlank(eventAt);
+
+                    Event eventTask = new Event(description, eventAt);
+                    myTasks.storeTasks(eventTask);
+                    Printer.printConfirmationMessage(eventTask);
+                    continue;
+                } catch (IndexOutOfBoundsException | BlankStringException e) {
+                    Printer.printFormatError(command);
+                    Printer.printHint(command);
+                } continue;
 
             default:
-                Printer.printError();
+                Printer.printUnknownCommandError(command); //TODO add custom error message when received unlisted commands
             }
         }
     }
