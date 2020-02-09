@@ -1,3 +1,5 @@
+package types;
+
 public class Task {
 
     /**
@@ -16,7 +18,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * A Task object: something to be done
+     * A types.Task object: something to be done
      * @param name name of task
      * @param taskNumber number of task
      */
@@ -44,7 +46,7 @@ public class Task {
 
     /**
      * Get name of task
-     * @return Task name
+     * @return types.Task name
      */
     public String getName() {
         return name;
