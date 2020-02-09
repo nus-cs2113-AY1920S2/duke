@@ -24,50 +24,38 @@ public class Duke {
         System.out.println(goodbyeMessage2);
     }
 
-    public static String[] splitUserInput(String originalInput){
+    public static String[] splitUserInput(String originalInput) throws ArrayIndexOutOfBoundsException, 
+    NoDescriptionException, NoRemarkException {
         String[] returnValue = new String[MAX_SUBSTRING_FIELDS];
         if (originalInput.contains(" /")){
             String[] separatedSections = originalInput.split(" /");
+            String commandWord = separatedSections[0].split(" ", 2)[0];
             // get description part of userInput without the command word
             returnValue[0] = separatedSections[0].split(" ", 2)[1];
+            if (returnValue[0].trim().length() == 0) {
+                throw new NoDescriptionException();
+            }
             // get additional remark part of userInput
             returnValue[1] = separatedSections[1];
+            boolean isRemarksEmpty = ((commandWord.equals("event") || commandWord.equals("deadline")) 
+            && returnValue[1].trim().length() == 0);
+            if (isRemarksEmpty){
+                throw new NoRemarkException();
+            }
             return returnValue;
         } else {
             // get description part of userInput without the command word
-            returnValue[0] = originalInput.trim().split(" ", 2)[1];
+            try {
+                returnValue[0] = originalInput.trim().split(" ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new NoDescriptionException();
+                
+            }
+            
             // remark column is an empty string
             returnValue[1] = "";
             return returnValue;
         }
-    }
-
-    public static void main(String[] args) {
-        Task[] taskList = new Task[MAX_NO_OF_TASKS];
-        taskCount = 0;
-        String userInput;
-        Scanner in = new Scanner(System.in);
-
-        sayIntro();
-        //easier to identify lines input by user (per Python)
-        System.out.print(">>>");
-        
-        while (in.hasNextLine()) {
-            userInput = in.nextLine();
-            String[] tokenizedInput = userInput.split(" ");
-            if (tokenizedInput[0].equals("bye")) {
-                break;
-            } else if (tokenizedInput[0].equals("list")) {     
-                addTaskToList(taskList);
-            } else if (tokenizedInput[0].equals("done")) {
-                updateTaskDone(tokenizedInput[1], taskList);
-            } else {
-                insertNewTask(taskList, userInput, tokenizedInput);
-            }
-            System.out.print(">>>");
-        }
-
-        sayGoodbye();
     }
 
     public static void addTaskToList(Task[] listInput) {
@@ -98,6 +86,7 @@ public class Duke {
         }
         //handle case where user tries to mark as done an already completed task
         boolean isTaskAlreadyDone = listInput[queryNumber-1].getIsDone();
+        
         if (isTaskAlreadyDone){
             System.out.println(underscoredLine + System.lineSeparator()
             + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
@@ -109,7 +98,8 @@ public class Duke {
         + listInput[queryNumber-1].getDescription() + System.lineSeparator() + underscoredLine);
     }
 
-    private static void insertNewTask(Task[] taskList, String userInput, String[] tokenizedInput) {
+    private static void insertNewTask(Task[] taskList, String userInput, String[] tokenizedInput) throws 
+    IllegalKeywordException, NoDescriptionException, NoRemarkException {
         Task newTask;
         switch (tokenizedInput[0]) {
         case ("todo"):
@@ -122,8 +112,8 @@ public class Duke {
             newTask = new Event(splitUserInput(userInput)[0], splitUserInput(userInput)[1]);
             break;
         default:
-            newTask = new Task(userInput);
-            break;
+            throw new IllegalKeywordException();
+            //break;
         }
 
         taskList[taskCount] = newTask;
@@ -133,5 +123,46 @@ public class Duke {
         + underscoredLine);
     }
 
+    public static void main(String[] args) {
+        Task[] taskList = new Task[MAX_NO_OF_TASKS];
+        taskCount = 0;
+        String userInput;
+        Scanner in = new Scanner(System.in);
+
+        sayIntro();
+        //easier to identify lines input by user (per Python)
+        System.out.print(">>>");
+        
+        while (in.hasNextLine()) {
+            userInput = in.nextLine();
+            String[] tokenizedInput = userInput.split(" ");
+            if (tokenizedInput[0].equals("bye")) {
+                break;
+            } else if (tokenizedInput[0].equals("list")) {     
+                addTaskToList(taskList);
+            } else if (tokenizedInput[0].equals("done")) {
+                updateTaskDone(tokenizedInput[1], taskList);
+            } else {
+                try{
+                    insertNewTask(taskList, userInput, tokenizedInput);
+                } catch (IllegalKeywordException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(underscoredLine);
+                } catch (NoDescriptionException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! The description of a " + tokenizedInput[0] + " cannot be empty.");
+                    System.out.println(underscoredLine);
+                } catch (NoRemarkException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! The remarks section of a " + tokenizedInput[0] + " cannot be empty.");
+                    System.out.println(underscoredLine);
+                }
+            }
+            System.out.print(">>>");
+        }
+
+        sayGoodbye();
+    }
 
 }
