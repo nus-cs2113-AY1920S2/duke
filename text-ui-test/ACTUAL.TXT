@@ -71,12 +71,7 @@ Here are the tasks in your list:
 ____________________________________________________________
 Enter a command: Command entered: blah
 ____________________________________________________________
-	blah
-____________________________________________________________
-Enter a command: Command entered: find
-____________________________________________________________
-Command is invalid
-Please try another command
+I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 Enter a command: Command entered: bye
 ____________________________________________________________
