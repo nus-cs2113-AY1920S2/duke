@@ -36,7 +36,8 @@ public class Task {
     }
 
     public char getDone() {
-        return isDone ? '✓' : '✗';
+        // return tick if done, cross if not done
+        return isDone ? '\u2713' : '\u2717';
     }
 
     public void setDone(boolean status) {
