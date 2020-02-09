@@ -1,0 +1,5 @@
+1. [T][✘] eat
+2. [T][✘] left
+3. [T][✘] right
+4. [T][✘] eat
+5. [T][✘] work
