@@ -8,7 +8,13 @@ public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static Task[] tasks = new Task[MAXIMUM_CAPACITY];
     private static int taskCount = 0;
+    private Parser parser;
+    private DukeException dukeException;
 
+    public Duke(){
+        parser = new Parser();
+        dukeException = new DukeException();
+    }
     public static void doLine(){
         String line = "_".repeat(60);
         System.out.println("\t"+line);
@@ -23,11 +29,6 @@ public class Duke {
         System.out.println("\tBye. Hope to see you again soon!");
         doLine();
 
-    }
-    public static void doWrongInput(){
-        doLine();
-        System.out.println("\tYou have entered an incorrect input. Please try again.");
-        doLine();
     }
     public static void getList(){
         doLine();
@@ -62,45 +63,74 @@ public class Duke {
         System.out.println("\t\t"+tasks[taskNumber].toString());
         doLine();
     }
-    public static void processInput(String command){
-        String[] firstProcess = new String[MAXIMUM_CAPACITY];
-        firstProcess = command.split(" ", 2);
-        String firstCommand = firstProcess[0];
-        try {
+    public void processInput(String input){
+        try{
+            parser.setInput(input);
+            String firstCommand = parser.getFirst();
             if(firstCommand.equals("bye")){
                 doFarewell();
                 exitProgram();
             }else if(firstCommand.equals("list")) {
                 getList();
             }else if(firstCommand.equals("deadline")){
-                String[] secondProcess = firstProcess[1].split(" /by ");
-                addTask(new Deadline(secondProcess[0], secondProcess[1]));
+                try {
+                    if(parser.getDeadlineItem().equals(" ") || parser.getDeadlineBy().isEmpty() || parser.getDeadlineItem().isEmpty() || parser.getDeadlineBy().equals(" ")){
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    addTask(new Deadline(parser.getDeadlineItem(), parser.getDeadlineBy()));
+                }catch (ArrayIndexOutOfBoundsException e){
+                    dukeException.printInvalidDeadlineException();
+                }
             }else if(firstCommand.equals("event")){
-                String[] secondProcess = firstProcess[1].split(" /at ");
-                addTask(new Event(secondProcess[0], secondProcess[1]));
+                try {
+                    if(parser.getEventItem().equals(" ") || parser.getEventItem().isEmpty() || parser.getEventAt().isEmpty() || parser.getEventAt().equals(" ")){
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    addTask(new Event(parser.getEventItem(), parser.getEventAt()));
+                }catch (ArrayIndexOutOfBoundsException e){
+                    dukeException.printInvalidEventException();
+                }
             }else if(firstCommand.equals("todo")){
-                System.out.println(firstProcess[1]);
-                addTask(new ToDo(firstProcess[1]));
+                try{
+                    if(parser.getToDo().equals(" ") || parser.getToDo().isEmpty()){
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    addTask(new ToDo(parser.getToDo()));
+                }catch (ArrayIndexOutOfBoundsException e){
+                    dukeException.printInvalidToDoException();
+                }
             }else if(firstCommand.equals("done")) {
-                completeTask(firstProcess[1]);
+                try {
+                    if(parser.getCompleteNumber().equals(" ")  || parser.getCompleteNumber().isEmpty()){
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    completeTask(parser.getCompleteNumber());
+                }catch (ArrayIndexOutOfBoundsException e){
+                    dukeException.printInvalidDoneException();
+                }
             }else{
-                doWrongInput();
+                dukeException.printInvalidCommandException();
             }
-        }catch(Exception e){
-            doWrongInput();
+        }catch (Exception e){
+            System.out.println(e);
+            dukeException.printInvalidCommandException();
         }
+
     }
 
     private static void exitProgram() {
         System.exit(0);
     }
-    public static void main(String[] args) {
-
-        doGreeting();
+    private void run(){
         while(true){
             String userCommand = getUserInput();
             processInput(userCommand);
         }
+    }
+    public static void main(String[] args) {
 
+        doGreeting();
+        Duke duke = new Duke();
+        duke.run();
     }
 }
