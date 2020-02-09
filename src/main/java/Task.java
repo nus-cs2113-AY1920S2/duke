@@ -1,15 +1,21 @@
 
 public class Task {
 
+    public static final String checkMark = "\u2713";
+    public static final String crossMark = "\u2718";
     /** Completion status for the task **/
     protected boolean isDone;
+
+    /** Check and cross markers */
 
     /** Task description given by the user**/
     protected String description;
 
+
     public Task (String description) {
         this.description = description;
         isDone = false;
+
     }
 
     public String getDescription () {
@@ -22,7 +28,7 @@ public class Task {
      * @return Label with a cross or check mark
      */
     public String getStatusIcon () {
-        return "[" + (isDone ? "\u2713" : "\u2718") + "]";
+        return "[" + (isDone ? checkMark : crossMark) + "]";
     }
 
     public boolean getCompletionStatus () {
@@ -32,6 +38,7 @@ public class Task {
     public void setTaskAsDone () {
         this.isDone = true;
     }
+
 
     @Override
     public String toString() {
