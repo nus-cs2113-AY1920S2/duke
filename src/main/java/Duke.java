@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,11 +6,11 @@ public class Duke {
     private static Task[] tasks = new Task[MAXIMUM_CAPACITY];
     private static int taskCount = 0;
     private Parser parser;
-    private DukeException dukeException;
+    private DukeExceptions dukeExceptions;
 
     public Duke(){
         parser = new Parser();
-        dukeException = new DukeException();
+        dukeExceptions = new DukeExceptions();
     }
     public static void doLine(){
         String line = "_".repeat(60);
@@ -79,7 +76,7 @@ public class Duke {
                     }
                     addTask(new Deadline(parser.getDeadlineItem(), parser.getDeadlineBy()));
                 }catch (ArrayIndexOutOfBoundsException e){
-                    dukeException.printInvalidDeadlineException();
+                    dukeExceptions.printInvalidDeadlineException();
                 }
             }else if(firstCommand.equals("event")){
                 try {
@@ -88,7 +85,7 @@ public class Duke {
                     }
                     addTask(new Event(parser.getEventItem(), parser.getEventAt()));
                 }catch (ArrayIndexOutOfBoundsException e){
-                    dukeException.printInvalidEventException();
+                    dukeExceptions.printInvalidEventException();
                 }
             }else if(firstCommand.equals("todo")){
                 try{
@@ -97,7 +94,7 @@ public class Duke {
                     }
                     addTask(new ToDo(parser.getToDo()));
                 }catch (ArrayIndexOutOfBoundsException e){
-                    dukeException.printInvalidToDoException();
+                    dukeExceptions.printInvalidToDoException();
                 }
             }else if(firstCommand.equals("done")) {
                 try {
@@ -106,14 +103,14 @@ public class Duke {
                     }
                     completeTask(parser.getCompleteNumber());
                 }catch (ArrayIndexOutOfBoundsException e){
-                    dukeException.printInvalidDoneException();
+                    dukeExceptions.printInvalidDoneException();
                 }
             }else{
-                dukeException.printInvalidCommandException();
+                dukeExceptions.printInvalidCommandException();
             }
         }catch (Exception e){
             System.out.println(e);
-            dukeException.printInvalidCommandException();
+            dukeExceptions.printInvalidCommandException();
         }
 
     }

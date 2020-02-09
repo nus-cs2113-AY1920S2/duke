@@ -1,4 +1,4 @@
-public class DukeException {
+public class DukeExceptions {
     public static void doLine(){
         String line = "_".repeat(60);
         System.out.println("\t"+line);
