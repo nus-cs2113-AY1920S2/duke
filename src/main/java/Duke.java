@@ -26,23 +26,23 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {
-            String[] splitUpInput = userInput.split(" ");
-            if (splitUpInput[0].equals("list")) {
+            //String[] splitUpInput = userInput.split(" ");
+            if (userInput.startsWith("list")) {
                 printTasks();
-            } else if (splitUpInput[0].equals("done")) {
+            } else if (userInput.startsWith("done")) {
                 tasks.get(Integer.parseInt(Character.toString(
                         userInput.charAt(userInput.length() - 1))) - 1).setDone();
-            } else if (splitUpInput[0].equals("todo")) {
+            } else if (userInput.startsWith("todo")) {
                 Task task = new ToDo(userInput.substring(5));
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:\n  " + task.toString()
                         + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
-            } else if (splitUpInput[0].equals("deadline")) {
+            } else if (userInput.startsWith("deadline")) {
                 Task task = new Deadline(userInput.substring(9));
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:\n  " + task.toString()
                         + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
-            } else if (splitUpInput[0].equals("event")) {
+            } else if (userInput.startsWith("event")) {
                 Task task = new Event(userInput.substring(6));
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:\n  " + task.toString()
