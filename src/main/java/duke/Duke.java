@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -5,7 +7,7 @@ public class Duke {
     /**
      * List of all tasks added by the user
      */
-    private static Task[] taskList;
+    private static types.Task[] taskList;
 
     /**
      * Number of tasks in taskList
@@ -82,7 +84,7 @@ public class Duke {
      * The introduction command, which generates the introduction script
      */
     private static void introduction() {
-        taskList = new Task[MAX_TASKS];
+        taskList = new types.Task[MAX_TASKS];
         numTasks = 0;
         System.out.println(BAR);
         System.out.println("    Hey! I'm Jamun");
@@ -99,7 +101,7 @@ public class Duke {
             throw new DukeException();
         }
         String[] splitTask2 = task.split("/at");
-        Task t = new Event(splitTask2[0], numTasks, splitTask2[1]);
+        types.Task t = new types.Event(splitTask2[0], numTasks, splitTask2[1]);
         addTask(t);
         printTask(t);
     }
@@ -108,7 +110,7 @@ public class Duke {
      * Print the task
      * @param t task to be printed
      */
-    private static void printTask(Task t) {
+    private static void printTask(types.Task t) {
         System.out.println("    Got it. I've added this task: ");
         System.out.println("    " + t.toString());
         System.out.println("    Now you have " + numTasks + " tasks in the list.");
@@ -123,7 +125,7 @@ public class Duke {
             throw new DukeException();
         }
         String[] splitTask2 = task.split("/by");
-        Task t = new Deadline(splitTask2[0], numTasks, splitTask2[1]);
+        types.Task t = new types.Deadline(splitTask2[0], numTasks, splitTask2[1]);
         addTask(t);
         printTask(t);
     }
@@ -132,7 +134,7 @@ public class Duke {
      * Add task to list and increment number of tasks
      * @param t task to be added to list
      */
-    private static void addTask(Task t) {
+    private static void addTask(types.Task t) {
         taskList[numTasks] = t;
         numTasks++;
     }
@@ -145,7 +147,7 @@ public class Duke {
         if (task.isEmpty()) {
             throw new DukeException();
         }
-        Task t = new Todo(task, numTasks);
+        types.Task t = new types.Todo(task, numTasks);
         addTask(t);
         printTask(t);
     }
@@ -160,7 +162,7 @@ public class Duke {
             throw new DukeException();
         }
         int taskDoneNum = Integer.parseInt(splitTask2[1]);
-        if (taskDoneNum - 1 >= numTasks) {
+        if (taskDoneNum - 1 >= numTasks || taskDoneNum <= 0) {
             System.out.println("    You haven't done that many tasks yet!");
         } else {
             taskList[taskDoneNum - 1].setDone(true);
