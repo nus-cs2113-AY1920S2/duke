@@ -1,4 +1,4 @@
-package task;
+package alie.task;
 
 public class Events extends Task {
     private String startDate;
@@ -8,6 +8,7 @@ public class Events extends Task {
         startDate = date;
     }
 
+    @Override
     public String getTaskInfo() {
         return ("[E]" + super.getTaskInfo() + " (at: " + startDate + ")");
     }
