@@ -1,3 +1,10 @@
+import exception.InexplicitTimeDescription;
+import exception.UnknownCommandException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 import java.util.*;
 public class Duke {
     public static void main(String[] args) {
@@ -10,10 +17,10 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String input = getAndProcessInput(in);
         Boolean inputNotValid = Boolean.TRUE;
-        ChooseOneMode(in, input, inputNotValid);
+        chooseOneMode(in, input, inputNotValid);
     }
 
-    private static void ChooseOneMode(Scanner in, String input, Boolean inputNotValid) {
+    private static void chooseOneMode(Scanner in, String input, Boolean inputNotValid) {
         while(inputNotValid) {
             switch(input){
             case "1":

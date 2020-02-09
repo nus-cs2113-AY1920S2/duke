@@ -1,3 +1,5 @@
+package task;
+
 public class Event extends Task {
     private static int eventNum = 0;
     private String date;
