@@ -12,12 +12,6 @@ public class Alie {
     protected static final int TODO_CMD_LENGTH = 5;
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
     protected static final String EVENT_DETAILS_DIVIDER = " /at ";
-    private static final String logo =
-                      "    /\\       |        |   |‾‾‾‾‾ " + System.lineSeparator()
-                    + "   /  \\      |        |   | " + System.lineSeparator()
-                    + "  /____\\     |        |   |----     " + System.lineSeparator()
-                    + " /      \\    |        |   |  " + System.lineSeparator()
-                    + "/        \\ . |_____ . | . |_____ . ";
 
     public static void main(String[] args) {
         printWelcomeMsg();
@@ -37,7 +31,13 @@ public class Alie {
     }
 
     public static void printWelcomeMsg() {
-        System.out.println("Hello from" + System.lineSeparator() + logo);
+        String logo =
+                          "    /\\       |        |   |‾‾‾‾‾    \n"
+                        + "   /  \\      |        |   |         \n"
+                        + "  /____\\     |        |   |----     \n"
+                        + " /      \\    |        |   |         \n"
+                        + "/        \\ . |_____ . | . |_____ .  \n";
+        System.out.println("Hello from\n" + logo);
         printHeader();
         System.out.println("What would you like to do?");
     }
@@ -72,11 +72,11 @@ public class Alie {
             addToDoTask(cmd, checkList);
             break;
         case "deadline":
-            // Input format: <task type> <task name> /by <task details>
+            // Input format 1: <task type> <task name> /by <task details>
             addDeadlineTask(cmd, checkList);
             break;
         case "event":
-            // Input format: <task type> <task name> /at <task details>
+            // Input format 1: <task type> <task name> /at <task details>
             addEventTask(cmd, checkList);
             break;
         default:
