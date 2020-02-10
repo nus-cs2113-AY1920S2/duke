@@ -8,7 +8,9 @@ import tasks.Event;
 import tasks.TaskType;
 
 // TODO: Extract existing error handling to exceptions.DukeException where appropriate
+// TODO: Assess if there is a better way to implement task adding i.e. with splitString() or otherwise
 // TODO: Check for further modularisation
+// TODO: A general add to arrayList method? reduce LOC
 
 public class Duke {
     /** Helper Functions Start **/
@@ -23,7 +25,7 @@ public class Duke {
                 + "\ttodo:      tasks without a date/time (syntax: todo buy food)\n"
                 + "\tlist:      list your current tasks (syntax: list)\n"
                 + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday)\n"
-                + "\tevent:     tasks that start/end by a specific time (syntax: event food fare /at Mon 2-4pm)\n"
+                + "\tevent:     tasks that start/end by a specific time (syntax: event food fair /at Mon 2-4pm)\n"
                 + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
                 + "\thelp:      launch the help screen (syntax: help)";
         System.out.println(helpMsg);
@@ -45,7 +47,7 @@ public class Duke {
     }
 
     // java.lang.NumberFormatException
-    private static void markTaskDone(String userCmd, ArrayList<Task> taskArrList) {
+    private static void markTaskDone(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");
         int completedTask = 0;
@@ -54,9 +56,11 @@ public class Duke {
         try {
             completedTask = Integer.parseInt(splitCmd[1]);
         }
-        catch (Exception e){
-            System.out.println("Incorrect syntax! Try again");
-            return;
+        catch (NumberFormatException e){
+            throw new DukeException("The number must be in number form. Syntax: done 3");
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("There must be a task number provided to mark as done. Syntax: done 3");
         }
 
         if (completedTask > taskArrList.size() ) {
@@ -65,7 +69,7 @@ public class Duke {
         else {
             int completedIndex = completedTask-1;
             Task t = taskArrList.get(completedIndex);
-            //todo: need to check if already completed?
+            // todo: need to check if already completed?
             t.setDone();
 
             System.out.println("I've marked this task as done:");
@@ -80,24 +84,29 @@ public class Duke {
             String[] splitCmd = userCmd.split("todo ");
             todoStr = splitCmd[1].trim();
         }
-        catch (Exception e){
-            throw new DukeException("There must be a description for a todo task.");
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("There must be a description for a todo task. Syntax: todo buy food");
         }
-
 
         Task newTask = new Task(TaskType.TODO, todoStr);
         taskArrList.add(newTask);
-        System.out.println("Task added: " +todoStr);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("\t" +newTask.toString() );
     }
 
     // java.lang.ArrayIndexOutOfBoundsException
-    private static void addDeadline(String userCmd, ArrayList<Task> taskArrList) {
+    private static void addDeadline(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
+        String taskStr, deadlineStr;
         // Syntax: deadline return book /by Sunday
-        String[] splitCmd = userCmd.split("/by ");
-        String deadlineStr = splitCmd[1].trim();
-
-        String[] splitName = splitCmd[0].split("deadline ");
-        String taskStr = splitName[1].trim();
+        try {
+            String[] splitCmd = userCmd.split("/by ");
+            deadlineStr = splitCmd[1].trim();
+            String[] splitName = splitCmd[0].split("deadline ");
+            taskStr = splitName[1].trim();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("Wrong syntax for deadline tasks. Syntax: deadline buy food /by Sunday");
+        }
 
         Deadline newDeadline = new Deadline(TaskType.DEADLINE, taskStr, deadlineStr);
         taskArrList.add(newDeadline);
@@ -107,16 +116,23 @@ public class Duke {
     }
 
     // java.lang.ArrayIndexOutOfBoundsException
-    private static void addEvent(String userCmd, ArrayList<Task> taskArrList) {
+    private static void addEvent(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
         // Syntax: event project meeting /at Mon 2-4pm
-        String[] splitCmd = userCmd.split("/at ");
-        String dateStr = splitCmd[1].trim();
+        String dateStr, eventStr;
 
-        String[] splitName = splitCmd[0].split("event ");
-        String eventStr = splitName[1].trim();
+        try {
+            String[] splitCmd = userCmd.split("/at ");
+            dateStr = splitCmd[1].trim();
+
+            String[] splitName = splitCmd[0].split("event ");
+            eventStr = splitName[1].trim();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("Wrong syntax for event tasks. Syntax: event food fair /at Mon 2-4pm");
+        }
 
         Event newEvent = new Event(TaskType.EVENT, eventStr, dateStr);
-
+        taskArrList.add(newEvent);
         System.out.println("Got it. I've added this event: ");
         System.out.println("\t" +newEvent.toString() );
     }
@@ -140,35 +156,39 @@ public class Duke {
             System.out.println("How can I help you?");
             userCmd = sc.nextLine();
 
-            // end program
-            if (userCmd.toLowerCase().equals("bye") ) {
-                System.out.println("Bye. Hope to see you again!");
-                continueRun = false;
-                break;
+            try {
+                // end program
+                if (userCmd.toLowerCase().equals("bye")) {
+                    System.out.println("Bye. Hope to see you again!");
+                    continueRun = false;
+                    break;
+                }
+                // List commands
+                else if (userCmd.toLowerCase().equals("list")) {
+                    listTasks(taskArrList);
+                }
+                // Mark task as done
+                else if (userCmd.contains("done")) {
+                    markTaskDone(userCmd, taskArrList);
+                }
+                // Add task type todos (normal tasks)
+                else if (userCmd.contains("todo")) {
+                    addTask(userCmd, taskArrList);
+                }
+                // Add task type deadline
+                else if (userCmd.contains("deadline")) {
+                    addDeadline(userCmd, taskArrList);
+                }
+                // Add task type events
+                else if (userCmd.contains("event")) {
+                    addEvent(userCmd, taskArrList);
+                } else {
+                    System.out.println("Wrong syntax!");
+                    printHelp();
+                }
             }
-            // List commands
-            else if (userCmd.toLowerCase().equals("list") ) {
-                listTasks(taskArrList);
-            }
-            // Mark task as done
-            else if (userCmd.contains("done") ) {
-                markTaskDone(userCmd, taskArrList);
-            }
-            // Add task type todos (normal tasks)
-            else if (userCmd.contains("todo") ) {
-                addTask(userCmd, taskArrList);
-            }
-            // Add task type deadline
-            else if (userCmd.contains("deadline") ) {
-                addDeadline(userCmd, taskArrList);
-            }
-            // Add task type events
-            else if (userCmd.contains("event") ) {
-                addEvent(userCmd, taskArrList);
-            }
-            else {
-                System.out.println("Wrong syntax!");
-                printHelp();
+            catch (DukeException e){
+                System.out.println(e +"\nPlease try again");
             }
         }
     }
