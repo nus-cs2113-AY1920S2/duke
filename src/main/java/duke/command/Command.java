@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Command {
 
     // TODO Refactor command information and command execution into

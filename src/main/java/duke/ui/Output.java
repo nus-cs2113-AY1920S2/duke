@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.command.Command;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Output {
