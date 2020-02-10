@@ -1,6 +1,8 @@
 public class ToDo extends TaskManager {
+    protected boolean isDone;
     public ToDo(String task) {
         super(task);
+        this.isDone = false;
     }
 
     @Override

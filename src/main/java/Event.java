@@ -10,7 +10,6 @@ public class Event extends TaskManager {
         if (by.equals("")) {
             return "[E]" + super.toString();
         }
-        String[] bySplit = by.split(" ", 2);
-        return "[E]" + super.toString() + "(" + bySplit[0] + ": " + bySplit[1] + ")";
+        return "[E]" + super.toString() + "( at: " + by + ")";
     }
 }
