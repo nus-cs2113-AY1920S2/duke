@@ -3,7 +3,7 @@ public class Duke {
 
     private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
-    
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -35,15 +35,16 @@ public class Duke {
         printLine();
         if(userResponde.equals("bye")){
             sayBye();
-        }
-        else if(userResponde.equals("list")) {
+        } else if(userResponde.equals("list")) {
             listTask();
-        }
-        else if(userResponde.startsWith("done")) {
+        } else if(userResponde.startsWith("done")) {
             markAsDone(userResponde);
-        }
-        else{
-            addNewTask(userResponde);
+        } else{
+            try{
+                addNewTask(userResponde);
+            }catch(DukeException e){
+                System.out.println("\t☹ OOPS!!! " + e.getMessage());
+            }
         }
         printLine();
         System.out.println();
@@ -71,21 +72,32 @@ public class Duke {
         System.out.println("\t  [\u2713] " + tasks[doneCount].getDescription());
     }
 
-    public static void addNewTask(String userResponde){
-        if(userResponde.startsWith("todo")){
+    public static void addNewTask(String userResponde) throws DukeException{
+        String[] responses = userResponde.split(" ");
+
+        if(responses[0].equals("todo")){
+            if( responses.length < 2){
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
             tasks[taskCount] = new Todo(userResponde.substring(5));
-        }
-        else if(userResponde.startsWith("deadline")){
+        } else if(responses[0].equals("deadline")){
+            if( responses.length < 2){
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
             int dividerPosition = userResponde.indexOf(" /by");
             String taskName = userResponde.substring(9,dividerPosition);
             String deadlineTime = userResponde.substring(dividerPosition + 5);
             tasks[taskCount] = new Deadline(taskName,deadlineTime);
-        }
-        else if(userResponde.startsWith("event")){
+        } else if(responses[0].equals("event")){
+            if( responses.length < 2){
+                throw new DukeException("The description of a event cannot be empty.");
+            }
             int dividerPosition = userResponde.indexOf(" /at");
             String taskName = userResponde.substring(6,dividerPosition);
             String deadlineTime = userResponde.substring(dividerPosition + 5);
             tasks[taskCount] = new Event(taskName,deadlineTime);
+        } else{
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + tasks[taskCount]);
