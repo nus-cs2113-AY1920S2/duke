@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Duke {
     public static void main(String[] args) {
         Task[] tasks = new Task[100];
-        int count = 0;
+        int taskCount = 0;
         boolean isBye = false;
         System.out.println("    ____________________________________________________________");
         System.out.println("    Hello! I'm Duke");
@@ -21,7 +21,7 @@ public class Duke {
             switch (stringSplit[0]) {
             case "list":
                 System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < taskCount; i++) {
                     System.out.println("     " + (i + 1) + "." + tasks[i].toString());
                 }
                 break;
@@ -37,34 +37,34 @@ public class Duke {
                 break;
             case "todo":
                 description = String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length));
-                tasks[count] = new Todo(description);
+                tasks[taskCount] = new Todo(description);
                 System.out.println("     Got it. I've added this task: ");
-                System.out.println("       " + tasks[count].toString());
-                count++;
-                System.out.println("     Now you have " + count + " tasks in the list.");
+                System.out.println("       " + tasks[taskCount].toString());
+                taskCount++;
+                System.out.println("     Now you have " + taskCount + " tasks in the list.");
                 break;
             case "deadline":
                 description = string.substring(0, string.indexOf(" /by")).replace("deadline ", "");
                 date = string.substring(string.indexOf("/by ")).replace("/by ", "");
-                tasks[count] = new Deadline(description, date);
+                tasks[taskCount] = new Deadline(description, date);
                 System.out.println("     Got it. I've added this task: ");
-                System.out.println("       " + tasks[count].toString());
-                count++;
-                System.out.println("     Now you have " + count + " tasks in the list.");
+                System.out.println("       " + tasks[taskCount].toString());
+                taskCount++;
+                System.out.println("     Now you have " + taskCount + " tasks in the list.");
                 break;
             case "event":
                 description = string.substring(0, string.indexOf(" /at")).replace("event ", "");
                 date = string.substring(string.indexOf("/at ")).replace("/at ", "");
-                tasks[count] = new Event(description, date);
+                tasks[taskCount] = new Event(description, date);
                 System.out.println("     Got it. I've added this task: ");
-                System.out.println("       " + tasks[count].toString());
-                count++;
-                System.out.println("     Now you have " + count + " tasks in the list.");
+                System.out.println("       " + tasks[taskCount].toString());
+                taskCount++;
+                System.out.println("     Now you have " + taskCount + " tasks in the list.");
                 break;
             default: //add Task into List
-                tasks[count] = new Task(string);
-                System.out.println("     added: " + tasks[count].getDescription());
-                count++;
+                tasks[taskCount] = new Task(string);
+                System.out.println("     added: " + tasks[taskCount].getDescription());
+                taskCount++;
                 break;
             }
             System.out.println("    ____________________________________________________________");
