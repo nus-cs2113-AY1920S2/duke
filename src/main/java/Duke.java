@@ -10,6 +10,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
+    private static int MAX_TASK = 100;
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -17,11 +18,9 @@ public class Duke {
     }
 
     private static void runChatbot() {
-        Task[] Tasks = new Task[100];
-
+        Task[] Tasks = new Task[MAX_TASK];
         Scanner in = new Scanner(System.in);
         String arr[] = getCommand(in);
-
         while (true) {
             runCommand(arr, Tasks, in);
             arr = getCommand(in);
