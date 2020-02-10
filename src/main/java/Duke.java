@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 public class Duke {
     private static final int TASKLIST_SIZE = 100;
