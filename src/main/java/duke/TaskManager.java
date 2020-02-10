@@ -28,6 +28,12 @@ public class TaskManager {
 
         if (command.equals("list")) {
             listTasks();
+        } else if (command.equals("done")) {
+            try {
+                markAsDone(userInput);
+            } catch (BadDoneFormatException e) {
+                Ui.printPretty(e.getMessage());
+            }
         } else {
             try {
                Task newTask = getTaskFromUserInput(command, userInput);
@@ -66,5 +72,30 @@ public class TaskManager {
             message += (String.format("%d. %s", i + 1, tasks.get(i).toString()) + lineEnd);
         }
         Ui.printPretty(message);
+    }
+
+    protected void markAsDone(String userInput) throws BadDoneFormatException{
+        if (!userInput.contains(" ")) {
+            throw new BadDoneFormatException("no space");
+        } else if (userInput.indexOf(" ") + 1 > userInput.length() - 1) {
+            throw new BadDoneFormatException("no task specified");
+        }
+
+        int taskIndex;
+        String taskNumber;
+        try {
+            taskNumber = userInput.substring(userInput.indexOf(" ") + 1);
+            taskIndex = Integer.parseInt(taskNumber) - 1;
+        } catch (NumberFormatException e) {
+            throw new BadDoneFormatException("task number invalid");
+        }
+
+        if (taskIndex > tasks.size() - 1 || taskIndex < 0) {
+            throw new BadDoneFormatException("task number invalid");
+        }
+
+        Task t = tasks.get(taskIndex);
+        t.setIsDone(true);
+        Ui.printPretty("Task " + taskNumber + " has been marked as done\n" + t.toString());
     }
 }
