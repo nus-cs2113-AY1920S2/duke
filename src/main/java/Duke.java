@@ -12,12 +12,17 @@ public class Duke {
         ArrayList<String> list = new ArrayList<String>(100);
         while (true) {
             String command = scanner.nextLine();
+            /* character-unicode list
+            \u2717 ✗
+            \u2713 ✓
+            */
 
             switch (command) {
             case "list":
-                System.out.println("    ____________________________________________________________");
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println("     " + (i+1) + ". " + list.get(i));
+                    System.out.println("     " + (i+1) + "." + list.get(i));
                 }
                 System.out.print("    ____________________________________________________________\n");
                 break;
@@ -27,9 +32,19 @@ public class Duke {
                         "    ____________________________________________________________");
                 return;
             default:
+                if (command.matches("done\\s\\d+")) {
+                    int listIndex = Integer.parseInt(command.replaceAll("[^\\d]",""));
+                    list.set(listIndex-1,list.get(listIndex-1).replace("✗","✓"));
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Nice! I've marked this task as done:\n       " + list.get(listIndex - 1)
+                            + "\n    ____________________________________________________________");
+
+                } else {
+
                 System.out.println("    ____________________________________________________________\n     added: " +
-                        command + "\n    ____________________________________________________________\n");
-                list.add(command);
+                        command + "\n    ____________________________________________________________");
+                list.add("[✗] " + command);
+                }
                 break;
             }
         }
