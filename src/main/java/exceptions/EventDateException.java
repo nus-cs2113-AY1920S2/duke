@@ -1,12 +1,14 @@
-public class EventDateException extends DukeException {
-    private String errorMsg;
+package exceptions;
 
-    public EventDateException(String errorMsg) {
-        this.errorMsg = errorMsg;
+public class EventDateException extends DukeException {
+    private String error;
+
+    public EventDateException(String error) {
+        this.error = error;
     }
 
     @Override
     public String toString() {
-        return String.format("Sorry! %s", this.errorMsg);
+        return String.format("Error: %s", this.error);
     }
 }

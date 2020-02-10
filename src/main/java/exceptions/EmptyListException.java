@@ -1,12 +1,14 @@
-public class EmptyListException extends DukeException {
-    private String errorMsg;
+package exceptions;
 
-    public EmptyListException(String errorMsg) {
-        this.errorMsg = errorMsg;
+public class EmptyListException extends DukeException {
+    private String error;
+
+    public EmptyListException(String error) {
+        this.error = error;
     }
 
     @Override
     public String toString() {
-        return String.format("Sorry! %s", this.errorMsg);
+        return String.format("Error: %s", this.error);
     }
 }

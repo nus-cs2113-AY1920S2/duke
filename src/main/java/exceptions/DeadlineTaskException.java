@@ -1,13 +1,14 @@
+package exceptions;
+
 public class DeadlineTaskException extends DukeException {
+    private String error;
 
-    private String errorMsg;
-
-    public DeadlineTaskException(String errorMsg) {
-        this.errorMsg = errorMsg;
+    public DeadlineTaskException(String error) {
+        this.error = error;
     }
 
     @Override
     public String toString() {
-        return String.format("Sorry, %s", this.errorMsg);
+        return String.format("Error: %s", this.error);
     }
 }
