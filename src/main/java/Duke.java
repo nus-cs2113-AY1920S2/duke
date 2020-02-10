@@ -22,42 +22,56 @@ public class Duke {
             taskDescription = command[1];
             printLine();
 
-            switch (taskType) {
-            case "bye":
-                // close the interpreter
-                System.out.println("\tBye. Hope to see you again soon!");
-                break;
-            case "list":
-                tasks.list();
-                break;
-            case "todo":
-                tasks.add(new ToDo(taskDescription));
-                break;
-            case "deadline":
-                taskDescriptionArgs = processArgs(taskDescription);
-                taskDescription = taskDescriptionArgs[0];
-                taskDescriptionBy = taskDescriptionArgs[1];
-                tasks.add(new Deadline(taskDescription, taskDescriptionBy));
-                break;
-            case "event":
-                taskDescriptionArgs = processArgs(taskDescription);
-                taskDescription = taskDescriptionArgs[0];
-                taskDescriptionAt = taskDescriptionArgs[1];
-                tasks.add(new Event(taskDescription, taskDescriptionAt));
-                break;
-            case "done":
-                // mark a task as done
-                System.out.println("\tNice! I've marked this task as done:");
-                int indexOfTasks = Integer.parseInt(command[1]) - 1;
-                tasks.setDoneByIndex(indexOfTasks);
-                System.out.println("\t" + tasks.getByIndex(indexOfTasks));
-                break;
-            default:
+            try {
+                switch (taskType) {
+                case "bye":
+                    // close the interpreter
+                    System.out.println("\tBye. Hope to see you again soon!");
+                    break;
+                case "list":
+                    tasks.list();
+                    break;
+                case "todo":
+                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
+                        throw new NoDescriptionException();
+                    }
+                    tasks.add(new ToDo(taskDescription));
+                    break;
+                case "deadline":
+                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
+                        throw new NoDescriptionException();
+                    }
+                    taskDescriptionArgs = processArgs(taskDescription);
+                    taskDescription = taskDescriptionArgs[0];
+                    taskDescriptionBy = taskDescriptionArgs[1];
+                    tasks.add(new Deadline(taskDescription, taskDescriptionBy));
+                    break;
+                case "event":
+                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
+                        throw new NoDescriptionException();
+                    }
+                    taskDescriptionArgs = processArgs(taskDescription);
+                    taskDescription = taskDescriptionArgs[0];
+                    taskDescriptionAt = taskDescriptionArgs[1];
+                    tasks.add(new Event(taskDescription, taskDescriptionAt));
+                    break;
+                case "done":
+                    // mark a task as done
+                    System.out.println("\tNice! I've marked this task as done:");
+                    int indexOfTasks = Integer.parseInt(command[1]) - 1;
+                    tasks.setDoneByIndex(indexOfTasks);
+                    System.out.println("\t" + tasks.getByIndex(indexOfTasks));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+                }
+            } catch (NoDescriptionException m) {
+                System.out.println("\t ☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
+            } catch (IllegalArgumentException m) {
                 System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-
             printLine();
-        } while (!taskType.equals("bye"));
+        } while (!taskType.equals("bye")) ;
     }
 
     /**
