@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 public class Event extends Task {
 
     String timePeriod;
