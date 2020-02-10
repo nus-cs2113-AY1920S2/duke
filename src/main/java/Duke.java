@@ -25,13 +25,23 @@ public class Duke {
     }
 
     public static String[] splitUserInput(String originalInput) throws ArrayIndexOutOfBoundsException, 
-    NoDescriptionException, NoRemarkException {
+    NoDescriptionException, NoRemarkException, IllegalKeywordException {
         String[] returnValue = new String[MAX_SUBSTRING_FIELDS];
         if (originalInput.contains(" /")){
             String[] separatedSections = originalInput.split(" /");
             String commandWord = separatedSections[0].split(" ", 2)[0];
+
+            //todo should not have a remark section
+            if (commandWord.equals("todo")) {
+                throw new IllegalKeywordException();
+            }
             // get description part of userInput without the command word
-            returnValue[0] = separatedSections[0].split(" ", 2)[1];
+            try{
+                returnValue[0] = separatedSections[0].split(" ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            
             if (returnValue[0].trim().length() == 0) {
                 throw new NoDescriptionException();
             }
@@ -135,6 +145,15 @@ public class Duke {
         
         while (in.hasNextLine()) {
             userInput = in.nextLine();
+            try {
+                String testBlankInput = userInput.split(" ")[0];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(underscoredLine);
+                System.out.println("\t\u2639 !!ERROR!! Command cannot be whitespaces.");
+                System.out.println(underscoredLine);
+                System.out.print(">>>");
+                continue;
+            }
             String[] tokenizedInput = userInput.split(" ");
             if (tokenizedInput[0].equals("bye")) {
                 break;
@@ -156,6 +175,10 @@ public class Duke {
                 } catch (NoRemarkException e) {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! The remarks section of a " + tokenizedInput[0] + " cannot be empty.");
+                    System.out.println(underscoredLine);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! " + tokenizedInput[0] + " command is missing additional parameters.");
                     System.out.println(underscoredLine);
                 }
             }
