@@ -24,60 +24,51 @@ public class Duke {
         System.out.println(goodbyeMessage2);
     }
 
-    public static String[] splitUserInput(String originalInput){
+    public static String[] splitUserInput(String originalInput) throws ArrayIndexOutOfBoundsException, 
+    NoDescriptionException, NoRemarkException, IllegalKeywordException {
         String[] returnValue = new String[MAX_SUBSTRING_FIELDS];
         if (originalInput.contains(" /")){
             String[] separatedSections = originalInput.split(" /");
+            String commandWord = separatedSections[0].split(" ", 2)[0];
+
+            //todo should not have a remark section
+            if (commandWord.equals("todo")) {
+                throw new IllegalKeywordException();
+            }
             // get description part of userInput without the command word
-            returnValue[0] = separatedSections[0].split(" ", 2)[1];
+            try{
+                returnValue[0] = separatedSections[0].split(" ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            
+            if (returnValue[0].trim().length() == 0) {
+                throw new NoDescriptionException();
+            }
             // get additional remark part of userInput
             returnValue[1] = separatedSections[1];
+            boolean isRemarksEmpty = ((commandWord.equals("event") || commandWord.equals("deadline")) 
+            && returnValue[1].trim().length() == 0);
+            if (isRemarksEmpty){
+                throw new NoRemarkException();
+            }
             return returnValue;
         } else {
             // get description part of userInput without the command word
-            returnValue[0] = originalInput.trim().split(" ", 2)[1];
+            try {
+                returnValue[0] = originalInput.trim().split(" ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new NoDescriptionException();
+                
+            }
+            
             // remark column is an empty string
             returnValue[1] = "";
             return returnValue;
         }
     }
 
-    public static void main(String[] args) {
-        Task[] taskList = new Task[MAX_NO_OF_TASKS];
-        taskCount = 0;
-        String userInput;
-        Scanner in = new Scanner(System.in);
-        boolean isExitCommandInvoked = false;
-
-        sayIntro();
-        //easier to identify lines input by user (per Python)
-        System.out.print(">>>");
-        
-        while (in.hasNextLine()) {
-            userInput = in.nextLine();
-            String[] tokenizedInput = userInput.split(" ");
-            switch (tokenizedInput[0]) {
-            case ("bye"):
-                isExitCommandInvoked = true;
-                break;
-            case ("list"):
-                addTaskToList(taskList);
-                break;
-            case("done"):
-                updateTaskDone(tokenizedInput[1], taskList);
-                break;
-            default:
-                insertNewTask(taskList, userInput, tokenizedInput);
-                break;
-            }
-            if (isExitCommandInvoked) {
-                break;
-            }
-            System.out.print(">>>");
-        }
-
-        sayGoodbye();
-    }
+    
 
     public static void addTaskToList(Task[] listInput) {
         //if list empty, inform user and await next command
@@ -107,6 +98,7 @@ public class Duke {
         }
         //handle case where user tries to mark as done an already completed task
         boolean isTaskAlreadyDone = listInput[queryNumber-1].getIsDone();
+        
         if (isTaskAlreadyDone){
             System.out.println(underscoredLine + System.lineSeparator()
                     + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
@@ -120,7 +112,8 @@ public class Duke {
                 + underscoredLine);
     }
 
-    private static void insertNewTask(Task[] taskList, String userInput, String[] tokenizedInput) {
+    private static void insertNewTask(Task[] taskList, String userInput, String[] tokenizedInput) throws 
+    IllegalKeywordException, NoDescriptionException, NoRemarkException {
         Task newTask;
         switch (tokenizedInput[0]) {
         case ("todo"):
@@ -133,8 +126,8 @@ public class Duke {
             newTask = new Event(splitUserInput(userInput)[0], splitUserInput(userInput)[1]);
             break;
         default:
-            newTask = new Task(userInput);
-            break;
+            throw new IllegalKeywordException();
+            //break;
         }
 
         taskList[taskCount] = newTask;
@@ -146,5 +139,69 @@ public class Duke {
                 + underscoredLine);
     }
 
+    public static void main(String[] args) {
+        Task[] taskList = new Task[MAX_NO_OF_TASKS];
+        int taskCount = 0;
+        String userInput;
+        Scanner in = new Scanner(System.in);
+        boolean isExitCommandInvoked = false;
+
+        sayIntro();
+        //easier to identify lines input by user (per Python)
+        System.out.print(">>>");
+        
+        while (in.hasNextLine()) {
+            userInput = in.nextLine();
+            try {
+                String testBlankInput = userInput.split(" ")[0];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(underscoredLine);
+                System.out.println("\t\u2639 !!ERROR!! Command cannot be whitespaces.");
+                System.out.println(underscoredLine);
+                System.out.print(">>>");
+                continue;
+            }
+            String[] tokenizedInput = userInput.split(" ");
+            switch (tokenizedInput[0]) {
+            case ("bye"):
+                isExitCommandInvoked = true;
+                break;
+            case ("list"):
+                addTaskToList(taskList);
+                break;
+            case("done"):
+                updateTaskDone(tokenizedInput[1], taskList);
+                break;
+            default:
+                try{
+                    insertNewTask(taskList, userInput, tokenizedInput);
+                } catch (IllegalKeywordException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(underscoredLine);
+                } catch (NoDescriptionException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! The description of a " + tokenizedInput[0] + " cannot be empty.");
+                    System.out.println(underscoredLine);
+                } catch (NoRemarkException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! The remarks section of a " + tokenizedInput[0] + " cannot be empty.");
+                    System.out.println(underscoredLine);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! " + tokenizedInput[0] + " command is missing additional parameters.");
+                    System.out.println(underscoredLine);
+                }
+            }
+
+            if (isExitCommandInvoked) {
+                break;
+            } else {
+                System.out.print(">>>");
+            }
+        }
+
+        sayGoodbye();
+    }
 
 }
