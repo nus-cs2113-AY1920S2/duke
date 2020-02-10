@@ -18,6 +18,11 @@ public class Deadlines extends Task {
     public String getDateTime() {
         return this.dateTime;
     }
+    
+    @Override
+    public Task setNewTaskId(int newTaskId) {
+        return new Deadlines(newTaskId, this.taskName, this.dateTime, this.isDone);
+    }
 
     @Override
     public String taskWithSymbol() {

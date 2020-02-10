@@ -10,6 +10,10 @@ public class ToDos extends Task {
         super(taskId, taskName);
     }
 
+    public Task setNewTaskId(int newTaskId) {
+        return new ToDos(newTaskId, this.taskName, this.isDone);
+    }
+    
     @Override
     public String taskWithSymbol() {
         return "[T]" 

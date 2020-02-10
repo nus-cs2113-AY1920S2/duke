@@ -30,6 +30,10 @@ public class Task {
     public boolean getDoneStatus() {
         return this.isDone;
     }
+    
+    public Task setNewTaskId(int newTaskId) {
+        return new Task(newTaskId, this.taskName, this.isDone);
+    }
 
     public String taskWithSymbol() {
         return ((this.isDone) ? tickSymbol : crossSymbol)

@@ -36,6 +36,34 @@ public class TaskList {
         System.out.println("\n");
     }
     
+    public void deleteTask(int taskId) throws IndexOutOfBoundsException {
+        if (taskId > this.tasks.size()) {
+            throw new IndexOutOfBoundsException(
+                    MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS);
+        }
+        
+        Task deleteTask = getDeletedTask(taskId);
+        TaskList.taskIdCounter--;
+        createDeleteTaskMessage(deleteTask);
+        this.tasks.remove(taskId - 1); 
+        reorderTask();
+    }
+    
+    public void reorderTask() {
+        int newIndex = 1;
+        List<Task> newTasks = new ArrayList<>();
+        
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task currentTask = this.tasks.get(i);
+            Task newTask = currentTask.setNewTaskId(newIndex);
+            newTasks.add(newTask);
+            newIndex++;
+        }
+        
+        this.tasks.clear();
+        this.tasks.addAll(newTasks);
+    }
+    
     public void completeTask(int taskId) throws IndexOutOfBoundsException {  
         if (taskId > this.tasks.size()) {
             throw new IndexOutOfBoundsException(
@@ -59,7 +87,17 @@ public class TaskList {
         TaskList.taskIdCounter++;       
     }
     
-    public Task getTask(int taskId) {
+    public Task getDeletedTask(int taskId) {
+        Task task = this.tasks
+                .stream()
+                .filter(x -> x.getTaskId() == taskId)
+                .map(x -> x)
+                .collect(Collectors.toList())
+                .get(FIRST_ELEMENT_INDEX);
+        return task;
+    }
+    
+    public Task getCompletedTask(int taskId) {
         Task task = this.tasks
                 .stream()
                 .filter(x -> x.getTaskId() == taskId)
@@ -69,12 +107,12 @@ public class TaskList {
         return task;
     }
     
-    public void createDeleteTaskMessage(int taskId) {
+    public void createDeleteTaskMessage(Task task) {
         String output = ("Nice! I've removed this task:\n"
                 + "  " 
-                + getTask(taskId).taskWithSymbol()
+                + task
                 + "\nNow you have " 
-                + TaskList.taskIdCounter
+                + (this.tasks.size() - 1)
                 + " tasks in the list.\n");
         System.out.println(output);
     }
@@ -82,7 +120,7 @@ public class TaskList {
     public void createCompleteTaskMessage(int taskId) {
         String output = ("Nice! I've marked this task as done:\n"
                 + "  " 
-                + getTask(taskId).taskWithSymbol()
+                + getCompletedTask(taskId).taskWithSymbol()
                 + ("\n"));
         System.out.println(output);
     }
