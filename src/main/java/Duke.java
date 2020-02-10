@@ -86,7 +86,6 @@ public class Duke {
         System.out.println(logo);
         System.out.println("____________________________________________________________");
         System.out.println("Hey there! My name is Duke and i will be your personal assistant.");
-        System.out.println("First of all, how may i address you?");
         System.out.println("Please enter your username: ");
         String userName = myScanner.nextLine();
         System.out.println("Hi "+ userName + "!" + " What can i do for you?");

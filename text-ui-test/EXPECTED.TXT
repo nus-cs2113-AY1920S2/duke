@@ -6,7 +6,6 @@
 
 ____________________________________________________________
 Hey there! My name is Duke and i will be your personal assistant.
-First of all, how may i address you?
 Please enter your username: 
 Hi Potatochips! What can i do for you?
  ___________________________________________________________________________________________________________
@@ -22,56 +21,56 @@ Hi Potatochips! What can i do for you?
 Please key in your command: 
 ____________________________________________________________
 New Task with deadline added:
-[D][?] return book (by: Sunday)
+[D][✘] return book (by: Sunday)
 Total number of tasks in the list:  1
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
-1.[D][?] return book (by: Sunday)
+1.[D][✘] return book (by: Sunday)
 ____________________________________________________________
 ____________________________________________________________
 New To-Do Task added:
-[T][?] borrow book list
+[T][✘] borrow book list
 Total number of tasks in the list:  2
 ____________________________________________________________
 ____________________________________________________________
 New event added:
-[E][?] project meeting (at: Mon 2-4pm)
+[E][✘] project meeting (at: Mon 2-4pm)
 Total number of tasks in the list:  3
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
-1.[D][?] return book (by: Sunday)
-2.[T][?] borrow book list
-3.[E][?] project meeting (at: Mon 2-4pm)
+1.[D][✘] return book (by: Sunday)
+2.[T][✘] borrow book list
+3.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Great job! I've marked this task as done in your planner:
-[D][?] return book (by: Sunday)
+[D][✓] return book (by: Sunday)
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
-1.[D][?] return book (by: Sunday)
-2.[T][?] borrow book list
-3.[E][?] project meeting (at: Mon 2-4pm)
+1.[D][✓] return book (by: Sunday)
+2.[T][✘] borrow book list
+3.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Great job! I've marked this task as done in your planner:
-[T][?] borrow book list
+[T][✓] borrow book list
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
-1.[D][?] return book (by: Sunday)
-2.[T][?] borrow book list
-3.[E][?] project meeting (at: Mon 2-4pm)
+1.[D][✓] return book (by: Sunday)
+2.[T][✓] borrow book list
+3.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Great job! I've marked this task as done in your planner:
-[E][?] project meeting (at: Mon 2-4pm)
+[E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
-1.[D][?] return book (by: Sunday)
-2.[T][?] borrow book list
-3.[E][?] project meeting (at: Mon 2-4pm)
+1.[D][✓] return book (by: Sunday)
+2.[T][✓] borrow book list
+3.[E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
