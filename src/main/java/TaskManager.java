@@ -23,15 +23,13 @@ public class TaskManager {
             try {
                Task newTask = getTaskFromUserInput(command, userInput);
                addTask(newTask);
-            } catch (BadTaskFormatException e){
+            } catch (BadTaskFormatException | InvalidKeywordException e){
                 Ui.printPretty(e.getMessage());
-            } catch (InvalidTaskException e) {
-                Ui.printPretty("That is not a valid command!");
             }
         }
     }
 
-    protected Task getTaskFromUserInput (String taskType, String userInput) throws InvalidTaskException,
+    protected Task getTaskFromUserInput (String taskType, String userInput) throws InvalidKeywordException,
             BadTaskFormatException {
         switch(taskType) {
         case "todo":
@@ -41,7 +39,7 @@ public class TaskManager {
         case "event":
             return new Event(userInput);
         default:
-            throw new InvalidTaskException();
+            throw new InvalidKeywordException(taskType);
         }
     }
 
