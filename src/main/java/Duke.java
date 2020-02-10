@@ -12,7 +12,7 @@ public class Duke {
     }
 
     private static void displayWelcome(String logo) {
-        System.out.println("Hey! I am " + logo);
+        System.out.println("Hello! I am " + logo);
         System.out.println("What would you like to do?");
     }
 
@@ -66,7 +66,8 @@ public class Duke {
         }
 
         if (!deadlineTask.contains("/by")) {
-            throw new DukeException("☹ OOPS!!! The format of the deadline task is invalid.");
+            throw new DukeException("☹ OOPS!!! The task has to be typed in this format (deadline {task description" +
+                    "} /by {date}).");
         }
 
         String[] details = deadlineTask.split("/by ");
@@ -94,7 +95,8 @@ public class Duke {
         }
 
         if (!eventTask.contains("/at")) {
-            throw new DukeException("☹ OOPS!!! The format of the event task is invalid.");
+            throw new DukeException("☹ OOPS!!! The task has to be typed in this format (event {task description" +
+                    "} /at {date and time}).");
         }
 
         String[] details = eventTask.split("/at ");
