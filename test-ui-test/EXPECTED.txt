@@ -17,6 +17,8 @@ Hello from
 
                      1 tasks in the list (â•¥_â•¥)
 ===================================================
+         Oops! Information is incomplete (â•¥_â•¥)
+===================================================
                  Got it. I've added this deadline:
                    [D][✘] return book (by: Monday)
 
@@ -30,13 +32,24 @@ Hello from
               Nice! I've marked this task as done:
                                 [T][✓] borrow book
 ===================================================
+Oops! Please include /by follows by the date (â•¥_â•¥)
+===================================================
               Nice! I've marked this task as done:
                    [D][✓] return book (by: Monday)
 ===================================================
+                  Here are the tasks in your list:
+                             1. [T][✓] borrow book
+                2. [D][✓] return book (by: Monday)
+                                   3. [T][✘] study
+===================================================
+Oops! Please include /at follows by the date (â•¥_â•¥)
+===================================================
                     Got it. I've added this event:
-         [E][✘] project meeting (at: Friday 2-4pm)
+          [E][✘] project meeting (at:Friday 2-4pm)
 
                      4 tasks in the list (â•¥_â•¥)
+===================================================
+        (â•¥_â•¥) Oops! Information is incomplete.
 ===================================================
                  Got it. I've added this deadline:
            [D][✘] report submission (by: Thursday)
@@ -47,7 +60,7 @@ Hello from
                              1. [T][✓] borrow book
                 2. [D][✓] return book (by: Monday)
                                    3. [T][✘] study
-      4. [E][✘] project meeting (at: Friday 2-4pm)
+       4. [E][✘] project meeting (at:Friday 2-4pm)
         5. [D][✘] report submission (by: Thursday)
 ===================================================
            Bye, kesin. Hope to see you again soon!

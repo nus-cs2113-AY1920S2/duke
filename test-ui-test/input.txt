@@ -1,10 +1,15 @@
 kesin
 todo borrow book
+event
 deadline return book /by Monday
 todo study
 done 1
+deadline report
 done 2
+list
+event party
 event project meeting /at Friday 2-4pm
+todo
 deadline report submission /by Thursday
 list
 bye
