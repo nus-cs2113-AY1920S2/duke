@@ -1,0 +1,8 @@
+todo eat
+todo sleep
+deadline cs2113 /by Tuesday
+event project meeting /at Mon 2-4pm
+done 2
+done 3
+list
+bye
