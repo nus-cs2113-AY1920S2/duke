@@ -45,5 +45,4 @@ public class Ui {
     public static String getNextLine() {
         return scannerObject.nextLine();
     }
-
 }

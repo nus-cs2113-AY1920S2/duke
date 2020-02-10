@@ -2,6 +2,10 @@ public abstract class Task {
     protected boolean isDone;
     protected String description;
 
+    public Task() {
+        setIsDone(false);
+    }
+
     public Task(String description) {
         setDescription(description);
         setIsDone(false);

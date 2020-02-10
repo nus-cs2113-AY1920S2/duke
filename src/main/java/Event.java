@@ -1,18 +1,16 @@
 public class Event extends Task {
     protected String startEndDateTime;
 
-    public Event(String description, String startEndDateTime) {
-        super(description);
-        this.startEndDateTime = startEndDateTime;
-    }
-
-    public static boolean validateUserInput(String userInput) {
+    public Event(String userInput) throws BadEventFormatException {
         if (!userInput.contains(" /at ")) {
-            return false;
+            throw new BadEventFormatException("input does not contain \" /at \"");
+        } else if (userInput.indexOf(" ") + 1 > userInput.indexOf(" /at ")) {
+            throw new BadEventFormatException("input does not contain a description");
         } else if (userInput.indexOf(" /at ") + 5 > userInput.length() - 1) {
-            return false;
+            throw new BadEventFormatException("input does not contain a date/time");
         }
-        return true;
+        this.description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /at "));
+        this.startEndDateTime = userInput.substring(userInput.indexOf(" /at ") + 5);
     }
 
     @Override

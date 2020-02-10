@@ -9,71 +9,44 @@ public class TaskManager {
 
     public void executeUserInput(String userInput) {
         String command;
-        if (userInput.contains(" ")) {
+        if (userInput.length() == 0) {
+            return;
+        } else if (userInput.contains(" ")) {
             command = userInput.substring(0, userInput.indexOf(" "));
         } else {
             command = userInput;
         }
 
-        if (!validateInput(command, userInput)) {
-            Ui.printPretty("Sorry, couldn't recognize this input format");
-            return;
-        }
-
         if (command.equals("list")) {
             listTasks();
-        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            Task newTask = getTaskFromUserInput(command, userInput);
-            if (newTask == null) {
-                Ui.printPretty("Sorry, couldn't recognize this input format");
-            } else {
-                addTask(newTask);
-            }
         } else {
-            Ui.printPretty("Sorry, couldn't recognize this input format");
+            try {
+               Task newTask = getTaskFromUserInput(command, userInput);
+               addTask(newTask);
+            } catch (BadTaskFormatException e){
+                Ui.printPretty(e.getMessage());
+            } catch (InvalidTaskException e) {
+                Ui.printPretty("That is not a valid command!");
+            }
         }
     }
 
-    protected boolean validateInput(String command, String userInput) {
-        if (command.equals("todo")) {
-            return ToDo.validateUserInput(userInput);
-        } else if (command.equals("deadline")) {
-            return Deadline.validateUserInput(userInput);
-        } else if (command.equals("event")) {
-            return Event.validateUserInput(userInput);
-        } else if (command.equals("list")) {
-            return true; // If command is list then anything after doesn't affect functionality
-        }
-
-        return false; // Unrecognized command
-    }
-
-    protected Task getTaskFromUserInput(String taskType, String userInput) {
-        if (userInput == null) {
-            return null;
-        }
-
-        String description;
+    protected Task getTaskFromUserInput (String taskType, String userInput) throws InvalidTaskException,
+            BadTaskFormatException {
         switch(taskType) {
         case "todo":
-            description = userInput.substring(userInput.indexOf(" ") + 1);
-            return new ToDo(description);
+            return new ToDo(userInput);
         case "deadline":
-            description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /by "));
-            String dueDateTime = userInput.substring(userInput.indexOf(" /by ") + 5);
-            return new Deadline(description, dueDateTime);
+            return new Deadline(userInput);
         case "event":
-            description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /at "));
-            String startEndDateTime = userInput.substring(userInput.indexOf(" /at ") + 5);
-            return new Event(description, startEndDateTime);
+            return new Event(userInput);
         default:
-            return null;
+            throw new InvalidTaskException();
         }
     }
 
     protected void addTask(Task newTask) {
         tasks.add(newTask);
-
         String message = "Added this task:" + System.lineSeparator() + newTask.toString() + System.lineSeparator() +
                 "Now you have " + tasks.size() + " tasks in the list";
         Ui.printPretty(message);
@@ -85,7 +58,6 @@ public class TaskManager {
             String lineEnd = i == tasks.size() - 1 ? "" : System.lineSeparator(); // Do this so no extra newline
             message += (String.format("%d. %s", i + 1, tasks.get(i).toString()) + lineEnd);
         }
-
         Ui.printPretty(message);
     }
 }
