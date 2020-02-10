@@ -27,8 +27,6 @@ public class Task {
         this.isDone = true;
     }
 
-
-    /** Getters & Setters **/
     public String getTaskName() {
         return taskName;
     }
