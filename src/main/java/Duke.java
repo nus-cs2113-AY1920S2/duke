@@ -25,68 +25,110 @@ public class Duke {
                         " What can I do for you?\n" + LINE);
 
         Scanner scanner = new Scanner(System.in);
-        String inputString = "";
+        //String inputString;
 
-        while (!inputString.equals("bye bye")) {
-            inputString = runCommands(scanner);
+        while (true) {
+            String inputString = scanner.nextLine();
+            if (inputString.equals("bye bye")) {
+                break;
+            } else {
+                runCommands(inputString);
+            }
         }
 
         System.out.println(" Bye. Hope to see you again soon!\n" + LINE);
     }
 
-    private static String runCommands(Scanner scanner) {
-        String inputString;
-        inputString = scanner.nextLine();
+    private static void runCommands(String inputString) {
+        //String inputString;
+        //inputString = scanner.nextLine();
         String instruction[] = inputString.split(" ", 2);
         Task new_task;
 
         switch (instruction[0]) {
-        case "list":
+        case (LIST):
             printList(tasks);
             break;
+
         case (DONE):
             try {
-                int index = Integer.parseInt((inputString.substring(5)));
+                int index = Integer.parseInt((instruction[1]));
                 System.out.println(index);
-                tasks[index-1].markAsDone();
-                System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].description + "\n" + LINE);
+                if (tasks[index-1].isDone == false) {
+                    tasks[index-1].markAsDone();
+                    System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].description + "\n" + LINE);
+                } else {
+                    System.out.println("You have already done this task!");
+                }
             } catch (NullPointerException e) {
                 System.out.println("This task does not exist!");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("This task does not exist!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please specify a task number!");
             }
             break;
-        case "todo":
-            new_task = new Todo(inputString.substring(5));
-            tasks[taskQty] = new_task;
-            taskQty += 1;
-            System.out.println( LINE +
-                    "  Ok! I've added this task. \n" +
-                    "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
-                    LINE);
+
+        case (TODO):
+            try {
+                new_task = new Todo(instruction[1]);
+                tasks[taskQty] = new_task;
+                taskQty += 1;
+                printAddMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no task specified!");
+            }
             break;
+
         case (DEADLINE):
-            int findSeparator = inputString.indexOf('/');
-            new_task = new Deadline(inputString.substring(9, findSeparator-1), inputString.substring(findSeparator+4));
-            tasks[taskQty] = new_task;
-            taskQty++;
-            System.out.println(" ____________________________________________________________\n" +
-                    "  Ok! I've added this task. \n" +
-                    "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
-                    "____________________________________________________________\n");
+            try {
+                int findSeparator = instruction[1].indexOf('/');
+                new_task = new Deadline(instruction[1].substring(0, findSeparator), instruction[1].substring(findSeparator + 1));
+                tasks[taskQty] = new_task;
+                taskQty++;
+                printAddMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no task specified!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please input task in the format: deadline task_name/deadline");
+            } catch (DukeException e) {
+                System.out.println("Task description or deadline field is empty.");
+            }
             break;
+
         case (EVENT):
-            int findSeparator2 = inputString.indexOf('/');
-            new_task = new Event(inputString.substring(6, findSeparator2-1), inputString.substring(findSeparator2+4));
-            tasks[taskQty] = new_task;
-            taskQty++;
-            System.out.println(" ____________________________________________________________\n" +
-                    "  Ok! I've added this task. \n" +
-                    "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
-                    "____________________________________________________________\n");
+            try {
+                int findSeparator = instruction[1].indexOf('/');
+                new_task = new Event(instruction[1].substring(0, findSeparator), instruction[1].substring(findSeparator + 1));
+                tasks[taskQty] = new_task;
+                taskQty++;
+                printAddMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no task specified!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please input task in the format: event task_name/event_date");
+            } catch (DukeException e) {
+                System.out.println("Task description or event date field is empty.");
+            }
             break;
+
         default:
-            System.out.println("huh?");
+            System.out.println("huh? I do not understand :( \n" +
+                    "I can help you with the following: \n" +
+                    "[list] - lists tasks \n" +
+                    "[todo <task_name>] - adds a todo task \n" +
+                    "[deadline <task_name> / deadline] - adds a deadline task \n" +
+                    "[event <event_name> / event_date] - adds an event \n" +
+                    "[done <task_num>] - marks a task as done \n" +
+                    "[bye bye] - exits duke \n" + LINE);
             break;
         }
-        return inputString;
+    }
+
+    private static void printAddMessage() {
+        System.out.println(LINE +
+                "  Ok! I've added this task. \n" +
+                "  Now you have " + String.valueOf(taskQty) + " tasks on your list.\n " +
+                LINE);
     }
 }
