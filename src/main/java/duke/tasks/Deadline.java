@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.tasks.exceptions.BadDeadlineFormatException;
+
 public class Deadline extends Task {
     protected String dueDateTime;
 

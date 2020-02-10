@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.tasks.exceptions.BadToDoFormatException;
+
 public class ToDo extends Task {
     public ToDo(String userInput) throws BadToDoFormatException {
         if (!userInput.contains(" ")) {

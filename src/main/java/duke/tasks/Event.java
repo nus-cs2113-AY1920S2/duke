@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.tasks.exceptions.BadEventFormatException;
+
 public class Event extends Task {
     protected String startEndDateTime;
 

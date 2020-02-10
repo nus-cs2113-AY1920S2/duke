@@ -1,3 +1,12 @@
+package duke;
+
+import duke.tasks.exceptions.BadTaskFormatException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.exceptions.InvalidKeywordException;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.util.ArrayList;
 
 public class TaskManager {
