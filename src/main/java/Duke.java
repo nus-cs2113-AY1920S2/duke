@@ -1,49 +1,69 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void printList(Task[] list) {
-        System.out.println("     Here are the tasks in your list:");
-        for(int i = 0; i < list.length; i ++) {
-            if(list[i] == null) {
+    public static final int TASK_LIMIT = 100;
+    public static final String LINE_SPLITTING = "\t____________________________________________________________\n";
+    public static final String BYE = "bye";
+    public static final String BYE_MESSAGE = "\tBye. Hope to see you again soon!";
+    public static final String HELLO_MESSAGE = "\tHello! I'm Duke\n";
+    public static final String HELP_MESSAGE = "\tIt seems like you are needing some help.\n";
+    public static final String DONE = "done";
+    public static final String LIST = "list";
+    public static final String TASK_MARKING_MESSAGE = "\tNice! I've marked this task as done:";
+    public static final String ADDED_MESSAGE = "\tadded: ";
+
+    public static void printList(Task[] tasks) {
+        System.out.println("\tHere are the tasks in your list:");
+        for(int i = 0; i < tasks.length; i ++) {
+            if(tasks[i] == null) {
                 break;
             }
-            System.out.println("     " + (i + 1) + "[" + list[i].getStatusIcon() + "] " + list[i].description);
+            System.out.println("\t" + (i + 1) + tasks[i]);
         }
     }
 
+
     public static void main(String[] args) {
-        Task[] list = new Task[100];
-        String greeting = "    ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
-                + "     It seems like you are needing some help.\n"
-                + "    ____________________________________________________________\n";
+        Task[] tasks = new Task[TASK_LIMIT];
+        welcomeMessage();
         int listCount = 0;
-        System.out.println(greeting);
         while(true) {
-            Scanner command = new Scanner(System.in);
-            String echoCommand = command.nextLine();
-            String[] words = echoCommand.split(" ");
-            System.out.println("    ____________________________________________________________");
-            if(echoCommand.equals("bye")) {
-                System.out.println("     Bye. Hope to see you again soon!");
-                System.out.println("    ____________________________________________________________\n");
+            Scanner commandScanner = new Scanner(System.in);
+            String command = commandScanner.nextLine();
+            String[] words = command.split(" ");
+            System.out.print(LINE_SPLITTING);
+            if(command.equals(BYE)) {
+                byeMessage();
                 break;
             }
-            else if(echoCommand.equals("list")) {
-                printList(list);
+            else if(command.equals(LIST)) {
+                printList(tasks);
             }
-            else if(words.length == 2 && words[0].equals("done") && (int)Double.parseDouble(words[1])
-                    == Double.parseDouble(words[1])) {
-                System.out.println("    Nice! I've marked this task as done:");
-                int index = Integer.parseInt(words[1]);
-                list[index - 1].markAsDone();
-                System.out.printf("      [%s] %s\n", list[index - 1].getStatusIcon(), list[index - 1].description);
+            else if(words.length == 2 && words[0].equals(DONE)) {
+                markTaskMessage(tasks, words[1]);
             }
             else {
-                System.out.println("     added: " + echoCommand);
-                list[listCount ++] = new Task(echoCommand);
+                System.out.println(ADDED_MESSAGE + command);
+                tasks[listCount++] = new Task(command);
             }
-            System.out.println("    ____________________________________________________________\n");
+            System.out.println(LINE_SPLITTING);
         }
+    }
+
+    private static void markTaskMessage(Task[] tasks, String word) {
+        System.out.println(TASK_MARKING_MESSAGE);
+        int index = Integer.parseInt(word);
+        tasks[index - 1].markAsDone();
+        System.out.printf("\t%s\n", tasks[index - 1]);
+    }
+
+    private static void byeMessage() {
+        System.out.println(BYE_MESSAGE);
+        System.out.println(LINE_SPLITTING);
+    }
+
+    private static void welcomeMessage() {
+        String greeting = LINE_SPLITTING + HELLO_MESSAGE + HELP_MESSAGE + LINE_SPLITTING;
+        System.out.println(greeting);
     }
 }
