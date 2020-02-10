@@ -1,7 +1,12 @@
+done
+list
 todo eat
 todo sleep
+todo
+heyhey
 deadline cs2113 /by Tuesday
 event project meeting /at Mon 2-4pm
+event
 done 2
 done 3
 list
