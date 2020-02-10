@@ -1,15 +1,12 @@
 public class ToDo extends Task {
-    public ToDo(String description) {
-        super(description);
-    }
-
-    public static boolean validateUserInput(String userInput) {
+    public ToDo(String userInput) throws BadToDoFormatException {
         if (!userInput.contains(" ")) {
-            return false;
+            throw new BadToDoFormatException("input does not contain a space");
         } else if (userInput.indexOf(" ") + 1 > userInput.length() - 1) {
-            return false;
+            throw new BadToDoFormatException("input does not contain a description");
         }
-        return true;
+
+        this.description = userInput.substring(userInput.indexOf(" ") + 1);
     }
 
     @Override
