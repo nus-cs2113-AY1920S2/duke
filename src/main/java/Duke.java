@@ -48,11 +48,14 @@ public class Duke {
                 taskNum--;
                 Tasks[taskNum].setDone(true);
                 printDone(Tasks[taskNum]);
-            } catch (ArrayIndexOutOfBoundsException e) { //If arr[1] does not exist
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //If arr[1] does not exist
                 System.out.println("Oops! Please include the task number.");
-            } catch (NumberFormatException e) { //If arr[1] cannot be parsed as an Integer
+            } catch (NumberFormatException e) {
+                //If arr[1] cannot be parsed as an Integer
                 System.out.println("Oops! Please include the task number instead of '" + arr[1] + "'.");
-            } catch (NullPointerException e) { //If the task number given is more than num of tasks
+            } catch (NullPointerException e) {
+                //If the task number given is more than num of tasks
                 System.out.println("Sorry but that task does not exist! Please try again.");
             }
             break;
@@ -60,7 +63,8 @@ public class Duke {
             try {
                 Tasks[NUM_OF_TASK] = new Todo(arr[1]);
                 printConfirm(Tasks[NUM_OF_TASK]);
-            } catch (ArrayIndexOutOfBoundsException e) { //If arr[1] does not exist
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //If arr[1] does not exist
                 System.out.println("Oops! Task description cannot be empty!");
             }
             break;
@@ -69,7 +73,8 @@ public class Duke {
                 String arr2[] = arr[1].split("/by ", 2);
                 Tasks[NUM_OF_TASK] = new Deadline(arr2[0], arr2[1]);
                 printConfirm(Tasks[NUM_OF_TASK]);
-            } catch (ArrayIndexOutOfBoundsException e) { //If arr[1] does not exist
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //If arr[1] does not exist
                 System.out.println("Oops! Deadline description is incomplete!");
             }
             break;
@@ -78,11 +83,13 @@ public class Duke {
                 String arr2[] = arr[1].split("/at ", 2);
                 Tasks[NUM_OF_TASK] = new Event(arr2[0], arr2[1]);
                 printConfirm(Tasks[NUM_OF_TASK]);
-            } catch (ArrayIndexOutOfBoundsException e) { //If arr[1] does not exist
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //If arr[1] does not exist
                 System.out.println("Oops! Event description is incomplete!");
             }
             break;
-        default: //unknown command
+        default:
+            //unknown command
             System.out.println("Oops! I'm sorry but I don't know what that means :(");
             break;
         }
