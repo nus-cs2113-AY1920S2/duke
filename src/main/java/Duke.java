@@ -36,9 +36,21 @@ public class Duke {
         if(userResponde.equals("bye")){
             sayBye();
         } else if(userResponde.equals("list")) {
-            listTask();
+            try{
+                listTask();
+            }catch( DukeException e){
+                System.out.println("\t☹ OOPS!!! " + e.getMessage());
+            }
         } else if(userResponde.startsWith("done")) {
-            markAsDone(userResponde);
+            try {
+                markAsDone(userResponde);
+            }catch(NumberFormatException e){
+                System.out.println("\t☹ OOPS!!! Please enter the task number.");
+            }catch(NullPointerException e){
+                System.out.println("\t☹ OOPS!!! Please first input the task then mark done.");
+            }catch(StringIndexOutOfBoundsException e){
+                System.out.println("\t☹ OOPS!!! Please enter the task number.");
+            }
         } else{
             try{
                 addNewTask(userResponde);
@@ -58,7 +70,10 @@ public class Duke {
         System.out.println("\tBye. Hope to see you again soon!");
     }
 
-    public static void listTask(){
+    public static void listTask() throws DukeException{
+        if( taskCount == 0){
+            throw new DukeException("No tasks!!!");
+        }
         System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < taskCount; i++) {
             System.out.println("\t" + (i + 1) + "." + tasks[i]);
@@ -85,6 +100,9 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             int dividerPosition = userResponde.indexOf(" /by");
+            if (dividerPosition == -1){
+                throw new DukeException("Please follow the format: deadline thingsToDo /by time");
+            }
             String taskName = userResponde.substring(9,dividerPosition);
             String deadlineTime = userResponde.substring(dividerPosition + 5);
             tasks[taskCount] = new Deadline(taskName,deadlineTime);
@@ -93,6 +111,9 @@ public class Duke {
                 throw new DukeException("The description of a event cannot be empty.");
             }
             int dividerPosition = userResponde.indexOf(" /at");
+            if (dividerPosition == -1){
+                throw new DukeException("Please follow the format: event thingsToDo /at time");
+            }
             String taskName = userResponde.substring(6,dividerPosition);
             String deadlineTime = userResponde.substring(dividerPosition + 5);
             tasks[taskCount] = new Event(taskName,deadlineTime);
