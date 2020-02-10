@@ -1,3 +1,14 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.TaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskManager;
+import duke.task.Todo;
+import duke.ui.Output;
+
 import java.util.Scanner;
 
 
@@ -10,7 +21,7 @@ public class Duke {
     private static Output printer;
 
     // TODO implement a better way to handle commnds
-    /** Command contains the names of each command */
+    /** duke.command.Command contains the names of each command */
     private static Command command;
 
     /** Manages the lists of tasks */

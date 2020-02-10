@@ -1,3 +1,4 @@
+package duke.task;
 
 public class Task {
 
@@ -8,7 +9,7 @@ public class Task {
 
     /** Check and cross markers */
 
-    /** Task description given by the user**/
+    /** duke.task.Task description given by the user**/
     protected String description;
 
 
