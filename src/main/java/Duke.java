@@ -10,14 +10,14 @@ public class Duke {
 
     private static void sayIntro(){
         String introMessage = curlyLine + System.lineSeparator() + "Hello! I'm Duke\n"
-        + "What can I do for you?\n" + curlyLine + System.lineSeparator();
+                + "What can I do for you?\n" + curlyLine + System.lineSeparator();
 
         System.out.println(introMessage);
     }
 
     private static void sayGoodbye(){
         String goodbyeMessage = curlyLine + System.lineSeparator() + "Bye! Hope to see you again soon\n"
-        + curlyLine + System.lineSeparator();
+                + curlyLine + System.lineSeparator();
         String goodbyeMessage2 = "********************CONNECTION TERMINATED********************";
 
         System.out.println(goodbyeMessage);
@@ -47,6 +47,7 @@ public class Duke {
         taskCount = 0;
         String userInput;
         Scanner in = new Scanner(System.in);
+        boolean isExitCommandInvoked = false;
 
         sayIntro();
         //easier to identify lines input by user (per Python)
@@ -55,14 +56,22 @@ public class Duke {
         while (in.hasNextLine()) {
             userInput = in.nextLine();
             String[] tokenizedInput = userInput.split(" ");
-            if (tokenizedInput[0].equals("bye")) {
+            switch (tokenizedInput[0]) {
+            case ("bye"):
+                isExitCommandInvoked = true;
                 break;
-            } else if (tokenizedInput[0].equals("list")) {     
+            case ("list"):
                 addTaskToList(taskList);
-            } else if (tokenizedInput[0].equals("done")) {
+                break;
+            case("done"):
                 updateTaskDone(tokenizedInput[1], taskList);
-            } else {
+                break;
+            default:
                 insertNewTask(taskList, userInput, tokenizedInput);
+                break;
+            }
+            if (isExitCommandInvoked) {
+                break;
             }
             System.out.print(">>>");
         }
@@ -73,8 +82,8 @@ public class Duke {
     public static void addTaskToList(Task[] listInput) {
         //if list empty, inform user and await next command
         if (taskCount == 0) {
-            System.out.println(underscoredLine + System.lineSeparator() + "\tThe list is empty." 
-            + System.lineSeparator() + underscoredLine);
+            System.out.println(underscoredLine + System.lineSeparator() + "\tThe list is empty."
+                    + System.lineSeparator() + underscoredLine);
             return;
         }
         //if list non-empty, print out all existing tasks
@@ -93,20 +102,22 @@ public class Duke {
         //handle case where user inputs non-existing task number to mark as done
         if (isOutOfRange){
             System.out.println(underscoredLine + System.lineSeparator() + "\tInvalid task number."
-            + System.lineSeparator() + underscoredLine);
+                    + System.lineSeparator() + underscoredLine);
             return;
         }
         //handle case where user tries to mark as done an already completed task
         boolean isTaskAlreadyDone = listInput[queryNumber-1].getIsDone();
         if (isTaskAlreadyDone){
             System.out.println(underscoredLine + System.lineSeparator()
-            + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
+                    + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
             return;
         }
         listInput[queryNumber-1].markAsDone();
-        System.out.println(underscoredLine + System.lineSeparator() + "\tGreat job! I've marked this task as done:\n"
-        + "\t" + Integer.toString(queryNumber) + ".[" + listInput[queryNumber-1].getStatusIcon() + "] "
-        + listInput[queryNumber-1].getDescription() + System.lineSeparator() + underscoredLine);
+
+        String taskDoneMessage = "\tGreat job! I've marked this task as done:\n\t" + Integer.toString(queryNumber)
+                + ".[" + listInput[queryNumber-1].getStatusIcon() + "] " + listInput[queryNumber-1].getDescription();
+        System.out.println(underscoredLine + System.lineSeparator() + taskDoneMessage + System.lineSeparator()
+                + underscoredLine);
     }
 
     private static void insertNewTask(Task[] taskList, String userInput, String[] tokenizedInput) {
@@ -128,9 +139,11 @@ public class Duke {
 
         taskList[taskCount] = newTask;
         taskCount++;
-        System.out.println(underscoredLine + System.lineSeparator() + "\tGot it. I've added this task: \n\t"
-        + newTask.toString() + System.lineSeparator() + "\tNow you have " + taskCount + " tasks in the list.\n"
-        + underscoredLine);
+
+        String taskAddedMessage = "\tGot it. I've added this task: \n\t" + newTask.toString() + System.lineSeparator()
+                + "\tNow you have " + taskCount + " tasks in the list.\n";
+        System.out.println(underscoredLine + System.lineSeparator() + taskAddedMessage + System.lineSeparator()
+                + underscoredLine);
     }
 
 
