@@ -1,9 +1,13 @@
-todo borrow book
-list
+Potatochips
 deadline return book /by Sunday
 list
+todo borrow book list
 event project meeting /at Mon 2-4pm
 list
 done 1
+list
+done 2
+list
+done 3
 list
 bye
