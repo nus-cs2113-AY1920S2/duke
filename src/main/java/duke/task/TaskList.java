@@ -69,6 +69,16 @@ public class TaskList {
         return task;
     }
     
+    public void createDeleteTaskMessage(int taskId) {
+        String output = ("Nice! I've removed this task:\n"
+                + "  " 
+                + getTask(taskId).taskWithSymbol()
+                + "\nNow you have " 
+                + TaskList.taskIdCounter
+                + " tasks in the list.\n");
+        System.out.println(output);
+    }
+    
     public void createCompleteTaskMessage(int taskId) {
         String output = ("Nice! I've marked this task as done:\n"
                 + "  " 
