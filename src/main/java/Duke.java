@@ -123,7 +123,8 @@ public class Duke {
 
         int itemNumber = in.nextInt();
         if (itemNumber<=0 || itemNumber>numberOfTasks){
-            throw new DukeException("☹ OOPS!!! The task item does not exist.");
+            throw new DukeException("☹ OOPS!!! The task item does not exist. Type \"list\" to see the task item " +
+                    "number.");
         }
 
         tasks[itemNumber-1].markAsDone();
