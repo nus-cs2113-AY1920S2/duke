@@ -9,5 +9,6 @@ remove task 1 from the list
 done 1
 done 2
 done 2
+todo
 list
 bye
