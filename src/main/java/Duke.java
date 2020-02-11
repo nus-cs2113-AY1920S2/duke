@@ -25,12 +25,16 @@ public class Duke {
             } else if (command.matches("event\\s.*")) { //Level 4: Events
                 processEventCommand(list, command);
             } else if (command.equals("bye")) { //Terminate
-                System.out.println("    ____________________________________________________________\n"
-                        + "     Bye. Hope to see you again soon!\n"
-                        + "    ____________________________________________________________");
+                processByeCommand();
                 return;
             }
         }
+    }
+
+    private static void processByeCommand() {
+        System.out.println("    ____________________________________________________________\n"
+                + "     Bye. Hope to see you again soon!\n"
+                + "    ____________________________________________________________");
     }
 
     private static void processDoneCommand(ArrayList<String> list, String command) {
