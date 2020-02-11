@@ -3,16 +3,12 @@ import java.util.Scanner;
 public class Jan {
 
     public static final int MAXIMUM_TASK = 100;
+    public static Task[] Tasks = new Task[MAXIMUM_TASK];
 
-    public static void executeInstruction(String command, Task[] Tasks, String commandDescription){
+    public static void executeInstruction(String command, String commandDescription) throws MissingDescriptionException,
+            UnknownCommandException{
         System.out.println("____________________________________________________________");
         switch(command) {
-        case "greet":
-            System.out.println("Hello! I'm Jan\n" + " What can I do for you?");
-            break;
-        case "bye":
-            System.out.println("Bye. Hope to see you again soon!");
-            break;
         case "list":
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < Task.getTotalTask(); i++) {
@@ -20,8 +16,11 @@ public class Jan {
             }
             break;
         case "done":
+            if (commandDescription.isEmpty()) {
+                throw new MissingDescriptionException();
+            }
             int taskNum = Integer.parseInt(commandDescription) - 1;
-            if (taskNum < Task.getTotalTask()) {
+            if (existTask(taskNum)) {
                 System.out.println("Nice! I've marked this task as done: ");
                 Tasks[taskNum].setDone(true);
                 System.out.println(Tasks[taskNum]);
@@ -30,31 +29,56 @@ public class Jan {
             }
             break;
         case "todo":
-            Todo todo = new Todo(commandDescription);
-            Tasks[Task.getTotalTask() - 1] = todo;
-            System.out.println("Got it. I've added this task:\n " + todo);
+            if (commandDescription.isEmpty()) {
+                throw new MissingDescriptionException();
+            }
+            addNewTask(command, commandDescription,"");
             printCurrentTaskCount();
 
             break;
         case "deadline":
-            String[] deadlineDetails = commandDescription.split("/by");
-            Deadline deadline = new Deadline(deadlineDetails[0],deadlineDetails[1]);
-            Tasks[Task.getTotalTask() - 1] = deadline;
-            System.out.println("Got it. I've added this task:\n " + deadline);
+            if (commandDescription.isEmpty()) {
+                throw new MissingDescriptionException();
+            }
+            addNewTask(command, commandDescription, "/by");
             printCurrentTaskCount();
             break;
         case "event":
-            String[] eventDetails = commandDescription.split("/at");
-            Event event = new Event(eventDetails[0],eventDetails[1]);
-            Tasks[Task.getTotalTask() - 1] = event;
-            System.out.println("Got it. I've added this task:\n " + event);
+            if (commandDescription.isEmpty()) {
+                throw new MissingDescriptionException();
+            }
+            addNewTask(command, commandDescription,"/at");
             printCurrentTaskCount();
             break;
         default:
-            System.out.println("Duke cannot understand your command.\n");
-            break;
+            throw new UnknownCommandException();
         }
         System.out.println("____________________________________________________________");
+    }
+
+    private static boolean existTask(int taskNum){
+        return taskNum < Task.getTotalTask();
+    }
+
+    private static void addNewTask(String command, String commandDescription, String divider) {
+        String[] taskDetails = commandDescription.split(divider);
+        switch(command) {
+        case "todo":
+            Todo todo = new Todo(commandDescription);
+            Tasks[Task.getTotalTask() - 1] = todo;
+            System.out.println("Got it. I've added this task:\n " + todo);
+            break;
+        case "deadline":
+            Deadline deadline = new Deadline(taskDetails[0],taskDetails[1]);
+            Tasks[Task.getTotalTask() - 1] = deadline;
+            System.out.println("Got it. I've added this task:\n " + deadline);
+            break;
+        case "event":
+            Event event = new Event(taskDetails[0],taskDetails[1]);
+            Tasks[Task.getTotalTask() - 1] = event;
+            System.out.println("Got it. I've added this task:\n " + event);
+            break;
+        }
     }
 
     private static void printCurrentTaskCount() {
@@ -65,9 +89,27 @@ public class Jan {
         }
     }
 
-    public static void main(String[] args) {
+    private static void printMissingTaskDetailMessage() {
+        System.out.println("Invalid request due to missing details. type \"help\" to find out more");
+    }
 
-        Task[] Tasks = new Task[MAXIMUM_TASK];
+    private static void printUnknownCommandMessage() {
+        System.out.println("Try using the following commands:\n"
+                + "list                             -- to get a list of all the existing tasks\n"
+                + "done [item number]               -- mark task as completed"
+                + "todo [item]                      -- add new todo task\n"
+                + "deadline [item] /by [date][time] -- add new deadline task\n"
+                + "event [item] /at [date][time]    -- add new event task\n");
+    }
+
+    private static void printGreetingMessage(String logo) {
+        System.out.println(logo);
+        System.out.println("____________________________________________________________");
+        System.out.println("Hello! I'm Jan\n" + " What can I do for you?");
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void main(String[] args) {
 
         String logo = " ________     _____     _____     __\n"
                 + "|_____   |  /  ___  \\  |     \\   |  | \n"
@@ -75,23 +117,27 @@ public class Jan {
                 + " __   |  | |  |___|  | |  | \\  \\ |  |\n"
                 + "|  |__|  | |   ___   | |  |  \\  \\|  |\n"
                 + "|________/ |__|   |__| |__|   \\_____|\n";
-        System.out.println(logo);
-        executeInstruction("greet",Tasks,"");
+        printGreetingMessage(logo);
 
         String line;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        while (!line.equals("bye")) {
-            String[] requests = line.split(" ",2);
-            if(requests.length > 1) {
-                executeInstruction(requests[0], Tasks,requests[1]);
-            } else {
-                executeInstruction(requests[0],Tasks,"");
-            }
+            Scanner in = new Scanner(System.in);
             line = in.nextLine();
-        }
+            while (!line.equals("bye")) {
+                String[] requests = line.split(" ", 2);
+                try {
+                    if (requests.length > 1) {
+                        executeInstruction(requests[0], requests[1]);
+                    } else {
+                        executeInstruction(requests[0], "");
+                    }
+                }catch (MissingDescriptionException e) {
+                    printMissingTaskDetailMessage();
+                } catch (UnknownCommandException e) {
+                    printUnknownCommandMessage();
+                }
+                line = in.nextLine();
+            }
 
-        executeInstruction("bye",Tasks,"");
-
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
