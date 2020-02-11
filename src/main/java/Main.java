@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import duke.Duke;
 import duke.task.InvalidTaskArgumentException;
 import command.CommandResult;
@@ -5,14 +7,19 @@ import command.ExitCommand;
 import command.InvalidCommandException;
 import command.Command;
 import parser.Parser;
+import storage.InvalidStorageFilePathException;
+import storage.Storage;
+import storage.StorageReadWriteException;
 import ui.Ui;
 
 public class Main {
 
     private Ui ui;
     private Duke duke;
+    private Storage storage;
     
-    public static void main(String[] args) {
+    
+    public static void main(String... args) {
         new Main().run(args);
     }
     
@@ -23,9 +30,18 @@ public class Main {
     }
     
     public void start(String[] args) {
-        this.ui = new Ui();
-        this.duke = new Duke();
-        ui.displayWelcomeMessage();
+        try {
+            this.ui = new Ui();
+            this.storage = new Storage();           
+            this.duke = new Duke(storage.load());
+            ui.displayWelcomeMessage();
+        } catch (InvalidStorageFilePathException e) {
+            ui.displayErrorMessage(e.getMessage());
+        } catch (StorageReadWriteException e) {
+            ui.displayErrorMessage(e.getMessage());
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
     
     private void runCommandUntilExit() {                     
@@ -37,8 +53,14 @@ public class Main {
             try {  
                 command = new Parser().parseCommand(commandText);
                 CommandResult output = command.execute(this.duke);
-                ui.displayOutputMessage(output);
                 
+                try {
+                    storage.save(storage.getFilePath(), duke.getTaskList());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } 
+                
+                ui.displayOutputMessage(output);             
                 if (ExitCommand.isExit(command)) {
                     break;
                 }
@@ -58,6 +80,6 @@ public class Main {
     private void exit() {
         ui.displayExitMessage();
         System.exit(0);
-    }       
+    }    
 }
 

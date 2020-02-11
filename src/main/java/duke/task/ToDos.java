@@ -2,7 +2,7 @@ package duke.task;
 
 public class ToDos extends Task {
 
-    private ToDos(int taskId, String taskName, boolean isDone) {
+    public ToDos(int taskId, String taskName, boolean isDone) {
         super(taskId, taskName, isDone);
     }
 

@@ -3,7 +3,7 @@ package duke.task;
 public class Deadlines extends Task {
     private final String dateTime;
 
-    private Deadlines(int taskId, String taskName, 
+    public Deadlines(int taskId, String taskName, 
             String dateTime, boolean isDone) {
 
         super(taskId, taskName, isDone);
