@@ -1,16 +1,15 @@
+import java.io.IOException;
+
 import duke.Duke;
 import duke.task.InvalidTaskArgumentException;
 import command.CommandResult;
 import command.ExitCommand;
 import command.InvalidCommandException;
-
-import java.io.File;
-import java.io.IOException;
-
 import command.Command;
 import parser.Parser;
 import storage.InvalidStorageFilePathException;
 import storage.Storage;
+import storage.StorageReadWriteException;
 import ui.Ui;
 
 public class Main {
@@ -18,6 +17,7 @@ public class Main {
     private Ui ui;
     private Duke duke;
     private Storage storage;
+    
     
     public static void main(String... args) {
         new Main().run(args);
@@ -32,15 +32,15 @@ public class Main {
     public void start(String[] args) {
         try {
             this.ui = new Ui();
-            this.storage = new Storage("storage.txt");
-            
+            this.storage = new Storage();           
             this.duke = new Duke(storage.load());
-
             ui.displayWelcomeMessage();
         } catch (InvalidStorageFilePathException e) {
             ui.displayErrorMessage(e.getMessage());
-        } catch (IOException e) {
+        } catch (StorageReadWriteException e) {
             ui.displayErrorMessage(e.getMessage());
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
     
@@ -55,14 +55,12 @@ public class Main {
                 CommandResult output = command.execute(this.duke);
                 
                 try {
-                    storage.save("C:\\Users\\limwe\\OneDrive\\Documents\\GitHub\\duke\\src\\main\\java\\data\\storage.txt", this.duke.getTaskList());
+                    storage.save(storage.getFilePath(), duke.getTaskList());
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } 
                 
-                ui.displayOutputMessage(output);
-                
+                ui.displayOutputMessage(output);             
                 if (ExitCommand.isExit(command)) {
                     break;
                 }
@@ -82,12 +80,5 @@ public class Main {
     private void exit() {
         ui.displayExitMessage();
         System.exit(0);
-    } 
-    
-    /*
-    private Storage initializeStorage(String[] args) {
-        boolean hasExistingStorage = args.length > 0;
-        return hasExistingStorage ? new Storage(args[0]) : new Storage();
-    }
-    */
+    }    
 }

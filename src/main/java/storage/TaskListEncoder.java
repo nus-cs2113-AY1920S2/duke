@@ -18,8 +18,7 @@ public class TaskListEncoder {
         
         for (Task task : taskList.getTasks()) {
             encodedTaskList.append(encodeTask(task) + "\n");
-        }
-        
+        }        
         
         return encodedTaskList.toString();
     }
@@ -28,16 +27,14 @@ public class TaskListEncoder {
         StringBuilder encodedTask = new StringBuilder("");
         
         if (task instanceof ToDos) {
-            String encodedToDos = "";
-            
+            String encodedToDos = "";           
             encodedToDos += ("T"
                     + " | "
                     + (task.getDoneStatus() ? "1" : "0")
                     + " | "
                     + ((ToDos) task).getTaskName());
             encodedTask.append(encodedToDos);
-        } else if (task instanceof Deadlines) {
-           
+        } else if (task instanceof Deadlines) {           
             String encodedDeadlines = "";
             encodedDeadlines += ("D"
                     + " | "
@@ -47,8 +44,7 @@ public class TaskListEncoder {
                     + " | "
                     + ((Deadlines) task).getDateTime();
             encodedTask.append(encodedDeadlines);
-        } else if (task instanceof Events) {
-           
+        } else if (task instanceof Events) {           
             String encodedEvents = "";
             encodedEvents += ("E"
                     + " | "

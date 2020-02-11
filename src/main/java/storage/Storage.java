@@ -17,13 +17,16 @@ import storage.InvalidStorageFilePathException;
 
 public class Storage {
     
-    public static final String DEFAULT_STORAGE_FILEPATH = "storage.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = 
+            "C:\\Users\\limwe\\OneDrive\\Documents"
+            + "\\GitHub\\duke\\src\\main\\java\\data\\storage.txt";
     
     public final Path path;
     
     public Storage() {
         this(DEFAULT_STORAGE_FILEPATH);
     }
+    
     
     public Storage(String filePath) {
         this.path = Paths.get(filePath);
@@ -35,7 +38,7 @@ public class Storage {
     }
     
     public TaskList load() throws IOException {
-        File f = new File("C:\\Users\\limwe\\OneDrive\\Documents\\GitHub\\duke\\src\\main\\java\\data\\storage.txt");        
+        File f = new File(this.path.toString());        
         BufferedReader br = new BufferedReader(new FileReader(f));
         List<String> lines = new ArrayList<>();
         
@@ -45,11 +48,10 @@ public class Storage {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new InvalidStorageFilePathException("asdsa", path.toString());
+            throw new StorageReadWriteException("Unable to read "
+                    + "or write the current file.");
         } 
-
         return TaskListDecoder.decodeTaskList(lines);
-
     }
      
     public void save(String filePath, TaskList taskList) throws IOException {
@@ -61,9 +63,13 @@ public class Storage {
             bw.write(encodedTaskList);
             bw.close();
         } catch (IOException e) {
-            System.err.println("Something went wrong:" + e.getMessage());
+            e.printStackTrace();;
         }
         
+    }
+    
+    public String getFilePath() {
+        return this.path.toString();
     }
     
     public boolean isValidPath(Path filePath) {

@@ -7,62 +7,38 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDos;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
 public class TaskListDecoder {
-    public static int decoderTaskCounter = 0;
+
+   public static int TASK_TYPE_INDEX = 0;
+   public static int TASK_STATUS_INDEX = 1;
+   public static int TASK_NAME_INDEX = 2;
+   public static int TASK_REQUIREMENT_INDEX = 3;
+   public static int decoderTaskCounter = 0;
     
     public static TaskList decodeTaskList(List<String> lines) {
         TaskList decodedTaskList = new TaskList();       
-        
-        
+             
         for (String line : lines) {
             TaskListDecoder.decoderTaskCounter++;
-            Task decodedTask = decodeTask(line);
-            
+            List<Optional<String>> taskArgs = parseLineIntoTaskArguments(line);
+            Task decodedTask = decodeTask(taskArgs);           
             decodedTaskList.addTask(decodedTask);
         }
-
         return decodedTaskList;
     }
     
-    public static Task decodeTask(String line) {
-        List<Optional<String>> list = new ArrayList<>();
-        String[] taskArgs = line.split(" | ");
+    public static Task decodeTask(List<Optional<String>> taskArgs) {         
+        String taskType = taskArgs.get(TaskListDecoder.TASK_TYPE_INDEX).get();
+        String taskStatus = taskArgs.get(TaskListDecoder.TASK_STATUS_INDEX).get();
+        String taskName = taskArgs.get(TaskListDecoder.TASK_NAME_INDEX).get();
+        Optional<String> taskRequirement = taskArgs.get(TaskListDecoder.TASK_REQUIREMENT_INDEX);
         
-        String cleanWord = "";
-        for (String word : taskArgs) {           
-            if (word.equals("|")) {
-              list.add(Optional.of(cleanWord));
-              cleanWord = "";
-              continue;
-            } else {
-                if (cleanWord == "") {
-                    cleanWord += (word);
-                } else {
-                    cleanWord += (" " + word);
-                }
-            }
-        }
-        list.add(Optional.of(cleanWord));
-        
-        if (list.size() == 3) {
-            list.add(Optional.of(""));
-        }
+        boolean isDone = (taskStatus.equals("1") ? true : false);
        
-         
-        String taskType = list.get(0).get();
-        String isDoneNumber = list.get(1).get();
-        String taskName = list.get(2).get();
-        Optional<String> taskRequirement = list.get(3);
-        
-        boolean isDone = (isDoneNumber.equals("1") ? true : false);
-
-        
         Task task;        
         switch(taskType) {
         case "T":             
@@ -81,8 +57,33 @@ public class TaskListDecoder {
             throw new InvalidTaskArgumentException("Cannot understand taskType");
         }
 
-        return task;
-        
+        return task;       
     }
     
+    private static List<Optional<String>> parseLineIntoTaskArguments(String line) {
+        List<Optional<String>> taskArgs = new ArrayList<>();
+        String[] wordsArray = line.split(" | ");
+        
+        String cleanWord = "";
+        for (String word : wordsArray) {           
+            if (word.equals("|")) {
+              taskArgs.add(Optional.of(cleanWord));
+              cleanWord = "";
+              continue;
+            } else {               
+                if (cleanWord == "") {
+                    cleanWord += (word);
+                } else {
+                    // If the next word of the array is not "|", add a space before.
+                    cleanWord += (" " + word);
+                }
+            }
+        }
+        taskArgs.add(Optional.of(cleanWord));
+        
+        if (taskArgs.size() == 3) {
+            taskArgs.add(Optional.of(""));
+        }
+        return taskArgs;
+    }
 }
