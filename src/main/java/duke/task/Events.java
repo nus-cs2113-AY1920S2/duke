@@ -3,7 +3,7 @@ package duke.task;
 public class Events extends Task {
     private final String dateTime;
 
-    private Events(int taskId, String taskName, 
+    public Events(int taskId, String taskName, 
             String dateTime, boolean isDone) {
 
         super(taskId, taskName, isDone);
