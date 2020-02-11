@@ -15,7 +15,14 @@ public class Duke {
 
         while (!input.equals("bye")) {
             String[] words = input.split(" ", 2);
-            itemCount = manageCommand(list, itemCount, input, words);
+            try {
+                itemCount = manageCommand(list, itemCount, input, words);
+            } catch (EmptyToDoException e) {
+                System.out.println("    ☹ OOPS!!! The description of a todo cannot be empty.");
+            } catch (InvalidCommandException e) {
+                System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+
             input = in.nextLine(); // Get string input
         }
         printExitMessage(); // Exit
@@ -23,7 +30,7 @@ public class Duke {
 
     }
 
-    private static int manageCommand(Task[] list, int itemCount, String input, String[] words) {
+    private static int manageCommand(Task[] list, int itemCount, String input, String[] words) throws EmptyToDoException, InvalidCommandException {
         if(words[0].equals("list")) { // List tasks
             printBorder();
             System.out.println("    Here are the tasks in your list:");
@@ -60,13 +67,18 @@ public class Duke {
             printListCount(itemCount);
             printBorder();
         } else if(words[0].equals("todo")) { // ToDo
-            String toDoTask = input.substring(5, input.length());
+            if(words.length < 2) {
+                throw new EmptyToDoException();
+            }
+            String toDoTask = words[1];
             list[itemCount] = new ToDo(toDoTask);
             printBorder();
             printTaskAdded(list, itemCount);
             itemCount++;
             printListCount(itemCount);
             printBorder();
+        } else {
+            throw new InvalidCommandException();
         }
         return itemCount;
     }
