@@ -14,6 +14,10 @@ public class Duke {
         this.taskList = new TaskList();
     }
     
+    public void executeDeleteCommand(int taskId) {
+        this.taskList.deleteTask(taskId);
+    }
+    
     public void executeListCommand() {
         this.taskList.listTask();
     }

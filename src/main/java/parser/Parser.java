@@ -5,8 +5,13 @@ import static misc.Messages.MESSAGE_INVALID_COMMAND_RESULT;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
-
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.InvalidCommandException;
+import command.ListCommand;
 
 public class Parser {
     private final String[] prepositionArray = {"/by", "/at"};
@@ -49,6 +54,9 @@ public class Parser {
             break;
         case "event":
             command = new AddCommand(commandType, parser.taskInfo, parser.taskRequirement);
+            break;
+        case "delete":
+            command = new DeleteCommand(Integer.parseInt(parser.taskInfo.get()));
             break;
         default: 
             throw new InvalidCommandException(MESSAGE_INVALID_COMMAND_RESULT);
