@@ -91,15 +91,17 @@ public class Jan {
 
     private static void printMissingTaskDetailMessage() {
         System.out.println("Invalid request due to missing details. type \"help\" to find out more");
+        System.out.println("____________________________________________________________");
     }
 
     private static void printUnknownCommandMessage() {
         System.out.println("Try using the following commands:\n"
                 + "list                             -- to get a list of all the existing tasks\n"
-                + "done [item number]               -- mark task as completed"
+                + "done [item number]               -- mark task as completed\n"
                 + "todo [item]                      -- add new todo task\n"
                 + "deadline [item] /by [date][time] -- add new deadline task\n"
-                + "event [item] /at [date][time]    -- add new event task\n");
+                + "event [item] /at [date][time]    -- add new event task");
+        System.out.println("____________________________________________________________");
     }
 
     private static void printGreetingMessage(String logo) {
