@@ -14,7 +14,7 @@ public class Duke {
         String msg = "";
         // sets a specified task as done
         int index;
-        try {
+        try { 
             index = Integer.valueOf(cmds[1]);
         } catch (Exception exception) {
             throw new DukeException("Oops!! Wrong format.");
