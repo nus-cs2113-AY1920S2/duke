@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -148,6 +147,13 @@ public class Duke {
     private static void printUnknownWordExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "\t You can try the following commands instead:\n"
+                + "\t\t list\n"
+                + "\t\t todo <task name>\n"
+                + "\t\t done <task number>\n"
+                + "\t\t deadline <task name> /by <date>\n"
+                + "\t\t event <task name> /at <location>\n"
+                + "\t\t bye\n"
                 + "\t____________________________________________________________\n");
     }
 }
