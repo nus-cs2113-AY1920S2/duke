@@ -16,8 +16,7 @@ public class Main {
 
     private Ui ui;
     private Duke duke;
-    private Storage storage;
-    
+    private Storage storage;   
     
     public static void main(String... args) {
         new Main().run(args);
