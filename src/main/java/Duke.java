@@ -9,64 +9,66 @@ public class Duke {
         boolean isExit = false;
         Task[] list = new Task[MAX_TASK];
         int itemCount = 0;
-        do {
-            Scanner in = new Scanner(System.in);
-            String input = in.nextLine(); // Get string input
-            if(input.equals("bye")) { // Exit
-                printExitMessage();
-                isExit = true;
-            } else if(input.equals("list")) { // List tasks
-                printBorder();
-                System.out.println("    Here are the tasks in your list:");
-                for(int i = 0; i < itemCount; ++i) { // Print list of tasks
-                    System.out.println("    " + (i + 1) + ". " + list[i].toString() );
-                }
-                printBorder();
-            } else if(input.startsWith("done") ) { // Mark task as done
-                printBorder();
-                System.out.println("    Nice! I've marked this task as done: ");
-                String doneTask = input.substring(5, input.length() );
-                int taskIndex = Integer.parseInt(doneTask) - 1;
-                list[taskIndex].setDone(true);
-                System.out.println("    " + list[taskIndex].toString() ); // Print task marked as done
-                printBorder();
-            } else if(input.startsWith("deadline")) { // Deadline
-                int dividerIndex = input.indexOf("/by");
-                String deadlineTask = input.substring(9, (dividerIndex - 1));
-                String deadlineBy = input.substring((dividerIndex + 4), input.length() );
-                list[itemCount] = new Deadline(deadlineTask, deadlineBy);
-                printBorder();
-                printTaskAdded(list, itemCount);
-                itemCount++;
-                printListCount(itemCount);
-                printBorder();
-            } else if(input.startsWith("event")) { // Event
-                int dividerIndex = input.indexOf("/at");
-                String eventTask = input.substring(6, (dividerIndex - 1));
-                String eventAt = input.substring((dividerIndex + 4), input.length());
-                list[itemCount] = new Event(eventTask, eventAt);
-                printBorder();
-                printTaskAdded(list, itemCount);
-                itemCount++;
-                printListCount(itemCount);
-                printBorder();
-            } else if(input.startsWith("todo")) { // ToDo
-                String toDoTask = input.substring(5, input.length() );
-                list[itemCount] = new ToDo(toDoTask);
-                printBorder();
-                printTaskAdded(list, itemCount);
-                itemCount++;
-                printListCount(itemCount);
-                printBorder();
+
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine(); // Get string input
+
+        while (!input.equals("bye")) {
+            String[] words = input.split(" ", 2);
+            itemCount = manageCommand(list, itemCount, input, words);
+            input = in.nextLine(); // Get string input
+        }
+        printExitMessage(); // Exit
+
+
+    }
+
+    private static int manageCommand(Task[] list, int itemCount, String input, String[] words) {
+        if(words[0].equals("list")) { // List tasks
+            printBorder();
+            System.out.println("    Here are the tasks in your list:");
+            for(int i = 0; i < itemCount; ++i) { // Print list of tasks
+                System.out.println("    " + (i + 1) + ". " + list[i].toString() );
             }
-            else { // Add task
-                printBorder();
-                list[itemCount] = new Task(input);
-                itemCount++;
-                System.out.println("    added: " + input); // Print task added
-                printBorder();
-            }
-        } while (isExit == false);
+            printBorder();
+        } else if(words[0].equals("done") ) { // Mark task as done
+            printBorder();
+            System.out.println("    Nice! I've marked this task as done: ");
+            String doneTask = input.substring(5, input.length() );
+            int taskIndex = Integer.parseInt(doneTask) - 1;
+            list[taskIndex].setDone(true);
+            System.out.println("    " + list[taskIndex].toString() ); // Print task marked as done
+            printBorder();
+        } else if(words[0].equals("deadline")) { // Deadline
+            int dividerIndex = input.indexOf("/by");
+            String deadlineTask = input.substring(9, (dividerIndex - 1));
+            String deadlineBy = input.substring((dividerIndex + 4), input.length() );
+            list[itemCount] = new Deadline(deadlineTask, deadlineBy);
+            printBorder();
+            printTaskAdded(list, itemCount);
+            itemCount++;
+            printListCount(itemCount);
+            printBorder();
+        } else if(words[0].equals("event")) { // Event
+            int dividerIndex = input.indexOf("/at");
+            String eventTask = input.substring(6, (dividerIndex - 1));
+            String eventAt = input.substring((dividerIndex + 4), input.length());
+            list[itemCount] = new Event(eventTask, eventAt);
+            printBorder();
+            printTaskAdded(list, itemCount);
+            itemCount++;
+            printListCount(itemCount);
+            printBorder();
+        } else if(words[0].equals("todo")) { // ToDo
+            String toDoTask = input.substring(5, input.length());
+            list[itemCount] = new ToDo(toDoTask);
+            printBorder();
+            printTaskAdded(list, itemCount);
+            itemCount++;
+            printListCount(itemCount);
+            printBorder();
+        }
+        return itemCount;
     }
 
     private static void printListCount(int itemCount) {
