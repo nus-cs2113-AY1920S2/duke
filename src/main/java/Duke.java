@@ -6,10 +6,7 @@ public class Duke {
         Task[] tasks = new Task[100];
         int taskCount = 0;
         boolean isBye = false;
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        greetUser();
         Scanner sc = new Scanner(System.in);
         while (!isBye) {
             String description;
@@ -69,5 +66,34 @@ public class Duke {
             }
             System.out.println("    ____________________________________________________________");
         }
+    }
+
+    public static void greetUser() {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Hello! I'm Duke");
+        commandList();
+        System.out.println("    What can I do for you?");
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void commandList() {
+        System.out.println("    Here is the list of commands that are available:");
+        System.out.println("+---------------------------------------------------------------+");
+        System.out.println("| Index | Input            | Command                            |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 01    | list             | List out all the stored task       |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 02    | done i           | Mark task i as done                |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 03    | bye              | Terminate the program              |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 04    | todo j           | Add a task(j) without dateline     |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 05    | dateline j /by d | Add a task(j) with due date d      |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 06    | event j /at d    | Add a task(j) that start at date d |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 07    | j                | Add a task(j)                      |");
+        System.out.println("|---------------------------------------------------------------|");
     }
 }
