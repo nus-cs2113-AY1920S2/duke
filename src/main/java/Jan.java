@@ -30,24 +30,25 @@ public class Jan {
             }
             break;
         case "todo":
-            Todo todo = new Todo(commandDescription,"T");
+            Todo todo = new Todo(commandDescription);
+            Tasks[Task.getTotalTask() - 1] = todo;
             System.out.println("Got it. I've added this task:\n " + todo);
             printCurrentTaskCount();
-            Tasks[Task.getTotalTask() - 1] = todo;
+
             break;
         case "deadline":
             String[] deadlineDetails = commandDescription.split("/by");
             Deadline deadline = new Deadline(deadlineDetails[0],deadlineDetails[1]);
+            Tasks[Task.getTotalTask() - 1] = deadline;
             System.out.println("Got it. I've added this task:\n " + deadline);
             printCurrentTaskCount();
-            Tasks[Task.getTotalTask() - 1] = deadline;
             break;
         case "event":
             String[] eventDetails = commandDescription.split("/at");
             Event event = new Event(eventDetails[0],eventDetails[1]);
+            Tasks[Task.getTotalTask() - 1] = event;
             System.out.println("Got it. I've added this task:\n " + event);
             printCurrentTaskCount();
-            Tasks[Task.getTotalTask() - 1] = event;
             break;
         default:
             System.out.println("Duke cannot understand your command.\n");
