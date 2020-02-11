@@ -1,5 +1,13 @@
+
+                      
 list
 done 1
+todo
+blah
+event /                                    
+event /
+event fail1 /               
+event fail2 /
 todo abc
 event def /123
 deadline ghi /456
@@ -12,3 +20,5 @@ done 2
 done 2
 list
 bye
+
+(note: 2 is whitespaces,  7&9 is event with whitespace remarks)
