@@ -16,19 +16,28 @@ public class Duke {
 
             System.out.println("____________________________________________________________");
 
-            if (input.equals("list")) {
-                viewList(tasks);
-            } else if (inputArray[0].equals("todo")) {
-                addToDo(tasks, inputArray[1]);
-            } else if (inputArray[0].equals("deadline")) {
-                addDeadline(tasks, inputArray[1]);
-            } else if (inputArray[0].equals("event")) {
-                addEvent(tasks, inputArray[1]);
-            } else if (inputArray[0].equals("done")) {
-                markDone(tasks, inputArray[1]);
-            } else if (input.equals("bye")) {
-                exitMessage();
-                exitProgram = true;
+            try {
+                if (input.equals("list")) {
+                    viewList(tasks);
+                } else if (inputArray[0].equals("todo")) {
+                    if (inputArray.length < 2) throw new ToDoEmptyException();
+                    addToDo(tasks, inputArray[1]);
+                } else if (inputArray[0].equals("deadline")) {
+                    addDeadline(tasks, inputArray[1]);
+                } else if (inputArray[0].equals("event")) {
+                    addEvent(tasks, inputArray[1]);
+                } else if (inputArray[0].equals("done")) {
+                    markDone(tasks, inputArray[1]);
+                } else if (input.equals("bye")) {
+                    exitMessage();
+                    exitProgram = true;
+                } else {
+                    throw new InvalidCommandException();
+                }
+            } catch (ToDoEmptyException e) {
+                System.out.println("OOPS!!! The description of a todo cannot be empty");
+            } catch (InvalidCommandException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
             }
 
             System.out.println("____________________________________________________________");
