@@ -77,12 +77,19 @@ public class Duke {
                 System.out.println("------------------------------------------");
             } else if (choice.equals(option_4)) {
                 Task newTask = new ToDos(option.getArgs());
-                list.add(newTask);
-                System.out.println("------------------------");
-                System.out.println("Added : ");
-                System.out.println(newTask.toString());
-                System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
-                System.out.println("------------------------");
+                if ( option.getArgs() == " ")
+                {
+                    System.out.println("-------------------------------------------");
+                    System.out.println("Uh Oh! The description cannot be empty ~");
+                    System.out.println("-------------------------------------------");
+                } else {
+                    list.add(newTask);
+                    System.out.println("------------------------");
+                    System.out.println("Added : ");
+                    System.out.println(newTask.toString());
+                    System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
+                }
+
             } else if (choice.equals(option_5)) {
                 final int indexOfAtPrefix = option.getArgs().indexOf("/at");
                 description = option.getArgs().substring(0, indexOfAtPrefix);
@@ -94,6 +101,7 @@ public class Duke {
                 System.out.println(newEvent.toString());
                 System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
                 System.out.println("------------------------");
+
             } else if (choice.equals(option_6)) {
                 final int indexOfByPrefix = option.getArgs().indexOf("/by");
                 description = option.getArgs().substring(0, indexOfByPrefix);
@@ -105,8 +113,6 @@ public class Duke {
                 System.out.println(newDeadline.toString());
                 System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
                 System.out.println("------------------------");
-
-
             } else {
                 // if there is no "done", "bye", "list" in the string
                 System.out.println("-------------------------------------------");
