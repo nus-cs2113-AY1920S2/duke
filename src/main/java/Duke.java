@@ -15,56 +15,101 @@ public class Duke {
             String string = sc.nextLine();
             System.out.println("    ____________________________________________________________");
             String[] stringSplit = string.split(" ");
-            switch (stringSplit[0]) {
-            case "list":
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < taskCount; i++) {
-                    System.out.println("     " + (i + 1) + "." + tasks[i].toString());
+            try {
+                switch (stringSplit[0]) {
+                    case "list":
+                        listCommand(tasks, stringSplit, taskCount);
+                        break;
+                    case "done":
+                        doneCommand(tasks, stringSplit, taskCount);
+                        break;
+                    case "bye":
+                        isBye = byeCommand(stringSplit);
+                        break;
+                    case "todo":
+                        description = String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length));
+                        tasks[taskCount] = new Todo(description);
+                        System.out.println("     Got it. I've added this task: ");
+                        System.out.println("       " + tasks[taskCount].toString());
+                        taskCount++;
+                        System.out.println("     Now you have " + taskCount + " tasks in the list.");
+                        break;
+                    case "deadline":
+                        description = string.substring(0, string.indexOf(" /by")).replace("deadline ", "");
+                        date = string.substring(string.indexOf("/by ")).replace("/by ", "");
+                        tasks[taskCount] = new Deadline(description, date);
+                        System.out.println("     Got it. I've added this task: ");
+                        System.out.println("       " + tasks[taskCount].toString());
+                        taskCount++;
+                        System.out.println("     Now you have " + taskCount + " tasks in the list.");
+                        break;
+                    case "event":
+                        description = string.substring(0, string.indexOf(" /at")).replace("event ", "");
+                        date = string.substring(string.indexOf("/at ")).replace("/at ", "");
+                        tasks[taskCount] = new Event(description, date);
+                        System.out.println("     Got it. I've added this task: ");
+                        System.out.println("       " + tasks[taskCount].toString());
+                        taskCount++;
+                        System.out.println("     Now you have " + taskCount + " tasks in the list.");
+                        break;
+                    default: //add Task into List
+                        tasks[taskCount] = new Task(string);
+                        System.out.println("     added: " + tasks[taskCount].getDescription());
+                        taskCount++;
+                        break;
                 }
-                break;
-            case "done":
-                int done = Integer.parseInt(stringSplit[1]) - 1;
-                tasks[done].markAsDone();
-                System.out.println("     Nice! I've marked this task as done: ");
-                System.out.println("       " + tasks[done].toString());
-                break;
-            case "bye":
-                System.out.println("    Bye. Hope to see you again soon!");
-                isBye = true;
-                break;
-            case "todo":
-                description = String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length));
-                tasks[taskCount] = new Todo(description);
-                System.out.println("     Got it. I've added this task: ");
-                System.out.println("       " + tasks[taskCount].toString());
-                taskCount++;
-                System.out.println("     Now you have " + taskCount + " tasks in the list.");
-                break;
-            case "deadline":
-                description = string.substring(0, string.indexOf(" /by")).replace("deadline ", "");
-                date = string.substring(string.indexOf("/by ")).replace("/by ", "");
-                tasks[taskCount] = new Deadline(description, date);
-                System.out.println("     Got it. I've added this task: ");
-                System.out.println("       " + tasks[taskCount].toString());
-                taskCount++;
-                System.out.println("     Now you have " + taskCount + " tasks in the list.");
-                break;
-            case "event":
-                description = string.substring(0, string.indexOf(" /at")).replace("event ", "");
-                date = string.substring(string.indexOf("/at ")).replace("/at ", "");
-                tasks[taskCount] = new Event(description, date);
-                System.out.println("     Got it. I've added this task: ");
-                System.out.println("       " + tasks[taskCount].toString());
-                taskCount++;
-                System.out.println("     Now you have " + taskCount + " tasks in the list.");
-                break;
-            default: //add Task into List
-                tasks[taskCount] = new Task(string);
-                System.out.println("     added: " + tasks[taskCount].getDescription());
-                taskCount++;
-                break;
+            } catch (DukeArgumentException e) {
+                System.out.println(e.getMessage());
+            } catch (DukeIndexException e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("    ____________________________________________________________");
+        }
+    }
+
+    public static boolean byeCommand(String[] stringSplit) throws DukeArgumentException {
+        if (stringSplit.length > 1) {
+            throw new DukeArgumentException("     ☹ OOPS!!! Description not required after bye.");
+        }
+
+        System.out.println("    Bye. Hope to see you again soon!");
+        return true;
+    }
+
+    public static void doneCommand(Task[] tasks, String[] stringSplit, int taskCount) throws
+            DukeArgumentException, DukeIndexException {
+        int completedTask;
+        if (stringSplit.length == 1) {
+            throw new DukeArgumentException("     ☹ OOPS!!! Missing index after done.");
+        } else {
+            completedTask = Integer.parseInt(stringSplit[1]) - 1;
+        }
+
+        if (completedTask >= taskCount) {
+            throw new DukeIndexException("     ☹ OOPS!!! Invalid index after done.");
+        } else {
+            System.out.println("done is: " + completedTask);
+            System.out.println("taskCount is: " + taskCount);
+            tasks[completedTask].markAsDone();
+            System.out.println("     Nice! I've marked this task as done: ");
+            System.out.println("       " + tasks[completedTask].toString());
+        }
+    }
+
+    public static void listCommand(Task[] tasks, String[] stringSplit, int taskCount) throws DukeArgumentException {
+        if (stringSplit.length > 1) {
+            throw new DukeArgumentException("     ☹ OOPS!!! Description not required after list.");
+        }
+
+        switch (taskCount) {
+        case 0:
+            System.out.println("     There are currently no tasks in your list");
+            break;
+        default:
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < taskCount; i++) {
+                System.out.println("     " + (i + 1) + "." + tasks[i].toString());
+            }
         }
     }
 
