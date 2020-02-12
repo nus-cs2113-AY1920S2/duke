@@ -1,0 +1,3 @@
+T|✓|add books
+T|✓|delete books
+T|✓|read story
