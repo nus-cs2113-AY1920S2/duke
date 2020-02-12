@@ -28,10 +28,20 @@ public class Duke {
                 }
             } else if (userInput.startsWith("done")){
                 String taskToDelete = userInput.substring(5);
+                //quick fix, have to redo
+                if (taskToDelete.length() == 0) {
+                    System.out.println("Duke doesn't know which task!");
+                    break;
+                }
                 int ID = Integer.valueOf(taskToDelete) - 1;
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(taskList[ID].markAsDone());
             } else if (userInput.startsWith("todo")) {
+                String toDo = userInput.substring(5);
+                if (toDo.length() == 0) {
+                    System.out.println("Description cannot be blank!");
+                    break;
+                }
                 taskList[taskListSize] = new ToDo(userInput.substring(5));
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
@@ -46,6 +56,7 @@ public class Duke {
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
             } else {
+                // error handling
                 taskList[taskListSize] = new Task(userInput);
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
