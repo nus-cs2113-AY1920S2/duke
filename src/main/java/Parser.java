@@ -49,4 +49,9 @@ public class Parser {
         String firstWord = getFirstWord();
         return firstWord.equals("deadline");
     }
+
+    public boolean isDelete() {
+        String firstWord = getFirstWord();
+        return firstWord.equals("delete");
+    }
 }

@@ -53,4 +53,20 @@ public class DukeExceptions {
         System.out.println(" Example: deadline return book /by Sunday");
         System.out.println(" Disclaimer: Description field can be left empty");
     }
+
+    public void printIOBDeleteExceptions(String input) {
+        System.out.println(" Command Entered: " + input);
+        System.out.println(" [Error: Specifier entered is out of range]");
+        System.out.println(" delete: deletes task from stored list");
+        System.out.println(" Parameters: delete [TASK NUMBER]");
+        System.out.println(" Example: delete 1");
+    }
+
+    public void printNFEDeleteExceptions(String input) {
+        System.out.println(" Command Entered: " + input);
+        System.out.println(" [Error: Specifier entered is not a numerical value]");
+        System.out.println(" delete: deletes task from stored list");
+        System.out.println(" Parameters: delete [TASK NUMBER]");
+        System.out.println(" Example: delete 1");
+    }
 }
