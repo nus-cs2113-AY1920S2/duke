@@ -1,7 +1,5 @@
-public class IllegalDukeException extends Exception {
-
+public class IllegalDukeException extends Exception{
     public IllegalDukeException(String message){
-        super(message);
+    super(message);
     }
-
 }

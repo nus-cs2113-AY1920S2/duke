@@ -70,7 +70,7 @@ public class Duke {
         }
     }
 
-    public static String[] getTaskInfo(String userIn) throws IllegalDukeException{
+    public static String[] getTaskInfo(String userIn) throws IllegalDukeException {
         String[] temp = getCommand(userIn);
         if(temp.length==1){
             throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + temp[0] + " cannot be empty.");
@@ -125,7 +125,7 @@ public class Duke {
         addTask(l1, event);
     }
 
-    public static int validateCommand(String inCommand, ArrayList<Task> l1) throws IllegalDukeException {
+    public static int validateCommand(String inCommand, ArrayList<Task> l1) throws IllegalDukeException{
         String[] userCommand = getCommand(inCommand);
         String[] taskInfo= new String[2];
         int status;
