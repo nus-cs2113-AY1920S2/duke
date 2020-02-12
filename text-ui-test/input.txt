@@ -9,4 +9,8 @@ event project meeting
 done
 bla
 done liao
+delete 3
+list
+delete 1
+list
 bye

@@ -10,6 +10,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -18,6 +19,8 @@ public class Duke {
     private static final String welcomeMessage = "Hello! I'm KJ\nHow can I help you today?";
 
     private static final String completeMessage = "Nice! I've marked this task as done:";
+
+    private static final String deleteMessage = "Noted. I've removed this task:";
 
     private static final String byeMessage = "Bye. Hope to see you again soon!";
 
@@ -32,7 +35,7 @@ public class Duke {
     private static final String formatProblem = "The format of your command is incorrect, please use:\n"
             + "deadline (item) /by (time)\n" + "event (item) /at (time)";
 
-    private static final int MAXIMUM_TASKS = 100;
+    private static String spacing = "  ";
 
     private static boolean shouldContinue;
 
@@ -42,9 +45,7 @@ public class Duke {
 
     private static Scanner input;
 
-    private static Task[] instructions;
-
-    private static int instructionCount;
+    private static ArrayList<Task> instructions;
 
     public static void main(String[] args) {
         initDuke();
@@ -80,7 +81,7 @@ public class Duke {
             break;
         case "done":
             checkCompleteInput();
-            completeTask();
+            completeTask("complete");
             break;
         case "deadline":
             checkCompleteInput();
@@ -96,6 +97,10 @@ public class Duke {
             checkCompleteInput();
             addTodo();
             confirmTask();
+            break;
+        case "delete":
+            checkCompleteInput();
+            completeTask("delete");
             break;
         default:
             throw new InvalidInputException();
@@ -114,8 +119,7 @@ public class Duke {
 
     private static void addTodo() {
         String description = command.substring(phrases[0].length()+1);
-        instructions[instructionCount] = new Todo(description);
-        instructionCount += 1;
+        instructions.add(new Todo(description));
     }
 
     private static void addEvent() throws FormatErrorException {
@@ -125,8 +129,7 @@ public class Duke {
         }
         String description = command.substring(phrases[0].length()+1, index - 1);
         String duration = command.substring(index + timingSpecifier);
-        instructions[instructionCount] = new Event(description, duration);
-        instructionCount += 1;
+        instructions.add(new Event(description, duration));
     }
 
     private static void addDeadline() throws FormatErrorException {
@@ -136,23 +139,31 @@ public class Duke {
         }
         String description = command.substring(phrases[0].length()+1, index - 1);
         String by = command.substring(index + timingSpecifier);
-        instructions[instructionCount] = new Deadline(description, by);
-        instructionCount += 1;
+        instructions.add(new Deadline(description, by));
     }
-    private static void completeTask() throws OutOfBoundsException {
+    private static void completeTask(String type) throws OutOfBoundsException {
         int index = Integer.parseInt(phrases[1]);
-        if (index > instructionCount) {
+        if (index > instructions.size()) {
             throw new OutOfBoundsException();
         }
-        instructions[index-1].markAsDone();
-        System.out.println(completeMessage);
-        System.out.println("  " + instructions[index-1]);
+        if (type.equals("complete")) {
+            instructions.get(index-1).markAsDone();
+            System.out.println(completeMessage);
+            System.out.println(spacing + instructions.get(index-1));
+        } else {
+            Task obsolete = instructions.get(index-1);
+            System.out.println(deleteMessage);
+            System.out.println(spacing + obsolete);
+            System.out.println("Now you have " + (instructions.size()-1) + " tasks in the list.");
+            instructions.remove(obsolete);
+        }
+
     }
 
     private static void listTasks() {
         System.out.println(listMessage);
-        for (int i = 0; i < instructionCount; i++) {
-            System.out.println((i+1) + "." + instructions[i]);
+        for (int i = 0; i < instructions.size(); i++) {
+            System.out.println((i+1) + "." + instructions.get(i));
         }
     }
 
@@ -168,13 +179,12 @@ public class Duke {
     private static void initDuke() {
         shouldContinue = true;
         input = new Scanner(System.in);
-        instructions = new Task[MAXIMUM_TASKS];
-        instructionCount = 0;
+        instructions = new ArrayList<>();
     }
 
     private static void confirmTask() {
-        System.out.println("Got it. I've added this task:\n  " + instructions[instructionCount-1] + "\n"
-            + "Now you have " + instructionCount + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n  " + instructions.get(instructions.size()-1) + "\n"
+            + "Now you have " + instructions.size() + " tasks in the list.");
     }
 
     private static void displayWelcome() {
