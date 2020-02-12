@@ -1,5 +1,6 @@
 Hello! I'm KJ
 How can I help you today?
+There are no tasks in your list currently.
 Got it. I've added this task:
   [T][✘] borrow book
 Now you have 1 tasks in the list.

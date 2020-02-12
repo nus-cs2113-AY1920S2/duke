@@ -9,12 +9,24 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Duke {
 
     private static final int timingSpecifier = 4;
+
+    private static int savedStatus = 1;
+
+    private static int savedType = 0;
+
+    private static int savedDescription = 2;
+
+    private static int savedBy = 3;
 
     private static final String welcomeMessage = "Hello! I'm KJ\nHow can I help you today?";
 
@@ -26,11 +38,17 @@ public class Duke {
 
     private static final String listMessage = "Here are the tasks in your list:";
 
+    private static final String noTaskMessage = "There are no tasks in your list currently.";
+
     private static final String invalid = "Oops, I'm sorry but I don't know what that means :-(";
 
     private static final String incomplete = "Uh-oh, I need more information to process that request :-(";
 
     private static final String indexProblem = "It appears you have entered an invalid index :O";
+
+    private static final String fileError = "Error: Could not create save file";
+
+    private static final String writeError = "Error: Could not save data to file";
 
     private static final String formatProblem = "The format of your command is incorrect, please use:\n"
             + "deadline (item) /by (time)\n" + "event (item) /at (time)";
@@ -48,7 +66,15 @@ public class Duke {
     private static ArrayList<Task> instructions;
 
     public static void main(String[] args) {
-        initDuke();
+        try {
+            initDuke();
+        } catch (IOException e) {
+            printError(fileError);
+            return;
+        } catch (InvalidInputException e) {
+            printError(invalid);
+            return;
+        }
         displayWelcome();
         while (shouldContinue) {
             readInput();
@@ -64,13 +90,16 @@ public class Duke {
                 printError(formatProblem);
             } catch (OutOfBoundsException e) {
                 printError(indexProblem);
+            } catch (IOException e) {
+                printError(writeError);
+                return;
             }
 
         }
     }
 
     private static void processCommand() throws InvalidInputException, IncompleteInputException, FormatErrorException,
-            OutOfBoundsException {
+            OutOfBoundsException, IOException {
         phrases = command.split(" ");
         switch(phrases[0]) {
         case "bye":
@@ -117,53 +146,83 @@ public class Duke {
         }
     }
 
-    private static void addTodo() {
+    private static void addTodo() throws IOException {
         String description = command.substring(phrases[0].length()+1);
-        instructions.add(new Todo(description));
+        Todo newTodo = new Todo(description);
+        instructions.add(newTodo);
+        FileWriter textAdder = new FileWriter("duke.txt",true);
+        textAdder.write("T|" + "\u2718" + "|" + newTodo.getDescription() + "\n");
+        textAdder.close();
     }
 
-    private static void addEvent() throws FormatErrorException {
+    private static void addEvent() throws FormatErrorException, IOException {
         int index = command.indexOf("/at");
         if (index == -1) {
             throw new FormatErrorException();
         }
         String description = command.substring(phrases[0].length()+1, index - 1);
         String duration = command.substring(index + timingSpecifier);
-        instructions.add(new Event(description, duration));
+        Event newEvent = new Event(description,duration);
+        instructions.add(newEvent);
+        FileWriter textAdder = new FileWriter("duke.txt",true);
+        textAdder.write("E|" + "\u2718" + "|" + newEvent.getDescription() + "|" + newEvent.getDuration() + "\n");
+        textAdder.close();
     }
 
-    private static void addDeadline() throws FormatErrorException {
+    private static void addDeadline() throws FormatErrorException, IOException {
         int index = command.indexOf("/by");
         if (index == -1) {
             throw new FormatErrorException();
         }
         String description = command.substring(phrases[0].length()+1, index - 1);
         String by = command.substring(index + timingSpecifier);
-        instructions.add(new Deadline(description, by));
+        Deadline newDeadline = new Deadline(description,by);
+        instructions.add(newDeadline);
+        FileWriter textAdder = new FileWriter("duke.txt",true);
+        textAdder.write("D|" + "\u2718" + "|" + newDeadline.getDescription() + "|" + newDeadline.getBy() + "\n");
+        textAdder.close();
     }
-    private static void completeTask(String type) throws OutOfBoundsException {
+
+    private static void completeTask(String type) throws OutOfBoundsException, IOException {
         int index = Integer.parseInt(phrases[1]);
         if (index > instructions.size()) {
             throw new OutOfBoundsException();
         }
+        Task completedTask = instructions.get(index-1);
         if (type.equals("complete")) {
-            instructions.get(index-1).markAsDone();
+            completedTask.markAsDone();
             System.out.println(completeMessage);
-            System.out.println(spacing + instructions.get(index-1));
+            System.out.println(spacing + completedTask);
         } else {
-            Task obsolete = instructions.get(index-1);
             System.out.println(deleteMessage);
-            System.out.println(spacing + obsolete);
+            System.out.println(spacing + completedTask);
             System.out.println("Now you have " + (instructions.size()-1) + " tasks in the list.");
-            instructions.remove(obsolete);
+            instructions.remove(completedTask);
         }
-
+        FileWriter textAdder = new FileWriter("duke.txt");
+        for (int i = 0; i < instructions.size(); i += 1) {
+            Task newVersion = instructions.get(i);
+            if (newVersion instanceof Todo) {
+                textAdder.write("T|" + newVersion.getStatus() + "|" + newVersion.getDescription() + "\n");
+            } else if (newVersion instanceof Event) {
+                textAdder.write("E|" + newVersion.getStatus() + "|" + newVersion.getDescription() + "|"
+                        + ((Event) newVersion).getDuration() + "\n");
+            } else {
+                textAdder.write("D|" + newVersion.getStatus() + "|" + newVersion.getDescription() + "|"
+                        + ((Deadline) newVersion).getBy() + "\n");
+            }
+        }
+        textAdder.close();
     }
 
     private static void listTasks() {
-        System.out.println(listMessage);
-        for (int i = 0; i < instructions.size(); i++) {
-            System.out.println((i+1) + "." + instructions.get(i));
+        if (instructions.size() == 0) {
+            System.out.println(noTaskMessage);
+        } else {
+            System.out.println(listMessage);
+            for (int i = 0; i < instructions.size(); i++) {
+                System.out.println((i+1) + "." + instructions.get(i));
+            }
         }
     }
 
@@ -176,10 +235,44 @@ public class Duke {
         command = input.nextLine();
     }
 
-    private static void initDuke() {
+    private static void initDuke() throws InvalidInputException,IOException {
+        instructions = new ArrayList<>();
         shouldContinue = true;
         input = new Scanner(System.in);
-        instructions = new ArrayList<>();
+        File savedData = new File("duke.txt");
+        if (!savedData.exists()) {
+            savedData.createNewFile();
+        }
+        Scanner loader = new Scanner(savedData);
+        while (loader.hasNext()) {
+            command = loader.nextLine();
+            phrases = command.split("\\|");
+            switch(phrases[savedType]) {
+            case "T":
+                Todo newTodo = new Todo(phrases[savedDescription]);
+                if (phrases[savedStatus].equals("\u2713")) {
+                    newTodo.markAsDone();
+                }
+                instructions.add(newTodo);
+                break;
+            case "D":
+                Deadline newDeadline = new Deadline(phrases[savedDescription],phrases[savedBy]);
+                if (phrases[savedStatus].equals("\u2713")) {
+                    newDeadline.markAsDone();
+                }
+                instructions.add(newDeadline);
+                break;
+            case "E":
+                Event newEvent = new Event(phrases[savedDescription],phrases[savedBy]);
+                if (phrases[savedStatus].equals("\u2713")) {
+                    newEvent.markAsDone();
+                }
+                instructions.add(newEvent);
+                break;
+            default:
+                throw new InvalidInputException();
+            }
+        }
     }
 
     private static void confirmTask() {
