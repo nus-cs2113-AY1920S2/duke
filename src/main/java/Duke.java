@@ -1,3 +1,8 @@
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -64,7 +69,7 @@ public class Duke {
                 printConfirm(Tasks[NUM_OF_TASK]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 //If arr[1] does not exist
-                System.out.println("Oops! Task description cannot be empty!");
+                System.out.println("Oops! task.Task description cannot be empty!");
             }
             break;
         case (DEADLINE_COMMAND):
@@ -74,7 +79,7 @@ public class Duke {
                 printConfirm(Tasks[NUM_OF_TASK]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 //If arr[1] does not exist
-                System.out.println("Oops! Deadline description is incomplete!");
+                System.out.println("Oops! task.Deadline description is incomplete!");
             }
             break;
         case (EVENT_COMMAND):
@@ -84,7 +89,7 @@ public class Duke {
                 printConfirm(Tasks[NUM_OF_TASK]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 //If arr[1] does not exist
-                System.out.println("Oops! Event description is incomplete!");
+                System.out.println("Oops! task.Event description is incomplete!");
             }
             break;
         default:
