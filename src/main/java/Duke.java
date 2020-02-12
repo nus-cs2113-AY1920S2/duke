@@ -10,6 +10,7 @@ public class Duke {
     private UI userInterface;
     private Parser parser;
     private DukeExceptions dukeExceptions;
+    private Storage storage;
     private final int startIndex = 0;
     private final int lengthOfDeadline = 9;
     private final int lengthOfEvent = 5;
@@ -21,6 +22,7 @@ public class Duke {
         userInterface = new UI();
         parser = new Parser();
         dukeExceptions = new DukeExceptions();
+        storage = new Storage();
     }
 
     private void printList() {
@@ -32,6 +34,7 @@ public class Duke {
     }
 
     private void list() {
+        tasks = storage.loadTasks();
         if (tasks.size() == 0) {
             dukeExceptions.printListExceptions();
         } else {
@@ -57,12 +60,13 @@ public class Duke {
             tasks.set(index, completedTask);
             System.out.println(" Duke has marked the following tasks as done:");
             System.out.println("  " + completedTask);
+            storage.save(tasks);
         }
     }
 
     private void getDoneExceptions(String input) {
         try {
-            int index = getIndex(input,lengthOfDone);
+            int index = getIndex(input, lengthOfDone);
             markAsDone(index);
         } catch(IndexOutOfBoundsException exception) {
             dukeExceptions.printDoneIOBExceptions(input);
@@ -79,6 +83,7 @@ public class Duke {
         System.out.println(" Got it! I have added the following tasks: ");
         System.out.println( newToDo);
         System.out.println("There are currently " + tasks.size() + " task(s) queued");
+        storage.save(tasks);
     }
 
     private void getToDoExceptions(String input) {
@@ -105,6 +110,7 @@ public class Duke {
             System.out.println(" New task has been added:");
             System.out.println(" " + newEvent);
             System.out.println(" There are currently " + tasks.size() + " task(s) being queued");
+            storage.save(tasks);
         }
     }
 
@@ -133,6 +139,7 @@ public class Duke {
             System.out.println(" Got it!I've added this task:");
             System.out.println(" " + newDeadline);
             System.out.println(" There are currently " + tasks.size() + " being queued");
+            storage.save(tasks);
         }
     }
 
@@ -152,7 +159,7 @@ public class Duke {
         System.out.println(" Got it! I've removed this task:");
         System.out.println(" " + deletedTask);
         System.out.println(" There are currently " + length + " task(s) being queued");
-//        storage.save(tasks);
+        storage.save(tasks);
     }
 
     private void getDeleteExceptions(String input) {
@@ -169,6 +176,7 @@ public class Duke {
     private void run() {
         Scanner sc = new Scanner(System.in);
         userInterface.printGreetingMessage();
+        storage.restoreArray(sc, tasks);
         while (true) {
             String input = sc.nextLine().trim();
             parser.updateInput(input);
@@ -187,7 +195,7 @@ public class Duke {
                 getEventExceptions(input);
             } else if (parser.isDeadline()) {
                 getDeadlineExceptions(input);
-            } else if (parser.isDelete()){
+            } else if (parser.isDelete()) {
                 getDeleteExceptions(input);
             } else {
                 System.out.println(" Duke does not understand your command! Can you repeat again?");

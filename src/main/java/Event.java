@@ -8,6 +8,11 @@ public class Event extends Task {
         this.eventDetails = eventDetails;
     }
 
+    public Event(String description, boolean isDone, String eventDetails) {
+        super(description, isDone);
+        this.eventDetails = eventDetails;
+    }
+
     public String getEventDetails() {
         return eventDetails;
     }
@@ -15,5 +20,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E][ " + super.getStatusIcon() + " ] " + super.getDescription() + "(At: " + getEventDetails() + ")";
+    }
+
+    @Override
+    public String storeText() {
+        return "[E]," +  super.getStatus() + "," + super.getDescription() + "," + getEventDetails();
     }
 }

@@ -54,4 +54,5 @@ public class Parser {
         String firstWord = getFirstWord();
         return firstWord.equals("delete");
     }
+    
 }
