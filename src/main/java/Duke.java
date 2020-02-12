@@ -68,7 +68,7 @@ public class Duke {
                 }
             }else if(userInput.startsWith("todo")) {
                 try {
-                    userInput = userInput.substring(5, userInput.length());
+                    userInput = userInput.substring(5);
                     if (userInput.trim().equals("")){
                         throw new EmptyStringException();
                     }
@@ -86,7 +86,7 @@ public class Duke {
             }else if (userInput.startsWith("deadline")){
 
                 try {
-                    userInput = userInput.substring(9, userInput.length());
+                    userInput = userInput.substring(9);
                     if (userInput.trim().equals("")){
                         throw new EmptyStringException();
                     }
@@ -104,7 +104,7 @@ public class Duke {
                 }
             }else if (userInput.startsWith("event")){
                 try {
-                    userInput = userInput.substring(6, userInput.length());
+                    userInput = userInput.substring(6);
                     if (userInput.trim().equals("")) {
                         throw new EmptyStringException();
                     }
