@@ -51,8 +51,6 @@ public class Duke {
             finishConversation();
         } else if (str.equals("add task")) {
             System.out.println("____________________________________________________________");
-            System.out.println("Please add no more than 100 tasks");
-            System.out.println("____________________________________________________________");
             addTaskScreen();
         } else if (str.equals("list")) {
             listTask();
@@ -63,7 +61,6 @@ public class Duke {
             conversation();
         }
     }
-
 
     public static void addTaskScreen() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
