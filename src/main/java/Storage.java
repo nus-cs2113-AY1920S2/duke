@@ -60,9 +60,9 @@ public class Storage{
             restoreArray(fileReader, tasksList);
             fileReader.close();
         } catch (FileNotFoundException exception) {
-            System.out.println("file not found");
+            System.out.println(" [Warning: File not found]");
         } catch (Exception exception) {
-            System.out.println("File not found");
+            System.out.println(" [Warning: File not found]");
         }
         return tasksList;
     }
