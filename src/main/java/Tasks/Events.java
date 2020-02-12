@@ -1,4 +1,4 @@
-package src.main.java;
+package src.main.java.Tasks;
 
 public class Events extends Task{
     public Events(String description) {
