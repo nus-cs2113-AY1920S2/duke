@@ -54,5 +54,9 @@ public class Parser {
         String firstWord = getFirstWord();
         return firstWord.equals("delete");
     }
-    
+
+    public boolean isSave() {
+        String firstWord = getFirstWord();
+        return firstWord.equals("save");
+    }
 }

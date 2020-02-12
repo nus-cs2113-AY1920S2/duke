@@ -3,7 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
-import java.util.Scanner; 
+import java.util.Scanner;
 
 public class Storage{
     protected File file;
@@ -11,7 +11,7 @@ public class Storage{
     protected ArrayList <Task> tasks;
 
     public Storage() {
-        file = new File("store.txt");
+        file = new File("database.txt");
         filePath = file.getAbsolutePath();
     }
 
@@ -61,6 +61,8 @@ public class Storage{
             fileReader.close();
         } catch (FileNotFoundException exception) {
             System.out.println("file not found");
+        } catch (Exception exception) {
+            System.out.println("File not found");
         }
         return tasksList;
     }

@@ -1,5 +1,6 @@
 public class DukeExceptions {
     protected String input;
+
     public DukeExceptions() {
         this.input = null;
     }
@@ -12,25 +13,25 @@ public class DukeExceptions {
         System.out.println(" [Warning: The task(s) has already been marked as done]");
     }
 
-    public void printDoneIOBExceptions(String input) {
+    public void printIOBDoneExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Index is missing / out of bounds]");
-        System.out.println(" done : check the task as completed");
-        System.out.println(" Parameters: done [index] ");
+        System.out.println(" [Error: Specifier entered is out of range]");
+        System.out.println(" done: marks task to be completed");
+        System.out.println(" Parameters: done [TASK NUMBER]");
         System.out.println(" Example: done 1");
     }
 
-    public void printDoneNFExceptions() {
+    public void printNFEDoneExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Index is missing / out of bounds]");
-        System.out.println(" done : check the task as completed");
-        System.out.println(" Parameters: done [index] ");
+        System.out.println(" [Error: Specifier entered is not a numerical value]");
+        System.out.println(" done: marks task to be completed");
+        System.out.println(" Parameters: done [Specifier]");
         System.out.println(" Example: done 1");
     }
 
-    public void toDoExceptions(String input) {
+    public void printToDoExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Event Description is missing]");
+        System.out.println(" [Error: Missing specifier(s)]");
         System.out.println(" todo: Adds todo items");
         System.out.println(" Parameters: todo [description]");
         System.out.println(" Example: todo read book");
@@ -69,5 +70,4 @@ public class DukeExceptions {
         System.out.println(" Parameters: delete [TASK NUMBER]");
         System.out.println(" Example: delete 1");
     }
-    
 }
