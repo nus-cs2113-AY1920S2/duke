@@ -28,6 +28,7 @@ public class Duke {
         do {
             Scanner in = new Scanner(System.in);
             userInput = in.nextLine();
+            userInput = userInput.trim();
             //user checks list
             if (userInput.equalsIgnoreCase("list")){
                 if (toDoList.size() > 0 ) {
