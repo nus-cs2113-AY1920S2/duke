@@ -2,6 +2,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 public class Duke {
     public static final String LINE = "\t__________________________________________________________";
     public static final String[] COMMAND= {"todo", "deadline", "event", "done", "bye", "list", "help"};
@@ -11,7 +13,7 @@ public class Duke {
             "\t available list of task numbers";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
             " listing";
-    public static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+    public static final String NO_TASK_NUMBER = "\t Please enter a task number!";
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
 
     public static void printError(String message){
@@ -55,7 +57,7 @@ public class Duke {
             IllegalDukeException{
         String[] temp = getCommand(userIn);
         if(temp.length>1) {
-            int number = Integer.parseInt(temp[1]) - 1;
+            int number = parseInt(temp[1]) - 1;
             if(number>=l1.size() || number<0) {
                 throw new ArrayIndexOutOfBoundsException(OUT_OF_BOUND_INDEX);
             }
@@ -125,6 +127,20 @@ public class Duke {
         addTask(l1, event);
     }
 
+    public static void removeTask(ArrayList<Task> l1, String inCommand) throws IllegalDukeException{
+        String[] temp = getCommand(inCommand);
+        if(temp.length==1){
+            throw new IllegalDukeException(NO_TASK_NUMBER);
+        }
+        int index=parseInt(temp[1]) -1;
+        Task task=l1.get(index);
+        l1.remove(index);
+        System.out.println(LINE);
+        System.out.println("\t Noted. I've removed this task: ");
+        System.out.println("\t   " + task.toString());
+        System.out.println("\t Now you have" + l1.size() + "tasks in the list.");
+        System.out.println(LINE);
+    }
     public static int validateCommand(String inCommand, ArrayList<Task> l1) throws IllegalDukeException{
         String[] userCommand = getCommand(inCommand);
         String[] taskInfo= new String[2];
@@ -161,6 +177,10 @@ public class Duke {
                 case "help":
                     status = 7;
                     listCommands();
+                    break;
+                case "delete":
+                    status = 8;
+                    removeTask(l1, inCommand);
                     break;
                 default:
                     status = -1;
