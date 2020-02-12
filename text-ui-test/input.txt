@@ -10,11 +10,25 @@ deadline This is a task with deadline /by tomorrow 6pm
 deadline
 deadline This is a deadline task without a specified deadline
 list
+todo Another todo task
+list
+event Another event /at Nov 7th 10-11am
+list
 done
 done -1
 done 2
 list
 done 100
 done 1
+list
+delete nonsense
+list
+delete 100
+list
+delete 2
+list
+delete 0
+list
+delete 3
 list
 bye
