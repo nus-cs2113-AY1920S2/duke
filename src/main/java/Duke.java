@@ -26,7 +26,7 @@ public class Duke {
             if(tasks[i] == null) {
                 break;
             }
-            System.out.println("\t" + (i + 1) + tasks[i]);
+            System.out.println("\t" + (i + 1) + "." + tasks[i]);
         }
     }
 
