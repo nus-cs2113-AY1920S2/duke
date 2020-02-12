@@ -2,24 +2,24 @@ Hello! I'm KJ
 How can I help you today?
 There are no tasks in your list currently.
 Got it. I've added this task:
-  [T][✘] borrow book
+  [T][Not complete] borrow book
 Now you have 1 tasks in the list.
 Got it. I've added this task:
-  [D][✘] return book (by: Sunday)
+  [D][Not complete] return book (by: Sunday)
 Now you have 2 tasks in the list.
 Got it. I've added this task:
-  [E][✘] project meeting (at: Mon 2-4pm)
+  [E][Not complete] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 Here are the tasks in your list:
-1.[T][✘] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[E][✘] project meeting (at: Mon 2-4pm)
+1.[T][Not complete] borrow book
+2.[D][Not complete] return book (by: Sunday)
+3.[E][Not complete] project meeting (at: Mon 2-4pm)
 Nice! I've marked this task as done:
-  [E][✓] project meeting (at: Mon 2-4pm)
+  [E][Complete] project meeting (at: Mon 2-4pm)
 Here are the tasks in your list:
-1.[T][✘] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[E][✓] project meeting (at: Mon 2-4pm)
+1.[T][Not complete] borrow book
+2.[D][Not complete] return book (by: Sunday)
+3.[E][Complete] project meeting (at: Mon 2-4pm)
 It appears you have entered an invalid index :O
 The format of your command is incorrect, please use:
 deadline (item) /by (time)
@@ -28,14 +28,14 @@ Uh-oh, I need more information to process that request :-(
 Oops, I'm sorry but I don't know what that means :-(
 It appears you have entered an invalid index :O
 Noted. I've removed this task:
-  [E][✓] project meeting (at: Mon 2-4pm)
+  [E][Complete] project meeting (at: Mon 2-4pm)
 Now you have 2 tasks in the list.
 Here are the tasks in your list:
-1.[T][✘] borrow book
-2.[D][✘] return book (by: Sunday)
+1.[T][Not complete] borrow book
+2.[D][Not complete] return book (by: Sunday)
 Noted. I've removed this task:
-  [T][✘] borrow book
+  [T][Not complete] borrow book
 Now you have 1 tasks in the list.
 Here are the tasks in your list:
-1.[D][✘] return book (by: Sunday)
+1.[D][Not complete] return book (by: Sunday)
 Bye. Hope to see you again soon!

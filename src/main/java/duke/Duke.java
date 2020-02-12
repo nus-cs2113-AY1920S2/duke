@@ -151,7 +151,7 @@ public class Duke {
         Todo newTodo = new Todo(description);
         instructions.add(newTodo);
         FileWriter textAdder = new FileWriter("duke.txt",true);
-        textAdder.write("T|" + "\u2718" + "|" + newTodo.getDescription() + "\n");
+        textAdder.write("T|" + "Not complete" + "|" + newTodo.getDescription() + "\n");
         textAdder.close();
     }
 
@@ -165,7 +165,7 @@ public class Duke {
         Event newEvent = new Event(description,duration);
         instructions.add(newEvent);
         FileWriter textAdder = new FileWriter("duke.txt",true);
-        textAdder.write("E|" + "\u2718" + "|" + newEvent.getDescription() + "|" + newEvent.getDuration() + "\n");
+        textAdder.write("E|" + "Not complete" + "|" + newEvent.getDescription() + "|" + newEvent.getDuration() + "\n");
         textAdder.close();
     }
 
@@ -179,7 +179,7 @@ public class Duke {
         Deadline newDeadline = new Deadline(description,by);
         instructions.add(newDeadline);
         FileWriter textAdder = new FileWriter("duke.txt",true);
-        textAdder.write("D|" + "\u2718" + "|" + newDeadline.getDescription() + "|" + newDeadline.getBy() + "\n");
+        textAdder.write("D|" + "Not complete" + "|" + newDeadline.getDescription() + "|" + newDeadline.getBy() + "\n");
         textAdder.close();
     }
 
@@ -250,21 +250,21 @@ public class Duke {
             switch(phrases[savedType]) {
             case "T":
                 Todo newTodo = new Todo(phrases[savedDescription]);
-                if (phrases[savedStatus].equals("\u2713")) {
+                if (phrases[savedStatus].equals("Complete")) {
                     newTodo.markAsDone();
                 }
                 instructions.add(newTodo);
                 break;
             case "D":
                 Deadline newDeadline = new Deadline(phrases[savedDescription],phrases[savedBy]);
-                if (phrases[savedStatus].equals("\u2713")) {
+                if (phrases[savedStatus].equals("Complete")) {
                     newDeadline.markAsDone();
                 }
                 instructions.add(newDeadline);
                 break;
             case "E":
                 Event newEvent = new Event(phrases[savedDescription],phrases[savedBy]);
-                if (phrases[savedStatus].equals("\u2713")) {
+                if (phrases[savedStatus].equals("Complete")) {
                     newEvent.markAsDone();
                 }
                 instructions.add(newEvent);

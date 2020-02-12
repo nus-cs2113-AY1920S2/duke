@@ -1,2 +1,2 @@
-T|✘|read book
-E|✘|eat breakfast|9 am
+T|Not complete|event
+D|Complete|project|3pm

@@ -12,9 +12,9 @@ public class Task {
 
     public String getStatus() {
         if (isCompleted) {
-            return "\u2713";
+            return "Complete";
         } else {
-            return "\u2718";
+            return "Not complete";
         }
     }
 
