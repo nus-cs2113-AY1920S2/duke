@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -6,7 +8,7 @@ public class Duke {
     public static final String LINE_SPLITTING = "\t____________________________________________________________\n";
     public static final String BYE = "bye";
     public static final String BYE_MESSAGE = "\tBye. Hope to see you again soon!";
-    public static final String HELLO_MESSAGE = "\tHello! I'm Duke\n";
+    public static final String HELLO_MESSAGE = "\tHello! I'm duke.Duke\n";
     public static final String HELP_MESSAGE = "\tIt seems like you are needing some help.\n";
     public static final String DONE = "done";
     public static final String LIST = "list";
@@ -23,7 +25,7 @@ public class Duke {
     public static final String EMPTY_STRING = "";
     public static final String EMPTY_INPUT_MESSAGE = "\t☹ OOPS!!! Input cannot be empty";
     public static final String DUMMY_INPUT_MESSAGE = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    public static final String LIMIT_REACHED_MESSAGE = "\t☹ OOPS!!! Task limit has reached";
+    public static final String LIMIT_REACHED_MESSAGE = "\t☹ OOPS!!! duke.Task limit has reached";
     public static final String WRONG_NUMBER_FORMAT_MESSAGE = "\t☹ OOPS!!! The task's index cannot be a float number";
     public static final String OUT_OF_BOUND_MESSAGE = "\t☹ OOPS!!! The task's index is out of bound or does not exist";
 
@@ -53,7 +55,7 @@ public class Duke {
                 String prefix = commandSplitter[0];
                 switch (prefix) {
                 case DONE:
-                    markTaskMessage(tasks, commandSplitter[1]);
+                    markTaskMessage(tasks, commandSplitter[1], listCount);
                     break;
                 case EMPTY_STRING:
                 case TODO:
@@ -115,9 +117,12 @@ public class Duke {
         return listCount;
     }
 
-    private static void markTaskMessage(Task[] tasks, String word) {
+    private static void markTaskMessage(Task[] tasks, String word, int listCount) throws ArrayIndexOutOfBoundsException{
         try {
             int index = Integer.parseInt(word);
+            if(index >= listCount) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
             tasks[index - 1].markAsDone();
             System.out.println(TASK_MARKING_MESSAGE);
             String printTask = "\t%s\n";
@@ -127,9 +132,6 @@ public class Duke {
             System.out.println(WRONG_NUMBER_FORMAT_MESSAGE);
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(OUT_OF_BOUND_MESSAGE);
-        }
-        catch (NullPointerException e) {
             System.out.println(OUT_OF_BOUND_MESSAGE);
         }
     }
