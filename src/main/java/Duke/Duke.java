@@ -1,12 +1,11 @@
-import java.util.Scanner;
-import java.util.Arrays;
+package Duke;
 
-//test
+import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
-        String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
+        String greeting = "Hello! I'm Duke.Duke\n" + "What can I do for you?";
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(greeting);
 
@@ -30,7 +29,7 @@ public class Duke {
                 String taskToDelete = userInput.substring(5);
                 //quick fix, have to redo
                 if (taskToDelete.length() == 0) {
-                    System.out.println("Duke doesn't know which task!");
+                    System.out.println("Duke.Duke doesn't know which task!");
                     break;
                 }
                 int ID = Integer.valueOf(taskToDelete) - 1;
