@@ -46,13 +46,19 @@ public class Duke {
 
     private static void saveList(ArrayList<Task> taskList, int numberOfTasks) {
         if (numberOfTasks > 0) {
-            Path path = Paths.get("data", "duke.txt");
-            File f = new File(String.valueOf(path));
+            Path directoryPath = Paths.get("data");
+            boolean isFileExists = Files.exists(directoryPath);
+            if (!isFileExists) {
+                File directory = new File("data");
+                directory.mkdir();
+            }
+            File f = new File("data/duke.txt");
             try {
                 FileWriter fw = new FileWriter(f);
                 for (int i = 0; i < numberOfTasks; i++) {
                     String[] getTaskInfo = taskList.get(i).getTaskInfo();
-                    fw.write(getTaskInfo[0] + " | " + getTaskInfo[1] + " | " + getTaskInfo[2] + " | " + getTaskInfo[3] + System.lineSeparator());
+                    fw.write(getTaskInfo[0] + " | " + getTaskInfo[1] + " | " + getTaskInfo[2] + " | " + getTaskInfo[3] +
+                            System.lineSeparator());
                 }
                 fw.close();
 
@@ -98,9 +104,9 @@ public class Duke {
             File f = new File(String.valueOf(path));
             try {
                 Scanner s = new Scanner(f);
+                int taskNumber = 0;
                 while (s.hasNext()) {
                     String[] obtainedLine = s.nextLine().split("\\|");
-                    int taskNumber = 0;
                     String[] splitTaskDescriptionArray = new String[2];
                     splitTaskDescriptionArray[0] = obtainedLine[2].trim();
                     if (obtainedLine.length == 4) {
@@ -108,27 +114,9 @@ public class Duke {
                     } else {
                         splitTaskDescriptionArray[1] = "";
                     }
-                    switch (obtainedLine[0].trim()) {
-                    case "T":
-                        taskNumber = addTodoToList(taskList, taskNumber, splitTaskDescriptionArray);
-                        if (obtainedLine[1].trim().equals("1")) {
-                            taskList.get(taskNumber - 1).markAsDone();
-                        }
-                        break;
-                    case "D":
-                        taskNumber = addDeadlineToList(taskList, taskNumber, splitTaskDescriptionArray);
-                        if (obtainedLine[1].trim().equals("1")) {
-                            taskList.get(taskNumber - 1).markAsDone();
-                        }
-                        break;
-                    case "E":
-                        taskNumber = addEventToList(taskList, taskNumber, splitTaskDescriptionArray);
-                        if (obtainedLine[1].trim().equals("1")) {
-                            taskList.get(taskNumber - 1).markAsDone();
-                        }
-                        break;
-                    default:
-                        break;
+                    taskNumber = importToList(taskList, taskNumber, splitTaskDescriptionArray, obtainedLine[0]);
+                    if (obtainedLine[1].trim().equals("1")) {
+                        taskList.get(taskNumber - 1).markAsDone();
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -140,22 +128,50 @@ public class Duke {
         return taskList;
     }
 
+    private static int importToList(ArrayList<Task> taskList, int taskNumber, String[] splitTaskDescriptionArray,
+                                    String s) {
+        Task newTask;
+        int currentTaskNumber = taskNumber;
+        switch (s.trim()){
+        case "T":
+            newTask = new Todo(splitTaskDescriptionArray[0],splitTaskDescriptionArray[1]);
+            taskList.add(newTask);
+            currentTaskNumber = currentTaskNumber + 1;
+            break;
+        case "E":
+            newTask = new Event(splitTaskDescriptionArray[0],splitTaskDescriptionArray[1]);
+            taskList.add(newTask);
+            currentTaskNumber = currentTaskNumber + 1;
+            break;
+        case "D":
+            newTask = new Deadline(splitTaskDescriptionArray[0],splitTaskDescriptionArray[1]);
+            taskList.add(newTask);
+            currentTaskNumber = currentTaskNumber + 1;
+            break;
+        default:
+            System.out.println("Error in importing this task! Task starts with: " + s.trim());
+            break;
+
+        }
+        return currentTaskNumber;
+    }
+
     private static int doTaskAndGetNewNumberOfTasks(ArrayList<Task> taskList, int numberOfTasks, String userInput,
                                                     String[] splitUserInput) {
 
 
+        int currentNumberOfTasks = numberOfTasks;
         try {
             validateTask(splitUserInput, userInput);
-            String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
             switch (splitUserInput[0].toLowerCase()) {
             case TODO:
-                numberOfTasks = addTodoToList(taskList, numberOfTasks, splitTaskDescriptionArray);
+                currentNumberOfTasks = addTodoToList(taskList, numberOfTasks, userInput);
                 break;
             case DEADLINE:
-                numberOfTasks = addDeadlineToList(taskList, numberOfTasks, splitTaskDescriptionArray);
+                currentNumberOfTasks = addDeadlineToList(taskList, numberOfTasks, userInput);
                 break;
             case EVENT:
-                numberOfTasks = addEventToList(taskList, numberOfTasks, splitTaskDescriptionArray);
+                currentNumberOfTasks = addEventToList(taskList, numberOfTasks, userInput);
                 break;
             case LIST:
                 displayList(taskList, numberOfTasks);
@@ -171,7 +187,7 @@ public class Duke {
         }
 
 
-        return numberOfTasks;
+        return currentNumberOfTasks;
     }
 
     private static void validateTask(String[] splitUserInput, String userInput)
@@ -231,16 +247,12 @@ public class Duke {
         }
     }
 
-    private static int addEventToList(ArrayList<Task> taskList, int numberOfTasks, String[] splitTaskDescriptionArray) {
+    private static int addEventToList(ArrayList<Task> taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        if (isDescriptionBlank(splitTaskDescriptionArray)) {
-            displayNoDescriptionError();
-            numberOfTasks = numberOfTasks;
-            return numberOfTasks;
-        }
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
         newTask = new Event(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
+        int currentNumberOfTasks = addToList(newTask, taskList, numberOfTasks);
+        return currentNumberOfTasks;
     }
 
     private static boolean isDescriptionBlank(String[] strings) {
@@ -248,29 +260,21 @@ public class Duke {
     }
 
     private static int addDeadlineToList(ArrayList<Task> taskList, int numberOfTasks,
-                                         String[] splitTaskDescriptionArray) {
+                                         String userInput) {
         Task newTask;
-        if (isDescriptionBlank(splitTaskDescriptionArray)) {
-            displayNoDescriptionError();
-            numberOfTasks = numberOfTasks;
-            return numberOfTasks;
-        }
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
         newTask = new Deadline(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
+        int currentNumberOfTasks = addToList(newTask, taskList, numberOfTasks);
+        return currentNumberOfTasks;
     }
 
 
-    private static int addTodoToList(ArrayList<Task> taskList, int numberOfTasks, String[] splitTaskDescriptionArray) {
+    private static int addTodoToList(ArrayList<Task> taskList, int numberOfTasks, String userInput) {
         Task newTask;
-        if (isDescriptionBlank(splitTaskDescriptionArray)) {
-            displayNoDescriptionError();
-            numberOfTasks = numberOfTasks;
-            return numberOfTasks;
-        }
+        String[] splitTaskDescriptionArray = splitTaskDescription(userInput);
         newTask = new Todo(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
-        numberOfTasks = addToList(newTask, taskList, numberOfTasks);
-        return numberOfTasks;
+        int currentNumberOfTasks = addToList(newTask, taskList, numberOfTasks);
+        return currentNumberOfTasks;
     }
 
     private static int addToList(Task newTask, ArrayList<Task> taskList, int numberOfTasks) {

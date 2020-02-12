@@ -1,2 +1,4 @@
-T | 1 | asdasda asd asd asd asd asd | at sadsa
-E | 0 | kok | 
+T | 0 | ja | at 2020
+E | 1 | lollol | through asdsad
+D | 0 | wawa | 
+T | 1 | things | add 2200202
