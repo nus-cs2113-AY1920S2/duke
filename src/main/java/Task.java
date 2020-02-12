@@ -18,4 +18,11 @@ public class Task {
         return getStatus()+ " " + this.action;
     }
 
+    public String toFile(){
+        String done = this.isDone ? "Y" : "N" ;
+
+        return done + "-" + action;
+    }
+
+
 }
