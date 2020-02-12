@@ -1,0 +1,14 @@
+todo
+blah
+help
+list
+done
+event
+event meeting at /2pm today
+deadline finish homework /2pm tomoroow
+todo                 read books
+list
+done 3
+done 4
+list
+bye
