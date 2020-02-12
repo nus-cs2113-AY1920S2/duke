@@ -16,6 +16,7 @@ import static chatty.util.Constants.BOT_NAME;
 import static chatty.util.Constants.BYE_STRING;
 import static chatty.util.Constants.BY_STRING;
 import static chatty.util.Constants.DEADLINE_STRING;
+import static chatty.util.Constants.DELETE_STRING;
 import static chatty.util.Constants.DONE_STRING;
 import static chatty.util.Constants.DOT_CHARACTER;
 import static chatty.util.Constants.EVENT_STRING;
@@ -82,6 +83,13 @@ public class ChattyChatBot {
                     System.out.println("Please specify the time of your event");
                 }
                 break;
+            case DELETE_STRING:
+                try {
+                    deleteTask(tasks, array[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Let me know which task you would like to delete?");
+                }
+                break;
             case BYE_STRING:
                 sendByeMessage();
                 break;
@@ -106,6 +114,7 @@ public class ChattyChatBot {
             int taskIdx = Integer.parseInt(indexStr);
             Task task = tasks.get(taskIdx - 1);
             task.markAsDone();
+            System.out.println("Congratulations! You've successfully marked the following task as done:");
             System.out.println(task.toString());
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid task number");
@@ -148,6 +157,20 @@ public class ChattyChatBot {
             System.out.println(TASK_SUMMARY_FIRST_HALF + tasks.size() + TASK_SUMMARY_SECOND_HALF);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChattyChatBotException();
+        }
+    }
+
+    private static void deleteTask(List<Task> tasks, String indexStr) {
+        try {
+            int taskIdx = Integer.parseInt(indexStr);
+            Task task = tasks.get(taskIdx - 1);
+            tasks.remove(taskIdx - 1);
+            System.out.println("Successfully deleted the following task:");
+            System.out.println(task.toString());
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid task number");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The number you entered does not match any task in your list");
         }
     }
 
