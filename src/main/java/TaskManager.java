@@ -1,4 +1,4 @@
-public abstract class TaskManager {
+public class TaskManager {
     protected String task;
     protected boolean isDone;
     public TaskManager(String task) {

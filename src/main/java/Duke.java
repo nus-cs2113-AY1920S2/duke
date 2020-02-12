@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,11 +13,11 @@ public class Duke {
     public static void main(String[] args) {
         printIntro();
         printExeType();
-        exeCommand(manageTask);
+        exeCommand();
         printExit();
     }
 
-    public static void exeCommand(TaskManager[] manageTask) {
+    public static void exeCommand() {
         String exeCommand = getUserInput(userInput);// exeType = addTask||deleteTask||printTask
         while (!exeCommand.equals(EXIT_COMMAND)) {
             exeType(exeCommand); //to select the exeType and execute the command type
@@ -55,7 +54,7 @@ public class Duke {
             task = getUserInput(userInput);
             manageTask[Task_ind] = new ToDo(task);
             Task_ind++;
-            System.out.println("    You have "+ Task_ind + " task(s) now in total");
+            printRespondToAddTask(task);
             break;
         case "2": //Deadline
             userInputTask();
@@ -64,21 +63,25 @@ public class Duke {
             by = getUserInput(userInput);
             manageTask[Task_ind] = new Deadline(task, by);
             Task_ind++;
-            System.out.println("    You have "+ Task_ind + " task(s) now in total");
+            printRespondToAddTask(task);
             break;
         case "3": //Event
             userInputTask();
             task = getUserInput(userInput);
             System.out.println("    Please enter the venue of your task: (format at: )");
             by = getUserInput(userInput);
-            manageTask[Task_ind] = new Deadline(task, by);
+            manageTask[Task_ind] = new Event(task, by);
             Task_ind++;
-            System.out.println("    You have "+ Task_ind + " task(s) now in total");
+            printRespondToAddTask(task);
             break;
         default: System.out.println("    Sorry I don't understand your command :(");
         }
     }
 
+    public static void printRespondToAddTask(String task) {
+        System.out.println("    You have successfully added " + task + "!");
+        System.out.println("    You have "+ Task_ind + " task(s) now in total");
+    }
     public static void doneTask() {
         System.out.println("    Please choose the task that you have completed (select the no)");
         printTasks();
