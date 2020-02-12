@@ -24,17 +24,13 @@ public class UI {
             return "Sighhssss...I am your slave again?";
         case "markedDone":
             return "Okay whatever.. so you have completed this item.. so what?";
+        case "gettingTypes":
+            return "So? Nothing special to check baka..";
         default:
             return getErrorMsg(id);
         }
     }
 
-    /**
-     * Returns a error string according to id
-     *
-     * @param id the str
-     * @return the string
-     */
     private static String getErrorMsg(String id) {
         switch (id) {
         case "imaginary":
@@ -55,11 +51,32 @@ public class UI {
         case "deleteFieldEmpty":
             return "Delete yourself!";
         case "wrongDate":
-            return "Please input a proper date/time!";
+            return "Don't understand your time.. Something like dd/mm/yyyy!";
         case "wrongDateFormat":
-            return "Invalid date/time format";
+            return "Invalid date/time format.. Please input it like dd/mm/yyyy baka";
+        case "wrongType":
+            return "There is no such type stupid!";
         default:
             return "What you want?";
         }
     }
+
+    /**
+     * Returns the init line (welcome)
+     *
+     * @return A string with the instructions for stats
+     */
+    public static String getInstrStats() {
+        String inst = "======= Stats commands =======\n" +
+                "1. Type <TaskType>\n" +
+                "  Shows the tass by <TaskType> \n" +
+                "2. Expired\n" +
+                "  Shows the tasks which are expired\n" +
+                "3. Week/Today\n" +
+                "  Shows the task done in this week/today" +
+                "4. Deleted\n" +
+                "  Show deleted task in session";
+        return inst;
+    }
+
 }

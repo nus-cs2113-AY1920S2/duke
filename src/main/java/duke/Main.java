@@ -28,6 +28,7 @@ public class Main extends Application {
             stage.setTitle("Doki Doki Task Bot");
             stage.centerOnScreen();
             stage.setResizable(false);
+            //Get icon code snippet from https://stackoverflow.com/questions/20094620/set-icon-on-stage-in-javafx/20094784
             stage.getIcons().add(new Image(("/images/mitsuri.jpg")));
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);

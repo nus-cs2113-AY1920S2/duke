@@ -39,18 +39,24 @@ public class DukeInit {
      *
      * @return the String instr
      */
-    public static String getInstr() {
+    public static String getInstrAdd() {
         String inst = "Here are my list of Commands:\n" +
                      "========Add Tasks=======\n" +
                     "1. todo <yourtasknamehere>\n" +
                    "2. event <youreventnamehere> /at (date or Time)\n" +
-                   "3. deadline <youreventnamehere> /by (date or Time)\n\n" +
-                   "======= Other commands =======\n" +
-                  "1. Find <keyword>\n" +
-                  "2. Delete <tasknumber>\n" +
-                   "3. Done <tasknumber>";
-
+                   "3. deadline <youreventnamehere> /by (date or Time)\n\n";
         return inst;
     }
+
+    public static String getInstrOther() {
+        String inst = "======= Other commands =======\n" +
+                "1. Find <keyword>\n" +
+                "2. Delete <tasknumber>\n" +
+                "3. Done <tasknumber>\n" +
+                "4. List\n" +
+                "5. stats";
+        return inst;
+    }
+
 
 }

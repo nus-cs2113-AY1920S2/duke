@@ -3,6 +3,7 @@ package database;
 import duke.UI;
 import exceptions.DukeException;
 import resources.Task;
+import resources.TaskTracker;
 
 import java.util.ArrayList;
 
@@ -12,9 +13,6 @@ import java.util.ArrayList;
 public class MyList {
     private static ArrayList<Task> listOfTasks = new ArrayList<>();
     private static Task justAdded;
-
-
-
 
     /**
      * Add tasks.
@@ -47,6 +45,7 @@ public class MyList {
             throw new DukeException(UI.getReply("deleteEmpty"));
         }
         System.out.println("Deleted: " + listOfTasks.get(ID));
+        TaskTracker.markDeleted();
         listOfTasks.remove(ID);
     }
 

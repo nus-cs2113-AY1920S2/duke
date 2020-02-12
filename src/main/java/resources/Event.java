@@ -2,6 +2,7 @@ package resources;
 
 import exceptions.DukeException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -25,6 +26,11 @@ public class Event extends Task {
         endDate = DateTimeHandler.getLocalDateTime(parsed[1]);
         super.resetDesc(parsed[0]);
     }
+
+    public LocalDateTime getEndDate() {
+        return this.endDate;
+    }
+
     private String[] getParse(String desc) throws DukeException {
         if (!desc.contains("/at ")) {
             throw new DukeException("Hello? Missing your /at command!");

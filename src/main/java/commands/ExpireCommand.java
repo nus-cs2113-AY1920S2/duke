@@ -2,19 +2,19 @@ package commands;
 
 import resources.Statistics;
 
-public class ThisWeekCommand extends UserCommand {
+public class ExpireCommand extends UserCommand {
 
     /**
      * Instantiates a new User command.
      * Set the ID
      *
      */
-    ThisWeekCommand() {
-        super(7);
+    ExpireCommand() {
+        super(12);
     }
 
     @Override
     public String reply() {
-        return Statistics.taskDoneWeek();
+        return Statistics.getExpired();
     }
 }

@@ -28,7 +28,12 @@ import java.util.HashMap;
         commandList.put("bye", new ByeCommand());
         commandList.put("list", new ListCommand());
         commandList.put("week", new ThisWeekCommand());
+        commandList.put("today", new TodayCommand());
+        commandList.put("deleted", new ShowDeletedCommand());
+        commandList.put("expire", new ExpireCommand());
+        commandList.put("stats", new StatsCommand());
     }
+
     /**
      * Parses the Commands.UserCommand
      *
@@ -56,29 +61,40 @@ import java.util.HashMap;
             desc = parsedCommand[1];
         }
 
-        System.out.println(ID);
         if (commandList.containsKey(ID)) { //gets generic commands
             return commandList.get(ID);
-        } else if (ID.contains("done")) { //done command
+        }
+
+        if (ID.contains("done")) { //done command
             if (desc.equals("null") || desc.equals("")) {
                 throw new DukeException(UI.getReply("doneFieldEmpty"));
             }
             return new DoneCommand(Integer.parseInt(desc));
-        } else if (ID.contains("todo") || ID.contains("deadline") || ID.contains("event")) {
+        }
+
+        if (ID.contains("todo") || ID.contains("deadline") || ID.contains("event")) {
             if (desc.equals("null")) {
                 throw new DukeException("BAKA! Your not suppose to leave "
                                          + ID + " field empty!");
             }
             return new AddCommand(ID, desc);
-        } else if (ID.contains("delete")) {
+        }
+
+        if (ID.contains("delete")) {
             if (desc.equals("null") || desc.equals("")) {
                 throw new DukeException(UI.getReply("deleteFieldEmpty"));
             }
             return new DeleteCommand(Integer.parseInt(desc));
-        } else if (ID.contains("find")) {
-            return new FindCommand(desc);
-        } else {
-            throw new DukeException(UI.getReply("wrongCommand"));
         }
+
+        if (ID.contains("find")) {
+            return new FindCommand(desc);
+        }
+
+        if (ID.contains("type")) {
+            return new TypeCommand(desc);
+        }
+
+        throw new DukeException(UI.getReply("wrongCommand"));
     }
 }

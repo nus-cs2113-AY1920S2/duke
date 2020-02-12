@@ -33,7 +33,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         botInitSpeech();
-        botInst();
+        botInstAdd();
+        botInstOther();
     }
 
     /**
@@ -72,10 +73,21 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Prints the instructions for bot
+     * Prints the instructions add for bot
      */
-    public void botInst() {
-        String response = DukeInit.getInstr();
+    public void botInstAdd() {
+        String response = DukeInit.getInstrAdd();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Prints the instructions other for bot
+     */
+    public void botInstOther() {
+        String response = DukeInit.getInstrOther();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );

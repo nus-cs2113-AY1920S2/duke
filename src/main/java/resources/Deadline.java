@@ -24,6 +24,11 @@ public class Deadline extends Task {
         deadline = DateTimeHandler.getLocalDateTime(parsed[1]);
         super.resetDesc(parsed[0]);
     }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
     private String[] getParse(String desc) throws DukeException {
         if (!desc.contains("/by ")) {
             throw new DukeException("Hello? Missing your /by command!");
