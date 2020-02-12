@@ -35,11 +35,9 @@ public class Duke {
             TaskMgr.addTask(taskInfo, TODO_COMMAND);
             break;
         case DEADLINE_COMMAND:
-            System.out.println(LINE_DIVIDER);
             processTaskWithTime(TaskMgr, taskInfo, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND, DEADLINE_FORMAT_ERROR_MESSAGE);
             break;
         case EVENT_COMMAND:
-            System.out.println(LINE_DIVIDER);
             processTaskWithTime(TaskMgr, taskInfo, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
             break;
         default:
@@ -48,6 +46,7 @@ public class Duke {
     }
 
     private static void processTaskWithTime(TaskManager TaskMgr, String taskInfo, String timeDelimiter, String deadlineCommand, String formatErrorMessage) {
+        System.out.println(LINE_DIVIDER);
         try {
             String taskDescriptions = extractTaskDescription(taskInfo, timeDelimiter);
             String taskTime = extractTaskTime(taskInfo, timeDelimiter);
