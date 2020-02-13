@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'seedu.duke'
@@ -11,10 +13,16 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "chatty.ChattyChatBot"
 }
 
 run {
     standardInput = System.in
+}
+
+shadowJar {
+    archiveBaseName = "chattychatbot"
+    archiveVersion = "v0.1.0"
+    archiveClassifier = null
+    archiveAppendix = null
 }
