@@ -50,6 +50,7 @@ public class Duke {
                 "|  | |\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("OIOIOIO");
     }
 
     public static void main(String[] args) {
