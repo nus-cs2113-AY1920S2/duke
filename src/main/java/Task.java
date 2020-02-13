@@ -1,4 +1,3 @@
-
 public class Task {
     protected String action;
     protected boolean isDone;
@@ -17,5 +16,8 @@ public class Task {
     public String toString(){
         return getStatus()+ " " + this.action;
     }
-
+    public String toFile(){
+        String done = this.isDone? "Y" : "N";
+        return done + "-" + this.action;
+    }
 }
