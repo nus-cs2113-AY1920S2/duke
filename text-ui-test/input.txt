@@ -19,4 +19,14 @@ done 7
 list
 deadline do homework /by no idea :-p
 list
+list all
+done
+done 10
+bye there
+todo
+deadline
+deadline complete ip coding
+event
+event complete ip coding
+complete everything
 bye
