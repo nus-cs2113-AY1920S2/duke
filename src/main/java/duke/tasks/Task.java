@@ -33,4 +33,6 @@ public abstract class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
+
+    public abstract String toFormattedString();
 }

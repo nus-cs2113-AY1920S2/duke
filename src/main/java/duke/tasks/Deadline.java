@@ -8,6 +8,12 @@ import java.util.Arrays;
 public class Deadline extends Task {
     protected String dueDateTime;
 
+    public Deadline(boolean isDone, String description, String dueDateTime) {
+        super(description);
+        this.isDone = isDone;
+        this.dueDateTime = dueDateTime;
+    }
+
     public Deadline(Command command) throws BadDeadlineFormatException {
         String[] tokens = command.getTokens();
         if (!Arrays.asList(tokens).contains("/by")) {
@@ -35,5 +41,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + description + " (by: " + dueDateTime + ")";
+    }
+
+    public String toFormattedString() {
+        String done = isDone ? "y" : "n";
+        return "D," + done + "," + description + "," + dueDateTime;
     }
 }

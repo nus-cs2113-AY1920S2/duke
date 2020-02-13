@@ -8,6 +8,12 @@ import java.util.Arrays;
 public class Event extends Task {
     protected String startEndDateTime;
 
+    public Event(boolean isDone, String description, String startEndDateTime) {
+        super(description);
+        this.isDone = isDone;
+        this.startEndDateTime = startEndDateTime;
+    }
+
     public Event(Command command) throws BadEventFormatException {
         String[] tokens = command.getTokens();
         if (!Arrays.asList(tokens).contains("/at")) {
@@ -35,5 +41,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + description + " (at: " + startEndDateTime + ")";
+    }
+
+    public String toFormattedString() {
+        String done = isDone ? "y" : "n";
+        return "E," + done + "," + description + "," + startEndDateTime;
     }
 }

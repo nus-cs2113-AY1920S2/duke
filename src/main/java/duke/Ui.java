@@ -17,12 +17,15 @@ public class Ui {
         System.out.println();
         displayLineSeparator();
         System.out.println("Hello! This is Quinn's chat bot");
-        System.out.println("Currently support todo, deadline, event");
+        System.out.println("Currently supported task types: todo, deadline, event");
+        System.out.println("Currently supported commands: list, done, delete");
         System.out.println("Example usage:");
         System.out.println("todo math homework");
         System.out.println("deadline finish math homework /by Monday");
         System.out.println("event math class /at Monday 8am-10am");
-        System.out.println("Type \"list\" to display a list of your tasks");
+        System.out.println("list");
+        System.out.println("done <Task Number>");
+        System.out.println("delete <Task Number>");
         System.out.println("Type \"" + Duke.END_STRING + "\" to exit");
         displayLineSeparator();
         System.out.println();

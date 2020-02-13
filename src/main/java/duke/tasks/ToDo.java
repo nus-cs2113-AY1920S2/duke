@@ -6,6 +6,11 @@ import duke.tasks.exceptions.BadToDoFormatException;
 import java.util.Arrays;
 
 public class ToDo extends Task {
+    public ToDo(boolean isDone, String description) {
+        super(description);
+        this.isDone = isDone;
+    }
+
     public ToDo(Command command) throws BadToDoFormatException {
         String[] tokens = command.getTokens();
         if (tokens.length < 2) {
@@ -18,5 +23,10 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T][" + getStatusIcon() + "] " + description;
+    }
+
+    public String toFormattedString() {
+        String done = isDone ? "y" : "n";
+        return "T," + done + "," + description;
     }
 }
