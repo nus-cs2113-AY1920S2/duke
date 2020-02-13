@@ -8,6 +8,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -17,6 +18,7 @@ public class Duke {
 
     public static final int OFFSITE_OF_TIME = 4;
     public static final String CUTTING_LINE = "    ____________________________________________________________";
+    public static final String FILE_PATH = "data/duke.txt";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void greet(String logo){
@@ -169,7 +171,7 @@ public class Duke {
     }
 
     public static void save() {
-        String fileName = "data/duke.txt";
+        String fileName = FILE_PATH;
 
         try {
             for (Task task : tasks) {
@@ -191,6 +193,63 @@ public class Duke {
         fw.close();
     }
 
+    public static void load(){
+        try {
+            loadFileContents();
+        }catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    public static void loadFileContents() throws FileNotFoundException {
+        File fileToBeLoad = new File(FILE_PATH);
+        Scanner s = new Scanner(fileToBeLoad);
+        while (s.hasNext()){
+            int indexOfCommand = 3;
+            String command = s.nextLine().substring(indexOfCommand).replace("(","/").replace(")","");
+            addLoadedTask(command,tasks);
+        }
+    }
+
+    public static void addLoadedTask(String description, ArrayList<Task> tasks){
+        Task newTask;
+        String[] words = description.split(" ");
+        String taskType = words[0];
+        String taskStatus = words[1];
+        String isDoneIcon = "[\u2713]";
+
+        boolean isToDo = taskType.equals("[T]");
+        boolean isDeadline = taskType.equals("[D]");
+        boolean isEvent = taskType.equals("[E]");
+
+        boolean isDone =taskStatus.equals(isDoneIcon);
+        int indexOfCommand = 7;
+
+        TestDukeException testDukeException = new TestDukeException(description);
+        try {
+            if (isToDo) {
+                String command = "todo" + description.substring(indexOfCommand);
+                newTask = processToDoDescription(command);
+            } else if (isDeadline) {
+                String command = "deadline" + description.substring(indexOfCommand);
+                newTask = processDeadlineDescription(command);
+            } else if (isEvent) {
+                String command = "event" + description.substring(indexOfCommand);
+                newTask = processEventDescription(command);
+            } else {
+                testDukeException.throwTaskTypeException();
+                newTask = null;
+            }
+            if (isDone) {
+                newTask.markAsDone();
+            }
+            tasks.add(newTask);
+        } catch (DukeException dukeException){
+            System.out.println(dukeException.getMessage());
+        }
+
+    }
+
     public static void main(String[] args) {
 
         /* A logo for Renzo */
@@ -203,7 +262,7 @@ public class Duke {
 
 
         //Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
-
+        load();
         /* Greet to user */
         greet(logo);
 
@@ -224,10 +283,10 @@ public class Duke {
                list(tasks);
             } else if (command.contains("done")) {
                 markAsDone(command, tasks);
-            } else if (command.contains("save")) {
                 save();
             } else {
                 addTask(command, tasks);
+                save();
             }
             command = scanner.nextLine();
         }
