@@ -36,7 +36,7 @@ public class TaskManager {
                 markAsDone(command);
                 break;
             case DELETE:
-                Ui.printPretty("coming soon...");
+                deleteTask(command);
                 break;
             case DEADLINE:
                 addTask(new Deadline(command));
@@ -51,7 +51,7 @@ public class TaskManager {
                 // Should never reach default case b/c check for invalid keyword when creating command object
                 break;
             }
-        } catch (BadDoneFormatException | BadTaskFormatException e) {
+        } catch (BadTaskFormatException | BadTaskChoiceFormatException e) {
             Ui.printPretty(e.getMessage());
         }
     }
@@ -72,23 +72,48 @@ public class TaskManager {
         Ui.printPretty(message);
     }
 
-    protected void markAsDone(Command command) throws BadDoneFormatException {
+    protected int getTaskIndex(Command command) throws BadTaskChoiceFormatException {
         String[] tokens = command.getTokens();
         if (tokens.length <= 1) {
-            throw new BadDoneFormatException("Specify a task by entering a task number");
+            throw new BadTaskChoiceFormatException("Specify a task by entering a task number");
         } else if (tokens.length > 2) {
-            throw new BadDoneFormatException("Too many tokens");
+            throw new BadTaskChoiceFormatException("Too many tokens");
         }
 
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(tokens[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new BadDoneFormatException("Task number is invalid");
+            throw new BadTaskChoiceFormatException("Task number is not parsable");
         }
 
         if (taskIndex > tasks.size() - 1 || taskIndex < 0) {
-            throw new BadDoneFormatException("Task number is invalid");
+            throw new BadTaskChoiceFormatException("Task number is invalid");
+        }
+
+        return taskIndex;
+    }
+
+    protected void deleteTask(Command command) throws BadDeleteFormatException {
+        int taskIndex;
+        try {
+            taskIndex = getTaskIndex(command);
+        } catch (BadTaskChoiceFormatException e) {
+            throw new BadDeleteFormatException(e.getMessage());
+        }
+
+        Task t = tasks.get(taskIndex);
+        tasks.remove(taskIndex);
+        Ui.printPretty("Deleted task " + (taskIndex + 1) + ":\n" + t.toString() + "\nNow you have " + tasks.size() +
+                " tasks left in your list");
+    }
+
+    protected void markAsDone(Command command) throws BadDoneFormatException {
+        int taskIndex;
+        try {
+            taskIndex = getTaskIndex(command);
+        } catch (BadTaskChoiceFormatException e) {
+            throw new BadDoneFormatException(e.getMessage());
         }
 
         Task t = tasks.get(taskIndex);
