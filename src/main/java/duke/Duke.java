@@ -12,13 +12,19 @@ import duke.task.Todo;
 import java.util.Scanner;  // User input
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 
 public class Duke {
 
+    static String dataFilePath = "resources/data.csv";
+    static File dataFile = new File(dataFilePath);
     static List<Task> taskList = new ArrayList<Task>();
 
     private static void intro()
     {
+        loadFile();
         // Logo generated using http://patorjk.com/software/taag/#p=display&f=Fire%20Font-s&t=NUSBOT
         String logo = "    )       (           )          \n"
                 + " ( /(       )\\ )  (  ( /(   *   )  \n"
@@ -31,6 +37,49 @@ public class Duke {
                 + "                                   \n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Type 'bye' to leave at any time.");
+    }
+
+    private static void loadFile() {
+
+        // Create data file if it does not exist already
+        if (!dataFile.exists()) {
+            try  {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                formatPrint("Error loading data file.");
+            }
+            return;
+        }
+
+
+
+        // if it does, load
+        // duke.csv file format:
+        // taskID, taskType (e.g. deadline/event), taskIsDone, taskDesc, taskDate
+
+    }
+
+    private static void writeToFile(String s) throws IOException {
+        FileWriter fw = new FileWriter(dataFilePath);
+        fw.write(s);
+        fw.close();
+    }
+
+    private static void addTask(Task t) {
+        taskList.add(t); // Add to running taskList
+
+        int taskId = taskList.size()-1; // Get ID of task in running taskList
+
+        // Convert to comma-separated information
+        String dataLine = t.toData(taskId);
+
+        // Write to data file
+        try {
+            writeToFile(dataLine);
+        } catch (IOException e) {
+            formatPrint("Error saving task to data file.");
+        }
+        formatPrint("Added task: " t);
     }
 
     private static void formatPrint(String input) {
@@ -54,8 +103,7 @@ public class Duke {
             if (userParams.trim().isEmpty()) {
                 throw new NoDescException();
             }
-            taskList.add(new Todo(userParams));
-            formatPrint("Added todo:" + userParams);
+            addTask(new Todo(userParams));
             break;
         case "deadline":
             // Fallthrough
@@ -77,11 +125,9 @@ public class Duke {
                     throw new NoDateException();
                 }
             if (userCommand.equals("deadline")) {
-                taskList.add(new Deadline(desc, date));
-                formatPrint("Added task: " + desc + "| deadline: " + date);
+                addTask(new Deadline(desc, date));
             } else {
-                taskList.add(new Event(desc, date));
-                formatPrint("Added event: " + desc + "| on/at: " + date);
+                addTask(new Event(desc, date));
             }
             break;
         case "done":

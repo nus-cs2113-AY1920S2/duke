@@ -25,6 +25,12 @@ public class Task {
         this.isDone = true;
     }
 
+    // Provides a string to be stored in data file
+    public String toData(int taskId) {
+        String dataLine = taskId + ", Task";
+        return dataLine;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
