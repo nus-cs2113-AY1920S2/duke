@@ -58,16 +58,16 @@ public class Duke {
                     break;
                 case "done":
                     // mark a task as done
-                    System.out.println("\tNice! I've marked this task as done:");
                     indexOfTasks = Integer.parseInt(command[1]) - 1;
                     tasks.setDoneByIndex(indexOfTasks);
+                    System.out.println("\tNice! I've marked this task as done:");
                     System.out.println("\t" + tasks.getByIndex(indexOfTasks));
                     break;
                 case "delete":
-                    System.out.println("\tNoted. I've removed this task:");
                     indexOfTasks = Integer.parseInt(command[1]) - 1;
                     Task removedTask = tasks.getByIndex(indexOfTasks);
                     tasks.removeByIndex(indexOfTasks);
+                    System.out.println("\tNoted. I've removed this task:");
                     System.out.println("\t  " + removedTask);
                     tasks.printSize();
                     break;
@@ -78,6 +78,8 @@ public class Duke {
                 System.out.println("\t ☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
             } catch (IllegalArgumentException m) {
                 System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (IndexOutOfBoundsException m) {
+                System.out.println("\t ☹ OOPS!!! " + m);
             }
             printLine();
         } while (!taskType.equals("bye")) ;
@@ -127,9 +129,15 @@ public class Duke {
     }
 
     private static String[] processArgs(String s) {
-        String[] tokens = s.split("/");
-        tokens[0] = tokens[0].trim();
-        tokens[1] = tokens[1].substring(tokens[1].indexOf(' ') + 1);
+        String[] tokens = new String[2];
+        if (s.indexOf('/') == -1) {
+            tokens[0] = s.trim();
+            tokens[1] = "";
+        } else {
+            tokens = s.split("/");
+            tokens[0] = tokens[0].trim();
+            tokens[1] = tokens[1].substring(tokens[1].indexOf(' ') + 1);
+        }
         return tokens;
     }
 }
