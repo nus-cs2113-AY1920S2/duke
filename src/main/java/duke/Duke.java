@@ -23,6 +23,7 @@ public class Duke {
         switch (command) {
         case EXIT_COMMAND:
             bye();
+            TaskMgr.saveDataToFile();
             break;
         case LIST_COMMAND:
             TaskMgr.listTasks();
@@ -55,7 +56,7 @@ public class Duke {
             String taskTime = extractTaskTime(taskInfo, timeDelimiter);
             TaskMgr.addTask(taskDescriptions, taskTime, deadlineCommand);
         } catch (DukeException e) {
-            System.out.println(FIVE_SPACES+CRYING_FACE+ formatErrorMessage);
+            TaskMgr.printErrorMsg(formatErrorMessage);
         }
     }
 
@@ -112,7 +113,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskManager TaskMgr = new TaskManager();
+        TaskManager TaskMgr = new TaskManager(DATA_FILE_PATH);
 
         greet();
 

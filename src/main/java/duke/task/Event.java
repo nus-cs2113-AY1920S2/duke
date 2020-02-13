@@ -12,6 +12,14 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public String getIcon() {
+        return typeIcon;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         return typeIcon + super.toString() + " (at : " + time + ")";

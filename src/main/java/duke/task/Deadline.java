@@ -12,6 +12,10 @@ public class Deadline extends Task {
         this.byTime = byTime;
     }
 
+    public String getIcon() {
+        return typeIcon;
+    }
+
     @Override
     public String toString() {
         return typeIcon + super.toString() + " (by: " + byTime + ")";

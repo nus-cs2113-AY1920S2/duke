@@ -32,10 +32,11 @@ public class Constants {
     public static final String ADD_SINGLE_TASK_MESSAGE = "%s\n";
     public static final String DELETE_SINGLE_TASK_MESSAGE = "%s\n";
     public static final String DONE_SINGLE_TASK_MESSAGE = "%s\n";
-    public static final String TASK_ID_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task id provided is invalid or does not exist!";
+    public static final String TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task id is not provided or invalid!";
     public static final String DEADLINE_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the deadline format is not correct!";
     public static final String EVENT_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task description cannot be empty!";
-    public static final String yesIcon = "[\u2713]";
-    public static final String noIcon = "[\u2718]";
+    public static final String YES_ICON = "[\u2713]";
+    public static final String NO_ICON = "[\u2718]";
+    public static final String DATA_FILE_PATH = "data/duke.txt";
 }
