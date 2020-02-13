@@ -190,11 +190,13 @@ public class ChattyChatBot {
         try {
             System.out.println("May I know where your file for storing tasks is located?");
             filePath = SCANNER.nextLine().trim();
+            // Solution below adapted from: https://howtodoinjava.com/java/io/how-to-check-if-file-exists-in-java/
             if (Files.notExists(Paths.get(filePath))) {
                 System.out.println("The path you specify is not valid, using default file path...");
                 filePath = DEFAULT_FILE_PATH;
             }
             System.out.println("Reading tasks from disk...");
+
             // Solution below adapted from: https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics
             // .html#w6-3-java-file-access
             File file = new File(filePath);
