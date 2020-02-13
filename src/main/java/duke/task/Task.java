@@ -9,6 +9,12 @@ public class Task {
         this.isDone = false;
     }
 
+    // Overloaded constructor in case you want to initialize a task as already done
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getType() {
         return "Task";
     }
@@ -30,6 +36,8 @@ public class Task {
     }
 
     // Provides a string to be stored in data file
+    // duke.csv file format:
+    // taskID, taskType, taskIsDone, taskDesc, taskDate
     public String toData(int taskId) {
         String dataLine = taskId + ", Task";
         return dataLine;

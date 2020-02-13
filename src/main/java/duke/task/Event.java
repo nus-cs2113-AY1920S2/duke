@@ -21,6 +21,11 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    public Event(boolean isDone, String description, String eventTime) {
+        super(isDone, description);
+        this.eventTime = eventTime;
+    }
+
     @Override
     public String toData(int taskId) {
         String dataLine = taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription() + "," + this.getEventTime();

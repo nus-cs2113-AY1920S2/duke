@@ -6,6 +6,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(boolean isDone, String description) {
+        super(isDone, description);
+    }
+
     @Override
     public String getType() {
         return "T";

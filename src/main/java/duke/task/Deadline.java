@@ -21,6 +21,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(boolean isDone, String description, String by) {
+        super(isDone, description);
+        this.by = by;
+    }
+
     @Override
     public String toData(int taskId) {
         String dataLine = taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription() + "," + this.getBy();
