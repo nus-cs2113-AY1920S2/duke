@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// unicode-character reference list: \u2717 = ✗, \u2713 ✓
+
 public class Duke {
     public static void main(String[] args) {
         System.out.println("    ____________________________________________________________\n"
@@ -8,27 +10,37 @@ public class Duke {
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n");
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<String>(100);
+        ArrayList<Task> list = new ArrayList<Task>();
 
         while (true) {
             String command = scanner.nextLine();
 
-            // unicode-character reference list: \u2717 = ✗, \u2713 ✓
             if (command.matches("done\\s\\d+")) { //Level 3: Mark as Done
                 processDoneCommand(list, command);
             } else if (command.equals("list")) { //Level 2: List (Add-function is included in level 4)
                 processListCommand(list);
             } else if (command.matches("todo\\s.*")){ //Level 4: ToDos
-                processToDoCommand(list, command);
+                list.add(new Todo(command));
+                list.get(list.size()-1).printMessage(list.size());
             } else if (command.matches("deadline\\s.*")){ //Level 4: Deadlines
-                processDeadLineCommand(list, command);
+                list.add(new Deadline(command));
+                list.get(list.size()-1).printMessage(list.size());
             } else if (command.matches("event\\s.*")) { //Level 4: Events
-                processEventCommand(list, command);
+                list.add(new Event(command));
+                list.get(list.size()-1).printMessage(list.size());
             } else if (command.equals("bye")) { //Terminate
                 processByeCommand();
                 return;
             }
         }
+    }
+
+    private static void processDoneCommand(ArrayList<Task> list, String command) {
+        int listIndex = Integer.parseInt(command.replaceAll("[^\\d]",""));
+        list.get(listIndex-1).filteredTask = list.get(listIndex-1).filteredTask.replace("✗","✓");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Nice! I've marked this task as done:\n       " + list.get(listIndex - 1).filteredTask
+                + "\n    ____________________________________________________________");
     }
 
     private static void processByeCommand() {
@@ -37,51 +49,14 @@ public class Duke {
                 + "    ____________________________________________________________");
     }
 
-    private static void processDoneCommand(ArrayList<String> list, String command) {
-        int listIndex = Integer.parseInt(command.replaceAll("[^\\d]",""));
-        list.set(listIndex-1,list.get(listIndex-1).replace("✗","✓"));
-        System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n       " + list.get(listIndex - 1)
-                + "\n    ____________________________________________________________");
-    }
-
-    private static void processListCommand(ArrayList<String> list) {
+    private static void processListCommand(ArrayList<Task> list) {
         System.out.println("    ____________________________________________________________\n"
                 + "     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + list.get(i));
+            System.out.println("     " + (i + 1) + "." + list.get(i).filteredTask);
         }
         System.out.print("    ____________________________________________________________\n");
     }
 
-    private static void processToDoCommand(ArrayList<String> list, String command) {
-        String filteredCommand = "[T][✗] " + command.replaceFirst("todo\\s","");
-        list.add(filteredCommand);
-        printMessage(list, filteredCommand);
-    }
-
-    private static void processDeadLineCommand(ArrayList<String> list, String command) {
-        String filteredCommand = "[D][✗] "
-                + command.replaceFirst("deadline\\s","").replaceFirst("/by","(by:")
-                + ")";
-        list.add(filteredCommand);
-        printMessage(list, filteredCommand);
-    }
-
-    private static void processEventCommand(ArrayList<String> list, String command) {
-        String filteredCommand = "[E][✗] "
-                + command.replaceFirst("event\\s","").replaceFirst("/at","(at:")
-                + ")";
-        list.add(filteredCommand);
-        printMessage(list, filteredCommand);
-    }
-
-    private static void printMessage(ArrayList<String> list, String filteredCommand) {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n       "
-                + filteredCommand
-                + "\n     Now you have " + list.size() + " tasks in the list."
-                + "\n    ____________________________________________________________");
-    }
 }
 
