@@ -57,11 +57,7 @@ public class Duke {
     private static void processToDoCommand(ArrayList<String> list, String command) {
         String filteredCommand = "[T][✗] " + command.replaceFirst("todo\\s","");
         list.add(filteredCommand);
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n       "
-                + filteredCommand
-                + "\n     Now you have " + list.size() + " tasks in the list."
-                + "\n    ____________________________________________________________");
+        printMessage(list, filteredCommand);
     }
 
     private static void processDeadLineCommand(ArrayList<String> list, String command) {
@@ -69,11 +65,7 @@ public class Duke {
                 + command.replaceFirst("deadline\\s","").replaceFirst("/by","(by:")
                 + ")";
         list.add(filteredCommand);
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n       "
-                + filteredCommand
-                + "\n     Now you have " + list.size() + " tasks in the list."
-                + "\n    ____________________________________________________________");
+        printMessage(list, filteredCommand);
     }
 
     private static void processEventCommand(ArrayList<String> list, String command) {
@@ -81,6 +73,10 @@ public class Duke {
                 + command.replaceFirst("event\\s","").replaceFirst("/at","(at:")
                 + ")";
         list.add(filteredCommand);
+        printMessage(list, filteredCommand);
+    }
+
+    private static void printMessage(ArrayList<String> list, String filteredCommand) {
         System.out.println("    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n       "
                 + filteredCommand
