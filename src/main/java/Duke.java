@@ -75,6 +75,6 @@ public class Duke {
             }
             userInput = scan.nextLine();
         }
-        System.out.println("Bye!");
+        System.out.println("Bye from Singapore!");
     }
 }
