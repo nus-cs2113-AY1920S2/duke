@@ -1,6 +1,7 @@
 package Duke.TaskTypes;
 
 public class Deadline extends Task {
+
     protected String by;
 
     public Deadline(String description, String by) {
@@ -21,12 +22,9 @@ public class Deadline extends Task {
     public String[] getTaskInfo() {
         String[] taskInfoArray = new String[4];
         taskInfoArray[0] = "D";
-        if (super.isDone)
-        {
+        if (super.isDone) {
             taskInfoArray[1] = "1";
-        }
-        else
-        {
+        } else {
             taskInfoArray[1] = "0";
         }
         taskInfoArray[2] = super.description;

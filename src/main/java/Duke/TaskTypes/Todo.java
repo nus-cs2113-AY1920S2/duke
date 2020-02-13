@@ -22,19 +22,14 @@ public class Todo extends Task {
     public String[] getTaskInfo() {
         String[] taskInfoArray = new String[4];
         taskInfoArray[0] = "T";
-        if (super.isDone)
-        {
+        if (super.isDone) {
             taskInfoArray[1] = "1";
-        }
-        else
-        {
+        } else {
             taskInfoArray[1] = "0";
         }
         taskInfoArray[2] = super.description;
         taskInfoArray[3] = by;
         return taskInfoArray;
-
-
 
     }
 }
