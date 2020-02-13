@@ -111,7 +111,7 @@ public class Duke {
 
     public static void printAddedTask(Task newTask) {
         System.out.println(CUTTING_LINE);
-        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\tGot it. I've added this task:");
         System.out.println("\t" + newTask.toString());
         System.out.printf("\tNow you have %d task(s) in the list\n", tasks.size());
         System.out.println(CUTTING_LINE);
@@ -135,7 +135,7 @@ public class Duke {
 
     public static void printMarkedTask(Task markedTask) {
         System.out.println(CUTTING_LINE);
-        System.out.println("\tI've marked this task as done: ");
+        System.out.println("\tI've marked this task as done:");
         System.out.println("\t" + markedTask.getStatusIcon() + markedTask.getName());
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
@@ -181,7 +181,7 @@ public class Duke {
 
     public static void printDeleteTask(Task task){
         System.out.println(CUTTING_LINE);
-        System.out.println("\tNoted: I've removed this task: ");
+        System.out.println("\tNoted: I've removed this task:");
         System.out.println("\t" + task.getStatusIcon() + task.getName());
         int numberOfRemainedTasks = tasks.size()-1;
         System.out.printf("\tNow you have %d task(s) in the list.\n", numberOfRemainedTasks);
