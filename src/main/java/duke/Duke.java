@@ -7,13 +7,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
     public static final int OFFSITE_OF_TIME = 4;
     public static final String CUTTING_LINE = "    ____________________________________________________________";
+    public static final String FILE_PATH = "data/duke.txt";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void greet(String logo){
@@ -166,6 +171,7 @@ public class Duke {
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
+
     public static void delete(String command, ArrayList<Task> tasks){
         int taskID = getIdFromCommand(command);
 
@@ -179,14 +185,94 @@ public class Duke {
         tasks.remove(taskID-1);
     }
 
-    public static void printDeleteTask(Task task){
+    public static void printDeleteTask(Task task) {
         System.out.println(CUTTING_LINE);
         System.out.println("\tNoted: I've removed this task:");
         System.out.println("\t" + task.getStatusIcon() + task.getName());
-        int numberOfRemainedTasks = tasks.size()-1;
+        int numberOfRemainedTasks = tasks.size() - 1;
         System.out.printf("\tNow you have %d task(s) in the list.\n", numberOfRemainedTasks);
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+    }
+
+    public static void save() {
+        String fileName = FILE_PATH;
+
+        try {
+            for (Task task : tasks) {
+                writeToFile(fileName);
+            }
+        } catch (IOException e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static void writeToFile(String fileName) throws IOException{
+        FileWriter fw = new FileWriter(fileName);
+        for (Task task : tasks) {
+            int taskID = tasks.indexOf(task) + 1;
+            fw.write(taskID + ". " + task.toString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void load(){
+        try {
+            loadFileContents();
+        }catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    public static void loadFileContents() throws FileNotFoundException {
+        File fileToBeLoad = new File(FILE_PATH);
+        Scanner s = new Scanner(fileToBeLoad);
+        while (s.hasNext()){
+            int indexOfCommand = 3;
+            String command = s.nextLine().substring(indexOfCommand).replace("(","/")
+                    .replace(")","")
+                    .replace(": ",":");
+            addLoadedTask(command,tasks);
+        }
+    }
+
+    public static void addLoadedTask(String description, ArrayList<Task> tasks){
+        Task newTask;
+        String[] words = description.split(" ");
+        String taskType = words[0];
+        String taskStatus = words[1];
+        String isDoneIcon = "[\u2713]";
+
+        boolean isToDo = taskType.equals("[T]");
+        boolean isDeadline = taskType.equals("[D]");
+        boolean isEvent = taskType.equals("[E]");
+
+        boolean isDone =taskStatus.equals(isDoneIcon);
+        int indexOfCommand = 7;
+
+        TestDukeException testDukeException = new TestDukeException(description);
+        try {
+            if (isToDo) {
+                String command = "todo" + description.substring(indexOfCommand);
+                newTask = processToDoDescription(command);
+            } else if (isDeadline) {
+                String command = "deadline" + description.substring(indexOfCommand);
+                newTask = processDeadlineDescription(command);
+            } else if (isEvent) {
+                String command = "event" + description.substring(indexOfCommand);
+                newTask = processEventDescription(command);
+            } else {
+                testDukeException.throwTaskTypeException();
+                newTask = null;
+            }
+            if (isDone) {
+                newTask.markAsDone();
+            }
+            tasks.add(newTask);
+        } catch (DukeException dukeException){
+            System.out.println(dukeException.getMessage());
+        }
+
     }
 
     public static void main(String[] args) {
@@ -201,7 +287,7 @@ public class Duke {
 
 
         //Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
-
+        load();
         /* Greet to user */
         greet(logo);
 
@@ -222,10 +308,13 @@ public class Duke {
                list(tasks);
             } else if (command.contains("done")) {
                 markAsDone(command, tasks);
+                save();
             } else if (command.contains("delete")) {
                 delete(command, tasks);
+                save();
             } else {
                 addTask(command, tasks);
+                save();
             }
             command = scanner.nextLine();
         }
