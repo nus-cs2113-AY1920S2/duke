@@ -1,8 +1,8 @@
 package duke.util;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import duke.exception.DukeException;
@@ -14,28 +14,23 @@ import duke.task.Todo;
 import static duke.util.Constants.*;
 
 public class TaskManager {
-    private Task[] tasks;
-    private int taskCount;
+    private ArrayList<Task> tasks;
 
     public TaskManager() {
-        tasks = new Task[100];
-        this.taskCount = 0;
+        tasks = new ArrayList<>();
     }
 
-    public TaskManager(int taskCount) {
-        tasks = new Task[taskCount];
-        this.taskCount = 0;
-    }
 
     public int getTaskCount() {
-        return taskCount;
+        return tasks.size();
     }
 
     public void listTasks() {
         System.out.println(LINE_DIVIDER);
         System.out.println(FIVE_SPACES + LIST_TASKS_PROMPT);
+        int taskCount = tasks.size();
         for (int i = 0; i < taskCount; ++i) {
-            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE, i, tasks[i]);
+            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE, i, tasks.get(i));
         }
         System.out.println(LINE_DIVIDER);
     }
@@ -47,26 +42,26 @@ public class TaskManager {
     public void addTask(String... args) {
         String taskDescription = args[0].trim();
         try {
-            Task currentTask;
+            Task taskToAdd;
             if (args.length == 2) {
-                currentTask = new Todo(taskDescription);
+                taskToAdd = new Todo(taskDescription);
             } else if (args[2].equals("deadline")) {
-                currentTask = new Deadline(taskDescription, args[1]);
+                taskToAdd = new Deadline(taskDescription, args[1]);
             } else {
-                currentTask = new Event(taskDescription, args[1]);
+                taskToAdd = new Event(taskDescription, args[1]);
             }
-            tasks[taskCount++] = currentTask;
-            printAddTaskSuccessfulPrompt(currentTask);
+            tasks.add(taskToAdd);
+            printAddTaskSuccessfulPrompt(taskToAdd);
         } catch (DukeException e) {
-            System.out.println(FIVE_SPACES + CRYING_FACE + TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
+            printErrorMsg(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
         }
     }
 
-    private void printAddTaskSuccessfulPrompt(Task currentTask) {
+    private void printAddTaskSuccessfulPrompt(Task addedTask) {
         System.out.println(LINE_DIVIDER);
         System.out.println(FIVE_SPACES + ADD_TASKS_PROMPT);
-        System.out.printf(SEVEN_SPACES + ADD_SINGLE_TASK_MESSAGE, currentTask);
-        System.out.printf(FIVE_SPACES + ADD_TASKS_POST_PROMPT, taskCount);
+        System.out.printf(SEVEN_SPACES + ADD_SINGLE_TASK_MESSAGE, addedTask);
+        System.out.printf(FIVE_SPACES + ADD_TASKS_POST_PROMPT, tasks.size());
         System.out.println(LINE_DIVIDER);
     }
 
@@ -74,9 +69,9 @@ public class TaskManager {
     public void markAsDone(int taskID) {
         System.out.println(LINE_DIVIDER);
         try {
-            tasks[taskID].markAsDone();
+            tasks.get(taskID).markAsDone();
             System.out.println(FIVE_SPACES + DONE_TASKS_PROMPT);
-            System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks[taskID]);
+            System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks.get(taskID));
         } catch (NullPointerException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_EXIST_ERROR_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -84,6 +79,12 @@ public class TaskManager {
         } finally {
             System.out.println(LINE_DIVIDER);
         }
+    }
+
+    public void printErrorMsg(String formatErrorMessage) {
+        System.out.println(LINE_DIVIDER);
+        System.out.println(FIVE_SPACES+CRYING_FACE+ formatErrorMessage);
+        System.out.println(LINE_DIVIDER);
     }
 
     public void loadDataFromFile(String filePath) {
@@ -95,10 +96,8 @@ public class TaskManager {
             Gson gson = new Gson();
             String json;
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < taskCount; ++i) {
-                json = gson.toJson(tasks[i]);
-                fw.write(json + System.lineSeparator());
-            }
+            json = gson.toJson(tasks);
+            fw.write(json);
             fw.close();
         } catch (IOException e) {
             System.out.println("opp, something went wrong!");
