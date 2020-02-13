@@ -95,10 +95,11 @@ public class Duke {
         Boolean isDone;
         //Error check, to make sure you are given a valid done statement
         if (LENG_LIST == 1){
-            System.out.println("Please specify (eg: done 2) or just add a new one");
-            isDone = true;
-            return isDone;
-
+            if (words[0].equals("done")){
+                System.out.println("Please specify (eg: done 2) or just add a new one");
+                isDone = true;
+                return isDone;
+            }
         }
         isDone = isValidTaskAndDone(taskList, words);
         return isDone;
