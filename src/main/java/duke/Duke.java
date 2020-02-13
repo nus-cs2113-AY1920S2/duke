@@ -148,23 +148,25 @@ public class Duke {
             }
         }
 
-        // Update indexes of subsequent tasks
-        for (int i = removedIndex; i < fileContent.size(); i++)
-        {
-            String currString = fileContent.get(i);
-            System.out.println(currString);
-            List<String> cells = Arrays.asList(currString.split(","));
-            // Change first cell (taskID) to new ID
-            cells.set(0, String.valueOf(i));
-
-            String updatedString = String.join(",", cells);
-            System.out.println(updatedString);
-            replaceLine(i, updatedString);
-            System.out.println("here");
-        }
-
         // Rewrite list into data file
         Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
+
+        // Update indexes of subsequent tasks (e.g. if you remove task 2, task 3 becomes task 2)
+        for (int i = removedIndex; i < fileContent.size(); i++)
+        {
+            // Get current comma separated string
+            String currString = fileContent.get(i);
+            // Split into different cells
+            List<String> cells = Arrays.asList(currString.split(","));
+            // Change first cell (taskID) to new ID (taskID-1)
+            // Task 3 becomes task 2, task 4 becomes task 3, until end of list
+            cells.set(0, String.valueOf(i));
+            // Recombine the comma separated string
+            String updatedString = String.join(",", cells);
+            // Replace the line with the updated string
+            replaceLine(i+1, updatedString);
+        }
+
     }
 
     private static void replaceLine(int lineNumber, String newString) throws IOException {
@@ -180,7 +182,8 @@ public class Duke {
                 break;
             }
         }
-            Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
+
+        Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
     }
 
     private static void formatPrint(String input) {
