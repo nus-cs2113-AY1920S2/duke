@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? yesIcon : noIcon); //return tick or X symbols
+        return (isDone ? YES_ICON : NO_ICON); //return tick or X symbols
     }
 
     public String getTaskDescription() {

@@ -34,6 +34,7 @@ public class Constants {
     public static final String DEADLINE_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the deadline format is not correct!";
     public static final String EVENT_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task description cannot be empty!";
-    public static final String yesIcon = "[\u2713]";
-    public static final String noIcon = "[\u2718]";
+    public static final String YES_ICON = "[\u2713]";
+    public static final String NO_ICON = "[\u2718]";
+    public static final String DATA_FILE_PATH = "data/duke.txt";
 }

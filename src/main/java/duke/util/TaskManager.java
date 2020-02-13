@@ -1,4 +1,10 @@
 package duke.util;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
+
+import com.google.gson.Gson;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -27,49 +33,40 @@ public class TaskManager {
 
     public void listTasks() {
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES+LIST_TASKS_PROMPT);
+        System.out.println(FIVE_SPACES + LIST_TASKS_PROMPT);
         for (int i = 0; i < taskCount; ++i) {
-            System.out.printf(SEVEN_SPACES+LIST_SINGLE_TASK_MESSAGE, i, tasks[i]);
+            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE, i, tasks[i]);
         }
         System.out.println(LINE_DIVIDER);
     }
 
     /**
-     *
-     * @param args
-     *
-     * todo: addTasks(description, "todo")
-     * deadline/event: addTasks(description, time, "deadline"/"event")
+     * @param args todo: addTasks(description, "todo")
+     *             deadline/event: addTasks(description, time, "deadline"/"event")
      */
     public void addTask(String... args) {
         String taskDescription = args[0].trim();
         try {
             Task currentTask;
-            switch (args.length) {
-            case 2:
+            if (args.length == 2) {
                 currentTask = new Todo(taskDescription);
-                break;
-            default:
-                // add deadline/event
-                if (args[2].equals("deadline")) {
-                    currentTask = new Deadline(taskDescription, args[1]);
-                } else {
-                    currentTask = new Event(taskDescription, args[1]);
-                }
-                break;
+            } else if (args[2].equals("deadline")) {
+                currentTask = new Deadline(taskDescription, args[1]);
+            } else {
+                currentTask = new Event(taskDescription, args[1]);
             }
             tasks[taskCount++] = currentTask;
             printAddTaskSuccessfulPrompt(currentTask);
         } catch (DukeException e) {
-            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
+            System.out.println(FIVE_SPACES + CRYING_FACE + TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
         }
     }
 
     private void printAddTaskSuccessfulPrompt(Task currentTask) {
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES+ADD_TASKS_PROMPT);
-        System.out.printf(SEVEN_SPACES+ADD_SINGLE_TASK_MESSAGE, currentTask);
-        System.out.printf(FIVE_SPACES+ADD_TASKS_POST_PROMPT, taskCount);
+        System.out.println(FIVE_SPACES + ADD_TASKS_PROMPT);
+        System.out.printf(SEVEN_SPACES + ADD_SINGLE_TASK_MESSAGE, currentTask);
+        System.out.printf(FIVE_SPACES + ADD_TASKS_POST_PROMPT, taskCount);
         System.out.println(LINE_DIVIDER);
     }
 
@@ -81,12 +78,30 @@ public class TaskManager {
             System.out.println(FIVE_SPACES + DONE_TASKS_PROMPT);
             System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks[taskID]);
         } catch (NullPointerException e) {
-            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_EXIST_ERROR_MESSAGE);
+            System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_EXIST_ERROR_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
-        }
-        finally {
+            System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
+        } finally {
             System.out.println(LINE_DIVIDER);
+        }
+    }
+
+    public void loadDataFromFile(String filePath) {
+
+    }
+
+    public void saveDataToFile(String filePath) {
+        try {
+            Gson gson = new Gson();
+            String json;
+            FileWriter fw = new FileWriter(filePath);
+            for (int i = 0; i < taskCount; ++i) {
+                json = gson.toJson(tasks[i]);
+                fw.write(json + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("opp, something went wrong!");
         }
     }
 }
