@@ -5,44 +5,48 @@ import alie.task.Events;
 import alie.task.Task;
 import alie.task.ToDo;
 
+import java.util.ArrayList;
+
 public class TaskManager {
-    protected static final int SIZE_LIMIT = 100;
     protected static final String INDENTATION = "      ";
-    protected static final String TASK_NAME_DIVIDER = " ";
-    protected static final String TASK_DETAILS_DIVIDER = "/";
+    protected static final String MORE_INDENTATION = "        ";
+    protected ArrayList<Task> taskList = new ArrayList<>();
 
-    //Assume no more than 100 tasks given for each Manager
-    protected Task[] taskList;
-    protected static int taskCount;
-
-    public TaskManager() {
+    /*public TaskManager() {
         this.taskList = new Task[SIZE_LIMIT];
-        this.taskCount = 0;
-    }
+    }*/
 
     public void addNewTask(Task newTask) {
-        taskList[taskCount] = newTask;
-        System.out.println(INDENTATION +
-                taskList[taskCount].justAddedText(taskCount));
-        taskCount += 1;
+        taskList.add(newTask);
+        int taskId = taskList.size() - 1;
+        System.out.println(INDENTATION + taskList.get(taskId).justAddedText(taskId));
     }
 
     public void printAllTasksAdded() {
-        if (taskCount == 0) {
+        if (taskList.size() == 0) {
             System.out.println("No tasks added yet");
         } else {
             System.out.println (INDENTATION + "Here are the tasks in your list:");
-            for (int counter = 0; counter < taskCount; counter += 1) {
-                System.out.printf("%s %d.%s", INDENTATION, counter + 1,
-                        taskList[counter].getTaskInfo() + System.lineSeparator());
+            int counter = 1;
+            for (Task task : taskList) {
+                System.out.printf("%s %d.%s", INDENTATION, counter,
+                        task.getTaskInfo() + System.lineSeparator());
+                counter += 1;
             }
         }
     }
 
     public void markTaskCompleted(int index) {
-        taskList[index].setIsCompleted();
+        taskList.set(index, taskList.get(index).setTaskCompleted(taskList.get(index)));
         System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-        System.out.println(INDENTATION + "[✓] " + taskList[index].getName());
+        System.out.println(INDENTATION + "[✓] " + taskList.get(index).getName());
+    }
 
+    public void deleteTask(int index) {
+        System.out.println(INDENTATION + "Noted. I've removed this task:" + System.lineSeparator()
+                + MORE_INDENTATION + taskList.get(index).getTaskInfo() + System.lineSeparator()
+                + INDENTATION + "Now you have " + (taskList.size() - 1) + " " + "tasks in the " +
+                "list.");
+        taskList.remove(index);
     }
 }
