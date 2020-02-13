@@ -60,7 +60,7 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 System.out.println("Sorry I don't understand that command. Here is the list of commands available\n"
                         + "\"bye\": to exit\n\"list\": to show the list of all your tasks\n\"todo\": add a todo\n" +
-                        "\"deadline\": add a deadline\n\"event\': add an event\n" +
+                        "\"deadline\": add a deadline\n\"event\": add an event\n" +
                         "\"done\": check off a task on your list");
             }
             userInput = scan.nextLine();
@@ -68,8 +68,3 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-
-// should have:
-// invalid command, like no such starting word
-// too few arguments
-// incorrect format like "/by" -> "by" or sth
