@@ -10,16 +10,10 @@ import java.util.ArrayList;
 import static duke.util.Constants.*;
 
 public class TaskManager {
-    //private Task[] tasks;
     private ArrayList<Task> tasks;
 
     public TaskManager() {
         tasks = new ArrayList<>();
-    }
-
-
-    public int getTaskCount() {
-        return tasks.size();
     }
 
     public void listTasks() {
@@ -43,18 +37,12 @@ public class TaskManager {
         String taskDescription = args[0].trim();
         try {
             Task currentTask;
-            switch (args.length) {
-            case 2:
+            if (args.length == 2) {
                 currentTask = new Todo(taskDescription);
-                break;
-            default:
-                // add deadline/event
-                if (args[2].equals("deadline")) {
-                    currentTask = new Deadline(taskDescription, args[1]);
-                } else {
-                    currentTask = new Event(taskDescription, args[1]);
-                }
-                break;
+            } else if (args[2].equals("deadline")) {
+                currentTask = new Deadline(taskDescription, args[1]);
+            } else {
+                currentTask = new Event(taskDescription, args[1]);
             }
             tasks.add(currentTask);
             printAddTaskSuccessfulPrompt(currentTask);
@@ -79,7 +67,7 @@ public class TaskManager {
             System.out.println(FIVE_SPACES + DONE_TASKS_PROMPT);
             System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks.get(taskID));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_EXIST_ERROR_MESSAGE);
+            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_ERROR_MESSAGE);
         } finally {
             System.out.println(LINE_DIVIDER);
         }
