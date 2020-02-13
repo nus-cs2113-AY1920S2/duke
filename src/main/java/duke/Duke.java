@@ -142,7 +142,7 @@ public class Duke {
             // If the current line matches the taskId
             if (fileContent.get(i).startsWith(String.valueOf(lineNumber))) {
                 // Remove current line
-                removedIndex = i;
+                removedIndex = i; // Store index of removed line to use as initial index of next loop
                 fileContent.remove(i);
                 break;
             }
