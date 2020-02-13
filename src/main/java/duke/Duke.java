@@ -7,8 +7,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -165,6 +168,29 @@ public class Duke {
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
+    public static void save() {
+        String fileName = "data/duke.txt";
+
+        try {
+            for (Task task : tasks) {
+                writeToFile(fileName);
+            }
+            System.out.println("Save successfully!");
+            System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+        } catch (IOException e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static void writeToFile(String fileName) throws IOException{
+        FileWriter fw = new FileWriter(fileName);
+        for (Task task : tasks) {
+            int taskID = tasks.indexOf(task) + 1;
+            fw.write(taskID + ". " + task.toString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
     public static void main(String[] args) {
 
         /* A logo for Renzo */
@@ -198,6 +224,8 @@ public class Duke {
                list(tasks);
             } else if (command.contains("done")) {
                 markAsDone(command, tasks);
+            } else if (command.contains("save")) {
+                save();
             } else {
                 addTask(command, tasks);
             }
