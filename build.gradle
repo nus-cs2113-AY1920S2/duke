@@ -22,7 +22,7 @@ run {
 
 shadowJar {
     archiveBaseName = "chattychatbot"
-    archiveVersion = "v0.1.0"
+    archiveVersion = "v0.1.1"
     archiveClassifier = null
     archiveAppendix = null
 }
