@@ -95,27 +95,27 @@ public class Duke {
         Boolean isDone;
         //Error check, to make sure you are given a valid done statement
         if (LENG_LIST == 1){
-            if (words[0].toUpperCase().equals("DONE")) {
-                System.out.println("Please specify (eg: done 2) or just add a new one");
-                isDone = true;
-                return isDone;
-            }
+            System.out.println("Please specify (eg: done 2) or just add a new one");
+            isDone = true;
+            return isDone;
+
         }
-        isDone = markValidTaskAsDone(taskList, words);
+        isDone = isValidTaskAndDone(taskList, words);
         return isDone;
     }
 
     /**
-     * Returns a boolean that signifies if the task that was supposed to be marked exists and if it is marked.
+     * Returns a boolean that marks a task as done if it exists
+     *
      */
-    private Boolean markValidTaskAsDone(ArrayList<Task> taskList, String[] words) {
+    private Boolean isValidTaskAndDone(ArrayList<Task> taskList, String[] words) {
         Boolean isSet= false;
         if (words[0].toUpperCase().equals("DONE")) {
             int IDX_WORDS = Integer.parseInt(words[1]) - 1;
             if (words[1] == null){
                 return isSet;
             } else if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() -1) {
-                System.out.println("Index is out of bounds, please try again!");
+                System.out.println("That task number isn't in our task list, please try again!");
                 return true;
             }
             taskList.get(Integer.parseInt(words[1]) - 1).markIt();
@@ -172,9 +172,9 @@ public class Duke {
         while (!ogString.toUpperCase().equals("BYE")) {
             String[] words = ogString.split(" ");
             String eventType = words[0];
-            System.out.println(eventType);
+
             if (!checkIfValidTask(eventType)) {
-                System.out.println("Please specify (eg: done, todo, deadline, list, event)");
+                System.out.println("Please specify the task type more clearly (eg: done, todo, deadline, list, event)");
             }
             else {
                 performTasks(taskList, ogString, eventType);
@@ -200,28 +200,39 @@ public class Duke {
             this.printTaskList(taskList);
             printStraightLine();
         } else {
-            printStraightLine();
-            String todoOrDeadlineOrEvent = returnStringToAdd(ogString, eventType);
-            if (eventType.equals("event") || eventType.equals("deadline")) {
-                if (eventType.equals("event")) {
-                    Event t = new Event(todoOrDeadlineOrEvent);
-                    taskList.add(t);
+            try {
+                printStraightLine();
+
+                String todoOrDeadlineOrEvent = returnStringToAdd(ogString, eventType);
+                if (eventType.equals("event") || eventType.equals("deadline")) {
+                    if (eventType.equals("event")) {
+                        Event t = new Event(todoOrDeadlineOrEvent);
+                        taskList.add(t);
+                    } else {
+                        Deadline t = new Deadline(todoOrDeadlineOrEvent);
+                        taskList.add(t);
+                    }
                 } else {
-                    Deadline t = new Deadline(todoOrDeadlineOrEvent);
-                    taskList.add(t);
+                    Todo e = new Todo(todoOrDeadlineOrEvent);
+                    taskList.add(e);
                 }
-            } else {
-                Todo e = new Todo(todoOrDeadlineOrEvent);
-                taskList.add(e);
+                Task t = taskList.get(taskList.size() - 1);
+                String description = t.getDescription();
+                String statusIcon = t.getStatusIcon();
+                String typeIcon = t.getTypeIcon();
+                System.out.println("Got it. I have added this task: \n");
+                System.out.println(typeIcon +  " [" +  statusIcon + "] " +  description + "\n");
+                System.out.println("Now you have " + taskList.size() +  " item/s in the list \n");
+                printStraightLine();
+
+            } catch (IndexOutOfBoundsException e){
+                System.out.println("Your inputs can only be of the following forms: \n 1. todo {task description} \n 2." +
+                                        " deadline {task description} \\by {dedline eg. 6 PM} \n 3. event {event description} " +
+                                            "\\at {event date\\time eg. 6 PM}");
+                System.out.println("Try again!");
+                printStraightLine();
             }
-            Task t = taskList.get(taskList.size() - 1);
-            String description = t.getDescription();
-            String statusIcon = t.getStatusIcon();
-            String typeIcon = t.getTypeIcon();
-            System.out.println("Got it. I have added this task: \n" + todoOrDeadlineOrEvent);
-            System.out.println(typeIcon +  " [" +  statusIcon + "] " +  description + "\n");
-            System.out.println("Now you have " + taskList.size() +  " items in the list \n");
-            printStraightLine();
+
         }
     }
 
