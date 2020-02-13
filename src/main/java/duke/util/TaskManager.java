@@ -34,29 +34,48 @@ public class TaskManager {
      * deadline/event: addTasks(description, time, "deadline"/"event")
      */
     public void addTask(String... args) {
+        System.out.println(LINE_DIVIDER);
         String taskDescription = args[0].trim();
         try {
-            Task currentTask;
+            Task taskToAdd;
             if (args.length == 2) {
-                currentTask = new Todo(taskDescription);
+                taskToAdd = new Todo(taskDescription);
             } else if (args[2].equals("deadline")) {
-                currentTask = new Deadline(taskDescription, args[1]);
+                taskToAdd = new Deadline(taskDescription, args[1]);
             } else {
-                currentTask = new Event(taskDescription, args[1]);
+                taskToAdd = new Event(taskDescription, args[1]);
             }
-            tasks.add(currentTask);
-            printAddTaskSuccessfulPrompt(currentTask);
+            tasks.add(taskToAdd);
+            printAddTaskSuccessfulPrompt(taskToAdd);
         } catch (DukeException e) {
             System.out.println(FIVE_SPACES+CRYING_FACE+TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
+        } finally {
+            System.out.println(LINE_DIVIDER);
         }
     }
 
-    private void printAddTaskSuccessfulPrompt(Task currentTask) {
+    public void delTask(int taskID) {
         System.out.println(LINE_DIVIDER);
+        try {
+            Task deletedTask = tasks.get(taskID);
+            tasks.remove(taskID);
+            printDeleteTaskSuccessfulPrompt(deletedTask);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_ERROR_MESSAGE);
+        }
+        System.out.println(LINE_DIVIDER);
+    }
+
+    private void printAddTaskSuccessfulPrompt(Task addedTask) {
         System.out.println(FIVE_SPACES+ADD_TASKS_PROMPT);
-        System.out.printf(SEVEN_SPACES+ADD_SINGLE_TASK_MESSAGE, currentTask);
-        System.out.printf(FIVE_SPACES+ADD_TASKS_POST_PROMPT, tasks.size());
-        System.out.println(LINE_DIVIDER);
+        System.out.printf(SEVEN_SPACES+ADD_SINGLE_TASK_MESSAGE, addedTask);
+        System.out.printf(FIVE_SPACES+ADD_OR_DELETE_TASKS_POST_PROMPT, tasks.size());
+    }
+
+    private void printDeleteTaskSuccessfulPrompt(Task currentTask) {
+        System.out.println(FIVE_SPACES+DELETE_TASKS_PROMPT);
+        System.out.printf(SEVEN_SPACES+DELETE_SINGLE_TASK_MESSAGE, currentTask);
+        System.out.printf(FIVE_SPACES+ADD_OR_DELETE_TASKS_POST_PROMPT, tasks.size());
     }
 
 
