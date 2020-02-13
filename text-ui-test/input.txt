@@ -1,3 +1,4 @@
+delete 1
 todo borrow book
 list
 deadline return book /by Sunday
@@ -14,6 +15,7 @@ list
 done 3
 done 4
 done 5
+delete 5
 list
 todo
 deadline
@@ -24,4 +26,9 @@ event
 event   /at  some time
 event  yes  no  /at
 event       to-trim event    /at   to-trim date
+delete 0
+delete 2
+delete 2
+list
+delete 5
 bye
