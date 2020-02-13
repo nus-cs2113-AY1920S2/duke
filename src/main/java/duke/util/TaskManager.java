@@ -5,31 +5,29 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 import static duke.util.Constants.*;
 
 public class TaskManager {
-    private Task[] tasks;
-    private int taskCount;
+    //private Task[] tasks;
+    private ArrayList<Task> tasks;
 
     public TaskManager() {
-        tasks = new Task[100];
-        this.taskCount = 0;
+        tasks = new ArrayList<>();
     }
 
-    public TaskManager(int taskCount) {
-        tasks = new Task[taskCount];
-        this.taskCount = 0;
-    }
 
     public int getTaskCount() {
-        return taskCount;
+        return tasks.size();
     }
 
     public void listTasks() {
         System.out.println(LINE_DIVIDER);
         System.out.println(FIVE_SPACES+LIST_TASKS_PROMPT);
+        int taskCount = tasks.size();
         for (int i = 0; i < taskCount; ++i) {
-            System.out.printf(SEVEN_SPACES+LIST_SINGLE_TASK_MESSAGE, i, tasks[i]);
+            System.out.printf(SEVEN_SPACES+LIST_SINGLE_TASK_MESSAGE, i, tasks.get(i));
         }
         System.out.println(LINE_DIVIDER);
     }
@@ -58,7 +56,7 @@ public class TaskManager {
                 }
                 break;
             }
-            tasks[taskCount++] = currentTask;
+            tasks.add(currentTask);
             printAddTaskSuccessfulPrompt(currentTask);
         } catch (DukeException e) {
             System.out.println(FIVE_SPACES+CRYING_FACE+TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
@@ -69,7 +67,7 @@ public class TaskManager {
         System.out.println(LINE_DIVIDER);
         System.out.println(FIVE_SPACES+ADD_TASKS_PROMPT);
         System.out.printf(SEVEN_SPACES+ADD_SINGLE_TASK_MESSAGE, currentTask);
-        System.out.printf(FIVE_SPACES+ADD_TASKS_POST_PROMPT, taskCount);
+        System.out.printf(FIVE_SPACES+ADD_TASKS_POST_PROMPT, tasks.size());
         System.out.println(LINE_DIVIDER);
     }
 
@@ -77,15 +75,12 @@ public class TaskManager {
     public void markAsDone(int taskID) {
         System.out.println(LINE_DIVIDER);
         try {
-            tasks[taskID].markAsDone();
+            tasks.get(taskID).markAsDone();
             System.out.println(FIVE_SPACES + DONE_TASKS_PROMPT);
-            System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks[taskID]);
-        } catch (NullPointerException e) {
+            System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks.get(taskID));
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_EXIST_ERROR_MESSAGE);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(FIVE_SPACES+CRYING_FACE+TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
-        }
-        finally {
+        } finally {
             System.out.println(LINE_DIVIDER);
         }
     }

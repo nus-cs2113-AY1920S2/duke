@@ -111,7 +111,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskManager TaskMgr = new TaskManager(100);
+        TaskManager TaskMgr = new TaskManager();
 
         greet();
 
