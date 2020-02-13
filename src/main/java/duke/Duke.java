@@ -8,12 +8,13 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     public static final int OFFSITE_OF_TIME = 4;
-    public static final int MAX_NUMBER_OF_TASKS = 100;
     public static final String CUTTING_LINE = "    ____________________________________________________________";
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void greet(String logo){
         System.out.println(CUTTING_LINE);
@@ -24,12 +25,11 @@ public class Duke {
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
-    public static void list(Task[] tasks){
+    public static void list(ArrayList<Task> tasks){
         System.out.println(CUTTING_LINE);
         System.out.println("\tHere are the tasks in your list:");
-        int numberOfTasks = Task.getNumberOfTasks();
-        for (int i = 1; i <= numberOfTasks; i++) {
-            System.out.println("\t" + tasks[i].getID() + "." + tasks[i].toString());
+        for (Task task: tasks) {
+            System.out.println("\t" + task.getID() + "." + task.toString());
         }
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
@@ -80,7 +80,7 @@ public class Duke {
         return new Event(name, time);
     }
 
-    public static void addTask(String description, Task[] tasks){
+    public static void addTask(String description, ArrayList<Task> tasks){
         Task newTask;
         String words[] = description.split(" ");
         String taskType = words[0];
@@ -100,7 +100,7 @@ public class Duke {
                 testDukeException.throwTaskTypeException();
                 newTask = null;
             }
-            tasks[newTask.getID()] = newTask;
+            tasks.add(newTask);
             printAddedTask(newTask);
         } catch (DukeException dukeException){
             System.out.println(dukeException.getMessage());
@@ -117,7 +117,7 @@ public class Duke {
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
-    public static void markAsDone(String command, Task[] tasks){
+    public static void markAsDone(String command, ArrayList<Task> tasks){
         int taskID = getIdFromCommand(command);
 
         /* Exit if enter a wrong task id */
@@ -127,7 +127,7 @@ public class Duke {
             return;
         }
 
-        Task taskToBeMarked = tasks[taskID];
+        Task taskToBeMarked = tasks.get(taskID-1);
         taskToBeMarked.markAsDone();
         printMarkedTask(taskToBeMarked);
     }
@@ -176,7 +176,7 @@ public class Duke {
                 +"\t|_|  \\_\\ |_____| |_|  \\_| /_____| \\_____/ \n";
 
 
-        Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
+        //Task[] tasks = new Task[MAX_NUMBER_OF_TASKS];
 
         /* Greet to user */
         greet(logo);
@@ -192,7 +192,7 @@ public class Duke {
         bye();
     }
 
-    public static void processCommand(Task[] tasks, Scanner scanner, String command) {
+    public static void processCommand(ArrayList<Task> tasks, Scanner scanner, String command) {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                list(tasks);
