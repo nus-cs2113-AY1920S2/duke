@@ -115,19 +115,19 @@ public class Duke {
                                     String s) {
         Task newTask;
         int currentTaskNumber = taskNumber;
-        switch (s.trim()){
+        switch (s.trim()) {
         case T:
-            newTask = new Todo(splitTaskDescriptionArray[0],splitTaskDescriptionArray[1]);
+            newTask = new Todo(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
             taskList.add(newTask);
             currentTaskNumber = currentTaskNumber + 1;
             break;
         case E:
-            newTask = new Event(splitTaskDescriptionArray[0],splitTaskDescriptionArray[1]);
+            newTask = new Event(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
             taskList.add(newTask);
             currentTaskNumber = currentTaskNumber + 1;
             break;
         case D:
-            newTask = new Deadline(splitTaskDescriptionArray[0],splitTaskDescriptionArray[1]);
+            newTask = new Deadline(splitTaskDescriptionArray[0], splitTaskDescriptionArray[1]);
             taskList.add(newTask);
             currentTaskNumber = currentTaskNumber + 1;
             break;
@@ -192,7 +192,11 @@ public class Duke {
             default:
                 break;
             }
-        } catch (InvalidTaskException | MissingDescriptonException | MissingNumberFieldException | MissingTimeFieldException | NumberFormatException m) {
+        } catch (InvalidTaskException
+                | MissingDescriptonException
+                | MissingNumberFieldException
+                | MissingTimeFieldException
+                | NumberFormatException m) {
             System.out.println("Exception occurred: " + m);
         }
         return currentNumberOfTasks;
@@ -203,17 +207,23 @@ public class Duke {
             MissingTimeFieldException {
 
         String nameOfTask = splitUserInput[0].toLowerCase();
-        if (!nameOfTask.equals(TODO) && !nameOfTask.equals(EVENT) &&
-                !nameOfTask.equals(DEADLINE) && !nameOfTask.equals(DONE) &&
-                !nameOfTask.equals(LIST) && !nameOfTask.equals(DELETE)) {
+        if (!nameOfTask.equals(TODO)
+                && !nameOfTask.equals(EVENT)
+                && !nameOfTask.equals(DEADLINE)
+                && !nameOfTask.equals(DONE)
+                && !nameOfTask.equals(LIST)
+                && !nameOfTask.equals(DELETE)) {
             throw new InvalidTaskException("Input is invalid. No such task");
         } else {
             String[] splitArray = splitTaskDescription(userInput);
-            if ((nameOfTask.toLowerCase().equals(DONE) || nameOfTask.toLowerCase().equals(DELETE)) && splitUserInput.length == 1) {
+            if ((nameOfTask.toLowerCase().equals(DONE)
+                    || nameOfTask.toLowerCase().equals(DELETE)) && splitUserInput.length == 1) {
                 throw new MissingNumberFieldException(nameOfTask.toUpperCase() + "'s number field is empty!");
             } else if (isDescriptionBlank(splitArray) && !nameOfTask.equals(LIST)) {
                 throw new MissingDescriptonException("Missing description!");
-            } else if (nameOfTask.equals(TODO) || nameOfTask.equals(EVENT) || nameOfTask.toLowerCase().equals(DEADLINE)) {
+            } else if (nameOfTask.equals(TODO)
+                    || nameOfTask.equals(EVENT)
+                    || nameOfTask.toLowerCase().equals(DEADLINE)) {
                 if (splitArray[2].equals("yes")) {
                     String obtainedTime = splitArray[1];
                     String[] timeCheck = obtainedTime.split(" ", 2);
@@ -300,8 +310,13 @@ public class Duke {
                 taskList.remove(taskListNumber - 1);
                 currentNumberOfTasks = currentNumberOfTasks - 1;
                 System.out.println(
-                        "Noted. I removed this task: " + System.lineSeparator() + removedTask + System.lineSeparator() +
-                                "Now you have " + currentNumberOfTasks + " tasks in the list");
+                        "Noted. I removed this task: "
+                                + System.lineSeparator()
+                                + removedTask
+                                + System.lineSeparator()
+                                + "Now you have "
+                                + currentNumberOfTasks
+                                + " tasks in the list");
             }
             return currentNumberOfTasks;
         } catch (NumberFormatException e) {
@@ -328,8 +343,14 @@ public class Duke {
                 FileWriter fw = new FileWriter(f);
                 for (int i = 0; i < numberOfTasks; i++) {
                     String[] getTaskInfo = taskList.get(i).getTaskInfo();
-                    fw.write(getTaskInfo[0] + " | " + getTaskInfo[1] + " | " + getTaskInfo[2] + " | " + getTaskInfo[3] +
-                            System.lineSeparator());
+                    fw.write(getTaskInfo[0]
+                            + " | "
+                            + getTaskInfo[1]
+                            + " | "
+                            + getTaskInfo[2]
+                            + " | "
+                            + getTaskInfo[3]
+                            + System.lineSeparator());
                 }
                 fw.close();
 
@@ -374,7 +395,6 @@ public class Duke {
     private static void closeScanner(Scanner myInput) {
         myInput.close();
     }
-
 
 
 }
