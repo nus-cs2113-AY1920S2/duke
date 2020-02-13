@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeIndexException;
+import duke.exception.DukeNullException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -33,7 +43,7 @@ public class Duke {
                 case "event":
                     taskCount = eventCommand(tasks, taskCount, string);
                     break;
-                default: //add Task into List
+                default: //add duke.task.Task into List
                     throw new DukeNullException("     \u2639 OOPS!!! Command does not exist.");
                 }
             } catch (DukeArgumentException e) {
@@ -148,7 +158,7 @@ public class Duke {
 
     public static void greetUser() {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm Duke");
+        System.out.println("    Hello! I'm duke.Duke");
         commandList();
         System.out.println("    What can I do for you?");
         System.out.println("    ____________________________________________________________");
