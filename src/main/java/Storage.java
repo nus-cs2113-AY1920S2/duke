@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Storage{
+public class Storage {
+
     protected File file;
     protected String filePath;
     protected ArrayList <Task> tasks;
@@ -30,26 +31,30 @@ public class Storage{
         }
     }
 
+    public void addTask(String input, ArrayList <Task> tasksList) {
+        String [] parameters = input.split(",");
+        String type = parameters[0];
+        boolean isDone = Boolean.parseBoolean(parameters[1]);
+        String description = parameters[2];
+        if (type.equals("[T]")) {
+            ToDo existingToDo = new ToDo(description, isDone);
+            tasksList.add(existingToDo);
+        } else if (type.equals("[E]")) {
+            String eventDetails = parameters[3];
+            Event existingEvent = new Event(description, isDone, eventDetails);
+            tasksList.add(existingEvent);
+
+        } else {
+            String by = parameters[3];
+            Deadline existingDeadline = new Deadline(description, isDone, by);
+            tasksList.add(existingDeadline);
+        }
+    }
+
     public void restoreArray(Scanner fileReader, ArrayList <Task> tasksList) {
         while (fileReader.hasNextLine()) {
             String input = fileReader.nextLine();
-            String [] parameters = input.split(",");
-            String type = parameters[0];
-            boolean isDone = Boolean.parseBoolean(parameters[1]);
-            String description = parameters[2];
-            if (type.equals("[T]")) {
-                ToDo existingToDo = new ToDo(description, isDone);
-                tasksList.add(existingToDo);
-            } else if (type.equals("[E]")) {
-                String eventDetails = parameters[3];
-                Event existingEvent = new Event(description, isDone, eventDetails);
-                tasksList.add(existingEvent);
-
-            } else {
-                String by = parameters[3];
-                Deadline existingDeadline = new Deadline(description, isDone, by);
-                tasksList.add(existingDeadline);
-            }
+            addTask(input, tasksList);
         }
     }
 

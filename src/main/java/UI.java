@@ -1,4 +1,5 @@
 public class UI {
+    
     protected String leavingMessage;
     protected String boundary;
     protected String firstGreetingMessage;
@@ -7,10 +8,10 @@ public class UI {
 
     public UI() {
         leavingMessage = " Bye! Duke is now a freeeeee elf again!!!!";
-        boundary = " ======================================================================";
+        boundary = "===========================================================================================";
         firstGreetingMessage = " Hi! I am Duke, your next doooooorrrr friendly elf.....I mean bot";
         secondGreetingMessage = " How may Dukeeeeee help you today?";
-        line = "_______________________________________________________________________";
+        line = "____________________________________________________________________________________________";
     }
     public void printLine() {
         System.out.println(boundary);

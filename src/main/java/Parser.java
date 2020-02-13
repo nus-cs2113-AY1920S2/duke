@@ -1,16 +1,11 @@
 public class Parser {
+
     protected String input;
+    protected String firstWord;
 
     public Parser() {
         this.input = null;
-    }
-
-    public void updateInput(String input) {
-        this.input = input;
-    }
-
-    String getInput() {
-        return input;
+        this.firstWord = null;
     }
 
     public String getFirstWord() {
@@ -20,43 +15,36 @@ public class Parser {
         return firstWord;
     }
 
+    public void updateInput(String input) {
+        this.input = input;
+        this.firstWord = getFirstWord();
+    }
+
     public boolean isBye() {
-        String firstWord = getFirstWord();
         return firstWord.equals("bye");
     }
 
     public boolean isList() {
-        String firstWord = getFirstWord();
         return firstWord.equals("list");
     }
 
     public boolean isDone() {
-        String firsWord = getFirstWord();
-        return firsWord.equals("done");
+        return firstWord.equals("done");
     }
 
     public boolean isToDo() {
-        String firstWord = getFirstWord();
         return firstWord.equals("todo");
     }
 
     public boolean isEvent() {
-        String firstWord = getFirstWord();
         return firstWord.equals("event");
     }
 
     public boolean isDeadline() {
-        String firstWord = getFirstWord();
         return firstWord.equals("deadline");
     }
 
     public boolean isDelete() {
-        String firstWord = getFirstWord();
         return firstWord.equals("delete");
-    }
-
-    public boolean isSave() {
-        String firstWord = getFirstWord();
-        return firstWord.equals("save");
     }
 }

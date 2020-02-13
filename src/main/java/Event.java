@@ -1,6 +1,5 @@
 public class Event extends Task {
-    protected String description;
-    protected boolean isDone;
+
     protected String eventDetails;
 
     public Event(String description, String eventDetails) {
@@ -19,7 +18,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E][ " + super.getStatusIcon() + " ] " + super.getDescription() + "(At: " + getEventDetails() + ")";
+        return "[E][ " + super.getStatusIcon() + " ] " + super.getDescription() + "(at: " + getEventDetails() + ")";
     }
 
     @Override

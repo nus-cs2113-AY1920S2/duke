@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+
 public class TaskList {
+
     protected Storage storage;
     protected Event newEvent;
     protected ToDo newToDo;
@@ -11,14 +13,6 @@ public class TaskList {
         storage = new Storage();
         dukeExceptions = new DukeExceptions();
         this.tasks = new ArrayList<Task>();
-    }
-
-    public ArrayList<Task> getArray() {
-        ArrayList<Task> returnedArray = new ArrayList<Task>();
-        for (Task task : tasks) {
-            returnedArray.add(task);
-        }
-        return returnedArray;
     }
 
     public int getIndex (String input, int position) {

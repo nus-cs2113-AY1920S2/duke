@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -33,6 +34,6 @@ public class Task {
     }
 
     public String storeText() {
-        return isDone + "|" + getDescription();
+        return isDone + "," + getDescription();
     }
 }

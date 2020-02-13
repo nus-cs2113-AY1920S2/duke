@@ -6,12 +6,14 @@ public class Duke {
     private Parser parser;
     private TaskList tasks;
     private Storage storage;
+    private DukeExceptions dukeExceptions;
 
     public Duke() {
         userInterface = new UI();
         parser = new Parser();
         tasks = new TaskList();
         storage = new Storage();
+        dukeExceptions = new DukeExceptions();
     }
 
     private void run() {
@@ -39,10 +41,8 @@ public class Duke {
                 tasks.getDeadlineExceptions(input);
             } else if(parser.isDelete()) {
                 tasks.getDeleteExceptions(input);
-            } else if (parser.isSave()) {
-                System.out.println("SAVING...");
             } else {
-                System.out.println(" Duke does not understand your command! Can you repeat again?");
+                dukeExceptions.printInvalidInput();
             }
             userInterface.printLine();
         }
