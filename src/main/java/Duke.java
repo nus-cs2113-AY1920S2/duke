@@ -14,6 +14,7 @@ public class Duke {
         String taskDescriptionBy;
         String taskDescriptionAt;
         TaskList tasks = new TaskList();
+        int indexOfTasks;
 
         do {
             input = reader.nextLine();
@@ -58,9 +59,17 @@ public class Duke {
                 case "done":
                     // mark a task as done
                     System.out.println("\tNice! I've marked this task as done:");
-                    int indexOfTasks = Integer.parseInt(command[1]) - 1;
+                    indexOfTasks = Integer.parseInt(command[1]) - 1;
                     tasks.setDoneByIndex(indexOfTasks);
                     System.out.println("\t" + tasks.getByIndex(indexOfTasks));
+                    break;
+                case "delete":
+                    System.out.println("\tNoted. I've removed this task:");
+                    indexOfTasks = Integer.parseInt(command[1]) - 1;
+                    Task removedTask = tasks.getByIndex(indexOfTasks);
+                    tasks.removeByIndex(indexOfTasks);
+                    System.out.println("\t  " + removedTask);
+                    tasks.printSize();
                     break;
                 default:
                     throw new IllegalArgumentException();
