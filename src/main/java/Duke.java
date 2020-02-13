@@ -50,6 +50,10 @@ public class Duke {
                 "|  | |\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Sorry I don't understand that command. Here is the list of commands available\n"
+                + "\"bye\": to exit\n\"list\": to show the list of all your tasks\n\"todo\": add a todo\n" +
+                "\"deadline\": add a deadline\n\"event\": add an event\n" +
+                "\"done\": check off a task on your list");
         System.out.println("OIOIOIO");
     }
 
