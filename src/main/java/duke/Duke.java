@@ -89,6 +89,10 @@ public class Duke {
             taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
             formatPrint("Marked task as done.");
             break;
+        case "delete":
+            String taskToRemove = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
+            taskList.remove(Integer.parseInt(taskToRemove) - 1);
+            break;
         case "list":
             printList();
             break;
