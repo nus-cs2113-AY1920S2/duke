@@ -23,7 +23,7 @@ public class Duke {
         switch (command) {
         case EXIT_COMMAND:
             bye();
-            TaskMgr.saveDataToFile(DATA_FILE_PATH);
+            TaskMgr.saveDataToFile();
             break;
         case LIST_COMMAND:
             TaskMgr.listTasks();
@@ -109,7 +109,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskManager TaskMgr = new TaskManager();
+        TaskManager TaskMgr = new TaskManager(DATA_FILE_PATH);
 
         greet();
 
