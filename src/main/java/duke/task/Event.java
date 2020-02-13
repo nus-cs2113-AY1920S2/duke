@@ -7,6 +7,11 @@ public class Event extends Task {
         return eventTime;
     }
 
+    @Override
+    public String getType() {
+        return "E";
+    }
+
     public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
     }
@@ -14,6 +19,17 @@ public class Event extends Task {
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
+    }
+
+    public Event(boolean isDone, String description, String eventTime) {
+        super(isDone, description);
+        this.eventTime = eventTime;
+    }
+
+    @Override
+    public String toData(int taskId) {
+        String dataLine = taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription() + "," + this.getEventTime();
+        return dataLine;
     }
 
     @Override

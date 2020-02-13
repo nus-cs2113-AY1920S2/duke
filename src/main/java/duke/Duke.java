@@ -9,16 +9,28 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;  // User input
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.util.stream.Stream;
 
 public class Duke {
 
+    static String dataFilePath = "resources/data.csv";
+    static File dataFile = new File(dataFilePath);
     static List<Task> taskList = new ArrayList<Task>();
 
     private static void intro()
     {
+        loadFile();
         // Logo generated using http://patorjk.com/software/taag/#p=display&f=Fire%20Font-s&t=NUSBOT
         String logo = "    )       (           )          \n"
                 + " ( /(       )\\ )  (  ( /(   *   )  \n"
@@ -31,6 +43,101 @@ public class Duke {
                 + "                                   \n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Type 'bye' to leave at any time.");
+    }
+
+    private static void loadFile() {
+
+        // Create data file if it does not exist already
+        if (!dataFile.exists()) {
+            try  {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                formatPrint("Error loading data file.");
+            }
+            return;
+        }
+
+        try {
+            Scanner dataScanner = new Scanner(dataFile);
+            while (dataScanner.hasNext()) {
+                parseDataLine(dataScanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            formatPrint("Error: file not found.");
+        }
+    }
+
+    private static void parseDataLine(String s) {
+        List<String> strings = Arrays.asList(s.split(","));
+
+        boolean isDone = Boolean.parseBoolean(strings.get(2));
+
+        switch (strings.get(1)) {
+        case "T":
+            Todo t = new Todo(isDone, strings.get(3));
+            taskList.add(t);
+            break;
+        case "D":
+            Deadline d = new Deadline(isDone, strings.get(3), strings.get(4));
+            taskList.add(d);
+            break;
+        case "E":
+            Event e = new Event(isDone, strings.get(3), strings.get(4));
+            taskList.add(e);
+            break;
+        }
+    }
+
+    private static void writeToFile(String s) throws IOException {
+        FileWriter fw = new FileWriter(dataFilePath, true);
+        fw.write(s + System.lineSeparator());
+        fw.close();
+    }
+
+    private static void addTask(Task t) {
+        taskList.add(t); // Add to running taskList
+
+        int taskId = taskList.size()-1; // Get ID of task in running taskList
+
+        // Convert to comma-separated information
+        // duke.csv file format:
+        // taskID, taskType, taskIsDone, taskDesc, taskDate
+        String dataLine = t.toData(taskId);
+
+        // Write to data file
+        try {
+            writeToFile(dataLine);
+        } catch (IOException e) {
+            formatPrint("Error saving task to data file.");
+        }
+        formatPrint("Added task: " + t);
+    }
+
+    private static void taskDone(int taskId) {
+        taskList.get(taskId).markAsDone(); // Mark task with that ID as done
+        formatPrint("Marked task as done.");
+
+        try {
+            replaceLine(taskId, taskList.get(taskId).toData(taskId));
+        } catch (IOException e) {
+            formatPrint("Error updating line in data file.");
+        }
+    }
+
+    private static void replaceLine(int lineNumber, String newString) throws IOException {
+        // Read file into list of strings, where each string is a line in the file
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
+
+        // Iterate through the lines
+        for (int i = 0; i < fileContent.size(); i++) {
+            // If the current line matches the taskId
+            if (fileContent.get(i).startsWith(String.valueOf(lineNumber))) {
+                // Replace it with the new task string
+                fileContent.set(i, newString);
+                break;
+            }
+        }
+            Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
     }
 
     private static void formatPrint(String input) {
@@ -54,8 +161,7 @@ public class Duke {
             if (userParams.trim().isEmpty()) {
                 throw new NoDescException();
             }
-            taskList.add(new Todo(userParams));
-            formatPrint("Added todo:" + userParams);
+            addTask(new Todo(userParams.trim()));
             break;
         case "deadline":
             // Fallthrough
@@ -77,18 +183,15 @@ public class Duke {
                     throw new NoDateException();
                 }
             if (userCommand.equals("deadline")) {
-                taskList.add(new Deadline(desc, date));
-                formatPrint("Added task: " + desc + "| deadline: " + date);
+                addTask(new Deadline(desc.trim(), date.trim()));
             } else {
-                taskList.add(new Event(desc, date));
-                formatPrint("Added event: " + desc + "| on/at: " + date);
+                addTask(new Event(desc.trim(), date.trim()));
             }
             break;
         case "done":
-            int idTaskDone;
-            String taskId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
-            taskList.get(Integer.parseInt(taskId) - 1).markAsDone(); // Mark task with that ID as done
-            formatPrint("Marked task as done.");
+            String stringId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
+            int taskId = Integer.parseInt(stringId) - 1;
+            taskDone(taskId);
             break;
         case "delete":
             int idTaskDelete;

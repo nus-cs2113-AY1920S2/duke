@@ -4,6 +4,9 @@
 # Text-UI-Testing files
 text-ui-test/ACTUAL.TXT
 
+# Data files
+resources/data.csv
+
 # IDEA files
 /.idea/
 /out/
@@ -12,7 +15,7 @@ text-ui-test/ACTUAL.TXT
 # Gradle build files
 /.gradle/
 /build/
-src/main/resources/docs/
+resources/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
