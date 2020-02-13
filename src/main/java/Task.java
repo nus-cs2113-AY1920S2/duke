@@ -1,4 +1,6 @@
-public class Task {
+public abstract class Task {
+    public static final String TICK = "✓";
+    public static final String CROSS = "✘";
     protected String description;
     protected boolean isDone;
 
@@ -12,7 +14,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 
     public String getDescription() {
@@ -32,8 +34,6 @@ public class Task {
         System.out.println("\nYou've got " + taskCounter + " task(s) in the list!\n");
     }
 
-    public void printListDetails(int taskCounter) {
-        System.out.println("["+ getTaskType() + "][" + getStatusIcon() + "] " + taskCounter + ". " + getDescription());
-    }
+    public abstract void printListDetails(int count);
 
 }
