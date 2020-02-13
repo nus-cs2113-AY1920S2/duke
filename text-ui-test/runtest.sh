@@ -19,6 +19,7 @@ then
     exit 1
 fi
 
+# Solution below adapted from: https://apple.stackexchange.com/questions/15318/using-terminal-to-copy-a-file-to-clipboard
 cat ../data/chattychatbotstarttemplate.txt | pbcopy
 pbpaste > ../data/chattychatbot.txt
 
