@@ -26,4 +26,7 @@ public class Constants {
     public static final String FILE_FIELD_SEPARATOR_FOR_READ = "\\|";
     public static final String FILE_FIELD_SEPARATOR_FOR_WRITE = "|";
     public static final String NEW_LINE = "\n";
+
+    public static final int MINIMUM_FIELD_NUM_FOR_TASK = 3;
+    public static final int MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE = 4;
 }

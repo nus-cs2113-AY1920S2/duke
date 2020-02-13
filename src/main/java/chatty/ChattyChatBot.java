@@ -29,6 +29,8 @@ import static chatty.util.Constants.FILE_FIELD_SEPARATOR_FOR_READ;
 import static chatty.util.Constants.FILE_NAME;
 import static chatty.util.Constants.LINE_BREAK;
 import static chatty.util.Constants.LIST_STRING;
+import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_TASK;
+import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE;
 import static chatty.util.Constants.NEW_LINE;
 import static chatty.util.Constants.SPACE_SEPARATOR;
 import static chatty.util.Constants.TASK_SUMMARY_FIRST_HALF;
@@ -138,10 +140,7 @@ public class ChattyChatBot {
     private static void addToDoTask(List<Task> tasks, String description) {
         ToDo newToDoTask = new ToDo(description.trim());
         tasks.add(newToDoTask);
-
-        System.out.println(ADDED_TASK_CONFIRMATION);
-        System.out.println(newToDoTask);
-        System.out.println(TASK_SUMMARY_FIRST_HALF + tasks.size() + TASK_SUMMARY_SECOND_HALF);
+        confirmAddTask(tasks, newToDoTask);
     }
 
     private static void addDeadlineTask(List<Task> tasks, String inputStr) throws ChattyChatBotException {
@@ -149,10 +148,7 @@ public class ChattyChatBot {
             String[] array = inputStr.split(BY_STRING);
             Deadline newDeadlineTask = new Deadline(array[0].trim(), array[1].trim());
             tasks.add(newDeadlineTask);
-
-            System.out.println(ADDED_TASK_CONFIRMATION);
-            System.out.println(newDeadlineTask);
-            System.out.println(TASK_SUMMARY_FIRST_HALF + tasks.size() + TASK_SUMMARY_SECOND_HALF);
+            confirmAddTask(tasks, newDeadlineTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChattyChatBotException();
         }
@@ -163,13 +159,16 @@ public class ChattyChatBot {
             String[] array = inputStr.split(AT_STRING);
             Event newEventTask = new Event(array[0].trim(), array[1].trim());
             tasks.add(newEventTask);
-
-            System.out.println(ADDED_TASK_CONFIRMATION);
-            System.out.println(newEventTask);
-            System.out.println(TASK_SUMMARY_FIRST_HALF + tasks.size() + TASK_SUMMARY_SECOND_HALF);
+            confirmAddTask(tasks, newEventTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChattyChatBotException();
         }
+    }
+
+    private static void confirmAddTask(List<Task> tasks, Task newTask) {
+        System.out.println(ADDED_TASK_CONFIRMATION);
+        System.out.println(newTask);
+        System.out.println(TASK_SUMMARY_FIRST_HALF + tasks.size() + TASK_SUMMARY_SECOND_HALF);
     }
 
     private static void deleteTask(List<Task> tasks, String indexStr) {
@@ -237,14 +236,23 @@ public class ChattyChatBot {
 
     private static Optional<Task> stringToTask(String taskStr) {
         String[] fields = taskStr.split(FILE_FIELD_SEPARATOR_FOR_READ);
-        if (fields.length < 3) {
+        if (fields.length < MINIMUM_FIELD_NUM_FOR_TASK) {
             System.out.println("Invalid line in input file:");
             System.out.println(taskStr);
             return Optional.empty();
         }
 
         String taskType = fields[0];
-        boolean isDone = fields[1].equals("true");
+        boolean isDone;
+        if (fields[1].equals("true")) {
+            isDone = true;
+        } else if (fields[1].equals("false")) {
+            isDone = false;
+        } else {
+            System.out.println("Wrong format - please use true or false to mark task as done or not done");
+            System.out.println(taskStr);
+            return Optional.empty();
+        }
         String description = fields[2];
         Task task;
 
@@ -253,7 +261,7 @@ public class ChattyChatBot {
             task = new ToDo(description);
             break;
         case "E":
-            if (fields.length < 4) {
+            if (fields.length < MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE) {
                 System.out.println("Wrong format for Event in input file:");
                 System.out.println(taskStr);
                 return Optional.empty();
@@ -262,7 +270,7 @@ public class ChattyChatBot {
             task = new Event(description, eventPeriod);
             break;
         case "D":
-            if (fields.length < 4) {
+            if (fields.length < MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE) {
                 System.out.println("Wrong format for Deadline in input file:");
                 System.out.println(taskStr);
                 return Optional.empty();
