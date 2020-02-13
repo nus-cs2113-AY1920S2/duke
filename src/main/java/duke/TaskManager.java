@@ -3,7 +3,6 @@ package duke;
 import duke.tasks.exceptions.BadTaskFormatException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.exceptions.InvalidKeywordException;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
@@ -17,44 +16,43 @@ public class TaskManager {
     }
 
     public void executeUserInput(String userInput) {
-        String command;
-        if (userInput.length() == 0) {
+        Command command;
+        try {
+            command = new Command(userInput);
+        } catch (InvalidKeywordException e) {
+            Ui.printPretty(e.getMessage());
             return;
-        } else if (userInput.contains(" ")) {
-            command = userInput.substring(0, userInput.indexOf(" "));
-        } else {
-            command = userInput;
         }
-
-        if (command.equals("list")) {
-            listTasks();
-        } else if (command.equals("done")) {
-            try {
-                markAsDone(userInput);
-            } catch (BadDoneFormatException e) {
-                Ui.printPretty(e.getMessage());
-            }
-        } else {
-            try {
-               Task newTask = getTaskFromUserInput(command, userInput);
-               addTask(newTask);
-            } catch (BadTaskFormatException | InvalidKeywordException e){
-                Ui.printPretty(e.getMessage());
-            }
-        }
+        executeCommand(command);
     }
 
-    protected Task getTaskFromUserInput (String taskType, String userInput) throws InvalidKeywordException,
-            BadTaskFormatException {
-        switch(taskType) {
-        case "todo":
-            return new ToDo(userInput);
-        case "deadline":
-            return new Deadline(userInput);
-        case "event":
-            return new Event(userInput);
-        default:
-            throw new InvalidKeywordException(taskType);
+    protected void executeCommand(Command command) {
+        try {
+            switch (command.getKeyword()) {
+            case LIST:
+                listTasks();
+                break;
+            case DONE:
+                markAsDone(command);
+                break;
+            case DELETE:
+                Ui.printPretty("coming soon...");
+                break;
+            case DEADLINE:
+                addTask(new Deadline(command));
+                break;
+            case EVENT:
+                addTask(new Event(command));
+                break;
+            case TODO:
+                addTask(new ToDo(command));
+                break;
+            default:
+                // Should never reach default case b/c check for invalid keyword when creating command object
+                break;
+            }
+        } catch (BadDoneFormatException | BadTaskFormatException e) {
+            Ui.printPretty(e.getMessage());
         }
     }
 
@@ -74,28 +72,27 @@ public class TaskManager {
         Ui.printPretty(message);
     }
 
-    protected void markAsDone(String userInput) throws BadDoneFormatException{
-        if (!userInput.contains(" ")) {
-            throw new BadDoneFormatException("no space");
-        } else if (userInput.indexOf(" ") + 1 > userInput.length() - 1) {
-            throw new BadDoneFormatException("no task specified");
+    protected void markAsDone(Command command) throws BadDoneFormatException {
+        String[] tokens = command.getTokens();
+        if (tokens.length <= 1) {
+            throw new BadDoneFormatException("Specify a task by entering a task number");
+        } else if (tokens.length > 2) {
+            throw new BadDoneFormatException("Too many tokens");
         }
 
         int taskIndex;
-        String taskNumber;
         try {
-            taskNumber = userInput.substring(userInput.indexOf(" ") + 1);
-            taskIndex = Integer.parseInt(taskNumber) - 1;
+            taskIndex = Integer.parseInt(tokens[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new BadDoneFormatException("task number invalid");
+            throw new BadDoneFormatException("Task number is invalid");
         }
 
         if (taskIndex > tasks.size() - 1 || taskIndex < 0) {
-            throw new BadDoneFormatException("task number invalid");
+            throw new BadDoneFormatException("Task number is invalid");
         }
 
         Task t = tasks.get(taskIndex);
         t.setIsDone(true);
-        Ui.printPretty("Task " + taskNumber + " has been marked as done\n" + t.toString());
+        Ui.printPretty("Task " + (taskIndex + 1) + " has been marked as done\n" + t.toString());
     }
 }

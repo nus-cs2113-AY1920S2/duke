@@ -1,20 +1,35 @@
 package duke.tasks;
 
+import duke.Command;
 import duke.tasks.exceptions.BadDeadlineFormatException;
+
+import java.util.Arrays;
 
 public class Deadline extends Task {
     protected String dueDateTime;
 
-    public Deadline(String userInput) throws BadDeadlineFormatException {
-        if (!userInput.contains(" /by ")) {
-            throw new BadDeadlineFormatException("input does not contain \" /by \"");
-        } else if (userInput.indexOf(" ") + 1 > userInput.indexOf(" /by ")) {
-            throw new BadDeadlineFormatException("input does not contain a description");
-        } else if (userInput.indexOf(" /by ") + 5 > userInput.length() - 1) {
-            throw new BadDeadlineFormatException("input does not contain a due date/time");
+    public Deadline(Command command) throws BadDeadlineFormatException {
+        String[] tokens = command.getTokens();
+        if (!Arrays.asList(tokens).contains("/by")) {
+            throw new BadDeadlineFormatException("Input does not contain \" /by \"");
         }
-        this.description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /by "));
-        this.dueDateTime = userInput.substring(userInput.indexOf(" /by ") + 5);
+
+        int byIndex = -1;
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].equals("/by")) {
+                byIndex = i;
+                break;
+            }
+        }
+
+        if (byIndex == tokens.length - 1) {
+            throw new BadDeadlineFormatException("Input does not contain a due date");
+        } else if (byIndex == 1) {
+            throw new BadDeadlineFormatException("Input does not contain a description");
+        }
+
+        this.description = String.join(" ", Arrays.copyOfRange(tokens, 1, byIndex));
+        this.dueDateTime = String.join(" ", Arrays.copyOfRange(tokens, byIndex + 1, tokens.length));
     }
 
     @Override

@@ -1,20 +1,35 @@
 package duke.tasks;
 
+import duke.Command;
 import duke.tasks.exceptions.BadEventFormatException;
+
+import java.util.Arrays;
 
 public class Event extends Task {
     protected String startEndDateTime;
 
-    public Event(String userInput) throws BadEventFormatException {
-        if (!userInput.contains(" /at ")) {
-            throw new BadEventFormatException("input does not contain \" /at \"");
-        } else if (userInput.indexOf(" ") + 1 > userInput.indexOf(" /at ")) {
-            throw new BadEventFormatException("input does not contain a description");
-        } else if (userInput.indexOf(" /at ") + 5 > userInput.length() - 1) {
-            throw new BadEventFormatException("input does not contain a date/time");
+    public Event(Command command) throws BadEventFormatException {
+        String[] tokens = command.getTokens();
+        if (!Arrays.asList(tokens).contains("/at")) {
+            throw new BadEventFormatException("Input does not contain \" /at \"");
         }
-        this.description = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf(" /at "));
-        this.startEndDateTime = userInput.substring(userInput.indexOf(" /at ") + 5);
+
+        int atIndex = -1;
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].equals("/at")) {
+                atIndex = i;
+                break;
+            }
+        }
+
+        if (atIndex == tokens.length - 1) {
+            throw new BadEventFormatException("Input does not contain a date/time");
+        } else if (atIndex == 1) {
+            throw new BadEventFormatException("Input does not contain a description");
+        }
+
+        this.description = String.join(" ", Arrays.copyOfRange(tokens, 1, atIndex));
+        this.startEndDateTime = String.join(" ", Arrays.copyOfRange(tokens, atIndex + 1, tokens.length));
     }
 
     @Override

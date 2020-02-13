@@ -1,16 +1,18 @@
 package duke.tasks;
 
+import duke.Command;
 import duke.tasks.exceptions.BadToDoFormatException;
 
+import java.util.Arrays;
+
 public class ToDo extends Task {
-    public ToDo(String userInput) throws BadToDoFormatException {
-        if (!userInput.contains(" ")) {
-            throw new BadToDoFormatException("input does not contain a space");
-        } else if (userInput.indexOf(" ") + 1 > userInput.length() - 1) {
-            throw new BadToDoFormatException("input does not contain a description");
+    public ToDo(Command command) throws BadToDoFormatException {
+        String[] tokens = command.getTokens();
+        if (tokens.length < 2) {
+            throw new BadToDoFormatException("Input does not contain a description");
         }
 
-        this.description = userInput.substring(userInput.indexOf(" ") + 1);
+        this.description = String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length));
     }
 
     @Override
