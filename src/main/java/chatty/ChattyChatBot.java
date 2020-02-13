@@ -10,43 +10,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static chatty.util.Constants.ADDED_TASK_CONFIRMATION;
-import static chatty.util.Constants.AT_STRING;
-import static chatty.util.Constants.BOT_NAME;
-import static chatty.util.Constants.BYE_STRING;
-import static chatty.util.Constants.BY_STRING;
-import static chatty.util.Constants.DEADLINE_STRING;
-import static chatty.util.Constants.DELETE_STRING;
-import static chatty.util.Constants.DONE_STRING;
-import static chatty.util.Constants.DOT_CHARACTER;
-import static chatty.util.Constants.EVENT_STRING;
-import static chatty.util.Constants.FILE_FIELD_SEPARATOR_FOR_READ;
-import static chatty.util.Constants.FILE_NAME;
-import static chatty.util.Constants.LINE_BREAK;
-import static chatty.util.Constants.LIST_STRING;
-import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_TASK;
-import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE;
-import static chatty.util.Constants.NEW_LINE;
-import static chatty.util.Constants.SPACE_SEPARATOR;
-import static chatty.util.Constants.TASK_SUMMARY_FIRST_HALF;
-import static chatty.util.Constants.TASK_SUMMARY_SECOND_HALF;
-import static chatty.util.Constants.TODO_STRING;
+import static chatty.util.Constants.*;
 
 public class ChattyChatBot {
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static String filePath;
 
     public static void main(String[] args) {
         sendWelcomeMessage();
 
         List<Task> tasks = new ArrayList<>();
 
-        readDataFromFile(FILE_NAME, tasks);
+        readDataFromFile(tasks);
         System.out.println(LINE_BREAK);
 
         String userInput;
@@ -104,7 +87,7 @@ public class ChattyChatBot {
                 }
                 break;
             case BYE_STRING:
-                saveDataToFile(FILE_NAME, tasks);
+                saveDataToFile(tasks);
                 sendByeMessage();
                 break;
             default:
@@ -203,12 +186,18 @@ public class ChattyChatBot {
         System.out.println("See you again soon!");
     }
 
-    private static void readDataFromFile(String path, List<Task> tasks) {
+    private static void readDataFromFile(List<Task> tasks) {
         try {
+            System.out.println("May I know where your file for storing tasks is located?");
+            filePath = SCANNER.nextLine().trim();
+            if (Files.notExists(Paths.get(filePath))) {
+                System.out.println("The path you specify is not valid, using default file path...");
+                filePath = DEFAULT_FILE_PATH;
+            }
             System.out.println("Reading tasks from disk...");
             // Solution below adapted from: https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics
             // .html#w6-3-java-file-access
-            File file = new File(path);
+            File file = new File(filePath);
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String taskStr = fileScanner.nextLine();
@@ -221,9 +210,9 @@ public class ChattyChatBot {
         }
     }
 
-    private static void saveDataToFile(String path, List<Task> tasks) {
+    private static void saveDataToFile(List<Task> tasks) {
         try {
-            FileWriter fileWriter = new FileWriter(path);
+            FileWriter fileWriter = new FileWriter(filePath);
             for (Task task : tasks) {
                 fileWriter.write(task.getFileString() + NEW_LINE);
             }
