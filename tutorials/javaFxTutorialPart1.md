@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # JavaFX Tutorial Part 1 – Introduction
 
 ## JavaFX lifecycle of an application
