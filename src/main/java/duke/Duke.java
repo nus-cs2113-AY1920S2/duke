@@ -29,7 +29,8 @@ public class Duke {
         System.out.println(CUTTING_LINE);
         System.out.println("\tHere are the tasks in your list:");
         for (Task task: tasks) {
-            System.out.println("\t" + task.getID() + "." + task.toString());
+            int taskID = tasks.indexOf(task) + 1;
+            System.out.println("\t" + taskID + "." + task.toString());
         }
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
@@ -110,9 +111,9 @@ public class Duke {
 
     public static void printAddedTask(Task newTask) {
         System.out.println(CUTTING_LINE);
-        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\tGot it. I've added this task:");
         System.out.println("\t" + newTask.toString());
-        System.out.printf("\tNow you have %d task(s) in the list\n", Task.getNumberOfTasks());
+        System.out.printf("\tNow you have %d task(s) in the list\n", tasks.size());
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
@@ -121,7 +122,7 @@ public class Duke {
         int taskID = getIdFromCommand(command);
 
         /* Exit if enter a wrong task id */
-        boolean isWrongID = taskID > Task.getNumberOfTasks() || taskID < 1;
+        boolean isWrongID = taskID > tasks.size() || taskID < 1;
         if (isWrongID){
             printIdOutOfRangeError();
             return;
@@ -134,7 +135,7 @@ public class Duke {
 
     public static void printMarkedTask(Task markedTask) {
         System.out.println(CUTTING_LINE);
-        System.out.println("\tI've marked this task as done: ");
+        System.out.println("\tI've marked this task as done:");
         System.out.println("\t" + markedTask.getStatusIcon() + markedTask.getName());
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
@@ -161,6 +162,29 @@ public class Duke {
     public static void echo(String command){
         System.out.println(CUTTING_LINE);
         System.out.println("\t" + command);
+        System.out.println(CUTTING_LINE);
+        System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+    }
+
+    public static void delete(String command, ArrayList<Task> tasks){
+        int taskID = getIdFromCommand(command);
+
+        /* Exit if enter a wrong task id */
+        boolean isWrongID = taskID > tasks.size() || taskID < 1;
+        if (isWrongID){
+            printIdOutOfRangeError();
+            return;
+        }
+        printDeleteTask(tasks.get(taskID-1));
+        tasks.remove(taskID-1);
+    }
+
+    public static void printDeleteTask(Task task){
+        System.out.println(CUTTING_LINE);
+        System.out.println("\tNoted: I've removed this task:");
+        System.out.println("\t" + task.getStatusIcon() + task.getName());
+        int numberOfRemainedTasks = tasks.size()-1;
+        System.out.printf("\tNow you have %d task(s) in the list.\n", numberOfRemainedTasks);
         System.out.println(CUTTING_LINE);
         System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
@@ -198,6 +222,8 @@ public class Duke {
                list(tasks);
             } else if (command.contains("done")) {
                 markAsDone(command, tasks);
+            } else if (command.contains("delete")) {
+                delete(command, tasks);
             } else {
                 addTask(command, tasks);
             }

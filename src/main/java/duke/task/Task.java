@@ -2,10 +2,8 @@ package duke.task;
 
 public class Task {
     protected String name;
-    protected int id;
     protected String taskType;
     protected boolean isDone;
-    private static int numberOfTasks = 0;
 
     public Task(){
         this("");
@@ -13,21 +11,15 @@ public class Task {
 
     public Task(String name){
         setName(name);
-        id = numberOfTasks;
         this.isDone = false;
     }
 
     public void setName(String name){
         this.name = name;
-        numberOfTasks++;
     }
 
     public String getName(){
         return name;
-    }
-
-    public int getID(){
-        return id;
     }
 
     public void markAsDone(){
@@ -36,10 +28,6 @@ public class Task {
 
     public String getStatusIcon(){
         return (isDone ? "[\u2713]" : "[\u2718]");
-    }
-
-    public static int getNumberOfTasks(){
-        return numberOfTasks;
     }
 
     public String getTaskType(){

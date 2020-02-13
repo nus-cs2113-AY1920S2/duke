@@ -12,7 +12,7 @@
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	Got it. I've added this task: 
+	Got it. I've added this task:
 	[T][✘] borrow book
 	Now you have 1 task(s) in the list
     ____________________________________________________________
@@ -25,34 +25,34 @@ Please enter your command or enter "bye" to exit:
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	Got it. I've added this task: 
+	Got it. I've added this task:
 	[D][✘] return book (by: Sunday)
 	Now you have 2 task(s) in the list
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	Got it. I've added this task: 
+	Got it. I've added this task:
 	[E][✘] project meeting (at: Mon 2-4pm)
 	Now you have 3 task(s) in the list
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	I've marked this task as done: 
+	I've marked this task as done:
 	[✓]return book
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	Got it. I've added this task: 
+	Got it. I've added this task:
 	[T][✘] buy books
 	Now you have 4 task(s) in the list
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	Got it. I've added this task: 
+	Got it. I've added this task:
 	[D][✘] finish project (by: Friday Morning)
 	Now you have 5 task(s) in the list
     ____________________________________________________________
@@ -69,13 +69,13 @@ Please enter your command or enter "bye" to exit:
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	I've marked this task as done: 
+	I've marked this task as done:
 	[✓]project meeting
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
     ____________________________________________________________
-	Got it. I've added this task: 
+	Got it. I've added this task:
 	[D][✘] finish homework (by: Friday Afternoon)
 	Now you have 6 task(s) in the list
     ____________________________________________________________
@@ -92,15 +92,31 @@ Please enter your command or enter "bye" to exit:
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
+    ____________________________________________________________
+	Noted: I've removed this task:
+	[✓]project meeting
+	Now you have 5 task(s) in the list.
+    ____________________________________________________________
+
+Please enter your command or enter "bye" to exit:
+    ____________________________________________________________
+	Here are the tasks in your list:
+	1.[T][✘] borrow book
+	2.[D][✓] return book (by: Sunday)
+	3.[T][✘] buy books
+	4.[D][✘] finish project (by: Friday Morning)
+	5.[D][✘] finish homework (by: Friday Afternoon)
+    ____________________________________________________________
+
+Please enter your command or enter "bye" to exit:
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
     ____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][✘] borrow book
 	2.[D][✓] return book (by: Sunday)
-	3.[E][✓] project meeting (at: Mon 2-4pm)
-	4.[T][✘] buy books
-	5.[D][✘] finish project (by: Friday Morning)
-	6.[D][✘] finish homework (by: Friday Afternoon)
+	3.[T][✘] buy books
+	4.[D][✘] finish project (by: Friday Morning)
+	5.[D][✘] finish homework (by: Friday Afternoon)
     ____________________________________________________________
 
 Please enter your command or enter "bye" to exit:
