@@ -28,7 +28,7 @@ public class Duke {
             TaskMgr.listTasks();
             break;
         case DONE_COMMAND:
-            int doneTaskID = extractDoneTaskID(userInput);
+            int doneTaskID = extractTaskID(userInput);
             TaskMgr.markAsDone(doneTaskID);
             break;
         case TODO_COMMAND:
@@ -40,21 +40,22 @@ public class Duke {
         case EVENT_COMMAND:
             processTaskWithTime(TaskMgr, taskInfo, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
             break;
+        case DELETE_COMMAND:
+            int delTaskID = extractTaskID(userInput);
+            TaskMgr.delTask(delTaskID);
+            break;
         default:
             respondToUnknownCommand();
         }
     }
 
     private static void processTaskWithTime(TaskManager TaskMgr, String taskInfo, String timeDelimiter, String deadlineCommand, String formatErrorMessage) {
-        System.out.println(LINE_DIVIDER);
         try {
             String taskDescriptions = extractTaskDescription(taskInfo, timeDelimiter);
             String taskTime = extractTaskTime(taskInfo, timeDelimiter);
             TaskMgr.addTask(taskDescriptions, taskTime, deadlineCommand);
         } catch (DukeException e) {
             System.out.println(FIVE_SPACES+CRYING_FACE+ formatErrorMessage);
-        } finally {
-            System.out.println(LINE_DIVIDER);
         }
     }
 
@@ -94,7 +95,7 @@ public class Duke {
         }
     }
 
-    private static int extractDoneTaskID(String userInput) {
+    private static int extractTaskID(String userInput) {
         int taskIDIndex = userInput.indexOf(" ") + 1;
         String doneTaskIDString = userInput.substring(taskIDIndex);
         try {
@@ -111,7 +112,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskManager TaskMgr = new TaskManager(100);
+        TaskManager TaskMgr = new TaskManager();
 
         greet();
 

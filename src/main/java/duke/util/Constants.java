@@ -18,6 +18,7 @@ public class Constants {
     public static final String TODO_COMMAND = "todo";
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String EVENT_COMMAND = "event";
+    public static final String DELETE_COMMAND = "delete";
     public static final String DEADLINE_TIME_DELIMITER = " /by ";
     public static final String EVENT_TIME_DELIMITER = " /at ";
     public static final String CRYING_FACE = "\u2639";
@@ -25,12 +26,13 @@ public class Constants {
     public static final String LIST_TASKS_PROMPT = "Here are the tasks in your list:";
     public static final String DONE_TASKS_PROMPT = "Nice! I've marked this duke.task as done:";
     public static final String ADD_TASKS_PROMPT = "Got it. I've added this duke.task:";
-    public static final String ADD_TASKS_POST_PROMPT = "Now you have %d tasks in the list.\n";
+    public static final String ADD_OR_DELETE_TASKS_POST_PROMPT = "Now you have %d tasks in the list.\n";
+    public static final String DELETE_TASKS_PROMPT = "Noted. I've removed this task:";
     public static final String LIST_SINGLE_TASK_MESSAGE = "%d.%s\n";
     public static final String ADD_SINGLE_TASK_MESSAGE = "%s\n";
+    public static final String DELETE_SINGLE_TASK_MESSAGE = "%s\n";
     public static final String DONE_SINGLE_TASK_MESSAGE = "%s\n";
-    public static final String TASK_ID_NOT_EXIST_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task id provided does not exist!";
-    public static final String TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task id is not provided or invalid!";
+    public static final String TASK_ID_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task id provided is invalid or does not exist!";
     public static final String DEADLINE_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the deadline format is not correct!";
     public static final String EVENT_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the duke.task description cannot be empty!";
