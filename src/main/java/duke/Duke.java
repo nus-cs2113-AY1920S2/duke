@@ -9,7 +9,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,15 +17,12 @@ import java.util.Arrays;
 import java.util.Scanner;  // User input
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import java.util.stream.Stream;
 
 public class Duke {
 
     static String dataFilePath = "resources/data.csv";
     static File dataFile = new File(dataFilePath);
+
     static List<Task> taskList = new ArrayList<Task>();
 
     private static void intro()
@@ -124,6 +121,52 @@ public class Duke {
         }
     }
 
+    private static void taskDelete(int taskId) {
+        taskList.remove(taskId);
+
+        try {
+            removeLine(taskId);
+        } catch (IOException e) {
+            formatPrint("Error while deleting task from data file.");
+        }
+        formatPrint("Deleted task " + (taskId+1));
+    }
+
+    private static void removeLine(int lineNumber) throws IOException {
+        // Read file into list of strings, where each string is a line in the file
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
+        int removedIndex = 0;
+
+        // Iterate through the lines
+        for (int i = 0; i < fileContent.size(); i++) {
+            // If the current line matches the taskId
+            if (fileContent.get(i).startsWith(String.valueOf(lineNumber))) {
+                // Remove current line
+                removedIndex = i;
+                fileContent.remove(i);
+                break;
+            }
+        }
+
+        // Update indexes of subsequent tasks
+        for (int i = removedIndex; i < fileContent.size(); i++)
+        {
+            String currString = fileContent.get(i);
+            System.out.println(currString);
+            List<String> cells = Arrays.asList(currString.split(","));
+            // Change first cell (taskID) to new ID
+            cells.set(0, String.valueOf(i));
+
+            String updatedString = String.join(",", cells);
+            System.out.println(updatedString);
+            replaceLine(i, updatedString);
+            System.out.println("here");
+        }
+
+        // Rewrite list into data file
+        Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
+    }
+
     private static void replaceLine(int lineNumber, String newString) throws IOException {
         // Read file into list of strings, where each string is a line in the file
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
@@ -189,16 +232,15 @@ public class Duke {
             }
             break;
         case "done":
+            // Fallthrough
+        case "delete":
             String stringId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
             int taskId = Integer.parseInt(stringId) - 1;
-            taskDone(taskId);
-            break;
-        case "delete":
-            int idTaskDelete;
-            String taskToRemove = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
-            taskList.remove(Integer.parseInt(taskToRemove) - 1);
-            formatPrint("Deleted task: " + taskList.get(Integer.parseInt(taskToRemove) - 1));
-                    System.out.println(i+1 + ". " + taskList.get(i));
+            if (userCommand.equals("done")) {
+                taskDone(taskId);
+            } else {
+                taskDelete(taskId);
+            }
             break;
         case "list":
             printList();
@@ -217,7 +259,7 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         // Note: Scanner.next() reads until delimiter, Scanner.nextLine() reads until EOL
-        // If Scanner.next() is called first, then Scanner.nextline() reads from that point onwards
+        // If Scanner.next() is called first, then Scanner.nextLine() reads from that point onwards
         // e.g. if the user inputs: 'deadline read book \5pm', the two strings below will contain:
         //      userCommand = 'deadline'
         //      userParams  = 'read book \5pm'
