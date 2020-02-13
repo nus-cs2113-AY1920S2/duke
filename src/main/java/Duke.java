@@ -1,6 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.logging.ConsoleHandler;
+
+import static java.lang.Integer.parseInt;
 
 public class Duke {
     public static final String LINE = "\t__________________________________________________________";
@@ -11,7 +17,7 @@ public class Duke {
             "\t available list of task numbers";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
             " listing";
-    public static final String NO_TASK_NUMBER = "\t Please enter the task number to be mark as done!";
+    public static final String NO_TASK_NUMBER = "\t Please enter a task number!";
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
 
     public static void printError(String message){
@@ -55,7 +61,7 @@ public class Duke {
             IllegalDukeException{
         String[] temp = getCommand(userIn);
         if(temp.length>1) {
-            int number = Integer.parseInt(temp[1]) - 1;
+            int number = parseInt(temp[1]) - 1;
             if(number>=l1.size() || number<0) {
                 throw new ArrayIndexOutOfBoundsException(OUT_OF_BOUND_INDEX);
             }
@@ -125,48 +131,114 @@ public class Duke {
         addTask(l1, event);
     }
 
-    public static int validateCommand(String inCommand, ArrayList<Task> l1) throws IllegalDukeException{
+    public static void removeTask(ArrayList<Task> l1, String inCommand) throws IllegalDukeException,
+            ArrayIndexOutOfBoundsException{
+        String[] temp = getCommand(inCommand);
+        if(temp.length==1){
+            throw new IllegalDukeException(NO_TASK_NUMBER);
+        }
+        int index=parseInt(temp[1]) -1;
+        if(index<0 || index>=l1.size()){
+            throw new ArrayIndexOutOfBoundsException(OUT_OF_BOUND_INDEX);
+        }
+        Task task=l1.get(index);
+        l1.remove(index);
+        System.out.println(LINE);
+        System.out.println("\t Noted. I've removed this task: ");
+        System.out.println("\t   " + task.toString());
+        System.out.println("\t Now you have " + l1.size() + " tasks in the list.");
+        System.out.println(LINE);
+    }
+    public static int validateCommand(String inCommand, ArrayList<Task> l1) throws IllegalDukeException {
         String[] userCommand = getCommand(inCommand);
-        String[] taskInfo= new String[2];
+        String[] taskInfo = new String[2];
         int status;
-            switch (userCommand[0]) {
-                case "bye":
-                    status = 1;
-                    executeBye();
-                    break;
-                case "list":
-                    status = 2;
-                    executeList(l1);
-                    break;
-                case "done":
-                    status = 3;
-                    executeDone(inCommand, l1);
-                    break;
-                case "todo":
-                    status = 4;
-                    taskInfo = getTaskInfo(inCommand);
-                    addTodo(l1, taskInfo);
-                    break;
-                case "deadline":
-                    status = 5;
-                    taskInfo = getTaskInfo(inCommand);
-                    Deadline deadline = new Deadline(taskInfo[0]);
-                    addDeadline(l1, taskInfo);
-                    break;
-                case "event":
-                    status = 6;
-                    taskInfo = getTaskInfo(inCommand);
-                    addEvent(l1, taskInfo);
-                    break;
-                case "help":
-                    status = 7;
-                    listCommands();
-                    break;
-                default:
-                    status = -1;
-                    throw new IllegalDukeException(WRONG_INPUT);
+        switch (userCommand[0]) {
+            case "bye":
+                status = 1;
+                executeBye();
+                break;
+            case "list":
+                status = 2;
+                executeList(l1);
+                break;
+            case "done":
+                status = 3;
+                executeDone(inCommand, l1);
+                break;
+            case "todo":
+                status = 4;
+                taskInfo = getTaskInfo(inCommand);
+                addTodo(l1, taskInfo);
+                break;
+            case "deadline":
+                status = 5;
+                taskInfo = getTaskInfo(inCommand);
+                Deadline deadline = new Deadline(taskInfo[0]);
+                addDeadline(l1, taskInfo);
+                break;
+            case "event":
+                status = 6;
+                taskInfo = getTaskInfo(inCommand);
+                addEvent(l1, taskInfo);
+                break;
+            case "help":
+                status = 7;
+                listCommands();
+                break;
+            case "delete":
+                status = 8;
+                removeTask(l1, inCommand);
+                break;
+            default:
+                status = -1;
+                throw new IllegalDukeException(WRONG_INPUT);
+        }
+        return status;
+    }
+    public static void saveFile(ArrayList<Task> l1) throws FileNotFoundException {
+        PrintWriter outText= new PrintWriter("C:\\Users\\User\\Desktop\\cloned duke\\new\\data\\duke.txt");
+        for(int i=0; i< l1.size(); i++){
+            outText.println(l1.get(i).toFile());
+        }
+        outText.close();
+    }
+    public static void initList(String[] temp, ArrayList<Task> l1){
+        switch(temp[0]){
+            case "T" :
+                Todo todo = new Todo(temp[2]);
+                if(temp[1]=="Y"){
+                    todo.done();
+                }
+                l1.add(todo);
+                break;
+            case "D" :
+                Deadline deadline = new Deadline(temp[3]);
+                deadline.setBy(temp[1]);
+                if(temp[2]=="Y"){
+                    deadline.done();
+                }
+                l1.add(deadline);
+                break;
+            case "E" :
+                Event event = new Event(temp[3]);
+                event.setAt(temp[1]);
+                if(temp[2]=="Y"){
+                    event.done();
+                }
+                l1.add(event);
+                break;
+            default:
+                break;
+        }
+    }
+    public  static void loadFile(ArrayList<Task> l1) throws FileNotFoundException{
+        Scanner in = new Scanner(new File("C:\\Users\\User\\Desktop\\cloned duke\\new\\data\\duke.txt"));
+            while (in.hasNextLine()) {
+                String[] temp = in.nextLine().split("-");
+                initList(temp, l1);
             }
-            return status;
+            in.close();
     }
 
     public static void printWelcomeMessage() {
@@ -186,18 +258,22 @@ public class Duke {
         System.out.println("\t" + "What can I do for you?");
         System.out.println(LINE);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(System.in);
         ArrayList<Task> l1 = new ArrayList<Task>();
         int status = 0;
+        loadFile(l1);
         printWelcomeMessage();
             while (status != 1) {
                 try {
                     String userIn = in.nextLine();
                     status = validateCommand(userIn, l1);
-                } catch (IllegalDukeException | ArrayIndexOutOfBoundsException| IllegalStateException e ) {
+                    saveFile(l1);
+                } catch (IllegalDukeException | ArrayIndexOutOfBoundsException | IllegalStateException |
+                        FileNotFoundException e ) {
                     printError(e.getMessage());
                 }
             }
+        in.close();
     }
 }
