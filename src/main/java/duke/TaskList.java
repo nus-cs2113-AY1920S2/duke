@@ -19,6 +19,23 @@ public class TaskList {
                 (tasks.size() == 1 ? "" : "s") + " in the list");
     }
 
+    public void deleteTask(int index) {
+        try {
+            Task deletedTask = tasks.get(index);
+            tasks.remove(index);
+            System.out.println("Task deleted:");
+            System.out.println("  " + deletedTask);
+            System.out.println("You have " + tasks.size() + " task" +
+                    (tasks.size() == 1 ? "" : "s") + " in the list");
+        } catch (IndexOutOfBoundsException e) {
+            if (tasks.size() == 0) {
+                System.out.println("You have no tasks to be deleted");
+            } else {
+                System.out.println("Please specify a task number between 1 and " + tasks.size());
+            }
+        }
+    }
+
     public void showTasks() {
         if (tasks.size() == 0) {
             System.out.println("Nice, nothing to see here");
