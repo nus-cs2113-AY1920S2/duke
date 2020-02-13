@@ -1,0 +1,4 @@
+D|true|write assignment|tomorrow
+E|false|workshop event|May 4th 10-11am
+T|true|attend lab
+D|false|submit lab|next week Monday
