@@ -7,6 +7,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getType() {
+        return "T";
+    }
+
+    @Override
     public String toData(int taskId) {
         String dataLine = taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription();
         return dataLine;

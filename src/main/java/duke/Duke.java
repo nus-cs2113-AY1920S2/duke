@@ -60,8 +60,8 @@ public class Duke {
     }
 
     private static void writeToFile(String s) throws IOException {
-        FileWriter fw = new FileWriter(dataFilePath);
-        fw.write(s);
+        FileWriter fw = new FileWriter(dataFilePath, true);
+        fw.write(s + System.lineSeparator());
         fw.close();
     }
 
@@ -79,7 +79,7 @@ public class Duke {
         } catch (IOException e) {
             formatPrint("Error saving task to data file.");
         }
-        formatPrint("Added task: " t);
+        formatPrint("Added task: " + t);
     }
 
     private static void formatPrint(String input) {
@@ -103,7 +103,7 @@ public class Duke {
             if (userParams.trim().isEmpty()) {
                 throw new NoDescException();
             }
-            addTask(new Todo(userParams));
+            addTask(new Todo(userParams.trim()));
             break;
         case "deadline":
             // Fallthrough
@@ -125,9 +125,9 @@ public class Duke {
                     throw new NoDateException();
                 }
             if (userCommand.equals("deadline")) {
-                addTask(new Deadline(desc, date));
+                addTask(new Deadline(desc.trim(), date.trim()));
             } else {
-                addTask(new Event(desc, date));
+                addTask(new Event(desc.trim(), date.trim()));
             }
             break;
         case "done":

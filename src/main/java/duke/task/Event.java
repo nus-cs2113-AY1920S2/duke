@@ -7,6 +7,11 @@ public class Event extends Task {
         return eventTime;
     }
 
+    @Override
+    public String getType() {
+        return "E";
+    }
+
     public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
     }

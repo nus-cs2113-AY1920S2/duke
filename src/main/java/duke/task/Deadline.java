@@ -3,6 +3,11 @@ package duke.task;
 public class Deadline extends Task {
     private String by; // String containing deadline
 
+    @Override
+    public String getType() {
+        return "D";
+    }
+
     public String getBy() {
         return by;
     }
