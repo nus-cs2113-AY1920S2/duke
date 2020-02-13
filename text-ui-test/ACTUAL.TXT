@@ -53,12 +53,38 @@ Here are the tasks in your list:
 3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
 ____________________________________________________________
 ____________________________________________________________
+Got it. I've added this task:
+[T][✘] Another todo task
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✘] This is a todo task
+2. [E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+4. [T][✘] Another todo task
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[E][✘] Another event  (at:  Nov 7th 10-11am)
+Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✘] This is a todo task
+2. [E][✘] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+4. [T][✘] Another todo task
+5. [E][✘] Another event  (at:  Nov 7th 10-11am)
+____________________________________________________________
+____________________________________________________________
 Let me know which task you would like to mark as done?
 ____________________________________________________________
 ____________________________________________________________
 The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
+Congratulations! You've successfully marked the following task as done:
 [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
@@ -66,11 +92,14 @@ Here are the tasks in your list:
 1. [T][✘] This is a todo task
 2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
 3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+4. [T][✘] Another todo task
+5. [E][✘] Another event  (at:  Nov 7th 10-11am)
 ____________________________________________________________
 ____________________________________________________________
 The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
+Congratulations! You've successfully marked the following task as done:
 [T][✓] This is a todo task
 ____________________________________________________________
 ____________________________________________________________
@@ -78,6 +107,61 @@ Here are the tasks in your list:
 1. [T][✓] This is a todo task
 2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
 3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+4. [T][✘] Another todo task
+5. [E][✘] Another event  (at:  Nov 7th 10-11am)
+____________________________________________________________
+____________________________________________________________
+Please enter a valid task number
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] This is a todo task
+2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+4. [T][✘] Another todo task
+5. [E][✘] Another event  (at:  Nov 7th 10-11am)
+____________________________________________________________
+____________________________________________________________
+The number you entered does not match any task in your list
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] This is a todo task
+2. [E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+4. [T][✘] Another todo task
+5. [E][✘] Another event  (at:  Nov 7th 10-11am)
+____________________________________________________________
+____________________________________________________________
+Successfully deleted the following task:
+[E][✓] This is an event happening  (at:  Feb 10th 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] This is a todo task
+2. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+3. [T][✘] Another todo task
+4. [E][✘] Another event  (at:  Nov 7th 10-11am)
+____________________________________________________________
+____________________________________________________________
+The number you entered does not match any task in your list
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] This is a todo task
+2. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+3. [T][✘] Another todo task
+4. [E][✘] Another event  (at:  Nov 7th 10-11am)
+____________________________________________________________
+____________________________________________________________
+Successfully deleted the following task:
+[T][✘] Another todo task
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] This is a todo task
+2. [D][✘] This is a task with deadline  (by:  tomorrow 6pm)
+3. [E][✘] Another event  (at:  Nov 7th 10-11am)
 ____________________________________________________________
 ____________________________________________________________
 Thanks for chatting with Chatty Chat Bot
