@@ -17,4 +17,5 @@ public class Command {
 
     /** Easter egg */
     public static final String CMD_DEBUG = "debug";
+    public static final String CMD_DELETE = "delete";
 }

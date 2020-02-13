@@ -175,6 +175,12 @@ public class Output {
         msg += System.lineSeparator() + "\t\ttodo [description]";
         msg += System.lineSeparator();
 
+        // help for delete command
+        msg += System.lineSeparator() + String.format("\t%s: removes specified task from the list. Input" +
+                " must follow the format below,", command.CMD_DELETE);
+        msg += System.lineSeparator() + "\t\tdelete [task number]";
+        msg += System.lineSeparator();
+
         // help for clear window
         msg += System.lineSeparator() + String.format("\t%s: clears command window. Input" +
                 " must follow the format below,", command.CMD_CLEAR_WINDOW);
@@ -205,5 +211,23 @@ public class Output {
                 "\t    _,'                 `,_";
 
         displayMessage(msg);
+    }
+
+    public void printTaskRemoved(Task toPrint, int size) {
+        String msg = "Okay! I've removed the following task from your list :) :" + System.lineSeparator()
+                + "\t\t" + toPrint + System.lineSeparator();
+
+        if (size > 0) {
+            msg += "\tNow you have " + size + " " + getTaskNoun(size)
+                    + " in your list";
+        } else {
+            msg += "\tYour list is empty now :O";
+        }
+
+        displayMessage(msg);
+    }
+
+    private String getTaskNoun (int nounSize) {
+        return (nounSize == 1) ? "task": "tasks";
     }
 }

@@ -123,6 +123,16 @@ public class Duke {
         }
     }
 
+    private static void executeDeleteTask(String userInput) {
+        int taskIndex = Integer.parseInt(userInput.substring(userInput.indexOf(" ") + 1)) - 1;
+
+        try {
+            taskManager.removeTask(taskIndex);
+        } catch (TaskException e) {
+            printer.displayMessage(e.toString());
+        }
+    }
+
     /**
      * Prints new lines to make it look like the command window was cleared
      */
@@ -184,7 +194,9 @@ public class Duke {
 
             } else if (cmd.equals(command.CMD_CLEAR_WINDOW)) {
                 executeClearWindow();
-            } else if (cmd.equals(command.CMD_DEBUG)) {
+            } else if (cmd.equals(command.CMD_DELETE)) {
+                executeDeleteTask(userResponse);
+            }  else if (cmd.equals(command.CMD_DEBUG)) {
                 executeSpotBug();
             } else {
                throw new DukeException();
