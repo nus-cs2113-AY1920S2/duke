@@ -72,18 +72,28 @@ public class Duke {
 
         case "delete":
             // delete a task by its displayed list index
-            // TODO: throw exception if deleteIndex is not specified
-            // TODO: change Character to String to handle multi-digit indexes
-            int deleteIndex = Character.getNumericValue(fullCommand.charAt(7)) - 1;
-            tasks.deleteTask(deleteIndex);
+            try {
+                int deleteIndex = Integer.parseInt(commandTokens[1]);
+                tasks.deleteTask(deleteIndex);
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                // deleteIndex is not specified
+                throw new DukeException("Please specify a task number to be deleted");
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Please specify an integer for the task number to be deleted");
+            }
             break;
 
         case "done":
             // mark a task as done
-            // TODO: throw exception if taskIndex is not specified
-            // TODO: change Character to String to handle multi-digit indexes
-            int taskIndex = Character.getNumericValue(fullCommand.charAt(5)) - 1;
-            tasks.markTaskAsDone(taskIndex);
+            try {
+                int taskIndex = Character.getNumericValue(fullCommand.charAt(5)) - 1;
+                tasks.markTaskAsDone(taskIndex);
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                // deleteIndex is not specified
+                throw new DukeException("Please specify a task number to be marked as done");
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Please specify an integer for the task number to be marked as done");
+            }
             break;
 
         case "todo":
@@ -146,7 +156,7 @@ public class Duke {
 
     private static void printWelcomeBanner() {
         printDividerLine();
-        System.out.println("This is\n" + DUKE_LOGO);
+        System.out.println("This is" + System.lineSeparator() + DUKE_LOGO);
         System.out.println("How can I help you today?");
         printDividerLine();
     }
