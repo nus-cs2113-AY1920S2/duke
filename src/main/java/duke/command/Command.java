@@ -1,6 +1,9 @@
 package duke.command;
 
-public class Command {
+import duke.task.TaskManager;
+import duke.ui.Output;
+
+public abstract class Command {
 
     // TODO Refactor command information and command execution into
     // their own classes
@@ -16,6 +19,16 @@ public class Command {
     public static final String CMD_CLEAR_WINDOW = "clear";
 
     /** Easter egg */
-    public static final String CMD_DEBUG = "debug";
     public static final String CMD_DELETE = "delete";
+
+    protected TaskManager taskManager;
+    protected Output printer;
+
+    public Command (TaskManager taskManager, Output printer) {
+        this.taskManager = taskManager;
+        this.printer = printer;
+    }
+
+    public abstract void execute ();
+
 }
