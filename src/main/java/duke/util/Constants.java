@@ -48,4 +48,8 @@ public class Constants {
     public static final String DATA_FILE_PATH = "data/duke.txt";
     public static final String FILE_NOT_FOUND_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the DATA_FILE_PATH does not exist!";
     public static final String FILE_OPERATION_IO_ERROR_MESSAGE = " OOPS!!! I'm sorry, but something went wrong here!";
+    public static final String LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING = "Loading data from %s, please wait...\n";
+    public static final String DATA_LOADED_SUCCESSFULLY_PROMPT = "Data loaded successfully!";
+    public static final String SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING = "Saving data to $s, please wait...\n";
+    public static final String DATA_SAVED_SUCCESSFULLY_PROMPT = "Data saved successfully!";
 }

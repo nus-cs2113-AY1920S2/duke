@@ -18,11 +18,15 @@ import duke.task.Event;
 import duke.task.Todo;
 import duke.task.DummyTask;
 
+import static duke.util.Constants.DATA_LOADED_SUCCESSFULLY_PROMPT;
+import static duke.util.Constants.DATA_SAVED_SUCCESSFULLY_PROMPT;
 import static duke.util.Constants.DEADLINE_COMMAND;
 import static duke.util.Constants.DEADLINE_ICON;
 import static duke.util.Constants.EVENT_ICON;
 import static duke.util.Constants.LINE_DIVIDER;
 import static duke.util.Constants.FIVE_SPACES;
+import static duke.util.Constants.LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING;
+import static duke.util.Constants.SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING;
 import static duke.util.Constants.SEVEN_SPACES;
 import static duke.util.Constants.LIST_TASKS_PROMPT;
 import static duke.util.Constants.DONE_TASK_PROMPT;
@@ -123,6 +127,7 @@ public class TaskManager {
 
     // I know this function sucks, give me some time to think of a better one plz.
     public void loadDataFromFile(String filePath) {
+        System.out.printf(FIVE_SPACES + LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING, DATA_FILE_PATH);
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
@@ -143,6 +148,7 @@ public class TaskManager {
                     System.out.println(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
                 }
             }
+            System.out.println(DATA_LOADED_SUCCESSFULLY_PROMPT);
         } catch (FileNotFoundException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + FILE_NOT_FOUND_ERROR_MESSAGE);
         }
@@ -170,6 +176,7 @@ public class TaskManager {
     }
 
     public void saveDataToFile() {
+        System.out.printf(FIVE_SPACES + SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING, DATA_FILE_PATH);
         try {
             Gson gson = new Gson();
             FileWriter fw = new FileWriter(DATA_FILE_PATH);
@@ -177,6 +184,7 @@ public class TaskManager {
             fw.write(json);
             fw.flush();
             fw.close();
+            System.out.println(FIVE_SPACES + DATA_SAVED_SUCCESSFULLY_PROMPT);
         } catch (IOException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + FILE_OPERATION_IO_ERROR_MESSAGE);
         }
