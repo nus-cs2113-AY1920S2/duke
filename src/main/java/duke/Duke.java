@@ -10,12 +10,19 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Vector;
 
 public class Duke {
 
     private static Vector<Task> list = new Vector<>();
+    Scanner scanner = new Scanner(System.in);
+    private static final String TASK_LIST_PATH = "./data/taskList.txt";
+    //private static final String DATA_DIRECTORY_PATH = "../../../../../data";
 
     private void doTask(String[] words) throws InvalidFormatException, InvalidListNumberException {
         if (words.length > 2) {
@@ -130,7 +137,6 @@ public class Duke {
     }
 
     private void readInput() {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("bye")) {
@@ -148,17 +154,42 @@ public class Duke {
         }
     }
 
-    private void runChat() {
+    private void runChat() throws IOException {
         Printer.printWelcomeMessage();
+
         Printer.printLoadMessage();
+        try {
+            loadTaskList(list);
+        } catch (FileNotFoundException e) {
+            File taskListFile = new File(TASK_LIST_PATH);
+            taskListFile.getParentFile().mkdirs();
+            taskListFile.createNewFile();
+
+            System.out.println("No file exist");
+        }
+
+        Printer.printReadyMessage();
 
         readInput();
 
         Printer.printExitMessage();
     }
 
+    private void loadTaskList(Vector<Task> list) throws FileNotFoundException {
+        File taskListFile = new File(TASK_LIST_PATH);
+        Scanner fileScanner = new Scanner(taskListFile);
+
+        while (fileScanner.hasNextLine()) {
+            System.out.println(fileScanner.hasNextLine());
+        }
+    }
+
     public static void main(String[] args) {
         Duke chatBot = new Duke();
-        chatBot.runChat();
+        try {
+            chatBot.runChat();
+        } catch (IOException e) {
+            System.out.println("An error has occurred!!\n Aborting LumiChat program...");
+        }
     }
 }

@@ -25,7 +25,10 @@ public class Printer {
     }
 
     public static void printLoadMessage() {
-        System.out.println("Initializing LumiChat v0.0.1.4...\n");
+        System.out.println("Initializing LumiChat v3.2.1.1...\n");
+    }
+
+    public static void printReadyMessage() {
         System.out.println("LumiChat is now ready.\n");
         System.out.println("  Hey I'm Lumi!");
         System.out.println("  How may Lumi assist you today?\n");
