@@ -88,20 +88,20 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        //new Duke().run();
-        displayHello();
-        ArrayList<Task> taskList = initializeTaskList();
-        Scanner myInput = initializeScanner();
-        String userInput = getUserInput(myInput);
-        int numberOfTasks = getTaskListSize(taskList);
-        while (isNotBye(userInput)) {
-            String[] splitUserInput = splitTheUserInput(userInput);
-            numberOfTasks = doTaskAndGetNewNumberOfTasks(taskList, numberOfTasks, userInput, splitUserInput);
-            userInput = getNextUserInput(myInput);
-        }
-        saveList(taskList, numberOfTasks);
-        displayGoodbye();
-        closeScanner(myInput);
+        new Duke().run();
+//        displayHello();
+//        ArrayList<Task> taskList = initializeTaskList();
+//        Scanner myInput = initializeScanner();
+//        String userInput = getUserInput(myInput);
+//        int numberOfTasks = getTaskListSize(taskList);
+//        while (isNotBye(userInput)) {
+//            String[] splitUserInput = splitTheUserInput(userInput);
+//            numberOfTasks = doTaskAndGetNewNumberOfTasks(taskList, numberOfTasks, userInput, splitUserInput);
+//            userInput = getNextUserInput(myInput);
+//        }
+//        saveList(taskList, numberOfTasks);
+//        displayGoodbye();
+//        closeScanner(myInput);
     }
 
     private static void displayHello() {

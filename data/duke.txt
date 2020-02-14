@@ -1,2 +1,6 @@
 T | 1 | lol | at 29292
 E | 0 | what is this lol | in 25 minutes
+E | 1 | eatthis thing | at 20202
+D | 1 | 2020202 | 
+T | 0 | things at okokok | 
+D | 0 | addthings | 

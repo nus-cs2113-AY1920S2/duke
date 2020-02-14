@@ -73,10 +73,13 @@ public class Command {
         switch (typeOfCommand.toLowerCase()) {
         case TODO:
             newTask = new Todo(descriptionOfCommand, timeOfCommand);
+            break;
         case DEADLINE:
             newTask = new Deadline(descriptionOfCommand, timeOfCommand);
+            break;
         case EVENT:
             newTask = new Event(descriptionOfCommand, timeOfCommand);
+            break;
         default:
             break;
         }
@@ -84,40 +87,20 @@ public class Command {
         ui.displayTaskAdded(newTask);
     }
 
-    public String[] getSplitCommand() {
-        return splitCommand;
-    }
-
     public void setSplitCommand(String[] splitCommand) {
         this.splitCommand = splitCommand;
-    }
-
-    public String getTypeOfCommand() {
-        return typeOfCommand;
     }
 
     public void setTypeOfCommand(String typeOfCommand) {
         this.typeOfCommand = typeOfCommand;
     }
 
-    public String getDescriptionOfCommand() {
-        return descriptionOfCommand;
-    }
-
     public void setDescriptionOfCommand(String descriptionOfCommand) {
         this.descriptionOfCommand = descriptionOfCommand;
     }
 
-    public String getTimeOfCommand() {
-        return timeOfCommand;
-    }
-
     public void setTimeOfCommand(String timeOfCommand) {
         this.timeOfCommand = timeOfCommand;
-    }
-
-    public String getFullCommand() {
-        return fullCommand;
     }
 
     public void setFullCommand(String fullCommand) {
