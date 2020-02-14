@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     //private static int counter = 0;
     public static final int MAXIMUM_TASKS = 100;
-    public static final String[] VALID_COMMANDS = {"done","list","bye","todo","deadline","event"};
+    public static final String[] VALID_COMMANDS = {"done", "list", "bye", "todo", "deadline", "event", "delete"};
     //private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
     private static ArrayList<Task> listOfTasks = new ArrayList<>();
     private static final String logo = "  ____        _        \n"
@@ -74,7 +74,7 @@ public class Duke {
         if (dividerPosition == -1) {
             throw new IndexOutOfBoundsException();
         } else {
-            return line.substring(dividerPosition+1);
+            return line.substring(dividerPosition + 1);
         }
     }
 
@@ -110,6 +110,9 @@ public class Duke {
             case "done":
                 markTaskAsDone(line);
                 break;
+            case "delete":
+                deleteTask(line);
+                break;
             default:
                 String taskInformation;
                 try {
@@ -127,7 +130,7 @@ public class Duke {
     public static void storeTaskIntoList(String taskInformation, String separator, String command) {
         int dividerPosition = taskInformation.indexOf(separator);
         String description = taskInformation.substring(0, dividerPosition);
-        String dateAndTime = taskInformation.substring(dividerPosition+5);
+        String dateAndTime = taskInformation.substring(dividerPosition + 5);
         if (command.equals("deadline")) {
             Deadline deadlineToAdd = new Deadline(description, dateAndTime);
             listOfTasks.add(deadlineToAdd);
@@ -190,13 +193,28 @@ public class Duke {
 
     public static void markTaskAsDone(String line) {
         int dividerPosition = line.indexOf("done");
-        int taskNumber = Integer.parseInt(line.substring(dividerPosition+5));
+        int taskNumber = Integer.parseInt(line.substring(dividerPosition + 5));
         Task taskDone = listOfTasks.get(taskNumber - 1);
         taskDone.markAsDone();
         printLine();
         System.out.println(" Nice! I've marked this task as done:");
         System.out.print("   [" + taskDone.getStatusIcon() + "] ");
         System.out.println(taskDone.showFullDescription());
+        printLine();
+    }
+
+    private static void deleteTask(String line) {
+        String[] splitLine = line.split(" ");
+        int taskNumber = Integer.parseInt(splitLine[1]);
+        Task taskToDelete = listOfTasks.get(taskNumber - 1);
+        listOfTasks.remove(taskNumber - 1);
+        int numOfTasksLeft = listOfTasks.size();
+
+        printLine();
+        System.out.println("Noted. I've removed this task: ");
+        System.out.print("   [" + taskToDelete.getStatusIcon() + "] ");
+        System.out.println(taskToDelete.showFullDescription());
+        System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
         printLine();
     }
 }
