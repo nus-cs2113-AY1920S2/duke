@@ -1,7 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
@@ -95,6 +92,11 @@ public class Duke {
     }
 
     private static void run() {
+        try {
+            loadFile();
+        } catch (IOException e) {
+            System.out.println("IO Exception occurred: " + e.getMessage());
+        }
         while (true) {
             String line = getInput();
             String command;
@@ -201,23 +203,60 @@ public class Duke {
 
     }
 
+    public static void loadFile() throws IOException {
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
+        } else {
+            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+            String line = reader.readLine();
+
+            while (line != null) {
+                String[] splitLine = line.split(", ");
+                String typeIcon = splitLine[0];
+                String isDoneString = splitLine[1];
+                String description = splitLine[2];
+                Task task;
+                if (typeIcon.equals("[E]")) {
+                    String timePeriod = splitLine[3];
+                    task = new Event(description, timePeriod);
+                } else if (typeIcon.equals("[D]")) {
+                    String dueDate = splitLine[3];
+                    task = new Deadline(description, dueDate);
+                } else {
+                    task = new Todo(description);
+                }
+                boolean isDone = Boolean.parseBoolean(isDoneString);
+                task.setIsDone(isDone);
+                listOfTasks[counter] = task;
+                counter++;
+
+                line = reader.readLine();
+            }
+        }
+
+
+
+    }
+
     public static void saveToFile() throws IOException {
         File dataFile = new File(filePath);
         if (!dataFile.exists()) {
             dataFile.createNewFile();
         }
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
 
             for (int i = 0; i < counter; i++) {
                 Task currTask = listOfTasks[i];
-                String formattedTask = String.format("%s | %s | %s", currTask.getTypeIcon(), currTask.getIsDone(),
+                String formattedTask = String.format("%s, %s, %s", currTask.getTypeIcon(), currTask.getIsDone(),
                         currTask.getDescription());
                 if (currTask instanceof Event) {
-                    formattedTask += " | ";
+                    formattedTask += ", ";
                     formattedTask += ((Event) currTask).getTimePeriod();
                 }
                 if (currTask instanceof Deadline) {
-                    formattedTask += " | ";
+                    formattedTask += ", ";
                     formattedTask += ((Deadline) currTask).getDueDate();
                 }
                 writer.write(formattedTask + "\n");

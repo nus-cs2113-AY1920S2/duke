@@ -27,6 +27,10 @@ public class Task {
         return isDone;
     }
 
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
