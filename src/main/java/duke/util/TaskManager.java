@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.*;
 
-
+import static duke.util.Constants.DEADLINE_COMMAND;
+import static duke.util.Constants.DEADLINE_ICON;
+import static duke.util.Constants.EVENT_ICON;
 import static duke.util.Constants.LINE_DIVIDER;
 import static duke.util.Constants.FIVE_SPACES;
 import static duke.util.Constants.SEVEN_SPACES;
@@ -29,6 +30,11 @@ import static duke.util.Constants.TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE;
 import static duke.util.Constants.TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE;
 import static duke.util.Constants.CRYING_FACE;
 import static duke.util.Constants.DATA_FILE_PATH;
+import static duke.util.Constants.FILE_NOT_FOUND_ERROR_MESSAGE;
+import static duke.util.Constants.FILE_OPERATION_IO_ERROR_MESSAGE;
+import static duke.util.Constants.TODO_ICON;
+import static duke.util.Constants.YES_ICON;
+
 
 public class TaskManager {
     private ArrayList<Task> tasks;
@@ -86,15 +92,15 @@ public class TaskManager {
     }
 
     private void printAddTaskSuccessfulPrompt(Task addedTask) {
-        System.out.println(FIVE_SPACES+ ADD_TASK_PROMPT);
-        System.out.println(SEVEN_SPACES+addedTask);
-        System.out.printf(FIVE_SPACES+ ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
+        System.out.println(FIVE_SPACES + ADD_TASK_PROMPT);
+        System.out.println(SEVEN_SPACES + addedTask);
+        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
     }
 
     private void printDeleteTaskSuccessfulPrompt(Task currentTask) {
-        System.out.println(FIVE_SPACES+DELETE_TASKS_PROMPT);
-        System.out.println(SEVEN_SPACES+currentTask);
-        System.out.printf(FIVE_SPACES+ ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
+        System.out.println(FIVE_SPACES + DELETE_TASKS_PROMPT);
+        System.out.println(SEVEN_SPACES + currentTask);
+        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
     }
 
 
@@ -113,7 +119,7 @@ public class TaskManager {
 
     public void printErrorMsg(String formatErrorMessage) {
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES+CRYING_FACE+ formatErrorMessage);
+        System.out.println(FIVE_SPACES + CRYING_FACE + formatErrorMessage);
         System.out.println(LINE_DIVIDER);
     }
 
@@ -122,46 +128,47 @@ public class TaskManager {
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
-            String json = s.nextLine();
+            String jsonStr = s.nextLine();
             s.close();
 
-            System.out.println(json);
+            List<DummyTask> taskList = extractDummyTasks(jsonStr);
 
-            Type listType = new TypeToken<List<DummyTask>>(){}.getType();
-            Gson gson = new Gson();
-            List<DummyTask> taskList = gson.fromJson(json, listType);
-            for (DummyTask i: taskList) {
-                if (i.getIcon().equals("[D]")) {
-                    System.out.println("this is a deadline");
-                    try {
-                        System.out.println(i.getByTime());
-                        Deadline tmp = new Deadline(i.getTaskDescription(), i.getByTime());
-                        tasks.add(tmp);
-                    } catch (DukeException e) {
-                        System.out.println(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
+            Task currentTask;
+            for (DummyTask i : taskList) {
+                try {
+                    currentTask = convertDummyTaskToSpecificTask(i, i.getIcon());
+                    if (i.getStatusIcon().equals(YES_ICON)) {
+                        currentTask.markAsDone();
                     }
-                } else if (i.getIcon().equals("[T]")) {
-                    System.out.println("this is a todo");
-                    try {
-                        Todo tmp = new Todo(i.getTaskDescription());
-                        tasks.add(tmp);
-                    } catch (DukeException e ) {
-                        System.out.println(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
-                    }
-                } else {
-                    System.out.println("this is an event");
-                    try {
-                        System.out.println(i.getAtTime());
-                        Event tmp = new Event(i.getTaskDescription(), i.getAtTime());
-                        tasks.add(tmp);
-                    } catch (DukeException e ) {
-                        System.out.println(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
-                    }
+                    tasks.add(currentTask);
+                } catch (DukeException e) {
+                    System.out.println(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("opp, the file was not found!");
+            System.out.println(FIVE_SPACES + CRYING_FACE + FILE_NOT_FOUND_ERROR_MESSAGE);
         }
+    }
+
+    private Task convertDummyTaskToSpecificTask(DummyTask task, String typeIcon) throws DukeException {
+        Task convertedTask;
+        switch (typeIcon) {
+        case DEADLINE_ICON:
+            convertedTask = new Deadline(task.getTaskDescription(), task.getByTime());
+            break;
+        case EVENT_ICON:
+            convertedTask = new Event(task.getTaskDescription(), task.getAtTime());
+            break;
+        default:
+            convertedTask = new Todo(task.getTaskDescription());
+        }
+        return convertedTask;
+    }
+
+    private List<DummyTask> extractDummyTasks(String jsonStr) {
+        Type listType = new TypeToken<List<DummyTask>>(){}.getType();
+        Gson gson = new Gson();
+        return gson.fromJson(jsonStr, listType);
     }
 
     public void saveDataToFile() {
@@ -173,7 +180,7 @@ public class TaskManager {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            System.out.println("opp, something went wrong!");
+            System.out.println(FIVE_SPACES + CRYING_FACE + FILE_OPERATION_IO_ERROR_MESSAGE);
         }
     }
 }

@@ -34,7 +34,7 @@ import static duke.util.Constants.CRYING_FACE;
 
 
 public class Duke {
-    private static boolean isExit = false;
+    private static boolean isExited = false;
 
     private static void greet() {
         System.out.println(LOGO);
@@ -52,7 +52,7 @@ public class Duke {
         case EXIT_COMMAND_QUIT:
             bye();
             TaskMgr.saveDataToFile();
-            isExit = true;
+            isExited = true;
             break;
         case LIST_COMMAND:
         case LIST_COMMAND_SHORTCUT:
@@ -156,6 +156,6 @@ public class Duke {
         do {
             input = s.nextLine();
             processUserInput(TaskMgr, input);
-        } while (!isExit);
+        } while (!isExited);
     }
 }

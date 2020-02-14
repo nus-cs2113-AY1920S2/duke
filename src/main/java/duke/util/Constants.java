@@ -46,4 +46,6 @@ public class Constants {
     public static final String EVENT_ICON = "[E]";
     public static final String TODO_ICON = "[T]";
     public static final String DATA_FILE_PATH = "data/duke.txt";
+    public static final String FILE_NOT_FOUND_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the DATA_FILE_PATH does not exist!";
+    public static final String FILE_OPERATION_IO_ERROR_MESSAGE = " OPPS!!! I'm sorry, but something went wrong here!";
 }
