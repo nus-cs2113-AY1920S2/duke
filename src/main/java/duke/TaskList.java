@@ -12,7 +12,20 @@ public class TaskList {
         this.numTasks = 0;
     }
 
+    public Task[] getTasks() {
+        return list;
+    }
+
+    public int getNumTasks() {
+        return numTasks;
+    }
+
     public void addTask(Task task) {
+        this.list[numTasks] = task;
+        numTasks++;
+    }
+
+    public void addTaskWithMessage(Task task) {
         this.list[numTasks] = task;
         numTasks++;
         System.out.println("Task added:");
