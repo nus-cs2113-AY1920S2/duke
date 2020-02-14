@@ -1,8 +1,20 @@
 package taskManager;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import exceptionHandler.inputValidation;
 public class Duke {
     private static int MAXIMUM_TASKS = 100;
+
+    public static  void printWelcomeMsg() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___| ";
+        System.out.println(logo + " says hello :)");
+        System.out.println("\nWhat can i do for you?");
+    }
 
     public static void printTaskList(Task[] taskList, int counter){
         for (int i = 0; i < counter; i++) {
@@ -67,20 +79,23 @@ public class Duke {
         return null;
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___| ";
-        System.out.println(logo + " says hello :)");
-        System.out.println("\nWhat can i do for you?");
+    public static Task[] fillTasks(FileOperation fileOp) {
         Task[] taskList = new Task[MAXIMUM_TASKS];
-        int counter = 0;
-        Boolean instr = false;
+        try {
+            taskList = fileOp.loadTaskList();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
+        return taskList;
+    }
+
+    public static void main(String[] args) {
+        printWelcomeMsg();
+        FileOperation fileOp = new FileOperation();
+        Task[] taskList = fillTasks(fileOp);
+        int counter = fileOp.counter;
         Scanner myObj = new Scanner(System.in);
-        String cmd;
-        cmd = myObj.nextLine();
+        String cmd = myObj.nextLine();
         while (!cmd.equalsIgnoreCase("bye")) {
             String cmdType = cmdTypeIdentifier(cmd, counter);
             if (cmdType != null) {
