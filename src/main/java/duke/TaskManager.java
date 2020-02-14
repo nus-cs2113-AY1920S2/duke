@@ -1,18 +1,21 @@
 package duke;
 
+import duke.exceptions.BadDeleteFormatException;
+import duke.exceptions.BadDoneFormatException;
+import duke.exceptions.BadFileFormatException;
+import duke.exceptions.BadLineFormatException;
+import duke.exceptions.BadTaskChoiceFormatException;
+import duke.exceptions.InvalidKeywordException;
 import duke.tasks.exceptions.BadTaskFormatException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+
+import java.util.ArrayList;
 
 public class TaskManager {
     protected ArrayList<Task> tasks;
@@ -20,8 +23,18 @@ public class TaskManager {
 
     public TaskManager() {
         tasks = new ArrayList<>();
-        loadFromFile();
-        listTasks();
+        try {
+            ArrayList<String> fileContents = FileIO.loadFromFile(filePath);
+            addFileContentsToTasks(fileContents);
+        } catch (FileNotFoundException e) {
+            Ui.printPretty("Couldn't locate a save file. Starting with an empty list of tasks");
+        } catch (BadFileFormatException e) {
+            Ui.printPretty(e.getMessage());
+        }
+
+        if (tasks.size() != 0) {
+            listTasks();
+        }
     }
 
     public void executeUserInput(String userInput) {
@@ -43,23 +56,23 @@ public class TaskManager {
                 break;
             case DONE:
                 markAsDone(command);
-                saveToFile();
+                FileIO.saveToFile(filePath, getFormattedTasks());
                 break;
             case DELETE:
                 deleteTask(command);
-                saveToFile();
+                FileIO.saveToFile(filePath, getFormattedTasks());
                 break;
             case DEADLINE:
                 addTask(new Deadline(command));
-                saveToFile();
+                FileIO.saveToFile(filePath, getFormattedTasks());
                 break;
             case EVENT:
                 addTask(new Event(command));
-                saveToFile();
+                FileIO.saveToFile(filePath, getFormattedTasks());
                 break;
             case TODO:
                 addTask(new ToDo(command));
-                saveToFile();
+                FileIO.saveToFile(filePath, getFormattedTasks());
                 break;
             default:
                 // Should never reach default case b/c check for invalid keyword when creating command object
@@ -67,6 +80,9 @@ public class TaskManager {
             }
         } catch (BadTaskFormatException | BadTaskChoiceFormatException e) {
             Ui.printPretty(e.getMessage());
+        } catch (IOException e) {
+            Ui.printPretty(e.getMessage() + System.lineSeparator() +
+                    "*** Writing to file failed. Your task list may not have been saved. ***");
         }
     }
 
@@ -135,65 +151,42 @@ public class TaskManager {
         Ui.printPretty("Task " + (taskIndex + 1) + " has been marked as done\n" + t.toString());
     }
 
-    protected void saveToFile() {
-        try {
-            File d = new File(filePath.substring(0, filePath.indexOf("/")));
-            if (!d.exists()) {
-                d.mkdir();
-            }
+    protected String getFormattedTasks() {
+        String formattedTasks = "";
+        for (Task t : tasks) {
+            formattedTasks += t.toFormattedString() + System.lineSeparator();
+        }
+        return formattedTasks;
+    }
 
-            File f = new File(filePath);
-            if (!f.exists()) {
-                f.createNewFile();
-            }
+    protected void addFileContentsToTasks(ArrayList<String> fileContents) throws BadFileFormatException {
+        int lineCounter = 1;
+        String errors = "";
 
-            FileWriter fw = new FileWriter(filePath);
-            String formattedTasks = "";
-            for (Task t : tasks) {
-                formattedTasks += t.toFormattedString() + System.lineSeparator();
+        for (String s : fileContents) {
+            try {
+                tasks.add(getTaskFromFormattedLine(s));
+            } catch (BadLineFormatException e) {
+                errors += e.getMessage() + " on line " + lineCounter + " of " + filePath + System.lineSeparator();
             }
-            fw.write(formattedTasks);
-            fw.close();
-        } catch (IOException e) {
-            Ui.printPretty(e.getMessage());
-            Ui.printPretty("*** Writing to file failed. Your task list may not have been saved. ***");
+            lineCounter++;
+        }
+
+        if (!errors.equals("")) {
+            throw new BadFileFormatException(errors.substring(0, errors.length() - 1));
         }
     }
 
-    protected void loadFromFile() {
-        try {
-            File f = new File(filePath);
-            Scanner s = new Scanner(f);
-            int counter = 1;
-            String errors = "";
-
-            while (s.hasNext()) {
-                try {
-                    tasks.add(getTaskFromFormattedLine(s.nextLine()));
-                } catch (BadFileFormatException e){
-                    errors += e.getMessage() + " on line " + counter + " of " + filePath + System.lineSeparator();
-                }
-                counter++;
-            }
-
-            if (!errors.equals("")) {
-                Ui.printPretty(errors.substring(0, errors.length() - 1));
-            }
-        } catch (FileNotFoundException e) {
-            Ui.printPretty("Couldn't locate a save file. Starting with an empty list of tasks");
-        }
-    }
-
-    protected Task getTaskFromFormattedLine(String line) throws BadFileFormatException {
+    protected Task getTaskFromFormattedLine(String line) throws BadLineFormatException {
         String[] tokens = line.split(",");
         if (tokens.length == 0) {
-            throw new BadFileFormatException("Empty line");
+            throw new BadLineFormatException("Empty line");
         } else if (tokens.length < 3) {
-            throw new BadFileFormatException("Not enough tokens");
+            throw new BadLineFormatException("Not enough tokens");
         } else if ((tokens[0].equals("D") || tokens[0].equals("E")) && tokens.length < 4) {
-            throw new BadFileFormatException("Not enough tokens");
+            throw new BadLineFormatException("Not enough tokens");
         } else if (!(tokens[1].equals("y") || tokens[1].equals("n"))) {
-            throw new BadFileFormatException("Second token must be y or n");
+            throw new BadLineFormatException("Second token must be y or n");
         }
 
         switch(tokens[0]) {
@@ -204,7 +197,7 @@ public class TaskManager {
         case "E":
             return new Event(tokens[1].equals("y") ? true : false, tokens[2], tokens[3]);
         default:
-            throw new BadFileFormatException("First token must be T, D, or E");
+            throw new BadLineFormatException("First token must be T, D, or E");
         }
     }
 }

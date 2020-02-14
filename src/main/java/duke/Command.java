@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exceptions.InvalidKeywordException;
+
 public class Command {
     protected Keyword keyword;
     protected String[] tokens;
