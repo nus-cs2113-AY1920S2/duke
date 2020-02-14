@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,11 +14,12 @@ import java.util.List;
 import duke.task.TaskList;
 import storage.InvalidStorageFilePathException;
 
+import static misc.Messages.MESSAGE_READ_WRITE_FAILURE;
+
 public class Storage {
     
     public static final String DEFAULT_STORAGE_FILEPATH = 
-            "C:\\Users\\limwe\\OneDrive\\Documents"
-            + "\\GitHub\\duke\\src\\main\\java\\data\\storage.txt";
+            "data\\storage.txt";
     
     public final Path path;
     
@@ -38,18 +38,17 @@ public class Storage {
     }
     
     public TaskList load() throws IOException {
-        File f = new File(this.path.toString());        
-        BufferedReader br = new BufferedReader(new FileReader(f));
         List<String> lines = new ArrayList<>();
         
         try {
             String line;
+            File f = new File(this.path.toString());        
+            BufferedReader br = new BufferedReader(new FileReader(f));
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new StorageReadWriteException("Unable to read "
-                    + "or write the current file.");
+            throw new StorageReadWriteException(MESSAGE_READ_WRITE_FAILURE);
         } 
         return TaskListDecoder.decodeTaskList(lines);
     }
@@ -63,9 +62,8 @@ public class Storage {
             bw.write(encodedTaskList);
             bw.close();
         } catch (IOException e) {
-            e.printStackTrace();;
-        }
-        
+            throw new StorageReadWriteException(MESSAGE_READ_WRITE_FAILURE);
+        }        
     }
     
     public String getFilePath() {
