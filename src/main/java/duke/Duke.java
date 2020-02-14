@@ -58,11 +58,17 @@ public class Duke {
     }
 
     private static void processDoneCommand(ArrayList<Task> list, String command) {
-        int listIndex = Integer.parseInt(command.replaceAll("[^\\d]", ""));
-        list.get(listIndex - 1).filteredTask = list.get(listIndex - 1).filteredTask.replace("✗", "✓");
-        System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n       " + list.get(listIndex - 1).filteredTask
-                + "\n    ____________________________________________________________");
+        try {
+            int listIndex = Integer.parseInt(command.replaceAll("[^\\d]", ""));
+            list.get(listIndex - 1).filteredTask = list.get(listIndex - 1).filteredTask.replace("✗", "✓");
+            System.out.println("    ____________________________________________________________\n"
+                    + "     Nice! I've marked this task as done:\n       " + list.get(listIndex - 1).filteredTask
+                    + "\n    ____________________________________________________________");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    ____________________________________________________________\n"
+                    + "     Task does not exist!\n"
+                    + "    ____________________________________________________________");
+        }
     }
 
     private static void processByeCommand() {
