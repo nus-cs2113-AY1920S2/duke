@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static int counter = 0;
+    //private static int counter = 0;
     public static final int MAXIMUM_TASKS = 100;
     public static final String[] VALID_COMMANDS = {"done","list","bye","todo","deadline","event"};
-    private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
+    //private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
+    private static ArrayList<Task> listOfTasks = new ArrayList<>();
     private static final String logo = "  ____        _        \n"
                                  + " |  _ \\ _   _| | _____ \n"
                                  + " | | | | | | | |/ / _ \\\n"
@@ -127,17 +129,21 @@ public class Duke {
         String description = taskInformation.substring(0, dividerPosition);
         String dateAndTime = taskInformation.substring(dividerPosition+5);
         if (command.equals("deadline")) {
-            listOfTasks[counter] = new Deadline(description, dateAndTime);
+            Deadline deadlineToAdd = new Deadline(description, dateAndTime);
+            listOfTasks.add(deadlineToAdd);
         } else if (command.equals("event")) {
-            listOfTasks[counter] = new Event(description, dateAndTime);
+            Event eventToAdd = new Event(description, dateAndTime);
+            listOfTasks.add(eventToAdd);
         }
 
     }
 
     public static void storeTaskIntoList(String taskInformation, String command) {
+        Task taskToStore;
         switch (command) {
         case "todo":
-            listOfTasks[counter] = new Todo(taskInformation);
+            Todo todoToAdd = new Todo(taskInformation);
+            listOfTasks.add(todoToAdd);
             break;
         case "deadline":
             storeTaskIntoList(taskInformation, " /by ", command);
@@ -146,39 +152,51 @@ public class Duke {
             storeTaskIntoList(taskInformation, " /at ", command);
             break;
         }
-        counter += 1;
+        //counter += 1;
         showStoredTask();
     }
 
     private static void showStoredTask() {
+        int sizeOfList = listOfTasks.size();
+        Task lastTask = listOfTasks.get(sizeOfList - 1);
+
         printLine();
         System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + listOfTasks[counter-1].getTypeIcon()
-                +"[" + listOfTasks[counter-1].getStatusIcon() + "]"
-                + " " + listOfTasks[counter-1].showFullDescription());
-        System.out.println(" Now you have " + counter + " tasks in the list.");
+        System.out.println("   " + lastTask.getTypeIcon()
+                +"[" + lastTask.getStatusIcon() + "]"
+                + " " + lastTask.showFullDescription());
+
+        System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         printLine();
     }
 
     public static void listAllTasks() {
         printLine();
         System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < counter; i += 1) {
+        /*for (int i = 0; i < counter; i += 1) {
             System.out.print(" " + (i+1) + "." + listOfTasks[i].getTypeIcon() + "["
                     + listOfTasks[i].getStatusIcon() + "] ");
             System.out.println(listOfTasks[i].showFullDescription());
+        }*/
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task currTask = listOfTasks.get(i);
+            System.out.print(" " + (i + 1) + "." + currTask.getTypeIcon() + "["
+                    + currTask.getStatusIcon() + "] ");
+            System.out.println(currTask.showFullDescription());
         }
+
         printLine();
     }
 
     public static void markTaskAsDone(String line) {
         int dividerPosition = line.indexOf("done");
         int taskNumber = Integer.parseInt(line.substring(dividerPosition+5));
-        listOfTasks[taskNumber-1].markAsDone();
+        Task taskDone = listOfTasks.get(taskNumber - 1);
+        taskDone.markAsDone();
         printLine();
         System.out.println(" Nice! I've marked this task as done:");
-        System.out.print("   [" + listOfTasks[taskNumber-1].getStatusIcon() + "] ");
-        System.out.println(listOfTasks[taskNumber-1].showFullDescription());
+        System.out.print("   [" + taskDone.getStatusIcon() + "] ");
+        System.out.println(taskDone.showFullDescription());
         printLine();
     }
 }
