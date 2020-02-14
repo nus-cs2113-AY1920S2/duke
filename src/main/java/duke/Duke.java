@@ -6,6 +6,10 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,9 +26,20 @@ import static duke.utils.Constants.EVENT_MARKER;
 public class Duke {
     // a array to store user input task
     private static List<Task> tasks = new ArrayList<>();
+
+    private static String filePath = "data" + File.separator + "duke.txt";
     
     public static void main(String[] args) {
         displayWelcomeMessage();
+
+        // for debugging
+        // System.out.println(java.nio.file.Paths.get("").toAbsolutePath().toString());
+        
+        try {
+            loadFileContents(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         
         Scanner in = new Scanner(System.in);
         String input = null;
@@ -41,10 +56,13 @@ public class Duke {
             case DONE_COMMAND:
                 try {
                     markAsDone(Integer.parseInt(split[1].trim()));
+                    updateTasksToFile(filePath, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
                 } catch (NumberFormatException e) {
                     displayInvalidTaskNumberMessage();
+                } catch (IOException e) {
+                    displayIOExceptionMessage(e);
                 } catch (ChatboxException e) {
                     displayInvalidTaskNumberMessage();
                 }
@@ -55,22 +73,31 @@ public class Duke {
             case TODO_COMMAND:
                 try {
                     addTodo(split[1]);
+                    updateTasksToFile(filePath, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
+                } catch (IOException e) {
+                    displayIOExceptionMessage(e);
                 }
                 break;
             case DEADLINE_COMMAND:
                 try {
                     addDeadline(split[1]);
+                    updateTasksToFile(filePath, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
+                } catch (IOException e) {
+                    displayIOExceptionMessage(e);
                 }
                 break;
             case EVENT_COMMAND:
                 try {
                     addEvent(split[1]);
+                    updateTasksToFile(filePath, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
+                } catch (IOException e) {
+                    displayIOExceptionMessage(e);
                 }
                 break;
             default:
@@ -79,7 +106,7 @@ public class Duke {
             }
         } while (!input.equals(BYE_COMMAND));
     }
-    
+
     private static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -158,5 +185,64 @@ public class Duke {
 
     private static void displayEmptyDescriptionMessage(String command) {
         System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", command));
+    }
+
+    private static void displayIOExceptionMessage(IOException e) {
+        System.out.println("Something went wrong: " + e.getMessage());
+    }
+
+    private static void loadFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        System.out.println("Tasks on the list: ");
+        if (!s.hasNext()) {
+            System.out.println("Empty list");
+        }
+        
+        while (s.hasNext()) {
+            String taskLine = s.nextLine();
+            System.out.println(taskLine);
+            saveStringtoTask(taskLine);
+        }
+    }
+    
+    private static void updateTasksToFile(String filePath, List<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task: tasks) {
+            fw.write(task.getFileString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+    
+    private static void saveStringtoTask(String fileLine) {
+        String[] arrays = fileLine.split("\\|");
+        String type = arrays[0].trim();
+        String isDone = arrays[1].trim();
+        String description = arrays[2].trim();
+        switch (type) {
+        case "T":
+            Task todo = new Todo(description);
+            if (isDone == "1") {
+                todo.markAsDone();
+            }
+            tasks.add(todo);
+            break;
+        case "D":
+            String by = arrays[3].trim();
+            Task deadline = new Deadline(description, by);
+            if (isDone == "1") {
+                deadline.markAsDone();
+            }
+            tasks.add(deadline);
+            break;
+        case "E":
+            String at = arrays[3].trim();
+            Task event = new Event(description, at);
+            if (isDone == "1") {
+                event.markAsDone();
+            }
+            tasks.add(event);
+            break;
+        }         
     }
 }
