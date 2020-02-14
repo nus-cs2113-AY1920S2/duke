@@ -112,7 +112,7 @@ public class TaskManager {
             tasks.get(taskID).markAsDone();
             System.out.println(FIVE_SPACES + DONE_TASK_PROMPT);
             System.out.println(SEVEN_SPACES + tasks.get(taskID));
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
         } finally {
             System.out.println(LINE_DIVIDER);
@@ -148,7 +148,7 @@ public class TaskManager {
                     System.out.println(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
                 }
             }
-            System.out.println(DATA_LOADED_SUCCESSFULLY_PROMPT);
+            System.out.println(FIVE_SPACES + DATA_LOADED_SUCCESSFULLY_PROMPT);
         } catch (FileNotFoundException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + FILE_NOT_FOUND_ERROR_MESSAGE);
         }
