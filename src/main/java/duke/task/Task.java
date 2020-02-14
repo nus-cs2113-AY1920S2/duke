@@ -21,6 +21,8 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String getDetails();
+
     public String getTaskStatus() {
         String icon = isDone ? "\u2713" : "\u2718";
         return ("[" + icon + "] " + task);

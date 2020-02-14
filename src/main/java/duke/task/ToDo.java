@@ -8,6 +8,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getDetails() {
+        return null;
+    }
+
+    @Override
     public String getTaskStatus() {
         return "[T]" + super.getTaskStatus();
     }

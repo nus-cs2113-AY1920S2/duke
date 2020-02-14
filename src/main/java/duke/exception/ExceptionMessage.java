@@ -6,9 +6,20 @@ import static java.lang.System.lineSeparator;
 
 public class ExceptionMessage {
 
+    public static final String IO_ERROR_MESSAGE =
+            "An unexpected error has occurred!!" + lineSeparator() + "Aborting LumiChat program...";
+
+    public static final String FILE_NOT_FOUND_MESSAGE =
+            "No existing task list found! Starting a new empty task list..." + lineSeparator();
+
+    public static final String FILE_SAVE_ERROR_MESSAGE =
+            TextFormatter.SHOCK_FACE +
+            "Arh!! Lumi cannot seem to save your list!!"
+            + lineSeparator() + "  Do you still want to leave without saving?" + lineSeparator();
+
     public final static String INVALID_ACTION_MESSAGE =
             TextFormatter.SHOCK_FACE +
-            "Oh no!! Lumi has trouble understanding these words... Please try again!\n";
+            "Oh no!! Lumi has trouble understanding these words... Please try again!" + lineSeparator();
 
     public final static String INVALID_DONE_FORMAT_MESSAGE =
             TextFormatter.SHOCK_FACE +

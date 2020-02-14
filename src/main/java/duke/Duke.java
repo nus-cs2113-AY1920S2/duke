@@ -5,15 +5,14 @@ import duke.exception.InvalidActionException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidListNumberException;
 import duke.format.Printer;
+import duke.format.TextFormatter;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -140,8 +139,14 @@ public class Duke {
         while (true) {
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("bye")) {
-                scanner.close();
-                return;
+                try {
+                    saveTaskList(list);
+                    Printer.printGoodbyeMessage();
+                    Printer.printSuccessfulSaveMessage();
+                    return;
+                } catch (IOException e) {
+                    System.out.println(ExceptionMessage.FILE_SAVE_ERROR_MESSAGE);
+                }
             } else if (input.toLowerCase().equals("list")) {
                 Printer.printList(list, true);
             } else {
@@ -161,16 +166,18 @@ public class Duke {
         try {
             loadTaskList(list);
         } catch (FileNotFoundException e) {
+            // Create new task list file
             File taskListFile = new File(TASK_LIST_PATH);
             taskListFile.getParentFile().mkdirs();
             taskListFile.createNewFile();
 
-            System.out.println("No file exist");
+            System.out.println(ExceptionMessage.FILE_NOT_FOUND_MESSAGE);
         }
 
         Printer.printReadyMessage();
 
         readInput();
+        scanner.close();
 
         Printer.printExitMessage();
     }
@@ -180,8 +187,30 @@ public class Duke {
         Scanner fileScanner = new Scanner(taskListFile);
 
         while (fileScanner.hasNextLine()) {
-            System.out.println(fileScanner.hasNextLine());
+            System.out.println(fileScanner.nextLine());
         }
+
+        fileScanner.close();
+    }
+
+    private void saveTaskList(Vector<Task> list) throws IOException {
+        // Ensure all directories are made first
+        File taskListFile = new File(TASK_LIST_PATH);
+        taskListFile.getParentFile().mkdirs();
+
+        FileWriter writer = new FileWriter(TASK_LIST_PATH);
+
+        for (Task task : list) {
+            String taskType = task.getClass().getSimpleName().substring(0, 1);
+            String doneStatus = task.getIsDone() ? "1" : "0";
+            String taskDescription = task.getTask();
+            String taskDetail = task.getDetails();
+
+            String taskData = String.join("__", new String[]{taskType, doneStatus, taskDescription, taskDetail});
+            writer.write(taskData + System.lineSeparator());
+        }
+
+        writer.close();
     }
 
     public static void main(String[] args) {
@@ -189,7 +218,7 @@ public class Duke {
         try {
             chatBot.runChat();
         } catch (IOException e) {
-            System.out.println("An error has occurred!!\n Aborting LumiChat program...");
+            System.out.println(ExceptionMessage.IO_ERROR_MESSAGE);
         }
     }
 }
