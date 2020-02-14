@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static misc.Messages.MESSAGE_INVALID_TASK_TYPE;
 
 public class TaskListDecoder {
 
@@ -18,6 +19,7 @@ public class TaskListDecoder {
    public static int TASK_NAME_INDEX = 2;
    public static int TASK_REQUIREMENT_INDEX = 3;
    public static int decoderTaskCounter = 0;
+   public static int DEFAULT_TASK_ARGUMENT_LENGTH = 3;
     
     public static TaskList decodeTaskList(List<String> lines) {
         TaskList decodedTaskList = new TaskList();       
@@ -26,12 +28,13 @@ public class TaskListDecoder {
             TaskListDecoder.decoderTaskCounter++;
             List<Optional<String>> taskArgs = parseLineIntoTaskArguments(line);
             Task decodedTask = decodeTask(taskArgs);           
-            decodedTaskList.addTask(decodedTask);
+            decodedTaskList.loadTask(decodedTask);
         }
         return decodedTaskList;
     }
     
-    public static Task decodeTask(List<Optional<String>> taskArgs) {         
+    public static Task decodeTask(List<Optional<String>> taskArgs) {  
+        // Extract task information from the Optional wrapper.
         String taskType = taskArgs.get(TaskListDecoder.TASK_TYPE_INDEX).get();
         String taskStatus = taskArgs.get(TaskListDecoder.TASK_STATUS_INDEX).get();
         String taskName = taskArgs.get(TaskListDecoder.TASK_NAME_INDEX).get();
@@ -54,9 +57,8 @@ public class TaskListDecoder {
                     taskName, taskRequirement.get(), isDone);
             break;
         default:
-            throw new InvalidTaskArgumentException("Cannot understand taskType");
+            throw new InvalidTaskArgumentException(MESSAGE_INVALID_TASK_TYPE);
         }
-
         return task;       
     }
     
@@ -81,7 +83,7 @@ public class TaskListDecoder {
         }
         taskArgs.add(Optional.of(cleanWord));
         
-        if (taskArgs.size() == 3) {
+        if (taskArgs.size() == DEFAULT_TASK_ARGUMENT_LENGTH) {
             taskArgs.add(Optional.of(""));
         }
         return taskArgs;
