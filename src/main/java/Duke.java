@@ -1,67 +1,104 @@
+import java.lang.NullPointerException;
 import java.util.Scanner;
+import Duke.*;
+import Exceptions.*;
 
 public class Duke {
-    private  static Task [] tasks = new Task[100];
-    private  static int size = 0;
+    private static Task[] tasks = new Task[100];
+    private static int size = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+
+
         Scanner myScanner = new Scanner(System.in);
-
         String userName = GreetingsAndFunctions(myScanner); //Greetings and list of Functions
 
         boolean flag = true; //Boolean flag for while loop
-        while(flag == true){
-            String function = myScanner.next();
-            String line = myScanner.nextLine();
+        String function = null;
+        while (flag == true) {
 
-            switch (function) {
-                case "todo":
-                    addtask(new Todo(line));
-                    printAddedTask("New To-Do Task added:");
-                    break;
+            try {
+                function = myScanner.next();
+                String line = myScanner.nextLine();
 
-                case "deadline":
-                    String [] description = line.split("/");
-                    String [] deadLine = description[1].split("by ");
-                    addtask(new Deadline(description[0], deadLine[1]));
-                    printAddedTask("New Task with deadline added:");
-                    break;
+                switch (function) {
+                    case "todo":
+                        if(line.equals("")){
+                            throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
+                        }
+                        addtask(new Todo(line));
+                        printAddedTask("New To-Do Duke.Task added:");
+                        break;
 
-                case "event":
-                    String [] eventName = line.split("/");
-                    String [] event = eventName[1].split("at ");
-                    addtask(new Events(eventName[0], event[1]));
-                    printAddedTask("New event added:");
-                    break;
+                    case "deadline":
+                        String[] description = line.split("/");
+                        if(description[0].equals("")){
+                            throw new MissingDescriptionException("☹ OOPS!!! The deadline description cannot be empty!!");
+                        }
+                        String[] deadLine = description[1].split("by ");
+                        if(description[0] == null){
+                            throw new ArrayIndexOutOfBoundsException();
+                        }
+                        addtask(new Deadline(description[0], deadLine[1]));
+                        printAddedTask("New Duke.Task with deadline added:");
+                        break;
 
-                case "bye":
-                    System.out.println("Bye " + userName + "! Hope to see you again soon!");
-                    System.out.println("____________________________________________________________");
-                    flag = false;
-                    break;
+                    case "event":
+                        String[] eventName = line.split("/");
+                        if(eventName[0].equals("")){
+                            throw new MissingDescriptionException("☹ OOPS!!! The event description cannot be empty!!");
+                        }
+                        String[] event = eventName[1].split("at ");
+                        if(event[0].equals(null)){
+                            throw new ArrayIndexOutOfBoundsException();
+                        }
+                        addtask(new Events(eventName[0], event[1]));
+                        printAddedTask("New event added:");
+                        break;
 
-                case "list":
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Here are your task(s) currently in your planner:");
-                    for (int i = 0; i < size; i++) {
-                        System.out.println(i+1 + "." + tasks[i]);
-                    }
-                    System.out.println("____________________________________________________________");
-                    break;
+                    case "bye":
+                        System.out.println("Bye " + userName + "! Hope to see you again soon!");
+                        System.out.println("____________________________________________________________");
+                        flag = false;
+                        break;
 
-                case "done":
-                    String l = line.replace(" ","");
-                    int taskNumber = Integer.parseInt(l);
-                    tasks[taskNumber-1].markAsDone(tasks[taskNumber-1]);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Great job! I've marked this task as done in your planner:");
-                    System.out.println(tasks[taskNumber-1]);
-                    System.out.println("____________________________________________________________");
-                    break;
+                    case "list":
+                        System.out.println("____________________________________________________________");
+                        System.out.println("Here are your task(s) currently in your planner:");
+                        for (int i = 0; i < size; i++) {
+                            System.out.println(i + 1 + "." + tasks[i]);
+                        }
+                        System.out.println("____________________________________________________________");
+                        break;
 
-                default:
-                    System.out.println("Please key in a valid function"); //loop till valid function entered
-                    break;
+                    case "done":
+                        String l = line.replace(" ", "");
+                        if(l == ""){
+                            throw new IllegalArgumentException();
+                        }
+                        int taskNumber = Integer.parseInt(l);
+                        tasks[taskNumber - 1].markAsDone(tasks[taskNumber - 1]);
+                        if(tasks[0] == null){
+                            throw new NullPointerException();
+                        }
+                        System.out.println("____________________________________________________________");
+                        System.out.println("Great job! I've marked this task as done in your planner:");
+                        System.out.println(tasks[taskNumber - 1]);
+                        System.out.println("____________________________________________________________");
+                        break;
+
+                    default:
+                        System.out.println("Please key in a valid function"); //loop till valid function entered
+                        break;
+                }
+            } catch (MissingDescriptionException e) {
+               e.printDescr();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("☹ OOPS! Error storing date and time!! Please try again.");
+            } catch (NullPointerException e) {
+                System.out.println("☹ OH NO! task number is missing!! Please try storing a task first.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("☹ OOPS! Missing command! Please try command: done [task number] ");
             }
         }
     }
@@ -88,7 +125,7 @@ public class Duke {
         System.out.println("Hey there! My name is Duke and i will be your personal assistant.");
         System.out.println("Please enter your username: ");
         String userName = myScanner.nextLine();
-        System.out.println("Hi "+ userName + "!" + " What can i do for you?");
+        System.out.println("Hi " + userName + "!" + " What can i do for you?");
         System.out.println(" ___________________________________________________________________________________________________________");
         System.out.println("|  Functions:  |                 Descriptions:                      |               Example:                |");
         System.out.println("|______________|____________________________________________________|_______________________________________|");
@@ -104,7 +141,7 @@ public class Duke {
     }
 
     //method for adding adding newly created task into tasks array
-    public static void addtask(Task description){
+    public static void addtask(Task description) {
         tasks[size++] = description;
     }
 }
