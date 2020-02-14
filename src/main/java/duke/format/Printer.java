@@ -2,7 +2,9 @@ package duke.format;
 
 import duke.task.Task;
 
-import java.util.Vector;
+import java.util.ArrayList;
+
+import static java.lang.System.lineSeparator;
 
 public class Printer {
 
@@ -35,9 +37,10 @@ public class Printer {
         System.out.println(TextFormatter.SAD_FACE + "Goodbye! Lumi will miss you!");
     }
 
-     public static void printAddTaskMessage(Vector<Task> list) {
-        System.out.println(TextFormatter.HAPPY_FACE + "Alright, Lumi has added: " + list.lastElement().getTask() + "!");
-        System.out.println(TextFormatter.createSpaces(8) + list.lastElement().getTaskStatus());
+     public static void printAddTaskMessage(ArrayList<Task> list) {
+        int latestTaskIndex = list.size() - 1; // 0-based indexing
+        System.out.println(TextFormatter.HAPPY_FACE + "Alright, Lumi has added: " + list.get(latestTaskIndex).getTask() + "!");
+        System.out.println(TextFormatter.createSpaces(8) + list.get(latestTaskIndex).getTaskStatus());
         if (list.size() == 1) {
             System.out.println("  You now have " + list.size() + " task in Lumi's list!\n");
         } else {
@@ -45,53 +48,82 @@ public class Printer {
         }
     }
 
-    public static void printCompleteTaskMessage(Vector<Task> list, int listNumber) {
+    public static void printCompleteTaskMessage(ArrayList<Task> list, int listNumber) {
         System.out.println(TextFormatter.HAPPY_FACE + "Well done! Lumi marks this task as completed!");
         System.out.println(TextFormatter.createSpaces(8) + list.get(listNumber).getTaskStatus() +
-                System.lineSeparator());
+                lineSeparator());
     }
 
-    public static void printAlreadyCompletedTaskMessage(Vector<Task> list, int listNumber) {
+    public static void printAlreadyCompletedTaskMessage(ArrayList<Task> list, int listNumber) {
         System.out.println(TextFormatter.ANGRY_FACE +
-        "Hey!! Lumi already marked <" + list.get(listNumber).getTask() + "> as completed!" + System.lineSeparator());
+        "Hey!! Lumi already marked <" + list.get(listNumber).getTask() + "> as completed!" + lineSeparator());
     }
 
 
-    public static void printList(Vector<Task> list, boolean isStandardPrint) {
+    public static void printList(ArrayList<Task> list, boolean isStandardPrint) {
 
         if (isStandardPrint) {
             System.out.println(TextFormatter.HAPPY_FACE + "Sure! Lumi prints your list!");
         }
 
-        String listTop =
+        final String LIST_TOP =
                 "    +---------+\n" +
                 "+---| L I S T |------------------------------------------------+\n" +
                 "|   +---------+                                                |";
-        String listLeft = "| ";
-        String listRight = " |";
-        String listBottom = "+--------------------------------------------------------------+\n";
+        final String LIST_LEFT = "| ";
+        final String LIST_RIGHT = " |";
+        final String LIST_BOTTOM = "+--------------------------------------------------------------+\n";
         final int LIST_LENGTH = 60;
 
-        System.out.println(listTop);
+        System.out.println(LIST_TOP);
 
         // Print list items
         for (int i = 0; i < list.size(); i++) {
             String listItem = i+1 + ". " + list.get(i).getTaskStatus();
 
-            System.out.print(listLeft);
+            System.out.print(LIST_LEFT);
             System.out.print(listItem);
             System.out.print(TextFormatter.createSpaces(LIST_LENGTH-listItem.length()-1));
-            System.out.println(listRight);
+            System.out.println(LIST_RIGHT);
         }
 
-        System.out.print(listBottom);
+        System.out.print(LIST_BOTTOM);
 
         // Print total number of tasks
         String totalTaskString = "Total: " + list.size() + (list.size() == 1 ? " task" : " tasks");
-        System.out.print(listLeft);
+        System.out.print(LIST_LEFT);
         System.out.print(totalTaskString);
         System.out.print(TextFormatter.createSpaces(LIST_LENGTH-totalTaskString.length()));
-        System.out.println(listRight);
-        System.out.println(listBottom);
+        System.out.println(LIST_RIGHT);
+        System.out.println(LIST_BOTTOM);
+    }
+
+    public static void printDeleteTaskConfirmationMessage(ArrayList<Task> list, int listNumber) {
+        System.out.println(TextFormatter.THINKING_FACE + "Umm... Lumi needs you to confirm to delete this task:");
+        System.out.println(TextFormatter.createSpaces(8) + list.get(listNumber).getTaskStatus() +
+                lineSeparator());
+    }
+
+    public static void printPromptValidConfirmationMessage() {
+        System.out.println(TextFormatter.THINKING_FACE +
+                "Uh... Lumi needs you to enter either " +
+                TextFormatter.toBoldAndItalic("YES") + " to confirm deletion or " +
+                TextFormatter.toBoldAndItalic("NO") + " to cancel..." + lineSeparator());
+    }
+
+    public static void printDeleteTaskMessage(ArrayList<Task> list, int listNumber) {
+        System.out.println(TextFormatter.HAPPY_FACE + "Bleep, Lumi say bye-bye to: " + list.get(listNumber).getTask() + "!");
+        System.out.println(TextFormatter.createSpaces(8) + list.get(listNumber).getTaskStatus());
+
+        int newListSize = list.size() - 1;
+        if (newListSize == 1) {
+            System.out.println("  You now have " + newListSize + " task in Lumi's list!\n");
+        } else {
+            System.out.println("  You now have " + newListSize + " tasks in Lumi's list!\n");
+        }
+    }
+
+    public static void printAbortDeleteMessage() {
+        System.out.println(TextFormatter.HAPPY_FACE + "OK, Lumi continues without deleting!" + lineSeparator());
     }
 }
