@@ -165,9 +165,10 @@ public class Duke {
 
         printLine();
         System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + lastTask.getTypeIcon()
-                +"[" + lastTask.getStatusIcon() + "]"
-                + " " + lastTask.showFullDescription());
+        System.out.println("   " + lastTask);
+//        System.out.println("   " + lastTask.getTypeIcon()
+//                +"[" + lastTask.getStatusIcon() + "]"
+//                + " " + lastTask.showFullDescription());
 
         System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         printLine();
@@ -183,9 +184,10 @@ public class Duke {
         }*/
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task currTask = listOfTasks.get(i);
-            System.out.print(" " + (i + 1) + "." + currTask.getTypeIcon() + "["
-                    + currTask.getStatusIcon() + "] ");
-            System.out.println(currTask.showFullDescription());
+            System.out.println(" " + (i + 1) + ". " + currTask);
+            //        currTask.getTypeIcon() + "[
+                    //       + currTask.getStatusIcon() + "] ");
+            //System.out.println(currTask.showFullDescription());
         }
 
         printLine();
@@ -198,8 +200,9 @@ public class Duke {
         taskDone.markAsDone();
         printLine();
         System.out.println(" Nice! I've marked this task as done:");
-        System.out.print("   [" + taskDone.getStatusIcon() + "] ");
-        System.out.println(taskDone.showFullDescription());
+        System.out.println("   " + taskDone);
+        //System.out.print("   [" + taskDone.getStatusIcon() + "] ");
+        //System.out.println(taskDone.showFullDescription());
         printLine();
     }
 
@@ -212,8 +215,9 @@ public class Duke {
 
         printLine();
         System.out.println("Noted. I've removed this task: ");
-        System.out.print("   [" + taskToDelete.getStatusIcon() + "] ");
-        System.out.println(taskToDelete.showFullDescription());
+        System.out.println("   " + taskToDelete);
+        //System.out.print("   [" + taskToDelete.getStatusIcon() + "] ");
+        //System.out.println(taskToDelete.showFullDescription());
         System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
         printLine();
     }
