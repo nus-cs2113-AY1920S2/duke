@@ -1,14 +1,20 @@
-import task.*;
-import exceptions.*;
+import task.Deadline;
+import task.Event;
+import task.Todo;
+import task.Task;
+import exceptions.InvalidCommandException;
+import exceptions.MissingDescriptionException;
+import exceptions.InvalidTaskException;
+
+import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws InvalidCommandException, MissingDescriptionException {
+    public static void main(String[] args) {
         UI.initUI();
         UI.printGreetMessage();
 
         String userInput;
-        Task [] tasks = new Task [100];
-        int numTasks = 0;
+        ArrayList<Task> tasks = new ArrayList<Task> (100);
 
         while (true) {
             userInput = UI.getNextLine();
@@ -28,15 +34,26 @@ public class Duke {
 
                 switch(command) {
                 case "list": // List all the tasks
-                    listTasks(tasks, numTasks);
+                    listTasks(tasks, tasks.size());
                     break;
                 case "done": // Mark a task as done
                     UI.br();
+                    int taskIdx = Integer.parseInt(words) -1; // -1 for zero-based indexing
+                    tasks.get(taskIdx).setDone();
                     System.out.println("\t Dun dun dun dun! This task is done:");
-                    int taskIdx = Integer.parseInt(words);
-                    taskIdx--; // -1 for zero-based indexing
-                    tasks[taskIdx].setDone();
-                    System.out.println("\t   " + tasks[taskIdx]);
+                    System.out.println("\t   " + tasks.get(taskIdx));
+                    UI.br();
+                    break;
+                case "delete": // Delete a task
+                    taskIdx = Integer.parseInt(words) -1;
+                    if (taskIdx >= tasks.size() || taskIdx < 0) {
+                        throw new InvalidTaskException();
+                    }
+                    UI.br();
+                    System.out.println("\t This task has been whisked out of existence:");
+                    System.out.println("\t  " + tasks.get(taskIdx));
+                    tasks.remove(taskIdx);
+                    System.out.println("\t " + tasks.size() + " task(s) remaining.");
                     UI.br();
                     break;
                 default: // Add a task
@@ -69,10 +86,8 @@ public class Duke {
                         throw new InvalidCommandException();
                     }
 
-                    tasks[numTasks] = t;
-                    numTasks++;
-
-                    printAddedTaskMessage(t, numTasks);
+                    tasks.add(t); // Append the task to the ArrayList
+                    printAddedTaskMessage(t, tasks.size());
                     break;
                 }
             } catch (MissingDescriptionException e) {
@@ -81,11 +96,15 @@ public class Duke {
                 UI.br();
             } catch (InvalidCommandException e) {
                 UI.br();
-                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(");
                 UI.br();
             } catch (IndexOutOfBoundsException e) {
                 UI.br();
-                System.out.println("\t ☹ OOPS!!! The task description cannot be empty.");
+                System.out.println("\t I'm sorry, but I don't know what that means :(");
+                UI.br();
+            } catch (InvalidTaskException e) {
+                UI.br();
+                System.out.println("\t This task doesn't exist!");
                 UI.br();
             }
         }
@@ -103,12 +122,12 @@ public class Duke {
     }
 
     /** Prints all tasks in the list */
-    private static void listTasks(Task[] tasks, int numTasks) {
+    private static void listTasks(ArrayList<Task> tasks, int numTasks) {
         UI.br();
         System.out.println("\t Dook will list your tasks now:");
         for (int i=0; i<numTasks; i++) {
             int taskNum = i+1;
-            System.out.println("\t " + taskNum + ". " + tasks[i]);
+            System.out.println("\t " + taskNum + ". " + tasks.get(i));
         }
         UI.br();
     }
