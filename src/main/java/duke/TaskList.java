@@ -11,8 +11,20 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public int getNumTasks() {
+        return tasks.size();
+    }
+
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public void addTaskWithMessage(Task task) {
+        addTask(task);
         System.out.println("Task added:");
         System.out.println("  " + task);
         System.out.println("You have " + tasks.size() + " task" +
