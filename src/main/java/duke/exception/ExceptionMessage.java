@@ -7,10 +7,14 @@ import static java.lang.System.lineSeparator;
 public class ExceptionMessage {
 
     public static final String IO_ERROR_MESSAGE =
-            "An unexpected error has occurred!!" + lineSeparator() + "Aborting LumiChat program...";
+            "An unexpected " + TextFormatter.toBold("error") + " has occurred!!"
+            + lineSeparator() + "Aborting LumiChat program...";
 
     public static final String FILE_NOT_FOUND_MESSAGE =
             "No existing task list found! Starting a new empty task list..." + lineSeparator();
+
+    public static final String CORRUPTED_FILE_MESSAGE =
+            "The task list file appears to be " + TextFormatter.toBold("corrupted") + "!" + lineSeparator();
 
     public static final String FILE_SAVE_ERROR_MESSAGE =
             TextFormatter.SHOCK_FACE +

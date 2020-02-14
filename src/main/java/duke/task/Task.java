@@ -10,15 +10,15 @@ public abstract class Task {
     }
 
     public String getTask() {
-        return this.task;
+        return task;
     }
 
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public void setIsDone(boolean status) {
-        this.isDone = true;
+        isDone = status;
     }
 
     public abstract String getDetails();

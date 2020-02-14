@@ -1,18 +1,16 @@
 package duke;
 
-import duke.exception.ExceptionMessage;
-import duke.exception.InvalidActionException;
-import duke.exception.InvalidFormatException;
-import duke.exception.InvalidListNumberException;
+import duke.exception.*;
 import duke.format.Printer;
-import duke.format.TextFormatter;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.*;
-import java.nio.file.Files;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -21,7 +19,6 @@ public class Duke {
     private static Vector<Task> list = new Vector<>();
     Scanner scanner = new Scanner(System.in);
     private static final String TASK_LIST_PATH = "./data/taskList.txt";
-    //private static final String DATA_DIRECTORY_PATH = "../../../../../data";
 
     private void doTask(String[] words) throws InvalidFormatException, InvalidListNumberException {
         if (words.length > 2) {
@@ -172,6 +169,8 @@ public class Duke {
             taskListFile.createNewFile();
 
             System.out.println(ExceptionMessage.FILE_NOT_FOUND_MESSAGE);
+        } catch (CorruptedFileException e) {
+            System.out.println(ExceptionMessage.CORRUPTED_FILE_MESSAGE);
         }
 
         Printer.printReadyMessage();
@@ -182,12 +181,46 @@ public class Duke {
         Printer.printExitMessage();
     }
 
-    private void loadTaskList(Vector<Task> list) throws FileNotFoundException {
+    private void loadTaskList(Vector<Task> list) throws FileNotFoundException, CorruptedFileException {
         File taskListFile = new File(TASK_LIST_PATH);
         Scanner fileScanner = new Scanner(taskListFile);
 
         while (fileScanner.hasNextLine()) {
-            System.out.println(fileScanner.nextLine());
+            String line = fileScanner.nextLine().trim();
+
+            if (line.isEmpty()) {
+                break;
+            }
+
+            String[] taskInformation = line.split("__");
+            String taskType = taskInformation[0];
+            String doneStatus = taskInformation[1];
+            String taskDescription = taskInformation[2];
+            String taskDetail = taskInformation[3];
+
+            if (!doneStatus.equals("1") && !doneStatus.equals("0")) {
+                throw new CorruptedFileException();
+            }
+
+            switch (taskType) {
+            case "T":
+                ToDo newToDoTask = new ToDo(taskDescription);
+                newToDoTask.setIsDone(doneStatus.equals("1"));
+                list.add(newToDoTask);
+                break;
+            case "D":
+                Deadline newDeadlineTask = new Deadline(taskDescription, taskDetail);
+                newDeadlineTask.setIsDone(doneStatus.equals("1"));
+                list.add(newDeadlineTask);
+                break;
+            case "E":
+                Event newEventTask = new Event(taskDescription, taskDetail);
+                newEventTask.setIsDone(doneStatus.equals("1"));
+                list.add(newEventTask);
+                break;
+            default:
+                throw new CorruptedFileException();
+            }
         }
 
         fileScanner.close();
