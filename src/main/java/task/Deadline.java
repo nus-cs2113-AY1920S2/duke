@@ -6,6 +6,13 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        this.taskType = "D";
+    }
+
+    @Override
+    public String getFileRecord() {
+        int doneValue = isDone ? 1 : 0;
+        return String.format("%s,%d,%s,%s\n", this.taskType, doneValue, this.description.strip(), this.by);
     }
 
     @Override

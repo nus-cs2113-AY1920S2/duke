@@ -6,15 +6,16 @@ import exceptions.InvalidCommandException;
 import exceptions.MissingDescriptionException;
 import exceptions.InvalidTaskException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         UI.initUI();
         UI.printGreetMessage();
 
         String userInput;
-        ArrayList<Task> tasks = new ArrayList<Task> (100);
+        ArrayList<Task> tasks = DataManager.loadTasks(); // Get tasks from txt file
 
         while (true) {
             userInput = UI.getNextLine();
@@ -107,6 +108,8 @@ public class Duke {
                 System.out.println("\t This task doesn't exist!");
                 UI.br();
             }
+
+            DataManager.saveTasks(tasks); // Update txt file
         }
 
         UI.printEndMessage();
