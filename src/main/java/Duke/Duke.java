@@ -22,21 +22,73 @@ import java.nio.file.Files;
 
 public class Duke {
 
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
-    public static final String LIST = "list";
-    public static final String DONE = "done";
-    public static final String DELETE = "delete";
-    public static final String T = "T";
-    public static final String E = "E";
-    public static final String D = "D";
-    public static final int DESCRIPTION = 0;
-    public static final int TIME = 1;
-    public static final int TIME_INCLUDED = 2;
-    public static final int TASK_TYPE = 0;
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String LIST = "list";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String T = "T";
+    private static final String E = "E";
+    private static final String D = "D";
+    private static final int DESCRIPTION = 0;
+    private static final int TIME = 1;
+    private static final int TIME_INCLUDED = 2;
+    private static final int TASK_TYPE = 0;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+
+    public Duke() {
+            ui = new Ui();
+            storage = new Storage();
+            tasks = new TaskList();
+    }
+
+    public void run() {
+        enterDuke();
+        runDukeTillExit();
+        exitDuke();
+
+    }
+
+    private void enterDuke() {
+        ui.displayHello();
+        tasks.setTaskList(storage.load());
+    }
+
+    private void runDukeTillExit() {
+        String userInput = ui.getUserInput();
+        Command command;
+        Parser parser = new Parser();
+        while (parser.isNotBye(userInput)){
+            try {
+                command = parser.parseUserInput(userInput);
+                command.execute(tasks);
+
+
+            } catch (InvalidTaskException
+                    | MissingDescriptonException
+                    | MissingNumberFieldException
+                    | MissingTimeFieldException
+                    | NumberFormatException m) {
+                System.out.println("Exception occurred: " + m);
+            }
+            ui.displayPrompt();
+            userInput = ui.getUserInput();
+        }
+    }
+
+    private void exitDuke() {
+        storage.save(tasks.getTaskList(), tasks.getNumberOfTask());
+        ui.displayGoodbye();
+    }
+
+
 
     public static void main(String[] args) {
+        //new Duke().run();
         displayHello();
         ArrayList<Task> taskList = initializeTaskList();
         Scanner myInput = initializeScanner();
@@ -316,7 +368,8 @@ public class Duke {
                                 + System.lineSeparator()
                                 + "Now you have "
                                 + currentNumberOfTasks
-                                + " tasks in the list");
+                                + " tasks in the list"
+                                + System.lineSeparator());
             }
             return currentNumberOfTasks;
         } catch (NumberFormatException e) {
