@@ -1,5 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+
 public class Deadline extends Task {
-    public Deadline(String command) throws DukeException{
+    public Deadline(String command) throws DukeException {
         super("[D][✗] "
                 + command.replaceFirst("deadline\\s","").replaceFirst("/by","(by:").trim()
                 + ")");

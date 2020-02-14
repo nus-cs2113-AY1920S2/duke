@@ -4,10 +4,12 @@
  *
  */
 
+package duke;
+
 public class DukeException extends Exception{
     public int exceptionCode;
     public String[] field = new String[2];
-    DukeException(int exceptionCode, String field){
+    public DukeException(int exceptionCode, String field){
         this.exceptionCode = exceptionCode;
         this.field[0] = field;
         switch (field) {

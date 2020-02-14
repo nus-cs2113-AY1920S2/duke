@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Task {
     public String filteredTask;
 

@@ -1,3 +1,9 @@
+import duke.*;
+import duke.command.*;
+import duke.command.Event;
+import duke.command.Task;
+import duke.command.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,8 +58,8 @@ public class Duke {
     }
 
     private static void processDoneCommand(ArrayList<Task> list, String command) {
-        int listIndex = Integer.parseInt(command.replaceAll("[^\\d]",""));
-        list.get(listIndex-1).filteredTask = list.get(listIndex-1).filteredTask.replace("✗","✓");
+        int listIndex = Integer.parseInt(command.replaceAll("[^\\d]", ""));
+        list.get(listIndex - 1).filteredTask = list.get(listIndex - 1).filteredTask.replace("✗", "✓");
         System.out.println("    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n       " + list.get(listIndex - 1).filteredTask
                 + "\n    ____________________________________________________________");
