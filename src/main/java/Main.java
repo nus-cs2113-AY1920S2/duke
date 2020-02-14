@@ -32,7 +32,8 @@ public class Main {
         try {
             this.ui = new Ui();
             this.storage = new Storage();           
-            this.duke = new Duke(storage.load());           
+            this.duke = new Duke(storage.load());  
+            ui.displayWelcomeMessage();
         } catch (InvalidStorageFilePathException e) {
             ui.displayErrorMessage(e.getMessage());
         } catch (StorageReadWriteException e) {
@@ -40,9 +41,7 @@ public class Main {
             throw new RuntimeException(e);
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } finally {
-            ui.displayWelcomeMessage();
-        }
+        } 
     }
     
     private void runCommandUntilExit() {                     
