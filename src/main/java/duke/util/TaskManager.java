@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.DummyTask;
 
 import static duke.util.Constants.DEADLINE_COMMAND;
 import static duke.util.Constants.DEADLINE_ICON;
@@ -32,7 +36,6 @@ import static duke.util.Constants.CRYING_FACE;
 import static duke.util.Constants.DATA_FILE_PATH;
 import static duke.util.Constants.FILE_NOT_FOUND_ERROR_MESSAGE;
 import static duke.util.Constants.FILE_OPERATION_IO_ERROR_MESSAGE;
-import static duke.util.Constants.TODO_ICON;
 import static duke.util.Constants.YES_ICON;
 
 
@@ -55,10 +58,6 @@ public class TaskManager {
         System.out.println(LINE_DIVIDER);
     }
 
-    /**
-     * @param args todo: addTasks(description, "todo")
-     *             deadline/event: addTasks(description, time, "deadline"/"event")
-     */
     public void addTask(String... args) {
         System.out.println(LINE_DIVIDER);
         String taskDescription = args[0].trim();
@@ -66,7 +65,7 @@ public class TaskManager {
             Task taskToAdd;
             if (args.length == 2) {
                 taskToAdd = new Todo(taskDescription);
-            } else if (args[2].equals("deadline")) {
+            } else if (args[2].equals(DEADLINE_COMMAND)) {
                 taskToAdd = new Deadline(taskDescription, args[1]);
             } else {
                 taskToAdd = new Event(taskDescription, args[1]);
@@ -102,7 +101,6 @@ public class TaskManager {
         System.out.println(SEVEN_SPACES + currentTask);
         System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
     }
-
 
     public void markAsDone(int taskID) {
         System.out.println(LINE_DIVIDER);

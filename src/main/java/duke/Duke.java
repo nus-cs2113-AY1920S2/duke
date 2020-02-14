@@ -32,7 +32,6 @@ import static duke.util.Constants.EVENT_FORMAT_ERROR_MESSAGE;
 import static duke.util.Constants.CRYING_FACE;
 
 
-
 public class Duke {
     private static boolean isExited = false;
 
@@ -84,11 +83,11 @@ public class Duke {
         }
     }
 
-    private static void processTaskWithTime(TaskManager TaskMgr, String taskInfo, String timeDelimiter, String deadlineCommand, String formatErrorMessage) {
+    private static void processTaskWithTime(TaskManager TaskMgr, String taskInfo, String timeDelimiter, String command, String formatErrorMessage) {
         try {
             String taskDescriptions = extractTaskDescription(taskInfo, timeDelimiter);
             String taskTime = extractTaskTime(taskInfo, timeDelimiter);
-            TaskMgr.addTask(taskDescriptions, taskTime, deadlineCommand);
+            TaskMgr.addTask(taskDescriptions, taskTime, command);
         } catch (DukeException e) {
             TaskMgr.printErrorMsg(formatErrorMessage);
         }
