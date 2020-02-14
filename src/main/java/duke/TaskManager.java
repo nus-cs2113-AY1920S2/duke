@@ -137,6 +137,11 @@ public class TaskManager {
 
     protected void saveToFile() {
         try {
+            File d = new File(filePath.substring(0, filePath.indexOf("/")));
+            if (!d.exists()) {
+                d.mkdir();
+            }
+
             File f = new File(filePath);
             if (!f.exists()) {
                 f.createNewFile();
