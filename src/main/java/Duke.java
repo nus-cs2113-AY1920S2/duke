@@ -49,7 +49,10 @@ public class Duke {
 
         if (str.equals("bye")) {
             finishConversation();
-        } else if (str.equals("add task")) {
+        }else if(str.contains("delete")){
+            deleteTask(str);
+            conversation();
+        }else if (str.equals("add task")) {
             System.out.println("____________________________________________________________");
             addTaskScreen();
         } else if (str.equals("list")) {
@@ -107,6 +110,9 @@ public class Duke {
             Events newTask = new Events(task,date,time);
             addTask(newTask);
             addTaskScreen();
+        }else if(str.contains("delete")) {
+            deleteTask(str);
+            addTaskScreen();
         }else{
             wrongInputFormatError(str);
         }
@@ -118,6 +124,24 @@ public class Duke {
         System.out.println("added : " + newTask);
         System.out.println("Now you have " + taskList.size() + " tasks in the list") ;
     }
+
+    public static void deleteTask(String str) throws IOException, DukeException {
+        if(str.equals("delete")){
+            missingIndexError();
+        }
+        int dividerPosition = str.indexOf(" ");
+        String index = str.substring(dividerPosition+1);
+        int i = Integer.parseInt(index);
+        deleteError(i,taskList);
+        Task toRemove = taskList.get(i-1);
+        taskList.remove(i-1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("Removed : " + toRemove);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list") ;
+    }
+
+
+
 
     public static void listTask(){
         System.out.println("____________________________________________________________");
@@ -161,6 +185,14 @@ public class Duke {
         }
 
     public static void markDoneError(int index, ArrayList<Task> taskList) throws DukeException{
+        if(index == 0){
+            throw  new DukeException("OOPS!!!Invalid input index");
+        }else if(index > taskList.size()){
+            throw  new DukeException("OOPS!!!Index out of range");
+        }
+    }
+
+    public static void deleteError(int index, ArrayList<Task> taskList) throws DukeException{
         if(index == 0){
             throw  new DukeException("OOPS!!!Invalid input index");
         }else if(index > taskList.size()){
