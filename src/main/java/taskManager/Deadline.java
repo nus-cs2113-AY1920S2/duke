@@ -12,4 +12,9 @@ public class Deadline extends Task {
     public String printObject() {
         return ("[" + itemType + "][" + getStatusIcon() + "] "+ description + " (by: " + by + ")");
     }
+
+    @Override
+    public String createStrForSaving() {
+        return itemType + " | " + convertBoolean() + " | " + description + " | " + by;
+    }
 }

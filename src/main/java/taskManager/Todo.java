@@ -9,4 +9,9 @@ public class Todo extends Task {
     public String printObject() {
         return ("[" + itemType + "][" + getStatusIcon() +"] "+ description);
     }
+
+    @Override
+    public String createStrForSaving() {
+        return itemType + " | " + convertBoolean() + " | " + description;
+    }
 }

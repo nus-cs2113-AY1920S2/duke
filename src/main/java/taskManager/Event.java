@@ -11,4 +11,9 @@ public class Event extends Task {
     public String printObject() {
         return ("[" + itemType + "][" + getStatusIcon() +"] "+ description + " (at: " + eventDate + ")");
     }
+
+    @Override
+    public String createStrForSaving() {
+        return itemType + " | " + convertBoolean() + " | " + description + " | " + eventDate;
+    }
 }

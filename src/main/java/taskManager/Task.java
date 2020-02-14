@@ -19,4 +19,10 @@ public class Task {
     public String printObject(){
         return "\0";
     }
+
+    public String createStrForSaving() { return ""; }
+
+    public String convertBoolean(){
+        return (isDone == true) ? "1" : "0";
+    }
 }

@@ -1,6 +1,6 @@
 package taskManager;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import exceptionHandler.inputValidation;
 public class Duke {
@@ -89,11 +89,11 @@ public class Duke {
         return taskList;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         printWelcomeMsg();
         FileOperation fileOp = new FileOperation();
         Task[] taskList = fillTasks(fileOp);
-        int counter = fileOp.counter;
+        int counter = fileOp.COUNTER;
         Scanner myObj = new Scanner(System.in);
         String cmd = myObj.nextLine();
         while (!cmd.equalsIgnoreCase("bye")) {
@@ -123,6 +123,7 @@ public class Duke {
                     break;
                 }
             }
+            fileOp.saveTaskList(taskList, counter);
             cmd = myObj.nextLine();
         }
         System.out.println("Bye bye! Talk to me again soon!");
