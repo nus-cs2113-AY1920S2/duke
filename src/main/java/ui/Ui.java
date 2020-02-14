@@ -9,7 +9,11 @@ import static misc.Messages.MESSAGE_COMMAND_RESULT_FAILURE;
 import static misc.Messages.MESSAGE_EXIT;
 
 public class Ui {
-    private static final String BORDER = "\n___________________________________________________________________________________________________________\n";
+    
+    private static final String BORDER = "\n_____________________"
+            + "__________________________________________________"
+            + "____________________________________\n";
+    
     private final Scanner sc;
     
     public Ui() {
