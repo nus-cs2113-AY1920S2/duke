@@ -32,14 +32,15 @@ public class Main {
         try {
             this.ui = new Ui();
             this.storage = new Storage();           
-            this.duke = new Duke(storage.load());
-            ui.displayWelcomeMessage();
+            this.duke = new Duke(storage.load());           
         } catch (InvalidStorageFilePathException e) {
             ui.displayErrorMessage(e.getMessage());
         } catch (StorageReadWriteException e) {
             ui.displayErrorMessage(e.getMessage());
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        } finally {
+            ui.displayWelcomeMessage();
         }
     }
     

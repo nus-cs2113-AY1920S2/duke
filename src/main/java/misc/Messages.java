@@ -33,5 +33,5 @@ public class Messages {
     
     public static final String MESSAGE_INVALID_TASK_TYPE = ">>>>>>>> I'm sorry! I cannot understand the type of the task given.";
     
-    public static final String MESSAGE_READ_WRITE_FAILURE = "Unable to read or write the current file.";
+    public static final String MESSAGE_READ_WRITE_FAILURE = "Make sure you have a 'data' folder containing a storage.txt file.";
 }

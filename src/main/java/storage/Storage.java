@@ -3,9 +3,13 @@ package storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,8 +22,7 @@ import static misc.Messages.MESSAGE_READ_WRITE_FAILURE;
 
 public class Storage {
     
-    public static final String DEFAULT_STORAGE_FILEPATH = 
-            "data\\storage.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "data/storage.txt";
     
     public final Path path;
     
@@ -49,14 +52,13 @@ public class Storage {
             }
         } catch (IOException e) {
             throw new StorageReadWriteException(MESSAGE_READ_WRITE_FAILURE);
-        } 
+        }
         return TaskListDecoder.decodeTaskList(lines);
     }
      
-    public void save(String filePath, TaskList taskList) throws IOException {
-        FileWriter fw;
+    public void save(String filePath, TaskList taskList) throws IOException {      
         try {
-            fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(filePath);
             BufferedWriter bw = new BufferedWriter(fw);
             String encodedTaskList = TaskListEncoder.encodeTaskList(taskList); 
             bw.write(encodedTaskList);
