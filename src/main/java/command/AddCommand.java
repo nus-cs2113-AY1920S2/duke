@@ -1,7 +1,6 @@
 package command;
 
 import duke.Duke;
-import duke.exception.DukeException;
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.InvalidTaskArgumentException;
@@ -10,6 +9,7 @@ import duke.task.TaskList;
 import duke.task.ToDos;
 import java.util.Optional;
 
+import static misc.Messages.MESSAGE_INVALID_TASK_TYPE;
 import static misc.Messages.MESSAGE_COMMAND_RESULT_SUCCESS;
 import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_INFO;
 import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_DEADLINES;
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
                     taskRequirement.get());
             break;
         default:
-            throw new DukeException("ERROR");
+            throw new InvalidTaskArgumentException(MESSAGE_INVALID_TASK_TYPE);
         }
         return task;
     }
