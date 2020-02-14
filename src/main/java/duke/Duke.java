@@ -71,10 +71,13 @@ public class Duke {
             case DELETE_COMMAND:
                 try {
                     deleteTask(Integer.parseInt(split[1].trim()));
+                    updateTasksToFile(filePath, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
                 } catch (NumberFormatException e) {
                     displayInvalidTaskNumberMessage();
+                } catch (IOException e) {
+                    displayIOExceptionMessage(e);
                 } catch (ChatboxException e) {
                     displayInvalidTaskNumberMessage();
                 }
