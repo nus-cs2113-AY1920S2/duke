@@ -4,11 +4,12 @@ import task.Todo;
 import task.Task;
 import exceptions.InvalidCommandException;
 import exceptions.MissingDescriptionException;
+import exceptions.InvalidTaskException;
 
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws InvalidCommandException, MissingDescriptionException {
+    public static void main(String[] args) {
         UI.initUI();
         UI.printGreetMessage();
 
@@ -37,18 +38,22 @@ public class Duke {
                     break;
                 case "done": // Mark a task as done
                     UI.br();
-                    System.out.println("\t Dun dun dun dun! This task is done:");
-                    int taskIdx = Integer.parseInt(words);
-                    taskIdx--; // -1 for zero-based indexing
+                    int taskIdx = Integer.parseInt(words) -1; // -1 for zero-based indexing
                     tasks.get(taskIdx).setDone();
+                    System.out.println("\t Dun dun dun dun! This task is done:");
                     System.out.println("\t   " + tasks.get(taskIdx));
                     UI.br();
                     break;
                 case "delete": // Delete a task
+                    taskIdx = Integer.parseInt(words) -1;
+                    if (taskIdx >= tasks.size() || taskIdx < 0) {
+                        throw new InvalidTaskException();
+                    }
                     UI.br();
                     System.out.println("\t This task has been whisked out of existence:");
-                    // To add code
-                    System.out.println(tasks.size() + " tasks remaining.");
+                    System.out.println("\t  " + tasks.get(taskIdx));
+                    tasks.remove(taskIdx);
+                    System.out.println("\t " + tasks.size() + " task(s) remaining.");
                     UI.br();
                     break;
                 default: // Add a task
@@ -82,7 +87,6 @@ public class Duke {
                     }
 
                     tasks.add(t); // Append the task to the ArrayList
-
                     printAddedTaskMessage(t, tasks.size());
                     break;
                 }
@@ -92,11 +96,15 @@ public class Duke {
                 UI.br();
             } catch (InvalidCommandException e) {
                 UI.br();
-                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(");
                 UI.br();
             } catch (IndexOutOfBoundsException e) {
                 UI.br();
-                System.out.println("\t ☹ OOPS!!! The task description cannot be empty.");
+                System.out.println("\t I'm sorry, but I don't know what that means :(");
+                UI.br();
+            } catch (InvalidTaskException e) {
+                UI.br();
+                System.out.println("\t This task doesn't exist!");
                 UI.br();
             }
         }
