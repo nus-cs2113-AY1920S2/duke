@@ -13,6 +13,7 @@ import java.util.Scanner;
 import static duke.utils.Constants.LIST_COMMAND;
 import static duke.utils.Constants.BYE_COMMAND;
 import static duke.utils.Constants.DONE_COMMAND;
+import static duke.utils.Constants.DELETE_COMMAND;
 import static duke.utils.Constants.TODO_COMMAND;
 import static duke.utils.Constants.DEADLINE_COMMAND;
 import static duke.utils.Constants.EVENT_COMMAND;
@@ -49,8 +50,16 @@ public class Duke {
                     displayInvalidTaskNumberMessage();
                 }
                 break;
-            case BYE_COMMAND:
-                displayExitMessage();
+            case DELETE_COMMAND:
+                try {
+                    deleteTask(Integer.parseInt(split[1].trim()));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    displayEmptyDescriptionMessage(command);
+                } catch (NumberFormatException e) {
+                    displayInvalidTaskNumberMessage();
+                } catch (ChatboxException e) {
+                    displayInvalidTaskNumberMessage();
+                }
                 break;
             case TODO_COMMAND:
                 try {
@@ -64,6 +73,8 @@ public class Duke {
                     addDeadline(split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
+                } catch (ChatboxException e) {
+                    displayTimeMissingMessage();
                 }
                 break;
             case EVENT_COMMAND:
@@ -71,7 +82,12 @@ public class Duke {
                     addEvent(split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     displayEmptyDescriptionMessage(command);
+                } catch (ChatboxException e) {
+                    displayTimeMissingMessage();
                 }
+                break;
+            case BYE_COMMAND:
+                displayExitMessage();
                 break;
             default:
                 displayCommandNotFoundMessage();
@@ -111,13 +127,21 @@ public class Duke {
         System.out.print("  ");
         System.out.println(task);
     }
+    
+    private static void deleteTask(int taskNumber) throws ChatboxException {
+        if (taskNumber > tasks.size() || taskNumber <= 0) {
+            throw new ChatboxException();
+        }
+        
+        System.out.println("Noted. I've removed this task: ");
+        System.out.print("  ");
+        System.out.println(tasks.get(taskNumber - 1));
+        tasks.remove(taskNumber - 1);
+        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+    }
 
     private static void displayInvalidTaskNumberMessage() {
         System.out.println("Please enter a valid task number~");
-    }
-
-    private static void displayExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
     }
     
     private static void addTodo(String description) {
@@ -127,8 +151,13 @@ public class Duke {
         displayAddTaskMessage(task);
     }
     
-    private static void addDeadline(String description) {
+    private static void addDeadline(String description) throws ChatboxException {
         String[] taskBy = description.split(DEADLINE_MARKER);
+        
+        if (taskBy.length != 2) {
+            throw new ChatboxException();
+        }
+        
         String taskDescription = taskBy[0].trim();
         String by = taskBy[1].trim();
         Task task = new Deadline(taskDescription, by);
@@ -136,8 +165,13 @@ public class Duke {
         displayAddTaskMessage(task);
     }
     
-    private static void addEvent(String description) {
+    private static void addEvent(String description) throws ChatboxException {
         String[] taskAt = description.split(EVENT_MARKER);
+        
+        if (taskAt.length != 2) {
+            throw new ChatboxException();
+        }
+        
         String taskDescription = taskAt[0].trim();
         String at = taskAt[1].trim();
         Task task = new Event(taskDescription, at);
@@ -152,11 +186,19 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 
+    private static void displayExitMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
     private static void displayCommandNotFoundMessage() {
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private static void displayEmptyDescriptionMessage(String command) {
         System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", command));
+    }
+
+    private static void displayTimeMissingMessage() {
+        System.out.println("Oops! Time is missing!");
     }
 }
