@@ -1,0 +1,4 @@
+[T] | true | sleep
+[E] | false | sleep | tues 12
+[D] | false | sleep | fri 1159
+[T] | false | read catching fire 

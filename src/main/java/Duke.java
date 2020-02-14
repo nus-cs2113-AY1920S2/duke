@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +14,8 @@ public class Duke {
                                  + " | | | | | | | |/ / _ \\\n"
                                  + " | |_| | |_| |   <  __/\n"
                                  + " |____/ \\__,_|_|\\_\\___|\n";
+    static String currDir = System.getProperty("user.dir");
+    private final static String filePath = currDir + "/duke.txt";
 
     public static void main(String[] args) {
         showWelcomeMessage();
@@ -107,6 +113,13 @@ public class Duke {
                 break;
             case "done":
                 markTaskAsDone(line);
+
+                try {
+                    saveToFile();
+                } catch (IOException e) {
+                    System.out.println("IO Exception occurred: " + e.getMessage());
+                }
+
                 break;
             default:
                 String taskInformation;
@@ -117,6 +130,11 @@ public class Duke {
                     continue;
                 }
                 storeTaskIntoList(taskInformation, command);
+                try {
+                    saveToFile();
+                } catch (IOException e) {
+                    System.out.println("IO Exception occurred: " + e.getMessage());
+                }
                 break;
             }
         }
@@ -180,5 +198,31 @@ public class Duke {
         System.out.print("   [" + listOfTasks[taskNumber-1].getStatusIcon() + "] ");
         System.out.println(listOfTasks[taskNumber-1].showFullDescription());
         printLine();
+
+    }
+
+    public static void saveToFile() throws IOException {
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
+
+            for (int i = 0; i < counter; i++) {
+                Task currTask = listOfTasks[i];
+                String formattedTask = String.format("%s | %s | %s", currTask.getTypeIcon(), currTask.getIsDone(),
+                        currTask.getDescription());
+                if (currTask instanceof Event) {
+                    formattedTask += " | ";
+                    formattedTask += ((Event) currTask).getTimePeriod();
+                }
+                if (currTask instanceof Deadline) {
+                    formattedTask += " | ";
+                    formattedTask += ((Deadline) currTask).getDueDate();
+                }
+                writer.write(formattedTask + "\n");
+            }
+
+        writer.close();
     }
 }
