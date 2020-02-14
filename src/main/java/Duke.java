@@ -1,59 +1,101 @@
 import java.util.Scanner;
 public class Duke {
+
+    public static String lineSeparator = "--------------------------------------------";
+    public static Task[] tasks = new Task[100];
+    public static int numOfTasks = 0;
+    public static Scanner userInput = new Scanner(System.in);
+
     public static void main(String[] args) {
-    	String lines = "--------------------------------------------"; 
+
+        // Function that prints out the initial greeting for duke
+        printGreeting();
+
+        // Loop that keeps running the program until user exits
+        while(true) {
+            // Getting the user input every time from the user
+            String userResponse = getUserResponse();
+            String[] userResponseList = userResponse.split(" ");
+            String action = userResponseList[0];
+            String restOfUserInput = userResponse.replace(action, "");
+
+            if(action.equals("bye")){
+                break;
+            } else if(action.equals("list")){
+                doListCommand();
+            } else if(action.equals("done")){
+                doDoneCommand(restOfUserInput);
+            } else if(action.equals("todo")){
+                doTodoCommand(restOfUserInput);
+            } else if(action.equals("deadline")){
+                System.out.println("this is for deadline");
+            } else if(action.equals("event")){
+                System.out.println("this is for even");
+            } else {
+                System.out.println("Add exception here");
+            }
+
+        }
+        printExitMessage();
+    }
+
+    // Helper function for printing line separator
+    public static void printLineSeparator(){
+        System.out.println(lineSeparator);
+    }
+
+    // Function for initial greeting of Duke
+    public static void printGreeting(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?"); 
-        System.out.println(lines);
+        System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
+        printLineSeparator();
+    }
 
+    // Helper function that gets the response from the user
+    public static String getUserResponse() {
+        String userResponse = userInput.nextLine();
+        return userResponse.trim();
+    }
 
-        String line;
-        Task[] tasks = new Task[100]; 
-        int items = 0; 
-
-        do {
-            Scanner in = new Scanner(System.in); 
-            line = in.nextLine();
-            line = line.trim();
-
-            if (line.equals("bye")) {
-                break;
-            } else if (line.equals("list")) {
-                System.out.println(lines);
-                System.out.println("Here are the tasks in your list: "); 
-                for (int i = 0; i < items; i++) { 
-                    System.out.println((i+1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description); 
-                }
-            } else if (line.contains("done")) { 
-                int line_length = line.length(); 
-                int number = line.charAt(line_length-1) - '0';
-                Task doneTask = tasks[number-1];
-                doneTask.markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + doneTask.getStatusIcon() + "] " + doneTask.description);
-
-                
-            } else { 
-            System.out.println(lines); 
-            Task t = new Task(line);  
-            System.out.println("added: " + line); 
-            tasks[items] = t;
-            items++; 
-            }
-
-
-
-        System.out.println(lines); 
-        } while (!line.equals("bye"));
-
+    // Function that prints out action when user exits program
+    public static void printExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(lines);  
+        printLineSeparator();
+    }
 
+    // Helper function that executes command for 'list'
+    public static void doListCommand() {
+        printLineSeparator();
+        System.out.println("Here are the tasks in your list:");
+        for(int i = 0; i < numOfTasks; i++){
+            System.out.println((i+1) + "." + tasks[i]);
+        }
+        printLineSeparator();
+    }
+
+    // Helper function that executes command for 'done'
+    public static void doDoneCommand(String command){
+        printLineSeparator();
+        int taskNum = Integer.parseInt(command.trim()) - 1;
+        tasks[taskNum].markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasks[taskNum]);
+        printLineSeparator();
+    }
+
+    // Helper function that executes command for 'todo'
+    public static void doTodoCommand(String command){
+        printLineSeparator();
+        tasks[numOfTasks] = new Todo(command);
+        numOfTasks++;
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks[numOfTasks-1]);
+        System.out.println("Now you have " + numOfTasks + " tasks in the list. ");
+        printLineSeparator();
     }
 }
 
