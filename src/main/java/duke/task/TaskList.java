@@ -87,6 +87,11 @@ public class TaskList {
         TaskList.taskIdCounter++;       
     }
     
+    public void loadTask(Task task) {    
+        this.tasks.add(task);
+        TaskList.taskIdCounter++;       
+    } 
+    
     public Task getDeletedTask(int taskId) {
         Task task = this.tasks
                 .stream()
