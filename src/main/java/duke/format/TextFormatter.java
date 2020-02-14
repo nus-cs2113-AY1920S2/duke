@@ -27,4 +27,5 @@ public class TextFormatter {
     public static String createSpaces(int numberOfSpaces) {
         return " ".repeat(numberOfSpaces);
     }
+
 }

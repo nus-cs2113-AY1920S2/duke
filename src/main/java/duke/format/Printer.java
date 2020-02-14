@@ -23,18 +23,29 @@ public class Printer {
             " | | |__  | |  |  || |     | __| | |_ | | |___ | |     || |     |   | | |\n" +
             " | | |__\\ | |     || | | | ||\\__\\| |_\\| | |___\\| |  |  || |  |  |   | | |\n" +
             "  \\|_____| \\|_____| \\|_|_|_| \\|______| \\|_____| \\|__|__| \\|__|__|    \\|_|";
-        System.out.println("Welcome to\n" + logo);
+        System.out.println("Welcome to" + System.lineSeparator() + logo + System.lineSeparator());
     }
 
     public static void printLoadMessage() {
-        System.out.println("Initializing LumiChat v0.0.1.4...\n");
-        System.out.println("LumiChat is now ready.\n");
-        System.out.println("  Hey I'm Lumi!");
-        System.out.println("  How may Lumi assist you today?\n");
+        System.out.println("Initializing LumiChat v3.2.1.1...\n");
     }
 
     public static void printExitMessage() {
-        System.out.println(TextFormatter.SAD_FACE + "Goodbye! Lumi will miss you!");
+        System.out.println("LumiChat program has ended.");
+    }
+
+    public static void printSuccessfulSaveMessage() {
+        System.out.println("Your task list has been saved successfully!");
+    }
+
+    public static void printReadyMessage() {
+        System.out.println("LumiChat is now ready." + System.lineSeparator());
+        System.out.println("  Hey I'm Lumi!");
+        System.out.println("  How may Lumi assist you today?" + System.lineSeparator());
+    }
+
+    public static void printGoodbyeMessage() {
+        System.out.println(TextFormatter.SAD_FACE + "Goodbye! Lumi will miss you!" + System.lineSeparator());
     }
 
      public static void printAddTaskMessage(ArrayList<Task> list) {

@@ -9,6 +9,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getDetails() {
+        return duration;
+    }
+
+    @Override
     public String getTaskStatus() {
         return "[E]" + super.getTaskStatus() + " (at: " + duration + ")";
     }
