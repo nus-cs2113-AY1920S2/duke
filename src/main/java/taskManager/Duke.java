@@ -1,10 +1,21 @@
 package taskManager;
-import java.lang.reflect.Array;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import exceptionHandler.inputValidation;
 public class Duke {
     private static int MAXIMUM_TASKS = 100;
+
+    public static  void printWelcomeMsg() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___| ";
+        System.out.println(logo + " says hello :)");
+        System.out.println("\nWhat can i do for you?");
+    }
 
     public static void printTaskList(ArrayList<Task> taskList){
         for (int i = 0; i < taskList.size(); i++) {
@@ -78,20 +89,23 @@ public class Duke {
         return null;
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___| ";
-        System.out.println(logo + " says hello :)");
-        System.out.println("\nWhat can i do for you?");
+    public static ArrayList<Task> fillTasks(FileOperation fileOp) {
         ArrayList<Task> taskList = new ArrayList<>();
-        int counter = 0;
-        Boolean instr = false;
+        try {
+            taskList = fileOp.loadTaskList();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
+        return taskList;
+    }
+
+    public static void main(String[] args) throws IOException {
+        printWelcomeMsg();
+        FileOperation fileOp = new FileOperation();
+        ArrayList<Task> taskList = fillTasks(fileOp);
+        int counter = fileOp.COUNTER;
         Scanner myObj = new Scanner(System.in);
-        String cmd;
-        cmd = myObj.nextLine();
+        String cmd = myObj.nextLine();
         while (!cmd.equalsIgnoreCase("bye")) {
             String cmdType = cmdTypeIdentifier(cmd, taskList.size());
             if (cmdType != null) {
@@ -119,6 +133,7 @@ public class Duke {
                     break;
                 }
             }
+            fileOp.saveTaskList(taskList, counter);
             cmd = myObj.nextLine();
         }
         System.out.println("Bye bye! Talk to me again soon!");
