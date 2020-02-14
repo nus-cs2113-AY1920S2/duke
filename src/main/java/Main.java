@@ -55,8 +55,8 @@ public class Main {
                 
                 try {
                     storage.save(storage.getFilePath(), duke.getTaskList());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
                 } 
                 
                 ui.displayOutputMessage(output);             
