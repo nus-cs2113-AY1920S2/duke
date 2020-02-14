@@ -12,7 +12,11 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 run {
