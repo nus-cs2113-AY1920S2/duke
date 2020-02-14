@@ -21,7 +21,8 @@ public class Deadlines extends Task {
     
     @Override
     public Task setNewTaskId(int newTaskId) {
-        return new Deadlines(newTaskId, this.taskName, this.dateTime, this.isDone);
+        return new Deadlines(newTaskId, this.taskName, 
+                this.dateTime, this.isDone);
     }
 
     @Override
