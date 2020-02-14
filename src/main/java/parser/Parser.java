@@ -72,7 +72,6 @@ public class Parser {
                     return Arrays.stream(prepositionArray)
                             .anyMatch(preposition -> preposition.equals(word));
                 });
-
     }
     
     public int getPrepositionIndex(String[] argsArray) {
@@ -85,59 +84,86 @@ public class Parser {
                 .reduce(0, (x, y) -> x + y);
     }
     
+    public Optional<String> parsePhraseBeforePreposition(String[] userInputArray, 
+            int prepositionIndex) {
+        
+        String phrase = "";        
+        
+        for (int i = 1; i < prepositionIndex; i++) {
+            if (i != 1) {
+                phrase += (" " + userInputArray[i]);
+            } else {
+                phrase += (userInputArray[i]);
+            }
+        }
+        
+        Optional<String> optionalPhrase;
+        if (phrase.equals("")) {
+            optionalPhrase = Optional.empty();
+        } else {
+            optionalPhrase = Optional.ofNullable(phrase);
+        }
+        
+        return optionalPhrase;
+    }  
+    
+    public Optional<String> parsePhraseAfterPreposition(String[] userInputArray, 
+            int prepositionIndex) {
+        
+        String phrase = "";
+        
+        for (int k = prepositionIndex + 1; k < userInputArray.length; k++) {
+            if (k > prepositionIndex + 1) {
+                phrase += (" " + userInputArray[k]);
+            } else {
+                phrase += (userInputArray[k]);
+            }
+        }
+        
+        Optional<String> optionalPhrase;
+        if (phrase.equals("")) {
+            optionalPhrase = Optional.empty();
+        } else {
+            optionalPhrase = Optional.ofNullable(phrase);
+        }
+        
+        return optionalPhrase;
+    }
+    
+    public Optional<String> parsePhraseWithoutPreposition(String[] userInputArray) {      
+        String phrase = "";
+        
+        for (int i = 1; i < userInputArray.length; i++) {
+            if (i != 1) {
+                phrase += (" " + userInputArray[i]);
+            } else {
+                phrase += (userInputArray[i]);
+            }
+        }
+        
+        return Optional.of(phrase);
+    }
+    
     public Parser parseUserInputIntoCommandArguments(String userInput) {
         String[] argsArray = userInput.trim().split(" ");
         int prepositionIndex = 0;
         String commandType = argsArray[0];
-        String taskInfo = "";
-        String taskRequirement = "";
-             
+        Optional<String> taskInfo = Optional.empty();
+        Optional<String> taskRequirement = Optional.empty();
+        
+        // If input contains preposition, break into respective optional arguments.
         if (hasPreposition(argsArray)) {
             prepositionIndex = getPrepositionIndex(argsArray);
             
-            // Parse argsArray into taskInfo
-            for (int j = 1; j < prepositionIndex; j++) {
-                if (j != 1) {
-                    taskInfo += (" " + argsArray[j]);
-                } else {
-                    taskInfo += (argsArray[j]);
-                }
-            }
+            taskInfo = parsePhraseBeforePreposition(
+                    argsArray, prepositionIndex);
             
-            // Parse argsArray into taskDescription
-            for (int k = prepositionIndex + 1; k < argsArray.length; k++) {
-                if (k > prepositionIndex + 1) {
-                    taskRequirement += (" " + argsArray[k]);
-                } else {
-                    taskRequirement += (argsArray[k]);
-                }
-            }      
+            taskRequirement = parsePhraseAfterPreposition(
+                    argsArray, prepositionIndex);                      
         } else {
-            for (int i = 1; i < argsArray.length; i++) {
-                if (i != 1) {
-                    taskInfo += (" " + argsArray[i]);
-                } else {
-                    taskInfo += (argsArray[i]);
-                }
-            }
+            taskInfo = parsePhraseWithoutPreposition(argsArray);
         }
         
-        // Wrapping an optional to taskInfo string
-        Optional<String> taskInformation;
-        if (taskInfo.equals("")) {
-            taskInformation = Optional.empty();
-        } else {
-            taskInformation = Optional.ofNullable(taskInfo);
-        }
-        
-        // Wrapping an optional to taskRequirement string
-        Optional<String> taskReq;
-        if (taskRequirement.equals("")) {
-            taskReq = Optional.empty();
-        } else {
-            taskReq = Optional.ofNullable(taskRequirement);
-        }
-        
-        return new Parser(commandType, taskInformation, taskReq); 
+        return new Parser(commandType, taskInfo, taskRequirement); 
     }
 }
