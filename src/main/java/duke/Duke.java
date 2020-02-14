@@ -4,6 +4,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,12 +16,22 @@ public class Duke {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static TaskList tasks = new TaskList();
+    private static Storage storage = new Storage();
+    private static TaskList tasks;
 
     public static void main(String[] args) {
         printWelcomeBanner();
 
         Scanner scanner = new Scanner(System.in);
+        try {
+            tasks = storage.load();
+        } catch (FileNotFoundException e) {
+            // no save file found
+            tasks = new TaskList();
+        } catch (DukeException e) {
+            System.out.println(e.toString());
+            tasks = new TaskList();
+        }
 
         // Loop terminates on receiving a "bye" command, which calls System.exit(0)
         //noinspection InfiniteLoopStatement
@@ -33,6 +45,12 @@ public class Duke {
                 System.out.println(e.toString());
             } finally {
                 printDividerLine();
+            }
+
+            try {
+                storage.save(tasks);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -59,7 +77,7 @@ public class Duke {
             break;
 
         case "todo":
-            // add todo to tasks
+            // add to`do to tasks
             // input follows format <taskType> <taskName>
             String description = null;
             try {
@@ -68,7 +86,7 @@ public class Duke {
                 throw new DukeException("The description of a todo cannot be empty");
             }
 
-            tasks.addTask(new Todo(description));
+            tasks.addTaskWithMessage(new Todo(description));
             break;
 
         case "deadline":
@@ -86,7 +104,7 @@ public class Duke {
             }
             String deadlineName = deadlineInfo[0].trim();
             String deadlineDate = deadlineInfo[1].trim();
-            tasks.addTask(new Deadline(deadlineName, deadlineDate));
+            tasks.addTaskWithMessage(new Deadline(deadlineName, deadlineDate));
             break;
 
         case "event":
@@ -103,8 +121,8 @@ public class Duke {
                 throw new DukeException("The description and date of an event cannot be empty");
             }
             String eventName =eventInfo[0].trim();
-            String eventDate=eventInfo[1].trim();
-            tasks.addTask(new Event(eventName, eventDate));
+            String eventDate = eventInfo[1].trim();
+            tasks.addTaskWithMessage(new Event(eventName, eventDate));
             break;
 
         default:

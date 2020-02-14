@@ -1,6 +1,10 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
+    protected static final String DELIMITER = "|";
+    protected static final String TASK_DONE_ICON = "✓";
+    protected static final String TASK_NOT_DONE_ICON = "✘";
+
     protected String description;
     protected boolean isDone;
 
@@ -10,12 +14,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? TASK_DONE_ICON : TASK_NOT_DONE_ICON);
     }
 
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String encodeTask();
 
     @Override
     public String toString() {
