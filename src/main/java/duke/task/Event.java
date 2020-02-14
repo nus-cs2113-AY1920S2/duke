@@ -2,26 +2,28 @@ package duke.task;
 
 import duke.exception.DukeException;
 
-public class Event extends Task {
-    protected String time;
-    protected  String typeIcon;
+import static duke.util.Constants.EVENT_ICON;
 
-    public Event(String description, String time) throws DukeException {
+public class Event extends Task {
+    protected String atTime;
+    protected String typeIcon;
+
+    public Event(String description, String atTime) throws DukeException {
         super(description);
-        typeIcon = "[E]";
-        this.time = time;
+        typeIcon = EVENT_ICON;
+        this.atTime = atTime;
     }
 
     public String getIcon() {
         return typeIcon;
     }
 
-    public String getTime() {
-        return time;
+    public String getAtTime() {
+        return atTime;
     }
 
     @Override
     public String toString() {
-        return typeIcon + super.toString() + " (at : " + time + ")";
+        return typeIcon + super.toString() + " (at : " + atTime + ")";
     }
 }

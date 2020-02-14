@@ -21,11 +21,14 @@ public class Duke {
         String command = extractCommand(userInput);
         String taskInfo = extractTaskInfo(userInput);
         switch (command) {
-        case EXIT_COMMAND:
+        case EXIT_COMMAND_BYE:
+        case EXIT_COMMAND_EXIT:
+        case EXIT_COMMAND_QUIT:
             bye();
             TaskMgr.saveDataToFile();
             break;
         case LIST_COMMAND:
+        case LIST_COMMAND_SHORTCUT:
             TaskMgr.listTasks();
             break;
         case DONE_COMMAND:
@@ -33,15 +36,19 @@ public class Duke {
             TaskMgr.markAsDone(doneTaskID);
             break;
         case TODO_COMMAND:
+        case TODO_COMMAND_SHORTCUT:
             TaskMgr.addTask(taskInfo, TODO_COMMAND);
             break;
         case DEADLINE_COMMAND:
+        case DEADLINE_COMMAND_SHORTCUT:
             processTaskWithTime(TaskMgr, taskInfo, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND, DEADLINE_FORMAT_ERROR_MESSAGE);
             break;
         case EVENT_COMMAND:
+        case EVENT_COMMAND_SHORTCUT:
             processTaskWithTime(TaskMgr, taskInfo, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
             break;
         case DELETE_COMMAND:
+        case DELETE_COMMAND_SHORTCUT:
             int delTaskID = extractTaskID(userInput);
             TaskMgr.delTask(delTaskID);
             break;
@@ -122,6 +129,6 @@ public class Duke {
         do {
             input = s.nextLine();
             processUserInput(TaskMgr, input);
-        } while (!input.equals(EXIT_COMMAND));
+        } while (!input.equals(EXIT_COMMAND_BYE));
     }
 }

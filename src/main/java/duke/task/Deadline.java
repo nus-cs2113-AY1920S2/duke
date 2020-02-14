@@ -2,13 +2,15 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import static duke.util.Constants.DEADLINE_ICON;
+
 public class Deadline extends Task {
     protected String byTime;
     protected  String typeIcon;
 
     public Deadline(String description, String byTime) throws DukeException {
         super(description);
-        typeIcon = "[D]";
+        typeIcon = DEADLINE_ICON;
         this.byTime = byTime;
     }
 

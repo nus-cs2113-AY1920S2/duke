@@ -78,15 +78,15 @@ public class TaskManager {
     }
 
     private void printAddTaskSuccessfulPrompt(Task addedTask) {
-        System.out.println(FIVE_SPACES+ADD_TASKS_PROMPT);
+        System.out.println(FIVE_SPACES+ ADD_TASK_PROMPT);
         System.out.printf(SEVEN_SPACES+ADD_SINGLE_TASK_MESSAGE, addedTask);
-        System.out.printf(FIVE_SPACES+ADD_OR_DELETE_TASKS_POST_PROMPT, tasks.size());
+        System.out.printf(FIVE_SPACES+ ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
     }
 
     private void printDeleteTaskSuccessfulPrompt(Task currentTask) {
         System.out.println(FIVE_SPACES+DELETE_TASKS_PROMPT);
         System.out.printf(SEVEN_SPACES+DELETE_SINGLE_TASK_MESSAGE, currentTask);
-        System.out.printf(FIVE_SPACES+ADD_OR_DELETE_TASKS_POST_PROMPT, tasks.size());
+        System.out.printf(FIVE_SPACES+ ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
     }
 
 
@@ -94,7 +94,7 @@ public class TaskManager {
         System.out.println(LINE_DIVIDER);
         try {
             tasks.get(taskID).markAsDone();
-            System.out.println(FIVE_SPACES + DONE_TASKS_PROMPT);
+            System.out.println(FIVE_SPACES + DONE_TASK_PROMPT);
             System.out.printf(SEVEN_SPACES + DONE_SINGLE_TASK_MESSAGE, tasks.get(taskID));
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
@@ -125,7 +125,7 @@ public class TaskManager {
                 if (i.getIcon().equals("[D]")) {
                     System.out.println("this is a deadline");
                     try {
-                        Deadline tmp = new Deadline(i.getTaskDescription(), i.getTime());
+                        Deadline tmp = new Deadline(i.getTaskDescription(), i.getAtTime());
                         tasks.add(tmp);
                     } catch (DukeException e) {
                         System.out.println("asdf");
