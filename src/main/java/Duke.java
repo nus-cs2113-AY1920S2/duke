@@ -4,7 +4,7 @@ import java.util.Scanner;
 // unicode-character reference list: \u2717 = ✗, \u2713 ✓
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         System.out.println("    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
@@ -20,17 +20,33 @@ public class Duke {
             } else if (command.equals("list")) { //Level 2: List (Add-function is included in level 4)
                 processListCommand(list);
             } else if (command.matches("todo\\s.*")){ //Level 4: ToDos
-                list.add(new Todo(command));
-                list.get(list.size()-1).printMessage(list.size());
+                try {
+                    list.add(new Todo(command));
+                    list.get(list.size()-1).printMessage(list.size());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } else if (command.matches("deadline\\s.*")){ //Level 4: Deadlines
-                list.add(new Deadline(command));
-                list.get(list.size()-1).printMessage(list.size());
+                try {
+                    list.add(new Deadline(command));
+                    list.get(list.size()-1).printMessage(list.size());
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
             } else if (command.matches("event\\s.*")) { //Level 4: Events
-                list.add(new Event(command));
-                list.get(list.size()-1).printMessage(list.size());
+                try {
+                    list.add(new Event(command));
+                    list.get(list.size()-1).printMessage(list.size());
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
             } else if (command.equals("bye")) { //Terminate
                 processByeCommand();
                 return;
+            } else {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "    ____________________________________________________________");
             }
         }
     }
