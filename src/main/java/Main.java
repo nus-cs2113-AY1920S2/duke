@@ -37,6 +37,7 @@ public class Main {
             ui.displayErrorMessage(e.getMessage());
         } catch (StorageReadWriteException e) {
             ui.displayErrorMessage(e.getMessage());
+            throw new RuntimeException(e);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {
