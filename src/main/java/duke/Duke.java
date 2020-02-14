@@ -89,7 +89,7 @@ public class Duke {
             String taskTime = extractTaskTime(taskInfo, timeDelimiter);
             TaskMgr.addTask(taskDescriptions, taskTime, command);
         } catch (DukeException e) {
-            TaskMgr.printErrorMsg(formatErrorMessage);
+            TaskMgr.printFormatErrorMsg(formatErrorMessage);
         }
     }
 

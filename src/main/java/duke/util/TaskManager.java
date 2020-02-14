@@ -63,7 +63,6 @@ public class TaskManager {
     }
 
     public void addTask(String... args) {
-        System.out.println(LINE_DIVIDER);
         String taskDescription = args[0].trim();
         try {
             Task taskToAdd;
@@ -77,51 +76,67 @@ public class TaskManager {
             tasks.add(taskToAdd);
             printAddTaskSuccessfulPrompt(taskToAdd);
         } catch (DukeException e) {
-            printErrorMsg(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
-        } finally {
-            System.out.println(LINE_DIVIDER);
+            printFormatErrorMsg(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
         }
     }
 
-    public void delTask(int taskID) {
+    private void printAddTaskSuccessfulPrompt(Task addedTask) {
         System.out.println(LINE_DIVIDER);
+        System.out.println(FIVE_SPACES + ADD_TASK_PROMPT);
+        System.out.println(SEVEN_SPACES + addedTask);
+        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
+        System.out.println(LINE_DIVIDER);
+    }
+
+    public void printFormatErrorMsg(String formatErrorMessage) {
+        System.out.println(LINE_DIVIDER);
+        System.out.println(FIVE_SPACES + CRYING_FACE + formatErrorMessage);
+        System.out.println(LINE_DIVIDER);
+    }
+
+    public void delTask(int taskID) {
         try {
             Task deletedTask = tasks.get(taskID);
             tasks.remove(taskID);
             printDeleteTaskSuccessfulPrompt(deletedTask);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
+            printDeleteTaskErrorMsg();
         }
-    }
-
-    private void printAddTaskSuccessfulPrompt(Task addedTask) {
-        System.out.println(FIVE_SPACES + ADD_TASK_PROMPT);
-        System.out.println(SEVEN_SPACES + addedTask);
-        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
     }
 
     private void printDeleteTaskSuccessfulPrompt(Task currentTask) {
+        System.out.println(LINE_DIVIDER);
         System.out.println(FIVE_SPACES + DELETE_TASKS_PROMPT);
         System.out.println(SEVEN_SPACES + currentTask);
         System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, tasks.size());
+        System.out.println(LINE_DIVIDER);
+    }
+
+    private void printDeleteTaskErrorMsg() {
+        System.out.println(LINE_DIVIDER);
+        System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
+        System.out.println(LINE_DIVIDER);
     }
 
     public void markAsDone(int taskID) {
-        System.out.println(LINE_DIVIDER);
         try {
             tasks.get(taskID).markAsDone();
-            System.out.println(FIVE_SPACES + DONE_TASK_PROMPT);
-            System.out.println(SEVEN_SPACES + tasks.get(taskID));
+            printMarkAsDoneSuccessfulPrompt(tasks.get(taskID));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
-        } finally {
-            System.out.println(LINE_DIVIDER);
+            printMarkAsDoneErrorMsg();
         }
     }
 
-    public void printErrorMsg(String formatErrorMessage) {
+    private void printMarkAsDoneSuccessfulPrompt(Task currentTask) {
         System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES + CRYING_FACE + formatErrorMessage);
+        System.out.println(FIVE_SPACES + DONE_TASK_PROMPT);
+        System.out.println(SEVEN_SPACES + currentTask);
+        System.out.println(LINE_DIVIDER);
+    }
+
+    private void printMarkAsDoneErrorMsg() {
+        System.out.println(LINE_DIVIDER);
+        System.out.println(FIVE_SPACES + CRYING_FACE + TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE);
         System.out.println(LINE_DIVIDER);
     }
 
