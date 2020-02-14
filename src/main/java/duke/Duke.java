@@ -5,10 +5,36 @@ import java.util.Scanner;
 import duke.util.TaskManager;
 import duke.exception.DukeException;
 
-// I know I shouldn't do this, but I am too tired now.
-import static duke.util.Constants.*;
+import static duke.util.Constants.LOGO;
+import static duke.util.Constants.LINE_DIVIDER;
+import static duke.util.Constants.FIVE_SPACES;
+import static duke.util.Constants.GREETING_WORD;
+import static duke.util.Constants.BYE_WORD;
+import static duke.util.Constants.EXIT_COMMAND_BYE;
+import static duke.util.Constants.EXIT_COMMAND_QUIT;
+import static duke.util.Constants.EXIT_COMMAND_EXIT;
+import static duke.util.Constants.LIST_COMMAND;
+import static duke.util.Constants.LIST_COMMAND_SHORTCUT;
+import static duke.util.Constants.DONE_COMMAND;
+import static duke.util.Constants.TODO_COMMAND;
+import static duke.util.Constants.TODO_COMMAND_SHORTCUT;
+import static duke.util.Constants.DEADLINE_COMMAND;
+import static duke.util.Constants.DEADLINE_COMMAND_SHORTCUT;
+import static duke.util.Constants.EVENT_COMMAND;
+import static duke.util.Constants.EVENT_COMMAND_SHORTCUT;
+import static duke.util.Constants.DELETE_COMMAND;
+import static duke.util.Constants.DELETE_COMMAND_SHORTCUT;
+import static duke.util.Constants.DEADLINE_TIME_DELIMITER;
+import static duke.util.Constants.EVENT_TIME_DELIMITER;
+import static duke.util.Constants.UNKNOWN_COMMAND_RESPONSE;
+import static duke.util.Constants.DEADLINE_FORMAT_ERROR_MESSAGE;
+import static duke.util.Constants.EVENT_FORMAT_ERROR_MESSAGE;
+import static duke.util.Constants.CRYING_FACE;
+
+
 
 public class Duke {
+    private static boolean isExit = false;
 
     private static void greet() {
         System.out.println(LOGO);
@@ -26,6 +52,7 @@ public class Duke {
         case EXIT_COMMAND_QUIT:
             bye();
             TaskMgr.saveDataToFile();
+            isExit = true;
             break;
         case LIST_COMMAND:
         case LIST_COMMAND_SHORTCUT:
@@ -120,7 +147,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskManager TaskMgr = new TaskManager(DATA_FILE_PATH);
+        TaskManager TaskMgr = new TaskManager();
 
         greet();
 
@@ -129,6 +156,6 @@ public class Duke {
         do {
             input = s.nextLine();
             processUserInput(TaskMgr, input);
-        } while (!input.equals(EXIT_COMMAND_BYE));
+        } while (!isExit);
     }
 }
