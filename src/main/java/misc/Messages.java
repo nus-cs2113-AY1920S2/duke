@@ -30,4 +30,8 @@ public class Messages {
     public static final String MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_EVENTS = ">>>>>>>> It seems like you have forgotten to add a venue to your event?";
     
     public static final String MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS = ">>>>>>>> I'm sorry! There is no current task with that index...";
+    
+    public static final String MESSAGE_INVALID_TASK_TYPE = ">>>>>>>> I'm sorry! I cannot understand the type of the task given.";
+    
+    public static final String MESSAGE_READ_WRITE_FAILURE = "Unable to read or write the current file.";
 }
