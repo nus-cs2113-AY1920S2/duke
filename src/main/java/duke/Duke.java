@@ -52,8 +52,18 @@ public class Duke {
             tasks.showTasks();
             break;
 
+        case "delete":
+            // delete a task by its displayed list index
+            // TODO: throw exception if deleteIndex is not specified
+            // TODO: change Character to String to handle multi-digit indexes
+            int deleteIndex = Character.getNumericValue(fullCommand.charAt(7)) - 1;
+            tasks.deleteTask(deleteIndex);
+            break;
+
         case "done":
             // mark a task as done
+            // TODO: throw exception if taskIndex is not specified
+            // TODO: change Character to String to handle multi-digit indexes
             int taskIndex = Character.getNumericValue(fullCommand.charAt(5)) - 1;
             tasks.markTaskAsDone(taskIndex);
             break;

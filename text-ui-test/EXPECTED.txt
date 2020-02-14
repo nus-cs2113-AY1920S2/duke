@@ -8,6 +8,8 @@ This is
 
 How can I help you today?
 _________________________________________________
+> You have no tasks to be deleted
+_________________________________________________
 > Task added:
   [T][?] borrow book
 You have 1 task in the list
@@ -71,12 +73,15 @@ _________________________________________________
 > Well, that's one task down
   [T][?] i want to write a slash here /by doing sth like this
 _________________________________________________
+> Task deleted:
+  [T][?] i want to write a slash here /by doing sth like this
+You have 4 tasks in the list
+_________________________________________________
 > Quite a few tasks you got there
   1. [T][?] borrow book
   2. [D][?] return book (by: Sunday)
   3. [E][?] project meeting (at: Mon 2-4pm)
   4. [D][?] finish reading book (by: Sat maybe?)
-  5. [T][?] i want to write a slash here /by doing sth like this
 _________________________________________________
 > ☹ OOPS!!! The description of a todo cannot be empty
 _________________________________________________
@@ -88,7 +93,7 @@ _________________________________________________
 _________________________________________________
 > Task added:
   [D][?] to-trim deadline (by: to-trim date)
-You have 6 tasks in the list
+You have 5 tasks in the list
 _________________________________________________
 > ☹ OOPS!!! The description and date of an event cannot be empty
 _________________________________________________
@@ -98,7 +103,25 @@ _________________________________________________
 _________________________________________________
 > Task added:
   [E][?] to-trim event (at: to-trim date)
-You have 7 tasks in the list
+You have 6 tasks in the list
+_________________________________________________
+> Please specify a task number between 1 and 6
+_________________________________________________
+> Task deleted:
+  [D][?] return book (by: Sunday)
+You have 5 tasks in the list
+_________________________________________________
+> Task deleted:
+  [E][?] project meeting (at: Mon 2-4pm)
+You have 4 tasks in the list
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][?] borrow book
+  2. [D][?] finish reading book (by: Sat maybe?)
+  3. [D][?] to-trim deadline (by: to-trim date)
+  4. [E][?] to-trim event (at: to-trim date)
+_________________________________________________
+> Please specify a task number between 1 and 4
 _________________________________________________
 > Goodbye
 _________________________________________________
