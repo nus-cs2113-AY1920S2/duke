@@ -24,6 +24,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return typeIcon + super.toString() + " (at : " + atTime + ")";
+        return typeIcon + super.toString() + " (at: " + atTime + ")";
     }
 }
