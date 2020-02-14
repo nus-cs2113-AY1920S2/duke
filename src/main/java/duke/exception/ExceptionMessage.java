@@ -67,4 +67,11 @@ public class ExceptionMessage {
             TextFormatter.THINKING_FACE + "Hmm... Lumi senses missing information..." + lineSeparator() +
             "  Lumi needs you to put in either a " + TextFormatter.toBold("task description") + " or a " +
             TextFormatter.toBold("duration") + "!" + lineSeparator();
+
+    public final static String INVALID_DELETE_FORMAT_MESSAGE =
+            TextFormatter.SHOCK_FACE +
+                    "Oops!! Lumi cannot understand this " + TextFormatter.toItalic("DELETE")  + " command..." +
+                    lineSeparator() + "  Lumi needs you to follow this format:" +
+                    lineSeparator() + TextFormatter.createSpaces(8) +
+                    TextFormatter.toBoldAndItalic("delete <list number>") + lineSeparator();
 }
