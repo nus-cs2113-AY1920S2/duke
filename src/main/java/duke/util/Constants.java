@@ -28,7 +28,7 @@ public class Constants {
     public static final String DELETE_COMMAND_SHORTCUT = "del";
     public static final String DEADLINE_TIME_DELIMITER = " /by ";
     public static final String EVENT_TIME_DELIMITER = " /at ";
-    public static final String UNKNOWN_COMMAND_RESPONSE = " OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String UNKNOWN_COMMAND_RESPONSE = " OOPS!!! I'm sorry, but I don't know what that means";
     public static final String LIST_TASKS_PROMPT = "Here are the tasks in your list:";
     public static final String DONE_TASK_PROMPT = "Nice! I've marked this duke.task as done:";
     public static final String ADD_TASK_PROMPT = "Got it. I've added this duke.task:";
@@ -39,9 +39,9 @@ public class Constants {
     public static final String DEADLINE_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the deadline format is not correct!";
     public static final String EVENT_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task description cannot be empty!";
-    public static final String YES_ICON = "[\u2713]";
-    public static final String NO_ICON = "[\u2718]";
-    public static final String CRYING_FACE = "\u2639";
+    public static final String YES_ICON = "[v]";
+    public static final String NO_ICON = "[x]";
+    public static final String CRYING_FACE = ":-(";
     public static final String DEADLINE_ICON = "[D]";
     public static final String EVENT_ICON = "[E]";
     public static final String TODO_ICON = "[T]";
