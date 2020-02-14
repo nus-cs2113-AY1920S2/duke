@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileOperation {
-    int MAXIMUM_TASKS = 100;
     int COUNTER = 0;
-    String PATHNAME = "data/duke.txt";
-    File f = new File(PATHNAME);
+    File f = new File("tasksData.txt");
+    String PATHNAME = f.getAbsolutePath();
     public FileOperation() {
 
     }

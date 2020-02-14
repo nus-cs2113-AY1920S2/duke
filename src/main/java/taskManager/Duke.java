@@ -18,6 +18,9 @@ public class Duke {
     }
 
     public static void printTaskList(ArrayList<Task> taskList){
+        if (taskList.size() == 0) {
+            System.out.println("There are currently nothing to do! Add something!");
+        }
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(i + 1 + ". " + taskList.get(i).printObject());
         }
