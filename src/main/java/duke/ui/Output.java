@@ -8,11 +8,6 @@ import java.util.ArrayList;
 public class Output {
 
     final String bulletArrow = "\t\t\u2023";
-    private Command command;
-
-    public Output() {
-        command = new Command();
-    }
 
     public void printTaskAdded(int taskCount, Task toPrint) {
 
@@ -73,7 +68,11 @@ public class Output {
     /**
      * Greets user.
      */
-    public static void greetUser() {
+    public static void greetUser(String[] args) {
+
+        if (args.length >= 1 && args[0].equals("1")) {
+            return;
+        }
 
         String name = "Zapato";
 
@@ -83,7 +82,6 @@ public class Output {
         System.out.println("\tHello from " + name + ":)");
         System.out.println("\tWhat can I do for you? (type \"help\" for more info)");
         printHorizontalLine(true);
-
 
     }
 
@@ -141,43 +139,49 @@ public class Output {
 
         // help for exit command
         msg += System.lineSeparator() + String.format("\t%s: exits the program. " +
-                "Input must follow the format below,", command.CMD_EXIT);
+                "Input must follow the format below,", Command.CMD_EXIT);
         msg += System.lineSeparator() + "\t\tbye";
         msg += System.lineSeparator();
 
         // help for done command
         msg += System.lineSeparator() + String.format("\t%s: marks task as done. " +
-                "Input must follow the format below,", command.CMD_DONE);
+                "Input must follow the format below,", Command.CMD_DONE);
         msg += System.lineSeparator() + "\t\tdone [task number]";
         msg += System.lineSeparator();
 
         // help for done command
         msg += System.lineSeparator() + String.format("\t%s: lists the tasks currently available. " +
-                "Input must follow the format below,", command.CMD_LIST);
+                "Input must follow the format below,", Command.CMD_LIST);
         msg += System.lineSeparator() + "\t\tlist";
         msg += System.lineSeparator();
 
         // help for deadline command
         msg += System.lineSeparator() + String.format("\t%s: adds deadline to your list of tasks. " +
-                "Input must follow the format below,", command.CMD_ADD_DEADLINE);
+                "Input must follow the format below,", Command.CMD_ADD_DEADLINE);
         msg += System.lineSeparator() + "\t\tdeadline [description] /by [date/time]";
         msg += System.lineSeparator();
 
         // help for event command
         msg += System.lineSeparator() + String.format("\t%s: adds event to your list of tasks. Input " +
-                "must follow the format below,", command.CMD_ADD_EVENT);
+                "must follow the format below,", Command.CMD_ADD_EVENT);
         msg += System.lineSeparator() + "\t\tevent [description] /at [date/time]";
         msg += System.lineSeparator();
 
         // help for to do command
         msg += System.lineSeparator() + String.format("\t%s: add todo to your list of tasks. Input" +
-                " must follow the format below,", command.CMD_ADD_TODO);
+                " must follow the format below,", Command.CMD_ADD_TODO);
         msg += System.lineSeparator() + "\t\ttodo [description]";
+        msg += System.lineSeparator();
+
+        // help for delete command
+        msg += System.lineSeparator() + String.format("\t%s: removes specified task from the list. Input" +
+                " must follow the format below,", Command.CMD_DELETE);
+        msg += System.lineSeparator() + "\t\tdelete [task number]";
         msg += System.lineSeparator();
 
         // help for clear window
         msg += System.lineSeparator() + String.format("\t%s: clears command window. Input" +
-                " must follow the format below,", command.CMD_CLEAR_WINDOW);
+                " must follow the format below,", Command.CMD_CLEAR_WINDOW);
         msg += System.lineSeparator() + "\t\tclear";
         msg += System.lineSeparator();
 
@@ -185,25 +189,21 @@ public class Output {
 
     }
 
-    // ASCII art from: https://www.asciiart.eu/computers/bug, by Joan Start
-    public void printEasterEgg() {
-        String msg = "\tNice! you found a bug :) keep it up!" + System.lineSeparator() + System.lineSeparator();
+    public void printTaskRemoved(Task toPrint, int size) {
+        String msg = "Okay! I've removed the following task from your list :) :" + System.lineSeparator()
+                + "\t\t" + toPrint + System.lineSeparator();
 
-        msg += "\t    .--.       .--.\n" +
-                "\t    _  `    \\     /    `  _\n" +
-                "\t     `\\.===. \\.^./ .===./`\n" +
-                "\t            \\/`\"`\\/\n" +
-                "\t         ,  | y2k |  ,\n" +
-                "\t        / `\\|;-.-'|/` \\\n" +
-                "\t       /    |::\\  |    \\\n" +
-                "\t    .-' ,-'`|:::; |`'-, '-.\n" +
-                "\t        |   |::::\\|   | \n" +
-                "\t        |   |::::;|   |\n" +
-                "\t        |   \\:::://   |\n" +
-                "\t        |    `.://'   |\n" +
-                "\tjgs    .'             `.\n" +
-                "\t    _,'                 `,_";
+        if (size > 0) {
+            msg += "\tNow you have " + size + " " + getTaskNoun(size)
+                    + " in your list";
+        } else {
+            msg += "\tYour list is empty now :O";
+        }
 
         displayMessage(msg);
+    }
+
+    private String getTaskNoun (int nounSize) {
+        return (nounSize == 1) ? "task": "tasks";
     }
 }

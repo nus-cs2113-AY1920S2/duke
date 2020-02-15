@@ -54,6 +54,24 @@ public class TaskManager {
         } else {
             printer.printTaskAlreadyMarked(tasks.get(taskIndex));
         }
+    }
+
+    public void removeTask (int taskIndex) throws TaskException {
+
+        if (tasks.isEmpty()) {
+            String msg = "Your list is empty... I cannot delete something that doesn't exist";
+            throw new TaskException(msg);
+        }
+
+        if (taskIndexOutOfBounds(taskIndex)) {
+            String msg = String.format("The task number %d doesn't exist. There %s only %d %s",
+                    taskIndex + 1, getNounDescriptor(), tasks.size(), getTaskNoun());
+            throw new TaskException(msg);
+        }
+
+        printer.printTaskRemoved(tasks.get(taskIndex), tasks.size() - 1);
+        tasks.remove(taskIndex);
+
 
     }
 

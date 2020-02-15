@@ -15,7 +15,8 @@ fi
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java \
             ../src/main/java/duke/command/*.java ../src/main/java/duke/task/*.java \
-            ../src/main/java/duke/ui/*.java ../src/main/java/duke/exception/*.java
+            ../src/main/java/duke/ui/*.java ../src/main/java/duke/exception/*.java \
+            ../src/main/java/duke/utility/*.java
 
 then
     echo "********** BUILD FAILURE **********"
