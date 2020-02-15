@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     protected String description;
     protected int index;
@@ -19,7 +21,7 @@ public class Task {
     }
 
 
-    protected final void setType(String type){
+    public final void setType(String type){
         this.type = type;
     }
     public String getDescription() {

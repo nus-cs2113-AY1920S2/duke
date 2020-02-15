@@ -1,3 +1,5 @@
+import task.*;
+
 import java.util.Scanner;
 import java.util.Arrays;
 
