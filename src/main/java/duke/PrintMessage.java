@@ -1,7 +1,6 @@
 package duke;
 
 import duke.exception.DukeException;
-import duke.task.Task;
 
 import static duke.Duke.tasks;
 
@@ -25,6 +24,9 @@ public class PrintMessage {
     private static final String COMMAND_ADD_MESSAGE =
             "Got it. I've added this task:" + LS + TAB + "%s" + LS + "Now " + "you have %d task(s) in the list.";
     
+    private static final String COMMAND_DELETE_MESSAGE =
+            "Noted. I've removed this task:" + LS + TAB + "%s" + LS + "Now " + "you have %d task(s) in the list.";
+    
     private static final String COMMAND_INVALID_MESSAGE = "Command is invalid, " + "please try another command";
     private static final String COMMAND_INVALID_INDEX_MESSAGE = "Index is invalid";
     
@@ -39,18 +41,17 @@ public class PrintMessage {
     }
     
     protected static void displayAddMessage() {
-        printToConsole(DIVIDER, String.format(COMMAND_ADD_MESSAGE, tasks[Task.getTaskCount() - 1], Task.getTaskCount()),
-                DIVIDER);
+        printToConsole(DIVIDER, String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()), DIVIDER);
     }
     
     protected static void displayDoneMessage(String index) {
         try {
             int doneTaskIndex = Integer.parseInt(index) - 1;
-            if (doneTaskIndex >= Task.getTaskCount()) {
+            if (doneTaskIndex >= tasks.size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            tasks[doneTaskIndex].markAsDone();
-            printToConsole(DIVIDER, COMMAND_DONE_MESSAGE, TAB + tasks[doneTaskIndex], DIVIDER);
+            tasks.get(doneTaskIndex).markAsDone();
+            printToConsole(DIVIDER, COMMAND_DONE_MESSAGE, TAB + tasks.get(doneTaskIndex), DIVIDER);
         } catch (ArrayIndexOutOfBoundsException e) {
             printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
         }
@@ -78,14 +79,28 @@ public class PrintMessage {
     }
     
     protected static void displayTaskList() {
-        if (Task.getTaskCount() == 0) {
+        if (tasks.isEmpty()) {
             printToConsole(DIVIDER, COMMAND_LIST_EMPTY_MESSAGE, DIVIDER);
             return;
         }
         printToConsole(DIVIDER, COMMAND_LIST_MESSAGE);
-        for (int i = 0; i < Task.getTaskCount(); ++i) {
-            System.out.println((i + 1) + "." + tasks[i]);
+        for (int i = 0; i < tasks.size(); ++i) {
+            System.out.println((i + 1) + "." + tasks.get(i));
         }
         printToConsole(DIVIDER);
+    }
+    
+    protected static void displayRemoveMessage(String index) {
+        try {
+            int removeTaskIndex = Integer.parseInt(index) - 1;
+            if (removeTaskIndex >= tasks.size() || removeTaskIndex < 0) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            printToConsole(DIVIDER, String.format(COMMAND_DELETE_MESSAGE, tasks.get(removeTaskIndex), tasks.size() - 1),
+                    DIVIDER);
+            tasks.remove(removeTaskIndex);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
+        }
     }
 }
