@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import duke.task.Task;
 import static misc.Messages.MESSAGE_COMMAND_LIST_TASK;
 import static misc.Messages.MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS;
+import static misc.Messages.MESSAGE_COMMAND_FILTER_TASK;
 
 public class TaskList {
     public final int FIRST_ELEMENT_INDEX = 0;
@@ -25,6 +26,17 @@ public class TaskList {
     
     public List<Task> getTasks() {
         return this.tasks;
+    }
+    
+    public void filterTask(String date) {
+        System.out.println(MESSAGE_COMMAND_FILTER_TASK);
+        
+        this.tasks.stream()
+            .filter(task -> task.getDate().isPresent())
+            .filter(task -> task.getDate().get().equals(date))
+            .forEachOrdered(System.out::println);
+        
+        System.out.println("\n");
     }
     
     public void listTask() {
