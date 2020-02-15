@@ -28,6 +28,7 @@ public class Duke {
             try {
                 String userInput = getInput(input.nextLine());
                 String[] userCommands = userInput.split(" ", 2);
+
                 if (userCommands[0].equalsIgnoreCase("bye")) {
                     printByeMessage();
                     break;
@@ -41,6 +42,8 @@ public class Duke {
                     addEvent(Tasks, userCommands);
                 } else if (userCommands[0].equalsIgnoreCase("deadline")) {
                     addDeadline(Tasks, userCommands);
+                } else if (userCommands[0].equalsIgnoreCase("remove")) {
+                    printRemove(userCommands, Tasks);
                 } else {
                     throw new DukeException();
                 }
@@ -51,12 +54,30 @@ public class Duke {
         }
     }
 
+    private static void printRemove(String[] input, ArrayList<Task> Tasks) {
+        try {
+            int num = Integer.parseInt(input[1]) - 1;
+            System.out.println("    Noted. I've removed this task:");
+            System.out.println("      " + Tasks.get(num));
+            Tasks.remove(num);
+            int taskCounter = Tasks.size();
+            System.out.println("    Now you have " + taskCounter + " task(s) in the list.");
+        } catch (NullPointerException e) {
+            System.out.println("    Error: Given Index is out of bound");
+        } catch (Exception e) {
+            System.out.println("    Error: Insufficient detail");
+        }
+    }
+
     private static void addEvent(ArrayList<Task> tasks, String[] userCommand) {
         try {
             if (userCommand.length <= 1) {
                 throw new DukeException();
             }
             String[] buffer = userCommand[1].split("/at", 2);
+            if (buffer[1].trim().isEmpty()) {
+                throw new DukeException();
+            }
             int taskCounter = tasks.size();
             tasks.add(new Event(buffer[0].trim(), buffer[1].trim()));
             printTask(tasks.get(taskCounter), taskCounter);
@@ -73,6 +94,9 @@ public class Duke {
                 throw new DukeException();
             }
             String[] buffer = userCommand[1].split("/by", 2);
+            if (buffer[1].trim().isEmpty()) {
+                throw new DukeException();
+            }
             int taskCounter = tasks.size();
             tasks.add(new DeadLine(buffer[0].trim(), buffer[1].trim()));
             printTask(tasks.get(taskCounter), taskCounter);
@@ -86,10 +110,15 @@ public class Duke {
     private static void addToDo(ArrayList<Task> tasks, String[] userCommands) {
         try {
             int taskCounter = tasks.size();
+            if (userCommands[1].trim().isEmpty()){
+                throw new DukeException();
+            }
             tasks.add(new ToDo(userCommands[1]));
             printTask(tasks.get(taskCounter), taskCounter);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("    ☹ OOPS!!! The description of a DeadLine cannot be empty.");
+            System.out.println("    ☹ OOPS!!! The description of a ToDo cannot be empty.");
+        } catch (DukeException e) {
+            System.out.println("    ☹ OOPS!!! The description of a ToDo cannot be empty.");
         }
     }
 
