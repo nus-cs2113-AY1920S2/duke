@@ -13,6 +13,6 @@ public class Todo extends Task{
 
     @Override
     public String saveTask() {
-        return "D | " + super.isDoneNum() + " | " + super.saveTask();
+        return "T | " + super.isDoneNum() + " | " + super.saveTask();
     }
 }
