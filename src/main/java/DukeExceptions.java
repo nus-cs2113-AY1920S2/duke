@@ -42,5 +42,18 @@ public class DukeExceptions {
         System.out.println("\tdone <item number>\t\t\t\t\t <Ex: 'done 1'");
         doLine();
     }
+    public static void printInvalidDeleteException(){
+        doLine();
+        System.out.println("\tYou have entered an incorrect input. Please try again.");
+        System.out.println("\tHere is a example of the done command:");
+        System.out.println("\tdelete <item number>\t\t\t\t\t <Ex: 'delete 1'");
+        doLine();
+    }
+    public static void printIndexOutOfBoundsException(){
+        doLine();
+        System.out.println("\tYou have entered an item number that does not exist. Please try again.");
+        System.out.println("\tTry 'list' to display the items that exists in the Task list.");
+        doLine();
+    }
 
 }

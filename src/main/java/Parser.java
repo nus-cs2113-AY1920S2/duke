@@ -13,7 +13,7 @@ public class Parser {
     public String getFirst(){
         return this.input.split(" ", 2)[0];
     }
-    private String getSecond(){
+    public String getSecond(){
         return this.input.split(" ", 2)[1];
     }
     public String getDeadlineItem(){

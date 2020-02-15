@@ -1,9 +1,10 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Duke {
     public static final int MAXIMUM_CAPACITY = 100;
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static Task[] tasks = new Task[MAXIMUM_CAPACITY];
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int taskCount = 0;
     private Parser parser;
     private DukeExceptions dukeExceptions;
@@ -30,8 +31,8 @@ public class Duke {
     public static void getList(){
         doLine();
         System.out.println("\tHere are the tasks in your list:");
-        for(int i = 0; i< taskCount; i++){
-            System.out.println("\t"+(i+1)+"."+tasks[i].toString());
+        for(int i = 0; i< tasks.size(); i++){
+            System.out.println("\t"+(i+1)+"."+tasks.get(i).toString());
         }
         doLine();
     }
@@ -43,21 +44,29 @@ public class Duke {
         return inputLine;
     }
     private static void addTask(Task task){
-        tasks[taskCount] = task;
-
+        tasks.add(task);
         doLine();
         System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t"+tasks[taskCount].toString());
-        taskCount++;
-        System.out.println("\tNow you have "+ taskCount +" tasks in the list.");
+        System.out.println("\t\t"+tasks.get(tasks.size()-1).toString());
+        System.out.println("\tNow you have "+ tasks.size() +" tasks in the list.");
+        doLine();
+    }
+    private static void deleteTask(String taskCount){
+        int taskNumber = Integer.parseInt(taskCount) -1;
+        String taskString = tasks.get(taskNumber).toString();
+        doLine();
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t\t"+ taskString);
+        tasks.remove(taskNumber);
+        System.out.println("\tNow you have "+ tasks.size() +" tasks in the list.");
         doLine();
     }
     private static void completeTask(String taskCount){
         int taskNumber = Integer.parseInt(taskCount) -1;
-        tasks[taskNumber].markAsDone();
+        tasks.get(taskNumber).markAsDone();
         doLine();
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t"+tasks[taskNumber].toString());
+        System.out.println("\t\t"+tasks.get(taskNumber).toString());
         doLine();
     }
     public void processInput(String input){
@@ -78,6 +87,18 @@ public class Duke {
                 }catch (ArrayIndexOutOfBoundsException e){
                     dukeExceptions.printInvalidDeadlineException();
                 }
+            }else if(firstCommand.equals("delete")){
+                try {
+                    if(parser.getSecond().equals(" ")  || parser.getSecond().isEmpty()){
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    deleteTask(parser.getSecond());
+                }catch (NumberFormatException e){
+                    dukeExceptions.printInvalidDeleteException();
+                }catch (IndexOutOfBoundsException e){
+                    dukeExceptions.printIndexOutOfBoundsException();
+                }
+
             }else if(firstCommand.equals("event")){
                 try {
                     if(parser.getEventItem().equals(" ") || parser.getEventItem().isEmpty() || parser.getEventAt().isEmpty() || parser.getEventAt().equals(" ")){
@@ -93,7 +114,7 @@ public class Duke {
                         throw new ArrayIndexOutOfBoundsException();
                     }
                     addTask(new ToDo(parser.getToDo()));
-                }catch (ArrayIndexOutOfBoundsException e){
+                }catch (IndexOutOfBoundsException e){
                     dukeExceptions.printInvalidToDoException();
                 }
             }else if(firstCommand.equals("done")) {
@@ -103,6 +124,8 @@ public class Duke {
                     }
                     completeTask(parser.getCompleteNumber());
                 }catch (ArrayIndexOutOfBoundsException e){
+                    dukeExceptions.printIndexOutOfBoundsException();
+                }catch (NumberFormatException e){
                     dukeExceptions.printInvalidDoneException();
                 }
             }else{
