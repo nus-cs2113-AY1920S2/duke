@@ -1,5 +1,6 @@
 package Duke;
 
+
 public class Deadline extends Task {
 
     public static final String TYPE_DEADLINE = "D";
@@ -35,6 +36,5 @@ public class Deadline extends Task {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
                             count + ". " + super.description + " (by: " + date + ")");
     }
-
 
 }

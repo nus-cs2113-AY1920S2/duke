@@ -101,50 +101,57 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
-
-            if (wordLength <= 1) { // empty parameter
-                taskCounter--;
-                throw new NoParameterException();
-            }
-
-            try {
-                String itemName = taskDescription.substring(LENGTH_DEADLINE);
-                String[] words = itemName.split("/");
-                for (int i = 0; i < words.length; i++) {
-                    if (words[i].isBlank()){
-                        throw new NoParameterException();
-                    }
-                }
-                System.out.println("Len: " + words.length);
-                Task newTask = new Deadline(words[0].trim(), words[1].trim());
-                tasks.add(newTask);
-                newTask.printAddDetails(taskCounter);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please input the date using the specified format");
-                taskCounter--;
-            }
-
-
-
-
-    }
-
-    public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+    public static String[] processDatedTasks(String taskDescription, int taskCounter, int wordLength, int commandLength) throws NoParameterException {
+        if (wordLength <= 1) { // empty parameter
+            throw new NoParameterException();
+        }
         try {
-            String itemName = taskDescription.substring(LENGTH_EVENT);
-            String[] words = itemName.split("/");
-            Task newTask = new Event(words[0].trim(), words[1].trim());
-            tasks.add(newTask);
-            newTask.printAddDetails(taskCounter);
-        } catch (Exception e) {
+            String itemName = taskDescription.substring(commandLength);
+            String[] words = itemName.split("/"); // potential problem is not accepting date format with '/' inside, throw err if more than 2 len
+            for (int i = 0; i < words.length; i++) { // checking for blank tasks, including one char of space
+                if (words[i].isBlank()){
+                    throw new NoParameterException();
+                }
+            }
+            return words;
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
             taskCounter--;
         }
+        System.out.println("Ugh null");
+        return null;
     }
 
-    public static void addTodo(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
+        try {
+            String[] words = processDatedTasks(taskDescription, taskCounter, wordLength, LENGTH_DEADLINE);
+            Task newTask = new Deadline(words[0].trim(), words[1].trim());
+            tasks.add(newTask);
+            newTask.printAddDetails(taskCounter);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please input the date using the specified format");
+        }
+    }
+
+    public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
+        try {
+            String[] words = processDatedTasks(taskDescription, taskCounter, wordLength, LENGTH_EVENT);
+            Task newTask = new Event(words[0].trim(), words[1].trim());
+            tasks.add(newTask);
+            newTask.printAddDetails(taskCounter);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please input the date using the specified format");
+        }
+    }
+
+    public static void addTodo(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
+        if (wordLength <= 1) { // empty parameter
+            throw new NoParameterException();
+        }
         String itemName = taskDescription.substring(LENGTH_TODO);
+        if (itemName.isBlank()) { // task is a space/blank char
+            throw new NoParameterException();
+        }
         Task newTask = new ToDo(itemName.trim());
         tasks.add(newTask);
         newTask.printAddDetails(taskCounter);
@@ -186,23 +193,33 @@ public class Duke {
                 printHelp();
                 break;
             case "todo":
-                taskCounter++;
-                addTodo(tasks, userCommand, taskCounter);
+                try {
+                    taskCounter++;
+                    addTodo(tasks, userCommand, taskCounter, wordLength);
+                } catch (NoParameterException e) {
+                    taskCounter--;
+                    System.out.println("Missing Parameters detected!\n");
+                }
                 break;
             case "event":
                 taskCounter++;
-                addEvent(tasks, userCommand, taskCounter);
-                break;
+                try {
+                    addEvent(tasks, userCommand, taskCounter, wordLength);
+                } catch (NoParameterException e){
+                    taskCounter--;
+                    System.out.println("Missing Parameters detected!\n");
+                }
             case "deadline":
                 taskCounter++;
                 try {
                     addDeadline(tasks, userCommand, taskCounter, wordLength);
                 } catch (NoParameterException e){
-                    System.out.println("No Parameters detected!\n");
+                    taskCounter--;
+                    System.out.println("Missing Parameters detected!\n");
                 }
                 break;
             default:
-                System.out.println("Please add the task type\n");
+                System.out.println("Command not recognised\n");
             }
             // end of current listening loop, preparing next command
             userCommand = input.nextLine();

@@ -1,5 +1,7 @@
 package Duke;
 
+import java.util.ArrayList;
+
 public class Event extends Task {
 
     public static final String TYPE_EVENT = "E";
@@ -36,4 +38,5 @@ public class Event extends Task {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
                             count + ". " + description + " (by: " + date + ")");
     }
+
 }
