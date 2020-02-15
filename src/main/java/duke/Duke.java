@@ -25,9 +25,13 @@ public class Duke {
      * command information
      */
     public static void init () {
+
         taskManager = new TaskManager();
         printer = new Output();
+
         inputHandler = new InputHandler(taskManager, printer);
+
+        taskManager.loadTasks();
     }
 
 

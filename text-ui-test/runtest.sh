@@ -13,10 +13,15 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java \
+#if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java \
+#            ../src/main/java/duke/command/*.java ../src/main/java/duke/task/*.java \
+#            ../src/main/java/duke/ui/*.java ../src/main/java/duke/exception/*.java
+
+if ! javac -cp ../lib/gson-2.8.6.jar -Xlint:none -d ../bin ../src/main/java/duke/*.java \
             ../src/main/java/duke/command/*.java ../src/main/java/duke/task/*.java \
             ../src/main/java/duke/ui/*.java ../src/main/java/duke/exception/*.java \
             ../src/main/java/duke/utility/*.java
+
 
 then
     echo "********** BUILD FAILURE **********"
@@ -24,7 +29,8 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -Dfile.encoding=UTF-8 -classpath ../bin duke.Duke 1 < input.txt > ACTUAL.TXT
+# java -Dfile.encoding=UTF-8 ../-classpath ../bin duke.Duke 1 < input.txt > ACTUAL.TXT
+java -Dfile.encoding=UTF-8 -cp ../lib/gson-2.8.6.jar:../bin duke.Duke 1 < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED.TXT
