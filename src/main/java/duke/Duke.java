@@ -37,7 +37,7 @@ public class Duke {
 
                 if (userCommands[0].equalsIgnoreCase("bye")) {
                     printByeMessage();
-                    saveData(Tasks);
+                    writeToFile(Tasks);
                     break;
                 } else if (userCommands[0].equalsIgnoreCase("list")) {
                     printList(Tasks);
@@ -78,8 +78,10 @@ public class Duke {
         }
     }
 
-    private static void saveData(ArrayList<Task> tasks) throws IOException {
+    private static void writeToFile(ArrayList<Task> tasks) throws IOException {
+        Files.delete(Paths.get("C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt"));
         FileWriter fw = new FileWriter("C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt", true);
+
         for (Task i : tasks) {
             fw.write(i.toOutput());
             fw.write(System.lineSeparator());

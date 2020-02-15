@@ -1,9 +1,3 @@
-T | false | eat
-E | false | sleep | home
-D | false | project | monday
-T | true | eat
-E | false | sleep | home
-D | true | project | monday
-T | false | homework
-D | true | tutorials | today
-E | false | lecture | i-cube
+T | 1 | hello
+E | 0 | lecture | hall
+D | 1 | hw | 2359

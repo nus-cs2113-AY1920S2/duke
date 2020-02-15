@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String toOutput() {
-        return "E | " + isDone + " | " + description
+        return "E | " + (isDone ? '1' : '0') + " | " + description
                 + " | " + at;
     }
 

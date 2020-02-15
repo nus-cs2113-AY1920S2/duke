@@ -7,7 +7,7 @@ public class ToDo extends Task {
 
     @Override
     public String toOutput() {
-        return "T | " + isDone + " | " + description;
+        return "T | " + (isDone ? '1' : '0') + " | " + description;
     }
 
     @Override
