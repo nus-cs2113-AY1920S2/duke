@@ -2,10 +2,6 @@ import java.lang.NullPointerException;
 import java.util.Scanner;
 import Duke.*;
 import Exceptions.*;
-<<<<<<< HEAD
-
-=======
->>>>>>> Level-5
 
 public class Duke {
     private static Task[] tasks = new Task[100];
