@@ -2,10 +2,7 @@ import java.lang.NullPointerException;
 import java.util.Scanner;
 import Duke.*;
 import Exceptions.*;
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> master
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
