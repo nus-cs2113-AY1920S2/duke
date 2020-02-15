@@ -15,6 +15,10 @@ public class Event extends Todo {
         return taskType;
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
     public String toString() {
         return super.toString() + " (at: " + at + ")";
     }
