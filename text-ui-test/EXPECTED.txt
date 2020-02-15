@@ -60,6 +60,62 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	[Command entered: deadline]
+	Invalid Command! Description cannot be empty!
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: deadline to finish homework]
+	Invalid Command! BY cannot be empty!
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: deadline to finish homework /by 2359]
+	Got it. I've added this task:
+	Now you have 1 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: event go out with friends]
+	Invalid Command! AT cannot be empty!
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: event go out with friends /at 1st April]
+	Got it. I've added this task:
+	Now you have 2 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: todo]
+	Invalid Command! Description cannot be empty!
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: todo lab report]
+	Got it. I've added this task:
+	Now you have 3 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: mark]
+	Invalid Command! Nothing is marked!
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: mark 2]
+	You have marked -- 2
+	____________________________________________________________
+
+	____________________________________________________________
+	[Command entered: list]
+	Here are the tasks in your list:
+	1. [D][N] to finish homework 	(by: 2359)
+	2. [E][Y] go out with friends 	(at: 1st April)
+	3. [T][N] lab report
+	____________________________________________________________
+
+	____________________________________________________________
 	[Command entered: exit]
 	Bye. Hope to see you again soon!
 

@@ -90,6 +90,7 @@ public class Duke {
             userCommand = sc.nextLine();
             displayLineDivider();
             echoUserCommand(userCommand);
+            // Input Processing
             int startIndexOfInput = userCommand.indexOf(" ");
             int startIndexForDeadline = userCommand.indexOf("/by");
             int startIndexForEvent = userCommand.indexOf("/at");
@@ -109,6 +110,8 @@ public class Duke {
                 commandType = userCommand.toUpperCase();
                 description = "";
             }
+
+            // Command
             switch (commandType) {
                 case COMMAND_TODO_WORD:
                     if (description == ""){
