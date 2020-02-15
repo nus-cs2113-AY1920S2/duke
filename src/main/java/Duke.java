@@ -35,7 +35,6 @@ public class Duke {
         try {
             File file =
                     new File(SAVE_FILE_DIRECTORY);
-            System.out.println(file.exists());
             if(file.exists()) {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
@@ -69,7 +68,6 @@ public class Duke {
             }
         }catch (Exception e){
             System.out.println("Error loading file.");
-            System.out.println(e);
         }
 
     }
