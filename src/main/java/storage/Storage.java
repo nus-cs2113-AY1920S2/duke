@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import static misc.Messages.MESSAGE_READ_WRITE_FAILURE;
 
 public class Storage {
     
-    public static final String DEFAULT_STORAGE_FILEPATH = "data/storage.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "storage.txt";
     
     public final Path path;
     
@@ -43,10 +41,15 @@ public class Storage {
     public TaskList load() throws IOException {
         List<String> lines = new ArrayList<>();
         
+        // Find an existing storage.txt file first, else create a new storage.txt.
+        File f = new File(this.path.toString()); 
+        f.createNewFile();
+        FileOutputStream outputFile = new FileOutputStream(f, false);
+        outputFile.close();
+        
         try {
-            String line;
-            File f = new File(this.path.toString());        
-            BufferedReader br = new BufferedReader(new FileReader(f));
+            String line;                       
+            BufferedReader br = new BufferedReader(new FileReader(this.path.toString()));
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
