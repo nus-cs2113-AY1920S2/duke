@@ -21,7 +21,6 @@ public class TaskLoader {
     private final String DEADLINE = "D";
 
 
-
     public TaskLoader (Output printer) {
         this.printer = printer;
         gson = new Gson();
@@ -34,6 +33,10 @@ public class TaskLoader {
     public ArrayList<Task> loadTasks () {
 
         ArrayList<Task> savedTasks = new ArrayList<>();
+
+        if (!file.exists()) {
+            return savedTasks;
+        }
 
         try {
             input = new Scanner(file);
