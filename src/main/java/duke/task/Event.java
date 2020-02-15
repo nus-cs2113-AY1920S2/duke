@@ -9,6 +9,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String toOutput() {
+        return "E | " + isDone + " | " + description
+                + " | " + at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

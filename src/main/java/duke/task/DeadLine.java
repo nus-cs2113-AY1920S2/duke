@@ -9,6 +9,12 @@ public class DeadLine extends Task {
     }
 
     @Override
+    public String toOutput() {
+        return "D | " + isDone + " | " + description
+                + " | " + by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
