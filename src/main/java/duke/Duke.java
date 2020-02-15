@@ -63,7 +63,6 @@ public class Duke {
         }
     }
 
-<<<<<<< HEAD
     private static void printRemove(String[] input, ArrayList<Task> Tasks) {
         try {
             int num = Integer.parseInt(input[1]) - 1;
@@ -77,7 +76,8 @@ public class Duke {
         } catch (Exception e) {
             System.out.println("    Error: Insufficient detail");
         }
-=======
+    }
+
     private static void saveData(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter("C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt", true);
         for (Task i : tasks) {
@@ -85,7 +85,6 @@ public class Duke {
             fw.write(System.lineSeparator());
         }
         fw.close();
->>>>>>> branch-Level-7
     }
 
     private static void addEvent(ArrayList<Task> tasks, String[] userCommand) {
@@ -129,7 +128,7 @@ public class Duke {
     private static void addToDo(ArrayList<Task> tasks, String[] userCommands) {
         try {
             int taskCounter = tasks.size();
-            if (userCommands[1].trim().isEmpty()){
+            if (userCommands[1].trim().isEmpty()) {
                 throw new DukeException();
             }
             tasks.add(new ToDo(userCommands[1]));
@@ -162,7 +161,7 @@ public class Duke {
     }
 
     private static void printList(ArrayList<Task> tasks) {
-        if (tasks.isEmpty()){
+        if (tasks.isEmpty()) {
             System.out.println("    The list is empty.");
         } else {
             System.out.println("    Here are the tasks in your list:");
@@ -205,3 +204,4 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 }
+
