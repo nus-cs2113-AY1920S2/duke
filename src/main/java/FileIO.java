@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,9 +8,14 @@ public class FileIO {
     private FileReader fileToReadFrom;
     private FileWriter fileToWriteTo;
 
-    public FileIO (String path) throws IOException {
-        this.fileToReadFrom = new FileReader(path);
-        this.fileToWriteTo = new FileWriter(path);
+    public FileIO (File f, TaskList tasks) {
+        try {
+            this.fileToReadFrom = new FileReader(f);
+            this.loadAllTo(tasks);
+            this.fileToWriteTo = new FileWriter(f);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -73,11 +79,12 @@ public class FileIO {
         Task currTask;
         String taskInString = "";
 
+        // Create string to be stored into current file
         for (int i = 0; i < tasks.size(); ++i) {
             currTask = tasks.getByIndex(i);
             taskInString += String.format("%c,%b,%s",
                     currTask.getType(),
-                    currTask.getDone(),
+                    currTask.getDoneInBoolean(),
                     currTask.getDescription());
 
             // now write additional info (for Deadline and Event objects)
@@ -92,7 +99,13 @@ public class FileIO {
             // mark end of Task
             taskInString += System.lineSeparator();
         }
+
         // now add everything to file (from the start)
-        fileToWriteTo.write(taskInString, 0, taskInString.length());
+        fileToWriteTo.write(taskInString);
+    }
+
+    public void close() throws IOException {
+        this.fileToReadFrom.close();
+        this.fileToWriteTo.close();
     }
 }

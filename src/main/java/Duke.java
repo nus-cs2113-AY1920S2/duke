@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
-        String name = "Duke";
-        welcome(name);
+        System.out.println("Initialising...");
 
         Scanner reader = new Scanner(System.in);
         String input;
@@ -14,6 +15,25 @@ public class Duke {
         String taskDescriptionBy;
         String taskDescriptionAt;
         TaskList tasks = new TaskList();
+
+        // Indicate location to store tasks in an external file
+        // ASSUMPTION: working directory is .../duke/
+        File f = new File("./data/duke.txt");
+        if (!f.exists()) {
+            System.out.println("Storage file not found.");
+            try {
+                new File(f.getParent()).mkdir();    // mkdir
+                f.createNewFile();
+                System.out.println("A storage file is created.");
+            } catch (IOException m) {
+                System.out.println("... but storage file already exists??");
+            }
+        }
+
+        FileIO file = new FileIO(f, tasks);
+
+        String name = "Duke";
+        welcome(name);
 
         do {
             input = reader.nextLine();
@@ -27,6 +47,7 @@ public class Duke {
                 case "bye":
                     // close the interpreter
                     System.out.println("\tBye. Hope to see you again soon!");
+                    file.storeAllFrom(tasks);
                     break;
                 case "list":
                     tasks.list();
@@ -69,9 +90,17 @@ public class Duke {
                 System.out.println("\t ☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
             } catch (IllegalArgumentException m) {
                 System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (IOException m) {
+                System.out.println(m);
             }
             printLine();
-        } while (!taskType.equals("bye")) ;
+        } while (!taskType.equals("bye"));
+
+        try {
+            file.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -104,6 +133,7 @@ public class Duke {
     }
 
     public static void welcome(String name) {
+        printLine();
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
