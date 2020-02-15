@@ -17,7 +17,7 @@ public class Duke {
             String userResponse = getUserResponse();
             String[] userResponseList = userResponse.split(" ");
             String action = userResponseList[0];
-            String restOfUserInput = userResponse.replace(action, "");
+            String restOfUserInput = userResponse.replace(action, "").trim();
 
             if(action.equals("bye")){
                 break;
@@ -28,9 +28,9 @@ public class Duke {
             } else if(action.equals("todo")){
                 doTodoCommand(restOfUserInput);
             } else if(action.equals("deadline")){
-                System.out.println("this is for deadline");
+                doDeadlineCommand(restOfUserInput);
             } else if(action.equals("event")){
-                System.out.println("this is for even");
+                doEventCommand(restOfUserInput);
             } else {
                 System.out.println("Add exception here");
             }
@@ -67,6 +67,13 @@ public class Duke {
         printLineSeparator();
     }
 
+    // Helper function to print out message when task gets added to list
+    public static void printTask() {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks[numOfTasks-1]);
+        System.out.println("Now you have " + numOfTasks + " tasks in the list. ");
+    }
+
     // Helper function that executes command for 'list'
     public static void doListCommand() {
         printLineSeparator();
@@ -80,7 +87,7 @@ public class Duke {
     // Helper function that executes command for 'done'
     public static void doDoneCommand(String command){
         printLineSeparator();
-        int taskNum = Integer.parseInt(command.trim()) - 1;
+        int taskNum = Integer.parseInt(command) - 1;
         tasks[taskNum].markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks[taskNum]);
@@ -92,9 +99,31 @@ public class Duke {
         printLineSeparator();
         tasks[numOfTasks] = new Todo(command);
         numOfTasks++;
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[numOfTasks-1]);
-        System.out.println("Now you have " + numOfTasks + " tasks in the list. ");
+        printTask();
+        printLineSeparator();
+    }
+
+    // Helper function that executes command for 'deadline'
+    public static void doDeadlineCommand(String command){
+        printLineSeparator();
+        String[] taskList = command.split(" /by ");
+        String task = taskList[0];
+        String by = taskList[1];
+        tasks[numOfTasks] = new Deadline(task, by);
+        numOfTasks++;
+        printTask();
+        printLineSeparator();
+    }
+
+    // Helper function that executes command for 'event'
+    public static void doEventCommand(String command){
+        printLineSeparator();
+        String[] taskList = command.split(" /at ");
+        String task = taskList[0];
+        String at = taskList[1];
+        tasks[numOfTasks] = new Deadline(task, at);
+        numOfTasks++;
+        printTask();
         printLineSeparator();
     }
 }
