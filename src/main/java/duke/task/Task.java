@@ -3,6 +3,7 @@ package duke.task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected final String PIPE = " | ";
     
     public Task(String description) {
         this.description = description;
@@ -21,11 +22,8 @@ public abstract class Task {
         return getStatusIcon() + " " + description;
     }
     
-    //Solution below adapted from https://www.baeldung.com/java-add-character-to-string
-    protected String stringBuilder(String input) {
-        StringBuilder sb = new StringBuilder(input);
-        sb.insert(3, ":");
-        return sb.toString();
+    public String toStorage() {
+        return PIPE + (isDone ? "1" : "0") + PIPE + description;
     }
     
 }

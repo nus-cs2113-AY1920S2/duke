@@ -17,6 +17,8 @@ import static duke.PrintMessage.displayByeMessageAndExit;
 import static duke.PrintMessage.displayTaskList;
 import static duke.PrintMessage.displayRemoveMessage;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
@@ -43,56 +45,69 @@ public class Duke {
     private static final String SPILT_BY_SPACE = "\\s+";
     private static final String SPILT_BY_SLASH = "/";
     
+    private static final String FILEPATH = "\\data\\duke.txt";
+    
     private static Scanner in = new Scanner(System.in);
     
     protected static ArrayList<Task> tasks = new ArrayList<>();
     
     public static void main(String[] args) {
+        final String filePath = getRelativePath().replace("\\", "/");
+        new Storage(filePath);
         displayWelcomeMessage();
         while (true) {
             String userInput = getUserInput();
-            executeCommand(userInput);
+            executeCommand(filePath, userInput);
         }
     }
+    
+    //@@author geoO-reused
+    //Reused from https://stackoverflow.com/questions/4871051/getting-the-current-working-directory-in-java
+    public static String getRelativePath() {
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        return s + FILEPATH;
+    }
+    //@@author geoO-reused
     
     /* Solution below adapted from
        https://github.com/nus-cs2113-AY1920S2/contacts/blob/master/src/main/java/Contacts1.java
      */
-    private static void executeCommand(String userInput) {
+    private static void executeCommand(String filePath, String userInput) {
         String[] commandTypeAndParams = splitInputLine(userInput, SPILT_BY_SPACE);
         String[] paramAndDate = splitInputLine(commandTypeAndParams[1], SPILT_BY_SLASH);
-        String commandWord = commandTypeAndParams[0];
-        String commandArgs = paramAndDate[0];
-        String commandDate = paramAndDate[1];
+        String commandWord = commandTypeAndParams[0].trim();
+        String commandArgs = paramAndDate[0].trim();
+        String commandDate = paramAndDate[1].trim();
         
         try {
             hasEmptyDescription(commandWord, commandArgs);
             hasEmptyDate(commandWord, commandDate);
-            operateCommand(commandWord, commandArgs, commandDate);
+            operateCommand(filePath, commandWord, commandArgs, commandDate);
         } catch (DukeException e) {
             System.out.println(e.toString());
         }
     }
     
-    private static void operateCommand(String commandWord, String commandArgs, String commandDate) {
+    private static void operateCommand(String filePath, String commandWord, String commandArgs, String commandDate) {
         switch (commandWord.toLowerCase()) {
         case COMMAND_TODO_WORD:
             tasks.add(new Todo(commandArgs));
-            displayAddMessage();
+            displayAddMessage(filePath);
             break;
         case COMMAND_DEADLINE_WORD:
             tasks.add(new Deadline(commandArgs, commandDate));
-            displayAddMessage();
+            displayAddMessage(filePath);
             break;
         case COMMAND_EVENT_WORD:
             tasks.add(new Event(commandArgs, commandDate));
-            displayAddMessage();
+            displayAddMessage(filePath);
             break;
         case COMMAND_LIST_WORD:
             displayTaskList();
             break;
         case COMMAND_DONE_WORD:
-            displayDoneMessage(commandArgs);
+            displayDoneMessage(filePath, commandArgs);
             break;
         case COMMAND_BYE_WORD:
             displayByeMessageAndExit();

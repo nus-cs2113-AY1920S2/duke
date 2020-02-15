@@ -2,7 +2,11 @@ package duke;
 
 import duke.exception.DukeException;
 
+import java.io.IOException;
+
 import static duke.Duke.tasks;
+import static duke.Storage.appendToFile;
+import static duke.Storage.modifyFile;
 
 public class PrintMessage {
     
@@ -40,19 +44,31 @@ public class PrintMessage {
         printToConsole(DIVIDER, WELCOME_MESSAGE, DIVIDER);
     }
     
-    protected static void displayAddMessage() {
-        printToConsole(DIVIDER, String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()), DIVIDER);
+    protected static void displayAddMessage(String filePath) {
+        try {
+            printToConsole(DIVIDER, String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()),
+                    DIVIDER);
+            appendToFile(filePath, tasks.get(tasks.size() - 1).toStorage());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
     
-    protected static void displayDoneMessage(String index) {
+    protected static void displayDoneMessage(String filePath, String index) {
         try {
+            if (index.equals("")) {
+                throw new IOException();
+            }
             int doneTaskIndex = Integer.parseInt(index) - 1;
             if (doneTaskIndex >= tasks.size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
             tasks.get(doneTaskIndex).markAsDone();
+            modifyFile(filePath, doneTaskIndex, tasks.get(doneTaskIndex).toStorage());
             printToConsole(DIVIDER, COMMAND_DONE_MESSAGE, TAB + tasks.get(doneTaskIndex), DIVIDER);
         } catch (ArrayIndexOutOfBoundsException e) {
+            printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
+        } catch (IOException e) {
             printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
         }
     }

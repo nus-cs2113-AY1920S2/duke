@@ -3,20 +3,22 @@ package duke.task;
 public class Deadline extends Task {
     
     private String by;
-    private final String TAG = "[D]";
-    private final String OPEN_BRACKET = "(";
-    private final String CLOSE_BRACKET = ")";
+    private final String PREFIX = "D";
+    private final int startIndexForSubstring = 3;
     
     public Deadline(String description, String by) {
         super(description);
-        this.by = OPEN_BRACKET + by + CLOSE_BRACKET;
-        this.by = stringBuilder(this.by);
+        this.by = by.substring(startIndexForSubstring);
     }
     
     @Override
     public String toString() {
-        return TAG + super.toString() + by;
+        return "[" + PREFIX + "]" + super.toString() + " (by: " + by + ")";
     }
     
+    @Override
+    public String toStorage() {
+        return PREFIX + super.toStorage() + PIPE + by;
+    }
     
 }
