@@ -3,6 +3,11 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -53,13 +58,10 @@ public class Duke {
                 Tasks[taskNum].setDone(true);
                 printDone(Tasks[taskNum]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
                 System.out.println("Oops! Please include the task number.");
             } catch (NumberFormatException e) {
-                //If arr[1] cannot be parsed as an Integer
                 System.out.println("Oops! Please include the task number instead of '" + arr[1] + "'.");
             } catch (NullPointerException e) {
-                //If the task number given is more than num of tasks
                 System.out.println("Sorry but that task does not exist! Please try again.");
             }
             break;
@@ -68,7 +70,6 @@ public class Duke {
                 Tasks[NUM_OF_TASK] = new Todo(arr[1]);
                 printConfirm(Tasks[NUM_OF_TASK]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
                 System.out.println("Oops! task.Task description cannot be empty!");
             }
             break;
@@ -78,7 +79,6 @@ public class Duke {
                 Tasks[NUM_OF_TASK] = new Deadline(arr2[0], arr2[1]);
                 printConfirm(Tasks[NUM_OF_TASK]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
                 System.out.println("Oops! task.Deadline description is incomplete!");
             }
             break;
@@ -88,16 +88,23 @@ public class Duke {
                 Tasks[NUM_OF_TASK] = new Event(arr2[0], arr2[1]);
                 printConfirm(Tasks[NUM_OF_TASK]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
                 System.out.println("Oops! task.Event description is incomplete!");
             }
             break;
         default:
-            //unknown command
             System.out.println("Oops! I'm sorry but I don't know what that means :(");
             break;
         }
         System.out.println(LINE);
+    }
+
+    private static void saveData(ArrayList<Task> Tasks) throws IOException {
+        FileWriter fileWriter = new FileWriter("../../../data/duke.txt", true);
+        for (Task task : Tasks) {
+            fileWriter.write(task.saveTask());
+            fileWriter.write(System.lineSeparator());
+        }
+        fileWriter.close();
     }
 
     private static void printDone(Task task) {
