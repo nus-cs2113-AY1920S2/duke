@@ -12,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String encodeTask() {
-        return String.format("%s | %s | %s | %s", EVENT_ICON, isDone, description, time);
+        return String.format("%s|%s|%s|%s", EVENT_ICON, isDone, description, time);
     }
 
     public static Event decodeTask(String encodedTask) {

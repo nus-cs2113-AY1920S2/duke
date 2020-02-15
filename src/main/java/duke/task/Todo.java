@@ -9,7 +9,7 @@ public class Todo extends Task {
 
     @Override
     public String encodeTask() {
-        return String.format("%s | %s | %s", TODO_ICON, isDone, description);
+        return String.format("%s|%s|%s", TODO_ICON, isDone, description);
     }
 
     public static Todo decodeTask(String encodedTask) {

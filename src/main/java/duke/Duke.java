@@ -73,7 +73,7 @@ public class Duke {
         case "delete":
             // delete a task by its displayed list index
             try {
-                int deleteIndex = Integer.parseInt(commandTokens[1]);
+                int deleteIndex = Integer.parseInt(commandTokens[1]) - 1;
                 tasks.deleteTask(deleteIndex);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
                 // deleteIndex is not specified
@@ -86,11 +86,11 @@ public class Duke {
         case "done":
             // mark a task as done
             try {
-                int taskIndex = Character.getNumericValue(fullCommand.charAt(5)) - 1;
+                int taskIndex = Integer.parseInt(commandTokens[1]) - 1;
                 tasks.markTaskAsDone(taskIndex);
-            } catch (ArrayIndexOutOfBoundsException aioobe) {
-                // deleteIndex is not specified
-                throw new DukeException("Please specify a task number to be marked as done");
+            } catch (IndexOutOfBoundsException aioobe) {
+                // taskIndex is not specified
+                throw new DukeException("Please specify a valid task number to be marked as done");
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Please specify an integer for the task number to be marked as done");
             }

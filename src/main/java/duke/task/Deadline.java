@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String encodeTask() {
-        return String.format("%s | %s | %s | %s", DEADLINE_ICON, isDone, description, by);
+        return String.format("%s|%s|%s|%s", DEADLINE_ICON, isDone, description, by);
    }
 
     public static Deadline decodeTask(String encodedTask) {
