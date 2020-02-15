@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -5,14 +7,14 @@ public class Duke {
     public static final String FORMAT_LINE = "------------------------------------";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
     public static final String INVALID_COMMAND = "☹ OOPS!!! This is an invalid command, please type a valid command";
-    public static final String GREETING = String.format("%s\n%s", "Hello, I'm Duke!", "What can I do for you?");
-    public static final String TODO_DESCRIPTION = "todo <Task Name>";
-    public static final String DEADLINE_DESCRIPTION = "deadline <Task Name> /by <Deadline>";
+    public static final String GREETING = String.format("%s\n%s", "Hello, I'm duke.Duke!", "What can I do for you?");
+    public static final String TODO_DESCRIPTION = "todo <duke.task.Task Name>";
+    public static final String DEADLINE_DESCRIPTION = "deadline <duke.task.Task Name> /by <duke.task.Deadline>";
     public static final String INVALID_DONE = "# of the task is invalid\n";
-    public static final String DONE_DESCRIPTION = "done <Task #>";
+    public static final String DONE_DESCRIPTION = "done <duke.task.Task #>";
     public static final String CORRECT_FORMAT = "The correct format should be:\n";
     public static final String INVALID_DESCRIPTION = "The description of the task is invalid";
-    public static final String EVENT_DESCRIPTION = "event <Task Name> /at <Timeslot>";
+    public static final String EVENT_DESCRIPTION = "event <duke.task.Task Name> /at <Timeslot>";
 
     private TaskManager manager = new TaskManager();
 
