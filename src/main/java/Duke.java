@@ -2,9 +2,10 @@ import java.lang.NullPointerException;
 import java.util.Scanner;
 import Duke.*;
 import Exceptions.*;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int size = 0;
 
     public static void main(String[] args)  {
@@ -66,7 +67,7 @@ public class Duke {
                         System.out.println("____________________________________________________________");
                         System.out.println("Here are your task(s) currently in your planner:");
                         for (int i = 0; i < size; i++) {
-                            System.out.println(i + 1 + "." + tasks[i]);
+                            System.out.println(i + 1 + "." + tasks.get(i));
                         }
                         System.out.println("____________________________________________________________");
                         break;
@@ -77,13 +78,15 @@ public class Duke {
                             throw new IllegalArgumentException();
                         }
                         int taskNumber = Integer.parseInt(l);
-                        tasks[taskNumber - 1].markAsDone(tasks[taskNumber - 1]);
-                        if(tasks[0] == null){
-                            throw new NullPointerException();
+                        tasks.get(taskNumber - 1).markAsDone(tasks.get(taskNumber - 1));
+                        if(tasks.get(0) == null){
+//                            if(tasks[0] == null){
+                                throw new NullPointerException();
                         }
                         System.out.println("____________________________________________________________");
                         System.out.println("Great job! I've marked this task as done in your planner:");
-                        System.out.println(tasks[taskNumber - 1]);
+                        System.out.println(tasks.get(taskNumber - 1));
+//                        System.out.println(tasks[taskNumber - 1]);
                         System.out.println("____________________________________________________________");
                         break;
 
@@ -107,7 +110,7 @@ public class Duke {
     public static void printAddedTask(String s) {
         System.out.println("____________________________________________________________");
         System.out.println(s);
-        System.out.println(tasks[size - 1]);                     //size-1 to get index value of current task
+        System.out.println(tasks.get(size - 1));                     //size-1 to get index value of current task
         System.out.println("Total number of tasks in the list:  " + size);
         System.out.println("____________________________________________________________");
     }
@@ -142,6 +145,7 @@ public class Duke {
 
     //method for adding adding newly created task into tasks array
     public static void addtask(Task description) {
-        tasks[size++] = description;
+        tasks.add(description);
+        size++;
     }
 }
