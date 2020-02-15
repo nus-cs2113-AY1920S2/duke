@@ -3,6 +3,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,7 +16,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
-    private static int MAX_TASK = 100;
+    private static final String DELETE_COMMAND = "delete";
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -23,7 +24,8 @@ public class Duke {
     }
 
     private static void runChatbot() {
-        Task[] Tasks = new Task[MAX_TASK];
+        ArrayList<Task> Tasks = new ArrayList<Task>();
+
         Scanner in = new Scanner(System.in);
         String arr[] = getCommand(in);
         while (true) {
@@ -38,7 +40,7 @@ public class Duke {
         return arr;
     }
 
-    private static void runCommand(String[] arr, Task[] Tasks, Scanner in)  {
+    private static void runCommand(String[] arr, ArrayList<Task> Tasks, Scanner in)  {
         System.out.println(LINE);
         switch (arr[0]) {
         case (BYE_COMMAND):
@@ -50,54 +52,70 @@ public class Duke {
             try {
                 int taskNum = Integer.parseInt(arr[1]);
                 taskNum--;
-                Tasks[taskNum].setDone(true);
-                printDone(Tasks[taskNum]);
+                Tasks.get(taskNum).setDone(true);
+                printDone(Tasks.get(taskNum));
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
                 System.out.println("Oops! Please include the task number.");
             } catch (NumberFormatException e) {
-                //If arr[1] cannot be parsed as an Integer
                 System.out.println("Oops! Please include the task number instead of '" + arr[1] + "'.");
             } catch (NullPointerException e) {
-                //If the task number given is more than num of tasks
                 System.out.println("Sorry but that task does not exist! Please try again.");
             }
             break;
         case (TODO_COMMAND):
             try {
-                Tasks[NUM_OF_TASK] = new Todo(arr[1]);
-                printConfirm(Tasks[NUM_OF_TASK]);
+                Todo todo = new Todo(arr[1]);
+                Tasks.add(todo);
+                printConfirm(Tasks.get(NUM_OF_TASK));
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
-                System.out.println("Oops! task.Task description cannot be empty!");
+                System.out.println("Oops! Todo description cannot be empty!");
             }
             break;
         case (DEADLINE_COMMAND):
             try {
                 String arr2[] = arr[1].split("/by ", 2);
-                Tasks[NUM_OF_TASK] = new Deadline(arr2[0], arr2[1]);
-                printConfirm(Tasks[NUM_OF_TASK]);
+                Deadline deadline = new Deadline(arr2[0], arr2[1]);
+                Tasks.add(deadline);
+                printConfirm(Tasks.get(NUM_OF_TASK));
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
-                System.out.println("Oops! task.Deadline description is incomplete!");
+                System.out.println("Oops! Deadline description is incomplete!");
             }
             break;
         case (EVENT_COMMAND):
             try {
                 String arr2[] = arr[1].split("/at ", 2);
-                Tasks[NUM_OF_TASK] = new Event(arr2[0], arr2[1]);
-                printConfirm(Tasks[NUM_OF_TASK]);
+                Event event = new Event(arr2[0], arr2[1]);
+                Tasks.add(event);
+                printConfirm(Tasks.get(NUM_OF_TASK));
             } catch (ArrayIndexOutOfBoundsException e) {
-                //If arr[1] does not exist
-                System.out.println("Oops! task.Event description is incomplete!");
+                System.out.println("Oops! Event description is incomplete!");
+            }
+            break;
+        case (DELETE_COMMAND):
+            try {
+                int taskNum = Integer.parseInt(arr[1]) - 1;
+                printDelete(Tasks.get(taskNum));
+                Tasks.remove(taskNum);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Oops! Please include the task number!");
+            } catch (NumberFormatException e) {
+                System.out.println("Oops! Please include the task number instead of '" + arr[1] + "'.");
+            } catch (NullPointerException e) {
+                System.out.println("Sorry but that task does not exist! Please try again.");
             }
             break;
         default:
-            //unknown command
             System.out.println("Oops! I'm sorry but I don't know what that means :(");
             break;
         }
         System.out.println(LINE);
+    }
+
+    private static void printDelete(Task task) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("   " + task);
+        NUM_OF_TASK--;
+        System.out.println("Now you have " + NUM_OF_TASK + " task(s) in the list.");
     }
 
     private static void printDone(Task task) {
@@ -154,11 +172,11 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void printList(Task[] Task) {
+    public static void printList(ArrayList<Task> Task) {
         System.out.println("Here are the tasks in your list: \n");
         for (int i = 0; i < NUM_OF_TASK; i++) {
             int num = i + 1;
-            System.out.println(num + ". " + Task[i]);
+            System.out.println(num + ". " + Task.get(i));
         }
     }
 }
