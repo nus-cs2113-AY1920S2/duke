@@ -10,7 +10,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
         taskDescription = "task";
-        totalTasks++;
     }
 
     public String getStatusIcon() {
@@ -31,9 +30,6 @@ public class Task {
         isDone = true;
     }
 
-    public int getTotalTasks() {
-        return totalTasks;
-    }
 
     public String getTaskDescription() {
         return taskDescription;
