@@ -62,9 +62,12 @@ public class FileManager {
     }
 
     public static void saveTaskList(ArrayList<Task> list) throws IOException {
-        // Ensure all directories are made first
         File taskListFile = new File(TASK_LIST_PATH);
-        taskListFile.getParentFile().mkdirs();
+
+        // Ensure task list file exists
+        if (!taskListFile.exists()) {
+            createTaskListFile();
+        }
 
         FileWriter writer = new FileWriter(TASK_LIST_PATH);
 

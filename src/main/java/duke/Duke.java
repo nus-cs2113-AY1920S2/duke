@@ -22,6 +22,7 @@ public class Duke {
             chatBot.runChat();
         } catch (IOException e) {
             System.out.println(IO_ERROR_MESSAGE);
+            printExitMessage();
         }
     }
 
@@ -32,11 +33,22 @@ public class Duke {
         try {
             FileManager.loadTaskList(list);
         } catch (FileNotFoundException e) {
+            System.out.println(FILE_NOT_FOUND_MESSAGE);
+
             // Create new task list file
             FileManager.createTaskListFile();
-            System.out.println(FILE_NOT_FOUND_MESSAGE);
-        } catch (CorruptedFileException e) {
+        } catch (CorruptedFileException | IndexOutOfBoundsException e) {
             System.out.println(CORRUPTED_FILE_MESSAGE);
+
+            boolean canCreate = getConfirmation(PROMPT_VALID_CREATE_CONFIRMATION_MESSAGE);
+            if (canCreate) {
+                printCreateNewFileMessage();
+            } else {
+                printAbortCreateNewFileMessage();
+                printExitMessage();
+                return;
+            }
+
         }
 
         printReadyMessage();
@@ -47,17 +59,39 @@ public class Duke {
         printExitMessage();
     }
 
+    private boolean getConfirmation(String validConfirmationMessage) {
+        while (true) {
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("yes") || input.equals("y")) {
+                return true;
+            } else if (input.equals("no") || input.equals("n")) {
+                return false;
+            } else {
+                System.out.println(validConfirmationMessage);
+            }
+        }
+    }
+
     private void readInput() {
         while (true) {
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.equals("bye")) {
                 try {
                     FileManager.saveTaskList(list);
-                    printGoodbyeMessage();
                     printSuccessfulSaveMessage();
+                    printGoodbyeMessage();
                     return;
                 } catch (IOException e) {
                     System.out.println(FILE_SAVE_ERROR_MESSAGE);
+
+                    boolean canExit = getConfirmation(PROMPT_VALID_EXIT_CONFIRMATION_MESSAGE);
+                    if (canExit) {
+                        printUnsuccessfulSaveMessage();
+                        printGoodbyeMessage();
+                        return;
+                    } else {
+                        printAbortExitMessage();
+                    }
                 }
             } else if (input.equals("list")) {
                 printList(list, true);
@@ -66,12 +100,15 @@ public class Duke {
                     completeAction(input);
                 } catch (InvalidActionException e) {
                     System.out.println(INVALID_ACTION_MESSAGE);
+                } catch (EmptyInputException e) {
+                    System.out.println(EMPTY_INPUT_MESSAGE);
                 }
             }
         }
     }
 
-    private void completeAction(String input) throws InvalidActionException {
+
+    private void completeAction(String input) throws InvalidActionException, EmptyInputException {
         String[] words = input.split(" ");
         String action = words[0].toLowerCase();
 
@@ -131,6 +168,8 @@ public class Duke {
                 System.out.println(MISSING_LIST_NUMBER_MESSAGE);
             }
             break;
+        case "":
+            throw new EmptyInputException();
         default:
             throw new InvalidActionException();
         }
@@ -209,9 +248,9 @@ public class Duke {
         }
 
         printDeleteTaskConfirmationMessage(list, listNumber);
-        boolean isConfirmDelete = getDeleteConfirmation();
+        boolean canDelete = getConfirmation(PROMPT_VALID_DELETE_CONFIRMATION_MESSAGE);
 
-        if (isConfirmDelete) {
+        if (canDelete) {
             printDeleteTaskMessage(list, listNumber);
             list.remove(listNumber);
         } else {
@@ -219,16 +258,4 @@ public class Duke {
         }
     }
 
-    private boolean getDeleteConfirmation() {
-        while (true) {
-            String input = scanner.nextLine().trim().toLowerCase();
-            if (input.equals("yes") || input.equals("y")) {
-                return true;
-            } else if (input.equals("no") || input.equals("n")) {
-                return false;
-            } else {
-                printPromptValidConfirmationMessage();
-            }
-        }
-    }
 }
