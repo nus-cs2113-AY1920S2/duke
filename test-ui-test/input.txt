@@ -1,6 +1,7 @@
 kesin
 todo borrow book
 event
+delete 3
 deadline return book /by Monday
 todo study
 done 1
@@ -8,8 +9,12 @@ deadline report
 done 2
 list
 event party
+todo homework
+done 5
+todo CS2113T project
 event project meeting /at Friday 2-4pm
 todo
 deadline report submission /by Thursday
 list
+delete 1
 bye

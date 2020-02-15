@@ -70,10 +70,12 @@ public class Duke {
                 } else if (command.equalsIgnoreCase("delete")) {
                     try {
                         int removeTask = Integer.parseInt(parseInput[1])-1;
+                        String taskInformation = String.valueOf(tasks.get(removeTask));
                         System.out.println(String.format("%50s", "Noted. I've removed this task: "+ HAPPY_FACE));
-                        System.out.println(String.format("%50s", tasks.get(removeTask)));
+                        System.out.println(String.format("%50s", taskInformation));
                         tasks.remove(removeTask);
                         System.out.println(String.format("%50s", "Now you have " + tasks.size() + " tasks in the list."));
+                        System.out.println(DIVIDER);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(String.format("%50s", "Please include task number in the list " + SAD_FACE));
                         System.out.println(DIVIDER);
