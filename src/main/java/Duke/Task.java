@@ -1,3 +1,7 @@
+package Duke;
+
+import java.util.ArrayList;
+
 public abstract class Task {
     public static final String TICK = "✓";
     public static final String CROSS = "✘";

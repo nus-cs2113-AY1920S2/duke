@@ -1,7 +1,25 @@
+package Duke;
+
+import Exceptions.NoParameterException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+    /*
+    List of exceptions handled:
+
+    1. General commands
+        a. No recognised command given
+        b. No follow up parameters in command
+
+    2. Done command
+        a. Out of range
+        b. Not integer
+
+     */
+
 
 public class Duke {
 
@@ -22,7 +40,7 @@ public class Duke {
         if ( (taskIndex < tasks.size()) || (taskIndex > 0)) { // check if out of bounce
             Task currentTask = tasks.get(taskIndex);
             if (currentTask.getStatus()) { // check if already completed
-                System.out.println("Task already completed!\n");
+                System.out.println("Duke.Task already completed!\n");
             } else {
                 currentTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
@@ -53,8 +71,8 @@ public class Duke {
         System.out.println("List: lists all recorded tasks \nusage: list\n");
         System.out.println("Done: mark task as completed \nusage: done <task number>\n");
         System.out.println("Todo: Tasks without date/time \nUsage: todo <task> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Event: Event including date/time \nUsage: event <task> /<date> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Deadline: Tasks including date/time \nUsage: deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Duke.Event: Duke.Event including date/time \nUsage: event <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Duke.Deadline: Tasks including date/time \nUsage: deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
         System.out.println("");
     }
 
@@ -78,39 +96,62 @@ public class Duke {
         System.out.println("Everyday is a sunny day!");
         /*
         System.out.println("____________________________________________________________\n\nCurrent time: ");
-        getDateTime(); // due to testing purposes, will fail when coming timestamps
+        getDateTime(); // due to testing purposes, will fail when comparing timestamps
         */
         System.out.println("____________________________________________________________");
     }
 
-    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+    public static String[] processDatedTasks(String taskDescription, int taskCounter, int wordLength, int commandLength) throws NoParameterException {
+        if (wordLength <= 1) { // empty parameter
+            throw new NoParameterException();
+        }
         try {
-            String itemName = taskDescription.substring(LENGTH_DEADLINE);
-            String[] words = itemName.split("/");
+            String itemName = taskDescription.substring(commandLength);
+            String[] words = itemName.split("/"); // potential problem is not accepting date format with '/' inside, throw err if more than 2 len
+            for (int i = 0; i < words.length; i++) { // checking for blank tasks, including one char of space
+                if (words[i].isBlank()){
+                    throw new NoParameterException();
+                }
+            }
+            return words;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please input the date using the specified format");
+            taskCounter--;
+        }
+        System.out.println("Ugh null");
+        return null;
+    }
+
+    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
+        try {
+            String[] words = processDatedTasks(taskDescription, taskCounter, wordLength, LENGTH_DEADLINE);
             Task newTask = new Deadline(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
-            taskCounter--;
         }
     }
 
-    public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+    public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
         try {
-            String itemName = taskDescription.substring(LENGTH_EVENT);
-            String[] words = itemName.split("/");
+            String[] words = processDatedTasks(taskDescription, taskCounter, wordLength, LENGTH_EVENT);
             Task newTask = new Event(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
-            taskCounter--;
         }
     }
 
-    public static void addTodo(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
+    public static void addTodo(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
+        if (wordLength <= 1) { // empty parameter
+            throw new NoParameterException();
+        }
         String itemName = taskDescription.substring(LENGTH_TODO);
+        if (itemName.isBlank()) { // task is a space/blank char
+            throw new NoParameterException();
+        }
         Task newTask = new ToDo(itemName.trim());
         tasks.add(newTask);
         newTask.printAddDetails(taskCounter);
@@ -142,27 +183,43 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(words[1]);
                     completeTask(tasks, index);
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Please input a valid number\n");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Duke.Task not found, please try again");
                 }
                 break;
             case "help":
                 printHelp();
                 break;
             case "todo":
-                taskCounter++;
-                addTodo(tasks, userCommand, taskCounter);
+                try {
+                    taskCounter++;
+                    addTodo(tasks, userCommand, taskCounter, wordLength);
+                } catch (NoParameterException e) {
+                    taskCounter--;
+                    System.out.println("Missing Parameters detected!\n");
+                }
                 break;
             case "event":
                 taskCounter++;
-                addEvent(tasks, userCommand, taskCounter);
-                break;
+                try {
+                    addEvent(tasks, userCommand, taskCounter, wordLength);
+                } catch (NoParameterException e){
+                    taskCounter--;
+                    System.out.println("Missing Parameters detected!\n");
+                }
             case "deadline":
                 taskCounter++;
-                addDeadline(tasks, userCommand, taskCounter);
+                try {
+                    addDeadline(tasks, userCommand, taskCounter, wordLength);
+                } catch (NoParameterException e){
+                    taskCounter--;
+                    System.out.println("Missing Parameters detected!\n");
+                }
                 break;
             default:
-                System.out.println("Please add the task type\n");
+                System.out.println("Command not recognised\n");
             }
             // end of current listening loop, preparing next command
             userCommand = input.nextLine();
