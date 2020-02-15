@@ -14,10 +14,16 @@ public class Todo {
         return this.isDone ? "[✓] " : "[✗] ";
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isItDone() {
+        return this.isDone;
+    }
     public void setDone() {
         this.isDone = true;
-        System.out.println("  Nice! I've marked this task as done:");
-        System.out.println("  " + "[✓] " + this.description);
+
     }
 
     public char getTaskType() {

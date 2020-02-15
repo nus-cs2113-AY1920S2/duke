@@ -1,16 +1,20 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke implements Logo {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
+
+        Data data = new Data();
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
 
         Scanner input = new Scanner(System.in);
         String cmd = input.nextLine();
-        Data data = new Data();
+
 
         while (!cmd.equals("bye")) {
             lineBreak();
@@ -24,6 +28,8 @@ public class Duke implements Logo {
             } else if (cmd.contains("done")){
                 int option = Integer.parseInt(cmd.substring(cmd.length()-1));
                 data.setDone(option-1);
+                System.out.println("  Nice! I've marked this task as done:");
+                System.out.println("  " + "[✓] " + data.getDescription(option-1));
 
             } else {
                 try {
@@ -41,6 +47,7 @@ public class Duke implements Logo {
         lineBreak();
         System.out.println("  Bye. Hope to see you again soon!");
         lineBreak();
+        data.saveToFile();
     }
 
     public final static void lineBreak() {

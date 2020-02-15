@@ -11,6 +11,10 @@ public class Deadline extends Todo {
         this.by = by;
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     public char getTaskType() {
         return taskType;
     }

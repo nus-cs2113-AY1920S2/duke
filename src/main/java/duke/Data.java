@@ -4,14 +4,55 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Data {
     private static String[] availableTasks = {"todo", "deadline", "event"};
     private static ArrayList<Todo> todos;
 
-    public Data() {
+    public Data() throws FileNotFoundException {
         this.todos = new ArrayList<Todo>();
+        File f = new File("src/main/java/duke/data.txt");
+
+
+        // Adapted from https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics.html
+        Scanner s = new Scanner(f);
+        int i = 0;
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String taskType = line.substring(0, line.indexOf(" "));
+            String description;
+            switch (taskType) {
+                case "todo":
+                    description = line.substring(line.indexOf(" ")+1);
+                    todos.add(new Todo(description));
+                    break;
+                case "deadline":
+                    description = line.substring(line.indexOf(" ") + 1, line.indexOf("/") - 1);
+                    String by = line.substring(line.indexOf("/") + 4);
+                    todos.add(new Deadline(description, by));
+                    break;
+                case "event":
+                    description = line.substring(line.indexOf(" ")+1, line.indexOf("/") - 1);
+                    String at = line.substring(line.indexOf("/") + 4);
+                    todos.add(new Event(description, at));
+                    break;
+                default:
+                    break;
+            }
+            boolean isDone = Boolean.parseBoolean(s.nextLine());
+            if (isDone) {
+                setDone(i);
+            }
+            i++;
+        }
+
     }
 
     public static void newTask(String cmd) throws DukeException {
@@ -71,5 +112,37 @@ public class Data {
     }
     public void setDone(int i) {
         todos.get(i).setDone();
+    }
+    public String getDescription(int i) {
+        return todos.get(i).getDescription();
+    }
+    public void saveToFile() throws IOException {
+        FileWriter fw = new FileWriter("src/main/java/duke/data.txt");
+        for (Todo todo : todos) {
+            String description = todo.getDescription();
+            boolean isDone = todo.isItDone();
+            char taskType = todo.getTaskType();
+            String toBeWritten = null;
+            String at = null;
+            String by = null;
+            switch (taskType) {
+                case 'T':
+                    toBeWritten = "todo " + description;
+                    break;
+                case 'E':
+                    Event e = (Event) todo;
+                    toBeWritten = "event " + description + " /at " + e.getAt() ;
+                    break;
+                case 'D':
+                    Deadline d = (Deadline) todo;
+                    toBeWritten = "deadline " + description + " /by " + d.getBy(); ;
+                    break;
+                default:
+                    break;
+            }
+            fw.write(toBeWritten);
+            fw.write("\n" + isDone + "\n");
+        }
+        fw.close();
     }
 }
