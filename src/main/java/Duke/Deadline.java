@@ -1,3 +1,5 @@
+package Duke;
+
 public class Deadline extends Task {
 
     public static final String TYPE_DEADLINE = "D";

@@ -1,3 +1,7 @@
+package Duke;
+
+import Exceptions.NoParameterException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -14,7 +18,6 @@ import java.time.format.DateTimeFormatter;
         a. Out of range
         b. Not integer
 
-    3.
      */
 
 
@@ -37,7 +40,7 @@ public class Duke {
         if ( (taskIndex < tasks.size()) || (taskIndex > 0)) { // check if out of bounce
             Task currentTask = tasks.get(taskIndex);
             if (currentTask.getStatus()) { // check if already completed
-                System.out.println("Task already completed!\n");
+                System.out.println("Duke.Task already completed!\n");
             } else {
                 currentTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
@@ -68,8 +71,8 @@ public class Duke {
         System.out.println("List: lists all recorded tasks \nusage: list\n");
         System.out.println("Done: mark task as completed \nusage: done <task number>\n");
         System.out.println("Todo: Tasks without date/time \nUsage: todo <task> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Event: Event including date/time \nUsage: event <task> /<date> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Deadline: Tasks including date/time \nUsage: deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Duke.Event: Duke.Event including date/time \nUsage: event <task> /<date> \n(Avoid using other keywords as the first word)\n");
+        System.out.println("Duke.Deadline: Tasks including date/time \nUsage: deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
         System.out.println("");
     }
 
@@ -98,17 +101,33 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
-        try {
-            String itemName = taskDescription.substring(LENGTH_DEADLINE);
-            String[] words = itemName.split("/");
-            Task newTask = new Deadline(words[0].trim(), words[1].trim());
-            tasks.add(newTask);
-            newTask.printAddDetails(taskCounter);
-        } catch (Exception e) { // unable to detect the '/' partition
-            System.out.println("Please input the date using the specified format");
-            taskCounter--;
-        }
+    public static void addDeadline(ArrayList<Task> tasks, String taskDescription, int taskCounter, int wordLength) throws NoParameterException {
+
+            if (wordLength <= 1) { // empty parameter
+                taskCounter--;
+                throw new NoParameterException();
+            }
+
+            try {
+                String itemName = taskDescription.substring(LENGTH_DEADLINE);
+                String[] words = itemName.split("/");
+                for (int i = 0; i < words.length; i++) {
+                    if (words[i].isBlank()){
+                        throw new NoParameterException();
+                    }
+                }
+                System.out.println("Len: " + words.length);
+                Task newTask = new Deadline(words[0].trim(), words[1].trim());
+                tasks.add(newTask);
+                newTask.printAddDetails(taskCounter);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please input the date using the specified format");
+                taskCounter--;
+            }
+
+
+
+
     }
 
     public static void addEvent(ArrayList<Task> tasks, String taskDescription, int taskCounter) {
@@ -160,7 +179,7 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     System.out.println("Please input a valid number\n");
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Task not found, please try again");
+                    System.out.println("Duke.Task not found, please try again");
                 }
                 break;
             case "help":
@@ -176,7 +195,11 @@ public class Duke {
                 break;
             case "deadline":
                 taskCounter++;
-                addDeadline(tasks, userCommand, taskCounter);
+                try {
+                    addDeadline(tasks, userCommand, taskCounter, wordLength);
+                } catch (NoParameterException e){
+                    System.out.println("No Parameters detected!\n");
+                }
                 break;
             default:
                 System.out.println("Please add the task type\n");
