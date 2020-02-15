@@ -1,7 +1,9 @@
 package duke.task;
 import duke.exception.DukeException;
 
-import static duke.util.Constants.*;
+import static duke.util.Constants.NO_ICON;
+import static duke.util.Constants.YES_ICON;
+
 
 public class Task {
     protected String description;
