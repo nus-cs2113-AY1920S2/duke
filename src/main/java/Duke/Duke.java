@@ -3,6 +3,21 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+    /*
+    List of exceptions handled:
+
+    1. General commands
+        a. No recognised command given
+        b. No follow up parameters in command
+
+    2. Done command
+        a. Out of range
+        b. Not integer
+
+    3.
+     */
+
+
 public class Duke {
 
     public static final int LENGTH_DEADLINE = 9;
@@ -78,7 +93,7 @@ public class Duke {
         System.out.println("Everyday is a sunny day!");
         /*
         System.out.println("____________________________________________________________\n\nCurrent time: ");
-        getDateTime(); // due to testing purposes, will fail when coming timestamps
+        getDateTime(); // due to testing purposes, will fail when comparing timestamps
         */
         System.out.println("____________________________________________________________");
     }
@@ -90,7 +105,7 @@ public class Duke {
             Task newTask = new Deadline(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
-        } catch (Exception e) {
+        } catch (Exception e) { // unable to detect the '/' partition
             System.out.println("Please input the date using the specified format");
             taskCounter--;
         }
@@ -142,8 +157,10 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(words[1]);
                     completeTask(tasks, index);
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Please input a valid number\n");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Task not found, please try again");
                 }
                 break;
             case "help":
