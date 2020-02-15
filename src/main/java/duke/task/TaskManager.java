@@ -23,7 +23,7 @@ public class TaskManager {
     public static final String DELETE_COMMAND = "delete";
     public static final String DONE_COMMAND = "done";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
-    private static final String FILE_PATH = "./src/main/java/duke/TaskList.txt";
+    private static final String FILE_PATH = "src/main/java/duke/TaskList.txt";
 
     // Stores all the tasks provided
     static ArrayList<Task> tasks = new ArrayList<Task>();
@@ -34,7 +34,6 @@ public class TaskManager {
         Scanner s = new Scanner(f);
         while(s.hasNext()){
             String taskDescription = s.nextLine();
-
             String[] splitDescription = taskDescription.split("#",3);
             char taskType = splitDescription[0].charAt(0);
             boolean isDone = Boolean.parseBoolean(splitDescription[1].trim());
