@@ -12,10 +12,15 @@ public class TaskManager {
 
     /** Helps display the output to the user */
     private Output printer;
+    private TaskRecorder recorder;
+    private TaskLoader loader;
 
     public TaskManager () {
         tasks = new ArrayList<Task>();
         printer = new Output();
+
+        recorder = new TaskRecorder(printer);
+        loader = new TaskLoader(printer);
     }
 
     /**
@@ -27,6 +32,8 @@ public class TaskManager {
     public void addTask (Task task) {
         tasks.add(task);
         printer.printTaskAdded(tasks.size(), task);
+
+        recorder.recordAllTasks(tasks);
     }
 
     /**
@@ -51,10 +58,12 @@ public class TaskManager {
             tasks.get(taskIndex).setTaskAsDone();
             printer.printMarkedTask(tasks.get(taskIndex));
 
+
+            recorder.recordAllTasks(tasks);
+
         } else {
             printer.printTaskAlreadyMarked(tasks.get(taskIndex));
         }
-
     }
 
     private boolean taskIndexOutOfBounds (int taskIndex) {
@@ -80,6 +89,10 @@ public class TaskManager {
         }
 
         printer.printList(tasks);
+    }
+
+    public void loadTasks () {
+        this.tasks = loader.loadTasks();
     }
 
 }

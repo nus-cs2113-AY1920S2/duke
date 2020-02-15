@@ -7,6 +7,8 @@ public class Deadline extends Task {
     public Deadline (String description, String by) {
         super(description);
         this.by = by;
+
+        this.taskType = TaskType.D;
     }
 
     public String getBy () {
@@ -19,6 +21,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), by);
+        return String.format("[%s]%s (by: %s)", taskType, super.toString(), by);
     }
 }

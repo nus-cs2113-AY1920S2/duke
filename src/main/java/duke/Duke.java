@@ -215,11 +215,14 @@ public class Duke {
      * command information
      */
     public static void init () {
+
         taskManager = new TaskManager();
         printer = new Output();
         command = new Command();
 
         isProgramRunning = true;
+
+        taskManager.loadTasks();
     }
 
 

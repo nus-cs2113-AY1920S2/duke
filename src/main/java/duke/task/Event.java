@@ -7,6 +7,8 @@ public class Event extends Task {
     public Event (String description, String eventDate) {
         super(description);
         this.eventDate = eventDate;
+
+        this.taskType = TaskType.E;
     }
 
     public String getEventDate () {
@@ -19,6 +21,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), eventDate);
+        return String.format("[%s]%s (at: %s)", taskType, super.toString(), eventDate);
     }
 }
