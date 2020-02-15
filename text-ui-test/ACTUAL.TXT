@@ -109,6 +109,10 @@ Enter a command: Command entered: EVENT
 ____________________________________________________________
 OOPS!!! The description of a EVENT cannot be empty.
 ____________________________________________________________
+Enter a command: Command entered: command
+____________________________________________________________
+Command is invalid, please try another command
+____________________________________________________________
 Enter a command: Command entered: bye
 ____________________________________________________________
 	Bye. Hope to see you again soon!

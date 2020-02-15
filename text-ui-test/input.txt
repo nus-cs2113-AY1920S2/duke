@@ -20,4 +20,5 @@ done 5
 TODO
 DEADLINE
 EVENT
+command
 bye
