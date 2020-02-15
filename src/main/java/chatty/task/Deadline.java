@@ -1,7 +1,5 @@
 package chatty.task;
 
-import static chatty.util.Constants.FILE_FIELD_SEPARATOR_FOR_WRITE;
-
 public class Deadline extends Task {
 
     protected String dateTime;
@@ -13,12 +11,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dateTime + ")";
+        return String.format("[D]%s (by: %s)", super.toString(), this.dateTime);
     }
 
     @Override
     public String getFileString() {
-        return "D" + FILE_FIELD_SEPARATOR_FOR_WRITE + this.isDone + FILE_FIELD_SEPARATOR_FOR_WRITE + this.description +
-                FILE_FIELD_SEPARATOR_FOR_WRITE + this.dateTime;
+        return String.format("D|%s|%s|%s", this.isDone, this.description, this.dateTime);
     }
 }

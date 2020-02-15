@@ -23,8 +23,7 @@ public class Constants {
     public static final String TASK_SUMMARY_SECOND_HALF = " tasks in the list.";
 
     public static final String DEFAULT_FILE_PATH = "../data/chattychatbot.txt";
-    public static final String FILE_FIELD_SEPARATOR_FOR_READ = "\\|";
-    public static final String FILE_FIELD_SEPARATOR_FOR_WRITE = "|";
+    public static final String FILE_FIELD_SEPARATOR = "\\|";
     public static final String NEW_LINE = "\n";
 
     public static final int MINIMUM_FIELD_NUM_FOR_TASK = 3;

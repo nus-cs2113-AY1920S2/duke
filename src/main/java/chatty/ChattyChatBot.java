@@ -226,7 +226,7 @@ public class ChattyChatBot {
     }
 
     private static Optional<Task> stringToTask(String taskStr) {
-        String[] fields = taskStr.split(FILE_FIELD_SEPARATOR_FOR_READ);
+        String[] fields = taskStr.split(FILE_FIELD_SEPARATOR);
         if (fields.length < MINIMUM_FIELD_NUM_FOR_TASK) {
             System.out.println("Invalid line in input file:");
             System.out.println(taskStr);
