@@ -1,8 +1,10 @@
-import java.lang.reflect.Array;
+import java.io.FileWriter;
 import java.util.Scanner;
+import java.io.File;
 import java.util.ArrayList;
 public class Duke {
     public static final int MAXIMUM_CAPACITY = 100;
+    public static final String SAVE_FILE_DIRECTORY = System.getProperty("user.dir") + "\\duke.txt";
     private static final Scanner SCANNER = new Scanner(System.in);
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int taskCount = 0;
@@ -27,6 +29,69 @@ public class Duke {
         System.out.println("\tBye. Hope to see you again soon!");
         doLine();
 
+    }
+    public void loadList1(){
+        int taskCounter = 0;
+        try {
+            File file =
+                    new File(SAVE_FILE_DIRECTORY);
+            System.out.println(file.exists());
+            if(file.exists()) {
+                Scanner sc = new Scanner(file);
+                while (sc.hasNextLine()) {
+                    String text = sc.nextLine();
+                    String[] scanned = text.split(" \\| ");
+                    switch (scanned[0]) {
+                    case "T":
+                        tasks.add(new ToDo(scanned[2]));
+                        if (scanned[1].equals("1")) {
+                            tasks.get(taskCounter).markAsDone();
+                        }
+                        taskCounter++;
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(scanned[2], scanned[3]));
+                        if (scanned[1].equals("1")) {
+                            tasks.get(taskCounter).markAsDone();
+                        }
+                        taskCounter++;
+                        break;
+                    case "E":
+                        tasks.add(new Event(scanned[2], scanned[3]));
+                        if (scanned[1].equals("1")) {
+                            tasks.get(taskCounter).markAsDone();
+                        }
+                        taskCounter++;
+                        break;
+                    }
+                }
+                System.out.println("Duke List loaded.");
+            }
+        }catch (Exception e){
+            System.out.println("Error loading file.");
+            System.out.println(e);
+        }
+
+    }
+    public static void saveList(){
+        try{
+            FileWriter fw =new FileWriter(SAVE_FILE_DIRECTORY, false);
+            for(int i =0; i<tasks.size();i++){
+                String data = "";
+                if(tasks.get(i).getType().equals("T")){
+                    int dataBoolean = tasks.get(i).getIsDone() ? 1:0;
+                    data = tasks.get(i).getType() + " | " + dataBoolean + " | " + tasks.get(i).getDescription() + "\n";
+                }else{
+                    int dataBoolean = tasks.get(i).getIsDone() ? 1:0;
+                    data = tasks.get(i).getType() + " | " + dataBoolean + " | " + tasks.get(i).getDescription()
+                            + " | " + tasks.get(i).getExtra() + "\n";
+                }
+                fw.write(data);
+            }
+            fw.close();
+        }catch (Exception e){
+            System.out.println("Writing to file failed.");
+        }
     }
     public static void getList(){
         doLine();
@@ -84,6 +149,7 @@ public class Duke {
                         throw new ArrayIndexOutOfBoundsException();
                     }
                     addTask(new Deadline(parser.getDeadlineItem(), parser.getDeadlineBy()));
+                    saveList();
                 }catch (ArrayIndexOutOfBoundsException e){
                     dukeExceptions.printInvalidDeadlineException();
                 }
@@ -93,6 +159,7 @@ public class Duke {
                         throw new ArrayIndexOutOfBoundsException();
                     }
                     deleteTask(parser.getSecond());
+                    saveList();
                 }catch (NumberFormatException e){
                     dukeExceptions.printInvalidDeleteException();
                 }catch (IndexOutOfBoundsException e){
@@ -105,6 +172,7 @@ public class Duke {
                         throw new ArrayIndexOutOfBoundsException();
                     }
                     addTask(new Event(parser.getEventItem(), parser.getEventAt()));
+                    saveList();
                 }catch (ArrayIndexOutOfBoundsException e){
                     dukeExceptions.printInvalidEventException();
                 }
@@ -114,7 +182,8 @@ public class Duke {
                         throw new ArrayIndexOutOfBoundsException();
                     }
                     addTask(new ToDo(parser.getToDo()));
-                }catch (IndexOutOfBoundsException e){
+                    saveList();
+                }catch (Exception e){
                     dukeExceptions.printInvalidToDoException();
                 }
             }else if(firstCommand.equals("done")) {
@@ -123,6 +192,7 @@ public class Duke {
                         throw new ArrayIndexOutOfBoundsException();
                     }
                     completeTask(parser.getCompleteNumber());
+                    saveList();
                 }catch (ArrayIndexOutOfBoundsException e){
                     dukeExceptions.printIndexOutOfBoundsException();
                 }catch (NumberFormatException e){
@@ -141,6 +211,7 @@ public class Duke {
         System.exit(0);
     }
     private void run(){
+        loadList1();
         while(true){
             String userCommand = getUserInput();
             processInput(userCommand);
