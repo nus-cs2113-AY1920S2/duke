@@ -4,6 +4,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     private static int taskCount = 0;
+    protected final String PIPE = " | ";
     
     public Task(String description) {
         this.description = description;
@@ -23,16 +24,12 @@ public class Task {
         return taskCount;
     }
     
-    
     public String toString() {
         return getStatusIcon() + " " + description;
     }
     
-    //Solution below adapted from https://www.baeldung.com/java-add-character-to-string
-    protected String stringBuilder(String input) {
-        StringBuilder sb = new StringBuilder(input);
-        sb.insert(3, ":");
-        return sb.toString();
+    public String toStorage() {
+        return PIPE + (isDone ? "1" : "0") + PIPE + description;
     }
     
 }

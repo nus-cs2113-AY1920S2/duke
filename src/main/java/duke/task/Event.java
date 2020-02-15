@@ -3,19 +3,21 @@ package duke.task;
 public class Event extends Task {
     
     private String at;
-    private final String TAG = "[E]";
-    private final String OPEN_BRACKET = "(";
-    private final String CLOSE_BRACKET = ")";
+    private final String PREFIX = "E";
+    private final int startIndexForSubstring = 3;
     
     public Event(String description, String at) {
         super(description);
-        this.at = OPEN_BRACKET + at + CLOSE_BRACKET;
-        this.at = stringBuilder(this.at);
+        this.at = at.substring(startIndexForSubstring);
     }
     
     @Override
     public String toString() {
-        return TAG + super.toString() + at;
+        return "[" + PREFIX + "]" + super.toString() + " (at: " + at + ")";
     }
     
+    @Override
+    public String toStorage() {
+        return PREFIX + super.toStorage() + PIPE + at;
+    }
 }
