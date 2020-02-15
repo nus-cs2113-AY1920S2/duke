@@ -27,8 +27,8 @@ public class TaskList {
         addTask(task);
         System.out.println("Task added:");
         System.out.println("  " + task);
-        System.out.println("You have " + tasks.size() + " task" +
-                (tasks.size() == 1 ? "" : "s") + " in the list");
+        System.out.println("You have " + tasks.size() + " task"
+                + (tasks.size() == 1 ? "" : "s") + " in the list");
     }
 
     public void deleteTask(int index) {
@@ -37,8 +37,8 @@ public class TaskList {
             tasks.remove(index);
             System.out.println("Task deleted:");
             System.out.println("  " + deletedTask);
-            System.out.println("You have " + tasks.size() + " task" +
-                    (tasks.size() == 1 ? "" : "s") + " in the list");
+            System.out.println("You have " + tasks.size() + " task"
+                    + (tasks.size() == 1 ? "" : "s") + " in the list");
         } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
                 System.out.println("You have no tasks to be deleted");

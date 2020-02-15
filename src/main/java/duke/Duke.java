@@ -59,11 +59,12 @@ public class Duke {
         String[] commandTokens = fullCommand.split(" ");
         String commandType = commandTokens[0].toLowerCase();
 
-        switch(commandType) {
+        switch (commandType) {
         case "bye":
             // exit duke
             printByeMessage();
             System.exit(0);
+            // Fallthrough
 
         case "list":
             // show all tasks in the list
@@ -140,7 +141,7 @@ public class Duke {
             if (eventInfo.length != 2) {
                 throw new DukeException("The description and date of an event cannot be empty");
             }
-            String eventName =eventInfo[0].trim();
+            String eventName = eventInfo[0].trim();
             String eventDate = eventInfo[1].trim();
             tasks.addTaskWithMessage(new Event(eventName, eventDate));
             break;
