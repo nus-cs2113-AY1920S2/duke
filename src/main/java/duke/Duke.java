@@ -13,6 +13,7 @@ public class Duke {
     public static final String LIST_COMMAND = "list";
     public static final String EMPTY_COMMAND = "";
     public static final String DONE_COMMAND = "done";
+    public static final String DELETE_COMMAND = "delete";
     public static final String TODO_COMMAND = "todo";
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String EVENT_COMMAND = "event";
@@ -56,6 +57,9 @@ public class Duke {
                 break;
             case DEADLINE_COMMAND:
                 taskManager.addDeadlineTask(commandSplit, isOneWordCommand);
+                break;
+            case DELETE_COMMAND:
+                taskManager.deleteTask(commandSplit);
                 break;
             case EVENT_COMMAND:
                 taskManager.addEventTask(commandSplit, isOneWordCommand);

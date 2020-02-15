@@ -15,6 +15,9 @@ public class TaskManager {
     public static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
     public static final String DEADLINE_SPECIFIER = "/by ";
     public static final String PERIOD_SPECIFIER = "/at ";
+    public static final String DELETE_COMMAND = "delete";
+    public static final String DONE_COMMAND = "done";
+    public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
 
     // Stores all the tasks provided
     ArrayList<Task> tasks = new ArrayList<Task>();
@@ -50,7 +53,7 @@ public class TaskManager {
     public void markTask (String[] commandSplit) throws DukeException {
         int taskNumber;
         if (commandSplit.length != 2){
-            throw new DukeException(ExceptionType.IndexDoneCommand);
+            throw new DukeException(ExceptionType.InvalidDoneCommand);
         }
         String taskIndex = commandSplit[1];
         taskNumber = Integer.parseInt(taskIndex);
@@ -60,6 +63,45 @@ public class TaskManager {
             printAsAlreadyDone(taskNumber);
         } else {
             markTaskAsDone(taskNumber);
+        }
+    }
+
+    // Relays message to another method to delete  the task denoted
+    // Also throws exceptions in case the index provided isn't valid
+    public void deleteTaskFromList(String[] commandSplit) throws DukeException {
+        int taskNumber;
+        if (commandSplit.length != 2) {
+            throw new DukeException(ExceptionType.InvalidDeleteCommand);
+        }
+        String taskIndex = commandSplit[1];
+        taskNumber = Integer.parseInt(taskIndex);
+        // Convert to 0-based index
+        taskNumber--;
+        deleteTaskAtIndex(taskNumber);
+    }
+
+    // Deletes the task at specified index
+    private void deleteTaskAtIndex(int taskNumber) {
+        final String taskStatusWithDescription = tasks.get(taskNumber).getStatusWithDescription();
+        PrintHelper.printLine();
+        PrintHelper.printWithIndentation(TASK_DELETED_MESSAGE);
+        PrintHelper.printWithIndentation(taskStatusWithDescription,7);
+        tasks.remove(taskNumber);
+        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task" + (tasks.size() != 1?"s ":" ") + "in the list.");
+        PrintHelper.printLine();
+    }
+
+
+    // Instructs the task manager to delete the task if the correct format is used
+    public void deleteTask(String[] commandSplit) {
+        try{
+            deleteTaskFromList(commandSplit);
+        } catch (DukeException invalidDeleteCommand) {
+            invalidDeleteCommand.printExceptionMessage();
+        } catch (NumberFormatException indexNotInteger) {
+            PrintHelper.printIndexNotIntegerAlert(DELETE_COMMAND);
+        } catch (IndexOutOfBoundsException indexOutOfBounds){
+            PrintHelper.printInvalidIndexAlert(DELETE_COMMAND);
         }
     }
 
@@ -131,9 +173,9 @@ public class TaskManager {
         } catch (DukeException invalidDoneCommand) {
             invalidDoneCommand.printExceptionMessage();
         } catch (NumberFormatException indexNotInteger) {
-            PrintHelper.printIndexNotIntegerAlert();
+            PrintHelper.printIndexNotIntegerAlert(DONE_COMMAND);
         } catch (IndexOutOfBoundsException indexOutOfBounds){
-            PrintHelper.printInvalidIndexAlert();
+            PrintHelper.printInvalidIndexAlert(DONE_COMMAND);
         }
     }
 

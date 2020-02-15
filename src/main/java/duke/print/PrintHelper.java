@@ -1,5 +1,7 @@
 package duke.print;
 
+import duke.task.TaskManager;
+
 public class PrintHelper {
 
     private static final String INVALID_COMMAND_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
@@ -9,11 +11,16 @@ public class PrintHelper {
     private static final String WELCOME_MESSAGE_LINE_1 = "Hello! I'm Duke";
     private static final String WELCOME_MESSAGE_LINE_2 = "What can I do for you?";
     private static final String EMPTY_LINE_ALERT_MESSAGE = "You have entered a empty line, Please enter a valid command";
-    private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE = "Invalid Command (done x : x should be an integer)";
-    private static final String INVALID_ARRAY_INDEX_MESSAGE = "Invalid Command (done x : x should be a valid integer index)";
+    private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE_FOR_DONE_COMMAND = "Invalid Command (done x : x should be a valid integer index)";
+    private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE_FOR_DELETE_COMMAND = "Invalid Command (delete x : x should be a valid integer index)";
+    private static final String INVALID_ARRAY_INDEX_MESSAGE_FOR_DONE_COMMAND = "Invalid Command (done x : x should be an integer)";
+    private static final String INVALID_ARRAY_INDEX_MESSAGE_FOR_DELETE_COMMAND = "Invalid Command (delete x : x should be an integer)";
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String INVALID_TODO_FORMAT_MESSAGE = "OOPS!!! The description of a todo cannot be empty.";
     private static final String SINGLE_SPACE = " ";
+    private static final String DONE_COMMAND = TaskManager.DONE_COMMAND;
+    private static final String DELETE_COMMAND = TaskManager.DELETE_COMMAND;
+
 
     // Prints the number of spaces requested by the user
     public static void printSpaces(int numberOfSpaces){
@@ -59,16 +66,34 @@ public class PrintHelper {
     }
 
     // Prints a message to alert the user that an invalid task index was provided
-    public static void printInvalidIndexAlert(){
+    public static void printInvalidIndexAlert(String commandType){
         printLine();
-        printWithIndentation(INVALID_ARRAY_INDEX_MESSAGE);
+        switch(commandType) {
+        case DONE_COMMAND:
+            printWithIndentation(ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE_FOR_DONE_COMMAND);
+            break;
+        case DELETE_COMMAND:
+            printWithIndentation(ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE_FOR_DELETE_COMMAND);
+            break;
+        default:
+            // Add exception handling
+        }
         printLine();
     }
 
     // Prints a message to alert the user that an index of the wrong format was provided
-    public static void printIndexNotIntegerAlert(){
+    public static void printIndexNotIntegerAlert(String commandType){
         printLine();
-        printWithIndentation(ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE);
+        switch(commandType) {
+        case DONE_COMMAND:
+            printWithIndentation(INVALID_ARRAY_INDEX_MESSAGE_FOR_DONE_COMMAND);
+            break;
+        case DELETE_COMMAND:
+            printWithIndentation(INVALID_ARRAY_INDEX_MESSAGE_FOR_DELETE_COMMAND);
+            break;
+        default:
+            // Add exception handling
+        }
         printLine();
     }
 
@@ -109,6 +134,11 @@ public class PrintHelper {
 
     // Prints a message to alert that the user didn't follow the correct format to mark a task done
     public static void printInvalidDoneFormat() {
-        printIndexNotIntegerAlert();
+        printIndexNotIntegerAlert(DONE_COMMAND);
+    }
+
+
+    public static void printInvalidDeleteFormat() {
+        printIndexNotIntegerAlert(DELETE_COMMAND);
     }
 }
