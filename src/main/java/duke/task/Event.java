@@ -29,6 +29,10 @@ public class Event extends Task {
         return "(at: " + period + ")";
     }
 
+    // Returns the period
+    public String getPeriodWithoutBraces(){
+        return period;
+    }
     // Returns the task's type and status along with it's description as a string
     @Override
     public String getStatusWithDescription(){

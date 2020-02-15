@@ -29,6 +29,11 @@ public class Task {
         return description;
     }
 
+    // Set done as required
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
     // Marks the task as done
     public void markAsDone(){
         isDone = true;
