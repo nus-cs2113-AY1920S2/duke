@@ -27,7 +27,7 @@ public class Duke implements Logo {
 
             } else {
                 try {
-                    Data.newTask(cmd);
+                    data.taskCmd(cmd);
                 } catch(DukeException e) {
                     System.out.println(e);
                 }
