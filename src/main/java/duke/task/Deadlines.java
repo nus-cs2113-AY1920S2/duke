@@ -1,8 +1,10 @@
 package duke.task;
 
+import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT_INPUT;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 public class Deadlines extends Task {
@@ -19,12 +21,22 @@ public class Deadlines extends Task {
             String dateTime, boolean isDone) {
 
         super(taskId, taskName, isDone);
-        this.dateTime = LocalDateTime.parse(dateTime);
+
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+        } catch (DateTimeParseException dtpe) {
+            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
+        }
     }
 
     public Deadlines(int taskId, String taskName, String dateTime) {
         super(taskId, taskName);
-        this.dateTime = LocalDateTime.parse(dateTime);
+        
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+        } catch (DateTimeParseException dtpe) {
+            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
+        }
     }
     
     @Override
