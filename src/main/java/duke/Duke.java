@@ -67,6 +67,20 @@ public class Duke {
                         System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
                         System.out.println(DIVIDER);
                     }
+                } else if (command.equalsIgnoreCase("delete")) {
+                    try {
+                        int removeTask = Integer.parseInt(parseInput[1])-1;
+                        System.out.println(String.format("%50s", "Noted. I've removed this task: "+ HAPPY_FACE));
+                        System.out.println(String.format("%50s", tasks.get(removeTask)));
+                        tasks.remove(removeTask);
+                        System.out.println(String.format("%50s", "Now you have " + tasks.size() + " tasks in the list."));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(String.format("%50s", "Please include task number in the list " + SAD_FACE));
+                        System.out.println(DIVIDER);
+                    } catch (NumberFormatException e) {
+                        System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
+                        System.out.println(DIVIDER);
+                    }
                 } else {
                     throw new DukeException();
                 }
@@ -183,7 +197,7 @@ public class Duke {
             System.out.println(String.format("%50s", "Nice! I've marked this task as done:"));
             System.out.println(String.format("%50s", tasks.get(doneTask)));
             System.out.println(DIVIDER);
-        } catch (NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(String.format("Task not included in the list, please try again."));
             System.out.println(DIVIDER);
         } catch (Exception e) {
