@@ -39,5 +39,21 @@ public class Task {
         return taskDescription;
     }
 
+    public String getTask() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String getAt() {
+        return null;
+    }
+
+    public String getBy() {
+        return null;
+    }
+
 
 }

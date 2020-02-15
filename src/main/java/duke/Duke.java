@@ -5,6 +5,9 @@ import duke.command.Event;
 import duke.command.Task;
 import duke.command.Todo;
 import duke.exception.*;
+
+import java.awt.image.AreaAveragingScaleFilter;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -85,7 +88,7 @@ public class Duke {
             String todoTask = userInput.substring(TODO_COMMAND.length() + 1);
             Task todo = new Todo(todoTask);
             tasks.add(todo);
-            printIndividualTask(tasks,todo.getTotalTasks());
+            printIndividualTask(tasks,tasks.size());
         } else {
             throw new MissingTaskException("Todo tasks cannot be empty!");
         }
@@ -101,7 +104,7 @@ public class Duke {
             String atDate = userInput.substring(indexOfAt + "/at".length() + 1);
             Task event = new Event(eventTask, atDate);
             tasks.add(event);
-            printIndividualTask(tasks,event.getTotalTasks());
+            printIndividualTask(tasks,tasks.size());
         } else {
             throw new MissingTaskException("Event tasks cannot be empty!");
         }
@@ -117,7 +120,7 @@ public class Duke {
             String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
             Task deadline = new Deadline(deadlineTask, byDate);
             tasks.add(deadline);
-            printIndividualTask(tasks,deadline.getTotalTasks());
+            printIndividualTask(tasks,tasks.size());
         } else {
             throw new MissingTaskException("Deadline tasks cannot be empty!");
         }
@@ -125,7 +128,6 @@ public class Duke {
 
     public static void getExecuteCommand(ArrayList<Task> tasks, String userInput) throws UnknownInputException {
         String[] words = userInput.split(" ");
-
         if (words[0].equals(TODO_COMMAND)) {
             try {
                 executeToDo(tasks, userInput);
@@ -175,10 +177,10 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownInputException {
         initialisation();
         Scanner command = new Scanner(System.in);
-
+        Storage storage = new Storage("output.txt");
         while (true) {
             String userInput = command.nextLine();
             if (userInput.equals(END_COMMAND)) {
@@ -189,7 +191,13 @@ public class Duke {
             } else {
                 System.out.println(DIVIDER);
                 try {
+                    ArrayList<Task> tasks = storage.load();
                     getExecuteCommand(tasks, userInput);
+                    storage.save(tasks);
+                } catch (FileNotFoundException err) {
+                    ArrayList<Task> tasks = new ArrayList<>();
+                    getExecuteCommand(tasks, userInput);
+                    storage.save(tasks);
                 } catch (DukeException err) {
                     System.out.println(err.toString());
                 }
@@ -197,5 +205,6 @@ public class Duke {
             }
 
         }
+
     }
 }
