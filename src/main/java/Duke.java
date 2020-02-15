@@ -4,8 +4,16 @@ public class Duke {
 
     public static final String FORMAT_LINE = "------------------------------------";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
-    public static final String INVALID = "This is an invalid command, please type a valid command";
+    public static final String INVALID_COMMAND = "☹ OOPS!!! This is an invalid command, please type a valid command";
     public static final String GREETING = String.format("%s\n%s", "Hello, I'm Duke!", "What can I do for you?");
+    public static final String TODO_DESCRIPTION = "todo <Task Name>";
+    public static final String DEADLINE_DESCRIPTION = "deadline <Task Name> /by <Deadline>";
+    public static final String INVALID_DONE = "# of the task is invalid\n";
+    public static final String DONE_DESCRIPTION = "done <Task #>";
+    public static final String CORRECT_FORMAT = "The correct format should be:\n";
+    public static final String INVALID_DESCRIPTION = "The description of the task is invalid";
+    public static final String EVENT_DESCRIPTION = "event <Task Name> /at <Timeslot>";
+
     private TaskManager manager = new TaskManager();
 
     public static void printFormat(String str) {
@@ -25,20 +33,39 @@ public class Duke {
         while(in.hasNextLine()) {
             command = in.nextLine();
             String[] commands = command.split(" ", 2);
+
             if(commands[0].equals("bye")) {
                 return;
             } else if (commands[0].equals("list")){
                 manager.listTask();
             } else if (commands[0].equals("done")){
-                manager.markTask(Integer.parseInt(commands[1]));
+                try {
+                    manager.markTask(Integer.parseInt(commands[1]));
+                } catch (IndexOutOfBoundsException e) {
+                    printFormat(INVALID_DONE+ CORRECT_FORMAT+ DONE_DESCRIPTION);
+                } catch (NumberFormatException e) {
+                    printFormat(INVALID_DONE+ CORRECT_FORMAT+ DONE_DESCRIPTION);
+                }
             } else if (commands[0].equals("todo")){
-                manager.addTodo(commands[1]);
+                try {
+                    manager.addTodo(commands[1]);
+                }catch (IndexOutOfBoundsException e) {
+                    printFormat(INVALID_DESCRIPTION+CORRECT_FORMAT+TODO_DESCRIPTION);
+                }
             } else if (commands[0].equals("deadline")) {
-                manager.addDeadline(commands[1]);
+                try {
+                    manager.addDeadline(commands[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    printFormat(INVALID_DESCRIPTION+CORRECT_FORMAT+DONE_DESCRIPTION);
+                }
             } else if (commands[0].equals("event")) {
-                manager.addEvent(commands[1]);
+                try {
+                    manager.addEvent(commands[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    printFormat(INVALID_DESCRIPTION+CORRECT_FORMAT+ EVENT_DESCRIPTION);
+                }
             } else {
-                printFormat(INVALID);
+                printFormat(INVALID_COMMAND);
             }
         }
     }

@@ -44,7 +44,7 @@ public class TaskManager {
     }
 
     public void markTask(int taskNo) {
-        Duke.printFormat(DONE+"  [✓] " + tasks[taskNo-1].name);
-        tasks[taskNo-1].isDone = true;
+        Duke.printFormat(DONE+"  [✓] " + tasks[taskNo-1].getName());
+        tasks[taskNo-1].changeStatus(true);
     }
 }
