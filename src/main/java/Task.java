@@ -30,6 +30,10 @@ public class Task {
         return isDone ? '\u2713' : '\u2717';
     }
 
+    public boolean getDoneInBoolean() {
+        return isDone;
+    }
+
     public void setDone(boolean status) {
         isDone = status;
     }
