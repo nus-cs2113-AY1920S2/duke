@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Optional;
+
 public class Task {
     protected final String taskName;
     protected final int taskId;
@@ -41,6 +43,10 @@ public class Task {
                 + this.taskName;
     }
 
+    public Optional<String> getDate() {
+        return Optional.empty();
+    }
+    
     public Task makeDone() {
         return new Task(this.taskId, this.taskName, true);
     }

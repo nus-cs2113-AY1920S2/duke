@@ -1,22 +1,38 @@
 package duke.task;
 
-public class Events extends Task {
-    private final String dateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
+public class Events extends Task {
+    private final LocalDateTime dateTime;
+    
     public Events(int taskId, String taskName, 
-            String dateTime, boolean isDone) {
+            LocalDateTime dateTime, boolean isDone) {
 
         super(taskId, taskName, isDone);
         this.dateTime = dateTime;
     }
 
-    public Events(int taskId, String taskName, String dateTime) {
-        super(taskId, taskName);
-        this.dateTime = dateTime;
+    public Events(int taskId, String taskName, 
+            String dateTime, boolean isDone) {
+
+        super(taskId, taskName, isDone);
+        this.dateTime = LocalDateTime.parse(dateTime);
     }
 
-    public String getDateTime() {
-        return this.dateTime;
+    public Events(int taskId, String taskName, String dateTime) {
+        super(taskId, taskName);
+        this.dateTime = LocalDateTime.parse(dateTime);
+    }
+
+    @Override
+    public Optional<String> getDate() {
+        return Optional
+                .ofNullable(this.dateTime
+                .toLocalDate()
+                .toString());
     }
     
     @Override
@@ -44,6 +60,8 @@ public class Events extends Task {
         return this.taskId 
                 + "."  
                 + this.taskWithSymbol()
-                + " (at: " + this.dateTime + ")";
+                + " (at: " 
+                + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + ")";
     }
 }
