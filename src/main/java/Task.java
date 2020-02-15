@@ -15,8 +15,13 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getDescription(){
+    /*public String getDescription(){
         return description;
+    }*/
+
+    @Override
+    public String toString(){
+        return "[" + getStatusIcon() + "]" + description;
     }
 
 
