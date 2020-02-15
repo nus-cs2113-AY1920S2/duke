@@ -73,18 +73,24 @@ public class Duke {
     public static final void displayLineDivider() {
         System.out.println(LINE_DIVIDER);
     }
-    public static final void displayNumberOfTasks(int Tasks) { System.out.print("\tNow you have " + Tasks + " tasks in the list.");}
-    public static final void displayMarkedTask(int markedIndex){ System.out.print("\tYou have marked -- " + markedIndex);}
-    public static final void displayDeletedTask(int markedIndex){ System.out.print("\tYou have deleted -- " + markedIndex);}
-    private static void echoUserCommand(String userCommand) {  System.out.println("\t[Command entered: " + userCommand + "]"); }
+    public static final void displayNumberOfTasks(int Tasks) {
+        System.out.print("\tNow you have " + Tasks + " tasks in the list.");
+    }
+    public static final void displayMarkedTask(int markedIndex){
+        System.out.print("\tYou have marked -- " + markedIndex);
+    }
+    public static final void displayDeletedTask(int markedIndex){
+        System.out.print("\tYou have deleted -- " + markedIndex);
+    }
+    private static void echoUserCommand(String userCommand) {
+        System.out.println("\t[Command entered: " + userCommand + "]");
+    }
     private static void exitProgram() {
         displayExitMessage();
     }
 
     public static void main(String[] args) {
-//        Task task[] = new Task[MAX_TASKS];
         ArrayList<Task> taskList = new ArrayList(MAX_TASKS);
-        int index = 0;
         int markIndex;
         String input;
         displayWelcomeMessage();
@@ -124,12 +130,11 @@ public class Duke {
                         displayInvalidDescription();
                         break;
                     }
-                    item = new Todo(description, index);
+                    item = new Todo(description);
                     item.setType("[T]");
                     taskList.add(item);
-                    index++;
                     displayAcceptTask();
-                    displayNumberOfTasks(index);
+                    displayNumberOfTasks(taskList.size());
                     break;
                 case COMMAND_EVENT_WORD:
                     if (description == ""){
@@ -140,12 +145,11 @@ public class Duke {
                         displayInvalidAt();
                         break;
                     }
-                    item = new Event(description, userCommand.substring(startIndexForEvent + 4), index);
+                    item = new Event(description, userCommand.substring(startIndexForEvent + 4));
                     item.setType("[E]");
                     taskList.add(item);
-                    index++;
                     displayAcceptTask();
-                    displayNumberOfTasks(index);
+                    displayNumberOfTasks(taskList.size());
                     break;
                 case COMMAND_DEADLINE_WORD:
                     if (description == "" ){
@@ -156,12 +160,11 @@ public class Duke {
                         displayInvalidBy();
                         break;
                     }
-                    item = new Deadline(description, userCommand.substring(startIndexForDeadline + 4), index);
+                    item = new Deadline(description, userCommand.substring(startIndexForDeadline + 4));
                     item.setType("[D]");
                     taskList.add(item);
-                    index++;
                     displayAcceptTask();
-                    displayNumberOfTasks(index);
+                    displayNumberOfTasks(taskList.size());
                     break;
                 case COMMAND_DELETE_WORD:
                     if (description == "" ){
@@ -182,7 +185,7 @@ public class Duke {
                     displayDeletedTask(markIndex);
                     break;
                 case COMMAND_LIST_WORD:
-                    if (index == 0) {
+                    if (taskList.size() == 0) {
                         System.out.print("\tYour list is empty! Try adding to the list first :)");
                     } else {
                         System.out.println("\tHere are the tasks in your list:");
@@ -192,13 +195,10 @@ public class Duke {
                     }
                     break;
                 case "CLEAR":
-                    if (index == 0) {
+                    if (taskList.size() == 0) {
                         System.out.print("\tYour list is already empty!");
                     } else {
-                        for (int i = 0; i < index; i++) {
-                            taskList.remove(0);
-                        }
-                        index = 0;
+                        taskList.clear();
                         System.out.print("\tYour list is cleared!");
                     }
                     break;

@@ -4,8 +4,8 @@ public class Event extends Todo {
 
     protected String by;
 
-    public Event(String description, String by, int index) {
-        super(description, index);
+    public Event(String description, String by) {
+        super(description);
         this.by = by;
     }
 

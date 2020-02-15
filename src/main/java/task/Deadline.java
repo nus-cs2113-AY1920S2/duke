@@ -4,8 +4,8 @@ public class Deadline extends Todo {
 
     protected String by;
 
-    public Deadline(String description, String by, int index) {
-        super(description,index);
+    public Deadline(String description, String by) {
+        super(description);
         this.by = by;
     }
 

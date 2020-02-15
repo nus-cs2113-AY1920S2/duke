@@ -2,13 +2,11 @@ package task;
 
 public class Task {
     protected String description;
-    protected int index;
     protected String type;
     protected boolean isDone;
 
-    public Task(String description, int index) {
+    public Task(String description) {
         this.description = description;
-        this.index = index;
         this.isDone = false;
     }
 
@@ -30,6 +28,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (index+1) + ". " + type;
+        return ". " + type;
     }
 }

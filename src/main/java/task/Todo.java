@@ -2,8 +2,8 @@ package task;
 
 public class Todo extends Task {
 
-    public Todo(String description, int index) {
-        super(description,index);
+    public Todo(String description) {
+        super(description);
         isDone = false;
     }
 
