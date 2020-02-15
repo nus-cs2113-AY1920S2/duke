@@ -17,6 +17,8 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String toOutput();
+
     @Override
     public String toString() {
         return ("[" + getStatusIcon() + "] " + description);

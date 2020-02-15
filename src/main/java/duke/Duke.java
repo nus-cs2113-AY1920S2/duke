@@ -7,6 +7,12 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.FileWriter;
 
 public class Duke {
 
@@ -30,6 +36,7 @@ public class Duke {
                 String[] userCommands = userInput.split(" ", 2);
                 if (userCommands[0].equalsIgnoreCase("bye")) {
                     printByeMessage();
+                    saveData(Tasks);
                     break;
                 } else if (userCommands[0].equalsIgnoreCase("list")) {
                     printList(Tasks);
@@ -46,9 +53,20 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             }
             System.out.println(DIVIDER);
         }
+    }
+
+    private static void saveData(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter("C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt", true);
+        for (Task i : tasks) {
+            fw.write(i.toOutput());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
     }
 
     private static void addEvent(ArrayList<Task> tasks, String[] userCommand) {
