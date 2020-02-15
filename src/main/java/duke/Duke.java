@@ -5,6 +5,8 @@ import duke.exception.ExceptionType;
 import duke.print.PrintHelper;
 import duke.task.TaskManager;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -24,6 +26,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command;
+        loadTasks();
 
         PrintHelper.printWelcomeMessage();
         command = sc.nextLine();
@@ -36,7 +39,24 @@ public class Duke {
             command = sc.nextLine();
         }
 
+        saveTasks();
         PrintHelper.printByeMessage();
+    }
+
+    private static void saveTasks() {
+        try {
+            TaskManager.storeTasksToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadTasks() {
+        try {
+            TaskManager.loadTasksFromFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     // Executes the command entered by the user

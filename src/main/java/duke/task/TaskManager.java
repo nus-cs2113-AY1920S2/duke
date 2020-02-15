@@ -4,7 +4,12 @@ import duke.exception.DukeException;
 import duke.exception.ExceptionType;
 import duke.print.PrintHelper;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskManager {
 
@@ -18,9 +23,68 @@ public class TaskManager {
     public static final String DELETE_COMMAND = "delete";
     public static final String DONE_COMMAND = "done";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
+    private static final String FILE_PATH = "./src/main/java/duke/TaskList.txt";
 
     // Stores all the tasks provided
-    ArrayList<Task> tasks = new ArrayList<Task>();
+    static ArrayList<Task> tasks = new ArrayList<Task>();
+
+    // Loads the tasks saved previously
+    public static void loadTasksFromFile() throws FileNotFoundException {
+        File f = new File(FILE_PATH);
+        Scanner s = new Scanner(f);
+        while(s.hasNext()){
+            String taskDescription = s.nextLine();
+
+            String[] splitDescription = taskDescription.split("#",3);
+            char taskType = splitDescription[0].charAt(0);
+            boolean isDone = Boolean.parseBoolean(splitDescription[1].trim());
+            String description = splitDescription[2].trim();
+
+            switch (taskType){
+            case 'T':
+                ToDo toDo = new ToDo(description);
+                toDo.setDone(isDone);
+                tasks.add(toDo);
+                break;
+            case 'D':
+                Deadline deadline = new Deadline(description);
+                deadline.setDone(isDone);
+                tasks.add(deadline);
+                break;
+            case 'E':
+                Event event = new Event(description);
+                event.setDone(isDone);
+                tasks.add(event);
+                break;
+            default:
+                // Add exception handling
+            }
+        }
+    }
+
+    // Saves the tasks for future usage
+    public static void storeTasksToFile() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        for(Task task: tasks){
+            switch(task.taskType){
+            case 'T':
+                ToDo toDo = (ToDo) task;
+                fw.write("T # " + toDo.isDone + " # " + toDo.description + System.lineSeparator());
+                break;
+            case 'D':
+                Deadline deadline = (Deadline) task;
+                fw.write("D # " + deadline.isDone + " # " + deadline.description + "/by " + deadline.getByWithoutBraces() + System.lineSeparator());
+                break;
+            case 'E':
+                Event event = (Event) task;
+                fw.write("E # " + event.isDone + " # " + event.description + "/at " + event.getPeriodWithoutBraces() + System.lineSeparator());
+                break;
+            default:
+                // Add Exception handling
+            }
+        }
+        fw.close();
+    }
 
     // Adds a new task with the descriptionWithDetails provided by the user
     public void addTask(TaskType taskType, String descriptionWithDetails){

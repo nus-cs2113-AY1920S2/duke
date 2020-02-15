@@ -29,6 +29,11 @@ public class Deadline extends Task{
         return "(by: " + by + ")";
     }
 
+    // Returns the deadline
+    public String getByWithoutBraces(){
+        return by;
+    }
+
     // Returns the task's type and status along with it's description as a string
     @Override
     public String getStatusWithDescription(){
