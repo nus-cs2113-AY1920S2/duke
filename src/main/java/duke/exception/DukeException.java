@@ -14,8 +14,11 @@ public class DukeException extends Exception {
         case InvalidCommand:
             PrintHelper.printInvalidCommand();
             break;
-        case IndexDoneCommand:
+        case InvalidDoneCommand:
             PrintHelper.printInvalidDoneFormat();
+            break;
+        case InvalidDeleteCommand:
+            PrintHelper.printInvalidDeleteFormat();
             break;
         case InvalidToDoDeclaration:
             PrintHelper.printInvalidToDoFormat();
@@ -25,9 +28,6 @@ public class DukeException extends Exception {
             break;
         case InvalidEventDeclaration:
             PrintHelper.printInvalidEventFormat();
-            break;
-        case InvalidIndex:
-            PrintHelper.printIndexNotIntegerAlert();
             break;
         case EmptyCommand:
             PrintHelper.printEmptyLineAlert();
