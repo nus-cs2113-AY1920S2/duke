@@ -6,6 +6,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 import static duke.PrintMessage.displayWelcomeMessage;
 import static duke.PrintMessage.displayAddMessage;
 import static duke.PrintMessage.displayDoneMessage;
@@ -13,11 +15,12 @@ import static duke.PrintMessage.displayInvalidMessage;
 import static duke.PrintMessage.displayBlahMessage;
 import static duke.PrintMessage.displayByeMessageAndExit;
 import static duke.PrintMessage.displayTaskList;
+import static duke.PrintMessage.displayRemoveMessage;
 
 import java.util.Scanner;
 
 public class Duke {
- 
+    
     private static final String COMMAND_LIST_WORD = "list";
     
     private static final String COMMAND_BLAH_WORD = "blah";
@@ -30,6 +33,8 @@ public class Duke {
     private static final String COMMAND_DEADLINE_WORD = "deadline";
     private static final String COMMAND_EVENT_WORD = "event";
     
+    private static final String COMMAND_DELETE_WORD = "delete";
+    
     private static final String ENTER_A_COMMAND = "Enter a command: ";
     private static final String COMMAND_ENTERED = "Command entered: ";
     
@@ -40,9 +45,7 @@ public class Duke {
     
     private static Scanner in = new Scanner(System.in);
     
-    
-    private static final int MAX_CAPACITY = 100;
-    protected static Task[] tasks = new Task[MAX_CAPACITY];
+    protected static ArrayList<Task> tasks = new ArrayList<>();
     
     public static void main(String[] args) {
         displayWelcomeMessage();
@@ -74,15 +77,15 @@ public class Duke {
     private static void operateCommand(String commandWord, String commandArgs, String commandDate) {
         switch (commandWord.toLowerCase()) {
         case COMMAND_TODO_WORD:
-            tasks[Task.getTaskCount()] = new Todo(commandArgs);
+            tasks.add(new Todo(commandArgs));
             displayAddMessage();
             break;
         case COMMAND_DEADLINE_WORD:
-            tasks[Task.getTaskCount()] = new Deadline(commandArgs, commandDate);
+            tasks.add(new Deadline(commandArgs, commandDate));
             displayAddMessage();
             break;
         case COMMAND_EVENT_WORD:
-            tasks[Task.getTaskCount()] = new Event(commandArgs, commandDate);
+            tasks.add(new Event(commandArgs, commandDate));
             displayAddMessage();
             break;
         case COMMAND_LIST_WORD:
@@ -96,6 +99,9 @@ public class Duke {
             break;
         case COMMAND_BLAH_WORD:
             displayBlahMessage();
+            break;
+        case COMMAND_DELETE_WORD:
+            displayRemoveMessage(commandArgs);
             break;
         default:
             displayInvalidMessage();
