@@ -30,7 +30,7 @@ public class Duke {
         doLine();
 
     }
-    public void loadList1(){
+    public void loadList(){
         int taskCounter = 0;
         try {
             File file =
@@ -209,7 +209,7 @@ public class Duke {
         System.exit(0);
     }
     private void run(){
-        loadList1();
+        loadList();
         while(true){
             String userCommand = getUserInput();
             processInput(userCommand);
