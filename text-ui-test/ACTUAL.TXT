@@ -1,11 +1,14 @@
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ __     __ __________ __     __ _________       _________       ___        _________  __     __ 
+|  |   |  |   ____   |  |   |  |   ___   |     |   ___   \     /   \      |   ___   \|  |   |  |
+|  |   |  |  |    |  |  |   |  |  |   |  |     |  |   |  |    /  _  \     |  |   |  ||  |   |  |
+|  |___|  |  |    |  |  |   |  |  |___|  |     |  |___|  |   /  /_\  \    |  |___|  ||  |___|  |
+|______   |  |    |  |  |   |  |   ___   |     |   ___   |  /  _____  \   |   ___   ||______   |
+       |  |  |    |  |  |   |  |  |   \  \     |  |   |  | /  /     \  \  |  |   |  |       |  |
+ ______|  |  |____|  |  |___|  |  |    \  \    |  |___|  |/  /       \  \ |  |___|  | ______|  |
+|_________|__________|_________|__|     \__\   |_________/__/         \__\|_________/|_________|
 
 ____________________________________________________________
-Hey there! My name is Duke and i will be your personal assistant.
+Hey there! I am AI Scheduler, YOURBABY
 Please enter your username: 
 Hi Potatochips! What can i do for you?
  ___________________________________________________________________________________________________________
@@ -20,7 +23,7 @@ Hi Potatochips! What can i do for you?
 |______________|____________________________________________________|_______________________________________|
 Please key in your command: 
 ____________________________________________________________
-New Task with deadline added:
+New Duke.Duke.Task with deadline added:
 [D][✘] return book (by: Sunday)
 Total number of tasks in the list:  1
 ____________________________________________________________
@@ -29,7 +32,7 @@ Here are your task(s) currently in your planner:
 1.[D][✘] return book (by: Sunday)
 ____________________________________________________________
 ____________________________________________________________
-New To-Do Task added:
+New To-Do Duke.Duke.Task added:
 [T][✘] borrow book list
 Total number of tasks in the list:  2
 ____________________________________________________________
@@ -73,4 +76,6 @@ Here are your task(s) currently in your planner:
 1.[D][✓] return book (by: Sunday)
 2.[T][✓] borrow book list
 3.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Bye Potatochips! Hope to see you again soon!
 ____________________________________________________________
