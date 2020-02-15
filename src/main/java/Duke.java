@@ -2,6 +2,7 @@ import task.*;
 
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Duke {
     // Libary of common words
@@ -25,6 +26,7 @@ public class Duke {
     private static final String MESSAGE_BY_EMPTY = "\tInvalid Command! BY cannot be empty!";
     private static final String MESSAGE_AT_EMPTY = "\tInvalid Command! AT cannot be empty!";
     private static final String MESSAGE_MARK_EMPTY = "\tInvalid Command! Nothing is marked!";
+    private static final String MESSAGE_DELETE_EMPTY = "\tInvalid Command! Nothing is deleted!";
     private static final String COMMAND_ADD_WORD = "ADD";
     private static final String COMMAND_ADD_DESC = "Adds an item to the todo list";
     private static final String COMMAND_HELP_WORD = "HELP";
@@ -52,6 +54,7 @@ public class Duke {
     public static final String COMMAND_EVENT_WORD = "EVENT";
     public static final String COMMAND_DONE_WORD = "DONE";
     public static final String COMMAND_TODO_WORD = "TODO";
+    public static final String COMMAND_DELETE_WORD = "DELETE";
 
     public static final void displayWelcomeMessage() {System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER); }
     public static final void displayAcceptTask() { System.out.println("\tGot it. I've added this task: "); }
@@ -60,6 +63,7 @@ public class Duke {
     public static final void displayInvalidBy() { System.out.print(MESSAGE_BY_EMPTY);}
     public static final void displayInvalidAt() { System.out.print(MESSAGE_AT_EMPTY);}
     public static final void displayInvalidMark() { System.out.print(MESSAGE_MARK_EMPTY);}
+    public static final void displayInvalidDelete() { System.out.print(MESSAGE_DELETE_EMPTY);}
     public static final void displayExitMessage() {
         System.out.println(MESSAGE_EXIT);
     }
@@ -71,13 +75,15 @@ public class Duke {
     }
     public static final void displayNumberOfTasks(int Tasks) { System.out.print("\tNow you have " + Tasks + " tasks in the list.");}
     public static final void displayMarkedTask(int markedIndex){ System.out.print("\tYou have marked -- " + markedIndex);}
+    public static final void displayDeletedTask(int markedIndex){ System.out.print("\tYou have deleted -- " + markedIndex);}
     private static void echoUserCommand(String userCommand) {  System.out.println("\t[Command entered: " + userCommand + "]"); }
     private static void exitProgram() {
         displayExitMessage();
     }
 
     public static void main(String[] args) {
-        Task task[] = new Task[MAX_TASKS];
+//        Task task[] = new Task[MAX_TASKS];
+        ArrayList<Task> taskList = new ArrayList(MAX_TASKS);
         int index = 0;
         int markIndex;
         String input;
@@ -120,7 +126,7 @@ public class Duke {
                     }
                     item = new Todo(description, index);
                     item.setType("[T]");
-                    task[index] = item;
+                    taskList.add(item);
                     index++;
                     displayAcceptTask();
                     displayNumberOfTasks(index);
@@ -136,7 +142,7 @@ public class Duke {
                     }
                     item = new Event(description, userCommand.substring(startIndexForEvent + 4), index);
                     item.setType("[E]");
-                    task[index] = item;
+                    taskList.add(item);
                     index++;
                     displayAcceptTask();
                     displayNumberOfTasks(index);
@@ -152,10 +158,19 @@ public class Duke {
                     }
                     item = new Deadline(description, userCommand.substring(startIndexForDeadline + 4), index);
                     item.setType("[D]");
-                    task[index] = item;
+                    taskList.add(item);
                     index++;
                     displayAcceptTask();
                     displayNumberOfTasks(index);
+                    break;
+                case COMMAND_DELETE_WORD:
+                    if (description == "" ){
+                        displayInvalidDelete();
+                        break;
+                    }
+                    markIndex = Integer.parseInt(description);
+                    taskList.remove(markIndex - 1);
+                    displayDeletedTask(markIndex);
                     break;
                 case COMMAND_MARK_WORD:
                     if (description == "" ){
@@ -163,17 +178,16 @@ public class Duke {
                         break;
                     }
                     markIndex = Integer.parseInt(description);
-                    task[markIndex - 1].setDone();
-                    displayMarkedTask(markIndex);
+                    taskList.get(markIndex - 1).setDone();
+                    displayDeletedTask(markIndex);
                     break;
                 case COMMAND_LIST_WORD:
                     if (index == 0) {
                         System.out.print("\tYour list is empty! Try adding to the list first :)");
                     } else {
-                        System.out.print("\tHere are the tasks in your list:");
-                        for (int i = 0; i < index; i++) {
-                            //System.out.print("\n\t" + (i + 1) + ". [" + task[i].getType() + "]" + task[i].getStatusIcon() + task[i].getDescription() + task[i].getBy());
-                            System.out.print(task[i]);
+                        System.out.println("\tHere are the tasks in your list:");
+                        for (int i = 0; i < taskList.size(); i++){
+                            System.out.print(taskList.get(i));
                         }
                     }
                     break;
@@ -181,9 +195,8 @@ public class Duke {
                     if (index == 0) {
                         System.out.print("\tYour list is already empty!");
                     } else {
-                        item = new Task("",0);
                         for (int i = 0; i < index; i++) {
-                            task[i] = item;
+                            taskList.remove(0);
                         }
                         index = 0;
                         System.out.print("\tYour list is cleared!");
