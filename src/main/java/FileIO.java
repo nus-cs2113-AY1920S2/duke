@@ -1,34 +1,33 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FileIO {
-    private File file;
+    private FileReader fileToReadFrom;
+    private FileWriter fileToWriteTo;
 
-    public FileIO (String path) {
-        this.file = new File(path);
+    public FileIO (String path) throws IOException {
+        this.fileToReadFrom = new FileReader(path);
+        this.fileToWriteTo = new FileWriter(path);
     }
 
     /**
      * Load information from current file to a TaskList object.
      * @param tasks The object to be loaded up
      */
-    public void loadTo(TaskList tasks) {
-        try {
-            String rawCommand;
-            String[] breakdown;
-            Task task;
+    public void loadAllTo(TaskList tasks) {
+        String rawCommand;
+        String[] breakdown;
+        Task task;
 
-            Scanner s = new Scanner(file);
-            // load content to tasks
-            while(s.hasNext()) {
-                rawCommand = s.nextLine();
-                breakdown = rawCommand.split(",");
-                task = parseCommand(breakdown);
-                tasks.add(task);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+        Scanner s = new Scanner(fileToReadFrom);
+        // load content to tasks
+        while(s.hasNext()) {
+            rawCommand = s.nextLine();
+            breakdown = rawCommand.split(",");
+            task = parseCommand(breakdown);
+            tasks.add(task);
         }
     }
 
@@ -63,5 +62,37 @@ public class FileIO {
         }
 
         return task;
+    }
+
+    /**
+     * Store information from a TaskList object to current file.
+     * Note: Will replace existing content in current file.
+     * @param tasks The object to store information from
+     */
+    public void storeAllFrom(TaskList tasks) throws IOException {
+        Task currTask;
+        String taskInString = "";
+
+        for (int i = 0; i < tasks.size(); ++i) {
+            currTask = tasks.getByIndex(i);
+            taskInString += String.format("%c,%b,%s",
+                    currTask.getType(),
+                    currTask.getDone(),
+                    currTask.getDescription());
+
+            // now write additional info (for Deadline and Event objects)
+            if (currTask.getType() == 'D') {
+                Deadline currDeadline = (Deadline)currTask;
+                taskInString += (",by," + currDeadline.getBy());
+            } else if (currTask.getType() == 'E') {
+                Event currEvent = (Event) currTask;
+                taskInString += (",at," + currEvent.getAt());
+            }
+
+            // mark end of Task
+            taskInString += System.lineSeparator();
+        }
+        // now add everything to file (from the start)
+        fileToWriteTo.write(taskInString, 0, taskInString.length());
     }
 }
