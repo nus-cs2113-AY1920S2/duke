@@ -6,15 +6,16 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    public static final int MAXIMUM_TASKS = 100;
+    //public static final int MAXIMUM_TASKS = 100;
     public static final String HAPPY_FACE = "(＾▽＾)";
     public static final String SAD_FACE = "(╥_╥)";
     private static final String DIVIDER = "===================================================";
-    private static Task[] tasks;
-    private static int taskNumber;
+    //private static Task[] tasks;
+    //private static int taskNumber;
     private static String s;
 
     public static void main(String[] args) {
@@ -26,8 +27,10 @@ public class Duke {
     }
 
     private static void manageTasks(Scanner sc, String name) {
-        Task[] tasks = new Task[MAXIMUM_TASKS];
-        int taskNumber = 0;
+        //Task[]  tasks = new Task[MAXIMUM_TASKS];
+
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        //int taskNumber = 0;
 
         while (true) {
             String input = sc.nextLine();
@@ -44,22 +47,22 @@ public class Duke {
                         System.out.println(DIVIDER);
                     }
                 } else if (command.equalsIgnoreCase("list")) {
-                    printList(tasks, taskNumber);
+                    printList(tasks);
                 } else if (command.equalsIgnoreCase("todo")) {
-                    taskNumber = addToDo(tasks, taskNumber, parseInput);
+                    addToDo(tasks, parseInput);
                 } else if (command.equalsIgnoreCase("bye")) {
                     printByeMessage(name);
                     break;
                 } else if (command.equalsIgnoreCase("event")) {
                     try {
-                        taskNumber = addEvent(tasks, taskNumber, parseInput[1]);
+                        addEvent(tasks, parseInput[1]);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
                         System.out.println(DIVIDER);
                     }
                 } else if (command.equalsIgnoreCase("deadline")) {
                     try {
-                        taskNumber = addDeadline(tasks, taskNumber, parseInput[1]);
+                        addDeadline(tasks, parseInput[1]);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
                         System.out.println(DIVIDER);
@@ -75,20 +78,20 @@ public class Duke {
         }
     }
 
-    private static void printList(Task[] tasks, int taskNumber) {
-        if (taskNumber == 0) {
+    private static void printList(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
             System.out.println(String.format("%50s", "YAYYYY! There are no tasks in your list " + HAPPY_FACE));
             System.out.println(DIVIDER);
             return;
         }
         System.out.println(String.format("%50s", "Here are the tasks in your list:"));
-        for (int i = 1; i <= taskNumber; i++) {
-            System.out.println(String.format("%50s", i + ". " + tasks[i]));
+        for (int i = 1; i <= tasks.size(); i++) { //is it better to start from 0 ?
+            System.out.println(String.format("%50s", i + ". " + tasks.get(i-1)));
         }
         System.out.println(DIVIDER);
     }
 
-    private static int addDeadline(Task[] tasks, int taskNumber, String parseInput) {
+    private static void addDeadline(ArrayList<Task> tasks, String parseInput) {
         try {
             String[] deadline;
             deadline = parseInput.split("/by", 2);
@@ -99,11 +102,10 @@ public class Duke {
                     System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
                     System.out.println(DIVIDER);
                 }
-                taskNumber++;
-                tasks[taskNumber] = new Deadline(deadline[0], time);
+                tasks.add(new Deadline(deadline[0], time));
                 System.out.println(String.format("%50s", "Got it. I've added this deadline:"));
-                System.out.println(String.format("%50s", tasks[taskNumber]));
-                System.out.println(String.format("\n%50s", taskNumber + " tasks in the list " + SAD_FACE));
+                System.out.println(String.format("%50s", tasks.get(tasks.size()-1)));
+                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
                 System.out.println(DIVIDER);
             } else {
                 //catch empty string
@@ -118,25 +120,23 @@ public class Duke {
             System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
             System.out.println(DIVIDER);
         }
-        return taskNumber;
     }
 
-    private static int addEvent(Task[] tasks, int taskNumber, String parseInput) {
+    private static void addEvent(ArrayList<Task> tasks, String parseInput) {
         try {
             String[] event;
             event = parseInput.split("/at", 2);
             event[0].trim();
-            if (!event[0].isEmpty()){
+            if (!event[0].isEmpty()) {
                 String time = event[1].trim();
                 if (time.isEmpty()) {
                     System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
                     System.out.println(DIVIDER);
                 }
-                taskNumber++;
-                tasks[taskNumber] = new Event(event[0], time);
+                tasks.add(new Event(event[0], time));
                 System.out.println(String.format("%50s", "Got it. I've added this event:"));
-                System.out.println(String.format("%50s", tasks[taskNumber]));
-                System.out.println(String.format("\n%50s", taskNumber + " tasks in the list " + SAD_FACE));
+                System.out.println(String.format("%50s", tasks.get(tasks.size()-1)));
+                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
                 System.out.println(DIVIDER);
             } else {
                 //catch empty string
@@ -147,21 +147,19 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(String.format("%50s", "Oops! Please include /at follows by the date " + SAD_FACE));
             System.out.println(DIVIDER);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
             System.out.println(DIVIDER);
         }
-        return taskNumber;
     }
 
-    private static int addToDo(Task[] tasks, int taskNumber, String[] parseInput) {
+    private static void addToDo(ArrayList<Task> tasks, String[] parseInput) {
         try {
-            if (!parseInput[1].isEmpty()){
-                taskNumber++;
-                tasks[taskNumber] = new ToDo(parseInput[1]);
+            if (!parseInput[1].isEmpty()) {
+                tasks.add(new ToDo(parseInput[1]));
                 System.out.println(String.format("%50s", "Got it. I've added this task:"));
-                System.out.println(String.format("%50s", tasks[taskNumber]));
-                System.out.println(String.format("\n%50s", taskNumber + " tasks in the list " + SAD_FACE));
+                System.out.println(String.format("%50s", tasks.get(tasks.size()-1)));
+                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
                 System.out.println(DIVIDER);
             } else {
                 //empty string
@@ -176,15 +174,14 @@ public class Duke {
             System.out.println(String.format("%50s", "Please include task description. " + SAD_FACE));
             System.out.println(DIVIDER);
         }
-        return taskNumber;
     }
 
-    private static void printDoneTasks(Task[] tasks, String s) {
+    private static void printDoneTasks(ArrayList<Task> tasks, String s) {
         try {
-            int doneTask = Integer.parseInt(s);
-            tasks[doneTask].updateTask();
+            int doneTask = Integer.parseInt(s)-1;
+            tasks.get(doneTask).updateTask();
             System.out.println(String.format("%50s", "Nice! I've marked this task as done:"));
-            System.out.println(String.format("%50s", tasks[doneTask]));
+            System.out.println(String.format("%50s", tasks.get(doneTask)));
             System.out.println(DIVIDER);
         } catch (NullPointerException e) {
             System.out.println(String.format("Task not included in the list, please try again."));
