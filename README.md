@@ -20,7 +20,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 <a name="introduction"></a>
 
 
-##1. Introduction
+## 1. Introduction
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a *Command Line Interface (CLI)*. 
 Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
@@ -28,7 +28,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 <a name="quick-start"></a>
 
-##2. Quick Start
+## 2. Quick Start
 
 *   1. Ensure that `Java 11` or above is installed in your Computer.
 *   2. Download the latest `duke.jar` [_here_](https://github.com/JosephLimWeiJie/duke/releases/download/v0.1.0/duke.jar).
@@ -45,7 +45,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 <a name="features"></a>
 
-##3. Features
+## 3. Features
 
 Command Format
 
@@ -57,7 +57,7 @@ Command Format
 
 <a name="addtask"></a>
 
-###3.1 Adding a task: add
+### 3.1 Adding a task: add
 
 Adds a task into Duke.
 
@@ -73,7 +73,7 @@ Examples:
 
 <a name="list"></a>
 
-###3.2. Listing all tasks: list
+### 3.2. Listing all tasks: list
 
 Shows a list of all the tasks in Duke.
 
@@ -81,7 +81,7 @@ Format: `list`
 
 <a name="find"></a>
 
-###3.3 Finding a task: find
+### 3.3 Finding a task: find
 
 Finds tasks that contains a given keyword.
 
@@ -93,7 +93,7 @@ Example:
 
 <a name="delete"></a>
 
-###3.4 Deleting a task: delete
+### 3.4 Deleting a task: delete
 Deletes a specified task from Duke.
 
 Format: `delete INDEX`
@@ -103,7 +103,7 @@ Format: `delete INDEX`
 
 <a name="filter"></a>
 
-###3.5 Filter tasks by date: filter
+### 3.5 Filter tasks by date: filter
 Filters tasks based on a given DATE
 
 Format: `filter DATE`
@@ -115,7 +115,7 @@ you have to **add a zero in front**.
 
 <a name="complete"></a>
 
-###3.6 Complete a task: complete
+### 3.6 Complete a task: complete
 
 Marks a task as completed at the specified INDEX.
 
@@ -125,7 +125,7 @@ Format: `done INDEX`
 
 <a name="exit"></a>
 
-###3.7 Exiting the program: exit
+### 3.7 Exiting the program: exit
 
 Exits the program.
 Format: `exit`
@@ -133,7 +133,7 @@ Format: `exit`
 
 <a name="faq"></a>
 
-##4. FAQ
+## 4. FAQ
 
 *Q:* How do I transfer my data onto another Computer?
 
@@ -143,7 +143,7 @@ Format: `exit`
 
 <a name="command-summary"></a>
 
-##5. Command Summary
+## 5. Command Summary
 * Add 
     * Format: 
         * `todo TASK_DESCRIPTION`
