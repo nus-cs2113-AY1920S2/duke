@@ -5,11 +5,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static Task[] tasks = new Task[100];
+    //private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static int taskQty = 0;
     private static final String LINE = "____________________________________________________________ \n";
     private static final String LIST = "list";
@@ -18,10 +20,10 @@ public class Duke {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
 
-    public static void printList(Task[] list) {
-        for (int i = 0; i < taskQty; i++) {
+    public static void printList(ArrayList<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.print(String.valueOf(i+1) + ". ");
-            System.out.println(list[i]);
+            System.out.println(tasks.get(i));
         }
     }
 
@@ -61,9 +63,9 @@ public class Duke {
             try {
                 int index = Integer.parseInt((instruction[1]));
                 System.out.println(index);
-                if (tasks[index-1].getIsDone() == false) {
-                    tasks[index-1].markAsDone();
-                    System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].getDescription() + "\n" + LINE);
+                if (tasks.get(index-1).getIsDone() == false) {
+                    tasks.get(index-1).markAsDone();
+                    System.out.println(LINE + "  Yay! You have done: " + tasks.get(index-1).getDescription() + "\n" + LINE);
                 } else {
                     System.out.println("You have already done this task!");
                 }
@@ -79,7 +81,7 @@ public class Duke {
         case (TODO):
             try {
                 new_task = new Todo(instruction[1]);
-                tasks[taskQty] = new_task;
+                tasks.add(new_task);
                 taskQty += 1;
                 printAddMessage();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -91,7 +93,7 @@ public class Duke {
             try {
                 int findSeparator = instruction[1].indexOf('/');
                 new_task = new Deadline(instruction[1].substring(0, findSeparator), instruction[1].substring(findSeparator + 1));
-                tasks[taskQty] = new_task;
+                tasks.add(new_task);
                 taskQty++;
                 printAddMessage();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -99,7 +101,7 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Please input task in the format: deadline task_name/deadline");
             } catch (DukeException e) {
-                System.out.println("duke.tasks.Task description or deadline field is empty.");
+                System.out.println("Task description or deadline field is empty.");
             }
             break;
 
@@ -107,7 +109,7 @@ public class Duke {
             try {
                 int findSeparator = instruction[1].indexOf('/');
                 new_task = new Event(instruction[1].substring(0, findSeparator), instruction[1].substring(findSeparator + 1));
-                tasks[taskQty] = new_task;
+                tasks.add(new_task);
                 taskQty++;
                 printAddMessage();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -115,7 +117,7 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Please input task in the format: event task_name/event_date");
             } catch (DukeException e) {
-                System.out.println("duke.tasks.Task description or event date field is empty.");
+                System.out.println("Task description or event date field is empty.");
             }
             break;
 
