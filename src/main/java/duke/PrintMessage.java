@@ -6,7 +6,9 @@ import java.io.IOException;
 
 import static duke.Duke.tasks;
 import static duke.Storage.appendToFile;
-import static duke.Storage.modifyFile;
+import static duke.Storage.modifyFileContent;
+import static duke.Storage.deleteFileContent;
+
 
 public class PrintMessage {
     
@@ -65,7 +67,7 @@ public class PrintMessage {
             }
             tasks.get(doneTaskIndex).markAsDone();
             printToConsole(DIVIDER, COMMAND_DONE_MESSAGE, TAB + tasks.get(doneTaskIndex), DIVIDER);
-            modifyFile(doneTaskIndex, tasks.get(doneTaskIndex).toStorage());
+            modifyFileContent(doneTaskIndex, tasks.get(doneTaskIndex).toStorage());
         } catch (ArrayIndexOutOfBoundsException e) {
             printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
         } catch (IOException e) {
@@ -114,8 +116,9 @@ public class PrintMessage {
             }
             printToConsole(DIVIDER, String.format(COMMAND_DELETE_MESSAGE, tasks.get(removeTaskIndex), tasks.size() - 1),
                     DIVIDER);
+            deleteFileContent(removeTaskIndex);
             tasks.remove(removeTaskIndex);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException e) {
             printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
         }
     }

@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
@@ -62,13 +60,20 @@ public class Storage {
     //@@author Paul Vargas-reused
     //Reused from https://stackoverflow.com/questions/31375972/how-to-replace-a-specific-line-in-a-file-using-java
     //with minor modifications
-    protected static void modifyFile(int lineNumber, String data) throws IOException {
+    protected static void modifyFileContent(int lineNumber, String data) throws IOException {
         Path path = Paths.get(MK_FILE_STRING);
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         lines.set(lineNumber, data);
         Files.write(path, lines, StandardCharsets.UTF_8);
     }
     //@@author Paul Vargas-reused
+    
+    protected static void deleteFileContent(int lineNumber) throws IOException {
+        Path path = Paths.get(MK_FILE_STRING);
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        lines.remove(lineNumber);
+        Files.write(path, lines, StandardCharsets.UTF_8);
+    }
     
     protected static void printAndLoadContents() throws FileNotFoundException {
         File f = new File(MK_FILE_STRING);
