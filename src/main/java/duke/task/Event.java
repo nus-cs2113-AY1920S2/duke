@@ -13,6 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString () {
-        return (super.taskID + 1) + ". [E]" + super.getStatusIcon() + " " + super.description + " (at: " + time + ")";
+        return (super.taskID + 1) + ". [E] " + super.getStatusIcon() + " " + super.description + " (at: " + time + ")";
     }
 }

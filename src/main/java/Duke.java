@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import duke.task.Todo;
 import duke.task.Task;
 import duke.task.Event;
@@ -12,6 +17,7 @@ import duke.exception.DukeException;
 import duke.exception.FindDukeException;
 
 public class Duke {
+    public static final String FILE_PATH = "data/duke.txt";
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static final int charLengthToSkip = 5;
 
@@ -152,6 +158,88 @@ public class Duke {
         System.out.println();
     }
 
+    public static void save () {
+        try {
+            for (Task ignored : tasks) {
+                writeToFile();
+            }
+        } catch (IOException e) {
+            System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+            printInCenter("Error occurred: " + e.getMessage());
+            System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+        }
+    }
+
+    private static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter(Duke.FILE_PATH);
+        for (Task task : tasks) {
+            fw.write(task.toString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void load() {
+        try {
+            loadFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+            printInCenter("File not found.");
+            System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+        }
+    }
+
+    public static void loadFile() throws FileNotFoundException {
+        File file = new File(FILE_PATH);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            int indexOfCommand = 3;
+            String cmd = scanner.nextLine().substring(indexOfCommand)
+                    .replace("(","/")
+                    .replace(")","");
+            addLoadedTask(cmd, tasks);
+        }
+    }
+
+    private static void addLoadedTask (@NotNull String cmd, ArrayList<Task> tasks) {
+        String[] words = cmd.split(" ");
+        String taskType = words[0];
+        String taskStatus = words[1];
+        int indexOfCommand = 8;
+        int indexOfTimePosition = 6;
+        String cmdTask = cmd.substring(indexOfCommand);
+
+        boolean isToDo = taskType.equals("[T]");
+        boolean isDeadline = taskType.equals("[D]");
+        boolean isEvent = taskType.equals("[E]");
+        boolean isDone = taskStatus.equals("[\u2713]");
+
+        FindDukeException findDukeException = new FindDukeException(cmd);
+        try {
+            if (isToDo) {
+                Task todo = new Todo(tasks.size(), cmdTask, isDone);
+                tasks.add(todo);
+            } else if (isEvent) {
+                int timePosition = cmdTask.indexOf(" /at: ");
+                String cmdEvent = cmdTask.substring(0, timePosition);
+                String cmdTime = cmdTask.substring(timePosition + indexOfTimePosition);
+                Task event = new Event(tasks.size(), cmdEvent, isDone, cmdTime);
+                tasks.add(event);
+            } else if (isDeadline) {
+                int timePosition = cmdTask.indexOf(" /by: ");
+                String cmdDeadline = cmdTask.substring(0, timePosition);
+                String cmdTime = cmdTask.substring(timePosition + indexOfTimePosition);
+                Task deadline = new Deadline(tasks.size(), cmdDeadline, isDone, cmdTime);
+                tasks.add(deadline);
+            } else {
+                findDukeException.undefinedTypeException();
+            }
+        } catch (DukeException dukeException) {
+            System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+            printInCenter(dukeException.getMessage());
+            System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+        }
+    }
+
     public static void exit () {
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("Bye! See you next time \uD83E\uDD17");
@@ -160,8 +248,10 @@ public class Duke {
     }
 
     public static void main (String[] args) {
-        int spacePosition = -1;
-        int taskNumber = -1;
+        int spacePosition;
+        int taskNumber;
+
+        load();
         greet();
 
         // read command-line input
@@ -176,8 +266,9 @@ public class Duke {
                 break;
             case "delete":
                 spacePosition = cmd.indexOf(" ");
-                taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1, cmd.length())) - 1;
+                taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1)) - 1;
                 delete(taskNumber);
+                save();
                 break;
             case "todo":
                 try {
@@ -187,6 +278,7 @@ public class Duke {
                     printInCenter(dukeException.getMessage());
                     System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
                 }
+                save();
                 break;
             case "event":
                 try {
@@ -196,6 +288,7 @@ public class Duke {
                     printInCenter(dukeException.getMessage());
                     System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
                 }
+                save();
                 break;
             case "deadline":
                 try {
@@ -205,11 +298,13 @@ public class Duke {
                     printInCenter(dukeException.getMessage());
                     System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
                 }
+                save();
                 break;
             case "done":
                 spacePosition = cmd.indexOf(" ");
-                taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1, cmd.length())) - 1;
+                taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1)) - 1;
                 done(taskNumber);
+                save();
                 break;
             default:
                 try {
