@@ -25,6 +25,10 @@ public abstract class Task {
         return numberOfTasksInList;
     }
 
+    public static void reduceNumberOfTaskInList(){
+        numberOfTasksInList--;
+    }
+
     /**
      * Get the status of isDone of the Task.Task and returns an icon
      *
@@ -48,6 +52,7 @@ public abstract class Task {
      * Print done response message
      */
     public abstract String getDoneResponseMessage(int itemIndexRequested);
+
 
     /**
      * get description of Task.Task
