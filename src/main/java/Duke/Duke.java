@@ -1,6 +1,7 @@
 package Duke;
 
 import Exceptions.NoParameterException;
+import Exceptions.emptyListException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class Duke {
     public static final int LENGTH_EVENT = 6;
     public static final int LENGTH_TODO = 5;
     public static final int SIZE_DONE_COMMAND = 2;
+    public static final int SIZE_DELETE_COMMAND = 2;
+    public static final int LIST_TO_INDEX = 1;
+
 
     public static void getDateTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -46,6 +50,24 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println( "["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + "\n");
             }
+        } else {
+            System.out.println("Error: No such index in use\n");
+        }
+    }
+
+    public static void deleteTask(ArrayList<Task> tasks, int taskIndex) throws emptyListException {
+
+        if(tasks.isEmpty()) {
+            throw  new emptyListException();
+        }
+        taskIndex -= LIST_TO_INDEX;
+        if ( (taskIndex < tasks.size()) || (taskIndex > 0)) { // check if out of bounce
+            Task currentTask = tasks.get(taskIndex);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + "\n");
+            tasks.remove(taskIndex);
+            System.out.println("Now you have " + tasks.size() +" tasks in the list.\n");
+
         } else {
             System.out.println("Error: No such index in use\n");
         }
@@ -163,7 +185,6 @@ public class Duke {
         printWelcomeMessage();
 
         ArrayList<Task> tasks = new ArrayList<Task>();
-        int taskCounter = 0;
 
         Scanner input = new Scanner(System.in);
         String userCommand = input.nextLine();
@@ -192,29 +213,45 @@ public class Duke {
             case "help":
                 printHelp();
                 break;
+            case "delete":
+                if (wordLength != SIZE_DELETE_COMMAND) {
+                    System.out.println("Wrong format for command \"Delete\"\n");
+                    break;
+                }
+                try {
+                    int index = Integer.parseInt(words[1]);
+                    deleteTask(tasks, index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please input a valid number\n");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Task not found, please try again\n");
+                } catch (emptyListException e) {
+                    System.out.println("List is empty");
+                }
+                break;
             case "todo":
                 try {
-                    taskCounter++;
+                    int taskCounter = tasks.size() + 1;
                     addTodo(tasks, userCommand, taskCounter, wordLength);
                 } catch (NoParameterException e) {
-                    taskCounter--;
                     System.out.println("Missing Parameters detected!\n");
                 }
                 break;
             case "event":
-                taskCounter++;
+
                 try {
+                    int taskCounter = tasks.size() + 1;
                     addEvent(tasks, userCommand, taskCounter, wordLength);
                 } catch (NoParameterException e){
-                    taskCounter--;
                     System.out.println("Missing Parameters detected!\n");
                 }
+                break;
             case "deadline":
-                taskCounter++;
+
                 try {
+                    int taskCounter = tasks.size() + 1;
                     addDeadline(tasks, userCommand, taskCounter, wordLength);
                 } catch (NoParameterException e){
-                    taskCounter--;
                     System.out.println("Missing Parameters detected!\n");
                 }
                 break;
