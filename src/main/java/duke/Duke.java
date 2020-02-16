@@ -188,6 +188,9 @@ public class Duke {
                     case "list":
                         msg += list();
                         break;
+                    case "show_deleted":
+                    	msg += showRemoved();
+                    	break;
                     case "delete":
                     	msg += removeTask(str);
                     	break;
