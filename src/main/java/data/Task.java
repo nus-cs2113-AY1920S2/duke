@@ -1,8 +1,10 @@
 package data;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected final String TASK_DONE_NOTATION = "1";
+    protected final String TASK_NOTDONE_NOTATION = "0";
 
     public Task(String description) {
         this.description = description;
@@ -28,4 +30,6 @@ public class Task {
     public String toString(){
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public abstract String[] getTaskData();
 }

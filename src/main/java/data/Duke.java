@@ -1,5 +1,12 @@
-package data; //Scanner object takes in user input
-import java.util.Scanner;
+package data;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner; //Scanner object takes in user input
 import java.util.ArrayList;
 
 public class Duke {
@@ -50,13 +57,18 @@ public class Duke {
             // get additional remark part of userInput
             returnValue[1] = separatedSections[1];
             boolean isRemarksEmpty = ((commandWord.equals("event") || commandWord.equals("deadline")) 
-            && returnValue[1].trim().length() == 0);
+                    && returnValue[1].trim().length() == 0);
             if (isRemarksEmpty){
                 throw new NoRemarkException();
             }
             return returnValue;
         } else {
             // get description part of userInput without the command word
+            String[] separatedSections = originalInput.split(" /");
+            String commandWord = separatedSections[0].split(" ", 2)[0];
+            if (commandWord.equals("event") || commandWord.equals("deadline")) {
+                throw new IllegalKeywordException();
+            }
             try {
                 returnValue[0] = originalInput.trim().split(" ", 2)[1];
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -167,6 +179,71 @@ public class Duke {
         System.out.println(underscoredLine + System.lineSeparator() + taskRemovedMessage + System.lineSeparator()
                 + underscoredLine);
     }
+    
+    //TODO: load tasklist from file data/duke.txt on startup
+    private static void loadFileToTaskList(String filePath, ArrayList<Task> taskList) throws FileNotFoundException {
+        File f = new File(filePath);
+        if (!f.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            //add task (each line) to ArrayList taskList
+            //1. process each line first, construct new Todo/Event/Deadline object
+            String taskString = s.nextLine();
+            String[] tokenizedTaskString = taskString.split(" \\| ");
+            Task newTaskToLoad;
+            switch(tokenizedTaskString[0].toUpperCase()) {
+            case ("T"):
+                newTaskToLoad = new Todo(tokenizedTaskString[2], "");
+                break;
+            case ("E"):
+                newTaskToLoad = new Event(tokenizedTaskString[2], tokenizedTaskString[3]);
+                break;
+            case ("D"):
+                newTaskToLoad = new Deadline(tokenizedTaskString[2], tokenizedTaskString[3]);
+                break;
+            default:
+                newTaskToLoad = new Todo("hello", "world");
+                //break;
+            }
+            //if task was previously marked done already, make sure to mark it as done when loading to taskList
+            if (tokenizedTaskString[1].equals("1")) {
+                newTaskToLoad.markAsDone();
+            }
+            taskList.add(newTaskToLoad);
+            taskCount++;
+
+        }
+    }
+
+    //TODO: write loop to iterate through arraylist, write each task to file data/duke.txt on any changes
+    private static void saveTaskListToFile(String filePath, ArrayList<Task> taskList) throws IOException {
+        FileWriter fw;
+        try{
+            fw = new FileWriter(filePath); //overwrites existing file contents every time it is called
+        } catch (IOException e) {
+            throw new IOException();
+        }
+        //convert newTaskData to string format for storing in duke.txt
+        String newTaskString;
+        boolean hasDescription = false;
+
+        for (int i=0; i < taskList.size(); i++) {
+            Task newTaskData = taskList.get(i);
+            if (newTaskData instanceof Todo) {
+                newTaskString = newTaskData.getTaskData()[0] + " | " + newTaskData.getTaskData()[1] + " | "
+                        + newTaskData.getTaskData()[2] + System.lineSeparator();
+            } else {
+                newTaskString = newTaskData.getTaskData()[0] + " | " + newTaskData.getTaskData()[1] + " | "
+                        + newTaskData.getTaskData()[2] + " | " + newTaskData.getTaskData()[3] + System.lineSeparator();
+            }
+            fw.write(newTaskString);
+
+        }
+        fw.close();
+
+    }
 
     public static void main(String[] args) {
         String userInput;
@@ -174,11 +251,17 @@ public class Duke {
         boolean isExitCommandInvoked = false;
         ArrayList<Task> taskList = new ArrayList<>();
         
+        //load duke.txt on startup. If duke.txt does not exist create duke.txt in relative path
+        try {
+            loadFileToTaskList("src/main/java/data/duke.txt", taskList);
+        } catch (FileNotFoundException e) {
+            File f = new File("src/main/java/data/duke.txt");
+        }
 
         sayIntro();
         //easier to identify lines input by user (per Python)
         System.out.print(">>>");
-        
+
         while (in.hasNextLine()) {
             userInput = in.nextLine();
             try {
@@ -200,11 +283,19 @@ public class Duke {
                 break;
             case("done"):
                 updateTaskDone(tokenizedInput[1], taskList);
+                try {
+                    saveTaskListToFile("src/main/java/data/duke.txt", taskList);
+                } catch (IOException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\tError saving taskList to duke.txt");
+                    System.out.println(underscoredLine);
+                }
                 break;
             case("remove"):
                 //TODO: put remove under try-catch block, NumberFieldException
                 try {
                     removeTask(userInput, taskList);
+                    saveTaskListToFile("src/main/java/data/duke.txt", taskList);
                 } catch (NumberFieldException e) {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! The task number you have provided is not valid.");
@@ -213,11 +304,16 @@ public class Duke {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! The remove command is missing additional parameters.");
                     System.out.println(underscoredLine);
+                } catch (IOException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\tError saving taskList to duke.txt");
+                    System.out.println(underscoredLine);
                 }
                 break;
             default:
                 try{
                     insertNewTask(taskList, userInput, tokenizedInput);
+                    saveTaskListToFile("src/main/java/data/duke.txt", taskList);
                 } catch (IllegalKeywordException e) {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! I'm sorry, but I don't know what that means :-(");
@@ -234,8 +330,11 @@ public class Duke {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! " + tokenizedInput[0] + " command is missing additional parameters.");
                     System.out.println(underscoredLine);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
+
 
             if (isExitCommandInvoked) {
                 break;
@@ -246,7 +345,5 @@ public class Duke {
 
         sayGoodbye();
     }
-
-
-
+    
 }
