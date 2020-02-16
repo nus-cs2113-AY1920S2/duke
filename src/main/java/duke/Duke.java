@@ -1,10 +1,11 @@
-package java.duke;
+package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
+    private static ArrayList<Task> removedTasks = new ArrayList<>();
     private final static String name = "*Rick*";
     private final static String line = "____________________________________________________________";
     
@@ -25,12 +26,41 @@ public class Duke {
             throw new DukeException("Oops!! Invalid task.");
         } else if (index > list.size()) {
             throw new DukeException("Oops!! No such task.");
-        } else if (list.get(index - 1).isDone) {
+        } else if (list.get(index - 1).isDone()) {
             throw new DukeException("Oops!! Task is already completed.");
         } else {
-            list.get(index - 1).markAsDone();
+        	Task curr = list.get(index - 1);
+            curr.markAsDone();
             msg += "Nice! I've marked this task as done: " + '\n';
-            msg += "    " + list.get(index - 1).toString();
+            msg += "    " + curr.toString();
+        }
+        return msg;
+    }
+    
+    public static String removeTask(String line) throws DukeException {
+    	String[] cmds = line.split(" ");
+        if (cmds.length == 1) {
+            throw new DukeException("Oops!! Please select a task to remove.");
+        }
+        String msg = "";
+        // sets a specified task as done
+        int index;
+        try { 
+            index = Integer.valueOf(cmds[1]);
+        } catch (Exception exception) {
+            throw new DukeException("Oops!! Wrong format.");
+        }
+        if (index < 1) {
+            throw new DukeException("Oops!! Invalid task.");
+        } else if (index > list.size()) {
+            throw new DukeException("Oops!! No such task.");
+        } else {
+        	Task curr = list.get(index - 1);
+        	removedTasks.add(curr);
+            msg += "Noted. I've removed this task: " + '\n';
+            msg += "    " + curr.toString() + '\n';
+            list.remove(index - 1);
+            msg += "  Now you have " + list.size() + " tasks in the list.";
         }
         return msg;
     }
@@ -70,7 +100,7 @@ public class Duke {
     public static String addEvent(String line) throws DukeException {
         String[] cmds = line.split(" ");
         if (cmds.length == 1) {
-            throw new DukeException("Oops!! The description of an event cannt be empty.");
+            throw new DukeException("Oops!! The description of an event cannot be empty.");
         }
         String msg = "";
         try {
@@ -100,8 +130,27 @@ public class Duke {
             throw new DukeException("Oops!! List is empty.");
         } else {
             msg += "Here are the tasks in your list:" + '\n';
+            msg += '\n';
             int counter = 1;
             for (Task s : list) {
+                msg += "    " + counter + ". " + s.toString();
+                counter++;
+                msg += '\n';
+            }
+        }
+        return msg;
+    }
+    
+    public static String showRemoved() throws DukeException {
+    	String msg = "";
+        // accesses the list
+        if (removedTasks.size() == 0) {
+            throw new DukeException("Oops!! No removed tasks.");
+        } else {
+            msg += "Here are the tasks that have been removed:" + '\n';
+            msg += '\n';
+            int counter = 1;
+            for (Task s : removedTasks) {
                 msg += "    " + counter + ". " + s.toString();
                 counter++;
                 msg += '\n';
@@ -139,6 +188,9 @@ public class Duke {
                     case "list":
                         msg += list();
                         break;
+                    case "delete":
+                    	msg += removeTask(str);
+                    	break;
                     case "done":
                         msg += makeDone(str);
                         break;

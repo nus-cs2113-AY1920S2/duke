@@ -1,4 +1,4 @@
-package java.duke;
+package duke;
 
 public class Task {
     protected final String description;
@@ -30,6 +30,10 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+    
+    public boolean isDone() {
+    	return this.isDone;
     }
     
     /**

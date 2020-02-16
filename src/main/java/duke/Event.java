@@ -1,4 +1,4 @@
-package java.duke;
+package duke;
 
 public class Event extends Task {
     private final String date;
