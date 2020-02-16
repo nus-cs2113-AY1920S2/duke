@@ -3,6 +3,10 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,8 +28,13 @@ public class Duke {
     }
 
     private static void runChatbot() {
-        ArrayList<Task> Tasks = new ArrayList<Task>();
 
+        ArrayList<Task> Tasks = new ArrayList<Task>();
+        try {
+            Tasks = openData();
+        } catch (IOException e) {
+            System.out.println("Previous data cannot be loaded.");
+        }
         Scanner in = new Scanner(System.in);
         String arr[] = getCommand(in);
         while (true) {
@@ -44,7 +53,13 @@ public class Duke {
         System.out.println(LINE);
         switch (arr[0]) {
         case (BYE_COMMAND):
-            printExitMessage();
+            try {
+                saveData(Tasks);
+                printExitMessage();
+            } catch (IOException e) {
+                System.out.println("File cannot be saved. Please try again.");
+            }
+            break;
         case (LIST_COMMAND):
             printList(Tasks);
             break;
@@ -110,6 +125,54 @@ public class Duke {
         }
         System.out.println(LINE);
     }
+
+
+    private static void saveData(ArrayList<Task> Tasks) throws IOException {
+        FileWriter fileWriter = new FileWriter("data/duke.txt", true);
+        for (Task task : Tasks) {
+            fileWriter.write(task.saveTask());
+            fileWriter.write(System.lineSeparator());
+        }
+        fileWriter.close();
+        System.out.println("Data saved successfully.");
+    }
+
+    private static ArrayList<Task> openData() throws IOException {
+        ArrayList<Task> Tasks = new ArrayList<Task>();
+        int pointer = 0;
+        FileReader fileReader = new FileReader("data/duke.txt");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line = bufferedReader.readLine();
+        while (line != null) {
+            String arr[] = line.split("[|]", 4);
+            switch (arr[0]) {
+            case ("T"):
+                Todo todo = new Todo(arr[2]);
+                if (arr[1].equals("1")) {
+                    todo.setDone(true);
+                }
+                Tasks.add(todo);
+                break;
+            case ("D"):
+                Deadline deadline = new Deadline(arr[2], arr[3]);
+                if (arr[1].equals("1")) {
+                    deadline.setDone(true);
+                }
+                Tasks.add(deadline);
+                break;
+            case ("E"):
+                Event event = new Event(arr[2], arr[3]);
+                if (arr[1].equals("1")) {
+                    event.setDone(true);
+                }
+                Tasks.add(event);
+                break;
+            }
+            line = bufferedReader.readLine();
+            pointer++;
+        }
+        NUM_OF_TASK = pointer;
+        return Tasks;
 
     private static void printDelete(Task task) {
         System.out.println("Noted. I've removed this task: ");

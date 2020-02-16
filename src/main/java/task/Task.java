@@ -30,6 +30,13 @@ public class Task {
         return isDone;
     }
 
+    public int isDoneNum() {
+        if (isDone) {
+            return 1;
+        }
+        return 0;
+    }
+
     public void setDone(boolean done) {
         isDone = done;
     }
@@ -42,8 +49,11 @@ public class Task {
         this.num = num;
     }
 
-    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    public String saveTask() {
+        return description;
     }
 }
