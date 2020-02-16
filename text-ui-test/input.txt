@@ -11,10 +11,15 @@ event fail2 /
 todo abc
 event def /123
 deadline ghi /456
-jkl
+event jkl
 list
 done 1
 done 1
+remove foo
+remove
+remove
+remove 999
+remove 1
 list
 done 2
 done 2

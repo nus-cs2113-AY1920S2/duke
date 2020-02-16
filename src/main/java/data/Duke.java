@@ -1,5 +1,6 @@
 package data; //Scanner object takes in user input
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int MAX_NO_OF_TASKS = 100;
@@ -7,6 +8,7 @@ public class Duke {
     public static int taskCount = 0;
     private static String curlyLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static String underscoredLine = "\t____________________________________________________________";
+    
 
     private static void sayIntro(){
         String introMessage = curlyLine + System.lineSeparator() + "Hello! I'm Duke\n"
@@ -70,7 +72,7 @@ public class Duke {
 
     
 
-    public static void addTaskToList(Task[] listInput) {
+    public static void printTaskList(ArrayList<Task> listInput) {
         //if list empty, inform user and await next command
         if (taskCount == 0) {
             System.out.println(underscoredLine + System.lineSeparator() + "\tThe list is empty."
@@ -80,13 +82,13 @@ public class Duke {
         //if list non-empty, print out all existing tasks
         System.out.println(underscoredLine + System.lineSeparator());
         for (int i = 0; i < taskCount; i++) {
-            System.out.println("\t" + Integer.toString(i + 1) + "." + listInput[i].toString());
+            System.out.println("\t" + Integer.toString(i + 1) + "." + listInput.get(i).toString());
         }
         System.out.println(underscoredLine);
         return;
     }
 
-    public static void updateTaskDone(String taskNumberInput, Task[] listInput){
+    public static void updateTaskDone(String taskNumberInput, ArrayList<Task> listInput){
         int queryNumber = Integer.parseInt(taskNumberInput);
         boolean isOutOfRange = queryNumber < 1 || queryNumber > taskCount;
         
@@ -97,22 +99,22 @@ public class Duke {
             return;
         }
         //handle case where user tries to mark as done an already completed task
-        boolean isTaskAlreadyDone = listInput[queryNumber-1].getIsDone();
+        boolean isTaskAlreadyDone = listInput.get(queryNumber-1).getIsDone();
         
         if (isTaskAlreadyDone){
             System.out.println(underscoredLine + System.lineSeparator()
                     + "\tThis task has already been marked completed." + System.lineSeparator() + underscoredLine);
             return;
         }
-        listInput[queryNumber-1].markAsDone();
+        listInput.get(queryNumber-1).markAsDone();
 
         String taskDoneMessage = "\tGreat job! I've marked this task as done:\n\t" + Integer.toString(queryNumber)
-                + ".[" + listInput[queryNumber-1].getStatusIcon() + "] " + listInput[queryNumber-1].getDescription();
+                + ".[" + listInput.get(queryNumber-1).getStatusIcon() + "] " + listInput.get(queryNumber-1).getDescription();
         System.out.println(underscoredLine + System.lineSeparator() + taskDoneMessage + System.lineSeparator()
                 + underscoredLine);
     }
 
-    private static void insertNewTask(Task[] taskList, String userInput, String[] tokenizedInput) throws
+    private static void insertNewTask(ArrayList<Task> taskList, String userInput, String[] tokenizedInput) throws
             IllegalKeywordException, NoDescriptionException, NoRemarkException {
         Task newTask;
         switch (tokenizedInput[0]) {
@@ -130,7 +132,7 @@ public class Duke {
             //break;
         }
 
-        taskList[taskCount] = newTask;
+        taskList.add(newTask);
         taskCount++;
 
         String taskAddedMessage = "\tGot it. I've added this task: \n\t" + newTask.toString() + System.lineSeparator()
@@ -139,12 +141,39 @@ public class Duke {
                 + underscoredLine);
     }
 
+    private static void removeTask(String userInput, ArrayList<Task> taskList) throws NumberFieldException {
+        int taskNumberForRemoval;
+        //TODO: exceptions - second input out of bounds, not integer, no second input, only whitespaces after firstinput
+        try {
+            taskNumberForRemoval = Integer.parseInt(userInput.split(" ", 2)[1]);
+        } catch (NumberFormatException e) {
+            //throw NumberFieldException if taskNumber is a string eg. "remove foo" OR whitespaces only
+            throw new NumberFieldException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //throw AIOOB exception if remove cmd given without 2nd input (ie "remove")
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        //throw NumberFieldException if task number out of range
+        boolean isOutOfBounds = (taskNumberForRemoval <= 0 || taskNumberForRemoval > taskCount);
+        if (isOutOfBounds) {
+            throw new NumberFieldException();
+        }
+        Task removedTask = taskList.remove(Integer.valueOf(taskNumberForRemoval)-1);
+        taskCount--;
+
+        String taskRemovedMessage = "\tGot it. I've removed this task: \n\t" + removedTask.toString() + System.lineSeparator()
+                + "\tNow you have " + taskCount + " tasks in the list.\n";
+        System.out.println(underscoredLine + System.lineSeparator() + taskRemovedMessage + System.lineSeparator()
+                + underscoredLine);
+    }
+
     public static void main(String[] args) {
-        Task[] taskList = new Task[MAX_NO_OF_TASKS];
-        int taskCount = 0;
         String userInput;
         Scanner in = new Scanner(System.in);
         boolean isExitCommandInvoked = false;
+        ArrayList<Task> taskList = new ArrayList<>();
+        
 
         sayIntro();
         //easier to identify lines input by user (per Python)
@@ -162,15 +191,29 @@ public class Duke {
                 continue;
             }
             String[] tokenizedInput = userInput.split(" ");
-            switch (tokenizedInput[0]) {
+            switch (tokenizedInput[0].toLowerCase()) {
             case ("bye"):
                 isExitCommandInvoked = true;
                 break;
             case ("list"):
-                addTaskToList(taskList);
+                printTaskList(taskList);
                 break;
             case("done"):
                 updateTaskDone(tokenizedInput[1], taskList);
+                break;
+            case("remove"):
+                //TODO: put remove under try-catch block, NumberFieldException
+                try {
+                    removeTask(userInput, taskList);
+                } catch (NumberFieldException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! The task number you have provided is not valid.");
+                    System.out.println(underscoredLine);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(underscoredLine);
+                    System.out.println("\t\u2639 !!ERROR!! The remove command is missing additional parameters.");
+                    System.out.println(underscoredLine);
+                }
                 break;
             default:
                 try{
@@ -203,5 +246,7 @@ public class Duke {
 
         sayGoodbye();
     }
+
+
 
 }
