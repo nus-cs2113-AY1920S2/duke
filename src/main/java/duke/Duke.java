@@ -17,11 +17,11 @@ public class Duke {
     public static final String TODO_COMMAND = "todo";
     public static final String EVENT_COMMAND = "event";
     public static final String DEADLINE_COMMAND = "deadline";
+    public static final String DELETE_COMMAND = "delete";
     public static final String END_COMMAND = "bye";
     public static final String END_MESSAGE = "Bob thanks you for coming! See you again soon!";
 
     private static ArrayList<Task> tasks = new ArrayList<>();
-
     public static void printIndividualTask(ArrayList<Task> tasks, int taskNum) {
         if (tasks.get(taskNum - 1).getTaskDescription().equals(TODO_COMMAND)) {
             System.out.println("Got it! You've added a todo task: ");
@@ -44,7 +44,7 @@ public class Duke {
             System.out.println("Here are the tasks on your list: ");
             for (int i = 1; i < sizeofArray + 1; i++) {
                 String taskNum = Integer.toString(i);
-                System.out.println(taskNum + "." + tasks.get(i -1));
+                System.out.println(taskNum + "." + tasks.get(i - 1));
             }
         } else {
             throw new EmptyListException("There are no tasks in the list! Please add some tasks!");
@@ -69,6 +69,24 @@ public class Duke {
         }
     }
 
+    public static void executeDeleteTask(ArrayList<Task> tasks, String userInput) throws MissingTaskNumberException, MissingTaskNumberDescriptionException{
+        if (!userInput.trim().equals(DELETE_COMMAND)) {
+            String[] words = userInput.split(" ");
+            int taskNum = Integer.parseInt(words[1]);
+            int sizeOfArray = tasks.size();
+            if (taskNum <= sizeOfArray) {
+                System.out.println("Got it! I've removed this task: ");
+                System.out.println(tasks.get(taskNum - 1));
+                tasks.remove(taskNum - 1);
+                System.out.println(taskValidator(tasks.size()));
+            } else {
+                throw new MissingTaskNumberException("This task number does not exist on the list!");
+            }
+        } else {
+            throw new MissingTaskNumberDescriptionException("Please add a task number to \'delete\' to delete a task!");
+        }
+    }
+
 
     public static String taskValidator(int numTasks) {
         String totalTasks = Integer.toString(numTasks);
@@ -85,7 +103,7 @@ public class Duke {
             String todoTask = userInput.substring(TODO_COMMAND.length() + 1);
             Task todo = new Todo(todoTask);
             tasks.add(todo);
-            printIndividualTask(tasks,todo.getTotalTasks());
+            printIndividualTask(tasks,tasks.size());
         } else {
             throw new MissingTaskException("Todo tasks cannot be empty!");
         }
@@ -101,7 +119,7 @@ public class Duke {
             String atDate = userInput.substring(indexOfAt + "/at".length() + 1);
             Task event = new Event(eventTask, atDate);
             tasks.add(event);
-            printIndividualTask(tasks,event.getTotalTasks());
+            printIndividualTask(tasks,tasks.size());
         } else {
             throw new MissingTaskException("Event tasks cannot be empty!");
         }
@@ -117,7 +135,7 @@ public class Duke {
             String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
             Task deadline = new Deadline(deadlineTask, byDate);
             tasks.add(deadline);
-            printIndividualTask(tasks,deadline.getTotalTasks());
+            printIndividualTask(tasks,tasks.size());
         } else {
             throw new MissingTaskException("Deadline tasks cannot be empty!");
         }
@@ -156,6 +174,12 @@ public class Duke {
             } catch (DukeException err) {
                 System.out.println(err.toString());
             }
+        } else if (words[0].equals(DELETE_COMMAND)) {
+            try {
+                executeDeleteTask(tasks, userInput);
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
         } else {
             throw new UnknownInputException("There is no such input!");
         }
@@ -178,7 +202,6 @@ public class Duke {
     public static void main(String[] args) {
         initialisation();
         Scanner command = new Scanner(System.in);
-
         while (true) {
             String userInput = command.nextLine();
             if (userInput.equals(END_COMMAND)) {
