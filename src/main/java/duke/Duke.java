@@ -2,6 +2,7 @@ package duke;
 
 import duke.exceptions.IllegalCommandException;
 import duke.exceptions.IllegalDeleteException;
+import duke.exceptions.IllegalDoneTaskException;
 import duke.exceptions.IllegalTypeException;
 import duke.taskmanager.Deadline;
 import duke.taskmanager.Event;
@@ -79,6 +80,10 @@ public class Duke {
             System.out.println("    Sorry, task does not exist " +
                     "(IllegalDeleteException). ");
             exeType(exeCommand);
+        } catch (IllegalDoneTaskException e) {
+            System.out.println("    Sorry, task does not exist " +
+                    "(IllegalDoneTaskException). ");
+            exeType(exeCommand);
         }
     }
 
@@ -135,7 +140,7 @@ public class Duke {
             throw new IllegalDeleteException();
         }
     }
-    public static void doneTask() {
+    public static void doneTask() throws IllegalDoneTaskException {
         System.out.println("    Please choose the task that you have completed " +
                 "(select the no)");
         printTasks();
@@ -143,6 +148,8 @@ public class Duke {
         clearInput();
         if (doneTask < Task_No) {
             manageTask[doneTask].markAsDone();
+        } else {
+            throw new IllegalDoneTaskException();
         }
         System.out.println("    Congrats! Task " + doneTask + ": " +
                 manageTask[doneTask] +  " has been completed!");
