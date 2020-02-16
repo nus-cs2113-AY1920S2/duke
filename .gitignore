@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Output.txt File for Save functionality in Duke
+/output.txt/
