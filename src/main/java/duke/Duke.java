@@ -1,3 +1,10 @@
+package duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -21,7 +28,7 @@ public class Duke {
     public static void main(String[] args) {
 
         System.out.println(LINE +
-                        " Hello! I'm Duke :)\n" +
+                        " Hello! I'm duke.Duke :)\n" +
                         " What can I do for you?\n" + LINE);
 
         Scanner scanner = new Scanner(System.in);
@@ -54,9 +61,9 @@ public class Duke {
             try {
                 int index = Integer.parseInt((instruction[1]));
                 System.out.println(index);
-                if (tasks[index-1].isDone == false) {
+                if (tasks[index-1].getIsDone() == false) {
                     tasks[index-1].markAsDone();
-                    System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].description + "\n" + LINE);
+                    System.out.println(LINE + "  Yay! You have done: " + tasks[index-1].getDescription() + "\n" + LINE);
                 } else {
                     System.out.println("You have already done this task!");
                 }
@@ -92,7 +99,7 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Please input task in the format: deadline task_name/deadline");
             } catch (DukeException e) {
-                System.out.println("Task description or deadline field is empty.");
+                System.out.println("duke.tasks.Task description or deadline field is empty.");
             }
             break;
 
@@ -108,7 +115,7 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Please input task in the format: event task_name/event_date");
             } catch (DukeException e) {
-                System.out.println("Task description or event date field is empty.");
+                System.out.println("duke.tasks.Task description or event date field is empty.");
             }
             break;
 
