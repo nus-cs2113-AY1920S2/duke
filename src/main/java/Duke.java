@@ -1,8 +1,7 @@
 import duke.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -15,8 +14,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        readFromFile();
         greetUser();
         conversation();
+
     }
 
     private static String readCommand() throws IOException {
@@ -46,17 +47,20 @@ public class Duke {
         System.out.println("____________________________________________________________");
         String str = readCommand();
         System.out.println("____________________________________________________________");
-
         if (str.equals("bye")) {
             finishConversation();
-        }else if(str.contains("delete")){
+        } else if (str.contains("delete")) {
             deleteTask(str);
             conversation();
-        }else if (str.equals("add task")) {
+        } else if (str.equals("add task")) {
             System.out.println("____________________________________________________________");
             addTaskScreen();
         } else if (str.equals("list")) {
             listTask();
+            conversation();
+        }else if (str.contains("done")) {
+            markDone(str);
+            System.out.println("Mark task done");
             conversation();
         }else {
             System.out.println(str);
@@ -72,6 +76,7 @@ public class Duke {
         String str = readCommand();
 
         if (str.equals("bye")) {
+            saveTask();
             finishConversation();
         } else if (str.contains("done")) {
             markDone(str);
@@ -92,9 +97,9 @@ public class Duke {
             missingDateTimeError(str);
             int dividerPosition = str.indexOf(" ");
             int dividerPositionSlash = str.indexOf("/");
-            String task = str.substring(dividerPosition + 1 , dividerPositionSlash);
+            String task = str.substring(dividerPosition + 1, dividerPositionSlash);
             String by = str.substring(dividerPositionSlash + 4);
-            Deadlines newTask = new Deadlines(task,by);
+            Deadlines newTask = new Deadlines(task, by);
             addTask(newTask);
             addTaskScreen();
         } else if ((str.contains("event"))) {
@@ -102,18 +107,18 @@ public class Duke {
             missingDateTimeError(str);
             int dividerPosition = str.indexOf(" ");
             int dividerPositionSlash = str.indexOf("/");
-            String task = str.substring(dividerPosition + 1 , dividerPositionSlash);
-            String calender  = str.substring(dividerPositionSlash+4);
+            String task = str.substring(dividerPosition + 1, dividerPositionSlash);
+            String calender = str.substring(dividerPositionSlash + 4);
             int dateAndTime = calender.indexOf(" ");
-            String date  = calender.substring(0, dateAndTime);
-            String time  = calender.substring(dateAndTime+1);
-            Events newTask = new Events(task,date,time);
+            String date = calender.substring(0, dateAndTime);
+            String time = calender.substring(dateAndTime + 1);
+            Events newTask = new Events(task, date, time);
             addTask(newTask);
             addTaskScreen();
-        }else if(str.contains("delete")) {
+        } else if (str.contains("delete")) {
             deleteTask(str);
             addTaskScreen();
-        }else{
+        } else {
             wrongInputFormatError(str);
         }
     }
@@ -122,90 +127,153 @@ public class Duke {
         System.out.println("Got it. I've added this task: " + newTask.description);
         taskList.add(newTask);
         System.out.println("added : " + newTask);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list") ;
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
     }
 
     public static void deleteTask(String str) throws IOException, DukeException {
-        if(str.equals("delete")){
+        if (str.equals("delete")) {
             missingIndexError();
         }
         int dividerPosition = str.indexOf(" ");
-        String index = str.substring(dividerPosition+1);
+        String index = str.substring(dividerPosition + 1);
         int i = Integer.parseInt(index);
-        deleteError(i,taskList);
-        Task toRemove = taskList.get(i-1);
-        taskList.remove(i-1);
+        deleteError(i, taskList);
+        Task toRemove = taskList.get(i - 1);
+        taskList.remove(i - 1);
         System.out.println("Noted. I've removed this task: ");
         System.out.println("Removed : " + toRemove);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list") ;
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
     }
 
 
-
-
-    public static void listTask(){
+    public static void listTask() {
         System.out.println("____________________________________________________________");
         int i = 0;
         while (i < taskList.size()) {
             int j = i + 1;
-            System.out.println(j + " ." +  taskList.get(i).toString() );
+            System.out.println(j + " ." + taskList.get(i).toString());
             i++;
         }
 
         System.out.println("____________________________________________________________");
     }
 
-    public  static  void markDone(String str) throws IOException, DukeException {
-        if(str.equals("done")){
+    public static void markDone(String str) throws IOException, DukeException {
+        if (str.equals("done")) {
             missingIndexError();
         }
         int dividerPosition = str.indexOf(" ");
-        String index = str.substring(dividerPosition+1);
+        String index = str.substring(dividerPosition + 1);
         int i = Integer.parseInt(index);
-        markDoneError(i,taskList);
-        taskList.get(i-1).markDone();
+        markDoneError(i, taskList);
+        taskList.get(i - 1).markDone();
         listTask();
     }
 
 
-    public static void missingDateTimeError(String input) throws DukeException{
-        if(!input.contains("/")){
-            throw  new DukeException("OOPS!!!Please specify more details");
+    public static void missingDateTimeError(String input) throws DukeException {
+        if (!input.contains("/")) {
+            throw new DukeException("OOPS!!!Please specify more details");
         }
     }
 
-    public static void missingTaskError(String input) throws DukeException{
-        if(input.equals("todo") || input.equals("deadline") || input.equals("event")){
-            throw  new DukeException("OOPS!!! The description of a todo cannot be empty.");
+    public static void missingTaskError(String input) throws DukeException {
+        if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
-    public static void wrongInputFormatError(String input) throws DukeException{
-            throw  new DukeException("OOPS!!!Wrong input format.");
-        }
-
-    public static void markDoneError(int index, ArrayList<Task> taskList) throws DukeException{
-        if(index == 0){
-            throw  new DukeException("OOPS!!!Invalid input index");
-        }else if(index > taskList.size()){
-            throw  new DukeException("OOPS!!!Index out of range");
-        }
+    public static void wrongInputFormatError(String input) throws DukeException {
+        throw new DukeException("OOPS!!!Wrong input format.");
     }
 
-    public static void deleteError(int index, ArrayList<Task> taskList) throws DukeException{
-        if(index == 0){
-            throw  new DukeException("OOPS!!!Invalid input index");
-        }else if(index > taskList.size()){
-            throw  new DukeException("OOPS!!!Index out of range");
+    public static void markDoneError(int index, ArrayList<Task> taskList) throws DukeException {
+        if (index == 0) {
+            throw new DukeException("OOPS!!!Invalid input index");
+        } else if (index > taskList.size()) {
+            throw new DukeException("OOPS!!!Index out of range");
         }
     }
 
-    public static void missingIndexError() throws DukeException{
-        throw  new DukeException("OOPS!!! The index cannot be empty.");
+    public static void deleteError(int index, ArrayList<Task> taskList) throws DukeException {
+        if (index == 0) {
+            throw new DukeException("OOPS!!!Invalid input index");
+        } else if (index > taskList.size()) {
+            throw new DukeException("OOPS!!!Index out of range");
+        }
     }
 
+    public static void missingIndexError() throws DukeException {
+        throw new DukeException("OOPS!!! The index cannot be empty.");
+    }
+
+    public static void saveTask() throws IOException {
+        System.out.println("Tasks are being saved now");
+        try {
+            for (Task ignored : taskList) {
+                writeToFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Task can not be saved");
+        }
+
+    }
+
+    private static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter("duke.txt");
+        for (Task task : taskList) {
+            fw.write(task.toString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void readFromFile() throws IOException {
+        File file = new File("duke.txt");
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String raw = scanner.nextLine();
+            loadTaskList(raw, taskList);
+
+        }
+    }
+
+    private static void loadTaskList(String raw, ArrayList<Task> tasks) throws IOException {
+        if (raw.contains("[T]")) {
+            if (raw.contains("\u2713")) {
+                String taskDescription = raw.substring(6);
+                ToDos newTask = new ToDos(taskDescription);
+                newTask.isDone = true;
+                taskList.add(newTask);
+            } else {
+                String taskDescription = raw.substring(6);
+                ToDos newTask = new ToDos(taskDescription);
+                newTask.isDone = false;
+                taskList.add(newTask);
+            }
+        } else if (raw.contains("[D]")) {
+            int timeSectionStart = raw.indexOf("(");
+            int timeSectionEnd = raw.indexOf(")");
+            String taskDescription = raw.substring(6, timeSectionStart - 1);
+            String timePeriod = raw.substring(timeSectionStart + 5, timeSectionEnd);
+            Deadlines newTask = new Deadlines(taskDescription, timePeriod);
+            if (raw.contains("\u2713")) {
+                newTask.isDone = true;
+            }
+            taskList.add(newTask);
+        } else if (raw.contains("[E]")) {
+            int timeSectionStart = raw.indexOf("(");
+            int timeSectionEnd = raw.indexOf(")");
+            String taskDescription = raw.substring(6, timeSectionStart);
+            int colon = raw.indexOf(":");
+            String timePeriod = raw.substring(colon + 2  , timeSectionEnd);
+            int space = timePeriod.indexOf(" ");
+            String date = timePeriod.substring(0 , space );
+            String time = timePeriod.substring(space+1);
+            Events newTask = new Events(taskDescription, date, time);
+            if (raw.contains("\u2713")) {
+                newTask.isDone = true;
+            }
+            taskList.add(newTask);
+        }
+    }
 }
-
-
-
-
