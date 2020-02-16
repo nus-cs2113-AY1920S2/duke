@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import exception.DukeException;
 import task.Deadline;
 import task.Event;
@@ -6,9 +7,8 @@ import task.Task;
 import task.Todo;
 
 public class Duke {
-    private static final int TASKLIST_SIZE = 100;
     private static int numberOfTasks = 0;
-    private static final Task[] tasks = new Task[TASKLIST_SIZE];
+    private static final ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         String logo = "***John***";
         displayWelcome(logo);
@@ -35,6 +35,8 @@ public class Duke {
                     break;
                 } else if (userInput.equals("list")){
                     listTasks();
+                } else if (userInput.startsWith("delete")){
+                    deleteTasks(in);
                 } else if (userInput.startsWith("done")){
                     markTaskAsDone(in);
                 } else if (userInput.startsWith("todo")){
@@ -47,7 +49,7 @@ public class Duke {
                     throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -58,7 +60,8 @@ public class Duke {
         if (todoTask == null || todoTask.isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        tasks[numberOfTasks] = new Todo(todoTask);
+        Todo newToDoTask = new Todo(todoTask);
+        tasks.add(newToDoTask);
         numberOfTasks++;
         printNewTask();
     }
@@ -87,7 +90,8 @@ public class Duke {
 
         String deadlineTaskDescription = details[0];
         String date = details[1];
-        tasks[numberOfTasks] = new Deadline(deadlineTaskDescription, date);
+        Deadline newDeadlineTask = new Deadline(deadlineTaskDescription, date);
+        tasks.add(newDeadlineTask);
         numberOfTasks++;
         printNewTask();
     }
@@ -116,7 +120,8 @@ public class Duke {
 
         String eventTaskDescription = details[0];
         String date = details[1];
-        tasks[numberOfTasks] = new Event(eventTaskDescription, date);
+        Event newEventTask = new Event(eventTaskDescription, date);
+        tasks.add(newEventTask);
         numberOfTasks++;
         printNewTask();
     }
@@ -132,21 +137,38 @@ public class Duke {
                     "number.");
         }
 
-        tasks[itemNumber-1].markAsDone();
+        tasks.get(itemNumber-1).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + tasks[itemNumber-1]);
+        System.out.println("  " + tasks.get(itemNumber-1));
     }
 
     private static void printNewTask() {
         System.out.println("New task added: ");
-        System.out.println(" " + tasks[numberOfTasks-1]);
-        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+        System.out.println(" " + tasks.get(tasks.size()-1));
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     private static void listTasks() {
         System.out.println("Here are your tasks:");
-        for (int j = 0; j < numberOfTasks; j++) {
-            System.out.println(j+1 + ". " + tasks[j]);
+        for (int j = 0; j < tasks.size(); j++) {
+            System.out.println(j+1 + ". " + tasks.get(j));
         }
+    }
+
+    private static void deleteTasks(Scanner in) throws DukeException {
+        if (!in.hasNextInt()) {
+            throw new DukeException("☹ OOPS!!! The task item has to be an integer.");
+        }
+
+        int itemNumber = in.nextInt();
+        if (itemNumber<=0 || itemNumber>numberOfTasks){
+            throw new DukeException("☹ OOPS!!! The task item does not exist. Type \"list\" to see the task item " +
+                    "number.");
+        }
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(" " + tasks.get(itemNumber-1));
+        System.out.println("Now you have " + (tasks.size() - 1) + " tasks in the list.");
+        tasks.remove(itemNumber-1);
     }
 }
