@@ -1,5 +1,13 @@
 package command;
 
+import static misc.Messages.MESSAGE_INVALID_TASK_TYPE;
+import static misc.Messages.MESSAGE_COMMAND_RESULT_SUCCESS;
+import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_INFO;
+import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_DEADLINES;
+import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_EVENTS;
+
+import java.util.Optional;
+
 import duke.Duke;
 import duke.task.Deadlines;
 import duke.task.Events;
@@ -7,31 +15,49 @@ import duke.task.InvalidTaskArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDos;
-import java.util.Optional;
 
-import static misc.Messages.MESSAGE_INVALID_TASK_TYPE;
-import static misc.Messages.MESSAGE_COMMAND_RESULT_SUCCESS;
-import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_INFO;
-import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_DEADLINES;
-import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_EVENTS;
-
+/** 
+ * Represents the 'Add' function of a command.
+ */
 public class AddCommand extends Command {
     
+    /** Refers to task's keywords such as 'todo', 'deadline' or 'events'. */
     private final String commandType;
+    
+    /** Refers to the description of a task. */
     private final Optional<String> taskInfo;
+    
+    /** Refers to the requirments needed for a task. */
     private final Optional<String> taskRequirement;
+    
     private final Task task;
     
+    /** 
+     * Constructor for an AddCommand.
+     * 
+     * @param commandType 
+     * @param taskInfo
+     * @param taskRequirement
+     */
     public AddCommand(String commandType, Optional<String> taskInfo, 
             Optional<String> taskRequirement) {
         
         this.commandType = commandType;
         this.taskInfo = taskInfo;
         this.taskRequirement  = taskRequirement;
-        this.task = makeTask(commandType, taskInfo, taskRequirement);
-        
+        this.task = makeTask(commandType, taskInfo, taskRequirement);        
     }
     
+    /**
+     * Constructs a task based on the parameters provided.
+     * 
+     * @param commandType 
+     * @param taskInfo
+     * @param taskRequirement
+     * @return Task 
+     * @throws InvalidTaskArgumentException Throws an exception if there 
+     * are invalid arguments in the parameters.
+     */
     public Task makeTask(String commandType, Optional<String> taskInfo, 
             Optional<String> taskRequirement) {
         Task task;
@@ -75,6 +101,12 @@ public class AddCommand extends Command {
         return task;
     }
     
+    /**
+     * Executes the add function.
+     * 
+     * @param duke Takes in duke to process the command.
+     * @return Returns a result of a command after execution.
+     */
     @Override
     public CommandResult execute(Duke duke) {
         duke.executeAddCommand(task); 
