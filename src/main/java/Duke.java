@@ -1,47 +1,78 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    public static final String COMMAND_CREATE_TODO_TASK = "todo";
+    public static final String COMMAND_CREATE_DEADLINE_TASK = "deadline";
+    public static final String COMMAND_CREATE_EVENT_TASK = "event";
+    public static final String COMMAND_DISPLAY_LIST = "list";
+    public static final String COMMAND_END_PROGRAM = "bye";
+    public static final String COMMAND_MARK_AS_DONE = "done";
+    public static Task[] tasks = new Task[100];
+    public static int taskCount = 0, pendingTaskCount = 0;
+
     public static void main(String[] args) {
-        String command;
-        String[] tasks = new String[100];
-        int taskNumber = 0;
-        boolean[] isDone = new boolean[100];
 
+        String command, detailsOfTask;
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-        loop: do {
+        loop:  while(true) {
             Scanner input = new Scanner(System.in);
             command = input.next();
 
             switch(command) {
-            case "bye":
+            case COMMAND_CREATE_DEADLINE_TASK:
+                detailsOfTask = input.nextLine();
+                createTask(new DeadlineTask(detailsOfTask, taskCount));
+                tasks[taskCount].printCreateMessage(pendingTaskCount);
+                break;
+            case COMMAND_CREATE_EVENT_TASK:
+                detailsOfTask = input.nextLine();
+                createTask(new EventTask(detailsOfTask, taskCount));
+                tasks[taskCount].printCreateMessage(pendingTaskCount);
+                break;
+            case COMMAND_CREATE_TODO_TASK:
+                detailsOfTask = input.nextLine();
+                System.out.println(taskCount);
+                createTask(new TodoTask(detailsOfTask, taskCount));
+                System.out.println(taskCount);
+                tasks[taskCount].printCreateMessage(pendingTaskCount);
+                System.out.println(taskCount);
+                break;
+            case COMMAND_DISPLAY_LIST:
+                printTaskList(tasks, taskCount, pendingTaskCount);
+                break;
+            case COMMAND_END_PROGRAM:
                 System.out.println("Bye. Hope to see you again soon!");
                 break loop;
-            case "list":
-                for (int i = 0; i < taskNumber; ++i) {
-                    String doneStatus;
-                    if (isDone[i]) {
-                        doneStatus = "[Done] ";
-                    } else {
-                        doneStatus = "[Not Done] ";
-                    }
-                    System.out.println(i+1 + "." + doneStatus + tasks[i]);
+            case COMMAND_MARK_AS_DONE:
+                String number = input.next();
+                int doneTaskNumber = Integer.parseInt(number);
+                if (tasks[doneTaskNumber].isDone == false) {
+                    --pendingTaskCount;
+                    tasks[doneTaskNumber].markTaskAsDone(pendingTaskCount);
+                } else {
+                    System.out.println(tasks[doneTaskNumber].taskName + " is already done!");
                 }
                 break;
-            case "done":
-                command = input.next();
-                int i = Integer.parseInt(command);
-                isDone[i-1] = true;
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[Done] " + tasks[i-1]);
-                break;
             default:
-                command = command + input.nextLine();
-                System.out.println("added: " + command);
-                tasks[taskNumber] = command;
-                ++taskNumber;
+                System.out.println("Please enter a valid command!");
                 break;
             }
-        } while (command != "bye");
+        }
+    }
+
+    public static void printTaskList(Task[] tasks, int taskCount, int pendingTaskCount) {
+        System.out.println("Here is a list of all your tasks:");
+        for (int i = 1; i <= taskCount; ++i) {
+            tasks[i].printListMessage();
+        }
+        System.out.println("Total number of incomplete tasks: " + pendingTaskCount);
+    }
+
+    public static void createTask(Task t) {
+        ++taskCount;
+        ++pendingTaskCount;
+        System.out.println(taskCount);
+        tasks[taskCount] = t;
     }
 }
