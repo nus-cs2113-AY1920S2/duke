@@ -8,7 +8,7 @@ public class EmptyListException extends DukeException {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Empty List: It seems that the list is empty! Please add an item!");
     }
 }

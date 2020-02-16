@@ -14,19 +14,19 @@ public class Deadline extends Task {
         return this.eventType;
     }
 
-    public String getDeadline() {
-        return String.format("(%s)", this.deadline);
+    public String getTaskTime() {
+        return String.format("%s", this.deadline);
     }
 
     @Override
     public String toString() {
-        return String.format("%s%s %s%s", getEventType(),
-                super.getStatusIcon(), super.getDescription(), getDeadline());
+        return String.format("%s%s %s(%s)", getEventType(),
+                super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 
     @Override
     public String getDoneResponseMessage(int itemIndexRequested) {
-        return String.format("[%d. %s%s %s%s] is marked done!", itemIndexRequested, getEventType(),
-                super.getStatusIcon(), super.getDescription(), getDeadline());
+        return String.format("[%d. %s%s %s(%s)] is marked done!", itemIndexRequested, getEventType(),
+                super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 }

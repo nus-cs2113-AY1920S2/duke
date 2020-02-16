@@ -1,8 +1,8 @@
 import Exceptions.EmptyListException;
-import Exceptions.DukeException;
 import Exceptions.MissingItemIndexException;
 import Exceptions.MissingDescriptionException;
 import Exceptions.UnknownCommandException;
+import Storage.Storage;
 import Task.Task;
 import Task.Deadline;
 import Task.Events;
@@ -20,15 +20,15 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static final String MISSING_ITEM = "Please enter the task description to be added!";
     public static final String MISSING_TIME_PERIOD = "Please enter a time period for the task!";
     public static final String ITEM_OUT_OF_RANGE = "Item requested is out of range! Try another item.";
     public static final String MISSING_ITEM_NUMBER = "Enter an item number to be marked done!";
+    public static final String FILE_PATH = "data/duke.txt";
 
     public static void main(String[] args) {
-        // Create Scanner object
+        Storage storage = new Storage(FILE_PATH);
+        ArrayList<Task> myList = storage.load();
         Scanner myScanner = new Scanner(System.in);
-        ArrayList<Task> myList = new ArrayList<>();
         printWelcomeMessage();
         String userInput;
 
@@ -52,6 +52,7 @@ public class Duke {
             case "done":
                 try {
                     markTaskAsDone(myList, commands, userInput);
+                    storage.saveToHardDisk(myList);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(ITEM_OUT_OF_RANGE);
                 } catch (NumberFormatException e) {
@@ -63,6 +64,7 @@ public class Duke {
             case "todo":
                 try {
                     addNewToDo(myList, commands, userInput);
+                    storage.saveToHardDisk(myList);
                 } catch (MissingDescriptionException e) {
                     System.out.println(e);
                 }
@@ -70,6 +72,7 @@ public class Duke {
             case "deadline":
                 try {
                     addNewDeadline(myList, commands, userInput);
+                    storage.saveToHardDisk(myList);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(MISSING_TIME_PERIOD);
                 } catch (MissingDescriptionException e) {
@@ -79,6 +82,7 @@ public class Duke {
             case "event":
                 try {
                     addNewEvent(myList, commands, userInput);
+                    storage.saveToHardDisk(myList);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(MISSING_TIME_PERIOD);
                 } catch (MissingDescriptionException e) {
