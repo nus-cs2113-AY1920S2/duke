@@ -3,6 +3,8 @@ package duke.task;
 /**
  * Encapsulates the information of a task.
  */
+import java.util.Optional;
+
 public class Task {
     
     /** The description of a task. */
@@ -79,6 +81,10 @@ public class Task {
      * 
      * @return A new immutable completed task.
      */
+    public Optional<String> getDate() {
+        return Optional.empty();
+    }
+
     public Task makeDone() {
         return new Task(this.taskId, this.taskName, true);
     }

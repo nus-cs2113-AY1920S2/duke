@@ -85,6 +85,8 @@ public class Main {
                 ui.displayErrorMessage(e.getMessage());
             } catch (InvalidCommandException e) {
                 ui.displayErrorMessage(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                ui.displayErrorMessage(e.getMessage());
             } finally {
                 ui.displayBorder();
             }

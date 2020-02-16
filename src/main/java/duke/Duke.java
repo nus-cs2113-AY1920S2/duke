@@ -28,6 +28,14 @@ public class Duke {
         this.taskList = new TaskList();
     }
     
+    public void executeFindCommand(String keyword) {
+        this.taskList.findTask(keyword);
+    }
+    
+    public void executeFilterCommand(String date) {
+        this.taskList.filterTask(date);
+    }
+    
     /** 
      * Represents the execution of deleting a task based on a given task ID.
      * 

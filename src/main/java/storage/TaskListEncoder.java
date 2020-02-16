@@ -65,7 +65,7 @@ public class TaskListEncoder {
                     + " | "
                     + task.getTaskName())
                     + " | "
-                    + ((Deadlines) task).getDateTime();
+                    + ((Deadlines) task);
             encodedTask.append(encodedDeadlines);
         } else if (task instanceof Events) {           
             String encodedEvents = "";
@@ -75,7 +75,7 @@ public class TaskListEncoder {
                     + " | "
                     + task.getTaskName())
                     + " | "
-                    + ((Events) task).getDateTime();
+                    + ((Events) task);
             encodedTask.append(encodedEvents);
         } 
 

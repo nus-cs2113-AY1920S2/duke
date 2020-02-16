@@ -1,12 +1,19 @@
 package duke.task;
 
+
+import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT_INPUT;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
+
 /**
  * Encapsulates the information of a deadline.
  */
 public class Deadlines extends Task {
     
-    /** The date and time of a task. */
-    private final String dateTime;
+    private final LocalDateTime dateTime;
 
     /**
      * Constructor of a Deadlines task.
@@ -17,10 +24,22 @@ public class Deadlines extends Task {
      * @param isDone
      */
     public Deadlines(int taskId, String taskName, 
-            String dateTime, boolean isDone) {
+            LocalDateTime dateTime, boolean isDone) {
 
         super(taskId, taskName, isDone);
         this.dateTime = dateTime;
+    }
+    
+    public Deadlines(int taskId, String taskName, 
+            String dateTime, boolean isDone) {
+
+        super(taskId, taskName, isDone);
+
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+        } catch (DateTimeParseException dtpe) {
+            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
+        }
     }
 
     /** 
@@ -32,11 +51,20 @@ public class Deadlines extends Task {
      */
     public Deadlines(int taskId, String taskName, String dateTime) {
         super(taskId, taskName);
-        this.dateTime = dateTime;
+        
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+        } catch (DateTimeParseException dtpe) {
+            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
+        }
     }
-
-    public String getDateTime() {
-        return this.dateTime;
+    
+    @Override
+    public Optional<String> getDate() {
+        return Optional
+                .ofNullable(this.dateTime
+                .toLocalDate()
+                .toString());
     }
     
     /**
@@ -77,6 +105,8 @@ public class Deadlines extends Task {
         return this.taskId 
                 + "." 
                 + this.taskWithSymbol()
-                + " (by: " + this.dateTime + ")";
+                + " (by: " 
+                + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + ")";
     }
 }
