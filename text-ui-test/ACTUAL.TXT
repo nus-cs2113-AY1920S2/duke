@@ -2,6 +2,37 @@ ____________________________________________________________
 Hello! I'm Duke
 What can i do for you?
 ____________________________________________________________
+Enter a command: Command entered: help
+____________________________________________________________
+help: Shows the program command line interface instructions
+	Example: help
+
+list: Displays all the tasks in the list with index numbers.
+	Example: list
+
+todo: Adds a task to the list.
+	Parameter(s): TASK
+	Example: todo read book
+
+deadline: Adds a task to the list.
+	Parameter(s): TASK /by DAY
+	Example: deadline return book /by Sunday
+
+event: Adds a task to the list.
+	Parameter(s): TASK /by DAY_AND_TIME
+	Example: event project meeting /at Mon 2-4pm
+
+done: Marks the task done in the list.
+	Parameter(s): NUMBER
+	Example: done 1
+
+delete: Deletes the task from the list.
+	Parameter(s): NUMBER
+	Example: delete 1
+
+bye: Exits the program.
+	Example: bye
+____________________________________________________________
 Enter a command: Command entered: list
 ____________________________________________________________
 	The list is empty!
@@ -38,7 +69,7 @@ Here are the tasks in your list:
 ____________________________________________________________
 Enter a command: Command entered: done 4
 ____________________________________________________________
-Index is invalid
+Invalid Index
 ____________________________________________________________
 Enter a command: Command entered: done 2
 ____________________________________________________________
@@ -95,7 +126,7 @@ OOPS!!! The date of a event cannot be empty.
 ____________________________________________________________
 Enter a command: Command entered: done 5
 ____________________________________________________________
-Index is invalid
+Invalid Index
 ____________________________________________________________
 Enter a command: Command entered: TODO
 ____________________________________________________________
@@ -111,7 +142,8 @@ OOPS!!! The description of a EVENT cannot be empty.
 ____________________________________________________________
 Enter a command: Command entered: command
 ____________________________________________________________
-Command is invalid, please try another command
+Invalid Command, please try another command
+type "help" in the command line console for instructions
 ____________________________________________________________
 Enter a command: Command entered: delete 1
 ____________________________________________________________
@@ -132,7 +164,7 @@ Here are the tasks in your list:
 ____________________________________________________________
 Enter a command: Command entered: delete 2
 ____________________________________________________________
-Index is invalid
+Invalid Index
 ____________________________________________________________
 Enter a command: Command entered: todo fill water
 ____________________________________________________________

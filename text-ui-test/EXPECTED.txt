@@ -7,31 +7,28 @@ ____________________________________________________________
 help: Shows the program command line interface instructions
 	Example: help
 
-list: Displays all the tasks in the list with index numbers
+list: Displays all the tasks in the list with index numbers.
 	Example: list
 
-todo: Adds a task to the list
-	Parameters: TASK
+todo: Adds a task to the list.
+	Parameter(s): TASK
 	Example: todo read book
 
-deadline: Adds a task to the list
-	Parameters: TASK /by DATE
+deadline: Adds a task to the list.
+	Parameter(s): TASK /by DAY
 	Example: deadline return book /by Sunday
 
-event: Adds a task to the list
-	Parameters: TASK /at DAY_AND_TIME
+event: Adds a task to the list.
+	Parameter(s): TASK /by DAY_AND_TIME
 	Example: event project meeting /at Mon 2-4pm
 
 done: Marks the task done in the list.
-	Parameters: done NUMBER
+	Parameter(s): NUMBER
 	Example: done 1
 
-delete: Deletes a task from the list
-	Parameters: delete NUMBER
+delete: Deletes the task from the list.
+	Parameter(s): NUMBER
 	Example: delete 1
-
-help: Shows the program command line interface instructions
-	Example: help
 
 bye: Exits the program.
 	Example: bye
