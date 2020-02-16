@@ -1,4 +1,4 @@
-package src.main.java;
+package src.main.java.duke.task;
 
 public class Todo extends Task {
     private final String TODO = "T";

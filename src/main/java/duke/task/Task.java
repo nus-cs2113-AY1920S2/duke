@@ -1,4 +1,4 @@
-package src.main.java;
+package src.main.java.duke.task;
 
 public class Task {
     static int totalNumberOfTask = 0;
@@ -23,5 +23,7 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public boolean getIsDone() {return isDone;}
 }
 
