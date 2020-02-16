@@ -8,14 +8,14 @@ public class Duke {
 
     public static final String FORMAT_LINE = "------------------------------------";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
-    public static final String INVALID_COMMAND = "☹ OOPS!!! This is an invalid command, please type a valid command";
+    public static final String INVALID_COMMAND = "\uD83D\uDE22 OOPS!!! This is an invalid command, please type a valid command";
     public static final String GREETING = String.format("%s\n%s", "Hello, I'm duke.Duke!", "What can I do for you?");
     public static final String TODO_DESCRIPTION = "todo <Task Name>";
     public static final String DEADLINE_DESCRIPTION = "deadline <Task Name> /by <Deadline>";
     public static final String INVALID_DONE = "# of the task is invalid\n";
     public static final String DONE_DESCRIPTION = "done <Task #>";
     public static final String CORRECT_FORMAT = "The correct format should be:\n";
-    public static final String INVALID_DESCRIPTION = "The description of the task is invalid";
+    public static final String INVALID_DESCRIPTION = "The description of the task is invalid\n";
     public static final String EVENT_DESCRIPTION = "event <Task Name> /at <Timeslot>";
 
     private static boolean hasChanges = false;
@@ -34,7 +34,7 @@ public class Duke {
             try {
                 manager.writeToFile("data/duke.txt");
             } catch (IOException e) {
-                printFormat("☹ OOPS!!! Something went wrong when writing to file!");
+                printFormat("\uD83D\uDE22 OOPS!!! Something went wrong when writing to file!");
             }
         }
         printFormat(GOODBYE);
@@ -47,7 +47,7 @@ public class Duke {
         try {
             manager.loadFile("data/duke.txt");
         } catch (FileNotFoundException e) {
-            printFormat("☹ OOPS!!! File not found!");
+            printFormat("\uD83D\uDE22 OOPS!!! File not found!");
         }
         while(in.hasNextLine()) {
             command = in.nextLine();

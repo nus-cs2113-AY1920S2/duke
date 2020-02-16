@@ -89,7 +89,7 @@ public class TaskManager {
     }
 
     public void markTask(int taskNo) {
-        printCommand(DONE_TASK,"  [✓] " + tasks.get(taskNo-1).getName());
+        printCommand(DONE_TASK,"  [\u2713] " + tasks.get(taskNo-1).getName());
         tasks.get(taskNo-1).changeStatus(true);
     }
 

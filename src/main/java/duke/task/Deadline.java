@@ -22,9 +22,9 @@ public class Deadline extends Task {
     public String print() {
         String str = "[D]";
         if(isDone) {
-            str += "[✓]";
+            str += "[\u2713]";
         } else {
-            str += "[✗]";
+            str += "[\u274c]";
         }
         return str = str + " " + name + " (by: " + deadline + ")";
 
