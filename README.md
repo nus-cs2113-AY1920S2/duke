@@ -1,29 +1,29 @@
 # Duke - User Guide
 By: `JosephLimWeiJie` Since: `Feb 2019`
 
-```javascript
-* 1.Introduction
-* 2.Quick Start
-* 3.Features
-    * 3.1. Adding a task: add
-    * 3.2. Listing all tasks: list
-    * 3.3. Finding a task: find
-    * 3.4. Deleting a task: delete
-    * 3.5. Filter tasks by date: filter
-    * 3.6. Complete a task: complete
-    * 3.7. Exiting the program: exit
+
+- [1.Introduction](##1.Introduction)
+- [2.Quick Start](##2. Quick-Start)
+- 3.Features
+    * 3.1. Adding a task: `add`
+    * 3.2. Listing all tasks: `list`
+    * 3.3. Finding a task: `find`
+    * 3.4. Deleting a task: `delete`
+    * 3.5. Filter tasks by date: `filter`
+    * 3.6. Complete a task: `done`
+    * 3.7. Exiting the program: `exit`
 * 4. FAQ
 * 5. Command Summary
-```
-**1.Introduction**
+
+## 1.Introduction
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI). 
 Jump to Section 2, "Quick Start" to get started.
 
-**2. Quick Start**
+##2. Quick Start
 
 *   1. Ensure that Java 11 or above is installed in your Computer.
-*   2. Download the latest duke.jar here.
+*   2. Download the latest duke.jar [here](https://github.com/JosephLimWeiJie/duke/releases/download/v0.1.0/duke.jar).
 *   3. Copy the file to the foldere you want to use as the home folder for your Duke.
 *   4. Double-click on duke.jar to start the app. It should appear in a few seconds.
 *   5. Type in a command and press ENTER to execute it. For e.g. typing list and                         pressing enter will list all your current tasks.
@@ -34,7 +34,7 @@ Jump to Section 2, "Quick Start" to get started.
     *   done 1: Mark the first task as done shown in the current list.
     *   exit: exits the app
 
-**3. Features**
+##3. Features
 
 Command Format
 
@@ -44,7 +44,7 @@ Command Format
 * Tasks with a deadline can be added right after the TASK_DESCRIPTION by using /by e.g. deadline complete homework /by YYYY-MM-DDTHH:mm. Note that you have to add 'T' between the date and the time.
 ```
 
-**3.1. Adding a task: add**
+###3.1. Adding a task: add
 
 Adds a task into Duke.
 
@@ -58,13 +58,13 @@ Examples:
 * deadline Thesis submission /by 2020-01-12T23:59
 * event Wedding Ceremony /at ABC hotel
 
-**3.2. Listing all tasks: list**
+###3.2. Listing all tasks: list
 
 Shows a list of all the tasks in Duke.
 
 Format: list
 
-** 3.3. Finding a task: find**
+###3.3. Finding a task: find
 
 Finds tasks that contains a given keyword.
 
@@ -74,7 +74,7 @@ Format:
 Example:
 * find book
 
-** 3.4. Deleting a task: delete**
+###3.4. Deleting a task: delete
 Deletes a specified task from Duke.
 
 Format: delete INDEX
@@ -82,7 +82,7 @@ Format: delete INDEX
 * The index refers to the index number shown on the displayed task list.
 * The index must be a positive number 1,2,3,...
 
-** 3.5. Filter tasks by date: filter**
+###3.5. Filter tasks by date: filter
 Filters tasks based on a given DATE
 
 Format: filter DATE
@@ -92,7 +92,7 @@ filter 2019-01-01
 * Note that the month and date must be in 2 digits. If a date occurs on 1 Jan 2019,
 you have to add a zero in front. 
 
-** 3.6. Complete a task: complete**
+###3.6. Complete a task: complete
 
 Marks a task as completed at the specified INDEX.
 
@@ -100,12 +100,12 @@ Format: done INDEX
 * The index refers to the index number shown on the displayed task list.
 * The index must be a positive number 1,2,3,..
 
-** 3.7. Exiting the program: exit**
+###3.7. Exiting the program: exit
 
 Exits the program.
 Format: exit
 
-**4.FAQ**
+##4.FAQ
 
 
 *Q:* How do I transfer my data onto another Computer?
@@ -114,7 +114,7 @@ Format: exit
 *A:* Install the app in the other computer and copy the 'storage.txt' from the previous Duke folder onto your current new folder containing the duke.jar.
 
 
-**5. Command Summary**
+##5. Command Summary
 * Add 
     * Format: 
         * todo TASK_DESCRIPTION
@@ -136,3 +136,5 @@ Format: exit
    
 * Exit: exit
 
+
+[Arbitrary case-insensitive reference text]
