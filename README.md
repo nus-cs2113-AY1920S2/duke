@@ -1,3 +1,4 @@
+
 # Duke - User Guide
 By: `JosephLimWeiJie` Since: `Feb 2019`
 
@@ -20,7 +21,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 <a name="introduction"></a>
 
 
-## 1. Introduction
+##  1. Introduction
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a *Command Line Interface (CLI)*. 
 Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
