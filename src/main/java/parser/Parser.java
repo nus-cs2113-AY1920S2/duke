@@ -16,24 +16,54 @@ import command.FilterCommand;
 import command.InvalidCommandException;
 import command.ListCommand;
 
+/** 
+ * Represents a Parser used by the program that is
+ * responsible in parsing all user inputs.
+ */
 public class Parser {
+    
+    /** A string array that stores all possible preposition used by the user. */
     private final String[] prepositionArray = {"/by", "/at"};
+    
+    /** Refers to possible command keywords such as 'list', 'delete', 'todo' etc. */
     private final String commandType;
+    
+    /** An optional string to represent the information given for a task. */
     private final Optional<String> taskInfo;
+    
+    /** An optional string to represent the requirements stated for a task. */
     private final Optional<String> taskRequirement;
     
+    /** 
+     * Constructor of a Parser
+     * 
+     * @param commandType
+     * @param taskInfo
+     * @param taskRequirement
+     */
     public Parser(String commandType, Optional<String> taskInfo, Optional<String> taskRequirement) {
         this.commandType = commandType;
         this.taskInfo = taskInfo;
         this.taskRequirement = taskRequirement;
     }
     
+    /** 
+     * Constructor of a Parser that does not take in any arguments.
+     */
     public Parser() {
         this.commandType = "";
         this.taskInfo = Optional.empty();
         this.taskRequirement = Optional.empty();
     }
     
+    /** 
+     * Parse the input from the user into commands that can be executed.
+     * Throws an exception if a command cannot be created based on the user's input.
+     * 
+     * @param userInput
+     * @return Command
+     * @throws InvalidCommandException
+     */
     public Command parseCommand(String userInput) {
         Parser parser = parseUserInputIntoCommandArguments(userInput);
         String commandType = parser.commandType;
@@ -74,6 +104,7 @@ public class Parser {
         return command;
     }
     
+    /** Test if a user input contains a preposition. */
     public boolean hasPreposition(String[] argsArray) {
         return IntStream.range(0, argsArray.length)
                 .anyMatch(wordIndex -> {
@@ -83,6 +114,12 @@ public class Parser {
                 });
     }
     
+    /** 
+     * Get the preposition index from a array of user's input arguments.
+     * 
+     * @param argsArray
+     * @return
+     */
     public int getPrepositionIndex(String[] argsArray) {
         return IntStream.range(0, argsArray.length)
                 .filter(wordIndex -> {
@@ -93,6 +130,13 @@ public class Parser {
                 .reduce(0, (x, y) -> x + y);
     }
     
+    /** 
+     * Parse all words before a preposition based on the user's input.
+     * 
+     * @param userInputArray
+     * @param prepositionIndex
+     * @return An optional string phrase of all the words before the preposition.
+     */
     public Optional<String> parsePhraseBeforePreposition(String[] userInputArray, 
             int prepositionIndex) {
         
@@ -117,6 +161,13 @@ public class Parser {
         return optionalPhrase;
     }  
     
+    /**
+     * Parse all words after a preposition based on the user's input.
+     * 
+     * @param userInputArray
+     * @param prepositionIndex
+     * @return An optional string phrase of all the words after the preposition.
+     */
     public Optional<String> parsePhraseAfterPreposition(String[] userInputArray, 
             int prepositionIndex) {
         
@@ -158,6 +209,12 @@ public class Parser {
         return Optional.of(phrase);
     }
     
+    /**
+     * Parse a user's input into a format specified by the constructor of a command.
+     * 
+     * @param userInput
+     * @return Parser A parser object that can create a command.
+     */
     public Parser parseUserInputIntoCommandArguments(String userInput) {
         String[] argsArray = userInput.trim().split(" ");
         int prepositionIndex = 0;

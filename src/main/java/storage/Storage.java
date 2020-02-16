@@ -1,9 +1,10 @@
 package storage;
 
+import static misc.Messages.MESSAGE_READ_WRITE_FAILURE;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,19 +17,29 @@ import java.util.List;
 import duke.task.TaskList;
 import storage.InvalidStorageFilePathException;
 
-import static misc.Messages.MESSAGE_READ_WRITE_FAILURE;
-
+/**
+ * Represents the storage that stores all information pertaining
+ * to tasks in a storage.txt file.
+ */
 public class Storage {
     
+    /** The default file name that is to be read or write by the program. */
     public static final String DEFAULT_STORAGE_FILEPATH = "storage.txt";
     
     public final Path path;
     
+    /** Constructor of a Storage using the default file path. */
     public Storage() {
         this(DEFAULT_STORAGE_FILEPATH);
     }
     
-    
+    /** 
+     * Constructor of a Storage retrieved from Path.
+     * Throws an exception when there is no file that matches "storage.txt".
+     * 
+     * @param filePath
+     * @throws InvalidStorageFilePathException
+     */
     public Storage(String filePath) {
         this.path = Paths.get(filePath);
         
@@ -38,6 +49,12 @@ public class Storage {
         }
     }
     
+    /** 
+     * Loads all data from the storage file.
+     * 
+     * @return
+     * @throws IOException
+     */
     public TaskList load() throws IOException {
         List<String> lines = new ArrayList<>();
         
@@ -58,7 +75,16 @@ public class Storage {
         }
         return TaskListDecoder.decodeTaskList(lines);
     }
-     
+    
+    /**
+     * Write data into the storage file.
+     * Throws an exception if the file cannot be read or written.
+     * 
+     * @param filePath
+     * @param taskList
+     * @throws IOException
+     * @throws StorageReadWriteException
+     */
     public void save(String filePath, TaskList taskList) throws IOException {      
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -75,6 +101,7 @@ public class Storage {
         return this.path.toString();
     }
     
+    /** Test if a given file has a .txt extension. */
     public boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
     }   

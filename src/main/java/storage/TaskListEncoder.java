@@ -6,13 +6,30 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDos;
 
+/**
+ * Represents an encoder that encodes data from the TaskList
+ * into the storage file.
+ */
 public class TaskListEncoder {
+    
+    /** A TaskList that is to be encoded. */
     private final TaskList taskList;
     
+    /** 
+     * Constructor of a TaskListEncoder.
+     * 
+     * @param taskList
+     */
     public TaskListEncoder(TaskList taskList) {
         this.taskList = taskList;
     }
     
+    /** 
+     * Encodes the taskList into a text format that is stored in the storage file.
+     * 
+     * @param taskList
+     * @return String A string representation of tasks in the TaskList into text format.
+     */
     public static String encodeTaskList(TaskList taskList) {
         StringBuilder encodedTaskList = new StringBuilder("");
         
@@ -23,6 +40,12 @@ public class TaskListEncoder {
         return encodedTaskList.toString();
     }
     
+    /** 
+     * Encodes a Task object into a text format.
+     * 
+     * @param task
+     * @return A string representation of task into text format.
+     */
     public static String encodeTask(Task task) {
         StringBuilder encodedTask = new StringBuilder("");
         

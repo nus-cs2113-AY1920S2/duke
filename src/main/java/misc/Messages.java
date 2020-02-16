@@ -1,5 +1,8 @@
 package misc;
 
+/**
+ * Encapsulates all string representation of messages used by the program.
+ */
 public class Messages {
     
     public static final String MESSAGE_WELCOME = 
