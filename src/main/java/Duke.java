@@ -20,10 +20,9 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static final String MISSING_ITEM = "Please enter the task description to be added!";
     public static final String MISSING_TIME_PERIOD = "Please enter a time period for the task!";
     public static final String ITEM_OUT_OF_RANGE = "Item requested is out of range! Try another item.";
-    public static final String MISSING_ITEM_NUMBER = "Enter an item number to be marked done!";
+    public static final String INVALID_INDEX = "Invalid index! Please enter a valid integer as index!";
 
     public static void main(String[] args) {
         // Create Scanner object
@@ -55,7 +54,18 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(ITEM_OUT_OF_RANGE);
                 } catch (NumberFormatException e) {
-                    System.out.println(MISSING_ITEM_NUMBER);
+                    System.out.println(INVALID_INDEX);
+                } catch (MissingItemIndexException e) {
+                    System.out.println(e);
+                }
+                break;
+            case "delete":
+                try{
+                    deleteTask(myList, commands, userInput);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(ITEM_OUT_OF_RANGE);
+                } catch (NumberFormatException e) {
+                    System.out.println(INVALID_INDEX);
                 } catch (MissingItemIndexException e) {
                     System.out.println(e);
                 }
@@ -133,7 +143,6 @@ public class Duke {
             // testing IndexOutOfBoundsException
             myList.add(new Events(eventDetails[0].trim(), eventDetails[1].trim()));
             printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1).toString());
-
         }
     }
 
@@ -149,6 +158,21 @@ public class Duke {
         myList.get(itemIndexRequested).markAsDone();
         System.out.println(myList.get(itemIndexRequested)
                 .getDoneResponseMessage(itemIndexRequested + 1));
+    }
+
+    public static void deleteTask(ArrayList<Task> myList, String[] commands, String userInput)
+            throws IndexOutOfBoundsException, NumberFormatException, MissingItemIndexException {
+        if (isInvalidLength(commands)){
+            throw new MissingItemIndexException(userInput);
+        }
+        // testing NumberFormatException
+        int itemIndexRequested = Integer.parseInt(commands[1]) - 1;
+        String taskDetails = myList.get(itemIndexRequested).toString();
+
+        // testing IndexOutOfBoundsException
+        myList.remove(itemIndexRequested);
+        printSuccessfulDeleteMessage(taskDetails);
+
     }
 
     public static boolean isInvalidLength(String[] commands) {
@@ -171,6 +195,14 @@ public class Duke {
 
     public static void printSuccessfulAddMessage(String taskDetails) {
         System.out.println(String.format("Added the task:\n    %s", taskDetails));
+        System.out.println(String.format("Now you have %d tasks in the list!",
+                Task.getNumberOfTasksInList()));
+    }
+
+    public static void printSuccessfulDeleteMessage(String taskDetails) {
+        // update number of Tasks left
+        Task.reduceNumberOfTaskInList();
+        System.out.println(String.format("Removed the task:\n    %s", taskDetails));
         System.out.println(String.format("Now you have %d tasks in the list!",
                 Task.getNumberOfTasksInList()));
     }
