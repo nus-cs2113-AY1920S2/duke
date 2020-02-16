@@ -1,6 +1,7 @@
 package Duke;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -11,7 +12,8 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(GREETING);
 
-        Task[] taskList = new Task[MAXSIZE];
+        //Task[] taskList = new Task[MAXSIZE];
+        ArrayList<Task> taskArrayList = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         int exit = 0;
@@ -19,8 +21,8 @@ public class Duke {
 
         while (exit == 0) {
             String userInput = scanner.nextLine();
-            String[] tokens = userInput.split(" ", 2);
-            String instruction = tokens[0];
+            String[] tokenizedInputs = userInput.split(" ", 2);
+            String instruction = tokenizedInputs[0];
 
             switch(instruction) {
             case "bye":
@@ -28,42 +30,85 @@ public class Duke {
                 exit = 1;
                 break;
             case "list":
-                printTasks(taskList, taskListSize);
+                printTasks(taskArrayList, taskListSize);
                 break;
             case "done":
-                if (checkEmptyDescription(tokens, instruction)) break;
+                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                int taskDone = Integer.valueOf(tokenizedInputs[1]) - 1;
                 //to do more error handling here
-                int taskDone = Integer.valueOf(tokens[1]) - 1;
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(taskList[taskDone].markAsDone());
+                System.out.println(taskArrayList.get(taskDone).markAsDone());
+                break;
+            case "delete":
+                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                int taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
+                //to do more error handling here
+                taskListSize--;
+                respondDeleteSuccess(taskListSize, "Noted. I've removed this task:\n", taskArrayList.get(taskToDelete));
+                taskArrayList.remove(taskToDelete);
                 break;
             case "todo":
-                if (checkEmptyDescription(tokens, instruction)) break;
-                String toDo = tokens[1];
-                taskList[taskListSize] = new ToDo(tokens[1]);
-                addedResponse(taskList[taskListSize], taskListSize);
+                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                String toDo = tokenizedInputs[1];
+                taskArrayList.add(new ToDo(tokenizedInputs[1]));
+                respondAddedSuccess(taskListSize, taskArrayList.get(taskListSize));
                 taskListSize++;
                 break;
             case "deadline":
-                if (checkEmptyDescription(tokens, instruction)) break;
-                String[] deadlineInfo = tokens[1].split(" /by ");
+                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                String[] deadlineInfo = tokenizedInputs[1].split(" /by ");
                 if (checkDateEntered(deadlineInfo)) break;
-                taskList[taskListSize] = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                addedResponse(taskList[taskListSize], taskListSize);
+                taskArrayList.add(new Deadline(deadlineInfo[0], deadlineInfo[1]));
+                respondAddedSuccess(taskListSize, taskArrayList.get(taskListSize));
                 taskListSize++;
                 break;
             case "event":
-                if (checkEmptyDescription(tokens, instruction)) break;
-                String[] eventInfo = tokens[1].split(" /at ");
+                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                String[] eventInfo = tokenizedInputs[1].split(" /at ");
                 if (checkDateEntered(eventInfo)) break;
-                taskList[taskListSize] = new Event(eventInfo[0], eventInfo[1]);
-                addedResponse(taskList[taskListSize], taskListSize);
+                taskArrayList.add(new Event(eventInfo[0], eventInfo[1]));
+                respondAddedSuccess(taskListSize, taskArrayList.get(taskListSize));
                 taskListSize++;
                 break;
             default:
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
             }
+        }
+    }
+
+    private static void respondDeleteSuccess(int taskListSize, String s, Task task) {
+        System.out.println("____________________________________________________________\n" +
+                s + task.toString());
+        System.out.print("Now you have ");
+        System.out.print(taskListSize);
+        if (taskListSize == 1) {
+            System.out.print(" task in the list.\n" +
+                    "____________________________________________________________\n");
+        } else {
+            System.out.print(" tasks in the list.\n" +
+                    "____________________________________________________________\n");
+        }
+    }
+
+    private static void printTasks(ArrayList<Task> taskArrayList, int taskListSize) {
+        for (int i = 1; i <= taskListSize; i++) {
+            System.out.print(i);
+            System.out.println("." + taskArrayList.get(i-1).toString());
+        }
+    }
+
+    private static void respondAddedSuccess(int taskListSize, Task task) {
+        System.out.println("____________________________________________________________\n" +
+                "Got it. I've added this task:\n" + task.toString());
+        System.out.print("Now you have ");
+        System.out.print(taskListSize + 1);
+        if (taskListSize <= 0) {
+            System.out.print(" task in the list.\n" +
+                    "____________________________________________________________\n");
+        } else {
+            System.out.print(" tasks in the list.\n" +
+                    "____________________________________________________________\n");
         }
     }
 
@@ -81,26 +126,5 @@ public class Duke {
             return true;
         }
         return false;
-    }
-
-    private static void printTasks(Task[] taskList, int taskListSize) {
-        for (int i = 1; i <= taskListSize; i++) {
-            System.out.print(i);
-            System.out.println("." + taskList[i - 1].toString());
-        }
-    }
-
-    private static void addedResponse(Task task, int taskListSize) {
-        System.out.println("____________________________________________________________\n" +
-                "Got it. I've added this task:\n" + task.toString());
-        System.out.print("Now you have ");
-        System.out.print(taskListSize+1);
-        if (taskListSize == 0) {
-            System.out.print(" task in the list.\n" +
-                    "____________________________________________________________\n");
-        } else {
-            System.out.print(" tasks in the list.\n" +
-                    "____________________________________________________________\n");
-        }
     }
 }
