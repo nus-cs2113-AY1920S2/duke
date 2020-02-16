@@ -8,6 +8,17 @@ public class Event extends Task {
         timeSlot = commands[1].split(" ",2)[1];
     }
 
+    public Event(String command, boolean status, String timeSlot) {
+        super(command, status);
+        this.timeSlot = timeSlot;
+    }
+
+    public String textToFile() {
+        String text = "E | 0 | " + name + " | " + timeSlot;
+        if(isDone) text.replace("| 0 |", "| 1 |");
+        return  text;
+    }
+
     public String print() {
         String str = "[E]";
         if(isDone) {

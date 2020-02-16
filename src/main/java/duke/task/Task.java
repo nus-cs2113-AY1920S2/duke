@@ -10,6 +10,11 @@ public abstract class Task {
         isDone = false;
     }
 
+    public Task(String name, boolean status) {
+        this.name = name;
+        isDone = status;
+    }
+
     public String getName() {
         return name;
     }
@@ -21,6 +26,8 @@ public abstract class Task {
     public boolean getStatus() {
         return isDone;
     }
+
+    public abstract String textToFile();
 
     public abstract String print();
 }

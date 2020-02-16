@@ -5,6 +5,13 @@ public class Todo extends Task {
     public Todo(String command) {
         super(command);
     }
+    public Todo(String command, boolean status) {super(command, status);};
+
+    public String textToFile() {
+        String text = "T | 0 | " + name;
+        if(isDone) text.replace("| 0 |", "| 1 |");
+        return text;
+    }
 
     public String print(){
         String str = "[T]";
