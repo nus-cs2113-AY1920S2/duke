@@ -5,6 +5,8 @@ import duke.command.Event;
 import duke.command.Task;
 import duke.command.Todo;
 import duke.exception.*;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -20,8 +22,6 @@ public class Duke {
     public static final String DELETE_COMMAND = "delete";
     public static final String END_COMMAND = "bye";
     public static final String END_MESSAGE = "Bob thanks you for coming! See you again soon!";
-
-    private static ArrayList<Task> tasks = new ArrayList<>();
     public static void printIndividualTask(ArrayList<Task> tasks, int taskNum) {
         if (tasks.get(taskNum - 1).getTaskDescription().equals(TODO_COMMAND)) {
             System.out.println("Got it! You've added a todo task: ");
@@ -143,7 +143,6 @@ public class Duke {
 
     public static void getExecuteCommand(ArrayList<Task> tasks, String userInput) throws UnknownInputException {
         String[] words = userInput.split(" ");
-
         if (words[0].equals(TODO_COMMAND)) {
             try {
                 executeToDo(tasks, userInput);
@@ -199,9 +198,10 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownInputException {
         initialisation();
         Scanner command = new Scanner(System.in);
+        Storage storage = new Storage("output.txt");
         while (true) {
             String userInput = command.nextLine();
             if (userInput.equals(END_COMMAND)) {
@@ -212,7 +212,13 @@ public class Duke {
             } else {
                 System.out.println(DIVIDER);
                 try {
+                    ArrayList<Task> tasks = storage.load();
                     getExecuteCommand(tasks, userInput);
+                    storage.save(tasks);
+                } catch (FileNotFoundException err) {
+                    ArrayList<Task> tasks = new ArrayList<>();
+                    getExecuteCommand(tasks, userInput);
+                    storage.save(tasks);
                 } catch (DukeException err) {
                     System.out.println(err.toString());
                 }
@@ -220,5 +226,6 @@ public class Duke {
             }
 
         }
+
     }
 }
