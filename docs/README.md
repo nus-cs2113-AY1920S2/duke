@@ -2,7 +2,7 @@
 # Duke - User Guide
 By: `JosephLimWeiJie` Since: `Feb 2019`
 
-
+```javascript
 * [1. Introduction](#introduction)
 * [2. Quick Start](#quick-start)
 * [3. Features](#features)
@@ -15,7 +15,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
     + [3.7. Exiting the program:](#exit) `exit`
 * [4. FAQ](#faq)
 * [5. Command Summary](#command-summary)
-
+```
 
 
 <a name="introduction"></a>
@@ -48,12 +48,17 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 ## 3. Features
 
-Command Format
+**Command Format**
 
 ``` javascript
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter to specify a task's description
-* Tasks with a venue can be added right after the TASK_DESCRIPTION by using /at e.g. in `event TASK_DESCRIPTION /at VENUE`
-* Tasks with a deadline can be added right after the TASK_DESCRIPTION by using `/by` e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm`. Note that you have to add 'T' between the date and the time.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user 
+    * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter to specify a task's description
+
+* Tasks with a venue can be added right after the TASK_DESCRIPTION by using /at 
+    * e.g. in `event TASK_DESCRIPTION /at VENUE`
+
+* Tasks with a deadline can be added right after the TASK_DESCRIPTION by using `/by` 
+    * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm`. Note that you have to add 'T' between the date and the time.
 ```
 
 <a name="addtask"></a>
