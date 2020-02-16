@@ -5,6 +5,9 @@ import Duke.Exception.MissingDescriptonException;
 import Duke.Exception.MissingNumberFieldException;
 import Duke.Exception.MissingTimeFieldException;
 
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
 
     private Storage storage;
@@ -45,7 +48,8 @@ public class Duke {
                     | MissingDescriptonException
                     | MissingNumberFieldException
                     | MissingTimeFieldException
-                    | NumberFormatException m) {
+                    | NumberFormatException
+                    | DateTimeException m) {
                 System.out.println("Exception occurred: " + m);
             }
             ui.displayPrompt();

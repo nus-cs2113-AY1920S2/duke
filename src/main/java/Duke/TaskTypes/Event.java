@@ -1,12 +1,21 @@
 package Duke.TaskTypes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     protected String by;
+    protected LocalDate actualTime;
+    protected String slashWord;
 
     public Event(String description, String by) {
         super(description);
         this.by = by;
+        String[] bySplit = by.split(" ", 2);
+        this.slashWord = bySplit[0].trim();
+        String tempTime = bySplit[1].trim();
+        this.actualTime = LocalDate.parse(tempTime);
     }
 
     @Override
@@ -15,7 +24,7 @@ public class Event extends Task {
             return "[E]" + super.toString();
         }
         String[] bySplit = by.split(" ", 2);
-        return "[E]" + super.toString() + "(" + bySplit[0] + ": " + bySplit[1] + ")";
+        return "[E]" + super.toString() + "(" + this.slashWord + ": " + this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override

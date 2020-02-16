@@ -5,6 +5,11 @@ import Duke.Exception.MissingDescriptonException;
 import Duke.Exception.MissingNumberFieldException;
 import Duke.Exception.MissingTimeFieldException;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
@@ -55,7 +60,7 @@ public class Parser {
 
     private static void validateTask(String[] splitUserInput, String[] fullUserSplit)
             throws InvalidTaskException, MissingDescriptonException, MissingNumberFieldException,
-            MissingTimeFieldException {
+            MissingTimeFieldException, DateTimeParseException {
 
         String nameOfTask = splitUserInput[0].toLowerCase();
         if (!nameOfTask.equals(TODO)
@@ -80,6 +85,14 @@ public class Parser {
                     if (timeCheck.length == 1 || timeCheck[1].isBlank()) {
                         throw new MissingTimeFieldException("Missing time or missing slash word!");
                     }
+                    try {
+                        LocalDate d1 = LocalDate.parse(timeCheck[1]);
+                    }
+                    catch (DateTimeParseException m){
+                        throw new DateTimeException("Date cannot be parsed! Make sure the format is correct! Format: yyyy-mm-dd");
+                    }
+
+
                 }
 
             }
@@ -88,7 +101,7 @@ public class Parser {
 
     public Command parseUserInput(String userInput)
             throws InvalidTaskException, MissingDescriptonException, MissingNumberFieldException,
-            MissingTimeFieldException {
+            MissingTimeFieldException, DateTimeParseException {
         Command command = new Command();
         String[] splitUserInput = splitTheUserInput(userInput);
         String[] fullUserSplit = splitTaskDescription(userInput);
@@ -100,7 +113,6 @@ public class Parser {
         command.setTimeOfCommand(fullUserSplit[TIME]);
         if (splitUserInput[0].toLowerCase().equals(DONE) || splitUserInput[0].toLowerCase().equals(DELETE)) {
             command.setNumber(splitUserInput[1]);
-
         }
         return command;
     }
