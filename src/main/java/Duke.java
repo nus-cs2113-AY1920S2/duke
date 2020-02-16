@@ -215,7 +215,7 @@ public class Duke {
 
         printLine();
         System.out.println("Noted. I've removed this task: ");
-        System.out.println("   " + taskToDelete);
+        System.out.println("  " + taskToDelete);
         //System.out.print("   [" + taskToDelete.getStatusIcon() + "] ");
         //System.out.println(taskToDelete.showFullDescription());
         System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
