@@ -2,23 +2,31 @@
 By: `JosephLimWeiJie` Since: `Feb 2019`
 
 
-- [1.Introduction](#1.Introduction)
-- [2.Quick Start](#2.Quick Start)
-- [3.Features](#3.Features)
-    * [3.1. Adding a task:](##3.1. Adding a task:) `add`
-    * [3.2. Listing all tasks:](#3.2. Listing all tasks:) `list`
-    * [3.3. Finding a task:](#3.3. Finding a task:) `find`
-    * [3.4. Deleting a task:](#3.4. Deleting a task:) `delete`
-    * [3.5. Filter tasks by date:](#3.5. Filter tasks by date:) `filter`
-    * [3.6. Complete a task:](#3.6 Complete a task:) `done`
-    * [3.7. Exiting the program:](#3.7. Exiting the program) `exit`
-- [4.FAQ](#4.FAQ)
-- [5. Command Summary](#5. Command Summary)
+* [1. Introduction](#introduction)
+* [2. Quick Start](#quick-start)
+* [3. Features](#features)
+    + [3.1. Adding a task:](#addtask) `add`
+    + [3.2. Listing all tasks:](#list) `list`
+    + [3.3. Finding a task:](#find) `find`
+    + [3.4. Deleting a task:](#delete) `delete`
+    + [3.5. Filter tasks by date:](#filter) `filter`
+    + [3.6. Complete a task:](#complete) `done`
+    + [3.7. Exiting the program:](#exit) `exit`
+* [4. FAQ](#faq)
+* [5. Command Summary](#command-summary)
 
-## 1.Introduction
+
+
+<a name="introduction"></a>
+
+
+##Introduction
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI). 
 Jump to Section 2, "Quick Start" to get started.
+
+
+<a name="quick-start"></a>
 
 ##2. Quick Start
 
@@ -34,6 +42,8 @@ Jump to Section 2, "Quick Start" to get started.
     *   done 1: Mark the first task as done shown in the current list.
     *   exit: exits the app
 
+<a name="features"></a>
+
 ##3. Features
 
 Command Format
@@ -44,7 +54,9 @@ Command Format
 * Tasks with a deadline can be added right after the TASK_DESCRIPTION by using /by e.g. deadline complete homework /by YYYY-MM-DDTHH:mm. Note that you have to add 'T' between the date and the time.
 ```
 
-###3.1. Adding a task: add
+<a name="addtask"></a>
+
+###3.1 Adding a task: add
 
 Adds a task into Duke.
 
@@ -58,13 +70,17 @@ Examples:
 * deadline Thesis submission /by 2020-01-12T23:59
 * event Wedding Ceremony /at ABC hotel
 
+<a name="list"></a>
+
 ###3.2. Listing all tasks: list
 
 Shows a list of all the tasks in Duke.
 
 Format: list
 
-###3.3. Finding a task: find
+<a name="find"></a>
+
+###3.3 Finding a task: find
 
 Finds tasks that contains a given keyword.
 
@@ -74,7 +90,9 @@ Format:
 Example:
 * find book
 
-###3.4. Deleting a task: delete
+<a name="delete"></a>
+
+###3.4 Deleting a task: delete
 Deletes a specified task from Duke.
 
 Format: delete INDEX
@@ -82,7 +100,9 @@ Format: delete INDEX
 * The index refers to the index number shown on the displayed task list.
 * The index must be a positive number 1,2,3,...
 
-###3.5. Filter tasks by date: filter
+<a name="filter"></a>
+
+###3.5 Filter tasks by date: filter
 Filters tasks based on a given DATE
 
 Format: filter DATE
@@ -92,7 +112,9 @@ filter 2019-01-01
 * Note that the month and date must be in 2 digits. If a date occurs on 1 Jan 2019,
 you have to add a zero in front. 
 
-###3.6. Complete a task: complete
+<a name="complete"></a>
+
+###3.6 Complete a task: complete
 
 Marks a task as completed at the specified INDEX.
 
@@ -100,19 +122,25 @@ Format: done INDEX
 * The index refers to the index number shown on the displayed task list.
 * The index must be a positive number 1,2,3,..
 
-###3.7. Exiting the program: exit
+<a name="exit"></a>
+
+###3.7 Exiting the program: exit
 
 Exits the program.
 Format: exit
 
-##4.FAQ
 
+<a name="faq"></a>
+
+##4. FAQ
 
 *Q:* How do I transfer my data onto another Computer?
 
 
 *A:* Install the app in the other computer and copy the 'storage.txt' from the previous Duke folder onto your current new folder containing the duke.jar.
 
+
+<a name="command-summary"></a>
 
 ##5. Command Summary
 * Add 
