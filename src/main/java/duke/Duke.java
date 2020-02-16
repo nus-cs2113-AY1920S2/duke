@@ -15,6 +15,10 @@ public class Duke {
         this.taskList = new TaskList();
     }
     
+    public void executeFilterCommand(String date) {
+        this.taskList.filterTask(date);
+    }
+    
     public void executeDeleteCommand(int taskId) {
         this.taskList.deleteTask(taskId);
     }
