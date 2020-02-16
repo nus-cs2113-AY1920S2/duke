@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
 
@@ -16,6 +18,8 @@ public class Duke {
     public static final String INVALID_DESCRIPTION = "The description of the task is invalid";
     public static final String EVENT_DESCRIPTION = "event <duke.task.Task Name> /at <Timeslot>";
 
+    private static boolean hasChanges = false;
+
     private TaskManager manager = new TaskManager();
 
     public static void printFormat(String str) {
@@ -26,12 +30,25 @@ public class Duke {
     }
 
     public void exitDuke() {
+        if(hasChanges) {
+            try {
+                manager.writeToFile("data/duke.txt");
+            } catch (IOException e) {
+                printFormat("☹ OOPS!!! Something went wrong when writing to file!");
+            }
+        }
         printFormat(GOODBYE);
     }
 
     public void runDuke() {
         Scanner in = new Scanner(System.in);
         String command;
+
+        try {
+            manager.loadFile("data/duke.txt");
+        } catch (FileNotFoundException e) {
+            printFormat("☹ OOPS!!! File not found!");
+        }
         while(in.hasNextLine()) {
             command = in.nextLine();
             String[] commands = command.split(" ", 2);
@@ -43,6 +60,7 @@ public class Duke {
             } else if (commands[0].equals("done")){
                 try {
                     manager.markTask(Integer.parseInt(commands[1]));
+                    hasChanges = true;
                 } catch (IndexOutOfBoundsException e) {
                     printFormat(INVALID_DONE+ CORRECT_FORMAT+ DONE_DESCRIPTION);
                 } catch (NumberFormatException e) {
@@ -51,18 +69,21 @@ public class Duke {
             } else if (commands[0].equals("todo")){
                 try {
                     manager.addTodo(commands[1]);
+                    hasChanges = true;
                 }catch (IndexOutOfBoundsException e) {
                     printFormat(INVALID_DESCRIPTION+CORRECT_FORMAT+TODO_DESCRIPTION);
                 }
             } else if (commands[0].equals("deadline")) {
                 try {
                     manager.addDeadline(commands[1]);
+                    hasChanges = true;
                 } catch (IndexOutOfBoundsException e) {
                     printFormat(INVALID_DESCRIPTION+CORRECT_FORMAT+DONE_DESCRIPTION);
                 }
             } else if (commands[0].equals("event")) {
                 try {
                     manager.addEvent(commands[1]);
+                    hasChanges = true;
                 } catch (IndexOutOfBoundsException e) {
                     printFormat(INVALID_DESCRIPTION+CORRECT_FORMAT+ EVENT_DESCRIPTION);
                 }
