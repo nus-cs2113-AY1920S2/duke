@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 public class Duke {
 
     private static Task[] tasks = new Task[100];
@@ -19,7 +21,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greet();
-
+        loadTasks();
         String userResponde;
         Scanner in = new Scanner(System.in);
         do {
@@ -36,6 +38,41 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         printLine();
         System.out.println();
+    }
+
+    public static void loadTasks(){
+
+        File f = new File("data/duke.txt");
+        try{
+            Scanner s = new Scanner(f);
+            while(s.hasNext()){
+                String aTask;
+                aTask = s.nextLine();
+                loadATask(aTask);
+            }
+        } catch(FileNotFoundException e){
+            System.out.println("No duke history. Please input task. ");
+        }
+
+    }
+
+    public static void loadATask(String aTask){
+        String[] aTaskSplit = aTask.split(" \\| ");
+        switch(aTaskSplit[0]){
+        case "T":
+            tasks[taskCount] = new Todo(aTaskSplit[2]);
+            break;
+        case "D":
+            tasks[taskCount] = new Deadline(aTaskSplit[2],aTaskSplit[3]);
+            break;
+        case "E":
+            tasks[taskCount] = new Event(aTaskSplit[2],aTaskSplit[3]);
+            break;
+        }
+        if(aTaskSplit[1].equals("1")){
+            tasks[taskCount].markAsDone();
+        }
+        taskCount++;
     }
 
     public static void dukeResponde(String userResponde){
