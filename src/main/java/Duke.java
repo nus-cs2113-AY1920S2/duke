@@ -30,7 +30,6 @@ public class Duke {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < sizeOfList ; i += 1) {
                 System.out.println(i + 1 + ". " + tasks.get(i));
-                System.out.println(i + 1 + ". " + tasks.get(i));
             }
         } else {
             throw new EmptyListException("No tasks in the list.");
