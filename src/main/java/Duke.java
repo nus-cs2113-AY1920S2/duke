@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,40 +14,55 @@ public class Duke {
     public static void main(String[] args) {
         printIntro();
         printExeType();
-        exeCommand();
+        exeCommands();
         printExit();
     }
 
-    public static void exeCommand() {
+    /*
+    exeCommand does the job to identify whether the programme will end
+     */
+    public static void exeCommands() {
         String exeCommand = getUserInput(userInput);// exeType = addTask||deleteTask||printTask
-        while (!exeCommand.equals(EXIT_COMMAND)) {
-            exeType(exeCommand); //to select the exeType and execute the command type
-            printExeType(); //show the instructions after execution
-            exeCommand = getUserInput(userInput); //get the next command
+        try {
+            while (!exeCommand.equals(EXIT_COMMAND)) {
+                exeType(exeCommand); //to select the exeType and execute the command type
+                printExeType(); //show the instructions after execution
+                exeCommand = getUserInput(userInput); //get the next command
+            }
+        } catch (IllegalCommandException e) {
+            System.out.println("    Sorry,we do not understand your command. " +
+                    "Please follow the instructions below.");
+            printExeType();
+            exeCommands();
         }
     }
 
-    public static void exeType(String exeCommand){
+    public static void exeType(String exeCommand) throws IllegalCommandException {
         String taskType; //taskType = ToDo||Event||Deadline
-        switch (exeCommand) {
-        case ADD_TASK:
-            printTaskType();
-            taskType = getUserInput(userInput);
-            exeTask(taskType);
-            break;
-        case PRINT_TASKS:
-            printTasks();
-            break;
-        case MARK_AS_DONE:
-            doneTask();
-            break;
-        default:
-            System.out.println("    Sorry I don't understand your command :(");
-            break;
+        try {
+            switch (exeCommand) {
+            case ADD_TASK:
+                printTaskType();
+                taskType = getUserInput(userInput);
+                exeTask(taskType);
+                break;
+            case PRINT_TASKS:
+                printTasks();
+                break;
+            case MARK_AS_DONE:
+                doneTask();
+                break;
+            default:
+                throw new IllegalCommandException();
+            }
+        } catch (IllegalTypeException e) {
+            System.out.println("    Sorry,we do not understand your command. " +
+                    "Please follow the instructions below.");
+            exeType(exeCommand);
         }
     }
 
-    public static void exeTask(String taskType){
+    public static void exeTask(String taskType) throws IllegalTypeException {
         String task, by;
         switch (taskType) {
         case "1": //ToDo
@@ -74,7 +90,7 @@ public class Duke {
             Task_ind++;
             printRespondToAddTask(task);
             break;
-        default: System.out.println("    Sorry I don't understand your command :(");
+        default: throw new IllegalTypeException();
         }
     }
 
@@ -82,6 +98,7 @@ public class Duke {
         System.out.println("    You have successfully added " + task + "!");
         System.out.println("    You have "+ Task_ind + " task(s) now in total");
     }
+
     public static void doneTask() {
         System.out.println("    Please choose the task that you have completed (select the no)");
         printTasks();
