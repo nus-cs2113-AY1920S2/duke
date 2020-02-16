@@ -56,12 +56,16 @@ public class Duke {
                 break loop;
             case COMMAND_MARK_AS_DONE:
                 String number = input.next();
-                int doneTaskNumber = Integer.parseInt(number);
-                if (tasks[doneTaskNumber].isDone == false) {
-                    --pendingTaskCount;
-                    tasks[doneTaskNumber].markTaskAsDone(pendingTaskCount);
+                if(number == null || number.isEmpty()) {
+                    System.out.println("The task number cannot be left empty!");
                 } else {
-                    System.out.println(tasks[doneTaskNumber].taskName + " is already done!");
+                    int doneTaskNumber = Integer.parseInt(number);
+                    if (tasks[doneTaskNumber].isDone == false) {
+                        --pendingTaskCount;
+                        tasks[doneTaskNumber].markTaskAsDone(pendingTaskCount);
+                    } else {
+                        System.out.println(tasks[doneTaskNumber].taskName + " is already done!");
+                    }
                 }
                 break;
             default:
