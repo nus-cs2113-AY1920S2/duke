@@ -1,10 +1,11 @@
-import com.sun.source.tree.SwitchTree;
-import exception.InexplicitTimeDescription;
-import exception.UnknownCommandException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+package duke;
+
+import duke.exception.InexplicitTimeDescription;
+import duke.exception.UnknownCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -63,12 +64,12 @@ public class Duke {
     }
 
     private static void printTaskDoneInfo(Task cur_task) {
-        System.out.println("    Congratulations! You have just finished this task:");
+        System.out.println("    Congratulations! You have just finished this duke.task:");
         System.out.println("    " + cur_task.showTaskInfo());
     }
 
     private static void printTaskRemovedInfo(Task cur_task){
-        System.out.println("    Noted. I've removed this task:");
+        System.out.println("    Noted. I've removed this duke.task:");
         System.out.println("    "+cur_task.showTaskInfo());
     }
 
@@ -88,7 +89,7 @@ public class Duke {
     }
 
     public static void commandMode(String input, Scanner in) {
-//        TaskList taskList = new TaskList();
+//        duke.TaskList taskList = new duke.TaskList();
         int taskNum = 0;
         input = getAndProcessInput(in);
         while (!input.toLowerCase().equals("bye")) {
@@ -131,9 +132,9 @@ public class Duke {
             printTaskRemovedInfo(cur_task);
             System.out.println("    There are totally "+Integer.toString(taskList.getLenOfList())+" tasks in the taskList");
         } catch (NumberFormatException e){
-            System.out.println("    You have to point out which task to delete!!!");
+            System.out.println("    You have to point out which duke.task to delete!!!");
         } catch (IndexOutOfBoundsException e){
-            System.out.println("    Referred task doesn't exist!!!");
+            System.out.println("    Referred duke.task doesn't exist!!!");
             System.out.println("    There are totally "+Integer.toString(taskList.getLenOfList())+" tasks in the taskList");
         }
     }
@@ -146,13 +147,13 @@ public class Duke {
             saveToFile();
             showFeedback(newTaskName);
         } catch(StringIndexOutOfBoundsException e){
-            System.out.println("    Invalid input! Cannot find description for a task event");
+            System.out.println("    Invalid input! Cannot find description for a duke.task event");
             System.out.println("    Your input: "+input+".");
-            System.out.println("    Please use ' ' to split a task type and its description");
+            System.out.println("    Please use ' ' to split a duke.task type and its description");
         } catch (UnknownCommandException e) {
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch (InexplicitTimeDescription e){
-            System.out.println("    Invalid input!!! Please use '/' to split task name and its time description");
+            System.out.println("    Invalid input!!! Please use '/' to split duke.task name and its time description");
         }
     }
 
@@ -164,9 +165,9 @@ public class Duke {
             saveToFile();
             printTaskDoneInfo(cur_task);
         } catch (NumberFormatException e){
-            System.out.println("    You have to point out which task to mark as done!!!");
+            System.out.println("    You have to point out which duke.task to mark as done!!!");
         } catch (IndexOutOfBoundsException e){
-            System.out.println("    Reffered task doesn't exist!!!");
+            System.out.println("    Reffered duke.task doesn't exist!!!");
             System.out.println("    There are totally "+Integer.toString(taskList.getLenOfList())+" tasks in the taskList");
         }
     }

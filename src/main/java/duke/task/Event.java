@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Event extends Task {
     private static int eventNum = 0;
