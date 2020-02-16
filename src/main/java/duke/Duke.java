@@ -15,6 +15,10 @@ public class Duke {
         this.taskList = new TaskList();
     }
     
+    public void executeFindCommand(String keyword) {
+        this.taskList.findTask(keyword);
+    }
+    
     public void executeFilterCommand(String date) {
         this.taskList.filterTask(date);
     }

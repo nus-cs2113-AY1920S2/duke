@@ -31,8 +31,10 @@ public class Messages {
     
     public static final String MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS = ">>>>>>>> I'm sorry! There is no current task with that index...";
     
+    public static final String MESSAGE_FIND_COMMAND_TASK = "Here are the matching tasks in your list:";
+
     public static final String MESSAGE_COMMAND_FILTER_TASK = "Here are the tasks occuring on this date:";
-    
+
     public static final String MESSAGE_INVALID_TASK_TYPE = ">>>>>>>> I'm sorry! I cannot understand the type of the task given.";
     
     public static final String MESSAGE_READ_WRITE_FAILURE = "Make sure you have a 'data' folder containing a storage.txt file.";

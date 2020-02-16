@@ -11,6 +11,7 @@ import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.FilterCommand;
 import command.InvalidCommandException;
 import command.ListCommand;
@@ -39,6 +40,9 @@ public class Parser {
         Command command;
         
         switch(commandType) {
+        case "find":
+            command = new FindCommand(parser.taskInfo.get());
+            break;
         case "filter":
             command = new FilterCommand(parser.taskInfo.get());
             break;

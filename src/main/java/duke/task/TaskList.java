@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import duke.task.Task;
 import static misc.Messages.MESSAGE_COMMAND_LIST_TASK;
 import static misc.Messages.MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS;
+import static misc.Messages.MESSAGE_FIND_COMMAND_TASK;
 import static misc.Messages.MESSAGE_COMMAND_FILTER_TASK;
 import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
 
@@ -34,6 +35,18 @@ public class TaskList {
     
     public List<Task> getTasks() {
         return this.tasks;
+    }
+    
+
+    public void findTask(String keyword) {
+        System.out.println(MESSAGE_FIND_COMMAND_TASK);
+        
+        this.tasks.stream()
+            .filter(task -> task.getTaskName()
+                    .contains(keyword))
+            .forEachOrdered(System.out::println);
+        
+        System.out.println("\n");
     }
     
     public void filterTask(String date) throws IllegalArgumentException {
