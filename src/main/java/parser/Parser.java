@@ -5,12 +5,14 @@ import static misc.Messages.MESSAGE_INVALID_COMMAND_RESULT;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
+
 import command.AddCommand;
 import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.FilterCommand;
 import command.InvalidCommandException;
 import command.ListCommand;
 
@@ -40,6 +42,9 @@ public class Parser {
         switch(commandType) {
         case "find":
             command = new FindCommand(parser.taskInfo.get());
+            break;
+        case "filter":
+            command = new FilterCommand(parser.taskInfo.get());
             break;
         case "list": 
             command = new ListCommand();
@@ -101,6 +106,7 @@ public class Parser {
             }
         }
         
+        // Wrap an optional on the phrase.
         Optional<String> optionalPhrase;
         if (phrase.equals("")) {
             optionalPhrase = Optional.empty();
@@ -124,6 +130,10 @@ public class Parser {
             }
         }
         
+        // Format phrase into readable date time.
+        //phrase = parsePhraseIntoDateTime(phrase);
+        
+        // Wrap an optional on the phrase
         Optional<String> optionalPhrase;
         if (phrase.equals("")) {
             optionalPhrase = Optional.empty();
