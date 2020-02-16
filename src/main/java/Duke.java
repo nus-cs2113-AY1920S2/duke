@@ -48,6 +48,7 @@ public class Duke {
         String str = readCommand();
         System.out.println("____________________________________________________________");
         if (str.equals("bye")) {
+            saveTask();
             finishConversation();
         } else if (str.contains("delete")) {
             deleteTask(str);
