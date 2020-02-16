@@ -1,0 +1,5 @@
+T | 1 | abc
+E | 1 | def | 123
+D | 1 | ghi | 456
+T | 1 | jkl
+T | 0 | hi
