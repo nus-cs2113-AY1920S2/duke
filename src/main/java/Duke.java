@@ -1,4 +1,6 @@
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -52,6 +54,28 @@ public class Duke {
         tasks.add(todo);
         System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("Added: " + cmd);
+        System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println("    What can I do for you? Type 'bye' to exit.");
+        System.out.println();
+    }
+
+    public static void delete (int taskNumber) {
+        Task task = tasks.get(taskNumber);
+        tasks.remove(task);
+
+        Iterator itr = tasks.iterator();
+        int counter = 0;
+        while (itr.hasNext())
+        {
+            Task t = (Task)itr.next();
+            t.taskID = counter;
+            counter++;
+        }
+
+        System.out.println("    ╔═══════════════════════════════════════════════════════════╗");
+        printInCenter("Noted. I've removed this task: ");
+        printInCenter(task.toString());
+        printInCenter("Now you have " + tasks.size() + " tasks in the list.");
         System.out.println("    ╚═══════════════════════════════════════════════════════════╝");
         System.out.println("    What can I do for you? Type 'bye' to exit.");
         System.out.println();
@@ -136,6 +160,8 @@ public class Duke {
     }
 
     public static void main (String[] args) {
+        int spacePosition = -1;
+        int taskNumber = -1;
         greet();
 
         // read command-line input
@@ -147,6 +173,11 @@ public class Duke {
             switch (cmdSplit[0]) {
             case "list":
                 list();
+                break;
+            case "delete":
+                spacePosition = cmd.indexOf(" ");
+                taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1, cmd.length())) - 1;
+                delete(taskNumber);
                 break;
             case "todo":
                 try {
@@ -176,8 +207,8 @@ public class Duke {
                 }
                 break;
             case "done":
-                int spacePosition = cmd.indexOf(" ");
-                int taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1, cmd.length())) - 1;
+                spacePosition = cmd.indexOf(" ");
+                taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1, cmd.length())) - 1;
                 done(taskNumber);
                 break;
             default:
