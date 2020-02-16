@@ -24,11 +24,24 @@ public class Duke {
                 indicateTaskAsDone(inputLine);
 
             } else {
+
+                try {
+                    addInNewTask(inputLine);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(STANDARD_SEPARATOR);
+                    System.out.println("\u2639 OOPS!!! The description of a " + inputLine + " cannot be empty.");
+                    System.out.println(STANDARD_SEPARATOR);
+                } catch (DukeException e) {
+                    System.out.println(STANDARD_SEPARATOR);
+                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(STANDARD_SEPARATOR);
+                }
                 // adds a new task into the list
-                addInNewTask(inputLine);
+                //addInNewTask(inputLine);
 
             }
             // take in the next command
+
             inputLine = scanner.nextLine();
             inputCommand = inputLine.substring(0, 3);
         }
@@ -54,19 +67,30 @@ public class Duke {
      *
      * @param inputLine name of the task to add
      */
-    private static void addInNewTask(String inputLine) {
+    private static void addInNewTask(String inputLine) throws DukeException {
 
-        String inputCommand = inputLine.substring(0, 6);
+        String inputCommand = inputLine.substring(0, 4);
 
         if (inputCommand.contains("todo")) {
+            if (inputLine.equals("todo")) {
+                throw new IndexOutOfBoundsException();
+            }
             addToDo(inputLine);
 
         } else if (inputCommand.contains("dead")) {
+            if (inputLine.equals("deadline")) {
+                throw new IndexOutOfBoundsException();
+            }
             addDeadline(inputLine);
 
-        } else {
+        } else if (inputCommand.contains("even")){
+            if (inputLine.equals("event")) {
+                throw new IndexOutOfBoundsException();
+            }
             addEvent(inputLine);
 
+        } else {
+            throw new DukeException();
         }
 
         // creates new task
