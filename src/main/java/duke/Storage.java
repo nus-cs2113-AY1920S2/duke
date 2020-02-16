@@ -21,26 +21,40 @@ import duke.task.Event;
 
 public class Storage {
     
-    private static final String PIPE = "|";
     private static final String T = "T";
     private static final String D = "D";
     private static final String E = "E";
+    private static final String MK_DIR_STRING = (getRelativePath() + "\\data").replace("\\", "/");
+    private static final String MK_FILE_STRING = (getRelativePath() + "\\data\\duke.txt").replace("\\", "/");
+    private static final String PIPE_REGEX = "\\s+\\|\\s+";
     
-    
-    public Storage(String filePath) {
+    public Storage() {
         try {
-            File f = new File(filePath);
+            File dir = new File(MK_DIR_STRING);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File f = new File(MK_FILE_STRING);
             if (!f.exists()) {
                 f.createNewFile();
             }
-            printAndLoadContents(filePath);
+            printAndLoadContents();
         } catch (IOException e) {
             System.out.println("Unable to create a file");
         }
     }
     
-    protected static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
+    //@@author geoO-reused
+    //Reused from https://stackoverflow.com/questions/4871051/getting-the-current-working-directory-in-java
+    public static String getRelativePath() {
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        return s;
+    }
+    //@@author geoO-reused
+    
+    protected static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(MK_FILE_STRING, true);
         fw.write(textToAppend + System.lineSeparator());
         fw.close();
     }
@@ -48,39 +62,39 @@ public class Storage {
     //@@author Paul Vargas-reused
     //Reused from https://stackoverflow.com/questions/31375972/how-to-replace-a-specific-line-in-a-file-using-java
     //with minor modifications
-    protected static void modifyFile(String filePath, int lineNumber, String data) throws IOException {
-        Path path = Paths.get(filePath);
+    protected static void modifyFile(int lineNumber, String data) throws IOException {
+        Path path = Paths.get(MK_FILE_STRING);
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         lines.set(lineNumber, data);
         Files.write(path, lines, StandardCharsets.UTF_8);
     }
     //@@author Paul Vargas-reused
     
-    protected static void printAndLoadContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
+    protected static void printAndLoadContents() throws FileNotFoundException {
+        File f = new File(MK_FILE_STRING);
         Scanner s = new Scanner(f);
-        
+        // E | 0 | project meeting | Mon 2-4pm
         while (s.hasNextLine()) {
-            String input = s.toString();
-            String[] arguments = input.split(PIPE);
-            System.out.println(s.nextLine());
-            
-            switch (arguments[0]) {
+            String input = s.nextLine();
+            String[] argumentLine = input.trim().split(PIPE_REGEX);
+            System.out.println(input);
+            boolean isDone = argumentLine[1].equals("1");
+            switch (argumentLine[0]) {
             case T:
-                tasks.add(new Todo(arguments[2]));
-                if (Boolean.parseBoolean(arguments[1])) {
+                tasks.add(new Todo(argumentLine[2]));
+                if (isDone) {
                     tasks.get(tasks.size() - 1).markAsDone();
                 }
                 break;
             case D:
-                tasks.add(new Deadline(arguments[2], "/by" + arguments[3]));
-                if (Boolean.parseBoolean(arguments[1])) {
+                tasks.add(new Deadline(argumentLine[2], "/by" + argumentLine[3]));
+                if (isDone) {
                     tasks.get(tasks.size() - 1).markAsDone();
                 }
                 break;
             case E:
-                tasks.add(new Event(arguments[2], "/at" + arguments[3]));
-                if (Boolean.parseBoolean(arguments[1])) {
+                tasks.add(new Event(argumentLine[2], "/at" + argumentLine[3]));
+                if (isDone) {
                     tasks.get(tasks.size() - 1).markAsDone();
                 }
                 break;
