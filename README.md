@@ -58,7 +58,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
   e.g. in `event TASK_DESCRIPTION /at VENUE`
 
 * Tasks with a deadline can be added right after the TASK_DESCRIPTION by using /by 
-  e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm`. 
+  e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
   Note that you have to add 'T' between the date and the time.
 
 ```
