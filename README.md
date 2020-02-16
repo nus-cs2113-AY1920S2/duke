@@ -2,7 +2,7 @@
 By: `JosephLimWeiJie` Since: `Feb 2019`
 
 
-- [1.Introduction](##1.Introduction)
+- [1.Introduction](#1.Introduction)
 - [2.Quick Start](#2.Quick Start)
 - [3.Features](#3.Features)
     * [3.1. Adding a task:](##3.1. Adding a task:) `add`
@@ -24,7 +24,7 @@ Jump to Section 2, "Quick Start" to get started.
 
 *   1. Ensure that Java 11 or above is installed in your Computer.
 *   2. Download the latest duke.jar [here](https://github.com/JosephLimWeiJie/duke/releases/download/v0.1.0/duke.jar).
-*   3. Copy the file to the foldere you want to use as the home folder for your Duke.
+*   3. Copy the file to the folder you want to use as the home folder for your Duke.
 *   4. Double-click on duke.jar to start the app. It should appear in a few seconds.
 *   5. Type in a command and press ENTER to execute it. For e.g. typing list and                         pressing enter will list all your current tasks.
 *   6. Some other commands you can try:
@@ -136,5 +136,3 @@ Format: exit
    
 * Exit: exit
 
-
-[Arbitrary case-insensitive reference text]
