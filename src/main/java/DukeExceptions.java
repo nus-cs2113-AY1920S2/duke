@@ -1,4 +1,5 @@
 public class DukeExceptions {
+
     protected String input;
 
     public DukeExceptions() {
@@ -70,6 +71,7 @@ public class DukeExceptions {
         System.out.println(" Parameters: delete [TASK NUMBER]");
         System.out.println(" Example: delete 1");
     }
+
 
     public void printInvalidInput() {
         System.out.println(" [WARNING: INVALID INPUT]");

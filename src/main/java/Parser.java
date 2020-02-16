@@ -47,4 +47,5 @@ public class Parser {
     public boolean isDelete() {
         return firstWord.equals("delete");
     }
+
 }

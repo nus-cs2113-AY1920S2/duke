@@ -16,11 +16,13 @@ public class UI {
     public void printLine() {
         System.out.println(boundary);
     }
+
     public void printGreetingMessage() {
         System.out.println(firstGreetingMessage);
         System.out.println(secondGreetingMessage);
         System.out.println(line);
     }
+    
     public void printLeavingMessage() {
         System.out.println(leavingMessage);
     }
