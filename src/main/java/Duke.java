@@ -22,21 +22,31 @@ public class Duke {
             switch(command) {
             case COMMAND_CREATE_DEADLINE_TASK:
                 detailsOfTask = input.nextLine();
-                createTask(new DeadlineTask(detailsOfTask, taskCount));
-                tasks[taskCount].printCreateMessage(pendingTaskCount);
+                if(detailsOfTask == null || detailsOfTask.isEmpty()) {
+                    System.out.println("Details of the task cannot be left Empty!");
+                } else {
+                    createTask(new DeadlineTask(detailsOfTask, taskCount));
+                    tasks[taskCount].printCreateMessage(pendingTaskCount);
+
+                }
                 break;
             case COMMAND_CREATE_EVENT_TASK:
                 detailsOfTask = input.nextLine();
-                createTask(new EventTask(detailsOfTask, taskCount));
-                tasks[taskCount].printCreateMessage(pendingTaskCount);
+                if(detailsOfTask == null || detailsOfTask.isEmpty()) {
+                    System.out.println("Details of the task cannot be left Empty!");
+                } else {
+                    createTask(new EventTask(detailsOfTask, taskCount));
+                    tasks[taskCount].printCreateMessage(pendingTaskCount);
+                }
                 break;
             case COMMAND_CREATE_TODO_TASK:
                 detailsOfTask = input.nextLine();
-                System.out.println(taskCount);
-                createTask(new TodoTask(detailsOfTask, taskCount));
-                System.out.println(taskCount);
-                tasks[taskCount].printCreateMessage(pendingTaskCount);
-                System.out.println(taskCount);
+                if(detailsOfTask == null || detailsOfTask.isEmpty()) {
+                    System.out.println("Details of the task cannot be left Empty!");
+                } else {
+                    createTask(new TodoTask(detailsOfTask, taskCount));
+                    tasks[taskCount].printCreateMessage(pendingTaskCount);
+                }
                 break;
             case COMMAND_DISPLAY_LIST:
                 printTaskList(tasks, taskCount, pendingTaskCount);
@@ -55,7 +65,7 @@ public class Duke {
                 }
                 break;
             default:
-                System.out.println("Please enter a valid command!");
+                System.out.println("I don't understand what you are say! Please enter a valid command!");
                 break;
             }
         }
@@ -76,3 +86,4 @@ public class Duke {
         tasks[taskCount] = t;
     }
 }
+
