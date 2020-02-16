@@ -8,9 +8,12 @@ import Task.Deadline;
 import Task.Events;
 import Task.Todo;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class Duke {
 
@@ -23,11 +26,16 @@ public class Duke {
     public static final String MISSING_TIME_PERIOD = "Please enter a time period for the task!";
     public static final String ITEM_OUT_OF_RANGE = "Item requested is out of range! Try another item.";
     public static final String INVALID_INDEX = "Invalid index! Please enter a valid integer as index!";
-    public static final String FILE_PATH = "data/duke.txt";
+    public static final String FILE_PATH = "data" + File.separator + "duke.txt";
 
 
     public static void main(String[] args) {
-        Storage storage = new Storage(FILE_PATH);
+        String home = System.getProperty("user.home");
+        // inserts correct file path separator on *nix and Windows
+        // works on *nix
+        // works on Windows
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "projects","DUKE","duke","data", "duke.txt");
+        Storage storage = new Storage(path.toString());
         ArrayList<Task> myList = storage.load();
         Scanner myScanner = new Scanner(System.in);
         printWelcomeMessage();
@@ -65,6 +73,7 @@ public class Duke {
             case "delete":
                 try{
                     deleteTask(myList, commands, userInput);
+                    storage.saveToHardDisk(myList);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(ITEM_OUT_OF_RANGE);
                 } catch (NumberFormatException e) {
