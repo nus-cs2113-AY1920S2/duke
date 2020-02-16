@@ -14,6 +14,15 @@ public class Deadline extends Task {
         this.by = by.trim();
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
+    @Override
+    public String saveFormat() {
+        return "d//" + super.saveFormat() + "//" + by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
