@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static final int MAXSIZE = 100;
+
     public static void main(String[] args) {
         String greeting = "Hello! I'm Duke.Duke\n" + "What can I do for you?";
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(greeting);
 
-        Task[] taskList = new Task[100];
+        Task[] taskList = new Task[MAXSIZE];
 
         Scanner scanner = new Scanner(System.in);
         int exit = 0;
@@ -17,53 +19,51 @@ public class Duke {
 
         while (exit == 0) {
             String userInput = scanner.nextLine();
-            if (userInput.equals("bye")) {
+            String[] tokens = userInput.split(" ", 2);
+            String instruction = tokens[0];
+
+            switch(instruction) {
+            case "bye":
                 System.out.println(goodbye);
                 exit = 1;
-            } else if (userInput.equals("list")){
+                break;
+            case "list":
                 for (int i = 1; i <= taskListSize; i++) {
                     System.out.print(i);
                     System.out.println("." + taskList[i-1].toString());
                 }
-            } else if (userInput.startsWith("done")){
-                String taskToDelete = userInput.substring(5);
-                //quick fix, have to redo
-                if (taskToDelete.length() == 0) {
-                    System.out.println("Duke.Duke doesn't know which task!");
-                    break;
-                }
-                int ID = Integer.valueOf(taskToDelete) - 1;
+                break;
+            case "done":
+                int taskDone = Integer.valueOf(tokens[1]) - 1;
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(taskList[ID].markAsDone());
-            } else if (userInput.startsWith("todo")) {
-                String toDo = userInput.substring(5);
-                if (toDo.length() == 0) {
-                    System.out.println("Description cannot be blank!");
-                    break;
-                }
-                taskList[taskListSize] = new ToDo(userInput.substring(5));
+                System.out.println(taskList[taskDone].markAsDone());
+                break;
+            case "todo":
+                String toDo = tokens[1];
+                //if tokens[1] is a NullPointer maybe...
+                taskList[taskListSize] = new ToDo(tokens[1]);
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
-            } else if (userInput.startsWith("deadline")) {
-                String[] userInputs = userInput.substring(9).split(" /by ");
-                taskList[taskListSize] = new Deadline(userInputs[0], userInputs[1]);
+                break;
+            case "deadline":
+                String[] deadlineInfo = tokens[1].split(" /by ");
+                taskList[taskListSize] = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
-            } else if (userInput.startsWith("event")) {
-                String[] userInputs = userInput.substring(6).split(" /at ");
-                taskList[taskListSize] = new Event(userInputs[0], userInputs[1]);
+                break;
+            case "event":
+                String[] eventInfo = tokens[1].split(" /at ");
+                taskList[taskListSize] = new Event(eventInfo[0], eventInfo[1]);
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
-            } else {
-                // error handling
+                break;
+            default:
                 taskList[taskListSize] = new Task(userInput);
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
+                break;
             }
         }
-
-
-
     }
 
     private static void addedResponse(Task task, int taskListSize) {
@@ -79,6 +79,4 @@ public class Duke {
                     "____________________________________________________________\n");
         }
     }
-
-
 }
