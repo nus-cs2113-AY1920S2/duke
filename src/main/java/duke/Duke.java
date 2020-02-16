@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
@@ -126,7 +128,7 @@ public class Duke {
     public static String list() throws DukeException {
         String msg = "";
         // accesses the list
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             throw new DukeException("Oops!! List is empty.");
         } else {
             msg += "Here are the tasks in your list:" + '\n';
@@ -144,7 +146,7 @@ public class Duke {
     public static String showRemoved() throws DukeException {
     	String msg = "";
         // accesses the list
-        if (removedTasks.size() == 0) {
+        if (removedTasks.isEmpty()) {
             throw new DukeException("Oops!! No removed tasks.");
         } else {
             msg += "Here are the tasks that have been removed:" + '\n';
@@ -157,6 +159,19 @@ public class Duke {
             }
         }
         return msg;
+    }
+    
+    public static void writeToFile(String msg) throws IOException, DukeException {
+    	if (list.isEmpty()) {
+    		throw new DukeException("Oops!! List is empty.");
+    	}
+    	FileWriter fw = new FileWriter("duke.txt");
+    	try {
+    		fw.write(msg);
+    		fw.close();
+    	} catch (IOException e) {
+    		System.out.println("Something went wrong: " + e.getMessage());
+    	}
     }
     
     public static void goodbye() {
@@ -173,7 +188,7 @@ public class Duke {
         System.out.println(line + '\n');
     }
     
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         Scanner sc = new Scanner(System.in);
         greet();
         OuterLoop: while (true) {
@@ -193,18 +208,23 @@ public class Duke {
                     	break;
                     case "delete":
                     	msg += removeTask(str);
+                    	writeToFile(list());
                     	break;
                     case "done":
                         msg += makeDone(str);
+                        writeToFile(list());
                         break;
                     case "todo":
                         msg += addTodo(str);
+                        writeToFile(list());
                         break;
                     case "deadline":
                         msg += addDeadline(str);
+                        writeToFile(list());
                         break;
                     case "event":
                         msg += addEvent(str);
+                        writeToFile(list());
                         break;
                     default:
                         throw new DukeException("Oops!! Unknown Command.");
