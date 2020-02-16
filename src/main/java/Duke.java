@@ -4,6 +4,8 @@ import commands.Task;
 import commands.Todo;
 import exceptions.*;
 import java.util.ArrayList;
+import java.awt.image.AreaAveragingScaleFilter;
+import java.io.FileNotFoundException;
 
 import java.util.Scanner;
 
@@ -27,7 +29,8 @@ public class Duke {
         if (sizeOfList != 0) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < sizeOfList ; i += 1) {
-                  System.out.println(i + 1 + ". " + tasks.get(i));
+                System.out.println(i + 1 + ". " + tasks.get(i));
+                System.out.println(i + 1 + ". " + tasks.get(i));
             }
         } else {
             throw new EmptyListException("No tasks in the list.");
@@ -166,9 +169,10 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCommandException {
         greeting();
         Scanner scan = new Scanner(System.in);
+        Storage storage = new Storage("output.txt");
 
         while (true) {
             String userData = scan.nextLine();
@@ -177,9 +181,15 @@ public class Duke {
                 break;
             } else {
                 try {
+                    ArrayList<Task> tasks = storage.getData();
                     executeCommand(tasks, userData);
+                    storage.saveData(tasks);
                 } catch (DukeException err) {
                     System.out.println(err.toString());
+                } catch (FileNotFoundException err) {
+                    ArrayList<Task> tasks = new ArrayList<>();
+                    executeCommand(tasks, userData);
+                    storage.saveData(tasks);
                 }
             }
         }
