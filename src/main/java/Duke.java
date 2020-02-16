@@ -20,7 +20,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
-    private static int MAX_TASK = 100;
+    private static final String DELETE_COMMAND = "delete";
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -28,7 +28,8 @@ public class Duke {
     }
 
     private static void runChatbot() {
-        Task[] Tasks = new Task[MAX_TASK];
+
+        ArrayList<Task> Tasks = new ArrayList<Task>();
         try {
             Tasks = openData();
         } catch (IOException e) {
@@ -48,7 +49,7 @@ public class Duke {
         return arr;
     }
 
-    private static void runCommand(String[] arr, Task[] Tasks, Scanner in)  {
+    private static void runCommand(String[] arr, ArrayList<Task> Tasks, Scanner in)  {
         System.out.println(LINE);
         switch (arr[0]) {
         case (BYE_COMMAND):
@@ -66,8 +67,8 @@ public class Duke {
             try {
                 int taskNum = Integer.parseInt(arr[1]);
                 taskNum--;
-                Tasks[taskNum].setDone(true);
-                printDone(Tasks[taskNum]);
+                Tasks.get(taskNum).setDone(true);
+                printDone(Tasks.get(taskNum));
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Oops! Please include the task number.");
             } catch (NumberFormatException e) {
@@ -78,28 +79,44 @@ public class Duke {
             break;
         case (TODO_COMMAND):
             try {
-                Tasks[NUM_OF_TASK] = new Todo(arr[1]);
-                printConfirm(Tasks[NUM_OF_TASK]);
+                Todo todo = new Todo(arr[1]);
+                Tasks.add(todo);
+                printConfirm(Tasks.get(NUM_OF_TASK));
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! task.Task description cannot be empty!");
+                System.out.println("Oops! Todo description cannot be empty!");
             }
             break;
         case (DEADLINE_COMMAND):
             try {
                 String arr2[] = arr[1].split("/by ", 2);
-                Tasks[NUM_OF_TASK] = new Deadline(arr2[0], arr2[1]);
-                printConfirm(Tasks[NUM_OF_TASK]);
+                Deadline deadline = new Deadline(arr2[0], arr2[1]);
+                Tasks.add(deadline);
+                printConfirm(Tasks.get(NUM_OF_TASK));
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! task.Deadline description is incomplete!");
+                System.out.println("Oops! Deadline description is incomplete!");
             }
             break;
         case (EVENT_COMMAND):
             try {
                 String arr2[] = arr[1].split("/at ", 2);
-                Tasks[NUM_OF_TASK] = new Event(arr2[0], arr2[1]);
-                printConfirm(Tasks[NUM_OF_TASK]);
+                Event event = new Event(arr2[0], arr2[1]);
+                Tasks.add(event);
+                printConfirm(Tasks.get(NUM_OF_TASK));
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! task.Event description is incomplete!");
+                System.out.println("Oops! Event description is incomplete!");
+            }
+            break;
+        case (DELETE_COMMAND):
+            try {
+                int taskNum = Integer.parseInt(arr[1]) - 1;
+                printDelete(Tasks.get(taskNum));
+                Tasks.remove(taskNum);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Oops! Please include the task number!");
+            } catch (NumberFormatException e) {
+                System.out.println("Oops! Please include the task number instead of '" + arr[1] + "'.");
+            } catch (NullPointerException e) {
+                System.out.println("Sorry but that task does not exist! Please try again.");
             }
             break;
         default:
@@ -109,18 +126,19 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private static void saveData(Task[] Tasks) throws IOException {
+
+    private static void saveData(ArrayList<Task> Tasks) throws IOException {
         FileWriter fileWriter = new FileWriter("data/duke.txt", true);
-        for (int i = 0; i < NUM_OF_TASK; i++) {
-            fileWriter.write(Tasks[i].saveTask());
+        for (Task task : Tasks) {
+            fileWriter.write(task.saveTask());
             fileWriter.write(System.lineSeparator());
         }
         fileWriter.close();
         System.out.println("Data saved successfully.");
     }
 
-    private static Task[] openData() throws IOException {
-        Task[] Tasks = new Task[MAX_TASK];
+    private static ArrayList<Task> openData() throws IOException {
+        ArrayList<Task> Tasks = new ArrayList<Task>();
         int pointer = 0;
         FileReader fileReader = new FileReader("data/duke.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -133,21 +151,21 @@ public class Duke {
                 if (arr[1].equals("1")) {
                     todo.setDone(true);
                 }
-                Tasks[pointer] = todo;
+                Tasks.add(todo);
                 break;
             case ("D"):
                 Deadline deadline = new Deadline(arr[2], arr[3]);
                 if (arr[1].equals("1")) {
                     deadline.setDone(true);
                 }
-                Tasks[pointer] = deadline;
+                Tasks.add(deadline);
                 break;
             case ("E"):
                 Event event = new Event(arr[2], arr[3]);
                 if (arr[1].equals("1")) {
                     event.setDone(true);
                 }
-                Tasks[pointer] = event;
+                Tasks.add(event);
                 break;
             }
             line = bufferedReader.readLine();
@@ -155,6 +173,12 @@ public class Duke {
         }
         NUM_OF_TASK = pointer;
         return Tasks;
+
+    private static void printDelete(Task task) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("   " + task);
+        NUM_OF_TASK--;
+        System.out.println("Now you have " + NUM_OF_TASK + " task(s) in the list.");
     }
 
     private static void printDone(Task task) {
@@ -211,11 +235,11 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void printList(Task[] Task) {
+    public static void printList(ArrayList<Task> Task) {
         System.out.println("Here are the tasks in your list: \n");
         for (int i = 0; i < NUM_OF_TASK; i++) {
             int num = i + 1;
-            System.out.println(num + ". " + Task[i]);
+            System.out.println(num + ". " + Task.get(i));
         }
     }
 }
