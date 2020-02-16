@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int CAPACITY = 100;
@@ -15,12 +16,14 @@ public class Duke {
     public static final int EVENT = 6;
     public static final int DONE = 5;
     public static final int DATE = 3;
+    public static final int DELETE = 7;
 
     public static void main(String[] args) {
         printWelcomeMessage();
-        Task[] tasks = new Task[CAPACITY];
+        //Task[] tasks = new Task[CAPACITY];
         int taskCounter = 0;
         Scanner input = new Scanner(System.in);
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while(true) {
             String line;
@@ -38,8 +41,9 @@ public class Duke {
                 case "todo":
                     line = line.substring(TODO);
                     Task t = new Todo(line);
-                    tasks[taskCounter] = t;
-                    printAcknowledgement(tasks[taskCounter], taskCounter);
+                    tasks.add(t);
+                    //tasks[taskCounter] = t;
+                    printAcknowledgement(tasks.get(taskCounter), taskCounter);
                     taskCounter++;
                     break;
                 case "deadline":
@@ -47,8 +51,9 @@ public class Duke {
                     String deadlineDescription = deadlineWords[0].substring(DEADLINE);
                     String by = deadlineWords[1].substring(DATE);
                     Task d = new Deadline(deadlineDescription, by);
-                    tasks[taskCounter] = d;
-                    printAcknowledgement(tasks[taskCounter], taskCounter);
+                    tasks.add(d);
+                    //tasks[taskCounter] = d;
+                    printAcknowledgement(tasks.get(taskCounter), taskCounter);
                     taskCounter++;
                     break;
                 case "event":
@@ -56,17 +61,28 @@ public class Duke {
                     String eventDescription = eventWords[0].substring(EVENT);
                     String at = eventWords[1].substring(DATE);
                     Task e = new Event(eventDescription, at);
-                    tasks[taskCounter] = e;
-                    printAcknowledgement(tasks[taskCounter], taskCounter);
+                    tasks.add(e);
+                    //tasks[taskCounter] = e;
+                    printAcknowledgement(tasks.get(taskCounter), taskCounter);
                     taskCounter++;
                     break;
                 case "done":
-                    String number = line.substring(DONE);
-                    int taskNumber = Integer.parseInt(number);
-                    tasks[taskNumber - 1].markAsDone();
+                    String doneNumber = line.substring(DONE);
+                    int doneTaskNum = Integer.parseInt(doneNumber);
+                    tasks.get(doneTaskNum - 1).markAsDone();
                     System.out.println(BORDER);
-                    System.out.println("Nice! I've marked this task as done: " + tasks[taskNumber - 1].description);
+                    System.out.println("Nice! I've marked this task as done: " + tasks.get(doneTaskNum - 1).description);
                     System.out.println(BORDER);
+                    break;
+                case "delete":
+                    String deleteNumber = line.substring(DELETE);
+                    int delTaskNum = Integer.parseInt(deleteNumber);
+                    tasks.remove(tasks.get(delTaskNum - 1));
+                    System.out.println(BORDER);
+                    System.out.println("Noted! I've removed this task:  " + tasks.get(delTaskNum - 1).description);
+                    System.out.println("Now you have " + (tasks.size()) + " tasks in your list!");
+                    System.out.println(BORDER);
+                    taskCounter--;
                     break;
                 default:
                     throw new DukeException();
@@ -91,11 +107,11 @@ public class Duke {
         }
     }
 
-    private static void printList(Task[] tasks, int taskCounter) {
+    private static void printList(ArrayList<Task> tasks, int taskCounter) {
         System.out.println(BORDER);
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskCounter; i++){
-            System.out.println(i+1 + ". " + tasks[i].toString());
+            System.out.println(i+1 + ". " + tasks.get(i).toString());
         }
         System.out.println(BORDER);
     }
