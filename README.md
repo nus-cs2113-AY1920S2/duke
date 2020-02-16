@@ -20,7 +20,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 <a name="introduction"></a>
 
 
-##Introduction
+##1. Introduction
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI). 
 Jump to Section 2, "Quick Start" to get started.
