@@ -28,10 +28,7 @@ public class Duke {
                 exit = 1;
                 break;
             case "list":
-                for (int i = 1; i <= taskListSize; i++) {
-                    System.out.print(i);
-                    System.out.println("." + taskList[i-1].toString());
-                }
+                printTasks(taskList, taskListSize);
                 break;
             case "done":
                 int taskDone = Integer.valueOf(tokens[1]) - 1;
@@ -40,7 +37,6 @@ public class Duke {
                 break;
             case "todo":
                 String toDo = tokens[1];
-                //if tokens[1] is a NullPointer maybe...
                 taskList[taskListSize] = new ToDo(tokens[1]);
                 addedResponse(taskList[taskListSize], taskListSize);
                 taskListSize++;
@@ -63,6 +59,13 @@ public class Duke {
                 taskListSize++;
                 break;
             }
+        }
+    }
+
+    private static void printTasks(Task[] taskList, int taskListSize) {
+        for (int i = 1; i <= taskListSize; i++) {
+            System.out.print(i);
+            System.out.println("." + taskList[i - 1].toString());
         }
     }
 
