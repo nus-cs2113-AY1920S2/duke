@@ -78,7 +78,7 @@ public class Storage {
     protected static void printAndLoadContents() throws FileNotFoundException {
         File f = new File(MK_FILE_STRING);
         Scanner s = new Scanner(f);
-        // E | 0 | project meeting | Mon 2-4pm
+        
         while (s.hasNextLine()) {
             String input = s.nextLine();
             String[] argumentLine = input.trim().split(PIPE_REGEX);
