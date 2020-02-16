@@ -18,4 +18,11 @@ done 20
 bye bye
 list more
 done 2020
+delete 2
+delete 3
+list
+delete 1
+delete 1
+delete 0
+list
 bye

@@ -19,8 +19,9 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void setIsCompleted() {
-        this.isDone = true;
+    public Task setTaskCompleted(Task taskToSet) {
+        taskToSet.isDone = true;
+        return taskToSet;
     }
 
     public String getTaskInfo() {
