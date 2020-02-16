@@ -16,6 +16,7 @@ import static duke.PrintMessage.displayBlahMessage;
 import static duke.PrintMessage.displayByeMessageAndExit;
 import static duke.PrintMessage.displayTaskList;
 import static duke.PrintMessage.displayRemoveMessage;
+import static duke.PrintMessage.getUsageInfoForAllCommands;
 
 import java.util.Scanner;
 
@@ -34,6 +35,8 @@ public class Duke {
     private static final String COMMAND_EVENT_WORD = "event";
     
     private static final String COMMAND_DELETE_WORD = "delete";
+    
+    private static final String COMMAND_HELP_WORD = "help";
     
     private static final String ENTER_A_COMMAND = "Enter a command: ";
     private static final String COMMAND_ENTERED = "Command entered: ";
@@ -104,6 +107,9 @@ public class Duke {
             break;
         case COMMAND_DELETE_WORD:
             displayRemoveMessage(commandArgs);
+            break;
+        case COMMAND_HELP_WORD:
+            getUsageInfoForAllCommands();
             break;
         default:
             displayInvalidMessage();
