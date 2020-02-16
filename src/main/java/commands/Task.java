@@ -5,14 +5,21 @@ public class Task {
     protected boolean isDone;
     private static int listCount = 0;
 
+
+    protected String taskDescription;
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        taskDescription = "task";
         listCount += 1;
     }
 
     public void updateIsDone (){
         this.isDone = true;
+    }
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
     public String getDescription(){
@@ -23,8 +30,16 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public static int getListCount() {
-        return listCount;
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String getAtDescription() {
+        return null;
+    }
+
+    public String getByDescription() {
+        return null;
     }
 
     @Override
