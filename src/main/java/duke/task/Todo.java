@@ -8,7 +8,7 @@ public class Todo extends Task {
     public Todo(String command, boolean status) {super(command, status);};
 
     public String textToFile() {
-        String text = "T | 0 | " + name;
+        String text = "T | 0 | " + name + System.lineSeparator();
         if(isDone) text.replace("| 0 |", "| 1 |");
         return text;
     }

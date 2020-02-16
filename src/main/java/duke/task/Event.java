@@ -14,7 +14,7 @@ public class Event extends Task {
     }
 
     public String textToFile() {
-        String text = "E | 0 | " + name + " | " + timeSlot;
+        String text = "E | 0 | " + name + " | " + timeSlot + System.lineSeparator();
         if(isDone) text.replace("| 0 |", "| 1 |");
         return  text;
     }

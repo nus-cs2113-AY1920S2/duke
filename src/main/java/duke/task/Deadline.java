@@ -14,7 +14,7 @@ public class Deadline extends Task {
     }
 
     public String textToFile() {
-        String text = "D | 0 | " + name + " | " + deadline;
+        String text = "D | 0 | " + name + " | " + deadline + System.lineSeparator();
         if(isDone) text.replace("| 0 |", "| 1 |");
         return  text;
     }

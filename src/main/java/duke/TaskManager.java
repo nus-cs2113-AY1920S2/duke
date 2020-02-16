@@ -4,14 +4,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskManager {
     public static final String FORMAT_LINE = "------------------------------------";
@@ -20,13 +19,12 @@ public class TaskManager {
     public static final String ADD_TASK = "Got it! I have added this task into your list:";
     public static final String DELETE_TASK= "Noted! I have deleted this task from the list:";
     private ArrayList<Task> tasks = new ArrayList<>();
-    private int numOfTasks = 0;
 
     public void printCommand(String command, String str) {
         System.out.println(FORMAT_LINE);
         System.out.println(command);
         System.out.println("\t" + str);
-        System.out.println("Now you have " + numOfTasks + (numOfTasks > 1 ? " tasks" : " task") + " in the list");
+        System.out.println("Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
         System.out.println("Remember to finish your tasks on time!");
         System.out.println(FORMAT_LINE);
         System.out.println();
@@ -38,8 +36,8 @@ public class TaskManager {
         String record;
         while (fileIn.hasNextLine()) {
             record = fileIn.nextLine();
-            String[] meta = record.split("|");
-            switch (meta[0]) {
+            String[] meta = record.split("\\|");
+            switch (meta[0].trim()) {
             case "T":
                 tasks.add(new Todo(meta[2].trim(), meta[1].trim().equals("1")));
                 break;
@@ -59,30 +57,32 @@ public class TaskManager {
         for(Task task: tasks) {
             fw.write(task.textToFile());
         }
+        fw.close();
     }
 
     public void addTodo(String command) {
         tasks.add(new Todo(command));
-        printCommand(ADD_TASK, tasks.get(numOfTasks++).print());
+        printCommand(ADD_TASK, tasks.get(tasks.size()-1).print());
     }
 
     public void addDeadline(String command) {
         String[] commands = command.split("/", 2);
         tasks.add(new Deadline(commands));
-        printCommand(ADD_TASK, tasks.get(numOfTasks++).print());
+        printCommand(ADD_TASK, tasks.get(tasks.size()-1).print());
     }
 
     public void addEvent(String command) {
         String[] commands = command.split("/", 2);
         tasks.add(new Event(commands));
-        printCommand(ADD_TASK, tasks.get(numOfTasks++).print());
+        printCommand(ADD_TASK, tasks.get(tasks.size()-1).print());
     }
 
     public void listTask() {
         System.out.println(FORMAT_LINE);
         System.out.println(LISTING);
-        for(int i = 0; i < numOfTasks; i++) {
-            System.out.println(i+1 + "." + tasks.get(i).print());
+        int i = 1;
+        for(Task task: tasks) {
+            System.out.println(i++ + "." + task.print());
         }
         System.out.println(FORMAT_LINE);
         System.out.println();
@@ -94,8 +94,8 @@ public class TaskManager {
     }
 
     public void delete(int taskNo) {
-        numOfTasks--;
-        printCommand(DELETE_TASK, tasks.get(taskNo-1).print());
+        String description = tasks.get(taskNo-1).print();
         tasks.remove(taskNo-1);
+        printCommand(DELETE_TASK, description);
     }
 }
