@@ -3,17 +3,17 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 
 
 - [1.Introduction](##1.Introduction)
-- [2.Quick Start](##2. Quick-Start)
-- 3.Features
-    * 3.1. Adding a task: `add`
-    * 3.2. Listing all tasks: `list`
-    * 3.3. Finding a task: `find`
-    * 3.4. Deleting a task: `delete`
-    * 3.5. Filter tasks by date: `filter`
-    * 3.6. Complete a task: `done`
-    * 3.7. Exiting the program: `exit`
-* 4. FAQ
-* 5. Command Summary
+- [2.Quick Start](#2.Quick Start)
+- [3.Features](#3.Features)
+    * [3.1. Adding a task:](##3.1. Adding a task:) `add`
+    * [3.2. Listing all tasks:](#3.2. Listing all tasks:) `list`
+    * [3.3. Finding a task:](#3.3. Finding a task:) `find`
+    * [3.4. Deleting a task:](#3.4. Deleting a task:) `delete`
+    * [3.5. Filter tasks by date:](#3.5. Filter tasks by date:) `filter`
+    * [3.6. Complete a task:](#3.6 Complete a task:) `done`
+    * [3.7. Exiting the program:](#3.7. Exiting the program) `exit`
+- [4.FAQ](#4.FAQ)
+- [5. Command Summary](#5. Command Summary)
 
 ## 1.Introduction
 
