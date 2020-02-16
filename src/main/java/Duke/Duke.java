@@ -20,6 +20,9 @@ public class Duke {
             parser = new Parser();
     }
 
+    /**
+     * The actual execution of Duke is summarised in this method. Duke is first entered, then the commands are fed till exit is found. Finally, the duke exits
+     */
     public void run() {
         enterDuke();
         runDukeTillExit();
