@@ -4,26 +4,44 @@ import alie.task.Deadlines;
 import alie.task.Events;
 import alie.task.ToDo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Alie {
 
     public static final String logo =
-            "    /\\       |        |   |‾‾‾‾‾    \n"
-                    + "   /  \\      |        |   |         \n"
-                    + "  /____\\     |        |   |----     \n"
-                    + " /      \\    |        |   |         \n"
-                    + "/        \\ . |_____ . | . |_____ .  \n";
+                      "    /\\       |        |   |‾‾‾‾‾" + System.lineSeparator()
+                    + "   /  \\      |        |   |"      + System.lineSeparator()
+                    + "  /____\\     |        |   |----"  + System.lineSeparator()
+                    + " /      \\    |        |   |"      + System.lineSeparator()
+                    + "/        \\ . |_____ . | . |_____ .";
     protected static final int DONE_CMD_LENGTH = 5;
     protected static final int TODO_CMD_LENGTH = 5;
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
     protected static final String EVENT_DETAILS_DIVIDER = " /at ";
+    protected static final String FILEPATH = "try.txt";
 
     public static void main(String[] args) {
         printWelcomeMsg();
 
-        TaskManager checkList = new TaskManager();
+        TaskManager checkList = null;
+        Storage storage = new Storage(FILEPATH);
         Scanner userInput = new Scanner(System.in);
+
+        try {
+            checkList = storage.readFromFile();
+        } catch (FileNotFoundException e) {
+            checkList = new TaskManager();
+            System.out.println("File not found");
+        } catch (InvalidCmdException e) {
+
+        } finally {
+            if (checkList == null) {
+                checkList = new TaskManager();
+            }
+        }
 
         while (true) {
             printHeader();
@@ -32,6 +50,12 @@ public class Alie {
                 parseThenExecuteCmd(cmd, checkList);
             } catch (Exception errorMsg) {
                 System.out.println(errorMsg);
+            }
+
+            try {
+                storage.save(checkList);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -109,9 +133,7 @@ public class Alie {
             checkList.markTaskCompleted(indexOfTask - 1);
         } catch (NumberFormatException error) {
             throw new InvalidCmdException("INDEX provided is not a number.");
-        } catch (IndexOutOfBoundsException error) {
-            throw new InvalidCmdException("INDEX provided is not a valid index.");
-        } catch (NullPointerException error) {
+        } catch (IndexOutOfBoundsException | NullPointerException error) {
             throw new InvalidCmdException("INDEX provided is not a valid index.");
         }
         return;

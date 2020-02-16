@@ -1,9 +1,6 @@
 package alie;
 
-import alie.task.Deadlines;
-import alie.task.Events;
 import alie.task.Task;
-import alie.task.ToDo;
 
 public class TaskManager {
     protected static final int SIZE_LIMIT = 100;
@@ -13,7 +10,7 @@ public class TaskManager {
 
     //Assume no more than 100 tasks given for each Manager
     protected Task[] taskList;
-    protected static int taskCount;
+    public static int taskCount;
 
     public TaskManager() {
         this.taskList = new Task[SIZE_LIMIT];

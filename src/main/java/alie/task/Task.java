@@ -5,6 +5,7 @@ public abstract class Task {
     protected boolean isDone;
     protected static final String INDENTATION = "      ";
     protected static final String MORE_INDENTATION = "        ";
+    protected static final String DELIMITER = "|";
 
     public Task (String name) {
         this.description = name;
@@ -32,4 +33,6 @@ public abstract class Task {
                 MORE_INDENTATION + getTaskInfo() + System.lineSeparator() +
                 INDENTATION + "Now you have " + (taskCount+1) + " tasks in the list.");
     }
+
+    public abstract String encodeTask();
 }
