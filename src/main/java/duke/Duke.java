@@ -10,7 +10,7 @@ import java.util.Scanner;
 // unicode-character reference list: \u2717 = ✗, \u2713 ✓
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         System.out.println("    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
@@ -21,8 +21,10 @@ public class Duke {
         while (true) {
             String command = scanner.nextLine();
 
-            if (command.matches("done\\s\\d+")) { //Level 3: Mark as Done
+            if (command.matches("done\\s+\\d+(\\s+)?")) { //Level 3: Mark as Done
                 processDoneCommand(list, command);
+            } else if (command.matches("delete\\s+\\d+(\\s+)?")) { //Level 6: Delete
+                processDeleteCommand(list, command);
             } else if (command.equals("list")) { //Level 2: List (Add-function is included in level 4)
                 processListCommand(list);
             } else if (command.matches("todo\\s.*")){ //Level 4: ToDos
@@ -54,6 +56,21 @@ public class Duke {
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "    ____________________________________________________________");
             }
+        }
+    }
+
+    private static void processDeleteCommand(ArrayList<Task> list, String command) {
+        try {
+            System.out.println("    ____________________________________________________________\n"
+                    + "     Noted. I've removed this task: \n" + "       "
+                    + list.get(Integer.parseInt(command.replaceAll("[^\\d]",""))-1).filteredTask
+                    + "\n     Now you have " + (list.size()-1) + (list.size()>1?" tasks":" task") + " in the list.\n"
+                    + "    ____________________________________________________________");
+            list.remove(Integer.parseInt(command.replaceAll("[^\\d]",""))-1);
+        } catch (NumberFormatException e){
+            System.out.println("    ____________________________________________________________\n"
+                    + "     Task does not exist!\n"
+                    + "    ____________________________________________________________");
         }
     }
 
