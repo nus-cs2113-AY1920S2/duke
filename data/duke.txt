@@ -1,0 +1,4 @@
+[T][✓]sleep
+[D][✘]getup (by: mon)
+[E][✓]lol    (at: mon 1)
+[E][✘]lmao   (at: fri 2)

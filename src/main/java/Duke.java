@@ -221,7 +221,7 @@ public class Duke {
     }
 
     private static void writeToFile() throws IOException {
-        FileWriter fw = new FileWriter("duke.txt");
+        FileWriter fw = new FileWriter("data/duke.txt");
         for (Task task : taskList) {
             fw.write(task.toString() + System.lineSeparator());
         }
@@ -229,7 +229,7 @@ public class Duke {
     }
 
     public static void readFromFile() throws IOException {
-        File file = new File("duke.txt");
+        File file = new File("data/duke.txt");
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String raw = scanner.nextLine();
