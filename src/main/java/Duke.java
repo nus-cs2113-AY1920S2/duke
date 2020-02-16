@@ -27,6 +27,7 @@ public class Duke {
                 + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday)\n"
                 + "\tevent:     tasks that start/end by a specific time (syntax: event food fair /at Mon 2-4pm)\n"
                 + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
+                + "\tdelete x:  remove the xth task (syntax: delete 3)\n"
                 + "\thelp:      launch the help screen (syntax: help)";
         System.out.println(helpMsg);
     }
@@ -137,6 +138,36 @@ public class Duke {
         System.out.println("\t" +newEvent.toString() );
     }
 
+    private static void deleteTask(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
+        // syntax: done 2
+        String[] splitCmd = userCmd.split(" ");
+        int taskToDelete = 0;
+
+        // error check syntax
+        try {
+            taskToDelete = Integer.parseInt(splitCmd[1]);
+        }
+        catch (NumberFormatException e){
+            throw new DukeException("The number must be in number form. Syntax: delete 3");
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("There must be a task number provided to mark as done. Syntax: delete 3");
+        }
+
+        if (taskToDelete > taskArrList.size() ) {
+            System.out.println("Task not found!");
+        }
+        else {
+            int taskIndex = taskToDelete-1;
+            Task t = taskArrList.get(taskIndex);
+            taskArrList.remove(taskIndex);
+
+            System.out.println("I've removed this task:");
+            System.out.println("\t" +t.toString());
+            System.out.println("You have " +taskArrList.size() +" task(s) left.");
+        }
+    }
+
     /** Main method Start **/
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
@@ -182,10 +213,15 @@ public class Duke {
                 // Add task type events
                 else if (userCmd.contains("event")) {
                     addEvent(userCmd, taskArrList);
-                } else {
+                }
+                else if (userCmd.contains("delete")) {
+                    deleteTask(userCmd, taskArrList);
+                }
+                else {
                     System.out.println("Wrong syntax!");
                     printHelp();
                 }
+
             }
             catch (DukeException e){
                 System.out.println(e +"\nPlease try again");
