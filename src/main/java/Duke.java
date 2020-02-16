@@ -128,7 +128,7 @@ public class Duke {
 
 
     private static void saveData(ArrayList<Task> Tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter("data/duke.txt", true);
+        FileWriter fileWriter = new FileWriter("data/duke.txt", false);
         for (Task task : Tasks) {
             fileWriter.write(task.saveTask());
             fileWriter.write(System.lineSeparator());
@@ -173,6 +173,7 @@ public class Duke {
         }
         NUM_OF_TASK = pointer;
         return Tasks;
+    }
 
     private static void printDelete(Task task) {
         System.out.println("Noted. I've removed this task: ");
