@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,6 +26,8 @@ public class Duke {
      * Maximum number of tasks
      */
     private static final int MAX_TASKS = 100;
+
+    private static final String FILE_PATH = "./duke.txt";
 
     public static void main(String[] args) throws DukeException {
         introduction();
@@ -110,6 +115,11 @@ public class Duke {
         types.Task t = new types.Event(splitTask2[0], numTasks, splitTask2[1]);
         addTask(t);
         printTask(t);
+        try {
+            taskListWrite(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -134,6 +144,11 @@ public class Duke {
         types.Task t = new types.Deadline(splitTask2[0], numTasks, splitTask2[1]);
         addTask(t);
         printTask(t);
+        try {
+            taskListWrite(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -156,6 +171,11 @@ public class Duke {
         types.Task t = new types.Todo(task, numTasks);
         addTask(t);
         printTask(t);
+        try {
+            taskListWrite(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -174,6 +194,11 @@ public class Duke {
             taskList[taskDoneNum - 1].setDone(true);
             System.out.println("    Good work! I've marked this task as done!");
             System.out.println("    " + taskList[taskDoneNum - 1].toString());
+        }
+        try {
+            taskListWrite(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -228,5 +253,25 @@ public class Duke {
         }
     }
 
+    private static void writeToFile(types.Task t, FileWriter fr) throws IOException {
+        String str = t.getType() + " | " + t.getDone() + " | " + t.getName();
+        if (t.getType().equals("D")) {
+            str += " | " + t.getBy();
+        } else if (t.getType().equals("E")) {
+            str += " | " + t.getAt();
+        }
+        fr.write(str);
+        fr.write(System.lineSeparator());
+    }
+
+    private static void taskListWrite(types.Task[] arr) throws IOException {
+        File f = new File(FILE_PATH);
+        FileWriter fr = null;
+        fr = new FileWriter(f);
+        for (int i = 0; i < numTasks; i++) {
+            writeToFile(arr[i], fr);
+        }
+        fr.close();
+    }
 }
 

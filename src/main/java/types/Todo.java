@@ -19,4 +19,14 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Get type of task
+     * @return type
+     */
+    @Override
+    public String getType() {
+        return "T";
+    }
+
 }

@@ -37,6 +37,19 @@ public class Task {
     }
 
     /**
+     * Returns if task is done
+     * @param isDone whether task is done
+     * @return if task is done
+     */
+    public int getDone() {
+        if (isDone) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
      * Get task number
      * @return task number
      */
@@ -65,6 +78,30 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    /**
+     * Get type of task
+     * @return type
+     */
+    public String getType() {
+        return "Z";
+    }
+
+    /**
+     * Returns when the event is
+     * @return when event is at
+     */
+    public String getAt() {
+        return "";
+    }
+
+    /**
+     * Returns when deadline is by
+     * @return when deadline is by
+     */
+    public String getBy() {
+        return "";
     }
 
 }

@@ -26,4 +26,22 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by:" + by + ")";
     }
+
+    /**
+     * Get type of task
+     * @return type
+     */
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    /**
+     * Returns when deadline is by
+     * @return when deadline is by
+     */
+    @Override
+    public String getBy() {
+        return by;
+    }
 }
