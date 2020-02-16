@@ -221,6 +221,11 @@ public class Duke {
             taskList = deleteIndex(taskList, taskDeleteNum - 1);
             System.out.println("    Now you have " + numTasks + " tasks in the list.");
         }
+        try {
+            taskListWrite(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -253,6 +258,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Writes a task to file
+     * @param t task
+     * @param fr fileWriters
+     * @throws IOException exception
+     */
     private static void writeToFile(types.Task t, FileWriter fr) throws IOException {
         String str = t.getType() + " | " + t.getDone() + " | " + t.getName();
         if (t.getType().equals("D")) {
@@ -264,6 +275,11 @@ public class Duke {
         fr.write(System.lineSeparator());
     }
 
+    /**
+     * Writes entire task list array to file
+     * @param arr task list array
+     * @throws IOException exception
+     */
     private static void taskListWrite(types.Task[] arr) throws IOException {
         File f = new File(FILE_PATH);
         FileWriter fr = null;
