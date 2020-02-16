@@ -1,0 +1,2 @@
+[T][✘]Todo
+[D][✘]Deadline (by: tmr)

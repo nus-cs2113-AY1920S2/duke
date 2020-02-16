@@ -9,6 +9,9 @@ import duke.taskmanager.Event;
 import duke.taskmanager.TaskManager;
 import duke.taskmanager.ToDo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,12 +27,21 @@ public class Duke {
     public static int Task_No = 0;
     private static TaskManager[] manageTask = new TaskManager[TASK_NUMBER];
     private static Scanner userInput = new Scanner(System.in);
+    private static FileWriter Duke_fw;
+    static {
+        try {
+            Duke_fw = new FileWriter("data/TaskManagement.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         printIntro();
         printExeType();
         exeCommands();
         printExit();
+        saveFile();
     }
 
     /*
@@ -223,6 +235,13 @@ public class Duke {
 
     public static void clearInput(){
         userInput.nextLine();
+    }
+
+    public static void saveFile() throws IOException {
+        for (int i = 0; i < Task_No; i++){
+            Duke_fw.write(manageTask[i].toString()+"\n");
+        }
+        Duke_fw.close();
     }
 }
 
