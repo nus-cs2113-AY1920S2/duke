@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends TaskManager {
     protected String by;
     public Event(String task, String by) {

@@ -1,3 +1,5 @@
+package duke;
+
 public class Deadline extends TaskManager {
     protected String by;
     public Deadline(String task, String by) {

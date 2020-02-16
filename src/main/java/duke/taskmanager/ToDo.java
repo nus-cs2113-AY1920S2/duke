@@ -1,3 +1,5 @@
+package duke;
+
 public class ToDo extends TaskManager {
     protected boolean isDone;
     public ToDo(String task) {
