@@ -62,6 +62,12 @@ public class Duke {
                 } catch (DukeException e){
                     System.out.println("    You must specify when the event is at!");
                 }
+            } else if (cWord.equals("delete")) {
+               try {
+                   deleteCommand(command);
+               } catch (DukeException e) {
+                   System.out.println("    You must include the number of deleted task!");
+               }
             } else {
                 System.out.println("    I'm sorry! I don't know what that means :( ");
             }
@@ -169,6 +175,46 @@ public class Duke {
             System.out.println("    Good work! I've marked this task as done!");
             System.out.println("    " + taskList[taskDoneNum - 1].toString());
         }
+    }
+
+    /**
+     * The delete command, which deletes an item from the list
+     * @param command number of task to be deleted
+     * @throws DukeException an error
+     */
+    private static void deleteCommand(String command) throws DukeException {
+        String[] splitTask2 = command.split(" ");
+        if (splitTask2.length != 2) {
+            throw new DukeException();
+        }
+        int taskDeleteNum = Integer.parseInt(splitTask2[1]);
+        if (taskDeleteNum - 1 >= numTasks || taskDeleteNum <= 0) {
+            System.out.println("    You haven't done that many tasks yet!");
+        } else {
+            System.out.println("    Noted. I've removed this task: ");
+            System.out.println("    " + taskList[taskDeleteNum - 1].toString());
+            taskList = deleteIndex(taskList, taskDeleteNum - 1);
+            System.out.println("    Now you have " + numTasks + " tasks in the list.");
+        }
+    }
+
+    /**
+     * Removes an item from the task array
+     * @param arr original array
+     * @param index of item to be deleted
+     * @return the new array
+     */
+    private static types.Task[] deleteIndex(types.Task[] arr, int index) {
+        types.Task[] result = new types.Task[arr.length - 1];
+        for (int i = 0; i < result.length; i++) {
+            if (i < index) {
+                result[i] = arr[i];
+            } else {
+                result[i] = arr[i+1];
+            }
+        }
+        numTasks--;
+        return result;
     }
 
     /**
