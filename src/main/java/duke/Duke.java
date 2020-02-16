@@ -225,15 +225,15 @@ public class Duke {
     }
 
     public static void printExeType() {
-        System.out.println("    ✻❊✽✼❉✱✲✾❃❋❈❆✿❀❁\n" +
+        System.out.println("    ~·~·~·~·~·~·~·~·~·~·~·~·~·\n" +
                 "    Hi what can I do for you? (please key in the number):" +
                 "\n    1. Add a new task, \n" +
                 "    2. Show my tasks,\n"+
                 "    3. I've completed my task!\n" +
                 "    4. Delete a task,  or \n" +
                 "    5. See you next time! \n" +
-                "    to end this conversation" +
-                "    ✻❊✽✼❉✱✲✾❃❋❈❆✿❀❁\n");
+                "    to end this conversation \n" +
+                "    ~·~·~·~·~·~·~·~·~·~·~·~·~·\n");
     }
 
     public static void printTaskType() {
@@ -260,9 +260,9 @@ public class Duke {
     }
 
     public static void printExit() {
-        System.out.println("    ✻❊✽✼❉✱✲✾❃❋❈❆✿❀❁\n" +
+        System.out.println("    ~·~·~·~·~·~·~·~·~·~·~·~·~·\n" +
                 "    Bye. Hope to see you again soon!\n" +
-                "    ✻❊✽✼❉✱✲✾❃❋❈❆✿❀❁" );
+                "    ~·~·~·~·~·~·~·~·~·~·~·~·~·" );
     }
 
     public static void clearInput(){
@@ -276,4 +276,3 @@ public class Duke {
         Duke_fw.close();
     }
 }
-
