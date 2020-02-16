@@ -1,9 +1,6 @@
 package alie;
 
-import alie.task.Deadlines;
-import alie.task.Events;
 import alie.task.Task;
-import alie.task.ToDo;
 
 import java.util.ArrayList;
 
@@ -11,6 +8,7 @@ public class TaskManager {
     protected static final String INDENTATION = "      ";
     protected static final String MORE_INDENTATION = "        ";
     protected ArrayList<Task> taskList = new ArrayList<>();
+
 
     /*public TaskManager() {
         this.taskList = new Task[SIZE_LIMIT];
