@@ -8,6 +8,8 @@ import duke.task.Todo;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 public class Duke {
 
     private static Task[] tasks = new Task[100];
@@ -95,12 +97,14 @@ public class Duke {
             }catch(StringIndexOutOfBoundsException e){
                 System.out.println("\t:(OOPS!!! Please enter the task number.");
             }
+            outputTasks();
         } else{
             try{
                 addNewTask(userResponde);
             }catch(DukeException e){
                 System.out.println("\t:(OOPS!!! " + e.getMessage());
             }
+            outputTasks();
         }
         printLine();
         System.out.println();
@@ -169,6 +173,19 @@ public class Duke {
         System.out.println("\tNow you have " + (taskCount+1) + " tasks in the list");
         taskCount++;
     }
+
+    public static void outputTasks(){
+        try{
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for(int i = 0; i<taskCount; i++){
+                fw.write(tasks[i].toFile() + "\n");
+            }
+            fw.close();
+        }catch (IOException e){
+            System.out.println("No backup file in the hard disk.");
+        }
+    }
+
 
 }
 
