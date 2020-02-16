@@ -9,7 +9,6 @@ import duke.taskmanager.Event;
 import duke.taskmanager.TaskManager;
 import duke.taskmanager.ToDo;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +23,9 @@ public class Duke {
     public static final String MARK_AS_DONE = "3";
     public static final String DELETE_TASK = "4";
     public static final String EXIT_COMMAND = "5";
+    public static final String TODO = "1";
+    public static final String DEADLINE = "2";
+    public static final String EVENT = "3";
     public static int Task_No = 0;
     private static TaskManager[] manageTask = new TaskManager[TASK_NUMBER];
     private static Scanner userInput = new Scanner(System.in);
@@ -55,7 +57,7 @@ public class Duke {
                 printExeType(); //show the instructions after execution
                 exeCommand = getStringInput(userInput); //get the next command
             }
-        } catch (IllegalCommandException e) { //todo
+        } catch (IllegalCommandException e) {
             System.out.println("    Sorry,we do not understand your command. " +
                     "(IllegalCommandException). " +
                     "Please follow the instructions below.");
@@ -104,14 +106,14 @@ public class Duke {
         taskType = getStringInput(userInput);
         String task, by;
         switch (taskType) {
-        case "1": //ToDoo
+        case TODO:
             printUserInputTask();
             task = getStringInput(userInput);
             manageTask[Task_No] = new ToDo(task);
             Task_No++;
             printRespondToAddTask(task);
             break;
-        case "2": //Deadline
+        case DEADLINE:
             printUserInputTask();
             task = getStringInput(userInput);
             System.out.println("    Please enter the deadline of your task: ");
@@ -120,7 +122,7 @@ public class Duke {
             Task_No++;
             printRespondToAddTask(task);
             break;
-        case "3": //Event
+        case EVENT:
             printUserInputTask();
             task = getStringInput(userInput);
             System.out.println("    Please enter the venue of your task: " +
