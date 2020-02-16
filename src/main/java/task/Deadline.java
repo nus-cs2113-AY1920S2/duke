@@ -23,6 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String saveTask() {
-        return "D | " + super.isDoneNum() + " | " + super.saveTask() + " | " + this.by;
+        return "D|" + super.isDoneNum() + "|" + super.saveTask() + "|" + this.by;
     }
 }

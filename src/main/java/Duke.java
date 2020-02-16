@@ -29,6 +29,11 @@ public class Duke {
 
     private static void runChatbot() {
         Task[] Tasks = new Task[MAX_TASK];
+        try {
+            Tasks = openData();
+        } catch (IOException e) {
+            System.out.println("Previous data cannot be loaded.");
+        }
         Scanner in = new Scanner(System.in);
         String arr[] = getCommand(in);
         while (true) {
@@ -114,36 +119,42 @@ public class Duke {
         System.out.println("Data saved successfully.");
     }
 
-    private static void openData(ArrayList<Task> Tasks) throws IOException {
+    private static Task[] openData() throws IOException {
+        Task[] Tasks = new Task[MAX_TASK];
+        int pointer = 0;
         FileReader fileReader = new FileReader("data/duke.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();
         while (line != null) {
-            String arr[] = line.split(" ", 4);
+            String arr[] = line.split("[|]", 4);
             switch (arr[0]) {
             case ("T"):
                 Todo todo = new Todo(arr[2]);
                 if (arr[1].equals("1")) {
                     todo.setDone(true);
                 }
-                Tasks.add(todo);
+                Tasks[pointer] = todo;
                 break;
             case ("D"):
                 Deadline deadline = new Deadline(arr[2], arr[3]);
                 if (arr[1].equals("1")) {
                     deadline.setDone(true);
                 }
-                Tasks.add(deadline);
+                Tasks[pointer] = deadline;
                 break;
             case ("E"):
                 Event event = new Event(arr[2], arr[3]);
                 if (arr[1].equals("1")) {
                     event.setDone(true);
                 }
-                Tasks.add(event);
+                Tasks[pointer] = event;
                 break;
             }
+            line = bufferedReader.readLine();
+            pointer++;
         }
+        NUM_OF_TASK = pointer;
+        return Tasks;
     }
 
     private static void printDone(Task task) {

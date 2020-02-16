@@ -24,6 +24,6 @@ public class Event extends Task {
 
     @Override
     public String saveTask() {
-        return "E | " + super.isDoneNum() + " | " + super.saveTask() + " | " + this.time;
+        return "E|" + super.isDoneNum() + "|" + super.saveTask() + "|" + this.time;
     }
 }
