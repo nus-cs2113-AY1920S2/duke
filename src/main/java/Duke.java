@@ -109,7 +109,7 @@ public class Duke {
 
     private static void greet() {
         System.out.print(FOUR_SPACE_INDENT);
-        System.out.println("Hello I'm Yapyap.");
+        System.out.println("Hello, I'm Taskmaster Yipyap.");
         System.out.print(FOUR_SPACE_INDENT);
         System.out.println("What can I do for you?");
     }
