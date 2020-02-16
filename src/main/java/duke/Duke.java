@@ -58,6 +58,16 @@ public class Duke {
             }catch(StringIndexOutOfBoundsException e){
                 System.out.println("\t:(OOPS!!! Please enter the task number.");
             }
+        } else if(userResponde.startsWith("delete")){
+            try{
+                deleteTask(userResponde);
+            } catch(NumberFormatException e) {
+                System.out.println("\t:(OOPS!!! Please enter the task number you want to delete.");
+            } catch(StringIndexOutOfBoundsException e){
+                System.out.println("\t:(OOPS!!! Please enter the task number you want to delete.");
+            } catch(DukeException e){
+                System.out.println("\t:(OOPS!!! " + e.getMessage());
+            }
         } else{
             try{
                 addNewTask(userResponde);
@@ -92,6 +102,20 @@ public class Duke {
         tasks[doneCount].markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t  [\u2713] " + tasks[doneCount].getDescription());
+    }
+
+    public static void deleteTask(String userResponde) throws DukeException{
+        int deleteCount = Integer.parseInt(userResponde.substring(7)) - 1;
+        if(deleteCount > taskCount){
+            throw new DukeException("There is no task " + (deleteCount + 1) + ". Please reconsider the index.");
+        }
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t  " + tasks[deleteCount]);
+        taskCount--;
+        for(int i = deleteCount; i <taskCount ; i++){
+            tasks[i] = tasks[i+1];
+        }
+        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
     }
 
     public static void addNewTask(String userResponde) throws DukeException{
