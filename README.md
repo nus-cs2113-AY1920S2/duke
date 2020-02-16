@@ -17,13 +17,12 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 * [5. Command Summary](#command-summary)
 
 
-
 <a name="introduction"></a>
 
 
 ##  1. Introduction
 
-Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a *Command Line Interface (CLI)*. 
+Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is **optimized for those who prefer to work with a Command Line Interface (CLI)**. 
 Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 
@@ -48,88 +47,104 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 ## 3. Features
 
-Command Format
+**Command Format**
 
-``` javascript
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter to specify a task's description
-* Tasks with a venue can be added right after the TASK_DESCRIPTION by using /at e.g. in `event TASK_DESCRIPTION /at VENUE`
-* Tasks with a deadline can be added right after the TASK_DESCRIPTION by using `/by` e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm`. Note that you have to add 'T' between the date and the time.
+```javascript
+* Words in `UPPER_CASE` are the parameters to be supplied by the user 
+  e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
+  to specify a task's description
+
+* Tasks with a venue can be added right after the TASK_DESCRIPTION  by using /at 
+  e.g. in `event TASK_DESCRIPTION /at VENUE`
+
+* Tasks with a deadline can be added right after the TASK_DESCRIPTION by using /by 
+  e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm`. 
+  Note that you have to add 'T' between the date and the time.
+
 ```
 
 <a name="addtask"></a>
 
-### 3.1 Adding a task: add
+### 3.1 Adding a task: `add`
 
 Adds a task into Duke.
 
-Format: 
-* `todo TASK_DESCRIPTION`
-* `deadline TASK_DESCRIPTION /by DATE T TIME`
-* `event TASK_DESCRIPTION /at VENUE`
 
-Examples:
-* `todo return book`
-* `deadline Thesis submission /by 2020-01-12T23:59`
-* `event Wedding Ceremony /at ABC hotel`
+* **Format**: 
+    * `todo TASK_DESCRIPTION`
+    * `deadline TASK_DESCRIPTION /by DATE T TIME`
+    * `event TASK_DESCRIPTION /at VENUE`
+
+* **Examples**:
+    * `todo return book`
+    * `deadline Thesis submission /by 2020-01-12T23:59`
+    * `event Wedding Ceremony /at ABC hotel`
 
 <a name="list"></a>
 
-### 3.2. Listing all tasks: list
+### 3.2. Listing all tasks: `list`
 
 Shows a list of all the tasks in Duke.
 
-Format: `list`
+**Format**: `list`
+
 
 <a name="find"></a>
 
-### 3.3 Finding a task: find
+### 3.3 Finding a task: `find`
 
 Finds tasks that contains a given keyword.
 
-Format:
-* `find KEYWORD`
+**Format** : `find KEYWORD`
 
-Example:
-* `find book`
+**Example**: `find book`
 
 <a name="delete"></a>
 
-### 3.4 Deleting a task: delete
+### 3.4 Deleting a task: `delete`
 Deletes a specified task from Duke.
 
-Format: `delete INDEX`
-* Deletes the task at the specified INDEX.
-* The index refers to the index number shown on the displayed task list.
-* The index must be a positive number 1,2,3,...
+**Format**: `delete INDEX`
+
+```javascript
+    * Deletes the task at the specified INDEX.
+    * The index refers to the index number shown on the displayed task list.
+    * The index must be a positive number 1,2,3,...
+```
 
 <a name="filter"></a>
 
-### 3.5 Filter tasks by date: filter
+### 3.5 Filter tasks by date: `filter`
 Filters tasks based on a given DATE
 
-Format: `filter DATE`
+**Format**: `filter DATE`
 
-Example:
-`filter 2019-01-01`
-* Note that the **month and date must be in 2 digits**. If a date occurs on 1 Jan 2019,
-you have to **add a zero in front**. 
+**Example**: `filter 2019-01-01`
+
+```javascript
+* Note that the month and date MUST be in 2 digits. 
+  If a date occurs on 1 Jan 2019, you have to add a ZERO in front. 
+```
 
 <a name="complete"></a>
 
-### 3.6 Complete a task: complete
+### 3.6 Complete a task: `complete`
 
 Marks a task as completed at the specified INDEX.
 
-Format: `done INDEX`
+**Format**: `done INDEX`
+
+```javascript
 * The index refers to the index number shown on the displayed task list.
 * The index must be a positive number 1,2,3,..
+```
 
 <a name="exit"></a>
 
-### 3.7 Exiting the program: exit
+### 3.7 Exiting the program: `exit`
 
 Exits the program.
-Format: `exit`
+**Format**: `exit`
 
 
 <a name="faq"></a>
