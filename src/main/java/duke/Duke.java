@@ -6,6 +6,10 @@ import duke.task.Task;
 import duke.task.Todo;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -20,7 +24,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greet();
-
+        loadTasks();
         String userResponde;
         Scanner in = new Scanner(System.in);
         do {
@@ -37,6 +41,41 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         printLine();
         System.out.println();
+    }
+
+    public static void loadTasks(){
+
+        File f = new File("data/duke.txt");
+        try{
+            Scanner s = new Scanner(f);
+            while(s.hasNext()){
+                String aTask;
+                aTask = s.nextLine();
+                loadATask(aTask);
+            }
+        } catch(FileNotFoundException e){
+            System.out.println("No duke history. Please input task. ");
+        }
+
+    }
+
+    public static void loadATask(String aTask){
+        String[] aTaskSplit = aTask.split(" \\| ");
+        switch(aTaskSplit[0]){
+        case "T":
+            tasks.add(new Todo(aTaskSplit[2]));
+            break;
+        case "D":
+            tasks.add(new Deadline(aTaskSplit[2],aTaskSplit[3]));
+            break;
+        case "E":
+            tasks.add(new Event(aTaskSplit[2],aTaskSplit[3]));
+            break;
+        }
+        if(aTaskSplit[1].equals("1")){
+            tasks.get(taskCount).markAsDone();
+        }
+        taskCount++;
     }
 
     public static void dukeResponde(String userResponde){
@@ -69,12 +108,14 @@ public class Duke {
             } catch(DukeException e){
                 System.out.println("\t:(OOPS!!! " + e.getMessage());
             }
+            outputTasks();
         } else{
             try{
                 addNewTask(userResponde);
             }catch(DukeException e){
                 System.out.println("\t:(OOPS!!! " + e.getMessage());
             }
+            outputTasks();
         }
         printLine();
         System.out.println();
@@ -155,6 +196,19 @@ public class Duke {
         System.out.println("\tNow you have " + (taskCount+1) + " tasks in the list");
         taskCount++;
     }
+
+    public static void outputTasks(){
+        try{
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for(int i = 0; i<taskCount; i++){
+                fw.write(tasks.get(i).toFile() + "\n");
+            }
+            fw.close();
+        }catch (IOException e){
+            System.out.println("No backup file in the hard disk.");
+        }
+    }
+
 
 }
 
