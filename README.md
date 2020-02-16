@@ -1,39 +1,138 @@
-# Setting up
+# Duke - User Guide
+By: `JosephLimWeiJie` Since: `Feb 2019`
 
-**Prerequisites**
+```javascript
+* 1.Introduction
+* 2.Quick Start
+* 3.Features
+    * 3.1. Adding a task: add
+    * 3.2. Listing all tasks: list
+    * 3.3. Finding a task: find
+    * 3.4. Deleting a task: delete
+    * 3.5. Filter tasks by date: filter
+    * 3.6. Complete a task: complete
+    * 3.7. Exiting the program: exit
+* 4. FAQ
+* 5. Command Summary
+```
+**1.Introduction**
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI). 
+Jump to Section 2, "Quick Start" to get started.
 
-**Importing the project into IntelliJ**
+**2. Quick Start**
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+*   1. Ensure that Java 11 or above is installed in your Computer.
+*   2. Download the latest duke.jar here.
+*   3. Copy the file to the foldere you want to use as the home folder for your Duke.
+*   4. Double-click on duke.jar to start the app. It should appear in a few seconds.
+*   5. Type in a command and press ENTER to execute it. For e.g. typing list and                         pressing enter will list all your current tasks.
+*   6. Some other commands you can try:
+    *  todo return book: adds a todo task to return a book
+    *   deadline Finish a movie /by 2019-12-01T10:00: adds a deadline task to finish a movie by 1 Dec 2019 at 1000 hrs.
+    *   event Midnight Party /at Marina Bay Sands: adds an event task to attend a midnight party at Marina Bay Sands
+    *   done 1: Mark the first task as done shown in the current list.
+    *   exit: exits the app
 
-# Tutorials 
+**3. Features**
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+Command Format
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+``` javascript
+* Words in UPPER_CASE are the parameters to be supplied by the user e.g. in todo TASK_DESCRIPTION, TASK_DESCRIPTION is a parameter to specify a task's description
+* Tasks with a venue can be added right after the TASK_DESCRIPTION by using /at e.g. in event TASK_DESCRIPTION /at VENUE
+* Tasks with a deadline can be added right after the TASK_DESCRIPTION by using /by e.g. deadline complete homework /by YYYY-MM-DDTHH:mm. Note that you have to add 'T' between the date and the time.
+```
 
-# Feedback, Bug Reports
+**3.1. Adding a task: add**
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+Adds a task into Duke.
+
+Format: 
+* todo TASK_DESCRIPTION
+* deadline TASK_DESCRIPTION /by DATE T TIME
+* event TASK_DESCRIPTION /at VENUE
+
+Examples:
+* todo return book
+* deadline Thesis submission /by 2020-01-12T23:59
+* event Wedding Ceremony /at ABC hotel
+
+**3.2. Listing all tasks: list**
+
+Shows a list of all the tasks in Duke.
+
+Format: list
+
+** 3.3. Finding a task: find**
+
+Finds tasks that contains a given keyword.
+
+Format:
+* find KEYWORD
+
+Example:
+* find book
+
+** 3.4. Deleting a task: delete**
+Deletes a specified task from Duke.
+
+Format: delete INDEX
+* Deletes the task at the specified INDEX.
+* The index refers to the index number shown on the displayed task list.
+* The index must be a positive number 1,2,3,...
+
+** 3.5. Filter tasks by date: filter**
+Filters tasks based on a given DATE
+
+Format: filter DATE
+
+Example:
+filter 2019-01-01
+* Note that the month and date must be in 2 digits. If a date occurs on 1 Jan 2019,
+you have to add a zero in front. 
+
+** 3.6. Complete a task: complete**
+
+Marks a task as completed at the specified INDEX.
+
+Format: done INDEX
+* The index refers to the index number shown on the displayed task list.
+* The index must be a positive number 1,2,3,..
+
+** 3.7. Exiting the program: exit**
+
+Exits the program.
+Format: exit
+
+**4.FAQ**
+
+
+*Q:* How do I transfer my data onto another Computer?
+
+
+*A:* Install the app in the other computer and copy the 'storage.txt' from the previous Duke folder onto your current new folder containing the duke.jar.
+
+
+**5. Command Summary**
+* Add 
+    * Format: 
+        * todo TASK_DESCRIPTION
+        * deadline TASK_DESCRIPTION /by DATE T TIME
+        * event TASK_DESCRIPTION /at VENUE
+    * Examples:
+        * todo return book
+        * deadline Thesis submission /by 2020-01-12T23:59
+        * event Wedding Ceremony /at ABC hotel
+* List: list 
+* Find: find KEYWORD
+    * e.g. find book
+* Filter: filter DATE
+    * e.g. filter 2019-01-01
+* Delete: delete INDEX
+    * delete 2
+* Done: done INDEX
+    * e.g. done 1
+   
+* Exit: exit
+
