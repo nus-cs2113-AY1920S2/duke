@@ -19,6 +19,7 @@ public class Duke {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
+    private static final String DELETE = "delete";
 
     public static void printList(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
@@ -69,6 +70,20 @@ public class Duke {
                 } else {
                     System.out.println("You have already done this task!");
                 }
+            } catch (NullPointerException e) {
+                System.out.println("This task does not exist!");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("This task does not exist!");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Please specify a task number!");
+            }
+            break;
+
+        case (DELETE):
+            try {
+                int index = Integer.parseInt((instruction[1]));
+                System.out.println(LINE + "  You have deleted: " + tasks.get(index-1).getDescription() + "\n" + LINE);
+                tasks.remove(index-1);
             } catch (NullPointerException e) {
                 System.out.println("This task does not exist!");
             } catch (ArrayIndexOutOfBoundsException e) {
