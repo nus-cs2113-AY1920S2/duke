@@ -14,6 +14,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /**
      * Returns tick or X symbols
      *
@@ -30,5 +35,10 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[" + getStatusIcon() + "]  " + this.description);
+    }
+
+    public String convertToData() {
+        int isDoneAsInt = isDone ? 1 : 0;
+        return String.format(isDoneAsInt + "|" + this.description);
     }
 }

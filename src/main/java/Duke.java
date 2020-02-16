@@ -4,11 +4,18 @@ import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
 
 public class Duke {
     private static final int TASKLIST_SIZE = 100;
     private static int numberOfTasks = 0;
     private static final Task[] tasks = new Task[TASKLIST_SIZE];
+    private static final String dataPath = "duke.txt";
     public static void main(String[] args) {
         String logo = "***John***";
         displayWelcome(logo);
@@ -26,29 +33,36 @@ public class Duke {
     }
 
     private static void startDuke() {
-        String userInput = "";
+        String userInput;
         Scanner in = new Scanner(System.in);
-        while (true) {
-            userInput = in.next();
-            try {
-                if (userInput.equals("bye")){
+        try {
+            loadTasks();
+            while (true) {
+                userInput = in.next();
+                if (userInput.equals("bye")) {
                     break;
-                } else if (userInput.equals("list")){
+                } else if (userInput.equals("list")) {
                     listTasks();
-                } else if (userInput.startsWith("done")){
+                } else if (userInput.startsWith("done")) {
                     markTaskAsDone(in);
-                } else if (userInput.startsWith("todo")){
+                    saveTasks();
+                } else if (userInput.startsWith("todo")) {
                     addTodoTask(in);
-                } else if (userInput.startsWith("deadline")){
+                    saveTasks();
+                } else if (userInput.startsWith("deadline")) {
                     addDeadlineTask(in);
-                } else if (userInput.startsWith("event")){
+                    saveTasks();
+                } else if (userInput.startsWith("event")) {
                     addEventTask(in);
+                    saveTasks();
                 } else {
                     throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
-                System.out.println(e);
             }
+        } catch (DukeException e) {
+                System.out.println(e);
+        } catch (IOException e) {
+                System.out.println("☹ OOPS!!! File not found.");
         }
     }
 
@@ -70,19 +84,10 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        if (!deadlineTask.contains("/by")) {
-            throw new DukeException("☹ OOPS!!! The task has to be typed in this format (deadline {task description" +
-                    "} /by {date}).");
-        }
-
         String[] details = deadlineTask.split("/by ");
 
-        if (details.length < 2) {
-            throw new DukeException("☹ OOPS!!! Make sure to include both the description and the deadline.");
-        }
-
-        if (details.length > 2) {
-            throw new DukeException("☹ OOPS!!! Make sure that only 1 /by character is inputted.");
+        if (details.length != 2) {
+            throw new DukeException("☹ OOPS!!! Incorrect format.");
         }
 
         String deadlineTaskDescription = details[0];
@@ -99,19 +104,10 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
 
-        if (!eventTask.contains("/at")) {
-            throw new DukeException("☹ OOPS!!! The task has to be typed in this format (event {task description" +
-                    "} /at {date and time}).");
-        }
-
         String[] details = eventTask.split("/at ");
 
-        if (details.length < 2) {
-            throw new DukeException("☹ OOPS!!! Make sure to include both the description and the deadline.");
-        }
-
-        if (details.length > 2) {
-            throw new DukeException("☹ OOPS!!! Make sure that only 1 /by character is inputted.");
+        if (details.length != 2) {
+            throw new DukeException("☹ OOPS!!! Incorrect format.");
         }
 
         String eventTaskDescription = details[0];
@@ -148,5 +144,41 @@ public class Duke {
         for (int j = 0; j < numberOfTasks; j++) {
             System.out.println(j+1 + ". " + tasks[j]);
         }
+    }
+
+    private static void loadTasks() throws FileNotFoundException, DukeException {
+        File f = new File(dataPath);
+        Scanner s = new Scanner(f);
+
+        while (s.hasNext()) {
+            String taskString = s.nextLine();
+            String[] details = taskString.split("\\|", -1);
+            boolean isDone = Integer.parseInt(details[1]) == 1;
+            String taskType = details[0];
+            switch (taskType){
+            case "T":
+                tasks[numberOfTasks] = new Todo(details[2], isDone);
+                break;
+            case "D":
+                tasks[numberOfTasks] = new Deadline(details[2], details[3], isDone);
+                break;
+            case "E":
+                tasks[numberOfTasks] = new Event(details[2], details[3], isDone);
+                break;
+            default:
+                throw new DukeException("☹ OOPS!!! Problem loading data.");
+            }
+            numberOfTasks++;
+        }
+    }
+
+    private static void saveTasks() throws IOException {
+        FileWriter fw = new FileWriter(dataPath);
+        StringBuilder textToAdd = new StringBuilder();
+        for (int i = 0; i < numberOfTasks; i++) {
+            textToAdd.append(tasks[i].convertToData()).append("\n");
+        }
+        fw.write(textToAdd.toString());
+        fw.close();
     }
 }
