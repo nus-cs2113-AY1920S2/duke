@@ -112,33 +112,36 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> taskList, int numberOfTasks) {
-        if (numberOfTasks > 0) {
-            Path directoryPath = Paths.get("data");
-            boolean isFileExists = Files.exists(directoryPath);
-            if (!isFileExists) {
-                File directory = new File("data");
-                directory.mkdir();
-            }
-            File f = new File("data/duke.txt");
-            try {
-                FileWriter fw = new FileWriter(f);
-                for (int i = 0; i < numberOfTasks; i++) {
-                    String[] getTaskInfo = taskList.get(i).getTaskInfo();
-                    fw.write(getTaskInfo[0]
-                            + " | "
-                            + getTaskInfo[1]
-                            + " | "
-                            + getTaskInfo[2]
-                            + " | "
-                            + getTaskInfo[3]
-                            + System.lineSeparator());
-                }
-                fw.close();
 
-            } catch (IOException e) {
-                System.out.println("Exception occurred: " + e + ": Error in writing file!");
-            }
-
+        Path directoryPath = Paths.get("data");
+        boolean isFileExists = Files.exists(directoryPath);
+        if (!isFileExists) {
+            File directory = new File("data");
+            directory.mkdir();
         }
+        File f = new File("data/duke.txt");
+        try {
+            FileWriter fw = new FileWriter(f);
+            if (numberOfTasks == 0) {
+                fw.write("");
+            }
+            for (int i = 0; i < numberOfTasks; i++) {
+                String[] getTaskInfo = taskList.get(i).getTaskInfo();
+                fw.write(getTaskInfo[0]
+                        + " | "
+                        + getTaskInfo[1]
+                        + " | "
+                        + getTaskInfo[2]
+                        + " | "
+                        + getTaskInfo[3]
+                        + System.lineSeparator());
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.println("Exception occurred: " + e + ": Error in writing file!");
+        }
+
+
     }
 }

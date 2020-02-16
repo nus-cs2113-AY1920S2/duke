@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Ui {
 
+    private Scanner myInput;
     public Ui() {
     }
 
@@ -40,7 +41,7 @@ public class Ui {
     }
 
     public String getUserInput() {
-        Scanner myInput = initializeScanner();
+        myInput = initializeScanner();
         return getUserInput(myInput);
     }
 
@@ -73,5 +74,9 @@ public class Ui {
 
     public void displayPrompt() {
         System.out.println("What else do you want to do?");
+    }
+
+    public void closeScanner() {
+        myInput.close();
     }
 }

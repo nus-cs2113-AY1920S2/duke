@@ -78,7 +78,7 @@ public class Parser {
                     String obtainedTime = fullUserSplit[1];
                     String[] timeCheck = obtainedTime.split(" ", 2);
                     if (timeCheck.length == 1 || timeCheck[1].isBlank()) {
-                        throw new MissingTimeFieldException("Missing time!");
+                        throw new MissingTimeFieldException("Missing time or missing slash word!");
                     }
                 }
 
