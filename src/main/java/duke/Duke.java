@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -190,7 +192,7 @@ public class Duke {
      * Performs the requested task
      * @param taskList TaskList of all available tasks.
      * @param ogString Original string that is inputted by the user using the command line.
-     * @param eventType Event Type, meaning the nature of the command (eg. LIST, DEADLINE).
+     * @param eventType event Type, meaning the nature of the command (eg. LIST, DEADLINE).
      */
     public void performTasks(ArrayList<Task> taskList, String ogString, String eventType) {
         if (hasDone(ogString, taskList)){
