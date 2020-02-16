@@ -9,11 +9,6 @@ public class TaskManager {
     protected static final String MORE_INDENTATION = "        ";
     protected ArrayList<Task> taskList = new ArrayList<>();
 
-
-    /*public TaskManager() {
-        this.taskList = new Task[SIZE_LIMIT];
-    }*/
-
     public void addNewTask(Task newTask) {
         taskList.add(newTask);
         int taskId = taskList.size() - 1;

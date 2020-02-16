@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import alie.task.Deadlines;
 import alie.task.Events;
+import alie.task.Task;
 import alie.task.ToDo;
 
 public class Storage {
@@ -44,9 +45,8 @@ public class Storage {
     public void save(TaskManager taskManager) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         StringBuilder allTasks = new StringBuilder();
-        for (int i = 0; i < TaskManager.taskCount; i += 1) {
-            allTasks.append(taskManager.taskList[i].encodeTask());
-            allTasks.append(System.lineSeparator());
+        for (Task task : taskManager.taskList) {
+            allTasks.append(task.encodeTask());
         }
         fw.write(allTasks.toString());
         fw.close();

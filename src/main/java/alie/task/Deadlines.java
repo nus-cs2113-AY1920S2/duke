@@ -26,7 +26,7 @@ public class Deadlines extends Task {
         String endDate = task[3];
         Deadlines deadlineTask = new Deadlines(description, endDate);
         if (isDone) {
-            deadlineTask.setIsCompleted();
+            deadlineTask.setTaskCompleted(deadlineTask);
         }
         return deadlineTask;
     }

@@ -23,7 +23,7 @@ public class ToDo extends Task {
         String description = task[2];
         ToDo toDoTask = new ToDo(description);
         if (isDone) {
-            toDoTask.setIsCompleted();
+            toDoTask.setTaskCompleted(toDoTask);
         }
         return toDoTask;
     }

@@ -26,7 +26,7 @@ public class Events extends Task {
         String startDate = task[3];
         Events eventTask = new Events(description, startDate);
         if (isDone) {
-            eventTask.setIsCompleted();
+            eventTask.setTaskCompleted(eventTask);
         }
         return eventTask;
     }

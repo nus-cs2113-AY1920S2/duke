@@ -13,3 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 try.txt
+storage.txt
