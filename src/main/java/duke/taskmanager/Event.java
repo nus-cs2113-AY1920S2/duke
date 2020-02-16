@@ -1,4 +1,4 @@
-package duke;
+package duke.taskmanager;
 
 public class Event extends TaskManager {
     protected String by;

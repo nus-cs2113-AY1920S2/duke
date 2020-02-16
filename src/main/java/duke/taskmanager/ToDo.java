@@ -1,4 +1,4 @@
-package duke;
+package duke.taskmanager;
 
 public class ToDo extends TaskManager {
     protected boolean isDone;

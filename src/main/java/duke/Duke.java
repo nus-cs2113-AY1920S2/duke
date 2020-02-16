@@ -1,4 +1,12 @@
-import java.io.IOException;
+package duke;
+
+import duke.exceptions.IllegalCommandException;
+import duke.exceptions.IllegalTypeException;
+import duke.taskmanager.Deadline;
+import duke.taskmanager.Event;
+import duke.taskmanager.TaskManager;
+import duke.taskmanager.ToDo;
+
 import java.util.Scanner;
 
 public class Duke {
