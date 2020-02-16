@@ -18,6 +18,12 @@ public class Duke {
     public static void main(String[] args) {
         String logo = "***John***";
         displayWelcome(logo);
+        try {
+            loadTasks();
+        }
+        catch (FileNotFoundException e){
+            System.out.println(" ☹ OOPS!!! File not found.");
+        }
         startDuke();
         displayExit();
     }
@@ -34,9 +40,8 @@ public class Duke {
     private static void startDuke() {
         String userInput;
         Scanner in = new Scanner(System.in);
-        try {
-            loadTasks();
-            while (true) {
+        while (true) {
+            try {
                 userInput = in.next();
                 if (userInput.equals("bye")) {
                     break;
@@ -60,11 +65,11 @@ public class Duke {
                 } else {
                     throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            }
-        } catch (DukeException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
-        } catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println("☹ OOPS!!! File not found.");
+            }
         }
     }
 
@@ -137,7 +142,7 @@ public class Duke {
 
     private static void printNewTask() {
         System.out.println("New task added: ");
-        System.out.println(" " + tasks.get(tasks.size()-1));
+        System.out.println(" " + tasks.get(tasks.size() - 1));
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
@@ -160,12 +165,12 @@ public class Duke {
         }
 
         System.out.println("Noted. I've removed this task:");
-        System.out.println(" " + tasks.get(itemNumber-1));
+        System.out.println(" " + tasks.get(itemNumber - 1));
         System.out.println("Now you have " + (tasks.size() - 1) + " tasks in the list.");
         tasks.remove(itemNumber-1);
     }
 
-    private static void loadTasks() throws FileNotFoundException, DukeException {
+    private static void loadTasks() throws FileNotFoundException {
         File f = new File(dataPath);
         Scanner s = new Scanner(f);
 
@@ -185,7 +190,7 @@ public class Duke {
                 tasks.add(new Event(details[2], details[3], isDone));
                 break;
             default:
-                throw new DukeException("☹ OOPS!!! Problem loading data.");
+                throw new FileNotFoundException("☹ OOPS!!! Problem loading data.");
             }
         }
     }
