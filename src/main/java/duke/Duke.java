@@ -47,14 +47,20 @@ public class Duke {
     }
 
     /*
-    exeCommand does the job to identify whether the programme will end
+    exeCommand identifies whether the user is going to
+    1. add a task
+    2. print a task
+    3. mark task as done
+    4. deleteTask or
+    5. exit programme
+    for further data processing
      */
     public static void exeCommands() {
-        String exeCommand = getStringInput(userInput);// exeType = addTask||deleteTask||printTask
+        String exeCommand = getStringInput(userInput);
         try {
             while (!exeCommand.equals(EXIT_COMMAND)) {
-                exeType(exeCommand); //to select the exeType and execute the command type
-                printExeType(); //show the instructions after execution
+                exeType(exeCommand); //to select the exeType and execute it
+                printExeType(); //user guide after execution of command
                 exeCommand = getStringInput(userInput); //get the next command
             }
         } catch (IllegalCommandException e) {
@@ -66,6 +72,9 @@ public class Duke {
         }
     }
 
+    /*
+    exeType receives the command from exeCommand and it executes the command received.
+     */
     public static void exeType(String exeCommand) throws IllegalCommandException {
         try {
             switch (exeCommand) {
@@ -101,6 +110,13 @@ public class Duke {
         }
     }
 
+    /*
+    addTask adds task to manageTask array.
+    Firstly, addTask gets the type of task input from the user.
+    Secondly, based on the type, it will prompt the user to key
+    in the task (and by...).
+    Lastly, it adds the task (and by...) to the manageTask array.
+     */
     public static void addTask() throws IllegalTypeException {
         String taskType; //taskType = ToDoo||Event||Deadline
         taskType = getStringInput(userInput);
@@ -135,6 +151,13 @@ public class Duke {
         default: throw new IllegalTypeException();
         }
     }
+
+    /*
+    deleteTask deletes a certain task from manageTask array.
+    It prompts the user to key in the task index and show task
+    list. Then delete the element of respective index in the
+    manageTask array.
+     */
     public static void deleteTask() throws IllegalDeleteException {
         int index;
         System.out.println("     Please enter the index of the task " +
@@ -154,6 +177,13 @@ public class Duke {
             throw new IllegalDeleteException();
         }
     }
+
+    /*
+   doneTask mark a certain task in manageTask array as done.
+   It prompts the user to key in the task index and show task
+   list. Then mark the element of respective index in the
+   manageTask array as a done task.
+    */
     public static void doneTask() throws IllegalDoneTaskException {
         System.out.println("    Please choose the task that you have completed " +
                 "(select the no)");
