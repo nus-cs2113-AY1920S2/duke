@@ -1,16 +1,22 @@
-public class Todo extends Task {
+package duke.task;
+
+public class Deadline extends Task {
+
+    protected String by;
+
     /**
      * Returns the task created with the specified
      * description.
      *
      * @param description the description of the task
      */
-    public Todo(String description) {
+    public Deadline(String description, String by) {
         super(description);
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
 }
