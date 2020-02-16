@@ -1,5 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 
 import exceptions.DukeException;
 import tasks.Task;
@@ -13,6 +19,9 @@ import tasks.TaskType;
 // TODO: A general add to arrayList method? reduce LOC
 
 public class Duke {
+    /** variables **/
+    private static String FILEPATH = "./src/main/java/duke/data/taskList.txt"
+
     /** Helper Functions Start **/
     // TODO: Check if this method will help, may be unhelpful
     private static String[] splitString(String[] strArr, String userCmd, String splitCase){
@@ -137,12 +146,60 @@ public class Duke {
         System.out.println("\t" +newEvent.toString() );
     }
 
+    private static void loadDuke() {
+        try{
+            File f = new File(FILEPATH);
+            Scanner sc = new Scanner(f);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private static void saveDuke(ArrayList<Task> taskArrList) throws DukeException {
+        String fileWriteData = "";
+
+        for (Task t : taskArrList){
+            int status;
+            if (t.isDone()){
+                status = 1;
+            }
+            else{
+                status = 0;
+            }
+
+            switch (t.getCategory()){
+            case 'T': //todos
+                fileWriteData += t.getCategory() +"," +status +"," +t.getTaskName() +"\n";
+            case 'D':
+                fileWriteData += t.getCategory() +"," +status +"," +t.getTaskName() +"," +t.get+"\n";
+            case 'E': //events
+
+            }
+
+
+        }
+
+        try {
+            Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
+            String filePath = path.toString() +"/data/taskList.txt";
+
+            FileWriter fw = new FileWriter("./src/main/java/duke/data/taskList.txt");
+            fw.write("helloworld");
+            fw.close();
+        }
+        catch (IOException e){
+            throw new DukeException("File save error occurred.");
+        }
+    }
+
     /** Main method Start **/
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean continueRun = true;
         String userCmd = "";
         ArrayList<Task> taskArrList = new ArrayList<>();
+        loadDuke();
 
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -182,10 +239,12 @@ public class Duke {
                 // Add task type events
                 else if (userCmd.contains("event")) {
                     addEvent(userCmd, taskArrList);
-                } else {
+                }
+                else {
                     System.out.println("Wrong syntax!");
                     printHelp();
                 }
+                saveDuke(taskArrList);
             }
             catch (DukeException e){
                 System.out.println(e +"\nPlease try again");
