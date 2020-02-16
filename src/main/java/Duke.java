@@ -14,7 +14,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        readFromFile();
+        loadFile();
         greetUser();
         conversation();
 
@@ -228,6 +228,21 @@ public class Duke {
         fw.close();
     }
 
+    public static void loadFile() {
+        try {
+            readFromFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("____________________________________________________________");
+            System.out.println("File not found");
+            System.out.println("____________________________________________________________");
+        } catch (IOException e) {
+            System.out.println("____________________________________________________________");
+            System.out.println("IO error");
+            System.out.println("____________________________________________________________");
+            e.printStackTrace();
+        }
+    }
+
     public static void readFromFile() throws IOException {
         File file = new File("data/duke.txt");
         Scanner scanner = new Scanner(file);
@@ -264,7 +279,7 @@ public class Duke {
         } else if (raw.contains("[E]")) {
             int timeSectionStart = raw.indexOf("(");
             int timeSectionEnd = raw.indexOf(")");
-            String taskDescription = raw.substring(6, timeSectionStart);
+            String taskDescription = raw.substring(6, timeSectionStart-1);
             int colon = raw.indexOf(":");
             String timePeriod = raw.substring(colon + 2  , timeSectionEnd);
             int space = timePeriod.indexOf(" ");
