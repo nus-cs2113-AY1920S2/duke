@@ -13,6 +13,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getTaskTime() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return String.format("%s%s %s", getEventType(), super.getStatusIcon(), super.getDescription());
     }

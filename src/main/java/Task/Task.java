@@ -45,15 +45,6 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    @Override
-    public abstract String toString();
-
-    /**
-     * Print done response message
-     */
-    public abstract String getDoneResponseMessage(int itemIndexRequested);
-
-
     /**
      * get description of Task.Task
      *
@@ -62,4 +53,15 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
+
+    public String isDone() {
+        return (isDone ? "Y" : "N");
+    }
+
+    @Override
+    public abstract String toString();
+
+    public abstract String getEventType();
+    public abstract String getTaskTime();
+    public abstract String getDoneResponseMessage(int itemIndexRequested);
 }
