@@ -44,17 +44,17 @@ public class PrintMessage {
         printToConsole(DIVIDER, WELCOME_MESSAGE, DIVIDER);
     }
     
-    protected static void displayAddMessage(String filePath) {
+    protected static void displayAddMessage() {
         try {
             printToConsole(DIVIDER, String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()),
                     DIVIDER);
-            appendToFile(filePath, tasks.get(tasks.size() - 1).toStorage());
+            appendToFile(tasks.get(tasks.size() - 1).toStorage());
         } catch (IOException e) {
             System.out.println(e);
         }
     }
     
-    protected static void displayDoneMessage(String filePath, String index) {
+    protected static void displayDoneMessage(String index) {
         try {
             if (index.equals("")) {
                 throw new IOException();
@@ -64,8 +64,8 @@ public class PrintMessage {
                 throw new ArrayIndexOutOfBoundsException();
             }
             tasks.get(doneTaskIndex).markAsDone();
-            modifyFile(filePath, doneTaskIndex, tasks.get(doneTaskIndex).toStorage());
             printToConsole(DIVIDER, COMMAND_DONE_MESSAGE, TAB + tasks.get(doneTaskIndex), DIVIDER);
+            modifyFile(doneTaskIndex, tasks.get(doneTaskIndex).toStorage());
         } catch (ArrayIndexOutOfBoundsException e) {
             printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
         } catch (IOException e) {
