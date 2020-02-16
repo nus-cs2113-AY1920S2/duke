@@ -1,28 +1,30 @@
 import task.Task;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public class TaskList {
-    private Task[] taskList;
-    private int lenOfList;
+    private ArrayList<Task> taskList;
 
     public TaskList(){
-        this.lenOfList = 0;
-        this.taskList = new Task[0];
+        this.taskList = new ArrayList<>();
     }
 
     public Task getOneTask(int taskIndex){
-        return taskList[taskIndex];
+        return taskList.get(taskIndex);
     }
 
     public int getLenOfList(){
-        return this.lenOfList;
+        return this.taskList.size();
     }
 
     public void append(Task task){
-        this.taskList = Arrays.copyOf(taskList,lenOfList+1);
-        this.lenOfList += 1;
-        taskList[lenOfList-1] = task;
+        this.taskList.add(task);
+    }
+
+    public void remove(int taskIndex){
+        this.taskList.remove(taskIndex-1);
+        Task.setTaskNum(Task.getTaskNum()-1);
     }
 
     public void printTaskList(){

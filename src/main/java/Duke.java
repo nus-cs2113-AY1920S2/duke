@@ -53,6 +53,11 @@ public class Duke {
         System.out.println("    "+cur_task.showTaskInfo());
     }
 
+    private static void printTaskRemovedInfo(Task cur_task){
+        System.out.println("    Noted. I've removed this task:");
+        System.out.println("    "+cur_task.showTaskInfo());
+    }
+
     public static void sayBye(){
         System.out.println("    ________________________________");
         System.out.println("    Don't leave me alone! Please come back soon!");
@@ -95,33 +100,58 @@ public class Duke {
 
     private static void parseInputCommand(String input, TaskList taskList) {
         if(input.startsWith("done")){
-            try{
-                int taskIndex = getTaskIndex(input);
-                Task cur_task = taskList.getOneTask(taskIndex-1);
-                cur_task.setTaskStatus(Task.DONE);
-                printTaskDoneInfo(cur_task);
-            } catch (NumberFormatException e){
-                System.out.println("    You have to point out which task to mark as done!!!");
-            } catch (IndexOutOfBoundsException e){
-                System.out.println("    Reffered task doesn't exist!!!");
-                System.out.println("    There are totally "+Integer.toString(Task.getTaskNum())+" tasks in the taskList");
-            }
+            setTaskDone(input, taskList);
+        }else if(input.startsWith("delete")){
+            removeCertainTask(input, taskList);
         } else if(!input.equals("list")) {
-            int dividePosition = input.indexOf(" ");
-            try {
-                String type = input.substring(0,dividePosition);
-                String newTaskName = newSpecificTask(input, taskList, type);
-                showFeedback(newTaskName,taskList);
-            } catch(StringIndexOutOfBoundsException e){
-                System.out.println("    Invalid input! Cannot find description for a task event");
-                System.out.println("    Your input: "+input+".");
-                System.out.println("    Please use ' ' to split a task type and its description");
-            } catch (UnknownCommandException e) {
-                System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } catch (InexplicitTimeDescription e){
-                System.out.println("    Invalid input!!! Please use '/' to split task name and its time description");
-            }
+            addNewTask(input, taskList);
         } else taskList.printTaskList();
+    }
+
+    private static void removeCertainTask(String input, TaskList taskList) {
+        try{
+            int taskIndex = getTaskIndex(input);
+            Task cur_task = taskList.getOneTask(taskIndex-1);
+            taskList.remove(taskIndex);
+            printTaskRemovedInfo(cur_task);
+            System.out.println("    There are totally "+Integer.toString(taskList.getLenOfList())+" tasks in the taskList");
+        } catch (NumberFormatException e){
+            System.out.println("    You have to point out which task to delete!!!");
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("    Referred task doesn't exist!!!");
+            System.out.println("    There are totally "+Integer.toString(taskList.getLenOfList())+" tasks in the taskList");
+        }
+    }
+
+    private static void addNewTask(String input, TaskList taskList) {
+        int dividePosition = input.indexOf(" ");
+        try {
+            String type = input.substring(0,dividePosition);
+            String newTaskName = newSpecificTask(input, taskList, type);
+            showFeedback(newTaskName,taskList);
+        } catch(StringIndexOutOfBoundsException e){
+            System.out.println("    Invalid input! Cannot find description for a task event");
+            System.out.println("    Your input: "+input+".");
+            System.out.println("    Please use ' ' to split a task type and its description");
+        } catch (UnknownCommandException e) {
+            System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (InexplicitTimeDescription e){
+            System.out.println("    Invalid input!!! Please use '/' to split task name and its time description");
+        }
+    }
+
+    private static void setTaskDone(String input, TaskList taskList) {
+        try{
+            int taskIndex = getTaskIndex(input);
+            Task cur_task = taskList.getOneTask(taskIndex-1);
+            cur_task.setTaskStatus(Task.DONE);
+            printTaskDoneInfo(cur_task);
+        } catch (NumberFormatException e){
+            System.out.println("    You have to point out which task to mark as done!!!");
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("    Reffered task doesn't exist!!!");
+            System.out.println("    There are totally "+Integer.toString(taskList.getLenOfList())+" tasks in the taskList");
+        }
     }
 
     private static void showFeedback(String newTaskName,TaskList taskList) {
