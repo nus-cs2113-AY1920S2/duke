@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static final int CAPACITY = 100;
@@ -15,12 +18,93 @@ public class Duke {
     public static final int EVENT = 6;
     public static final int DONE = 5;
     public static final int DATE = 3;
+    //public static final String PATH = System.getProperty("user.dir") + "/data/duke.txt";
+    public static final String PATH = "duke.txt";
+    public static int taskCounter = 0;
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    private static void copyList(Task[] tasks, int taskCounter) throws IOException {
+        File f = new File(PATH);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        String status;
+        writeToFile(PATH, "");
+        for (int i = 0; i <= taskCounter; i++) {
+            String line = tasks[i].toString();
+            String[] sentence = line.split("]");
+            String taskType = sentence[0].substring(1).toLowerCase();
+            if (tasks[i].isDone) {
+                status = "0";
+            } else {
+                status = "1";
+            }
+
+            if (taskType.equals("t")) {
+            appendToFile(PATH, (taskType + " | " + status + " | " + tasks[i].description + System.lineSeparator()));
+            } else {
+                String [] newSentence = line.split(":");
+                String dueDate = newSentence[1].substring(1);
+                int length = dueDate.length();
+                String newDate = newSentence[1].substring(1,length);
+                appendToFile(PATH, (taskType + " | " + status + " | " + tasks[i].description + "| " + newDate + System.lineSeparator()));
+            }
+        }
+    }
+
+    private static void insertFileContents(Task[] tasks) throws IOException {
+        File f = new File(PATH); // create a File for the given file path
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+        while (s.hasNext()) {
+            String line;
+            line = s.nextLine();
+            String[] sentence = line.split("\\|");
+            String taskType = sentence[0].toLowerCase();
+            switch(taskType) {
+            case "t ":
+                Task t = new Todo(sentence[2]);
+                tasks[taskCounter] = t;
+                taskCounter++;
+                break;
+            case "d ":
+                Task d = new Deadline(sentence[2], sentence[3]);
+                tasks[taskCounter] = d;
+                taskCounter++;
+                break;
+            case "e ":
+                Task e = new Event(sentence[2], sentence[3]);
+                tasks[taskCounter] = e;
+                taskCounter++;
+                break;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         printWelcomeMessage();
         Task[] tasks = new Task[CAPACITY];
-        int taskCounter = 0;
         Scanner input = new Scanner(System.in);
+
+        try {
+            insertFileContents(tasks);
+        } catch (IOException e) {
+            System.out.println("Input/Output Error!");
+        }
 
         while(true) {
             String line;
@@ -40,6 +124,7 @@ public class Duke {
                     Task t = new Todo(line);
                     tasks[taskCounter] = t;
                     printAcknowledgement(tasks[taskCounter], taskCounter);
+                    copyList(tasks, taskCounter);
                     taskCounter++;
                     break;
                 case "deadline":
@@ -49,6 +134,7 @@ public class Duke {
                     Task d = new Deadline(deadlineDescription, by);
                     tasks[taskCounter] = d;
                     printAcknowledgement(tasks[taskCounter], taskCounter);
+                    copyList(tasks, taskCounter);
                     taskCounter++;
                     break;
                 case "event":
@@ -58,6 +144,7 @@ public class Duke {
                     Task e = new Event(eventDescription, at);
                     tasks[taskCounter] = e;
                     printAcknowledgement(tasks[taskCounter], taskCounter);
+                    copyList(tasks, taskCounter);
                     taskCounter++;
                     break;
                 case "done":
@@ -67,10 +154,12 @@ public class Duke {
                     System.out.println(BORDER);
                     System.out.println("Nice! I've marked this task as done: " + tasks[taskNumber - 1].description);
                     System.out.println(BORDER);
+                    copyList(tasks, taskCounter);
                     break;
                 default:
                     throw new DukeException();
                 }
+
             } catch (DukeException e) {
                 System.out.println(BORDER);
                 System.out.println("☹ OH NO!!! I'm sorry, but I don't know what that means! :o(");
@@ -87,6 +176,8 @@ public class Duke {
                 System.out.println(BORDER);
                 System.out.println("☹ OH NO!!! The description of a " + taskType + " cannot be empty! :o(");
                 System.out.println(BORDER);
+            } catch (IOException e) {
+                System.out.println("Input/Output Error!");
             }
         }
     }
@@ -122,7 +213,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println(BORDER);
-        System.out.println("Hello! I'm Duke.Duke");
+        System.out.println("Hello! I'm Duke!");
         System.out.println("What can I do for you?");
         System.out.println(BORDER);
     }
