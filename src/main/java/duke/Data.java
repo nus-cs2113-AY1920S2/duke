@@ -18,7 +18,7 @@ public class Data {
 
     public Data() throws FileNotFoundException {
         this.todos = new ArrayList<Todo>();
-        File f = new File("src/main/java/duke/data.txt");
+        File f = new File("lib/data.txt");
 
 
         // Adapted from https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics.html
@@ -59,10 +59,10 @@ public class Data {
         if (cmd.isEmpty()) {
             throw new DukeException("Please type something.");
         }
-        if (cmd.substring(0, 6).equals("delete")) {
-            todos.remove(Integer.parseInt(cmd.substring(cmd.indexOf(" ")+1))-1);
+        if (cmd.contains("delete")) {
             System.out.println("  Noted. I've removed this task:");
             System.out.println("     " + todos.get(getSize() - 1));
+            todos.remove(Integer.parseInt(cmd.substring(cmd.indexOf(" ")+1))-1);
             System.out.println("  Now you have " + getSize() + " tasks in the list.");
         } else {
             if (!cmd.contains(" ") && cmd.length() > 0) {
@@ -124,7 +124,7 @@ public class Data {
         return todos.get(i).getDescription();
     }
     public void saveToFile() throws IOException {
-        FileWriter fw = new FileWriter("src/main/java/duke/data.txt");
+        FileWriter fw = new FileWriter("lib/data.txt");
         for (Todo todo : todos) {
             String description = todo.getDescription();
             boolean isDone = todo.isItDone();
