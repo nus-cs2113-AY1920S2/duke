@@ -16,6 +16,15 @@ shadowJar {
     archiveAppendix = null
 }
 
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    baseName = 'all-in-one-jar'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
@@ -56,4 +65,8 @@ application {
 
 run {
     standardInput = System.in
+}
+
+configurations {
+    runtimeLibraries
 }

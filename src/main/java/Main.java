@@ -11,9 +11,10 @@ import java.util.Scanner;
 
 public class Main  {
     private CommandResult commandResult;
-    TaskManager taskManager = new TaskManager();
+    public TaskManager taskManager;
 
     public Main() throws StorageOperationException {
+        taskManager = new TaskManager();
     }
 
     public static void main(String[] args) throws StorageOperationException {
