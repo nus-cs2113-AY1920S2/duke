@@ -6,39 +6,49 @@ public class Duke {
     public static int numOfTasks = 0;
     public static Scanner userInput = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         // Function that prints out the initial greeting for duke
         printGreeting();
 
         // Loop that keeps running the program until user exits
-        while(true) {
+        while (true) {
             // Getting the user input every time from the user
             String userResponse = getUserResponse();
             String[] userResponseList = userResponse.split(" ");
             String action = userResponseList[0];
             String restOfUserInput = userResponse.replace(action, "").trim();
+            try {
+                if (action.equals("bye")) {
+                    break;
+                } else if (action.equals("list")) {
+                    doListCommand();
+                } else if (action.equals("done")) {
+                    doDoneCommand(restOfUserInput);
+                } else if (action.equals("todo")) {
+                    try {
+                        doTodoCommand(restOfUserInput);
+                    } catch (DukeException e) {
+                        System.out.println("Error. Todo command must have input!");
+                        printLineSeparator();
+                    }
+                } else if (action.equals("deadline")) {
+                    doDeadlineCommand(restOfUserInput);
+                } else if (action.equals("event")) {
+                    doEventCommand(restOfUserInput);
+                } else {
+                    throw new DukeException();
 
-            if(action.equals("bye")){
-                break;
-            } else if(action.equals("list")){
-                doListCommand();
-            } else if(action.equals("done")){
-                doDoneCommand(restOfUserInput);
-            } else if(action.equals("todo")){
-                doTodoCommand(restOfUserInput);
-            } else if(action.equals("deadline")){
-                doDeadlineCommand(restOfUserInput);
-            } else if(action.equals("event")){
-                doEventCommand(restOfUserInput);
-            } else {
-                System.out.println("Add exception here");
+                }
+
+            } catch (DukeException e) {
+                printLineSeparator();
+                System.out.println("Invalid command. Please try again! ");
+                printLineSeparator();
             }
-
         }
         printExitMessage();
     }
-
     // Helper function for printing line separator
     public static void printLineSeparator(){
         System.out.println(lineSeparator);
@@ -95,12 +105,17 @@ public class Duke {
     }
 
     // Helper function that executes command for 'todo'
-    public static void doTodoCommand(String command){
+    public static void doTodoCommand(String command) throws DukeException{
         printLineSeparator();
-        tasks[numOfTasks] = new Todo(command);
-        numOfTasks++;
-        printTask();
-        printLineSeparator();
+        if (command.isEmpty()){
+            throw new DukeException();
+        } else{
+            tasks[numOfTasks] = new Todo(command);
+            numOfTasks++;
+            printTask();
+            printLineSeparator();
+        }
+
     }
 
     // Helper function that executes command for 'deadline'
@@ -121,7 +136,7 @@ public class Duke {
         String[] taskList = command.split(" /at ");
         String task = taskList[0];
         String at = taskList[1];
-        tasks[numOfTasks] = new Deadline(task, at);
+        tasks[numOfTasks] = new Event(task, at);
         numOfTasks++;
         printTask();
         printLineSeparator();
