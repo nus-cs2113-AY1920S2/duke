@@ -7,8 +7,7 @@ public class Deadline extends Task {
     private String date;
 
     public Deadline (String description, String date) {
-        super(description);
-        this.date = date;
+        super(description, date);
     }
 
     public void setDate(String date) {
@@ -27,14 +26,19 @@ public class Deadline extends Task {
     @Override
     public void printAddDetails(int taskCounter) {
         System.out.println("The following task has been added:\n[" + getTaskType() +"][" +
-                            super.getStatusIcon() + "] " + super.description + " (by: " + date + ")\n");
+                            super.getStatusIcon() + "] " + super.description + " (by: " + super.date + ")\n");
         System.out.println("You've got " + taskCounter + " task(s) in the list!\n");
     }
 
     @Override
     public void printListDetails(int count) {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
-                            count + ". " + super.description + " (by: " + date + ")");
+                            count + ". " + super.description + " (by: " + super.date + ")");
+    }
+
+    @Override
+    public void saveTask() {
+
     }
 
 }

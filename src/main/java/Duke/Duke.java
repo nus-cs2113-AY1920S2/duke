@@ -128,6 +128,7 @@ public class Duke {
             Task newTask = new Deadline(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
+            newTask.saveTask();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
         }
@@ -139,6 +140,7 @@ public class Duke {
             Task newTask = new Event(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
+            newTask.saveTask();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
         }
@@ -155,8 +157,12 @@ public class Duke {
         Task newTask = new ToDo(itemName.trim());
         tasks.add(newTask);
         newTask.printAddDetails(taskCounter);
+        newTask.saveTask();
     }
 
+    public static void saveData(Task newTask) {
+
+    }
 
     public static void main(String[] args) {
 
