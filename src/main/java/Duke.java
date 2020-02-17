@@ -26,16 +26,14 @@ public class Duke {
     public static final String MISSING_TIME_PERIOD = "Please enter a time period for the task!";
     public static final String ITEM_OUT_OF_RANGE = "Item requested is out of range! Try another item.";
     public static final String INVALID_INDEX = "Invalid index! Please enter a valid integer as index!";
-    public static final String FILE_PATH = "data" + File.separator + "duke.txt";
-
 
     public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        // inserts correct file path separator on *nix and Windows
-        // works on *nix
-        // works on Windows
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "projects","DUKE","duke","data", "duke.txt");
-        Storage storage = new Storage(path.toString());
+//        String home = System.getProperty("user.home");
+//        // inserts correct file path separator on *nix and Windows
+//        // works on *nix
+//        // works on Windows
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "projects","DUKE","duke","data", "duke.txt");
+        Storage storage = new Storage();
         ArrayList<Task> myList = storage.load();
         Scanner myScanner = new Scanner(System.in);
         printWelcomeMessage();
