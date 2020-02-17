@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,12 +23,40 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
         printUserGreeting(name);
-        manageTasks(sc, name);
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            retrieve(tasks);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        manageTasks(sc, name, tasks);
     }
 
-    private static void manageTasks(Scanner sc, String name) {
+    private static ArrayList<Task> retrieve(ArrayList<Task> tasks) throws FileNotFoundException {
+        File f = new File("C:\\repos\\IP\\data\\duke.txt"); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String input = s.nextLine();
+            String[] parseInput = input.split("[|]");
+            switch (parseInput[0].trim()) {
+                case ("T"):
+                    tasks.add(new ToDo(parseInput[2].trim()));
+                    break;
+                case ("E"):
+                    tasks.add(new Event(parseInput[2].trim(), parseInput[3].trim()));
+                    break;
+                case ("D"):
+                    tasks.add(new Deadline(parseInput[2].trim(), parseInput[3].trim()));
+                    break;
+            }
+            if (parseInput[1].trim().equals("1")) {
+                tasks.get(tasks.size()-1).updateTask();
+            }
+        }
+        return tasks;
+    }
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+    private static void manageTasks(Scanner sc, String name, ArrayList<Task> tasks) {
 
         while (true) {
             String input = sc.nextLine();
@@ -70,13 +100,7 @@ public class Duke {
                     }
                 } else if (command.equalsIgnoreCase("delete")) {
                     try {
-                        int removeTask = Integer.parseInt(parseInput[1])-1;
-                        String taskInformation = String.valueOf(tasks.get(removeTask));
-                        System.out.println(String.format("%50s", "Noted. I've removed this task: "+ HAPPY_FACE));
-                        System.out.println(String.format("%50s", taskInformation));
-                        tasks.remove(removeTask);
-                        System.out.println(String.format("%50s", "Now you have " + tasks.size() + " tasks in the list."));
-                        System.out.println(DIVIDER);
+                        deleteTask(tasks, parseInput[1]);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(String.format("%50s", "Please include task number in the list " + SAD_FACE));
                         System.out.println(DIVIDER);
@@ -93,6 +117,16 @@ public class Duke {
                 System.out.println(DIVIDER);
             }
         }
+    }
+
+    private static void deleteTask(ArrayList<Task> tasks, String s) {
+        int removeTask = Integer.parseInt(s)-1;
+        String taskInformation = String.valueOf(tasks.get(removeTask));
+        System.out.println(String.format("%50s", "Noted. I've removed this task: "+ HAPPY_FACE));
+        System.out.println(String.format("%50s", taskInformation));
+        tasks.remove(removeTask);
+        System.out.println(String.format("%50s", "Now you have " + tasks.size() + " tasks in the list."));
+        System.out.println(DIVIDER);
     }
 
     private static void save(ArrayList<Task> tasks) throws IOException {
