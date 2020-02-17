@@ -49,6 +49,9 @@ public class Parser {
      */
     private Command getCommand(int nextTaskIndex, String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
         switch (commandWordFirstPart[0]){
+        //save to json
+        case SaveToJsonCommand.COMMAND_WORD:
+            return  new SaveToJsonCommand();
         //find task
         case FindCommand.COMMAND_WORD:
             return new FindCommand(commandWordDescription);

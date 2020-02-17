@@ -17,6 +17,8 @@ public class Messages {
     public static final String MESSAGE_TODO_LIST = "  %d. [Id:%d][%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "Error writing to file: %s";
+
     public static StringBuilder taskListMessage = new StringBuilder();
 
     /**
