@@ -14,13 +14,19 @@ public class Duke {
         String input = in.nextLine(); // Get string input
 
         while (!input.equals("bye")) {
-            String[] words = input.split(" ", 2);
+            String[] words = input.split(" ", 2); // Split command from rest of sentence
             try {
                 itemCount = manageCommand(list, itemCount, input, words);
             } catch (EmptyToDoException e) {
                 System.out.println("    ☹ OOPS!!! The description of a todo cannot be empty.");
             } catch (InvalidCommandException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (InvalidDeadlineException e) {
+                System.out.println("    ☹ OOPS!!! The description of a deadline must be in this format: ");
+                System.out.println("    deadline <task name> /by <date/time>");
+            } catch (InvalidEventException e) {
+                System.out.println("    ☹ OOPS!!! The description of an event must be in this format: ");
+                System.out.println("    event <task name> /at <date/time>");
             }
 
             input = in.nextLine(); // Get string input
@@ -30,44 +36,50 @@ public class Duke {
 
     }
 
-    private static int manageCommand(Task[] list, int itemCount, String input, String[] words) throws EmptyToDoException, InvalidCommandException {
-        if(words[0].equals("list")) { // List tasks
+    private static int manageCommand(Task[] list, int itemCount, String input, String[] words) throws EmptyToDoException, InvalidCommandException, InvalidDeadlineException, InvalidEventException {
+        if (words[0].equals("list")) { // List tasks
             printBorder();
             System.out.println("    Here are the tasks in your list:");
-            for(int i = 0; i < itemCount; ++i) { // Print list of tasks
-                System.out.println("    " + (i + 1) + ". " + list[i].toString() );
+            for (int i = 0; i < itemCount; ++i) { // Print list of tasks
+                System.out.println("    " + (i + 1) + ". " + list[i].toString());
             }
             printBorder();
-        } else if(words[0].equals("done") ) { // Mark task as done
+        } else if (words[0].equals("done")) { // Mark task as done
             printBorder();
             System.out.println("    Nice! I've marked this task as done: ");
-            String doneTask = input.substring(5, input.length() );
+            String doneTask = words[1];
             int taskIndex = Integer.parseInt(doneTask) - 1;
             list[taskIndex].setDone(true);
-            System.out.println("    " + list[taskIndex].toString() ); // Print task marked as done
+            System.out.println("    " + list[taskIndex].toString()); // Print task marked as done
             printBorder();
-        } else if(words[0].equals("deadline")) { // Deadline
-            int dividerIndex = input.indexOf("/by");
-            String deadlineTask = input.substring(9, (dividerIndex - 1));
-            String deadlineBy = input.substring((dividerIndex + 4), input.length() );
+        } else if (words[0].equals("deadline")) { // Deadline
+            if ((words.length < 2) || !words[1].contains(" /by ")) {
+                throw new InvalidDeadlineException();
+            }
+            String[] deadlineWords = words[1].split(" /by ", 2); // Split task and date/time
+            String deadlineTask = deadlineWords[0];
+            String deadlineBy = deadlineWords[1];
             list[itemCount] = new Deadline(deadlineTask, deadlineBy);
             printBorder();
             printTaskAdded(list, itemCount);
             itemCount++;
             printListCount(itemCount);
             printBorder();
-        } else if(words[0].equals("event")) { // Event
-            int dividerIndex = input.indexOf("/at");
-            String eventTask = input.substring(6, (dividerIndex - 1));
-            String eventAt = input.substring((dividerIndex + 4), input.length());
+        } else if (words[0].equals("event")) { // Event
+            if ((words.length < 2) || !words[1].contains(" /at ")) {
+                throw new InvalidEventException();
+            }
+            String[] eventWords = words[1].split(" /at ", 2); // Split task and date/time
+            String eventTask = eventWords[0];
+            String eventAt = eventWords[1];
             list[itemCount] = new Event(eventTask, eventAt);
             printBorder();
             printTaskAdded(list, itemCount);
             itemCount++;
             printListCount(itemCount);
             printBorder();
-        } else if(words[0].equals("todo")) { // ToDo
-            if(words.length < 2) {
+        } else if (words[0].equals("todo")) { // ToDo
+            if (words.length < 2) {
                 throw new EmptyToDoException();
             }
             String toDoTask = words[1];
@@ -88,8 +100,8 @@ public class Duke {
     }
 
     private static void printTaskAdded(Task[] list, int itemCount) {
-        System.out.println("    Got it. I've added this task: " );
-        System.out.println("      " + list[itemCount].toString() ); // Print task info
+        System.out.println("    Got it. I've added this task: ");
+        System.out.println("      " + list[itemCount].toString()); // Print task info
     }
 
     private static void printBorder() {
