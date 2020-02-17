@@ -187,29 +187,29 @@ public class ChattyChatBot {
     }
 
     private static void readDataFromFile(List<Task> tasks) {
+        filePath = DEFAULT_FILE_PATH;
+        // Solution below adapted from: https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics
+        // .html#w6-3-java-file-access
+        File file = new File(System.getProperty("user.dir"), filePath);
+        System.out.println("Reading tasks from disk...");
         try {
-            System.out.println("May I know where your file for storing tasks is located?");
-            filePath = SCANNER.nextLine().trim();
-            // Solution below adapted from: https://howtodoinjava.com/java/io/how-to-check-if-file-exists-in-java/
-            if (Files.notExists(Paths.get(filePath))) {
-                System.out.println("The path you specify is not valid, using default file path...");
-                filePath = DEFAULT_FILE_PATH;
+            file.getParentFile().mkdirs();
+            if (file.createNewFile()) {
+                System.out.println("New output file created");
+                System.out.println(file.getAbsolutePath());
             }
-            System.out.println("Reading tasks from disk...");
-
-            // Solution below adapted from: https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics
-            // .html#w6-3-java-file-access
-            File file = new File(filePath);
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String taskStr = fileScanner.nextLine();
                 Optional<Task> taskOptional = stringToTask(taskStr);
                 taskOptional.ifPresent(tasks::add);
             }
-            listAllTasks(tasks);
-        } catch (FileNotFoundException e) {
-            System.out.println("Input file not found! Initializing empty task list...");
+        } catch (IOException e) {
+            System.out.println("Exception occurred while reading file...");
+            System.out.println("Initializing empty tasks list");
+            e.printStackTrace();
         }
+        listAllTasks(tasks);
     }
 
     private static void saveDataToFile(List<Task> tasks) {
