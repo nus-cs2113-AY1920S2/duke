@@ -221,7 +221,18 @@ public class Duke {
     }
 
     private static void writeToFile() throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
+        File duke = new File("duke.txt");
+        if (!duke.exists()) {
+            try {
+                duke.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("New duke file has been created");
+        } else {
+            System.out.println("duke file detected");
+        }
+        FileWriter fw = new FileWriter("duke.txt");
         for (Task task : taskList) {
             fw.write(task.toString() + System.lineSeparator());
         }
@@ -244,7 +255,7 @@ public class Duke {
     }
 
     public static void readFromFile() throws IOException {
-        File file = new File("data/duke.txt");
+        File file = new File("duke.txt");
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String raw = scanner.nextLine();
