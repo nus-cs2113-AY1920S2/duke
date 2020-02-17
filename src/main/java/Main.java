@@ -17,6 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import parser.Parser;
+import storage.LoadFile;
 import storage.StorageFile;
 import ui.TextUi;
 import java.util.Scanner;
@@ -190,9 +191,10 @@ public class Main extends Application {
         commandResult = executeCommand(command);
         return commandResult.feedbackToUser;
     }
-
-    private StorageFile storage = new StorageFile();
     Duke duke = new Duke();
+    private StorageFile storager = new StorageFile();
+    private LoadFile loader = new LoadFile();
+
 
     public Main() throws StorageOperationException {
     }
@@ -203,6 +205,7 @@ public class Main extends Application {
 
     private void run() throws StorageOperationException {
         TextUi.showWelcomeMessage();
+        loader.readDom(duke);
         runCommandLoopUntilExitCommand();
     }
 
@@ -231,7 +234,8 @@ public class Main extends Application {
             // Execute according to the command itself
             commandResult = command.execute();
             // save the duke to a file
-            storage.save(duke);
+            storager.save(duke);
+            StorageFile.saveJson(duke);
         } catch (Exception ex) {
             // the out layer exception handler
             System.out.println(ex);

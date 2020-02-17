@@ -6,22 +6,18 @@ import parser.ParseTime;
 import java.time.LocalDate;
 
 public class DeadlineTask extends Task{
-
-    private String taskDeadline;
-    private LocalDate taskDeadlineDate;
-    private String taskInformation;
-
+    protected String taskInformation;
     public DeadlineTask() {
     }
 
     public DeadlineTask(int taskIndex, String taskDescription, String taskDeadline) {
         super(taskIndex, taskDescription, 'D');
-        this.taskDeadline = taskDeadline;
-        taskDeadlineDate = ParseTime.parseStringToLocalTime(this.taskDeadline);
+        this.taskTime = taskDeadline;
+        taskDeadlineDate = ParseTime.parseStringToLocalTime(this.taskTime);
     }
 
     public String getTaskDeadline() {
-        return taskDeadline;
+        return taskTime;
     }
 
     public LocalDate getTaskDeadlineDate() {

@@ -2,29 +2,43 @@ package data.task;
 
 import common.Messages;
 
+import java.time.LocalDate;
+
 public class Task {
 
-    //protected int index;
+    /** common attributes*/
     protected int taskIndex;
     protected String taskDescription;
     protected boolean isDone;
     protected char taskType;
 
+    /** deadline and event task attributes*/
+    protected String taskTime;
+    /** deadline task attributes*/
+    protected LocalDate taskDeadlineDate;
+
     public Task() {
     }
 
+//    /**
+//     * called by
+//     */
+//    public Task(int taskIndex, String taskDescription) {
+//        this.taskIndex = taskIndex;
+//        this.taskDescription = taskDescription;
+//        this.isDone = false;
+//    }
 
-    public Task(int taskIndex, String taskDescription) {
-        this.taskIndex = taskIndex;
-        this.taskDescription = taskDescription;
-        this.isDone = false;
-    }
-
+    /**
+     * called by ToDo constructor
+     */
     public Task(int taskIndex,String taskDescription, char taskType) {
         this.taskIndex = taskIndex;
         this.taskDescription = taskDescription;
         this.taskType = taskType;
         this.isDone = false;
+        this.taskTime = "-1";
+        this.taskDeadlineDate = LocalDate.MAX;
     }
 
     public String getTaskDescription() {
@@ -62,6 +76,23 @@ public class Task {
 
     public void setTaskIndex(int taskIndex) {
         this.taskIndex = taskIndex;
+    }
+
+    public String getTaskDeadline() {
+        return taskTime;
+    }
+
+    public LocalDate getTaskDeadlineDate() {
+        return taskDeadlineDate;
+    }
+
+
+    public String getTaskStartTime() {
+        return taskTime;
+    }
+
+    public String getTaskEndTime() {
+        return taskTime;
     }
 
     /**
