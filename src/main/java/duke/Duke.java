@@ -1,7 +1,12 @@
 package duke;
-
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
 
 
 
@@ -20,22 +25,104 @@ public class Duke {
 
     Scanner scanner = new Scanner(System.in);
 
-    public void printStraightLine(){
+    public void printStraightLine() {
         System.out.println("___________________________________________________________________________\n");
     }
 
-    /**
-     * Generates Logo.
-     */
-    public void printLogo(){
-        for (int i = 0; i < 5; i++){
+    public static String filePath = "files/TaskList.txt";
+
+    //we will not use this methid in this branch, but it be useful in the next branch for testing purposes
+    private static void printFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
+
+
+
+    public static Boolean convertMarkToBool(String mark){
+        if (mark.equals("\u2713")){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static void createTaskList(String filepathe, ArrayList<Task> taskList) {
+        try {
+            File f = new File(filePath);
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String ogString = s.nextLine();
+                String[] words = ogString.split(" \\| ");
+                String taskType = words[0];
+                String mark = words[1];
+                String description = words[2];
+                Boolean isTaskDone = convertMarkToBool(mark);
+                if (taskType.equals("[T]")) {
+                    Todo t = new Todo(description);
+                    t.isDone = isTaskDone;
+                    taskList.add(t);
+                } else if (taskType.equals("[E]")) {
+                    Event t = new Event(description);
+                    t.isDone = isTaskDone;
+                    taskList.add(t);
+                } else {
+                    Deadline t = new Deadline(description);
+                    t.isDone = isTaskDone;
+                    taskList.add(t);
+                }
+
+            }
+        } catch(FileNotFoundException e){
+            //Dont need to return anything as we hardcode the name of the file
+        }
+    }
+
+    public static void saveTaskList(ArrayList<Task> taskList) {
+        try {
+            for (int i = 0; i < taskList.size(); i++){
+                Task t = taskList.get(i);
+                String description = t.getDescription();
+                String typeIcon = t.getTypeIcon();
+                String statusIcon = t.getStatusIcon();
+                String stringToAdd = typeIcon + " | " + statusIcon + " | " + description;
+                if (i == 0){
+                    FileWriter fw = new FileWriter(filePath);
+                    fw.write(stringToAdd);
+                    fw.write("\n");
+                    fw.close();
+                } else {
+                    FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+                    fw.write(stringToAdd);
+                    fw.write("\n");
+                    fw.close();
+
+                }
+            }
+            }
+        catch(IOException e){
+        }
+    }
+
+
+
+        /**
+         * Generates Logo.
+         */
+    public void printLogo() {
+        for (int i = 0; i < 5; i++) {
             String addOne = "*";
             String addTwo = "     *";
             String addThree = "*";
             String addFour = "     *";
             String addFive = "*";
             String addSix = "     *";
-            for (int j = 0; j < i; j++){
+            for (int j = 0; j < i; j++) {
                 addOne += "*";
                 addTwo += "*";
                 addThree += "*";
@@ -44,40 +131,40 @@ public class Duke {
                 addSix += "*";
             }
             System.out.println(addOne + addTwo + addThree + addFour + addFive + addSix +
-                                    addOne + addTwo + addThree + addFour + addFive + addSix +
-                                        addOne + addTwo + addThree + addFour + addFive + addSix +
-                                            addOne + addTwo + addThree + addFour + addFive + addSix);
+                    addOne + addTwo + addThree + addFour + addFive + addSix +
+                    addOne + addTwo + addThree + addFour + addFive + addSix +
+                    addOne + addTwo + addThree + addFour + addFive + addSix);
         }
     }
+
 
     /**
      * Print all available tasks.
      */
-    public void printTaskList(ArrayList<Task> taskList){
+    public void printTaskList(ArrayList<Task> taskList) {
         int taskCounter = 1;
-        for (Task task : taskList){
+        for (Task task : taskList) {
             String description = task.getDescription();
             String statusIcon = task.getStatusIcon();
             String typeIcon = task.getTypeIcon();
-            System.out.println(taskCounter + ". "  + typeIcon +  " [" +  statusIcon + "] " +  description);
-            taskCounter+= 1;
+            System.out.println(taskCounter + ". " + typeIcon + " [" + statusIcon + "] " + description);
+            taskCounter += 1;
         }
     }
 
 
     /**
      * Checks if the given task is valid
-      */
-    public Boolean checkIfValidTask(String type){
+     */
+    public Boolean checkIfValidTask(String type) {
         String DONE = "done";
         String DEADLINE = "deadline";
         String TODO = "todo";
         String EVENT = "event";
         String LISTE = "list";
-
         if (type.equals(DONE) || type.equals(TODO) || type.equals(DEADLINE)
-                || type.equals(EVENT) || type.equals(LISTE) ){
-             return true;
+                || type.equals(EVENT) || type.equals(LISTE)) {
+            return true;
         }
         return false;
     }
@@ -86,7 +173,7 @@ public class Duke {
     /**
      * Returns a boolean if a given task is marked as done
      *
-     * @param line  Line that represents the task that is supposed to marked as done.
+     * @param line     Line that represents the task that is supposed to marked as done.
      * @param taskList TaskList of all available tasks.
      * @return isDone Is the task marked as Done.
      */
@@ -95,8 +182,8 @@ public class Duke {
         int LENG_LIST = words.length;
         Boolean isDone;
         //Error check, to make sure you are given a valid done statement
-        if (LENG_LIST == 1){
-            if (words[0].equals("done")){
+        if (LENG_LIST == 1) {
+            if (words[0].equals("done")) {
                 System.out.println("Please specify (eg: done 2) or just add a new one");
                 isDone = true;
                 return isDone;
@@ -108,15 +195,14 @@ public class Duke {
 
     /**
      * Returns a boolean that marks a task as done if it exists
-     *
      */
     private Boolean isValidTaskAndDone(ArrayList<Task> taskList, String[] words) {
-        Boolean isSet= false;
+        Boolean isSet = false;
         if (words[0].toUpperCase().equals("DONE")) {
             int IDX_WORDS = Integer.parseInt(words[1]) - 1;
-            if (words[1] == null){
+            if (words[1] == null) {
                 return isSet;
-            } else if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() -1) {
+            } else if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() - 1) {
                 System.out.println("That task number isn't in our task list, please try again!");
                 return true;
             }
@@ -124,32 +210,32 @@ public class Duke {
             String statusIcon = taskList.get(Integer.parseInt(words[1]) - 1).getStatusIcon();
             String typeIcon = taskList.get(Integer.parseInt(words[1]) - 1).getTypeIcon();
             String description = taskList.get(Integer.parseInt(words[1]) - 1).getDescription();
-            System.out.println((Integer.parseInt(words[1])) + ". "+ typeIcon +  "[" + statusIcon + "]" + " " + description);
+            System.out.println((Integer.parseInt(words[1])) + ". " + typeIcon + "[" + statusIcon + "]" + " " + description);
             System.out.println("Done! We have checked " + words[1] + "!");
             isSet = true;
-            }
+        }
         return isSet;
     }
 
     /**
      * Returns the description of the task in the required format
+     *
      * @param line Line that represents the task that is supposed to marked as done.
-     * @type type Type of subclass of task.
      * @return description Description of the task in the required format.
+     * @type type Type of subclass of task.
      */
     public String returnStringToAdd(String line, String type) {
-        if (type.equals("todo") ){
+        if (type.equals("todo")) {
             String[] arrOfStr = line.split(type);
-            String toReturn= arrOfStr[1].trim();
+            String toReturn = arrOfStr[1].trim();
             return toReturn;
         } else {
             String preposition;
             String splitter;
-            if (type.equals("deadline")){
+            if (type.equals("deadline")) {
                 preposition = "by: ";
                 splitter = "/by";
-            }
-            else {
+            } else {
                 preposition = "at: ";
                 splitter = "/at";
             }
@@ -166,7 +252,8 @@ public class Duke {
 
     /**
      * Reads what type of task if given and calls the required method accordingly.
-     * @param line Line that represents the task that is supposed to marked as done.
+     *
+     * @param line     Line that represents the task that is supposed to marked as done.
      * @param taskList Tasklist of all available tasks.
      */
     public void readCommands(String line, ArrayList<Task> taskList) {
@@ -177,25 +264,25 @@ public class Duke {
 
             if (!checkIfValidTask(eventType)) {
                 System.out.println("Please specify the task type more clearly (eg: done, todo, deadline, list, event)");
-            }
-            else {
+            } else {
                 performTasks(taskList, ogString, eventType);
             }
-//            Scanner scanner = new Scanner(System.in);
             ogString = scanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!\n");
+        saveTaskList(taskList);
         printStraightLine();
     }
 
     /**
      * Performs the requested task
-     * @param taskList TaskList of all available tasks.
-     * @param ogString Original string that is inputted by the user using the command line.
+     *
+     * @param taskList  TaskList of all available tasks.
+     * @param ogString  Original string that is inputted by the user using the command line.
      * @param eventType event Type, meaning the nature of the command (eg. LIST, DEADLINE).
      */
     public void performTasks(ArrayList<Task> taskList, String ogString, String eventType) {
-        if (hasDone(ogString, taskList)){
+        if (hasDone(ogString, taskList)) {
             printStraightLine();
         } else if (ogString.toUpperCase().equals("LIST")) {
             printStraightLine();
@@ -223,14 +310,16 @@ public class Duke {
                 String statusIcon = t.getStatusIcon();
                 String typeIcon = t.getTypeIcon();
                 System.out.println("Got it. I have added this task: \n");
-                System.out.println(typeIcon +  " [" +  statusIcon + "] " +  description + "\n");
-                System.out.println("Now you have " + taskList.size() +  " item/s in the list \n");
+                System.out.println(typeIcon + " [" + statusIcon + "] " + description + "\n");
+                System.out.println("Now you have " + taskList.size() + " item/s in the list \n");
+//                String stringToAdd = typeIcon + " | " + statusIcon + " | " + description;
+//                writeToFile(filePath, stringToAdd);
                 printStraightLine();
 
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("Your inputs can only be of the following forms: \n 1. todo {task description} \n 2." +
-                                        " deadline {task description} \\by {dedline eg. 6 PM} \n 3. event {event description} " +
-                                            "\\at {event date\\time eg. 6 PM}");
+                        " deadline {task description} \\by {dedline eg. 6 PM} \n 3. event {event description} " +
+                        "\\at {event date\\time eg. 6 PM}");
                 System.out.println("Try again!");
                 printStraightLine();
             }
@@ -239,11 +328,14 @@ public class Duke {
     }
 
 
+
+
     /**
      * Gets the program statted by adding an initial task or taking the initial command
      */
-    public void startThingsOff(){
+    public void startThingsOff() {
         printLogo();
+        createTaskList(filePath, taskList);
         String line;
         printStraightLine();
         System.out.println("Hello! I'm Hiroshi");
@@ -251,12 +343,19 @@ public class Duke {
         printStraightLine();
         line = scanner.nextLine();
         readCommands(line, taskList);
-        }
+    }
 
 
     public static void main(String[] args) {
         Duke hiroshiNagai = new Duke();
         hiroshiNagai.startThingsOff();
+//        try {
+//            printFileContents(filePath);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found");
+//        }
     }
 
 }
+
+
