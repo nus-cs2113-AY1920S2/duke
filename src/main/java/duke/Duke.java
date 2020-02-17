@@ -44,7 +44,7 @@ public class Duke {
     }
 
     public static void loadTasks(){
-
+        
         File f = new File("data/duke.txt");
         try{
             Scanner s = new Scanner(f);
@@ -54,7 +54,14 @@ public class Duke {
                 loadATask(aTask);
             }
         } catch(FileNotFoundException e){
-            System.out.println("No duke history. Please input task. ");
+            System.out.println("\tCreating back up file in hard disk... ");
+            System.out.println();
+            try{
+                f.createNewFile();
+            }catch(IOException error){
+
+                System.out.println("\tSomething went wrong: " + error.getMessage());
+            }
         }
 
     }
@@ -98,6 +105,7 @@ public class Duke {
             }catch(StringIndexOutOfBoundsException e){
                 System.out.println("\t:(OOPS!!! Please enter the task number.");
             }
+            outputTasks();
         } else if(userResponde.startsWith("delete")){
             try{
                 deleteTask(userResponde);
@@ -143,7 +151,7 @@ public class Duke {
         int doneCount = Integer.parseInt(userResponde.substring(5)) - 1;
         tasks.get(doneCount).markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  [\u2713] " + tasks.get(doneCount).getDescription());
+        System.out.println("\t  yes! " + tasks.get(doneCount).getDescription());
     }
 
     public static void deleteTask(String userResponde) throws DukeException{
@@ -205,7 +213,7 @@ public class Duke {
             }
             fw.close();
         }catch (IOException e){
-            System.out.println("No backup file in the hard disk.");
+            System.out.println("\tNo backup file in the hard disk.");
         }
     }
 
