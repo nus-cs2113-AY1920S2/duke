@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<Task> taskList = new ArrayList<>();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,8 +16,6 @@ public class Duke {
                 "\tWhat can I do for you?\n"
                 + "\t____________________________________________________________\n");
 
-
-        Task[] taskList = new Task[100];
         int taskCount = 0;
 
         Scanner in = new Scanner(System.in);
@@ -23,9 +24,13 @@ public class Duke {
         while (!line.equals("bye")){
             String[] words = line.split(" ",2); // split the first word from the rest of the sentence using space as the delimiter
             try {
-                taskCount = handleCommand(taskList, taskCount, line, words);
+                handleCommand(line, words);
+            } catch (EmptyTaskListException e) {
+                printEmptyTaskListExceptionMessage();;
             } catch (EmptyDoneException e) {
                 printEmptyDoneExceptionMessage();
+            } catch (EmptyDeleteException e) {
+                printEmptyDeleteExceptionMessage();
             } catch (UnknownWordException e) {
                 printUnknownWordExceptionMessage();
             } catch (EmptyTodoException e) {
@@ -34,23 +39,42 @@ public class Duke {
                 printEmptyDeadlineExceptionMessage();
             } catch (EmptyEventException e) {
                 printEmptyEventExceptionMessage();
+            } catch (IndexOutOfBoundsException e) {
+                printIndexOutOfBoundsExceptionMessage();
             }
             line = in.nextLine();
         }
         printGoodbyeMessage();
     }
 
-    private static int handleCommand(Task[] taskList, int taskCount, String line, String[] words) throws EmptyDoneException, UnknownWordException, EmptyTodoException, EmptyDeadlineException, EmptyEventException {
+    private static void handleCommand(String line, String[] words) throws EmptyTaskListException, EmptyDoneException, EmptyDeleteException, UnknownWordException, EmptyTodoException, EmptyDeadlineException, EmptyEventException {
         if (line.equals("list")) {
-            printListMessage(taskList, taskCount);
+            if(taskList.isEmpty()){
+                throw new EmptyTaskListException();
+            }
+            printListMessage();
         } else if (words[0].equals("done")) {
+            if(taskList.isEmpty()){
+                throw new EmptyTaskListException();
+            }
             if (words.length < 2){
                 throw new EmptyDoneException();
             }
             int taskNum = Integer.parseInt(words[1]);
-            Task t=taskList[taskNum-1];
+            Task t=taskList.get(taskNum-1);
             t.markAsDone();
             printDoneMessage(t);
+        } else if (words[0].equals("delete")) {
+            if(taskList.isEmpty()){
+                throw new EmptyTaskListException();
+            }
+            if (words.length < 2){
+                throw new EmptyDeleteException();
+            }
+            int taskNum = Integer.parseInt(words[1]);
+            Task t = taskList.get(taskNum-1);
+            taskList.remove(t);
+            printDeleteMessage(t);
         } else if (words[0].equals("todo") || words[0].equals("deadline") || words[0].equals("event")){
             String taskType = words[0];
             Task t = new Task(line);
@@ -62,51 +86,65 @@ public class Duke {
                     t = new Todo(words[1]);
                     break;
                 case "deadline":
-                    if (words.length < 3){
+                    String[] deadlineWords = words[1].split(" /by ", 2); // split the deadline task from the by string using /by as the delimiter
+                    if (deadlineWords.length < 2){
                         throw new EmptyDeadlineException();
                     }
-                    String[] deadlineWords = words[1].split(" /by ", 2); // split the deadline task from the by string using /by as the delimiter
                     t = new Deadline(deadlineWords[0], deadlineWords[1]);
                     break;
                 case "event":
-                    if (words.length < 3){
+                    String[] eventWords = words[1].split(" /at ", 2); // split the event task from the by string using /at as the delimiter
+                    if (eventWords.length < 2){
                         throw new EmptyEventException();
                     }
-                    String[] eventWords = words[1].split(" /at ", 2); // split the event task from the by string using /at as the delimiter
                     t = new Event(eventWords[0], eventWords[1]);
                     break;
             }
-            taskList[taskCount] = t;
-            taskCount++;
-            printAddTaskMessage(taskCount, t);
+            taskList.add(t);
+//            taskList[taskCount] = t;
+//            taskCount++;
+            printAddTaskMessage(t);
         } else {
             throw new UnknownWordException();
         }
-        return taskCount;
     }
 
-    private static void printListMessage(Task[] taskList, int taskCount) {
+    private static void printListMessage() {
         System.out.println("\t____________________________________________________________\n"
                 +"\t Here are the tasks in your list:");
-        for(int i=0; i<taskCount; ++i){
-            Task t = taskList[i];
+        int i=0;
+        for (Task t : taskList) {
             System.out.println("\t " + (i+1) + ". " + t.toString());
+            i++;
         }
+//        for(int i=0; i<taskCount; ++i){
+//            Task t = taskList[i];
+//            System.out.println("\t " + (i+1) + ". " + t.toString());
+//        }
         System.out.println("\t____________________________________________________________\n");
     }
+
 
     private static void printDoneMessage(Task t) {
         System.out.println("\t____________________________________________________________\n"
                 +"\t Nice! I've marked this task as done:\n"
-                +"\t" + t.toString() + "\n"
+                +"\t\t" + t.toString() + "\n"
                 +"\t____________________________________________________________\n");
     }
 
-    private static void printAddTaskMessage(int taskCount, Task t) {
+    private static void printDeleteMessage(Task t) {
+        System.out.println("\t____________________________________________________________\n"
+                +"\t Noted. I've removed this task:\n"
+                +"\t\t" + t.toString() + "\n"
+                + "\t Now you have " + taskList.size() +" tasks in the list.\n"
+                +"\t____________________________________________________________\n");
+    }
+
+    private static void printAddTaskMessage(Task t) {
         System.out.println("\t____________________________________________________________\n"
                 + "\t Got it. I've added this task:\n"
                 + "\t   " + t.toString() + "\n"
-                + "\t Now you have " + taskCount +" tasks in the list.\n"
+                + "\t Now you have " + taskList.size() +" tasks in the list.\n"
                 + "\t____________________________________________________________\n");
     }
 
@@ -130,6 +168,13 @@ public class Duke {
                 + "\t____________________________________________________________\n");
     }
 
+    private static void printEmptyDeleteExceptionMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t☹ OOPS!!! The description of a delete must contain a task number in this format:\n"
+                + "\t delete <task number>\n"
+                + "\t____________________________________________________________\n");
+    }
+
     private static void printEmptyDeadlineExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! The description of a deadline must contain a task name and a date in this format:\n"
@@ -150,10 +195,28 @@ public class Duke {
                 + "\t You can try the following commands instead:\n"
                 + "\t\t list\n"
                 + "\t\t todo <task name>\n"
+                + "\t\t deadline <task name> /by <date>\n"
+                + "\t\t event <task name> /at <location>\n"
+                + "\t\t done <task number>\n"
+                + "\t\t delete <task number>\n"
+                + "\t\t bye\n"
+                + "\t____________________________________________________________\n");
+    }
+
+    private static void printIndexOutOfBoundsExceptionMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t ☹ OOPS!!! The index you have entered is out of bounds.\n"
+                + "\t You can try index in the range of 1 to " + taskList.size() + " instead.\n"
+                + "\t____________________________________________________________\n");
+    }
+
+    private static void printEmptyTaskListExceptionMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t ☹ OOPS!!! Your task list is empty!\n"
+                + "\t You can try entering a task using the following commands first:\n"
                 + "\t\t done <task number>\n"
                 + "\t\t deadline <task name> /by <date>\n"
                 + "\t\t event <task name> /at <location>\n"
-                + "\t\t bye\n"
                 + "\t____________________________________________________________\n");
     }
 }
