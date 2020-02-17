@@ -1,6 +1,6 @@
-package src.main.java.Tasks;
+package Tasks;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String description) {
         super(description);

@@ -1,4 +1,4 @@
-package src.main.java.Exceptions;
+package Exceptions;
 
 public class EmptyStringException extends Exception {
 

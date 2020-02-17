@@ -1,12 +1,11 @@
-package src.main.java;
-import src.main.java.Exceptions.EmptyStringException;
-import src.main.java.Tasks.Deadline;
-import src.main.java.Tasks.Events;
-import src.main.java.Tasks.Task;
-import src.main.java.Tasks.ToDo;
+import Exceptions.EmptyStringException;
+import Tasks.Deadline;
+import Tasks.Events;
+import Tasks.Task;
+import Tasks.ToDo;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static int todoSize=0;
