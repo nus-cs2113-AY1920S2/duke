@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,6 +34,12 @@ public class Duke {
     public static final String OUT_OF_BOUND_MESSAGE = "\t☹ OOPS!!! The task's index is out of bound or does not exist";
     public static final String TASK_REMOVED_MESSAGE = "\tNoted. I've removed this task:";
     public static final String DELETE = "delete";
+    public static final String VERTICAL_BAR = "|";
+    public static final String TODO_ABBREVIATION = "T";
+    public static final String DEADLINE_ABBREVIATION = "D";
+    public static final String EVENT_ABBREVIATION = "E";
+    public static final String PATH = "data/duke.txt";
+    public static final String ONE = "1";
 
     public static void printList(ArrayList<Task> tasks) {
         System.out.println(TASK_LISTING);
@@ -41,8 +50,9 @@ public class Duke {
 
 
     public static void main(String[] args) throws IOException, NullPointerException{
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
         welcomeMessage();
+        loadFileData(tasks);
         Scanner commandScanner = new Scanner(System.in);
         String command = commandScanner.nextLine();
         while(!command.equals(BYE)) {
@@ -70,7 +80,17 @@ public class Duke {
             System.out.println(LINE_SPLITTING);
             command = commandScanner.nextLine();
         }
+        writeFileData(tasks);
         byeMessage();
+    }
+
+    private static void writeFileData(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(PATH);
+        for(Task t: tasks) {
+            fw.write(t.getType() + VERTICAL_BAR + t.getIsDone() + VERTICAL_BAR + t.getDescription()
+                    + VERTICAL_BAR + t.getTime() + System.lineSeparator());
+        }
+        fw.close();
     }
 
     private static void deleteTaskMessage(ArrayList<Task> tasks, String number) {
@@ -166,5 +186,31 @@ public class Duke {
     private static void welcomeMessage() {
         String greeting = LINE_SPLITTING + HELLO_MESSAGE + HELP_MESSAGE + LINE_SPLITTING;
         System.out.println(greeting);
+    }
+
+    private static void loadFileData(ArrayList<Task> tasks) throws FileNotFoundException {
+        try {
+            File f = new File(PATH); // create a File for the given file path
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String[] dataSplitter = s.nextLine().split("\\|");
+                switch (dataSplitter[0]) {
+                case TODO_ABBREVIATION:
+                    tasks.add(new ToDo(dataSplitter[2]));
+                    break;
+                case DEADLINE_ABBREVIATION:
+                    tasks.add(new Deadline(dataSplitter[2], dataSplitter[3]));
+                    break;
+                case EVENT_ABBREVIATION:
+                    tasks.add(new Event(dataSplitter[2], dataSplitter[3]));
+                    break;
+                }
+                if (dataSplitter[1].equals(ONE)) {
+                    tasks.get(tasks.size() - 1).markAsDone();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File does not exist yet");
+        }
     }
 }
