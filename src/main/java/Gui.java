@@ -1,19 +1,18 @@
-import commands.Command;
 import commands.CommandResult;
+import common.Messages;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import parser.Parser;
 
 public class Gui extends Application {
 
@@ -25,27 +24,28 @@ public class Gui extends Application {
     private Button sendButton;
     private Scene scene;
     private CommandResult commandResult;
-
     @Override
     public void start(Stage stage) {
         AnchorPane mainLayout = setupAnchorPane(stage);
         formatWindow(stage, mainLayout);
         parseUserInput();
+        //isExit(stage, "aa");
     }
 
+    /**
+     * setup anchorPane with parameters
+     * @param stage stage
+     */
     private AnchorPane setupAnchorPane(Stage stage) {
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -53,6 +53,11 @@ public class Gui extends Application {
         return mainLayout;
     }
 
+    /**
+     * setup Window with parameters
+     * @param stage stage
+     * @param mainLayout uninitialized anchorPane
+     */
     private void formatWindow(Stage stage, AnchorPane mainLayout) {
         //Step 2. Formatting the window to look as expected
         setStage(stage);
@@ -114,20 +119,26 @@ public class Gui extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing TaskManager's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws StorageOperationException {
         //user box
         Label userText = new Label(userInput.getText());
-        //duke response
+        //taskManager response
         //construct a label with the response
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(new Main().getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userPng)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukePng))
         );
         userInput.clear();
+    }
+
+    private void isExit(Stage stage, String outputToUser){
+        if (outputToUser.equals(Messages.MESSAGE_FAREWELL)){
+            stage.close();
+        }
     }
 
     /** setup AnchorPane with parameters*/
@@ -148,24 +159,14 @@ public class Gui extends Application {
         scrollPane.setFitToWidth(true);
     }
 
-    /** setup Stage with parameters*/
+    /**
+     * setup Stage with parameters
+     * @param stage uninitialized stage
+     */
     private void setStage(Stage stage) {
-        stage.setTitle("Duke");
+        stage.setTitle("TaskManager");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
     }
-
-    /**
-     * Replace this stub with your completed method.
-     * @param input the full length of user input
-     */
-    private String getResponse(String input) throws StorageOperationException {
-//        Command command;
-//////        command = new Parser().parseCommand(input);
-//////        commandResult = Main.executeCommand(command);
-//////        return commandResult.feedbackToUser;
-        return "dummy";
-    }
-
 }

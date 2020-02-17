@@ -1,12 +1,7 @@
 package commands;
 
-import commands.Command;
-import commands.CommandResult;
 import common.Messages;
-import data.task.Task;
 import data.task.TaskList;
-
-import javax.print.attribute.standard.Media;
 
 public class FindCommand extends Command {
 
@@ -39,7 +34,7 @@ public class FindCommand extends Command {
     }
 
     private boolean isQualifiedTasksEmpty() {
-        qualifiedTasks = duke.searchTask(toSearch);
+        qualifiedTasks = taskManager.searchTask(toSearch);
         if (qualifiedTasks.getInternalList().isEmpty()){
             return true;
         } else {

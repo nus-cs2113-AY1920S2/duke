@@ -1,12 +1,12 @@
 package commands;
 
-import data.Duke;
+import data.TaskManager;
 import data.task.Task;
 import ui.TextUi;
 
 public abstract class Command {
 
-    protected Duke duke;
+    protected TaskManager taskManager;
     public String COMMAND_WORD;
     private int targetIndex = -1;
 
@@ -31,8 +31,8 @@ public abstract class Command {
     /**
      * Supplies the data the command will operate on.
      */
-    public void setData(Duke duke) {
-        this.duke = duke;
+    public void setData(TaskManager taskManager) {
+        this.taskManager = taskManager;
     }
 
     /**
@@ -41,7 +41,7 @@ public abstract class Command {
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
     protected Task getTargetTask() throws IndexOutOfBoundsException {
-        return duke.getTaskList().getInternalList().get(getTargetIndex() - TextUi.DISPLAYED_INDEX_OFFSET);
+        return taskManager.getTaskList().getInternalList().get(getTargetIndex() - TextUi.DISPLAYED_INDEX_OFFSET);
     }
 
     public int getTargetIndex() {

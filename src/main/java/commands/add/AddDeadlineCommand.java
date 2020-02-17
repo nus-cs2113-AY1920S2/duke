@@ -1,7 +1,6 @@
 package commands.add;
 
 import commands.CommandResult;
-import common.Month;
 import data.task.DeadlineTask;
 import data.task.Task;
 
@@ -20,7 +19,7 @@ public class AddDeadlineCommand extends AddCommand {
 
     @Override
     public CommandResult execute() {
-        duke.addTask(deadlineTask);
+        taskManager.addTask(deadlineTask);
         //according to the data format
         return new CommandResult(String.format(
                 MESSAGE_DEADLINE_SUCCESS,

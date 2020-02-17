@@ -1,10 +1,6 @@
 package commands;
 
 import common.Messages;
-import data.task.DeadlineTask;
-import data.task.EventTask;
-import data.task.Task;
-import data.task.TodoTask;
 
 /**
  * Lists all persons in the address book to the user.
@@ -30,8 +26,8 @@ public class ListCommand extends Command {
      */
     public CommandResult execute() {
         System.out.println(Messages.DIVIDER);
-        if (duke.getTaskList().getInternalList().size()>0){
-            taskListMessage = Messages.printAllTasks(duke.getTaskList());
+        if (taskManager.getTaskList().getInternalList().size()>0){
+            taskListMessage = Messages.printAllTasks(taskManager.getTaskList());
             return new CommandResult((taskListMessage));
         } else {
             return new CommandResult(MESSAGE_EMPTY_LIST);

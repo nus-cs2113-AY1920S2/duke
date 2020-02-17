@@ -2,12 +2,10 @@ package storage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import common.Messages;
-import data.Duke;
-import data.exceptions.ParseException;
+import data.TaskManager;
 import data.exceptions.StorageOperationException;
 import parser.EncodeToFile;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,16 +13,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static java.io.File.pathSeparator;
-
 /**
  * Represents the file used to store task list data.
  */
 public class StorageFile {
 
     /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
-    public static final String DEFAULT_STORAGE_JSON_FILEPATH = "duke.json";
+    public static final String DEFAULT_STORAGE_FILEPATH = "taskManager.txt";
+    public static final String DEFAULT_STORAGE_JSON_FILEPATH = "taskManager.json";
     private static String jsonFilePath = DEFAULT_STORAGE_JSON_FILEPATH;
     private Path filePath;
 
@@ -53,12 +49,12 @@ public class StorageFile {
     /**
      * Parses user input into command for execution.
      *
-     * @param duke duke management system
+     * @param taskManager taskManager management system
      * @throws StorageOperationException
      */
-    public void save(Duke duke) throws StorageOperationException {
+    public void save(TaskManager taskManager) throws StorageOperationException {
         try {
-            List<String> encodedDuke = EncodeToFile.encodeAllTasks(duke);
+            List<String> encodedDuke = EncodeToFile.encodeAllTasks(taskManager);
             Files.write(filePath, encodedDuke);
         } catch (IOException ioe) {
             throw new StorageOperationException(
@@ -77,12 +73,12 @@ public class StorageFile {
     }
 
 
-    public static void saveJson(Duke duke) throws StorageOperationException {
+    public static void saveJson(TaskManager taskManager) throws StorageOperationException {
         //System.out.printf(FIVE_SPACES + SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING, DATA_FILE_PATH);
         try {
             Gson gson = new GsonBuilder().create();
             FileWriter fw = new FileWriter(String.valueOf(jsonFilePath));
-            String json = gson.toJson(duke.getTaskList().getInternalList());
+            String json = gson.toJson(taskManager.getTaskList().getInternalList());
             fw.write(json);
             fw.flush();
             fw.close();

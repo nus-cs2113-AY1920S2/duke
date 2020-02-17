@@ -1,5 +1,4 @@
 package common;
-import data.Duke;
 import data.task.*;
 
 /**

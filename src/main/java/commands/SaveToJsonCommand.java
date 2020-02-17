@@ -14,7 +14,7 @@ public class SaveToJsonCommand extends Command{
     @Override
     public CommandResult execute() {
         try {
-            StorageFile.saveJson(duke);
+            StorageFile.saveJson(taskManager);
         } catch (StorageOperationException soe) {
             System.out.println(soe);
         }

@@ -18,7 +18,7 @@ public class AddTodoCommand extends AddCommand {
 
     @Override
     public CommandResult execute() {
-        duke.addTask(toDoTask);
+        taskManager.addTask(toDoTask);
         return new CommandResult(String.format(
                 MESSAGE_TODO_SUCCESS,
                 toDoTask.getTaskIndex(),

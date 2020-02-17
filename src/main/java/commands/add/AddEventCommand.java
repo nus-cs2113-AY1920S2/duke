@@ -19,7 +19,7 @@ public class AddEventCommand extends AddCommand {
 
     @Override
     public CommandResult execute() {
-        duke.addTask(eventTask);
+        taskManager.addTask(eventTask);
         return new CommandResult(String.format(
                 MESSAGE_EVENT_SUCCESS,
                 COMMAND_TYPE,

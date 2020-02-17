@@ -2,11 +2,7 @@ package storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import data.Duke;
-import data.task.DeadlineTask;
-import data.task.EventTask;
-import data.task.Task;
-import data.task.TodoTask;
+import data.task.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,8 +15,8 @@ import java.util.ArrayList;
 public class LoadFile {
 
     /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
-    public static final String DEFAULT_STORAGE_JSON_FILEPATH = "duke.json";
+    public static final String DEFAULT_STORAGE_FILEPATH = "taskManager.txt";
+    public static final String DEFAULT_STORAGE_JSON_FILEPATH = "taskManager.json";
     private static String jsonFilePath = DEFAULT_STORAGE_JSON_FILEPATH;
     private Path filePath;
     public  ArrayList<Task> taskArrayList;
@@ -46,7 +42,7 @@ public class LoadFile {
     }
 
 
-    public  void readDom(Duke duke)  {
+    public  void readDom(TaskList taskList)  {
         BufferedReader reader = null;
         try {
             File file = new File(jsonFilePath);
@@ -60,15 +56,15 @@ public class LoadFile {
                  ) {
                 switch (task.getTaskType()){
                 case 'T':
-                    duke.getTaskList().getInternalList().add(
+                    taskList.getInternalList().add(
                             new TodoTask(task.getTaskIndex(),task.getTaskDescription()));
                     break;
                 case 'D':
-                    duke.getTaskList().getInternalList().add(
+                    taskList.getInternalList().add(
                             new DeadlineTask(task.getTaskIndex(),task.getTaskDescription(), task.getTaskDeadline()));
                     break;
                 case 'E':
-                    duke.getTaskList().getInternalList().add(
+                    taskList.getInternalList().add(
                             new EventTask(task.getTaskIndex(),task.getTaskDescription(), task.getTaskStartTime()));
                     break;
                 default:

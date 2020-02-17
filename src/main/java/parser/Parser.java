@@ -6,7 +6,7 @@ import commands.add.AddDeadlineCommand;
 import commands.add.AddEventCommand;
 import commands.add.AddTodoCommand;
 import common.Messages;
-import data.Duke;
+import data.TaskManager;
 import data.exceptions.ParseException;
 import data.task.DeadlineTask;
 import data.task.EventTask;
@@ -34,13 +34,13 @@ public class Parser {
      * commandWordFirstPart [0] stores the Command Word
      * description stores additional information
      */
-    public Command parseCommand(Duke duke, String userInput) {
+    public Command parseCommand(TaskManager taskManager, String userInput) {
         final String commandWord = userInput;
         final String []commandWordFirstPart = commandWord.split(" ");
         /** further split the user input, get the secondary part, the description */
         final String commandWordDescription = commandWord.substring(commandWordFirstPart[0].length());
         //operates according to different command word
-        return getCommand(duke.getTaskList().getNextTaskIndex(), commandWord, commandWordFirstPart, commandWordDescription);
+        return getCommand(taskManager.getTaskList().getNextTaskIndex(), commandWord, commandWordFirstPart, commandWordDescription);
     }
 
     /**

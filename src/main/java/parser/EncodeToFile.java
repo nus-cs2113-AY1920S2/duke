@@ -1,6 +1,6 @@
 package parser;
 
-import data.Duke;
+import data.TaskManager;
 import data.task.DeadlineTask;
 import data.task.EventTask;
 import data.task.Task;
@@ -14,12 +14,12 @@ import java.util.List;
 public class EncodeToFile {
 
     /**
-     * Encodes all the {@code Duke} in the {@code duke} into a list of readable string presentation
+     * Encodes all the {@code TaskManager} in the {@code taskManager} into a list of readable string presentation
      * for storage.
      */
-    public static List<String> encodeAllTasks(Duke duke) {
+    public static List<String> encodeAllTasks(TaskManager taskManager) {
         final List<String> encodedTasks = new ArrayList<>();
-        duke.getTaskList().forEach(person -> encodedTasks.add(encodeTaskToString(person)));
+        taskManager.getTaskList().forEach(person -> encodedTasks.add(encodeTaskToString(person)));
         return encodedTasks;
     }
 

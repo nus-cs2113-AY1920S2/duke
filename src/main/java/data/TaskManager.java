@@ -1,25 +1,38 @@
 package data;
 
-import data.exceptions.ParseException;
+import data.exceptions.StorageOperationException;
 import data.exceptions.TaskNotFoundException;
 import data.task.Task;
 import data.task.TaskList;
+import storage.LoadFile;
+import storage.StorageFile;
 
 /**
- * Represents the duke system. Contains the data of the all tasks
+ * Represents the taskManager system. Contains the data of the all tasks
  */
-public class Duke {
+public class TaskManager {
 
+    private StorageFile storager = new StorageFile();
+    private LoadFile loader = new LoadFile();
     /* the tasks list within the system */
     private TaskList allTasks;
     private TaskList qualifiedTasks;
 
+    public StorageFile getStorager() {
+        return storager;
+    }
+
+    public LoadFile getLoader() {
+        return loader;
+    }
+
     /**
-     * Creates an empty duke taskList.
+     * Creates an empty taskManager taskList.
      */
-    public Duke() {
+    public TaskManager() throws StorageOperationException {
         this.allTasks = new TaskList();
         this.qualifiedTasks = new TaskList();
+        loader.readDom(allTasks);
     }
 
     /**
@@ -100,8 +113,8 @@ public class Duke {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Duke // instanceof handles nulls
-                && this.allTasks.equals(((Duke) other).allTasks));
+                || (other instanceof TaskManager // instanceof handles nulls
+                && this.allTasks.equals(((TaskManager) other).allTasks));
     }
 
     /**

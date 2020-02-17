@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute() {
         try {
             final Task target = getTargetTask();
-            duke.removeTask(target);
+            taskManager.removeTask(target);
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, target.getTaskDescription()));
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
