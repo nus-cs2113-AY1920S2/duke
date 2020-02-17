@@ -1,5 +1,8 @@
 package Duke.TaskTypes;
 
+/**
+ * The <code>TODO</code> type class
+ */
 public class Todo extends Task {
 
     protected String by;
@@ -17,7 +20,15 @@ public class Todo extends Task {
         String[] bySplit = by.split(" ", 2);
         return "[T]" + super.toString() + "(" + bySplit[0] + ": " + bySplit[1] + ")";
     }
-
+    /**
+     * Gets the <code>TODO</code> information stored nicely in a <code>String[]</code> array
+     * <p></p>
+     * <p>
+     *     Used in the {@link Duke.Storage} class for retrieving the <code>TODO</code> task's information to store it as offline saved data
+     * </p>
+     * @return a <code>String[]</code> array containing the description, the time and whether the event is done
+     * @see Duke.Storage#save
+     */
     @Override
     public String[] getTaskInfo() {
         String[] taskInfoArray = new String[4];

@@ -1,5 +1,8 @@
 package Duke.TaskTypes;
 
+/**
+ * The <code>DEADLINE</code> type class
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -17,7 +20,15 @@ public class Deadline extends Task {
         String[] bySplit = by.split(" ", 2);
         return "[D]" + super.toString() + "(" + bySplit[0] + ": " + bySplit[1] + ")";
     }
-
+    /**
+     * Gets the <code>DEADLINE</code> information stored nicely in a <code>String[]</code> array
+     * <p></p>
+     * <p>
+     *     Used in the {@link Duke.Storage} class for retrieving the <code>DEADLINE</code> task's information to store it as offline saved data
+     * </p>
+     * @return a <code>String[]</code> array containing the description, the time and whether the event is done
+     * @see Duke.Storage#save
+     */
     @Override
     public String[] getTaskInfo() {
         String[] taskInfoArray = new String[4];

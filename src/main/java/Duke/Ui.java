@@ -64,6 +64,7 @@ public class Ui {
 
     /**
      * Just show a message indicating it is out of range
+     * <p></p>
      * <p>
      * Only used tp display a message when the user wants to access a non-existent element
      * </p>
@@ -120,6 +121,7 @@ public class Ui {
 
     /**
      * Close the input scanner
+     * <p></p>
      * <p>
      * Only used once when Duke ends
      * </p>

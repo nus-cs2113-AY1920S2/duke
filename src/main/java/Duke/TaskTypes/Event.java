@@ -1,5 +1,8 @@
 package Duke.TaskTypes;
 
+/**
+ * The <code>EVENT</code> type class
+ */
 public class Event extends Task {
 
     protected String by;
@@ -18,6 +21,15 @@ public class Event extends Task {
         return "[E]" + super.toString() + "(" + bySplit[0] + ": " + bySplit[1] + ")";
     }
 
+    /**
+     * Gets the <code>EVENT</code> information stored nicely in a <code>String[]</code> array
+     * <p></p>
+     * <p>
+     *     Used in the {@link Duke.Storage} class for retrieving the <code>EVENT</code> task's information to store it as offline saved data
+     * </p>
+     * @return a <code>String[]</code> array containing the description, the time and whether the event is done
+     * @see Duke.Storage#save
+     */
     @Override
     public String[] getTaskInfo() {
         String[] taskInfoArray = new String[4];

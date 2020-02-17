@@ -6,7 +6,8 @@ import Duke.Exception.MissingNumberFieldException;
 import Duke.Exception.MissingTimeFieldException;
 
 /**
- * Class used to parse the user input. Helps check for error as well as formatting the input for the <code>Command</code> class to use
+ * Class used to parse the user input. Helps check for error as well as formatting the input for the {@link Command} class to use
+ * <p></p>
  * <p>
  *     When an error is found, it will throw the respective errors given
  * </p>
@@ -29,6 +30,7 @@ public class Parser {
 
     /**
      * Split the array up by spaces.
+     * <p></p>
      * <p>
      *     Only usage is just to get the type of command
      * </p>
@@ -133,7 +135,7 @@ public class Parser {
     /**
      * Parse the user input. It formats the user input so that it transform the user input (the task) to becomes a valid executable command. Likewise, if there is any error in the user input, it will throw an exception and explain what the error in the user input is .
      * @param userInput the raw user input
-     * @return the formatted command stored in a <code>Command</code> class
+     * @return the formatted command stored in a {@link Command} class
      * @throws InvalidTaskException exception thrown when the task given is not a valid task and hence not a valid command
      * @throws MissingDescriptonException exception thrown when the task given has no description attached to it despite expecting it
      * @throws MissingNumberFieldException exception thrown when the task given lacks a number field. Only used for <code>DELETE</code> and <code>DONE</code> commands
@@ -166,11 +168,12 @@ public class Parser {
 
     /**
      * Check to see if the user input obtained does not equal to "bye". If it is "bye", it means the user wants to exit duke
+     * <p></p>
      * <p>
-     *     Only used during the UI loop to check if the user wants to exit
+     *     Only used during the Ui loop to check if the user wants to exit
      * </p>
      * @param userInput the raw user input
-     * @return <code>true</code> if user wants to exit, else <code>false</code>
+     * @return <code>TRUE</code> if user wants to exit (user input "bye"), else <code>FALSE</code>
      */
     public boolean isNotBye(String userInput) {
         return !userInput.equals("bye");
