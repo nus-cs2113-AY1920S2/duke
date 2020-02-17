@@ -9,10 +9,6 @@ public class Event extends Task {
         super.date = date;
     }
 
-    public String getDate() {
-        return date;
-    }
-
     public Event(String description, String date){
         super(description, date);
     }

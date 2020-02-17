@@ -2,6 +2,10 @@ package Duke;
 
 import Exceptions.NoParameterException;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -27,6 +31,9 @@ public class Duke {
     public static final int LENGTH_EVENT = 6;
     public static final int LENGTH_TODO = 5;
     public static final int SIZE_DONE_COMMAND = 2;
+    public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
+    public static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Save");
+    public static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Save", "data.txt");
 
     public static void getDateTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -128,7 +135,7 @@ public class Duke {
             Task newTask = new Deadline(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
-            newTask.saveTask();
+            saveTask(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
         }
@@ -140,7 +147,7 @@ public class Duke {
             Task newTask = new Event(words[0].trim(), words[1].trim());
             tasks.add(newTask);
             newTask.printAddDetails(taskCounter);
-            newTask.saveTask();
+            saveTask(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
         }
@@ -157,16 +164,65 @@ public class Duke {
         Task newTask = new ToDo(itemName.trim());
         tasks.add(newTask);
         newTask.printAddDetails(taskCounter);
-        newTask.saveTask();
+        saveTask(newTask);
     }
 
-    public static void saveData(Task newTask) {
+    public static void checkFolderPath() {
+        // Locate folder location, if missing create folder
+        boolean directoryExists = java.nio.file.Files.exists(FOLDER_PATH);
+        try {
+            if (!directoryExists) {
+                Files.createDirectory(FOLDER_PATH);
+                System.out.println("Directory created");
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating folder!\n");
+        }
+    }
 
+    private static void writeTaskToFile(Task newTask, FileWriter myWriter) throws IOException {
+        if (newTask.getDate().isEmpty()) {
+            myWriter.write(newTask.getTaskType() + " | " + newTask.getStatus() + " | "
+                    + newTask.getDescription() + "\n");
+        } else {
+            myWriter.write(newTask.getTaskType() + " | " + newTask.getStatus() + " | "
+                    + newTask.getDescription() + " | " + newTask.getDate() + "\n");
+        }
+    }
+
+    public static void saveTask(Task newTask) {
+        // Append new task to file
+        try {
+            File file = new File(String.valueOf(FILE_PATH));
+            FileWriter myWriter = new FileWriter(file, true);
+
+            writeTaskToFile(newTask, myWriter);
+            myWriter.close();
+            System.out.println("Successfully updated data file!\n");
+        } catch (IOException e) {
+            System.out.println("Error updating file!\n");
+        }
+    }
+
+    public static void rebuildTaskFile(Task[] tasks) {
+        // replace current list with new updated list
+        try {
+            File file = new File(String.valueOf(FILE_PATH));
+            FileWriter myWriter = new FileWriter(file, false);
+            for (Task newTask : tasks) {
+                writeTaskToFile(newTask, myWriter);
+            }
+            myWriter.close();
+            System.out.println("Successfully updated data file!\n");
+        } catch (IOException e) {
+            System.out.println("Error updating file!\n");
+        }
     }
 
     public static void main(String[] args) {
 
         printWelcomeMessage();
+        checkFolderPath();
 
         ArrayList<Task> tasks = new ArrayList<Task>();
         int taskCounter = 0;
@@ -215,6 +271,7 @@ public class Duke {
                     taskCounter--;
                     System.out.println("Missing Parameters detected!\n");
                 }
+                break;
             case "deadline":
                 taskCounter++;
                 try {

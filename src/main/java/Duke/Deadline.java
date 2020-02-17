@@ -4,19 +4,15 @@ package Duke;
 public class Deadline extends Task {
 
     public static final String TYPE_DEADLINE = "D";
-    private String date;
 
     public Deadline (String description, String date) {
         super(description, date);
     }
 
     public void setDate(String date) {
-        this.date = date;
+        super.date = date;
     }
 
-    public String getDate() {
-        return date;
-    }
 
     @Override
     public String getTaskType() {
@@ -36,9 +32,5 @@ public class Deadline extends Task {
                             count + ". " + super.description + " (by: " + super.date + ")");
     }
 
-    @Override
-    public void saveTask() {
-
-    }
 
 }
