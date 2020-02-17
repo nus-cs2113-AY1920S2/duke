@@ -1,4 +1,2 @@
-T | 0 | thinsg | at 20020202
-E | 0 | choya | by 100000 words
-D | 0 | crazytax when now | 
-D | 0 | aslkdj through the world | 
+T | 1 | things | at 2018-12-13
+E | 0 | my show | by 2007-12-01

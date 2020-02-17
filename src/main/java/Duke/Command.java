@@ -5,6 +5,7 @@ import Duke.TaskTypes.Event;
 import Duke.TaskTypes.Task;
 import Duke.TaskTypes.Todo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Command {
@@ -23,6 +24,7 @@ public class Command {
     private String descriptionOfCommand;
     private String timeOfCommand;
     private String number;
+    private LocalDate time;
 
     public Command() {
     }
