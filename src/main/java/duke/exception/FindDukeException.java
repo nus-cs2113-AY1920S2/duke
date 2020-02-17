@@ -14,29 +14,29 @@ public class FindDukeException extends Throwable {
 
     public void toDoException () throws DukeException {
         if (isWrongLength) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty. \uD83E\uDD7A");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     public void deadlineException () throws DukeException {
         boolean isMissingTime = (!cmd.contains("/by"));
         if (isWrongLength) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty. \uD83E\uDD7A");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (isMissingTime) {
-            throw new DukeException("OOPS!!! You forget to fill in a specific date/time. \uD83E\uDD7A");
+            throw new DukeException("OOPS!!! You forget to fill in a specific date/time.");
         }
     }
 
     public void eventException () throws DukeException {
         boolean isMissingTime = (!cmd.contains("/at"));
         if (isWrongLength) {
-            throw new DukeException("OOPS!!! The description of an event cannot be empty. \uD83E\uDD7A");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else if (isMissingTime) {
-            throw new DukeException("OOPS!!! You forget to fill in a specific date/time. \uD83E\uDD7A");
+            throw new DukeException("OOPS!!! You forget to fill in a specific date/time.");
         }
     }
 
     public void undefinedTypeException () throws DukeException{
-        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.. \uD83E\uDD7A");
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means..");
     }
 }
