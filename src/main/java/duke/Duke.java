@@ -1,7 +1,7 @@
 package duke;
 
 import java.util.Scanner;
-
+import java.util.ArrayList;
 import duke.excpetions.EmptyDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -10,8 +10,7 @@ import duke.task.ToDo;
 
 public class Duke {
 
-    private static Task[] tasks = new Task[100];;
-    private static int taskCount = 0;
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
         welcomeMessage();
@@ -37,6 +36,9 @@ public class Duke {
                 case "event":
                     addEvent(command);
                     break;
+                case "delete":
+                    deleteTask(command);
+                    break;
                 default:
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -50,6 +52,17 @@ public class Duke {
         exitMessage();
     }
 
+    private static void deleteTask(String command) throws EmptyDescriptionException{
+        if(command.indexOf(" ")==-1) {
+            System.out.println("☹ OOPS!!! Please specify the index of the task you want to delete.");
+            throw new EmptyDescriptionException();
+        }
+        int index = Integer.parseInt(command.split(" ")[1])-1;
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(tasks.remove(index));
+        printNumOfTasks();
+    }
+
     private static String commandDivider(String command){
         if (command.contains(" ")){
              return command.substring(0,command.indexOf(" "));
@@ -59,7 +72,7 @@ public class Duke {
     }
 
     private static void printNumOfTasks(){
-        System.out.println("Now you have "+taskCount+" tasks in the list.");
+        System.out.println("Now you have "+tasks.size()+" tasks in the list.");
     }
 
     private static void addEvent(String command) throws EmptyDescriptionException {
@@ -69,10 +82,10 @@ public class Duke {
         }
         String description=command.substring(command.indexOf(" "),command.indexOf("/"));
         String period=command.substring(command.indexOf("/at")+4);
-        tasks[taskCount]=new Event(description, period);
+        Event newEvent = new Event(description, period);
+        tasks.add(newEvent);
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
-        taskCount++;
+        System.out.println(newEvent);
         printNumOfTasks();
     }
 
@@ -83,10 +96,10 @@ public class Duke {
         }
         String description=command.substring(command.indexOf(" "),command.indexOf("/"));
         String by=command.substring(command.indexOf("/by")+4);
-        tasks[taskCount]=new Deadline(description,by);
+        Deadline newDeadline = new Deadline(description,by);
+        tasks.add(newDeadline);
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
-        taskCount++;
+        System.out.println(newDeadline);
         printNumOfTasks();
     }
 
@@ -96,20 +109,20 @@ public class Duke {
             throw new EmptyDescriptionException();
         }
         String description=command.substring(command.indexOf(" "));
-        tasks[taskCount]=new ToDo(description);
+        ToDo newTodo = new ToDo(description);
+        tasks.add(newTodo);
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount]);
-        taskCount++;
+        System.out.println(newTodo);
         printNumOfTasks();
     }
 
     private static void doneTask(String command) {
         String[] splitCommand=command.split(" ");
         int taskIndex=Integer.parseInt(splitCommand[1])-1;
-        if(taskIndex< taskCount) {
-            tasks[taskIndex].markAsDone();
+        if(taskIndex< tasks.size()) {
+            tasks.get(taskIndex).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  ["+ tasks[taskIndex].getStatusIcon() + "] " + tasks[taskIndex].description);
+            System.out.println("  ["+ tasks.get(taskIndex).getStatusIcon() + "] " + tasks.get(taskIndex).description);
         }else{
             System.out.println("There is no task No."+(taskIndex+1));
         }
@@ -121,11 +134,11 @@ public class Duke {
 
     private static void listTasks() {
         System.out.println("Here are the tasks in your list:");
-        for(int i=0;i<100;i++){
-            if(tasks[i]==null){
+        for(int i=0;i<tasks.size();i++){
+            if(tasks.get(i)==null){
                 break;
             }
-            System.out.println((i+1)+". "+tasks[i]);
+            System.out.println((i+1)+". "+tasks.get(i));
         }
     }
 
