@@ -1,8 +1,6 @@
 package duke;
 
 import duke.Deadline;
-
-
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,18 +9,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static void writeToFile(String filePath, ArrayList<Task> tasksToWrite) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        try {
-            for (int i = 0; i < tasksToWrite.size(); i++) {
-                String writtenString = String.format("%d. %s\n", i + 1, tasksToWrite.get(i).toString());
-                fw.write(writtenString);
-            }
-        } catch (IOException e){
-            System.out.println("Invalid path");
-        }
-        fw.close();
-    }
+
     public static void main(String[] args) throws IOException {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
