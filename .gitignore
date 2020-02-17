@@ -8,6 +8,12 @@
 /build/
 src/main/resources/docs/
 
+# Jar file metadata
+src/main/java/META-INF/
+
+# Jar file
+out/artifacts/iP_jar/iP.jar
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
