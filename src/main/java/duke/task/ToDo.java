@@ -7,6 +7,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String saveTask() {
+        return "T | " + (super.isDone ? 1 : 0) + " | " + super.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
