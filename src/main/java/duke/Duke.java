@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import duke.excpetions.EmptyDescriptionException;
@@ -13,43 +17,62 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
-        welcomeMessage();
-        Scanner read=new Scanner(System.in);
-        String command=read.nextLine();
-        while(!command.equals("bye")){
-            printDividingLine();
-            String commandType = commandDivider(command);
-            try{
-                switch(commandType) {
-                case "list":
-                    listTasks();
-                    break;
-                case "done":
-                    doneTask(command);
-                    break;
-                case "todo":
-                    addToDo(command);
-                    break;
-                case "deadline":
-                    addDeadline(command);
-                    break;
-                case "event":
-                    addEvent(command);
-                    break;
-                case "delete":
-                    deleteTask(command);
-                    break;
-                default:
-                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
+        try {
+            welcomeMessage();
+            Scanner read=new Scanner(System.in);
+            String command=read.nextLine();
+            while(!command.equals("bye")){
                 printDividingLine();
-                System.out.println("Do you have any other commands? ");
-            } catch (EmptyDescriptionException e){
-                System.out.println("Please re-enter your command with a description.");
+                executeCommand(command);
+                command=read.nextLine();
             }
-            command=read.nextLine();
+            writeFile();
+            exitMessage();
+        }catch (FileNotFoundException e){
+            System.out.println("File can not be found!");
+        }catch (IOException e){
+            System.out.println("Something goes wrong.");
         }
-        exitMessage();
+    }
+
+    private static void executeCommand(String command) {
+        String commandType = commandDivider(command);
+        try{
+            switch(commandType) {
+            case "list":
+                listTasks();
+                break;
+            case "done":
+                doneTask(command);
+                break;
+            case "todo":
+                addToDo(command);
+                break;
+            case "deadline":
+                addDeadline(command);
+                break;
+            case "event":
+                addEvent(command);
+                break;
+            default:
+                System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            printDividingLine();
+            System.out.println("Do you have any other commands? ");
+        } catch (EmptyDescriptionException e){
+            System.out.println("Please re-enter your command with a description.");
+        }
+    }
+
+    private static void writeFile() throws IOException {
+        FileWriter fw = new FileWriter("src/tasksList.txt");
+        for (int i=0;i<tasks.size();i++){
+            if (tasks.get(i)!=null){
+                fw.write(tasks.get(i).toString());
+                fw.write("\n");
+            }
+        }
+        fw.close();
     }
 
     private static void deleteTask(String command) throws EmptyDescriptionException{
