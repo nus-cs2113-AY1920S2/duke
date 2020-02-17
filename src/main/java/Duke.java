@@ -160,7 +160,6 @@ public class Duke {
     }
 
     public static void storeTaskIntoList(String taskInformation, String command) {
-        Task taskToStore;
         switch (command) {
         case "todo":
             Todo todoToAdd = new Todo(taskInformation);
@@ -234,11 +233,13 @@ public class Duke {
             String line = reader.readLine();
 
             while (line != null) {
+                // create Tasks after loading it from the file
                 String[] splitLine = line.split(", ");
                 String typeIcon = splitLine[0];
                 String isDoneString = splitLine[1];
                 String description = splitLine[2];
                 Task task;
+
                 if (typeIcon.equals("[E]")) {
                     String timePeriod = splitLine[3];
                     task = new Event(description, timePeriod);
@@ -264,8 +265,8 @@ public class Duke {
         }
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
-            int size = listOfTasks.size();
 
+        // format task before writing it to file
         for (Task currTask : listOfTasks) {
             String formattedTask = String.format("%s, %s, %s", currTask.getTypeIcon(), currTask.getIsDone(),
                     currTask.getDescription());
