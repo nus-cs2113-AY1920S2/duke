@@ -5,6 +5,7 @@ import Duke.Exception.MissingDescriptonException;
 import Duke.Exception.MissingNumberFieldException;
 import Duke.Exception.MissingTimeFieldException;
 
+
 /**
  * Class used to parse the user input. Helps check for error as well as formatting the input for the {@link Command} class to use
  * <p></p>
@@ -12,6 +13,13 @@ import Duke.Exception.MissingTimeFieldException;
  *     When an error is found, it will throw the respective errors given
  * </p>
  */
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 public class Parser {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
@@ -22,8 +30,12 @@ public class Parser {
     private static final int DESCRIPTION = 0;
     private static final int TIME = 1;
     private static final int TIME_INCLUDED = 2;
+
     public static final int TYPE_OF_COMMAND = 0;
     public static final int TASK_NUMBER = 1;
+
+    public static final String FIND = "find";
+
 
     public Parser() {
     }
@@ -98,7 +110,7 @@ public class Parser {
      */
     private static void validateTask(String[] splitUserInput, String[] fullUserSplit)
             throws InvalidTaskException, MissingDescriptonException, MissingNumberFieldException,
-            MissingTimeFieldException {
+            MissingTimeFieldException, DateTimeParseException {
 
         String nameOfTask = splitUserInput[0].toLowerCase();
 
@@ -108,7 +120,8 @@ public class Parser {
                 && !nameOfTask.equals(DEADLINE)
                 && !nameOfTask.equals(DONE)
                 && !nameOfTask.equals(LIST)
-                && !nameOfTask.equals(DELETE)) {
+                && !nameOfTask.equals(DELETE)
+                && !nameOfTask.equals(FIND)) {
             throw new InvalidTaskException("Input is invalid. No such task");
         } else {
             // Check if the task has correct input
@@ -126,6 +139,14 @@ public class Parser {
                     if (timeCheck.length == 1 || timeCheck[1].isBlank()) {
                         throw new MissingTimeFieldException("Missing time or missing slash word!");
                     }
+                    try {
+                        LocalDate d1 = LocalDate.parse(timeCheck[1]);
+                    }
+                    catch (DateTimeParseException m){
+                        throw new DateTimeException("Date cannot be parsed! Make sure the format is correct! Format: yyyy-mm-dd");
+                    }
+
+
                 }
 
             }
@@ -144,7 +165,7 @@ public class Parser {
      */
     public Command parseUserInput(String userInput)
             throws InvalidTaskException, MissingDescriptonException, MissingNumberFieldException,
-            MissingTimeFieldException {
+            MissingTimeFieldException, DateTimeParseException {
         Command command = new Command();
 
         //Format and split up the user input task so as to be checked by the validateTask method
@@ -160,7 +181,11 @@ public class Parser {
         command.setDescriptionOfCommand(fullUserSplit[DESCRIPTION]);
         command.setTimeOfCommand(fullUserSplit[TIME]);
         if (splitUserInput[0].toLowerCase().equals(DONE) || splitUserInput[0].toLowerCase().equals(DELETE)) {
+
             command.setNumber(splitUserInput[TASK_NUMBER]);
+
+
+            command.setNumber(splitUserInput[1]);
 
         }
         return command;

@@ -1,15 +1,27 @@
 package Duke.TaskTypes;
 
+
 /**
  * The <code>DEADLINE</code> type class
  */
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 public class Deadline extends Task {
 
     protected String by;
+    protected LocalDate actualTime;
+    protected String slashWord;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        String[] bySplit = by.split(" ", 2);
+        this.slashWord = bySplit[0].trim();
+        String tempTime = bySplit[1].trim();
+        this.actualTime = LocalDate.parse(tempTime);
     }
 
     @Override
@@ -18,7 +30,7 @@ public class Deadline extends Task {
             return "[D]" + super.toString();
         }
         String[] bySplit = by.split(" ", 2);
-        return "[D]" + super.toString() + "(" + bySplit[0] + ": " + bySplit[1] + ")";
+        return "[D]" + super.toString() + "(" + this.slashWord + ": " + this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
     /**
      * Gets the <code>DEADLINE</code> information stored nicely in a <code>String[]</code> array

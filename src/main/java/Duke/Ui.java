@@ -4,6 +4,7 @@ import Duke.TaskTypes.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner myInput;
+
     public Ui() {
     }
 
@@ -128,5 +130,16 @@ public class Ui {
      */
     public void closeScanner() {
         myInput.close();
+    }
+
+    public void displayNoResultReturned() {
+        System.out.println("This word/sentence is not found!");
+    }
+
+    public void displayObtainedResults(ArrayList<String> tempResults) {
+        System.out.println(tempResults.size() + " task found! Here are the matching tasks in your list:");
+        for (String resultFound : tempResults) {
+            System.out.println(resultFound);
+        }
     }
 }

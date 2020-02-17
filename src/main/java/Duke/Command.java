@@ -5,6 +5,7 @@ import Duke.TaskTypes.Event;
 import Duke.TaskTypes.Task;
 import Duke.TaskTypes.Todo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 public class Command {
 
+    public static final String FIND = "find";
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -27,6 +29,7 @@ public class Command {
     private String descriptionOfCommand;
     private String timeOfCommand;
     private String number;
+    private LocalDate time;
 
     public Command() {
     }
@@ -230,10 +233,34 @@ public class Command {
         case DELETE:
             deleteTask(tasks, this.number, ui);
             break;
+        case FIND:
+            findTask(tasks, ui);
         default:
             break;
         }
     }
+
+
+
+
+    private void findTask(TaskList tasks, Ui ui) {
+        ArrayList<Task> findList = tasks.getTaskList();
+        ArrayList<String> tempResults = new ArrayList<>();
+        for (Task checkTask : findList) {
+            if (checkTask.toString().contains(this.descriptionOfCommand)) {
+                tempResults.add(checkTask.toString());
+            }
+        }
+        if (tempResults.size() == 0) {
+            ui.displayNoResultReturned();
+
+        } else {
+            ui.displayObtainedResults(tempResults);
+        }
+    }
+
+
+
 
     /**
      * Set method for storing the task number specified in the command itself

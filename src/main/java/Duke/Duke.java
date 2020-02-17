@@ -5,9 +5,15 @@ import Duke.Exception.MissingDescriptonException;
 import Duke.Exception.MissingNumberFieldException;
 import Duke.Exception.MissingTimeFieldException;
 
+
 /**
  * The main class that first get run
  */
+
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+
+
 public class Duke {
 
     private Storage storage;
@@ -63,13 +69,12 @@ public class Duke {
             try {
                 command = parser.parseUserInput(userInput);
                 command.execute(tasks);
-
-
             } catch (InvalidTaskException
                     | MissingDescriptonException
                     | MissingNumberFieldException
                     | MissingTimeFieldException
-                    | NumberFormatException m) {
+                    | NumberFormatException
+                    | DateTimeException m) {
                 System.out.println("Exception occurred: " + m);
             }
             ui.displayPrompt();
