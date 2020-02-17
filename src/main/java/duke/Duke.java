@@ -22,13 +22,6 @@ public class Duke {
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
 
-    public static void printList(ArrayList<Task> tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.print(String.valueOf(i+1) + ". ");
-            System.out.println(tasks.get(i));
-        }
-    }
-
     public static void main(String[] args) {
 
         try {
