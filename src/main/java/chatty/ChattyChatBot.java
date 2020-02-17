@@ -193,6 +193,8 @@ public class ChattyChatBot {
         File file = new File(System.getProperty("user.dir"), filePath);
         System.out.println("Reading tasks from disk...");
         try {
+            // Solution below adapted from: https://stackoverflow
+            // .com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
             file.getParentFile().mkdirs();
             if (file.createNewFile()) {
                 System.out.println("New output file created");
