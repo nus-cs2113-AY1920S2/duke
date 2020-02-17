@@ -140,6 +140,7 @@ public class Duke {
 
     /**
      * Print all available tasks.
+     * @param taskList Tasklist of all available tasks
      */
     public void printTaskList(ArrayList<Task> taskList) {
         int taskCounter = 1;
@@ -154,17 +155,66 @@ public class Duke {
 
 
     /**
-     * Checks if the given task is valid
+     * Returns true if taskType is Delete. If it is indeed delete, then it also calls another method to delete
+     * @param ogString Original String that is inputted by the user into the command line
+     * @param taskList Tasklist of all available tasks
+     * @return isTaskTypeDelete Returns true if the type of the task is delete
      */
-    public Boolean checkIfValidTask(String type) {
+    public Boolean isTaskTypeDelete(String ogString, ArrayList<Task> taskList) {
+        String[] words = ogString.split(" ");
+        Boolean isTaskTypeDelete = false;
+        String taskType = words[0].toUpperCase();
+        if (taskType.equals("DELETE")) {
+            try {
+                int taskNumber = Integer.parseInt(words[1]) - 1;
+                if (taskNumber < 0 || taskNumber > taskList.size() -1) {
+                    System.out.println("That task number isn't in our task list or your input is not in the" +
+                            " correct format (eg: delete 1), please try again!");
+                    return true;
+                } else {
+                    deleteTask(taskList, taskNumber);
+                    isTaskTypeDelete = true;
+                }
+            } catch (IndexOutOfBoundsException e){
+                System.out.println("Please also specify task number, i.e. delete 3");
+                return true;
+            }
+        }
+        return isTaskTypeDelete;
+    }
+
+    /**
+     * Deletes the task at index taskNumber from the tasklist
+     * @param taskList Tasklist of all available tasks
+     * @param taskNumber The index of the task we are trying delete
+     */
+    public void deleteTask(ArrayList<Task> taskList, int taskNumber) {
+        Task task = taskList.get(taskNumber);
+        String description = task.getDescription();
+        String statusIcon = task.getStatusIcon();
+        String typeIcon = task.getTypeIcon();
+        System.out.println("Cool, we will remove the following task:");
+        System.out.println(typeIcon +  " [" +  statusIcon + "] " +  description);
+        taskList.remove(taskNumber);
+        System.out.println("Now you have " + Integer.toString(taskList.size()) + " items in your list" );
+    }
+
+
+    /**
+     * Checks if the given task is valid
+     * @param type Type of task
+     * @return Checks if the task type is valid
+      */
+    public Boolean checkIfValidTask(String type){
         String DONE = "done";
         String DEADLINE = "deadline";
         String TODO = "todo";
         String EVENT = "event";
         String LISTE = "list";
+        String DELETE = "delete";
         if (type.equals(DONE) || type.equals(TODO) || type.equals(DEADLINE)
-                || type.equals(EVENT) || type.equals(LISTE)) {
-            return true;
+                || type.equals(EVENT) || type.equals(LISTE) || type.equals(DELETE) ){
+             return true;
         }
         return false;
     }
@@ -177,52 +227,54 @@ public class Duke {
      * @param taskList TaskList of all available tasks.
      * @return isDone Is the task marked as Done.
      */
-    public Boolean hasDone(String line, ArrayList<Task> taskList) {
+    public Boolean isTaskTypeDone(String line, ArrayList<Task> taskList) {
         String[] words = line.split(" ");
         int LENG_LIST = words.length;
-        Boolean isDone;
-        //Error check, to make sure you are given a valid done statement
-        if (LENG_LIST == 1) {
-            if (words[0].equals("done")) {
-                System.out.println("Please specify (eg: done 2) or just add a new one");
-                isDone = true;
-                return isDone;
-            }
+        Boolean isDone = false;
+        String taskType = words[0].toUpperCase();
+
+        if (taskType.equals("DONE")){
+            if (LENG_LIST == 1) {
+                    System.out.println("Please specify (eg: done 2) or just add a new one");
+                    isDone = true;
+                    return isDone;
+                } else {
+                         int IDX_WORDS = Integer.parseInt(words[1]) - 1;
+                         if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() - 1) {
+                             System.out.println("That task number isn't in our task list, please try again!");
+                             return true;
+                    } else {
+                             markTaskAsDone(taskList, words);
+                             isDone = true;
+                             return isDone;
+                         }
+                }
         }
-        isDone = isValidTaskAndDone(taskList, words);
         return isDone;
     }
-
     /**
+<<<<<<< HEAD
      * Returns a boolean that marks a task as done if it exists
+     * Marks a task as done
+     * @param taskList TaskList containg all tasks
+     * @param words Inputted command by the user that is turned into a string array
      */
-    private Boolean isValidTaskAndDone(ArrayList<Task> taskList, String[] words) {
-        Boolean isSet = false;
-        if (words[0].toUpperCase().equals("DONE")) {
-            int IDX_WORDS = Integer.parseInt(words[1]) - 1;
-            if (words[1] == null) {
-                return isSet;
-            } else if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() - 1) {
-                System.out.println("That task number isn't in our task list, please try again!");
-                return true;
-            }
+    public void markTaskAsDone(ArrayList<Task> taskList, String[] words ) {
             taskList.get(Integer.parseInt(words[1]) - 1).markIt();
             String statusIcon = taskList.get(Integer.parseInt(words[1]) - 1).getStatusIcon();
             String typeIcon = taskList.get(Integer.parseInt(words[1]) - 1).getTypeIcon();
             String description = taskList.get(Integer.parseInt(words[1]) - 1).getDescription();
             System.out.println((Integer.parseInt(words[1])) + ". " + typeIcon + "[" + statusIcon + "]" + " " + description);
             System.out.println("Done! We have checked " + words[1] + "!");
-            isSet = true;
-        }
-        return isSet;
-    }
+            }
+
+
 
     /**
      * Returns the description of the task in the required format
-     *
      * @param line Line that represents the task that is supposed to marked as done.
+     * @param type  Type of subclass of task.
      * @return description Description of the task in the required format.
-     * @type type Type of subclass of task.
      */
     public String returnStringToAdd(String line, String type) {
         if (type.equals("todo")) {
@@ -282,16 +334,17 @@ public class Duke {
      * @param eventType event Type, meaning the nature of the command (eg. LIST, DEADLINE).
      */
     public void performTasks(ArrayList<Task> taskList, String ogString, String eventType) {
-        if (hasDone(ogString, taskList)) {
+        if (isTaskTypeDone(ogString, taskList)){
             printStraightLine();
         } else if (ogString.toUpperCase().equals("LIST")) {
             printStraightLine();
             this.printTaskList(taskList);
             printStraightLine();
+        } else if (isTaskTypeDelete(ogString, taskList)){
+            printStraightLine();
         } else {
             try {
                 printStraightLine();
-
                 String todoOrDeadlineOrEvent = returnStringToAdd(ogString, eventType);
                 if (eventType.equals("event") || eventType.equals("deadline")) {
                     if (eventType.equals("event")) {
@@ -316,17 +369,16 @@ public class Duke {
 //                writeToFile(filePath, stringToAdd);
                 printStraightLine();
 
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e){
+
                 System.out.println("Your inputs can only be of the following forms: \n 1. todo {task description} \n 2." +
                         " deadline {task description} \\by {dedline eg. 6 PM} \n 3. event {event description} " +
-                        "\\at {event date\\time eg. 6 PM}");
+                        "\\at {event date\\time eg. 6 PM} 4. delete {taskNumber}");
                 System.out.println("Try again!");
                 printStraightLine();
             }
-
         }
     }
-
 
 
 
