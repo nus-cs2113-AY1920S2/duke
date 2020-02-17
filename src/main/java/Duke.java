@@ -3,10 +3,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +30,7 @@ public class Duke {
         try {
             Tasks = openData();
         } catch (IOException e) {
-            System.out.println("Previous data cannot be loaded.");
+            System.out.println("No previous data found.");
         }
         Scanner in = new Scanner(System.in);
         String arr[] = getCommand(in);
@@ -55,10 +52,10 @@ public class Duke {
         case (BYE_COMMAND):
             try {
                 saveData(Tasks);
-                printExitMessage();
             } catch (IOException e) {
-                System.out.println("File cannot be saved. Please try again.");
+                System.out.println("File cannot be saved.");
             }
+            printExitMessage();
             break;
         case (LIST_COMMAND):
             printList(Tasks);
@@ -128,6 +125,8 @@ public class Duke {
 
 
     private static void saveData(ArrayList<Task> Tasks) throws IOException {
+        File file = new File("data/duke.txt");
+        file.createNewFile();
         FileWriter fileWriter = new FileWriter("data/duke.txt", false);
         for (Task task : Tasks) {
             fileWriter.write(task.saveTask());
@@ -139,7 +138,6 @@ public class Duke {
 
     private static ArrayList<Task> openData() throws IOException {
         ArrayList<Task> Tasks = new ArrayList<Task>();
-        int pointer = 0;
         FileReader fileReader = new FileReader("data/duke.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();
@@ -169,9 +167,8 @@ public class Duke {
                 break;
             }
             line = bufferedReader.readLine();
-            pointer++;
+            NUM_OF_TASK++;
         }
-        NUM_OF_TASK = pointer;
         return Tasks;
     }
 
