@@ -65,7 +65,7 @@ public class Duke {
     }
 
     private static void writeFile() throws IOException {
-        FileWriter fw = new FileWriter("src/tasksList.txt");
+        FileWriter fw = new FileWriter("./tasksList.txt");
         for (int i=0;i<tasks.size();i++){
             if (tasks.get(i)!=null){
                 fw.write(tasks.get(i).toString());
