@@ -20,6 +20,8 @@ public class Parser {
     private static final int DESCRIPTION = 0;
     private static final int TIME = 1;
     private static final int TIME_INCLUDED = 2;
+    public static final String FIND = "find";
+
     public Parser() {
     }
 
@@ -68,7 +70,8 @@ public class Parser {
                 && !nameOfTask.equals(DEADLINE)
                 && !nameOfTask.equals(DONE)
                 && !nameOfTask.equals(LIST)
-                && !nameOfTask.equals(DELETE)) {
+                && !nameOfTask.equals(DELETE)
+                && !nameOfTask.equals(FIND)) {
             throw new InvalidTaskException("Input is invalid. No such task");
         } else {
             if ((nameOfTask.toLowerCase().equals(DONE)
