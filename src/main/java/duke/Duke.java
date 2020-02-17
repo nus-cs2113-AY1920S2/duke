@@ -22,6 +22,14 @@ public class Duke {
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
 
+
+    public static void printList(ArrayList<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.print(String.valueOf(i+1) + ". ");
+            System.out.println(tasks.get(i));
+        }
+    }
+
     public static void main(String[] args) {
 
         try {
@@ -64,9 +72,9 @@ public class Duke {
             try {
                 int index = Integer.parseInt((instruction[1]));
                 System.out.println(index);
-                if (tasks.get(index - 1).getIsDone() == false) {
-                    tasks.get(index - 1).markAsDone();
-                    System.out.println(LINE + "  Yay! You have done: " + tasks.get(index - 1).getDescription() + "\n" + LINE);
+                if (tasks.get(index-1).getIsDone() == false) {
+                    tasks.get(index-1).markAsDone();
+                    System.out.println(LINE + "  Yay! You have done: " + tasks.get(index-1).getDescription() + "\n" + LINE);
                 } else {
                     System.out.println("You have already done this task!");
                 }
