@@ -2,7 +2,6 @@ ____________________________________________________________
 Hello from Chatty Chat Bot
 Glad to be at your service!
 ____________________________________________________________
-May I know where your file for storing tasks is located?
 Reading tasks from disk...
 Invalid line in input file:
 T|invalid task with not enough fields
