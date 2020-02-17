@@ -5,18 +5,16 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    //public static final int MAXIMUM_TASKS = 100;
-    public static final String HAPPY_FACE = "(＾▽＾)";
-    public static final String SAD_FACE = "(╥_╥)";
+    private static final String HAPPY_FACE = "(＾▽＾)";
+    private static final String SAD_FACE = "(╥_╥)";
     private static final String DIVIDER = "===================================================";
-    //private static Task[] tasks;
-    //private static int taskNumber;
-    private static String s;
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -27,10 +25,8 @@ public class Duke {
     }
 
     private static void manageTasks(Scanner sc, String name) {
-        //Task[]  tasks = new Task[MAXIMUM_TASKS];
 
         ArrayList<Task> tasks = new ArrayList<Task>();
-        //int taskNumber = 0;
 
         while (true) {
             String input = sc.nextLine();
@@ -51,6 +47,11 @@ public class Duke {
                 } else if (command.equalsIgnoreCase("todo")) {
                     addToDo(tasks, parseInput);
                 } else if (command.equalsIgnoreCase("bye")) {
+                    try {
+                        save(tasks);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     printByeMessage(name);
                     break;
                 } else if (command.equalsIgnoreCase("event")) {
@@ -94,6 +95,15 @@ public class Duke {
         }
     }
 
+    private static void save(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter("C:\\repos\\IP\\data\\duke.txt",false);
+        for (Task i : tasks) {
+            fw.write(i.saveTask());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+    }
+
     private static void printList(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             System.out.println(String.format("%50s", "YAYYYY! There are no tasks in your list " + HAPPY_FACE));
@@ -111,9 +121,9 @@ public class Duke {
         try {
             String[] deadline;
             deadline = parseInput.split("/by", 2);
-            deadline[0].trim();
+            deadline[0] = deadline[0].trim();
             if (!deadline[0].isEmpty()) {
-                String time = deadline[1];
+                String time = deadline[1].trim();
                 if (time.isEmpty()) {
                     System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
                     System.out.println(DIVIDER);
@@ -125,8 +135,6 @@ public class Duke {
                 System.out.println(DIVIDER);
             } else {
                 //catch empty string
-//                System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-//                System.out.println(DIVIDER);
                 throw new DukeException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -142,7 +150,9 @@ public class Duke {
         try {
             String[] event;
             event = parseInput.split("/at", 2);
-            event[0].trim();
+
+            event[0] = event[0].trim();
+            
             if (!event[0].isEmpty()) {
                 String time = event[1].trim();
                 if (time.isEmpty()) {
@@ -156,8 +166,6 @@ public class Duke {
                 System.out.println(DIVIDER);
             } else {
                 //catch empty string
-//                System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-//                System.out.println(DIVIDER);
                 throw new DukeException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -178,9 +186,6 @@ public class Duke {
                 System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
                 System.out.println(DIVIDER);
             } else {
-                //empty string
-                //System.out.println(String.format("%50s", "Please include task number " + SAD_FACE));
-                //System.out.println(DIVIDER);
                 throw new DukeException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
