@@ -1,0 +1,3 @@
+t//true//eat
+d//false//coda//tmr
+e//false//go//tmr

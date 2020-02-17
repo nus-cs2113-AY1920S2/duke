@@ -15,8 +15,18 @@ public class Event extends Task {
         this.timePeriod = t.trim();
     }
 
+    public String getTimePeriod() {
+        return this.timePeriod;
+    }
+
+    @Override
+    public String saveFormat() {
+        return "e//" + super.saveFormat() + "//" + timePeriod;
+    }
+
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.timePeriod + ")";
+        return "[E]" + super.toString() + " (at: " + this.timePeriod + ")";
     }
 }
