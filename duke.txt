@@ -1,0 +1,6 @@
+[T], true, sleepppp
+[T], true, sleep moreeeeee
+[T], false, be happy
+[E], false, sleep, tues 1159
+[D], false, sleep, fri 1111
+[E], false, v day celebration, fri 1400

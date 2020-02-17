@@ -1,17 +1,18 @@
+import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    //private static int counter = 0;
-    public static final int MAXIMUM_TASKS = 100;
     public static final String[] VALID_COMMANDS = {"done", "list", "bye", "todo", "deadline", "event", "delete"};
-    //private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
     private static ArrayList<Task> listOfTasks = new ArrayList<>();
     private static final String logo = "  ____        _        \n"
                                  + " |  _ \\ _   _| | _____ \n"
                                  + " | | | | | | | |/ / _ \\\n"
                                  + " | |_| | |_| |   <  __/\n"
                                  + " |____/ \\__,_|_|\\_\\___|\n";
+    static String currDir = System.getProperty("user.dir");
+    private final static String filePath = currDir + "/duke.txt";
 
     public static void main(String[] args) {
         showWelcomeMessage();
@@ -91,6 +92,11 @@ public class Duke {
     }
 
     private static void run() {
+        try {
+            loadFile();
+        } catch (IOException e) {
+            System.out.println("IO Exception occurred: " + e.getMessage());
+        }
         while (true) {
             String line = getInput();
             String command;
@@ -109,6 +115,13 @@ public class Duke {
                 break;
             case "done":
                 markTaskAsDone(line);
+
+                try {
+                    saveToFile();
+                } catch (IOException e) {
+                    System.out.println("IO Exception occurred: " + e.getMessage());
+                }
+
                 break;
             case "delete":
                 deleteTask(line);
@@ -122,6 +135,11 @@ public class Duke {
                     continue;
                 }
                 storeTaskIntoList(taskInformation, command);
+                try {
+                    saveToFile();
+                } catch (IOException e) {
+                    System.out.println("IO Exception occurred: " + e.getMessage());
+                }
                 break;
             }
         }
@@ -155,7 +173,6 @@ public class Duke {
             storeTaskIntoList(taskInformation, " /at ", command);
             break;
         }
-        //counter += 1;
         showStoredTask();
     }
 
@@ -166,9 +183,6 @@ public class Duke {
         printLine();
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + lastTask);
-//        System.out.println("   " + lastTask.getTypeIcon()
-//                +"[" + lastTask.getStatusIcon() + "]"
-//                + " " + lastTask.showFullDescription());
 
         System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         printLine();
@@ -177,19 +191,11 @@ public class Duke {
     public static void listAllTasks() {
         printLine();
         System.out.println(" Here are the tasks in your list:");
-        /*for (int i = 0; i < counter; i += 1) {
-            System.out.print(" " + (i+1) + "." + listOfTasks[i].getTypeIcon() + "["
-                    + listOfTasks[i].getStatusIcon() + "] ");
-            System.out.println(listOfTasks[i].showFullDescription());
-        }*/
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task currTask = listOfTasks.get(i);
             System.out.println(" " + (i + 1) + ". " + currTask);
-            //        currTask.getTypeIcon() + "[
-                    //       + currTask.getStatusIcon() + "] ");
-            //System.out.println(currTask.showFullDescription());
-        }
 
+        }
         printLine();
     }
 
@@ -201,8 +207,6 @@ public class Duke {
         printLine();
         System.out.println(" Nice! I've marked this task as done:");
         System.out.println("   " + taskDone);
-        //System.out.print("   [" + taskDone.getStatusIcon() + "] ");
-        //System.out.println(taskDone.showFullDescription());
         printLine();
     }
 
@@ -216,9 +220,66 @@ public class Duke {
         printLine();
         System.out.println("Noted. I've removed this task: ");
         System.out.println("  " + taskToDelete);
-        //System.out.print("   [" + taskToDelete.getStatusIcon() + "] ");
-        //System.out.println(taskToDelete.showFullDescription());
         System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
         printLine();
+
+    }
+
+    public static void loadFile() throws IOException {
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
+        } else {
+            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+            String line = reader.readLine();
+
+            while (line != null) {
+                String[] splitLine = line.split(", ");
+                String typeIcon = splitLine[0];
+                String isDoneString = splitLine[1];
+                String description = splitLine[2];
+                Task task;
+                if (typeIcon.equals("[E]")) {
+                    String timePeriod = splitLine[3];
+                    task = new Event(description, timePeriod);
+                } else if (typeIcon.equals("[D]")) {
+                    String dueDate = splitLine[3];
+                    task = new Deadline(description, dueDate);
+                } else {
+                    task = new Todo(description);
+                }
+                boolean isDone = Boolean.parseBoolean(isDoneString);
+                task.setIsDone(isDone);
+                listOfTasks.add(task);
+
+                line = reader.readLine();
+            }
+        }
+    }
+
+    public static void saveToFile() throws IOException {
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
+            int size = listOfTasks.size();
+
+        for (Task currTask : listOfTasks) {
+            String formattedTask = String.format("%s, %s, %s", currTask.getTypeIcon(), currTask.getIsDone(),
+                    currTask.getDescription());
+            if (currTask instanceof Event) {
+                formattedTask += ", ";
+                formattedTask += ((Event) currTask).getTimePeriod();
+            }
+            if (currTask instanceof Deadline) {
+                formattedTask += ", ";
+                formattedTask += ((Deadline) currTask).getDueDate();
+            }
+            writer.write(formattedTask + "\n");
+        }
+
+        writer.close();
     }
 }

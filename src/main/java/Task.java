@@ -15,8 +15,20 @@ public class Task {
         return description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getTypeIcon() {
         return "";
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public void markAsDone() {

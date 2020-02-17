@@ -11,6 +11,10 @@ public class Event extends Task {
         return description + " (at: " + timePeriod + ")";
     }
 
+    public String getTimePeriod() {
+        return timePeriod;
+    }
+
     @Override
     public String getTypeIcon() {
         return "[E]";
