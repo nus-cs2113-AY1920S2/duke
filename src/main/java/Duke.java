@@ -229,8 +229,6 @@ public class Duke {
                 e.printStackTrace();
             }
             System.out.println("New duke file has been created");
-        } else {
-            System.out.println("duke file detected");
         }
         FileWriter fw = new FileWriter("duke.txt");
         for (Task task : taskList) {
