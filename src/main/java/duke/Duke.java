@@ -43,7 +43,7 @@ public class Duke {
         }
         String status;
         writeToFile(PATH, "");
-        for (int i = 0; i <= taskCounter; i++) {
+        for (int i = 0; i < taskCounter; i++) {
             String line = tasks.get(i).toString();
             String[] sentence = line.split("]");
             String taskType = sentence[0].substring(1).toLowerCase();
@@ -54,13 +54,13 @@ public class Duke {
             }
 
             if (taskType.equals("t")) {
-            appendToFile(PATH, (taskType + " | " + status + " | " + tasks[i].description + System.lineSeparator()));
+            appendToFile(PATH, (taskType + " | " + status + " | " + tasks.get(i).description + System.lineSeparator()));
             } else {
                 String [] newSentence = line.split(":");
                 String dueDate = newSentence[1].substring(1);
                 int length = dueDate.length();
                 String newDate = newSentence[1].substring(1,length);
-                appendToFile(PATH, (taskType + " | " + status + " | " + tasks[i].description + "| " + newDate + System.lineSeparator()));
+                appendToFile(PATH, (taskType + " | " + status + " | " + tasks.get(i).description + "| " + newDate + System.lineSeparator()));
             }
         }
     }
@@ -167,6 +167,7 @@ public class Duke {
                     System.out.println("Now you have " + (tasks.size()) + " tasks in your list!");
                     System.out.println(BORDER);
                     taskCounter--;
+                    copyList(tasks, taskCounter);
                     break;
                 default:
                     throw new DukeException();
