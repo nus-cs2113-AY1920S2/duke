@@ -34,4 +34,10 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    @Override
+    public String toString() {
+        String status = String.format("[%s]", this.getStatusIcon());
+        return this.getTypeIcon() + status + " " + this.showFullDescription();
+    }
 }

@@ -1,11 +1,11 @@
 import java.io.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static int counter = 0;
-    public static final int MAXIMUM_TASKS = 100;
-    public static final String[] VALID_COMMANDS = {"done","list","bye","todo","deadline","event"};
-    private static Task[] listOfTasks =  new Task[MAXIMUM_TASKS];
+    public static final String[] VALID_COMMANDS = {"done", "list", "bye", "todo", "deadline", "event", "delete"};
+    private static ArrayList<Task> listOfTasks = new ArrayList<>();
     private static final String logo = "  ____        _        \n"
                                  + " |  _ \\ _   _| | _____ \n"
                                  + " | | | | | | | |/ / _ \\\n"
@@ -75,7 +75,7 @@ public class Duke {
         if (dividerPosition == -1) {
             throw new IndexOutOfBoundsException();
         } else {
-            return line.substring(dividerPosition+1);
+            return line.substring(dividerPosition + 1);
         }
     }
 
@@ -123,6 +123,9 @@ public class Duke {
                 }
 
                 break;
+            case "delete":
+                deleteTask(line);
+                break;
             default:
                 String taskInformation;
                 try {
@@ -145,19 +148,23 @@ public class Duke {
     public static void storeTaskIntoList(String taskInformation, String separator, String command) {
         int dividerPosition = taskInformation.indexOf(separator);
         String description = taskInformation.substring(0, dividerPosition);
-        String dateAndTime = taskInformation.substring(dividerPosition+5);
+        String dateAndTime = taskInformation.substring(dividerPosition + 5);
         if (command.equals("deadline")) {
-            listOfTasks[counter] = new Deadline(description, dateAndTime);
+            Deadline deadlineToAdd = new Deadline(description, dateAndTime);
+            listOfTasks.add(deadlineToAdd);
         } else if (command.equals("event")) {
-            listOfTasks[counter] = new Event(description, dateAndTime);
+            Event eventToAdd = new Event(description, dateAndTime);
+            listOfTasks.add(eventToAdd);
         }
 
     }
 
     public static void storeTaskIntoList(String taskInformation, String command) {
+        Task taskToStore;
         switch (command) {
         case "todo":
-            listOfTasks[counter] = new Todo(taskInformation);
+            Todo todoToAdd = new Todo(taskInformation);
+            listOfTasks.add(todoToAdd);
             break;
         case "deadline":
             storeTaskIntoList(taskInformation, " /by ", command);
@@ -166,39 +173,54 @@ public class Duke {
             storeTaskIntoList(taskInformation, " /at ", command);
             break;
         }
-        counter += 1;
         showStoredTask();
     }
 
     private static void showStoredTask() {
+        int sizeOfList = listOfTasks.size();
+        Task lastTask = listOfTasks.get(sizeOfList - 1);
+
         printLine();
         System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + listOfTasks[counter-1].getTypeIcon()
-                +"[" + listOfTasks[counter-1].getStatusIcon() + "]"
-                + " " + listOfTasks[counter-1].showFullDescription());
-        System.out.println(" Now you have " + counter + " tasks in the list.");
+        System.out.println("   " + lastTask);
+
+        System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         printLine();
     }
 
     public static void listAllTasks() {
         printLine();
         System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < counter; i += 1) {
-            System.out.print(" " + (i+1) + "." + listOfTasks[i].getTypeIcon() + "["
-                    + listOfTasks[i].getStatusIcon() + "] ");
-            System.out.println(listOfTasks[i].showFullDescription());
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task currTask = listOfTasks.get(i);
+            System.out.println(" " + (i + 1) + ". " + currTask);
+
         }
         printLine();
     }
 
     public static void markTaskAsDone(String line) {
         int dividerPosition = line.indexOf("done");
-        int taskNumber = Integer.parseInt(line.substring(dividerPosition+5));
-        listOfTasks[taskNumber-1].markAsDone();
+        int taskNumber = Integer.parseInt(line.substring(dividerPosition + 5));
+        Task taskDone = listOfTasks.get(taskNumber - 1);
+        taskDone.markAsDone();
         printLine();
         System.out.println(" Nice! I've marked this task as done:");
-        System.out.print("   [" + listOfTasks[taskNumber-1].getStatusIcon() + "] ");
-        System.out.println(listOfTasks[taskNumber-1].showFullDescription());
+        System.out.println("   " + taskDone);
+        printLine();
+    }
+
+    private static void deleteTask(String line) {
+        String[] splitLine = line.split(" ");
+        int taskNumber = Integer.parseInt(splitLine[1]);
+        Task taskToDelete = listOfTasks.get(taskNumber - 1);
+        listOfTasks.remove(taskNumber - 1);
+        int numOfTasksLeft = listOfTasks.size();
+
+        printLine();
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("  " + taskToDelete);
+        System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
         printLine();
 
     }
@@ -228,15 +250,11 @@ public class Duke {
                 }
                 boolean isDone = Boolean.parseBoolean(isDoneString);
                 task.setIsDone(isDone);
-                listOfTasks[counter] = task;
-                counter++;
+                listOfTasks.add(task);
 
                 line = reader.readLine();
             }
         }
-
-
-
     }
 
     public static void saveToFile() throws IOException {
@@ -246,21 +264,21 @@ public class Duke {
         }
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
+            int size = listOfTasks.size();
 
-            for (int i = 0; i < counter; i++) {
-                Task currTask = listOfTasks[i];
-                String formattedTask = String.format("%s, %s, %s", currTask.getTypeIcon(), currTask.getIsDone(),
-                        currTask.getDescription());
-                if (currTask instanceof Event) {
-                    formattedTask += ", ";
-                    formattedTask += ((Event) currTask).getTimePeriod();
-                }
-                if (currTask instanceof Deadline) {
-                    formattedTask += ", ";
-                    formattedTask += ((Deadline) currTask).getDueDate();
-                }
-                writer.write(formattedTask + "\n");
+        for (Task currTask : listOfTasks) {
+            String formattedTask = String.format("%s, %s, %s", currTask.getTypeIcon(), currTask.getIsDone(),
+                    currTask.getDescription());
+            if (currTask instanceof Event) {
+                formattedTask += ", ";
+                formattedTask += ((Event) currTask).getTimePeriod();
             }
+            if (currTask instanceof Deadline) {
+                formattedTask += ", ";
+                formattedTask += ((Deadline) currTask).getDueDate();
+            }
+            writer.write(formattedTask + "\n");
+        }
 
         writer.close();
     }
