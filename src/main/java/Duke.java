@@ -21,7 +21,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printSeparator();
         System.out.println("Hello! I'm Duke");
-        System.out.println("1. \"list\" to display To Do List\n2. \"done [index]\" to mark as done\n3. \"todo\" or \"deadline /by [date/time]\" or \"event /at [date/time]\" to add to list\n4. \"bye\" to exit");
+        System.out.println("1. \"list\" to display To Do List\n2. \"done [index]\" to mark as done\n3. \"todo\" or \"deadline /by [date/time]\" or \"event /at [date/time]\" to add to list\n4. \"delete [index]\" to delete\n5. \"bye\" to exit");
         printSeparator();
     }
 
