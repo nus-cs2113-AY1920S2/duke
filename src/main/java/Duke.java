@@ -1,10 +1,26 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
         welcomeMessage();
+
+        try {
+            File newFile = new File("./src/main/java/data/duke.txt");
+            if (newFile.createNewFile()) {
+                System.out.println("File created: " + newFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<Task>();
@@ -17,6 +33,7 @@ public class Duke {
             System.out.println("____________________________________________________________");
 
             try {
+                FileWriter fileWriter = new FileWriter("./src/main/java/data/duke.txt");
                 if (input.equals("list")) {
                     viewList(tasks);
                 } else if (inputArray[0].equals("todo")) {
@@ -36,10 +53,19 @@ public class Duke {
                 } else {
                     throw new InvalidCommandException();
                 }
+                int counter = 0;
+                for (Task task : tasks) {
+                    counter++;
+                    fileWriter.write(counter + ". " + task);
+                }
+                fileWriter.close();
             } catch (ToDoEmptyException e) {
                 System.out.println("OOPS!!! The description of a todo cannot be empty");
             } catch (InvalidCommandException e) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
 
             System.out.println("____________________________________________________________");
