@@ -3,6 +3,12 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static final String ERROR_DELETE_MESSAGE = "|| OOPS! I can't delete that because"
+            + " you haven't" + " added task %s yet!";
+    private static final String ERROR_MESSAGE = "|| OOPS! The %s of a %s command cannot be empty.\n";
+    private static final String ERROR_DELETE_PARAM = "|| Parameters: delete [TASK NUMBER]\n";
+    private static final String ERROR_DELETE_EXAMPLE = "|| Example: delete 1";
+
     private static Command splitCommand(String line) {
         String word;
         String argument;
@@ -14,6 +20,25 @@ public class Duke {
             argument = " ";
         }
         return new Command(word, argument);
+    }
+
+    private static void executeDeleteCommand(ArrayList<Task> taskList, Command command) throws NumberFormatException, IndexOutOfBoundsException {
+        int index;
+        if (command.getArgs() == null) {
+            throw new NumberFormatException();
+        }
+        index = Integer.parseInt(String.valueOf(command.getArgs()));
+        if (index > taskList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Task t = taskList.get(index - 1);
+        taskList.remove(index - 1);
+        System.out.println("-------------------------------------------");
+        System.out.println(" Noted! I've removed this task:");
+        System.out.println(t.toString());
+        System.out.printf(" Now you have %d tasks in your list.\n", taskList.size());
+        System.out.println("-------------------------------------------");
+
     }
 
     public static Task getTheTask(ArrayList<Task> List, int j)
@@ -41,7 +66,7 @@ public class Duke {
         String option_4 = "todo";
         String option_5 = "event";
         String option_6 = "deadline";
-
+        String option_7 = "delete";
         while (true)
         {
             command = in.nextLine();
@@ -88,6 +113,8 @@ public class Duke {
                     System.out.println("Added : ");
                     System.out.println(newTask.toString());
                     System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
+                    System.out.println("------------------------");
+
                 }
 
             } else if (choice.equals(option_5)) {
@@ -113,6 +140,19 @@ public class Duke {
                 System.out.println(newDeadline.toString());
                 System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
                 System.out.println("------------------------");
+            } else if (choice.equals(option_7)){
+                try {
+                    executeDeleteCommand(list, option);
+                } catch (NumberFormatException e) {
+                    System.out.println("------------------------------------------");
+                    System.out.println(String.format(ERROR_MESSAGE, "task number", option_7)
+                            + ERROR_DELETE_PARAM + ERROR_DELETE_EXAMPLE);
+                    System.out.println("------------------------------------------");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("------------------------------------------");
+                    System.out.println(String.format(ERROR_DELETE_MESSAGE, option.getArgs()));
+                    System.out.println("------------------------------------------");
+                }
             } else {
                 // if there is no "done", "bye", "list" in the string
                 System.out.println("-------------------------------------------");
