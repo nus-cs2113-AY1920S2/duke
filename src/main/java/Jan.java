@@ -71,13 +71,14 @@ public class Jan {
             if (commandDescription.isEmpty()) {
                 throw new MissingDescriptionException();
             }
-            addTaskToArrayList(command, commandDescription,"/at");
-            printSuccessfulAddTaskMessage();
-            printCurrentTaskCount();
-            try {
-                addToFile(Tasks.get(Tasks.size() - 1).stringToSave());
-            } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+            if (addTaskToArrayList(command, commandDescription,"/at")) {
+                printSuccessfulAddTaskMessage();
+                printCurrentTaskCount();
+                try {
+                    addToFile(Tasks.get(Tasks.size() - 1).stringToSave());
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
             }
             break;
         case "delete":
@@ -152,22 +153,33 @@ public class Jan {
         return (taskNum < Tasks.size()) && (taskNum > 0);
     }
 
-    private static void addTaskToArrayList(String command, String commandDescription, String divider) {
+    private static boolean addTaskToArrayList(String command, String commandDescription, String divider) {
         String[] taskDetails = commandDescription.split(divider);
         switch(command) {
         case "todo":
             Todo todo = new Todo(commandDescription);
             Tasks.add(todo);
-            break;
+            return true;
         case "deadline":
-            Deadline deadline = new Deadline(taskDetails[0],taskDetails[1]);
-            Tasks.add(deadline);
-            break;
+            try {
+                Deadline deadline = new Deadline(taskDetails[0], taskDetails[1]);
+                Tasks.add(deadline);
+            } catch (IndexOutOfBoundsException e) {
+                printIncorrectCommandMessage();
+                return false;
+            }
+            return true;
         case "event":
-            Event event = new Event(taskDetails[0],taskDetails[1]);
-            Tasks.add(event);
-            break;
+            try {
+                Event event = new Event(taskDetails[0], taskDetails[1]);
+                Tasks.add(event);
+            } catch (IndexOutOfBoundsException e) {
+                printIncorrectCommandMessage();
+                return false;
+            }
+            return true;
         }
+        return false;
     }
 
     private static void printSuccessfulAddTaskMessage() {
@@ -183,9 +195,8 @@ public class Jan {
         }
     }
 
-    private static void printMissingTaskDetailMessage() {
-        System.out.println("Invalid request due to missing details. type \"help\" to find out more");
-        System.out.println(DIVIDER);
+    private static void printIncorrectCommandMessage() {
+        System.out.println("Invalid request due to missing details or incorrect format. type \"help\" to find out more");
     }
 
     private static void printUnknownCommandMessage() {
@@ -238,9 +249,11 @@ public class Jan {
                     executeInstruction(requests[0], "");
                 }
             }catch (MissingDescriptionException e) {
-                printMissingTaskDetailMessage();
+                printIncorrectCommandMessage();
+                System.out.println(DIVIDER);
             } catch (UnknownCommandException e) {
                 printUnknownCommandMessage();
+                System.out.println(DIVIDER);
             }
             line = in.nextLine();
         }
