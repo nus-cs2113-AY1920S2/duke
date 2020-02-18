@@ -28,19 +28,23 @@ public class Duke {
     // a array to store user input task
     private static List<Task> tasks = new ArrayList<>();
 
-    private static String filePath = "data" + File.separator + "duke.txt";
+    private static String dirPath = "./data";
+    private static String filePath = dirPath + File.separator + "duke.txt";
     
     public static void main(String[] args) {
         displayWelcomeMessage();
 
         // for debugging
-        // System.out.println(java.nio.file.Paths.get("").toAbsolutePath().toString());
+        System.out.println(java.nio.file.Paths.get("").toAbsolutePath().toString());
         
         try {
-            loadFileContents(filePath);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            loadFileContents(dirPath, filePath);
+        } catch (IOException e) {
+            System.out.println("Something goes wrong: " + e.getMessage());
         }
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found");
+//        }
         
         Scanner in = new Scanner(System.in);
         String input = null;
@@ -236,9 +240,18 @@ public class Duke {
         System.out.println("Something went wrong: " + e.getMessage());
     }
 
-    private static void loadFileContents(String filePath) throws FileNotFoundException {
+    private static void loadFileContents(String dirPath, String filePath) throws IOException {
+        File directory = new File(dirPath);
+        if (!directory.exists()) { // create the folder
+            directory.mkdir();
+        }
+        
         File f = new File(filePath); // create a File for the given file path
+        if (!f.exists()) {
+            f.createNewFile();
+        }
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        
         System.out.println("Tasks on the list: ");
         if (!s.hasNext()) {
             System.out.println("Empty list");
