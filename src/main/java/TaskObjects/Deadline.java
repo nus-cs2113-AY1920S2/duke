@@ -1,3 +1,5 @@
+package TaskObjects;
+
 public class Deadline extends Task {
 
     protected String by;
@@ -18,5 +20,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return super.toString() + "(by: " + by + ")";
+    }
+
+    @Override
+    public String stringToSave() {
+        return super.stringToSave() + "|" + by;
     }
 }
