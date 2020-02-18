@@ -1,3 +1,7 @@
+/**
+ * Represents the possible messages that makes up the User Interface of Duke
+ * A UI object represents all the messages that makes up the User Interface of Duke
+ */
 public class UI {
     
     protected String leavingMessage;
@@ -13,6 +17,10 @@ public class UI {
         secondGreetingMessage = " How may Dukeeeeee help you today?";
         line = "____________________________________________________________________________________________";
     }
+
+    /**
+     *prints boundary of each command
+     */
     public void printLine() {
         System.out.println(boundary);
     }

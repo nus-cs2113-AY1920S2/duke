@@ -2,4 +2,4 @@
 [T],true,read book,
 [E],true,say hello,sunday
 [D],false,submit assignment ,Sunday
-[E],false,project meeting,NUS SOC,2pm
+[E],false,project meeting,NUS SOC

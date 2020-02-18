@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks stored in an ArrayList
+ * A TaskList object corresponds to an ArrayList of Task objects stored
+ */
 public class TaskList {
 
     protected Storage storage;
@@ -15,6 +19,12 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Returns the index of tasks for done and delete operations
+     * @param input String input by the user
+     * @param position number of characters to skip to get the index
+     * @return index for delete/done operation
+     */
     public int getIndex (String input, int position) {
         String removeTrailingSpaces = input.trim();
         String numericalIndex = removeTrailingSpaces.substring(position,input.length()).trim();
@@ -87,6 +97,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes item from task list based on index
+     * Saves the updated task list
+     * @param index index of task to be deleted from task list
+     */
     public void deleteItem(int index) {
         Task deletedTask = tasks.get(index);
         int length = tasks.size() - 1;
@@ -105,6 +120,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Displays list of tasks that have been queued
+     */
     public void list() {
         tasks = storage.loadTasks();
         if (tasks.size() == 0) {
@@ -114,6 +132,15 @@ public class TaskList {
             printTasks();
         }
     }
+
+    /**
+     * Marks tasks as completed as specified by index provided by user
+     * If the index provided is of incorrect format, an error message will be displayed
+     * if the index is out of bounds, an error message will be displayed
+     * @param input input by user
+     * @throws IndexOutOfBoundsException if index < length of task list or index > length of task list
+     * @throws NumberFormatException if index is not a number
+     */
     public void getDoneExceptions(String input) {
         try {
             int index = getIndex(input,5);
@@ -125,6 +152,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a todo task to the task list
+     * if description of todo is not provided, an error message will be shown
+     * @param input String input by user
+     * @throws StringIndexOutOfBoundsException if description of todo is not provided
+     */
     public void getToDoExceptions(String input) {
         try {
             addToDo(input);
@@ -133,6 +166,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an Event object to the task list
+     * @param input String input by user
+     * @throws IndexOutOfBoundsException if there is a missing event description/event date or time
+     */
     public void getEventExceptions(String input) {
         try {
             addEvent(input);
@@ -142,6 +180,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Deadline object to the task list
+     * @param input String input by user
+     * @throws IndexOutOfBoundsException if there is a missing deadline description/deadline date or time
+     */
     public void getDeadlineExceptions(String input) {
         try {
             addDeadline(input);
@@ -151,6 +194,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes task from task list, according to index of task provided
+     * @param input String input by user
+     * @throws IndexOutOfBoundsException if index > length of task list or index < length of task list
+     * @throws NumberFormatException if index is not a number
+     */
     public void getDeleteExceptions(String input) {
         try {
             int index = getIndex(input, 6);
@@ -188,6 +237,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out tasks that have descriptions matching keywords
+     * prints out error message if the search query is NaN
+     * @param input String input by user
+     */
     public void getFindExceptions(String input) {
         String description = input.substring(4, input.length()).trim();
         if (description.isBlank()) {

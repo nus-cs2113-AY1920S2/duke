@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Represents a file destination to store text file containing list of tasks
+ * A Storage object corresponds to the file name and the file path.
+ */
 public class Storage {
 
     protected File file;
@@ -16,6 +20,12 @@ public class Storage {
         filePath = file.getAbsolutePath();
     }
 
+    /**
+     * Saves the updated tasklist into the text file
+     * If there is an IO Exception, an error message will be printed
+     * @param tasks ArrayList storing all the tasks
+     * @throws IOException if IO operation fails
+     */
     public void save(ArrayList <Task> tasks) {
         this.tasks = tasks;
         try {
@@ -31,6 +41,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a new task to the stored ArrayList and updates the text file
+     * @param input String input by user
+     * @param tasksList ArrayList storing all the tasks that have been queued
+     */
     public void addTask(String input, ArrayList <Task> tasksList) {
         String [] parameters = input.split(",");
         String type = parameters[0];
@@ -51,6 +66,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Restore tasks back to ArrayList from text file
+     * @param fileReader Java.io.FileWriter to read text document
+     * @param tasksList ArrayList storing all the tasks that have been queued
+     */
     public void restoreArray(Scanner fileReader, ArrayList <Task> tasksList) {
         while (fileReader.hasNextLine()) {
             String input = fileReader.nextLine();
@@ -58,6 +78,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load Tasks back to ArrayList from text file
+     * If text file cannot be found, an error message will be displayed
+     * @return ArrayList of all tasks stored
+     * @throws FileNotFoundException if text file cannot be found
+     */
     public ArrayList <Task> loadTasks() {
         ArrayList <Task> tasksList = new ArrayList<Task>();
         try {

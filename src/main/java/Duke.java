@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Main logic behind the CLI
+ * A Duke object contains UI, Parser, TaskList, Storage, DukeExceptions, DukeHelp object
+ */
 public class Duke {
 
     private UI userInterface;
@@ -7,6 +11,7 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
     private DukeExceptions dukeExceptions;
+    private DukeHelp dukeHelp;
 
     public Duke() {
         userInterface = new UI();
@@ -14,6 +19,7 @@ public class Duke {
         tasks = new TaskList();
         storage = new Storage();
         dukeExceptions = new DukeExceptions();
+        dukeHelp = new DukeHelp();
     }
 
     private void run() {
@@ -44,10 +50,10 @@ public class Duke {
             } else if (parser.isFind()){
                 tasks.getFindExceptions(input);
             } else if (parser.isHelp()) {
-              dukeExceptions.printHelp();
+              dukeHelp.printHelp();
             } else {
                 dukeExceptions.printInvalidInput();
-                dukeExceptions.printHelp();
+                dukeHelp.printHelp();
             }
             userInterface.printLine();
         }
