@@ -1,3 +1,6 @@
+/**
+ * Represents the error messages that should be printed for different errors
+ */
 public class DukeExceptions {
 
     protected String input;
@@ -6,14 +9,24 @@ public class DukeExceptions {
         this.input = null;
     }
 
+    /**
+     * Error message printed if the tasks list is empty
+     */
     public void printListExceptions() {
         System.out.println(" [Warning: There are currently no tasks!]");
     }
 
+    /**
+     * Error message printed if user wants to mark a completed task as done
+     */
     public void printDoneExceptions() {
         System.out.println(" [Warning: The task(s) has already been marked as done]");
     }
 
+    /**
+     * Error message printed if there is an IndexOutOfBoundsException for done command
+     * @param input String input by user
+     */
     public void printIOBDoneExceptions(String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: Specifier entered is out of range]");
@@ -22,6 +35,10 @@ public class DukeExceptions {
         System.out.println(" Example: done 1");
     }
 
+    /**
+     * Error message printed if there is an NumberFormatException for done command
+     * @param input String input by user
+     */
     public void printNFEDoneExceptions(String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: Specifier entered is not a numerical value]");
@@ -30,6 +47,10 @@ public class DukeExceptions {
         System.out.println(" Example: done 1");
     }
 
+    /**
+     * Error message printed if todo task(s) is missing description
+     * @param input String input by user
+     */
     public void printToDoExceptions(String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: Missing specifier(s)]");
@@ -38,6 +59,11 @@ public class DukeExceptions {
         System.out.println(" Example: todo read book");
     }
 
+    /**
+     * Error message printed if Event task(s) is missing description / date or time
+     * @param errorMessage error message to be printed
+     * @param input String input by user
+     */
     public void printEventExceptions(String errorMessage, String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: " + errorMessage + "]");
@@ -47,6 +73,11 @@ public class DukeExceptions {
         System.out.println(" Disclaimer: Description field can be left empty");
     }
 
+    /**
+     * Error message printed if Deadline task(s) is missing description / date or time
+     * @param errorMessage error message to be printed
+     * @param input String input by user
+     */
     public void printDeadlineExceptions(String errorMessage, String input) {
         System.out.println(" Command entered: " + input);
         System.out.println(" [Error: " + errorMessage + "]");
@@ -56,6 +87,10 @@ public class DukeExceptions {
         System.out.println(" Disclaimer: Description field can be left empty");
     }
 
+    /**
+     * Error message printed if there is an IndexOutOfBoundsException for delete command
+     * @param input String input by user
+     */
     public void printIOBDeleteExceptions(String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: Specifier entered is out of range]");
@@ -64,6 +99,10 @@ public class DukeExceptions {
         System.out.println(" Example: delete 1");
     }
 
+    /**
+     * Error message printed if there is an NumberFormatException for done command
+     * @param input String input by user
+     */
     public void printNFEDeleteExceptions(String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: Specifier entered is not a numerical value]");
@@ -72,6 +111,10 @@ public class DukeExceptions {
         System.out.println(" Example: delete 1");
     }
 
+    /**
+     * Error message printed if keywords for find operation is missing
+     * @param input String input by user
+     */
     public void printFindExceptions(String input) {
         System.out.println(" Command Entered: " + input);
         System.out.println(" [Error: Specifier entered is out of range]");
@@ -80,19 +123,10 @@ public class DukeExceptions {
         System.out.println(" Example: find books");
     }
 
+    /**
+     * Error message printed if Duke does not understand command
+     */
     public void printInvalidInput() {
         System.out.println(" [WARNING: INVALID INPUT]");
-    }
-
-    public void printHelp() {
-        System.out.println(" Here are the command list:");
-        System.out.println("   1. todo: Creates a todo activity[Syntax: todo {description}]");
-        System.out.println("   2. deadline: Creates a deadline activity[Syntax: deadline {description} /by"
-                           + " {deadline}]");
-        System.out.println("   3. event: Creates an event activity[Syntax: event {description} /at {time/date}]");
-        System.out.println("   4. done: Mark event as done[Syntax: done {index of task}]");
-        System.out.println("   5. delete: removes task from list[Syntax: delete {index of task}]");
-        System.out.println("   6. list: displays list of all tasks[Syntax: list]");
-        System.out.println("   7. bye : Exits Duke");
     }
 }

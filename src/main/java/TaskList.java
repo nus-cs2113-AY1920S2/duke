@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Represents all the Task objects
+ * A TaskList object corresponds to storage, dukeExceptions and ArrayList object
+ */
 public class TaskList {
 
     protected Storage storage;
@@ -15,6 +19,12 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Returns index for delete and done operations
+     * @param input String input by user
+     * @param position number of characters of delete / done operation
+     * @return index
+     */
     public int getIndex (String input, int position) {
         String removeTrailingSpaces = input.trim();
         String numericalIndex = removeTrailingSpaces.substring(position,input.length()).trim();
@@ -97,6 +107,9 @@ public class TaskList {
         storage.save(tasks);
     }
 
+    /**
+     * Prints task in tasks list
+     */
     public void printTasks() {
         int position = 1;
         for (Task text: tasks) {
@@ -105,6 +118,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * List operation to print task in tasks list
+     */
     public void list() {
         tasks = storage.loadTasks();
         if (tasks.size() == 0) {
@@ -114,6 +130,15 @@ public class TaskList {
             printTasks();
         }
     }
+
+    /**
+     * Marks Task object as completed
+     * If IndexOutOfBoundsException, error message will be displayed
+     * if NumberFormatException, error message will be displayed
+     * @param input String input by user
+     * @throws IndexOutOfBoundsException if index < length of task list or index > length of task list
+     * @throws NumberFormatException if index is not a number
+     */
     public void getDoneExceptions(String input) {
         try {
             int index = getIndex(input,5);
@@ -125,6 +150,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds ToDo task into tasks list
+     * @param input String input by user
+     * @throws StringIndexOutOfBoundsException if description of todo is empty
+     */
     public void getToDoExceptions(String input) {
         try {
             addToDo(input);
@@ -133,6 +163,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds Event task into tasks list
+     * @param input String input by user
+     * @throws StringIndexOutOfBoundsException if description of event / event date or time is empty
+     */
     public void getEventExceptions(String input) {
         try {
             addEvent(input);
@@ -142,6 +177,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds Deadline task into tasks list
+     * @param input String input by user
+     * @throws IndexOutOfBoundsException if description of deadline / deadline date or time is empty
+     */
     public void getDeadlineExceptions(String input) {
         try {
             addDeadline(input);
@@ -151,6 +191,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes object based on index
+     * If IndexOutOfBoundsException, error message will be displayed
+     * if NumberFormatException, error message will be displayed
+     * @param input String input by user
+     * @throws IndexOutOfBoundsException if index < length of task list or index > length of task list
+     * @throws NumberFormatException if index is not a number
+     */
     public void getDeleteExceptions(String input) {
         try {
             int index = getIndex(input, 6);
@@ -188,6 +236,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds task based on keywords
+     * If keywords is empty, Duke will print an error message
+     * @param input String input by user
+     */
     public void getFindExceptions(String input) {
         String description = input.substring(4, input.length()).trim();
         if (description.isBlank()) {

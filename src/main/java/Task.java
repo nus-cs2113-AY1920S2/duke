@@ -1,3 +1,7 @@
+/**
+ * Represents a Task object for tasks
+ * AnTask object corresponds to a description, and boolean isDone to check if task has been completed
+ */
 public class Task {
 
     protected String description;
@@ -13,26 +17,49 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns boolean status of task
+     * @return status of task
+     */
     public boolean getStatus() {
         return isDone;
     }
 
+    /**
+     * Returns status icon of Task object based on its status
+     * @return status icon
+     */
     public String getStatusIcon() {
         return (isDone ? "/" : "x"); //return tick or X symbols
     }
 
+    /**
+     * Returns description of task
+     * @return description
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Mark Task object as completed
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns String format for Tasks tasks to be printed on CLI
+     * @return String format of Tasks tasks
+     */
     public String toString() {
         return "[ " + getStatusIcon() + " ] " + getDescription();
     }
 
+    /**
+     * Returns String format for Task tasks to be stored in text file
+     * @return String format of Task tasks
+     */
     public String storeText() {
         return isDone + "," + getDescription();
     }
