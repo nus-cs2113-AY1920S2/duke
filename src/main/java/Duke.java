@@ -39,10 +39,15 @@ public class Duke {
                 tasks.getEventExceptions(input);
             } else if (parser.isDeadline()) {
                 tasks.getDeadlineExceptions(input);
-            } else if(parser.isDelete()) {
+            } else if (parser.isDelete()) {
                 tasks.getDeleteExceptions(input);
+            } else if (parser.isFind()){
+                tasks.getFindExceptions(input);
+            } else if (parser.isHelp()) {
+              dukeExceptions.printHelp();
             } else {
                 dukeExceptions.printInvalidInput();
+                dukeExceptions.printHelp();
             }
             userInterface.printLine();
         }

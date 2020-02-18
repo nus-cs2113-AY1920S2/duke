@@ -48,4 +48,11 @@ public class Parser {
         return firstWord.equals("delete");
     }
 
+    public boolean isHelp() {
+        return firstWord.equals("help");
+    }
+
+    public boolean isFind() {
+        return firstWord.equals("find");
+    }
 }

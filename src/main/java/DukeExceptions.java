@@ -72,9 +72,19 @@ public class DukeExceptions {
         System.out.println(" Example: delete 1");
     }
 
+    public void printFindExceptions(String input) {
+        System.out.println(" Command Entered: " + input);
+        System.out.println(" [Error: Specifier entered is out of range]");
+        System.out.println(" find: Searches through the tasks for matching queries");
+        System.out.println(" Parameters: find [query]");
+        System.out.println(" Example: find books");
+    }
 
     public void printInvalidInput() {
         System.out.println(" [WARNING: INVALID INPUT]");
+    }
+
+    public void printHelp() {
         System.out.println(" Here are the command list:");
         System.out.println("   1. todo: Creates a todo activity[Syntax: todo {description}]");
         System.out.println("   2. deadline: Creates a deadline activity[Syntax: deadline {description} /by"
@@ -83,6 +93,6 @@ public class DukeExceptions {
         System.out.println("   4. done: Mark event as done[Syntax: done {index of task}]");
         System.out.println("   5. delete: removes task from list[Syntax: delete {index of task}]");
         System.out.println("   6. list: displays list of all tasks[Syntax: list]");
-        System.out.println("   7. save: save list of tasks[Syntax: save]");
+        System.out.println("   7. bye : Exits Duke");
     }
 }
