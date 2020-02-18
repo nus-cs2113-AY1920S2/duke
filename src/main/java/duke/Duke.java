@@ -5,18 +5,16 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.FileWriter;
 
 public class Duke {
 
     public static final String DIVIDER = "    ____________________________________________________________";
+    public static final String FILE_PATH = "C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt";
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -26,10 +24,41 @@ public class Duke {
     private static void runChatBot() {
         Scanner input = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            tasks = bootMemory();
+        } catch (FileNotFoundException e) {
+            System.out.println("    File not found");
+        }
         taskManager(input, tasks);
     }
 
-    private static void taskManager(Scanner input, ArrayList<Task> Tasks) {
+    private static ArrayList<Task> bootMemory() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        File f = new File(FILE_PATH); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+        while (s.hasNext()) {
+            String fileInput = s.nextLine();
+            String[] fileData = fileInput.split("[|]");
+            switch (fileData[0].trim()) {
+            case ("E"):
+                tasks.add(new Event(fileData[2].trim(), fileData[3].trim()));
+                break;
+            case ("D"):
+                tasks.add(new DeadLine(fileData[2].trim(), fileData[3].trim()));
+                break;
+            case ("T"):
+                tasks.add(new ToDo(fileData[2].trim()));
+                break;
+            }
+            if(Boolean.parseBoolean(fileData[1])){
+                tasks.get(tasks.size()-1).taskDone();
+            }
+        }
+        return tasks;
+    }
+
+    private static void taskManager(Scanner input, ArrayList<Task> tasks) {
         while (true) {
             try {
                 String userInput = getInput(input.nextLine());
@@ -37,39 +66,39 @@ public class Duke {
 
                 if (userCommands[0].equalsIgnoreCase("bye")) {
                     printByeMessage();
-                    writeToFile(Tasks);
+                    writeToFile(tasks);
                     break;
                 } else if (userCommands[0].equalsIgnoreCase("list")) {
-                    printList(Tasks);
+                    printList(tasks);
                 } else if (userCommands[0].equalsIgnoreCase("done")) {
-                    printDone(userCommands, Tasks);
+                    printDone(userCommands, tasks);
                 } else if (userCommands[0].equalsIgnoreCase("todo")) {
-                    addToDo(Tasks, userCommands);
+                    addToDo(tasks, userCommands);
                 } else if (userCommands[0].equalsIgnoreCase("event")) {
-                    addEvent(Tasks, userCommands);
+                    addEvent(tasks, userCommands);
                 } else if (userCommands[0].equalsIgnoreCase("deadline")) {
-                    addDeadline(Tasks, userCommands);
-                } else if (userCommands[0].equalsIgnoreCase("remove")) {
-                    printRemove(userCommands, Tasks);
+                    addDeadline(tasks, userCommands);
+                } else if (userCommands[0].equalsIgnoreCase("delete")) {
+                    printDelete(userCommands, tasks);
                 } else {
                     throw new DukeException();
                 }
             } catch (DukeException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                System.out.println("    Something went wrong: " + e.getMessage());
             }
             System.out.println(DIVIDER);
         }
     }
 
-    private static void printRemove(String[] input, ArrayList<Task> Tasks) {
+    private static void printDelete(String[] input, ArrayList<Task> tasks) {
         try {
             int num = Integer.parseInt(input[1]) - 1;
             System.out.println("    Noted. I've removed this task:");
-            System.out.println("      " + Tasks.get(num));
-            Tasks.remove(num);
-            int taskCounter = Tasks.size();
+            System.out.println("      " + tasks.get(num));
+            tasks.remove(num);
+            int taskCounter = tasks.size();
             System.out.println("    Now you have " + taskCounter + " task(s) in the list.");
         } catch (NullPointerException e) {
             System.out.println("    Error: Given Index is out of bound");
@@ -79,8 +108,7 @@ public class Duke {
     }
 
     private static void writeToFile(ArrayList<Task> tasks) throws IOException {
-        Files.delete(Paths.get("C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt"));
-        FileWriter fw = new FileWriter("C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt", true);
+        FileWriter fw = new FileWriter(FILE_PATH, false);
 
         for (Task i : tasks) {
             fw.write(i.toOutput());
@@ -135,19 +163,17 @@ public class Duke {
             }
             tasks.add(new ToDo(userCommands[1]));
             printTask(tasks.get(taskCounter), taskCounter);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("    ☹ OOPS!!! The description of a ToDo cannot be empty.");
-        } catch (DukeException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             System.out.println("    ☹ OOPS!!! The description of a ToDo cannot be empty.");
         }
     }
 
-    private static void printDone(String[] input, ArrayList<Task> Tasks) {
+    private static void printDone(String[] input, ArrayList<Task> tasks) {
         try {
             int num = Integer.parseInt(input[1]) - 1;
-            Tasks.get(num).taskDone();
+            tasks.get(num).taskDone();
             System.out.println("    Nice! I've marked this task as done:");
-            System.out.println("      " + Tasks.get(num));
+            System.out.println("      " + tasks.get(num));
         } catch (NullPointerException e) {
             System.out.println("    Error: Given Index is out of bound");
         } catch (Exception e) {
@@ -180,26 +206,22 @@ public class Duke {
     }
 
     private static String getInput(String next) {
-        String input = next;
         System.out.println(DIVIDER);
-        return input;
+        return next;
     }
 
     private static void printWelcomeMessage() {
-        String logo = "    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
-                "    ░░░░░░░░░░▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄░░░░░░░░░\n" +
-                "    ░░░░░░░░▄▀░░░░░░░░░░░░▄░░░░░░░▀▄░░░░░░░\n" +
-                "    ░░░░░░░░█░░▄░░░░▄░░░░░░░░░░░░░░█░░░░░░░\n" +
-                "    ░░░░░░░░█░░░░░░░░░░░░▄█▄▄░░▄░░░█░▄▄▄░░░\n" +
-                "    ░▄▄▄▄▄░░█░░░░░░▀░░░░▀█░░▀▄░░░░░█▀▀░██░░\n" +
-                "    ░██▄▀██▄█░░░▄░░░░░░░██░░░░▀▀▀▀▀░░░░██░░\n" +
-                "    ░░▀██▄▀██░░░░░░░░▀░██▀░░░░░░░░░░░░░▀██░\n" +
-                "    ░░░░▀████░▀░░░░▄░░░██░░░▄█░░░░▄░▄█░░██░\n" +
-                "    ░░░░░░░▀█░░░░▄░░░░░██░░░░▄░░░▄░░▄░░░██░\n" +
-                "    ░░░░░░░▄█▄░░░░░░░░░░░▀▄░░▀▀▀▀▀▀▀▀░░▄▀░░\n" +
-                "    ░░░░░░█▀▀█████████▀▀▀▀████████████▀░░░░\n" +
-                "    ░░░░░░████▀░░███▀░░░░░░▀███░░▀██▀░░░░░░\n" +
-                "    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n";
+        String logo = "\n" +
+                "    ▒▒▒▒▒▒▒█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\n" +
+                "    ▒▒▒▒▒▒▒█░▒▒▒▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒░█\n" +
+                "    ▒▒▒▒▒▒▒█░▒▒▓▒▒▒▒▒▒▒▒▒▄▄▒▓▒▒░█░▄▄\n" +
+                "    ▒▒▄▀▀▄▄█░▒▒▒▒▒▒▓▒▒▒▒█░░▀▄▄▄▄▄▀░░█\n" +
+                "    ▒▒█░░░░█░▒▒▒▒▒▒▒▒▒▒▒█░░░░░░░░░░░█\n" +
+                "    ▒▒▒▀▀▄▄█░▒▒▒▒▓▒▒▒▓▒█░░░█▒░░░░█▒░░█\n" +
+                "    ▒▒▒▒▒▒▒█░▒▓▒▒▒▒▓▒▒▒█░░░░░░░▀░░░░░█\n" +
+                "    ▒▒▒▒▒▄▄█░▒▒▒▓▒▒▒▒▒▒▒█░░█▄▄█▄▄█░░█\n" +
+                "    ▒▒▒▒█░░░█▄▄▄▄▄▄▄▄▄▄█░█▄▄▄▄▄▄▄▄▄█\n" +
+                "    ▒▒▒▒█▄▄█░░█▄▄█░░░░░░█▄▄█░░█▄▄█\n";
         System.out.println(DIVIDER);
         System.out.print(logo);
         System.out.println("    Hello Nyan Cat here!");
