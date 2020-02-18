@@ -18,9 +18,8 @@ public class Duke {
     public static final int DEADLINE = 9;
     public static final int EVENT = 6;
     public static final int DONE = 5;
-    public static final int DATE = 3;
+    public static final int DATE = 4;
     public static final int DELETE = 7;
-    //public static final String PATH = System.getProperty("user.dir") + "/data/duke.txt";
     public static final String PATH = "duke.txt";
     public static int taskCounter = 0;
 
@@ -54,7 +53,7 @@ public class Duke {
             }
 
             if (taskType.equals("t")) {
-            appendToFile(PATH, (taskType + " | " + status + " | " + tasks.get(i).description + System.lineSeparator()));
+                appendToFile(PATH, (taskType + " | " + status + " | " + tasks.get(i).description + System.lineSeparator()));
             } else {
                 String [] newSentence = line.split(":");
                 String dueDate = newSentence[1].substring(1);
@@ -82,16 +81,19 @@ public class Duke {
                 Task t = new Todo(sentence[2]);
                 tasks.add(t);
                 taskCounter++;
+                copyList(tasks, taskCounter);
                 break;
             case "d ":
                 Task d = new Deadline(sentence[2], sentence[3]);
                 tasks.add(d);
                 taskCounter++;
+                copyList(tasks, taskCounter);
                 break;
             case "e ":
                 Task e = new Event(sentence[2], sentence[3]);
                 tasks.add(e);
                 taskCounter++;
+                copyList(tasks, taskCounter);
                 break;
             }
         }
@@ -113,11 +115,12 @@ public class Duke {
             line = input.nextLine();
             String[] sentence = line.split(" ");
             String taskType = sentence[0].toLowerCase();
+            if (taskType.equalsIgnoreCase("bye")) {
+                printByeMessage();
+                break;
+            }
             try {
                 switch(taskType) {
-                case "bye":
-                    printByeMessage();
-                    break;
                 case "list":
                     printList(tasks, taskCounter);
                     break;
@@ -126,8 +129,8 @@ public class Duke {
                     Task t = new Todo(line);
                     tasks.add(t);
                     printAcknowledgement(tasks.get(taskCounter), taskCounter);
-                    copyList(tasks, taskCounter);
                     taskCounter++;
+                    copyList(tasks, taskCounter);
                     break;
                 case "deadline":
                     String[] deadlineWords = line.split("/");
@@ -136,8 +139,8 @@ public class Duke {
                     Task d = new Deadline(deadlineDescription, by);
                     tasks.add(d);
                     printAcknowledgement(tasks.get(taskCounter), taskCounter);
-                    copyList(tasks, taskCounter);
                     taskCounter++;
+                    copyList(tasks, taskCounter);
                     break;
                 case "event":
                     String[] eventWords = line.split("/");
@@ -146,8 +149,8 @@ public class Duke {
                     Task e = new Event(eventDescription, at);
                     tasks.add(e);
                     printAcknowledgement(tasks.get(taskCounter), taskCounter);
-                    copyList(tasks, taskCounter);
                     taskCounter++;
+                    copyList(tasks, taskCounter);
                     break;
                 case "done":
                     String doneNumber = line.substring(DONE);
@@ -161,13 +164,14 @@ public class Duke {
                 case "delete":
                     String deleteNumber = line.substring(DELETE);
                     int delTaskNum = Integer.parseInt(deleteNumber);
-                    tasks.remove(tasks.get(delTaskNum - 1));
+                    String delTaskName = tasks.get(delTaskNum -1).description;
+                    tasks.remove(delTaskNum - 1);
                     System.out.println(BORDER);
-                    System.out.println("Noted! I've removed this task:  " + tasks.get(delTaskNum - 1).description);
+                    System.out.println("Noted! I've removed this task:  " + delTaskName);
                     System.out.println("Now you have " + (tasks.size()) + " tasks in your list!");
                     System.out.println(BORDER);
                     taskCounter--;
-                    copyList(tasks, taskCounter);
+                    copyList(tasks,taskCounter);
                     break;
                 default:
                     throw new DukeException();
