@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static int todoSize=0;
+    private static int todoSize = 0;
+
     public static void printSeparator() {
         System.out.println("----------------------------------------------");
     }
+
     public static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
     public static void printWelcomeMessage() {
         System.out.println("Hello from\n" + logo);
         printSeparator();
@@ -56,6 +59,25 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(toDoList.get(indexCompleted - 1).toString());
                     printSeparator();
+                }catch (NumberFormatException e){
+                    printSeparator();
+                    System.out.println("You did not enter a number. Try again!!");
+                    printSeparator();
+                }catch (IndexOutOfBoundsException e){
+                    printSeparator();
+                    System.out.println("The index you entered does not exist??? Look at ur list properly lah");
+                    printSeparator();
+                }
+            }else if (userInput.startsWith("delete")){
+                try {
+                    int indexToDelete = Integer.parseInt(userInput.substring(7));
+                    printSeparator();
+                    System.out.println("Noted with thanks. This task is deleted liao: ");
+                    System.out.println(toDoList.get(indexToDelete - 1).toString());
+                    System.out.println("Now there are " + (todoSize - 1) + " task(s) in your list");
+                    printSeparator();
+                    toDoList.remove( indexToDelete - 1);
+                    todoSize--;
                 }catch (NumberFormatException e){
                     printSeparator();
                     System.out.println("You did not enter a number. Try again!!");
@@ -120,7 +142,7 @@ public class Duke {
                 }
             }else {
                 printSeparator();
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("OOPS!!! IDGI THAT");
                 printSeparator();
             }
         } while (!userInput.equalsIgnoreCase("bye"));
