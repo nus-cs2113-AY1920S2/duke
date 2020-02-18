@@ -1,0 +1,5 @@
+T | TRUE | read book
+D | FALSE | return book | June 6th
+E | FALSE | project meeting | Aug 6th 2-4pm
+T | TRUE | join sports clubT | false | pee
+D | false | poo | now
