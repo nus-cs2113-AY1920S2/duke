@@ -28,6 +28,8 @@ public class Duke {
                     addEvent(tasks, inputArray[1]);
                 } else if (inputArray[0].equals("done")) {
                     markDone(tasks, inputArray[1]);
+                } else if (inputArray[0].equals("delete")) {
+                    deleteTask(tasks, inputArray[1]);
                 } else if (input.equals("bye")) {
                     exitMessage();
                     exitProgram = true;
@@ -44,6 +46,15 @@ public class Duke {
 
         }
 
+    }
+
+    private static void deleteTask(List<Task> tasks, String s) {
+        int taskIndex = Integer.parseInt(s) - 1;
+        Task deleteTask = tasks.get(taskIndex);
+        tasks.remove(deleteTask);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deleteTask);
+        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
     }
 
     private static void markDone(List<Task> tasks, String s) {
