@@ -161,4 +161,39 @@ public class TaskList {
             dukeExceptions.printNFEDeleteExceptions(input);
         }
     }
+
+    public ArrayList<Task> getSearchQuery(String input) {
+        String descriptionLowerCase = input.toLowerCase();
+        ArrayList<Task> results = new ArrayList<Task>();
+        for (Task task : tasks) {
+            String taskDescription = task.getDescription().toLowerCase();
+            if (taskDescription.contains(descriptionLowerCase)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
+    public void printSearchQuery(String description) {
+        ArrayList<Task> results = getSearchQuery(description);
+        if (results.size() == 0) {
+            System.out.println(" [WARNING: There are no tasks that matched the search queries]");
+        } else {
+            System.out.println(" Here are the matching tasks in your list:");
+            int count = 1;
+            for (Task task: results) {
+                System.out.println("  " + count + ". " + task);
+                count += 1;
+            }
+        }
+    }
+
+    public void getFindExceptions(String input) {
+        String description = input.substring(4, input.length()).trim();
+        if (description.isBlank()) {
+            dukeExceptions.printFindExceptions(input);
+        } else {
+            printSearchQuery(description);
+        }
+    }
 }
