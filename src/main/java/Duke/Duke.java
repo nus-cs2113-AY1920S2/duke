@@ -76,7 +76,7 @@ public class Duke {
             System.out.println("["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + "\n");
             tasks.remove(taskIndex);
             System.out.println("Now you have " + tasks.size() +" tasks in the list.\n");
-
+            rebuildTaskFile(tasks);
         } else {
             System.out.println("Error: No such index in use\n");
         }
@@ -228,7 +228,7 @@ public class Duke {
         }
     }
 
-    public static void rebuildTaskFile(Task[] tasks) {
+    public static void rebuildTaskFile(ArrayList<Task> tasks) {
         // replace current list with new updated list
         try {
             File file = new File(String.valueOf(FILE_PATH));
