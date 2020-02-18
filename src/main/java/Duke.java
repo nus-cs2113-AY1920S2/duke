@@ -22,18 +22,23 @@ public class Duke {
                 "\tWhat can I do for you?\n"
                 + "\t____________________________________________________________\n");
 
-        String filePathString = "../../../docs/data/duke.txt";
+        String folderString = "data";
+        String fileString = "duke.txt";
+        String filePathString = folderString + "/" + fileString;
         try {
             File f = new File(filePathString);
+            File directory = new File(folderString);
+
+            if (!directory.exists()){
+                directory.mkdir();
+            }
             if(!f.exists()){
                 f.createNewFile();
             }
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
                 String line = s.nextLine();
-                System.out.println(line);
                 String[] words = line.split(",");
-                System.out.println(Arrays.toString(words));
                 Task t = new Task(line);
                 switch (words[0]){
                     case "T":
