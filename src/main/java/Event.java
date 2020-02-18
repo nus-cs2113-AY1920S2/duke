@@ -18,4 +18,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
     }
+
+    @Override
+    public String toFileString() {
+        return "T," + super.toFileString() + "," + this.getAt();
+    }
 }

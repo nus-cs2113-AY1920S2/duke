@@ -1,10 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.util.Arrays;
 
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,7 +22,39 @@ public class Duke {
                 "\tWhat can I do for you?\n"
                 + "\t____________________________________________________________\n");
 
-        int taskCount = 0;
+        String filePathString = "../../../docs/data/duke.txt";
+        try {
+            File f = new File(filePathString);
+            if(!f.exists()){
+                f.createNewFile();
+            }
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                System.out.println(line);
+                String[] words = line.split(",");
+                System.out.println(Arrays.toString(words));
+                Task t = new Task(line);
+                switch (words[0]){
+                    case "T":
+                        t = new Todo(words[2]);
+                        break;
+                    case "D":
+                        t = new Deadline(words[2], words[3]);
+                        break;
+                    case "E":
+                        t = new Event(words[2], words[3]);
+                        break;
+                }
+                taskList.add(t);
+                if(words[1].equals("\u2713")){
+                    t.markAsDone();
+                }
+            }
+            s.close();
+        } catch (IOException e) {
+            printIOExceptionMessage();
+        }
 
         Scanner in = new Scanner(System.in);
         String line = in.nextLine();
@@ -25,8 +63,9 @@ public class Duke {
             String[] words = line.split(" ",2); // split the first word from the rest of the sentence using space as the delimiter
             try {
                 handleCommand(line, words);
+                writeToFile(filePathString);
             } catch (EmptyTaskListException e) {
-                printEmptyTaskListExceptionMessage();;
+                printEmptyTaskListExceptionMessage();
             } catch (EmptyDoneException e) {
                 printEmptyDoneExceptionMessage();
             } catch (EmptyDeleteException e) {
@@ -41,7 +80,11 @@ public class Duke {
                 printEmptyEventExceptionMessage();
             } catch (IndexOutOfBoundsException e) {
                 printIndexOutOfBoundsExceptionMessage();
+            } catch (IOException e){
+                printIOExceptionMessage();
             }
+
+
             line = in.nextLine();
         }
         printGoodbyeMessage();
@@ -101,11 +144,19 @@ public class Duke {
                     break;
             }
             taskList.add(t);
-//            taskList[taskCount] = t;
-//            taskCount++;
             printAddTaskMessage(t);
         } else {
             throw new UnknownWordException();
+        }
+    }
+
+    private static void writeToFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.close();
+        for(Task t : taskList){
+            fw = new FileWriter(filePath, true);
+            fw.write(t.toFileString() + System.lineSeparator());
+            fw.close();
         }
     }
 
@@ -117,10 +168,6 @@ public class Duke {
             System.out.println("\t " + (i+1) + ". " + t.toString());
             i++;
         }
-//        for(int i=0; i<taskCount; ++i){
-//            Task t = taskList[i];
-//            System.out.println("\t " + (i+1) + ". " + t.toString());
-//        }
         System.out.println("\t____________________________________________________________\n");
     }
 
@@ -216,7 +263,12 @@ public class Duke {
                 + "\t You can try entering a task using the following commands first:\n"
                 + "\t\t done <task number>\n"
                 + "\t\t deadline <task name> /by <date>\n"
-                + "\t\t event <task name> /at <location>\n"
+                + "\t\t event <task name> /at <location>\n");
+    }
+
+    private static void printIOExceptionMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t ☹ OOPS!!! File is not found!\n"
                 + "\t____________________________________________________________\n");
     }
 }
