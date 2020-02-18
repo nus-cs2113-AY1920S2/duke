@@ -1,0 +1,6 @@
+T|0|work
+E|0|kill people |work
+D|0|assignment |next wk
+T|0|sleep
+E|1|meeting |sch
+T|1|buy cat food
