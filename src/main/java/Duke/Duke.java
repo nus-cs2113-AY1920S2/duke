@@ -1,8 +1,9 @@
+package Duke;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Duke {
     private static final String BORDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ";
@@ -14,6 +15,11 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String DONE_ERROR_MESSAGE = "Duke.Task not found";
+    private static final String TODO_ERROR_MESSAGE = "Oops! The description of todo cannot be empty.";
+    private static final String DEADLINE_ERROR_MESSAGE = "Oops! The description of deadline cannot be empty.";
+    private static final String EVENT_ERROR_MESSAGE = "Oops! The description of event cannot be empty.";
+    private static final String INVALID_COMMAND_MESSAGE = " Oops! Im sorry, but I don't know what that means :(";
 
     private static void printBorder(){
         System.out.println(BORDER);
@@ -29,30 +35,19 @@ public class Duke {
         printBorder();
     }
 
-    private static void replyUser(){
-        Scanner scanner = new Scanner(System.in);
-        while(true){
-            String input = scanner.nextLine();
-            printBorder();
-            if(input.equals(BYE_COMMAND)) {
-                printMessage("Bye. Hope to see you again soon!");
-                printBorder();
-                break;
-            }
-            else if(input.equals(LIST_COMMAND)){
-                if (tasksList.size() == 0){
+    private static void replyUser(String input) throws DukeException {
+            if(input.equals(LIST_COMMAND)){
+                if(tasksList.size() == 0){
                     printMessage("There are no tasks in your list!");
-                    printBorder();
                 }
                 else {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < tasksList.size(); i++) {
                         printMessage((i + 1) + ". " + tasksList.get(i).toString());
                     }
-                    printBorder();
                 }
             }
-            else{
+            else {
                 String[] line = input.split(" ");
                 List<String> taskList = Arrays.asList(line);
                 String command = line[0];
@@ -60,56 +55,64 @@ public class Duke {
                 Task task = null;
                 String s;
                 boolean isTask = false;
-                switch(command){
+                switch (command) {
                 case DONE_COMMAND:
-                    if(line.length == 2 && isNumeric(line[1])) {
+                    if(line.length == 2 && isNumeric(line[1])){
                         int i = Integer.parseInt(line[1]);
-                        if (i > 0 && i <= tasksList.size()) {
+                        if (i > 0 && i <= tasksList.size()){
                             System.out.println("Nice! I've marked this task as done");
                             tasksList.get(i - 1).markAsDone();
                             System.out.println(i + ". " + tasksList.get(i - 1).toString());
-                        } else {
-                            System.out.println("Task not found");
                             printBorder();
+                        } else{
+                            throw new DukeException(DONE_ERROR_MESSAGE);
                         }
                     }
                     break;
 
                 case TODO_COMMAND:
+                    if (line.length == 1){
+                        throw new DukeException(EVENT_ERROR_MESSAGE);
+                    }
                     isTask = true;
-                    s = String.join("", arguments);
+                    s = String.join(" ", arguments);
                     task = new Todo(s);
                     break;
 
                 case DEADLINE_COMMAND:
+                    if (line.length == 1){
+                        throw new DukeException(DEADLINE_ERROR_MESSAGE);
+                    }
                     isTask = true;
                     int index = taskList.indexOf("/by");
                     if(index == -1){
-                        System.out.println("Please give a deadline: ");
+                        System.out.println("Please enter again with a deadline: ");
                         printBorder();
-                        continue;
+                        //continue;
                     }
-                    String by = String.join("", taskList.subList(index + 1, taskList.size()));
-                    String description = String.join("", taskList.subList(1, index));
+                    String by = String.join(" ", taskList.subList(index + 1, taskList.size()));
+                    String description = String.join(" ", taskList.subList(1, index));
                     task = new Deadline(description, by);
                     break;
 
                 case EVENT_COMMAND:
+                    if (line.length == 1){
+                        throw new DukeException(EVENT_ERROR_MESSAGE);
+                    }
                     isTask = true;
                     index = taskList.indexOf("/at");
                     if(index == -1){
-                        System.out.println("Please give a location: ");
+                        System.out.println("Please enter again with a location: ");
                         printBorder();
-                        continue;
+                        //continue;
                     }
-                    String at = String.join("", taskList.subList(index + 1, taskList.size()));
-                    description = String.join("", taskList.subList(1, index));
+                    String at = String.join(" ", taskList.subList(index + 1, taskList.size()));
+                    description = String.join(" ", taskList.subList(1, index));
                     task = new Event(description, at);
                     break;
 
                 default:
-                    System.out.println("invalid");
-                    printBorder();
+                    throw new DukeException(INVALID_COMMAND_MESSAGE);
                 }
                 if(isTask) {
                     tasksList.add(task);
@@ -117,7 +120,6 @@ public class Duke {
                     System.out.println(" " + task.toString());
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
                     printBorder();
-                }
                 }
             }
         printBorder();
@@ -137,6 +139,20 @@ public class Duke {
 
     public static void main(String[] args) {
         greetUser();
-        replyUser();
+        while(true){
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine().trim();
+            if(input.equals(BYE_COMMAND)) {
+                printMessage("Bye. Hope to see you again soon!");
+                break;
+            }
+            printBorder();
+            try{
+                replyUser(input);
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
+                printBorder();
+            }
+        }
     }
 }
