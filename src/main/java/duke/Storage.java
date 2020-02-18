@@ -11,7 +11,7 @@ public class Storage {
     public Storage(String fname) {
         this.fname = fname;
     }
-    private static void writeToFile(String filePath, ArrayList<Task> tasksToWrite) throws IOException {
+    public static void writeToFile(String filePath, ArrayList<Task> tasksToWrite) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         try {
             for (int i = 0; i < tasksToWrite.size(); i++) {
@@ -23,7 +23,7 @@ public class Storage {
         }
         fw.close();
     }
-    private static ArrayList<String> readFromFile(String filePath) throws FileNotFoundException {
+    public static ArrayList<String> readFromFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner sc = null;
         ArrayList<String> tasks = new ArrayList<String>();
@@ -35,8 +35,8 @@ public class Storage {
         }catch (FileNotFoundException e) {
             System.out.println("File Not Found");
         }
-
-
+        sc.close();
+        return tasks;
         }
 
         }

@@ -21,6 +21,8 @@ public class Duke {
         while (true){
             String next = input.nextLine();
             if (next.equals("bye")){
+                Storage.writeToFile("./duke.txt",tasks);
+                counter = counter -1;
                 System.out.println("Bye. Hope to see you again soon! :)");
                 break;
             } else if (next.equals("list")) {
@@ -94,7 +96,7 @@ public class Duke {
                         counter = counter - 2;
                     }
                 } else if (splitString[0].equals("save")){
-                    writeToFile("./duke.txt",tasks);
+                    Storage.writeToFile("./duke.txt",tasks);
                     counter = counter -1;
 
                 }
