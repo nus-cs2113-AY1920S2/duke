@@ -5,7 +5,14 @@ import java.util.Scanner;
 import duke.util.TaskManager;
 import duke.exception.DukeException;
 
-
+import static duke.util.Constants.DEADLINE_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.DELETE_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.DONE_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.EVENT_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.EXIT_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.LIST_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.TODO_COMMAND_HELP_MESSAGE;
+import static duke.util.Constants.HELP_COMMAND;
 import static duke.util.Constants.LOGO;
 import static duke.util.Constants.LINE_DIVIDER;
 import static duke.util.Constants.FIVE_SPACES;
@@ -80,6 +87,9 @@ public class Duke {
             int delTaskID = extractTaskID(userInput);
             TaskMgr.delTask(delTaskID);
             break;
+        case HELP_COMMAND:
+            printHelpMessage(afterCommand);
+            break;
         default:
             respondToUnknownCommand();
         }
@@ -148,6 +158,48 @@ public class Duke {
         }
     }
 
+    private static void printHelpMessage(String commandWord) {
+        System.out.println(LINE_DIVIDER);
+        switch (commandWord) {
+        case EXIT_COMMAND_BYE:
+        case EXIT_COMMAND_EXIT:
+        case EXIT_COMMAND_QUIT:
+            System.out.println(FIVE_SPACES + EXIT_COMMAND_HELP_MESSAGE);
+            break;
+        case LIST_COMMAND:
+        case LIST_COMMAND_SHORTCUT:
+            System.out.println(FIVE_SPACES + LIST_COMMAND_HELP_MESSAGE);
+            break;
+        case DONE_COMMAND:
+            System.out.println(FIVE_SPACES + DONE_COMMAND_HELP_MESSAGE);
+            break;
+        case TODO_COMMAND:
+        case TODO_COMMAND_SHORTCUT:
+            System.out.println(FIVE_SPACES + TODO_COMMAND_HELP_MESSAGE);
+            break;
+        case DEADLINE_COMMAND:
+        case DEADLINE_COMMAND_SHORTCUT:
+            System.out.println(FIVE_SPACES + DEADLINE_COMMAND_HELP_MESSAGE);
+            break;
+        case EVENT_COMMAND:
+        case EVENT_COMMAND_SHORTCUT:
+            System.out.println(FIVE_SPACES + EVENT_COMMAND_HELP_MESSAGE);
+            break;
+        case DELETE_COMMAND:
+        case DELETE_COMMAND_SHORTCUT:
+            System.out.println(FIVE_SPACES + DELETE_COMMAND_HELP_MESSAGE);
+            break;
+        default:
+            System.out.println(FIVE_SPACES + EXIT_COMMAND_HELP_MESSAGE);
+            System.out.println(FIVE_SPACES + LIST_COMMAND_HELP_MESSAGE);
+            System.out.println(FIVE_SPACES + DONE_COMMAND_HELP_MESSAGE);
+            System.out.println(FIVE_SPACES + TODO_COMMAND_HELP_MESSAGE);
+            System.out.println(FIVE_SPACES + DEADLINE_COMMAND_HELP_MESSAGE);
+            System.out.println(FIVE_SPACES + EVENT_COMMAND_HELP_MESSAGE);
+            System.out.println(FIVE_SPACES + DELETE_COMMAND_HELP_MESSAGE);
+        }
+        System.out.println(LINE_DIVIDER);
+    }
 
     private static void bye() {
         System.out.println(LINE_DIVIDER);
