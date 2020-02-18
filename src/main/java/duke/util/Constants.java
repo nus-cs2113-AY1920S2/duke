@@ -26,9 +26,11 @@ public class Constants {
     public static final String EVENT_COMMAND_SHORTCUT = "evt";
     public static final String DELETE_COMMAND = "delete";
     public static final String DELETE_COMMAND_SHORTCUT = "del";
-    public static final String DEADLINE_TIME_DELIMITER = " /by ";
-    public static final String EVENT_TIME_DELIMITER = " /at ";
-    public static final String UNKNOWN_COMMAND_RESPONSE = " OOPS!!! I'm sorry, but I don't know what that means";
+    public static final String HELP_COMMAND = "help";
+    public static final String DEADLINE_TIME_DELIMITER = " -by ";
+    public static final String EVENT_TIME_DELIMITER = " -at ";
+    public static final String UNKNOWN_COMMAND_RESPONSE = " OOPS!!! I'm sorry, but I don't know what that means\n"
+                                                        + FIVE_SPACES + "You may enter `help` to check available commands!";
     public static final String LIST_TASKS_PROMPT = "Here are the tasks in your list:";
     public static final String DONE_TASK_PROMPT = "Nice! I've marked this duke.task as done:";
     public static final String ADD_TASK_PROMPT = "Got it. I've added this duke.task:";
@@ -39,6 +41,13 @@ public class Constants {
     public static final String DEADLINE_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the deadline format is not correct!";
     public static final String EVENT_FORMAT_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = " OOPS!!! I'm sorry, but the task description cannot be empty!";
+    public static final String DONE_COMMAND_HELP_MESSAGE = "key in `done <task_id>` to mark the task with <task_id> as done.";
+    public static final String LIST_COMMAND_HELP_MESSAGE = "key in `list` or `ls` to list all the tasks.";
+    public static final String TODO_COMMAND_HELP_MESSAGE = "key in `todo/td <task_description>` to add a todo task.";
+    public static final String DEADLINE_COMMAND_HELP_MESSAGE = "key in `deadline/ddl <task_description> -by <deadline>` to add a deadline task.";
+    public static final String EVENT_COMMAND_HELP_MESSAGE = "key in `event/evt <task_description> -at <event_date>` to add an event task.";
+    public static final String DELETE_COMMAND_HELP_MESSAGE = "key in `delete/del <task_id>` to delete the task with <task_id>.";
+    public static final String EXIT_COMMAND_HELP_MESSAGE = "key in `exit/bye/quit` to exit the programme.";
     public static final String YES_ICON = "[v]";
     public static final String NO_ICON = "[x]";
     public static final String CRYING_FACE = ":-(";

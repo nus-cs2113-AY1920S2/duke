@@ -5,6 +5,7 @@ import java.util.Scanner;
 import duke.util.TaskManager;
 import duke.exception.DukeException;
 
+
 import static duke.util.Constants.LOGO;
 import static duke.util.Constants.LINE_DIVIDER;
 import static duke.util.Constants.FIVE_SPACES;
@@ -43,9 +44,10 @@ public class Duke {
     }
 
     private static void processUserInput(TaskManager TaskMgr, String userInput) {
-        String command = extractCommand(userInput);
-        String taskInfo = extractTaskInfo(userInput);
-        switch (command) {
+        String commands[] = splitCommand(userInput);
+        String commandWord = commands[0];
+        String afterCommand = commands[1];
+        switch (commandWord) {
         case EXIT_COMMAND_BYE:
         case EXIT_COMMAND_EXIT:
         case EXIT_COMMAND_QUIT:
@@ -63,15 +65,15 @@ public class Duke {
             break;
         case TODO_COMMAND:
         case TODO_COMMAND_SHORTCUT:
-            TaskMgr.addTask(taskInfo, TODO_COMMAND);
+            TaskMgr.addTask(afterCommand, TODO_COMMAND);
             break;
         case DEADLINE_COMMAND:
         case DEADLINE_COMMAND_SHORTCUT:
-            processTaskWithTime(TaskMgr, taskInfo, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND, DEADLINE_FORMAT_ERROR_MESSAGE);
+            processTaskWithTime(TaskMgr, afterCommand, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND, DEADLINE_FORMAT_ERROR_MESSAGE);
             break;
         case EVENT_COMMAND:
         case EVENT_COMMAND_SHORTCUT:
-            processTaskWithTime(TaskMgr, taskInfo, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
+            processTaskWithTime(TaskMgr, afterCommand, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
             break;
         case DELETE_COMMAND:
         case DELETE_COMMAND_SHORTCUT:
@@ -99,7 +101,14 @@ public class Duke {
         System.out.println(LINE_DIVIDER);
     }
 
-    private static String extractCommand(String userInput) {
+    private static String[] splitCommand(String userInput) {
+        String commandWord = extractCommandWord(userInput);
+        String afterCommand = userInput.substring(commandWord.length()).trim();
+        String[] commands = new String[]{commandWord, afterCommand};
+        return commands;
+    }
+
+    private static String extractCommandWord(String userInput) {
         int spaceIndex = userInput.indexOf(' ');
         if (spaceIndex == -1) {
             return userInput;
@@ -138,6 +147,7 @@ public class Duke {
             return -1;
         }
     }
+
 
     private static void bye() {
         System.out.println(LINE_DIVIDER);
