@@ -1,5 +1,7 @@
 package Duke;
 
+
+
 public class ToDo extends Task {
 
     public static final String TYPE_TODO = "T";
@@ -17,5 +19,6 @@ public class ToDo extends Task {
     public void printListDetails(int taskCounter) {
         System.out.println("["+ getTaskType() + "][" + getStatusIcon() + "] " + taskCounter + ". " + getDescription());
     }
+
 
 }

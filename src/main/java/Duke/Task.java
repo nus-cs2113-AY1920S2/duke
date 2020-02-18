@@ -1,18 +1,40 @@
 package Duke;
 
-import java.util.ArrayList;
+import java.io.File;
+
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
+
 
 public abstract class Task {
+
     public static final String TICK = "✓";
     public static final String CROSS = "✘";
+
+    String workingDir = System.getProperty("user.dir");
+    java.nio.file.Path folderPath = java.nio.file.Paths.get(workingDir, "Save");
+    java.nio.file.Path filePath = java.nio.file.Paths.get(workingDir, "Save", "data.txt");
+
+
     protected String description;
+    protected String date;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
+        this.date = "";
         this.isDone = false;
     }
 
+    public Task(String description, String date) {
+        this.description = description;
+        this.date = date;
+        this.isDone = false;
+    }
+
+    public String getDate() {
+        return date;
+    }
     public boolean getStatus() {
         return isDone;
     }

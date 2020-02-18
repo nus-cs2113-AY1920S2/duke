@@ -1,23 +1,16 @@
 package Duke;
 
-import java.util.ArrayList;
 
 public class Event extends Task {
 
     public static final String TYPE_EVENT = "E";
-    private String date;
 
     public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getDate() {
-        return date;
+        super.date = date;
     }
 
     public Event(String description, String date){
-        super(description);
-        this.date = date;
+        super(description, date);
     }
 
     @Override
@@ -28,7 +21,7 @@ public class Event extends Task {
     @Override
     public void printAddDetails(int taskCounter) {
         System.out.println("The following task has been added:\n[" + getTaskType() +"][" +
-                            getStatusIcon() + "] " + description + " (at: " + date + ")\n");
+                            getStatusIcon() + "] " + super.description + " (at: " + super.date + ")\n");
 
         System.out.println("You've got " + taskCounter + " task(s) in the list!\n");
     }
@@ -36,7 +29,7 @@ public class Event extends Task {
     @Override
     public void printListDetails(int count) {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
-                            count + ". " + description + " (by: " + date + ")");
+                            count + ". " + super.description + " (by: " + super.date + ")");
     }
 
 }
