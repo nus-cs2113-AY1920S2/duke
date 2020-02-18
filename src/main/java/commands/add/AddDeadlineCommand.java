@@ -19,6 +19,9 @@ public class AddDeadlineCommand extends AddCommand {
 
     @Override
     public CommandResult execute() {
+        if (deadlineTask == null) {
+            return new CommandResult("Invalid Command Format");
+        }
         taskManager.addTask(deadlineTask);
         //according to the data format
         return new CommandResult(String.format(

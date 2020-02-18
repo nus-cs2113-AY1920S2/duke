@@ -19,6 +19,9 @@ public class AddEventCommand extends AddCommand {
 
     @Override
     public CommandResult execute() {
+        if (eventTask == null) {
+            return new CommandResult("Invalid Command Format");
+        }
         taskManager.addTask(eventTask);
         return new CommandResult(String.format(
                 MESSAGE_EVENT_SUCCESS,

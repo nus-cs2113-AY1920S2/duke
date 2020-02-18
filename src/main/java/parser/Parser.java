@@ -94,8 +94,12 @@ public class Parser {
      */
     private Command prepareAddEventTask(int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and start time
-        String [] temp = commandDescription.split("/");
-        return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+        try {
+            String [] temp = commandDescription.split("/");
+            return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+        } catch (ArrayIndexOutOfBoundsException aiobex){
+            return new AddEventCommand(null);
+        }
     }
 
     /**
@@ -106,8 +110,13 @@ public class Parser {
      */
     private Command prepareAddDeadlineTask(int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and deadline
-        String [] temp = commandDescription.split("/");
-        return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+        try {
+            String [] temp = commandDescription.split("/");
+            return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+        } catch (ArrayIndexOutOfBoundsException aex){
+            return new AddEventCommand(null);
+        }
+
     }
 
     /**
