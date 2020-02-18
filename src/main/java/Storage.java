@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Represents the location where text files are stored
+ * A Storage object correspnds to filepath and file name
+ */
 public class Storage {
 
     protected File file;
@@ -16,6 +20,12 @@ public class Storage {
         filePath = file.getAbsolutePath();
     }
 
+    /**
+     * saves the tasks in ArrayList into text file
+     * If there is an IOException, an error message will be displayed
+     * @param tasks ArrayList of Tasks
+     * @throws IOException if IO is invalid
+     */
     public void save(ArrayList <Task> tasks) {
         this.tasks = tasks;
         try {
@@ -31,6 +41,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds Task from text file to ArrayList
+     *
+     * @param input String input by user
+     * @param tasksList ArrayList to store tasks
+     */
     public void addTask(String input, ArrayList <Task> tasksList) {
         String [] parameters = input.split(",");
         String type = parameters[0];
@@ -51,6 +67,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Restores Tasks from text file into ArrayList
+     * @param fileReader java.io.FileWriter to read the text file
+     * @param tasksList ArrayList to store tasks
+     */
     public void restoreArray(Scanner fileReader, ArrayList <Task> tasksList) {
         while (fileReader.hasNextLine()) {
             String input = fileReader.nextLine();
@@ -58,6 +79,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an ArrayList containing all the updated tasks
+     * @return ArrayList containing tasks
+     * @throws FileNotFoundException if text file cannot be found
+     */
     public ArrayList <Task> loadTasks() {
         ArrayList <Task> tasksList = new ArrayList<Task>();
         try {
