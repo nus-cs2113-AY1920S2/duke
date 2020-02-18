@@ -13,8 +13,8 @@ public class Deadline extends Task {
      * @param taskNumber what number the task is on our list
      * @param by when the task needs to be done by
      */
-    public Deadline(String description, int taskNumber, String by) {
-        super(description, taskNumber);
+    public Deadline(String description, String by) {
+        super(description);
         this.by = by;
     }
 

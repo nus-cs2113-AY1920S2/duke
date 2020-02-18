@@ -13,8 +13,8 @@ public class Event extends Task {
      * @param taskNumber what number the task is on our list
      * @param at time the event is at
      */
-    public Event(String description, int taskNumber, String at) {
-        super(description, taskNumber);
+    public Event(String description, String at) {
+        super(description);
         this.at = at;
     }
 

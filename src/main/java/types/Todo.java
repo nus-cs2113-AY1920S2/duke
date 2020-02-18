@@ -7,8 +7,8 @@ public class Todo extends Task {
      * @param description the task that needs to be done
      * @param taskNumber what number the task is on our list
      */
-    public Todo(String description, int taskNumber) {
-        super(description, taskNumber);
+    public Todo(String description) {
+        super(description);
     }
 
     /**

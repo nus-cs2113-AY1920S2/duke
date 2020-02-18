@@ -22,7 +22,7 @@ public class Task {
      * @param name name of task
      * @param taskNumber number of task
      */
-    public Task(String name, int taskNumber) {
+    public Task(String name) {
         this.name = name;
         this.taskNumber = taskNumber;
         isDone = false;

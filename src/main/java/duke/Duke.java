@@ -1,6 +1,10 @@
 package duke;
 
+import types.Deadline;
+import types.Todo;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -29,8 +33,9 @@ public class Duke {
 
     private static final String FILE_PATH = "./duke.txt";
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
         introduction();
+        File f = loadFile();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         while (!command.equals("bye")) {
@@ -45,31 +50,31 @@ public class Duke {
                 listCommand();
             } else if (cWord.equals("done")) {
                 try {
-                    doneCommand(command);
+                    doneCommand(command, f);
                 } catch (DukeException e){
                     System.out.println("    You must include the number of the completed task!");
                 }
             } else if (cWord.equals("todo")) {
                 try {
-                    todoCommand(task);
+                    todoCommand(task, f);
                 } catch (DukeException e){
                     System.out.println("    You must include what needs to be done!");
                 }
             } else if (cWord.equals("deadline")) {
                 try {
-                    deadlineCommand(task);
+                    deadlineCommand(task, f);
                 } catch (DukeException e){
                     System.out.println("    You must specify when the deadline is by!");
                 }
             } else if (cWord.equals("event")) {
                 try {
-                    eventCommand(task);
+                    eventCommand(task, f);
                 } catch (DukeException e){
                     System.out.println("    You must specify when the event is at!");
                 }
             } else if (cWord.equals("delete")) {
                try {
-                   deleteCommand(command);
+                   deleteCommand(command, f);
                } catch (DukeException e) {
                    System.out.println("    You must include the number of deleted task!");
                }
@@ -107,16 +112,16 @@ public class Duke {
      * The event command, which adds a new event and when it is
      * @param task what the event is and when it is at, denoted by /at
      */
-    private static void eventCommand(String task) throws DukeException{
+    private static void eventCommand(String task, File f) throws DukeException{
         if (!task.contains("/at")) {
             throw new DukeException();
         }
         String[] splitTask2 = task.split("/at");
-        types.Task t = new types.Event(splitTask2[0], numTasks, splitTask2[1]);
+        types.Task t = new types.Event(splitTask2[0], splitTask2[1]);
         addTask(t);
         printTask(t);
         try {
-            taskListWrite(taskList);
+            taskListWrite(taskList, f);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,16 +141,16 @@ public class Duke {
      * The deadline command, which adds a new task and its deadline
      * @param task what the deadline is for and when it needs to be done by, denoted by /by
      */
-    private static void deadlineCommand(String task) throws DukeException {
+    private static void deadlineCommand(String task, File f) throws DukeException {
         if (!task.contains("/by")) {
             throw new DukeException();
         }
         String[] splitTask2 = task.split("/by");
-        types.Task t = new types.Deadline(splitTask2[0], numTasks, splitTask2[1]);
+        types.Task t = new types.Deadline(splitTask2[0], splitTask2[1]);
         addTask(t);
         printTask(t);
         try {
-            taskListWrite(taskList);
+            taskListWrite(taskList, f);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -164,15 +169,15 @@ public class Duke {
      * The to do command, which adds a new task to be done
      * @param task what needs to be done
      */
-    private static void todoCommand(String task) throws DukeException {
+    private static void todoCommand(String task, File f) throws DukeException {
         if (task.isEmpty()) {
             throw new DukeException();
         }
-        types.Task t = new types.Todo(task, numTasks);
+        types.Task t = new types.Todo(task);
         addTask(t);
         printTask(t);
         try {
-            taskListWrite(taskList);
+            taskListWrite(taskList, f);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,7 +187,7 @@ public class Duke {
      * The done command, which can mark and event as done or not
      * @param command the command that was done and the number of the command
      */
-    private static void doneCommand(String command) throws DukeException {
+    private static void doneCommand(String command, File f) throws DukeException {
         String[] splitTask2 = command.split(" ");
         if (splitTask2.length != 2) {
             throw new DukeException();
@@ -196,7 +201,7 @@ public class Duke {
             System.out.println("    " + taskList[taskDoneNum - 1].toString());
         }
         try {
-            taskListWrite(taskList);
+            taskListWrite(taskList, f);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -207,7 +212,7 @@ public class Duke {
      * @param command number of task to be deleted
      * @throws DukeException an error
      */
-    private static void deleteCommand(String command) throws DukeException {
+    private static void deleteCommand(String command, File f) throws DukeException {
         String[] splitTask2 = command.split(" ");
         if (splitTask2.length != 2) {
             throw new DukeException();
@@ -222,7 +227,7 @@ public class Duke {
             System.out.println("    Now you have " + numTasks + " tasks in the list.");
         }
         try {
-            taskListWrite(taskList);
+            taskListWrite(taskList, f);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -265,11 +270,11 @@ public class Duke {
      * @throws IOException exception
      */
     private static void writeToFile(types.Task t, FileWriter fr) throws IOException {
-        String str = t.getType() + " | " + t.getDone() + " | " + t.getName();
+        String str = t.getType() + " ; " + t.getDone() + " ; " + t.getName();
         if (t.getType().equals("D")) {
-            str += " | " + t.getBy();
+            str += " ; " + t.getBy();
         } else if (t.getType().equals("E")) {
-            str += " | " + t.getAt();
+            str += " ; " + t.getAt();
         }
         fr.write(str);
         fr.write(System.lineSeparator());
@@ -280,14 +285,49 @@ public class Duke {
      * @param arr task list array
      * @throws IOException exception
      */
-    private static void taskListWrite(types.Task[] arr) throws IOException {
-        File f = new File(FILE_PATH);
+    private static void taskListWrite(types.Task[] arr, File f) throws IOException {
         FileWriter fr = null;
         fr = new FileWriter(f);
         for (int i = 0; i < numTasks; i++) {
             writeToFile(arr[i], fr);
         }
         fr.close();
+    }
+
+    private static File loadFile() throws FileNotFoundException {
+        File f = new File(FILE_PATH);
+        if (f.length() != 0) {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                boolean bool = false;
+                String cl = s.nextLine();
+                String[] splitTask = cl.split(" ; ");
+                String type = splitTask[0];
+                if (type.equals("D")) {
+                    taskList[numTasks] = new types.Deadline(splitTask[2], splitTask[3]);
+                    if (Integer.parseInt(splitTask[1].trim()) == 1) {
+                        bool = true;
+                    }
+                    taskList[numTasks].setDone(bool);
+                    numTasks++;
+                } else if (type.equals("E")) {
+                    taskList[numTasks] = new types.Event(splitTask[2], splitTask[3]);
+                    if (Integer.parseInt(splitTask[1]) == 1) {
+                        bool = true;
+                    }
+                    taskList[numTasks].setDone(bool);
+                    numTasks++;
+                } else {
+                    taskList[numTasks] = new types.Todo(splitTask[2]);
+                    if (Integer.parseInt(splitTask[1]) == 1) {
+                        bool = true;
+                    }
+                    taskList[numTasks].setDone(bool);
+                    numTasks++;
+                }
+            }
+        }
+        return f;
     }
 }
 
