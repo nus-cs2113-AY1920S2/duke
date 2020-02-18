@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Duke {
 
-    static String dataFilePath = "resources/data.csv";
+    static String dataFilePath = "data/data.csv";
     static File dataFile = new File(dataFilePath);
 
     static List<Task> taskList = new ArrayList<Task>();

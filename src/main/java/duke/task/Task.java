@@ -20,7 +20,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // Return tick or X symbols
+        return (isDone ? "/" : "X"); // Return / or X symbols
     }
 
     public String getDescription() {
