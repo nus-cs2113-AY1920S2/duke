@@ -1,14 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-
-    public static final int MAX_TASK = 100;
 
     public static void main(String[] args) {
         printWelcomeMessage();
         boolean isExit = false;
-        Task[] list = new Task[MAX_TASK];
-        int itemCount = 0;
+        ArrayList<Task> taskList = new ArrayList<>();
 
         Scanner in = new Scanner(System.in);
         String input = in.nextLine(); // Get string input
@@ -16,10 +14,14 @@ public class Duke {
         while (!input.equals("bye")) {
             String[] words = input.split(" ", 2); // Split command from rest of sentence
             try {
-                itemCount = manageCommand(list, itemCount, input, words);
+                manageCommand(taskList, input, words);
             } catch (EmptyToDoException e) {
                 System.out.println("    ☹ OOPS!!! The description of a todo cannot be empty.");
-            } catch (InvalidCommandException e) {
+            } catch (InvalidTaskIndexException e) {
+                System.out.println("    ☹ OOPS!!! The task index you've entered is invalid.");
+            } catch (EmptyDoneException e) {
+                System.out.println("    ☹ OOPS!!! The description of the task cannot be empty.");
+            }  catch (InvalidCommandException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (InvalidDeadlineException e) {
                 System.out.println("    ☹ OOPS!!! The description of a deadline must be in this format: ");
@@ -27,6 +29,10 @@ public class Duke {
             } catch (InvalidEventException e) {
                 System.out.println("    ☹ OOPS!!! The description of an event must be in this format: ");
                 System.out.println("    event <task name> /at <date/time>");
+            } catch (EmptyListException e) {
+                System.out.println("    ☹ OOPS!!! Your task list is empty! Try adding a task first!");
+            } catch (NumberFormatException e) {
+                System.out.println("    ☹ OOPS!!! You entered an invalid number!");
             }
 
             input = in.nextLine(); // Get string input
@@ -36,22 +42,23 @@ public class Duke {
 
     }
 
-    private static int manageCommand(Task[] list, int itemCount, String input, String[] words) throws EmptyToDoException, InvalidCommandException, InvalidDeadlineException, InvalidEventException {
+    private static void manageCommand(ArrayList<Task> taskList, String input, String[] words) throws NumberFormatException, EmptyToDoException, EmptyDoneException, EmptyListException, InvalidTaskIndexException, InvalidCommandException, InvalidDeadlineException, InvalidEventException {
         if (words[0].equals("list")) { // List tasks
-            printBorder();
-            System.out.println("    Here are the tasks in your list:");
-            for (int i = 0; i < itemCount; ++i) { // Print list of tasks
-                System.out.println("    " + (i + 1) + ". " + list[i].toString());
+            if (taskList.isEmpty() ) {
+                throw new EmptyListException();
             }
-            printBorder();
+            printListMessage(taskList);
         } else if (words[0].equals("done")) { // Mark task as done
-            printBorder();
-            System.out.println("    Nice! I've marked this task as done: ");
+            if (words.length < 2) {
+                throw new EmptyDoneException();
+            }
             String doneTask = words[1];
             int taskIndex = Integer.parseInt(doneTask) - 1;
-            list[taskIndex].setDone(true);
-            System.out.println("    " + list[taskIndex].toString()); // Print task marked as done
-            printBorder();
+            if ((taskIndex < 0) || (taskIndex >= taskList.size() ) ) {
+                throw new InvalidTaskIndexException();
+            }
+            taskList.get(taskIndex).setDone(true);
+            printDoneMessage(taskList, taskIndex);
         } else if (words[0].equals("deadline")) { // Deadline
             if ((words.length < 2) || !words[1].contains(" /by ")) {
                 throw new InvalidDeadlineException();
@@ -59,11 +66,10 @@ public class Duke {
             String[] deadlineWords = words[1].split(" /by ", 2); // Split task and date/time
             String deadlineTask = deadlineWords[0];
             String deadlineBy = deadlineWords[1];
-            list[itemCount] = new Deadline(deadlineTask, deadlineBy);
+            taskList.add(new Deadline(deadlineTask, deadlineBy));
             printBorder();
-            printTaskAdded(list, itemCount);
-            itemCount++;
-            printListCount(itemCount);
+            printTaskAdded(taskList);
+            printListCount(taskList);
             printBorder();
         } else if (words[0].equals("event")) { // Event
             if ((words.length < 2) || !words[1].contains(" /at ")) {
@@ -72,36 +78,68 @@ public class Duke {
             String[] eventWords = words[1].split(" /at ", 2); // Split task and date/time
             String eventTask = eventWords[0];
             String eventAt = eventWords[1];
-            list[itemCount] = new Event(eventTask, eventAt);
+            taskList.add(new Event(eventTask, eventAt));
             printBorder();
-            printTaskAdded(list, itemCount);
-            itemCount++;
-            printListCount(itemCount);
+            printTaskAdded(taskList);
+            printListCount(taskList);
             printBorder();
         } else if (words[0].equals("todo")) { // ToDo
             if (words.length < 2) {
                 throw new EmptyToDoException();
             }
             String toDoTask = words[1];
-            list[itemCount] = new ToDo(toDoTask);
+            taskList.add(new ToDo(toDoTask));
             printBorder();
-            printTaskAdded(list, itemCount);
-            itemCount++;
-            printListCount(itemCount);
+            printTaskAdded(taskList);
+            printListCount(taskList);
             printBorder();
+        } else if (words[0].equals("delete")) {
+            if(taskList.isEmpty()){
+                throw new EmptyListException();
+            }
+            String deleteTask = words[1];
+            int taskIndex = Integer.parseInt(deleteTask) - 1;
+            if ((taskIndex < 0) || (taskIndex >= taskList.size() ) ) {
+                throw new InvalidTaskIndexException();
+            }
+            printDeleteMessage(taskList, taskIndex);
+            taskList.remove(taskList.get(taskIndex) );
+            printListCount(taskList);
         } else {
             throw new InvalidCommandException();
         }
-        return itemCount;
     }
 
-    private static void printListCount(int itemCount) {
-        System.out.println("    Now you have " + itemCount + " tasks in the list."); // Print list count
+    private static void printDeleteMessage(ArrayList<Task> taskList, int taskIndex) {
+        printBorder();
+        System.out.println("    Noted. I've removed this task: ");
+        System.out.println("    " + taskList.get(taskIndex).toString()); // Print task deleted
+        printBorder();
     }
 
-    private static void printTaskAdded(Task[] list, int itemCount) {
+    private static void printDoneMessage(ArrayList<Task> taskList, int taskIndex) {
+        printBorder();
+        System.out.println("    Nice! I've marked this task as done: ");
+        System.out.println("    " + taskList.get(taskIndex).toString()); // Print task marked as done
+        printBorder();
+    }
+
+    private static void printListMessage(ArrayList<Task> taskList) {
+        printBorder();
+        System.out.println("    Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); ++i) { // Print list of tasks
+            System.out.println("    " + (i + 1) + ". " + taskList.get(i).toString());
+        }
+        printBorder();
+    }
+
+    private static void printListCount(ArrayList<Task> taskList) {
+        System.out.println("    Now you have " + taskList.size() + " tasks in the list."); // Print list count
+    }
+
+    private static void printTaskAdded(ArrayList<Task> taskList) {
         System.out.println("    Got it. I've added this task: ");
-        System.out.println("      " + list[itemCount].toString()); // Print task info
+        System.out.println("      " + taskList.get(taskList.size() - 1) ); // Print task info
     }
 
     private static void printBorder() {
