@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jan {
 
     public static final int MAXIMUM_TASK = 100;
-    public static Task[] Tasks = new Task[MAXIMUM_TASK];
+    public static ArrayList<Task> Tasks = new ArrayList<>();
 
     public static void executeInstruction(String command, String commandDescription) throws MissingDescriptionException,
             UnknownCommandException{
@@ -12,7 +13,7 @@ public class Jan {
         case "list":
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < Task.getTotalTask(); i++) {
-                System.out.println(Tasks[i].getTaskNum() + ". " + Tasks[i]);
+                System.out.println( i + 1 + ". " + Tasks.get(i));
             }
             break;
         case "done":
@@ -22,8 +23,8 @@ public class Jan {
             int taskNum = Integer.parseInt(commandDescription) - 1;
             if (existTask(taskNum)) {
                 System.out.println("Nice! I've marked this task as done: ");
-                Tasks[taskNum].setDone(true);
-                System.out.println(Tasks[taskNum]);
+                Tasks.get(taskNum).setDone(true);
+                System.out.println(Tasks.get(taskNum));
             }else{
                 System.out.println("Jan cannot find this task");
             }
@@ -65,17 +66,17 @@ public class Jan {
         switch(command) {
         case "todo":
             Todo todo = new Todo(commandDescription);
-            Tasks[Task.getTotalTask() - 1] = todo;
+            Tasks.add(todo);
             System.out.println("Got it. I've added this task:\n " + todo);
             break;
         case "deadline":
             Deadline deadline = new Deadline(taskDetails[0],taskDetails[1]);
-            Tasks[Task.getTotalTask() - 1] = deadline;
+            Tasks.add(deadline);
             System.out.println("Got it. I've added this task:\n " + deadline);
             break;
         case "event":
             Event event = new Event(taskDetails[0],taskDetails[1]);
-            Tasks[Task.getTotalTask() - 1] = event;
+            Tasks.add(event);
             System.out.println("Got it. I've added this task:\n " + event);
             break;
         }
