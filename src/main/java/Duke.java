@@ -52,6 +52,7 @@ public class Duke {
             userInterface.printLine();
         }
         sc.close();
+
     }
     
     public static void main(String[] args) {
