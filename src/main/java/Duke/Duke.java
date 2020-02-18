@@ -35,8 +35,8 @@ public class Duke {
     public static final int LENGTH_TODO = 5;
     public static final int SIZE_DONE_COMMAND = 2;
     public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
-    public static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Save");
-    public static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Save", "data.txt");
+    public static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke");
+    public static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
     public static final int SIZE_DELETE_COMMAND = 2;
     public static final int LIST_TO_INDEX = 1;
 
@@ -204,6 +204,11 @@ public class Duke {
         }
     }
 
+    public static boolean checkFileExists() {
+        boolean fileExists = java.nio.file.Files.exists(FILE_PATH);
+        return fileExists;
+    }
+
     private static void writeTaskToFile(Task newTask, FileWriter myWriter) throws IOException {
         if (newTask.getDate().isEmpty()) {
             myWriter.write(newTask.getTaskType() + " | " + newTask.getStatus() + " | "
@@ -313,7 +318,9 @@ public class Duke {
         printWelcomeMessage();
         checkFolderPath();
         ArrayList<Task> tasks = new ArrayList<Task>();
-        populateList(tasks);
+        if (checkFileExists()) {
+            populateList(tasks);
+        }
 
         Scanner input = new Scanner(System.in);
         String userCommand = input.nextLine();

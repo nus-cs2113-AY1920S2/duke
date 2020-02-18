@@ -11,11 +11,6 @@ public abstract class Task {
     public static final String TICK = "✓";
     public static final String CROSS = "✘";
 
-    String workingDir = System.getProperty("user.dir");
-    java.nio.file.Path folderPath = java.nio.file.Paths.get(workingDir, "Save");
-    java.nio.file.Path filePath = java.nio.file.Paths.get(workingDir, "Save", "data.txt");
-
-
     protected String description;
     protected String date;
     protected boolean isDone;
