@@ -1,3 +1,5 @@
+package TaskObjects;
+
 public class Task {
     protected int taskNum;
     protected String description;
@@ -40,5 +42,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + type + "]" + "[" +getStatusIcon() + "]" + description;
+    }
+
+    public String stringToSave(){
+        return type + "|" + (isDone?"0":"1") + "|" + description;
     }
 }

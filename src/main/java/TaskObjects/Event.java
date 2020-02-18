@@ -1,3 +1,5 @@
+package TaskObjects;
+
 public class Event extends Task {
 
     protected String at;
@@ -18,5 +20,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return super.toString() + "(at: " + at + ")";
+    }
+
+    @Override
+    public String stringToSave() {
+        return super.stringToSave() + "|" + at;
     }
 }

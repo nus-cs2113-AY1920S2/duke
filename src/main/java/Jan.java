@@ -1,12 +1,24 @@
+import Exceptions.MissingDescriptionException;
+import Exceptions.UnknownCommandException;
+import TaskObjects.Task;
+import TaskObjects.Todo;
+import TaskObjects.Deadline;
+import TaskObjects.Event;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Jan {
 
     public static final int MAXIMUM_TASK = 100;
     public static Task[] Tasks = new Task[MAXIMUM_TASK];
+    public static final String FILEPATH = "data/TaskList.txt"; //final save
 
     public static void executeInstruction(String command, String commandDescription) throws MissingDescriptionException,
-            UnknownCommandException{
+            UnknownCommandException {
         System.out.println("____________________________________________________________");
         switch(command) {
         case "list":
@@ -32,23 +44,40 @@ public class Jan {
             if (commandDescription.isEmpty()) {
                 throw new MissingDescriptionException();
             }
-            addNewTask(command, commandDescription,"");
+            addTaskToArrayList(command, commandDescription,"");
+            printSuccessfulAddTaskMessage();
             printCurrentTaskCount();
-
+            try {
+                saveToFile(FILEPATH);
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
             break;
         case "deadline":
             if (commandDescription.isEmpty()) {
                 throw new MissingDescriptionException();
             }
-            addNewTask(command, commandDescription, "/by");
+            addTaskToArrayList(command, commandDescription, "/by");
+            printSuccessfulAddTaskMessage();
             printCurrentTaskCount();
+            try {
+                saveToFile(FILEPATH);
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
             break;
         case "event":
             if (commandDescription.isEmpty()) {
                 throw new MissingDescriptionException();
             }
-            addNewTask(command, commandDescription,"/at");
+            addTaskToArrayList(command, commandDescription,"/at");
+            printSuccessfulAddTaskMessage();
             printCurrentTaskCount();
+            try {
+                addToFile(FILEPATH,Tasks[Task.getTotalTask() - 1].stringToSave());
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
             break;
         default:
             throw new UnknownCommandException();
@@ -56,29 +85,73 @@ public class Jan {
         System.out.println("____________________________________________________________");
     }
 
+    private static void saveToFile(String filePath) throws IOException {
+        File file = new File(filePath);
+        file.createNewFile();
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < Task.getTotalTask(); i++) {
+            fw.write(Tasks[i].stringToSave() + "\n");
+        }
+        fw.close();
+    }
+
+    private static void addToFile(String filePath, String textToAdd) throws IOException {
+        File file = new File(filePath);
+        file.createNewFile();
+        FileWriter fw = new FileWriter(filePath,true);
+        fw.write(textToAdd + "\n");
+        fw.close();
+    }
+
+    private static void getFileContents() throws FileNotFoundException {
+        File f = new File(FILEPATH); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String stringInput = s.nextLine();
+            parseTaskFromFile(stringInput);
+        }
+    }
+
+    private static void parseTaskFromFile(String savedString){
+        String[] taskDetails = savedString.split("[|]");
+        switch (taskDetails[0]) {
+        case "T":
+            addTaskToArrayList("todo", taskDetails[1],"");
+            break;
+        case "E":
+            addTaskToArrayList("event",taskDetails[1] + "/at" +taskDetails[2],"/at");
+            break;
+        case "D":
+            addTaskToArrayList("event",taskDetails[1] + "/at" +taskDetails[2],"/by");
+            break;
+        }
+    }
+
     private static boolean existTask(int taskNum){
         return taskNum < Task.getTotalTask();
     }
 
-    private static void addNewTask(String command, String commandDescription, String divider) {
+    private static void addTaskToArrayList(String command, String commandDescription, String divider) {
         String[] taskDetails = commandDescription.split(divider);
         switch(command) {
         case "todo":
             Todo todo = new Todo(commandDescription);
             Tasks[Task.getTotalTask() - 1] = todo;
-            System.out.println("Got it. I've added this task:\n " + todo);
             break;
         case "deadline":
             Deadline deadline = new Deadline(taskDetails[0],taskDetails[1]);
             Tasks[Task.getTotalTask() - 1] = deadline;
-            System.out.println("Got it. I've added this task:\n " + deadline);
             break;
         case "event":
             Event event = new Event(taskDetails[0],taskDetails[1]);
             Tasks[Task.getTotalTask() - 1] = event;
-            System.out.println("Got it. I've added this task:\n " + event);
             break;
         }
+    }
+
+    private static void printSuccessfulAddTaskMessage() {
+        Task task = Tasks[Task.getTotalTask()-1];
+        System.out.println("Got it. I've added this task:\n " + task);
     }
 
     private static void printCurrentTaskCount() {
@@ -120,6 +193,11 @@ public class Jan {
                 + "|  |__|  | |   ___   | |  |  \\  \\|  |\n"
                 + "|________/ |__|   |__| |__|   \\_____|\n";
         printGreetingMessage(logo);
+        try {
+            getFileContents();
+        } catch (FileNotFoundException e) {
+            //do nothing
+        }
 
         String line;
             Scanner in = new Scanner(System.in);
@@ -132,7 +210,7 @@ public class Jan {
                     } else {
                         executeInstruction(requests[0], "");
                     }
-                }catch (MissingDescriptionException e) {
+                } catch (MissingDescriptionException e) {
                     printMissingTaskDetailMessage();
                 } catch (UnknownCommandException e) {
                     printUnknownCommandMessage();
