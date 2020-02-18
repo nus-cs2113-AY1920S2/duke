@@ -10,8 +10,8 @@ plugins {
 //}
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveBaseName = "kuri"
+    archiveVersion = "v1.1"
     archiveClassifier = null
     archiveAppendix = null
 }

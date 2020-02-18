@@ -3,6 +3,7 @@ import commands.CommandResult;
 import commands.ExitCommand;
 import data.TaskManager;
 import data.exceptions.StorageOperationException;
+import javafx.application.Application;
 import parser.Parser;
 import storage.StorageFile;
 import ui.TextUi;
@@ -18,7 +19,18 @@ public class Main  {
     }
 
     public static void main(String[] args) throws StorageOperationException {
-        new Main().run();
+        Scanner sc = new Scanner(System.in);
+        int userChoice = sc.nextInt();
+        switch (userChoice){
+        case 1:
+            System.out.println("Thanks for choosing GUI");
+            Application.launch(Gui.class, args);
+            break;
+        case 2:
+            System.out.println("Thanks for choosing CLI");
+            new Main().run();
+            break;
+        }
     }
 
     private void run() throws StorageOperationException {

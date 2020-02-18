@@ -1,4 +1,3 @@
-import commands.CommandResult;
 import common.Messages;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;
@@ -23,7 +22,6 @@ public class Gui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private CommandResult commandResult;
     @Override
     public void start(Stage stage) {
         AnchorPane mainLayout = setupAnchorPane(stage);
