@@ -12,7 +12,7 @@ public class Duke {
                                  + " | |_| | |_| |   <  __/\n"
                                  + " |____/ \\__,_|_|\\_\\___|\n";
     static String currDir = System.getProperty("user.dir");
-    private final static String filePath = currDir + "/duke.txt";
+    private final static String filePath = currDir + "/data.txt";
 
     public static void main(String[] args) {
         showWelcomeMessage();
