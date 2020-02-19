@@ -1,21 +1,28 @@
 import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+    private Parser io;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filepath) {
         System.out.println("Initialising...");
 
+        io = new Parser();
+        storage = new Storage("./data/duke.txt", tasks);
+        tasks = new TaskList();
+        ui = new Ui();
+    }
+
+    public void run() {
         String[] command = new String[2];
         String taskType;
         String taskDescription;
         String[] taskDescriptionArgs;
         String taskDescriptionBy;
         String taskDescriptionAt;
-        TaskList tasks = new TaskList();
         int indexOfTasks;
-
-        Parser io = new Parser();
-        Storage storage = new Storage("./data/duke.txt", tasks);
-        Ui ui = new Ui();
 
         ui.showWelcome("Duke");
 
@@ -96,7 +103,7 @@ public class Duke {
         }
     }
 
-    private static String[] processArgs(String s) {
+    private String[] processArgs(String s) {
         String[] tokens = new String[2];
         if (s.indexOf('/') == -1) {
             tokens[0] = s.trim();
@@ -107,5 +114,9 @@ public class Duke {
             tokens[1] = tokens[1].substring(tokens[1].indexOf(' ') + 1);
         }
         return tokens;
+    }
+
+    public static void main(String[] args) {
+        new Duke("./data/duke.txt").run();
     }
 }
