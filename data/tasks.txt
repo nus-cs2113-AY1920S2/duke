@@ -1,3 +1,6 @@
 1. [T] [✘] go to sleep
-2. [D] [✘] cook (by: 7pm)
-3. [E] [✓] watch a film (at: 4:00 pm)
+2. [D] [✓] cook (by: 2020-1-20)
+3. [E] [✓] watch a film (at: Dec 1 2019)
+4. [E] [✘] go back home (at: 2020-5-4)
+5. [E] [✘] go back to shchool (at: Aug 31 2020)
+6. [D] [✘] iP (by: Mar 2 2020)
