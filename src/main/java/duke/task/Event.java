@@ -7,6 +7,11 @@ public class Event extends Task {
         return eventTime;
     }
 
+    /**
+     * Returns the type of the task.
+     *
+     * @return The type of the task.
+     */
     @Override
     public String getType() {
         return "E";

@@ -8,7 +8,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class containing useful functions for modifying the data file.
+ */
 public class StorageHandler {
+
+    /**
+     * Removes the line whose index matches lineNumber from file at dataFilePath.
+     *
+     * @param lineNumber Index of line to remove.
+     * @param dataFilePath Path to data file.
+     * @throws IOException If an error occurs while writing the new list to file.
+     */
     public static void removeLine(int lineNumber, String dataFilePath) throws IOException {
         // Read file into list of strings, where each string is a line in the file
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
@@ -25,11 +36,12 @@ public class StorageHandler {
     }
 
     /**
-     * Remove line from a list based on its index. Returns index at which the line was removed.
-     * @param lineNumber
-     * @param list
-     * @param removedIndex
-     * @return
+     * Removes line from a list based on its index. Returns index at which the line was removed.
+     *
+     * @param lineNumber Index of line to remove.
+     * @param list List of strings containing lines, each with a starting index.
+     * @param removedIndex Index at which line was removed.
+     * @return Index of the removed line.
      */
     private static int removeLineFromList(int lineNumber, List<String> list, int removedIndex) {
         // Iterate through the lines
@@ -45,20 +57,36 @@ public class StorageHandler {
         return removedIndex;
     }
 
+    /**
+     * After a line has been removed, updates subsequent indexes.
+     *
+     * @param fileContent List of strings from the data file.
+     * @param removedIndex Index at which line was removed.
+     * @param dataFilePath Path to data file.
+     * @throws IOException If an error occurs while writing to file.
+     */
     private static void updateIndexes(List<String> fileContent, int removedIndex, String dataFilePath) throws IOException {
         // Update indexes of subsequent tasks (e.g. if you remove task 2, task 3 becomes task 2)
         for (int i = removedIndex; i < fileContent.size(); i++)
         {
-            String updatedString = decrementIndex(fileContent, i);
+            // Get current comma separated string
+            String currString = fileContent.get(i);
+
+            String updatedString = decrementIndex(currString, i);
 
             // Replace the line with the updated string
             replaceLine(i+1, updatedString, dataFilePath);
         }
     }
 
-    private static String decrementIndex(List<String> fileContent, int i) {
-        // Get current comma separated string
-        String currString = fileContent.get(i);
+    /**
+     * Decrements index at beginning of string by 1.
+     *
+     * @param currString String whose index must be decremented.
+     * @param i Index that the currString's index must be set to.
+     * @return Original string with its index decremented by 1.
+     */
+    private static String decrementIndex(String currString, int i) {
 
         // Split into different cells
         List<String> cells = Arrays.asList(currString.split(","));
@@ -71,6 +99,14 @@ public class StorageHandler {
         return String.join(",", cells);
     }
 
+    /**
+     * Replaces line in a data file.
+     *
+     * @param lineNumber Index of the line to replace.
+     * @param newString String that replaces the original line.
+     * @param dataFilePath Path to data file.
+     * @throws IOException If an error occurs while writing to file.
+     */
     public static void replaceLine(int lineNumber, String newString, String dataFilePath) throws IOException {
         // Read file into list of strings, where each string is a line in the file
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
@@ -82,6 +118,13 @@ public class StorageHandler {
         Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Replaces a line in a list of Strings.
+     *
+     * @param lineNumber Number at which line must be replaced.
+     * @param newString String that replaces the original string.
+     * @param list List of strings.
+     */
     private static void replaceLineInList(int lineNumber, String newString, List<String> list) {
         // Iterate through the lines
         for (int i = 0; i < list.size(); i++) {

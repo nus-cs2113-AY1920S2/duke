@@ -10,6 +10,11 @@ public class Todo extends Task {
         super(isDone, description);
     }
 
+    /**
+     * Returns the type of the task.
+     *
+     * @return The type of the task.
+     */
     @Override
     public String getType() {
         return "T";

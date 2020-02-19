@@ -13,13 +13,26 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Scans the user input and parses the commands.
+ */
 public class Parser {
+
+    /** Scanner object to read user input. */
     Scanner inputScanner;
 
+    /**
+     * Constructs a Parser object by initializing a new Scanner.
+     */
     public Parser() {
         inputScanner = new Scanner(System.in);
     }
 
+    /**
+     * Scans the latest user input, reading the command and the parameters separately.
+     *
+     * @return ScannedCommand object comprising both the command and the parameters.
+     */
     public ScannedCommand scanCommand() {
         // Note: Scanner.next() reads until delimiter, Scanner.nextLine() reads until EOL
         // If Scanner.next() is called first, then Scanner.nextLine() reads from that point onwards
@@ -32,6 +45,18 @@ public class Parser {
         return new ScannedCommand(userCommand, userParams);
     }
 
+    /**
+     * Parses the scanned input and executes commands accordingly.
+     *
+     * @param userCommand Command input by the user.
+     * @param userParams Any subsequent parameters input by the user.
+     * @param taskList The current session's TaskList.
+     * @param storage The current session's Storage (where the data file is stored).
+     * @throws NoDescException If description for a task is missing.
+     * @throws NoDateException If date for a task is missing.
+     * @throws InvalidDateFormatException If date for a task is not formatted properly.
+     * @throws InvalidCommandException If command is invalid.
+     */
     public static void parseCommand(String userCommand, String userParams, TaskList taskList, Storage storage) throws NoDescException, NoDateException, InvalidDateFormatException, InvalidCommandException {
         switch (userCommand) {
         case "todo":
@@ -56,6 +81,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses commands that modify a task, by either marking it as done or deleting it.
+     *
+     * @param userCommand Command input by the user.
+     * @param userParams String containing the ID of the task to mark as done or delete.
+     * @param taskList Current session's TaskList.
+     * @param storage Current session's Storage.
+     */
     private static void parseTaskModification(String userCommand, String userParams, TaskList taskList, Storage storage) {
         String stringId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
         int taskId = Integer.parseInt(stringId) - 1;
@@ -66,6 +99,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses tasks with a LocalDate property (e.g. Deadline and Event).
+     *
+     * @param userCommand Command input by the user.
+     * @param userParams Description and date of task.
+     * @param taskList Current session's TaskList.
+     * @param storage Current session's Storage.
+     * @throws InvalidDateFormatException If date is not formatted properly.
+     * @throws NoDescException If description is missing.
+     * @throws NoDateException If date is missing.
+     */
     private static void parseDateTask(String userCommand, String userParams, TaskList taskList, Storage storage) throws InvalidDateFormatException, NoDescException, NoDateException {
         int delimIndex = userParams.indexOf("/"); // duke.Duke uses / to define where the date starts
 
@@ -90,12 +134,20 @@ public class Parser {
         }
     }
 
-    private static void parseTodo(String userParams, TaskList taskList, Storage storage) throws NoDescException {
+    /**
+     * Parses a Todo command.
+     *
+     * @param desc The description of the task.
+     * @param taskList Current session's TaskList.
+     * @param storage Current session's Storage.
+     * @throws NoDescException If description is missing.
+     */
+    private static void parseTodo(String desc, TaskList taskList, Storage storage) throws NoDescException {
         // Check that description exists
-        if (userParams.trim().isEmpty()) {
+        if (desc.trim().isEmpty()) {
             throw new NoDescException();
         }
-        taskList.addTask(new Todo(userParams.trim()), storage);
+        taskList.addTask(new Todo(desc.trim()), storage);
     }
 
 }

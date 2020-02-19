@@ -15,6 +15,11 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the type of the task.
+     *
+     * @return The type of the task.
+     */
     public String getType() {
         return "Task";
     }
