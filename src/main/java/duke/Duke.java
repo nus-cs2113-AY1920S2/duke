@@ -5,57 +5,75 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String STANDARD_SEPARATOR = "____________________________________________________________";
     private static final String SHANNON = "Shannon";
-    private static Task[] listOfTasks = new Task[100]; // array of tasks that is <=100
+    private static ArrayList<Task> listOfTasks = new ArrayList<>(); // array of tasks that is <=100
     private static int sizeOfList = 0; // number of items in the list
+    private static String inputLine = null;
 
     public static void main(String[] args) {
         printWelcomeMessage();
-
-        // Reads in the first command from the user
-        Scanner scanner = new Scanner(System.in);
-        String inputLine = scanner.nextLine();
-        String inputCommand = inputLine.substring(0, 3);
-
-        while (!inputCommand.contains("bye")) {
-            if (inputCommand.contains("lis")) {
-                // prints out the list
-                printsOutTheList();
-
-            } else if (inputCommand.contains("don")) {
-                // marks task in the stated index as done
-                indicateTaskAsDone(inputLine);
-
-            } else {
-
-                try {
-                    addInNewTask(inputLine);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(STANDARD_SEPARATOR);
-                    System.out.println("\u2639 OOPS!!! The description of a " + inputLine + " cannot be empty.");
-                    System.out.println(STANDARD_SEPARATOR);
-                } catch (DukeException e) {
-                    System.out.println(STANDARD_SEPARATOR);
-                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println(STANDARD_SEPARATOR);
-                }
-                // adds a new task into the list
-                //addInNewTask(inputLine);
-
-            }
-            // take in the next command
-
-            inputLine = scanner.nextLine();
-            inputCommand = inputLine.substring(0, 3);
-        }
-
+        runCommandLoop();  // Reads in the first command from the user
         printExitMessage();
+
     }
 
+    private static void runCommandLoop() {
+        Scanner scanner = new Scanner(System.in);
+        String inputLine = scanner.nextLine();
+
+        while (!inputLine.equals("bye")) {
+            try {
+                String inputCommand = inputLine.substring(0, 3);
+                if (inputLine.substring(0, 4).equals("list")) {
+                    printsOutTheList(); // prints out the list
+
+                } else if (inputLine.substring(0, 4).equals("done")) {
+                    indicateTaskAsDone(inputLine); // marks task in the stated index as done
+
+                } else if (inputLine.substring(0, 6).equals("remove")) {
+                    removeTaskFromList(inputLine); // removes task in the stated index
+
+                } else {
+                    addInNewTask(inputLine);// adds a new task into the list
+                }
+
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(STANDARD_SEPARATOR);
+                System.out.println("\u2639 OOPS!!! The description of a " + inputLine + " cannot be empty.");
+                System.out.println(STANDARD_SEPARATOR);
+            } catch (DukeException e) {
+                System.out.println(STANDARD_SEPARATOR);
+                System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println(STANDARD_SEPARATOR);
+            }
+
+            inputLine = scanner.nextLine(); // take in the next command
+        }
+    }
+
+    private static void removeTaskFromList(String inputLine) throws DukeException {
+
+        String[] commandArray = inputLine.split(" ");
+        if (commandArray.length < 2) { throw new IndexOutOfBoundsException(); }
+        if (commandArray.length > 2) { throw new DukeException(); }
+        int indexToRemove = Integer.parseInt(commandArray[1]) - 1; // obtain index of task to remove
+        if (indexToRemove >= sizeOfList) { throw new DukeException(); }
+        Task taskToDelete = listOfTasks.get(indexToRemove);
+
+        listOfTasks.remove(taskToDelete);
+        sizeOfList--;
+
+        System.out.println(STANDARD_SEPARATOR);
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println("   " + taskToDelete.toString());
+        System.out.println(" Now you have " + sizeOfList + " in the list.");
+        System.out.println(STANDARD_SEPARATOR);
+    }
 
 
     /**
@@ -66,7 +84,6 @@ public class Duke {
         System.out.println(" Bye. Hope to see you again soon!");
         System.out.println(STANDARD_SEPARATOR);
     }
-
 
 
     /**
@@ -90,7 +107,7 @@ public class Duke {
             }
             addDeadline(inputLine);
 
-        } else if (inputCommand.contains("even")){
+        } else if (inputCommand.contains("even")) {
             if (inputLine.equals("event")) {
                 throw new IndexOutOfBoundsException();
             }
@@ -104,11 +121,10 @@ public class Duke {
         // informs user that task has been added to list
         System.out.println(STANDARD_SEPARATOR);
         System.out.println(" Got it. I've added this task:");
-        System.out.println("  " + listOfTasks[sizeOfList-1].toString());
+        System.out.println("  " + listOfTasks.get(sizeOfList - 1).toString());
         System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         System.out.println(STANDARD_SEPARATOR);
     }
-
 
 
     /**
@@ -125,10 +141,9 @@ public class Duke {
         description = inputLine.substring(descriptionStart, descriptionEnd);
         String at = inputLine.substring(indexOfEvent);
         Event newEvent = new Event(description, at);
-        listOfTasks[sizeOfList] = newEvent;
+        listOfTasks.add(newEvent);
         sizeOfList++;
     }
-
 
 
     /**
@@ -145,10 +160,9 @@ public class Duke {
         description = inputLine.substring(descriptionStart, descriptionEnd);
         String by = inputLine.substring(indexOfDeadline);
         Deadline newDeadline = new Deadline(description, by);
-        listOfTasks[sizeOfList] = newDeadline;
+        listOfTasks.add(newDeadline);
         sizeOfList++;
     }
-
 
 
     /**
@@ -159,7 +173,7 @@ public class Duke {
     private static void addToDo(String inputLine) {
         String description = inputLine.substring(5);
         Todo newToDo = new Todo(description);
-        listOfTasks[sizeOfList] = newToDo;
+        listOfTasks.add(newToDo);
         sizeOfList++;
     }
 
@@ -170,34 +184,35 @@ public class Duke {
      *
      * @param inputLine name of task to set as done
      */
-    private static void indicateTaskAsDone(String inputLine) {
+    private static void indicateTaskAsDone(String inputLine) throws DukeException {
+        String[] commandArray = inputLine.split(" ");
+        if (commandArray.length < 2) { throw new IndexOutOfBoundsException(); }
+        if (commandArray.length > 2) { throw new DukeException(); }
+        // obtain index of task to set as done
+        //String indexInString = inputLine.substring(5);
+        int index = Integer.parseInt(commandArray[1]) - 1;
+        if (index >= sizeOfList) { throw new DukeException(); }
+        // mark as done
+        listOfTasks.get(index).markAsDone();
         System.out.println(STANDARD_SEPARATOR);
         System.out.println(" Nice! I've marked this task as done:");
-        // obtain index of task to set as done
-        String indexInString = inputLine.substring(5);
-        int index = Integer.parseInt(indexInString) - 1;
-        // mark as done
-        listOfTasks[index].markAsDone();
-        System.out.println("   " + listOfTasks[index].toString());
+        System.out.println("   " + listOfTasks.get(index).toString());
         System.out.println(STANDARD_SEPARATOR);
     }
 
 
-
     /**
      * Prints out the entire list
-     *
      */
     private static void printsOutTheList() {
         System.out.println(STANDARD_SEPARATOR);
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < sizeOfList; i++) {
             int k = i + 1;
-            System.out.println(" " + k + "." + listOfTasks[i].toString());
+            System.out.println(" " + k + "." + listOfTasks.get(i).toString());
         }
         System.out.println(STANDARD_SEPARATOR);
     }
-
 
 
     /**
