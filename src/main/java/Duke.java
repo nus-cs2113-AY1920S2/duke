@@ -156,6 +156,15 @@ public class Duke {
 
     private static void printHelpMessage() {
         printBorder();
+        System.out.println("\t  _          _       \n" +
+                "\t | |        | |      \n" +
+                "\t | |__   ___| |_ __  \n" +
+                "\t | '_ \\ / _ \\ | '_ \\ \n" +
+                "\t | | | |  __/ | |_) |\n" +
+                "\t |_| |_|\\___|_| .__/ \n" +
+                "\t              | |    \n" +
+                "\t              |_|    \n");
+        printBorder();
         System.out.println("\t ADD TASK:");
         System.out.println("\t\t todo <task name>");
         System.out.println("\t\t deadline <task name> /by <date/time>");
@@ -219,7 +228,7 @@ public class Duke {
 
     private static void printExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(" _                \n"
+        System.out.println("\t  _                \n"
                 + "| |               \n"
                 + "| |__  _   _  ___ \n"
                 + "| '_ \\| | | |/ _ \\\n"
