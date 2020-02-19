@@ -18,7 +18,7 @@ public class Duke {
 
         String line;
         Scanner in = new Scanner(System.in);
-        String[] validCommands = {"todo", "deadline", "event", "done", "list"};
+        String[] validCommands = {"todo", "deadline", "event", "done", "list", "delete"};
 
         System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?");
         line = in.nextLine();
