@@ -25,7 +25,7 @@ public class TestDukeException {
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;
         if(isWrongLength && isTodo){
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         }
     }
 
@@ -33,7 +33,7 @@ public class TestDukeException {
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;
         if(isWrongLength && isDeadline){
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty.");
         }
     }
 
@@ -41,11 +41,11 @@ public class TestDukeException {
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;
         if(isWrongLength && isEvent){
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException("The description of a event cannot be empty.");
         }
     }
 
     public void throwTaskTypeException() throws DukeException{
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 }
