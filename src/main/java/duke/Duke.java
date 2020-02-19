@@ -5,12 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.exception.*;
+import duke.command.Command;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Duke {
-    private Ui ui;
 
     public static final String DIVIDER = "_________________________________________________";
     public static final String DONE_COMMAND = "done";
@@ -184,25 +184,9 @@ public class Duke {
         }
     }
 
-    public static void initialisation() {
-        String logo = ".______     ______   .______   \n"
-                + "|   _  \\   /  __  \\  |   _  \\  \n"
-                + "|  |_)  | |  |  |  | |  |_)  | \n"
-                + "|   _  <  |  |  |  | |   _  <  \n"
-                + "|  |_)  | |  `--'  | |  |_)  | \n"
-                + "|______/   \\______/  |______/  \n";
-        String welcomeMessage = "Hello human! I am Bob.\n" + "What can I do for you?";
-
-        System.out.println("Bob the chatbot\n" + logo);
-        System.out.println(welcomeMessage);
-        System.out.println(DIVIDER);
-    }
-
     public static void main(String[] args) throws UnknownInputException {
         Ui ui = new Ui();
-        /*
-        initialisation();
-        Scanner command = new Scanner(System.in); */
+        TaskList tasks = new TaskList();
         ui.startMessage();
         Storage storage = new Storage("output.txt");
         while (true) {
@@ -213,14 +197,24 @@ public class Duke {
                 break;
             } else {
                 ui.displayDividerLine();
+                /*
                 try {
                     ArrayList<Task> tasks = storage.load();
-                    getExecuteCommand(tasks, userInput);
+                    Command command = Parser.parse(userInput);
+                    command.execute(tasks, ui);
+                    //getExecuteCommand(tasks, userInput);
                     storage.save(tasks);
                 } catch (FileNotFoundException err) {
                     ArrayList<Task> tasks = new ArrayList<>();
-                    getExecuteCommand(tasks, userInput);
+                    //getExecuteCommand(tasks, userInput);
                     storage.save(tasks);
+                } catch (DukeException err) {
+                    ui.displayErrorMessage(err.toString());
+                }*/
+
+                try {
+                    Command command = Parser.parse(userInput);
+                    command.execute(tasks, ui);
                 } catch (DukeException err) {
                     ui.displayErrorMessage(err.toString());
                 }
