@@ -3,15 +3,17 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+
 public class Storage {
     protected String fname;
     public Storage(String fname) {
         this.fname = fname;
     }
     public static void writeToFile(String filePath, TaskList tasksToWrite) throws IOException {
+        //This method writes the list of tasks to a file
+
         FileWriter fw = new FileWriter(filePath);
         try {
             for (int i = 0; i < tasksToWrite.getSize(); i++) {
@@ -24,6 +26,9 @@ public class Storage {
         fw.close();
     }
     public static TaskList readFromFile(String filePath) throws FileNotFoundException {
+        /* This method takes a file
+        and adds all the tasks in the file to the tasklist
+         */
         File file = new File(filePath);
         Scanner sc = null;
         TaskList tasks1 = new TaskList();
@@ -41,6 +46,9 @@ public class Storage {
         }
 
     public static Task createTask(String task) {
+        /* This method takes a string and
+        converts it to a task object
+         */
         String[] splitString = task.split("]",2);
         Task newTask;
         if (splitString[0].contains("T")){
