@@ -182,7 +182,12 @@ public class Duke {
                 // Add task type events
                 else if (userCmd.contains("event")) {
                     addEvent(userCmd, taskArrList);
-                } else {
+                }
+                // Help command
+                else if (userCmd.contains("help")) {
+                    printHelp();
+                }
+                else {
                     System.out.println("Wrong syntax!");
                     printHelp();
                 }
