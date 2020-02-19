@@ -1,4 +1,4 @@
-package taskManager;
+package TaskList;
 public class Event extends Task {
     protected String eventDate;
     public Event(String description, String eventDate) {

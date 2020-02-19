@@ -1,4 +1,5 @@
-package taskManager;
+package Storage;
+import TaskList.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,11 +8,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileOperation {
-    int COUNTER = 0;
-    File f = new File("tasksData.txt");
-    String PATHNAME = f.getAbsolutePath();
-    public FileOperation() {
+    public int COUNTER = 0;
+    File f;
+    String PATHNAME;
 
+    public FileOperation(String filepath) {
+        f = new File(filepath);
+        PATHNAME = f.getAbsolutePath();
     }
 
     public ArrayList<Task> loadTaskList() throws FileNotFoundException {
@@ -41,11 +44,11 @@ public class FileOperation {
         return taskList;
     }
 
-    public void saveTaskList (ArrayList<Task> taskList, int taskCount) throws IOException {
+    public void saveTaskList (ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(PATHNAME);
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             String convertedTask = taskList.get(i).createStrForSaving();
-            if (i != taskCount-1) {
+            if (i != taskList.size() - 1) {
                 fw.write(convertedTask + System.lineSeparator());
             } else {
                 fw.write(convertedTask);

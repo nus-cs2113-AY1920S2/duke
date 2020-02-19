@@ -1,4 +1,4 @@
-package taskManager;
+package TaskList;
 public class Task {
     protected String description;
     protected boolean isDone;
