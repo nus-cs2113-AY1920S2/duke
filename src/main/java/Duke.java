@@ -1,11 +1,10 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
 
 import exceptions.DukeException;
 import tasks.Task;
@@ -19,9 +18,6 @@ import tasks.TaskType;
 // TODO: A general add to arrayList method? reduce LOC
 
 public class Duke {
-    /** variables **/
-    private static String FILEPATH = "./src/main/java/duke/data/taskList.txt"
-
     /** Helper Functions Start **/
     // TODO: Check if this method will help, may be unhelpful
     private static String[] splitString(String[] strArr, String userCmd, String splitCase){
@@ -147,13 +143,13 @@ public class Duke {
     }
 
     private static void loadDuke() {
-        try{
-            File f = new File(FILEPATH);
-            Scanner sc = new Scanner(f);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try{
+//            File f = new File(FILEPATH);
+//            Scanner sc = new Scanner(f);
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
     }
     private static void saveDuke(ArrayList<Task> taskArrList) throws DukeException {
@@ -172,7 +168,7 @@ public class Duke {
             case 'T': //todos
                 fileWriteData += t.getCategory() +"," +status +"," +t.getTaskName() +"\n";
             case 'D':
-                fileWriteData += t.getCategory() +"," +status +"," +t.getTaskName() +"," +t.get+"\n";
+                fileWriteData += t.getCategory() +"," +status +"," +t.getTaskName() +"," +"\n";
             case 'E': //events
 
             }
@@ -193,13 +189,71 @@ public class Duke {
         }
     }
 
+    private static void saveByStream(String filepath) throws DukeException {
+        File file = new File(filepath);
+        //write to file
+//        try{
+//            //Creates a file output stream to write to the file
+//            FileOutputStream writeData = new FileOutputStream(file);
+//            //handle the object to be written into the file that FileOutputStream created.
+//            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+//
+//            // write the people ArrayList into the file
+//            writeStream.writeObject(people);
+//            //flush the data in stream, writes to file
+//            writeStream.flush();
+//            // close stream, close resource
+//            writeStream.close();
+//
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    private static void loadByStream(File file) throws DukeException {
+        if(!file.exists()) {
+            try {
+                // creates all sub dir if not exist
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            catch (IOException e){
+                throw new DukeException("File creation error");
+            }
+        }
+//        else {
+//            try{
+//                //change to input, to read from file
+//                FileInputStream readData = new FileInputStream(file);
+//                ObjectInputStream readStream = new ObjectInputStream(readData);
+//
+//                //create a new arraylist for checking
+//                //cast the value to arraylist person
+//                ArrayList<Person> people2 = (ArrayList<Person>) readStream.readObject();
+//                //close reading stream
+//                readStream.close();
+//                System.out.println(people2.toString());
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
+
     /** Main method Start **/
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean continueRun = true;
         String userCmd = "";
         ArrayList<Task> taskArrList = new ArrayList<>();
-        loadDuke();
+
+        String dir = System.getProperty("user.dir");
+        Path filepath = Paths.get(dir, "src","main", "java","data", "taskList.txt");
+        String filepathStr = String.valueOf(filepath);
+        File dukeFile = new File(filepathStr);
+        loadByStream(dukeFile);
+//        loadDuke(); TODO
 
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -244,7 +298,7 @@ public class Duke {
                     System.out.println("Wrong syntax!");
                     printHelp();
                 }
-                saveDuke(taskArrList);
+//                saveDuke(taskArrList); TODO
             }
             catch (DukeException e){
                 System.out.println(e +"\nPlease try again");
@@ -252,3 +306,6 @@ public class Duke {
         }
     }
 }
+
+// saving & reading to file reference:
+// https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
