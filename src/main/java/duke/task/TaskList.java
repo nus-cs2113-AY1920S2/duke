@@ -119,4 +119,19 @@ public class TaskList {
             Ui.formatPrint("Error while deleting task from data file.");
         }
     }
+
+    public void find(String toFind) {
+        String s = toFind.trim();
+        List<String> matches = new ArrayList<String>();
+        int matchCounter = 0;
+
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDescription().contains(s)) {
+                matches.add(taskList.get(i).toString());
+                matchCounter += 1;
+            }
+        }
+        System.out.println("Found " + matchCounter + " match(es) in your list:");
+        Ui.formatPrint(matches);
+    }
 }
