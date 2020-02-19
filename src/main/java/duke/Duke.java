@@ -7,20 +7,37 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
+/**
+ * Main class for the Duke program.
+ */
 public class Duke {
 
+    /** Constant file path of data file. */
     private static final String DATA_FILE_PATH = "data/data.csv";
+
+    /** Storage object for data file. */
     private static Storage storage;
+
+    /** Task list to store current tasks in. */
     private static TaskList taskList;
+
+    /** Parser object to scan and parse user input. */
     private static Parser parser;
 
+    /**
+     * Constructs Duke, loading data from the specified file path.
+     * @param dataFilePath File path to data file.
+     */
     public Duke(String dataFilePath) {
         storage = new Storage(dataFilePath);
         parser = new Parser();
         createTaskList();
     }
 
+    /**
+     * Creates TaskList and loads data from data file if the data file previously existed;
+     * otherwise, an empty task list is initialized.
+     */
     private void createTaskList() {
         if (storage.loadFile()) {
             taskList = new TaskList(storage.dataFile);
@@ -29,6 +46,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main running function.
+     * @param args CLI arguments when starting file.
+     */
     public static void main(String[] args) {
         new Duke(DATA_FILE_PATH);
         Ui.displayWelcome();
@@ -46,6 +67,12 @@ public class Duke {
 
     }
 
+    /**
+     * Parses command and catches exceptions for unusual input.
+     *
+     * @param userCommand Command input by the user.
+     * @param userParams Any parameters input by the user.
+     */
     private static void run(String userCommand, String userParams) {
         try {
             Parser.parseCommand(userCommand, userParams, taskList, storage);

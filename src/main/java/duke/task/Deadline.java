@@ -30,20 +30,46 @@ public class Deadline extends Task {
         return deadline;
     }
 
+    /**
+     * Sets the task's deadline.
+     *
+     * @param deadline The deadline to set.
+     */
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
+    /**
+     * Constructs a deadline task.
+     *
+     * @param description Task description.
+     * @param deadline Task deadline.
+     */
     public Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }
 
+    /**
+     * Constructs a deadline task.
+     *
+     * @param isDone Set whether the task is already done or not.
+     * @param description Task description.
+     * @param deadline Task deadline.
+     */
     public Deadline(boolean isDone, String description, LocalDate deadline) {
         super(isDone, description);
         this.deadline = deadline;
     }
 
+    /**
+     * Converts the Task object to data representation to be stored in a data file.
+     * File format:
+     * taskId, taskType, taskIsDone, taskDesc, taskDate
+     *
+     * @param taskId ID of task.
+     * @return String representing the Task object in comma-separated data format.
+     */
     @Override
     public String toData(int taskId) {
         String dataLine = (taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription() + ","
@@ -51,6 +77,11 @@ public class Deadline extends Task {
         return dataLine;
     }
 
+    /**
+     * Represents the input task as a string.
+     *
+     * @return String representing the Task object.
+     */
     @Override
     public String toString() {
         return ("[D]" + super.toString() + " (by: "

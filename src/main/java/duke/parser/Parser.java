@@ -53,6 +53,7 @@ public class Parser {
      * @param storage The current session's Storage (where the data file is stored).
      * @throws NoDescException If description for a task is missing.
      * @throws NoDateException If date for a task is missing.
+     * @throws NoFindException If string to find is missing when using the 'find' command.
      * @throws InvalidDateFormatException If date for a task is not formatted properly.
      * @throws InvalidCommandException If command is invalid.
      */
