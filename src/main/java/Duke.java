@@ -10,8 +10,17 @@ public class Duke {
 
         ArrayList<Task> taskList = new ArrayList<Task>();
 
+        File file = new File("data/duke.txt");
         try {
-            loadFile("data/duke.txt", taskList);
+            file.createNewFile();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        String filePath = file.getAbsolutePath();
+
+        try {
+            loadFile(filePath, taskList);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -46,7 +55,7 @@ public class Duke {
         }
 
         try {
-            saveFile("data/duke.txt", taskList);
+            saveFile(filePath, taskList);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -92,9 +101,17 @@ public class Duke {
         String lineInTextFile;
         String taskComplete;
 
+        if (taskList.isEmpty()) {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write("");
+            fw.close();
+            return;
+        }
+
         for (int i = 0; i < taskList.size(); i++) {
 
             FileWriter fw;
+
             if (i == 0) {
                 fw = new FileWriter(filePath);
             } else {
@@ -168,17 +185,25 @@ public class Duke {
     }
 
     public static void printEditTask(String command, Task t, ArrayList<Task> taskList) {
-        String editWord;
+        String editWord, singular;
         if (command.equals("delete")) {
             editWord = "removed";
         } else {
             editWord = "added";
         }
+
+        if (taskList.size() == 1) {
+            singular = "";
+        } else {
+            singular = "s";
+        }
+
         if (command.equals("done")) {
             System.out.println("Nice! I've marked this task as done: " + System.lineSeparator() + t);
         } else {
             System.out.println("Got it. I've " + editWord + " this task: " + System.lineSeparator() + t
-                    + System.lineSeparator() + "Now you have " + taskList.size() + " tasks in the list.");
+                    + System.lineSeparator() + "Now you have " + taskList.size() + " task"
+                    + singular + " in the list.");
         }
     }
 
