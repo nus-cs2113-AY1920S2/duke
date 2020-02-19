@@ -50,8 +50,8 @@ public class Duke {
         System.out.println(LINE_DIVIDER);
     }
 
-    private static void processUserInput(TaskManager TaskMgr, String userInput) {
-        String commands[] = splitCommand(userInput);
+    private static void processUserInput(TaskManager taskMgr, String userInput) {
+        String[] commands = splitCommand(userInput);
         String commandWord = commands[0];
         String afterCommand = commands[1];
         switch (commandWord) {
@@ -59,33 +59,34 @@ public class Duke {
         case EXIT_COMMAND_EXIT:
         case EXIT_COMMAND_QUIT:
             bye();
-            TaskMgr.saveDataToFile();
+            taskMgr.saveDataToFile();
             isExited = true;
             break;
         case LIST_COMMAND:
         case LIST_COMMAND_SHORTCUT:
-            TaskMgr.listTasks();
+            taskMgr.listTasks();
             break;
         case DONE_COMMAND:
-            int doneTaskID = extractTaskID(userInput);
-            TaskMgr.markAsDone(doneTaskID);
+            int doneTaskId = extractTaskId(userInput);
+            taskMgr.markAsDone(doneTaskId);
             break;
         case TODO_COMMAND:
         case TODO_COMMAND_SHORTCUT:
-            TaskMgr.addTask(afterCommand, TODO_COMMAND);
+            taskMgr.addTask(afterCommand, TODO_COMMAND);
             break;
         case DEADLINE_COMMAND:
         case DEADLINE_COMMAND_SHORTCUT:
-            processTaskWithTime(TaskMgr, afterCommand, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND, DEADLINE_FORMAT_ERROR_MESSAGE);
+            processTaskWithTime(taskMgr, afterCommand, DEADLINE_TIME_DELIMITER, DEADLINE_COMMAND,
+                    DEADLINE_FORMAT_ERROR_MESSAGE);
             break;
         case EVENT_COMMAND:
         case EVENT_COMMAND_SHORTCUT:
-            processTaskWithTime(TaskMgr, afterCommand, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
+            processTaskWithTime(taskMgr, afterCommand, EVENT_TIME_DELIMITER, EVENT_COMMAND, EVENT_FORMAT_ERROR_MESSAGE);
             break;
         case DELETE_COMMAND:
         case DELETE_COMMAND_SHORTCUT:
-            int delTaskID = extractTaskID(userInput);
-            TaskMgr.delTask(delTaskID);
+            int delTaskId = extractTaskId(userInput);
+            taskMgr.delTask(delTaskId);
             break;
         case HELP_COMMAND:
             printHelpMessage(afterCommand);
@@ -95,13 +96,14 @@ public class Duke {
         }
     }
 
-    private static void processTaskWithTime(TaskManager TaskMgr, String taskInfo, String timeDelimiter, String command, String formatErrorMessage) {
+    private static void processTaskWithTime(TaskManager taskMgr, String taskInfo, String timeDelimiter,
+                                            String command, String formatErrorMessage) {
         try {
             String taskDescriptions = extractTaskDescription(taskInfo, timeDelimiter);
             String taskTime = extractTaskTime(taskInfo, timeDelimiter);
-            TaskMgr.addTask(taskDescriptions, taskTime, command);
+            taskMgr.addTask(taskDescriptions, taskTime, command);
         } catch (DukeException e) {
-            TaskMgr.printFormatErrorMsg(formatErrorMessage);
+            taskMgr.printFormatErrorMsg(formatErrorMessage);
         }
     }
 
@@ -148,11 +150,11 @@ public class Duke {
         }
     }
 
-    private static int extractTaskID(String userInput) {
-        int taskIDIndex = userInput.indexOf(" ") + 1;
-        String doneTaskIDString = userInput.substring(taskIDIndex);
+    private static int extractTaskId(String userInput) {
+        int taskIdIndex = userInput.indexOf(" ") + 1;
+        String doneTaskIdString = userInput.substring(taskIdIndex);
         try {
-            return Integer.parseInt(doneTaskIDString);
+            return Integer.parseInt(doneTaskIdString);
         } catch (NumberFormatException e) {
             return -1;
         }
@@ -208,7 +210,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskManager TaskMgr = new TaskManager();
+        TaskManager taskMgr = new TaskManager();
 
         greet();
 
@@ -216,7 +218,7 @@ public class Duke {
         Scanner s = new Scanner(System.in);
         do {
             input = s.nextLine();
-            processUserInput(TaskMgr, input);
+            processUserInput(taskMgr, input);
         } while (!isExited);
     }
 }

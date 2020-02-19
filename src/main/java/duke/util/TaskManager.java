@@ -1,6 +1,6 @@
 package duke.util;
 
-import java.awt.*;
+
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -96,10 +96,10 @@ public class TaskManager {
         System.out.println(LINE_DIVIDER);
     }
 
-    public void delTask(int taskID) {
+    public void delTask(int taskId) {
         try {
-            Task deletedTask = tasks.get(taskID);
-            tasks.remove(taskID);
+            Task deletedTask = tasks.get(taskId);
+            tasks.remove(taskId);
             printDeleteTaskSuccessfulPrompt(deletedTask);
         } catch (IndexOutOfBoundsException e) {
             printDeleteTaskErrorMsg();
@@ -120,10 +120,10 @@ public class TaskManager {
         System.out.println(LINE_DIVIDER);
     }
 
-    public void markAsDone(int taskID) {
+    public void markAsDone(int taskId) {
         try {
-            tasks.get(taskID).markAsDone();
-            printMarkAsDoneSuccessfulPrompt(tasks.get(taskID));
+            tasks.get(taskId).markAsDone();
+            printMarkAsDoneSuccessfulPrompt(tasks.get(taskId));
         } catch (IndexOutOfBoundsException e) {
             printMarkAsDoneErrorMsg();
         }

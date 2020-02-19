@@ -1,4 +1,5 @@
 package duke.task;
+
 import duke.exception.DukeException;
 
 import static duke.util.Constants.NO_ICON;
