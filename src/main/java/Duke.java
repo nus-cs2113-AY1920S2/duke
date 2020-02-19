@@ -1,8 +1,124 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 
 public class Duke {
+
+
+    public static void main(String[] args) {
+
+        ArrayList<Task> taskList = new ArrayList<Task>();
+
+        try {
+            loadFile("data/duke.txt", taskList);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        String line;
+        Scanner in = new Scanner(System.in);
+        String[] validCommands = {"todo", "deadline", "event", "done", "list"};
+
+        System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?");
+        line = in.nextLine();
+
+        while (checkLoop(line)) {
+
+            String[] words =  line.split(" ", 2);
+            String command = words[0].toLowerCase();
+
+            try {
+                checkValidCommand(command, validCommands);
+            } catch (DukeException e) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                line = in.nextLine();
+                continue;
+            }
+
+            if (command.equals("list")) {
+                displayList(taskList);
+            } else {
+                determineTask(command, line, taskList);
+            }
+
+            line = in.nextLine();
+        }
+
+        try {
+            saveFile("data/duke.txt", taskList);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+
+
+
+    //read text file to load previously saved taskList
+    private static void loadFile (String filePath, ArrayList<Task> taskList) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] words =  line.split(" \\| ");
+            if (words[0].equals("T")) {
+                Task t = new Todo (words[2]);
+                if (words[1].equals("1")) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            } else if (words[0].equals("D")) {
+                Task t = new Deadline(words[2], words[3]);
+                if (words[1].equals("1")) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            } else {
+                Task t = new Event(words[2], words[3]);
+                if (words[1].equals("1")) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            }
+        }
+    }
+
+    //save taskList to text file before end program
+    private static void saveFile (String filePath, ArrayList<Task> taskList) throws IOException {
+
+        //FileWriter fw = new FileWriter(filePath, true);
+        String lineInTextFile;
+        String taskComplete;
+
+        for (int i = 0; i < taskList.size(); i++) {
+
+            FileWriter fw;
+            if (i == 0) {
+                fw = new FileWriter(filePath);
+            } else {
+                fw = new FileWriter(filePath, true);
+            }
+
+            if (taskList.get(i).isDone) {
+                taskComplete = "1";
+            } else {
+                taskComplete = "0";
+            }
+            lineInTextFile = taskList.get(i).taskType + " | " + taskComplete +
+                    " | " + taskList.get(i).action;
+            if (taskList.get(i).date != null) {
+                lineInTextFile += (" | " + taskList.get(i).date + System.lineSeparator());
+            } else {
+                lineInTextFile += System.lineSeparator();
+            }
+
+            fw.write(lineInTextFile);
+            fw.close();
+
+        }
+    }
 
 
     public static boolean checkLoop(String line) {
@@ -141,40 +257,6 @@ public class Duke {
         }
     }
 
-
-    public static void main(String[] args) {
-
-        String line;
-        Scanner in = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
-        String[] validCommands = {"todo", "deadline", "event", "done", "list", "delete"};
-
-        System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?");
-        line = in.nextLine();
-
-        while (checkLoop(line)) {
-
-            String[] words =  line.split(" ", 2);
-            String command = words[0].toLowerCase();
-
-            try {
-                checkValidCommand(command, validCommands);
-            } catch (DukeException e) {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                line = in.nextLine();
-                continue;
-            }
-
-            if (command.equals("list")) {
-                displayList(taskList);
-            } else {
-                determineTask(command, line, taskList);
-            }
-
-            line = in.nextLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
-    }
 
 
 }

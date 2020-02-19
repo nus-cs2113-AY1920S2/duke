@@ -1,5 +1,5 @@
 public class Todo extends Task {
-    protected String by;
+    //protected String by;
 
     public Todo(String action) {
         super(action);
@@ -7,6 +7,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + taskType + "]" + super.toString();
     }
 }
