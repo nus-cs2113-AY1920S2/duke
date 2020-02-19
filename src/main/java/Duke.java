@@ -1,13 +1,10 @@
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Initialising...");
 
-        Scanner reader = new Scanner(System.in);
-        String input;
         String[] command = new String[2];
         String taskType;
         String taskDescription;
@@ -32,13 +29,12 @@ public class Duke {
         }
 
         FileIO file = new FileIO(f, tasks);
+        Parser io = new Parser();
 
-        String name = "Duke";
-        welcome(name);
+        welcome("Duke");
 
         do {
-            input = reader.nextLine();
-            command = inputProcessing(input);
+            command = io.readUserInput();
             taskType = command[0];
             taskDescription = command[1];
             printLine();
@@ -112,31 +108,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-
-    /**
-     * Split first word from the rest of String.
-     * @param input: one-line string
-     * @return array of 2 String, [0]: first word, [1]: subsequent words.
-     */
-    private static String[] inputProcessing(String input) {
-        String[] output = new String[2];
-
-        input = input.trim();   // strip leading & trailing spaces
-        int startIndexOfDescription = input.indexOf(' ');
-
-        if (startIndexOfDescription == -1) {
-            // only has 1 word
-            output[0] = input.toLowerCase();
-        } else {
-            // has 2 words
-            String cmdType = input.substring(0, startIndexOfDescription).toLowerCase();
-            String cmdDescription = input.substring(startIndexOfDescription + 1);
-            output[0] = cmdType;
-            output[1] = cmdDescription;
-        }
-
-        return output;
     }
 
     public static void printLine() {
