@@ -27,17 +27,21 @@ public class Parser {
                 eventCommand(splitString,tasks);
             } else if (splitString[0].equals("delete")){
                 deleteCommand(splitString,tasks);
+            } else if (splitString[0].equals("find")) {
+                findCommand(splitString,tasks);
             } else {
-                errorCommand();
+                    errorCommand();
+                }
             }
         }
-    }
+
     private static void listCommand(TaskList tasks) {
         System.out.println("Here are the tasks on your list:");
         for (int i = 0; i < tasks.getSize(); i++) {
             System.out.printf("%d. %s\n",i +1,tasks.getIndex(i).toString());
         }
     }
+
     private static void doneCommand(String command,TaskList tasks){
 
         String temp = command.replaceAll("\\D+","");
@@ -50,6 +54,22 @@ public class Parser {
             System.out.printf("  [%s] %s\n",tasks.getIndex(FinishedNumber-1).getStatusIcon(),tasks.getIndex(FinishedNumber-1).getDescription());
         }
 
+    }
+    private static void findCommand(String[] splitString, TaskList tasks) {
+        String searchTarget = splitString[1];
+        boolean noMatch = false;
+        System.out.println("Here are the matching tasks in your list:");
+        int counter = 1;
+        for (int i = 0; i < tasks.getSize(); i++) {
+            if (tasks.getIndex(i).getDescription().contains(searchTarget)){
+                System.out.printf("%d. %s\n",counter,tasks.getIndex(i).toString());
+                noMatch = true;
+                counter = counter + 1;
+            }
+        }
+        if (noMatch == false) {
+            System.out.println("There are no matches :(");
+        }
     }
     private static  void deadlineCommand(String[] splitString,TaskList tasks) {
         if (splitString.length == 1) {
@@ -98,14 +118,23 @@ public class Parser {
         }
     }
     private static void deleteCommand(String[] splitString, TaskList tasks) {
-        //need to note wrong index
+    
         if (splitString.length == 1) {
             System.out.println("OOPS!!! The description of event cannot be empty");
 
         } else {
-            System.out.println("Noted: I've removed this task:");
-            System.out.printf("  %s\n", tasks.getIndex(Integer.parseInt(splitString[1]) - 1).toString());
-            tasks.removeTask(Integer.parseInt(splitString[1]) - 1);
+            if (splitString[1].matches("\\d+")) {
+                if (Integer.parseInt(splitString[1]) > tasks.getSize()) {
+                    System.out.println("Input valid index");
+                } else {
+                    System.out.println("Noted: I've removed this task:");
+                    System.out.printf("  %s\n", tasks.getIndex(Integer.parseInt(splitString[1]) -1).toString());
+                    tasks.removeTask(Integer.parseInt(splitString[1]));
+                }
+
+            } else {
+                System.out.println("Input an integer for the index you wish to delete.");
+            }
         }
     }
     private static void errorCommand(){

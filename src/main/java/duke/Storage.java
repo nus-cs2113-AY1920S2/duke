@@ -53,7 +53,8 @@ public class Storage {
         } else if (splitString[0].contains("E")){
             //Event
             String[] splitString1 = splitString[1].split("] ",2);
-            String[] splitString2 = splitString1[1].split(" \\(at: ");
+            String[] splitString2 = splitString1[1].split(" \\(at:");
+
             newTask = new Event(splitString2[0],splitString2[1]);
             if (splitString1[0].contains("\u2713")){
                 newTask.markAsDone();
@@ -61,7 +62,7 @@ public class Storage {
         } else {
             //Deadline
             String[] splitString1 = splitString[1].split("] ",2);
-            String[] splitString2 = splitString1[1].split(" \\(by: ", 2);
+            String[] splitString2 = splitString1[1].split(" \\(by:", 2);
             newTask = new Deadline(splitString2[0],splitString2[1]);
             if (splitString1[0].contains("\u2713")){
                 newTask.markAsDone();
