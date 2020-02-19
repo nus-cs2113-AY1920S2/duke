@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
+    //Each duke object will have a designated storage, tasklist and input Ui
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -20,6 +21,8 @@ public class Duke {
         }
     }
     public void run() {
+        // This method ensures that the program runs until the 'bye' command is inputted
+
         ui.showWelcomeMessage();
         while (true) {
             String command = ui.getUserCommand();
