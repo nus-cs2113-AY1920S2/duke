@@ -1,0 +1,6 @@
+D | 1 | increment level-7  | 1:30pm
+D | 0 | email coach  | 2pm
+T | 0 | 2105 webcast 4
+T | 0 | 2017 webcast 5
+E | 0 | run + shower  | 6-7pm
+T | 0 | apply jobs 
