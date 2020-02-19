@@ -15,10 +15,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
-    @Override
-    public String getAt() {
-        return (" (at: " + at + ")");
-    }
+
 
 
 }

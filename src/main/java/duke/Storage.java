@@ -23,39 +23,37 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String data = scanner.nextLine();
-            char task = data.charAt(0);
+            char task = data.charAt(1);
             char isDone = data.charAt(4);
             if (task == 'T') {
-                String todoTask = data.substring(8);
+                String todoTask = data.substring(7);
                 Task todo = new Todo(todoTask);
-                if (isDone == '1') {
+                if (isDone == '\u2713') {
                     todo.markAsDone();
                 }
                 tasks.add(todo);
             } else if (task == 'E') {
-                String details = data.substring(8);
+                String details = data.substring(7);
                 String[] eventDetailsArray = details.split(" \\(at: ");
-                String eventDetails = eventDetailsArray[0];
                 String eventDate = eventDetailsArray[1].substring(0, eventDetailsArray[1].length() - 1);
-                Task event = new Event(eventDetails, eventDate);
-                if (isDone == '1') {
+                Task event = new Event(eventDetailsArray[0], eventDate);
+                if (isDone == '\u2713') {
                     event.markAsDone();
                 }
                 tasks.add(event);
             } else if (task == 'D') {
-                String details = data.substring(8);
+                String details = data.substring(7);
                 String[] deadlineDetailsArray = details.split(" \\(by: ");
-                String deadlineDetails = deadlineDetailsArray[0];
                 String deadlineDate = deadlineDetailsArray[1].substring(0, deadlineDetailsArray[1].length() - 1);
-                Task deadline = new Deadline(deadlineDetails, deadlineDate);
-                if (isDone == '1') {
+                Task deadline = new Deadline(deadlineDetailsArray[0], deadlineDate);
+                if (isDone == '\u2713') {
                     deadline.markAsDone();
                 }
                 tasks.add(deadline);
@@ -69,49 +67,13 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter("output.txt");
             for (Task task : tasks) {
-                if (task.getTaskDescription().equals(TODO_COMMAND)) {
-                    String taskTypeDescription = "T |";
-                    String taskDoneDescription = "";
-                    if (task.isDone()) {
-                        taskDoneDescription = " 1 | ";
-                    } else {
-                        taskDoneDescription = " 0 | ";
-                    }
-                    String taskDescription = task.getTask();
-                    String taskToAdd = taskTypeDescription + taskDoneDescription + taskDescription;
-                    fw.write(taskToAdd + System.lineSeparator());
-                } else if (task.getTaskDescription().equals(EVENT_COMMAND)) {
-                    String taskTypeDescription = "E |";
-                    String taskDoneDescription = "";
-                    if (task.isDone()) {
-                        taskDoneDescription = " 1 | ";
-                    } else {
-                        taskDoneDescription = " 0 | ";
-                    }
-                    String taskDescription = task.getTask();
-                    String taskAtDescription = task.getAt();
-                    String taskToAdd = taskTypeDescription + taskDoneDescription + taskDescription + taskAtDescription;
-                    fw.write(taskToAdd + System.lineSeparator());
-                } else if (task.getTaskDescription().equals(DEADLINE_COMMAND)) {
-                    String taskTypeDescription = "D |";
-                    String taskDoneDescription = "";
-                    if (task.isDone()) {
-                        taskDoneDescription = " 1 | ";
-                    } else {
-                        taskDoneDescription = " 0 | ";
-                    }
-                    String taskDescription = task.getTask();
-                    String taskByDescription = task.getBy();
-                    String taskToAdd = taskTypeDescription + taskDoneDescription + taskDescription + taskByDescription;
-                    fw.write(taskToAdd + System.lineSeparator());
-                }
+                fw.write(task.toString() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException err) {
             err.printStackTrace();
         }
     }
-
 
 }
 
