@@ -1,35 +1,25 @@
 package Duke.Task;
 
 public class Task {
-    public String description;
-    public int index;
-    public String type;
-    public boolean isDone;
-
-    public Task(String description, int index) {
+    
+    protected String description;
+    protected boolean isDone;
+    public Task(String description) {
         this.description = description;
-        this.index = index;
         this.isDone = false;
     }
-
-    public void setDone() {
-        isDone = true;
-    }
-
-    public boolean isDone() {
+    public boolean isDone(){
         return isDone;
     }
-
-
-    public final void setType(String type){
-        this.type = type;
+    public String getTaskStatus() {
+        return (isDone ? "Y" : "N"); //return tick or X symbols
     }
-    public String getDescription() {
-        return description;
+    public void markAsDone() {
+        isDone = true;
     }
-
     @Override
     public String toString() {
-        return (index+1) + " " + type;
+        return "[" + getTaskStatus() + "]" + description;
     }
+    
 }
