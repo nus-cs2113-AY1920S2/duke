@@ -8,13 +8,29 @@ public class FileIO {
     private FileReader fileToReadFrom;
     private FileWriter fileToWriteTo;
 
-    public FileIO (File f, TaskList tasks) {
+    public FileIO (String directory, TaskList tasks) {
+        File f = new File(directory);
+        ensurePathExist(f);
+
         try {
             this.fileToReadFrom = new FileReader(f);
             this.loadAllTo(tasks);
             this.fileToWriteTo = new FileWriter(f);
         } catch (IOException e) {
             System.out.println(e);
+        }
+    }
+
+    private void ensurePathExist(File f) {
+        if (!f.exists()) {
+            System.out.println("Storage file not found.");
+            try {
+                new File(f.getParent()).mkdir();    // mkdir
+                f.createNewFile();
+                System.out.println("A storage file is created.");
+            } catch (IOException m) {
+                System.out.println("... but storage file already exists??");
+            }
         }
     }
 
@@ -35,6 +51,8 @@ public class FileIO {
             task = parseCommand(breakdown);
             tasks.add(task);
         }
+
+        s.close();
     }
 
     /**

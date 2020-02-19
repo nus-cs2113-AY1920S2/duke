@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
@@ -14,21 +13,8 @@ public class Duke {
         TaskList tasks = new TaskList();
         int indexOfTasks;
 
-        // Indicate location to store tasks in an external file
         // ASSUMPTION: working directory is .../duke/
-        File f = new File("./data/duke.txt");
-        if (!f.exists()) {
-            System.out.println("Storage file not found.");
-            try {
-                new File(f.getParent()).mkdir();    // mkdir
-                f.createNewFile();
-                System.out.println("A storage file is created.");
-            } catch (IOException m) {
-                System.out.println("... but storage file already exists??");
-            }
-        }
-
-        FileIO file = new FileIO(f, tasks);
+        FileIO file = new FileIO("./data/duke.txt", tasks);
         Parser io = new Parser();
 
         welcome("Duke");
