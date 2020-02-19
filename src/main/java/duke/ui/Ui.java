@@ -26,7 +26,7 @@ public class Ui {
         System.out.println("----------");
     }
 
-    public static void printList(TaskList taskList) {
+    public static void formatPrint(TaskList taskList) {
         System.out.println("----------");
         for (int i = 0; i < taskList.getSize(); i++) {
             System.out.println(i+1 + ". " + taskList.getTask(i));

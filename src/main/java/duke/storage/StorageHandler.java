@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StorageHandler {
-    public void removeLine(int lineNumber, String dataFilePath) throws IOException {
+    public static void removeLine(int lineNumber, String dataFilePath) throws IOException {
         // Read file into list of strings, where each string is a line in the file
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
         int removedIndex = 0;
@@ -31,7 +31,7 @@ public class StorageHandler {
      * @param removedIndex
      * @return
      */
-    private int removeLineFromList(int lineNumber, List<String> list, int removedIndex) {
+    private static int removeLineFromList(int lineNumber, List<String> list, int removedIndex) {
         // Iterate through the lines
         for (int i = 0; i < list.size(); i++) {
             // If the current line matches the taskId
@@ -45,7 +45,7 @@ public class StorageHandler {
         return removedIndex;
     }
 
-    private void updateIndexes(List<String> fileContent, int removedIndex, String dataFilePath) throws IOException {
+    private static void updateIndexes(List<String> fileContent, int removedIndex, String dataFilePath) throws IOException {
         // Update indexes of subsequent tasks (e.g. if you remove task 2, task 3 becomes task 2)
         for (int i = removedIndex; i < fileContent.size(); i++)
         {
@@ -56,7 +56,7 @@ public class StorageHandler {
         }
     }
 
-    private String decrementIndex(List<String> fileContent, int i) {
+    private static String decrementIndex(List<String> fileContent, int i) {
         // Get current comma separated string
         String currString = fileContent.get(i);
 
@@ -71,7 +71,7 @@ public class StorageHandler {
         return String.join(",", cells);
     }
 
-    public void replaceLine(int lineNumber, String newString, String dataFilePath) throws IOException {
+    public static void replaceLine(int lineNumber, String newString, String dataFilePath) throws IOException {
         // Read file into list of strings, where each string is a line in the file
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(dataFilePath), StandardCharsets.UTF_8));
 
@@ -82,7 +82,7 @@ public class StorageHandler {
         Files.write(Paths.get(dataFilePath), fileContent, StandardCharsets.UTF_8);
     }
 
-    private void replaceLineInList(int lineNumber, String newString, List<String> list) {
+    private static void replaceLineInList(int lineNumber, String newString, List<String> list) {
         // Iterate through the lines
         for (int i = 0; i < list.size(); i++) {
             // If the current line matches the taskId

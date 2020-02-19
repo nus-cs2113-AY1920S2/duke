@@ -48,7 +48,7 @@ public class Parser {
             parseTaskModification(userCommand, userParams, taskList, storage);
             break;
         case "list":
-            Ui.printList(taskList);
+            Ui.formatPrint(taskList);
             break;
         default:
             throw new InvalidCommandException();

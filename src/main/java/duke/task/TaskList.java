@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.storage.Storage;
+import duke.storage.StorageHandler;
 import duke.ui.Ui;
 
 import java.io.File;
@@ -20,8 +21,10 @@ public class TaskList {
 
     public TaskList(File dataFile) {
         taskList = new ArrayList<Task>();
+        populateTaskList(dataFile);
+    }
 
-        // Populate from dataFile
+    private void populateTaskList(File dataFile) {
         try {
             Scanner dataScanner = new Scanner(dataFile);
             while (dataScanner.hasNext()) {
@@ -46,6 +49,10 @@ public class TaskList {
 
         boolean isDone = Boolean.parseBoolean(strings.get(2));
 
+        parseDataLine_parseTask(strings, isDone);
+    }
+
+    private void parseDataLine_parseTask(List<String> strings, boolean isDone) {
         switch (strings.get(1)) {
         case "T":
             Todo t = new Todo(isDone, strings.get(3));
@@ -63,9 +70,9 @@ public class TaskList {
     }
 
     public void addTask(Task t, Storage storage) {
-        taskList.add(t); // Add to running taskList
+        taskList.add(t);
 
-        int taskId = taskList.size()-1; // Get ID of task in running taskList
+        int taskId = taskList.size()-1;
 
         String dataLine = t.toData(taskId);
 
@@ -89,7 +96,7 @@ public class TaskList {
 
     private void setDone_updateFile(int taskId, Storage storage) {
         try {
-            storage.replaceLine(taskId, taskList.get(taskId).toData(taskId), );
+            StorageHandler.replaceLine(taskId, taskList.get(taskId).toData(taskId), storage.dataFilePath);
         } catch (IOException e) {
             Ui.formatPrint("Error updating line in data file.");
         }
@@ -103,7 +110,7 @@ public class TaskList {
 
     private void deleteTask_updateFile(int taskId, Storage storage) {
         try {
-            storage.removeLine(taskId, );
+            StorageHandler.removeLine(taskId, storage.dataFilePath);
         } catch (IOException e) {
             Ui.formatPrint("Error while deleting task from data file.");
         }
