@@ -37,10 +37,10 @@ public class Ui {
     public static void printCorrectDateFormat(String taskType) {
         switch (taskType) {
         case "deadline":
-            Ui.formatPrint("deadline description /date");
+            Ui.formatPrint("deadline description /by yyy-mm-dd");
             break;
         case "event":
-            Ui.formatPrint("event description /date");
+            Ui.formatPrint("event description /at yyyy-mm-dd");
             break;
         }
     }
