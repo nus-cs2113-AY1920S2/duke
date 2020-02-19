@@ -2,13 +2,15 @@ package Duke;
 
 import Duke.Exception.IllegalCommandException;
 import Duke.Exception.IllegalDeleteException;
-import Duke.Exception.IllegalTypeException;
 import Duke.Exception.IllegalDoneTaskException;
+import Duke.Exception.IllegalTypeException;
 import Duke.Task.Deadline;
 import Duke.Task.Event;
 import Duke.Task.Task;
 import Duke.Task.Todo;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -237,7 +239,39 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
+    private static FileWriter Duke_data;
+    static {
+        try {
+            Duke_data = new FileWriter("data/output.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Read stored input
+    /*
+    private static FileReader Duke_in;
+    static {
+        try{
+            Duke_in = new FileReader("data/output.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void readFile() throws IOException {
+        Duke_in.read();
+        Duke_in.close();
+    }*/
+
+    public static void saveFile() throws IOException {
+        for (int i = 0; i < TaskList.size(); i++){
+            Duke_data.write(TaskList.get(i).toString()+"\n");
+        }
+        Duke_data.close();
+    }
+
+    public static void main(String[] args) throws IOException {
         displayWelcomeMessage();
         int index;
         while(run){
@@ -307,7 +341,6 @@ public class Duke {
             }
             displayLineDivider();
         }
-
-
+        saveFile();
     }
 }
