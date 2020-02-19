@@ -1,6 +1,8 @@
 package duke.ui;
 import duke.task.TaskList;
 
+import java.util.List;
+
 public class Ui {
 
     public static void displayWelcome()
@@ -30,6 +32,14 @@ public class Ui {
         System.out.println("----------");
         for (int i = 0; i < taskList.getSize(); i++) {
             System.out.println(i+1 + ". " + taskList.getTask(i));
+        }
+        System.out.println("----------");
+    }
+
+    public static void formatPrint(List<String> list) {
+        System.out.println("----------");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
         }
         System.out.println("----------");
     }

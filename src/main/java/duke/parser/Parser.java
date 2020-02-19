@@ -1,9 +1,6 @@
 package duke.parser;
 
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateFormatException;
-import duke.exception.NoDateException;
-import duke.exception.NoDescException;
+import duke.exception.*;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -61,7 +58,8 @@ public class Parser {
      */
     public static void parseCommand(String userCommand, String userParams,
                                     TaskList taskList, Storage storage)
-            throws NoDescException, NoDateException, InvalidDateFormatException, InvalidCommandException {
+            throws NoDescException, NoDateException, InvalidDateFormatException,
+                InvalidCommandException, NoFindException {
         switch (userCommand) {
         case "todo":
             parseTodo(userParams, taskList, storage);
@@ -75,6 +73,9 @@ public class Parser {
             // Fallthrough
         case "delete":
             parseTaskModification(userCommand, userParams, taskList, storage);
+            break;
+        case "find":
+            parseFind(userParams, taskList);
             break;
         case "list":
             Ui.formatPrint(taskList);
@@ -163,4 +164,10 @@ public class Parser {
         taskList.addTask(new Todo(desc.trim()), storage);
     }
 
+    private static void parseFind(String userParams, TaskList taskList) throws NoFindException {
+        if (userParams.trim().isEmpty()) {
+            throw new NoFindException();
+        }
+        taskList.find(userParams);
+    }
 }
