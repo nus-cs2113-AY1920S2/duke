@@ -96,11 +96,11 @@ public class Duke {
                     throw new IllegalArgumentException();
                 }
             } catch (NoDescriptionException m) {
-                System.out.println("\t ☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
+                System.out.println("\t \u2639 OOPS!!! The description of a " + taskType + " cannot be empty.");
             } catch (IllegalArgumentException m) {
-                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("\t \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (IndexOutOfBoundsException m) {
-                System.out.println("\t ☹ OOPS!!! " + m);
+                System.out.println("\t \u2639 OOPS!!! " + m);
             } catch (IOException m) {
                 System.out.println(m);
             }
