@@ -40,7 +40,7 @@ public class Duke {
             if (action.startsWith("/at")) {
                 index = -1;
             }
-        } else if (command.equals("done")) {
+        } else if (command.equals("done") || command.equals("delete")) {
             int listNumber = Integer.parseInt(action);
             if (listNumber > taskList.size()) {
                 index = -1;
@@ -52,10 +52,16 @@ public class Duke {
     }
 
     public static void printEditTask(String command, Task t, ArrayList<Task> taskList) {
-        if (command.equals("done")){
+        String editWord;
+        if (command.equals("delete")) {
+            editWord = "removed";
+        } else {
+            editWord = "added";
+        }
+        if (command.equals("done")) {
             System.out.println("Nice! I've marked this task as done: " + System.lineSeparator() + t);
         } else {
-            System.out.println("Got it. I've added this task: " + System.lineSeparator() + t
+            System.out.println("Got it. I've " + editWord + " this task: " + System.lineSeparator() + t
                     + System.lineSeparator() + "Now you have " + taskList.size() + " tasks in the list.");
         }
     }
@@ -71,7 +77,7 @@ public class Duke {
         } else if (command.equals("event")) {
             commandType = "an " + command;
             addition =  " and needs a date indicated by \"/at \".";
-        } else if (command.equals("done")) {
+        } else if (command.equals("done") || command.equals("delete")) {
             commandType = command;
             addition = " and has to be a number in the list.";
         }
@@ -124,8 +130,14 @@ public class Duke {
             printEditTask(command, t, taskList);
         } else if (command.equals("done")) {
             int listNumber = Integer.parseInt(taskDescription.substring(5));
-            taskList.get(listNumber-1).markAsDone();
-            printEditTask(command, taskList.get(listNumber-1), taskList);
+            Task t = taskList.get(listNumber-1);
+            t.markAsDone();
+            printEditTask(command, t, taskList);
+        } else if (command.equals("delete")) {
+            int listNumber = Integer.parseInt(taskDescription.substring(7));
+            Task t = taskList.get(listNumber-1);
+            taskList.remove(t);
+            printEditTask(command, t, taskList);
         }
     }
 
@@ -135,7 +147,7 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<Task>();
-        String[] validCommands = {"todo", "deadline", "event", "done", "list"};
+        String[] validCommands = {"todo", "deadline", "event", "done", "list", "delete"};
 
         System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?");
         line = in.nextLine();
