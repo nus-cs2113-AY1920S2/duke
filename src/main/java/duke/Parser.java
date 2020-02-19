@@ -39,7 +39,7 @@ public class Parser {
         }
     }
     private static void doneCommand(String command,TaskList tasks){
-        //note need case where index is wrong
+
         String temp = command.replaceAll("\\D+","");
         int FinishedNumber = Integer.parseInt(temp);
         if (FinishedNumber > tasks.getSize()) {

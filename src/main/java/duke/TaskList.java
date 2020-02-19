@@ -9,10 +9,7 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
         this.counter =0;
     }
-    public TaskList(ArrayList<Task> tasks){
-        this.tasks = tasks;
-        this.counter = tasks.size();
-    }
+
     public void addTask(Task task) {
         tasks.add(task);
         this.counter = tasks.size();
