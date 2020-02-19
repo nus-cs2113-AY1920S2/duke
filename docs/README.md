@@ -35,6 +35,11 @@
 ### Command Format
 Words enclosed by `{` and `}` are parameters that are supplied by you.
 
+## Setting Up
+1. Extract the jar folder into an empty folder
+2. Add a `database.txt` document into the folder
+3. Enter your terminal and move to the location of the folder
+3. Run the Command-Line interface(CLI) with `java -jar Duke.jar` in your terminal
 
 ## Usage
 
@@ -156,6 +161,7 @@ Syntax:
 Expected outcome:
 
 `Displays help command`
+
 
 ### <a id="bye"></a> `bye` - Terminate program
 
