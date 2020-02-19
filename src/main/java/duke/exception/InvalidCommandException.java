@@ -1,5 +1,7 @@
 package duke.exception;
 
-// Thrown when command is not recognized
+/**
+ * Thrown when an invalid command is input.
+ */
 public class InvalidCommandException extends Exception {
 }
