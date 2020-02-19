@@ -15,19 +15,19 @@
 
 	____________________________________________________________
 	[Command entered: todo Assignments]
-	Got it. I've added this task:
+	Got it. I've added this Duke.Task:
 	Now you have 1 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	[Command entered: deadline Complete CS2113 Homework /by 2359]
-	Got it. I've added this task:
+	Got it. I've added this Duke.Task:
 	Now you have 2 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	[Command entered: event Dinner with friends /at 24 June]
-	Got it. I've added this task:
+	Got it. I've added this Duke.Task:
 	Now you have 3 tasks in the list.
 	____________________________________________________________
 

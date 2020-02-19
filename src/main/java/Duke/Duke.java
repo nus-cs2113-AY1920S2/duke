@@ -1,8 +1,11 @@
+package Duke;
+
+import Duke.Task.*;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Duke {
-    // Libary of common words
+    // Library of common words
     public static Scanner sc = new Scanner(System.in);
     private static final int MAX_TASKS = 100;
     private static final String BOT_NAME = "E.D.I.T.H.";
@@ -29,17 +32,17 @@ public class Duke {
     private static final String COMMAND_HELP_DESC = "\n" +
             "\tHere's the help list\n" +
             "\t1. todo [Description]\n" +
-            "\t\tadd in a todo task, format ' todo [Description] '\n" +
+            "\t\tadd in a todo Duke.task, format ' todo [Description] '\n" +
             "\t2. deadline\n" +
-            "\t\tadd in a deadline task, format ' deadline [Description] /by[Time] ' \n" +
+            "\t\tadd in a deadline Duke.task, format ' deadline [Description] /by[Time] ' \n" +
             "\t3. event\n" +
-            "\t\tadd in an event task, format ' event [Description] /at[Time] '\n" +
+            "\t\tadd in an event Duke.task, format ' event [Description] /at[Time] '\n" +
             "\t4. list\n" +
             "\t\tlist out all the tasks\n" +
             "\t5. clear\n" +
-            "\t\tclear all items from task\n" +
+            "\t\tclear all items from Duke.task\n" +
             "\t6. mark\n" +
-            "\t\tmark a task by its index, format ' mark [index] '\n" +
+            "\t\tmark a Duke.task by its index, format ' mark [index] '\n" +
             "\t7. bye\n" +
             "\t\texit the program";
     public static final String COMMAND_LIST_WORD = "LIST";
@@ -52,7 +55,7 @@ public class Duke {
     public static final String COMMAND_TODO_WORD = "TODO";
 
     public static final void displayWelcomeMessage() {System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER); }
-    public static final void displayAcceptTask() { System.out.println("\tGot it. I've added this task: "); }
+    public static final void displayAcceptTask() { System.out.println("\tGot it. I've added this Duke.task: "); }
     public static final void displayInvalidCommand() { System.out.println(MESSAGE_INVALID_COMMAND); }
     public static final void displayInvalidDescription() { System.out.print(MESSAGE_DESC_EMPTY);}
     public static final void displayInvalidBy() { System.out.print(MESSAGE_BY_EMPTY);}
@@ -75,6 +78,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        ArrayList<Task> Tasklist = new ArrayList(MAX_TASKS);
         Task task[] = new Task[MAX_TASKS];
         int index = 0;
         int markIndex;
@@ -167,7 +171,7 @@ public class Duke {
                     } else {
                         System.out.print("\tHere are the tasks in your list:");
                         for (int i = 0; i < index; i++) {
-                            //System.out.print("\n\t" + (i + 1) + ". [" + task[i].getType() + "]" + task[i].getStatusIcon() + task[i].getDescription() + task[i].getBy());
+                            //System.out.print("\n\t" + (i + 1) + ". [" + Duke.task[i].getType() + "]" + Duke.task[i].getStatusIcon() + Duke.task[i].getDescription() + Duke.task[i].getBy());
                             System.out.print(task[i]);
                         }
                     }

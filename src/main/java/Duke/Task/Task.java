@@ -1,8 +1,10 @@
+package Duke.Task;
+
 public class Task {
-    protected String description;
-    protected int index;
-    protected String type;
-    protected boolean isDone;
+    public String description;
+    public int index;
+    public String type;
+    public boolean isDone;
 
     public Task(String description, int index) {
         this.description = description;
@@ -19,7 +21,7 @@ public class Task {
     }
 
 
-    protected final void setType(String type){
+    public final void setType(String type){
         this.type = type;
     }
     public String getDescription() {
@@ -28,6 +30,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (index+1) + ". " + type;
+        return (index+1) + " " + type;
     }
 }
