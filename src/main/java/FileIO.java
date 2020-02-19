@@ -14,7 +14,7 @@ public class FileIO {
 
         try {
             this.fileToReadFrom = new FileReader(f);
-            this.loadAllTo(tasks);
+            this.readAll(tasks);
             this.fileToWriteTo = new FileWriter(f);
         } catch (IOException e) {
             System.out.println(e);
@@ -35,10 +35,10 @@ public class FileIO {
     }
 
     /**
-     * Load information from current file to a TaskList object.
-     * @param tasks The object to be loaded up
+     * Read information from current file to tasks.
+     * @param tasks The object to write the information to
      */
-    public void loadAllTo(TaskList tasks) {
+    public void readAll(TaskList tasks) {
         String rawCommand;
         String[] breakdown;
         Task task;
@@ -57,8 +57,8 @@ public class FileIO {
 
     /**
      * Transform input to one of the Task objects.
-     * @param breakdown
-     * @return
+     * @param breakdown An array of command arguments from storage file
+     * @return The task to be created
      */
     private Task parseCommand(String[] breakdown) {
         String taskType = breakdown[0];
@@ -89,11 +89,11 @@ public class FileIO {
     }
 
     /**
-     * Store information from a TaskList object to current file.
+     * Write from tasks to current file.
      * Note: Will replace existing content in current file.
-     * @param tasks The object to store information from
+     * @param tasks The object to write information from
      */
-    public void storeAllFrom(TaskList tasks) throws IOException {
+    public void writeAll(TaskList tasks) throws IOException {
         Task currTask;
         String taskInString = "";
 

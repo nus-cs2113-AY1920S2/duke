@@ -13,9 +13,8 @@ public class Duke {
         TaskList tasks = new TaskList();
         int indexOfTasks;
 
-        // ASSUMPTION: working directory is .../duke/
-        FileIO file = new FileIO("./data/duke.txt", tasks);
         Parser io = new Parser();
+        Storage storage = new Storage("./data/duke.txt", tasks);
 
         welcome("Duke");
 
@@ -30,7 +29,7 @@ public class Duke {
                 case "bye":
                     // close the interpreter
                     System.out.println("\tBye. Hope to see you again soon!");
-                    file.storeAllFrom(tasks);
+                    storage.store();
                     break;
                 case "list":
                     tasks.list();
@@ -90,7 +89,7 @@ public class Duke {
         } while (!taskType.equals("bye"));
 
         try {
-            file.close();
+            storage.close();
         } catch (IOException e) {
             System.out.println(e);
         }
