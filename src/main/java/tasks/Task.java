@@ -1,10 +1,12 @@
 package tasks;
 
+import java.io.Serializable;
+
 /**
  * Also known as ToDos: tasks without any date/time attached to it
  * e.g., visit new theme park
   */
-public class Task {
+public class Task implements Serializable {
     protected String taskName;
     protected boolean isDone;
     protected char category;
