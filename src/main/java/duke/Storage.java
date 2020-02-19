@@ -11,11 +11,11 @@ public class Storage {
     public Storage(String fname) {
         this.fname = fname;
     }
-    public static void writeToFile(String filePath, ArrayList<Task> tasksToWrite) throws IOException {
+    public static void writeToFile(String filePath, TaskList tasksToWrite) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         try {
-            for (int i = 0; i < tasksToWrite.size(); i++) {
-                String writtenString = String.format("%d. %s\n", i + 1, tasksToWrite.get(i).toString());
+            for (int i = 0; i < tasksToWrite.getSize(); i++) {
+                String writtenString = String.format("%d. %s\n", i + 1, tasksToWrite.getIndex(i).toString());
                 fw.write(writtenString);
             }
         } catch (IOException e){
@@ -23,23 +23,52 @@ public class Storage {
         }
         fw.close();
     }
-    public static ArrayList<String> readFromFile(String filePath) throws FileNotFoundException {
+    public static TaskList readFromFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner sc = null;
-        ArrayList<String> tasks = new ArrayList<String>();
-        try {
+        TaskList tasks1 = new TaskList();
+        if (file.exists()){
             sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
+                Task task1 = createTask(task);
+                tasks1.addTask(task1);
             }
-        }catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
         }
         sc.close();
-        return tasks;
+
+        return tasks1;
         }
 
+    public static Task createTask(String task) {
+        String[] splitString = task.split("]",2);
+        Task newTask;
+        if (splitString[0].contains("T")){
+            //Todo
+            String[] splitString1 = splitString[1].split("] ", 2);
+            newTask= new Todo(splitString1[1]);
+            if (splitString1[0].contains("\u2713")){
+                newTask.markAsDone();
+            }
+        } else if (splitString[0].contains("E")){
+            //Event
+            String[] splitString1 = splitString[1].split("] ",2);
+            String[] splitString2 = splitString1[1].split(" \\(at: ");
+            newTask = new Event(splitString2[0],splitString2[1]);
+            if (splitString1[0].contains("\u2713")){
+                newTask.markAsDone();
+            }
+        } else {
+            //Deadline
+            String[] splitString1 = splitString[1].split("] ",2);
+            String[] splitString2 = splitString1[1].split(" \\(by: ", 2);
+            newTask = new Deadline(splitString2[0],splitString2[1]);
+            if (splitString1[0].contains("\u2713")){
+                newTask.markAsDone();
+            }
         }
-
+        return  newTask;
     }
-}
+    }
+
+

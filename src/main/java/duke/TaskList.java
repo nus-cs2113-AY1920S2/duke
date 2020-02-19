@@ -15,7 +15,7 @@ public class TaskList {
     }
     public void addTask(Task task) {
         tasks.add(task);
-        this.counter = tasks.size()
+        this.counter = tasks.size();
     }
     public void removeTask(int number) {
         tasks.remove(number -1);

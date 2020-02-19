@@ -1,10 +1,9 @@
 package duke;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class Parser {
-    private String command;
     public static void parseCommand(String command, TaskList tasks) {
         if (command.equals("list")){
             listCommand(tasks);
@@ -17,6 +16,7 @@ public class Parser {
                 System.out.println("Error writing to file");
             }
             System.out.println("Bye. Hope to see you again soon! :)");
+            System.exit(0);
         } else {
             String[] splitString = command.split(" ", 2);
             if (splitString[0].equals("deadline")){
@@ -24,7 +24,7 @@ public class Parser {
             } else if (splitString[0].equals("todo")){
                 todoCommand(splitString,tasks);
             } else if (splitString[0].equals("event")) {
-                eventCommand(splitString,tasks)
+                eventCommand(splitString,tasks);
             } else if (splitString[0].equals("delete")){
                 deleteCommand(splitString,tasks);
             } else {
@@ -42,9 +42,14 @@ public class Parser {
         //note need case where index is wrong
         String temp = command.replaceAll("\\D+","");
         int FinishedNumber = Integer.parseInt(temp);
-        tasks.getIndex(FinishedNumber-1).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("  [%s] %s\n",tasks.getIndex(FinishedNumber-1).getStatusIcon(),tasks.getIndex(FinishedNumber-1).getDescription());
+        if (FinishedNumber > tasks.getSize()) {
+            System.out.println("Incorrect index");
+        } else {
+            tasks.getIndex(FinishedNumber-1).markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.printf("  [%s] %s\n",tasks.getIndex(FinishedNumber-1).getStatusIcon(),tasks.getIndex(FinishedNumber-1).getDescription());
+        }
+
     }
     private static  void deadlineCommand(String[] splitString,TaskList tasks) {
         if (splitString.length == 1) {

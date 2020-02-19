@@ -1,5 +1,8 @@
 1. [T][✘] eat
-2. [T][✘] left
+2. [T][✓] left
 3. [T][✘] right
 4. [T][✘] eat
-5. [T][✘] work
+5. [T][✓] work
+6. [T][✘] sleep
+7. [D][✘] return book  (by:Sunday))
+8. [E][✓] project meeting  (at:Mon 2-4pm))
