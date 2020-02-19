@@ -1,9 +1,6 @@
 package duke;
 
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateFormatException;
-import duke.exception.NoDateException;
-import duke.exception.NoDescException;
+import duke.exception.*;
 import duke.parser.Parser;
 import duke.parser.ScannedCommand;
 import duke.storage.Storage;
@@ -47,7 +44,6 @@ public class Duke {
             run(userCommand, userParams);
         } while (!userCommand.equalsIgnoreCase("bye"));
 
-        System.out.println("Goodbye!");
     }
 
     private static void run(String userCommand, String userParams) {
@@ -62,6 +58,8 @@ public class Duke {
             Ui.printCorrectDateFormat(userCommand);
         } catch (InvalidCommandException e) {
             Ui.formatPrint("Sorry, I didn't recognize that command.");
+        } catch (NoFindException e) {
+            Ui.formatPrint("Please input the string you want to find.");
         }
         System.out.println("You have " + taskList.getSize() + " task/s. (type 'list' to list your tasks)");
         System.out.println("Anything else? Remember that you can leave by typing 'bye'.");

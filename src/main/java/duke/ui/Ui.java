@@ -1,6 +1,8 @@
 package duke.ui;
 import duke.task.TaskList;
 
+import java.util.List;
+
 public class Ui {
 
     public static void displayWelcome()
@@ -34,13 +36,21 @@ public class Ui {
         System.out.println("----------");
     }
 
+    public static void formatPrint(List<String> list) {
+        System.out.println("----------");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        System.out.println("----------");
+    }
+
     public static void printCorrectDateFormat(String taskType) {
         switch (taskType) {
         case "deadline":
-            Ui.formatPrint("deadline description /date");
+            Ui.formatPrint("deadline description /by yyy-mm-dd");
             break;
         case "event":
-            Ui.formatPrint("event description /date");
+            Ui.formatPrint("event description /at yyyy-mm-dd");
             break;
         }
     }

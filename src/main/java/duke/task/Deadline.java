@@ -1,39 +1,44 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String by; // String containing deadline
+    private LocalDate deadline; // String containing deadline
 
     @Override
     public String getType() {
         return "D";
     }
 
-    public String getBy() {
-        return by;
+    public LocalDate getDeadline() {
+        return deadline;
     }
 
-    public void setBy(String by) {
-        this.by = by;
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
     }
 
-    public Deadline(boolean isDone, String description, String by) {
+    public Deadline(boolean isDone, String description, LocalDate deadline) {
         super(isDone, description);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     @Override
     public String toData(int taskId) {
-        String dataLine = taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription() + "," + this.getBy();
+        String dataLine = (taskId + "," + this.getType() + "," + this.isDone() + "," + this.getDescription() + ","
+                + this.getDeadline());
         return dataLine;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return ("[D]" + super.toString() + " (by: "
+                + this.getDeadline().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 }
