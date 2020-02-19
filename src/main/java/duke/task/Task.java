@@ -35,7 +35,7 @@ public class Task {
         this.isDone = true;
     }
 
-    // Provides a string to be stored in data file
+    // Convert to comma-separated information
     // duke.csv file format:
     // taskID, taskType, taskIsDone, taskDesc, taskDate
     public String toData(int taskId) {
