@@ -15,14 +15,15 @@ public class Duke {
 
         Parser io = new Parser();
         Storage storage = new Storage("./data/duke.txt", tasks);
+        Ui ui = new Ui();
 
-        welcome("Duke");
+        ui.showWelcome("Duke");
 
         do {
             command = io.readUserInput();
             taskType = command[0];
             taskDescription = command[1];
-            printLine();
+            ui.showLine();
 
             try {
                 switch (taskType) {
@@ -85,7 +86,7 @@ public class Duke {
             } catch (IOException m) {
                 System.out.println(m);
             }
-            printLine();
+            ui.showLine();
         } while (!taskType.equals("bye"));
 
         try {
@@ -93,25 +94,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-
-    public static void printLine() {
-        System.out.println("\t____________________________________________________________");
-    }
-
-    public static void welcome(String name) {
-        printLine();
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\tHello from\n" + logo);
-
-        printLine();
-        System.out.println("\tHello! I'm " + name);
-        System.out.println("\tWhat can I do for you?");
-        printLine();
     }
 
     private static String[] processArgs(String s) {
