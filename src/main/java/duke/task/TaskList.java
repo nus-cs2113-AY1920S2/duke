@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
