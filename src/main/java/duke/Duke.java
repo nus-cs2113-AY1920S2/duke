@@ -47,7 +47,6 @@ public class Duke {
             run(userCommand, userParams);
         } while (!userCommand.equalsIgnoreCase("bye"));
 
-        System.out.println("Goodbye!");
     }
 
     private static void run(String userCommand, String userParams) {

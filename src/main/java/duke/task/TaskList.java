@@ -7,6 +7,7 @@ import duke.ui.Ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,12 +60,15 @@ public class TaskList {
             taskList.add(t);
             break;
         case "D":
-            Deadline d = new Deadline(isDone, strings.get(3), strings.get(4));
+            Deadline d = new Deadline(isDone, strings.get(3), LocalDate.parse(strings.get(4)));
             taskList.add(d);
             break;
         case "E":
-            Event e = new Event(isDone, strings.get(3), strings.get(4));
+            Event e = new Event(isDone, strings.get(3), LocalDate.parse(strings.get(4)));
             taskList.add(e);
+            break;
+        default:
+            Ui.formatPrint("Error: task type not recognized");
             break;
         }
     }
