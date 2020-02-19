@@ -125,13 +125,10 @@ public class Parser {
         }
     }
     private static void deleteCommand(String[] splitString, TaskList tasks) {
-<<<<<<< HEAD
-    
-=======
        /* This function processes the 'delete' command
         and removes a valid index from the task list
        */
->>>>>>> branch-A-JavaDoc
+
         if (splitString.length == 1) {
             System.out.println("OOPS!!! The description of event cannot be empty");
 
