@@ -89,7 +89,7 @@ public class TaskList {
 
     private void setDone_updateFile(int taskId, Storage storage) {
         try {
-            storage.replaceLine(taskId, taskList.get(taskId).toData(taskId));
+            storage.replaceLine(taskId, taskList.get(taskId).toData(taskId), );
         } catch (IOException e) {
             Ui.formatPrint("Error updating line in data file.");
         }
@@ -103,7 +103,7 @@ public class TaskList {
 
     private void deleteTask_updateFile(int taskId, Storage storage) {
         try {
-            storage.removeLine(taskId);
+            storage.removeLine(taskId, );
         } catch (IOException e) {
             Ui.formatPrint("Error while deleting task from data file.");
         }
