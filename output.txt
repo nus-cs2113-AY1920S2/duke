@@ -1,2 +1,2 @@
-[T][✘] buy bread
 [T][✓] borrow book
+[T][✘] buy bread

@@ -1,17 +1,16 @@
 package duke;
 
-import duke.command.Deadline;
-import duke.command.Event;
-import duke.command.Task;
-import duke.command.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.exception.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import java.util.Scanner;
-
 public class Duke {
+    private Ui ui;
 
     public static final String DIVIDER = "_________________________________________________";
     public static final String DONE_COMMAND = "done";
@@ -22,6 +21,7 @@ public class Duke {
     public static final String DELETE_COMMAND = "delete";
     public static final String END_COMMAND = "bye";
     public static final String END_MESSAGE = "Bob thanks you for coming! See you again soon!";
+
     public static void printIndividualTask(ArrayList<Task> tasks, int taskNum) {
         if (tasks.get(taskNum - 1).getTaskDescription().equals(TODO_COMMAND)) {
             System.out.println("Got it! You've added a todo task: ");
@@ -199,18 +199,20 @@ public class Duke {
     }
 
     public static void main(String[] args) throws UnknownInputException {
+        Ui ui = new Ui();
+        /*
         initialisation();
-        Scanner command = new Scanner(System.in);
+        Scanner command = new Scanner(System.in); */
+        ui.startMessage();
         Storage storage = new Storage("output.txt");
         while (true) {
-            String userInput = command.nextLine();
+
+            String userInput = ui.readCommand();
             if (userInput.equals(END_COMMAND)) {
-                System.out.println(DIVIDER);
-                System.out.println(END_MESSAGE);
-                System.out.println(DIVIDER);
+                ui.endMessage();
                 break;
             } else {
-                System.out.println(DIVIDER);
+                ui.displayDividerLine();
                 try {
                     ArrayList<Task> tasks = storage.load();
                     getExecuteCommand(tasks, userInput);
@@ -220,9 +222,9 @@ public class Duke {
                     getExecuteCommand(tasks, userInput);
                     storage.save(tasks);
                 } catch (DukeException err) {
-                    System.out.println(err.toString());
+                    ui.displayErrorMessage(err.toString());
                 }
-                System.out.println(DIVIDER);
+                ui.displayDividerLine();
             }
 
         }
