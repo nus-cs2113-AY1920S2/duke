@@ -18,6 +18,7 @@ public class Ui {
             + "\t|  _  /  |  __|  | |\\   |   / /   | | | | \n"
             + "\t| | \\ \\  | |___  | | \\  |  / /__  | |_| | \n"
             + "\t|_|  \\_\\ |_____| |_|  \\_| /_____| \\_____/ \n";
+    public static final String TAP = "\t";
 
     private Scanner in;
     private PrintStream out;
@@ -37,25 +38,20 @@ public class Ui {
         out.println(LOGO);
         out.println("\tHello! I'm Renzo");
         out.println("\tWhat can I do for you?");
+        printOutputTail();
+    }
+
+    /** The information shows to the user in the end. */
+    public void printOutputTail() {
         out.println(CUTTING_LINE);
         out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
-    public void printInfoHead() {
-        out.println(CUTTING_LINE);
-        out.println("\tHere are the tasks in your list:");
-    }
-
-    public void printOutputTail() {
-        System.out.println(CUTTING_LINE);
-        System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
-    }
-
     /**Byes when the user issues to exit. */
     public void bye(){
-        System.out.println(CUTTING_LINE);
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println(CUTTING_LINE);
+        out.println(CUTTING_LINE);
+        out.println("\tBye. Hope to see you again soon!");
+        out.println(CUTTING_LINE);
     }
 
     /**
@@ -67,24 +63,16 @@ public class Ui {
     }
 
     /**
-     * Print the error gotten in Duke Exception.
+     * Prints the error gotten in Duke Exception.
      */
     public void showError(String e){
         out.println(CUTTING_LINE);
         out.println("\t☹ OOPS!!! " + e);
-        out.println(CUTTING_LINE);
-        out.println("\nPlease enter your command or enter \"bye\" to exit:");
-    }
-
-    public static void printIdOutOfRangeError() {
-        System.out.println(CUTTING_LINE);
-        System.out.println("\tWrong Number!");
-        System.out.println(CUTTING_LINE);
-        System.out.println("\nPlease enter your command again or enter \"bye\" to exit:");
+        printOutputTail();
     }
 
     /**
-     * Print the added or deleted task and show the new size of task list.
+     * Prints the added or deleted task and show the new size of task list.
      * @param newTask the added or deleted task.
      * @param tasks the task list.
      * @param taskType  the task type of this command.
@@ -92,33 +80,39 @@ public class Ui {
     public void printTask(Task newTask, TaskList tasks, String taskType) {
         out.println(CUTTING_LINE);
         out.println("\tGot it. I've "+ taskType+ " this task:");
-        out.println("\t" + newTask.toString());
+        out.println(TAP + newTask.toString());
         out.printf("\tNow you have %d task(s) in the list\n", tasks.size());
-        out.println(CUTTING_LINE);
-        out.println("\nPlease enter your command or enter \"bye\" to exit:");
+        printOutputTail();
     }
 
     /**
-     * Print the modified task.
+     * Prints the modified task.
      * @param newTask the modified task.
      * @param taskType  the task type of this command.
      */
     public void printTask(Task newTask, String taskType) {
         out.println(CUTTING_LINE);
         out.println("\tGot it. I've "+ taskType+ " this task:");
-        out.println("\t" + newTask.toString());
-        boolean isAdd = taskType.equalsIgnoreCase("added");
-        out.println(CUTTING_LINE);
-        out.println("\nPlease enter your command or enter \"bye\" to exit:");
+        out.println(TAP + newTask.toString());
+        printOutputTail();
     }
 
+    /**
+     * Prints one task to the user.
+     * @param task the task to print.
+     * @param ID the task ID.
+     */
     public void printOneTask(Task task, int ID) {
-        out.println("\t"+ ID + "." + task.toString());
+        out.println(TAP + ID + "." + task.toString());
     }
 
+    /**
+     * Prints some information head.
+     * @param infoHead some information depends on different task type
+     */
     public void printInfoHead(String infoHead) {
         out.println(CUTTING_LINE);
-        out.println(infoHead);
+        out.println(TAP +infoHead);
     }
 
 }

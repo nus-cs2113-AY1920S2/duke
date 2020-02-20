@@ -18,17 +18,20 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-       list(tasks);
+       list(tasks, ui);
     }
 
-    public void list(TaskList tasks) {
-        System.out.println(CUTTING_LINE);
-        System.out.println("\tHere are the tasks in your list:");
-        for (Task task : tasks) {
-            int taskID = tasks.indexOf(task) + 1;
-            System.out.println("\t" + taskID + "." + task.toString());
+    /**
+     * Lists tasks in the task list.
+     * @param tasks the task list.
+     * @param ui Duke's UI.
+     */
+    public void list(TaskList tasks, Ui ui) {
+        ui.printInfoHead("Here are the matching tasks in your list:");
+        for(Task task: tasks){
+            int id = tasks.indexOf(task);
+            ui.printOneTask(task, id);
         }
-        System.out.println(CUTTING_LINE);
-        System.out.println("\nPlease enter your command or enter \"bye\" to exit:");
+        ui.printOutputTail();
     }
 }

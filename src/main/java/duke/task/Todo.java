@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
 /**
  * Represents a todo task.
  */
@@ -9,10 +8,6 @@ public class Todo extends Task {
         super(description);
         super.isDone = false;
         super.taskType = "[T]";
-    }
-
-    public void setDone(boolean isDone) {
-        super.isDone = isDone;
     }
 
     public boolean isDone() {

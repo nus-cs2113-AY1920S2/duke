@@ -1,6 +1,5 @@
 package duke.exception;
 
-import duke.exception.DukeException;
 /**
  * Tests whether there is a Duke exception.
  */
@@ -9,7 +8,6 @@ public class TestDukeException {
     private boolean isTodo ;
     private boolean isDeadline;
     private boolean isEvent;
-    private boolean isWrongType;
     private String[] words;
     private String taskType;
 
@@ -20,7 +18,6 @@ public class TestDukeException {
         isTodo = taskType.equalsIgnoreCase("todo");
         isDeadline = taskType.equalsIgnoreCase("deadline");
         isEvent = taskType.equalsIgnoreCase("event");
-        isWrongType = !(isTodo || isDeadline || isEvent);
     }
 
     /**

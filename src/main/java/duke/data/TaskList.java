@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Represents Duke's task list.
  */
 public class TaskList extends ArrayList<Task>{
-    //private ArrayList<Task> tasks;
 
     public TaskList(){
         super();
