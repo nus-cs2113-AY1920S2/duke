@@ -2,8 +2,8 @@ package duke.task;
 
 public abstract class Task {
     protected static final String DELIMITER = "|";
-    protected static final String TASK_DONE_ICON = "✓";
-    protected static final String TASK_NOT_DONE_ICON = "✘";
+    protected static final String TASK_DONE_ICON = "O";
+    protected static final String TASK_NOT_DONE_ICON = "X";
 
     protected String description;
     protected boolean isDone;

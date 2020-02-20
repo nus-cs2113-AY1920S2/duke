@@ -9,20 +9,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String DUKE_LOGO =
+    private final String DUKE_LOGO =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static Storage storage = new Storage();
-    private static TaskList tasks;
+    private Storage storage;
+    private TaskList tasks;
 
-    public static void main(String[] args) {
-        printWelcomeBanner();
-
-        Scanner scanner = new Scanner(System.in);
+    public Duke() {
+        this.storage = new Storage();
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
@@ -32,7 +30,11 @@ public class Duke {
             System.out.println(e.toString());
             tasks = new TaskList();
         }
+    }
 
+    public void run() {
+        printWelcomeBanner();
+        Scanner scanner = new Scanner(System.in);
         // Loop terminates on receiving a "bye" command, which calls System.exit(0)
         //noinspection InfiniteLoopStatement
         while (true) {
@@ -55,7 +57,11 @@ public class Duke {
         }
     }
 
-    private static void parseCommand(String fullCommand) throws DukeException {
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    private void parseCommand(String fullCommand) throws DukeException {
         String[] commandTokens = fullCommand.split(" ");
         String commandType = commandTokens[0].toLowerCase();
 
@@ -151,18 +157,18 @@ public class Duke {
         }
     }
 
-    private static void printDividerLine() {
+    private void printDividerLine() {
         System.out.println("_________________________________________________");
     }
 
-    private static void printWelcomeBanner() {
+    private void printWelcomeBanner() {
         printDividerLine();
         System.out.println("This is" + System.lineSeparator() + DUKE_LOGO);
         System.out.println("How can I help you today?");
         printDividerLine();
     }
 
-    private static void printByeMessage() {
+    private void printByeMessage() {
         System.out.println("Goodbye");
         printDividerLine();
     }

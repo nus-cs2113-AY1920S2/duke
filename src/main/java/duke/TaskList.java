@@ -41,7 +41,7 @@ public class TaskList {
                     + (tasks.size() == 1 ? "" : "s") + " in the list");
         } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
-                System.out.println("You have no tasks to be deleted");
+                System.out.println("You have no tasks right now though");
             } else {
                 System.out.println("Please specify a task number between 1 and " + tasks.size());
             }
@@ -60,8 +60,12 @@ public class TaskList {
     }
 
     public void markTaskAsDone(int index) {
-        tasks.get(index).markAsDone();
-        System.out.println("Well, that's one task down");
-        System.out.println("  " + tasks.get(index));
+        if (tasks.size() == 0) {
+            System.out.println("You have no tasks right now though");
+        } else {
+            tasks.get(index).markAsDone();
+            System.out.println("Well, that's one task down");
+            System.out.println("  " + tasks.get(index));
+        }
     }
 }
