@@ -40,17 +40,17 @@ Words in `UPPER_CASE` are the parameters to be supplied by the user.
 
 For example:
 
-in ​```todo TASK_NAME```, TASK_NAME is the parameter of a specific todo task’s name which can be used as `todo buy a book`.
+in ​```todo TASK_NAME```, `TASK_NAME` is the parameter of a specific todo task’s name which can be used as `todo buy a book`.
 
-### 2.1 `Add` tasks: 
+### 2.1 `Add` Tasks: 
 
-#### 2.1.1 Add `Todo` task
+#### 2.1.1 Add `Todo` Task
 
 Add todo task into task list
 
 Format:​ ```todo TASK_NAME```
 
-#### 2.1.2 Add `Deadline` task
+#### 2.1.2 Add `Deadline` Task
 
 Add deadline task into task list
 
@@ -58,7 +58,7 @@ Format:​ ```deadline TASK_NAME /by TIME```
 
 Noted: If the users input a time in the format of `yyyy-mm-dd`, Duke can recognize the input time string as a real time.
 
-#### 2.1.3 Add `Event` task
+#### 2.1.3 Add `Event` Task
 
 Add event task into task list
 
@@ -90,7 +90,7 @@ Users can find all the tasks which contains a certain keyword.\
 
 Format: ​`find KEYWORD`
 
-### 2.6 Save and load
+### 2.6 Save and Load
 
 This software can save and load the recorded data automatically.
 
