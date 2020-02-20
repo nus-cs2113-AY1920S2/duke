@@ -27,7 +27,6 @@ public class Ui {
     public void endMessage() {
         System.out.println("____________________________________________________________________");
         System.out.println("Bob thanks you for coming! See you again soon!");
-        System.out.println("____________________________________________________________________");
     }
 
     public String readCommand() {

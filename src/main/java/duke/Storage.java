@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
+import duke.TaskList;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -16,10 +17,6 @@ import java.io.IOException;
 public class Storage {
 
     private String filePath;
-    private static final String TODO_COMMAND = "todo";
-    private static final String EVENT_COMMAND = "event";
-    private static final String DEADLINE_COMMAND = "deadline";
-
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -63,10 +60,10 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter("output.txt");
-            for (Task task : tasks) {
+            for (Task task : tasks.getTaskArray()) {
                 fw.write(task.toString() + System.lineSeparator());
             }
             fw.close();

@@ -1,227 +1,51 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.exception.*;
-import duke.command.Command;
 
+import duke.exception.DukeException;
+import duke.command.Command;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+
 
 public class Duke {
 
-    public static final String DIVIDER = "_________________________________________________";
-    public static final String DONE_COMMAND = "done";
-    public static final String LIST_COMMAND = "list";
-    public static final String TODO_COMMAND = "todo";
-    public static final String EVENT_COMMAND = "event";
-    public static final String DEADLINE_COMMAND = "deadline";
-    public static final String DELETE_COMMAND = "delete";
     public static final String END_COMMAND = "bye";
-    public static final String END_MESSAGE = "Bob thanks you for coming! See you again soon!";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void printIndividualTask(ArrayList<Task> tasks, int taskNum) {
-        if (tasks.get(taskNum - 1).getTaskDescription().equals(TODO_COMMAND)) {
-            System.out.println("Got it! You've added a todo task: ");
-            System.out.println(tasks.get(taskNum - 1));
-            System.out.println(taskValidator(taskNum));
-        } else if (tasks.get(taskNum - 1).getTaskDescription().equals(DEADLINE_COMMAND)) {
-            System.out.println("Got it! You've added a deadline task: ");
-            System.out.println(tasks.get(taskNum - 1));
-            System.out.println(taskValidator(taskNum));
-        } else if (tasks.get(taskNum - 1).getTaskDescription().equals(EVENT_COMMAND)) {
-            System.out.println("Got it! You've added an event task: ");
-            System.out.println(tasks.get(taskNum - 1));
-            System.out.println(taskValidator(taskNum));
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("output.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException err) {
+            ui.displayErrorMessage(err.toString());
+            tasks = new TaskList();
         }
     }
 
-    public static void printTaskList(ArrayList<Task> tasks) throws EmptyListException {
-        int sizeofArray = tasks.size();
-        if (sizeofArray != 0) {
-            System.out.println("Here are the tasks on your list: ");
-            for (int i = 1; i < sizeofArray + 1; i++) {
-                String taskNum = Integer.toString(i);
-                System.out.println(taskNum + "." + tasks.get(i - 1));
-            }
-        } else {
-            throw new EmptyListException("There are no tasks in the list! Please add some tasks!");
-        }
-    }
-    
-
-    public static void executeDoneTask(ArrayList<Task> tasks, String userInput) throws MissingTaskNumberException, MissingTaskNumberDescriptionException {
-        if (!userInput.trim().equals(DONE_COMMAND)) {
-            String[] words = userInput.split(" ");
-            int taskNum = Integer.parseInt(words[1]);
-            int sizeOfArray = tasks.size();
-            if (taskNum <= sizeOfArray) {
-                tasks.get(taskNum - 1).markAsDone();
-                System.out.println("Awesome! I've marked the following task as done:");
-                System.out.println(tasks.get(taskNum - 1));
-            } else {
-                throw new MissingTaskNumberException("This task number does not exist on the list!");
-            }
-        } else {
-            throw new MissingTaskNumberDescriptionException("Please add a task number to \'done\' to mark task as done!");
-        }
-    }
-
-    public static void executeDeleteTask(ArrayList<Task> tasks, String userInput) throws MissingTaskNumberException, MissingTaskNumberDescriptionException{
-        if (!userInput.trim().equals(DELETE_COMMAND)) {
-            String[] words = userInput.split(" ");
-            int taskNum = Integer.parseInt(words[1]);
-            int sizeOfArray = tasks.size();
-            if (taskNum <= sizeOfArray) {
-                System.out.println("Got it! I've removed this task: ");
-                System.out.println(tasks.get(taskNum - 1));
-                tasks.remove(taskNum - 1);
-                System.out.println(taskValidator(tasks.size()));
-            } else {
-                throw new MissingTaskNumberException("This task number does not exist on the list!");
-            }
-        } else {
-            throw new MissingTaskNumberDescriptionException("Please add a task number to \'delete\' to delete a task!");
-        }
-    }
-
-
-    public static String taskValidator(int numTasks) {
-        String totalTasks = Integer.toString(numTasks);
-        if (numTasks <= 1) {
-            return "You now have " + totalTasks + " task in the list!";
-        } else {
-            return "You now have " + totalTasks+ " tasks in the list!";
-        }
-    }
-
-
-    public static void executeToDo(ArrayList<Task> tasks, String userInput) throws MissingTaskException {
-        if (!userInput.trim().equals(TODO_COMMAND)) {
-            String todoTask = userInput.substring(TODO_COMMAND.length() + 1);
-            Task todo = new Todo(todoTask);
-            tasks.add(todo);
-            printIndividualTask(tasks,tasks.size());
-        } else {
-            throw new MissingTaskException("Todo tasks cannot be empty!");
-        }
-    }
-
-    public static void executeEvent(ArrayList<Task> tasks, String userInput) throws MissingTaskException, MissingEventDateException {
-        if (!userInput.trim().equals(EVENT_COMMAND)) {
-            int indexOfAt = userInput.indexOf("/at");
-            if (indexOfAt == -1) {
-                throw new MissingEventDateException("Please specify the date for event using \'at\'!");
-            }
-            String eventTask = userInput.substring(EVENT_COMMAND.length() + 1, indexOfAt - 1);
-            String atDate = userInput.substring(indexOfAt + "/at".length() + 1);
-            Task event = new Event(eventTask, atDate);
-            tasks.add(event);
-            printIndividualTask(tasks,tasks.size());
-        } else {
-            throw new MissingTaskException("Event tasks cannot be empty!");
-        }
-    }
-
-    public static void executeDeadline(ArrayList<Task> tasks, String userInput) throws MissingTaskException, MissingDeadlineDateException {
-        if (!userInput.trim().equals(DEADLINE_COMMAND)) {
-            int indexOfBy = userInput.indexOf("/by");
-            if (indexOfBy == -1) {
-                throw new MissingDeadlineDateException("Please specify a deadline using \'/by\'!");
-            }
-            String deadlineTask = userInput.substring(DEADLINE_COMMAND.length() + 1, indexOfBy - 1);
-            String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
-            Task deadline = new Deadline(deadlineTask, byDate);
-            tasks.add(deadline);
-            printIndividualTask(tasks,tasks.size());
-        } else {
-            throw new MissingTaskException("Deadline tasks cannot be empty!");
-        }
-    }
-
-    public static void getExecuteCommand(ArrayList<Task> tasks, String userInput) throws UnknownInputException {
-        String[] words = userInput.split(" ");
-        if (words[0].equals(TODO_COMMAND)) {
-            try {
-                executeToDo(tasks, userInput);
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-            }
-        } else if (words[0].equals(DEADLINE_COMMAND)) {
-            try {
-                executeDeadline(tasks, userInput);
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-            }
-        } else if (words[0].equals(EVENT_COMMAND)) {
-            try {
-                executeEvent(tasks, userInput);
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-            }
-        } else if (words[0].equals(DONE_COMMAND)) {
-            try {
-                executeDoneTask(tasks, userInput);
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-            }
-        } else if (words[0].equals(LIST_COMMAND)) {
-            try {
-                printTaskList(tasks);
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-            }
-        } else if (words[0].equals(DELETE_COMMAND)) {
-            try {
-                executeDeleteTask(tasks, userInput);
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-            }
-        } else {
-            throw new UnknownInputException("There is no such input!");
-        }
-    }
-
-    public static void main(String[] args) throws UnknownInputException {
-        Ui ui = new Ui();
-        TaskList tasks = new TaskList();
+    public void run() {
         ui.startMessage();
-        Storage storage = new Storage("output.txt");
         while (true) {
-
-            String userInput = ui.readCommand();
-            if (userInput.equals(END_COMMAND)) {
-                ui.endMessage();
-                break;
-            } else {
-                ui.displayDividerLine();
-                /*
-                try {
-                    ArrayList<Task> tasks = storage.load();
+            try {
+                String userInput = ui.readCommand();
+                if (userInput.equals(END_COMMAND)) {
+                    ui.endMessage();
+                    break;
+                } else {
+                    ui.displayDividerLine();
                     Command command = Parser.parse(userInput);
-                    command.execute(tasks, ui);
-                    //getExecuteCommand(tasks, userInput);
-                    storage.save(tasks);
-                } catch (FileNotFoundException err) {
-                    ArrayList<Task> tasks = new ArrayList<>();
-                    //getExecuteCommand(tasks, userInput);
-                    storage.save(tasks);
-                } catch (DukeException err) {
-                    ui.displayErrorMessage(err.toString());
-                }*/
-
-                try {
-                    Command command = Parser.parse(userInput);
-                    command.execute(tasks, ui);
-                } catch (DukeException err) {
-                    ui.displayErrorMessage(err.toString());
+                    command.execute(tasks, storage);
                 }
+            } catch (DukeException err) {
+                ui.displayErrorMessage(err.toString());
+            } finally {
                 ui.displayDividerLine();
             }
-
         }
-
     }
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
 }

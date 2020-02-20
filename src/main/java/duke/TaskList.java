@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.EmptyListException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.Todo;
@@ -27,6 +28,14 @@ public class TaskList {
         }
     }
 
+    public int getListSize() {
+        return tasks.size();
+    }
+
+    public ArrayList<Task> getTaskArray() {
+        return this.tasks;
+    }
+
     public void addTodo(String todoTask) {
         Todo todo = new Todo(todoTask);
         tasks.add(todo);
@@ -51,5 +60,31 @@ public class TaskList {
         System.out.println(taskValidator(tasks.size()));
     }
 
+    public void listTasks() throws EmptyListException {
+        int sizeofArray = tasks.size();
+        if (sizeofArray != 0) {
+            System.out.println("Here are the tasks on your list: ");
+            for (int i = 1; i < sizeofArray + 1; i++) {
+                String taskNum = Integer.toString(i);
+                System.out.println(taskNum + "." + tasks.get(i - 1));
+            }
+        } else {
+            throw new EmptyListException("There are no tasks in the list! Please add some tasks!");
+        }
+    }
+
+    public void deleteTask(int taskNum) {
+        System.out.println("Got it! I've removed this task: ");
+        System.out.println(tasks.get(taskNum - 1).toString());
+        tasks.remove(taskNum - 1);
+        System.out.println(taskValidator(tasks.size()));
+    }
+
+    public void markDone(int taskNum) {
+        tasks.get(taskNum - 1).markAsDone();
+        System.out.println("Awesome! I've marked the following task as done:");
+        System.out.println(tasks.get(taskNum - 1).toString());
+
+    }
 
 }

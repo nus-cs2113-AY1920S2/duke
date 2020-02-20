@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.MissingTaskException;
 import duke.exception.MissingDeadlineDateException;
 import duke.TaskList;
-import duke.Ui;
+import duke.Storage;
 
 
 
@@ -15,7 +15,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws MissingTaskException, MissingDeadlineDateException {
+    public void execute(TaskList tasks, Storage storage) throws MissingTaskException, MissingDeadlineDateException {
         if (!userInput.trim().equals(DEADLINE_COMMAND)) {
             int indexOfBy = userInput.indexOf("/by");
             if (indexOfBy == -1) {
@@ -24,6 +24,7 @@ public class DeadlineCommand extends Command {
             String deadlineTask = userInput.substring(DEADLINE_COMMAND.length() + 1, indexOfBy - 1);
             String byDate = userInput.substring(indexOfBy + "/by".length() + 1);
             tasks.addDeadline(deadlineTask, byDate);
+            storage.save(tasks);
         } else {
             throw new MissingTaskException("Deadline tasks cannot be empty!");
         }

@@ -2,7 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.UnknownInputException;
 
@@ -24,8 +27,14 @@ public class Parser {
             return new EventCommand(userInput);
         } else if (words[0].equals(DEADLINE_COMMAND)) {
             return new DeadlineCommand(userInput);
+        } else if (words[0].equals(LIST_COMMAND)) {
+            return new ListCommand();
+        } else if (words[0].equals(DELETE_COMMAND)) {
+            return new DeleteCommand(userInput);
+        } else if (words[0].equals(DONE_COMMAND)) {
+            return new DoneCommand(userInput);
         } else {
-            throw new UnknownInputException("Sorry! There is no such input!");
+            throw new UnknownInputException("There is no such input!");
         }
     }
 }
