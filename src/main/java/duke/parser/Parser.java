@@ -60,7 +60,7 @@ public class Parser {
     public static void parseCommand(String userCommand, String userParams,
                                     TaskList taskList, Storage storage)
             throws NoDescException, NoDateException, InvalidDateFormatException,
-                InvalidCommandException, NoFindException {
+                InvalidCommandException, NoFindException, InvalidTaskIndexException {
         switch (userCommand) {
         case "todo":
             parseTodo(userParams, taskList, storage);
@@ -99,9 +99,16 @@ public class Parser {
      * @param storage Current session's Storage.
      */
     private static void parseTaskModification(String userCommand, String userParams,
-                                              TaskList taskList, Storage storage) {
+                                              TaskList taskList, Storage storage)
+            throws InvalidTaskIndexException, NumberFormatException {
         String stringId = userParams.replaceAll("[^0-9]", ""); // Extract numeric characters
+
         int taskId = Integer.parseInt(stringId) - 1;
+
+        if (taskId < 0 || taskId >= taskList.getSize()) {
+            throw new InvalidTaskIndexException();
+        }
+
         if (userCommand.equals("done")) {
             taskList.setDone(taskId, storage);
         } else {

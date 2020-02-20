@@ -91,6 +91,10 @@ public class Duke {
             Ui.formatPrint("Please input the string you want to find.");
         } catch (DateTimeParseException e) {
             Ui.formatPrint("Incorrect date format: please input date as YYYY-mm-dd.");
+        } catch (InvalidTaskIndexException e) {
+            Ui.formatPrint("Error: please input a valid task index.");
+        } catch (NumberFormatException e) {
+            Ui.formatPrint("Please input an integer as task index.");
         }
         System.out.println("You have " + taskList.getSize() + " task/s. (type 'list' to list your tasks)");
         System.out.println("Anything else? Remember that you can leave by typing 'bye'.");
