@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     protected String at;
 
@@ -9,10 +12,17 @@ public class Event extends Task {
         super.taskType = "E";
     }
 
+    /**
+     * Gets this event's time
+     * @return the event's time
+     */
     public String getAt() {
         return at;
     }
 
+    /**
+     * Sets this event's time
+     */
     public void setAt(String at) {
         this.at = at;
     }

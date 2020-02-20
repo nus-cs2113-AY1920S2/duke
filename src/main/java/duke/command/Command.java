@@ -7,6 +7,10 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+/**
+ * Represents an executable command.
+ */
+
 public class Command {
     protected String fullCommand;
     protected String taskType;
@@ -42,11 +46,21 @@ public class Command {
         isAdd = isTodo || isDeadline || isEvent;
     }
 
-
+    /**
+     * Detects whether the command is exit.
+     * @return whether the command is exit.
+     */
     public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * Executes the command.
+     * @param tasks the task list.
+     * @param ui the Duke's ui.
+     * @param storage the Duke's storage.
+     * @throws DukeException if something wrong when executing.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
     }
 

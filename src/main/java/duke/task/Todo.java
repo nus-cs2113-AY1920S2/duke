@@ -1,7 +1,9 @@
 package duke.task;
 
 import duke.task.Task;
-
+/**
+ * Represents a todo task.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

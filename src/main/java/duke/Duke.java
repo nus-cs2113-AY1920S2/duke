@@ -7,6 +7,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Entry point of Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 
 public class Duke {
     private Ui ui;
@@ -28,20 +32,24 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /** Runs the application until user enters "bye". */
     public void run() {
         start();
         processCommand();
         exit();
     }
 
+    /** Starts with greeting to the user. */
     public void start() {
         ui.greet();
     }
 
+    /** Exits with saying "bye" to the user. */
     public void exit() {
         ui.bye();
     }
 
+    /** Reads the user command and execute it until user enters "bye". */
     public void processCommand() {
         boolean isExit = false;
         while (!isExit) {

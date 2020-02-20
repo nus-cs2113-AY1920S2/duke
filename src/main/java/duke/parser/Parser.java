@@ -3,8 +3,17 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into command for execution.
+     * @param fullCommand full user input command.
+     * @return the command based on user input.
+     * @throws DukeException if user input command is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String taskType;
         String args;

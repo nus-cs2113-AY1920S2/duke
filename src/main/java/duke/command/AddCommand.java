@@ -10,6 +10,9 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
 
     public AddCommand(String fullCommand, String taskType, String args) {
@@ -23,6 +26,11 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Processes the todo command and gets the todo task.
+     * @return a todo task the user wants to record.
+     * @throws DukeException if task name missing.
+     */
     public Todo processToDoDescription() throws DukeException {
         /*Process Todo Exception */
         TestDukeException testTodoException = new TestDukeException(super.fullCommand);
@@ -33,6 +41,11 @@ public class AddCommand extends Command {
         return new Todo(todoDescription);
     }
 
+    /**
+     * Processes the deadline command and gets the deadline task.
+     * @return a deadline task the user wants to record.
+     * @throws DukeException if task name or time missing.
+     */
     public Deadline processDeadlineDescription() throws DukeException {
         /*Process Deadline Exception */
         TestDukeException testDeadlineException = new TestDukeException(super.fullCommand);
@@ -45,6 +58,11 @@ public class AddCommand extends Command {
         return new Deadline(name, time);
     }
 
+    /**
+     * Processes the event command and gets the event task.
+     * @return a event task the user wants to record.
+     * @throws DukeException if task name or time missing.
+     */
     public Event processEventDescription() throws DukeException {
         /*Process Event Exception */
         TestDukeException testEventException = new TestDukeException(super.fullCommand);
@@ -57,7 +75,12 @@ public class AddCommand extends Command {
         return new Event(name, time);
     }
 
-
+    /**
+     * Adds the task into task list.
+     * @param tasks the task list.
+     * @return the added task.
+     * @throws DukeException if something wrong when processes the command.
+     */
     public Task addTask(TaskList tasks) throws DukeException{
         Task newTask;
 

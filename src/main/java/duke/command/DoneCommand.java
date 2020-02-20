@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+/**
+ * Marks a task as done using it's index from the task list.
+ */
 public class DoneCommand extends Command {
     public DoneCommand(String fullCommand, String taskType, String args) {
         super(fullCommand, taskType, args);
@@ -18,6 +21,12 @@ public class DoneCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Marks a task as done.
+     * @param tasks the task list.
+     * @return the marked task.
+     * @throws DukeException if index is out of range.
+     */
     public Task markAsDone(TaskList tasks) throws DukeException {
         if(super.args.length() == 0){
             throw new DukeException("Please enter a number!");

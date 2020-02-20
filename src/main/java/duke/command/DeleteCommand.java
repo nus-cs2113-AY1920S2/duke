@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+/**
+ * Deletes a task using it's index from the task list.
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand(String fullCommand, String taskType, String args) {
         super(fullCommand, taskType, args);
@@ -18,6 +21,12 @@ public class DeleteCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Deletes the task from the task list.
+     * @param tasks the task list.
+     * @return the deleted task
+     * @throws DukeException if index is out of range.
+     */
     public Task delete(TaskList tasks) throws DukeException {
         int taskID = Integer.parseInt(super.args);
 
