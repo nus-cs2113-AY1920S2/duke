@@ -3,3 +3,4 @@
 3. [E] [✓] watch a film (at: 4:00 pm)
 4. [E] [✓] make a pre of film (at: 2020-3-18)
 5. [E] [✓] attend a party (at: 2020-05-04)
+6. [D] [✘] iP (by: Mar 2 2020)
