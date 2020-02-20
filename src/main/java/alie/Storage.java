@@ -18,7 +18,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public TaskManager readFromFile() throws FileNotFoundException, InvalidCmdException {
+    public TaskManager readFromFile() throws FileNotFoundException, InvalidFileFormatException {
         File f = new File(filePath);
         TaskManager taskManager = new TaskManager();
         Scanner s = new Scanner(f);
@@ -27,16 +27,16 @@ public class Storage {
              String encodedTasks = s.nextLine();
              switch (encodedTasks.charAt(0)) {
              case 'T':
-                 taskManager.addNewTask(ToDo.decodeTask(encodedTasks));
+                 taskManager.addStorageTask(ToDo.decodeTask(encodedTasks));
                  break;
              case 'D':
-                 taskManager.addNewTask(Deadlines.decodeTask(encodedTasks));
+                 taskManager.addStorageTask(Deadlines.decodeTask(encodedTasks));
                  break;
              case 'E':
-                 taskManager.addNewTask(Events.decodeTask(encodedTasks));
+                 taskManager.addStorageTask(Events.decodeTask(encodedTasks));
                  break;
              default:
-                 throw new InvalidCmdException("File format is not correct.");
+                 throw new InvalidFileFormatException("File format is not correct.");
              }
          }
          return taskManager;
@@ -47,6 +47,7 @@ public class Storage {
         StringBuilder allTasks = new StringBuilder();
         for (Task task : taskManager.taskList) {
             allTasks.append(task.encodeTask());
+            allTasks.append(System.lineSeparator());
         }
         fw.write(allTasks.toString());
         fw.close();

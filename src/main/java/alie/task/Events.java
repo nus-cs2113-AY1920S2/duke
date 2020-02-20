@@ -20,7 +20,7 @@ public class Events extends Task {
     }
 
     public static Events decodeTask(String encodedTask) {
-        String[] task = encodedTask.split(DELIMITER);
+        String[] task = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(task[1]);
         String description = task[2];
         String startDate = task[3];

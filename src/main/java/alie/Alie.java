@@ -21,16 +21,15 @@ public class Alie {
     protected static final int DELETE_CMD_LENGTH = 7;
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
     protected static final String EVENT_DETAILS_DIVIDER = " /at ";
-    protected static final String FILEPATH = "storage.txt";
 
     public static void main(String[] args) {
         printWelcomeMsg();
 
         TaskManager checkList = null;
-        Storage storage = new Storage(FILEPATH);
+        Storage storage = new Storage(findStoragePath());
         Scanner userInput = new Scanner(System.in);
 
-        checkList = getDataFromStorage(checkList, storage);
+        checkList = getDataFromStorage(storage);
         while (true) {
             printHeader();
             String cmd = getUserInput(userInput);
@@ -47,6 +46,12 @@ public class Alie {
         System.out.println("Hello from\n" + logo);
         printHeader();
         System.out.println("What would you like to do?");
+    }
+
+    public static String findStoragePath() {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "storage.txt");
+        return path.toString();
     }
 
     public static void printHeader() {
@@ -187,14 +192,16 @@ public class Alie {
         }
     }
 
-    private static TaskManager getDataFromStorage(TaskManager checkList, Storage storage) {
+    private static TaskManager getDataFromStorage(Storage storage) {
+        TaskManager checkList = null;
         try {
             checkList = storage.readFromFile();
+            System.out.println("File found. Imported data from file.");
         } catch (FileNotFoundException e) {
             checkList = new TaskManager();
             System.out.println("File not found");
-        } catch (InvalidCmdException e) {
-
+        } catch (InvalidFileFormatException errorMsg) {
+            System.out.println(errorMsg);
         } finally {
             if (checkList == null) {
                 checkList = new TaskManager();

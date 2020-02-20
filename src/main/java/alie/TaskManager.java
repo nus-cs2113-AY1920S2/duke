@@ -9,6 +9,10 @@ public class TaskManager {
     protected static final String MORE_INDENTATION = "        ";
     protected ArrayList<Task> taskList = new ArrayList<>();
 
+    public void addStorageTask(Task newTask) {
+        taskList.add(newTask);
+    }
+
     public void addNewTask(Task newTask) {
         taskList.add(newTask);
         int taskId = taskList.size() - 1;
