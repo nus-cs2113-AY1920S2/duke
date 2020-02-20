@@ -62,12 +62,16 @@ public class Duke {
                         break;
 
                     case "list":
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Here are your task(s) currently in your planner:");
-                        for (int i = 0; i < size; i++) {
-                            System.out.println(i + 1 + "." + tasks.get(i));
+                        if(tasks.size() != 0) {
+                            System.out.println("____________________________________________________________");
+                            System.out.println("Here are your task(s) currently in your planner:");
+                            for (int i = 0; i < tasks.size(); i++) {
+                                System.out.println(i + 1 + "." + tasks.get(i));
+                            }
+                            System.out.println("____________________________________________________________");
+                        } else {
+                            System.out.println("Wow! your planner is empty currently! Try adding some tasks first!");
                         }
-                        System.out.println("____________________________________________________________");
                         break;
 
                     case "done":
@@ -75,16 +79,31 @@ public class Duke {
                         if(l == ""){
                             throw new IllegalArgumentException();
                         }
-                        int taskNumber = Integer.parseInt(l);
-                        tasks.get(taskNumber - 1).markAsDone(tasks.get(taskNumber - 1));
-                        if(tasks.get(0) == null){
-//                            if(tasks[0] == null){
+                        int taskNumber = Integer.parseInt(l) - 1;
+                        if(taskNumber >= tasks.size() || taskNumber < 0){
                                 throw new NullPointerException();
                         }
+                        tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
                         System.out.println("____________________________________________________________");
                         System.out.println("Great job! I've marked this task as done in your planner:");
-                        System.out.println(tasks.get(taskNumber - 1));
-//                        System.out.println(tasks[taskNumber - 1]);
+                        System.out.println(tasks.get(taskNumber));
+                        System.out.println("____________________________________________________________");
+                        break;
+
+                    case "delete":
+                        l = line.replace(" ","");
+                        taskNumber = Integer.parseInt(l) - 1;
+                        if(l == ""){
+                            throw new IllegalArgumentException();
+                        }
+                        if(taskNumber >= tasks.size() || taskNumber < 0){
+                            throw new NullPointerException();
+                        }
+                        System.out.println("____________________________________________________________");
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(tasks.get(taskNumber));
+                        tasks.remove(taskNumber);
+                        System.out.println("Now you have " + tasks.size() + " tasks in your list.");
                         System.out.println("____________________________________________________________");
                         break;
 
@@ -108,27 +127,24 @@ public class Duke {
     public static void printAddedTask(String s) {
         System.out.println("____________________________________________________________");
         System.out.println(s);
-        System.out.println(tasks.get(size - 1));                     //size-1 to get index value of current task
-        System.out.println("Total number of tasks in the list:  " + size);
+        System.out.println("Total number of tasks in the list:  " + tasks.size());
         System.out.println("____________________________________________________________");
     }
 
     // method for greeting and displaying of all available functions
     public static String GreetingsAndFunctions(Scanner myScanner) {
 
-            String logo = " __     __ __________ __     __ _________       _________       ___        _________  __     __ \n"
-                         + "|  |   |  |   ____   |  |   |  |   ___   |     |   ___   \\     /   \\      |   ___   \\|  |   |  |\n"
-                         + "|  |   |  |  |    |  |  |   |  |  |   |  |     |  |   |  |    /  _  \\     |  |   |  ||  |   |  |\n"
-                         + "|  |___|  |  |    |  |  |   |  |  |___|  |     |  |___|  |   /  /_\\  \\    |  |___|  ||  |___|  |\n"
-                         + "|______   |  |    |  |  |   |  |   ___   |     |   ___   |  /  _____  \\   |   ___   ||______   |\n"
-                         + "       |  |  |    |  |  |   |  |  |   \\  \\     |  |   |  | /  /     \\  \\  |  |   |  |       |  |\n"
-                         + " ______|  |  |____|  |  |___|  |  |    \\  \\    |  |___|  |/  /       \\  \\ |  |___|  | ______|  |\n"
-                         + "|_________|__________|_________|__|     \\__\\   |_________/__/         \\__\\|_________/|_________|\n";
+            String logo = " _____     _      ______ ______\n"
+                        + "|  _  \\   / \\    |  __  |  ____|\n"
+                        + "| |_| |  / _ \\   | |__| | |___\n"
+                        + "|  _  | / /_\\ \\  |  ____|  ___|\n"
+                        + "| |_| |/ _____ \\ | |    | |____\n"
+                        + "|_____/_/     \\_\\|_|    |______|\n";
 
             System.out.println(logo);
             System.out.println("____________________________________________________________");
-            System.out.println("Hey there! I am AI Scheduler, YOURBABY");
-            System.out.println("Please enter your username: ");
+            System.out.println("Hey there! BAPE, your scheduler");
+            System.out.println("How do i call you? ");
             String userName = myScanner.nextLine();
             System.out.println("Hi " + userName + "!" + " What can i do for you?");
             System.out.println(" ___________________________________________________________________________________________________________");
@@ -151,4 +167,3 @@ public class Duke {
         size++;
     }
 }
-
