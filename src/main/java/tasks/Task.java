@@ -22,7 +22,9 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon(){
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "Y" : "N");
+//        return (isDone ? "\u2713" : "\u2718"); check : cross mark
+
     }
 
     public void markDone(){
