@@ -28,6 +28,7 @@ public class Parser {
         boolean isList = taskType.equalsIgnoreCase("list");
         boolean isDone = taskType.equalsIgnoreCase("done");
         boolean isDelete = taskType.equalsIgnoreCase("delete");
+        boolean isFind = taskType.equalsIgnoreCase("find");
         boolean isAdd = isTodo || isDeadline || isEvent;
 
         boolean isNotEmpty = words.length > 1;
@@ -47,7 +48,9 @@ public class Parser {
             return new DoneCommand(fullCommand, taskType, args);
         } else if(isExit){
             return new ExitCommand(fullCommand, taskType, args);
-        }else {
+        } else if(isFind){
+            return new FindCommand(fullCommand, taskType, args);
+        } else {
             throw new DukeException("Your command cannot be used.");
         }
 

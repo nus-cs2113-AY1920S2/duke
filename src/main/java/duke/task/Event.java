@@ -1,15 +1,29 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents an event task.
  */
 public class Event extends Task {
     protected String at;
+    private boolean isStandardTime;
+    protected LocalDate date;
 
     public Event(String description, String time) {
         super(description);
         this.at = time;
-        super.taskType = "E";
+        isStandardTime = false;
+        try {
+            this.date = LocalDate.parse(time);
+            isStandardTime = true;
+        } catch (DateTimeParseException e){
+
+        } finally {
+            super.taskType = "E";
+        }
     }
 
     /**
@@ -29,6 +43,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + at + ")";
+        String outputTime = isStandardTime? date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : at;
+        return "[E] " + super.toString() + " (at: " + outputTime + ")";
     }
 }
