@@ -5,7 +5,7 @@
 text-ui-test/ACTUAL.TXT
 
 # Data files
-resources/data.csv
+data/data.csv
 
 # IDEA files
 /.idea/
@@ -15,7 +15,7 @@ resources/data.csv
 # Gradle build files
 /.gradle/
 /build/
-resources/docs/
+data/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store

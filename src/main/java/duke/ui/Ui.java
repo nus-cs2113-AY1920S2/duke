@@ -73,10 +73,10 @@ public class Ui {
     public static void printCorrectDateFormat(String taskType) {
         switch (taskType) {
         case "deadline":
-            Ui.formatPrint("deadline description /by yyy-mm-dd");
+            Ui.formatPrint("deadline description /by yyyy-mm-dd");
             break;
         case "event":
-            Ui.formatPrint("event description /at yyyy-mm-dd");
+            Ui.formatPrint("event description /on yyyy-mm-dd");
             break;
         }
     }
