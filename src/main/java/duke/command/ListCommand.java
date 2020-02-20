@@ -29,7 +29,7 @@ public class ListCommand extends Command {
     public void list(TaskList tasks, Ui ui) {
         ui.printInfoHead("Here are the matching tasks in your list:");
         for(Task task: tasks){
-            int id = tasks.indexOf(task);
+            int id = tasks.indexOf(task) + 1;
             ui.printOneTask(task, id);
         }
         ui.printOutputTail();
