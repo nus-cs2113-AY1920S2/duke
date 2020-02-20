@@ -220,7 +220,7 @@ public class Duke {
         String userCmd = "";
 
         String dir = System.getProperty("user.dir");
-        Path filepath = Paths.get(dir, "src","main", "java","data", "taskList.txt");
+        Path filepath = Paths.get(dir, "data", "taskList.txt");
         String filepathStr = String.valueOf(filepath);
         File dukeFile = new File(filepathStr);
         try {
