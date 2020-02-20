@@ -31,8 +31,7 @@ public class Storage {
         Gson gson = builder.create();
         BufferedReader bufferedReader = new BufferedReader(
                 new FileReader(userDirectory + "/taskList.json"));
-        ArrayList<Task> tasks = new ArrayList<>();
-        ArrayList<Task> newTask = gson.fromJson(bufferedReader, new TypeToken<ArrayList<Task>>(){}.getTypeK());
+        ArrayList<Task> newTask = gson.fromJson(bufferedReader, new TypeToken<ArrayList<Task>>(){}.getType());
         return newTask;
     }
 
