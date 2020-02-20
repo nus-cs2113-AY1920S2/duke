@@ -4,6 +4,7 @@ import Tasks.Events;
 import Tasks.Task;
 import Tasks.ToDo;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,6 +33,12 @@ public class Duke {
         printWelcomeMessage();
         String userInput;
         ArrayList<Task> toDoList = new ArrayList<>();
+        Storage storage = new Storage();
+        try {
+            toDoList = storage.load();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
         do {
             Scanner in = new Scanner(System.in);
             userInput = in.nextLine();
@@ -145,6 +152,7 @@ public class Duke {
                 System.out.println("OOPS!!! IDGI THAT");
                 printSeparator();
             }
+            storage.save(toDoList);
         } while (!userInput.equalsIgnoreCase("bye"));
 
         printSeparator();

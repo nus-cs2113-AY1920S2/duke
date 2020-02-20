@@ -16,6 +16,10 @@ shadowJar {
     archiveAppendix = null
 }
 
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
