@@ -8,80 +8,79 @@ This is
 
 How can I help you today?
 _________________________________________________
-> You have no tasks to be deleted
+> You have no tasks right now though
 _________________________________________________
 > Task added:
-  [T][?] borrow book
+  [T][X] borrow book
 You have 1 task in the list
 _________________________________________________
 > Quite a few tasks you got there
-  1. [T][?] borrow book
+  1. [T][X] borrow book
 _________________________________________________
 > Task added:
-  [D][?] return book (by: Sunday)
+  [D][X] return book (by: Sunday)
 You have 2 tasks in the list
 _________________________________________________
 > Task added:
-  [E][?] project meeting (at: Mon 2-4pm)
+  [E][X] project meeting (at: Mon 2-4pm)
 You have 3 tasks in the list
 _________________________________________________
 > Quite a few tasks you got there
-  1. [T][?] borrow book
-  2. [D][?] return book (by: Sunday)
-  3. [E][?] project meeting (at: Mon 2-4pm)
+  1. [T][X] borrow book
+  2. [D][X] return book (by: Sunday)
+  3. [E][X] project meeting (at: Mon 2-4pm)
 _________________________________________________
 > Well, that's one task down
-  [D][?] return book (by: Sunday)
+  [D][O] return book (by: Sunday)
 _________________________________________________
 > Quite a few tasks you got there
-  1. [T][?] borrow book
-  2. [D][?] return book (by: Sunday)
-  3. [E][?] project meeting (at: Mon 2-4pm)
+  1. [T][X] borrow book
+  2. [D][O] return book (by: Sunday)
+  3. [E][X] project meeting (at: Mon 2-4pm)
 _________________________________________________
 > Well, that's one task down
-  [T][?] borrow book
+  [T][O] borrow book
 _________________________________________________
 > Well, that's one task down
-  [E][?] project meeting (at: Mon 2-4pm)
+  [E][O] project meeting (at: Mon 2-4pm)
 _________________________________________________
 > Quite a few tasks you got there
-  1. [T][?] borrow book
-  2. [D][?] return book (by: Sunday)
-  3. [E][?] project meeting (at: Mon 2-4pm)
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Sunday)
+  3. [E][O] project meeting (at: Mon 2-4pm)
 _________________________________________________
 > Task added:
-  [D][?] finish reading book (by: Sat maybe?)
+  [D][X] finish reading book (by: Sat maybe?)
 You have 4 tasks in the list
 _________________________________________________
 > Task added:
-  [T][?] i want to write a slash here /by doing sth like this
+  [T][X] i want to write a slash here /by doing sth like this
 You have 5 tasks in the list
 _________________________________________________
 > Quite a few tasks you got there
-  1. [T][?] borrow book
-  2. [D][?] return book (by: Sunday)
-  3. [E][?] project meeting (at: Mon 2-4pm)
-  4. [D][?] finish reading book (by: Sat maybe?)
-  5. [T][?] i want to write a slash here /by doing sth like this
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Sunday)
+  3. [E][O] project meeting (at: Mon 2-4pm)
+  4. [D][X] finish reading book (by: Sat maybe?)
+  5. [T][X] i want to write a slash here /by doing sth like this
 _________________________________________________
 > Well, that's one task down
-  [E][?] project meeting (at: Mon 2-4pm)
+  [E][O] project meeting (at: Mon 2-4pm)
 _________________________________________________
 > Well, that's one task down
-  [D][?] finish reading book (by: Sat maybe?)
+  [D][O] finish reading book (by: Sat maybe?)
 _________________________________________________
 > Well, that's one task down
-  [T][?] i want to write a slash here /by doing sth like this
+  [T][O] i want to write a slash here /by doing sth like this
 _________________________________________________
-> Task deleted:
-  [T][?] i want to write a slash here /by doing sth like this
-You have 4 tasks in the list
+> Please specify a task number between 1 and 5
 _________________________________________________
 > Quite a few tasks you got there
-  1. [T][?] borrow book
-  2. [D][?] return book (by: Sunday)
-  3. [E][?] project meeting (at: Mon 2-4pm)
-  4. [D][?] finish reading book (by: Sat maybe?)
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Sunday)
+  3. [E][O] project meeting (at: Mon 2-4pm)
+  4. [D][O] finish reading book (by: Sat maybe?)
+  5. [T][O] i want to write a slash here /by doing sth like this
 _________________________________________________
 > ☹ OOPS!!! The description of a todo cannot be empty
 _________________________________________________
@@ -92,8 +91,8 @@ _________________________________________________
 > ☹ OOPS!!! The description and date of a deadline cannot be empty
 _________________________________________________
 > Task added:
-  [D][?] to-trim deadline (by: to-trim date)
-You have 5 tasks in the list
+  [D][X] to-trim deadline (by: to-trim date)
+You have 6 tasks in the list
 _________________________________________________
 > ☹ OOPS!!! The description and date of an event cannot be empty
 _________________________________________________
@@ -102,26 +101,83 @@ _________________________________________________
 > ☹ OOPS!!! The description and date of an event cannot be empty
 _________________________________________________
 > Task added:
-  [E][?] to-trim event (at: to-trim date)
-You have 6 tasks in the list
+  [E][X] to-trim event (at: to-trim date)
+You have 7 tasks in the list
 _________________________________________________
-> Please specify a task number between 1 and 6
+> Task added:
+  [T][X] 8
+You have 8 tasks in the list
+_________________________________________________
+> Task added:
+  [T][X] 9
+You have 9 tasks in the list
+_________________________________________________
+> Task added:
+  [T][X] 10
+You have 10 tasks in the list
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Sunday)
+  3. [E][O] project meeting (at: Mon 2-4pm)
+  4. [D][O] finish reading book (by: Sat maybe?)
+  5. [T][O] i want to write a slash here /by doing sth like this
+  6. [D][X] to-trim deadline (by: to-trim date)
+  7. [E][X] to-trim event (at: to-trim date)
+  8. [T][X] 8
+  9. [T][X] 9
+ 10. [T][X] 10
+_________________________________________________
+> ☹ OOPS!!! Please specify a valid task number to be marked as done
+_________________________________________________
+> Well, that's one task down
+  [T][O] 10
+_________________________________________________
+> Please specify a task number between 1 and 10
 _________________________________________________
 > Task deleted:
-  [D][?] return book (by: Sunday)
+  [T][O] 10
+You have 9 tasks in the list
+_________________________________________________
+> Task deleted:
+  [D][O] return book (by: Sunday)
+You have 8 tasks in the list
+_________________________________________________
+> Task deleted:
+  [E][O] project meeting (at: Mon 2-4pm)
+You have 7 tasks in the list
+_________________________________________________
+> Task deleted:
+  [D][O] finish reading book (by: Sat maybe?)
+You have 6 tasks in the list
+_________________________________________________
+> Task deleted:
+  [T][O] i want to write a slash here /by doing sth like this
 You have 5 tasks in the list
 _________________________________________________
 > Task deleted:
-  [E][?] project meeting (at: Mon 2-4pm)
+  [D][X] to-trim deadline (by: to-trim date)
 You have 4 tasks in the list
 _________________________________________________
-> Quite a few tasks you got there
-  1. [T][?] borrow book
-  2. [D][?] finish reading book (by: Sat maybe?)
-  3. [D][?] to-trim deadline (by: to-trim date)
-  4. [E][?] to-trim event (at: to-trim date)
+> Task deleted:
+  [E][X] to-trim event (at: to-trim date)
+You have 3 tasks in the list
 _________________________________________________
-> Please specify a task number between 1 and 4
+> Task deleted:
+  [T][X] 8
+You have 2 tasks in the list
 _________________________________________________
-> Goodbye
+> Task deleted:
+  [T][O] borrow book
+You have 1 task in the list
+_________________________________________________
+> Task deleted:
+  [T][X] 9
+You have 0 tasks in the list
+_________________________________________________
+> Nice, nothing to see here
+_________________________________________________
+> You have no tasks right now though
+_________________________________________________
+> Bye then
 _________________________________________________

@@ -15,7 +15,7 @@ list
 done 3
 done 4
 done 5
-delete 5
+delete 8
 list
 todo
 deadline
@@ -26,9 +26,23 @@ event
 event   /at  some time
 event  yes  no  /at
 event       to-trim event    /at   to-trim date
-delete 0
+todo 8
+todo 9
+todo 10
+list
+done 11
+done 10
+delete 11
+delete 10
 delete 2
 delete 2
+delete 2
+delete 2
+delete 2
+delete 2
+delete 2
+delete 1
+delete 1
 list
 delete 5
 bye

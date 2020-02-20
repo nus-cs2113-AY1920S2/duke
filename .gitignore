@@ -13,4 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 dukeData.txt
-/text-ui-test/ACTUAL.TXT
+/text-ui-test/ECTUAL.TXT
