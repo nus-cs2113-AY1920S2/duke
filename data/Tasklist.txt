@@ -1,0 +1,3 @@
+T//1//borrow book
+E//0//carrer fair//NUSHALL
+D//1//return book//2pm monday
