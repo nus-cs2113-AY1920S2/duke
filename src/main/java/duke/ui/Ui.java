@@ -89,5 +89,13 @@ public class Ui {
         out.println("\nPlease enter your command or enter \"bye\" to exit:");
     }
 
+    public void printOneTask(Task task, int ID) {
+        out.println("\t"+ ID + "." + task.toString());
+    }
+
+    public void printInfoHead(String infoHead) {
+        out.println(CUTTING_LINE);
+        out.println(infoHead);
+    }
 
 }
