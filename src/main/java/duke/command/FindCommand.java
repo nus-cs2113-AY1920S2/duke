@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
-
+/** Gives users a way to find a task by searching for a keyword. */
 public class FindCommand extends Command {
 
     public FindCommand(String fullCommand, String taskType, String args) {
@@ -17,6 +17,13 @@ public class FindCommand extends Command {
         find(tasks, args, ui);
     }
 
+    /**
+     * Finds a task by searching for a keyword.
+     * @param tasks task list
+     * @param args the keyword
+     * @param ui Duke's UI
+     * @throws DukeException if user do not enter a keyword or find nothing.
+     */
     public void find(TaskList tasks, String args, Ui ui) throws DukeException {
         boolean isEmptyKeyword = args.length()==0;
         if(isEmptyKeyword){
