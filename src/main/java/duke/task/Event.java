@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     protected String at;
     private boolean isStandardTime;
@@ -23,10 +26,17 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets this event's time
+     * @return the event's time
+     */
     public String getAt() {
         return at;
     }
 
+    /**
+     * Sets this event's time
+     */
     public void setAt(String at) {
         this.at = at;
     }

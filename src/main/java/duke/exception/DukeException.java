@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Signals that some exceptions when Duke runs.
+ */
 public class DukeException extends Exception {
     private String message;
 

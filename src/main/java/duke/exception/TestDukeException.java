@@ -1,7 +1,9 @@
 package duke.exception;
 
 import duke.exception.DukeException;
-
+/**
+ * Tests whether there is a Duke exception.
+ */
 public class TestDukeException {
     private String message;
     private boolean isTodo ;
@@ -21,6 +23,10 @@ public class TestDukeException {
         isWrongType = !(isTodo || isDeadline || isEvent);
     }
 
+    /**
+     * Tests whether there is a Todo exception.
+     * @throws DukeException if todo's task name missing.
+     */
     public void throwToDoException() throws DukeException {
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;
@@ -29,6 +35,10 @@ public class TestDukeException {
         }
     }
 
+    /**
+     * Tests whether there is a Deadline exception.
+     * @throws DukeException if deadline's task name or time missing.
+     */
     public void throwDeadlineException() throws DukeException{
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;
@@ -37,6 +47,10 @@ public class TestDukeException {
         }
     }
 
+    /**
+     * Tests whether there is a Event exception.
+     * @throws DukeException if Event's task name or time missing.
+     */
     public void throwEventException() throws DukeException{
         String[] words = message.split(" ");
         boolean isWrongLength = words.length <= 1;

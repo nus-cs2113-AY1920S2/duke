@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
     protected String by;
     private boolean isStandardTime;
@@ -25,10 +28,17 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gets this deadline's time
+     * @return the deadline's time
+     */
     public String getBy() {
         return by;
     }
 
+    /**
+     * Sets this deadline's time
+     */
     public void setBy(String by) {
         this.by = by;
     }

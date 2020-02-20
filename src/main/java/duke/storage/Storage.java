@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-
+/**
+ * Saves and loads the file of Duke's data.
+ */
 public class Storage {
     public static final String DEFAULT_FILEPATH = "data/tasks.txt";
     private final String filePath;
@@ -28,6 +30,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the file of Duke's data.
+     * @return Duke's task list.
+     * @throws DukeException if file path is wrong.
+     */
     public TaskList load() throws DukeException{
         try {
             return loadFileContents();
@@ -36,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Uses scanner to get the data in file and gets the stored task list.
+     * @return Duke's task list.
+     * @throws FileNotFoundException if file path is wrong.
+     */
     public TaskList loadFileContents() throws FileNotFoundException {
         File fileToBeLoad = new File(filePath);
         Scanner s = new Scanner(fileToBeLoad);
@@ -50,6 +62,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Translates data into tasks and adds tasks into task list.
+     * @param description one single line record in the file.
+     * @param tasks the task list
+     */
     public void addLoadedTask(String description, TaskList tasks){
         Task newTask;
         String[] words = description.split(" ",3);
@@ -88,6 +105,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Save task list into a local file.
+     * @param tasks the task list
+     * @throws DukeException if gets a IOException when saving.
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             writeToFile(tasks);
@@ -96,6 +118,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the task list to the local file.
+     * @param tasks the task list.
+     * @throws IOException if something wrong when writes the file.
+     */
     public void writeToFile(TaskList tasks) throws IOException{
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks) {
@@ -106,6 +133,13 @@ public class Storage {
     }
 
 
+    /**
+     * Processes todo's recorded line in file and translates it into a todo task.
+     * @param fullCommand todo's line recorded in file.
+     * @param args todo's task name.
+     * @return a todo task
+     * @throws DukeException if task name missing.
+     */
     public Todo processToDoDescription(String fullCommand, String args) throws DukeException {
         /*Process Todo Exception */
         TestDukeException testTodoException = new TestDukeException(fullCommand);
@@ -116,6 +150,13 @@ public class Storage {
         return new Todo(todoDescription);
     }
 
+    /**
+     * Processes deadline's recorded line in file and translates it into a deadline task.
+     * @param fullCommand deadline's line recorded in file.
+     * @param args deadline's task name and time.
+     * @return a deadline task
+     * @throws DukeException if deadline's task name or time missing.
+     */
     public Deadline processDeadlineDescription(String fullCommand, String args) throws DukeException {
         /*Process Deadline Exception */
         TestDukeException testDeadlineException = new TestDukeException(fullCommand);
@@ -128,6 +169,13 @@ public class Storage {
         return new Deadline(name, time);
     }
 
+    /**
+     * Processes event's recorded line in file and translates it into a deadline task.
+     * @param fullCommand event's line recorded in file.
+     * @param args event's task name and time.
+     * @return a event task
+     * @throws DukeException if event's task name or time missing.
+     */
     public Event processEventDescription(String fullCommand, String args) throws DukeException {
         /*Process Event Exception */
         TestDukeException testEventException = new TestDukeException(fullCommand);
