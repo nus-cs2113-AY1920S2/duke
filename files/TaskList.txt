@@ -1,2 +1,3 @@
-[T] | ✘ | slap
-[T] | ✘ | eat again
+[T] | ✓ | slap
+[T] | ✓ | eat again
+[T] | ✘ | eat
