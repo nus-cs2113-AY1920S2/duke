@@ -1,9 +1,7 @@
 package duke;
 
-import duke.exceptions.IllegalCommandException;
 import duke.exceptions.IllegalDeleteException;
 import duke.exceptions.IllegalDoneTaskException;
-import duke.exceptions.IllegalTypeException;
 import duke.taskmanager.Deadline;
 import duke.taskmanager.Event;
 import duke.taskmanager.TaskManager;
@@ -22,7 +20,8 @@ public class Duke {
     public static final String PRINT_TASKS = "2";
     public static final String MARK_AS_DONE = "3";
     public static final String DELETE_TASK = "4";
-    public static final String EXIT_COMMAND = "5";
+    public static final String FIND_TASK = "5";
+    public static final String EXIT_COMMAND = "6";
     public static final String TODO = "1";
     public static final String DEADLINE = "2";
     public static final String EVENT = "3";
@@ -37,45 +36,36 @@ public class Duke {
             e.printStackTrace();
         }
     }
+//    private TaskList tasks;
+//
+//    public Duke(String filePath) {
+//        storage = new Storage(filePath);
+//        try {
+//            tasks = new TaskList();
+//        } catch (DukeException e) {
+//            ui.showLoadingError();
+//            tasks = new TaskList();
+//        }
+//    }
 
     public static void main(String[] args) throws IOException {
         printIntro();
         printExeType();
-        exeCommands();
-        printExit();
-        saveFile();
-    }
-
-    /*
-    exeCommand identifies whether the user is going to
-    1. add a task
-    2. print a task
-    3. mark task as done
-    4. deleteTask or
-    5. exit programme
-    for further data processing
-     */
-    public static void exeCommands() {
         String exeCommand = getStringInput(userInput);
-        try {
-            while (!exeCommand.equals(EXIT_COMMAND)) {
-                exeType(exeCommand); //to select the exeType and execute it
-                printExeType(); //user guide after execution of command
-                exeCommand = getStringInput(userInput); //get the next command
-            }
-        } catch (IllegalCommandException e) {
-            System.out.println("    Sorry,we do not understand your command. " +
-                    "(IllegalCommandException). " +
-                    "Please follow the instructions below.");
-            printExeType();
-            exeCommands();
+        while (!exeCommand.equals(EXIT_COMMAND)) {
+            exeType(exeCommand); //to select the exeType and execute it
+            printExeType(); //user guide after execution of command
+            saveFile();
+            exeCommand = getStringInput(userInput); //get the next command
         }
+        printExit();
+        Duke_fw.close();
     }
 
     /*
     exeType receives the command from exeCommand and it executes the command received.
      */
-    public static void exeType(String exeCommand) throws IllegalCommandException {
+    public static void exeType(String exeCommand)  {
         try {
             switch (exeCommand) {
             case ADD_TASK:
@@ -91,14 +81,13 @@ public class Duke {
             case DELETE_TASK:
                 deleteTask();
                 break;
+            case FIND_TASK:
+                findTask();
+                break;
             default:
-                throw new IllegalCommandException();
+                System.out.println("    Sorry,we do not understand your command. " +
+                        "Please follow the instructions below.");
             }
-        } catch (IllegalTypeException e) {
-            System.out.println("    Sorry,we do not understand your command. " +
-                    "(IllegalTypeException). " +
-                    "Please follow the instructions below.");
-            exeType(exeCommand);
         } catch (IllegalDeleteException e) {
             System.out.println("    Sorry, task does not exist " +
                     "(IllegalDeleteException). ");
@@ -117,38 +106,46 @@ public class Duke {
     in the task (and by...).
     Lastly, it adds the task (and by...) to the manageTask array.
      */
-    public static void addTask() throws IllegalTypeException {
+    public static void addTask()  {
         String taskType; //taskType = ToDoo||Event||Deadline
         taskType = getStringInput(userInput);
         String task, by;
-        switch (taskType) {
-        case TODO:
-            printUserInputTask();
-            task = getStringInput(userInput);
-            manageTask[Task_No] = new ToDo(task);
-            Task_No++;
-            printRespondToAddTask(task);
-            break;
-        case DEADLINE:
-            printUserInputTask();
-            task = getStringInput(userInput);
-            System.out.println("    Please enter the deadline of your task: ");
-            by = getStringInput(userInput);
-            manageTask[Task_No] = new Deadline(task, by);
-            Task_No++;
-            printRespondToAddTask(task);
-            break;
-        case EVENT:
-            printUserInputTask();
-            task = getStringInput(userInput);
-            System.out.println("    Please enter the venue of your task: " +
-                    "(format at: )");
-            by = getStringInput(userInput);
-            manageTask[Task_No] = new Event(task, by);
-            Task_No++;
-            printRespondToAddTask(task);
-            break;
-        default: throw new IllegalTypeException();
+        printUserInputTask();
+        task = getStringInput(userInput);
+        boolean repeat = false;
+        for (TaskManager i : manageTask) {
+            if (i != null && i.task.equals(task)) {
+                System.out.println("    The is a repeated task.");
+                repeat = true;
+                break;
+            }
+        }
+        if (!repeat) {
+            switch (taskType) {
+            case TODO:
+                manageTask[Task_No] = new ToDo(task);
+                Task_No++;
+                printRespondToAddTask(task);
+                break;
+            case DEADLINE:
+                System.out.println("    Please enter the deadline of your task: ");
+                by = getStringInput(userInput);
+                manageTask[Task_No] = new Deadline(task, by);
+                Task_No++;
+                printRespondToAddTask(task);
+                break;
+            case EVENT:
+                System.out.println("    Please enter the venue of your task: ");
+                by = getStringInput(userInput);
+                manageTask[Task_No] = new Event(task, by);
+                Task_No++;
+                printRespondToAddTask(task);
+                break;
+            default:
+                System.out.println("    Sorry,we do not understand your command. " +
+                        "Please follow the instructions below.");
+                exeType(ADD_TASK);
+            }
         }
     }
 
@@ -198,7 +195,32 @@ public class Duke {
         System.out.println("    Congrats! Task " + doneTask + ": " +
                 manageTask[doneTask] +  " has been completed!");
     }
-    
+
+    public static void findTask() {
+        System.out.println("    Please enter the task that you want to find:");
+        String task = getStringInput(userInput);
+        boolean isfound = false;
+        if (manageTask == null) {
+            System.out.println("    You have no task in list.");
+        } else {
+            for (int i = 0; i < Task_No; i++) {
+                if (manageTask[i] != null) {
+                    String[] task_split = manageTask[i].task.split(" ", 5);
+                    for (String j : task_split) {
+                        if (j != null && j.equals(task)) {
+                            System.out.println("    Task " + i + ". " + manageTask[i]);
+                            isfound = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (!isfound) {
+            System.out.println("    No task found contains "+ task);
+        }
+    }
+
     public static void printRespondToAddTask(String task) {
         System.out.println("    You have successfully added " + task + "!");
         System.out.println("    You have "+ Task_No + " task(s) now in total");
@@ -225,15 +247,16 @@ public class Duke {
     }
 
     public static void printExeType() {
-        System.out.println("    ~·~·~·~·~·~·~·~·~·~·~·~·~·\n" +
+        System.out.println("    ================================\n" +
                 "    Hi what can I do for you? (please key in the number):" +
                 "\n    1. Add a new task, \n" +
                 "    2. Show my tasks,\n"+
                 "    3. I've completed my task!\n" +
                 "    4. Delete a task,  or \n" +
-                "    5. See you next time! \n" +
+                "    5. Find a task,  or \n" +
+                "    6. See you next time! \n" +
                 "    to end this conversation \n" +
-                "    ~·~·~·~·~·~·~·~·~·~·~·~·~·\n");
+                "    ================================\n");
     }
 
     public static void printTaskType() {
@@ -260,9 +283,9 @@ public class Duke {
     }
 
     public static void printExit() {
-        System.out.println("    ~·~·~·~·~·~·~·~·~·~·~·~·~·\n" +
+        System.out.println("    ================================\n" +
                 "    Bye. Hope to see you again soon!\n" +
-                "    ~·~·~·~·~·~·~·~·~·~·~·~·~·" );
+                "    ================================" );
     }
 
     public static void clearInput(){
@@ -273,6 +296,5 @@ public class Duke {
         for (int i = 0; i < Task_No; i++){
             Duke_fw.write(manageTask[i].toString()+"\n");
         }
-        Duke_fw.close();
     }
 }

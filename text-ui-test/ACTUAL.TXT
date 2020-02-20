@@ -1,0 +1,122 @@
+    Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+    Which category does your task belong to? 
+   1. ToDos: tasks without any date/time attached to it (e.g., visit new theme park)
+   2. Deadlines: tasks that need to be done before a specific date/time (e.g., submit report by 11/10/2019 5pm)
+   3. Events: tasks that start at a specific time and ends at a specific time (e.g., team project meeting on 2/10/2019 2-4pm)
+    Please enter the task: 
+    You have successfully added Todos!
+    You have 1 task(s) now in total
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+    Which category does your task belong to? 
+   1. ToDos: tasks without any date/time attached to it (e.g., visit new theme park)
+   2. Deadlines: tasks that need to be done before a specific date/time (e.g., submit report by 11/10/2019 5pm)
+   3. Events: tasks that start at a specific time and ends at a specific time (e.g., team project meeting on 2/10/2019 2-4pm)
+    Please enter the task: 
+    Please enter the deadline of your task: 
+    You have successfully added Deadlines!
+    You have 2 task(s) now in total
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+    Which category does your task belong to? 
+   1. ToDos: tasks without any date/time attached to it (e.g., visit new theme park)
+   2. Deadlines: tasks that need to be done before a specific date/time (e.g., submit report by 11/10/2019 5pm)
+   3. Events: tasks that start at a specific time and ends at a specific time (e.g., team project meeting on 2/10/2019 2-4pm)
+    Please enter the task: 
+    Please enter the venue of your task: (format at: )
+    You have successfully added Events!
+    You have 3 task(s) now in total
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+    Your current task list:
+    Task 0: [T][Not Done]Todos
+    Task 1: [D][Not Done]Deadlines (by: tmr)
+    Task 2: [E][Not Done]Events( at: NUS)
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+    Please choose the task that you have completed (select the no)
+    Your current task list:
+    Task 0: [T][Not Done]Todos
+    Task 1: [D][Not Done]Deadlines (by: tmr)
+    Task 2: [E][Not Done]Events( at: NUS)
+    Congrats! Task 0: [T][Done]Todos has been completed!
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+     Please enter the index of the task you want to delete
+    Your current task list:
+    Task 0: [T][Done]Todos
+    Task 1: [D][Not Done]Deadlines (by: tmr)
+    Task 2: [E][Not Done]Events( at: NUS)
+     You have successfully deleted the task [E][Not Done]Events( at: NUS)
+    Your current task list:
+    Task 0: [T][Done]Todos
+    Task 1: [D][Not Done]Deadlines (by: tmr)
+    ================================
+    Hi what can I do for you? (please key in the number):
+    1. Add a new task, 
+    2. Show my tasks,
+    3. I've completed my task!
+    4. Delete a task,  or 
+    5. See you next time! 
+    to end this conversation 
+    ================================
+
+    ================================
+    Bye. Hope to see you again soon!
+    ================================
