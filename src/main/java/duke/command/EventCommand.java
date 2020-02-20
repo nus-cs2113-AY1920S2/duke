@@ -11,6 +11,7 @@ public class EventCommand extends Command {
 
     public EventCommand(String userInput) {
         this.userInput = userInput;
+        this.isExit = false;
     }
 
     @Override

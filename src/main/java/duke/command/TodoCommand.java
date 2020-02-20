@@ -10,6 +10,7 @@ public class TodoCommand extends Command {
 
     public TodoCommand(String userInput) {
         this.userInput = userInput;
+        this.isExit = false;
     }
 
     @Override

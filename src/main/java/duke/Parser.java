@@ -1,13 +1,8 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 import duke.exception.UnknownInputException;
+
 
 
 public class Parser {
@@ -17,6 +12,7 @@ public class Parser {
     public static final String EVENT_COMMAND = "event";
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String DELETE_COMMAND = "delete";
+    public static final String END_COMMAND = "bye";
 
 
     public static Command parse(String userInput) throws UnknownInputException {
@@ -33,6 +29,8 @@ public class Parser {
             return new DeleteCommand(userInput);
         } else if (words[0].equals(DONE_COMMAND)) {
             return new DoneCommand(userInput);
+        } else if (words[0].equals(END_COMMAND)) {
+            return new ByeCommand();
         } else {
             throw new UnknownInputException("There is no such input!");
         }

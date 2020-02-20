@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-    public static final String END_COMMAND = "bye";
+    //public static final String END_COMMAND = "bye";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -26,17 +26,14 @@ public class Duke {
 
     public void run() {
         ui.startMessage();
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String userInput = ui.readCommand();
-                if (userInput.equals(END_COMMAND)) {
-                    ui.endMessage();
-                    break;
-                } else {
-                    ui.displayDividerLine();
-                    Command command = Parser.parse(userInput);
-                    command.execute(tasks, storage);
-                }
+                ui.displayDividerLine();
+                Command command = Parser.parse(userInput);
+                command.execute(tasks, storage);
+                isExit = command.isExit();
             } catch (DukeException err) {
                 ui.displayErrorMessage(err.toString());
             } finally {

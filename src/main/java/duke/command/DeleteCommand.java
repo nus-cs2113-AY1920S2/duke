@@ -10,6 +10,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String userInput) {
         this.userInput = userInput;
+        this.isExit = false;
     }
 
     @Override

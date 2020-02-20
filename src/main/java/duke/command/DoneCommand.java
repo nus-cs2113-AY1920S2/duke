@@ -10,6 +10,7 @@ public class DoneCommand extends Command {
 
     public DoneCommand(String userInput) {
         this.userInput = userInput;
+        this.isExit = false;
     }
 
     @Override

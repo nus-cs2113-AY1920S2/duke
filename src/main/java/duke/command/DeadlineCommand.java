@@ -12,6 +12,7 @@ public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String userInput) {
         this.userInput = userInput;
+        this.isExit = false;
     }
 
     @Override
