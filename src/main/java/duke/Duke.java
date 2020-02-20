@@ -7,6 +7,8 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * Main class for the Duke program.
  */
@@ -87,6 +89,8 @@ public class Duke {
             Ui.formatPrint("Sorry, I didn't recognize that command.");
         } catch (NoFindException e) {
             Ui.formatPrint("Please input the string you want to find.");
+        } catch (DateTimeParseException e) {
+            Ui.formatPrint("Incorrect date format: please input date as YYYY-mm-dd.");
         }
         System.out.println("You have " + taskList.getSize() + " task/s. (type 'list' to list your tasks)");
         System.out.println("Anything else? Remember that you can leave by typing 'bye'.");

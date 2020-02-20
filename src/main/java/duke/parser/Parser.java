@@ -122,7 +122,7 @@ public class Parser {
      */
     private static void parseDateTask(String userCommand, String userParams,
                                       TaskList taskList, Storage storage)
-            throws InvalidDateFormatException, NoDescException, NoDateException {
+            throws InvalidDateFormatException, NoDescException, NoDateException, InvalidDateFormatException {
         int delimIndex = userParams.indexOf("/"); // duke.Duke uses / to define where the date starts
 
         // If String.indexOf returns -1, the character has not been found
