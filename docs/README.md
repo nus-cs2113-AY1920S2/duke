@@ -1,28 +1,28 @@
-#Duke User Guide
+# Duke User Guide
 
-##Content Page
+## Content Page
 
 1. **Introduction**
 
 2. **Features**
 
-    2.1. Add Tasks
+    2.1. **Add Tasks**
     
-     - 2.1.1 Add Todo Task
+     - 2.1.1 **Add Todo Task**
         
-     -  2.1.2 Add Deadline Task
+     -  2.1.2 **Add Deadline Task**
         
-     -  2.1.3 Add Event Task
+     -  2.1.3 **Add Event Task**
         
-    2.2. Mark Tasks As Done 
+    2.2. **Mark Tasks As Done** 
     
-    2.3. Delete Tasks
+    2.3. **Delete Tasks**
     
-    2.4. List Tasks
+    2.4. **List Tasks**
     
-    2.5. Find Tasks
+    2.5. **Find Tasks**
     
-    2.6. Save and Load
+    2.6. **Save and Load**
     
 3. **Command Summary**
 
@@ -34,7 +34,7 @@ And it is optimized for users who want to type fast with CLI.
  
 ## 2. Features:
 
-###Command Format
+### Command Format
 
 Words in `UPPER_CASE` are the parameters to be supplied by the user.
 
@@ -42,7 +42,7 @@ For example:
 
 in ​```todo TASK_NAME```, TASK_NAME is the parameter of a specific todo task’s name which can be used as `todo buy a book`.
 
-###2.1 `Add` tasks: 
+### 2.1 `Add` tasks: 
 
 #### 2.1.1 Add `Todo` task
 
@@ -66,35 +66,35 @@ Format:​ ```event TASK_NAME /by TIME```
 
 Noted: If the users input a time in the format of `yyyy-mm-dd`, Duke can recognize the input time string as a real time.
 
-###2.2 Mark Tasks As `Done`
+### 2.2 Mark Tasks As `Done`
 
 Users can mark a task as done with the index of a task when they finish it.\
 
 Format: ​`done TASK_INDEX`
 
-###2.3 `Delete` Tasks
+### 2.3 `Delete` Tasks
 
 Users can delete a task as done with the index of a task when they finish it.\
 
 Format: ​`delete TASK_INDEX`
 
-###2.4 `List` Tasks
+### 2.4 `List` Tasks
 
 Users can list all the tasks in the task list when they need to look through it.\
 
 Format: ​`list`
 
-###2.5 `Find` Tasks
+### 2.5 `Find` Tasks
 
 Users can find all the tasks which contains a certain keyword.\
 
 Format: ​`find KEYWORD`
 
-###2.6 Save and load
+### 2.6 Save and load
 
 This software can save and load the recorded data automatically.
 
-##3. Command Summary:
+## 3. Command Summary:
 
 ### `Todo`
 
@@ -117,7 +117,7 @@ Expected outcome:
 Please enter your command or enter "bye" to exit:
 ```
 
-###`Deadline`
+### `Deadline`
 
 Command: 
 
@@ -155,7 +155,7 @@ Expected outcome:
 Please enter your command or enter "bye" to exit:
 ```
 
-###`Event`
+### `Event`
 
 Command:
 
@@ -192,7 +192,7 @@ Expected outcome:
 Please enter your command or enter "bye" to exit:
 ```
 
-###`Done`
+### `Done`
 
 Command: 
 
@@ -213,7 +213,7 @@ Expected outcome:
 Please enter your command or enter "bye" to exit:
 ```
 
-###`Delete`
+### `Delete`
 
 Command: 
 
@@ -235,7 +235,7 @@ Expected outcome:
 Please enter your command or enter "bye" to exit:
 ```
 
-###`List`
+### `List`
 
 Command: 
 
@@ -255,7 +255,7 @@ Expected outcome:
 Please enter your command or enter "bye" to exit:
 ```
     
-###`Find`
+### `Find`
 
 Command: 
 
