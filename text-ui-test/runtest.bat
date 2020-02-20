@@ -21,7 +21,7 @@ REM no error here, errorlevel == 0
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 REM java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input.txt > ACTUAL.TXT
-REM java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input.txt > EXPECTED.TXT
+ java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input.txt > EXPECTED.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

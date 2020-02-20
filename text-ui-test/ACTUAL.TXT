@@ -37,15 +37,21 @@ New To-Do Duke.Duke.Task added:
 Total number of tasks in the list:  2
 ____________________________________________________________
 ____________________________________________________________
+New To-Do Duke.Duke.Task added:
+[T][✘] watch movie
+Total number of tasks in the list:  3
+____________________________________________________________
+____________________________________________________________
 New event added:
 [E][✘] project meeting (at: Mon 2-4pm)
-Total number of tasks in the list:  3
+Total number of tasks in the list:  4
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
 1.[D][✘] return book (by: Sunday)
 2.[T][✘] borrow book list
-3.[E][✘] project meeting (at: Mon 2-4pm)
+3.[T][✘] watch movie
+4.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Great job! I've marked this task as done in your planner:
@@ -55,7 +61,8 @@ ____________________________________________________________
 Here are your task(s) currently in your planner:
 1.[D][✓] return book (by: Sunday)
 2.[T][✘] borrow book list
-3.[E][✘] project meeting (at: Mon 2-4pm)
+3.[T][✘] watch movie
+4.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Great job! I've marked this task as done in your planner:
@@ -65,17 +72,19 @@ ____________________________________________________________
 Here are your task(s) currently in your planner:
 1.[D][✓] return book (by: Sunday)
 2.[T][✓] borrow book list
-3.[E][✘] project meeting (at: Mon 2-4pm)
+3.[T][✘] watch movie
+4.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Great job! I've marked this task as done in your planner:
-[E][✓] project meeting (at: Mon 2-4pm)
+[T][✓] watch movie
 ____________________________________________________________
 ____________________________________________________________
 Here are your task(s) currently in your planner:
 1.[D][✓] return book (by: Sunday)
 2.[T][✓] borrow book list
-3.[E][✓] project meeting (at: Mon 2-4pm)
+3.[T][✓] watch movie
+4.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 Bye Potatochips! Hope to see you again soon!
 ____________________________________________________________

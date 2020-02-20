@@ -2,6 +2,7 @@ Potatochips
 deadline return book /by Sunday
 list
 todo borrow book list
+todo watch movie
 event project meeting /at Mon 2-4pm
 list
 done 1
