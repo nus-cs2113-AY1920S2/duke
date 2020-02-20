@@ -1,2 +1,4 @@
-T | 1 | things | at 2018-12-13
-E | 0 | my show | by 2007-12-01
+D | 0 | makesure | at 2018-12-19
+E | 0 | makesure | by 1996-12-19
+T | 1 | finally | kek 1915-02-19
+D | 0 | asdasdsad | at 2020-12-19

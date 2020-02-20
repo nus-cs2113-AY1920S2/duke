@@ -1,14 +1,13 @@
 package Duke.TaskTypes;
 
 
-/**
- * The <code>EVENT</code> type class
- */
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * The <code>EVENT</code> type class
+ * @see Task
+ */
 public class Event extends Task {
 
     protected String by;
@@ -18,10 +17,12 @@ public class Event extends Task {
     public Event(String description, String by) {
         super(description);
         this.by = by;
-        String[] bySplit = by.split(" ", 2);
-        this.slashWord = bySplit[0].trim();
-        String tempTime = bySplit[1].trim();
-        this.actualTime = LocalDate.parse(tempTime);
+        if (!this.by.equals("")) {
+            String[] bySplit = by.split(" ", 2);
+            this.slashWord = bySplit[0].trim();
+            String tempTime = bySplit[1].trim();
+            this.actualTime = LocalDate.parse(tempTime);
+        }
     }
 
     @Override
@@ -29,15 +30,16 @@ public class Event extends Task {
         if (by.equals("")) {
             return "[E]" + super.toString();
         }
-        String[] bySplit = by.split(" ", 2);
-        return "[E]" + super.toString() + "(" + this.slashWord + ": " + this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + "(" + this.slashWord + ": " +
+                this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
      * Gets the <code>EVENT</code> information stored nicely in a <code>String[]</code> array
      * <p></p>
      * <p>
-     *     Used in the {@link Duke.Storage} class for retrieving the <code>EVENT</code> task's information to store it as offline saved data
+     * Used in the {@link Duke.Storage} class for retrieving the <code>EVENT</code> task's information to store it as
+     * offline saved data
      * </p>
      * @return a <code>String[]</code> array containing the description, the time and whether the event is done
      * @see Duke.Storage#save

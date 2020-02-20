@@ -1,14 +1,13 @@
 package Duke.TaskTypes;
 
 
-/**
- * The <code>TODO</code> type class
- */
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * The <code>TODO</code> type class
+ * @see Task
+ */
 public class Todo extends Task {
 
     protected String by;
@@ -18,8 +17,8 @@ public class Todo extends Task {
     public Todo(String description, String by) {
         super(description);
         this.by = by;
-        String[] bySplit = by.split(" ", 2);
-        if (bySplit.length > 1) {
+        if (!this.by.equals("")) {
+            String[] bySplit = by.split(" ", 2);
             this.slashWord = bySplit[0].trim();
             String tempTime = bySplit[1].trim();
             this.actualTime = LocalDate.parse(tempTime);
@@ -31,13 +30,16 @@ public class Todo extends Task {
         if (by.equals("")) {
             return "[T]" + super.toString();
         }
-        return "[T]" + super.toString() + "(" + this.slashWord + ": " + this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[T]" + super.toString() + "(" + this.slashWord + ": " +
+                this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
     /**
      * Gets the <code>TODO</code> information stored nicely in a <code>String[]</code> array
      * <p></p>
      * <p>
-     *     Used in the {@link Duke.Storage} class for retrieving the <code>TODO</code> task's information to store it as offline saved data
+     * Used in the {@link Duke.Storage} class for retrieving the <code>TODO</code> task's information to store it as
+     * offline saved data
      * </p>
      * @return a <code>String[]</code> array containing the description, the time and whether the event is done
      * @see Duke.Storage#save

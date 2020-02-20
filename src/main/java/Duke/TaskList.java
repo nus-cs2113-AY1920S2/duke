@@ -5,9 +5,13 @@ import Duke.TaskTypes.Task;
 import java.util.ArrayList;
 
 /**
- * The class to represent the list of tasks itself. This is also where the manipulation of the tasks in the task list is actually done (other classes rely on this class {@link TaskList} to do the actual task list manipulations)
+ * The class to represent the list of tasks itself. This is also where the manipulation of the tasks in the task list is
+ * actually done (other classes rely on this class {@link TaskList} to do the actual task list manipulations)
  * <p></p>
- * <p>Not only does it serves to add and view the tasks, it also edit the status of the tasks as well. For example, it can get the number of tasks, mark tasks as done and remove the tasks in the tasklist</p>
+ * <p>
+ * Not only does it serves to add and view the tasks, it also edit the status of the tasks as well. For example, it
+ * can get the number of tasks, mark tasks as done and remove the tasks in the tasklist
+ * </p>
  * @see ArrayList
  */
 public class TaskList {
@@ -39,7 +43,7 @@ public class TaskList {
      * @param task the {@link Task} object to add into the task list
      * @see Task
      */
-    public void addTasks(Task task){
+    public void addTasks(Task task) {
         this.taskList.add(task);
     }
 

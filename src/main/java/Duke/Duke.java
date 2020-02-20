@@ -1,19 +1,13 @@
 package Duke;
 
-import Duke.Exception.InvalidTaskException;
-import Duke.Exception.MissingDescriptonException;
-import Duke.Exception.MissingNumberFieldException;
-import Duke.Exception.MissingTimeFieldException;
+import Duke.Exception.*;
 
-
-/**
- * The main class that first get run
- */
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeParseException;
 
-
+/**
+ * The main class that runs Duke
+ */
 public class Duke {
 
     private Storage storage;
@@ -25,14 +19,19 @@ public class Duke {
      * Create the respective classes that will be used in duke
      */
     public Duke() {
-            ui = new Ui();
-            storage = new Storage();
-            tasks = new TaskList();
-            parser = new Parser();
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList();
+        parser = new Parser();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     /**
-     * The actual execution of Duke is summarised in this method. Duke is first entered, then the commands are fed till the exit command is found. Finally, the duke exits
+     * The actual execution of Duke is summarised in this method. Duke is first entered, then the commands are fed till
+     * the exit command is found. Finally, the duke exits
      */
     public void run() {
         enterDuke();
@@ -50,7 +49,7 @@ public class Duke {
      * @see Storage#load
      */
     private void enterDuke() {
-        ui.displayHello();
+        Ui.displayHello();
         tasks.setTaskList(storage.load());
     }
 
@@ -65,25 +64,28 @@ public class Duke {
     private void runDukeTillExit() {
         String userInput = ui.getUserInput();
         Command command;
-        while (parser.isNotBye(userInput)){
+        while (parser.isNotBye(userInput)) {
             try {
                 command = parser.parseUserInput(userInput);
                 command.execute(tasks);
             } catch (InvalidTaskException
-                    | MissingDescriptonException
+                    | MissingDescriptionException
                     | MissingNumberFieldException
                     | MissingTimeFieldException
                     | NumberFormatException
-                    | DateTimeException m) {
-                System.out.println("Exception occurred: " + m);
+                    | DateTimeException
+                    | IndexOutOfBoundsException
+                    | MissingSlashWordException m) {
+                Ui.displayExceptionError(m);
             }
-            ui.displayPrompt();
+            Ui.displayPrompt();
             userInput = ui.getUserInput();
         }
     }
 
     /**
-     * The method used to exit Duke. Occurs when the "bye" command is issued. It saves the task list and close the scanner before saying goodbye
+     * The method used to exit Duke. Occurs when the "bye" command is issued. It saves the task list and close the
+     * scanner before saying goodbye
      * @see Storage#save
      * @see Ui#closeScanner
      * @see Ui#displayGoodbye()
@@ -91,11 +93,7 @@ public class Duke {
     private void exitDuke() {
         storage.save(tasks.getTaskList(), tasks.getNumberOfTask());
         ui.closeScanner();
-        ui.displayGoodbye();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
+        Ui.displayGoodbye();
     }
 
 
