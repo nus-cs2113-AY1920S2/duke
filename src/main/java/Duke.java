@@ -1,4 +1,4 @@
-package data;
+import data.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -253,9 +253,22 @@ public class Duke {
         
         //load duke.txt on startup. If duke.txt does not exist create duke.txt in relative path
         try {
-            loadFileToTaskList("src/main/java/data/duke.txt", taskList);
+            loadFileToTaskList("data/duke.txt", taskList);
         } catch (FileNotFoundException e) {
-            File f = new File("src/main/java/data/duke.txt");
+            File newDirectory = new File("data");
+            boolean isNewDirectoryCreated = newDirectory.mkdir();
+            if (isNewDirectoryCreated) {
+                File newFile = new File("data/duke.txt");
+                try {
+                    newFile.createNewFile();
+                } catch (IOException ex) {
+                    System.out.println("Failed to create file in new directory");
+                }
+
+            } else {
+                System.out.println("Failed to create directory");
+            }
+
         }
 
         sayIntro();
@@ -283,19 +296,10 @@ public class Duke {
                 break;
             case("done"):
                 updateTaskDone(tokenizedInput[1], taskList);
-                try {
-                    saveTaskListToFile("src/main/java/data/duke.txt", taskList);
-                } catch (IOException e) {
-                    System.out.println(underscoredLine);
-                    System.out.println("\tError saving taskList to duke.txt");
-                    System.out.println(underscoredLine);
-                }
                 break;
             case("remove"):
-                //TODO: put remove under try-catch block, NumberFieldException
                 try {
                     removeTask(userInput, taskList);
-                    saveTaskListToFile("src/main/java/data/duke.txt", taskList);
                 } catch (NumberFieldException e) {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! The task number you have provided is not valid.");
@@ -304,16 +308,11 @@ public class Duke {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! The remove command is missing additional parameters.");
                     System.out.println(underscoredLine);
-                } catch (IOException e) {
-                    System.out.println(underscoredLine);
-                    System.out.println("\tError saving taskList to duke.txt");
-                    System.out.println(underscoredLine);
                 }
                 break;
             default:
                 try{
                     insertNewTask(taskList, userInput, tokenizedInput);
-                    saveTaskListToFile("src/main/java/data/duke.txt", taskList);
                 } catch (IllegalKeywordException e) {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! I'm sorry, but I don't know what that means :-(");
@@ -330,8 +329,6 @@ public class Duke {
                     System.out.println(underscoredLine);
                     System.out.println("\t\u2639 !!ERROR!! " + tokenizedInput[0] + " command is missing additional parameters.");
                     System.out.println(underscoredLine);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
 
@@ -341,6 +338,14 @@ public class Duke {
             } else {
                 System.out.print(">>>");
             }
+        }
+
+        try {
+            saveTaskListToFile("data/duke.txt", taskList);
+        } catch (IOException e) {
+            System.out.println(underscoredLine);
+            System.out.println("\tError saving taskList to duke.txt");
+            System.out.println(underscoredLine);
         }
 
         sayGoodbye();
