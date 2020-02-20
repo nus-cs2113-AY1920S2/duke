@@ -9,50 +9,43 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    private final String DUKE_LOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     public Duke() {
         this.storage = new Storage();
+        this.ui = new Ui();
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
             // no save file found
             tasks = new TaskList();
         } catch (DukeException e) {
-            System.out.println(e.toString());
+            ui.showToUser(e.toString());
             tasks = new TaskList();
         }
     }
 
     public void run() {
-        printWelcomeBanner();
-        Scanner scanner = new Scanner(System.in);
+        ui.showWelcomeMessage();
         // Loop terminates on receiving a "bye" command, which calls System.exit(0)
         //noinspection InfiniteLoopStatement
         while (true) {
-            System.out.print("> ");
-            String fullCommand = scanner.nextLine();
+            String fullCommand = ui.getUserCommand();
 
             try {
                 parseCommand(fullCommand);
             } catch (DukeException e) {
-                System.out.println(e.toString());
-            } finally {
-                printDividerLine();
+                ui.showToUser(e.toString());
             }
 
             try {
                 storage.save(tasks);
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                ui.showToUser(e.getMessage());
+            } finally {
+                ui.showDivider();
             }
         }
     }
@@ -68,7 +61,7 @@ public class Duke {
         switch (commandType) {
         case "bye":
             // exit duke
-            printByeMessage();
+            ui.showByeMessage();
             System.exit(0);
             // Fallthrough
 
@@ -155,21 +148,5 @@ public class Duke {
         default:
             throw new DukeException("I'm not very sure what that means...");
         }
-    }
-
-    private void printDividerLine() {
-        System.out.println("_________________________________________________");
-    }
-
-    private void printWelcomeBanner() {
-        printDividerLine();
-        System.out.println("This is" + System.lineSeparator() + DUKE_LOGO);
-        System.out.println("How can I help you today?");
-        printDividerLine();
-    }
-
-    private void printByeMessage() {
-        System.out.println("Goodbye");
-        printDividerLine();
     }
 }
