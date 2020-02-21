@@ -112,6 +112,9 @@ public class Duke {
                         System.out.println("____________________________________________________________");
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(tasks.get(taskNumber));
+                        str = tasks.get(taskNumber).toString();
+                        str2 = str.substring(6,str.length());
+                        deleteToFile(str2);
                         tasks.remove(taskNumber);
                         System.out.println("Now you have " + tasks.size() + " tasks in your list.");
                         System.out.println("____________________________________________________________");
@@ -164,7 +167,7 @@ public class Duke {
         String [] strArr;
         String description;
         String timeDate;
-        System.out.println("input:"+newLine);
+    //    System.out.println("input:"+newLine);
         if(newLine.contains("(by:")){
             String newline2 = newLine.replace("(by:", ":");
             strArr = newline2.split(":");
@@ -172,19 +175,19 @@ public class Duke {
             System.out.println(description);
             timeDate = strArr[1].replace(")","").trim();
             taskSymbol = "D//";
-            System.out.println("D Formatted: " + description + timeDate);
+         //   System.out.println("D Formatted: " + description + timeDate);
         } else if (newLine.contains("(at:")) {
             String newline2 = newLine.replace("(at:", ":");
             strArr = newline2.split(":");
             description = strArr[0].trim();
             timeDate = strArr[1].replace(")","").trim();
             taskSymbol = "E//";
-            System.out.println(" E Formatted: " + description + timeDate);
+         //   System.out.println(" E Formatted: " + description + timeDate);
         } else {
             description = newLine.trim();
             timeDate = "";
             taskSymbol = "T//";
-            System.out.println("T Formatted: " + description);
+         //   System.out.println("T Formatted: " + description);
         }
         if(description.isBlank()){
             throw new WhitespaceExceptions();
@@ -225,6 +228,71 @@ public class Duke {
         }
     }
 
+    private static void deleteToFile(String newLine) throws WhitespaceExceptions {
+        String taskSymbol;
+        String [] strArr;
+        String description;
+        String timeDate;
+    //    System.out.println("input:"+newLine);
+        if(newLine.contains("(by:")){
+            String newline2 = newLine.replace("(by:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            timeDate = strArr[1].replace(")","").trim();
+            taskSymbol = "D//";
+         //   System.out.println("D Formatted: " + description + timeDate);
+        } else if (newLine.contains("(at:")) {
+            String newline2 = newLine.replace("(at:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            timeDate = strArr[1].replace(")","").trim();
+            taskSymbol = "E//";
+         //   System.out.println(" E Formatted: " + description + timeDate);
+        } else {
+            description = newLine.trim();
+            timeDate = "";
+            taskSymbol = "T//";
+         //   System.out.println("T Formatted: " + description);
+        }
+        if(description.isBlank()){
+            throw new WhitespaceExceptions();
+        }
+
+        String filePath = "data/Tasklist.txt";
+        File fileToBeModified = new File(filePath);
+        String originalFileContent = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            String currentReadingLine = reader.readLine();
+            String oldString = null;
+            String newString = null;
+
+            while (currentReadingLine != null) {
+                if(currentReadingLine.contains(description)){
+                    oldString = currentReadingLine;
+                    newString = "";
+                }
+                originalFileContent += currentReadingLine + System.lineSeparator();
+                currentReadingLine = reader.readLine();
+            }
+            String newFileContent = originalFileContent.replace(oldString, newString);
+            writer = new FileWriter(fileToBeModified);
+            writer.write(newFileContent);
+
+        } catch (IOException e) {
+            System.out.println("Error appending to file! Please try again!");
+        } finally {
+            try {
+                reader.close();
+                writer.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+    
     private static void importTaskFromFile() {
         try {
             Path path = Paths.get("data");
