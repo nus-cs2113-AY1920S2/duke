@@ -1,7 +1,3 @@
-E//1// borrow book//library
-T//1//sleep
-T//1//movie
-D//1//bathe//2pm
-T//1//play game
-D//1//meet teacher//7pm Oct Sharp
-E//1//CFG Fair//NUS utown 3pm
+T//1//borrow book//
+D//1//watch movie  at home//3pm oct
+E//1//carrer fair talk//NUS Utown 4 pm

@@ -161,24 +161,32 @@ public class Duke {
 
     private static void appendToFile(String newLine) throws WhitespaceExceptions {
         String taskSymbol;
-        String newLineFormatted;
-        String newLineTrimmed;
+        String [] strArr;
+        String description;
+        String timeDate;
+        System.out.println("input:"+newLine);
         if(newLine.contains("(by:")){
-            newLineFormatted = newLine.replace("(by: ", "//");
-            newLineTrimmed = newLineFormatted.replace(")","");
+            String newline2 = newLine.replace("(by:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            System.out.println(description);
+            timeDate = strArr[1].replace(")","").trim();
             taskSymbol = "D//";
-            //System.out.println("D Formatted: " + newLineTrimmed);
+            System.out.println("D Formatted: " + description + timeDate);
         } else if (newLine.contains("(at:")) {
-            newLineFormatted = newLine.replace("(at: ", "//");
-            newLineTrimmed = newLineFormatted.replace(")","");
+            String newline2 = newLine.replace("(at:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            timeDate = strArr[1].replace(")","").trim();
             taskSymbol = "E//";
-            //System.out.println(" E Formatted: " + newLineTrimmed);
+            System.out.println(" E Formatted: " + description + timeDate);
         } else {
-            newLineTrimmed = newLine;
+            description = newLine.trim();
+            timeDate = "";
             taskSymbol = "T//";
-           // System.out.println("T Formatted: " + newLineTrimmed);
+            System.out.println("T Formatted: " + description);
         }
-        if(newLineTrimmed.isBlank()){
+        if(description.isBlank()){
             throw new WhitespaceExceptions();
         }
 
@@ -194,9 +202,9 @@ public class Duke {
             String newString = null;
 
             while (currentReadingLine != null) {
-                if(currentReadingLine.contains(newLineTrimmed)){
+                if(currentReadingLine.contains(description)){
                     oldString = currentReadingLine;
-                    newString = taskSymbol + 1 + "//" + newLineTrimmed;
+                    newString = taskSymbol + 1 + "//" + description + "//" + timeDate;
                 }
                 originalFileContent += currentReadingLine + System.lineSeparator();
                 currentReadingLine = reader.readLine();
