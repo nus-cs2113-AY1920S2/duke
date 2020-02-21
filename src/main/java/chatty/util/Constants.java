@@ -16,6 +16,9 @@ public class Constants {
     public static final String BY_STRING = "/by";
     public static final String AT_STRING = "/at";
 
+    public static final String TRUE_STRING = "true";
+    public static final String FALSE_STRING = "false";
+
     public static final String LINE_BREAK = "____________________________________________________________";
 
     public static final String ADDED_TASK_CONFIRMATION = "Got it. I've added this task:";
