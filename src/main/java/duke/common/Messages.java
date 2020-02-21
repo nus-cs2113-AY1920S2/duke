@@ -1,8 +1,5 @@
 package duke.common;
 
-/**
- * Container for all user visible messages.
- */
 public class Messages {
 
     public static final String WELCOME_MESSAGE = "Hello! I'm KJ\nHow can I help you today?";
