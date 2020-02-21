@@ -78,8 +78,8 @@ public class Storage {
      * Loads tasks from file.
      *
      * @param tasks <code>TaskList</code> object that will store all the tasks.
-     * @throws IOException
-     * @throws InvalidInputException
+     * @throws IOException If new file could not be created to store tasks.
+     * @throws InvalidInputException If the data stored on file is invalid.
      */
     public void initialiseList (TaskList tasks) throws IOException,InvalidInputException {
         loader = new Scanner(savedData);

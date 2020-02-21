@@ -40,10 +40,10 @@ public class Parser {
      * @param command Command supplied by user.
      * @param tasks Current task list.
      * @return <code>Command</code> object obtained after parsing.
-     * @throws InvalidInputException
-     * @throws IncompleteInputException
-     * @throws FormatErrorException
-     * @throws OutOfBoundsException
+     * @throws InvalidInputException If command is not recognised.
+     * @throws IncompleteInputException If user did not supply index or keyword.
+     * @throws FormatErrorException If user did not use /by or /at.
+     * @throws OutOfBoundsException If user supplied an index that was out of bounds.
      */
     public static Command parseCommand(String command, TaskList tasks) throws InvalidInputException,
             IncompleteInputException, FormatErrorException, OutOfBoundsException {
@@ -92,6 +92,9 @@ public class Parser {
         return newCommand;
     }
 
+    /**
+     * Initialises the FindCommand.
+     */
     private static void createFindCommand() {
         if (phrases.length == 1) {
             newCommand = new ListCommand();
@@ -135,7 +138,7 @@ public class Parser {
      * Initialises the AddEventCommand.
      *
      * @param command Command supplied by the user.
-     * @throws FormatErrorException
+     * @throws FormatErrorException If user did not use /at in command.
      */
     private static void createEventCommand(String command) throws FormatErrorException {
         int pos = command.indexOf("/at");
@@ -151,7 +154,7 @@ public class Parser {
      * Initialises the AddDeadlineCommand.
      *
      * @param command Command supplied by the user.
-     * @throws FormatErrorException
+     * @throws FormatErrorException If user did not use /by in command.
      */
     private static void createDeadlineCommand(String command) throws FormatErrorException {
         int position = command.indexOf("/by");
@@ -174,7 +177,7 @@ public class Parser {
      * Checks if index supplied by user is within bounds.
      *
      * @param tasks Current list of tasks.
-     * @throws OutOfBoundsException
+     * @throws OutOfBoundsException If user supplied an index that is out of bounds.
      */
     private static void checkWithinBounds(TaskList tasks) throws OutOfBoundsException {
         index = Integer.parseInt(phrases[1]);
@@ -186,7 +189,7 @@ public class Parser {
     /**
      * Checks if user supplied the index if it is required by the command.
      *
-     * @throws IncompleteInputException
+     * @throws IncompleteInputException If user did not supply an index or keyword that was required.
      */
     private static void checkCompleteInput() throws IncompleteInputException {
         if (phrases.length == 1) {
@@ -212,7 +215,7 @@ public class Parser {
      * Extracts the command word from the user supplied command.
      *
      * @param command Command supplied by the user.
-     * @throws InvalidInputException
+     * @throws InvalidInputException If user entered no command.
      */
     public static void prepareCommand(String command) throws InvalidInputException {
         phrases = command.split(" ");
