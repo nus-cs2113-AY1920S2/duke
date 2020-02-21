@@ -31,4 +31,7 @@ delete 0
 list
 delete 3
 list
+event New event /at invalid format to invalid format
+list
+deadline New deadline /by invalid format
 bye
