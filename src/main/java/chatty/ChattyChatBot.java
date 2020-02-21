@@ -8,12 +8,8 @@ import chatty.task.Task;
 import chatty.task.ToDo;
 import chatty.ui.Ui;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import static chatty.util.Constants.ADDED_TASK_CONFIRMATION;
@@ -21,26 +17,18 @@ import static chatty.util.Constants.AT_STRING;
 import static chatty.util.Constants.BYE_STRING;
 import static chatty.util.Constants.BY_STRING;
 import static chatty.util.Constants.DEADLINE_STRING;
-import static chatty.util.Constants.DEFAULT_FILE_PATH;
 import static chatty.util.Constants.DELETE_STRING;
 import static chatty.util.Constants.DONE_STRING;
 import static chatty.util.Constants.EVENT_STRING;
-import static chatty.util.Constants.FALSE_STRING;
-import static chatty.util.Constants.FILE_FIELD_SEPARATOR;
 import static chatty.util.Constants.LIST_STRING;
-import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE;
-import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_TASK;
-import static chatty.util.Constants.NEW_LINE;
 import static chatty.util.Constants.SPACE_SEPARATOR;
 import static chatty.util.Constants.TASK_SUMMARY_FIRST_HALF;
 import static chatty.util.Constants.TASK_SUMMARY_SECOND_HALF;
 import static chatty.util.Constants.TODO_STRING;
-import static chatty.util.Constants.TRUE_STRING;
 
 public class ChattyChatBot {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static String filePath;
 
     private Ui ui;
     private Storage storage;
@@ -195,6 +183,4 @@ public class ChattyChatBot {
             System.out.println("The number you entered does not match any task in your list");
         }
     }
-
-
 }

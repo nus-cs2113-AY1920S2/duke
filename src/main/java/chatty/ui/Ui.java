@@ -10,7 +10,7 @@ import static chatty.util.Constants.LINE_BREAK;
 import static chatty.util.Constants.SPACE_SEPARATOR;
 
 public class Ui {
-    public Ui(){
+    public Ui() {
 
     }
 

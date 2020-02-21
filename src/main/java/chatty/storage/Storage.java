@@ -110,7 +110,6 @@ public class Storage {
         if (isDone) {
             task.markAsDone();
         }
-
         return Optional.of(task);
     }
 }
