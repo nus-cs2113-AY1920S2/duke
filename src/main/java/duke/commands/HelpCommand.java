@@ -7,10 +7,8 @@ import duke.ui.Ui;
 public class HelpCommand extends Command{
 
     public static final String COMMAND_PHRASE = "help";
-
     public static final String COMMAND_USAGE = COMMAND_PHRASE + System.lineSeparator()
             + "-Displays all commands and their input format";
-
 
     @Override
     public CommandResult execute(TaskList tasks, Ui textUi, Storage storage) {
@@ -22,7 +20,8 @@ public class HelpCommand extends Command{
                 + ByeCommand.COMMAND_USAGE + "\n\n"
                 + AddTodoCommand.COMMAND_USAGE + "\n\n"
                 + AddEventCommand.COMMAND_USAGE + "\n\n"
-                + AddDeadlineCommand.COMMAND_USAGE + "\n";
+                + AddDeadlineCommand.COMMAND_USAGE + "\n\n"
+                + FindCommand.COMMAND_USAGE + "\n";
         return new CommandResult(feedback);
     }
 }

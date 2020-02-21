@@ -8,6 +8,7 @@ import duke.commands.ClearCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.exception.FormatErrorException;
@@ -21,7 +22,6 @@ public class Parser {
     private static Command newCommand;
 
     private static String[] phrases;
-
 
     private static String commandWord;
 
@@ -65,10 +65,21 @@ public class Parser {
         case "help":
             createHelpCommand();
             break;
+        case "find":
+            createFindCommand();
+            break;
         default:
             throw new InvalidInputException();
         }
         return newCommand;
+    }
+
+    private static void createFindCommand() {
+        if (phrases.length == 1) {
+            newCommand = new ListCommand();
+        } else {
+            newCommand = new FindCommand(phrases[1]);
+        }
     }
 
     private static void createHelpCommand() {
@@ -132,7 +143,6 @@ public class Parser {
     private static void createByeCommand() {
         newCommand = new ByeCommand();
     }
-
 
     public static void prepareCommand(String command) throws InvalidInputException {
         phrases = command.split(" ");

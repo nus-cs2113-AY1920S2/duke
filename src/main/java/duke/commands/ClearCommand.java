@@ -6,6 +6,7 @@ import duke.ui.Ui;
 import static duke.common.Messages.CLEAR_MESSAGE;
 
 public class ClearCommand extends Command {
+
     public static final String COMMAND_PHRASE = "clear";
     public static final String COMMAND_USAGE = COMMAND_PHRASE
             + System.lineSeparator() + "-Clears all tasks in the list";

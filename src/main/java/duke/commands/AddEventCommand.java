@@ -8,7 +8,6 @@ import static duke.common.Messages.ADD_MESSAGE;
 
 public class AddEventCommand extends Command {
 
-
     private static String description;
     private static String duration;
     public static String COMMAND_PHRASE = "event (item) /at (date or time)";

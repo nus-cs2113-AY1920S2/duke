@@ -9,11 +9,8 @@ import static duke.common.Messages.ADD_MESSAGE;
 public class AddDeadlineCommand extends Command {
 
     private static String description;
-
     private static String by;
-
     public static String COMMAND_PHRASE = "deadline (item) /by (date or time)";
-
     public static String COMMAND_USAGE = COMMAND_PHRASE + System.lineSeparator() +
             "-Adds a deadline to the list";
 

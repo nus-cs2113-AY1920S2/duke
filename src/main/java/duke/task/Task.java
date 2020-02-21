@@ -11,7 +11,6 @@ public class Task {
         isCompleted = false;
     }
 
-
     public String getStatus() {
         if (isCompleted) {
             return "Complete";
