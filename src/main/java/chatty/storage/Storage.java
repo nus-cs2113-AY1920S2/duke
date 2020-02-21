@@ -3,6 +3,7 @@ package chatty.storage;
 import chatty.task.Deadline;
 import chatty.task.Event;
 import chatty.task.Task;
+import chatty.task.TaskList;
 import chatty.task.ToDo;
 
 import java.io.File;
@@ -26,7 +27,7 @@ public class Storage {
 
     }
 
-    public boolean readDataFromFile(List<Task> tasks) {
+    public boolean readDataFromFile(TaskList taskList) {
         File file = new File(System.getProperty("user.dir"), DEFAULT_FILE_PATH);
         try {
             // Solution below adapted from: https://stackoverflow
@@ -36,7 +37,7 @@ public class Storage {
             while (fileScanner.hasNext()) {
                 String taskStr = fileScanner.nextLine();
                 Optional<Task> taskOptional = stringToTask(taskStr);
-                taskOptional.ifPresent(tasks::add);
+                taskOptional.ifPresent(taskList::addTask);
             }
             return true;
         } catch (IOException e) {
@@ -44,11 +45,11 @@ public class Storage {
         }
     }
 
-    public boolean saveDataToFile(List<Task> tasks) {
+    public boolean saveDataToFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(DEFAULT_FILE_PATH);
-            for (Task task : tasks) {
-                fileWriter.write(task.getFileString() + NEW_LINE);
+            for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
+                fileWriter.write(taskList.getTaskAtIdx(i).getFileString() + NEW_LINE);
             }
             fileWriter.close();
             return true;

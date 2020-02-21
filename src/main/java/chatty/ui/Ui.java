@@ -1,13 +1,14 @@
 package chatty.ui;
 
 import chatty.task.Task;
+import chatty.task.TaskList;
 
-import java.util.List;
-
+import static chatty.util.Constants.ADDED_TASK_CONFIRMATION;
 import static chatty.util.Constants.BOT_NAME;
 import static chatty.util.Constants.DOT_CHARACTER;
 import static chatty.util.Constants.LINE_BREAK;
 import static chatty.util.Constants.SPACE_SEPARATOR;
+import static chatty.util.Constants.TASK_SUMMARY;
 
 public class Ui {
     public Ui() {
@@ -26,10 +27,10 @@ public class Ui {
         System.out.println("See you again soon!");
     }
 
-    public void listAllTasks(List<Task> tasks) {
+    public void listAllTasks(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
+            Task task = taskList.getTaskAtIdx(i);
             System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task.toString());
         }
     }
@@ -66,6 +67,25 @@ public class Ui {
 
     public void sendSpecifyDeadlinePrompt() {
         System.out.println("Please specify the deadline of your task");
+    }
+
+    public void sendTaskAddedMessage(Task newTask, int totalTaskCount) {
+        System.out.println(ADDED_TASK_CONFIRMATION);
+        System.out.println(newTask);
+        System.out.println(String.format(TASK_SUMMARY, totalTaskCount));
+    }
+
+    public void sendTaskDeletedMessage(Task deletedTask) {
+        System.out.println("Successfully deleted the following task:");
+        System.out.println(deletedTask);
+    }
+
+    public void sendTaskNumberOutOfBoundMessage() {
+        System.out.println("The number you entered does not match any task in your list");
+    }
+
+    public void sendWrongTaskNumberFormatMessage() {
+        System.out.println("Please enter a valid task number");
     }
 
     public void sendReadingTaskMessage() {
