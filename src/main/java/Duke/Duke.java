@@ -271,6 +271,10 @@ public class Duke {
         Duke_data.close();
     }
 
+    public static void run(){
+        //...
+    }
+
     public static void main(String[] args) throws IOException {
         displayWelcomeMessage();
         int index;
