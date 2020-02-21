@@ -1,0 +1,63 @@
+import Tasks.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Storage {
+
+    private File inFile;
+
+    public Storage(String filePath) throws FileNotFoundException {
+        this.inFile= new File(filePath);
+    }
+
+    public ArrayList<Task> loadFile() throws FileNotFoundException {
+        Scanner in = new Scanner(this.inFile);
+        ArrayList<Task> l1= new ArrayList<>();
+        while (in.hasNextLine()) {
+            String[] temp = in.nextLine().split("-");
+            initList(temp, l1);
+        }
+        in.close();
+        return l1;
+    }
+
+    public static void initList(String[] temp, ArrayList<Task> l1){
+        switch(temp[0]){
+            case "T" :
+                Todo todo = new Todo(temp[2]);
+                if(temp[1]=="Y"){
+                    todo.done();
+                }
+                l1.add(todo);
+                break;
+            case "D" :
+                Deadline deadline = new Deadline(temp[3]);
+                deadline.setBy(temp[1]);
+                if(temp[2]=="Y"){
+                    deadline.done();
+                }
+                l1.add(deadline);
+                break;
+            case "E" :
+                Event event = new Event(temp[3]);
+                event.setAt(temp[1]);
+                if(temp[2]=="Y"){
+                    event.done();
+                }
+                l1.add(event);
+                break;
+            default:
+                break;
+        }
+    }
+    public void saveFile(ArrayList<Task> l1) throws FileNotFoundException {
+            PrintWriter outText= new PrintWriter(this.inFile);
+            for(int i=0; i< l1.size(); i++){
+                outText.println(l1.get(i).toFile());
+            }
+            outText.close();
+    }
+}
