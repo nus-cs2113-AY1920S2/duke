@@ -68,6 +68,27 @@ public class Ui {
         System.out.println("Please specify the deadline of your task");
     }
 
+    public void sendReadingTaskMessage() {
+        System.out.println("Reading tasks from disk...");
+    }
+
+    public void sendReadTaskSuccessMessage() {
+        System.out.println("Successfully read the following task from file:");
+    }
+
+    public void sendReadTaskFailMessage() {
+        System.out.println("Exception occurred while reading file...");
+        System.out.println("Initializing empty tasks list");
+    }
+
+    public void sendSaveTaskSuccessMessage() {
+        System.out.println("Your tasks have been successfully saved to disk!");
+    }
+
+    public void sendSaveTaskFailMessage() {
+        System.out.println("Oops! Exception occurred when saving data to file.");
+    }
+
     public void sendLineBreak() {
         System.out.println(LINE_BREAK);
     }

@@ -1,6 +1,7 @@
 package chatty;
 
 import chatty.exception.ChattyChatBotException;
+import chatty.storage.Storage;
 import chatty.task.Deadline;
 import chatty.task.Event;
 import chatty.task.Task;
@@ -42,9 +43,11 @@ public class ChattyChatBot {
     private static String filePath;
 
     private Ui ui;
+    private Storage storage;
 
     public ChattyChatBot() {
         this.ui = new Ui();
+        this.storage = new Storage();
     }
 
     public static void main(String[] args) {
@@ -54,7 +57,13 @@ public class ChattyChatBot {
     public void run() {
         ui.sendWelcomeMessage();
         List<Task> tasks = new ArrayList<>();
-        readDataFromFile(tasks);
+        ui.sendReadingTaskMessage();
+        if (storage.readDataFromFile(tasks)) {
+            ui.sendReadTaskSuccessMessage();
+        } else {
+            ui.sendReadTaskFailMessage();
+        }
+        ui.listAllTasks(tasks);
         ui.sendLineBreak();
 
         String userInput;
@@ -110,7 +119,11 @@ public class ChattyChatBot {
                 }
                 break;
             case BYE_STRING:
-                saveDataToFile(tasks);
+                if (storage.saveDataToFile(tasks)) {
+                    ui.sendSaveTaskSuccessMessage();
+                } else {
+                    ui.sendSaveTaskFailMessage();
+                }
                 ui.sendByeMessage();
                 break;
             default:
@@ -183,101 +196,5 @@ public class ChattyChatBot {
         }
     }
 
-    private void readDataFromFile(List<Task> tasks) {
-        filePath = DEFAULT_FILE_PATH;
-        // Solution below adapted from: https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics
-        // .html#w6-3-java-file-access
-        File file = new File(System.getProperty("user.dir"), filePath);
-        System.out.println("Reading tasks from disk...");
-        try {
-            // Solution below adapted from: https://stackoverflow
-            // .com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
-            file.getParentFile().mkdirs();
-            if (file.createNewFile()) {
-                System.out.println("New output file created");
-                System.out.println(file.getAbsolutePath());
-            }
-            Scanner fileScanner = new Scanner(file);
-            while (fileScanner.hasNext()) {
-                String taskStr = fileScanner.nextLine();
-                Optional<Task> taskOptional = stringToTask(taskStr);
-                taskOptional.ifPresent(tasks::add);
-            }
-        } catch (IOException e) {
-            System.out.println("Exception occurred while reading file...");
-            System.out.println("Initializing empty tasks list");
-            e.printStackTrace();
-        }
-        ui.listAllTasks(tasks);
-    }
 
-    private static void saveDataToFile(List<Task> tasks) {
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            for (Task task : tasks) {
-                fileWriter.write(task.getFileString() + NEW_LINE);
-            }
-            fileWriter.close();
-            System.out.println("Your tasks have been successfully saved to disk!");
-        } catch (IOException e) {
-            System.out.println("Oops! Exception occurred when saving data to file.");
-        }
-    }
-
-    private static Optional<Task> stringToTask(String taskStr) {
-        String[] fields = taskStr.split(FILE_FIELD_SEPARATOR);
-        if (fields.length < MINIMUM_FIELD_NUM_FOR_TASK) {
-            System.out.println("Invalid line in input file:");
-            System.out.println(taskStr);
-            return Optional.empty();
-        }
-
-        String taskType = fields[0];
-        boolean isDone;
-        if (fields[1].equals(TRUE_STRING)) {
-            isDone = true;
-        } else if (fields[1].equals(FALSE_STRING)) {
-            isDone = false;
-        } else {
-            System.out.println("Wrong format - please use true or false to mark task as done or not done");
-            System.out.println(taskStr);
-            return Optional.empty();
-        }
-        String description = fields[2];
-        Task task;
-
-        switch (taskType) {
-        case "T":
-            task = new ToDo(description);
-            break;
-        case "E":
-            if (fields.length < MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE) {
-                System.out.println("Wrong format for Event in input file:");
-                System.out.println(taskStr);
-                return Optional.empty();
-            }
-            String eventPeriod = fields[3];
-            task = new Event(description, eventPeriod);
-            break;
-        case "D":
-            if (fields.length < MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE) {
-                System.out.println("Wrong format for Deadline in input file:");
-                System.out.println(taskStr);
-                return Optional.empty();
-            }
-            String dateTime = fields[3];
-            task = new Deadline(description, dateTime);
-            break;
-        default:
-            System.out.println("Task type not specified in input file:");
-            System.out.println(taskStr);
-            return Optional.empty();
-        }
-
-        if (isDone) {
-            task.markAsDone();
-        }
-
-        return Optional.of(task);
-    }
 }

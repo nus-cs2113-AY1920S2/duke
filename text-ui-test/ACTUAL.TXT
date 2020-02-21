@@ -9,6 +9,7 @@ Wrong format for Event in input file:
 E|true|invalid event with not enough fields
 Wrong format - please use true or false to mark task as done or not done
 D|not boolean|deadline|next month
+Successfully read the following task from file:
 Here are the tasks in your list:
 1. [D][✓] write assignment (by: tomorrow)
 2. [E][✘] workshop event (at: May 4th 10-11am)
