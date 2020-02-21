@@ -4,6 +4,10 @@ public class Messages {
 
     public static final String WELCOME_MESSAGE = "Hello! I'm KJ\nHow can I help you today?";
 
+    public static final String NO_RESULTS = "Sorry, I could not find any matching tasks!";
+
+    public static final String FILTER_MESSAGE = "Here are the matching tasks in your list:";
+
     public static final String COMMAND_FAIL = "This command can only be executed by child classes";
 
     public static final String ADD_MESSAGE = "Got it. I've added this task:";

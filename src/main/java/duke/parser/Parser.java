@@ -1,15 +1,6 @@
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.ListCommand;
-import duke.commands.HelpCommand;
-import duke.commands.DoneCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.ClearCommand;
-import duke.commands.ByeCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddTodoCommand;
-import duke.commands.AddDeadlineCommand;
+import duke.commands.*;
 import duke.exception.FormatErrorException;
 import duke.exception.IncompleteInputException;
 import duke.exception.InvalidInputException;
@@ -88,6 +79,13 @@ public class Parser {
             break;
         case "help":
             newCommand = new HelpCommand();
+            break;
+        case "find":
+            if (phrases.length == 1) {
+                newCommand = new ListCommand();
+                break;
+            }
+            newCommand = new FindCommand(phrases[1]);
             break;
         default:
             throw new InvalidInputException();

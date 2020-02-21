@@ -21,7 +21,8 @@ public class HelpCommand extends Command{
                 + ByeCommand.COMMAND_USAGE + "\n\n"
                 + AddTodoCommand.COMMAND_USAGE + "\n\n"
                 + AddEventCommand.COMMAND_USAGE + "\n\n"
-                + AddDeadlineCommand.COMMAND_USAGE + "\n\n";
+                + AddDeadlineCommand.COMMAND_USAGE + "\n\n"
+                + FindCommand.COMMAND_USAGE + "\n";
         return new CommandResult(feedback);
     }
 }
