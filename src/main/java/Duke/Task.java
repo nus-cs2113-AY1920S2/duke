@@ -21,6 +21,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void importDone() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString(){
         return "[" + getStatusIcon() + "]" + getDescription();

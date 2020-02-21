@@ -1,15 +1,19 @@
+import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
 import Duke.*;
 import Exceptions.*;
 import java.util.ArrayList;
+import java.nio.file.*;
+import java.io.BufferedReader;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int size = 0;
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
+        importTaskFromFile();
         Scanner myScanner = new Scanner(System.in);
         String userName = GreetingsAndFunctions(myScanner); //Greetings and list of Functions
         boolean flag = true; //Boolean flag for while loop
@@ -26,7 +30,8 @@ public class Duke {
                             throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
                         }
                         addtask(new Todo(line));
-                        printAddedTask("New To-Do Duke.Duke.Task added:");
+                        writeToFile(function,line);
+                        printAddedTask("New To-Do Task added:");
                         break;
 
                     case "deadline":
@@ -39,7 +44,8 @@ public class Duke {
                             throw new ArrayIndexOutOfBoundsException();
                         }
                         addtask(new Deadline(description[0], deadLine[1]));
-                        printAddedTask("New Duke.Duke.Task with deadline added:");
+                        writeToFile(function,line);
+                        printAddedTask("New Task with deadline added:");
                         break;
 
                     case "event":
@@ -52,6 +58,7 @@ public class Duke {
                             throw new ArrayIndexOutOfBoundsException();
                         }
                         addtask(new Events(eventName[0], event[1]));
+                        writeToFile(function,line);
                         printAddedTask("New event added:");
                         break;
 
@@ -84,6 +91,9 @@ public class Duke {
                                 throw new NullPointerException();
                         }
                         tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
+                        String str = tasks.get(taskNumber).toString();
+                        String str2 = str.substring(6,str.length());
+                        appendToFile(str2);
                         System.out.println("____________________________________________________________");
                         System.out.println("Great job! I've marked this task as done in your planner:");
                         System.out.println(tasks.get(taskNumber));
@@ -102,6 +112,9 @@ public class Duke {
                         System.out.println("____________________________________________________________");
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(tasks.get(taskNumber));
+                        str = tasks.get(taskNumber).toString();
+                        str2 = str.substring(6,str.length());
+                        deleteToFile(str2);
                         tasks.remove(taskNumber);
                         System.out.println("Now you have " + tasks.size() + " tasks in your list.");
                         System.out.println("____________________________________________________________");
@@ -119,7 +132,205 @@ public class Duke {
                 System.out.println("☹ OH NO! task number is missing!! Please try storing a task first.");
             } catch (IllegalArgumentException e) {
                 System.out.println("☹ OOPS! Missing command! Please try command: done [task number] ");
+            } catch (WhitespaceExceptions e) {
+                System.out.println("Error while appending to file. Please check your white spaces and symbols.");
             }
+        }
+    }
+
+    private static void writeToFile(String str1, String str2) {
+        String filePath = "data/Tasklist.txt";
+        try {
+            FileWriter fw = new FileWriter(filePath, true);
+            if (str1.contains("todo")) {
+                String newLineFormatted = str2.stripLeading();
+                fw.write("T//0//" + newLineFormatted + System.lineSeparator());
+                fw.close();
+            }
+            if (str1.contains("deadline")) {
+                String[] newLineFormatted = str2.split("/by");
+                fw.write("D//0//" + newLineFormatted[0].trim() + "//" + newLineFormatted[1].trim() + System.lineSeparator());
+                fw.close();
+            }
+            if (str1.contains("event")){
+                String[] newLineFormatted = str2.split("/at");
+                fw.write("E//0//" + newLineFormatted[0].trim() + "//" + newLineFormatted[1].trim() + System.lineSeparator());
+                fw.close();
+            }
+        } catch (IOException e) {
+            System.out.println("Error while writing into file. Please try again");
+        }
+    }
+
+    private static void appendToFile(String newLine) throws WhitespaceExceptions {
+        String taskSymbol;
+        String [] strArr;
+        String description;
+        String timeDate;
+    //    System.out.println("input:"+newLine);
+        if(newLine.contains("(by:")){
+            String newline2 = newLine.replace("(by:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            System.out.println(description);
+            timeDate = strArr[1].replace(")","").trim();
+            taskSymbol = "D//";
+         //   System.out.println("D Formatted: " + description + timeDate);
+        } else if (newLine.contains("(at:")) {
+            String newline2 = newLine.replace("(at:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            timeDate = strArr[1].replace(")","").trim();
+            taskSymbol = "E//";
+         //   System.out.println(" E Formatted: " + description + timeDate);
+        } else {
+            description = newLine.trim();
+            timeDate = "";
+            taskSymbol = "T//";
+         //   System.out.println("T Formatted: " + description);
+        }
+        if(description.isBlank()){
+            throw new WhitespaceExceptions();
+        }
+
+        String filePath = "data/Tasklist.txt";
+        File fileToBeModified = new File(filePath);
+        String originalFileContent = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            String currentReadingLine = reader.readLine();
+            String oldString = null;
+            String newString = null;
+
+            while (currentReadingLine != null) {
+                if(currentReadingLine.contains(description)){
+                    oldString = currentReadingLine;
+                    newString = taskSymbol + 1 + "//" + description + "//" + timeDate;
+                }
+                originalFileContent += currentReadingLine + System.lineSeparator();
+                currentReadingLine = reader.readLine();
+            }
+            String newFileContent = originalFileContent.replace(oldString, newString);
+            writer = new FileWriter(fileToBeModified);
+            writer.write(newFileContent);
+
+        } catch (IOException e) {
+            System.out.println("Error appending to file! Please try again!");
+        } finally {
+            try {
+                reader.close();
+                writer.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void deleteToFile(String newLine) throws WhitespaceExceptions {
+        String taskSymbol;
+        String [] strArr;
+        String description;
+        String timeDate;
+    //    System.out.println("input:"+newLine);
+        if(newLine.contains("(by:")){
+            String newline2 = newLine.replace("(by:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            timeDate = strArr[1].replace(")","").trim();
+            taskSymbol = "D//";
+         //   System.out.println("D Formatted: " + description + timeDate);
+        } else if (newLine.contains("(at:")) {
+            String newline2 = newLine.replace("(at:", ":");
+            strArr = newline2.split(":");
+            description = strArr[0].trim();
+            timeDate = strArr[1].replace(")","").trim();
+            taskSymbol = "E//";
+         //   System.out.println(" E Formatted: " + description + timeDate);
+        } else {
+            description = newLine.trim();
+            timeDate = "";
+            taskSymbol = "T//";
+         //   System.out.println("T Formatted: " + description);
+        }
+        if(description.isBlank()){
+            throw new WhitespaceExceptions();
+        }
+
+        String filePath = "data/Tasklist.txt";
+        File fileToBeModified = new File(filePath);
+        String originalFileContent = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            String currentReadingLine = reader.readLine();
+            String oldString = null;
+            String newString = null;
+
+            while (currentReadingLine != null) {
+                if(currentReadingLine.contains(description)){
+                    oldString = currentReadingLine;
+                    newString = "";
+                }
+                originalFileContent += currentReadingLine + System.lineSeparator();
+                currentReadingLine = reader.readLine();
+            }
+            String newFileContent = originalFileContent.replace(oldString, newString);
+            writer = new FileWriter(fileToBeModified);
+            writer.write(newFileContent);
+
+        } catch (IOException e) {
+            System.out.println("Error appending to file! Please try again!");
+        } finally {
+            try {
+                reader.close();
+                writer.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private static void importTaskFromFile() {
+        try {
+            Path path = Paths.get("data");
+            if(!Files.exists(path)) {
+                Files.createDirectory(path);
+                File f = new File("data/Tasklist.txt");
+            } else {
+                File f = new File("data/Tasklist.txt");
+                Scanner fileScanner = new Scanner(f);
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    String[] singleTaskDescriptions = line.split("//");
+                    switch (singleTaskDescriptions[0]) {
+                        case "T":
+                            addtask(new Todo(singleTaskDescriptions[2]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+
+                        case "D":
+                            addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+
+                        case "E":
+                            addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred. Please try again!");
         }
     }
 
