@@ -7,17 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-
-
-
-public class Ui  {public static final String LINE = "\t__________________________________________________________";
+public class Ui  {
+    public static final String LINE = "\t__________________________________________________________";
     public static final String[] COMMAND= {"todo", "deadline", "event", "done", "bye", "list", "help"};
     public static final String WRONG_INPUT="\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
             "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
             " listing";
     public static final String MISSING_FILE = "Please check if data.txt exist!";
+    public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
+    public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
     private final Scanner in;
     private final PrintStream out;
 
@@ -54,39 +53,32 @@ public class Ui  {public static final String LINE = "\t_________________________
         out.println(LINE);
     }
 
-    public void printError(String message){
-        out.println(LINE);
-        out.println(message);
-        out.println(LINE);
-    }
-    public void printAddTask(ArrayList<Task> l1, Task task){
-        out.println(LINE);
-        out.println("\t Got it. I've added this task:");
-        out.println("\t   "+task.toString());
-        out.println("\t Now you have " + l1.size()+ " tasks in the list.");
+    public void printLine(){
         out.println(LINE);
     }
 
+    public void printError(String message){
+        out.println(message);
+    }
+    public void printAddTask(ArrayList<Task> l1, Task task){
+        out.println("\t Got it. I've added this task:");
+        out.println("\t   "+task.toString());
+        out.println("\t Now you have " + l1.size()+ " tasks in the list.");
+    }
+
     public void printGoodByeMessage(){
-        out.println(LINE);
         out.println("\t Bye.Hope to see you again soon!");
-        out.println(LINE);
     }
     public void printDone(Task task){
-        out.println(LINE);
         out.println("\t Nice! I've marked this task as done:");
         out.println("\t   "+task.toString());
-        out.println(LINE);
     }
     public void printDelete(Task task, ArrayList<Task> l1){
-        out.println(LINE);
         out.println("\t Noted. I've removed this task: ");
         out.println("\t   " + task.toString());
         out.println("\t Now you have " + l1.size() + " tasks in the list.");
-        out.println(LINE);
     }
     public void printList(ArrayList<Task> l1){
-        out.println(LINE);
         if(l1.isEmpty()){
             out.println(LIST_EMPTY);
         }else {
@@ -97,22 +89,30 @@ public class Ui  {public static final String LINE = "\t_________________________
                 out.println("\t " + count + "." + task.toString());
             }
         }
-        out.println(LINE);
     }
     public void printWrongInput(){
-        out.println(LINE);
         out.println(WRONG_INPUT);
-        out.println(LINE);
     }
     public void printHelp(){
-        out.println(LINE);
         out.println("\t "+ Arrays.toString(COMMAND));
-        out.println(LINE);
     }
     public void showLoadingError(){
-        out.println(LINE);
         out.println(MISSING_FILE);
-        out.println(LINE);
+    }
+    public void printFindList(ArrayList<Task> l1, ArrayList<Integer> l2){
+        if(l2.isEmpty()){
+            out.println(NO_MATCHING_TASK);
+        }else {
+            out.println(MATCHING_TASK);
+            for (int i = 0; i < l2.size(); i++) {
+                int count = i + 1;
+                Task task = l1.get(l2.get(i));
+                out.println("\t " + count + "." + task.toString());
+            }
+        }
+    }
+    public void close(){
+        this.in.close();
     }
 }
 

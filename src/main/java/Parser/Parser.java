@@ -67,11 +67,12 @@ public class Parser  {
             case "todo":
             case "deadline":
             case "event":
+            case "find" :
                 if(userCommand.length==1){
                     throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + userCommand[0] +
                             " cannot be empty."
                     );
-                }else if (!userCommand[0].equals("todo")){
+                }else if (userCommand[0].equals("deadline") || userCommand[0].equals("event")){
                     int i=1;
                     boolean hasTiming=false;
                     while(i<userCommand.length) {
@@ -80,11 +81,10 @@ public class Parser  {
                         }
                         i++;
                     }
-                        if (!hasTiming) {
+                    if (!hasTiming) {
                             throw new IllegalDukeException(INDICATE_TIMING);
-                        }
-
                     }
+                }
                 break;
             default:
                 throw new IllegalDukeException(WRONG_INPUT);
@@ -114,6 +114,9 @@ public class Parser  {
                 break;
             case "delete":
                 outCommand = new DeleteCommand(fullCommand);
+                break;
+            case "find" :
+                outCommand = new FindCommand(fullCommand);
                 break;
             default:
                 outCommand = new WrongCommand(fullCommand);

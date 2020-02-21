@@ -7,8 +7,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class  Command  {
-    public int status;
-    public String[] fullCommand;
+    protected int status;
+    protected String[] fullCommand;
     public static final String OUT_OF_BOUND_INDEX = "\t Task number provided is not valid. Press \"list\" to see\n" +
             "\t available list of task numbers";
 
@@ -24,6 +24,9 @@ public class  Command  {
             ui.printList(l1);
         }
         return;
+    }
+    public int getStatus(){
+        return this.status;
     }
 
 }

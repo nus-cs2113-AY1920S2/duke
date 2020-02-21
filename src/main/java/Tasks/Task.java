@@ -1,7 +1,7 @@
 package Tasks;
 
 public class Task {
-    protected String action;
+    private String action;
     protected boolean isDone;
 
     public Task(String action){
@@ -23,6 +23,9 @@ public class Task {
         String done = this.isDone ? "Y" : "N" ;
 
         return done + "-" + action;
+    }
+    public String getAction(){
+        return this.action;
     }
 
 

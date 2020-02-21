@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class WrongCommand extends Command {
 
-
     public WrongCommand(String[] fullCommand) {
         super(fullCommand);
     }

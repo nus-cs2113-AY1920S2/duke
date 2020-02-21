@@ -29,12 +29,16 @@ public class Duke {
             try {
                 String input = this.ui.getUserIn();
                 Command command = Parser.parse(input);
+                this.ui.printLine();
                 command.execute(this.l1, this.ui, this.storage);
-                status=command.status;
+                status=command.getStatus();
             }catch(IllegalDukeException | FileNotFoundException e){
                 this.ui.printError(e.getMessage());
+            }finally{
+                this.ui.printLine();
             }
         }
+        this.ui.close();
     }
     public static void main(String[] args) throws FileNotFoundException {
         new Duke("data/duke.txt").run();
