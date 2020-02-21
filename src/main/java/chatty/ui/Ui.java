@@ -17,10 +17,8 @@ public class Ui {
     }
 
     public void sendWelcomeMessage() {
-        System.out.println(LINE_BREAK);
         System.out.println("Hello from " + BOT_NAME);
         System.out.println("Glad to be at your service!");
-        System.out.println(LINE_BREAK);
     }
 
     public void sendByeMessage() {
@@ -29,6 +27,11 @@ public class Ui {
     }
 
     public void listAllTasks(TaskList taskList) {
+        if (taskList.getTotalTaskNum() == 0) {
+            System.out.println("The task list is empty");
+            return;
+        }
+
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
             Task task = taskList.getTaskAtIdx(i);
@@ -42,34 +45,6 @@ public class Ui {
         System.out.println("How may I help you?");
     }
 
-    public void sendDonePrompt() {
-        System.out.println("Let me know which task you would like to mark as done?");
-    }
-
-    public void sendTodoPrompt() {
-        System.out.println("Sure, let me know what ToDo task you would like to add!");
-    }
-
-    public void sendDeadlineTimePrompt() {
-        System.out.println("Sure, let me know what Deadline task you would like to add!");
-    }
-
-    public void sendEventPrompt() {
-        System.out.println("Sure, let me know what Event task you would like to add!");
-    }
-
-    public void sendDeletePrompt() {
-        System.out.println("Let me know which task you would like to delete?");
-    }
-
-    public void sendSpecifyEventTimePrompt() {
-        System.out.println("Please specify the time of your event");
-    }
-
-    public void sendSpecifyDeadlinePrompt() {
-        System.out.println("Please specify the deadline of your task");
-    }
-
     public void sendTaskAddedMessage(Task newTask, int totalTaskCount) {
         System.out.println(ADDED_TASK_CONFIRMATION);
         System.out.println(newTask);
@@ -79,6 +54,15 @@ public class Ui {
     public void sendTaskDeletedMessage(Task deletedTask) {
         System.out.println("Successfully deleted the following task:");
         System.out.println(deletedTask);
+    }
+
+    public void sendTaskDoneMessage(Task doneTask) {
+        System.out.println("Congratulations! You've successfully marked the following task as done:");
+        System.out.println(doneTask);
+    }
+
+    public void askForMoreDetails() {
+        System.out.println("Please let me know more details so that I can help you");
     }
 
     public void sendTaskNumberOutOfBoundMessage() {
@@ -94,7 +78,7 @@ public class Ui {
     }
 
     public void sendReadTaskSuccessMessage() {
-        System.out.println("Successfully read the following task from file:");
+        System.out.println("Successfully read tasks from file");
     }
 
     public void sendReadTaskFailMessage() {

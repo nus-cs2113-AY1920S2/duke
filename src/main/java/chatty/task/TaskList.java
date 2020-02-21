@@ -16,14 +16,10 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Optional<Task> deleteTask(int idx) {
-        try {
-            Task task = tasks.get(idx);
-            tasks.remove(idx);
-            return Optional.of(task);
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
+    public Task deleteTask(int idx) {
+        Task task = tasks.get(idx);
+        tasks.remove(idx);
+        return task;
     }
 
     public int getTotalTaskNum() {
@@ -34,17 +30,9 @@ public class TaskList {
         return tasks.get(idx);
     }
 
-    public void markTaskAsDone(String indexStr) {
-        try {
-            int taskIdx = Integer.parseInt(indexStr);
-            Task task = tasks.get(taskIdx - 1);
-            task.markAsDone();
-            System.out.println("Congratulations! You've successfully marked the following task as done:");
-            System.out.println(task.toString());
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid task number");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("The number you entered does not match any task in your list");
-        }
+    public Task markTaskAsDone(int idx) {
+        Task task = tasks.get(idx);
+        task.markAsDone();
+        return task;
     }
 }

@@ -2,7 +2,7 @@ package chatty.task;
 
 public class Event extends Task {
 
-    protected String eventPeriod;
+    private String eventPeriod;
 
     public Event(String description, String eventPeriod) {
         super(description);

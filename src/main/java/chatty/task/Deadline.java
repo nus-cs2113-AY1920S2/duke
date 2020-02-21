@@ -2,7 +2,7 @@ package chatty.task;
 
 public class Deadline extends Task {
 
-    protected String dateTime;
+    private String dateTime;
 
     public Deadline(String description, String dateTime) {
         super(description);
