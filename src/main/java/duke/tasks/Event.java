@@ -8,7 +8,7 @@ public class Event extends Task {
 
     public Event(String description, String t) throws DukeException {
         super(description.trim());
-        if(description.equals("") || t.equals(""))
+        if(description.isBlank() | t.isBlank())
         {
             throw new DukeException();
         }

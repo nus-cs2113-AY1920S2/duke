@@ -7,7 +7,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) throws DukeException {
         super(description.trim());
-        if(description.equals("") || by.equals(""))
+        if(description.isBlank() | by.isBlank())
         {
             throw new DukeException();
         }

@@ -1,0 +1,3 @@
+t//true//homework
+d//false//lab//19/2/2020
+e//false//test//22/2/2020
