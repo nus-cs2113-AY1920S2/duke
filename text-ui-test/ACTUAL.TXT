@@ -225,6 +225,27 @@ Here are the tasks in your list:
 7. [E][✘] Another event (at: Nov 7th 10-11am)
 ____________________________________________________________
 ____________________________________________________________
+There is no task with keyword 'without'
+____________________________________________________________
+____________________________________________________________
+Here are the tasks with keyword 'with' in your list:
+1. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks with keyword 'an' in your list:
+1. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks with keyword 'happen' in your list:
+1. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks with keyword 'This' in your list:
+1. [T][✘] This is a todo task
+2. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
+3. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+____________________________________________________________
+____________________________________________________________
 Your tasks have been successfully saved to disk!
 Thanks for chatting with Chatty Chat Bot
 See you again soon!

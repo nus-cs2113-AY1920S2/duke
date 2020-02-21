@@ -31,4 +31,9 @@ delete 0
 list
 delete 3
 list
+find without
+find with
+find an
+find happen
+find This
 bye
