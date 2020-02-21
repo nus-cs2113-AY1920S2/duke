@@ -3,6 +3,8 @@ package chatty.task;
 import java.util.ArrayList;
 import java.util.List;
 
+import static chatty.util.Constants.REGEX_MATCH_ALL_CHARACTER;
+
 public class TaskList {
 
     private List<Task> tasks;
@@ -33,5 +35,15 @@ public class TaskList {
         Task task = tasks.get(idx);
         task.markAsDone();
         return task;
+    }
+
+    public TaskList findTaskWithKeyword(String keyword) {
+        TaskList taskListWithKeyword = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().matches(REGEX_MATCH_ALL_CHARACTER + keyword + REGEX_MATCH_ALL_CHARACTER)) {
+                taskListWithKeyword.addTask(task);
+            }
+        }
+        return taskListWithKeyword;
     }
 }

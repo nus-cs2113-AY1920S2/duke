@@ -35,6 +35,19 @@ public class Ui {
         }
     }
 
+    public void listTasksWithKeyword(TaskList taskList, String keyword) {
+        if (taskList.getTotalTaskNum() == 0) {
+            System.out.println(String.format("There is no task with keyword '%s'", keyword));
+            return;
+        }
+
+        System.out.println(String.format("Here are the tasks with keyword '%s' in your list:", keyword));
+        for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
+            Task task = taskList.getTaskAtIdx(i);
+            System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task.toString());
+        }
+    }
+
     public void sendDefaultResponse() {
         System.out.println("Sorry, I can't help you with that yet");
         System.out.println("I'm " + BOT_NAME);

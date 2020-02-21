@@ -6,6 +6,7 @@ import chatty.command.DeadlineCommand;
 import chatty.command.DeleteCommand;
 import chatty.command.DoneCommand;
 import chatty.command.EventCommand;
+import chatty.command.FindCommand;
 import chatty.command.ListCommand;
 import chatty.command.TodoCommand;
 import chatty.exception.ChattyChatBotException;
@@ -84,6 +85,10 @@ public class ChattyChatBot {
                 } else if (command instanceof DeleteCommand) {
                     Task deletedTask = taskList.deleteTask(((DeleteCommand) command).getIdx());
                     ui.sendTaskDeletedMessage(deletedTask);
+                } else if (command instanceof FindCommand) {
+                    String keyword = ((FindCommand) command).getKeyword();
+                    TaskList taskListWithKeyword = taskList.findTaskWithKeyword(keyword);
+                    ui.listTasksWithKeyword(taskListWithKeyword, keyword);
                 } else if (command instanceof ByeCommand) {
                     if (storage.saveDataToFile(taskList)) {
                         ui.sendSaveTaskSuccessMessage();

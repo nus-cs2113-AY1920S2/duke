@@ -6,6 +6,7 @@ import chatty.command.DeadlineCommand;
 import chatty.command.DeleteCommand;
 import chatty.command.DoneCommand;
 import chatty.command.EventCommand;
+import chatty.command.FindCommand;
 import chatty.command.ListCommand;
 import chatty.command.TodoCommand;
 import chatty.exception.ChattyChatBotException;
@@ -17,6 +18,7 @@ import static chatty.util.Constants.DEADLINE_STRING;
 import static chatty.util.Constants.DELETE_STRING;
 import static chatty.util.Constants.DONE_STRING;
 import static chatty.util.Constants.EVENT_STRING;
+import static chatty.util.Constants.FIND_STRING;
 import static chatty.util.Constants.LIST_STRING;
 import static chatty.util.Constants.SPACE_SEPARATOR;
 import static chatty.util.Constants.TODO_STRING;
@@ -52,6 +54,8 @@ public class Parser {
             return new EventCommand(eventFields[0], eventFields[1]);
         case DELETE_STRING:
             return new DeleteCommand(Integer.parseInt(array[1]) - 1);
+        case FIND_STRING:
+            return new FindCommand(array[1]);
         case BYE_STRING:
             return new ByeCommand();
         default:
