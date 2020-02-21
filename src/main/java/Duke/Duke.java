@@ -2,8 +2,8 @@ package Duke;
 
 import Duke.Exception.IllegalCommandException;
 import Duke.Exception.IllegalDeleteException;
-import Duke.Exception.IllegalDoneTaskException;
 import Duke.Exception.IllegalTypeException;
+import Duke.Exception.IllegalDoneTaskException;
 import Duke.Task.Deadline;
 import Duke.Task.Event;
 import Duke.Task.Task;
