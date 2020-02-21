@@ -4,6 +4,12 @@ import Asset.Storage;
 import Asset.Ui;
 import Tasks.Task;
 import java.util.ArrayList;
+/**
+ * This is a sub class of the Command class in Duke.
+ *
+ * This class finds any Task which description matches
+ * the key entered by User.
+ */
 
 public class FindCommand extends Command {
 

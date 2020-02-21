@@ -2,10 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e401facb-d800-4b54-829d-0bd067ba4e4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../data/duke.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Duke.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Asset/IllegalDukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Asset/IllegalDukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Asset/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Asset/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Asset/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Asset/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/ByeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/ByeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/DeleteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/DoneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/DoneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/FindCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Commands/WrongCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Commands/WrongCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Tasks/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Tasks/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Tasks/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Tasks/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Tasks/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Tasks/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Tasks/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/new/Deadline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/new/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/new/Duke.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/new/Event.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/new/IllegalDukeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/new/Task.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/new/Todo.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +44,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="RunManager">
+    <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Duke" />
+      <module name="new" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Duke" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -52,13 +85,37 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1581501015648">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1582287856219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581501015648" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1581501006760">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1582287856219" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1582281919251">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581501006760" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582281919251" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1582281919251">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582281919251" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1582281919251">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582281919251" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1582281919251">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582281919251" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1582287850566">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1582287850566" />
+    <state x="410" y="139" width="700" height="530" key="recent.locations.popup" timestamp="1582279504193">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="410" y="139" width="700" height="530" key="recent.locations.popup/0.0.1536.824@0.0.1536.824" timestamp="1582279504193" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1582278759604">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1582278759604" />
   </component>
 </project>

@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * This is the class that stores the list of tasks in an ArrayList.
+ * This class also saves and loads the ArrayList into data.txt
+ */
 public class Storage {
 
     private File inFile;

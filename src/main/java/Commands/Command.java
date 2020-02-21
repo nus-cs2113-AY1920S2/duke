@@ -5,7 +5,18 @@ import Tasks.Task;
 import Asset.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
+/**
+ * This is the parent class of the Command class in Duke.
+ *
+ * This class stores a status which determines the continuation
+ * of the run() method in Duke.
+ *
+ * This class also stores the full command entered by User in the
+ * form of an array of Strings.
+ *
+ * This class does basic execution like listing available tasks
+ * and commands in Duke.
+ */
 public class  Command  {
     protected int status;
     protected String[] fullCommand;

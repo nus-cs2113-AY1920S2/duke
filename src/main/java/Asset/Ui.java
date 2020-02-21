@@ -6,7 +6,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
+/**
+ * This class handles with the interaction with User.
+ */
 public class Ui  {
     public static final String LINE = "\t__________________________________________________________";
     public static final String[] COMMAND= {"todo", "deadline", "event", "done", "bye", "list", "help"};
@@ -29,11 +31,15 @@ public class Ui  {
         this.in = new Scanner(in);
         this.out = out;
     }
-
+    /**
+     * This methods gets the User input.
+     */
     public String getUserIn(){
         return in.nextLine();
     }
-
+    /**
+     * This method prints the welcome message to User.
+     */
     public void printWelcomeMessage() {
         String banner = "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
                 + "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
@@ -111,6 +117,9 @@ public class Ui  {
             }
         }
     }
+    /**
+     * This method closes the System.in class of Duke.
+     */
     public void close(){
         this.in.close();
     }

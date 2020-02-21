@@ -6,6 +6,19 @@ import Asset.Ui;
 import Commands.*;
 import Parser.Parser;
 import Tasks.*;
+/**
+ *h1>Hello, World!</h1>
+ *The program implements an application .
+ *that keeps a list of Tasks
+ *
+ *
+ *
+ *
+ *
+ * @author  Nizar Mohamed
+ * @version 1.0
+ * @since   2020-02-21
+ */
 
 public class Duke {
     private Storage storage;
@@ -22,6 +35,10 @@ public class Duke {
             this.l1 = new ArrayList<>();
         }
     }
+/**
+ * This method runs continuously, asking user for inputs
+ * until user input 'bye'
+ */
     public void run(){
         int status = 1;
         this.ui.printWelcomeMessage();
@@ -33,6 +50,7 @@ public class Duke {
                 command.execute(this.l1, this.ui, this.storage);
                 status=command.getStatus();
             }catch(IllegalDukeException | FileNotFoundException e){
+                this.ui.printLine();
                 this.ui.printError(e.getMessage());
             }finally{
                 this.ui.printLine();

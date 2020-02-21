@@ -8,7 +8,12 @@ import Tasks.Task;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
-
+/**
+ * This is a sub class of the Command class in Duke.
+ *
+ * This class deletes a Task from the ArrayList based on the task
+ * number stated by the User.
+ */
 public class DeleteCommand extends Command  {
     private int index;
 

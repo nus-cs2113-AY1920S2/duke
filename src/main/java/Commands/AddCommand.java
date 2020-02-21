@@ -9,7 +9,12 @@ import Tasks.Todo;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import Parser.*;
-
+/**
+ * This is the sub class of the Command class in Duke.
+ *
+ * This class adds tasks into the ArrayList based on User input.
+ *
+ */
 public class AddCommand extends Command   {
     private String action;
     private String timing;

@@ -5,11 +5,15 @@ import Asset.IllegalDukeException;
 import Asset.Storage;
 import Asset.Ui;
 import Tasks.Task;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
-
+/**
+ * This is a sub class of the Command class in Duke.
+ *
+ * This class marks a Task as done based on the task
+ * number stated by the User.
+ */
 public class DoneCommand extends Command  {
     private int index;
 
