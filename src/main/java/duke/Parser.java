@@ -7,7 +7,13 @@ public class Parser {
     // This class parses the user command and executes them
 
     public static void parseCommand(String command, TaskList tasks) {
-        //This method processes the command inputted
+        /**
+         * This method processes the command by the user and executes them
+         *
+         * @param command The command that the user specified
+         * @param tasks list of tasks that the command will be executed upon
+         */
+
         if (command.equals("list")){
             listCommand(tasks);
         } else if (command.startsWith("done")){
@@ -39,7 +45,12 @@ public class Parser {
         }
 
     private static void listCommand(TaskList tasks) {
-        //This method executes the list command
+        /**
+         * This method prints the list of tasks
+         *
+         * @param tasks list of tasks to be printed
+         */
+
         System.out.println("Here are the tasks on your list:");
         for (int i = 0; i < tasks.getSize(); i++) {
             System.out.printf("%d. %s\n",i +1,tasks.getIndex(i).toString());
@@ -47,7 +58,13 @@ public class Parser {
     }
 
     private static void doneCommand(String command,TaskList tasks){
-        //This method executes the done command and changes the status of a valid task to done
+        /**
+         * This method executes the done command and changes the status of a valid task to done
+         *
+         * @param command string that contains the index which has been 'done'
+         * @param tasks list of tasks which the done command will be executed upon
+         */
+
         String temp = command.replaceAll("\\D+","");
         int FinishedNumber = Integer.parseInt(temp);
         if (FinishedNumber > tasks.getSize()) {
@@ -60,6 +77,13 @@ public class Parser {
 
     }
     private static void findCommand(String[] splitString, TaskList tasks) {
+        /**
+         * This method executes the find command
+         *
+         * @param splitString array that contains the command to be executed
+         * @param tasks list of tasks that the command will be executed upon
+         */
+
         String searchTarget = splitString[1];
         boolean noMatch = false;
         System.out.println("Here are the matching tasks in your list:");
@@ -76,7 +100,13 @@ public class Parser {
         }
     }
     private static  void deadlineCommand(String[] splitString,TaskList tasks) {
-        //This method executes the deadline command
+        /**
+         * This method executes the deadline command
+         *
+         * @param splitString array that contains the command to be executed
+         * @param tasks list of tasks that the new deadline will be added into
+         */
+
         if (splitString.length == 1) {
             System.out.println("The description of deadline cannot be empty");
 
@@ -95,7 +125,12 @@ public class Parser {
 
     }
     private static void todoCommand(String[] splitString, TaskList tasks) {
-        //This method executes the todo command and adds a valid todo to the tasklist
+        /**
+         * This method executes the todo command and adds a valid todo to the tasklist
+         *
+         * @param splitString array that contains the command to be excecuted
+         * @param tasks list of tasks that the new todo task will be added into
+         */
         if (splitString.length == 1) {
             System.out.println("OOPS!!! The description of todo cannot be empty");
 
@@ -107,7 +142,13 @@ public class Parser {
 
     }
     private static void eventCommand(String[] splitString, TaskList tasks) {
-        //This method executes the event command and adds a valid event to the tasklist
+        /**
+         * This method executes the event command and adds a valid event to the tasklist
+         *
+         * @param splitString array that contains the command to be executed
+         * @param tasks list of tasks that that the new event will be added to
+         */
+
         if (splitString.length == 1) {
             System.out.println("OOPS!!! The description of event cannot be empty");
 
@@ -125,9 +166,13 @@ public class Parser {
         }
     }
     private static void deleteCommand(String[] splitString, TaskList tasks) {
-       /* This function processes the 'delete' command
-        and removes a valid index from the task list
-       */
+       /**
+        * This function processes the 'delete' command
+        * and removes a valid index from the task list
+        *
+        * @param splitString array that contains the command that is to be executed
+        * @param tasks list of tasks that the command will be executed upon
+        */
 
         if (splitString.length == 1) {
             System.out.println("OOPS!!! The description of event cannot be empty");

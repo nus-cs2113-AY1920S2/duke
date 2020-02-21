@@ -12,7 +12,13 @@ public class Storage {
         this.fname = fname;
     }
     public static void writeToFile(String filePath, TaskList tasksToWrite) throws IOException {
-        //This method writes the list of tasks to a file
+        /**
+         * This method writes the tasklist to a file
+         *
+         * @param filePath the path that the tasks will be written into
+         * @param tasksToWrite list of tasks that are to be written to the file
+         * @throws IOException IOException if the path doesn't exist
+         */
 
         FileWriter fw = new FileWriter(filePath);
         try {
@@ -26,9 +32,13 @@ public class Storage {
         fw.close();
     }
     public static TaskList readFromFile(String filePath) throws FileNotFoundException {
-        /* This method takes a file
-        and adds all the tasks in the file to the tasklist
+        /**
+         *  This method takes a file and adds all the tasks in the file to the tasklist
+         *
+         * @param filePath the file that the list of tasks will be retrieved from
+         * @throws FileNotFoundException if the file doesn't exist
          */
+
         File file = new File(filePath);
         Scanner sc = null;
         TaskList tasks1 = new TaskList();
@@ -46,9 +56,12 @@ public class Storage {
         }
 
     public static Task createTask(String task) {
-        /* This method takes a string and
-        converts it to a task object
+        /**
+         * This method takes a string and converts it to a task object
+         *
+         * @param task the task to be converted into a 'task' object
          */
+
         String[] splitString = task.split("]",2);
         Task newTask;
         if (splitString[0].contains("T")){

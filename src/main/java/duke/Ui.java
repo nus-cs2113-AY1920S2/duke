@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     //Each Ui object will hold the input stream that enters commands for duke
+
     private final Scanner input;
     public Ui (Scanner input) {
         this.input = input;
