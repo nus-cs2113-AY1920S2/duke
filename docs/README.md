@@ -28,9 +28,9 @@ Format: list
 
 ### Feature 5 - Mark task as done
 This marks the tasks at the specified index as done \
-Note: Index starts at 1 \ 
+Note: Index starts at 1 \
 Format: done INDEX \
-Example: done 1 \
+Example: done 1 
 
 ### Feature 6 - Delete Task
 This deletes the task at the specified index \
@@ -46,7 +46,7 @@ Tasks are automatically loaded from 'duke.txt' when the program starts
 
 ### Feature 9 - Find tasks
 This searches for the tasks where the description contains the keywords \
-Format: find KEYWORD \ 
+Format: find KEYWORD \
 Example: find sleep
 
 ### Feature 10 - Exit the program
