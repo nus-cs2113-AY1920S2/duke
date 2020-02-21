@@ -9,6 +9,7 @@ import Duke.Task.Event;
 import Duke.Task.Task;
 import Duke.Task.Todo;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -238,10 +239,19 @@ public class Duke {
         }
 
     }
-
+    static File file= new File ("data/output.txt");
     private static FileWriter Duke_data;
     static {
+
         try {
+            if (file.exists())
+            {
+                Duke_data = new FileWriter(file,true);
+            }
+            else
+            {
+                Duke_data = new FileWriter(file);
+            }
             Duke_data = new FileWriter("data/output.txt");
         } catch (IOException e) {
             e.printStackTrace();
@@ -257,7 +267,6 @@ public class Duke {
             e.printStackTrace();
         }
     }
-
 
     public static void readFile() throws IOException {
         Duke_in.read();
