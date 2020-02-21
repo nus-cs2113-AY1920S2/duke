@@ -3,6 +3,8 @@ package chatty.ui;
 import chatty.task.Task;
 import chatty.task.TaskList;
 
+import java.time.LocalDate;
+
 import static chatty.util.Constants.ADDED_TASK_CONFIRMATION;
 import static chatty.util.Constants.BOT_NAME;
 import static chatty.util.Constants.DOT_CHARACTER;
@@ -31,7 +33,20 @@ public class Ui {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
             Task task = taskList.getTaskAtIdx(i);
-            System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task.toString());
+            System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task);
+        }
+    }
+
+    public void listTasksOnDate(TaskList taskList, LocalDate date) {
+        if (taskList.getTotalTaskNum() == 0) {
+            System.out.println("You have no task on date " + date);
+            return;
+        }
+
+        System.out.println("Here are the tasks on " + date);
+        for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
+            Task task = taskList.getTaskAtIdx(i);
+            System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task);
         }
     }
 

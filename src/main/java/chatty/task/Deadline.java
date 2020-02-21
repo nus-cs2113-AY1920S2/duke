@@ -20,4 +20,8 @@ public class Deadline extends Task {
     public String getFileString() {
         return String.format("D|%s|%s|%s", this.isDone, this.description, this.dateTime);
     }
+
+    public LocalDate getDateTime() {
+        return dateTime;
+    }
 }

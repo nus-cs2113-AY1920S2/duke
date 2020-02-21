@@ -2,6 +2,7 @@ package chatty.parser;
 
 import chatty.command.ByeCommand;
 import chatty.command.Command;
+import chatty.command.DateCommand;
 import chatty.command.DeadlineCommand;
 import chatty.command.DeleteCommand;
 import chatty.command.DoneCommand;
@@ -11,12 +12,12 @@ import chatty.command.TodoCommand;
 import chatty.exception.ChattyChatBotException;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static chatty.util.Constants.AT_STRING;
 import static chatty.util.Constants.BYE_STRING;
 import static chatty.util.Constants.BY_STRING;
+import static chatty.util.Constants.DATE_STRING;
 import static chatty.util.Constants.DEADLINE_STRING;
 import static chatty.util.Constants.DELETE_STRING;
 import static chatty.util.Constants.DONE_STRING;
@@ -60,6 +61,8 @@ public class Parser {
                     LocalDate.parse(times[1].trim(), DateTimeFormatter.ISO_DATE));
         case DELETE_STRING:
             return new DeleteCommand(Integer.parseInt(array[1]) - 1);
+        case DATE_STRING:
+            return new DateCommand(LocalDate.parse(array[1], DateTimeFormatter.ISO_DATE));
         case BYE_STRING:
             return new ByeCommand();
         default:

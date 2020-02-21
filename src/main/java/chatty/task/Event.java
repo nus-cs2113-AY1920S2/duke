@@ -22,4 +22,12 @@ public class Event extends Task {
     public String getFileString() {
         return String.format("E|%s|%s|%s to %s", this.isDone, this.description, this.startTime, this.endTime);
     }
+
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
+    }
 }

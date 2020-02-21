@@ -235,6 +235,28 @@ ____________________________________________________________
 Please use correct date time format: yyyy-mm-dd
 ____________________________________________________________
 ____________________________________________________________
+Here are the tasks in your list:
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [T][✓] attend lab
+3. [T][✘] This is a todo task
+4. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+5. [D][✘] This is a task with deadline (by: 2019-12-02)
+6. [T][✘] Another todo task
+7. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks on 2019-12-02
+1. [D][✘] This is a task with deadline (by: 2019-12-02)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks on 2020-03-02
+1. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks on 2020-02-11
+1. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
+____________________________________________________________
+____________________________________________________________
 Your tasks have been successfully saved to disk!
 Thanks for chatting with Chatty Chat Bot
 See you again soon!
