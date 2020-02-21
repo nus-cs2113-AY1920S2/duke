@@ -9,6 +9,7 @@ import Duke.Task.Event;
 import Duke.Task.Task;
 import Duke.Task.Todo;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class Duke {
     public static final String COMMAND_MARK_WORD = "MARK";
     public static final String COMMAND_DEADLINE_WORD = "DEADLINE";
     public static final String COMMAND_DELETE_WORD = "DELETE";
+    public static final String COMMAND_REMOVE_WORD = "REMOVE";
     public static final String COMMAND_EXIT_WORD = "EXIT";
     public static final String COMMAND_BYE_WORD = "BYE";
     public static final String COMMAND_EVENT_WORD = "EVENT";
@@ -187,6 +189,7 @@ public class Duke {
     public static void executeType(String exeCommand) throws IllegalCommandException {
         try {
             switch(userCommand.toUpperCase()){
+                case COMMAND_REMOVE_WORD:
                 case COMMAND_DELETE_WORD:
                     deleteTask(sc.nextInt());
                     break;
@@ -238,10 +241,19 @@ public class Duke {
         }
 
     }
-
+    static File file= new File ("data/output.txt");
     private static FileWriter Duke_data;
     static {
+
         try {
+            if (file.exists())
+            {
+                Duke_data = new FileWriter(file,true);
+            }
+            else
+            {
+                Duke_data = new FileWriter(file);
+            }
             Duke_data = new FileWriter("data/output.txt");
         } catch (IOException e) {
             e.printStackTrace();
@@ -257,7 +269,6 @@ public class Duke {
             e.printStackTrace();
         }
     }
-
 
     public static void readFile() throws IOException {
         Duke_in.read();
@@ -281,6 +292,7 @@ public class Duke {
         while(run){
             userCommand = sc.nextLine();
             switch(userCommand.toUpperCase()){
+                case COMMAND_REMOVE_WORD:
                 case COMMAND_DELETE_WORD:
                     index = sc.nextInt();
                     if (index - 1 < TaskList.size()){
