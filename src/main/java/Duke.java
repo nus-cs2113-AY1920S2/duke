@@ -24,8 +24,10 @@ public class Duke {
             } catch (InvalidCommandException e) {
                 System.out.print("\n" + FOUR_SPACE_INDENT);
                 System.out.println("Sorry, me don't know what that means :-(");
-                System.out.print(FOUR_SPACE_INDENT);
-                System.out.println(e.getMessage());
+                if (e.getMessage() != null) {
+                    System.out.print(FOUR_SPACE_INDENT);
+                    System.out.println(e.getMessage());
+                }
             } catch (NumberFormatException e) {
                 System.out.print("\n" + FOUR_SPACE_INDENT);
                 System.out.println("Sorry, me don't know what that means :-(");
@@ -40,25 +42,26 @@ public class Duke {
 
 
     private static void executeCommand(String command) {
+        String[] commandSubstrings = command.split("\\s+");
         if (command.equals("bye")) {
             isExiting = true;
         } else if (command.equals("list")) {
             listTasks();
-        } else if (command.substring(0,5).equals("done ")) {
-            checkOffTask(command);
-        } else if (command.substring(0,5).equals("todo ")) {
-            addTodo(command.substring(5));
-        } else if (command.substring(0,9).equals("deadline ")) {
+        } else if (commandSubstrings[0].equals("done")) {
+            checkOffTask();
+        } else if (commandSubstrings[0].equals("todo")) {
+            addTodo(command.substring(5).trim());
+        } else if (commandSubstrings[0].equals("deadline")) {
             addDeadline(command.substring(9));
-        } else if (command.substring(0,6).equals("event ")) {
+        } else if (commandSubstrings[0].equals("event")) {
             addEvent(command.substring(6));
         }
     }
 
     private static void addEvent(String info) {
-        int dividerIndex = info.indexOf("/");
-        String description = info.substring(0, (dividerIndex - 1));
-        String at = info.substring(dividerIndex + 4);
+        int dividerIndex = info.indexOf("/at");
+        String description = info.substring(0, (dividerIndex - 1)).trim();
+        String at = info.substring(dividerIndex + 4).trim();
         tasks[taskCounter] = new Event(description, at);
         System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Got it. I've added this task:");
@@ -70,9 +73,9 @@ public class Duke {
     }
 
     private static void addDeadline(String info) {
-        int dividerIndex = info.indexOf("/");
-        String description = info.substring(0, (dividerIndex - 1));
-        String by = info.substring(dividerIndex + 4);
+        int dividerIndex = info.indexOf("/by");
+        String description = info.substring(0, (dividerIndex - 1)).trim();
+        String by = info.substring(dividerIndex + 4).trim();
         tasks[taskCounter] = new Deadline(description, by);
         System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Got it. I've added this task:");
@@ -94,13 +97,12 @@ public class Duke {
         System.out.println("Now you have " + taskCounter + " tasks in the list.");
     }
 
-    private static void checkOffTask(String command) {
-        taskIndex = Integer.parseInt(command.substring(5)) - 1;
-        tasks[taskIndex].markAsDone();
+    private static void checkOffTask() {
+        tasks[taskIndex - 1].markAsDone();
         System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Nice! I've marked this task as done:");
         System.out.print(SIX_SPACE_INDENT);
-        System.out.println(tasks[taskIndex].toString());
+        System.out.println(tasks[taskIndex - 1].toString());
     }
 
     private static void listTasks() {
@@ -121,7 +123,7 @@ public class Duke {
             input = input.trim();
         }
         // Input is not empty
-        String[] inputSubstrings = input.split("\\s");
+        String[] inputSubstrings = input.split("\\s+");
         if (inputSubstrings.length == 1) {
             if (!inputSubstrings[0].equals("list") && !inputSubstrings[0].equals("bye")) {
                 throw new InvalidCommandException();
@@ -176,13 +178,13 @@ public class Duke {
 
     private static void exit() {
         System.out.print("\n" + FOUR_SPACE_INDENT);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye human! See you next time!");
     }
 
     private static void greet() {
         System.out.print(FOUR_SPACE_INDENT);
         System.out.println("Hello, I'm Taskmaster Yipyap.");
         System.out.print(FOUR_SPACE_INDENT);
-        System.out.println("What can I do for you?");
+        System.out.println("What can I do for you, human?");
     }
 }
