@@ -59,6 +59,7 @@ public class Duke {
     public static final String COMMAND_MARK_WORD = "MARK";
     public static final String COMMAND_DEADLINE_WORD = "DEADLINE";
     public static final String COMMAND_DELETE_WORD = "DELETE";
+    public static final String COMMAND_REMOVE_WORD = "REMOVE";
     public static final String COMMAND_EXIT_WORD = "EXIT";
     public static final String COMMAND_BYE_WORD = "BYE";
     public static final String COMMAND_EVENT_WORD = "EVENT";
@@ -188,6 +189,7 @@ public class Duke {
     public static void executeType(String exeCommand) throws IllegalCommandException {
         try {
             switch(userCommand.toUpperCase()){
+                case COMMAND_REMOVE_WORD:
                 case COMMAND_DELETE_WORD:
                     deleteTask(sc.nextInt());
                     break;
@@ -286,6 +288,7 @@ public class Duke {
         while(run){
             userCommand = sc.nextLine();
             switch(userCommand.toUpperCase()){
+                case COMMAND_REMOVE_WORD:
                 case COMMAND_DELETE_WORD:
                     index = sc.nextInt();
                     if (index - 1 < TaskList.size()){
