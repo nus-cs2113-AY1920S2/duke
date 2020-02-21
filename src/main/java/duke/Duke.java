@@ -11,22 +11,40 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.TaskList;
-
 import java.io.IOException;
+import static duke.common.Messages.WELCOME_MESSAGE;
+import static duke.common.Messages.COMMAND_FAIL;
+import static duke.common.Messages.INVALID_MESSAGE;
+import static duke.common.Messages.INCOMPLETE_MESSAGE;
+import static duke.common.Messages.INDEX_PROBLEM_MESSAGE;
+import static duke.common.Messages.FILE_ERROR_MESSAGE;
+import static duke.common.Messages.FORMAT_PROBLEM_MESSAGE;
 
-
-import static duke.common.Messages.*;
-
-
+/**
+ * Entry point of the Duke application.
+ * Manages interactions between storage, UI and the list of tasks.
+ */
 public class Duke {
 
+    /** Storage object that loads tasks from file and saves tasks to file */
     private static Storage storage;
-    private static TaskList tasks = new TaskList();
+
+    /** List of tasks */
+    private static TaskList tasks;
+
+    /** UI that interacts with the user */
     private static Ui ui;
 
+    /** Flag that indicates whether an exit command has been encountered */
+    private static boolean isExit;
+
+    /**
+     * Runs the application.
+     *
+     * @param args Not significant in this case.
+     */
     public static void main(String[] args) {
-        ui = new Ui();
-        storage = new Storage();
+        initialiseDuke();
         try {
             storage.initialiseList(tasks);
         } catch (IOException e) {
@@ -35,7 +53,6 @@ public class Duke {
             ui.showMessage(INVALID_MESSAGE);
         }
         ui.showMessage(WELCOME_MESSAGE);
-        boolean isExit = false;
         while (!isExit) {
             try {
                 String command = ui.readInput();
@@ -59,6 +76,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialises the application, including all required resources.
+     */
+    private static void initialiseDuke() {
+        tasks = new TaskList();
+        ui = new Ui();
+        storage = new Storage();
+        isExit = false;
+    }
 
 
 }
