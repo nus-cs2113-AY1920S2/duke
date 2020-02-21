@@ -49,8 +49,9 @@ public class Storage {
                 Task task1 = createTask(task);
                 tasks1.addTask(task1);
             }
+            sc.close();
         }
-        sc.close();
+
 
         return tasks1;
         }
