@@ -3,18 +3,12 @@ Hello from Chatty Chat Bot
 Glad to be at your service!
 ____________________________________________________________
 Reading tasks from disk...
-Invalid line in input file:
-T|invalid task with not enough fields
-Wrong format for Event in input file:
-E|true|invalid event with not enough fields
-Wrong format - please use true or false to mark task as done or not done
-D|not boolean|deadline|next month
 Successfully read tasks from file
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✘] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✘] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 ____________________________________________________________
 Sorry, I can't help you with that yet
 I'm Chatty Chat Bot
@@ -30,15 +24,15 @@ Please let me know more details so that I can help you
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✘] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✘] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[E][✘] This is an event happening (at: Feb 10th 2-4pm)
+[E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
 Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -49,16 +43,16 @@ Please let me know more details so that I can help you
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✘] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✘] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[D][✘] This is a task with deadline (by: tomorrow 6pm)
+[D][✘] This is a task with deadline (by: 2019-12-02)
 Now you have 7 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -69,13 +63,13 @@ Please let me know more details so that I can help you
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✘] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✘] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
@@ -84,31 +78,31 @@ Now you have 8 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✘] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✘] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 8. [T][✘] Another todo task
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[E][✘] Another event (at: Nov 7th 10-11am)
+[E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 Now you have 9 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✘] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✘] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 8. [T][✘] Another todo task
-9. [E][✘] Another event (at: Nov 7th 10-11am)
+9. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 Please let me know more details so that I can help you
@@ -118,111 +112,111 @@ The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
 Congratulations! You've successfully marked the following task as done:
-[E][✓] workshop event (at: May 4th 10-11am)
+[E][✓] workshop event (at: 2019-12-01 to 2019-12-02)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✓] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✓] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 8. [T][✘] Another todo task
-9. [E][✘] Another event (at: Nov 7th 10-11am)
+9. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
 Congratulations! You've successfully marked the following task as done:
-[D][✓] write assignment (by: tomorrow)
+[D][✓] write assignment (by: 2019-12-10)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✓] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✓] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 8. [T][✘] Another todo task
-9. [E][✘] Another event (at: Nov 7th 10-11am)
+9. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 Please enter a valid task number
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✓] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✓] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 8. [T][✘] Another todo task
-9. [E][✘] Another event (at: Nov 7th 10-11am)
+9. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
-2. [E][✓] workshop event (at: May 4th 10-11am)
+1. [D][✓] write assignment (by: 2019-12-10)
+2. [E][✓] workshop event (at: 2019-12-01 to 2019-12-02)
 3. [T][✓] attend lab
-4. [D][✘] submit lab (by: next week Monday)
+4. [D][✘] submit lab (by: 2019-11-01)
 5. [T][✘] This is a todo task
-6. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-7. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+6. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+7. [D][✘] This is a task with deadline (by: 2019-12-02)
 8. [T][✘] Another todo task
-9. [E][✘] Another event (at: Nov 7th 10-11am)
+9. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 Successfully deleted the following task:
-[E][✓] workshop event (at: May 4th 10-11am)
+[E][✓] workshop event (at: 2019-12-01 to 2019-12-02)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
+1. [D][✓] write assignment (by: 2019-12-10)
 2. [T][✓] attend lab
-3. [D][✘] submit lab (by: next week Monday)
+3. [D][✘] submit lab (by: 2019-11-01)
 4. [T][✘] This is a todo task
-5. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-6. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+5. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+6. [D][✘] This is a task with deadline (by: 2019-12-02)
 7. [T][✘] Another todo task
-8. [E][✘] Another event (at: Nov 7th 10-11am)
+8. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 The number you entered does not match any task in your list
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
+1. [D][✓] write assignment (by: 2019-12-10)
 2. [T][✓] attend lab
-3. [D][✘] submit lab (by: next week Monday)
+3. [D][✘] submit lab (by: 2019-11-01)
 4. [T][✘] This is a todo task
-5. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-6. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+5. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+6. [D][✘] This is a task with deadline (by: 2019-12-02)
 7. [T][✘] Another todo task
-8. [E][✘] Another event (at: Nov 7th 10-11am)
+8. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 Successfully deleted the following task:
-[D][✘] submit lab (by: next week Monday)
+[D][✘] submit lab (by: 2019-11-01)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] write assignment (by: tomorrow)
+1. [D][✓] write assignment (by: 2019-12-10)
 2. [T][✓] attend lab
 3. [T][✘] This is a todo task
-4. [E][✘] This is an event happening (at: Feb 10th 2-4pm)
-5. [D][✘] This is a task with deadline (by: tomorrow 6pm)
+4. [E][✘] This is an event happening (at: 2020-03-01 to 2020-03-03)
+5. [D][✘] This is a task with deadline (by: 2019-12-02)
 6. [T][✘] Another todo task
-7. [E][✘] Another event (at: Nov 7th 10-11am)
+7. [E][✘] Another event (at: 2020-02-10 to 2020-02-12)
 ____________________________________________________________
 ____________________________________________________________
 Your tasks have been successfully saved to disk!

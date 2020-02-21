@@ -1,15 +1,17 @@
 package chatty.command;
 
+import java.time.LocalDate;
+
 public class DeadlineCommand extends TaskCommand {
 
-    private String dateTime;
+    private LocalDate dateTime;
 
-    public DeadlineCommand(String description, String dateTime) {
+    public DeadlineCommand(String description, LocalDate dateTime) {
         super(description);
-        this.dateTime = dateTime.trim();
+        this.dateTime = dateTime;
     }
 
-    public String getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 }

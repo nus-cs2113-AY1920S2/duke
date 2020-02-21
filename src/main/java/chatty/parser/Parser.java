@@ -10,6 +10,10 @@ import chatty.command.ListCommand;
 import chatty.command.TodoCommand;
 import chatty.exception.ChattyChatBotException;
 
+import java.time.LocalDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static chatty.util.Constants.AT_STRING;
 import static chatty.util.Constants.BYE_STRING;
 import static chatty.util.Constants.BY_STRING;
@@ -20,6 +24,7 @@ import static chatty.util.Constants.EVENT_STRING;
 import static chatty.util.Constants.LIST_STRING;
 import static chatty.util.Constants.SPACE_SEPARATOR;
 import static chatty.util.Constants.TODO_STRING;
+import static chatty.util.Constants.TO_STRING;
 
 public class Parser {
 
@@ -42,14 +47,17 @@ public class Parser {
             if (deadlineFields.length != 2) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            return new DeadlineCommand(deadlineFields[0], deadlineFields[1]);
+            return new DeadlineCommand(deadlineFields[0],
+                    LocalDate.parse(deadlineFields[1].trim(), DateTimeFormatter.ISO_DATE));
         case EVENT_STRING:
             String eventStr = array[1];
             String[] eventFields = eventStr.split(AT_STRING);
             if (eventFields.length != 2) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            return new EventCommand(eventFields[0], eventFields[1]);
+            String[] times = eventFields[1].split(TO_STRING);
+            return new EventCommand(eventFields[0], LocalDate.parse(times[0].trim(), DateTimeFormatter.ISO_DATE),
+                    LocalDate.parse(times[1].trim(), DateTimeFormatter.ISO_DATE));
         case DELETE_STRING:
             return new DeleteCommand(Integer.parseInt(array[1]) - 1);
         case BYE_STRING:

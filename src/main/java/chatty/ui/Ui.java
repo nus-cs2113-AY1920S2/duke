@@ -69,6 +69,10 @@ public class Ui {
         System.out.println("Please enter a valid task number");
     }
 
+    public void sendWrongDateTimeFormatMessage() {
+        System.out.println("Please use correct date time format: yyyy-mm-dd");
+    }
+
     public void sendReadingTaskMessage() {
         System.out.println("Reading tasks from disk...");
     }

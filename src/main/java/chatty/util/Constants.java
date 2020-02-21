@@ -16,6 +16,7 @@ public class Constants {
     public static final String DOT_CHARACTER = ".";
     public static final String BY_STRING = "/by";
     public static final String AT_STRING = "/at";
+    public static final String TO_STRING = " to ";
 
     public static final String TRUE_STRING = "true";
     public static final String FALSE_STRING = "false";

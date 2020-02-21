@@ -18,6 +18,7 @@ import chatty.task.TaskList;
 import chatty.task.ToDo;
 import chatty.ui.Ui;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static chatty.util.Constants.BYE_STRING;
@@ -78,7 +79,7 @@ public class ChattyChatBot {
                     ui.sendTaskAddedMessage(deadline, taskList.getTotalTaskNum());
                 } else if (command instanceof EventCommand) {
                     Event event = new Event(((EventCommand) command).getDescription(),
-                            ((EventCommand) command).getEventPeriod());
+                            ((EventCommand) command).getStartTime(), ((EventCommand) command).getEndTime());
                     taskList.addTask(event);
                     ui.sendTaskAddedMessage(event, taskList.getTotalTaskNum());
                 } else if (command instanceof DeleteCommand) {
@@ -100,6 +101,8 @@ public class ChattyChatBot {
                 ui.sendTaskNumberOutOfBoundMessage();
             } catch (NumberFormatException e) {
                 ui.sendWrongTaskNumberFormatMessage();
+            } catch (DateTimeParseException e) {
+                ui.sendWrongDateTimeFormatMessage();
             }
             ui.sendLineBreak();
         } while (!userInput.equals(BYE_STRING));

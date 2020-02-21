@@ -1,21 +1,25 @@
 package chatty.task;
 
+import java.time.LocalDate;
+
 public class Event extends Task {
 
-    private String eventPeriod;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
-    public Event(String description, String eventPeriod) {
+    public Event(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
-        this.eventPeriod = eventPeriod;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.eventPeriod);
+        return String.format("[E]%s (at: %s to %s)", super.toString(), this.startTime, this.endTime);
     }
 
     @Override
     public String getFileString() {
-        return String.format("E|%s|%s|%s", this.isDone, this.description, this.eventPeriod);
+        return String.format("E|%s|%s|%s to %s", this.isDone, this.description, this.startTime, this.endTime);
     }
 }
