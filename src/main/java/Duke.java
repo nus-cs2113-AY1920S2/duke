@@ -18,23 +18,39 @@ public class Duke {
 
     private static void takeCommands() {
         while(!isExiting) {
-            command = getCommand();
-            executeCommand(command);
+            try {
+                command = getCommand();
+                executeCommand(command);
+            } catch (InvalidCommandException e) {
+                System.out.print("\n" + FOUR_SPACE_INDENT);
+                System.out.println("Sorry, me don't know what that means :-(");
+                System.out.print(FOUR_SPACE_INDENT);
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.print("\n" + FOUR_SPACE_INDENT);
+                System.out.println("Sorry, me don't know what that means :-(");
+                System.out.print(FOUR_SPACE_INDENT);
+                System.out.println("Format: \"done <task index>\"");
+            } catch (TaskIndexOutOfBoundsException e) {
+                System.out.print("\n" + FOUR_SPACE_INDENT);
+                System.out.println("I need a valid task index!");
+            }
         }
     }
+
 
     private static void executeCommand(String command) {
         if (command.equals("bye")) {
             isExiting = true;
         } else if (command.equals("list")) {
             listTasks();
-        } else if (command.substring(0,4).equals("done")) {
+        } else if (command.substring(0,5).equals("done ")) {
             checkOffTask(command);
-        } else if (command.substring(0,4).equals("todo")) {
+        } else if (command.substring(0,5).equals("todo ")) {
             addTodo(command.substring(5));
-        } else if (command.substring(0,8).equals("deadline")) {
+        } else if (command.substring(0,9).equals("deadline ")) {
             addDeadline(command.substring(9));
-        } else if (command.substring(0,5).equals("event")) {
+        } else if (command.substring(0,6).equals("event ")) {
             addEvent(command.substring(6));
         }
     }
@@ -44,7 +60,7 @@ public class Duke {
         String description = info.substring(0, (dividerIndex - 1));
         String at = info.substring(dividerIndex + 4);
         tasks[taskCounter] = new Event(description, at);
-        System.out.print(FOUR_SPACE_INDENT);
+        System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Got it. I've added this task:");
         System.out.print(SIX_SPACE_INDENT);
         System.out.println(tasks[taskCounter].toString());
@@ -58,7 +74,7 @@ public class Duke {
         String description = info.substring(0, (dividerIndex - 1));
         String by = info.substring(dividerIndex + 4);
         tasks[taskCounter] = new Deadline(description, by);
-        System.out.print(FOUR_SPACE_INDENT);
+        System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Got it. I've added this task:");
         System.out.print(SIX_SPACE_INDENT);
         System.out.println(tasks[taskCounter].toString());
@@ -69,7 +85,7 @@ public class Duke {
 
     private static void addTodo(String description) {
         tasks[taskCounter] = new ToDo(description);
-        System.out.print(FOUR_SPACE_INDENT);
+        System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Got it. I've added this task:");
         System.out.print(SIX_SPACE_INDENT);
         System.out.println(tasks[taskCounter].toString());
@@ -81,7 +97,7 @@ public class Duke {
     private static void checkOffTask(String command) {
         taskIndex = Integer.parseInt(command.substring(5)) - 1;
         tasks[taskIndex].markAsDone();
-        System.out.print(FOUR_SPACE_INDENT);
+        System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Nice! I've marked this task as done:");
         System.out.print(SIX_SPACE_INDENT);
         System.out.println(tasks[taskIndex].toString());
@@ -89,7 +105,7 @@ public class Duke {
 
     private static void listTasks() {
         int bulletNum;
-        System.out.print(FOUR_SPACE_INDENT);
+        System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Here are the tasks in your list:");
         for (taskIndex = 0; taskIndex < taskCounter; taskIndex++) {
             bulletNum = taskIndex + 1;
@@ -98,12 +114,68 @@ public class Duke {
         }
     }
 
-    private static String getCommand() {
-        return in.nextLine();
+    private static String getCommand() throws InvalidCommandException, TaskIndexOutOfBoundsException {
+        String input = "";
+        while (input.isEmpty()) {
+            input = in.nextLine();
+            input = input.trim();
+        }
+        // Input is not empty
+        String[] inputSubstrings = input.split("\\s");
+        if (inputSubstrings.length == 1) {
+            if (!inputSubstrings[0].equals("list") && !inputSubstrings[0].equals("bye")) {
+                throw new InvalidCommandException();
+            }
+        } else if (!inputSubstrings[0].equals("done") && !inputSubstrings[0].equals("todo") &&
+                !inputSubstrings[0].equals("deadline") && !inputSubstrings[0].equals("event")) {
+            throw new InvalidCommandException();
+        } else if (inputSubstrings[0].equals("done")) {
+            if (inputSubstrings.length > 2) {
+                throw new InvalidCommandException("Format: \"done <task index>\"");
+            } else {
+               taskIndex = Integer.parseInt(inputSubstrings[1]);
+               if (taskIndex < 1 || taskIndex > taskCounter) {
+                   throw new TaskIndexOutOfBoundsException();
+               }
+            }
+        } else if (inputSubstrings[0].equals("deadline")) {
+            if (inputSubstrings.length < 4) {
+                throw new InvalidCommandException("Format: \"deadline <description> /by <deadline>\"");
+            }
+            for (int i = 1; i < inputSubstrings.length; i++) {
+                if (i == (inputSubstrings.length - 1)) {
+                    throw new InvalidCommandException("Format: \"deadline <description> /by <deadline>\"");
+                }
+                if (inputSubstrings[i].equals("/by")) {
+                    if (i == 1) {
+                        throw new InvalidCommandException("Format: \"deadline <description> /by <deadline>\"");
+                    } else {
+                        break;
+                    }
+                }
+            }
+        } else if (inputSubstrings[0].equals("event")) {
+            if (inputSubstrings.length < 4) {
+                throw new InvalidCommandException("Format: \"event <description> /at <date/time>\"");
+            }
+            for (int i = 1; i < inputSubstrings.length; i++) {
+                if (i == (inputSubstrings.length - 1)) {
+                    throw new InvalidCommandException("Format: \"event <description> /at <date/time>\"");
+                }
+                if (inputSubstrings[i].equals("/at")) {
+                    if (i == 1) {
+                        throw new InvalidCommandException("Format: \"event <description> /at <date/time>\"");
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        return input;
     }
 
     private static void exit() {
-        System.out.print(FOUR_SPACE_INDENT);
+        System.out.print("\n" + FOUR_SPACE_INDENT);
         System.out.println("Bye. Hope to see you again soon!");
     }
 
