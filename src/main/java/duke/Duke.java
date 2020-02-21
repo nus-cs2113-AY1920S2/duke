@@ -7,27 +7,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-
-
-
 public class Duke {
     /**
      * Keeps track of Class variable taskList.
      */
     private ArrayList<Task> taskList;
+    private Ui ui;
+    private Storage storage;
 
     /**
      * Constructor
      */
     public Duke() {
+        Ui ui = new Ui();
         this.taskList = new ArrayList<Task>();
     }
 
     Scanner scanner = new Scanner(System.in);
 
-    public void printStraightLine() {
-        System.out.println("___________________________________________________________________________\n");
-    }
 
     public static String filePath = "files/TaskList.txt";
 
@@ -332,7 +329,7 @@ public class Duke {
         }
         System.out.println("Bye. Hope to see you again soon!\n");
         saveTaskList(taskList);
-        printStraightLine();
+        Ui.printFancyLine();
     }
 
     /**
@@ -344,19 +341,17 @@ public class Duke {
      */
     public void performTasks(ArrayList<Task> taskList, String ogString, String eventType) {
         if (isTaskTypeDone(ogString, taskList)){
-            printStraightLine();
+            Ui.printStraightLine();
         } else if (ogString.toUpperCase().equals("LIST")) {
-            printStraightLine();
+            Ui.printStraightLine();
             this.printTaskList(taskList);
-            printStraightLine();
+            Ui.printStraightLine();
         } else if (isTaskTypeDelete(ogString, taskList)){
-            printStraightLine();
+            Ui.printStraightLine();
         } else {
             try {
-                printStraightLine();
+                Ui.printStraightLine();
                 String[] todoOrDeadlineOrEvent = returnStringToAdd(ogString, eventType);
-                System.out.println(todoOrDeadlineOrEvent[0]);
-                System.out.println(todoOrDeadlineOrEvent[1]);
                 if (eventType.equals("event") || eventType.equals("deadline")) {
 
                     if (eventType.equals("event")) {
@@ -370,7 +365,7 @@ public class Duke {
                     }
                 } else {
 
-                    Todo e = new Todo(todoOrDeadlineOrEvent[0]);
+                    Todo e = new Todo(todoOrDeadlineOrEvent[1].trim());
                     taskList.add(e);
                 }
                 Task t = taskList.get(taskList.size() - 1);
@@ -382,7 +377,7 @@ public class Duke {
                 System.out.println("Now you have " + taskList.size() + " item/s in the list \n");
 //                String stringToAdd = typeIcon + " | " + statusIcon + " | " + description;
 //                writeToFile(filePath, stringToAdd);
-                printStraightLine();
+                Ui.printStraightLine();
 
             } catch (IndexOutOfBoundsException e){
 
@@ -390,7 +385,7 @@ public class Duke {
                         " deadline {task description} /by {dedline eg. 6 PM} \n 3. event {event description} " +
                         "/at {event date\\time eg. 6 PM} \\4. delete {taskNumber}");
                 System.out.println("Try again!");
-                printStraightLine();
+                Ui.printStraightLine();
             }
         }
     }
@@ -401,13 +396,8 @@ public class Duke {
      * Gets the program statted by adding an initial task or taking the initial command
      */
     public void startThingsOff() {
-        printLogo();
         createTaskList(filePath, taskList);
         String line;
-        printStraightLine();
-        System.out.println("Hello! I'm Hiroshi");
-        System.out.println("Lets plan your day buddy! Things are looking good.\n");
-        printStraightLine();
         line = scanner.nextLine();
         readCommands(line, taskList);
     }
