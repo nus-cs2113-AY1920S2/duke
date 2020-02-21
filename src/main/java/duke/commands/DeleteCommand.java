@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(TaskList tasks, Ui textUi, Storage storage) {
         index -= 1;
         String feedback = DELETE_MESSAGE + System.lineSeparator() + tasks.getIndex(index)
-                + System.lineSeparator() + "Now you have " + (tasks.getSize()-1) + " in the list.";
+                + System.lineSeparator() + "Now you have " + (tasks.getSize()-1) + " tasks in the list.";
         tasks.removeTask(index);
         storage.saveChange(textUi,tasks);
         return new CommandResult(feedback);
