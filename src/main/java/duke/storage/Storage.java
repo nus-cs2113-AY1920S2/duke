@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import static duke.common.Messages.WRITE_ERROR_MESSAGE;
 
+/**
+ * Loads tasks from file and saves tasks to file.
+ */
 public class Storage {
 
     private static int savedType = 0;
@@ -27,6 +30,12 @@ public class Storage {
     File savedData = new File(DEFAULT_FILEPATH);
     Scanner loader;
 
+    /**
+     * Writes to the file whenever a task has been deleted or marked as done.
+     *
+     * @param textUi <code>Ui</code> object that interacts with the user.
+     * @param tasks <code>TaskList</code> object that contains all the tasks.
+     */
     public void saveChange(Ui textUi, TaskList tasks) {
         try {
             FileWriter textAdder = new FileWriter(DEFAULT_FILEPATH);
@@ -50,6 +59,11 @@ public class Storage {
 
     }
 
+    /**
+     * Erases all saved tasks from file.
+     *
+     * @param textUi <code>Ui</code> object that interacts with the user.
+     */
     public void performCleanup(Ui textUi) {
         try {
             FileWriter overrider = new FileWriter(DEFAULT_FILEPATH);
@@ -60,6 +74,13 @@ public class Storage {
 
     }
 
+    /**
+     * Loads tasks from file.
+     *
+     * @param tasks <code>TaskList</code> object that will store all the tasks.
+     * @throws IOException
+     * @throws InvalidInputException
+     */
     public void initialiseList (TaskList tasks) throws IOException,InvalidInputException {
         loader = new Scanner(savedData);
         if (!savedData.exists()) {
@@ -96,6 +117,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes a new to-do task to file.
+     *
+     * @param textUi <code>Ui</code> object that interacts with the user.
+     * @param description Description of the to-do task.
+     */
     public void writeTodo(Ui textUi,String description) {
         try {
             FileWriter textAdder = new FileWriter(DEFAULT_FILEPATH, true);
@@ -106,6 +133,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes a new deadline to file.
+     *
+     * @param textUi <code>Ui</code> object that interacts with the user.
+     * @param description Description of the deadline.
+     * @param by Time by which the task has to be finished.
+     */
     public void writeDeadline(Ui textUi,String description,String by) {
         try {
             FileWriter textAdder = new FileWriter(DEFAULT_FILEPATH,true);
@@ -116,6 +150,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes a new event to file.
+     *
+     * @param textUi <code>Ui</code> object that interacts with the user.
+     * @param description Description of the event.
+     * @param duration Duration of the event.
+     */
     public void writeEvent(Ui textUi,String description,String duration) {
         try {
             FileWriter textAdder = new FileWriter(DEFAULT_FILEPATH, true);
