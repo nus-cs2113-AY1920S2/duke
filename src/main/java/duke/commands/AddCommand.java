@@ -8,6 +8,8 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.time.format.DateTimeParseException;
+
 public class AddCommand extends Command {
     String command;
 
@@ -43,6 +45,8 @@ public class AddCommand extends Command {
             System.out.println("Task description or date field is empty.");
         } catch (DukeException e) {
             System.out.println("Task description or date field is empty.");
+        } catch (DateTimeParseException e){
+            System.out.println("Please enter the date as: yyyy-mm-dd!");
         }
     }
 

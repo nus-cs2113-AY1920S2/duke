@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class Storage {
 
-    //private TaskList tasks = new TaskList();
-
     public static void saveToFile(TaskList tasks) throws IOException {
         File file = new File("save2.txt");
 

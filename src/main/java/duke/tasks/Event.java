@@ -1,10 +1,13 @@
 package duke.tasks;
 
 import duke.DukeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    String timePeriod;
+    protected LocalDate timePeriod;
 
     public Event(String description, String t) throws DukeException {
         super(description.trim());
@@ -12,11 +15,8 @@ public class Event extends Task {
         {
             throw new DukeException();
         }
-        this.timePeriod = t.trim();
-    }
-
-    public String getTimePeriod() {
-        return this.timePeriod;
+        t = t.trim();
+        this.timePeriod = LocalDate.parse(t);
     }
 
     @Override
