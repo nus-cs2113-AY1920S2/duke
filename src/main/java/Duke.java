@@ -10,8 +10,8 @@ public class Duke {
         System.out.println("Initialising...");
 
         io = new Parser();
-        storage = new Storage("./data/duke.txt", tasks);
         tasks = new TaskList();
+        storage = new Storage("./data/duke.txt", tasks);
         ui = new Ui();
     }
 
@@ -111,7 +111,13 @@ public class Duke {
         } else {
             tokens = s.split("/");
             tokens[0] = tokens[0].trim();
-            tokens[1] = tokens[1].substring(tokens[1].indexOf(' ') + 1);
+            int indexAfterSpace = tokens[1].indexOf(' ') + 1;
+            if (indexAfterSpace == 0) {
+                // if nothing after /??
+                tokens[1] = "";
+            } else {
+                tokens[1] = tokens[1].substring(indexAfterSpace);
+            }
         }
         return tokens;
     }
