@@ -20,16 +20,7 @@ import chatty.ui.Ui;
 
 import java.util.Scanner;
 
-import static chatty.util.Constants.AT_STRING;
 import static chatty.util.Constants.BYE_STRING;
-import static chatty.util.Constants.BY_STRING;
-import static chatty.util.Constants.DEADLINE_STRING;
-import static chatty.util.Constants.DELETE_STRING;
-import static chatty.util.Constants.DONE_STRING;
-import static chatty.util.Constants.EVENT_STRING;
-import static chatty.util.Constants.LIST_STRING;
-import static chatty.util.Constants.SPACE_SEPARATOR;
-import static chatty.util.Constants.TODO_STRING;
 
 public class ChattyChatBot {
 

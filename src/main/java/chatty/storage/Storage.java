@@ -22,10 +22,6 @@ import static chatty.util.Constants.TRUE_STRING;
 
 public class Storage {
 
-    public Storage() {
-
-    }
-
     public boolean readDataFromFile(TaskList taskList) {
         File file = new File(System.getProperty("user.dir"), DEFAULT_FILE_PATH);
         try {

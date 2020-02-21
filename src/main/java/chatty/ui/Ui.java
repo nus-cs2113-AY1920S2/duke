@@ -12,10 +12,6 @@ import static chatty.util.Constants.TASK_SUMMARY;
 
 public class Ui {
 
-    public Ui() {
-
-    }
-
     public void sendWelcomeMessage() {
         System.out.println("Hello from " + BOT_NAME);
         System.out.println("Glad to be at your service!");

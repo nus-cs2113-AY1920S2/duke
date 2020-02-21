@@ -23,10 +23,6 @@ import static chatty.util.Constants.TODO_STRING;
 
 public class Parser {
 
-    public Parser() {
-
-    }
-
     public Command parseCommand(String userInput) throws ChattyChatBotException, ArrayIndexOutOfBoundsException {
         // Solution below adapted from: https://stackoverflow
         // .com/questions/5067942/what-is-the-best-way-to-extract-the-first-word-from-a-string-in-java
