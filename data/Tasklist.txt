@@ -1,3 +1,7 @@
-T//1//borrow book
-E//0//carrer fair//NUSHALL
-D//1//return book//2pm monday
+E//1// borrow book//library
+T//1//sleep
+T//1//movie
+D//1//bathe//2pm
+T//1//play game
+D//1//meet teacher//7pm Oct Sharp
+E//1//CFG Fair//NUS utown 3pm
