@@ -87,4 +87,26 @@ public class TaskList {
 
     }
 
+    public void findTask(String findString) {
+        ArrayList<Integer> matchList = new ArrayList<>();
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            if (tasks.get(i-1).toString().contains(findString)) {
+                matchList.add(i);
+            }
+        }
+
+        if (matchList.size() > 0) {
+            System.out.println("I've found the follow tasks matching your search: ");
+            for (int i = 0; i < matchList.size(); i++) {
+                String index = matchList.get(i).toString();
+                System.out.println(index + "." + tasks.get(matchList.get(i) - 1));
+            }
+        } else {
+            System.out.println("Sorry! I could not find any tasks matching your searches!");
+        }
+
+
+
+    }
+
 }

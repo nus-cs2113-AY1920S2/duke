@@ -13,6 +13,7 @@ public class Parser {
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String DELETE_COMMAND = "delete";
     public static final String END_COMMAND = "bye";
+    public static final String FIND_COMMAND = "find";
 
 
     public static Command parse(String userInput) throws UnknownInputException {
@@ -31,6 +32,8 @@ public class Parser {
             return new DoneCommand(userInput);
         } else if (words[0].equals(END_COMMAND)) {
             return new ByeCommand();
+        } else if (words[0].equals(FIND_COMMAND)) {
+            return new FindCommand(userInput);
         } else {
             throw new UnknownInputException("There is no such input!");
         }
