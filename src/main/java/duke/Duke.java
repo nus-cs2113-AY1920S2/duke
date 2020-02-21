@@ -67,14 +67,22 @@ public class Duke {
                     Todo t = new Todo(description);
                     t.isDone = isTaskDone;
                     taskList.add(t);
-                } else if (taskType.equals("[E]")) {
-                    Event t = new Event(description);
-                    t.isDone = isTaskDone;
-                    taskList.add(t);
-                } else {
-                    Deadline t = new Deadline(description);
-                    t.isDone = isTaskDone;
-                    taskList.add(t);
+                } else
+                {
+                    if (taskType.equals("[E]")) {
+                        String[] descriptionAndDate = description.split("at:");
+                        String AT = descriptionAndDate[1].trim();
+//                        String EVENTE = descriptionAndDate[0].trim();
+                        Event t = new Event(description, AT);
+                        t.isDone = isTaskDone;
+                        taskList.add(t);
+                    } else {
+                        String[] descriptionAndDate = description.split("by:");
+                        String BY = descriptionAndDate[1].trim();
+                        Deadline t = new Deadline(description, BY);
+                        t.isDone = isTaskDone;
+                        taskList.add(t);
+                    }
                 }
 
             }
@@ -276,11 +284,11 @@ public class Duke {
      * @param type  Type of subclass of task.
      * @return description Description of the task in the required format.
      */
-    public String returnStringToAdd(String line, String type) {
+    public String[] returnStringToAdd(String line, String type) {
         if (type.equals("todo")) {
             String[] arrOfStr = line.split(type);
-            String toReturn = arrOfStr[1].trim();
-            return toReturn;
+//            toReturn[0] = arrOfStr[1].trim();
+            return arrOfStr;
         } else {
             String preposition;
             String splitter;
@@ -298,7 +306,8 @@ public class Duke {
 
             toReturn[1] = arrOfStr[1].substring(1, arrOfStr[1].length()); // date
             String description = toReturn[0] + "(" + preposition + toReturn[1] + ")";
-            return description;
+            toReturn[0] = description;
+            return toReturn;
         }
     }
 
@@ -345,17 +354,23 @@ public class Duke {
         } else {
             try {
                 printStraightLine();
-                String todoOrDeadlineOrEvent = returnStringToAdd(ogString, eventType);
+                String[] todoOrDeadlineOrEvent = returnStringToAdd(ogString, eventType);
+                System.out.println(todoOrDeadlineOrEvent[0]);
+                System.out.println(todoOrDeadlineOrEvent[1]);
                 if (eventType.equals("event") || eventType.equals("deadline")) {
+
                     if (eventType.equals("event")) {
-                        Event t = new Event(todoOrDeadlineOrEvent);
+
+                        Event t = new Event(todoOrDeadlineOrEvent[0], todoOrDeadlineOrEvent[1]);
                         taskList.add(t);
                     } else {
-                        Deadline t = new Deadline(todoOrDeadlineOrEvent);
+
+                        Deadline t = new Deadline(todoOrDeadlineOrEvent[0], todoOrDeadlineOrEvent[1]);
                         taskList.add(t);
                     }
                 } else {
-                    Todo e = new Todo(todoOrDeadlineOrEvent);
+
+                    Todo e = new Todo(todoOrDeadlineOrEvent[0]);
                     taskList.add(e);
                 }
                 Task t = taskList.get(taskList.size() - 1);
@@ -372,8 +387,8 @@ public class Duke {
             } catch (IndexOutOfBoundsException e){
 
                 System.out.println("Your inputs can only be of the following forms: \n 1. todo {task description} \n 2." +
-                        " deadline {task description} \\by {dedline eg. 6 PM} \n 3. event {event description} " +
-                        "\\at {event date\\time eg. 6 PM} 4. delete {taskNumber}");
+                        " deadline {task description} /by {dedline eg. 6 PM} \n 3. event {event description} " +
+                        "/at {event date\\time eg. 6 PM} \\4. delete {taskNumber}");
                 System.out.println("Try again!");
                 printStraightLine();
             }
