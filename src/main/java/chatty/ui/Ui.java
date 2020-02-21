@@ -11,6 +11,7 @@ import static chatty.util.Constants.SPACE_SEPARATOR;
 import static chatty.util.Constants.TASK_SUMMARY;
 
 public class Ui {
+
     public Ui() {
 
     }
