@@ -82,10 +82,10 @@ public class Storage {
      * @throws InvalidInputException If the data stored on file is invalid.
      */
     public void initialiseList (TaskList tasks) throws IOException,InvalidInputException {
-        loader = new Scanner(savedData);
         if (!savedData.exists()) {
             savedData.createNewFile();
         }
+        loader = new Scanner(savedData);
         while (loader.hasNext()) {
             String command = loader.nextLine();
             String[] phrases = command.split("\\|");
