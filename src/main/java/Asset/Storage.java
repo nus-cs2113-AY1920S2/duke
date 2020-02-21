@@ -33,7 +33,7 @@ public class Storage {
         switch(temp[0]){
             case "T" :
                 Todo todo = new Todo(temp[2]);
-                if(temp[1]=="Y"){
+                if(temp[1].equals("Y")){
                     todo.done();
                 }
                 l1.add(todo);
@@ -41,7 +41,7 @@ public class Storage {
             case "D" :
                 Deadline deadline = new Deadline(temp[3]);
                 deadline.setBy(temp[1]);
-                if(temp[2]=="Y"){
+                if(temp[2].equals("Y")){
                     deadline.done();
                 }
                 l1.add(deadline);
@@ -49,7 +49,7 @@ public class Storage {
             case "E" :
                 Event event = new Event(temp[3]);
                 event.setAt(temp[1]);
-                if(temp[2]=="Y"){
+                if(temp[2].equals("Y")){
                     event.done();
                 }
                 l1.add(event);

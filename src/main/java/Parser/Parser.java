@@ -19,7 +19,7 @@ public class Parser  {
     public static final String NO_TASK_NUMBER = "\t Please enter a task number!";
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
     public static final String WRONG_USAGE_OF_COMMAND = " cannot be used with other commands";
-    public static final String NOT_INTEGER = "Argument after command used is not an integer!";
+    public static final String NOT_INTEGER = "\t Argument after command used is not an integer!";
     public static final String INDICATE_TIMING = "Use \"/\" to indicate timing!";
 /**
  * This method splits User input by spaces into an array of Strings
@@ -70,6 +70,7 @@ public class Parser  {
  * or illegal.
  */
    public static String[] validateCommand(String inCommand) throws IllegalDukeException {
+        inCommand=inCommand.toLowerCase();
         String[] userCommand = parseCommand(inCommand);
         String[] out = null;
         switch (userCommand[0]) {
@@ -86,7 +87,9 @@ public class Parser  {
                     throw new IllegalDukeException(NO_TASK_NUMBER);
                 } else {
                     try {
-                        int number = parseInt(userCommand[1]) - 1;
+                        if(!userCommand[1].equals("all")){
+                            int number = parseInt(userCommand[1]) - 1;
+                        }
                     } catch (NumberFormatException e) {
                             throw new IllegalDukeException(NOT_INTEGER);
                     }

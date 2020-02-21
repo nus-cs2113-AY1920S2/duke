@@ -40,7 +40,6 @@ public class Task {
      */
     public String toFile(){
         String done = this.isDone ? "Y" : "N" ;
-
         return done + "-" + action;
     }
     public String getAction(){

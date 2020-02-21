@@ -45,12 +45,11 @@ public class Duke {
         while (status == 1) {
             try {
                 String input = this.ui.getUserIn();
-                Command command = Parser.parse(input);
                 this.ui.printLine();
+                Command command = Parser.parse(input);
                 command.execute(this.l1, this.ui, this.storage);
                 status=command.getStatus();
             }catch(IllegalDukeException | FileNotFoundException e){
-                this.ui.printLine();
                 this.ui.printError(e.getMessage());
             }finally{
                 this.ui.printLine();

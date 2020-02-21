@@ -16,19 +16,36 @@ import static java.lang.Integer.parseInt;
  */
 public class DoneCommand extends Command  {
     private int index;
+    public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
+            "\t available list of task numbers";
 
     public DoneCommand(String[] fullCommand){
         super(fullCommand);
-        this.index=parseInt(fullCommand[1])-1;
+        if(fullCommand[1].equals("all")){
+            this.index=-1;
+        }else {
+            this.index = parseInt(fullCommand[1]) - 1;
+        }
     }
     @Override
     public void execute(ArrayList<Task> l1, Ui ui, Storage storage) throws IllegalDukeException, FileNotFoundException {
-        if (this.index >= l1.size() || this.index < 0) {
-            throw new IllegalDukeException(OUT_OF_BOUND_INDEX);
+        if (this.index >= l1.size() || this.index < -1) {
+            throw new IllegalDukeException(INDEX_OUT_OF_RANGE);
+        }else if(this.index == -1){
+            if(l1.isEmpty()){
+                ui.printList(l1);
+            }else {
+                for (int i = 0; i < l1.size(); i++) {
+                    Task task = l1.get(i);
+                    task.done();
+                }
+            }
+            ui.printDoneAll(l1);
+        }else {
+            Task task = l1.get(this.index);
+            task.done();
+            ui.printDone(task);
         }
-        Task task = l1.get(this.index);
-        task.done();
-        ui.printDone(task);
         storage.saveFile(l1);
     }
 }

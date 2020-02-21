@@ -14,8 +14,7 @@ public class Ui  {
     public static final String[] COMMAND= {"todo", "deadline", "event", "done", "bye", "list", "help"};
     public static final String WRONG_INPUT="\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
             "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
-    public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task\n\t before" +
-            " listing";
+    public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
     public static final String MISSING_FILE = "Please check if data.txt exist!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
@@ -84,6 +83,27 @@ public class Ui  {
         out.println("\t   " + task.toString());
         out.println("\t Now you have " + l1.size() + " tasks in the list.");
     }
+    public void printDoneAll(ArrayList<Task> l1){
+        out.println("\t All tasks have been marked as done!");
+            for (int i = 0; i < l1.size(); i++) {
+                int count = i + 1;
+                Task task = l1.get(i);
+                out.println("\t " + count + "." + task.toString());
+            }
+    }
+
+    public void printDeleteAll(){
+        out.println("\t All tasks have been deleted!");
+    }
+
+    public void confirmDeleteAll(){
+        out.println("\t Are you sure that you want ALL tasks to be deleted?");
+        out.println("\t Type Y for Yes and N for No");
+    }
+
+    public String receiveDeleteAllConfirmation(){
+        return in.nextLine();
+    }
     public void printList(ArrayList<Task> l1){
         if(l1.isEmpty()){
             out.println(LIST_EMPTY);
@@ -96,6 +116,7 @@ public class Ui  {
             }
         }
     }
+
     public void printWrongInput(){
         out.println(WRONG_INPUT);
     }
