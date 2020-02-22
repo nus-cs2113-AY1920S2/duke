@@ -9,12 +9,18 @@ import java.io.IOException;
 
 import static Duke.Library.Feature.*;
 
-public class Duke {
+public class Duke{
 
-    public static void main(String[] args) throws IllegalCommandException, IOException, IllegalTypeException, IllegalDeleteException, IllegalDoneTaskException {
-        System.out.println("Test879070");
+    public Duke(String filePath) {
+    }
+
+    public void run() throws IllegalCommandException, IOException, IllegalTypeException, IllegalDeleteException, IllegalDoneTaskException {
         displayWelcomeMessage();
         run();
         exitProgram();
+    }
+
+    public static void main(String[] args) throws IllegalTypeException, IllegalCommandException, IllegalDoneTaskException, IllegalDeleteException, IOException {
+        new Duke("data/output.txt").run();
     }
 }
