@@ -13,6 +13,7 @@
  * @author: Tan Zheng Fu Justin
  */
 
+import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +54,7 @@ public class Duke {
         return new Task(userInput);
     }
 
-    public static void echoUntilBye() {
+    public static void echoUntilBye(File f) {
         boolean isBye = false;
         while (!isBye) {
             Task task = readFromUser();
@@ -82,6 +83,7 @@ public class Duke {
                 continue;
 
             case "done":
+
                 try {
                     indexAsString = commands.get(LIST_INDEX);
                     indexAsString = indexAsString.trim();
@@ -90,12 +92,12 @@ public class Duke {
                     Task taskDone = myTasks.getTask(index);
                     taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
 
+                    FileSaver.updateFile(f, index);
+
                     Printer.printConfirmationMessage(command, taskDone);
 
-                } catch (IndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
-                } catch (NumberFormatException e) {
-                    Printer.printError(); //TODO add custom error message when user give alphabets
                 }
                 continue;
 
@@ -110,11 +112,10 @@ public class Duke {
 
                     Printer.printConfirmationMessage(command, taskDelete);
 
-                } catch (IndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
-                } catch (NumberFormatException e) {
-                    Printer.printError(); // TODO add custom error message when user give alphabets
                 }
+
                 continue;
 
             case "todo":
@@ -126,6 +127,9 @@ public class Duke {
 
                     ToDo toDoTask = new ToDo(description);
                     myTasks.storeTasks(toDoTask);
+
+                    FileSaver.saveFile(f, description);
+
                     Printer.printConfirmationMessage(command, toDoTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
@@ -149,6 +153,9 @@ public class Duke {
 
                     Deadline deadlineTask = new Deadline(description, deadline);
                     myTasks.storeTasks(deadlineTask);
+
+                    FileSaver.saveFile(command, f, description, deadline);
+
                     Printer.printConfirmationMessage(command, deadlineTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
@@ -172,6 +179,9 @@ public class Duke {
 
                     Event eventTask = new Event(description, eventAt);
                     myTasks.storeTasks(eventTask);
+
+                    FileSaver.saveFile(command, f, description, eventAt);
+
                     Printer.printConfirmationMessage(command, eventTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
@@ -188,9 +198,13 @@ public class Duke {
 
     public static void main(String[] args) {
         start();
+
+        File f = FileSaver.makeNewTextFile();
+        FileLoader.loadFile(myTasks, f);
+
         Printer.printLines();
         Printer.printGreetings();
         Printer.printLines();
-        echoUntilBye();
+        echoUntilBye(f);
     }
 }
