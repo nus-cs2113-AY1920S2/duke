@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 public class Deadline extends Task {
     public static final char DEADLINE_ICON = 'D';
 
@@ -22,7 +24,11 @@ public class Deadline extends Task {
         String by = tokens[3];
         Deadline deadline = new Deadline(description, by);
         if (isDone) {
-            deadline.markAsDone();
+            try {
+                deadline.markAsDone();
+            } catch (DukeException de) {
+                // user feedback not required
+            }
         }
         return deadline;
     }

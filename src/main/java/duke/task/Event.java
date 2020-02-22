@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 public class Event extends Task {
     public static final char EVENT_ICON = 'E';
 
@@ -22,7 +24,11 @@ public class Event extends Task {
         String time = tokens[3];
         Event event = new Event(description, time);
         if (isDone) {
-            event.markAsDone();
+            try {
+                event.markAsDone();
+            } catch (DukeException de) {
+                // user feedback not required
+            }
         }
         return event;
     }

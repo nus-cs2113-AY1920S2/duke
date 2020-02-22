@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 public class Todo extends Task {
     public static final char TODO_ICON = 'T';
 
@@ -18,7 +20,11 @@ public class Todo extends Task {
         String description = tokens[2];
         Todo todo = new Todo(description);
         if (isDone) {
-            todo.markAsDone();
+            try {
+                todo.markAsDone();
+            } catch (DukeException de) {
+                // user feedback not required
+            }
         }
         return todo;
     }

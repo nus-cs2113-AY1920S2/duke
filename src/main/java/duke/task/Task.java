@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.DukeException;
+import duke.Ui;
+
 public abstract class Task {
     protected static final String DELIMITER = "|";
     protected static final String TASK_DONE_ICON = "O";
@@ -17,7 +20,10 @@ public abstract class Task {
         return (isDone ? TASK_DONE_ICON : TASK_NOT_DONE_ICON);
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException(Ui.TASK_ALREADY_DONE_MESSAGE);
+        }
         this.isDone = true;
     }
 

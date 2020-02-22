@@ -45,7 +45,7 @@ public class Storage {
                 taskList.addTask(Event.decodeTask(taskLine));
                 break;
             default:
-                throw new DukeException(Ui.GENERIC_ERROR_MESSAGE_PREFIX + Ui.UNKNOWN_STORAGE_FORMAT_MESSAGE);
+                throw new DukeException(Ui.UNKNOWN_STORAGE_FORMAT_MESSAGE);
             }
         }
         return taskList;

@@ -18,6 +18,7 @@ public class Ui {
     public static final String HAVE_TASKS_MESSAGE = "Quite a few tasks you got there";
     public static final String TASK_INDEX_OUT_OF_RANGE_MESSAGE = "Please specify a task number between 1 and ";
     public static final String TASK_MARKED_AS_DONE_MESSAGE = "Well, that's one task down" + LS + "  ";
+    public static final String TASK_ALREADY_DONE_MESSAGE = "That task is already done";
     public static final String GENERIC_ERROR_MESSAGE_PREFIX = "☹ OOPS!!! ";
     public static final String TODO_INSUFFICIENT_ARGS_MESSAGE = "The description of a todo cannot be empty";
     public static final String DEADLINE_INSUFFICIENT_ARGS_MESSAGE =

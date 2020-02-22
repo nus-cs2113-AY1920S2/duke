@@ -35,7 +35,7 @@ public class TaskList {
         return deletedTask;
     }
 
-    public Task markTaskAsDone(int index) throws IndexOutOfBoundsException {
+    public Task markTaskAsDone(int index) throws IndexOutOfBoundsException, DukeException {
         Task doneTask = tasks.get(index);
         tasks.get(index).markAsDone();
         return doneTask;

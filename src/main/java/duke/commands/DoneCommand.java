@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -29,6 +30,8 @@ public class DoneCommand extends Command {
                         + numTasks
                 );
             }
+        } catch (DukeException de) {
+            ui.showToUser(de.toString());
         }
         attemptSave(tasks, ui, storage);
     }
