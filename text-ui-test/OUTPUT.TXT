@@ -1,0 +1,73 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+________________________________
+Hello,I'm little pepper. Your personal sweetheart.
+What can I do for you? You can choose two model:
+1.echo mode
+2.command mode
+________________________________
+    ________________________________
+    added: read book
+    Now you have 1 tasks in the list
+    ________________________________
+    ________________________________
+    added: wash clothes
+    Now you have 2 tasks in the list
+    ________________________________
+    ________________________________
+    added: push my repo
+    Now you have 3 tasks in the list
+    ________________________________
+    ________________________________
+    Invalid input!!! Please use '/' to split task name and its time description
+    ________________________________
+    ________________________________
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    ________________________________
+    ________________________________
+    1.[T][¡Á] read book
+    2.[E][¡Á] wash clothes (at: tonight)
+    3.[D][¡Á] push my repo (by: monday)
+    ________________________________
+    ________________________________
+    Congratulations! You have just finished this task:
+    [T][¡Ì] read book
+    ________________________________
+    ________________________________
+    Congratulations! You have just finished this task:
+    [E][¡Ì] wash clothes (at: tonight)
+    ________________________________
+    ________________________________
+    Congratulations! You have just finished this task:
+    [D][¡Ì] push my repo (by: monday)
+    ________________________________
+    ________________________________
+    Reffered task doesn't exist!!!
+    There are totally 3 tasks in the taskList
+    ________________________________
+    ________________________________
+    You have to point out which task to mark as done!!!
+    ________________________________
+    ________________________________
+    1.[T][¡Ì] read book
+    2.[E][¡Ì] wash clothes (at: tonight)
+    3.[D][¡Ì] push my repo (by: monday)
+    ________________________________
+    ________________________________
+    added: improve code quality
+    Now you have 4 tasks in the list
+    ________________________________
+    ________________________________
+    1.[T][¡Ì] read book
+    2.[E][¡Ì] wash clothes (at: tonight)
+    3.[D][¡Ì] push my repo (by: monday)
+    4.[D][¡Á] improve code quality (by: tuseday)
+    ________________________________
+    ________________________________
+    Don't leave me alone! Please come back soon!
+    ________________________________

@@ -1,0 +1,4 @@
+[E][√] attend meeting (at:  Tuesday)
+[D][×] push repo (by:  Friday)
+[T][×] eatfood
+[D][√] finish homeword (by: tonight)
