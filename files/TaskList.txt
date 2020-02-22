@@ -1,2 +1,3 @@
+[T] | ✓ | eat \at 4
 [T] | ✘ | eat
-[T] | ✘ | eat
+[D] | ✘ | duck (by: tom)

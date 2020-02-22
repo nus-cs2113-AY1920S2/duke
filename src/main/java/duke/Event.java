@@ -17,7 +17,6 @@ public class Event extends Task implements DatedEvents{
     }
 
 
-
     @Override
     public String getTypeIcon() {
 

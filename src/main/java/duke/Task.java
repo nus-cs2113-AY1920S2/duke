@@ -18,7 +18,6 @@ public abstract class Task {
         this.isDone = true;
     }
 
-
     public String getStatusIcon() {
         //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");
@@ -27,6 +26,5 @@ public abstract class Task {
     public String getTypeIcon() {
         return null;
     }
-
 
 }
