@@ -1,6 +1,7 @@
 package chatty.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
@@ -15,7 +16,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s to %s)", super.toString(), this.startTime, this.endTime);
+        return String.format("[E]%s (at: %s to %s)", super.toString(),
+                this.startTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                this.endTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
     @Override
