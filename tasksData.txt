@@ -4,3 +4,4 @@ E | 0 | project meeting | Aug 6th 2-4pm
 T | 1 | join sports club
 T | 0 | buy grocery
 E | 0 | concert | sunday
+D | 0 | assignment | Dec 1 2020
