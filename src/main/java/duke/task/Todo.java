@@ -20,11 +20,7 @@ public class Todo extends Task {
         String description = tokens[2];
         Todo todo = new Todo(description);
         if (isDone) {
-            try {
-                todo.markAsDone();
-            } catch (DukeException de) {
-                // user feedback not required
-            }
+            todo.markAsDone();
         }
         return todo;
     }

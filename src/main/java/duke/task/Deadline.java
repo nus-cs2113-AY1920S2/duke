@@ -24,11 +24,7 @@ public class Deadline extends Task {
         String by = tokens[3];
         Deadline deadline = new Deadline(description, by);
         if (isDone) {
-            try {
-                deadline.markAsDone();
-            } catch (DukeException de) {
-                // user feedback not required
-            }
+            deadline.markAsDone();
         }
         return deadline;
     }

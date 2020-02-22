@@ -24,11 +24,7 @@ public class Event extends Task {
         String time = tokens[3];
         Event event = new Event(description, time);
         if (isDone) {
-            try {
-                event.markAsDone();
-            } catch (DukeException de) {
-                // user feedback not required
-            }
+            event.markAsDone();
         }
         return event;
     }

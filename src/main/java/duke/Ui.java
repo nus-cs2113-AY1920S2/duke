@@ -16,6 +16,9 @@ public class Ui {
     public static final String LS = System.lineSeparator();
     public static final String NO_TASKS_MESSAGE = "You have no tasks right now though";
     public static final String HAVE_TASKS_MESSAGE = "Quite a few tasks you got there";
+    public static final String NO_MATCHING_TASKS_MESSAGE = "Hmm... Seems like no tasks matched your query";
+    public static final String FOUND_MATCHING_TASKS_MESSAGE = "Are these what you're looking for?";
+    public static final String FIND_INSUFFICIENT_ARGS_MESSAGE = "Please specify a string to search for";
     public static final String TASK_INDEX_OUT_OF_RANGE_MESSAGE = "Please specify a task number between 1 and ";
     public static final String TASK_MARKED_AS_DONE_MESSAGE = "Well, that's one task down" + LS + "  ";
     public static final String TASK_ALREADY_DONE_MESSAGE = "That task is already done";
