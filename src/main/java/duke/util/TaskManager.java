@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Deadline;
