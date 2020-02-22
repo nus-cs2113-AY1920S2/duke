@@ -45,4 +45,7 @@ delete 1
 delete 1
 list
 delete 5
+sssp
+done abc
+delete eeee
 bye

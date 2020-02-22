@@ -73,7 +73,7 @@ _________________________________________________
 > Well, that's one task down
   [T][O] i want to write a slash here /by doing sth like this
 _________________________________________________
-> Please specify a task number between 1 and 5
+> ☹ OOPS!!! Please specify a task number between 1 and 5
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][O] borrow book
@@ -128,12 +128,12 @@ _________________________________________________
   9. [T][X] 9
  10. [T][X] 10
 _________________________________________________
-> ☹ OOPS!!! Please specify a valid task number to be marked as done
+> ☹ OOPS!!! Please specify a task number between 1 and 10
 _________________________________________________
 > Well, that's one task down
   [T][O] 10
 _________________________________________________
-> Please specify a task number between 1 and 10
+> ☹ OOPS!!! Please specify a task number between 1 and 10
 _________________________________________________
 > Task deleted:
   [T][O] 10
@@ -175,9 +175,15 @@ _________________________________________________
   [T][X] 9
 You have 0 tasks in the list
 _________________________________________________
-> Nice, nothing to see here
+> You have no tasks right now though
 _________________________________________________
 > You have no tasks right now though
+_________________________________________________
+> ☹ OOPS!!! I'm not very sure what that means...
+_________________________________________________
+> ☹ OOPS!!! Please specify an integer for the task number
+_________________________________________________
+> ☹ OOPS!!! Please specify an integer for the task number
 _________________________________________________
 > Bye then
 _________________________________________________
