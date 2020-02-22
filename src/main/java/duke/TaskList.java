@@ -36,8 +36,11 @@ public class TaskList {
     }
 
     public Task markTaskAsDone(int index) throws IndexOutOfBoundsException, DukeException {
-        Task doneTask = tasks.get(index);
-        tasks.get(index).markAsDone();
-        return doneTask;
+        Task selectedTask = tasks.get(index);
+        if (selectedTask.isDone()) {
+            throw new DukeException(Ui.TASK_ALREADY_DONE_MESSAGE);
+        }
+        selectedTask.markAsDone();
+        return selectedTask;
     }
 }

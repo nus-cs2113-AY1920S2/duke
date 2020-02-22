@@ -20,10 +20,11 @@ public abstract class Task {
         return (isDone ? TASK_DONE_ICON : TASK_NOT_DONE_ICON);
     }
 
-    public void markAsDone() throws DukeException {
-        if (isDone) {
-            throw new DukeException(Ui.TASK_ALREADY_DONE_MESSAGE);
-        }
+    public Boolean isDone() {
+        return isDone;
+    }
+
+    public void markAsDone() {
         this.isDone = true;
     }
 
