@@ -20,8 +20,16 @@ import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_TASK;
 import static chatty.util.Constants.NEW_LINE;
 import static chatty.util.Constants.TRUE_STRING;
 
+/**
+ * Handles reading and writing of tasks from file storage.
+ */
 public class Storage {
 
+    /**
+     * Reads and parses tasks stored in file and writes the result to the list of tasks.
+     * @param taskList The list where the tasks read from file should be added to.
+     * @return Boolean value indicating whether or not the operation of reading tasks from file is successful.
+     */
     public boolean readDataFromFile(TaskList taskList) {
         File file = new File(System.getProperty("user.dir"), DEFAULT_FILE_PATH);
         try {
@@ -40,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves a list of tasks to file.
+     * @param taskList The list of tasks to be stored in the file.
+     * @return Boolean value indicating whether or not the operation of saving tasks to the file is successful.
+     */
     public boolean saveDataToFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(DEFAULT_FILE_PATH);
@@ -53,6 +66,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a string to create a task.
+     * @param taskStr The string which represents a task.
+     * @return The task created from the input string.
+     */
     public Optional<Task> stringToTask(String taskStr) {
         String[] fields = taskStr.split(FILE_FIELD_SEPARATOR);
         if (fields.length < MINIMUM_FIELD_NUM_FOR_TASK) {

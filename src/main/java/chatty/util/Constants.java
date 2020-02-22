@@ -1,5 +1,8 @@
 package chatty.util;
 
+/**
+ * Stores all the constants used in the application.
+ */
 public class Constants {
 
     public static final String BOT_NAME = "Chatty Chat Bot";
