@@ -44,10 +44,10 @@ public class Storage {
         String currTaskString = ""; //Follows format: TASK | 1 | DESCRIPTION | TIME
         while (s.hasNext()) {
             currTaskString = s.nextLine();
-            ArrayList<String> savedString = new ArrayList<String>(Arrays.asList(currTaskString.split(" , ")));
+            ArrayList<String> savedString = Parser.convertStringToArr(currTaskString, " , ");
             ArrayList<String> savedDescription = new ArrayList<String>();
             savedDescription.add(savedString.get(2));
-            Task taskToLoad = null;
+            Task taskToLoad;
             switch(savedString.get(0)) {
                 case "Todo":
                     taskToLoad = TaskList.newTodo(savedDescription);

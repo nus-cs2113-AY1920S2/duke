@@ -3,7 +3,6 @@ import Exception.DukeException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -53,7 +52,7 @@ public class Duke {
         myUI.intro();
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
-        ArrayList<String> words = new ArrayList<String>(Arrays.asList(userInput.split(" ")));
+        ArrayList<String> words = Parser.convertStringToArr(userInput, " ");
         String keyword = words.get(0);
 
         while (!keyword.equals("bye")) {
@@ -65,7 +64,7 @@ public class Duke {
                 UI.printLines();
             } finally {
                 userInput = in.nextLine();
-                words = new ArrayList<String>(Arrays.asList(userInput.split(" ")));
+                words = Parser.convertStringToArr(userInput, " ");
                 keyword = words.get(0);
             }
         }

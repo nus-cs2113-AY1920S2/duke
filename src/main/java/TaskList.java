@@ -7,7 +7,6 @@ import Exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> userList;
@@ -21,33 +20,23 @@ public class TaskList {
     public ArrayList<Task> getUserList() {
         return this.userList;
     }
-    public static Todo newTodo(ArrayList<String> userInputDetails) throws DukeException {
-        String task = String.join(" ", userInputDetails);
+    public static Todo newTodo(ArrayList<String> userInputInArray) throws DukeException {
+        String task = String.join(" ", userInputInArray);
         if (task.length() == 0) { // if user inputs nothing after to-do
             throw new DukeException("Format error, please follow: todo <task>");
         }
         return new Todo (task);
     }
-    public static Event newEvent(ArrayList<String> userInputDetails) throws DukeException {
-        String description = "";
-        String at = "";
-        int atIndex = -1;
-        atIndex = userInputDetails.indexOf("/at");
+    public static Event newEvent(ArrayList<String> userInputInArray) throws DukeException {
+       int atIndex = userInputInArray.indexOf("/at");
         if (atIndex == -1) {
             throw new DukeException("Format error, please follow: event <task> /at <datetime>." +
                     "\nFeature: you can use <datetime> as \"yyyy-mm-dd hr:min\" and we can format it for you!");
         }
-        for (int i=0; i<atIndex; i++) {
-            description += userInputDetails.get(i);
-            description += " ";
-        }
-        description = description.substring(0, description.length()-1);
-        for (int i=atIndex+1; i < userInputDetails.size(); i++) {
-            at += userInputDetails.get(i);
-            at += " ";
-        }
-        at = at.substring(0, at.length()-1);
-        ArrayList<String> userInputDelimit = new ArrayList<String>(Arrays.asList(at.split(" ", 2)));
+        ArrayList<String> filterByArr = Parser.descriptionFilter(atIndex, userInputInArray);
+        String description = filterByArr.get(0);
+        String at = filterByArr.get(1);
+        ArrayList<String> userInputDelimit = Parser.convertStringToArr(at, " ", 2);
         LocalDate myDate;
         String myTime = "";
         try {
@@ -63,26 +52,16 @@ public class TaskList {
         return new Event(description, myDate, myTime);
     }
 
-    public static Deadline newDeadline(ArrayList<String> userInputDetails) throws DukeException {
-        String description = "";
-        String by = "";
-        int byIndex = -1;
-        byIndex = userInputDetails.indexOf("/by");
+    public static Deadline newDeadline(ArrayList<String> userInputInArray) throws DukeException {
+        int byIndex = userInputInArray.indexOf("/by");
         if (byIndex == -1) {
             throw new DukeException("Format error, please follow: deadline <task> /by <datetime>." +
                     "\nFeature: you can use <datetime> as \"yyyy-mm-dd hr:min\" and we can format it for you!");
         }
-        for (int i=0; i<byIndex; i++) {
-            description += userInputDetails.get(i);
-            description += " ";
-        }
-        description = description.substring(0, description.length()-1);
-        for (int i=byIndex+1; i < userInputDetails.size(); i++) {
-            by += userInputDetails.get(i);
-            by += " ";
-        }
-        by = by.substring(0, by.length()-1);
-        ArrayList<String> userInputDelimit = new ArrayList<String>(Arrays.asList(by.split(" ", 2)));
+        ArrayList<String> filterByArr = Parser.descriptionFilter(byIndex, userInputInArray);
+        String description = filterByArr.get(0);
+        String by = filterByArr.get(1);
+        ArrayList<String> userInputDelimit = Parser.convertStringToArr(by, " ", 2);
         LocalDate myDate;
         String myTime = "";
         try {
@@ -99,18 +78,18 @@ public class TaskList {
 
     public void addCommand(String userInput, String taskType) {
         UI.printLines();
-        ArrayList<String> userInputDetails = new ArrayList<String>(Arrays.asList(userInput.split(" ")));
-        userInputDetails.remove(0);
+        ArrayList<String> userInputInArr = Parser.convertStringToArr(userInput, " ");
+        userInputInArr.remove(0);
         try {
             switch (taskType) {
                 case "todo":
-                    userList.add(newTodo(userInputDetails));
+                    userList.add(newTodo(userInputInArr));
                     break;
                 case "event":
-                    userList.add(newEvent(userInputDetails));
+                    userList.add(newEvent(userInputInArr));
                     break;
                 case "deadline":
-                    userList.add(newDeadline(userInputDetails));
+                    userList.add(newDeadline(userInputInArr));
                     break;
             }
             UI.printAddedInfo(this.userList);
@@ -174,12 +153,12 @@ public class TaskList {
         UI.printLines();
     }
     public void findCommand(String userInput) {
-        System.out.print(lines);
-        ArrayList<String> userFindDelimitBySpace = new ArrayList<>(Arrays.asList(userInput.split(" ", 2)));
+        UI.printLines();
+        ArrayList<String> delimitBySpace = Parser.convertStringToArr(userInput, " ", 2);
         int counter = 0;
         System.out.println("Here are the matching task/s in your list:");
         for (Task elem : userList) {
-            if (elem.getDescription().toLowerCase().contains(userFindDelimitBySpace.get(1).toLowerCase())) {
+            if (elem.getDescription().toLowerCase().contains(delimitBySpace.get(1).toLowerCase())) {
                 counter += 1;
                 System.out.println(counter + ". " + elem);
             }
@@ -187,6 +166,6 @@ public class TaskList {
         if (counter == 0) {
             System.out.println("Nothing was found.");
         }
-        System.out.print(lines);
+        UI.printLines();
     }
 }
