@@ -11,7 +11,7 @@ public class Events extends Task {
     }
 
     public String getTaskTime() {
-        return String.format("%s", this.eventTime);
+        return String.format("by: %s", this.eventTime);
     }
 
     public String getEventType() {

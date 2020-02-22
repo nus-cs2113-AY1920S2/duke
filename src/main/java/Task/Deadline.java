@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     public String getTaskTime() {
-        return String.format("%s", this.deadline);
+        return String.format("by: %s", this.deadline);
     }
 
     @Override
