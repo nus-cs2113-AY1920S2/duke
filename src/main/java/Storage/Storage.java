@@ -8,14 +8,21 @@ import Task.Events;
 import TaskList.TaskList;
 
 import java.io.*;
-
 import java.util.ArrayList;
 
+/**
+ * Manages the loading and saving of all data
+ */
 public class Storage {
     protected String filePath;
     protected String dirPath;
     protected File file;
 
+    /**
+     * Construct Storage object
+     * Creates directory if not found
+     * Creates data file if not found
+     */
     public Storage() {
         this.filePath = "duke.txt";
         this.dirPath = "data";
@@ -26,7 +33,15 @@ public class Storage {
         this.file = new File(dirPath, filePath);
     }
 
-    public ArrayList<Task> load() throws IndexOutOfBoundsException, FileNotFoundException {
+    /**
+     * Returns a ArrayList of Task objects saved in the data file
+     * @return ArrayList of Task objects saved in data file
+     * @throws IndexOutOfBoundsException throws when file operations fails
+     * @throws FileNotFoundException throws when file is not found
+     * @throws HardDiskCorruptedException throws when data file data is corrupted
+     */
+    public ArrayList<Task> load() throws IndexOutOfBoundsException,
+            FileNotFoundException, HardDiskCorruptedException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         if (!file.exists()) {
             throw new FileNotFoundException();
@@ -82,6 +97,10 @@ public class Storage {
         return isDone.equals("Y");
     }
 
+    /**
+     * Saves all Task in TaskList to the data file
+     * @param taskArrayList TaskList of current Tasks
+     */
     public void saveToHardDisk(TaskList taskArrayList) {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -94,6 +113,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes Task data in TaskList to the data file in proper formatting
+     * @param taskArrayList TaskList of current Tasks
+     * @param fileWriter Object that writes to the data file
+     * @throws IOException throws when writing to data file fails
+     * @throws HardDiskCorruptedException throws when task data is corrupted in current TaskList
+     */
     private void writeToDataFile(TaskList taskArrayList, FileWriter fileWriter)
             throws IOException, HardDiskCorruptedException {
         for (Task task : taskArrayList.getTaskList()) {

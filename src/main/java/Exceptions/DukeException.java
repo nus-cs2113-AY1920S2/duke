@@ -1,4 +1,7 @@
 package Exceptions;
 
-public class DukeException extends Exception {
+/**
+ * abstract class for custom exceptions
+ */
+public abstract class DukeException extends Exception {
 }

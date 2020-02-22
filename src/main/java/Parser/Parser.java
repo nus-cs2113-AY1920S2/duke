@@ -10,13 +10,19 @@ import Commands.DeadlineCommand;
 import Commands.ListCommand;
 import Commands.ExitCommand;
 
-import Exceptions.MissingDescriptionException;
 import Exceptions.UnknownCommandException;
 
+/**
+ * Parser that parses user input and returns the appropriate Command object that
+ * corresponds to the command word inputted
+ */
 public class Parser {
-    public Parser() {
-    }
-
+    /**
+     * Processes the user input from System.in and returns appropriate Command object
+     * @param rawUserInput String provided by user
+     * @return Command object that corresponds to the Command word
+     * @throws UnknownCommandException throws when command word is unknown
+     */
     public static Command parse(String rawUserInput)
             throws UnknownCommandException {
         String[] splitCommands = rawUserInput.trim().split(" ", 2);
