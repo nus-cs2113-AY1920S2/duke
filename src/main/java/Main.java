@@ -1,7 +1,6 @@
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
-import common.Messages;
 import data.TaskManager;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;
@@ -20,19 +19,24 @@ public class Main  {
     }
 
     public static void main(String[] args) throws StorageOperationException {
-        System.out.print("Please enter '1' for GUI and '2' for CLI: ");
-        Messages.consumeLine();
-        Scanner sc = new Scanner(System.in);
-        int userChoice = sc.nextInt();
+        TextUi.displayLogo();
+        chooseInterface(args);
+    }
+
+    private static void chooseInterface(String[] args) throws StorageOperationException {
+        int userChoice;
+        userChoice = TextUi.getUserChoice();
+        TextUi.acknowledgementUserChoice(userChoice);
         switch (userChoice){
         case 1:
-            System.out.println("Thanks for choosing GUI");
             Application.launch(Gui.class, args);
             break;
         case 2:
-            System.out.println("Thanks for choosing CLI");
             new Main().run();
             break;
+        default:
+            TextUi.askForReInput();
+            chooseInterface(args);
         }
     }
 
@@ -86,7 +90,6 @@ public class Main  {
         commandResult = executeCommand(command);
         return commandResult.feedbackToUser;
     }
-
 }
 
 

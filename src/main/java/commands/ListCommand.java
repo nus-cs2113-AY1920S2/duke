@@ -2,6 +2,9 @@ package commands;
 
 import common.Messages;
 
+import static org.fusesource.jansi.Ansi.Color.BLUE;
+import static org.fusesource.jansi.Ansi.ansi;
+
 /**
  * Lists all persons in the address book to the user.
  */
@@ -25,7 +28,7 @@ public class ListCommand extends Command {
      * If the list is empty, display the empty list message by return a CommandResult object.
      */
     public CommandResult execute() {
-        System.out.println(Messages.DIVIDER);
+        System.out.println( ansi().eraseScreen().fg(BLUE).a(Messages.DIVIDER).reset() );
         if (taskManager.getTaskList().getInternalList().size()>0){
             taskListMessage = Messages.printAllTasks(taskManager.getTaskList());
             return new CommandResult((taskListMessage));
