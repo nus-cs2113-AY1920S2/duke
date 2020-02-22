@@ -1,6 +1,10 @@
 package ui;
 
 import common.Messages;
+import org.fusesource.jansi.AnsiConsole;
+
+import static org.fusesource.jansi.Ansi.Color.*;
+import static org.fusesource.jansi.Ansi.ansi;
 
 
 public class TextUi {
@@ -9,24 +13,29 @@ public class TextUi {
 
     //display welcome message
     public static void showWelcomeMessage (){
-        System.out.println(Messages.DIVIDER);
-        System.out.println(Messages.MESSAGE_WELCOME);
-        //System.out.println(Messages.LOGO);
-        System.out.println(Messages.DIVIDER);
+        AnsiConsole.systemInstall();
+        System.out.println( ansi().eraseScreen().fg(BLUE).a(Messages.DIVIDER).reset() );
+        System.out.println( ansi().fg(GREEN).a(Messages.MESSAGE_WELCOME).reset() );
+        System.out.println( ansi().fg(BLUE).a(Messages.DIVIDER).reset() );
+        AnsiConsole.systemUninstall();
     }
 
     //display farewell message
     public static void showFarewellMessage (){
-        System.out.println(Messages.DIVIDER);
-        System.out.println(Messages.MESSAGE_FAREWELL);
-        System.out.println(Messages.DIVIDER);
+        AnsiConsole.systemInstall();
+        System.out.println( ansi().fg(BLUE).a(Messages.DIVIDER).reset() );
+        System.out.println( ansi().fg(GREEN).a(Messages.MESSAGE_FAREWELL).reset() );
+        System.out.println( ansi().fg(BLUE).a(Messages.DIVIDER).reset() );
+        AnsiConsole.systemUninstall();
     }
 
     //echo function, display user's input
     public static void showResult(String text) {
-        System.out.println(Messages.DIVIDER);
-        System.out.println(text);
-        System.out.println(Messages.DIVIDER);
+        AnsiConsole.systemInstall();
+        System.out.println( ansi().fg(BLUE).a(Messages.DIVIDER).reset() );
+        System.out.println( ansi().fg(GREEN).a(text).reset() );
+        System.out.println( ansi().fg(BLUE).a(Messages.DIVIDER).reset() );
+        AnsiConsole.systemUninstall();
     }
 
 }

@@ -37,7 +37,8 @@ dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
 
-    implementation 'com.'
+    //config the jar to Mavern library
+    implementation 'org.fusesource.jansi:jansi:1.18'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
