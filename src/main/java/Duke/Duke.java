@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -5,7 +7,7 @@ import java.io.File;
 
 public class Duke {
 
-    public static final String GREETING = "Hello! I'm Duke.Duke\n" + "What can I do for you?";
+    public static final String GREETING = "Hello! I'm Duke.Duke.Duke.Duke\n" + "What can I do for you?";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
 
     public static void main(String[] args) {
