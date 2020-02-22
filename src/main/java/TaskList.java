@@ -7,6 +7,10 @@ import Exception.DukeException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Contain the list of tasks added by user.
+ * Contain methods that edits the list of tasks and to add specific type of task depending on keyword by user.
+ */
 public class TaskList {
     private ArrayList<Task> userList;
     private String lines = "____________________________________________________________\n";
@@ -14,12 +18,17 @@ public class TaskList {
     public TaskList(ArrayList<Task> savedList) {
        this.userList = savedList;
     }
-    public TaskList() {
-        this.userList = new ArrayList<>();
-    }
+
     public ArrayList<Task> getUserList() {
         return this.userList;
     }
+
+    /**
+     * Returns a new To-do task object.
+     * @param userInputDetails Sentence containing the keyword and description of the to-do that user had typed into CLI.
+     * @return A new <code>Todo</code> object containing the description.
+     * @throws DukeException If user types in a blank description.
+     */
     public static Todo newTodo(ArrayList<String> userInputDetails) throws DukeException {
         String task = String.join(" ", userInputDetails);
         if (task.length() == 0) { // if user inputs nothing after todo
@@ -27,6 +36,13 @@ public class TaskList {
         }
         return new Todo (task);
     }
+
+    /**
+     * Returns a new Event task object.
+     * @param userInputDetails Sentence containing the keyword and description of the event that user had typed into CLI.
+     * @return A new <code>Event</code> object containing the description and datetime(if any).
+     * @throws DukeException If user did not follow the format required. For eg, missing "/at" keyword.
+     */
     public static Event newEvent(ArrayList<String> userInputDetails) throws DukeException {
         String description = "";
         String at = "";
@@ -48,6 +64,11 @@ public class TaskList {
         return new Event(description, at);
     }
 
+     /** Returns a new Deadline task object.
+     * @param userInputDetails Sentence containing the keyword and description of the deadline that user had typed into CLI.
+     * @return A new <code>Deadline</code> object containing the description and datetime(if any).
+     * @throws DukeException If user did not follow the format required. For eg, missing "/by" keyword.
+     */
     public static Deadline newDeadline(ArrayList<String> userInputDetails) throws DukeException {
         String description = "";
         String by = "";
@@ -69,6 +90,11 @@ public class TaskList {
         return new Deadline(description, by);
     }
 
+    /**
+     * Adds one of the three task: <code> Todo Event Deadline</code> .
+     * @param userInput Sentence that user typed into CLI.
+     * @param taskType Type of task in <code>String</code>.
+     */
     public void addCommand(String userInput, String taskType) {
         System.out.print(lines);
         ArrayList<String> userInputDetails = new ArrayList<String>(Arrays.asList(userInput.split(" ")));
@@ -92,6 +118,11 @@ public class TaskList {
         System.out.print(lines);
     }
 
+    /**
+     * Deletes a specific task via index.
+     * @param userInput Sentence that user typed into CLI.
+     * @throws DukeException If user inputs an invalid task index. For eg, an out of bound index.
+     */
     public void deleteCommand(String userInput) throws DukeException {
         System.out.print(lines);
         String[] words = userInput.split(" ");
@@ -111,6 +142,9 @@ public class TaskList {
         System.out.print(lines);
     }
 
+    /**
+     * Print out all tasks and its corresponding <code>isDone</code> and <code>LocalDate</code> within the task list.
+     */
     public void listCommand() {
         System.out.print(lines);
         if (userList.size() == 0) {
@@ -126,6 +160,11 @@ public class TaskList {
         System.out.print(lines);
     }
 
+    /**
+     * Marks a specific task via index as <code>DONE</code>
+     * @param userInput Sentence that user typed into CLI.
+     * @throws DukeException If user inputs an invalid task index. For eg, an out of bound index.
+     */
     public void doneCommand( String userInput) throws DukeException {
         System.out.print(lines);
         String[] words = userInput.split(" ");

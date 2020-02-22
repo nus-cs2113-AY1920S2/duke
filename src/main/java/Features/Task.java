@@ -1,5 +1,9 @@
 package Features;
 
+/**
+ * Base class for the 3 specific task type: <code>Event Deadline Todo</code>.
+ * Contain methods to check the elements of each task object.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

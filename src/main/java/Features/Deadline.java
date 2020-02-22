@@ -1,5 +1,8 @@
 package Features;
 
+/**
+ * Extension of <code>Task</code> class specifying an <code>Deadline</code> task.
+ */
 public class Deadline extends Task{
     public Deadline(String description, String by) {
        super(description);
