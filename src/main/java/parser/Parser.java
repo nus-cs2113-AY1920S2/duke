@@ -83,9 +83,12 @@ public class Parser {
         //exit
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-        //clear
+        //clear task list
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+        //clear screen
+        case ClearScreenCommand.COMMAND_WORD:
+            return new ClearScreenCommand();
         //help and default
         case HelpCommand.COMMAND_WORD:
         default:

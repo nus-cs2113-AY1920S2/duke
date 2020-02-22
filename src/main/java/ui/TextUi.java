@@ -3,10 +3,8 @@ package ui;
 import common.Messages;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -36,6 +34,7 @@ public class TextUi {
     //echo function, display user's input
     public static void showResult(String text) {
         AnsiConsole.systemInstall();
+        ansi().reset();
         printDivider(BLUE);
         System.out.println( ansi().bold().fg(GREEN).a(text).reset() );
         printDivider(BLUE);
@@ -46,6 +45,7 @@ public class TextUi {
         AnsiConsole.systemInstall();
         System.out.println( ansi().bold().eraseScreen().fg(MAGENTA).a(Messages.LOGO).reset() );
         printDivider(BLUE);
+        AnsiConsole.systemUninstall();
     }
 
     public static int getUserChoice() {
@@ -74,17 +74,33 @@ public class TextUi {
     }
 
     public static void acknowledgementUserChoice(int userChoice){
+        AnsiConsole.systemInstall();
         switch (userChoice){
         case 1:
             System.out.println( ansi().bold().fg(GREEN).a(Messages.MESSAGE_THANKS_FOR_GUI).reset() );
+            AnsiConsole.systemUninstall();
             break;
         case 2:
             System.out.println( ansi().bold().fg(GREEN).a(Messages.MESSAGE_THANKS_FOR_CLI).reset() );
+            AnsiConsole.systemUninstall();
             break;
         }
     }
 
+    /**
+     * print a divider
+     * @param color
+     */
     public static void printDivider(Ansi.Color color){
         System.out.println( ansi().bold().fg(color).a(Messages.DIVIDER).reset() );
+    }
+
+    /**
+     * clear the screen
+     */
+    public static void clearScreen(){
+        AnsiConsole.systemInstall();
+        System.out.println(ansi().eraseScreen());
+        AnsiConsole.systemUninstall();
     }
 }

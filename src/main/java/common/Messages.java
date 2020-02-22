@@ -23,7 +23,7 @@ public class Messages {
     public static final String MESSAGE_TODO_LIST = "  %d. [Id:%d][%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
-    public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "+|Error writing to file: %s|+";
+    public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "Error writing to file: %s";
     public static final String MESSAGE_DUPLICATE_TASK_ALERT = "Alert! This task is similar to task Index %d\nDo you want to add a duplicate task? Press Y to add and others to not add: ";
     public static final String MESSAGE_DUPLICATE_TASK_NOT_ADDED = "The duplicate task is not added!";
     public static final String MESSAGE_ASK_TO_CHOOSE_UI = "Please enter '1' for GUI and '2' for CLI: ";

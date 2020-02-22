@@ -12,7 +12,7 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
+        if (feedbackToUser!= null)
         TextUi.showResult(this.feedbackToUser);
     }
-
 }
