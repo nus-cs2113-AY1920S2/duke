@@ -27,8 +27,6 @@ public class Parser {
     /** index suffix for done and delete command */
     public static final int DELETE_INDEX = 7;
     public static final int DONE_INDEX = 5;
-    /** used for checking duplicate*/
-    private Task toADD;
 
     /**
      * Parses user input into command for execution.
@@ -62,10 +60,10 @@ public class Parser {
             return new FindCommand(commandWordDescription);
         //add event task
         case AddEventCommand.COMMAND_WORD:
-            return prepareAddEventTask(nextTaskIndex, commandWordDescription);
+            return prepareAddEventTask(taskManager, nextTaskIndex, commandWordDescription);
         //add deadline task
         case AddDeadlineCommand.COMMAND_WORD:
-            return prepareAddDeadlineTask(nextTaskIndex, commandWordDescription);
+            return prepareAddDeadlineTask(taskManager, nextTaskIndex, commandWordDescription);
         //add todo task
         case AddTodoCommand.COMMAND_WORD:
             return prepareAddTodoTask(taskManager, nextTaskIndex, commandWordDescription);
@@ -94,35 +92,90 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
+     * @param taskManager
      * @param nextTaskIndex the task ID for next task
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddEventTask(int nextTaskIndex, String commandDescription) {
+    private Command prepareAddEventTask(TaskManager taskManager, int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and start time
+        String [] temp = new String[2];
         try {
-            String [] temp = commandDescription.split("/");
-            return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+            temp = commandDescription.split("/");
+            for (Task toCheck: taskManager.getTaskList().getInternalList()
+            ) {
+                if (checkDuplicate(temp, toCheck)) return getUserDecisionForEventDuplicate(nextTaskIndex, temp);
+            }
         } catch (ArrayIndexOutOfBoundsException aiobex){
-            return new AddEventCommand(null);
+
+        }
+        return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+    }
+
+    private boolean checkDuplicate(String[] temp, Task toCheck) {
+        if (toCheck.getTaskDescription().contentEquals(temp[0])){
+            System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
+            Messages.consumeLine();
+            return true;
+        }
+        return false;
+    }
+
+    private Command getUserDecisionForEventDuplicate(int nextTaskIndex, String[] temp) {
+        Scanner scanner = new Scanner(System.in);
+        char userCommand  = scanner.next().charAt(0);
+        switch (userCommand){
+        case 'Y':
+        case 'y':
+            return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+        default:
+            System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
+            return new ListCommand();
         }
     }
 
     /**
      * Parses user input into command for execution.
+     * @param taskManager
      * @param nextTaskIndex the task ID for next task
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddDeadlineTask(int nextTaskIndex, String commandDescription) {
+    private Command prepareAddDeadlineTask(TaskManager taskManager, int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and deadline
+        String [] temp = new String[2];
         try {
-            String [] temp = commandDescription.split("/");
-            return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+            temp = commandDescription.split("/");
+            if (checkEventDuplicate(taskManager, temp, temp[0])) return getUserDecisionForDeadlineDuplicate(nextTaskIndex, temp);
         } catch (ArrayIndexOutOfBoundsException aex){
-            return new AddEventCommand(null);
+            aex.printStackTrace();
         }
+        return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+    }
 
+    private boolean checkEventDuplicate(TaskManager taskManager, String[] temp, String s) {
+        for (Task toCheck : taskManager.getTaskList().getInternalList()
+        ) {
+            if (toCheck.getTaskDescription().contentEquals(s)) {
+                System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
+                Messages.consumeLine();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Command getUserDecisionForDeadlineDuplicate(int nextTaskIndex, String[] temp) {
+        Scanner scanner = new Scanner(System.in);
+        char userCommand  = scanner.next().charAt(0);
+        switch (userCommand){
+        case 'Y':
+        case 'y':
+            return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+        default:
+            System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
+            return new ListCommand();
+        }
     }
 
     /**
@@ -138,27 +191,28 @@ public class Parser {
             ) {
                 if(toCheck.getTaskDescription().contentEquals(commandDescription)){
                     //
-                    System.out.println(String.format("Alert! This task is similar to task Index %d",
-                            toCheck.getTaskIndex()));
-                    System.out.println("Do you want to add a duplicate task?");
-                    System.out.print("Press Y to add and others to not add: ");
+                    System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
                     Messages.consumeLine();
-                    Scanner scanner = new Scanner(System.in);
-                    char userCommand  = scanner.next().charAt(0);
-                    switch (userCommand){
-                    case 'Y':
-                    case 'y':
-                        return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
-                    default:
-                        System.out.println("The duplicate task is not added!");
-                        return new ListCommand();
-                    }
+                    return getUserDecisionForTodoDuplicate(nextTaskIndex, commandDescription);
                 }
             }
         } catch (NullPointerException npex) {
             npex.printStackTrace();
         }
         return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
+    }
+
+    private Command getUserDecisionForTodoDuplicate(int nextTaskIndex, String commandDescription) {
+        Scanner scanner = new Scanner(System.in);
+        char userCommand  = scanner.next().charAt(0);
+        switch (userCommand){
+        case 'Y':
+        case 'y':
+            return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
+        default:
+            System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
+            return new ListCommand();
+        }
     }
 
     /**
