@@ -60,6 +60,8 @@ public class Duke {
             List<String> commands = Parser.parseCommand(task.description);
             String command = commands.get(DUKE_COMMAND);
 
+            int index;
+            String indexAsString;
             String descriptionAndDeadline;
             String description;
             String deadline;
@@ -79,14 +81,38 @@ public class Duke {
                 continue;
 
             case "done":
-                int index = Integer.parseInt(commands.get(LIST_INDEX));
                 try {
-                    Task t = myTasks.getTask(index);
-                    t.markAsDone();
-                    Printer.printConfirmationMessage(t);
+                    indexAsString = commands.get(LIST_INDEX);
+                    indexAsString = indexAsString.trim();
+
+                    index = Integer.parseInt(indexAsString);
+                    Task taskDone = myTasks.getTask(index);
+                    taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
+
+                    Printer.printConfirmationMessage(taskDone);
 
                 } catch (IndexOutOfBoundsException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
+                } catch (NumberFormatException e) {
+                    Printer.printError(); //TODO add custom error message when user give alphabets
+                }
+                continue;
+
+            case "delete":
+                try {
+                    indexAsString = commands.get(LIST_INDEX);
+                    indexAsString = indexAsString.trim();
+
+                    index = Integer.parseInt(indexAsString);
+                    Task taskDelete = myTasks.getTask(index);
+                    myTasks.deleteTask(index);
+
+                    Printer.printConfirmationMessage(command, taskDelete);
+
+                } catch (IndexOutOfBoundsException e) {
+                    Printer.printError(); //TODO add custom error message when accessing OFB index
+                } catch (NumberFormatException e) {
+                    Printer.printError(); // TODO add custom error message when user give alphabets
                 }
                 continue;
 
@@ -152,6 +178,7 @@ public class Duke {
                     Printer.printHint(command);
                 }
                 continue;
+
 
             default:
                 Printer.printUnknownCommandError(command); //TODO add custom error message when received unlisted

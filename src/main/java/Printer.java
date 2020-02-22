@@ -36,10 +36,32 @@ public class Printer {
         System.out.println("Bye ~ Hope to see you again soon! o(〒﹏〒)o");
     }
 
-    public static void printConfirmationMessage(String text) {
+    public static void printConfirmationMessage(String command, Task task) {
         printLines();
         printIndentation();
-        System.out.println("Added: " + text);
+
+        switch (command) {
+        case "done" :
+            System.out.printf("Nice! I've marked this task as done ヽ(・∀・)ﾉ :\n");
+            printIndentation();
+            System.out.printf("  %s\n", task);
+            break;
+
+        case "delete" :
+            System.out.printf("Ok! I have deleted this task ヽ(・∀・)ﾉ :\n");
+            printIndentation();
+            System.out.printf("  %s\n", task);
+            break;
+
+        case "todo" :
+            break;
+
+        case "deadline":
+            break;
+
+        case "event":
+            break;
+        }
         printLines();
     }
 

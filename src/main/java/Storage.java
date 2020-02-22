@@ -22,4 +22,8 @@ public class Storage {
     public static int getSize() {
         return myTasks.size();
     }
+
+    public void deleteTask(int index) {
+        myTasks.remove(index - 1);
+    }
 }
