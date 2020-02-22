@@ -36,6 +36,23 @@ public class Printer {
         System.out.println("Bye ~ Hope to see you again soon! o(〒﹏〒)o");
     }
 
+    public static void printTasks(List<Task> myList) {
+        printLines();
+        printIndentation();
+        if (myList.isEmpty()) {
+            System.out.println("List is empty (°ロ°) !");
+            printLines();
+            return;
+        }
+        System.out.println("Here's your list (◕‿◕)♡ ~ ");
+        for (int i = 0; i < myList.size(); i++) {
+            printIndentation();
+            Task temp = myList.get(i);
+            System.out.printf("%d. %s\n", i + 1, temp);
+        }
+        printLines();
+    }
+
     public static void printConfirmationMessage(String command, Task task) {
         printLines();
         printIndentation();
@@ -51,74 +68,33 @@ public class Printer {
             System.out.printf("Ok! I have deleted this task ヽ(・∀・)ﾉ :\n");
             printIndentation();
             System.out.printf("  %s\n", task);
+            printIndentation();
+            System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
             break;
 
         case "todo" :
+            System.out.println("Got it! I've added this task ＠＾◡＾) :");
+            printIndentation();
+            System.out.println("  " + task);
+            printIndentation();
+            System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
             break;
 
         case "deadline":
+            System.out.println("Oh a deadline huh! Don't worry, I have added this task <(￣︶￣)> :");
+            printIndentation();
+            System.out.println("  " + task);
+            printIndentation();
+            System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
             break;
 
         case "event":
-            break;
-        }
-        printLines();
-    }
-
-    public static void printConfirmationMessage(Task task) {
-        printLines();
-        printIndentation();
-        System.out.printf("Nice! I've marked this task as done ヽ(・∀・)ﾉ :\n");
-        printIndentation();
-        System.out.printf("  %s\n", task);
-        printLines();
-    }
-
-    public static void printConfirmationMessage(ToDo task) {
-        printLines();
-        printIndentation();
-        System.out.println("Got it! I've added this task ＠＾◡＾) :");
-        printIndentation();
-        System.out.println("  " + task);
-        printIndentation();
-        System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
-        printLines();
-    }
-
-    public static void printConfirmationMessage(Deadline task) {
-        printLines();
-        printIndentation();
-        System.out.println("Oh a deadline huh! Don't worry, I have added this task <(￣︶￣)> :");
-        printIndentation();
-        System.out.println("  " + task);
-        printIndentation();
-        System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
-        printLines();
-    }
-
-    public static void printConfirmationMessage(Event task) {
-        printLines();
-        printIndentation();
-        System.out.println("Huuu what a busy guy! I have marked this in your list~ <(￣︶￣)> :");
-        printIndentation();
-        System.out.println("  " + task);
-        printIndentation();
-        System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
-        printLines();
-    }
-
-    public static void printTasks(List<Task> myList) {
-        printLines();
-        printIndentation();
-        if (myList.isEmpty()) {
-            System.out.println("List is empty (°ロ°) !");
-            return;
-        }
-        System.out.println("Here's your list (◕‿◕)♡ ~ ");
-        for (int i = 0; i < myList.size(); i++) {
+            System.out.println("Huuu what a busy guy! I have marked this in your list~ <(￣︶￣)> :");
             printIndentation();
-            Task temp = myList.get(i);
-            System.out.printf("%d. %s\n", i + 1, temp);
+            System.out.println("  " + task);
+            printIndentation();
+            System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
+            break;
         }
         printLines();
     }
@@ -140,7 +116,6 @@ public class Printer {
         printLines();
         printIndentation();
         System.out.println("Σ(°ロ°) There seems to be some problem with the format of " + command + " !~ ٩(× ×)۶ ");
-
     }
 
     public static void printHint(String command) {
