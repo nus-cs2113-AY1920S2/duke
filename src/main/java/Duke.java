@@ -62,14 +62,15 @@ public class Duke {
 
             int index;
             String indexAsString;
-            String descriptionAndDeadline;
-            String description;
-            String deadline;
 
+            String descriptionAndDeadline;
             String descriptionAndEventAt;
-            String eventAt;
 
             List<String> separated;
+
+            String description;
+            String deadline;
+            String eventAt;
 
             switch (command) {
             case "bye":
@@ -89,7 +90,7 @@ public class Duke {
                     Task taskDone = myTasks.getTask(index);
                     taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
 
-                    Printer.printConfirmationMessage(taskDone);
+                    Printer.printConfirmationMessage(command, taskDone);
 
                 } catch (IndexOutOfBoundsException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
@@ -125,7 +126,7 @@ public class Duke {
 
                     ToDo toDoTask = new ToDo(description);
                     myTasks.storeTasks(toDoTask);
-                    Printer.printConfirmationMessage(toDoTask);
+                    Printer.printConfirmationMessage(command, toDoTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printEmptyDescriptionError(command);
@@ -148,7 +149,7 @@ public class Duke {
 
                     Deadline deadlineTask = new Deadline(description, deadline);
                     myTasks.storeTasks(deadlineTask);
-                    Printer.printConfirmationMessage(deadlineTask);
+                    Printer.printConfirmationMessage(command, deadlineTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printFormatError(command);
@@ -171,18 +172,16 @@ public class Duke {
 
                     Event eventTask = new Event(description, eventAt);
                     myTasks.storeTasks(eventTask);
-                    Printer.printConfirmationMessage(eventTask);
-                    continue;
+                    Printer.printConfirmationMessage(command, eventTask);
+
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printFormatError(command);
                     Printer.printHint(command);
                 }
                 continue;
 
-
             default:
-                Printer.printUnknownCommandError(command); //TODO add custom error message when received unlisted
-                // commands
+                Printer.printUnknownCommandError(command);
             }
         }
     }
