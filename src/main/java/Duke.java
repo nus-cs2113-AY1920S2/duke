@@ -60,14 +60,17 @@ public class Duke {
             List<String> commands = Parser.parseCommand(task.description);
             String command = commands.get(DUKE_COMMAND);
 
-            String descriptionAndDeadline;
-            String description;
-            String deadline;
+            int index;
+            String indexAsString;
 
+            String descriptionAndDeadline;
             String descriptionAndEventAt;
-            String eventAt;
 
             List<String> separated;
+
+            String description;
+            String deadline;
+            String eventAt;
 
             switch (command) {
             case "bye":
@@ -79,14 +82,38 @@ public class Duke {
                 continue;
 
             case "done":
-                int index = Integer.parseInt(commands.get(LIST_INDEX));
                 try {
-                    Task t = myTasks.getTask(index);
-                    t.markAsDone();
-                    Printer.printConfirmationMessage(t);
+                    indexAsString = commands.get(LIST_INDEX);
+                    indexAsString = indexAsString.trim();
+
+                    index = Integer.parseInt(indexAsString);
+                    Task taskDone = myTasks.getTask(index);
+                    taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
+
+                    Printer.printConfirmationMessage(command, taskDone);
 
                 } catch (IndexOutOfBoundsException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
+                } catch (NumberFormatException e) {
+                    Printer.printError(); //TODO add custom error message when user give alphabets
+                }
+                continue;
+
+            case "delete":
+                try {
+                    indexAsString = commands.get(LIST_INDEX);
+                    indexAsString = indexAsString.trim();
+
+                    index = Integer.parseInt(indexAsString);
+                    Task taskDelete = myTasks.getTask(index);
+                    myTasks.deleteTask(index);
+
+                    Printer.printConfirmationMessage(command, taskDelete);
+
+                } catch (IndexOutOfBoundsException e) {
+                    Printer.printError(); //TODO add custom error message when accessing OFB index
+                } catch (NumberFormatException e) {
+                    Printer.printError(); // TODO add custom error message when user give alphabets
                 }
                 continue;
 
@@ -99,7 +126,7 @@ public class Duke {
 
                     ToDo toDoTask = new ToDo(description);
                     myTasks.storeTasks(toDoTask);
-                    Printer.printConfirmationMessage(toDoTask);
+                    Printer.printConfirmationMessage(command, toDoTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printEmptyDescriptionError(command);
@@ -122,7 +149,7 @@ public class Duke {
 
                     Deadline deadlineTask = new Deadline(description, deadline);
                     myTasks.storeTasks(deadlineTask);
-                    Printer.printConfirmationMessage(deadlineTask);
+                    Printer.printConfirmationMessage(command, deadlineTask);
 
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printFormatError(command);
@@ -145,8 +172,8 @@ public class Duke {
 
                     Event eventTask = new Event(description, eventAt);
                     myTasks.storeTasks(eventTask);
-                    Printer.printConfirmationMessage(eventTask);
-                    continue;
+                    Printer.printConfirmationMessage(command, eventTask);
+
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printFormatError(command);
                     Printer.printHint(command);
@@ -154,8 +181,7 @@ public class Duke {
                 continue;
 
             default:
-                Printer.printUnknownCommandError(command); //TODO add custom error message when received unlisted
-                // commands
+                Printer.printUnknownCommandError(command);
             }
         }
     }
