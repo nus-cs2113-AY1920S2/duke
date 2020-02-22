@@ -13,8 +13,7 @@ public class Task {
     public String getStatusIcon() {
         if (isDone) {
             return "✓";
-        }
-        else {
+        } else {
             return "✗"; //return tick or X symbols
         }
     }
@@ -28,10 +27,9 @@ public class Task {
     }
 
     public int getIsDone() {
-        if(isDone) {
+        if (isDone) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }

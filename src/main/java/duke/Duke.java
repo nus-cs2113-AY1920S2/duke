@@ -43,7 +43,7 @@ public class Duke {
 
     public static void printList(ArrayList<Task> tasks) {
         System.out.println(TASK_LISTING);
-        for(int i = 0; i < tasks.size(); i ++) {
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.println("\t" + (i + 1) + "." + tasks.get(i));
         }
     }
@@ -54,10 +54,10 @@ public class Duke {
         loadFileData(tasks);
         Scanner commandScanner = new Scanner(System.in);
         String command = commandScanner.nextLine();
-        while(!command.equals(BYE)) {
+        while (!command.equals(BYE)) {
             String[] commandSplitter = command.split(SPACE);
             System.out.print(LINE_SPLITTING);
-            if(command.equals(LIST)) {
+            if (command.equals(LIST)) {
                 printList(tasks);
             } else {
                 String prefix = commandSplitter[0];
@@ -85,7 +85,7 @@ public class Duke {
 
     private static void writeFileData(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(PATH);
-        for(Task t: tasks) {
+        for (Task t: tasks) {
             fw.write(t.getType() + VERTICAL_BAR + t.getIsDone() + VERTICAL_BAR + t.getDescription()
                     + VERTICAL_BAR + t.getTime() + System.lineSeparator());
         }
@@ -100,11 +100,9 @@ public class Duke {
             tasks.remove(tasks.get(index - 1));
             String printTaskCount = "\tNow you have " + tasks.size() + " tasks in the list.";
             System.out.println(printTaskCount);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(OUT_OF_BOUND_MESSAGE);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println(WRONG_NUMBER_FORMAT_MESSAGE);
         }
     }
@@ -132,7 +130,7 @@ public class Duke {
             default:
                 throw new IOException();
             }
-            if(tasks.size() > TASK_LIMIT) {
+            if (tasks.size() > TASK_LIMIT) {
                 throw new ArrayIndexOutOfBoundsException();
             }
             System.out.println(ADDED_TASK_MESSAGE);
@@ -140,38 +138,32 @@ public class Duke {
             System.out.println(printTask);
             String printTaskCount = "\tNow you have " + tasks.size() + " tasks in the list.";
             System.out.println(printTaskCount);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println(EMPTY_INPUT_MESSAGE);
-        }
-        catch (StringIndexOutOfBoundsException e) {
-            String invalidFormatMessage = "\t☹ OOPS!!! The description of a " + prefix + " cannot be empty or" +
-                    " it is in the wrong format.";
+        } catch (StringIndexOutOfBoundsException e) {
+            String invalidFormatMessage = "\t☹ OOPS!!! The description of a " + prefix + " cannot be empty or"
+                    + " it is in the wrong format.";
             System.out.println(invalidFormatMessage);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(DUMMY_INPUT_MESSAGE);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(LIMIT_REACHED_MESSAGE);
         }
     }
 
-    private static void markTaskMessage(ArrayList<Task> tasks, String word) throws ArrayIndexOutOfBoundsException{
+    private static void markTaskMessage(ArrayList<Task> tasks, String word) throws ArrayIndexOutOfBoundsException {
         try {
             int index = Integer.parseInt(word);
-            if(index >= tasks.size()) {
+            if (index >= tasks.size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
             tasks.get(index - 1).markAsDone();
             System.out.println(TASK_MARKING_MESSAGE);
             String printTask = "\t%s\n";
             System.out.printf(printTask, tasks.get(index - 1));
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println(WRONG_NUMBER_FORMAT_MESSAGE);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(OUT_OF_BOUND_MESSAGE);
         }
     }
@@ -203,6 +195,7 @@ public class Duke {
                 case EVENT_ABBREVIATION:
                     tasks.add(new Event(dataSplitter[2], dataSplitter[3]));
                     break;
+                default:
                 }
                 if (dataSplitter[1].equals(ONE)) {
                     tasks.get(tasks.size() - 1).markAsDone();
