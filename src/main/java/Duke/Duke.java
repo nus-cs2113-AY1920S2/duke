@@ -3,26 +3,32 @@ package Duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
-
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
-    public static final String GREETING = "Hello! I'm Duke.Duke.Duke.Duke\n" + "What can I do for you?";
+    public static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
 
     public static void main(String[] args) {
         System.out.println(GREETING);
 
         File f = new File("saved/data.txt");
-        System.out.println("full path: " + f.getAbsolutePath());
-        System.out.println("file exists?: " + f.exists());
-        System.out.println("is Directory?: " + f.isDirectory());
+        String filePath = "saved/data.txt"; //maybe make it and absolute instead
 
         ArrayList<Task> taskArrayList = new ArrayList<>();
-
-        Scanner scanner = new Scanner(System.in);
         int exit = 0;
         int taskListSize = 0;
+
+        try {
+            taskListSize = loadFileContents(filePath, taskArrayList);
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved file available");
+        }
+
+        Scanner scanner = new Scanner(System.in);
 
         while (exit == 0) {
             String userInput = scanner.nextLine();
@@ -33,6 +39,7 @@ public class Duke {
             case "bye":
                 System.out.println(GOODBYE);
                 exit = 1;
+                saveTasks(filePath, taskArrayList, true);
                 break;
             case "list":
                 printTasks(taskArrayList, taskListSize);
@@ -78,6 +85,25 @@ public class Duke {
             default:
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
+            }
+        }
+    }
+
+    private static void saveTasks(String filePath, ArrayList<Task> taskArrayList, boolean overWrite) {
+        for (Task currTask : taskArrayList) {
+            if(overWrite == true) {
+                try {
+                    writeToFile(filePath,currTask.toSaveFormat() + "\n");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
+                overWrite = false;
+            } else {
+                try {
+                    appendToFile(filePath,currTask.toSaveFormat() + "\n");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage() + "\n");
+                }
             }
         }
     }
@@ -131,5 +157,45 @@ public class Duke {
             return true;
         }
         return false;
+    }
+
+    private static int loadFileContents(String filePath, ArrayList<Task> taskArrayList) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        int taskListSize = 0;
+        while (s.hasNext()) {
+            String newLine = s.nextLine();
+            String[] tokenizedLine = newLine.split("\\|");
+            String type = tokenizedLine[2];
+            switch (type) {
+            case ("T"):
+                taskArrayList.add(new ToDo(tokenizedLine[1], tokenizedLine[0]));
+                taskListSize++;
+                break;
+            case ("E"):
+                taskArrayList.add(new Event(tokenizedLine[1], tokenizedLine[3] ,tokenizedLine[0]));
+                taskListSize++;
+                break;
+            case ("D"):
+                taskArrayList.add(new Deadline(tokenizedLine[1], tokenizedLine[3] ,tokenizedLine[0]));
+                taskListSize++;
+                break;
+            }
+        }
+        System.out.println("Previous tasks has been loaded successfully:\n");
+        printTasks(taskArrayList, taskListSize);
+        return taskListSize;
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 }

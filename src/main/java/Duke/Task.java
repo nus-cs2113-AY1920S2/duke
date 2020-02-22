@@ -23,5 +23,12 @@ public class Task {
         return ("["+ this.getStatusIcon() + "] " + this.description);
     }
 
+    public String toSaveFormat() {
+        if (this.isDone == true) {
+            return ("1|" + this.description+ "|");
+        } else {
+            return ("0|" + this.description + "|");
+        }
+    }
 
 }
