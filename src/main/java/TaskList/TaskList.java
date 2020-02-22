@@ -1,6 +1,7 @@
 package TaskList;
 
 import Exceptions.EmptyListException;
+import Exceptions.TaskAlreadyDoneException;
 import Task.Task;
 import Task.Todo;
 import Task.Deadline;
@@ -38,10 +39,16 @@ public class TaskList {
     public void markTaskAsDone(int itemIndex) throws IndexOutOfBoundsException {
         int listIndex = itemIndex + 1;
         try {
-            taskList.get(itemIndex).markAsDone();
-            System.out.println(taskList.get(itemIndex).getDoneResponseMessage(listIndex));
+            if (taskList.get(itemIndex).isDone().equals("Y")) {
+                throw new TaskAlreadyDoneException("Task already done");
+            } else {
+                taskList.get(itemIndex).markAsDone();
+                System.out.println(taskList.get(itemIndex).getDoneResponseMessage(listIndex));
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You don't have that many items in the list. Please try a number within range!");
+        } catch (TaskAlreadyDoneException e) {
+            System.out.println(e);
         }
     }
 
