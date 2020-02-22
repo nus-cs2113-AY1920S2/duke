@@ -189,6 +189,11 @@ public class TaskList {
         }
         UI.printLines();
     }
+
+    /**
+     * finds similar word pattern in user's task list.
+     * @param userInput Sentence that user typed in.
+     */
     public void findCommand(String userInput) {
         UI.printLines();
         ArrayList<String> delimitBySpace = Parser.convertStringToArr(userInput, " ", 2);
