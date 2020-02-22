@@ -22,7 +22,7 @@ public class TaskList {
     }
     public static Todo newTodo(ArrayList<String> userInputDetails) throws DukeException {
         String task = String.join(" ", userInputDetails);
-        if (task.length() == 0) { // if user inputs nothing after todo
+        if (task.length() == 0) { // if user inputs nothing after to-do
             throw new DukeException("Format error, please follow: todo <task>");
         }
         return new Todo (task);
@@ -145,5 +145,20 @@ public class TaskList {
         }
         System.out.print(lines);
     }
-
+    public void findCommand(String userInput) {
+        System.out.print(lines);
+        ArrayList<String> userFindDelimitBySpace = new ArrayList<>(Arrays.asList(userInput.split(" ", 2)));
+        int counter = 0;
+        System.out.println("Here are the matching task/s in your list:");
+        for (Task elem : userList) {
+            if (elem.getDescription().toLowerCase().contains(userFindDelimitBySpace.get(1).toLowerCase())) {
+                counter += 1;
+                System.out.println(counter + ". " + elem);
+            }
+        }
+        if (counter == 0) {
+            System.out.println("Nothing was found.");
+        }
+        System.out.print(lines);
+    }
 }
