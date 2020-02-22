@@ -1,76 +1,62 @@
-package duke;
+package duke.Util;
 
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.FindCommand;
+import duke.commands.*;
 import duke.taskmanager.Deadline;
 import duke.taskmanager.Event;
-import duke.taskmanager.TaskManager;
+import duke.taskmanager.Tasks;
 import duke.taskmanager.ToDo;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Parser {
-    public static final String ADD_TASK = "1";
-    public static final String PRINT_TASKS = "2";
-    public static final String MARK_AS_DONE = "3";
-    public static final String DELETE_TASK = "4";
-    public static final String FIND_TASK = "5";
-    public static final String EXIT_COMMAND = "6";
     public static final String TODO = "1";
     public static final String DEADLINE = "2";
     public static final String EVENT = "3";
-    public static UI ui;
-    public static void parseCommand() {
-        String exeCommand = ui.getStringInput();
-        while (!exeCommand.equals(EXIT_COMMAND)) {
-            Parser.parseCommandType(exeCommand); //to select the exeType and execute it
-            ui.printExeType(); //user guide after execution of command
-            exeCommand = ui.getStringInput(); //get the next command
-        }
+    private static UI ui;
+    private static List<Tasks> list = Tasklist.getTasks();
+    public Parser(UI ui) {
+        Parser.ui = ui;
     }
-    public static void parseCommandType(String exeCommand) {
-        switch (exeCommand) {
+
+    public void parseCommand(String exeCommand) throws IOException {
+        CommandType commandType = CommandType.valueOf(exeCommand);
+        switch (commandType) {
         case ADD_TASK:
-            ui.printTaskType();
+            Parser.ui.printTaskType();
             parseAddCommand();
+            Storage.writeData(list);
             break;
         case PRINT_TASKS:
-            ui.printTasks();
+            ListCommand listCommand = new ListCommand();
+            listCommand.execute();
             break;
         case MARK_AS_DONE:
-            DoneCommand doneCommand = new DoneCommand();
+            DoneCommand doneCommand = new DoneCommand(ui);
             doneCommand.execute();
+            int indexDoneTask = doneCommand.getIndexOfTask();
+            saveDoneList(indexDoneTask);
             break;
         case DELETE_TASK:
-            ui.printDelete();
-            String task = ui.getStringInput();
-            int index = ui.getIntegerInput();
-            DeleteCommand delete = new DeleteCommand(task, index);
+            DeleteCommand delete = new DeleteCommand(ui);
             delete.execute();
             break;
         case FIND_TASK:
-            FindCommand findCommand = new FindCommand();
+            FindCommand findCommand = new FindCommand(ui);
             findCommand.execute();
             break;
+        default:
+            System.out.println("    Wrong command. Please try again.");
         }
     }
 
     private static void parseAddCommand() {
-        String taskType; //taskType = ToDoo||Event||Deadline
-        taskType = ui.getStringInput();
-        String task, by;
+        String task = Parser.ui.getStringInput();
+        TaskType taskType = TaskType.valueOf(task);
+        String by;
         System.out.println("    Please enter the task: ");
-        task = ui.getStringInput();
-        boolean isRepeat = false;
-        List<TaskManager> list = Tasklist.getTasks();
-        for (TaskManager i : list) {
-            if (i != null && i.task.equals(task)) {
-                System.out.println("    The is a repeated task.");
-                isRepeat = true;
-                break;
-            }
-        }
+        task = Parser.ui.getStringInput();
+        boolean isRepeat = checkRepeat(task);
         if (!isRepeat) {
             switch (taskType) {
             case TODO:
@@ -79,13 +65,13 @@ public class Parser {
                 break;
             case DEADLINE:
                 System.out.println("    Please enter the deadline of your task: ");
-                by = ui.getStringInput();
+                by = Parser.ui.getStringInput();
                 Deadline d = new Deadline(task, by);
                 Tasklist.add(d);
                 break;
             case EVENT:
                 System.out.println("    Please enter the venue of your task: ");
-                by = ui.getStringInput();
+                by = Parser.ui.getStringInput();
                 Event e = new Event(task, by);
                 Tasklist.add(e);
                 break;
@@ -94,9 +80,27 @@ public class Parser {
                         "Please follow the instructions below.");
                 parseAddCommand();
             }
-            ui.printRespondToAddTask(task);
-            Storage.writeData(Tasklist.getTasks());
+            Parser.ui.printRespondToAddTask(task);
         }
     }
 
+    private static boolean checkRepeat(String task) {
+        if (list!=null && !list.isEmpty()) {
+            for (Tasks i : list) {
+                if (i != null && i.task.equals(task)) {
+                    System.out.println("    The is a repeated task.");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static void saveDoneList(int indexDoneTask) {
+        Tasks task = list.get(indexDoneTask);
+        task.markAsDone();
+        list.set(indexDoneTask, task);
+        Storage.writeData(list);
+        Parser.ui.clearInput();
+    }
 }

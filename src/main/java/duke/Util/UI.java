@@ -1,26 +1,30 @@
-package duke;
+package duke.Util;
 
 import java.util.Scanner;
 
 public class UI {
-    private static Scanner userInput;
+    private static Scanner userInput = new Scanner(System.in);
     private final String SPLIT = "==============================\n";
 
-    public UI() {
-        userInput = new Scanner(System.in);
+    public UI(){
     }
 
-    public  void printRespondToAddTask(String task) {
+    public void printRespondToAddTask(String task) {
         System.out.println("    You have successfully added " + task + "!");
-        System.out.println("    You have "+ Task_No + " task(s) now in total");
+        System.out.println("    You have "+ Tasklist.getSize() + " task(s) now in total");
     }
-
 
     public String getStringInput() {
         return userInput.nextLine();
     }
     public Integer getIntegerInput() {
         return userInput.nextInt();
+    }
+
+    public void getDoneTask() {
+        System.out.println("    Please choose the task that you have completed " +
+                "(select the no)");
+        Tasklist.showList();
     }
 
     public void printIntro() {
@@ -57,12 +61,6 @@ public class UI {
                 " (e.g., team project meeting on 2/10/2019 2-4pm)") ;
     }
 
-
-
-    public void printDelete() {
-        System.out.println("     Please enter the index of the task " +
-                "you want to delete");
-    }
     public void printExit() {
         System.out.println("    ================================\n" +
                 "    Bye. Hope to see you again soon!\n" +

@@ -1,10 +1,11 @@
-package duke;
+package duke.commands;
 
-import duke.taskmanager.TaskManager;
-import javafx.concurrent.Task;
+import java.io.IOException;
 
 public abstract class Command {
-    //constructor
     public Command() {
+    };
+
+    public void execute() throws IOException {
     };
 }

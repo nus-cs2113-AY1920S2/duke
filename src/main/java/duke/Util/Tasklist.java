@@ -1,58 +1,62 @@
-package duke;
+package duke.Util;
 
-import duke.taskmanager.TaskManager;
+import duke.taskmanager.Tasks;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tasklist {
-
-    private static List<TaskManager> tasks;
-
-    public Tasklist(Storage store) {
-        if (store.getFileExits()) {
-            tasks = Load.loadData();
-        } else {
-            tasks = new ArrayList<>();
-        }
+    public static List<Tasks> tasks = new ArrayList<>();
+    private Load load;
+    public Tasklist() throws FileNotFoundException {
+        Load load = new Load(Paths.get("data/myTasks.txt"));
+        tasks = load.readData();
     }
 
-    public static List<TaskManager> find(String input) {
-        List<TaskManager> temp = new ArrayList<>();
-        for (TaskManager task : tasks) {
+    public static void find(String input) {
+        int index = 0;
+        for (Tasks task : tasks) {
             if (task.getTask().contains(input)) {
-                temp.add(task);
+                System.out.println("    "+ index + ": " +
+                        task);
             }
+            index ++;
         }
-        return temp;
     }
 
-    public static List<TaskManager> getTasks() {
+    public static void saveTaskList() {
+        Storage.writeData(tasks);
+    }
+    public static List<Tasks> getTasks() {
         return tasks;
     }
-    public List<TaskManager> getTask() {
-        return tasks;
+    public static Tasks getTask(int index) {
+        return tasks.get(index);
     }
-
-    public static void add(TaskManager task) {
+    public static void add(Tasks task) {
         tasks.add(task);
     }
 
     public static void delete(int index) {
         tasks.remove(index);
+        Storage.writeData(tasks);
     }
 
     public static int getSize() {
         return tasks.size();
     }
 
-    public static void printTasks() {
+    public static void showList() {
         System.out.println("    Your current task list:");
-        if (Task_No == 0){
+        if (getSize() == 0){
             System.out.println("    You have no ongoing task.");
         } else {
-            for (int i = 0; i < Task_No; i++){
-                System.out.println("    Task " + i + ": " + manageTask[i]);
+            int index = 0;
+            for (Tasks task : tasks) {
+                System.out.println("    " + index + ". " + task.toString());
+                index++;
             }
         }
     }

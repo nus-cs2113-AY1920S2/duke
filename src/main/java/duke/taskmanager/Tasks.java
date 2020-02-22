@@ -1,10 +1,10 @@
 package duke.taskmanager;
 
-public class TaskManager {
+public class Tasks {
     private static boolean isDone;
     public String task;
 
-    public TaskManager(String task) {
+    public Tasks(String task) {
         this.task = task;
         isDone = false;
     }
