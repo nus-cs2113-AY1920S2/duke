@@ -6,6 +6,10 @@ import Exception.DukeException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a parser for commands. A ParseCommand object corresponds to
+ * the full command, the type of command and the status of the program
+ */
 public class ParseCommand {
     private Boolean exitStatus = false;
     private String cmdType;
@@ -16,6 +20,13 @@ public class ParseCommand {
         this.cmdType = cmdTypeIdentifier(fullCommand);
     }
 
+    /**
+     * Returns the type of command for execution.
+     *
+     * @param cmd The command to be checked for type
+     * @return type The action to process
+     * @throws DukeException If the command is invalid
+     */
     private String cmdTypeIdentifier(String cmd) throws DukeException {
         try {
             if (cmd.equalsIgnoreCase("list")){
@@ -40,10 +51,24 @@ public class ParseCommand {
         return null;
     }
 
+    /**
+     * Returns the status of program.
+     *
+     * @return the status of the program
+     */
     public boolean isExit () {
         return exitStatus;
     }
 
+    /**
+     * Returns the type of command for execution.
+     *
+     * @param taskList The list of the different type of tasks
+     * @param ui The Textui object for printing of values
+     * @param storage The FileOperation object for the writing of the tasks
+     * @throws DukeException If the command is invalid
+     * @throws IOException If there is writing error
+     */
     public void execute(ArrayList<Task> taskList, TextUi ui, FileOperation storage) throws IOException, DukeException {
         if (cmdType != null) {
             switch (cmdType) {
@@ -70,9 +95,14 @@ public class ParseCommand {
             }
             storage.saveTaskList(taskList);
         }
-
     }
 
+    /**
+     * Change the Task completion to done
+     *
+     * @param taskList The list of the different type of tasks
+     * @throws DukeException If the command is complete (i.e. invalid item number)
+     */
     public void markTaskAsDone(ArrayList<Task> taskList) throws DukeException {
         int lenOfCmd = fullCommand.length() - 1;
         try {
@@ -84,6 +114,13 @@ public class ParseCommand {
         }
     }
 
+    /**
+     * Returns the task to be added into the tasklist
+     *
+     * @param taskList The list of the different type of tasks
+     * @return a task of the Todo Class
+     * @throws DukeException If the command is invalid
+     */
     public Todo createToDo(ArrayList<Task> taskList) throws DukeException {
         try {
             Todo item = new Todo(fullCommand.substring(5));
@@ -95,6 +132,13 @@ public class ParseCommand {
         }
     }
 
+    /**
+     * Returns the task to be added into the tasklist
+     *
+     * @param taskList The list of the different type of tasks
+     * @return a task of the Event Class
+     * @throws DukeException If the command is invalid
+     */
     public Event createEvent(ArrayList<Task> taskList) throws DukeException {
         try {
             int indexOfAt = fullCommand.indexOf("/at");
@@ -109,6 +153,13 @@ public class ParseCommand {
         }
     }
 
+    /**
+     * Returns the task to be added into the tasklist
+     *
+     * @param taskList The list of the different type of tasks
+     * @return a task of the Deadline Class
+     * @throws DukeException If the command is invalid
+     */
     public Deadline createDeadline(ArrayList<Task> taskList) throws DukeException {
         try {
             int indexOfBy = fullCommand.indexOf("/by");
@@ -123,6 +174,13 @@ public class ParseCommand {
         }
     }
 
+    /**
+     * Returns the index of the Task to be removed
+     *
+     * @param taskList The list of the different type of tasks
+     * @return index of object
+     * @throws DukeException If the command is invalid
+     */
     public int findObjectToRemove(ArrayList<Task> taskList) throws DukeException {
         try {
             int indexOfObject = Integer.parseInt(fullCommand.substring(7)) - 1;

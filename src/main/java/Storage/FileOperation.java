@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a file operation. A FileOperation object corresponds to
+ * the different manipulation of tasks for retrieval and storage.
+ */
 public class FileOperation {
     public int COUNTER = 0;
     File f;
@@ -17,6 +21,12 @@ public class FileOperation {
         PATHNAME = f.getAbsolutePath();
     }
 
+    /**
+     * Returns the type of command for execution.
+     *
+     * @return the list of tasks
+     * @throws FileNotFoundException when the file to load is not found
+     */
     public ArrayList<Task> loadTaskList() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
         if (f.exists()) {
@@ -44,6 +54,12 @@ public class FileOperation {
         return taskList;
     }
 
+    /**
+     * Save the tasks into a text file
+     *
+     * @param taskList The list of tasks
+     * @throws IOException If there is error while writing
+     */
     public void saveTaskList (ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(PATHNAME);
         for (int i = 0; i < taskList.size(); i++) {
