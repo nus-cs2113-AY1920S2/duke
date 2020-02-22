@@ -12,7 +12,7 @@ public class Duke {
     public static final String LINE_SPLITTING = "\t____________________________________________________________\n";
     public static final String BYE = "bye";
     public static final String BYE_MESSAGE = "\tBye. Hope to see you again soon!";
-    public static final String HELLO_MESSAGE = "\tHello! I'm duke.Duke\n";
+    public static final String HELLO_MESSAGE = "\tHello! I'm Duke\n";
     public static final String HELP_MESSAGE = "\tIt seems like you are needing some help.\n";
     public static final String DONE = "done";
     public static final String LIST = "list";
@@ -48,8 +48,7 @@ public class Duke {
         }
     }
 
-
-    public static void main(String[] args) throws IOException, NullPointerException{
+    public static void main(String[] args) throws IOException, NullPointerException {
         ArrayList<Task> tasks = new ArrayList<>();
         welcomeMessage();
         loadFileData(tasks);
@@ -188,7 +187,7 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    private static void loadFileData(ArrayList<Task> tasks) throws FileNotFoundException {
+    private static void loadFileData(ArrayList<Task> tasks) {
         try {
             File f = new File(PATH); // create a File for the given file path
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
