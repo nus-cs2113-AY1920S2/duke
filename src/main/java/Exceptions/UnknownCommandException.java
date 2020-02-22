@@ -9,7 +9,7 @@ public class UnknownCommandException extends DukeException{
 
     @Override
     public String toString() {
-        return String.format("Unknown Command Found: '%s' is not a valid command!" +
+        return String.format("Unknown Command: '%s' is not a valid command!" +
                 " Please enter a valid command!", errorMessage);
     }
 }

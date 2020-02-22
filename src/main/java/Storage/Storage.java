@@ -5,12 +5,10 @@ import Task.Task;
 import Task.Todo;
 import Task.Deadline;
 import Task.Events;
+import TaskList.TaskList;
 
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.File;
-import java.io.BufferedReader;
+import java.io.*;
+
 import java.util.ArrayList;
 
 public class Storage {
@@ -28,9 +26,11 @@ public class Storage {
         this.file = new File(dirPath, filePath);
     }
 
-    public ArrayList<Task> load() throws IndexOutOfBoundsException {
+    public ArrayList<Task> load() throws IndexOutOfBoundsException, FileNotFoundException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
-        if (file.exists()) {
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        } else {
             try {
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
                 String line = "";
@@ -74,27 +74,14 @@ public class Storage {
             } catch (HardDiskCorruptedException e) {
                 System.out.println(e);
             }
-        } else {
-            // No hard disk found, creating new
-            System.out.println("No existing stored data file found. Creating new file to store data!");
         }
         return taskArrayList;
     }
 
-    public void saveToHardDisk(ArrayList<Task> taskArrayList) {
+    public void saveToHardDisk(TaskList taskArrayList) {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for (Task task : taskArrayList) {
-                if (task.getEventType().equals("[T]")) {
-                    fileWriter.write(String.format("%s/%s/%s\n", task.getEventType(),
-                            task.isDone(), task.getDescription()));
-                } else if (task.getEventType().equals("[D]") || task.getEventType().equals("[E]")){
-                    fileWriter.write((String.format("%s/%s/%s/%s\n", task.getEventType(),
-                            task.isDone(), task.getDescription(), task.getTaskTime())));
-                } else {
-                    throw new HardDiskCorruptedException("Event type is corrupted");
-                }
-            }
+            writeToDataFile(taskArrayList, fileWriter);
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,4 +89,32 @@ public class Storage {
             System.out.println(e);
         }
     }
+
+    private void writeToDataFile(TaskList taskArrayList, FileWriter fileWriter) throws IOException, HardDiskCorruptedException {
+        for (Task task : taskArrayList.getTaskList()) {
+            if (isToDo(task)) {
+                fileWriter.write(String.format("%s/%s/%s\n", task.getEventType(),
+                        task.isDone(), task.getDescription()));
+            } else if (isDeadline(task) || isEvent(task)){
+                fileWriter.write((String.format("%s/%s/%s/%s\n", task.getEventType(),
+                        task.isDone(), task.getDescription(), task.getTaskTime())));
+            } else {
+                throw new HardDiskCorruptedException("File writing is corrupted!");
+            }
+        }
+    }
+
+    private boolean isToDo(Task task) {
+        return task.getEventType().equals("[T]");
+    }
+
+    private boolean isDeadline(Task task) {
+        return task.getEventType().equals("[D]");
+    }
+
+    private boolean isEvent(Task task) {
+        return task.getEventType().equals("[E]");
+    }
+
+
 }
