@@ -41,6 +41,9 @@ public class Duke {
             case "deadline":
                 myTasks.addCommand(userInput, "deadline");
                 break;
+            case "find":
+                myTasks.findCommand(userInput);
+                break;
             default:
                 throw new DukeException("Unknown command.");
         }
