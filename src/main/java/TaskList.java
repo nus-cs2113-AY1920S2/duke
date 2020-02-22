@@ -4,15 +4,16 @@ import Features.Task;
 import Features.Todo;
 import Exception.DukeException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> userList;
-    private String lines = "____________________________________________________________\n";
 
     public TaskList(ArrayList<Task> savedList) {
-       this.userList = savedList;
+        this.userList = savedList;
     }
     public TaskList() {
         this.userList = new ArrayList<>();
@@ -33,7 +34,8 @@ public class TaskList {
         int atIndex = -1;
         atIndex = userInputDetails.indexOf("/at");
         if (atIndex == -1) {
-            throw new DukeException("Format error, please follow: event <task> /at <time>");
+            throw new DukeException("Format error, please follow: event <task> /at <datetime>." +
+                    "\nFeature: you can use <datetime> as \"yyyy-mm-dd hr:min\" and we can format it for you!");
         }
         for (int i=0; i<atIndex; i++) {
             description += userInputDetails.get(i);
@@ -45,7 +47,20 @@ public class TaskList {
             at += " ";
         }
         at = at.substring(0, at.length()-1);
-        return new Event(description, at);
+        ArrayList<String> userInputDelimit = new ArrayList<String>(Arrays.asList(at.split(" ", 2)));
+        LocalDate myDate;
+        String myTime = "";
+        try {
+            myDate = LocalDate.parse(userInputDelimit.get(0));
+            myTime = userInputDelimit.get(1);
+
+        } catch (DateTimeParseException e) {
+            return new Event(description, String.join(" ", userInputDelimit));
+        } catch (IndexOutOfBoundsException e) {
+            myDate = LocalDate.parse(userInputDelimit.get(0));
+            return new Event(description, myDate, myTime);
+        }
+        return new Event(description, myDate, myTime);
     }
 
     public static Deadline newDeadline(ArrayList<String> userInputDetails) throws DukeException {
@@ -54,7 +69,8 @@ public class TaskList {
         int byIndex = -1;
         byIndex = userInputDetails.indexOf("/by");
         if (byIndex == -1) {
-            throw new DukeException("Format error, please follow: deadline <task> /by <time>");
+            throw new DukeException("Format error, please follow: deadline <task> /by <datetime>." +
+                    "\nFeature: you can use <datetime> as \"yyyy-mm-dd hr:min\" and we can format it for you!");
         }
         for (int i=0; i<byIndex; i++) {
             description += userInputDetails.get(i);
@@ -66,11 +82,23 @@ public class TaskList {
             by += " ";
         }
         by = by.substring(0, by.length()-1);
-        return new Deadline(description, by);
+        ArrayList<String> userInputDelimit = new ArrayList<String>(Arrays.asList(by.split(" ", 2)));
+        LocalDate myDate;
+        String myTime = "";
+        try {
+            myDate = LocalDate.parse(userInputDelimit.get(0));
+            myTime = userInputDelimit.get(1);
+        } catch (DateTimeParseException e) {
+            return new Deadline(description, String.join(" ", userInputDelimit));
+        } catch (IndexOutOfBoundsException e) {
+            myDate = LocalDate.parse(userInputDelimit.get(0));
+            return new Deadline(description, myDate, myTime);
+        }
+        return new Deadline(description, myDate, myTime);
     }
 
     public void addCommand(String userInput, String taskType) {
-        System.out.print(lines);
+        UI.printLines();
         ArrayList<String> userInputDetails = new ArrayList<String>(Arrays.asList(userInput.split(" ")));
         userInputDetails.remove(0);
         try {
@@ -89,11 +117,11 @@ public class TaskList {
         } catch (DukeException e) {
             System.out.println("OOPS!! " + e);
         }
-        System.out.print(lines);
+        UI.printLines();
     }
 
     public void deleteCommand(String userInput) throws DukeException {
-        System.out.print(lines);
+        UI.printLines();
         String[] words = userInput.split(" ");
         if (words.length != 2) {
             throw new DukeException("Format error, please follow: \"delete <task number>\"");
@@ -108,11 +136,11 @@ public class TaskList {
         } catch (NumberFormatException e) {
             System.out.println("OOPS!! " + words[1] + " is not a valid task number");
         }
-        System.out.print(lines);
+        UI.printLines();
     }
 
     public void listCommand() {
-        System.out.print(lines);
+        UI.printLines();
         if (userList.size() == 0) {
             System.out.println("No items added!");
         } else {
@@ -123,11 +151,11 @@ public class TaskList {
             System.out.print(index + ".");
             System.out.println(userList.get(i));
         }
-        System.out.print(lines);
+        UI.printLines();
     }
 
     public void doneCommand( String userInput) throws DukeException {
-        System.out.print(lines);
+        UI.printLines();
         String[] words = userInput.split(" ");
         if (words.length != 2) {
             throw new DukeException("Format error, please follow: \"done <task number>\"");
@@ -143,7 +171,7 @@ public class TaskList {
         } catch (NumberFormatException e) {
             System.out.println("OOPS!! " + words[1] + " is not a valid task number");
         }
-        System.out.print(lines);
+        UI.printLines();
     }
 
 }

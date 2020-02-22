@@ -77,7 +77,7 @@ public class Duke {
         myUI.exit();
     }
 
-    public static void main(String[] args) throws IOException, DukeException {
+    public static void main(String[] args) {
         java.util.Properties properties = System.getProperties();
 
         // to print all the keys in the properties map <for testing>
