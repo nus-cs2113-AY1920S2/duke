@@ -1,6 +1,9 @@
 import Features.Task;
 import java.util.ArrayList;
 
+/**
+ * Contain methods to beautify the output text in CLI.
+ */
 public class UI {
     private static String lines = "____________________________________________________________\n";
     public static void printAddedInfo(ArrayList<Task> userList) {

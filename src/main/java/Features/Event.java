@@ -2,6 +2,9 @@ package Features;
 
 import java.time.LocalDate;
 
+/**
+ * Extension of <code>Task</code> class specifying an <code>Event</code> task.
+ */
 public class Event extends Task{
     public Event(String description, String userDate) {
         super(description);

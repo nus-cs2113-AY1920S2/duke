@@ -5,11 +5,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Main bot control class for users to manage their tasks.
+ * It includes features like setting deadlines, events and todos.
+ */
 public class Duke {
     private Storage myStorage;
     private TaskList myTasks;
     private UI myUI;
 
+    /**
+     * Initialise the required class instances.
+     * Loads the previous task list from file with <code>Storage</code> object.
+     * @param f Location of the previously stored text file.
+     */
     public Duke(File f) {
         myUI = new UI();
         myStorage = new Storage(f);
@@ -20,7 +29,12 @@ public class Duke {
         }
     }
 
-    //Main bot control
+    /**
+     *
+     * @param keyword First keyword that user inputs into the CLI.
+     * @param userInput The whole sentence that user inputs.
+     * @throws DukeException If keyword is not regcognized.
+     */
     private void botResponse(String keyword, String userInput) throws DukeException {
         switch (keyword) {
             case "list": myTasks.listCommand();
@@ -48,13 +62,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Main bot loop, stops when user inputs keyword "bye".
+     */
     public void run() {
         myUI.intro();
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
         ArrayList<String> words = Parser.convertStringToArr(userInput, " ");
         String keyword = words.get(0);
-
         while (!keyword.equals("bye")) {
             try {
                 botResponse(keyword, userInput);
@@ -81,10 +97,6 @@ public class Duke {
 
     public static void main(String[] args) {
         java.util.Properties properties = System.getProperties();
-
-        // to print all the keys in the properties map <for testing>
-        //properties.list(System.out);
-        // get Operating System home directory(PLATFORM INDEPENDENT METHOD)
         String home = properties.get("user.home").toString();
         // get Operating System separator
         String separator = properties.get("file.separator").toString();
@@ -92,6 +104,7 @@ public class Duke {
         String directoryName = "duke";
         // your file name
         String fileName = "savedTasks.txt";
+
         File dir = new File(home + separator + directoryName);
         File f = new File(dir, fileName);
         new Duke(f).run();
