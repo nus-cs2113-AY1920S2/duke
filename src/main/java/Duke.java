@@ -2,6 +2,7 @@ import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
 import Duke.*;
+import ui.*;
 import Exceptions.*;
 import java.util.ArrayList;
 import java.nio.file.*;
@@ -10,14 +11,17 @@ import java.io.BufferedReader;
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int size = 0;
+    public static final String VERSION = "BAPE MANAGER - Version 1.0";
+
 
     public static void main(String[] args) {
 
         importTaskFromFile();
+        programStart();
+
         Scanner myScanner = new Scanner(System.in);
-        String userName = GreetingsAndFunctions(myScanner); //Greetings and list of Functions
         boolean flag = true; //Boolean flag for while loop
-        String function = null;
+        String function;
         while (flag == true) {
 
             try {
@@ -63,7 +67,7 @@ public class Duke {
                         break;
 
                     case "bye":
-                        System.out.println("Bye " + userName + "! Hope to see you again soon!");
+                        System.out.println("Bye " + /*userName + */"! Hope to see you again soon!");
                         System.out.println("____________________________________________________________");
                         flag = false;
                         break;
@@ -136,6 +140,11 @@ public class Duke {
                 System.out.println("Error while appending to file. Please check your white spaces and symbols.");
             }
         }
+    }
+
+    private static void programStart() {
+        DisplayUI ui = new DisplayUI();
+        ui.showStartMessages(VERSION);
     }
 
     private static void writeToFile(String str1, String str2) {
@@ -340,36 +349,6 @@ public class Duke {
         System.out.println(s);
         System.out.println("Total number of tasks in the list:  " + tasks.size());
         System.out.println("____________________________________________________________");
-    }
-
-    // method for greeting and displaying of all available functions
-    public static String GreetingsAndFunctions(Scanner myScanner) {
-
-            String logo = " _____     _      ______ ______\n"
-                        + "|  _  \\   / \\    |  __  |  ____|\n"
-                        + "| |_| |  / _ \\   | |__| | |___\n"
-                        + "|  _  | / /_\\ \\  |  ____|  ___|\n"
-                        + "| |_| |/ _____ \\ | |    | |____\n"
-                        + "|_____/_/     \\_\\|_|    |______|\n";
-
-            System.out.println(logo);
-            System.out.println("____________________________________________________________");
-            System.out.println("Hey there! BAPE, your scheduler");
-            System.out.println("How do i call you? ");
-            String userName = myScanner.nextLine();
-            System.out.println("Hi " + userName + "!" + " What can i do for you?");
-            System.out.println(" ___________________________________________________________________________________________________________");
-            System.out.println("|  Functions:  |                 Descriptions:                      |               Example:                |");
-            System.out.println("|______________|____________________________________________________|_______________________________________|");
-            System.out.println("|   todo       |                Create a To-do task                 | (eg. todo borrow books)               |");
-            System.out.println("|   deadline   |                Create a task with a deadline       | (eg. deadline bathe /by 9PM)          |");
-            System.out.println("|   event      |                Create an event task                | (eg. event Meeting /at Library, 12PM) |");
-            System.out.println("|   list       |                List all the task in your planner   |                                       |");
-            System.out.println("|   done       |                Mark a task as completed            |                                       |");
-            System.out.println("|   bye        |                Exit Planner                        |                                       |");
-            System.out.println("|______________|____________________________________________________|_______________________________________|");
-            System.out.println("Please key in your command: ");
-            return userName;
     }
 
     //method for adding adding newly created task into tasks array
