@@ -97,7 +97,7 @@ public class Duke {
                 Task newEvent = new Events(description, Time);
                 list.add(newEvent);
                 System.out.println("------------------------");
-                System.out.println("Added : ");
+                System.out.println("Added: ");
                 System.out.println(newEvent.toString());
                 System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
                 System.out.println("------------------------");
