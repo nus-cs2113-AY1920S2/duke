@@ -11,19 +11,19 @@ public class Duke {
 
     public static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
+    public static final String FILEPATH = "saved/data.txt";
 
     public static void main(String[] args) {
         System.out.println(GREETING);
 
-        File f = new File("saved/data.txt");
-        String filePath = "saved/data.txt"; //maybe make it and absolute instead
+        File f = new File(FILEPATH);
 
         ArrayList<Task> taskArrayList = new ArrayList<>();
         int exit = 0;
         int taskListSize = 0;
 
         try {
-            taskListSize = loadFileContents(filePath, taskArrayList);
+            taskListSize = loadFileContents(FILEPATH, taskArrayList);
         } catch (FileNotFoundException e) {
             System.out.println("No saved file available");
         }
@@ -39,7 +39,7 @@ public class Duke {
             case "bye":
                 System.out.println(GOODBYE);
                 exit = 1;
-                saveTasks(filePath, taskArrayList, true);
+                saveTasks(FILEPATH, taskArrayList, true);
                 break;
             case "list":
                 printTasks(taskArrayList, taskListSize);
