@@ -26,6 +26,10 @@ public class Ui {
     public static final String UNKNOWN_COMMAND_NAME_MESSAGE = "I'm not very sure what that means...";
     public static final String TASK_NUMBER_NOT_SPECIFIED_MESSAGE = "Please specify a task number";
     public static final String TASK_NUMBER_NOT_INTEGER_MESSAGE = "Please specify an integer for the task number";
+    public static final String UNKNOWN_STORAGE_FORMAT_MESSAGE =
+            "Unknown save file format encountered"
+            + LS
+            + "Exit now to manually fix and retain saved data";
 
     private final Scanner in;
     private final PrintStream out;
