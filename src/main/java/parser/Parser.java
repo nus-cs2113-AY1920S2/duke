@@ -27,6 +27,10 @@ public class Parser {
     /** index suffix for done and delete command */
     public static final int DELETE_INDEX = 7;
     public static final int DONE_INDEX = 5;
+    public static final int USER_CHOICE_INDEX = 0;
+    public static final int DESCRIPTION_MAXIMUM_SECTIONS = 2;
+    public static final int DESCRIPTION_INDEX = 0;
+    public static final int TIME_INDEX = 1;
 
     /**
      * Parses user input into command for execution.
@@ -89,7 +93,6 @@ public class Parser {
         }
     }
 
-
     /**
      * Parses user input into command for execution.
      * @param taskManager
@@ -99,7 +102,7 @@ public class Parser {
      */
     private Command prepareAddEventTask(TaskManager taskManager, int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and start time
-        String [] temp = new String[2];
+        String [] temp = new String[DESCRIPTION_MAXIMUM_SECTIONS];
         try {
             temp = commandDescription.split("/");
             for (Task toCheck: taskManager.getTaskList().getInternalList()
@@ -109,11 +112,11 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException aiobex){
 
         }
-        return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+        return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
     }
 
     private boolean checkDuplicate(String[] temp, Task toCheck) {
-        if (toCheck.getTaskDescription().contentEquals(temp[0])){
+        if (toCheck.getTaskDescription().contentEquals(temp[DESCRIPTION_INDEX])){
             System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
             Messages.consumeLine();
             return true;
@@ -123,11 +126,11 @@ public class Parser {
 
     private Command getUserDecisionForEventDuplicate(int nextTaskIndex, String[] temp) {
         Scanner scanner = new Scanner(System.in);
-        char userCommand  = scanner.next().charAt(0);
+        char userCommand  = scanner.next().charAt(USER_CHOICE_INDEX);
         switch (userCommand){
         case 'Y':
         case 'y':
-            return new AddEventCommand(new EventTask(nextTaskIndex, temp[0],temp[1]));
+            return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
         default:
             System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
             return new ListCommand();
@@ -143,14 +146,14 @@ public class Parser {
      */
     private Command prepareAddDeadlineTask(TaskManager taskManager, int nextTaskIndex, String commandDescription) {
         //split the commandDescription to task and deadline
-        String [] temp = new String[2];
+        String [] temp = new String[DESCRIPTION_MAXIMUM_SECTIONS];
         try {
             temp = commandDescription.split("/");
-            if (checkEventDuplicate(taskManager, temp, temp[0])) return getUserDecisionForDeadlineDuplicate(nextTaskIndex, temp);
+            if (checkEventDuplicate(taskManager, temp, temp[DESCRIPTION_INDEX])) return getUserDecisionForDeadlineDuplicate(nextTaskIndex, temp);
         } catch (ArrayIndexOutOfBoundsException aex){
             aex.printStackTrace();
         }
-        return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+        return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
     }
 
     private boolean checkEventDuplicate(TaskManager taskManager, String[] temp, String s) {
@@ -167,11 +170,11 @@ public class Parser {
 
     private Command getUserDecisionForDeadlineDuplicate(int nextTaskIndex, String[] temp) {
         Scanner scanner = new Scanner(System.in);
-        char userCommand  = scanner.next().charAt(0);
+        char userCommand  = scanner.next().charAt(USER_CHOICE_INDEX);
         switch (userCommand){
         case 'Y':
         case 'y':
-            return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[0],temp[1]));
+            return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
         default:
             System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
             return new ListCommand();
@@ -204,7 +207,7 @@ public class Parser {
 
     private Command getUserDecisionForTodoDuplicate(int nextTaskIndex, String commandDescription) {
         Scanner scanner = new Scanner(System.in);
-        char userCommand  = scanner.next().charAt(0);
+        char userCommand  = scanner.next().charAt(USER_CHOICE_INDEX);
         switch (userCommand){
         case 'Y':
         case 'y':
