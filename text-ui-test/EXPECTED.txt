@@ -64,8 +64,7 @@ _________________________________________________
   4. [D][X] finish reading book (by: Sat maybe?)
   5. [T][X] i want to write a slash here /by doing sth like this
 _________________________________________________
-> Well, that's one task down
-  [E][O] project meeting (at: Mon 2-4pm)
+> ☹ OOPS!!! That task is already done
 _________________________________________________
 > Well, that's one task down
   [D][O] finish reading book (by: Sat maybe?)
