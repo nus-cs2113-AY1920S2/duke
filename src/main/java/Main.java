@@ -1,6 +1,7 @@
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
+import common.Messages;
 import data.TaskManager;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;
@@ -19,6 +20,8 @@ public class Main  {
     }
 
     public static void main(String[] args) throws StorageOperationException {
+        System.out.print("Please enter '1' for GUI and '2' for CLI: ");
+        Messages.consumeLine();
         Scanner sc = new Scanner(System.in);
         int userChoice = sc.nextInt();
         switch (userChoice){

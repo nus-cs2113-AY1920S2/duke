@@ -10,11 +10,13 @@ public class AddTodoCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a Todo task to the DUKE system.\n"
             + "      Example: " + COMMAND_WORD + " read a book";
 
-    private final Task toDoTask;
+    private Task toDoTask;
 
     public AddTodoCommand(Task toDoTask) {
         this.toDoTask = toDoTask;
     }
+
+
 
     @Override
     public CommandResult execute() {

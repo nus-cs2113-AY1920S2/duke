@@ -113,4 +113,8 @@ public class Messages {
                 eventTask.getTaskDescription(),
                 eventTask.getTaskStartTime());
     }
+
+    public static void consumeLine(){
+        System.out.println("");
+    }
 }

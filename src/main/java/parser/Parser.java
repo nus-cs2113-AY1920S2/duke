@@ -10,7 +10,10 @@ import data.TaskManager;
 import data.exceptions.ParseException;
 import data.task.DeadlineTask;
 import data.task.EventTask;
+import data.task.Task;
 import data.task.TodoTask;
+
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +27,8 @@ public class Parser {
     /** index suffix for done and delete command */
     public static final int DELETE_INDEX = 7;
     public static final int DONE_INDEX = 5;
+    /** used for checking duplicate*/
+    private Task toADD;
 
     /**
      * Parses user input into command for execution.
@@ -40,14 +45,14 @@ public class Parser {
         /** further split the user input, get the secondary part, the description */
         final String commandWordDescription = commandWord.substring(commandWordFirstPart[0].length());
         //operates according to different command word
-        return getCommand(taskManager.getTaskList().getNextTaskIndex(), commandWord, commandWordFirstPart, commandWordDescription);
+        return getCommand(taskManager, taskManager.getTaskList().getNextTaskIndex(), commandWord, commandWordFirstPart, commandWordDescription);
     }
 
     /**
      * @param commandWordFirstPart, commandWordDescription the input String spited parts
      * @return parsed command
      */
-    private Command getCommand(int nextTaskIndex, String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
+    private Command getCommand(TaskManager taskManager, int nextTaskIndex, String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
         switch (commandWordFirstPart[0]){
         //save to json
         case SaveToJsonCommand.COMMAND_WORD:
@@ -63,7 +68,7 @@ public class Parser {
             return prepareAddDeadlineTask(nextTaskIndex, commandWordDescription);
         //add todo task
         case AddTodoCommand.COMMAND_WORD:
-            return prepareAddTodoTask(nextTaskIndex, commandWordDescription);
+            return prepareAddTodoTask(taskManager, nextTaskIndex, commandWordDescription);
         //done
         case DoneCommand.COMMAND_WORD:
             return prepareDone(commandWord);
@@ -122,11 +127,37 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
+     * @param taskManager
      * @param nextTaskIndex the task ID for next task
      * @param commandDescription full user input string (without the command Action)
      * @return the AddCommand obj constructed on the user input
      */
-    private Command prepareAddTodoTask(int nextTaskIndex, String commandDescription) {
+    private Command prepareAddTodoTask(TaskManager taskManager,int nextTaskIndex, String commandDescription) {
+        try{
+            for (Task toCheck:taskManager.getTaskList().getInternalList()
+            ) {
+                if(toCheck.getTaskDescription().contentEquals(commandDescription)){
+                    //
+                    System.out.println(String.format("Alert! This task is similar to task Index %d",
+                            toCheck.getTaskIndex()));
+                    System.out.println("Do you want to add a duplicate task?");
+                    System.out.print("Press Y to add and others to not add: ");
+                    Messages.consumeLine();
+                    Scanner scanner = new Scanner(System.in);
+                    char userCommand  = scanner.next().charAt(0);
+                    switch (userCommand){
+                    case 'Y':
+                    case 'y':
+                        return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
+                    default:
+                        System.out.println("The duplicate task is not added!");
+                        return new ListCommand();
+                    }
+                }
+            }
+        } catch (NullPointerException npex) {
+            npex.printStackTrace();
+        }
         return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
     }
 
