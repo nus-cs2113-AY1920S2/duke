@@ -36,7 +36,7 @@ public class Duke {
                         taskList.add(new Event(words[2], words[3]));
                         break;
                 }
-                if (words[1].equals("\u2713")) {
+                if (words[1].equals("1")) {
                     taskList.get(taskList.size() - 1).setDone(true);
                 }
             }
@@ -73,7 +73,6 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println("\t ☹ OOPS!!! You entered an invalid number!");
             }
-
             input = in.nextLine(); // Get string input
         }
         printExitMessage(); // Exit
