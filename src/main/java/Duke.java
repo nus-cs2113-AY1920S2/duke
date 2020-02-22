@@ -7,6 +7,9 @@ import Ui.TextUi;
 import Exception.*;
 import TaskList.*;
 
+/**
+ * Represents a Task Manager to keep track of different types of tasks
+ */
 public class Duke {
 
     private FileOperation storage;
@@ -26,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Program to run the task manager
+     */
     public void run() {
         ui.printWelcomeMsg();
         boolean isExit = false;
@@ -44,6 +50,9 @@ public class Duke {
         ui.printExitMsg();
     }
 
+    /**
+     * Main method to run program with the name of file with preloaded tasks
+     */
     public static void main(String[] args){
         new Duke("tasksData.txt").run();
     }

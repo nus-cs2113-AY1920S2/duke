@@ -3,7 +3,11 @@ package TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.io.FileNotFoundException;
 
+/**
+ * Represents a task with deadline
+ */
 public class Deadline extends Task {
     protected String by;
     private LocalDate deadline;
@@ -22,12 +26,18 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Prints the content of the Deadline type task
+     */
     @Override
     public String printObject() {
         convertDeadlineFormat(by);
         return ("[" + itemType + "][" + getStatusIcon() + "] "+ description + " (by: " + by + ")");
     }
 
+    /**
+     * Reformat Deadline task format for saving into file
+     */
     @Override
     public String createStrForSaving() {
         return itemType + " | " + convertBoolean() + " | " + description + " | " + by;
