@@ -70,6 +70,7 @@ public class Parser {
         //list
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+        //delete
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(commandWord);
         //exit

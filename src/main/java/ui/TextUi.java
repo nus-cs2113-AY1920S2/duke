@@ -25,7 +25,7 @@ public class TextUi {
     //echo function, display user's input
     public static void showResult(String text) {
         System.out.println(Messages.DIVIDER);
-        System.out.println("  "+ text);
+        System.out.println(text);
         System.out.println(Messages.DIVIDER);
     }
 

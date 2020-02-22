@@ -28,14 +28,14 @@ public class EncodeToFile {
      */
     private static String encodeTaskToString (Task task){
         StringBuilder encodedTaskBuilder = new StringBuilder();
-        encodedTaskBuilder = getStringBuilder(task, encodedTaskBuilder);
+        getStringBuilder(task, encodedTaskBuilder);
         //encode start/end time (optional)
         switch (task.getTaskType()){
         case 'D':
-            encodedTaskBuilder = encodeDeadlineToStting((DeadlineTask) task, encodedTaskBuilder);
+            encodeDeadlineToStting((DeadlineTask) task, encodedTaskBuilder);
             break;
         case 'E':
-            encodedTaskBuilder = encodeEventToString((EventTask) task, encodedTaskBuilder);
+            encodeEventToString((EventTask) task, encodedTaskBuilder);
             break;
         default:
         case 'T':
@@ -49,14 +49,11 @@ public class EncodeToFile {
      *
      * @param task
      * @param encodedTaskBuilder
-     * @return encodedTaskBuilder
      */
-    private static StringBuilder encodeEventToString(EventTask task, StringBuilder encodedTaskBuilder) {
-        encodedTaskBuilder = encodedTaskBuilder.append("|");
-        EventTask eTask = task;
-        encodedTaskBuilder = encodedTaskBuilder.append(eTask.getTaskStartTime());
-        encodedTaskBuilder = encodedTaskBuilder.append(eTask.getTaskEndTime());
-        return encodedTaskBuilder;
+    private static void encodeEventToString(EventTask task, StringBuilder encodedTaskBuilder) {
+        encodedTaskBuilder.append("|");
+        encodedTaskBuilder.append(task.getTaskStartTime());
+        encodedTaskBuilder.append(task.getTaskEndTime());
     }
 
     /**
@@ -64,14 +61,11 @@ public class EncodeToFile {
      *
      * @param task
      * @param encodedTaskBuilder
-     * @return encodedTaskBuilder
      */
-    private static StringBuilder encodeDeadlineToStting(DeadlineTask task, StringBuilder encodedTaskBuilder) {
-        encodedTaskBuilder = encodedTaskBuilder.append("|");
+    private static void encodeDeadlineToStting(DeadlineTask task, StringBuilder encodedTaskBuilder) {
+        encodedTaskBuilder.append("|");
         //up-casting
-        DeadlineTask dTask = task;
-        encodedTaskBuilder = encodedTaskBuilder.append(dTask.getTaskDeadline());
-        return encodedTaskBuilder;
+        encodedTaskBuilder.append(task.getTaskDeadline());
     }
 
     /**
@@ -79,15 +73,13 @@ public class EncodeToFile {
      *
      * @param task
      * @param encodedTaskBuilder
-     * @return encodedTaskBuilder
      */
-    private static StringBuilder getStringBuilder(Task task, StringBuilder encodedTaskBuilder) {
-        encodedTaskBuilder = encodedTaskBuilder.append(String.valueOf(task.getTaskType()));
-        encodedTaskBuilder = encodedTaskBuilder.append("|");
-        encodedTaskBuilder = encodedTaskBuilder.append(String.valueOf(task.getChar()));
-        encodedTaskBuilder = encodedTaskBuilder.append("|");
-        encodedTaskBuilder = encodedTaskBuilder.append(task.getTaskDescription());
-        return encodedTaskBuilder;
+    private static void getStringBuilder(Task task, StringBuilder encodedTaskBuilder) {
+        encodedTaskBuilder.append(String.valueOf(task.getTaskType()));
+        encodedTaskBuilder.append("|");
+        encodedTaskBuilder.append(String.valueOf(task.getChar()));
+        encodedTaskBuilder.append("|");
+        encodedTaskBuilder.append(task.getTaskDescription());
     }
 
 }

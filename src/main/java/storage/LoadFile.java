@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LoadFile {
@@ -28,21 +27,11 @@ public class LoadFile {
         this.filePath = filePath;
     }
 
-    public class TaskData {
-        /** common attributes*/
-        protected int taskIndex;
-        protected String taskDescription;
-        protected boolean isDone;
-        protected char taskType;
-
-        /** deadline and event task attributes*/
-        protected String taskTime;
-        /** deadline task attributes*/
-        protected LocalDate taskDeadlineDate;
-    }
-
-
-    public  void readDom(TaskList taskList)  {
+    /**
+     * read from jason file
+     * @param taskList
+     */
+    public void readDom(TaskList taskList)  {
         BufferedReader reader = null;
         try {
             File file = new File(jsonFilePath);

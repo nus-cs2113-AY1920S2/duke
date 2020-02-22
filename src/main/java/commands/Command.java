@@ -44,6 +44,10 @@ public abstract class Command {
         return taskManager.getTaskList().getInternalList().get(getTargetIndex() - TextUi.DISPLAYED_INDEX_OFFSET);
     }
 
+    /**
+     * get target index
+     * @return targetIndex
+     */
     public int getTargetIndex() {
         return targetIndex;
     }

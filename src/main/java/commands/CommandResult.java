@@ -10,7 +10,6 @@ public class CommandResult {
     /**
      * @parameter: Execute feedback to user
      */
-
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
         TextUi.showResult(this.feedbackToUser);

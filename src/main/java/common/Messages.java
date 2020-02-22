@@ -5,9 +5,10 @@ import data.task.*;
  * Container for user visible messages.
  */
 public class Messages {
+    public static final int INDEX_OFF_SET = -1;
     public static final char DONE = 'D';
     public static final char notDONE = 'N';
-    public static final String DIVIDER = "===================================================";
+    public static final String DIVIDER = "+----------------------------------------------------+";
     public static final String MESSAGE_WELCOME = "  Hello! I'm Kuri\n  What can I do for you?";
     public static final String MESSAGE_FAREWELL = "  Bye. Hope to see you again soon!";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
@@ -16,30 +17,59 @@ public class Messages {
     public static final String MESSAGE_TODO_LIST = "  %d. [Id:%d][%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
-    public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "Error writing to file: %s";
+    public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "+|Error writing to file: %s|+";
 
-    public static StringBuilder taskListMessage = new StringBuilder();
+    public static StringBuilder taskListMessage;
 
     /**
      * Print all tasks in the task list
      */
     public static String printAllTasks(TaskList tasklist){
         String taskMessage = "";
-        taskListMessage = new StringBuilder(taskMessage);
-        for (int i = 1; i <= tasklist.getInternalList().size() ; i++) {
-            Task task = tasklist.getInternalList().get(i-1);
-            if (task instanceof TodoTask) {
-                taskMessage = printTodoTask((TodoTask) task, i);
-            } else if (task instanceof DeadlineTask) {
-                taskMessage = printDeadlineTask((DeadlineTask) task, i);
-            } else if( task instanceof EventTask) {
-                taskMessage = printEventTask((EventTask) task, i);
-            }
-            taskListMessage = taskListMessage.append(taskMessage).append("\n");
-        }
+        taskListMessage = new StringBuilder();
+        getTaskListMessage(tasklist, taskMessage);
         return taskListMessage.toString();
     }
 
+    /**
+     * get tasklist message
+     * @param tasklist
+     * @param taskMessage
+     */
+    private static void getTaskListMessage(TaskList tasklist, String taskMessage) {
+        for (int index = 1; index <= tasklist.getInternalList().size() ; index++) {
+            Task task = tasklist.getInternalList().get(index+ INDEX_OFF_SET);
+            taskMessage = getTaskMessage(taskMessage, index, task);
+            taskListMessage = taskListMessage.append(taskMessage).append("\n");
+        }
+        taskListMessage.append(String.format("There are total %d task(s) in the list",
+                tasklist.getInternalList().size()));
+    }
+
+    /**
+     * get task message
+     * @param taskMessage
+     * @param index
+     * @param task
+     * @return
+     */
+    private static String getTaskMessage(String taskMessage, int index, Task task) {
+        if (task instanceof TodoTask) {
+            taskMessage = printTodoTask((TodoTask) task, index);
+        } else if (task instanceof DeadlineTask) {
+            taskMessage = printDeadlineTask((DeadlineTask) task, index);
+        } else if( task instanceof EventTask) {
+            taskMessage = printEventTask((EventTask) task, index);
+        }
+        return taskMessage;
+    }
+
+    /**
+     * print todo-type task
+     * @param todoTask
+     * @param index
+     * @return
+     */
     public static String printTodoTask(TodoTask todoTask, int index){
         return String.format(
                 MESSAGE_TODO_LIST,
@@ -50,6 +80,12 @@ public class Messages {
                 todoTask.getTaskDescription());
     }
 
+    /**
+     * print deadline-type task
+     * @param deadlineTask
+     * @param index
+     * @return
+     */
     public static String printDeadlineTask(DeadlineTask deadlineTask, int index){
         return String.format(
                 MESSAGE_DEADLINE_LIST,
@@ -61,6 +97,12 @@ public class Messages {
                 deadlineTask.getTaskDeadline());
     }
 
+    /**
+     * print event-type task
+     * @param eventTask
+     * @param index
+     * @return
+     */
     public static String printEventTask(EventTask eventTask, int index){
         return String.format(
                 MESSAGE_EVENT_LIST,

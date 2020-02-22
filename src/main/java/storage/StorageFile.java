@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Represents the file used to store task list data.
+ * save to both text file and json file
  */
 public class StorageFile {
 
