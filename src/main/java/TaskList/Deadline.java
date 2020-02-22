@@ -3,7 +3,6 @@ package TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.io.FileNotFoundException;
 
 /**
  * Represents a task with deadline
@@ -17,6 +16,11 @@ public class Deadline extends Task {
         this.itemType = 'D';
     }
 
+    /**
+     * Change the deadline date from string to localdate object
+     *
+     * @param oldFormat The string type date
+     */
     public void convertDeadlineFormat(String oldFormat) {
         try {
             deadline = LocalDate.parse(oldFormat);

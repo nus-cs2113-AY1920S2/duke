@@ -102,6 +102,12 @@ public class ParseCommand {
         }
     }
 
+    /**
+     * Find task using keyword specified by user
+     *
+     * @param taskList The list of the different type of tasks
+     * @throws DukeException If the command is complete (i.e. invalid item number)
+     */
     public ArrayList<Task> findTask(ArrayList<Task> taskList) throws DukeException {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         String keyword;
