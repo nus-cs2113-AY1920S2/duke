@@ -1,18 +1,31 @@
 package duke;
 
-import java.io.InputStream;
+import duke.task.Task;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String DUKE_LOGO =
+    public static final String DUKE_LOGO =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String DIVIDER = "_________________________________________________";
-    private static final String LS = System.lineSeparator();
+    public static final String DIVIDER = "_________________________________________________";
+    public static final String LS = System.lineSeparator();
+    public static final String NO_TASKS_MESSAGE = "You have no tasks right now though";
+    public static final String HAVE_TASKS_MESSAGE = "Quite a few tasks you got there";
+    public static final String TASK_INDEX_OUT_OF_RANGE_MESSAGE = "Please specify a task number between 1 and ";
+    public static final String TASK_MARKED_AS_DONE_MESSAGE = "Well, that's one task down" + LS + "  ";
+    public static final String GENERIC_ERROR_MESSAGE_PREFIX = "☹ OOPS!!! ";
+    public static final String TODO_INSUFFICIENT_ARGS_MESSAGE = "The description of a todo cannot be empty";
+    public static final String DEADLINE_INSUFFICIENT_ARGS_MESSAGE =
+            "The description and date of a deadline cannot be empty";
+    public static final String EVENT_INSUFFICIENT_ARGS_MESSAGE = "The description and date of an event cannot be empty";
+    public static final String UNKNOWN_COMMAND_NAME_MESSAGE = "I'm not very sure what that means...";
+    public static final String TASK_NUMBER_NOT_SPECIFIED_MESSAGE = "Please specify a task number";
+    public static final String TASK_NUMBER_NOT_INTEGER_MESSAGE = "Please specify an integer for the task number";
 
     private final Scanner in;
     private final PrintStream out;
@@ -41,6 +54,20 @@ public class Ui {
     public void showByeMessage() {
         showToUser("Bye then");
         showDivider();
+    }
+
+    public void showAddedTaskMessage(Task addedTask, int numTasks) {
+        showToUser("Task added:",
+                "  " + addedTask,
+                "You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in the list"
+        );
+    }
+
+    public void showDeletedTaskMessage(Task deletedTask, int numTasks) {
+        showToUser("Task deleted:",
+                "  " + deletedTask,
+                "You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in the list"
+        );
     }
 
     public String getUserCommand() {

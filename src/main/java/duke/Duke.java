@@ -1,7 +1,8 @@
 package duke;
 
+import duke.commands.Command;
+
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class Duke {
     private Storage storage;
@@ -28,20 +29,9 @@ public class Duke {
         //noinspection InfiniteLoopStatement
         while (true) {
             String fullCommand = ui.getUserCommand();
-
-            try {
-                Parser.parseCommand(fullCommand, ui, tasks);
-            } catch (DukeException e) {
-                ui.showToUser(e.toString());
-            }
-
-            try {
-                storage.save(tasks);
-            } catch (IOException e) {
-                ui.showToUser(e.getMessage());
-            } finally {
-                ui.showDivider();
-            }
+            Command command = Parser.parseCommand(fullCommand);
+            command.execute(tasks, ui, storage);
+            ui.showDivider();
         }
     }
 

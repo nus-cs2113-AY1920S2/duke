@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Todo extends Task {
-    protected static final String TODO_ICON = "T";
+    public static final char TODO_ICON = 'T';
 
     public Todo(String description) {
         super(description);

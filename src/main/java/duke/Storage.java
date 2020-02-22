@@ -32,15 +32,15 @@ public class Storage {
         while (scanner.hasNextLine()) {
             String taskLine = scanner.nextLine();
             switch (taskLine.charAt(0)) {
-            case 'T':
+            case Todo.TODO_ICON:
                 // todo
                 taskList.addTask(Todo.decodeTask(taskLine));
                 break;
-            case 'D':
+            case Deadline.DEADLINE_ICON:
                 // deadline
                 taskList.addTask(Deadline.decodeTask(taskLine));
                 break;
-            case 'E':
+            case Event.EVENT_ICON:
                 // event
                 taskList.addTask(Event.decodeTask(taskLine));
                 break;

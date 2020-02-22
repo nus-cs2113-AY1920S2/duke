@@ -7,6 +7,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! " + super.getMessage();
+        return Ui.GENERIC_ERROR_MESSAGE_PREFIX + super.getMessage();
     }
 }

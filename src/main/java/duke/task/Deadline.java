@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Deadline extends Task {
-    protected static final String DEADLINE_ICON = "D";
+    public static final char DEADLINE_ICON = 'D';
 
     protected String by;
 
