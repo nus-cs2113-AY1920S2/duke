@@ -5,15 +5,14 @@ import Storage.Storage;
 import TaskList.TaskList;
 import Ui.Ui;
 
-public class ToDoCommand extends Command {
-    public ToDoCommand(String userInput) {
-        super(userInput);
+public class FindCommand extends Command {
+    public FindCommand(String rawUserInput) {
+        super(rawUserInput);
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws MissingDescriptionException {
         String[] splitCommands = removeCommandWord(rawUserInput);
-        taskList.addNewToDo(splitCommands[1]);
-        storage.saveToHardDisk(taskList);
+        taskList.findTask(splitCommands[1]);
     }
 }

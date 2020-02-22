@@ -39,7 +39,7 @@ public class TaskList {
         int listIndex = itemIndex + 1;
         try {
             taskList.get(itemIndex).markAsDone();
-            taskList.get(itemIndex).getDoneResponseMessage(listIndex);
+            System.out.println(taskList.get(itemIndex).getDoneResponseMessage(listIndex));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You don't have that many items in the list. Please try a number within range!");
         }
@@ -84,5 +84,20 @@ public class TaskList {
         System.out.println(String.format("Added the task:\n    %s", taskDetails));
         System.out.println(String.format("Now you have %d tasks in the list!",
                 Task.getNumberOfTasksInList()));
+    }
+
+    public void findTask(String keyword) {
+        int index = 1;
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                if (index == 1) {
+                    System.out.println("Here are the matching tasks in your list:");
+                }
+                System.out.println(String.format("%d. %s", index++, task.toString()));
+            }
+        }
+        if (index == 1) {
+            System.out.println("There are no matching results");
+        }
     }
 }

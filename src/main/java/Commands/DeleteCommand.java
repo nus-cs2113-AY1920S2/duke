@@ -1,6 +1,5 @@
 package Commands;
 
-import Exceptions.DukeException;
 import Exceptions.MissingDescriptionException;
 import Exceptions.MissingItemIndexException;
 import Storage.Storage;

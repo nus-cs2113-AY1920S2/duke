@@ -1,13 +1,12 @@
 package Commands;
 
-import Exceptions.DukeException;
 import Exceptions.MissingDateException;
 import Exceptions.MissingDescriptionException;
 import Storage.Storage;
 import TaskList.TaskList;
 import Ui.Ui;
 
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
     public DeadlineCommand(String userInput) {
         super(userInput);
     }

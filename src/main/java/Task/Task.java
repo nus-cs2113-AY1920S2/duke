@@ -60,7 +60,6 @@ public abstract class Task {
 
     @Override
     public abstract String toString();
-
     public abstract String getEventType();
     public abstract String getTaskTime();
     public abstract String getDoneResponseMessage(int itemIndexRequested);

@@ -21,7 +21,7 @@ public class Storage {
         this.dirPath = "data";
 
         if (new File(dirPath).mkdir()) {
-            System.out.println("No existing data dir found, creating new data dir!");
+            System.out.println("No existing data directory found. Creating new data directory!");
         }
         this.file = new File(dirPath, filePath);
     }
@@ -46,21 +46,21 @@ public class Storage {
                     switch (taskType) {
                     case "[T]":
                         Todo todo = new Todo(taskDescription);
-                        if (isDone.equals("Y")) {
+                        if (isDone(isDone)) {
                             todo.markAsDone();
                         }
                         taskArrayList.add(todo);
                         break;
                     case "[D]":
                         Deadline deadline = new Deadline(taskDescription, parseLine[3]);
-                        if (isDone.equals("Y")) {
+                        if (isDone(isDone)) {
                             deadline.markAsDone();
                         }
                         taskArrayList.add(deadline);
                         break;
                     case "[E]":
                         Events event = new Events(taskDescription, parseLine[3]);
-                        if (isDone.equals("Y")) {
+                        if (isDone(isDone)) {
                             event.markAsDone();
                         }
                         taskArrayList.add(event);
@@ -78,6 +78,10 @@ public class Storage {
         return taskArrayList;
     }
 
+    public boolean isDone(String isDone) {
+        return isDone.equals("Y");
+    }
+
     public void saveToHardDisk(TaskList taskArrayList) {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -90,12 +94,13 @@ public class Storage {
         }
     }
 
-    private void writeToDataFile(TaskList taskArrayList, FileWriter fileWriter) throws IOException, HardDiskCorruptedException {
+    private void writeToDataFile(TaskList taskArrayList, FileWriter fileWriter)
+            throws IOException, HardDiskCorruptedException {
         for (Task task : taskArrayList.getTaskList()) {
             if (isToDo(task)) {
                 fileWriter.write(String.format("%s/%s/%s\n", task.getEventType(),
                         task.isDone(), task.getDescription()));
-            } else if (isDeadline(task) || isEvent(task)){
+            } else if (isDeadline(task) || isEvent(task)) {
                 fileWriter.write((String.format("%s/%s/%s/%s\n", task.getEventType(),
                         task.isDone(), task.getDescription(), task.getTaskTime())));
             } else {

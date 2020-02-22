@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class HardDiskCorruptedException extends DukeException{
+public class HardDiskCorruptedException extends DukeException {
     private String errorMessage;
 
     public HardDiskCorruptedException(String errorMessage) {

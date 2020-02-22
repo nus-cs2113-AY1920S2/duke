@@ -8,7 +8,7 @@ public class MissingItemIndexException extends DukeException {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Missing Item Index: missing an index! " +
                 "Please enter an index to be marked done!");
     }
