@@ -87,7 +87,8 @@ public class Duke {
 
                 } catch (IndexOutOfBoundsException e) {
                     Printer.printError(); //TODO add custom error message when accessing OFB index
-                } continue;
+                }
+                continue;
 
             case "todo":
                 try {
@@ -103,7 +104,8 @@ public class Duke {
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printEmptyDescriptionError(command);
                     Printer.printHint(command);
-                } continue;
+                }
+                continue;
 
             case "deadline":
                 try {
@@ -125,7 +127,8 @@ public class Duke {
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printFormatError(command);
                     Printer.printHint(command);
-                } continue;
+                }
+                continue;
 
             case "event":
                 try {
@@ -147,10 +150,12 @@ public class Duke {
                 } catch (IndexOutOfBoundsException | BlankStringException e) {
                     Printer.printFormatError(command);
                     Printer.printHint(command);
-                } continue;
+                }
+                continue;
 
             default:
-                Printer.printUnknownCommandError(command); //TODO add custom error message when received unlisted commands
+                Printer.printUnknownCommandError(command); //TODO add custom error message when received unlisted
+                // commands
             }
         }
     }
