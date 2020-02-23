@@ -59,6 +59,6 @@ public class ToDos extends Task {
     public String toString() {
         return this.taskId 
                 + "." 
-                + this.taskWithSymbol(); 			
+                + this.taskWithSymbol();
     }
 }

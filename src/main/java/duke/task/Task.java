@@ -108,6 +108,6 @@ public class Task {
     /** A string representation of a task object. */
     @Override
     public String toString() {
-        return this.taskId + "." + this.taskWithSymbol(); 			
+        return this.taskId + "." + this.taskWithSymbol();
     }
 }
