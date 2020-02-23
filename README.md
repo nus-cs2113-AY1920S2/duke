@@ -21,8 +21,9 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 
 
 ##  1. Introduction
-
-![Duke Main Screen](https://user-images.githubusercontent.com/59989652/75106818-5d90ba00-565b-11ea-8fcd-dd1fd53589d5.PNG)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/59989652/75109414-a9446300-565d-11ea-938e-8bcc5e3c0bc7.PNG">
+</p>
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is **optimized for those who prefer to work with a Command Line Interface (CLI)**. 
 Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
@@ -33,7 +34,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 ## 2. Quick Start
 
 *   1. Ensure that `Java 11` or above is installed in your Computer.
-*   2. Download the latest `duke.jar` [_here_](https://github.com/JosephLimWeiJie/duke/releases/download/v0.1.0/duke.jar).
+*   2. Download the latest `duke.jar` [_here_](https://github.com/JosephLimWeiJie/duke/releases/download/v0.2.0/duke.jar).
 *   3. Copy the file to the folder you want to use as the home folder for your Duke.
 *   4. Double-click on `duke.jar` to start the app. It should appear in a few seconds.
 *   5. Type in a command and press `ENTER` to execute it. For e.g. typing `list` and                         pressing enter will list all your current tasks.
