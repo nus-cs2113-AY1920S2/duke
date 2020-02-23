@@ -33,6 +33,7 @@ deadline homework1 /by 1200-12-12T10:00
 event homework1 group meeting /on 1200-12-12T10:00 to 1200-12-12T11:11
 find homework1
 filter 1200-12-12
+filter 12-12-12
 done
 delete
 find
