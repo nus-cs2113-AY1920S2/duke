@@ -13,11 +13,19 @@ public class Command {
         this.details = details;
     }
 
+    /**
+     * Execute the command given by the user
+     * @param ui
+     * @param taskManager
+     * @param storageManager
+     * @throws MissingDescriptionException
+     * @throws UnknownCommandException
+     */
     public void execute(Ui ui, TaskManager taskManager, StorageManager storageManager) throws MissingDescriptionException,
             UnknownCommandException{
         switch(instruction) {
         case "list":
-            taskManager.printAllTasks();
+            taskManager.printAllTasks(taskManager.getTasks(), "");
             break;
         case "done":
             if (details.isEmpty()) {

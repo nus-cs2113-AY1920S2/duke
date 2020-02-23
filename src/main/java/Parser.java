@@ -1,5 +1,12 @@
 public class Parser {
 
+    /**
+     * Create an object command that contains the instruction and details
+     * from the complete user input command, information should be delimited
+     * by white spaces.
+     * @param fullCommand
+     * @return an object command that contains an instruction and a string with details
+     */
     public static Command parse(String fullCommand) {
         Command command;
         String[] requests = fullCommand.split(" ", 2);

@@ -10,6 +10,9 @@ public class Jan {
     private static StorageManager storageManager;
     private static TaskManager taskManager;
 
+    /**
+     * Initialise task list and variables needed to run the program
+     */
     public static void init(){
         ui = new Ui();
         storageManager = new StorageManager(FILEPATH);
@@ -37,7 +40,7 @@ public class Jan {
                 Command command = Parser.parse(fullCommand);
                 command.execute(ui, taskManager, storageManager);
             }catch (MissingDescriptionException e) {
-                ui.printIncorrectCommandMessage();
+                ui.printIncorrectFormatMessage();
             } catch (UnknownCommandException e) {
                 ui.printHelpMessage();
             } finally {

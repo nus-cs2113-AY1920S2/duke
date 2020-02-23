@@ -6,7 +6,7 @@ import TaskObjects.Todo;
 import java.util.ArrayList;
 
 public class TaskManager {
-    protected static ArrayList<Task> Tasks;
+    protected ArrayList<Task> Tasks;
     private Ui ui = new Ui();
 
     public TaskManager() {
@@ -17,10 +17,14 @@ public class TaskManager {
         this.Tasks = Tasks;
     }
 
-    public static ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return Tasks;
     }
 
+    /**
+     * Returns the last task that was added to the arrayList
+     * @return the last task added to the arrayList
+     */
     public Task getLastTask(){
         if (Tasks.size() > 0) {
             return Tasks.get(Tasks.size() - 1);
@@ -29,10 +33,20 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Check if the task with specified task number exists. Returns true if exists and false
+     * otherwise.
+     * @param taskNum
+     * @return True if task exists and false otherwise
+     */
     private boolean existTask(int taskNum){
         return (taskNum <= Tasks.size()  && (taskNum > 0));
     }
 
+    /**
+     * Set the task with the specified task number as done
+     * @param taskNum
+     */
     public void markTaskAsDone(int taskNum){
         if (existTask(taskNum)) {
             System.out.println("Nice! I've marked this task as done: ");
@@ -43,6 +57,10 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Remove the task with the specified task number from the arrayList
+     * @param taskNum
+     */
     public void deleteTask(int taskNum) {
         if (existTask(taskNum)) {
             Task tempTask = Tasks.get(taskNum - 1);
@@ -55,41 +73,58 @@ public class TaskManager {
         }
     }
 
-    public boolean addTaskToArrayList(String command, String commandDescription, String divider) {
+    /**
+     * Create a new task object and add object to arrayList
+     * @param command
+     * @param commandDescription
+     * @param divider
+     */
+    public void addTaskToArrayList(String command, String commandDescription, String divider) {
         String[] taskDetails = commandDescription.split(divider);
         switch(command) {
         case "todo":
             Todo todo = new Todo(commandDescription);
             Tasks.add(todo);
             printSuccessfulAddTaskMessage();
-            return true;
+            break;
         case "deadline":
             try {
                 Deadline deadline = new Deadline(taskDetails[0], taskDetails[1]);
                 Tasks.add(deadline);
+                printSuccessfulAddTaskMessage();
             } catch (IndexOutOfBoundsException e) {
                 ui.printIncorrectFormatMessage();
             }
-            printSuccessfulAddTaskMessage();
+            break;
         case "event":
             try {
                 Event event = new Event(taskDetails[0], taskDetails[1]);
                 Tasks.add(event);
+                printSuccessfulAddTaskMessage();
             } catch (IndexOutOfBoundsException e) {
                 ui.printIncorrectFormatMessage();
             }
-            printSuccessfulAddTaskMessage();
-        }
-        return false;
-    }
 
-    public void printAllTasks(){
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < Tasks.size(); i++) {
-            System.out.println( i + 1 + ". " + Tasks.get(i));
+            break;
         }
     }
 
+    /**
+     * Display all task object within the arrayList. Specify the type of list
+     * it is, For example "matching" or "existing".
+     * @param TasksToPrint
+     * @param taskType
+     */
+    public void printAllTasks(ArrayList<Task> TasksToPrint, String taskType){
+        System.out.println("Here are the " + taskType +"tasks in your list :");
+        for (int i = 0; i < TasksToPrint.size(); i++) {
+            System.out.println( i + 1 + ". " + TasksToPrint.get(i));
+        }
+    }
+
+    /**
+     * Display the number of tasks in the complete task arrayList
+     */
     public void printCurrentTaskCount() {
         if (Tasks.size() < 2){
             System.out.println("Now you have " + Tasks.size() + " task in the list");
@@ -98,14 +133,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Display message if task addition was successful without any exceptions
+     */
     public void printSuccessfulAddTaskMessage() {
         Task task = Tasks.get(Tasks.size() - 1);
         System.out.println("Got it. I've added this task:\n " + task);
         printCurrentTaskCount();
     }
-
-    public void printNotSuccessfulAddTaskMessage(){
-        System.out.println("Something went wrong. Please try again.");
-    }
-
 }

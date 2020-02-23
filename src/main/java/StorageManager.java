@@ -19,6 +19,12 @@ public class StorageManager {
         this.filePath = filePath;
     }
 
+    /**
+     * Read in line by line from the text file and return an arraylist with all
+     * tasks added
+     * @return an arraylist containing all the tasks loaded from the text file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> Tasks = new ArrayList<>();
         File f = new File(filePath); // create a File for the given file path
@@ -30,7 +36,6 @@ public class StorageManager {
         return Tasks;
     }
 
-    //add an exception later to catch here if cannot be added properly
     private void parseTaskFromFile(String savedString, ArrayList<Task> Tasks){
         String[] taskDetails = savedString.split("[|]");
         switch (taskDetails[0]) {
@@ -59,6 +64,11 @@ public class StorageManager {
         }
     }
 
+    /**
+     * Add task information to the text file
+     * @param textToAdd
+     * @throws IOException
+     */
     public void addTaskToFile(String textToAdd) throws IOException {
         File file = new File(filePath);
         FileWriter fw = new FileWriter(filePath,true);
@@ -66,6 +76,12 @@ public class StorageManager {
         fw.close();
     }
 
+    /**
+     * Overwrite all existing tasks in the text file with the updated
+     * tasks in the arrayList
+     * @param Tasks
+     * @throws IOException
+     */
     public void saveToFile(ArrayList<Task> Tasks) throws IOException {
         File file = new File(filePath);
         file.createNewFile();
