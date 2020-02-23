@@ -5,7 +5,7 @@ import Duke.Task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Dictionary {
+public class Message {
 
     // Library of common words
     public static final int MAX_TASKS = 100;
@@ -27,11 +27,6 @@ public class Dictionary {
     public static final String MESSAGE_WELCOME = "\n\tHello! I'm " + BOT_NAME + "\n\tWhat can I do for you?";
     public static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
     public static final String LINE_DIVIDER = "\n\t___________________________________________________________________________";
-    public static final String MESSAGE_INVALID_COMMAND = "\tInvalid Command. Please try again\n";
-    public static final String MESSAGE_DESC_EMPTY = "\tInvalid Command! Description cannot be empty!";
-    public static final String MESSAGE_BY_EMPTY = "\tInvalid Command! BY cannot be empty!";
-    public static final String MESSAGE_AT_EMPTY = "\tInvalid Command! AT cannot be empty!";
-    public static final String MESSAGE_MARK_EMPTY = "\tInvalid Command! Nothing is marked!";
     public static final String COMMAND_HELP_WORD = "HELP";
     public static final String COMMAND_HELP_DESC = "\n" +
             "\tHere's the help list\n" +

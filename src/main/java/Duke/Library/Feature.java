@@ -13,7 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static Duke.Library.Dictionary.*;
+import static Duke.Library.Message.*;
 
 public class Feature {
 
@@ -40,26 +40,6 @@ public class Feature {
 
     public static final void displayAcceptTask(String userDescription) {
         System.out.println("\tGot it. I've added this " + userDescription);
-    }
-
-    public static final void displayInvalidCommand() {
-        System.out.println(MESSAGE_INVALID_COMMAND);
-    }
-
-    public static final void displayInvalidDescription() {
-        System.out.print(MESSAGE_DESC_EMPTY);
-    }
-
-    public static final void displayInvalidBy() {
-        System.out.print(MESSAGE_BY_EMPTY);
-    }
-
-    public static final void displayInvalidAt() {
-        System.out.print(MESSAGE_AT_EMPTY);
-    }
-
-    public static final void displayInvalidMark() {
-        System.out.print(MESSAGE_MARK_EMPTY);
     }
 
     public static final void displayExitMessage() {
@@ -168,7 +148,6 @@ public class Feature {
                 executeType(exeCommand);
             }
         } catch (IllegalCommandException e) {
-            displayInvalidCommand();
             executeCommand();
         } catch (IllegalDeleteException e) {
             e.printStackTrace();

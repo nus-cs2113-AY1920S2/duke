@@ -11,16 +11,9 @@ import static Duke.Library.Feature.*;
 
 public class Duke{
 
-    public Duke(String filePath) {
-    }
-
-    public void run() throws IllegalCommandException, IOException, IllegalTypeException, IllegalDeleteException, IllegalDoneTaskException {
+    public static void main(String[] args) throws IllegalTypeException, IllegalCommandException, IllegalDoneTaskException, IllegalDeleteException, IOException {
         displayWelcomeMessage();
         run();
         exitProgram();
-    }
-
-    public static void main(String[] args) throws IllegalTypeException, IllegalCommandException, IllegalDoneTaskException, IllegalDeleteException, IOException {
-        new Duke("data/output.txt").run();
     }
 }
