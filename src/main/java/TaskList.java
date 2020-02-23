@@ -19,6 +19,17 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public void find(String name) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        int i = 1;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(name)) {
+                System.out.printf("\t%d.%s%s", i, task, System.lineSeparator());
+                i++;
+            }
+        }
+    }
+
     public void removeByTask(Task task) {
         tasks.remove(task);
     }
