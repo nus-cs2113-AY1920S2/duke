@@ -81,6 +81,12 @@ public class Duke {
                     System.out.println("\t  " + removedTask);
                     tasks.printSize();
                     break;
+                case "find":
+                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
+                        throw new NoDescriptionException();
+                    }
+                    tasks.find(taskDescription);
+                    break;
                 default:
                     throw new IllegalArgumentException();
                 }
@@ -103,11 +109,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Split a string (by /) into tokens
-     * @param s input string
-     * @return An array of tokens
-     */
     private String[] processArgs(String s) {
         String[] tokens = new String[2];
         if (s.indexOf('/') == -1) {

@@ -7,10 +7,6 @@ public class Ui {
         System.out.println("\t____________________________________________________________");
     }
 
-    /**
-     * Prints a welcome message to the specified person.
-     * @param name the person to be welcomed
-     */
     public void showWelcome(String name) {
         showLine();
         String logo = " ____        _\n"

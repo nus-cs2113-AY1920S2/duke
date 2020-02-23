@@ -22,6 +22,9 @@ fi
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -Dfile.encoding=UTF8 -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
+# delete the storage file after testing
+rm data -r
+
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED.TXT
 if [ $? -eq 0 ]
