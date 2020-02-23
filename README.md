@@ -54,18 +54,20 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 ```javascript
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. 
-  e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
-  to specify a task's description.
+  * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
+    to specify a task's description.
 
 * For a general todo task, a task description MUST be added
-  e.g. in `todo TASK_DESCRIPTION`.
+  * e.g. in `todo TASK_DESCRIPTION`.
 
 * For a deadline task, a date MUST be added right after the TASK_DESCRIPTION by using /by. 
-  e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
+  * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
   Note that you have to add 'T' between the date and the time.
   
-* For an event task, an event start and end date and time MUST be added right after the TASK_DESCRIPTION  by using /on.
-  e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` such as 2020-01-12T10:00 to 2020-01-12T11:00`.
+* For an event task, an event start and end date and time MUST be added right after the TASK_DESCRIPTION  
+  by using /on.
+  * e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` 
+         such as 2020-01-12T10:00 to 2020-01-12T11:00`.
   Note that you have to add 'T' between the date and the time.    
 
 ```
