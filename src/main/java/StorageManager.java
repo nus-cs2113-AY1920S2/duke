@@ -23,7 +23,7 @@ public class StorageManager {
      * Read in line by line from the text file and return an arraylist with all
      * tasks added
      * @return an arraylist containing all the tasks loaded from the text file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException possible first instance of running the program, hence file not created yet
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> Tasks = new ArrayList<>();
@@ -66,8 +66,8 @@ public class StorageManager {
 
     /**
      * Add task information to the text file
-     * @param textToAdd
-     * @throws IOException
+     * @param textToAdd String of the task formatted for storing into the text file for retrieval
+     * @throws IOException refer to online documentation for more information
      */
     public void addTaskToFile(String textToAdd) throws IOException {
         File file = new File(filePath);
@@ -79,8 +79,8 @@ public class StorageManager {
     /**
      * Overwrite all existing tasks in the text file with the updated
      * tasks in the arrayList
-     * @param Tasks
-     * @throws IOException
+     * @param Tasks ArrayList of task to be stored into text file for future retrieval
+     * @throws IOException refer to online documentation for more information
      */
     public void saveToFile(ArrayList<Task> Tasks) throws IOException {
         File file = new File(filePath);

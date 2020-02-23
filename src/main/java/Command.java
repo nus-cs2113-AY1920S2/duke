@@ -15,11 +15,11 @@ public class Command {
 
     /**
      * Execute the command given by the user
-     * @param ui
-     * @param taskManager
-     * @param storageManager
-     * @throws MissingDescriptionException
-     * @throws UnknownCommandException
+     * @param ui ui class that manages all ui methods
+     * @param taskManager a class that manages all task methods
+     * @param storageManager a class that manages all methods related to storing data
+     * @throws MissingDescriptionException user input may be missing some task description
+     * @throws UnknownCommandException user input a command that cannot be processed
      */
     public void execute(Ui ui, TaskManager taskManager, StorageManager storageManager) throws MissingDescriptionException,
             UnknownCommandException{

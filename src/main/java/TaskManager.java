@@ -36,7 +36,7 @@ public class TaskManager {
     /**
      * Check if the task with specified task number exists. Returns true if exists and false
      * otherwise.
-     * @param taskNum
+     * @param taskNum The index of the task in order starting from 1. May differ from index of arrayList by 1
      * @return True if task exists and false otherwise
      */
     private boolean existTask(int taskNum){
@@ -45,7 +45,7 @@ public class TaskManager {
 
     /**
      * Set the task with the specified task number as done
-     * @param taskNum
+     * @param taskNum The index of the task in order starting from 1. May differ from index of arrayList by 1
      */
     public void markTaskAsDone(int taskNum){
         if (existTask(taskNum)) {
@@ -59,7 +59,7 @@ public class TaskManager {
 
     /**
      * Remove the task with the specified task number from the arrayList
-     * @param taskNum
+     * @param taskNum The index of the task in order starting from 1. May differ from index of arrayList by 1
      */
     public void deleteTask(int taskNum) {
         if (existTask(taskNum)) {
@@ -89,9 +89,9 @@ public class TaskManager {
 
     /**
      * Create a new task object and add object to arrayList
-     * @param command
-     * @param commandDescription
-     * @param divider
+     * @param command identifier for action to be taken or task type
+     * @param commandDescription details for the command that is to be executed
+     * @param divider divider for additional details if any
      */
     public void addTaskToArrayList(String command, String commandDescription, String divider) {
         String[] taskDetails = commandDescription.split(divider);
@@ -126,8 +126,8 @@ public class TaskManager {
     /**
      * Display all task object within the arrayList. Specify the type of list
      * it is, For example "matching" or "existing".
-     * @param TasksToPrint
-     * @param taskType
+     * @param TasksToPrint ArrayList with Tasks to be printed
+     * @param taskType Type of ArrayList to be printed
      */
     public void printAllTasks(ArrayList<Task> TasksToPrint, String taskType){
         System.out.println("Here are the " + taskType +"tasks in your list :");

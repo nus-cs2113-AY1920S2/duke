@@ -35,7 +35,7 @@ public class Ui {
 
     /**
      * Display general error message if exception is not due to user
-     * @param errorMsg
+     * @param errorMsg Error message generated if any
      */
     public void printGeneralErrorMessage(String errorMsg) {
         System.out.println("Something went wrong: " + errorMsg);
@@ -73,7 +73,7 @@ public class Ui {
      * Take in user input as full Command string for parsing.
      * @return a String that contains all information of the command
      */
-    public static String readCommand() {
+    public String readCommand() {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
