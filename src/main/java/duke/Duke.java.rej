@@ -1,0 +1,66 @@
+diff a/src/main/java/duke/Duke.java b/src/main/java/duke/Duke.java	(rejected hunks)
+@@ -36,45 +36,36 @@
+             e.printStackTrace();
+         }
+     }
++//    private TaskList tasks;
++//
++//    public Duke(String filePath) {
++//        storage = new Storage(filePath);
++//        try {
++//            tasks = new TaskList();
++//        } catch (DukeException e) {
++//            ui.showLoadingError();
++//            tasks = new TaskList();
++//        }
++//    }
+ 
+     public static void main(String[] args) throws IOException {
+         printIntro();
+         printExeType();
+-        exeCommands();
+-        printExit();
+-        saveFile();
+-    }
+-
+-    /*
+-    exeCommand identifies whether the user is going to
+-    1. add a task
+-    2. print a task
+-    3. mark task as done
+-    4. deleteTask or
+-    5. exit programme
+-    for further data processing
+-     */
+-    public static void exeCommands() {
+         String exeCommand = getStringInput(userInput);
+-        try {
+-            while (!exeCommand.equals(EXIT_COMMAND)) {
+-                exeType(exeCommand); //to select the exeType and execute it
+-                printExeType(); //user guide after execution of command
+-                exeCommand = getStringInput(userInput); //get the next command
+-            }
+-        } catch (IllegalCommandException e) {
+-            System.out.println("    Sorry,we do not understand your command. " +
+-                    "(IllegalCommandException). " +
+-                    "Please follow the instructions below.");
+-            printExeType();
+-            exeCommands();
++        while (!exeCommand.equals(EXIT_COMMAND)) {
++            exeType(exeCommand); //to select the exeType and execute it
++            printExeType(); //user guide after execution of command
++            saveFile();
++            exeCommand = getStringInput(userInput); //get the next command
+         }
++        printExit();
++        Duke_fw.close();
+     }
+ 
+     /*
+     exeType receives the command from exeCommand and it executes the command received.
+      */
+-    public static void exeType(String exeCommand) throws IllegalCommandException {
++    public static void exeType(String exeCommand)  {
+         try {
+             switch (exeCommand) {
+             case ADD_TASK:
