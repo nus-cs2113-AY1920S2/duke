@@ -6,6 +6,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DeadlineCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
@@ -35,6 +36,9 @@ public class Parser {
         case DoneCommand.DONE_COMMAND_NAME:
             // mark a task as done
             return prepareDoneCommand(commandTokens);
+        case FindCommand.FIND_COMMAND_NAME:
+            // find tasks with descriptions that match a query string
+            return prepareFindCommand(fullCommand);
         case TodoCommand.TODO_COMMAND_NAME:
             // add to`do to tasks
             return prepareTodoCommand(fullCommand);
@@ -149,6 +153,15 @@ public class Parser {
             return new IncorrectCommand(Ui.INVALID_DATE_FORMAT_MESSAGE);
         }
         return new EventCommand(eventName, eventDate);
+    }
+
+    private static Command prepareFindCommand(String fullCommand) {
+        try {
+            String searchString = fullCommand.substring(FindCommand.FIND_COMMAND_NAME.length() + 1).trim();
+            return new FindCommand(searchString);
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            return new IncorrectCommand(Ui.FIND_INSUFFICIENT_ARGS_MESSAGE);
+        }
     }
 
     private static Command prepareTodoCommand(String fullCommand) {
