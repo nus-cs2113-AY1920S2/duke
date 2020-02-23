@@ -12,18 +12,33 @@ public class Storage {
         Printer.printTasks(myTasks);
     }
 
+    /**
+     * Returns the task at index that the User specified.
+     * User-specified index will need to subtract 1 as we are using 0 indexing.
+     *
+     * @param index Index that the User specified.
+     * @return Task at index - 1, if it exists
+     */
     public Task getTask(int index) {
-        try {
-            return myTasks.get(index - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw e;
-        }
+
+        return myTasks.get(index - 1);
     }
 
+    /**
+     * Returns the current size of the tasks storage
+     *
+     * @return current size of storage
+     */
     public static int getSize() {
         return myTasks.size();
     }
 
+    /**
+     * Deletes the task at index that the User specified.
+     * User-specified index will need to subtract 1 as we are using 0 indexing.
+     *
+     * @param index Index that the User specified.
+     */
     public void deleteTask(int index) {
         myTasks.remove(index - 1);
     }
