@@ -20,6 +20,7 @@ public class Storage {
      * @return Task at index - 1, if it exists
      */
     public Task getTask(int index) {
+
         return myTasks.get(index - 1);
     }
 
@@ -35,9 +36,20 @@ public class Storage {
     /**
      * Deletes the task at index that the User specified.
      * User-specified index will need to subtract 1 as we are using 0 indexing.
+     *
      * @param index Index that the User specified.
      */
     public void deleteTask(int index) {
         myTasks.remove(index - 1);
+    }
+
+    public List<Task> findTasks(String keyword) {
+        List<Task> foundTasks = new ArrayList<>();
+
+        for (Task t : myTasks) {
+            t.addIfMatchesKeyword(t, foundTasks, keyword);
+        }
+
+        return foundTasks;
     }
 }

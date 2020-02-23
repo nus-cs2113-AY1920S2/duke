@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Represents an event task.
  */
@@ -35,5 +37,19 @@ public class Event extends Task {
         String toPrint = super.toString();
         toPrint = String.format("%s%s (at: %s)", this.icon, toPrint, this.eventAt);
         return toPrint;
+    }
+
+    public String getEventAt() {
+        return this.eventAt;
+    }
+
+    @Override
+    public void addIfMatchesKeyword(Task t, List<Task> foundTasks, String keyword) {
+        String description = t.getDescription();
+        String eventAt = getEventAt();
+        if (description.contains(keyword) || eventAt.contains(keyword)) {
+            foundTasks.add(t);
+        }
+
     }
 }

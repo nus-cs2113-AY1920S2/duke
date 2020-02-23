@@ -77,6 +77,8 @@ public class Parser {
             return new DoneCommand();
         case "bye":
             return new ByeCommand();
+        case "find" :
+            return new FindCommand();
         default :
             DukeExceptionHandler.unknownCommand();
             return null;
