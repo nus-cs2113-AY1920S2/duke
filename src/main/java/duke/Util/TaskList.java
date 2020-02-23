@@ -1,10 +1,14 @@
-package duke.commands;
+package duke.Util;
 
 import duke.taskmanager.Tasks;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListCommand extends Command {
+public class TaskList {
+    public static List<Tasks> tasks = new ArrayList<>();
     private static final String format = "0O=-             %-60s-=O0%n";
     private static final String split = "=============================" +
             "====================================================";
@@ -20,11 +24,14 @@ public class ListCommand extends Command {
             "00000000000000000000000000000000000000000000000000000000" +
             "000000000000000000\n" + split;
 
-    public ListCommand() {
+    public TaskList() throws IOException {
+        tasks = new ArrayList<>();
+        Load load = new Load(Paths.get("data/myTasks.txt"));
+        tasks = load.readData();
     }
 
+
     public static void printIntro() {
-        System.out.println(splitUpperBoundary);
         System.out.printf(format, "Your current task list:");
     }
 
@@ -34,9 +41,24 @@ public class ListCommand extends Command {
         System.out.println(splitLowerBoundary);
     }
 
-    public static void execute(List<Tasks> tasks) {
+
+    public List<Tasks> getTasks() {
+        return tasks;
+    }
+    public static Tasks getTask(int index) {
+        return tasks.get(index);
+    }
+    public static void add(Tasks task) {
+        tasks.add(task);
+    }
+
+    public static int getSize() {
+        return tasks.size();
+    }
+
+    public static void showList() {
         printIntro();
-        if (tasks.size() == 0){
+        if (getSize() == 0){
             printEmpty();
         } else {
             int index = 0;

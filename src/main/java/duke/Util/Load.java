@@ -14,25 +14,23 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Load {
-    private static Path path;
+    public static Path path;
     public static List<Tasks> list = new ArrayList<>();
     public static List<String> lines = new ArrayList<>();
     public static UI ui;
-
+    public static File file;
     public Load(Path path) {
         Load.path = path;
+        file = new File(String.valueOf(path));
     }
 
     public void loadData() throws FileNotFoundException {
         String line;
-        File file = new File(String.valueOf(path)); // create a File for the given file path
         Scanner readFile = new Scanner(file);
         while (readFile.hasNext()) {
             line = readFile.nextLine();
             lines.add(line);
         }
-        System.out.println(lines);
-        System.out.println("aoisdioasj");
     }
     public List<Tasks> readData() throws FileNotFoundException {
         loadData();

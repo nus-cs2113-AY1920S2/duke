@@ -6,11 +6,8 @@ public enum TaskType {
     EVENT("3")
     ;
 
-    private final String taskType;
+    public final String taskType;
     TaskType(String taskType) {
         this.taskType = taskType;
-    }
-    public String getTaskType() {
-        return this.taskType;
     }
 }

@@ -1,41 +1,34 @@
 package duke.commands;
 
-import duke.Util.Tasklist;
+import duke.Util.TaskList;
 import duke.Util.UI;
+import duke.exceptions.IllegalDeleteException;
 import duke.taskmanager.Tasks;
 
-import java.util.InputMismatchException;
+import java.util.List;
 
-public class DeleteCommand extends Command{
-    protected int index;
+public class DeleteCommand extends Command {
     public UI ui;
+    public static int taskNo;
     public DeleteCommand (UI ui)  {
         this.ui = ui;
+        taskNo = TaskList.getSize();
     }
 
-    public boolean isExist() {
-        Tasklist.showList();
-        int index = ui.getIntegerInput();
-        ui.clearInput();
-        return index < Tasklist.getSize();
-    }
-
-    @Override
-    public void execute() {
-        Tasks task = Tasklist.getTask(index);
-        try {
-            if (isExist()) {
-                Tasklist.delete(index);
-                System.out.println("    Task " + index + ": " +
-                        task.getTask() + " has been deleted!\n" +
-                        "    Input Any key to continue.");
-                Tasklist.saveTaskList();
-            } else {
-                System.out.println("    Sorry, task does not exist ");
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("    Not a valid input.");
-            ui.clearInput();
+    public List<Tasks> execute(List<Tasks> list) throws IllegalDeleteException {
+        if (taskNo <= 0) {
+            ListCommand.execute(list);
+            return list;
+        }
+        ui.printDeleteIntro();
+        int index = Integer.parseInt(ui.getStringInput());
+        if (index < TaskList.getSize() && index >= 0) {
+            Tasks task = TaskList.getTask(index);
+            list.remove(index);
+            ui.printTaskDeleted(index, task);
+            return list;
+        } else {
+            throw new IllegalDeleteException();
         }
     }
 }

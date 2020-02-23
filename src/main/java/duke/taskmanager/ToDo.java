@@ -15,7 +15,3 @@ public class ToDo extends Tasks {
     @Override
     public String contentToFile() { return "T" + "|" + super.contentToFile(); }
 }
-
-//if task = td
-//return task = [T][Done]td
-//return contentToFile = T| [T][Done]td | N

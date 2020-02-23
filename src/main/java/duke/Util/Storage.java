@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
@@ -14,19 +15,16 @@ public class Storage {
     public Storage() {
     }
 
-    public static void writeData(List<Tasks> taskList) {
-        for (Tasks temp : taskList) {
-            String store = temp.contentToFile();
-            try {
-                writeToFile(store+System.lineSeparator());
-            } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
-            }
-        }
-    }
-    private static void writeToFile(String textToAdd) throws IOException {
+    public static void writeData(List<Tasks> taskList) throws IOException {
         FileWriter fw = new FileWriter(String.valueOf(path));
-        fw.write(textToAdd);
+        List<String> store = new ArrayList<>();
+        for (Tasks temp : taskList) {
+            store.add(temp.contentToFile());
+        }
+        for(String str: store) {
+            fw.write(str + System.lineSeparator());
+        }
         fw.close();
     }
 }
+

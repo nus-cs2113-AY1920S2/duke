@@ -24,6 +24,3 @@ public class Event extends Tasks {
     public String contentToFile() { return "E" + "|" +
             super.contentToFile() + "|" + by; }
 }
-//if task = event by tmr
-//return task = [E][Done]event by tmr
-//return contentToFile = E| [E][Done]event by tmr | Y

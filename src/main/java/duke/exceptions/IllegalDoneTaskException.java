@@ -1,4 +1,4 @@
 package duke.exceptions;
 
-public class IllegalDoneTaskException extends Exception   {
+public class IllegalDoneTaskException extends Exception {
 }

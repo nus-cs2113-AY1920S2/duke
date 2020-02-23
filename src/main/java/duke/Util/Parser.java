@@ -1,6 +1,9 @@
 package duke.Util;
 
 import duke.commands.*;
+import duke.exceptions.IllegalClearException;
+import duke.exceptions.IllegalDeleteException;
+import duke.exceptions.IllegalDoneTaskException;
 import duke.taskmanager.Deadline;
 import duke.taskmanager.Event;
 import duke.taskmanager.Tasks;
@@ -10,74 +13,101 @@ import java.io.IOException;
 import java.util.List;
 
 public class Parser {
-    public static final String TODO = "1";
-    public static final String DEADLINE = "2";
-    public static final String EVENT = "3";
     private static UI ui;
-    private static List<Tasks> list = Tasklist.getTasks();
-    public Parser(UI ui) {
+    private static List<Tasks> list;
+    public Parser(UI ui, List<Tasks> list) {
         Parser.ui = ui;
+        Parser.list = list;
     }
 
     public void parseCommand(String exeCommand) throws IOException {
-        CommandType commandType = CommandType.valueOf(exeCommand);
-        switch (commandType) {
-        case ADD_TASK:
-            Parser.ui.printTaskType();
-            parseAddCommand();
+        try {
+            CommandType[] commandType = CommandType.values();
+            int index = Integer.parseInt(exeCommand)-1;
+            CommandType command = commandType[index];
+            switch (command) {
+            case ADD_TASK:
+                Parser.ui.printTaskType();
+                parseAddCommand();
+                break;
+            case PRINT_TASKS:
+                ListCommand.execute(list);
+                break;
+            case MARK_AS_DONE:
+                try {
+                    DoneCommand doneCommand = new DoneCommand(ui);
+                    list = doneCommand.execute(list);
+                } catch (IllegalDoneTaskException | IndexOutOfBoundsException e) {
+                    Parser.ui.printExceptionInstruction();
+                    String doneExceptionInput = Parser.ui.getStringInput();
+                    if (doneExceptionInput.equals("1") || doneExceptionInput.equals("Yes")) {
+                        parseCommand("3");
+                    }
+                }
+                break;
+            case DELETE_TASK:
+                try {
+                    DeleteCommand deleteCommand = new DeleteCommand(ui);
+                    list = deleteCommand.execute(list);
+                } catch (IllegalDeleteException e) {
+                    Parser.ui.printExceptionInstruction();
+                    String deleteExceptionInput = Parser.ui.getStringInput();
+                    if (deleteExceptionInput.equals("1") || deleteExceptionInput.equals("Yes")) {
+                        parseCommand("3");
+                    }
+                }
+                break;
+            case FIND_TASK:
+                FindCommand findCommand = new FindCommand(ui);
+                findCommand.execute(list);
+                break;
+            case CLEAR_TASK:
+                try {
+                    list.clear();
+                    Parser.ui.printRespondToClearTask(list);
+                } catch (IllegalClearException e) {
+                    Parser.ui.printClearErrorMessage();
+                }
+                break;
+            default:
+                Parser.ui.printErrorMessage();
+            }
             Storage.writeData(list);
-            break;
-        case PRINT_TASKS:
-            ListCommand listCommand = new ListCommand();
-            listCommand.execute();
-            break;
-        case MARK_AS_DONE:
-            DoneCommand doneCommand = new DoneCommand(ui);
-            doneCommand.execute();
-            int indexDoneTask = doneCommand.getIndexOfTask();
-            saveDoneList(indexDoneTask);
-            break;
-        case DELETE_TASK:
-            DeleteCommand delete = new DeleteCommand(ui);
-            delete.execute();
-            break;
-        case FIND_TASK:
-            FindCommand findCommand = new FindCommand(ui);
-            findCommand.execute();
-            break;
-        default:
-            System.out.println("    Wrong command. Please try again.");
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            Parser.ui.printErrorMessage();
         }
     }
 
     private static void parseAddCommand() {
         String task = Parser.ui.getStringInput();
-        TaskType taskType = TaskType.valueOf(task);
+        TaskType[] taskType = TaskType.values();
+        int index = Integer.parseInt(task)-1;
+        TaskType selectTask = taskType[index];
+
         String by;
         System.out.println("    Please enter the task: ");
         task = Parser.ui.getStringInput();
         boolean isRepeat = checkRepeat(task);
         if (!isRepeat) {
-            switch (taskType) {
+            switch (selectTask) {
             case TODO:
                 ToDo t = new ToDo(task);
-                Tasklist.add(t);
+                list.add(t);
                 break;
             case DEADLINE:
-                System.out.println("    Please enter the deadline of your task: ");
+                Parser.ui.printTaskInstruction("deadline ");
                 by = Parser.ui.getStringInput();
                 Deadline d = new Deadline(task, by);
-                Tasklist.add(d);
+                list.add(d);
                 break;
             case EVENT:
-                System.out.println("    Please enter the venue of your task: ");
+                Parser.ui.printTaskInstruction("venue ");
                 by = Parser.ui.getStringInput();
                 Event e = new Event(task, by);
-                Tasklist.add(e);
+                list.add(e);
                 break;
             default:
-                System.out.println("    Sorry,we do not understand your command. " +
-                        "Please follow the instructions below.");
+                Parser.ui.printErrorMessage();
                 parseAddCommand();
             }
             Parser.ui.printRespondToAddTask(task);
@@ -88,19 +118,11 @@ public class Parser {
         if (list!=null && !list.isEmpty()) {
             for (Tasks i : list) {
                 if (i != null && i.task.equals(task)) {
-                    System.out.println("    The is a repeated task.");
+                    Parser.ui.printRepeatMessage();
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    private static void saveDoneList(int indexDoneTask) {
-        Tasks task = list.get(indexDoneTask);
-        task.markAsDone();
-        list.set(indexDoneTask, task);
-        Storage.writeData(list);
-        Parser.ui.clearInput();
     }
 }

@@ -1,36 +1,34 @@
 package duke.commands;
 
-import duke.Util.Tasklist;
+import duke.Util.TaskList;
 import duke.Util.UI;
+import duke.exceptions.IllegalDoneTaskException;
 import duke.taskmanager.Tasks;
+
+import java.util.List;
 
 public class DoneCommand extends Command {
     public UI ui;
     public static int taskNo;
     public static String task;
     public DoneCommand(UI ui) {
-        taskNo = Tasklist.getSize();
+        taskNo = TaskList.getSize();
         this.ui = ui;
     }
 
-    @Override
-    public void execute() {
-        ui.getDoneTask();
-        int indexOfTask = getIndexOfTask();
-        Tasks task = Tasklist.getTask(indexOfTask);
-        Tasks tasks = new Tasks(task.getTask());
-        ui.clearInput();
-        if (indexOfTask < taskNo) {
-            tasks.markAsDone();
-            System.out.println("    Congrats! Task " + indexOfTask + ": " +
-                    task.getTask() +  " has been completed!\n" +
-                    "    Enter any key to continue.");
-        } else {
-            System.out.println("    Wrong task selected.");
+    public List<Tasks>  execute(List<Tasks> list) throws IllegalDoneTaskException {
+        if (taskNo <= 0) {
+            ListCommand.execute(list);
+            return list;
         }
-    }
-
-    public int getIndexOfTask() {
-        return Integer.parseInt(ui.getStringInput());
+        ui.printDoneIntro();
+        int indexOfTask = Integer.parseInt(ui.getStringInput());
+        if (indexOfTask < taskNo && indexOfTask >= 0) {
+            list.get(indexOfTask).markAsDone();
+            ui.printRespondToDoneTask(indexOfTask, list.get(indexOfTask));
+            return list;
+        } else {
+            throw new IllegalDoneTaskException();
+        }
     }
 }

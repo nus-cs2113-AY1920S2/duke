@@ -28,6 +28,4 @@ public class Tasks {
     public String toString() {
         return "[" + getTaskStatus() + "]" + task;
     }
-
-
 }
