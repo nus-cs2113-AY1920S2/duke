@@ -22,7 +22,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 
 ##  1. Introduction
 
-![Alt text](docs/img.jpg?raw=true "Duke Main Screen")
+![Duke Main Screen](https://user-images.githubusercontent.com/59989652/75106818-5d90ba00-565b-11ea-8fcd-dd1fd53589d5.PNG)
 
 Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is **optimized for those who prefer to work with a Command Line Interface (CLI)**. 
 Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
