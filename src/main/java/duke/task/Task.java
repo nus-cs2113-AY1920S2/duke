@@ -1,14 +1,17 @@
 package duke.task;
 
-/**
- * Encapsulates the information of a task.
- */
 import java.util.Optional;
 
+/**
+ * Encapsulates the information of a task. A task contains
+ * a description, a TaskID and a boolean status to denote 
+ * if it is completed or not.
+ * 
+ */
 public class Task {
     
     /** The description of a task. */
-    protected final String taskName;
+    protected final String taskDescription;
     
     /** The unique ID of a task. */
     protected final int taskId;
@@ -16,34 +19,34 @@ public class Task {
     /** Represents whether a task is done or not. */
     protected boolean isDone;
     
-    /** String representation of a tick symbol. */
-    protected static final String tickSymbol = "[✓]";
+    /** A tick symbol to represent a completed task. */
+    protected static final String tickSymbol = "[/]";
     
-    /** String representation of a cross symbol. */
-    protected static final String crossSymbol = "[✗]";
+    /** A cross symbol to represent an incomplete task. */
+    protected static final String crossSymbol = "[X]";
 
     /** 
-     * Constructor of a task.
+     * Constructor of a immutable task.
      * 
-     * @param taskId
-     * @param taskName
-     * @param isDone
+     * @param taskId The ID of the task to be created.
+     * @param taskDescription The description of the task to be created.
+     * @param isDone The status of the task to be created.
      */
-    protected Task(int taskId, String taskName, boolean isDone) {
+    protected Task(int taskId, String taskDescription, boolean isDone) {
         this.taskId = taskId;
-        this.taskName = taskName;
+        this.taskDescription = taskDescription;
         this.isDone = isDone;
     }
 
     /** 
-     * Constructor of a task.
+     * Constructs an immutable incomplete task.
      * 
-     * @param taskId
-     * @param taskName
+     * @param taskId The ID of the task to be created.
+     * @param taskDescription The description of the task to be created.
      */
-    protected Task(int taskId, String taskName) {
+    protected Task(int taskId, String taskDescription) {
         this.taskId = taskId;
-        this.taskName = taskName;
+        this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
@@ -52,7 +55,7 @@ public class Task {
     }
 
     public String getTaskName() {
-        return this.taskName;
+        return this.taskDescription;
     }
 
     public boolean getDoneStatus() {
@@ -66,14 +69,14 @@ public class Task {
      * @return A new immutable task.
      */
     public Task setNewTaskId(int newTaskId) {
-        return new Task(newTaskId, this.taskName, this.isDone);
+        return new Task(newTaskId, this.taskDescription, this.isDone);
     }
 
-    /** A string representation of a deadline task with tick and cross symbols. */
+    /** A string representation of a task completion status using tick and cross symbols. */
     public String taskWithSymbol() {
         return ((this.isDone) ? tickSymbol : crossSymbol)
                 + "   " 
-                + this.taskName;
+                + this.taskDescription;
     }
 
     /** 
@@ -86,12 +89,10 @@ public class Task {
     }
 
     public Task makeDone() {
-        return new Task(this.taskId, this.taskName, true);
+        return new Task(this.taskId, this.taskDescription, true);
     }
 
-    /** 
-     * An equals method to test if both tasks are the same.
-     */
+    /** Returns true if both tasks has the same taskId. */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -104,7 +105,7 @@ public class Task {
         return false;
     }
 
-    /** A string representation of an event task. */
+    /** A string representation of a task object. */
     @Override
     public String toString() {
         return this.taskId + "." + this.taskWithSymbol(); 			
