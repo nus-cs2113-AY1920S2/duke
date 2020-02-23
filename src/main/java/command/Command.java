@@ -3,14 +3,17 @@ package command;
 import duke.Duke;
 
 /**
- * Represents a command.
+ * Represents an abstract command. A command can be executed by
+ * specifying Duke as a parameter, which will return a CommandResult.
+ * 
  */
 public abstract class Command {
     
     /** 
-     * Execute a command based on the type of command.
+     * Executes a command based on the command type.
+     * 
      * @param duke Takes in duke to process the command.
-     * @return CommandResult Result of executing the command.
+     * @return The result of executing the command.
      */
     public abstract CommandResult execute(Duke duke);
 }
