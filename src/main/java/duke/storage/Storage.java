@@ -4,12 +4,16 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import duke.ui.Ui;
+import duke.parser.Parser;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Storage {
 
@@ -44,14 +48,14 @@ public class Storage {
                     taskList.add(t);
                 } else {
                     if (taskType.equals("[E]")) {
-                        String[] descriptionAndDate = description.split("at:");
-                        String AT = descriptionAndDate[1].trim();
+                        String date = words[3].trim();
+                        LocalDate AT = LocalDate.parse(date);
                         Event t = new Event(description, AT);
                         t.isDone = isTaskDone;
                         taskList.add(t);
                     } else {
-                        String[] descriptionAndDate = description.split("by:");
-                        String BY = descriptionAndDate[1].trim();
+                        String date = words[3].trim();
+                        LocalDate BY = LocalDate.parse(date);
                         Deadline t = new Deadline(description, BY);
                         t.isDone = isTaskDone;
                         taskList.add(t);
@@ -60,8 +64,9 @@ public class Storage {
 
             }
 
-        } catch(FileNotFoundException e){
-            //Dont need to return anything as we hardcode the name of the file
+        } catch(Exception e){
+            taskList.clear();
+            Ui.markLoadingError();
         }
         return taskList;
     }
@@ -73,7 +78,7 @@ public class Storage {
                 String description = t.getDescription();
                 String typeIcon = t.getTypeIcon();
                 String statusIcon = t.getStatusIcon();
-                String stringToAdd = typeIcon + " | " + statusIcon + " | " + description;
+                String stringToAdd = Parser.returnDescription(t, description, typeIcon, statusIcon);
                 if (i == 0){
                     FileWriter fw = new FileWriter(filePath);
                     fw.write(stringToAdd);
@@ -89,6 +94,9 @@ public class Storage {
             }
         }
         catch(IOException e){
+            //We do not need tp fill this part because we hardcode the known relative path  of the file where the data is saved
         }
     }
+
+
 }

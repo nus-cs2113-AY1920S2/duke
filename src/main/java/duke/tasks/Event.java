@@ -1,15 +1,17 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 public class Event extends Task implements DatedEvents {
 
-    protected String date;
+    protected LocalDate date;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.date = at;
     }
 
-    public String returnDate(){
+    public LocalDate returnDate(){
         return this.date;
     }
 
