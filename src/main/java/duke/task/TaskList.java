@@ -2,27 +2,23 @@ package duke.task;
 
 import static misc.Messages.MESSAGE_COMMAND_LIST_TASK;
 import static misc.Messages.MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS;
+import static misc.Messages.MESSAGE_FIND_COMMAND_TASK;
+import static misc.Messages.MESSAGE_COMMAND_FILTER_TASK;
+import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
 
 import java.util.List;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import duke.task.Task;
 
-import static misc.Messages.MESSAGE_COMMAND_LIST_TASK;
-import static misc.Messages.MESSAGE_DONE_COMMNAND_INDEX_OUT_OF_BOUNDS;
-import static misc.Messages.MESSAGE_FIND_COMMAND_TASK;
-import static misc.Messages.MESSAGE_COMMAND_FILTER_TASK;
-import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
-
 /**
  * Encapsulates the information of a TaskList. 
  * Stores an internal List<Task> that is manipulated based on
  * Duke's command execution. 
+ * 
  */
 public class TaskList {
     
@@ -34,15 +30,13 @@ public class TaskList {
     
     /** An internal storage of List of Task. */
     private final List<Task> tasks;
-    private final DateTimeFormatter dateFormatter = 
-            DateTimeFormatter.ofPattern("uuuu-MM-dd")
-            .withResolverStyle(ResolverStyle.STRICT);
     
     /** 
      * Constructor for a new TaskList.
      * Takes in a old TaskList and performs a deep copy of it.
      * 
      * @param oldTaskList
+     * @return An updated TaskList after a deep copy of old TaskList
      */
     public TaskList(TaskList oldTaskList) {
         this.tasks = oldTaskList.getTasks()
@@ -50,7 +44,7 @@ public class TaskList {
                 .collect(Collectors.toList());
     }
     
-    /** Initializes the List of tasks. */
+    /** Initializes the List<Task>. */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -59,7 +53,7 @@ public class TaskList {
         return this.tasks;
     }
     
-    /** List all tasks in the List<Task>. */
+    /** Find all tasks in the List<Task> containing a given keyword and display to user. */
     public void findTask(String keyword) {
         System.out.println(MESSAGE_FIND_COMMAND_TASK);
         
@@ -71,14 +65,45 @@ public class TaskList {
         System.out.println("\n");
     }
     
-    public void filterTask(String date) throws IllegalArgumentException {
+    /** 
+     * Filter tasks based on a given date. As each type of task contains optional
+     * parameters, there are 2 rounds of filter. The first round of filter filters
+     * away tasks that contains empty parameters. The second round of filter filters
+     * away tasks whose date does not match the required given date. Then, display
+     * the results to the user. 
+     * 
+     * @param date The date to be filtered against the List<Task>.
+     * @throws DateTimeParseException If the given date cannot be parsed into a
+     *                                LocalDateTime object.
+     */
+    public void filterTask(String date) {
         try {
-            LocalDate.parse(date, dateFormatter);            
+            LocalDate.parse(date);            
             System.out.println(MESSAGE_COMMAND_FILTER_TASK);
             
             this.tasks.stream()
-                .filter(task -> task.getDate().isPresent())
-                .filter(task -> task.getDate().get().equals(date))
+                .filter(task -> {
+                    if (task instanceof ToDos || task instanceof Deadlines) {
+                        return task.getDate().isPresent();
+                    } else if (task instanceof Events) {
+                        return ((Events) task).getStartDate().isPresent() 
+                                || ((Events) task).getEndDate().isPresent();
+                    } else {
+                        return false;
+                    }
+                })
+                .filter(task -> {
+                    if (task instanceof Deadlines) {
+                        String deadlineDate = ((Deadlines) task).getDate().get();
+                        return deadlineDate.equals(date);
+                    } else if (task instanceof Events) {
+                        String eventStartDate = ((Events) task).getStartDate().get();
+                        String eventEndDate = ((Events) task).getEndDate().get();
+                        return (eventStartDate.equals(date) || eventEndDate.equals(date));
+                    } else {
+                        return false;
+                    }
+                })
                 .forEachOrdered(System.out::println);
             
             System.out.println("\n");
@@ -86,7 +111,8 @@ public class TaskList {
             throw new IllegalArgumentException(MESSAGE_INCORRECT_DATE_FORMAT);
         }       
     }
-
+    
+    /** List all tasks currently in the List<Task> and display to the user. */
     public void listTask() {
         System.out.println(MESSAGE_COMMAND_LIST_TASK);
         
@@ -97,11 +123,13 @@ public class TaskList {
     }
     
     /** 
-     * Delete a task within List<Task> based on a given task ID.
-     * Throws an exception if the List<Task> does not contain that ID.
+     * Deletes a task within List<Task> based on a given task ID.
+     * Throws an IndexOutOfBoundsexception if the List<Task> does 
+     * not contain that ID.
      * 
-     * @param taskId
-     * @throws IndexOutOfBoundsException
+     * @param taskId 
+     * @throws IndexOutOfBoundsException  If the index given by the user exceeds
+     *                                    size of List<Task>.
      */
     public void deleteTask(int taskId) throws IndexOutOfBoundsException {
         if (taskId > this.tasks.size()) {
@@ -117,7 +145,7 @@ public class TaskList {
     }
     
     /** Reorder the tasks within List<Task> according to ascending task IDs. */
-    public void reorderTask() {
+    private void reorderTask() {
         int newIndex = 1;
         List<Task> newTasks = new ArrayList<>();
         
@@ -134,10 +162,12 @@ public class TaskList {
     
     /**
      * Completes a task based on a given task ID.
-     * Throws an exception if the List<Task> does not contain that ID.
+     * Throws an IndexOutOfBoundsException if the List<Task> does not 
+     * contain that ID.
      * 
-     * @param taskId
-     * @throws IndexOutOfBoundsException
+     * @param taskId The ID of the task to be completed.
+     * @throws IndexOutOfBoundsException  If the index given by the user exceeds
+     *                                    size of List<Task>.
      */
     public void completeTask(int taskId) throws IndexOutOfBoundsException {  
         if (taskId > this.tasks.size()) {
@@ -156,28 +186,20 @@ public class TaskList {
         this.tasks.addAll(newTasks);
     }
     
-    /**
-     * Adds a task into the List<Task>.
-     * 
-     * @param task
-     */
+    /** Adds a task into the List<Task>. */
     public void addTask(Task task) {
         createAddTaskMessage(task);     
         this.tasks.add(task);
         TaskList.taskIdCounter++;       
     }
     
-    /** 
-     * Loads a task from the storage file into the List<Task>.
-     * 
-     * @param task
-     */
+    /** Silent loads a task from the storage file into the List<Task>. */
     public void loadTask(Task task) {    
         this.tasks.add(task);
         TaskList.taskIdCounter++;       
     } 
     
-    public Task getDeletedTask(int taskId) {
+    private Task getDeletedTask(int taskId) {
         Task task = this.tasks
                 .stream()
                 .filter(x -> x.getTaskId() == taskId)
@@ -187,7 +209,7 @@ public class TaskList {
         return task;
     }
     
-    public Task getCompletedTask(int taskId) {
+    private Task getCompletedTask(int taskId) {
         Task task = this.tasks
                 .stream()
                 .filter(x -> x.getTaskId() == taskId)
@@ -197,12 +219,8 @@ public class TaskList {
         return task;
     }
     
-    /** 
-     * Generates a delete task message after deleting a task.
-     * 
-     * @param task
-     */
-    public void createDeleteTaskMessage(Task task) {
+    /** Generates a delete task message after deleting a task. */
+    private void createDeleteTaskMessage(Task task) {
         String output = ("Nice! I've removed this task:\n"
                 + "  " 
                 + task
@@ -212,12 +230,8 @@ public class TaskList {
         System.out.println(output);
     }
     
-    /** 
-     * Generates a complete task message after completing a task.
-     * 
-     * @param taskId
-     */
-    public void createCompleteTaskMessage(int taskId) {
+    /** Generates a complete task message after completing a task. */
+    private void createCompleteTaskMessage(int taskId) {
         String output = ("Nice! I've marked this task as done:\n"
                 + "  " 
                 + getCompletedTask(taskId).taskWithSymbol()
@@ -225,12 +239,8 @@ public class TaskList {
         System.out.println(output);
     }
     
-    /** 
-     * Generates an add task message after adding a task.
-     * 
-     * @param task
-     */
-    public void createAddTaskMessage(Task task) {
+    /** Generates an add task message after adding a task. */
+    private void createAddTaskMessage(Task task) {
         String message = "";
         message += ("Got it. I've added this task:\n"
                 + "  " 
