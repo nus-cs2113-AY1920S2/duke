@@ -1,17 +1,40 @@
-todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
-todo borrow book
-list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
 todo
-deadline finish eating
-event cooking class
+todo return book
+todo Bring dog to the vet to check-up
+todo sleeeeeeeeeeep!!!
+deadline
+deadline homework
+deadline homework /by
+deadline homework /by tuesday
+deadline homework /by 1200T10000
+deadline homework /by 1200T10:00
+deadline homework /by 1200-12-12T12:00
+list 
 done 1
 done 2
-done 100
-blah
+done 3
+delete 1
+delete 10
+done 10
+event
+event attend party
+event attend party /on tuesday
+event attend party /on 1200T10000
+event attend party /on 1200000L:00
+event attend party /on 1200-12-12Txcsac
+event attend party /on 1200-12-12T10:00
+event attend party /on 1200-12-12T10:00 to 
+event attend party /on 1200-12-12T10:00 1200-12-12T11:00
+event attend party /on 1200-12-12T1aaaa to 1200-12-12Tnnn
+event attend party /on 1200-12-12T10:00 to 1200-12-12T11:00
+list
+todo homework1
+deadline homework1 /by 1200-12-12T10:00
+event homework1 group meeting /on 1200-12-12T10:00 to 1200-12-12T11:11
+find homework1
+filter 1200-12-12
+done
+delete
+find
+filter
 bye
