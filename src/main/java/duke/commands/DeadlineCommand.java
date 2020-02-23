@@ -6,13 +6,15 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
+import java.time.LocalDateTime;
+
 public class DeadlineCommand extends Command {
     public static final String DEADLINE_COMMAND_NAME= "deadline";
     public static final String COMMAND_DATE_TIME_DELIMITER = "\\s+/by\\s+";
     private final String description;
-    private final String by;
+    private final LocalDateTime by;
 
-    public DeadlineCommand(String description, String by) {
+    public DeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
     }

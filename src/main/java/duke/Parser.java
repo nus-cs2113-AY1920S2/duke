@@ -10,7 +10,13 @@ import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
+    public static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    public static final DateTimeFormatter PRINT_DATE_FORMAT = DateTimeFormatter.ofPattern("EEE dd MMM yyyy HH':'mm");
 
     public static Command parseCommand(String fullCommand) {
         String[] commandTokens = fullCommand.split(" ");
@@ -43,6 +49,32 @@ public class Parser {
         }
     }
 
+    public static LocalDateTime parseDate(String dateTimeString) throws DateTimeParseException {
+        // handle issue where there are multiple spaces between the date and the time
+        String[] dateAndTime = dateTimeString.split("\\s+", 2);
+        String formattedDateTimeString = dateAndTime[0] + " " + dateAndTime[1];
+        return LocalDateTime.parse(formattedDateTimeString, INPUT_DATE_FORMAT);
+    }
+
+    public static void main(String[] args) {
+        String d1 = "12/3/2020 1800";
+        String d2 = "2020-3-12T18:00:00";
+        String d3 = "12/03/2020     1830";
+        String[] d3split = d3.split("\\s+", 2);
+        String d4 = d3split[0] + " " + d3split[1];
+        System.out.println(d4);
+        String d5 = "12/03/2020 1830";
+        DateTimeFormatter output = DateTimeFormatter.ofPattern("EEE dd MMM yyyy");
+
+        try {
+//            System.out.println(parseDate(d1).toString());
+//            System.out.println(parseDate(d4).format(output));
+            System.out.println(parseDate(d4).toString());
+        } catch (DateTimeParseException e){
+            System.out.println(e);
+        }
+    }
+
     private static Command prepareDeadlineCommand(String fullCommand) {
         // deadline command follows format <taskType> <taskName> /<date>
         String[] deadlineInfo = null;
@@ -58,8 +90,14 @@ public class Parser {
         if (deadlineInfo.length != 2) {
             return new IncorrectCommand(Ui.DEADLINE_INSUFFICIENT_ARGS_MESSAGE);
         }
+
         String deadlineName = deadlineInfo[0].trim();
-        String deadlineDate = deadlineInfo[1].trim();
+        LocalDateTime deadlineDate;
+        try {
+            deadlineDate = parseDate(deadlineInfo[1].trim());
+        } catch (DateTimeParseException dtpe) {
+            return new IncorrectCommand(Ui.INVALID_DATE_FORMAT_MESSAGE);
+        }
         return new DeadlineCommand(deadlineName, deadlineDate);
     }
 
@@ -104,7 +142,12 @@ public class Parser {
             return new IncorrectCommand(Ui.EVENT_INSUFFICIENT_ARGS_MESSAGE);
         }
         String eventName = eventInfo[0].trim();
-        String eventDate = eventInfo[1].trim();
+        LocalDateTime eventDate;
+        try {
+            eventDate = parseDate(eventInfo[1].trim());
+        } catch (DateTimeParseException dtpe) {
+            return new IncorrectCommand(Ui.INVALID_DATE_FORMAT_MESSAGE);
+        }
         return new EventCommand(eventName, eventDate);
     }
 
