@@ -34,6 +34,8 @@ public class Ui {
             "Unknown save file format encountered"
             + LS
             + "Exit now to manually fix and retain saved data";
+    public static final String INVALID_DATE_FORMAT_MESSAGE  =
+            "Please specify the date and time using the format DD/MM/YYYY HHMM";
 
     private final Scanner in;
     private final PrintStream out;

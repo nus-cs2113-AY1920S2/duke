@@ -1,15 +1,15 @@
 delete 1
 todo borrow book
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 12/03/20 1845
+event project meeting /at 28/02/20 1000
 list
 done 2
 list
 done 1
 done 3
 list
-deadline finish reading book /by  Sat maybe?
+deadline finish reading book /by 01/03/20 0000
 todo i want to write a slash here /by doing sth like this
 list
 done 3
@@ -19,13 +19,15 @@ delete 8
 list
 todo
 deadline
-deadline   /by some time
+deadline   /by 01/01/01 0101
 deadline  hello /by
-deadline    to-trim deadline      /by   to-trim date
+deadline    to-trim deadline      /by    22/02/20    2020
+deadline wrong date format test /by 30-02-20 1234
 event
-event   /at  some time
+event   /at  01/01/01 0101
 event  yes  no  /at
-event       to-trim event    /at   to-trim date
+event       to-trim event    /at   22/02/20      2020
+event wrong date format test /at 31/6/20 1234
 todo 8
 todo 9
 todo 10
