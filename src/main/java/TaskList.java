@@ -30,6 +30,11 @@ public class TaskList {
     }
 
     /**
+     * Prints all tasks which contain the specified keyword
+     * @param name the specified keyword to search from the list
+     */
+
+    /**
      * Removes the first occurrence of the specified task from this list,
      * if it is present.  If the list does not contain the task, it is
      * unchanged.
