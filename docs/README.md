@@ -56,7 +56,7 @@ Expected outcome:
 
 `adds a ToDo task to your list`
 
-![Adding ToDo task](docs/images/todo.JPG)
+![Adding ToDo task](images/todo.JPG)
 
 ### <a id="deadline"></a> `deadline` - Adds a deadline task to your list
 
@@ -70,7 +70,7 @@ Example of usage:
 
 Expected outcome:
 
-![Adding Deadline task](docs/images/deadline.JPG)
+![Adding Deadline task](images/deadline.JPG)
 
 INSERT PICTURE HERE
 
@@ -88,7 +88,7 @@ Expected outcome:
 
 `adds an Event task to your list`
 
-![Adding Event task](docs/images/event.JPG)
+![Adding Event task](images/event.JPG)
 
 ### <a id="list"></a> `list` - Displays all your tasks
 
@@ -100,7 +100,7 @@ Expected outcome:
 
 `Display all your tasks`
 
-![Listing all tasks](docs/images/list.JPG)
+![Listing all tasks](images/list.JPG)
 
 ### <a id="done"></a> `done` - Mark task as completed
 
@@ -116,7 +116,7 @@ Expected outcome:
 
 `Marks task as completed based on specified index`
 
-![Marking tasks as completed](docs/images/done.JPG)
+![Marking tasks as completed](images/done.JPG)
 
 ### <a id="delete"></a> `delete` - Deletes task from list
 
@@ -132,7 +132,7 @@ Expected outcome:
 
 `Deletes task based on specified index`
 
-![Deleting tasks](docs/images/delete.JPG)
+![Deleting tasks](images/delete.JPG)
 
 ### <a id="find"></a> `find` - Finds task from list
 
@@ -148,7 +148,7 @@ Expected outcome:
 
 `Finds task from list`
 
-![Finding tasks](docs/images/find.JPG)
+![Finding tasks](images/find.JPG)
 
 ### <a id="help"></a> `help` - Displays all the commands
 
@@ -161,7 +161,7 @@ Expected outcome:
 
 `Displays help command`
 
-![help](docs/images/help.JPG)
+![help](images/help.JPG)
 
 ### <a id="bye"></a> `bye` - Terminate program
 
@@ -173,4 +173,4 @@ Expected outcome:
 
 `Terminates program`
 
-![bye](docs/images/bye.JPG)
+![bye](images/bye.JPG)
