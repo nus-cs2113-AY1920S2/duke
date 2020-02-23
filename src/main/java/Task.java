@@ -1,4 +1,6 @@
-public class Task {
+import java.util.List;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -25,4 +27,6 @@ public class Task {
         String toPrint = String.format("[%s] %s", symbol, this.description );
         return toPrint;
     }
+
+    public abstract void addIfMatchesKeyword(Task t, List<Task> foundTasks, String keyword);
 }
