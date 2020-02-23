@@ -11,8 +11,6 @@ import java.io.BufferedReader;
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int size = 0;
-    public static final String VERSION = "BAPE MANAGER - Version 1.0";
-
 
     public static void main(String[] args) {
 
@@ -26,10 +24,10 @@ public class Duke {
 
             try {
                 function = myScanner.next();
-                String line = myScanner.nextLine();
 
                 switch (function) {
                     case "todo":
+                        String line = myScanner.nextLine();
                         if(line.equals("")){
                             throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
                         }
@@ -39,6 +37,7 @@ public class Duke {
                         break;
 
                     case "deadline":
+                        line = myScanner.nextLine();
                         String[] description = line.split("/");
                         if(description[0].equals("")){
                             throw new MissingDescriptionException("☹ OOPS!!! The deadline description cannot be empty!!");
@@ -53,6 +52,7 @@ public class Duke {
                         break;
 
                     case "event":
+                        line = myScanner.nextLine();
                         String[] eventName = line.split("/");
                         if(eventName[0].equals("")){
                             throw new MissingDescriptionException("☹ OOPS!!! The event description cannot be empty!!");
@@ -67,7 +67,7 @@ public class Duke {
                         break;
 
                     case "bye":
-                        System.out.println("Bye " + /*userName + */"! Hope to see you again soon!");
+                        System.out.println("Bye! Hope to see you again soon!");
                         System.out.println("____________________________________________________________");
                         flag = false;
                         break;
@@ -86,6 +86,7 @@ public class Duke {
                         break;
 
                     case "done":
+                        line = myScanner.nextLine();
                         String l = line.replace(" ", "");
                         if(l == ""){
                             throw new IllegalArgumentException();
@@ -105,6 +106,7 @@ public class Duke {
                         break;
 
                     case "delete":
+                        line = myScanner.nextLine();
                         l = line.replace(" ","");
                         taskNumber = Integer.parseInt(l) - 1;
                         if(l == ""){
@@ -122,6 +124,10 @@ public class Duke {
                         tasks.remove(taskNumber);
                         System.out.println("Now you have " + tasks.size() + " tasks in your list.");
                         System.out.println("____________________________________________________________");
+                        break;
+                    case "reset":
+                        deleteDirectory(new File("data"));
+                        flag = false;
                         break;
 
                     default:
@@ -141,10 +147,31 @@ public class Duke {
             }
         }
     }
+    private static void deleteDirectory(File dir){
+        if (dir.isDirectory()) {
+            if (dir.list().length == 0) {
+                dir.delete();
+                System.out.println("Directory is deleted : " + dir.getAbsolutePath());
+            } else {
+                String[] children = dir.list();
+                for (String temp : children) {
+                    File fileDelete = new File(dir, temp);
+                    deleteDirectory(fileDelete);
+                    }
+                }
+                if(dir.list().length==0){
+                    dir.delete();
+                    System.out.println("Directory is deleted : " + dir.getAbsolutePath());
+            }
+        } else{
+            dir.delete();
+            System.out.println("File is deleted : " + dir.getAbsolutePath());
+        }
+    }
 
     private static void programStart() {
         DisplayUI ui = new DisplayUI();
-        ui.showStartMessages(VERSION);
+        ui.showStartMessages();
     }
 
     private static void writeToFile(String str1, String str2) {

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class DisplayUI {
 
+    public static final String VERSION = "TASK MANAGER - Version 1.1";
+
     private static final String DIVIDER = "=============================================================================================================";
 
     public static final String MESSAGE_WELCOME  = "Welcome to BAPE, your Task Manager!\n"
@@ -28,12 +30,14 @@ public class DisplayUI {
                                              + "|   done       |                Mark a task as completed            |                                       |\n"
                                              + "|   bye        |                Exit Planner                        |                                       |\n"
                                              + "|______________|____________________________________________________|_______________________________________|\n"
+                                             + "LEGEND:   [O] ---- DONE | [X] ---- NOT DONE \n"
                                              + "Please key in your command: ";
 
-    public void showStartMessages(String Version){
+    public void showStartMessages(){
         printToUser(
                 DIVIDER,
                 LOGO,
+                VERSION,
                 DIVIDER,
                 MESSAGE_WELCOME,
                 DIVIDER,

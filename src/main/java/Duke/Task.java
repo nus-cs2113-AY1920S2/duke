@@ -1,4 +1,5 @@
 package Duke;
+import java.nio.charset.*;
 
 public class Task {
     private String description;
@@ -9,8 +10,18 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+//    public String getStatusIcon() {
+//        return (isDone ? "✓" : "✗"); //return tick or X symbols
+//    }
+    public String getStatusIcon(){
+        if(isDone) {
+//            String tickString = "✓";
+//            byte[] tickByte = tickString.getBytes();
+//            String tick = new String (tickByte, StandardCharsets.UTF_8);
+            return "O";
+        } else {
+                return "X";
+        }
     }
 
     public String getDescription(){
