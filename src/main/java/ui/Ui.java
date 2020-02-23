@@ -4,6 +4,7 @@ import static misc.Messages.MESSAGE_WELCOME;
 import static misc.Messages.MESSAGE_COMMAND_RESULT_FAILURE;
 import static misc.Messages.MESSAGE_EXIT;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import command.CommandResult;
@@ -11,6 +12,7 @@ import command.CommandResult;
 /**
  * Encapsulates the user interface of the program.
  * This class is responsible in displaying messages to the user.
+ * 
  */
 public class Ui {
     
@@ -22,23 +24,20 @@ public class Ui {
     /** A scanner object to read user input. */
     private final Scanner sc;
     
-    /** Constructor of a UI that initializes an internal scanner. */
+    /** Constructor of a Ui that initializes an internal scanner. */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
     
-    public String getCommand() {
-        String readline = sc.nextLine();
-        return readline;
+    /** Use the scanner to read the input from the user. */
+    public String getCommand() throws NoSuchElementException {
+        String readLine = sc.nextLine();
+        return readLine;  
     }
     
-    /** 
-     * Displays the result of a command to the user.
-     * 
-     * @param commandResult
-     */
+    /** Displays the result of a command to the user. */
     public void displayOutputMessage(CommandResult commandResult) {
-        String output = commandResult.getCommandOutput();
+        String output = commandResult.getCommandResult();
         displayMessage(output);
     }
     
@@ -72,6 +71,6 @@ public class Ui {
                 + "\n"
                 + message);
         
-        System.err.println(output);              
+        System.out.println(output);              
     }
 }
