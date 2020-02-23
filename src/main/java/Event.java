@@ -1,7 +1,17 @@
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     protected String icon = "[E]";
     protected String eventAt;
 
+    /**
+     * Constructor used when loading from the save file
+     *
+     * @param isDone integer representing a boolean, where 1 is done and 0 is not done, from save file.
+     * @param description string representing task description, from the save file
+     * @param evenAt string representing event location, from the save file
+     */
     public Event(int isDone, String description, String evenAt) {
         super(description);
         this.eventAt = evenAt;
@@ -16,6 +26,11 @@ public class Event extends Task {
         this.eventAt = eventAt;
     }
 
+    /**
+     * Overrides the default toString so that Task gets printed in a specific format
+     *
+     * @return the formatted String to print
+     */
     public String toString() {
         String toPrint = super.toString();
         toPrint = String.format("%s%s (at: %s)", this.icon, toPrint, this.eventAt);

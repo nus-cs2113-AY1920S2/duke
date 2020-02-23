@@ -32,12 +32,16 @@ public class Duke {
         Printer.printStart();
     }
 
+    /**
+     * Runs the program.
+     * The supplied param is where the save file will be at.
+     * @param saveFile the file object of the save file.
+     */
     public void run(File saveFile) {
         while (true) {
             String fullCommand = Ui.readFromUser();
             List<String> commands = Parser.parseCommand(fullCommand);
             String command = commands.get(DUKE_COMMAND);
-
             try {
                 Command c = Parser.whatCommand(command);
                 c.execute(myTasks, saveFile, commands, command);
