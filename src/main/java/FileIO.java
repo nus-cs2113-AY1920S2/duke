@@ -21,11 +21,6 @@ public class FileIO {
         }
     }
 
-    /**
-     * Checks if the file denoted by this abstract pathname exists.
-     * If it does not exist, create directories until that path.
-     * @param f the abstract pathname
-     */
     private void ensurePathExist(File f) {
         if (!f.exists()) {
             System.out.println("Storage file not found.");
