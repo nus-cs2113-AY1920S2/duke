@@ -167,6 +167,7 @@ public class Parser {
     }
 
     private static Command prepareFindCommand(String fullCommand) {
+        // find command follows format: find <searchString>
         try {
             String searchString = fullCommand.substring(FindCommand.FIND_COMMAND_NAME.length() + 1).trim();
             return new FindCommand(searchString);
