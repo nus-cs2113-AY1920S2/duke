@@ -32,6 +32,12 @@ todo 8
 todo 9
 todo 10
 list
+find book
+find o-t
+find
+find qwerty
+find /by
+find sh r
 done 11
 done 10
 delete 11
