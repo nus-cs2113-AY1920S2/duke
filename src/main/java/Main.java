@@ -78,6 +78,8 @@ public class Main {
                 ui.displayErrorMessage(e.getMessage());
             } catch (InvalidCommandException e) {
                 ui.displayErrorMessage(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                ui.displayErrorMessage(e.getMessage());
             } catch (NoSuchElementException nsee) {
                 // Used only for testing runtest.bat reads from an input file.
                 ui.displayErrorMessage(MESSAGE_END_OF_INPUT_FILE);
