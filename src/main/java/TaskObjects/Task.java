@@ -28,6 +28,6 @@ public class Task {
     }
 
     public String stringToSave(){
-        return type + "|" + (isDone?"0":"1") + "|" + description;
+        return type + "|" + (isDone?"1":"0") + "|" + description;
     }
 }
