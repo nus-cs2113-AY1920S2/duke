@@ -73,6 +73,20 @@ public class TaskManager {
         }
     }
 
+    public void findTasks(String keyword) {
+        ArrayList<Task> copyTasks = new ArrayList<>();
+        for (Task task : Tasks) {
+            if(task.getDescription().contains(keyword)){
+                copyTasks.add(task);
+            }
+        }
+        if(copyTasks.size() > 0) {
+            printAllTasks(copyTasks,"matching ");
+        } else {
+            System.out.println("Jan cannot find a match for the keyword: " + keyword);
+        }
+    }
+
     /**
      * Create a new task object and add object to arrayList
      * @param command

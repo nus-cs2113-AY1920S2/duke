@@ -79,6 +79,9 @@ public class Command {
                 System.out.println("Something went wrong");
             }
             break;
+        case "find":
+            taskManager.findTasks(details);
+            break;
         default:
             throw new UnknownCommandException();
         }
