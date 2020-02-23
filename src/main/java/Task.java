@@ -19,7 +19,7 @@ public class Task {
 
     /**
      * Returns boolean status of task
-     * @return status of task
+     * @return true if task is completed ; false otherwise
      */
     public boolean getStatus() {
         return isDone;
@@ -49,8 +49,8 @@ public class Task {
     }
 
     /**
-     * Returns String format for Tasks tasks to be printed on CLI
-     * @return String format of Tasks tasks
+     * Returns String format for tasks to be printed on CLI
+     * @return String format of tasks
      */
     public String toString() {
         return "[ " + getStatusIcon() + " ] " + getDescription();

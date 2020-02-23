@@ -133,11 +133,11 @@ public class TaskList {
 
     /**
      * Marks Task object as completed
-     * If IndexOutOfBoundsException, error message will be displayed
-     * if NumberFormatException, error message will be displayed
+     * Prints error messages if IndexOutOfBoundsException
+     * Prints error message if NumberFormatException
      * @param input String input by user
-     * @throws IndexOutOfBoundsException if index < length of task list or index > length of task list
-     * @throws NumberFormatException if index is not a number
+     * @exception IndexOutOfBoundsException if index < length of task list or index > length of task list
+     * @exception NumberFormatException if index is not a number
      */
     public void getDoneExceptions(String input) {
         try {
@@ -165,36 +165,38 @@ public class TaskList {
 
     /**
      * Adds Event task into tasks list
+     * Prints error message if StringIndexOutOfBoundsException
      * @param input String input by user
-     * @throws StringIndexOutOfBoundsException if description of event / event date or time is empty
+     * @exception StringIndexOutOfBoundsException if description of event / event location or time is empty
      */
     public void getEventExceptions(String input) {
         try {
             addEvent(input);
         } catch (IndexOutOfBoundsException exception) {
-            String errorMessage = "Missing specifier(s)";
+            String errorMessage = "Missing event description(s) / location or time / placeholder";
             dukeExceptions.printEventExceptions(errorMessage, input);
         }
     }
 
     /**
      * Adds Deadline task into tasks list
+     * Prints error message if IndexOutOfBoundsException
      * @param input String input by user
-     * @throws IndexOutOfBoundsException if description of deadline / deadline date or time is empty
+     * @exception IndexOutOfBoundsException if description of deadline / deadline date or time is empty
      */
     public void getDeadlineExceptions(String input) {
         try {
             addDeadline(input);
         } catch (IndexOutOfBoundsException exception) {
-            String errorMessage = "Missing specifier(s)";
+            String errorMessage = "Missing event description(s) / date or time / placeholder";
             dukeExceptions.printDeadlineExceptions(errorMessage, input);
         }
     }
 
     /**
      * Deletes object based on index
-     * If IndexOutOfBoundsException, error message will be displayed
-     * if NumberFormatException, error message will be displayed
+     * Prints error message if IndexOutOfBoundsException
+     * Prints error message if NumberFormatException
      * @param input String input by user
      * @throws IndexOutOfBoundsException if index < length of task list or index > length of task list
      * @throws NumberFormatException if index is not a number
@@ -238,7 +240,7 @@ public class TaskList {
 
     /**
      * Finds task based on keywords
-     * If keywords is empty, Duke will print an error message
+     * Prints error message if search query is empty
      * @param input String input by user
      */
     public void getFindExceptions(String input) {

@@ -10,57 +10,57 @@ public class DukeExceptions {
     }
 
     /**
-     * Error message printed if the tasks list is empty
+     * Prints error message if tasklist is empty
      */
     public void printListExceptions() {
         System.out.println(" [Warning: There are currently no tasks!]");
     }
 
     /**
-     * Error message printed if user wants to mark a completed task as done
+     * Prints error message if user tries to mark a completed task as done
      */
     public void printDoneExceptions() {
         System.out.println(" [Warning: The task(s) has already been marked as done]");
     }
 
     /**
-     * Error message printed if there is an IndexOutOfBoundsException for done command
+     * Prints error message for IndexOutOfBoundsException for done command
      * @param input String input by user
      */
     public void printIOBDoneExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Specifier entered is out of range]");
+        System.out.println(" [Error: Index entered is out of range]");
         System.out.println(" done: marks task to be completed");
         System.out.println(" Parameters: done [TASK NUMBER]");
         System.out.println(" Example: done 1");
     }
 
     /**
-     * Error message printed if there is an NumberFormatException for done command
+     * Prints error message for NumberFormatException for done command
      * @param input String input by user
      */
     public void printNFEDoneExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Specifier entered is not a numerical value]");
+        System.out.println(" [Error: Index entered is not a numerical value]");
         System.out.println(" done: marks task to be completed");
         System.out.println(" Parameters: done [Specifier]");
         System.out.println(" Example: done 1");
     }
 
     /**
-     * Error message printed if todo task(s) is missing description
+     * Prints error message if ToDo task is missing description
      * @param input String input by user
      */
     public void printToDoExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Missing specifier(s)]");
+        System.out.println(" [Error: Missing description(s)]");
         System.out.println(" todo: Adds todo items");
         System.out.println(" Parameters: todo [description]");
         System.out.println(" Example: todo read book");
     }
 
     /**
-     * Error message printed if Event task(s) is missing description / date or time
+     * Prints error message if Event task is missing description / location or time
      * @param errorMessage error message to be printed
      * @param input String input by user
      */
@@ -74,7 +74,7 @@ public class DukeExceptions {
     }
 
     /**
-     * Error message printed if Deadline task(s) is missing description / date or time
+     * Prints error message if deadline task is missing description / date or time
      * @param errorMessage error message to be printed
      * @param input String input by user
      */
@@ -88,43 +88,43 @@ public class DukeExceptions {
     }
 
     /**
-     * Error message printed if there is an IndexOutOfBoundsException for delete command
+     * Prints error message for IndexOutOfBoundsException for delete command
      * @param input String input by user
      */
     public void printIOBDeleteExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Specifier entered is out of range]");
+        System.out.println(" [Error: Index entered is out of range]");
         System.out.println(" delete: deletes task from stored list");
         System.out.println(" Parameters: delete [TASK NUMBER]");
         System.out.println(" Example: delete 1");
     }
 
     /**
-     * Error message printed if there is an NumberFormatException for done command
+     *Prints error message for NumberFormatException for delete command
      * @param input String input by user
      */
     public void printNFEDeleteExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Specifier entered is not a numerical value]");
+        System.out.println(" [Error: Index entered is not a numerical value]");
         System.out.println(" delete: deletes task from stored list");
         System.out.println(" Parameters: delete [TASK NUMBER]");
         System.out.println(" Example: delete 1");
     }
 
     /**
-     * Error message printed if keywords for find operation is missing
+     * Prints error message if query is missing for find operation
      * @param input String input by user
      */
     public void printFindExceptions(String input) {
         System.out.println(" Command Entered: " + input);
-        System.out.println(" [Error: Specifier entered is out of range]");
+        System.out.println(" [Error: Missing search query]");
         System.out.println(" find: Searches through the tasks for matching queries");
         System.out.println(" Parameters: find [query]");
         System.out.println(" Example: find books");
     }
 
     /**
-     * Error message printed if Duke does not understand command
+     * Prints error message if Duke is given invalid command
      */
     public void printInvalidInput() {
         System.out.println(" [WARNING: INVALID INPUT]");

@@ -1,7 +1,6 @@
 /**
  * Represents a parser for input by user
- * A Parser object corresponds to the String input by the user and extracts the command that the user
- * want to run
+ * A Parser object corresponds to the String input by the user and extracts the command that the user wants to run
  */
 public class Parser {
 
@@ -35,7 +34,7 @@ public class Parser {
 
     /**
      * Checks if command is 'bye'
-     * @return boolean
+     * @return true if command is 'bye'; false otherwise
      */
     public boolean isBye() {
         return firstWord.equals("bye");
@@ -43,7 +42,7 @@ public class Parser {
 
     /**
      * Checks if command is 'list'
-     * @return boolean
+     * @return true if command is 'list'; false otherwise
      */
     public boolean isList() {
         return firstWord.equals("list");
@@ -51,7 +50,7 @@ public class Parser {
 
     /**
      * Checks if command is 'done'
-     * @return boolean
+     * @return true if command is 'done'; false otherwise
      */
     public boolean isDone() {
         return firstWord.equals("done");
@@ -59,7 +58,7 @@ public class Parser {
 
     /**
      * Checks if command is 'todo'
-     * @return boolean
+     * @return true if command is 'todo'; false otherwise
      */
     public boolean isToDo() {
         return firstWord.equals("todo");
@@ -67,7 +66,7 @@ public class Parser {
 
     /**
      * Checks if command is 'event'
-     * @return boolean
+     * @return true if command is 'event'; false otherwise
      */
     public boolean isEvent() {
         return firstWord.equals("event");
@@ -75,7 +74,7 @@ public class Parser {
 
     /**
      * Checks if command is 'deadline'
-     * @return boolean
+     * @return true if command is 'deadline'; false otherwise
      */
     public boolean isDeadline() {
         return firstWord.equals("deadline");
@@ -83,7 +82,7 @@ public class Parser {
 
     /**
      * Checks if command is 'delete'
-     * @return boolean
+     * @return true if command is 'delete' ; false otherwise
      */
     public boolean isDelete() {
         return firstWord.equals("delete");
@@ -91,7 +90,7 @@ public class Parser {
 
     /**
      * Checks if command is 'help'
-     * @return boolean
+     * @return true if command is 'help' ; false otherwise
      */
     public boolean isHelp() {
         return firstWord.equals("help");
@@ -99,7 +98,7 @@ public class Parser {
 
     /**
      * Checks if command is 'find'
-     * @return boolean
+     * @return true if command is 'find' ; false otherwise
      */
     public boolean isFind() {
         return firstWord.equals("find");

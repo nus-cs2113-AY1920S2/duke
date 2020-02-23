@@ -1,6 +1,6 @@
 /**
  * Represents an Event object for tasks
- * An Event object corresponds to a description, time/date, and boolean isDone to check if Event task has been
+ * An Event object corresponds to a description, location/time, and boolean isDone to check if Event task has been
  * completed
  */
 public class Event extends Task {
@@ -18,16 +18,16 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the date/time of Event
-     * @return eventDetails
+     * Returns the location/time of Event
+     * @return eventDetails location/time of Event
      */
     public String getEventDetails() {
         return eventDetails;
     }
 
     /**
-     * Returns String format for Deadline tasks to be printed on CLI
-     * @return String format of Deadline tasks
+     * Returns String format for Event tasks to be printed on CLI
+     * @return String format of Event tasks
      */
     @Override
     public String toString() {
@@ -35,8 +35,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns String format for Deadline tasks to be stored in text file
-     * @return String format of Deadline tasks
+     * Returns String format for Event tasks to be stored in text file
+     * @return String format of Event tasks
      */
     @Override
     public String storeText() {

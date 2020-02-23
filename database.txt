@@ -1,0 +1,3 @@
+[T],true,read book,
+[E],false,project meeting,NUS SOC
+[D],false,submit CS2113T assignment ,Sunday

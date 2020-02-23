@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * Represents the location where text files are stored
- * A Storage object correspnds to filepath and file name
+ * A Storage object corresponds to filepath and file name
  */
 public class Storage {
 
@@ -21,8 +21,8 @@ public class Storage {
     }
 
     /**
-     * saves the tasks in ArrayList into text file
-     * If there is an IOException, an error message will be displayed
+     * Saves the tasks in ArrayList into text file
+     * Prints an error message if there is an IOException
      * @param tasks ArrayList of Tasks
      * @throws IOException if IO is invalid
      */
@@ -43,7 +43,6 @@ public class Storage {
 
     /**
      * Adds Task from text file to ArrayList
-     *
      * @param input String input by user
      * @param tasksList ArrayList to store tasks
      */
@@ -68,8 +67,24 @@ public class Storage {
     }
 
     /**
+     * Adds database file if file cannot be found
+     * Prints error message if there is an IOException
+     * @param file database file
+     * @exception IOException if IO is invalid
+     */
+    public void addFile(File file) {
+        try {
+            file.createNewFile();
+            System.out.println(" [New database file created at " + filePath + "]");
+        } catch(IOException exception) {
+            System.out.println(" [Error " + exception.getMessage() + "] ");
+            System.out.println(" Please contact the systems adminstrator for assistance");
+        }
+    }
+
+    /**
      * Restores Tasks from text file into ArrayList
-     * @param fileReader java.io.FileWriter to read the text file
+     * @param fileReader FileReader object to read text file
      * @param tasksList ArrayList to store tasks
      */
     public void restoreArray(Scanner fileReader, ArrayList <Task> tasksList) {
@@ -81,8 +96,9 @@ public class Storage {
 
     /**
      * Returns an ArrayList containing all the updated tasks
+     * Creates text file if FileNotFoundException
      * @return ArrayList containing tasks
-     * @throws FileNotFoundException if text file cannot be found
+     * @exception FileNotFoundException if text file cannot be found
      */
     public ArrayList <Task> loadTasks() {
         ArrayList <Task> tasksList = new ArrayList<Task>();
@@ -91,7 +107,7 @@ public class Storage {
             restoreArray(fileReader, tasksList);
             fileReader.close();
         } catch (FileNotFoundException exception) {
-            System.out.println(" [Warning: File not found. Please add a task/'database.txt' file]");
+            addFile(file);
         } catch (Exception exception) {
             System.out.println(" [Warning: File not found. Please add a task/'database.txt' file]");
         }

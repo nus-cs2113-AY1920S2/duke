@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Represents the main logic for running the CLI
- * Duke object corresponds to UI, Parser, TaskList, Storage, DukeExceptions object
+ * Duke object corresponds to UI, Parser, TaskList, Storage, DukeExceptions and DukeHelp object
  */
 public class Duke {
 
@@ -22,6 +22,9 @@ public class Duke {
         dukeHelp = new DukeHelp();
     }
 
+    /**
+     * Runs the CLI
+     */
     private void run() {
         Scanner sc = new Scanner(System.in);
         userInterface.printGreetingMessage();
