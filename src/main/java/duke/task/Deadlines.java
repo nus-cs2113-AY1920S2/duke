@@ -1,69 +1,53 @@
 package duke.task;
 
-
-import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT_INPUT;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
- * Encapsulates the information of a deadline.
+ * Encapsulates the information of a deadline. A Deadline task
+ * contains a description, a TaskID, a deadline requirement represented 
+ * using taskDeadline and a boolean status to denote if it is completed or not.
+ * 
  */
 public class Deadlines extends Task {
     
-    private final LocalDateTime dateTime;
-
-    /**
-     * Constructor of a Deadlines task.
-     * 
-     * @param taskId
-     * @param taskName
-     * @param dateTime
-     * @param isDone
-     */
-    public Deadlines(int taskId, String taskName, 
-            LocalDateTime dateTime, boolean isDone) {
-
-        super(taskId, taskName, isDone);
-        this.dateTime = dateTime;
-    }
-    
-    public Deadlines(int taskId, String taskName, 
-            String dateTime, boolean isDone) {
-
-        super(taskId, taskName, isDone);
-
-        try {
-            this.dateTime = LocalDateTime.parse(dateTime);
-        } catch (DateTimeParseException dtpe) {
-            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
-        }
-    }
+    /** A taskDeadline to represent a deadline requirement for a task. */
+    private final LocalDateTime taskDeadline;
 
     /** 
-     * Constructor of a Deadlines task.
+     * Constructor of a Deadlines task. 
      * 
-     * @param taskId
-     * @param taskName
-     * @param dateTime
+     * @param taskId The ID of the task to be constructed.
+     * @param taskDecription The description of the task to be constructed.
+     * @param taskDeadline The deadline of the task to be constructed.
+     * @param isDone The completion status of the task to be constructed.
      */
-    public Deadlines(int taskId, String taskName, String dateTime) {
-        super(taskId, taskName);
-        
-        try {
-            this.dateTime = LocalDateTime.parse(dateTime);
-        } catch (DateTimeParseException dtpe) {
-            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
-        }
+    public Deadlines(int taskId, String taskDescription, 
+            LocalDateTime taskDeadline, boolean isDone) {
+
+        super(taskId, taskDescription, isDone);
+        this.taskDeadline = taskDeadline;
+    }
+    
+    /**  Constructs a Deadlines task. This is used for makeTask() in the AddCommand. */
+    public Deadlines(int taskId, String taskDescription, LocalDateTime taskDeadline) {
+        super(taskId, taskDescription);
+        this.taskDeadline = taskDeadline;
     }
     
     @Override
     public Optional<String> getDate() {
         return Optional
-                .ofNullable(this.dateTime
+                .ofNullable(this.taskDeadline
                 .toLocalDate()
+                .toString());
+    }
+    
+    public Optional<String> getTime() {
+        return Optional
+                .ofNullable(this.taskDeadline
+                .toLocalTime()
                 .toString());
     }
     
@@ -71,32 +55,32 @@ public class Deadlines extends Task {
      * Set the ID of the task.
      * 
      * @param newTaskId The new task ID to be set.
-     * @return A new immutable task.
+     * @return A new immutable Deadline task.
      */
     @Override
     public Task setNewTaskId(int newTaskId) {
-        return new Deadlines(newTaskId, this.taskName, 
-                this.dateTime, this.isDone);
+        return new Deadlines(newTaskId, this.taskDescription, 
+                this.taskDeadline, this.isDone);
     }
 
-    /** A string representation of a deadline task with tick and cross symbols. */
+    /** A string representation of a deadline task completion status using tick and cross symbols. */
     @Override
     public String taskWithSymbol() {
         return "[D]" 
                 + ((this.isDone) ? Task.tickSymbol : Task.crossSymbol)
                 + " " 
-                + this.taskName;
+                + this.taskDescription;
     }
 
     /** 
-     * Completes the task.
+     * Completes the task by changing completion status to be true.
      * 
-     * @return A new immutable completed task.
+     * @return A new immutable completed deadline task.
      */
     @Override
     public Deadlines makeDone() {
-        return new Deadlines(this.taskId, this.taskName, 
-                this.dateTime, true);
+        return new Deadlines(this.taskId, this.taskDescription, 
+                this.taskDeadline, true);
     }
 
     /** A string representation of a deadline task. */
@@ -106,7 +90,8 @@ public class Deadlines extends Task {
                 + "." 
                 + this.taskWithSymbol()
                 + " (by: " 
-                + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + this.taskDeadline.format(
+                        DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
                 + ")";
     }
 }
