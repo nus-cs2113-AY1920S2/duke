@@ -81,6 +81,12 @@ public class Duke {
                     System.out.println("\t  " + removedTask);
                     tasks.printSize();
                     break;
+                case "find":
+                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
+                        throw new NoDescriptionException();
+                    }
+                    tasks.find(taskDescription);
+                    break;
                 default:
                     throw new IllegalArgumentException();
                 }
