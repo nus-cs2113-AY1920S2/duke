@@ -2,10 +2,11 @@ package command;
 
 import static misc.Messages.MESSAGE_INVALID_TASK_TYPE;
 import static misc.Messages.MESSAGE_COMMAND_RESULT_SUCCESS;
-import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_INFO;
+import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_DESCRIPTION;
 import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_DEADLINES;
 import static misc.Messages.MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_EVENTS;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import duke.Duke;
@@ -17,83 +18,106 @@ import duke.task.TaskList;
 import duke.task.ToDos;
 
 /** 
- * Represents the 'Add' function of a command.
+ * Represents the 'Add' functionality of a command. An AddCommand contains
+ * arguments to create a Task, which will then be pass onto Duke to execute the 
+ * command. An IllegalTaskArguments will be thrown if the arguments within the 
+ * command are invalid.
+ * 
  */
 public class AddCommand extends Command {
     
     /** Refers to task's keywords such as 'todo', 'deadline' or 'events'. */
-    private final String commandType;
+    private final String taskType;
     
-    /** Refers to the description of a task. */
-    private final Optional<String> taskInfo;
+    /** Refers to an optional description of a task. */
+    private final Optional<String> taskDescription;
     
-    /** Refers to the requirments needed for a task. */
-    private final Optional<String> taskRequirement;
+    /** Refers to an optional deadline requirement needed for a task. */
+    private final Optional<LocalDateTime> taskDeadline;
+    
+    /** Refers to an optional starting date and time needed for a task. */
+    private final Optional<LocalDateTime> taskStartDateTime;
+    
+    /** Refers to an optional ending date and time needed for a task. */
+    private final Optional<LocalDateTime> taskEndDateTime;
     
     private final Task task;
     
-    /** 
-     * Constructor for an AddCommand.
-     * 
-     * @param commandType 
-     * @param taskInfo
-     * @param taskRequirement
-     */
-    public AddCommand(String commandType, Optional<String> taskInfo, 
-            Optional<String> taskRequirement) {
-        
-        this.commandType = commandType;
-        this.taskInfo = taskInfo;
-        this.taskRequirement  = taskRequirement;
-        this.task = makeTask(commandType, taskInfo, taskRequirement);        
+    /** An AddCommand constructor for a ToDos task. */
+    public AddCommand(String taskType, Optional<String> taskDescription) {       
+        this.taskType = taskType;
+        this.taskDescription = taskDescription;
+        this.taskDeadline = Optional.empty();
+        this.taskStartDateTime = Optional.empty();
+        this.taskEndDateTime = Optional.empty();
+        this.task = makeTask(taskType, taskDescription, taskDeadline, 
+                taskStartDateTime, taskEndDateTime);        
     }
     
-    /**
-     * Constructs a task based on the parameters provided.
+    /** An AddCommand constructor for a Deadlines task. */
+    public AddCommand(String taskType, Optional<String> taskDescription, 
+            Optional<LocalDateTime> taskDeadline) {
+        
+        this.taskType = taskType;
+        this.taskDescription = taskDescription;
+        this.taskDeadline = taskDeadline;
+        this.taskStartDateTime = Optional.empty();
+        this.taskEndDateTime = Optional.empty();
+        this.task = makeTask(taskType, taskDescription, taskDeadline, 
+                taskStartDateTime, taskEndDateTime);        
+    }
+    
+    /** An AddCommand constructor for an Events task. */
+    public AddCommand(String taskType, Optional<String> taskDescription,  
+            Optional<LocalDateTime> taskStartDateTime,
+            Optional<LocalDateTime> taskEndDateTime) {
+        
+        this.taskType = taskType;
+        this.taskDescription = taskDescription;
+        this.taskDeadline = Optional.empty();
+        this.taskStartDateTime = taskStartDateTime;
+        this.taskEndDateTime = taskEndDateTime;
+        this.task = makeTask(taskType, taskDescription, taskDeadline, 
+                taskStartDateTime, taskEndDateTime);        
+    }  
+    
+    /** 
+     * Creates a task based on task arguments encapsulated within the AddCommand Object. 
      * 
-     * @param commandType 
-     * @param taskInfo
-     * @param taskRequirement
-     * @return Task 
-     * @throws InvalidTaskArgumentException Throws an exception if there 
-     * are invalid arguments in the parameters.
+     * @throws InvalidTaskArgumentException If any of the arguments are blank entries.
      */
-    public Task makeTask(String commandType, Optional<String> taskInfo, 
-            Optional<String> taskRequirement) {
+    private Task makeTask(String taskType, Optional<String> taskDescription, 
+            Optional<LocalDateTime> taskDeadline, 
+            Optional<LocalDateTime> taskStartDateTime,
+            Optional<LocalDateTime> taskEndDateTime) {
+        
         Task task;
         
-        switch(commandType) {
-        case "todo": 
-            if (taskInfo.isEmpty()) {
-                throw new InvalidTaskArgumentException(
-                        MESSAGE_ADD_COMMAND_INVALID_TASK_INFO);
-            }
-            
-            task = new ToDos(TaskList.taskIdCounter, taskInfo.get());
+        if (taskDescription.get().isBlank()) {
+            throw new InvalidTaskArgumentException(
+                    MESSAGE_ADD_COMMAND_INVALID_TASK_DESCRIPTION);
+        }
+        
+        switch(taskType) {
+        case "todo":                      
+            task = new ToDos(TaskList.taskIdCounter, taskDescription.get());
             break;
         case "deadline":
-            if (taskInfo.isEmpty()) {
-                throw new InvalidTaskArgumentException(
-                        MESSAGE_ADD_COMMAND_INVALID_TASK_INFO);
-            } else if (taskRequirement.isEmpty()) {
+            if (taskDeadline.isEmpty()) {
                 throw new InvalidTaskArgumentException(
                         MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_DEADLINES);
             }
             
-            task = new Deadlines(TaskList.taskIdCounter, taskInfo.get(), 
-                    taskRequirement.get());         
+            task = new Deadlines(TaskList.taskIdCounter, taskDescription.get(), 
+                    taskDeadline.get());         
             break;
         case "event":
-            if (taskInfo.isEmpty()) {
-                throw new InvalidTaskArgumentException(
-                        MESSAGE_ADD_COMMAND_INVALID_TASK_INFO);
-            } else if (taskRequirement.isEmpty()) {
+            if (taskStartDateTime.isEmpty() || taskEndDateTime.isEmpty()) {
                 throw new InvalidTaskArgumentException(
                         MESSAGE_ADD_COMMAND_INVALID_TASK_REQUIREMENT_EVENTS);
-            } 
-            
-            task = new Events(TaskList.taskIdCounter, taskInfo.get(), 
-                    taskRequirement.get());
+            }
+            task = new Events(TaskList.taskIdCounter, taskDescription.get(), 
+                    taskStartDateTime.get(), taskEndDateTime.get());
             break;
         default:
             throw new InvalidTaskArgumentException(MESSAGE_INVALID_TASK_TYPE);
@@ -101,12 +125,6 @@ public class AddCommand extends Command {
         return task;
     }
     
-    /**
-     * Executes the add function.
-     * 
-     * @param duke Takes in duke to process the command.
-     * @return Returns a result of a command after execution.
-     */
     @Override
     public CommandResult execute(Duke duke) {
         duke.executeAddCommand(task); 
