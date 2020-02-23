@@ -18,6 +18,8 @@ public class Ui  {
     public static final String MISSING_FILE = "Please check if data.txt exist!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
+    public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
+
     private final Scanner in;
     private final PrintStream out;
 
@@ -123,10 +125,11 @@ public class Ui  {
         out.println("\t Type Y for Yes and N for No");
     }
     /**
-     * This method receives confirmation with User if they want all Tasks to be deleted.
+     * This method informs User that the delete ALL command is ignored.
      */
-    public String receiveDeleteAllConfirmation(){
-        return in.nextLine();
+    public void ignoreDeleteAll(){
+        out.println("\t List was not modified!");
+        out.println("\t Enter \"list\" to ensure all tasks are still in the list!");
     }
     /**
      * This method shows User of all available Tasks.
@@ -151,6 +154,10 @@ public class Ui  {
      */
     public void printWrongInput(){
         out.println(WRONG_INPUT);
+    }
+
+    public void printYesOrNoOnly(){
+        out.println(YES_OR_NO_ONLY);
     }
     /**
      * This method lists the supported commands for User.

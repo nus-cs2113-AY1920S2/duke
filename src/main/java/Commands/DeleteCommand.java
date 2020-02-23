@@ -17,6 +17,8 @@ public class DeleteCommand extends Command  {
     private int index;
     public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
             "\t available list of task numbers";
+    public static final String ALL_TASKS_ALREADY_DELETED ="\t List is already empty!";
+
     public DeleteCommand(String[] fullCommand){
         super(fullCommand);
         if(fullCommand[1].equals("all")){
@@ -31,15 +33,25 @@ public class DeleteCommand extends Command  {
         if (this.index >= l1.size() || this.index < -1) {
             throw new IllegalDukeException(INDEX_OUT_OF_RANGE);
         }else if(this.index == -1){
+            if(l1.isEmpty()){
+                throw new IllegalDukeException(ALL_TASKS_ALREADY_DELETED);
+            }
             ui.confirmDeleteAll();
             ui.printLine();;
-            String confirmation = ui.receiveDeleteAllConfirmation();
-            ui.printLine();
-            confirmation=confirmation.toLowerCase();
-            if(confirmation.equals("y")) {
-                l1.removeAll(l1);
+            String confirmation = ui.getUserIn().toLowerCase();
+            ui.printLine();;
+            while(!confirmation.equals("y") && !confirmation.equals("n")){
+                ui.printYesOrNoOnly();
+                ui.printLine();
+                confirmation=ui.getUserIn().toLowerCase();
+                ui.printLine();
             }
-            ui.printDeleteAll();
+            if(confirmation.equals("y")) {
+                l1.clear();
+                ui.printDeleteAll();
+            }else if(confirmation.equals("n")){
+                ui.ignoreDeleteAll();
+            }
         }else {
             Task task=l1.get(this.index);
             l1.remove(this.index);

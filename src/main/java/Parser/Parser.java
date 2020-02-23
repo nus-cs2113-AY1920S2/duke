@@ -20,7 +20,7 @@ public class Parser  {
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
     public static final String WRONG_USAGE_OF_COMMAND = " cannot be used with other commands";
     public static final String NOT_INTEGER = "\t Argument after command used is not an integer!";
-    public static final String INDICATE_TIMING = "Use \"/\" to indicate timing!";
+    public static final String INDICATE_TIMING = "\t Use \"/\" to indicate timing!";
 /**
  * This method splits User input by spaces into an array of Strings
  *
