@@ -2,8 +2,17 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Loads from the save file into storage
+ */
 public class FileLoader {
 
+    /**
+     * Loads and store from the save file to the storage
+     *
+     * @param myTasks destination, stores from f into myTasks
+     * @param f source, reads from f and stores into myTasks.
+     */
     public static void loadFile(Storage myTasks, File f) {
         try  (Scanner s = new Scanner(f)){
 

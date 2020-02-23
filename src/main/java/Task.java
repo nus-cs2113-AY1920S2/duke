@@ -22,6 +22,11 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Overrides the default toString so that Task gets printed in a specific format
+     *
+     * @return the formatted String to print
+     */
     public String toString() {
         String symbol = getStatusIcon();
         String toPrint = String.format("[%s] %s", symbol, this.description );
