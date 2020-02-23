@@ -54,12 +54,29 @@ public class Printer {
             return;
         }
         System.out.println("Here's your list (◕‿◕)♡ ~ ");
+        printList(myList);
+        printLines();
+    }
+
+    public static void printTasks(String command, List<Task> myList) {
+        printLines();
+        printIndentation();
+        if (myList.isEmpty()) {
+            System.out.println("There are no matching tasks in your list (°ロ°) !");
+            printLines();
+            return;
+        }
+        System.out.println("Here's what I found (◕‿◕)♡ ~ ");
+        printList(myList);
+        printLines();
+    }
+
+    public static void printList(List<Task> myList) {
         for (int i = 0; i < myList.size(); i++) {
             printIndentation();
             Task temp = myList.get(i);
             System.out.printf("%d. %s\n", i + 1, temp);
         }
-        printLines();
     }
 
     public static void printConfirmationMessage(String command, Task task) {
@@ -142,11 +159,12 @@ public class Printer {
             System.out.println("Example: " + ANSI_BLUE + "event" + ANSI_RESET + " team meeting /at 2 August 2-4pm");
             break;
 
+        case "find":
         case "todo":
             System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>");
             printIndentation();
             printIndentation();
-            System.out.println("Example: " + ANSI_BLUE + "todo" + ANSI_RESET + " read book");
+            System.out.println("Example: " + ANSI_BLUE + command + ANSI_RESET + " read book");
             break;
 
         case "deadline":
@@ -155,7 +173,9 @@ public class Printer {
             printIndentation();
             System.out.println("Example: " + ANSI_BLUE + "deadline" + ANSI_RESET + " read book /by Sunday");
             break;
+
         }
+
         printLines();
     }
 

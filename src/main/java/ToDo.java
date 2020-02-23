@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class ToDo extends Task {
     protected String icon = "[T]";
 
@@ -17,5 +19,13 @@ public class ToDo extends Task {
         String toPrint = super.toString();
         toPrint = String.format("%s%s", this.icon, toPrint);
         return toPrint;
+    }
+
+    @Override
+    public void addIfMatchesKeyword(Task t, List<Task> foundTasks, String keyword) {
+        String description = t.getDescription();
+        if (description.contains(keyword)) {
+            foundTasks.add(t);
+        }
     }
 }
