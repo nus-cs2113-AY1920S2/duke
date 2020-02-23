@@ -1,4 +1,11 @@
 package duke;
+import duke.commands.Commands;
+import duke.commands.RunCommand;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 
@@ -27,8 +34,8 @@ public class Duke {
         boolean isExit = false;
         while (!isExit){
             String command = Ui.readCommand();
-            Commands c = new Commands(command);
-            c.runCommand(Commands.finalCommand, taskList, filePath);
+            RunCommand c = new RunCommand(command, taskList, filePath);
+            c.execute(Commands.finalCommand, taskList, filePath);
             isExit = c.isExit(Commands.finalCommand);
         }
         Ui.printStraightLine();

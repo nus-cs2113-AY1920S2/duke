@@ -1,3 +1,4 @@
-[T] | ✓ | eat \at 4
+[D] | ✓ | duck (by: tom)
+[T] | ✓ | eaer
 [T] | ✘ | eat
-[D] | ✘ | duck (by: tom)
+[T] | ✘ | add

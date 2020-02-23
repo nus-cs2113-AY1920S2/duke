@@ -1,9 +1,8 @@
-package duke;
+package duke.tasks;
 
-import duke.Task;
+import duke.tasks.Task;
 
 public class Todo extends Task {
-
 
     public Todo(String description) {
         super(description);
@@ -14,6 +13,5 @@ public class Todo extends Task {
 
         return ("[T]");
     }
-
 
 }

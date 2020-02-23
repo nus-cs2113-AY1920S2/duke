@@ -1,10 +1,28 @@
-package duke;
+package duke.parser;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 
 public class Parser {
 
+    public static String returnTaskType(String line){
+        String[] words = line.split(" ");
+        String taskType = words[0].trim();
+        return taskType;
+    }
 
+
+    public static Boolean isClearStatementCorrect (String ogString){
+        String[] wordss = ogString.split(" ");
+        int LENG_DONE_STATEMENT = wordss.length;
+        if (LENG_DONE_STATEMENT != 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public static Boolean isListStatementCorrect (String ogString){
         String[] wordss = ogString.split(" ");
@@ -15,10 +33,6 @@ public class Parser {
             return true;
         }
     }
-
-
-
-
 
     public static Boolean isDeleteStatementCorrect(String ogString, ArrayList<Task> taskList) {
         String[] words = ogString.split(" ");
@@ -40,7 +54,7 @@ public class Parser {
                     return isCorrect;
                 }
             } catch (NumberFormatException e) {
-                DukeException.markDoneStatementAsNonInt();
+                DukeException.markDeleteStatementAsNonInt();
             }
         }
         return isCorrect;
@@ -82,10 +96,6 @@ public class Parser {
         }
         return isCorrect;
     }
-
-
-
-
 
     /**
      * Returns the description of the task in the required format

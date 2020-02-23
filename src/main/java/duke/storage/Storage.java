@@ -1,5 +1,9 @@
-package duke;
-
+package duke.storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -62,7 +66,6 @@ public class Storage {
         return taskList;
     }
 
-
     public static void saveTaskList(String filePath, ArrayList<Task> taskList) {
         try {
             for (int i = 0; i < taskList.size(); i++){
@@ -88,6 +91,4 @@ public class Storage {
         catch(IOException e){
         }
     }
-
-
 }

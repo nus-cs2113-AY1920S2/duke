@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 public class DukeException extends Exception  {
 
@@ -33,6 +33,5 @@ public class DukeException extends Exception  {
         System.out.println("The output format should be of the format \"delete 2\", not \"delete + {string}\".");
     }
 
-
-
 }
+

@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,7 +67,6 @@ public class Ui {
         Ui.printStraightLine();
     }
 
-
     public static String readCommand() {
         System.out.println("Enter what you would like to do:");
         System.out.println("\n");
@@ -80,6 +80,7 @@ public class Ui {
 
     public static void showByeMessage(){
         System.out.println("Bye. Hope to see you again soon!\n");
+        Ui.printFancyLine();
     }
 
 }

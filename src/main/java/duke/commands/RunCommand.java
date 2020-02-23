@@ -1,22 +1,31 @@
-package duke;
+package duke.commands;
+import duke.common.Utils;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 
-public class RunCommand {
+public class RunCommand extends Commands {
+
+    public RunCommand(String command, ArrayList<Task> taskList, String filePath) {
+        super(command, taskList,filePath);
+    }
     /**
      * Reads what type of task if given and calls the required method accordingly.
      *
-     * @param command    Line that represents the task that is supposed to marked as done.
+     * @param command  Line that represents the task that is supposed to marked as done.
      * @param taskList Tasklist of  all available tasks.
      */
-    public void runCommand(String command, ArrayList<Task> taskList, String filePath) {
-        String taskType = returnTaskType(finalCommand);
-        if (!checkIfValidTask(taskType)) {
+
+    @Override
+    public void execute(String command, ArrayList<Task> taskList, String filePath) {
+        String taskType = Parser.returnTaskType(finalCommand);
+        if (!Utils.checkIfValidTask(taskType)) {
             DukeException.markAsIncorrectFormat();
         } else {
             executeCommands(taskList, command, taskType);
         }
-
     }
 
     /**
@@ -29,18 +38,23 @@ public class RunCommand {
     public static void executeCommands(ArrayList<Task> taskList, String ogString, String taskType) {
         switch (taskType) {
         case "done":
-            DoneCommand.DoneCommand(taskList, ogString);
+            DoneCommand.execute(taskList, ogString);
             break;
         case "list":
-            ListCommand.ListCommand(taskList, ogString);
+            ListCommand.execute(taskList, ogString);
             break;
         case "delete":
-            DeleteCommand.DeleteCommand(taskList, ogString);
+            DeleteCommand.execute(taskList, ogString);
+            break;
+        case "clear":
+            ClearCommand.execute(taskList, ogString);
             break;
         case "deadline":
         case "event":
         case "todo":
-            AddCommand.AddCommand(taskList, ogString, taskType);
+            AddCommand.execute(taskList, ogString, taskType);
         }
     }
 }
+
+
