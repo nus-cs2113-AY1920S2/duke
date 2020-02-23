@@ -24,7 +24,7 @@ public class TaskList {
         int i = 1;
         for (Task task : tasks) {
             if (task.getDescription().contains(name)) {
-                System.out.printf("\t%d.%s%c", i, task, System.lineSeparator());
+                System.out.printf("\t%d.%s%s", i, task, System.lineSeparator());
                 i++;
             }
         }
