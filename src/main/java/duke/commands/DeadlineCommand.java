@@ -6,6 +6,8 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
+import java.time.LocalDateTime;
+
 /**
  * Adds a Deadline to the TaskList.
  */
@@ -15,9 +17,9 @@ public class DeadlineCommand extends Command {
     /** Delimiter that separates the description and date of the Command */
     public static final String COMMAND_DATE_TIME_DELIMITER = "\\s+/by\\s+";
     private final String description;
-    private final String by;
+    private final LocalDateTime by;
 
-    public DeadlineCommand(String description, String by) {
+    public DeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
     }

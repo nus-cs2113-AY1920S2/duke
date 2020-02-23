@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.Parser;
+
+import java.time.LocalDateTime;
+
 /**
  * Type of Task that takes place at a specified date.
  */
@@ -8,16 +12,17 @@ public class Event extends Task {
     public static final char EVENT_ICON = 'E';
 
     /** Date at which the Event will be held */
-    protected String time;
+    protected LocalDateTime time;
 
-    public Event(String description, String time) {
+    public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
     @Override
     public String encodeTask() {
-        return String.format("%s|%s|%s|%s", EVENT_ICON, isDone, description, time);
+        return String.format("%s|%s|%s|%s",
+                EVENT_ICON, isDone, description, time.format(Parser.INPUT_DATE_FORMAT));
     }
 
     /**
@@ -29,20 +34,18 @@ public class Event extends Task {
         String[] tokens = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(tokens[1]);
         String description = tokens[2];
-        String time = tokens[3];
+        LocalDateTime time = Parser.parseDate(tokens[3]);
         Event event = new Event(description, time);
         if (isDone) {
-            try {
-                event.markAsDone();
-            } catch (DukeException de) {
-                // user feedback not required
-            }
+            event.markAsDone();
         }
         return event;
     }
 
     @Override
     public String toString() {
-        return "[" + EVENT_ICON + "]" + super.toString() + " (at: " + time + ")";
+        return "[" + EVENT_ICON + "]"
+                + super.toString()
+                + " (at: " + time.format(Parser.PRINT_DATE_FORMAT) + ")";
     }
 }

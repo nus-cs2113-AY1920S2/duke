@@ -18,39 +18,39 @@ _________________________________________________
   1. [T][X] borrow book
 _________________________________________________
 > Task added:
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: Thu 12 Mar 2020 18:45)
 You have 2 tasks in the list
 _________________________________________________
 > Task added:
-  [E][X] project meeting (at: Mon 2-4pm)
+  [E][X] project meeting (at: Fri 28 Feb 2020 10:00)
 You have 3 tasks in the list
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][X] borrow book
-  2. [D][X] return book (by: Sunday)
-  3. [E][X] project meeting (at: Mon 2-4pm)
+  2. [D][X] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][X] project meeting (at: Fri 28 Feb 2020 10:00)
 _________________________________________________
 > Well, that's one task down
-  [D][O] return book (by: Sunday)
+  [D][O] return book (by: Thu 12 Mar 2020 18:45)
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][X] borrow book
-  2. [D][O] return book (by: Sunday)
-  3. [E][X] project meeting (at: Mon 2-4pm)
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][X] project meeting (at: Fri 28 Feb 2020 10:00)
 _________________________________________________
 > Well, that's one task down
   [T][O] borrow book
 _________________________________________________
 > Well, that's one task down
-  [E][O] project meeting (at: Mon 2-4pm)
+  [E][O] project meeting (at: Fri 28 Feb 2020 10:00)
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][O] borrow book
-  2. [D][O] return book (by: Sunday)
-  3. [E][O] project meeting (at: Mon 2-4pm)
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00)
 _________________________________________________
 > Task added:
-  [D][X] finish reading book (by: Sat maybe?)
+  [D][X] finish reading book (by: Sun 01 Mar 2020 00:00)
 You have 4 tasks in the list
 _________________________________________________
 > Task added:
@@ -59,15 +59,15 @@ You have 5 tasks in the list
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][O] borrow book
-  2. [D][O] return book (by: Sunday)
-  3. [E][O] project meeting (at: Mon 2-4pm)
-  4. [D][X] finish reading book (by: Sat maybe?)
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00)
+  4. [D][X] finish reading book (by: Sun 01 Mar 2020 00:00)
   5. [T][X] i want to write a slash here /by doing sth like this
 _________________________________________________
 > ☹ OOPS!!! That task is already done
 _________________________________________________
 > Well, that's one task down
-  [D][O] finish reading book (by: Sat maybe?)
+  [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
 _________________________________________________
 > Well, that's one task down
   [T][O] i want to write a slash here /by doing sth like this
@@ -76,9 +76,9 @@ _________________________________________________
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][O] borrow book
-  2. [D][O] return book (by: Sunday)
-  3. [E][O] project meeting (at: Mon 2-4pm)
-  4. [D][O] finish reading book (by: Sat maybe?)
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00)
+  4. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
   5. [T][O] i want to write a slash here /by doing sth like this
 _________________________________________________
 > ☹ OOPS!!! The description of a todo cannot be empty
@@ -90,8 +90,10 @@ _________________________________________________
 > ☹ OOPS!!! The description and date of a deadline cannot be empty
 _________________________________________________
 > Task added:
-  [D][X] to-trim deadline (by: to-trim date)
+  [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
 You have 6 tasks in the list
+_________________________________________________
+> ☹ OOPS!!! Please specify the date and time using the format DD/MM/YYYY HHMM
 _________________________________________________
 > ☹ OOPS!!! The description and date of an event cannot be empty
 _________________________________________________
@@ -100,8 +102,10 @@ _________________________________________________
 > ☹ OOPS!!! The description and date of an event cannot be empty
 _________________________________________________
 > Task added:
-  [E][X] to-trim event (at: to-trim date)
+  [E][X] to-trim event (at: Sat 22 Feb 2020 20:20)
 You have 7 tasks in the list
+_________________________________________________
+> ☹ OOPS!!! Please specify the date and time using the format DD/MM/YYYY HHMM
 _________________________________________________
 > Task added:
   [T][X] 8
@@ -117,12 +121,12 @@ You have 10 tasks in the list
 _________________________________________________
 > Quite a few tasks you got there
   1. [T][O] borrow book
-  2. [D][O] return book (by: Sunday)
-  3. [E][O] project meeting (at: Mon 2-4pm)
-  4. [D][O] finish reading book (by: Sat maybe?)
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00)
+  4. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
   5. [T][O] i want to write a slash here /by doing sth like this
-  6. [D][X] to-trim deadline (by: to-trim date)
-  7. [E][X] to-trim event (at: to-trim date)
+  6. [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
+  7. [E][X] to-trim event (at: Sat 22 Feb 2020 20:20)
   8. [T][X] 8
   9. [T][X] 9
  10. [T][X] 10
@@ -139,15 +143,15 @@ _________________________________________________
 You have 9 tasks in the list
 _________________________________________________
 > Task deleted:
-  [D][O] return book (by: Sunday)
+  [D][O] return book (by: Thu 12 Mar 2020 18:45)
 You have 8 tasks in the list
 _________________________________________________
 > Task deleted:
-  [E][O] project meeting (at: Mon 2-4pm)
+  [E][O] project meeting (at: Fri 28 Feb 2020 10:00)
 You have 7 tasks in the list
 _________________________________________________
 > Task deleted:
-  [D][O] finish reading book (by: Sat maybe?)
+  [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
 You have 6 tasks in the list
 _________________________________________________
 > Task deleted:
@@ -155,11 +159,11 @@ _________________________________________________
 You have 5 tasks in the list
 _________________________________________________
 > Task deleted:
-  [D][X] to-trim deadline (by: to-trim date)
+  [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
 You have 4 tasks in the list
 _________________________________________________
 > Task deleted:
-  [E][X] to-trim event (at: to-trim date)
+  [E][X] to-trim event (at: Sat 22 Feb 2020 20:20)
 You have 3 tasks in the list
 _________________________________________________
 > Task deleted:
