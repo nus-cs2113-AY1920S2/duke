@@ -17,7 +17,7 @@ public class Command {
             UnknownCommandException{
         switch(instruction) {
         case "list":
-            taskManager.printAllTasks();
+            taskManager.printAllTasks(taskManager.getTasks(),"");
             break;
         case "done":
             if (details.isEmpty()) {
@@ -70,6 +70,9 @@ public class Command {
             } catch (IOException e) {
                 System.out.println("Something went wrong");
             }
+            break;
+        case "find":
+            taskManager.findTasks(details);
             break;
         default:
             throw new UnknownCommandException();

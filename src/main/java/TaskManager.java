@@ -55,6 +55,20 @@ public class TaskManager {
         }
     }
 
+    public void findTasks(String keyword) {
+        ArrayList<Task> copyTasks = new ArrayList<>();
+        for (Task task : Tasks) {
+            if(task.getDescription().contains(keyword)){
+                copyTasks.add(task);
+            }
+        }
+        if(copyTasks.size() > 0) {
+            printAllTasks(copyTasks,"matching ");
+        } else {
+            System.out.println("Jan cannot find a match for the keyword: " + keyword);
+        }
+    }
+
     public boolean addTaskToArrayList(String command, String commandDescription, String divider) {
         String[] taskDetails = commandDescription.split(divider);
         switch(command) {
@@ -83,10 +97,10 @@ public class TaskManager {
         return false;
     }
 
-    public void printAllTasks(){
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < Tasks.size(); i++) {
-            System.out.println( i + 1 + ". " + Tasks.get(i));
+    public void printAllTasks(ArrayList<Task> TasksToPrint, String taskType){
+        System.out.println("Here are the " + taskType +"tasks in your list :");
+        for (int i = 0; i < TasksToPrint.size(); i++) {
+            System.out.println( i + 1 + ". " + TasksToPrint.get(i));
         }
     }
 
