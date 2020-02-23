@@ -14,10 +14,22 @@ public class Parser {
     }
 
 
+    public static Boolean isFindStatementCorrect (String ogString){
+        String[] wordss = ogString.split(" ");
+        int LENG_DONE_STATEMENT = wordss.length;
+        if (LENG_DONE_STATEMENT != 2) {
+            DukeException.markIncorrectFindStatement();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static Boolean isClearStatementCorrect (String ogString){
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
         if (LENG_DONE_STATEMENT != 1) {
+            DukeException.markIncorrectClearStatement();
             return false;
         } else {
             return true;
@@ -28,11 +40,19 @@ public class Parser {
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
         if (LENG_DONE_STATEMENT != 1) {
+            DukeException.markIncorrectListStatement();
             return false;
         } else {
             return true;
         }
     }
+
+    public static String findKeyWord(String ogString){
+        String[] wordss = ogString.split(" ");
+        String KEY_WORD = wordss[1].trim();
+        return KEY_WORD;
+    }
+
 
     public static Boolean isDeleteStatementCorrect(String ogString, ArrayList<Task> taskList) {
         String[] words = ogString.split(" ");

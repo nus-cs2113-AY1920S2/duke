@@ -49,6 +49,9 @@ public class RunCommand extends Commands {
         case "clear":
             ClearCommand.execute(taskList, ogString);
             break;
+        case "find":
+            FindCommand.execute(taskList, ogString);
+            break;
         case "deadline":
         case "event":
         case "todo":
