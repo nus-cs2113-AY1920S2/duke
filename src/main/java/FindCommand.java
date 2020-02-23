@@ -13,7 +13,7 @@ public class FindCommand extends Command {
             List<Task> foundTasks = myTasks.findTasks(description);
             Printer.printTasks(command, foundTasks);
 
-        } catch (BlankStringException e) {
+        } catch (BlankStringException | IndexOutOfBoundsException e) {
             Printer.printEmptyDescriptionError(command);
             Printer.printHint(command);
         }
