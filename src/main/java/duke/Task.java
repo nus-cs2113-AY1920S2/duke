@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.List;
 
 public abstract class Task {
@@ -23,7 +25,7 @@ public abstract class Task {
     }
 
     /**
-     * Overrides the default toString so that Task gets printed in a specific format
+     * Overrides the default toString so that duke.Task gets printed in a specific format
      *
      * @return the formatted String to print
      */

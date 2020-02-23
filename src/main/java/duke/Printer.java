@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.List;
 
 public class Printer {
@@ -30,7 +32,7 @@ public class Printer {
 
     public static void printGreetings() {
         printIndentation();
-        System.out.println("Hello! I'm Duke (￣▽￣*)ゞ");
+        System.out.println("Hello! I'm duke.Duke (￣▽￣*)ゞ");
         printIndentation();
         System.out.println("What can I do for you?");
     }

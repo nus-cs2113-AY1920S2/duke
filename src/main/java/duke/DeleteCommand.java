@@ -1,21 +1,22 @@
+package duke;
+
 import java.io.File;
 import java.util.List;
 
 /**
- * Represents a "done" command that user will input.
- * A <code>DoneCommand</code> object will be executed when the User types in "done" in the UI
- * e.g., <code>done</code> 5
+ * Represents a "delete" command that user will input.
+ * A <code>duke.DeleteCommand</code> object will be executed when the User types in "delete" in the UI
+ * e.g., <code>delete</code> 5
  */
-public class DoneCommand extends Command {
+public class DeleteCommand extends Command {
 
     /**
-     * Executes the done command.
-     * Marks the task as done at index that User specified.
+     * Executes the delete command.
+     * Deletes the task at Index that user specified.
      *
-     * This method will first parse the index from @param commands
-     * Then marks the task at the specified index as done.
-     * Then save the changes to file.
-     * If the User specified out of bounds index or a non-number, error will be printed.
+     * This method will first parse the index from @param commands.
+     * Then it will delete the task at the index and save the changes to the save file
+     * If the User specified index is out of bounds index or a non-number, error will be printed.
      *
      * @param myTasks The list where children command will store Tasks.
      * @param saveFile The place where children command will save Tasks.
@@ -28,12 +29,12 @@ public class DoneCommand extends Command {
             indexAsString = indexAsString.trim();
 
             int index = Integer.parseInt(indexAsString);
-            Task taskDone = myTasks.getTask(index);
-            taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
+            Task taskDelete = myTasks.getTask(index);
+            myTasks.deleteTask(index);
 
-            FileSaver.updateFile(saveFile, index);
+            FileSaver.deleteSpecificLine(saveFile, index);
 
-            Printer.printConfirmationMessage(command, taskDone);
+            Printer.printConfirmationMessage(command, taskDelete);
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             Printer.printError(); //TODO add custom error message when accessing OFB index

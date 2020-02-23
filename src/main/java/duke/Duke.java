@@ -1,18 +1,19 @@
+package duke;
+
 /**
  * CS2113T Semester 2 AY19/20
  * Individual Project
  * <p>
- * Project Duke is a educational software project designed to take you through
+ * Project duke.Duke is a educational software project designed to take you through
  * the steps of building a small software incrementally,
  * while applying as many Java and SE techniques as possible along the way.
  * <p>
- * The project aims to build a product named Duke, a Personal Assistant Chatbot that
- * helps a person to keep track of various things. The name Duke was chosen as a placeholder name,
- * in honor of Duke, the Java Mascot. You may give it any other name and personality you wish.
+ * The project aims to build a product named duke.Duke, a Personal Assistant Chatbot that
+ * helps a person to keep track of various things. The name duke.Duke was chosen as a placeholder name,
+ * in honor of duke.Duke, the Java Mascot. You may give it any other name and personality you wish.
  *
  * @author: Tan Zheng Fu Justin
  */
-
 import java.io.File;
 import java.util.List;
 

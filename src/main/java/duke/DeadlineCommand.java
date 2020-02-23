@@ -1,9 +1,11 @@
+package duke;
+
 import java.io.File;
 import java.util.List;
 
 /**
  * Represents a "deadline" command that user will input.
- * A <code>DeadlineCommand</code> object will be executed when the User types in "deadline" in the UI
+ * A <code>duke.DeadlineCommand</code> object will be executed when the User types in "deadline" in the UI
  * e.g., <code>deadline</code> submit iP /by March 2
  */
 public class DeadlineCommand extends Command {

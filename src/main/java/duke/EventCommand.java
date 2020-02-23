@@ -1,9 +1,11 @@
+package duke;
+
 import java.io.File;
 import java.util.List;
 
 /**
  * Represents an "event" command that user will input.
- * A <code>EventCommand</code> object will be executed when the User types in "event" in the UI
+ * A <code>duke.EventCommand</code> object will be executed when the User types in "event" in the UI
  * e.g., <code>event</code> team meeting /at NUS
  */
 public class EventCommand extends Command {

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,7 +10,7 @@ public class Parser {
 
     /**
      * Returns the command that User has input.
-     * Index 0 will be the Command that User has input, while index 1 will be everything else.
+     * Index 0 will be the duke.Command that User has input, while index 1 will be everything else.
      *
      * @param description The user input that was scanned as an entire String initially. e.g., "event meeting /at NUS"
      * @return An ArrayList that was spilt by " ", limited by 2.
@@ -55,7 +57,7 @@ public class Parser {
 
     /**
      * Returns a specific command object
-     * Throws an UnknownCommandException if the User supplied an UnknownCommand
+     * Throws an duke.UnknownCommandException if the User supplied an UnknownCommand
      *
      * @param command The specific command in String
      * @return the specific command object

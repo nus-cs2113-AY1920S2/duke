@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class Storage {
      * User-specified index will need to subtract 1 as we are using 0 indexing.
      *
      * @param index Index that the User specified.
-     * @return Task at index - 1, if it exists
+     * @return duke.Task at index - 1, if it exists
      */
     public Task getTask(int index) {
 
