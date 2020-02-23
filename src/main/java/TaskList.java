@@ -19,6 +19,10 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Prints all tasks which contain the specified keyword
+     * @param name the specified keyword to search from the list
+     */
     public void find(String name) {
         System.out.println("\tHere are the matching tasks in your list:");
         int i = 1;
@@ -30,6 +34,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes the first occurrence of the specified task from this list,
+     * if it is present.  If the list does not contain the task, it is
+     * unchanged.
+     * Returns {@code true} if this list contained the specified element
+     * (or equivalently, if this list changed as a result of the call).
+     * @param task task to be removed from this list, if present
+     * @return {@code true} if this list contained the specified task
+     */
     public void removeByTask(Task task) {
         tasks.remove(task);
     }
