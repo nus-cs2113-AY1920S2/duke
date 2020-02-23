@@ -25,6 +25,10 @@ import java.time.format.DateTimeFormatter;
         a. Out of range
         b. Not integer
 
+    3. Load from data.txt
+        a. Not exist
+        b. Error reading / writing
+
      */
 
 
