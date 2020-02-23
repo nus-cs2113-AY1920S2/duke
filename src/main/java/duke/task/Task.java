@@ -24,7 +24,7 @@ public abstract class Task {
     public abstract String getDetails();
 
     public String getTaskStatus() {
-        String icon = isDone ? "\u2713" : "\u2718";
-        return ("[" + icon + "] " + task);
+        String statusIcon = isDone ? "\u2713" : "\u2718";
+        return ("[" + statusIcon + "] " + task);
     }
 }

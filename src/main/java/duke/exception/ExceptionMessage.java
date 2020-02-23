@@ -21,6 +21,10 @@ public class ExceptionMessage {
             SHOCK_FACE + "Arh!! Lumi cannot seem to save your list!!" + lineSeparator() +
             "  Do you still want to leave " + toBold("without") + " saving?" + lineSeparator();
 
+    public final static String INPUT_LENGTH_EXCEEDED_MESSAGE =
+            SHOCK_FACE + "Aye!! Lumi only lets you enter " +
+            toBold("less than 50 characters") + "!" + lineSeparator();
+
     public final static String EMPTY_INPUT_MESSAGE =
             ANGRY_FACE + "Hey!! Lumi needs you to type " + toBold("something") + "!" + lineSeparator();
 
@@ -64,7 +68,7 @@ public class ExceptionMessage {
             lineSeparator() + createSpaces(8) +
             toBoldAndItalic("deadline <task description> /by <due date>") + lineSeparator();
 
-    public final static String MISSING_DEADLINE_DESCRIPTION_MESSAGE =
+    public final static String MISSING_DEADLINE_INFORMATION_MESSAGE =
             THINKING_FACE + "Hmm... Lumi senses missing information..." + lineSeparator() +
             "  Lumi needs you to put in either a " + toBold("task description") + " or a " +
             toBold("deadline") + "!" + lineSeparator();
@@ -75,7 +79,7 @@ public class ExceptionMessage {
             lineSeparator() + createSpaces(8) +
             toBoldAndItalic("event <task description> /at <duration>") + lineSeparator();
 
-    public final static String MISSING_EVENT_DESCRIPTION_MESSAGE =
+    public final static String MISSING_EVENT_INFORMATION_MESSAGE =
             THINKING_FACE + "Hmm... Lumi senses missing information..." + lineSeparator() +
             "  Lumi needs you to put in either a " + toBold("task description") + " or a " +
             toBold("duration") + "!" + lineSeparator();

@@ -87,6 +87,10 @@ public class FileManager {
     public static void createTaskListFile() throws IOException {
         File taskListFile = new File(TASK_LIST_PATH);
         taskListFile.getParentFile().mkdirs();
-        taskListFile.createNewFile();
+        if (taskListFile.exists()) {
+            new FileWriter(TASK_LIST_PATH).close();
+        } else {
+            taskListFile.createNewFile();
+        }
     }
 }
