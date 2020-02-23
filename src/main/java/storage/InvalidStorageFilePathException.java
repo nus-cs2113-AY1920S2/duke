@@ -4,6 +4,7 @@ import java.nio.file.InvalidPathException;
 
 /**
  * Represents an exception thrown when the storage file path is invalid.
+ * 
  */
 public class InvalidStorageFilePathException extends InvalidPathException {
 
