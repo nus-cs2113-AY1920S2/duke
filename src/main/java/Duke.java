@@ -103,6 +103,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Split a string (by /) into tokens
+     * @param s input string
+     * @return An array of tokens
+     */
     private String[] processArgs(String s) {
         String[] tokens = new String[2];
         if (s.indexOf('/') == -1) {
