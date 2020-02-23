@@ -131,6 +131,25 @@ _________________________________________________
   9. [T][X] 9
  10. [T][X] 10
 _________________________________________________
+> Are these what you're looking for?
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+_________________________________________________
+> Are these what you're looking for?
+  1. [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
+  2. [E][X] to-trim event (at: Sat 22 Feb 2020 20:20)
+_________________________________________________
+> ☹ OOPS!!! Please specify a string to search for
+_________________________________________________
+> Hmm... Seems like no tasks matched your query
+_________________________________________________
+> Are these what you're looking for?
+  1. [T][O] i want to write a slash here /by doing sth like this
+_________________________________________________
+> Are these what you're looking for?
+  1. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+_________________________________________________
 > ☹ OOPS!!! Please specify a task number between 1 and 10
 _________________________________________________
 > Well, that's one task down
