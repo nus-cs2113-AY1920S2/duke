@@ -72,8 +72,6 @@ Expected outcome:
 
 ![Adding Deadline task](images/deadline.JPG)
 
-INSERT PICTURE HERE
-
 ### <a id="event"></a> `event` - Adds an Event task to your list
 
 Syntax: 
