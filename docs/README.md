@@ -60,7 +60,7 @@ Expected outcome:
 
 ### <a id="deadline"></a> `deadline` - Adds a deadline task to your list
 
-Syntax: 
+Syntax:
 
 `deadline {task description} /by {deadline}`
 
