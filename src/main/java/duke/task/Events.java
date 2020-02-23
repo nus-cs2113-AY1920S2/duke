@@ -1,61 +1,75 @@
 package duke.task;
 
-
-import static misc.Messages.MESSAGE_INCORRECT_DATE_FORMAT_INPUT;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
- * Encapsulates the information of an event.
+ * Encapsulates the information of an Event. An Events task
+ * contains a description, a TaskID, a duration represented using
+ * taskStartDateTime and taskEndDateTime and a boolean status to denote 
+ * if it is completed or not.
+ * 
  */
 public class Events extends Task {
     
-    private final LocalDateTime dateTime;
+    private final LocalDateTime taskStartDateTime;
     
-    public Events(int taskId, String taskName, 
-            LocalDateTime dateTime, boolean isDone) {
-
-        super(taskId, taskName, isDone);
-        this.dateTime = dateTime;
-    }
-
-    public Events(int taskId, String taskName, 
-            String dateTime, boolean isDone) {
-
-        super(taskId, taskName, isDone);
-        
-        try {
-            this.dateTime = LocalDateTime.parse(dateTime);
-        } catch (DateTimeParseException dtpe) {
-            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
-        }
-    }
+    private final LocalDateTime taskEndDateTime;
     
     /**
-     * Constructor of an events task.
+     * Constructor of an Events task.
      * 
-     * @param taskId
-     * @param taskName
-     * @param dateTime
+     * @param taskId The ID of the task to be constructed.
+     * @param taskDecription The description of the task to be constructed.
+     * @param taskStartDateTime The starting date and time of the event.
+     * @param taskEndDateTime The ending date and time of the event.
+     * @param isDone The completion status of the task to be constructed.
      */
-    public Events(int taskId, String taskName, String dateTime) {
-        super(taskId, taskName);
+    public Events(int taskId, String taskDescription, 
+            LocalDateTime taskStartDateTime, LocalDateTime taskEndDateTime,
+            boolean isDone) {
 
-        try {
-            this.dateTime = LocalDateTime.parse(dateTime);
-        } catch (DateTimeParseException dtpe) {
-            throw new InvalidTaskArgumentException(MESSAGE_INCORRECT_DATE_FORMAT_INPUT);
-        }
+        super(taskId, taskDescription, isDone);
+        this.taskStartDateTime = taskStartDateTime;
+        this.taskEndDateTime = taskEndDateTime;
     }
-;
-    @Override
-    public Optional<String> getDate() {
+    
+    /**  Constructs an Events task. This is used for makeTask() in the AddCommand. */
+    public Events(int taskId, String taskDescription, LocalDateTime taskStartDateTime,
+            LocalDateTime taskEndDateTime) {
+        super(taskId, taskDescription);
+        
+        this.taskStartDateTime = taskStartDateTime;
+        this.taskEndDateTime = taskEndDateTime;
+    }
+
+    
+    public Optional<String> getStartDate() {
         return Optional
-                .ofNullable(this.dateTime
+                .ofNullable(this.taskStartDateTime
                 .toLocalDate()
+                .toString());
+    }
+    
+    public Optional<String> getStartTime() {
+        return Optional
+                .ofNullable(this.taskStartDateTime
+                .toLocalTime()
+                .toString());
+    }
+   
+    public Optional<String> getEndDate() {
+        return Optional
+                .ofNullable(this.taskEndDateTime
+                .toLocalDate()
+                .toString());
+    }
+    
+    public Optional<String> getEndTime() {
+        return Optional
+                .ofNullable(this.taskEndDateTime
+                .toLocalTime()
                 .toString());
     }
     
@@ -67,8 +81,8 @@ public class Events extends Task {
      */
     @Override
     public Task setNewTaskId(int newTaskId) {
-        return new Events(newTaskId, this.taskName, 
-                this.dateTime, this.isDone);
+        return new Events(newTaskId, this.taskDescription, 
+                this.taskStartDateTime, this.taskEndDateTime, this.isDone);
     }
 
     /** A string representation of a deadline task with tick and cross symbols. */
@@ -77,7 +91,7 @@ public class Events extends Task {
         return "[E]" 
                 + ((this.isDone) ? Task.tickSymbol : Task.crossSymbol)
                 + " " 
-                + this.taskName;
+                + this.taskDescription;
     }
 
     /** 
@@ -87,8 +101,8 @@ public class Events extends Task {
      */
     @Override
     public Events makeDone() {
-        return new Events(this.taskId, this.taskName, 
-                this.dateTime, true);
+        return new Events(this.taskId, this.taskDescription, 
+                this.taskStartDateTime, this.taskEndDateTime, true);
     }
 
     /** A string representation of an event task. */
@@ -97,8 +111,12 @@ public class Events extends Task {
         return this.taskId 
                 + "."  
                 + this.taskWithSymbol()
-                + " (at: " 
-                + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + " (on: " 
+                + this.taskStartDateTime.format(
+                        DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + " to "
+                + this.taskEndDateTime.format(
+                        DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
                 + ")";
     }
 }
