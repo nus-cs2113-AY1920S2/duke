@@ -15,15 +15,26 @@ public class Storage {
     public Task getTask(int index) {
         try {
             return myTasks.get(index - 1);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw e;
         }
     }
+
     public static int getSize() {
         return myTasks.size();
     }
 
     public void deleteTask(int index) {
         myTasks.remove(index - 1);
+    }
+
+    public List<Task> findTasks(String keyword) {
+        List<Task> foundTasks = new ArrayList<>();
+
+        for (Task t : myTasks) {
+            t.addIfMatchesKeyword(t, foundTasks, keyword);
+        }
+
+        return foundTasks;
     }
 }
