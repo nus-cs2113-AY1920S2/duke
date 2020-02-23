@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -51,7 +51,7 @@ public class Storage {
     }
     //@@author geoO-reused
     
-    protected static void appendToFile(String textToAppend) throws IOException {
+    public static void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(MK_FILE_STRING, true);
         fw.write(textToAppend + System.lineSeparator());
         fw.close();
@@ -60,7 +60,7 @@ public class Storage {
     //@@author Paul Vargas-reused
     //Reused from https://stackoverflow.com/questions/31375972/how-to-replace-a-specific-line-in-a-file-using-java
     //with minor modifications
-    protected static void modifyFileContent(int lineNumber, String data) throws IOException {
+    public static void modifyFileContent(int lineNumber, String data) throws IOException {
         Path path = Paths.get(MK_FILE_STRING);
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         lines.set(lineNumber, data);
@@ -68,14 +68,14 @@ public class Storage {
     }
     //@@author Paul Vargas-reused
     
-    protected static void deleteFileContent(int lineNumber) throws IOException {
+    public static void deleteFileContent(int lineNumber) throws IOException {
         Path path = Paths.get(MK_FILE_STRING);
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         lines.remove(lineNumber);
         Files.write(path, lines, StandardCharsets.UTF_8);
     }
     
-    protected static void printAndLoadContents() throws FileNotFoundException {
+    public static void printAndLoadContents() throws FileNotFoundException {
         File f = new File(MK_FILE_STRING);
         Scanner s = new Scanner(f);
         

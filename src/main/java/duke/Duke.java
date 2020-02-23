@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -49,7 +50,7 @@ public class Duke {
     
     private static Scanner in = new Scanner(System.in);
     
-    protected static ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
     
     public static void main(String[] args) {
         new Storage();

@@ -5,9 +5,9 @@ import duke.exception.DukeException;
 import java.io.IOException;
 
 import static duke.Duke.tasks;
-import static duke.Storage.appendToFile;
-import static duke.Storage.modifyFileContent;
-import static duke.Storage.deleteFileContent;
+import static duke.storage.Storage.appendToFile;
+import static duke.storage.Storage.modifyFileContent;
+import static duke.storage.Storage.deleteFileContent;
 
 
 public class PrintMessage {
