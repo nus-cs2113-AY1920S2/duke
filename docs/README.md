@@ -40,7 +40,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
     *   `deadline Finish a movie /by 2019-12-01T10:00`: adds a deadline task to finish a movie by 1 Dec 2019 at 1000 hrs.
     *   `event Midnight Party /at Marina Bay Sands`: adds an event task to attend a midnight party at Marina Bay Sands
     *   `done 1`: Mark the first task as done shown in the current list.
-    *   `exit`: exits the app
+    *   `exit`: Exits the app
 *   7. Refer to [_Section 3, "Features"_](#features) for more details of each command.
 
 <a name="features"></a>
@@ -50,16 +50,20 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 **Command Format**
 
 ```javascript
-* Words in `UPPER_CASE` are the parameters to be supplied by the user 
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. 
   e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
-  to specify a task's description
+  to specify a task's description.
 
-* Tasks with a venue can be added right after the TASK_DESCRIPTION  by using /at 
-  e.g. in `event TASK_DESCRIPTION /at VENUE`
+* For a general todo task, a task description MUST be added
+  e.g. in `todo TASK_DESCRIPTION`.
 
-* Tasks with a deadline can be added right after the TASK_DESCRIPTION by using /by 
+* For a deadline task, a date MUST be added right after the TASK_DESCRIPTION by using /by. 
   e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
   Note that you have to add 'T' between the date and the time.
+  
+* For an event task, an event start and end date and time MUST be added right after the TASK_DESCRIPTION  by using /on.
+  e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` such as 2020-01-12T10:00 to 2020-01-12T11:00`.
+  Note that you have to add 'T' between the date and the time.    
 
 ```
 
@@ -72,13 +76,13 @@ Adds a task into Duke.
 
 * **Format**: 
     * `todo TASK_DESCRIPTION`
-    * `deadline TASK_DESCRIPTION /by DATE T TIME`
-    * `event TASK_DESCRIPTION /at VENUE`
+    * `deadline TASK_DESCRIPTION /by DATE_TIME`
+    * `event TASK_DESCRIPTION /on START_DATE_TIME to END_DATE_TIME`
 
 * **Examples**:
     * `todo return book`
     * `deadline Thesis submission /by 2020-01-12T23:59`
-    * `event Wedding Ceremony /at ABC hotel`
+    * `event Wedding Ceremony /on 2020-01-12T11:00 to 2020-01-12T12:00`
 
 <a name="list"></a>
 
@@ -93,7 +97,7 @@ Shows a list of all the tasks in Duke.
 
 ### 3.3 Finding a task: `find`
 
-Finds tasks that contains a given keyword.
+Finds tasks that contain a given keyword.
 
 **Format** : `find KEYWORD`
 
@@ -115,7 +119,7 @@ Deletes a specified task from Duke.
 <a name="filter"></a>
 
 ### 3.5 Filter tasks by date: `filter`
-Filters tasks based on a given DATE
+Filters tasks based on a given DATE.
 
 **Format**: `filter DATE`
 
@@ -144,6 +148,7 @@ Marks a task as completed at the specified INDEX.
 ### 3.7 Exiting the program: `exit`
 
 Exits the program.
+
 **Format**: `exit`
 
 
@@ -151,10 +156,10 @@ Exits the program.
 
 ## 4. FAQ
 
-*Q:* How do I transfer my data onto another Computer?
+*Q:* How do I transfer my data onto another computer?
 
 
-*A:* Install the app in the other computer and copy the `storage.txt` from the previous Duke folder onto your current new folder containing the duke.jar.
+*A:* Download or copy the previous `Duke.jar` onto the other computer and copy the `storage.txt` from the previous Duke folder onto your current new folder containing the `Duke.jar`.
 
 
 <a name="command-summary"></a>
@@ -163,19 +168,19 @@ Exits the program.
 * Add 
     * Format: 
         * `todo TASK_DESCRIPTION`
-        * `deadline TASK_DESCRIPTION /by DATE T TIME`
-        * `event TASK_DESCRIPTION /at VENUE`
+        * `deadline TASK_DESCRIPTION /by DATE_TIME`
+        * `event TASK_DESCRIPTION /on START_DATE_TIME to END_DATE_TIME`
     * Examples:
         * `todo return book`
         * `deadline Thesis submission /by 2020-01-12T23:59`
-        * `event Wedding Ceremony /at ABC hotel`
+        * `event Wedding Ceremony /on 2020-01-12T11:00 to 2020-01-12T12:00`
 * List: `list`
 * Find: `find KEYWORD`
     * e.g. `find book`
 * Filter: `filter DATE`
     * e.g. `filter 2019-01-01`
 * Delete: `delete INDEX`
-    * `delete 2`
+    * e.g. `delete 2`
 * Done: `done INDEX`
     * e.g. `done 1`
    
