@@ -1,10 +1,13 @@
 package duke.task;
 
-import duke.DukeException;
-
+/**
+ * Type of Task that takes place at a specified date.
+ */
 public class Event extends Task {
+    /** Icon used to represent an Event */
     public static final char EVENT_ICON = 'E';
 
+    /** Date at which the Event will be held */
     protected String time;
 
     public Event(String description, String time) {
@@ -17,6 +20,11 @@ public class Event extends Task {
         return String.format("%s|%s|%s|%s", EVENT_ICON, isDone, description, time);
     }
 
+    /**
+     * Returns the object representation of an encoded Event.
+     * @param encodedTask a string returned by method Task.encodeTask()
+     * @return an Event object whose information was stored in encodedTask
+     */
     public static Event decodeTask(String encodedTask) {
         String[] tokens = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(tokens[1]);

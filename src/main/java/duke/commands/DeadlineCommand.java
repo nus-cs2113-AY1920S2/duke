@@ -6,8 +6,13 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
+/**
+ * Adds a Deadline to the TaskList.
+ */
 public class DeadlineCommand extends Command {
-    public static final String DEADLINE_COMMAND_NAME= "deadline";
+    /** Word to be typed by the user to invoke this Command */
+    public static final String DEADLINE_COMMAND_NAME = "deadline";
+    /** Delimiter that separates the description and date of the Command */
     public static final String COMMAND_DATE_TIME_DELIMITER = "\\s+/by\\s+";
     private final String description;
     private final String by;
