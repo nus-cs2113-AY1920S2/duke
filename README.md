@@ -12,7 +12,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
     + [3.4. Deleting a task:](#delete) `delete`
     + [3.5. Filter tasks by date:](#filter) `filter`
     + [3.6. Complete a task:](#complete) `done`
-    + [3.7. Exiting the program:](#exit) `exit`
+    + [3.7. Exiting the program:](#exit) `bye`
 * [4. FAQ](#faq)
 * [5. Command Summary](#command-summary)
 
