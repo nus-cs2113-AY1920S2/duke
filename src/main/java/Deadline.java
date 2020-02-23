@@ -7,10 +7,18 @@ public class Deadline extends Task {
         setBy(by);
     }
 
+    /**
+     * Returns the deadline of the task.
+     * @return the deadline of the task
+     */
     public String getBy() {
         return by;
     }
 
+    /**
+     * Sets the deadline of the task.
+     * @param by the deadline of the task
+     */
     public void setBy(String by) {
         this.by = by;
     }
