@@ -12,6 +12,7 @@ import data.task.DeadlineTask;
 import data.task.EventTask;
 import data.task.Task;
 import data.task.TodoTask;
+import ui.TextUi;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -24,6 +25,10 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    public static final String DATE_SPLITTER = "/";
+    public static final String COMMAND_SPLITTER = " ";
+    public static final char CAP_ACKNOWLEDGEMENT = 'Y';
+    public static final char ACKNOWLEDGEMENT = 'y';
     /** index suffix for done and delete command */
     public static final int DELETE_INDEX = 7;
     public static final int DONE_INDEX = 5;
@@ -31,6 +36,7 @@ public class Parser {
     public static final int DESCRIPTION_MAXIMUM_SECTIONS = 2;
     public static final int DESCRIPTION_INDEX = 0;
     public static final int TIME_INDEX = 1;
+    public static final int COMMAND_WORD_INDEX = 0;
 
     /**
      * Parses user input into command for execution.
@@ -43,9 +49,9 @@ public class Parser {
      */
     public Command parseCommand(TaskManager taskManager, String userInput) {
         final String commandWord = userInput;
-        final String []commandWordFirstPart = commandWord.split(" ");
+        final String []commandWordFirstPart = commandWord.split(COMMAND_SPLITTER);
         /** further split the user input, get the secondary part, the description */
-        final String commandWordDescription = commandWord.substring(commandWordFirstPart[0].length());
+        final String commandWordDescription = commandWord.substring(commandWordFirstPart[COMMAND_WORD_INDEX].length());
         //operates according to different command word
         return getCommand(taskManager, taskManager.getTaskList().getNextTaskIndex(), commandWord, commandWordFirstPart, commandWordDescription);
     }
@@ -55,7 +61,7 @@ public class Parser {
      * @return parsed command
      */
     private Command getCommand(TaskManager taskManager, int nextTaskIndex, String commandWord, String[] commandWordFirstPart, String commandWordDescription) {
-        switch (commandWordFirstPart[0]){
+        switch (commandWordFirstPart[COMMAND_WORD_INDEX]){
         //save to json
         case SaveToJsonCommand.COMMAND_WORD:
             return  new SaveToJsonCommand();
@@ -104,35 +110,26 @@ public class Parser {
      * @return the AddCommand obj constructed on the user input
      */
     private Command prepareAddEventTask(TaskManager taskManager, int nextTaskIndex, String commandDescription) {
-        //split the commandDescription to task and start time
+        TextUi.printDivider();
         String [] temp = new String[DESCRIPTION_MAXIMUM_SECTIONS];
         try {
-            temp = commandDescription.split("/");
+            temp = commandDescription.split(DATE_SPLITTER);
             for (Task toCheck: taskManager.getTaskList().getInternalList()
             ) {
-                if (checkDuplicate(temp, toCheck)) return getUserDecisionForEventDuplicate(nextTaskIndex, temp);
+                if (checkDuplicateTask(toCheck, temp[DESCRIPTION_INDEX])) return getUserDecisionForDuplicate(Messages.EVENT_TYPE,nextTaskIndex, temp);
             }
         } catch (ArrayIndexOutOfBoundsException aiobex){
-
+            aiobex.printStackTrace();
         }
         return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
-    }
-
-    private boolean checkDuplicate(String[] temp, Task toCheck) {
-        if (toCheck.getTaskDescription().contentEquals(temp[DESCRIPTION_INDEX])){
-            System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
-            Messages.consumeLine();
-            return true;
-        }
-        return false;
     }
 
     private Command getUserDecisionForEventDuplicate(int nextTaskIndex, String[] temp) {
         Scanner scanner = new Scanner(System.in);
         char userCommand  = scanner.next().charAt(USER_CHOICE_INDEX);
         switch (userCommand){
-        case 'Y':
-        case 'y':
+        case CAP_ACKNOWLEDGEMENT:
+        case ACKNOWLEDGEMENT:
             return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
         default:
             System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
@@ -148,36 +145,32 @@ public class Parser {
      * @return the AddCommand obj constructed on the user input
      */
     private Command prepareAddDeadlineTask(TaskManager taskManager, int nextTaskIndex, String commandDescription) {
-        //split the commandDescription to task and deadline
+        TextUi.printDivider();
         String [] temp = new String[DESCRIPTION_MAXIMUM_SECTIONS];
         try {
-            temp = commandDescription.split("/");
-            if (checkEventDuplicate(taskManager, temp, temp[DESCRIPTION_INDEX])) return getUserDecisionForDeadlineDuplicate(nextTaskIndex, temp);
-        } catch (ArrayIndexOutOfBoundsException aex){
-            aex.printStackTrace();
+            temp = commandDescription.split(DATE_SPLITTER);
+            for (Task toCheck: taskManager.getTaskList().getInternalList()
+            ) {
+                if (checkDuplicateTask(toCheck, temp[DESCRIPTION_INDEX])) return getUserDecisionForDuplicate(Messages.DEADLINE_TYPE,nextTaskIndex, temp);
+            }
+        } catch (ArrayIndexOutOfBoundsException aiobex){
+            aiobex.printStackTrace();
         }
         return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
     }
 
-    private boolean checkEventDuplicate(TaskManager taskManager, String[] temp, String s) {
-        for (Task toCheck : taskManager.getTaskList().getInternalList()
-        ) {
-            if (toCheck.getTaskDescription().contentEquals(s)) {
-                System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
-                Messages.consumeLine();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Command getUserDecisionForDeadlineDuplicate(int nextTaskIndex, String[] temp) {
+    private Command getUserDecisionForDuplicate(char taskType, int nextTaskIndex, String[] temp) {
         Scanner scanner = new Scanner(System.in);
         char userCommand  = scanner.next().charAt(USER_CHOICE_INDEX);
         switch (userCommand){
-        case 'Y':
-        case 'y':
-            return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
+        case CAP_ACKNOWLEDGEMENT:
+        case ACKNOWLEDGEMENT:
+            switch (taskType){
+            case Messages.DEADLINE_TYPE:
+                return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
+            case Messages.EVENT_TYPE:
+                return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
+            }
         default:
             System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
             return new ListCommand();
@@ -192,15 +185,12 @@ public class Parser {
      * @return the AddCommand obj constructed on the user input
      */
     private Command prepareAddTodoTask(TaskManager taskManager,int nextTaskIndex, String commandDescription) {
+        TextUi.printDivider();
         try{
             for (Task toCheck:taskManager.getTaskList().getInternalList()
             ) {
-                if(toCheck.getTaskDescription().contentEquals(commandDescription)){
-                    //
-                    System.out.println(String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
-                    Messages.consumeLine();
+                if (checkDuplicateTask(toCheck, commandDescription))
                     return getUserDecisionForTodoDuplicate(nextTaskIndex, commandDescription);
-                }
             }
         } catch (NullPointerException npex) {
             npex.printStackTrace();
@@ -208,12 +198,20 @@ public class Parser {
         return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
     }
 
+    private boolean checkDuplicateTask(Task toCheck, String commandDescription) {
+        if (toCheck.getTaskDescription().contentEquals(commandDescription)) {
+            TextUi.alertToAddDuplicateTask(toCheck);
+            return true;
+        }
+        return false;
+    }
+
     private Command getUserDecisionForTodoDuplicate(int nextTaskIndex, String commandDescription) {
         Scanner scanner = new Scanner(System.in);
         char userCommand  = scanner.next().charAt(USER_CHOICE_INDEX);
         switch (userCommand){
-        case 'Y':
-        case 'y':
+        case CAP_ACKNOWLEDGEMENT:
+        case ACKNOWLEDGEMENT:
             return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
         default:
             System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
@@ -229,7 +227,7 @@ public class Parser {
      */
     private Command prepareDone (String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args, DONE_INDEX);//get target index
+            final int targetIndex = parseArgsAsDisplayedIndex(args, DONE_INDEX);
             return new DoneCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
@@ -248,8 +246,8 @@ public class Parser {
      */
     private Command prepareDelete(String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args, DELETE_INDEX);//get target index
-            return new DeleteCommand(targetIndex); //delete
+            final int targetIndex = parseArgsAsDisplayedIndex(args, DELETE_INDEX);
+            return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {

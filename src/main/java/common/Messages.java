@@ -12,6 +12,8 @@ public class Messages {
             "/_/ |_\\____/_/ |_/___/   \n" +
             "                         \n";
     public static final int INDEX_OFF_SET = -1;
+    public static final char EVENT_TYPE = 'E';
+    public static final char DEADLINE_TYPE = 'D';
     public static final char DONE = 'D';
     public static final char notDONE = 'N';
     public static final String DIVIDER = "+----------------------------------------------------+";
@@ -24,12 +26,13 @@ public class Messages {
     public static final String MESSAGE_DEADLINE_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "Error writing to file: %s";
-    public static final String MESSAGE_DUPLICATE_TASK_ALERT = "Alert! This task is similar to task Index %d\nDo you want to add a duplicate task? Press Y to add and others to not add: ";
+    public static final String MESSAGE_DUPLICATE_TASK_ALERT = "This task is similar to task Index %d\nDo you want to add a duplicate task? Press Y to add and others to not add: ";
     public static final String MESSAGE_DUPLICATE_TASK_NOT_ADDED = "The duplicate task is not added!";
     public static final String MESSAGE_ASK_TO_CHOOSE_UI = "Please enter '1' for GUI and '2' for CLI: ";
     public static final String MESSAGE_THANKS_FOR_GUI = "Thanks for choosing GUI";
     public static final String MESSAGE_THANKS_FOR_CLI = "Thanks for choosing CLI";
-    public static final String MESSAGE_INVALID_USER_CHOICE = "Warning: Invalid Choice!";
+    public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice!";
+    public static final String MESSAGE_ALERT = "[ALERT!]";
     public static StringBuilder taskListMessage;
 
     /**
