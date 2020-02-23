@@ -11,15 +11,15 @@
   
 3.Deleting tasks
 
-  Duke allows you to delete tasks through the `delete` command.
+  Duke helps you to delete tasks through the `delete` command.
   
 4.Finding tasks
 
-  Duke allows you to find for tasks with matching keywords using `find` command.
+  Duke helps you to find for tasks with matching keywords using `find` command.
   
 5.Auto-save and stores our tasks
 
-  Duke allows you to auto-save and stores the task.
+  Duke helps you to auto-save and stores the task.
   
 ### Commands
 + [ToDo](#todo)
@@ -37,10 +37,9 @@ Words enclosed by `{` and `}` are parameters that are supplied by you.
 
 ## Setting Up
 1. Extract the jar folder into an empty folder
-2. Add a `database.txt` document into the folder
-3. Enter your terminal and move to the location of the folder
+2. Enter your preferred terminal and move to the location of the folder
 3. Run the Command-Line interface(CLI) with `java -jar Duke.jar` in your terminal
-
+![Setting up Duke](/images/startup.JPG)
 ## Usage
 
 ### <a id="todo"></a> `todo` - Adds a todo task to your list
@@ -57,7 +56,7 @@ Expected outcome:
 
 `adds a ToDo task to your list`
 
-INSERT PICTURE HERE
+![Adding ToDo task](docs/images/todo.JPG)
 
 ### <a id="deadline"></a> `deadline` - Adds a deadline task to your list
 
@@ -71,7 +70,7 @@ Example of usage:
 
 Expected outcome:
 
-`adds a Deadline task to your list`
+![Adding Deadline task](docs/images/deadline.JPG)
 
 INSERT PICTURE HERE
 
@@ -89,7 +88,7 @@ Expected outcome:
 
 `adds an Event task to your list`
 
-INSERT PICTURE HERE
+![Adding Event task](docs/images/event.JPG)
 
 ### <a id="list"></a> `list` - Displays all your tasks
 
@@ -101,7 +100,7 @@ Expected outcome:
 
 `Display all your tasks`
 
-INSERT PICTURE
+![Listing all tasks](docs/images/list.JPG)
 
 ### <a id="done"></a> `done` - Mark task as completed
 
@@ -117,7 +116,7 @@ Expected outcome:
 
 `Marks task as completed based on specified index`
 
-INSERT PICTURE
+![Marking tasks as completed](docs/images/done.JPG)
 
 ### <a id="delete"></a> `delete` - Deletes task from list
 
@@ -133,7 +132,7 @@ Expected outcome:
 
 `Deletes task based on specified index`
 
-INSERT PICTURE
+![Deleting tasks](docs/images/delete.JPG)
 
 ### <a id="find"></a> `find` - Finds task from list
 
@@ -149,7 +148,7 @@ Expected outcome:
 
 `Finds task from list`
 
-INSERT PICTURE
+![Finding tasks](docs/images/find.JPG)
 
 ### <a id="help"></a> `help` - Displays all the commands
 
@@ -162,6 +161,7 @@ Expected outcome:
 
 `Displays help command`
 
+![help](docs/images/help.JPG)
 
 ### <a id="bye"></a> `bye` - Terminate program
 
@@ -172,3 +172,5 @@ Syntax:
 Expected outcome:
 
 `Terminates program`
+
+![bye](docs/images/bye.JPG)
