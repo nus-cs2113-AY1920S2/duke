@@ -1,15 +1,13 @@
 package command;
 
 /** 
- * Represents an exception of an invalid command.
+ * Represents an exception of an invalid command. This serves to 
+ * inform the user that the command word entered in the launch arguments
+ * is invalid.
+ * 
  */
 public class InvalidCommandException extends IllegalArgumentException {
     
-    /** 
-     * Constructor of an InvalidCommandException.
-     * 
-     * @param message
-     */
     public InvalidCommandException(String message) {
         super(message);
     }
