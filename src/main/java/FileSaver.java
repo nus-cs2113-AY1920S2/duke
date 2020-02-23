@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 public class FileSaver {
 
-    private static final int IS_DONE_INDEX = 1;
-    private static final String DONE = "1";
-
     public static void makeNewDirectory() {
         File f = new File("data");
         f.mkdir();
@@ -17,7 +14,7 @@ public class FileSaver {
     public static File makeNewSaveFile() {
         makeNewDirectory();
 
-        File f = new File("data/duke.txt");
+        File f = Duke.SAVE_FILE;
         boolean isFileExist = f.exists();
         if (!isFileExist) {
             try {
@@ -61,30 +58,36 @@ public class FileSaver {
         }
     }
 
-    public static void updateFile(File f, int index) {
-        File temp = new File("data/temp.txt");
-
+    public static void createTempFile(File temp) {
         try {
             temp.createNewFile();
         } catch (IOException e) {
             System.out.println("nani"); //TODO
         }
+    }
+
+    public static Scanner getScanner(File f, int index, FileWriter fw) throws IOException {
+        Scanner s = new Scanner(f);
+        for (int i = 1; i < index; i += 1) {
+            String sentence = s.nextLine();
+            fw.append(sentence + System.lineSeparator());
+        }
+        return s;
+    }
+
+    public static void updateFile(File f, int index) {
+        File temp = new File("data/temp.txt");
+
+        createTempFile(temp);
 
         try (FileWriter fw = new FileWriter(temp, true)) {
-            Scanner s = new Scanner(f);
-            for (int i = 1; i < index; i += 1) {
-                String sentence = s.nextLine();
-                fw.append(sentence + System.lineSeparator());
-            }
+            Scanner s = getScanner(f, index, fw);
 
             String regex = "\\d+";
             String sentence = (s.nextLine()).replaceFirst(regex, "1");
             fw.append(sentence + System.lineSeparator());
 
-            while(s.hasNext()) {
-                String inputSentence = s.nextLine();
-                fw.append(inputSentence + System.lineSeparator());
-            }
+            copyUntilEnd(fw, s);
             s.close();
 
         } catch (IOException e) {
@@ -93,6 +96,35 @@ public class FileSaver {
         } finally {
             f.delete();
             temp.renameTo(f);
+        }
+    }
+
+    public static void deleteSpecificLine(File saveFile, int index) {
+        File temp = new File("data/temp.txt");
+
+        createTempFile(temp);
+
+        try (FileWriter fw = new FileWriter(temp, true)) {
+            Scanner s = getScanner(saveFile, index, fw);
+
+            s.nextLine();
+
+            copyUntilEnd(fw, s);
+            s.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            saveFile.delete();
+            temp.renameTo(saveFile);
+        }
+    }
+
+    public static void copyUntilEnd(FileWriter fw, Scanner s) throws IOException {
+        while (s.hasNext()) {
+            String inputSentence = s.nextLine();
+            fw.append(inputSentence + System.lineSeparator());
         }
     }
 }

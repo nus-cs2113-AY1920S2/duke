@@ -15,8 +15,17 @@ public class Printer {
         System.out.print("    ");
     }
 
-    public static void printStart(String logo) {
+    public static void printStart() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
+        Printer.printLines();
+        Printer.printGreetings();
+        Printer.printLines();
     }
 
     public static void printGreetings() {
@@ -58,13 +67,13 @@ public class Printer {
         printIndentation();
 
         switch (command) {
-        case "done" :
+        case "done":
             System.out.printf("Nice! I've marked this task as done ヽ(・∀・)ﾉ :\n");
             printIndentation();
             System.out.printf("  %s\n", task);
             break;
 
-        case "delete" :
+        case "delete":
             System.out.printf("Ok! I have deleted this task ヽ(・∀・)ﾉ :\n");
             printIndentation();
             System.out.printf("  %s\n", task);
@@ -72,7 +81,7 @@ public class Printer {
             System.out.printf("Now you have %d tasks in the list\n", Storage.getSize());
             break;
 
-        case "todo" :
+        case "todo":
             System.out.println("Got it! I've added this task ＠＾◡＾) :");
             printIndentation();
             System.out.println("  " + task);
@@ -125,7 +134,7 @@ public class Printer {
         printIndentation();
         printIndentation();
 
-        switch(command) {
+        switch (command) {
         case "event":
             System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>(space)/at(space)<at>");
             printIndentation();
@@ -133,7 +142,7 @@ public class Printer {
             System.out.println("Example: " + ANSI_BLUE + "event" + ANSI_RESET + " team meeting /at 2 August 2-4pm");
             break;
 
-        case "todo" :
+        case "todo":
             System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>");
             printIndentation();
             printIndentation();

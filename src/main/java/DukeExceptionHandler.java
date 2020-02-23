@@ -5,9 +5,7 @@ public class DukeExceptionHandler {
         }
     }
 
-    public static void containsBy(String descriptionAndDate) throws DeadlineDateException {
-        if (!descriptionAndDate.contains(" /by ")) {
-            throw new DeadlineDateException();
-        }
+    public static void unknownCommand() throws UnknownCommandException {
+        throw new UnknownCommandException();
     }
 }
