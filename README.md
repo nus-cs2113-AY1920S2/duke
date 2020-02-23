@@ -154,7 +154,7 @@ Marks a task as completed at the specified INDEX.
 
 Exits the program.
 
-**Format**: `exit`
+**Format**: `bye`
 
 
 <a name="faq"></a>
@@ -189,5 +189,5 @@ Exits the program.
 * Done: `done INDEX`
     * e.g. `done 1`
    
-* Exit: `exit`
+* Exit: `bye`
 
