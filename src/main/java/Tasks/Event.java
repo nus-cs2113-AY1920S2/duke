@@ -12,7 +12,8 @@ public class Event extends Task {
         super(action);
     }
 /**
- * This method sets the value of @param at.
+ * This method sets the value of the parameter "at".
+ * @param at This is the only argument.
  */
     public void setAt(String at){
         this.at=at;
