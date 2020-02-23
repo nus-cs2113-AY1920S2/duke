@@ -54,7 +54,7 @@ public class Duke {
         return new Task(userInput);
     }
 
-    public static void echoUntilBye(File f) {
+    public static void echoUntilBye(File saveFile) {
         boolean isBye = false;
         while (!isBye) {
             Task task = readFromUser();
@@ -92,7 +92,7 @@ public class Duke {
                     Task taskDone = myTasks.getTask(index);
                     taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
 
-                    FileSaver.updateFile(f, index);
+                    FileSaver.updateFile(saveFile, index);
 
                     Printer.printConfirmationMessage(command, taskDone);
 
@@ -128,7 +128,7 @@ public class Duke {
                     ToDo toDoTask = new ToDo(description);
                     myTasks.storeTasks(toDoTask);
 
-                    FileSaver.saveFile(f, description);
+                    FileSaver.saveFile(saveFile, description);
 
                     Printer.printConfirmationMessage(command, toDoTask);
 
@@ -154,7 +154,7 @@ public class Duke {
                     Deadline deadlineTask = new Deadline(description, deadline);
                     myTasks.storeTasks(deadlineTask);
 
-                    FileSaver.saveFile(command, f, description, deadline);
+                    FileSaver.saveFile(command, saveFile, description, deadline);
 
                     Printer.printConfirmationMessage(command, deadlineTask);
 
@@ -180,7 +180,7 @@ public class Duke {
                     Event eventTask = new Event(description, eventAt);
                     myTasks.storeTasks(eventTask);
 
-                    FileSaver.saveFile(command, f, description, eventAt);
+                    FileSaver.saveFile(command, saveFile, description, eventAt);
 
                     Printer.printConfirmationMessage(command, eventTask);
 
@@ -199,12 +199,12 @@ public class Duke {
     public static void main(String[] args) {
         start();
 
-        File f = FileSaver.makeNewTextFile();
-        FileLoader.loadFile(myTasks, f);
+        File saveFile = FileSaver.makeNewSaveFile();
+        FileLoader.loadFile(myTasks, saveFile);
 
         Printer.printLines();
         Printer.printGreetings();
         Printer.printLines();
-        echoUntilBye(f);
+        echoUntilBye(saveFile);
     }
 }

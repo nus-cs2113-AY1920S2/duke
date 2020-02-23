@@ -14,7 +14,7 @@ public class FileSaver {
         f.mkdir();
     }
 
-    public static File makeNewTextFile() {
+    public static File makeNewSaveFile() {
         makeNewDirectory();
 
         File f = new File("data/duke.txt");
