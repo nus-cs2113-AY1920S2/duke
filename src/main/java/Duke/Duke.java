@@ -19,8 +19,10 @@ public class Duke {
         File f = new File(FILEPATH);
 
         ArrayList<Task> taskArrayList = new ArrayList<>();
+        ArrayList<Task> lastShownList = (ArrayList<Task>) taskArrayList.clone();
         int exit = 0;
         int taskListSize = 0;
+        int lastShownListSize = 0;
 
         try {
             taskListSize = loadFileContents(FILEPATH, taskArrayList);
@@ -41,23 +43,31 @@ public class Duke {
                 exit = 1;
                 saveTasks(FILEPATH, taskArrayList, true);
                 break;
+            case "find":
+                String keyword = tokenizedInputs[1];
+                lastShownList.clear();
+                lastShownListSize = 0;
+                displayMatchingTasks(taskArrayList, lastShownList, lastShownListSize, keyword);
+                break;
             case "list":
                 printTasks(taskArrayList, taskListSize);
+                lastShownList.clear();
+                lastShownList = (ArrayList<Task>) taskArrayList.clone();
                 break;
             case "done":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 int taskDone = Integer.valueOf(tokenizedInputs[1]) - 1;
                 //to do more error handling here
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(taskArrayList.get(taskDone).markAsDone());
+                System.out.println(lastShownList.get(taskDone).markAsDone());
                 break;
             case "delete":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 int taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
                 //to do more error handling here
                 taskListSize--;
-                respondDeleteSuccess(taskListSize, "Noted. I've removed this task:\n", taskArrayList.get(taskToDelete));
-                taskArrayList.remove(taskToDelete);
+                respondDeleteSuccess(taskListSize, "Noted. I've removed this task:\n", lastShownList.get(taskToDelete));
+                taskArrayList.remove(lastShownList.get(taskToDelete));
                 break;
             case "todo":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
@@ -87,6 +97,24 @@ public class Duke {
                 break;
             }
         }
+    }
+
+    private static void displayMatchingTasks(ArrayList<Task> taskArrayList, ArrayList<Task> lastShownList, int lastShownListSize, String keyword) {
+        for (Task i : taskArrayList) {
+            if (i.description.contains(keyword)) {
+                lastShownList.add(i);
+                lastShownListSize++;
+            }
+        }
+        if (lastShownListSize > 0) {
+            System.out.println("____________________________________________________________\n" +
+                    "     Here are the matching tasks in your list:\n");
+            printTasks(lastShownList, lastShownListSize);
+            System.out.println("____________________________________________________________\n");
+        } else {
+            System.out.println("There are no tasks matching that description.\n");
+        }
+
     }
 
     private static void saveTasks(String filePath, ArrayList<Task> taskArrayList, boolean overWrite) {
@@ -136,10 +164,10 @@ public class Duke {
         System.out.print(taskListSize + 1);
         if (taskListSize <= 0) {
             System.out.print(" task in the list.\n" +
-                    "____________________________________________________________\n");
+                    "____________________________________________________________");
         } else {
             System.out.print(" tasks in the list.\n" +
-                    "____________________________________________________________\n");
+                    "____________________________________________________________");
         }
     }
 
@@ -182,7 +210,7 @@ public class Duke {
                 break;
             }
         }
-        System.out.println("Previous tasks has been loaded successfully:\n");
+        System.out.println("Previous tasks has been loaded successfully:");
         printTasks(taskArrayList, taskListSize);
         return taskListSize;
     }
