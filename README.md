@@ -43,7 +43,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
     *   `deadline Finish a movie /by 2019-12-01T10:00`: adds a deadline task to finish a movie by 1 Dec 2019 at 1000 hrs.
     *   `event Midnight Party /at Marina Bay Sands`: adds an event task to attend a midnight party at Marina Bay Sands
     *   `done 1`: Mark the first task as done shown in the current list.
-    *   `exit`: Exits the app
+    *   `bye`: Exits the app
 *   7. Refer to [_Section 3, "Features"_](#features) for more details of each command.
 
 <a name="features"></a>
