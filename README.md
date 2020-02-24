@@ -1,39 +1,29 @@
-# Setting up
+# JAN v1.0
 
-**Prerequisites**
+Jan is a task management bot that can remember all the tasks that you tell it. This user guide will
+help you get started and find out how you can play with it.
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+**Installation**
 
-**Importing the project into IntelliJ**
+Use the Jar package from https://github.com/Janicetyy/duke/releases/tag/A-Jar
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+**Usage**
 
-# Tutorials 
+1. Open Command Prompt in the directory where the JAR file is located.
+2. Run the command `java -jar jan.jar`
 
-Duke Increment | Tutorial
+## Features
+
+Command | Description
 ---------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+`list` | Display all the tasks that was created.
+`done [tasknum]` | Mark a completed task as done. Completed tasks will show a ✓ and ✘ otherwise.
+`delete [tasknum]` | Delete an existing task.
+`find [keyword]` | Find all tasks from existing list of tasks that contains the keyword
+`todo [item] ` | Creates a new to-do task.
+`deadline [item] /by [datetime]` | Creates a new to-do task that has a deadline, hence to be completed by a specific date time.
+`event [item] /at [datetime]` | Creates an event type task that will take place at a specific date time.
 
 # Feedback, Bug Reports
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+* If you have feedback or bug reports, please email me at e0318725@u.nus.edu.
