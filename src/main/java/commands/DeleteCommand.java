@@ -12,7 +12,7 @@ import ui.Ui;
 public class DeleteCommand extends Command {
     /**
      * Constructs a Delete Command object
-     * @param rawUserInput unedited String object from System.in
+     * @param rawUserInput unedited String from user
      */
     public DeleteCommand(String rawUserInput) {
         super(rawUserInput);
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         } catch (MissingDescriptionException e) {
             throw new MissingItemIndexException(rawUserInput);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter an integer to be marked done");
+            ui.printErrorMessage("Please enter an integer to be marked done");
         }
     }
 }

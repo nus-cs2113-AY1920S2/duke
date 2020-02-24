@@ -2,6 +2,7 @@ package commands;
 
 import exceptions.MissingDescriptionException;
 import exceptions.MissingItemIndexException;
+import exceptions.TaskAlreadyDoneException;
 import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
@@ -12,7 +13,7 @@ import ui.Ui;
 public class DoneCommand extends Command {
     /**
      * Constructs a Done Command object
-     * @param rawUserInput unedited String object from user
+     * @param rawUserInput unedited String from user
      */
     public DoneCommand(String rawUserInput) {
         super(rawUserInput);
@@ -26,9 +27,11 @@ public class DoneCommand extends Command {
      * @param storage object handling storage operations
      * @throws MissingItemIndexException throws when user fails to provide index to be marked done
      * @throws NumberFormatException throws when user provides a non-integer to be marked done
+     * @throws TaskAlreadyDoneException throws when user tries to mark a task that is already done
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws MissingItemIndexException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws MissingItemIndexException
+            , TaskAlreadyDoneException {
         try {
             String[] splitCommands = removeCommandWord(super.rawUserInput);
             int itemIndex = Integer.parseInt(splitCommands[1]) - 1;
@@ -37,7 +40,7 @@ public class DoneCommand extends Command {
         } catch (MissingDescriptionException e) {
             throw new MissingItemIndexException(super.rawUserInput);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter an integer to be marked done");
+            ui.printErrorMessage("Please enter an integer to be marked done");
         }
     }
 }
