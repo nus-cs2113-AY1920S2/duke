@@ -15,10 +15,16 @@ public class AddCommand extends Commands {
     public static void execute(ArrayList<Task> taskList, String ogString, String taskType) {
         try {
             Ui.printStraightLine();
-            addTasks.execute(taskList, ogString, taskType);
-            Ui.printAddedStatement(taskList);
+            try {
+                addTasks.execute(taskList, ogString, taskType);
+                Ui.printAddedStatement(taskList);
+            } catch (java.time.format.DateTimeParseException ex) {
+                Ui.markDateTimeException();
+                Ui.printStraightLine();
+            }
+
         } catch (IndexOutOfBoundsException e) {
-            DukeException.markAsIncorrectFormat();
+            Ui.markAsIncorrectFormat();
             Ui.printStraightLine();
         }
     }

@@ -1,8 +1,8 @@
 package duke.commands;
 import duke.common.Utils;
-import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class RunCommand extends Commands {
     public void execute(String command, ArrayList<Task> taskList, String filePath) {
         String taskType = Parser.returnTaskType(finalCommand);
         if (!Utils.checkIfValidTask(taskType)) {
-            DukeException.markAsIncorrectFormat();
+            Ui.markAsIncorrectFormat();
         } else {
             executeCommands(taskList, command, taskType);
         }

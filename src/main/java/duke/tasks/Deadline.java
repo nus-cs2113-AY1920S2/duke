@@ -1,14 +1,16 @@
 package duke.tasks;
 
-public class Deadline extends Task implements DatedEvents {
-    protected String date;
+import java.time.LocalDate;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task implements DatedEvents {
+    protected LocalDate date;
+
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.date = by;
     }
 
-    public String returnDate(){
+    public LocalDate returnDate(){
         return this.date;
     }
 

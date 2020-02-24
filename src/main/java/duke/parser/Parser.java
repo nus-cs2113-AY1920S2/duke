@@ -1,9 +1,17 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
+
 
 public class Parser {
 
@@ -59,14 +67,14 @@ public class Parser {
         int LENG_DELETE_STATEMENT = words.length;
         Boolean isCorrect = false;
         if (LENG_DELETE_STATEMENT != 2) {
-            DukeException.markIncorrectDeleteStatement();
+            Ui.markIncorrectDeleteStatement();
             isCorrect = false;
             return isCorrect;
         } else {
             try {
                 int IDX_WORDS = Integer.parseInt(words[1]) - 1;
                 if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() - 1) {
-                    DukeException.markDeleteStatementOutOfBounds();
+                    Ui.markDeleteStatementOutOfBounds();
                     isCorrect = false;
                     return isCorrect;
                 } else {
@@ -74,14 +82,11 @@ public class Parser {
                     return isCorrect;
                 }
             } catch (NumberFormatException e) {
-                DukeException.markDeleteStatementAsNonInt();
+                Ui.markDeleteStatementAsNonInt();
             }
         }
         return isCorrect;
     }
-
-
-
 
 
     /**
@@ -96,14 +101,14 @@ public class Parser {
         int LENG_DONE_STATEMENT = words.length;
         Boolean isCorrect = false;
         if (LENG_DONE_STATEMENT != 2) {
-            DukeException.markIncorrectDoneStatement();
+            Ui.markIncorrectDoneStatement();
             isCorrect = false;
             return isCorrect;
         } else {
             try {
                 int IDX_WORDS = Integer.parseInt(words[1]) - 1;
                 if (IDX_WORDS < 0 || IDX_WORDS > taskList.size() - 1) {
-                    DukeException.markDoneStatementOutOfBounds();
+                    Ui.markDoneStatementOutOfBounds();
                     isCorrect = false;
                     return isCorrect;
                 } else {
@@ -111,7 +116,7 @@ public class Parser {
                     return isCorrect;
                 }
             } catch (NumberFormatException e) {
-                DukeException.markDoneStatementAsNonInt();
+                Ui.markDoneStatementAsNonInt();
             }
         }
         return isCorrect;
@@ -125,8 +130,7 @@ public class Parser {
      */
     public static String[] returnStringToAdd(String line, String type) {
         if (type.equals("todo")) {
-            String[] arrOfStr = line.split(type);
-//            toReturn[0] = arrOfStr[1].trim();
+            String[] arrOfStr = line.trim().split(type);
             return arrOfStr;
         } else {
             String preposition;
@@ -141,11 +145,33 @@ public class Parser {
             String[] arrOfStr = line.split(splitter);
             String[] toReturn = new String[2];
             String[] todo = arrOfStr[0].split(type);
-            toReturn[0] = (todo[1].substring(1, todo[1].length()));       // task
-            toReturn[1] = arrOfStr[1].substring(1, arrOfStr[1].length()); // date
-            String description = toReturn[0] + "(" + preposition + toReturn[1] + ")";
-            toReturn[0] = description;
+            String taskDescritpion = (todo[1].substring(1, todo[1].length()));       // task
+            String date = arrOfStr[1].substring(1, arrOfStr[1].length()); // date
+            LocalDate d1 = LocalDate.parse(date);
+            String dateFormatted = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            taskDescritpion = taskDescritpion + "(" + preposition + dateFormatted + ")";
+            toReturn[0] = taskDescritpion;
+            toReturn[1] = date;
             return toReturn;
         }
     }
+
+
+    public static String returnDescription(Task t, String description, String typeIcon, String statusIcon) {
+        String stringToAdd;
+        if (typeIcon.equals("[T]")){
+            stringToAdd = typeIcon + " | " + statusIcon + " | " + description;
+        } else if(typeIcon.equals("[D]")) {
+            Deadline d = (Deadline) t;
+            String date = d.returnDate().toString();
+            stringToAdd = typeIcon + " | " + statusIcon + " | " + description + " | " + date;
+        } else {
+            Event d = (Event) t;
+            String date = d.returnDate().toString();
+            stringToAdd = typeIcon + " | " + statusIcon + " | " + description + " | " + date;
+        }
+        return stringToAdd;
+    }
+
+
 }

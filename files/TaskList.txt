@@ -1,4 +1,2 @@
-[D] | ✓ | duck (by: tom)
-[T] | ✓ | eaer
-[T] | ✘ | eat
-[T] | ✘ | add
+[T] | ✓ | eat
+[E] | ✓ | (at: Jan 1 2019) | 2019-01-01
