@@ -156,7 +156,8 @@ public class Printer {
     public static void printFormatError(String command) {
         printLines();
         printIndentation();
-        System.out.println("Σ(°ロ°) There seems to be some problem with the format of " + command + " !~ ٩(× ×)۶ ");
+        System.out.println("Σ(°ロ°) There seems to be some problem with the format of " + ANSI_BLUE + command + ANSI_RESET
+                + " !~ ٩(× ×)۶ ");
     }
 
     public static void printHint(String command) {
@@ -188,6 +189,18 @@ public class Printer {
             printIndentation();
             System.out.println("Example: " + ANSI_BLUE + "deadline" + ANSI_RESET + " read book /by Sunday");
             break;
+
+        case "done":
+            System.out.println(ANSI_RED + "Please ensure that the index supplied exists in the list (．．)" + ANSI_RESET);
+            System.out.println();
+            printIndentation();
+            printIndentation();
+            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<index>");
+            printIndentation();
+            printIndentation();
+            System.out.println("Example: " + ANSI_BLUE + command + ANSI_RESET + " 1");
+            break;
+
         default :
             System.out.println("Havent code yet");
             break;
