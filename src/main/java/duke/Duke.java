@@ -5,6 +5,7 @@ import duke.exception.ExceptionType;
 import duke.print.PrintHelper;
 import duke.task.TaskManager;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command;
-        loadTasks();
+        loadData();
 
         PrintHelper.printWelcomeMessage();
         command = sc.nextLine();
@@ -39,11 +40,19 @@ public class Duke {
             command = sc.nextLine();
         }
 
-        saveTasks();
+        saveData();
         PrintHelper.printByeMessage();
     }
 
-    private static void saveTasks() {
+    private static void loadData() {
+        try {
+            loadTasks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveData() {
         try {
             TaskManager.storeTasksToFile();
         } catch (IOException e) {
@@ -51,11 +60,12 @@ public class Duke {
         }
     }
 
-    private static void loadTasks() {
+    private static void loadTasks() throws IOException {
         try {
             TaskManager.loadTasksFromFile();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            File file = new File("TaskList.txt");
+            file.createNewFile();
         }
     }
 

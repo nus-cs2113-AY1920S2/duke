@@ -23,13 +23,14 @@ public class TaskManager {
     public static final String DELETE_COMMAND = "delete";
     public static final String DONE_COMMAND = "done";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
-    private static final String FILE_PATH = "src/main/java/duke/TaskList.txt";
+    private static final String FILE_PATH = "TaskList.txt";
 
     // Stores all the tasks provided
     static ArrayList<Task> tasks = new ArrayList<Task>();
 
     // Loads the tasks saved previously
     public static void loadTasksFromFile() throws FileNotFoundException {
+
         File f = new File(FILE_PATH);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
