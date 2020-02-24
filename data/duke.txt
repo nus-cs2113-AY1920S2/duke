@@ -5,3 +5,4 @@
 5. [E] [x] hang out (at: Sat)
 6. [T] [v] workout
 7. [E] [x] exam (at: Fri)
+8. [T] [x] book shopping

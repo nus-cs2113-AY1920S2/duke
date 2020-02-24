@@ -17,6 +17,8 @@ import duke.exception.DukeException;
 import duke.exception.FindDukeException;
 
 public class Duke {
+    private static String HEADER_LINE = "        ╔═══════════════════════════════════════════════════════════╗";
+    private static String BOTTOM_LINE = "        ╚═══════════════════════════════════════════════════════════╝";
     public static final String FILE_PATH = "data/duke.txt";
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static final int charLengthToSkip = 5;
@@ -32,7 +34,7 @@ public class Duke {
     }
 
     public static void greet () {
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("  _   _    _   _ U _____ u             ");
         printInCenter(" |'| |'|U |\"|u| |\\| ___\"|/    ___      ");
         printInCenter("/| |_| |\\\\| |\\| | |  _|\"     |_\"_|     ");
@@ -42,15 +44,15 @@ public class Duke {
         printInCenter("(_\") (\"_)   (__) (__) (__)\\_)-' '-(_/  ");
         printInCenter("");
         printInCenter("Hello! I'm your chatbot - Huei.");
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
 
     public static void echo (String cmd) {
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter(cmd);
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
@@ -58,11 +60,41 @@ public class Duke {
     public static void add (String cmd) {
         Task todo = new Task(tasks.size(), cmd, false);
         tasks.add(todo);
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("Added: " + cmd);
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
+    }
+
+    public static void find (@NotNull String cmd) throws DukeException {
+        int startPosition = cmd.indexOf(" ");
+        String cmdFind = cmd.substring(startPosition + 1);
+
+        boolean isEmptyKeyword = cmdFind.length()==0;
+        if(isEmptyKeyword){
+            throw new DukeException("Please enter a keyword.");
+        }
+
+        int taskID = 0;
+        for (Task t: tasks) {
+            if (t.toString().contains(cmdFind)) {
+                boolean isFirstOne = (taskID == 0);
+                if (isFirstOne) {
+                    System.out.println(HEADER_LINE);
+                    printInCenter("Here are the matching tasks in your list:");
+                }
+                taskID++;
+                printInCenter(t.toString());
+            }
+        }
+
+        boolean isNotFound = taskID == 0;
+        if (isNotFound) {
+            throw new DukeException("Not found this keyword.");
+        } else {
+            System.out.println(BOTTOM_LINE);
+        }
     }
 
     public static void delete (int taskNumber) {
@@ -78,21 +110,21 @@ public class Duke {
             counter++;
         }
 
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("Noted. I've removed this task: ");
         printInCenter(task.toString());
         printInCenter("Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
 
     private static void printTask (@NotNull Task t) {
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("Got it. I've added this task: ");
         printInCenter(t.toString());
         printInCenter("Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
@@ -136,16 +168,16 @@ public class Duke {
 
     public static void done (int taskNumber) {
         tasks.get(taskNumber).setStatus();
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("Nice! I've marked this task as done: ");
         printInCenter(tasks.get(taskNumber).toString());
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
 
     public static void list () {
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("Here are the tasks in your list:");
         for (Task t: tasks){
             if (t == null){
@@ -153,7 +185,7 @@ public class Duke {
             }
             printInCenter(t.toString());
         }
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.out.println("        What can I do for you? Type 'bye' to exit.");
         System.out.println();
     }
@@ -164,9 +196,9 @@ public class Duke {
                 writeToFile();
             }
         } catch (IOException e) {
-            System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+            System.out.println(HEADER_LINE);
             printInCenter("Error occurred: " + e.getMessage());
-            System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+            System.out.println(BOTTOM_LINE);
         }
     }
 
@@ -191,9 +223,9 @@ public class Duke {
         try {
             loadFile();
         } catch (FileNotFoundException e) {
-            System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+            System.out.println(HEADER_LINE);
             printInCenter("File not found.");
-            System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+            System.out.println(BOTTOM_LINE);
         }
     }
 
@@ -243,20 +275,20 @@ public class Duke {
                 findDukeException.undefinedTypeException();
             }
         } catch (DukeException dukeException) {
-            System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+            System.out.println(HEADER_LINE);
             printInCenter(dukeException.getMessage());
-            System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+            System.out.println(BOTTOM_LINE);
         }
     }
 
     public static void exit () {
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+        System.out.println(HEADER_LINE);
         printInCenter("Bye! See you next time. :)");
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+        System.out.println(BOTTOM_LINE);
         System.exit(0);
     }
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws DukeException {
         int spacePosition;
         int taskNumber;
 
@@ -273,6 +305,9 @@ public class Duke {
             case "list":
                 list();
                 break;
+            case "find":
+                find(cmd);
+                break;
             case "delete":
                 spacePosition = cmd.indexOf(" ");
                 taskNumber = Integer.parseInt(cmd.substring(spacePosition + 1)) - 1;
@@ -283,9 +318,9 @@ public class Duke {
                 try {
                     todo(cmd);
                 } catch (DukeException dukeException) {
-                    System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+                    System.out.println(HEADER_LINE);
                     printInCenter(dukeException.getMessage());
-                    System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+                    System.out.println(BOTTOM_LINE);
                 }
                 save();
                 break;
@@ -293,9 +328,9 @@ public class Duke {
                 try {
                     event(cmd);
                 } catch (DukeException dukeException) {
-                    System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+                    System.out.println(HEADER_LINE);
                     printInCenter(dukeException.getMessage());
-                    System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+                    System.out.println(BOTTOM_LINE);
                 }
                 save();
                 break;
@@ -303,9 +338,9 @@ public class Duke {
                 try {
                     deadline(cmd);
                 } catch (DukeException dukeException) {
-                    System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+                    System.out.println(HEADER_LINE);
                     printInCenter(dukeException.getMessage());
-                    System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+                    System.out.println(BOTTOM_LINE);
                 }
                 save();
                 break;
@@ -320,9 +355,9 @@ public class Duke {
                     FindDukeException findDukeException = new FindDukeException(cmd);
                     findDukeException.undefinedTypeException();
                 } catch (DukeException dukeException) {
-                    System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
+                    System.out.println(HEADER_LINE);
                     printInCenter(dukeException.getMessage());
-                    System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
+                    System.out.println(BOTTOM_LINE);
                 }
                 break;
             }
