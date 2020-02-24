@@ -13,6 +13,7 @@ public class Parser {
     private static final String EVENT = "event";
     private static final String DONE = "done";
     private static final String DELETE = "delete";
+    private static final String FIND = "find";
     private static final String BYE = "bye";
     public static final String BORDER = "____________________________________________________________\n";
 
@@ -52,6 +53,9 @@ public class Parser {
                 break;
             case (DELETE):
                 command = new DeleteCommand(sentence[1]);
+                break;
+            case (FIND):
+                command = new FindCommand(sentence[1]);
                 break;
             case (BYE):
                 command = new ExitCommand("");
