@@ -8,8 +8,8 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 public class ClearCommand extends Commands{
-    public ClearCommand(String command, ArrayList<Task> taskList, String filePath) {
-        super(command, taskList,filePath);
+    public ClearCommand(String command, ArrayList<Task> taskList, String taskType) {
+        super(command, taskList,taskType);
     }
     public static void execute(ArrayList<Task> taskList, String ogString) {
         if (Parser.isClearStatementCorrect(ogString)) {
