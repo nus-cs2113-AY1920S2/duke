@@ -10,7 +10,7 @@ Use the Jar package from https://github.com/Janicetyy/duke/releases/tag/A-Jar
 **Usage**
 
 1. Open Command Prompt in the directory where the JAR file is located.
-2. Run the command `java -jar duke.jar`
+2. Run the command `java -jar jan.jar`
 
 ## Features
 
