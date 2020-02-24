@@ -11,7 +11,7 @@ import ui.Ui;
 public class ToDoCommand extends Command {
     /**
      * Constructs a Todo Command object
-     * @param rawUserInput
+     * @param rawUserInput String provided by user
      */
     public ToDoCommand(String rawUserInput) {
         super(rawUserInput);
