@@ -32,7 +32,7 @@ public class FindCommand extends Command {
             String[] splitCommands = removeCommandWord(super.rawUserInput);
             taskList.findTask(splitCommands[1]);
         } catch (MissingDescriptionException e) {
-            System.out.println("Missing keywords to search for! Please provide a keyword to search!");
+            ui.printErrorMessage("Missing keywords to search for! Please provide a keyword to search!");
         }
     }
 }

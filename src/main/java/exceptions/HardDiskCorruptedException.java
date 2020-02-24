@@ -15,7 +15,7 @@ public class HardDiskCorruptedException extends DukeException {
     }
 
     /**
-     * Returns a formatted string object
+     * Returns a formatted string
      * @return String formatting the error message
      */
     @Override
