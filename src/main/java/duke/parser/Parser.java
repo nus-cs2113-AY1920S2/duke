@@ -1,22 +1,37 @@
-package duke;
+package duke.parser;
 
+import duke.commands.*;
+import static duke.constants.ConstantCommands.*;
+
+import duke.constants.ConstantCommands;
+import duke.exceptions.DukeExceptionHandler;
+import duke.exceptions.UnknownCommandException;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
+
 public class Parser {
     public static final int LIMIT = 2;
+    public static final String REGEX_SPACE = " ";
+    public static final String REGEX_BY = " /by ";
+    public static final String REGEX_AT = " /at ";
+    public static final String REGEX_VERTICAL = " [|] ";
+
 
     /**
      * Returns the command that User has input.
-     * Index 0 will be the duke.Command that User has input, while index 1 will be everything else.
+     * Index 0 will be the duke.commands.Command that User has input, while index 1 will be everything else.
      *
      * @param description The user input that was scanned as an entire String initially. e.g., "event meeting /at NUS"
      * @return An ArrayList that was spilt by " ", limited by 2.
      */
     public static List<String> parseCommand(String description) {
-        return new ArrayList<>(Arrays.asList(description.split(" ", LIMIT)));
+        return new ArrayList<>(Arrays.asList(description.split(REGEX_SPACE, LIMIT)));
     }
 
     /**
@@ -27,7 +42,7 @@ public class Parser {
      * @return An ArrayList that was split by " ", reversed, and limited by 2.
      */
     public static List<String> parseDeadlineDate(String descriptionAndDate) {
-        List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndDate.split(" /by ", LIMIT)));
+        List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndDate.split(REGEX_BY, LIMIT)));
         Collections.reverse(separated);
         return separated;
     }
@@ -40,7 +55,7 @@ public class Parser {
      * @return An ArrayList that was split by " ", reversed, and limited by 2.
      */
     public static List<String> parseEventAt(String descriptionAndPlace) {
-        List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndPlace.split(" /at ", LIMIT)));
+        List<String> separated = new ArrayList<>(Arrays.asList(descriptionAndPlace.split(REGEX_AT, LIMIT)));
         Collections.reverse(separated);
         return separated;
     }
@@ -52,12 +67,12 @@ public class Parser {
      * @return An ArrayList separated by " | "
      */
     public static List<String> parseFile(String sentence){
-        return new ArrayList<>(Arrays.asList(sentence.split(" [|] ")));
+        return new ArrayList<>(Arrays.asList(sentence.split(REGEX_VERTICAL)));
     }
 
     /**
      * Returns a specific command object
-     * Throws an duke.UnknownCommandException if the User supplied an UnknownCommand
+     * Throws an duke.exceptions.UnknownCommandException if the User supplied an UnknownCommand
      *
      * @param command The specific command in String
      * @return the specific command object
@@ -65,26 +80,49 @@ public class Parser {
      */
     public static Command whatCommand(String command) throws UnknownCommandException {
         switch(command) {
-        case "todo" :
+        case TODO :
             return new ToDoCommand();
-        case "event" :
+        case EVENT :
             return new EventCommand();
-        case "deadline" :
+        case DEADLINE :
             return new DeadlineCommand();
-        case "delete" :
+        case DELETE :
             return new DeleteCommand();
-        case "list" :
+        case LIST :
             return new ListCommand();
-        case "done" :
+        case DONE :
             return new DoneCommand();
-        case "bye":
+        case BYE:
             return new ByeCommand();
-        case "find" :
+        case FIND :
             return new FindCommand();
+        case HELP :
+            return new HelpCommand();
         default :
             DukeExceptionHandler.unknownCommand();
             return null;
         }
+    }
+
+    /**
+     * Gets the constant fields declared in the constant class and returns them as an ArrayList
+     *
+     * @return an ArrayList of commands
+     */
+    public static List<String> getCommandList() {
+        Field[] constants = ConstantCommands.class.getDeclaredFields();
+        ConstantCommands constant = new ConstantCommands();
+        List<String> commandList = new ArrayList<>();
+
+        try {
+            for (Field field : constants) {
+                String command = (String) field.get(constant);
+                commandList.add(command);
+            }
+        } catch (Exception ignored) {
+        }
+
+        return commandList;
     }
 }
 

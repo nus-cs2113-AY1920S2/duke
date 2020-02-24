@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class Ui {
      *
      * @return entire user input
      */
-    public static String readFromUser() {
+    public String readFromUser() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }

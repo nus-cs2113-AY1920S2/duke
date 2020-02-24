@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Overrides the default toString so that duke.Task gets printed in a specific format
+     * Overrides the default toString so that duke.tasks.Task gets printed in a specific format
      *
      * @return the formatted String to print
      */

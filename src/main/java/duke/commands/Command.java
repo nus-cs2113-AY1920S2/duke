@@ -1,4 +1,7 @@
-package duke;
+package duke.commands;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
 
 import java.io.File;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.List;
  * A parent class for the various commands to inherit.
  */
 public abstract class Command {
+    public static final List<String> COMMAND_LIST = Parser.getCommandList();
     public static final int LIMIT = 2;
     public static final int LIST_INDEX = 1;
     public static final int TASK_DESCRIPTION = 1;

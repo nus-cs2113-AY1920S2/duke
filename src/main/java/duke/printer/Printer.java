@@ -1,4 +1,8 @@
-package duke;
+package duke.printer;
+
+import duke.commands.Command;
+import duke.storage.Storage;
+import duke.tasks.Task;
 
 import java.util.List;
 
@@ -17,7 +21,7 @@ public class Printer {
         System.out.print("    ");
     }
 
-    public static void printStart() {
+    public static void printStart(boolean isReturnUser) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,15 +30,24 @@ public class Printer {
 
         System.out.println("Hello from\n" + logo);
         Printer.printLines();
-        Printer.printGreetings();
+        Printer.printGreetings(isReturnUser);
         Printer.printLines();
     }
 
-    public static void printGreetings() {
+    public static void printGreetings(boolean isReturnUser) {
         printIndentation();
-        System.out.println("Hello! I'm duke.Duke (￣▽￣*)ゞ");
-        printIndentation();
-        System.out.println("What can I do for you?");
+
+        if (isReturnUser) {
+            System.out.println("Hello! I'm Duke (￣▽￣*)ゞ");
+            printIndentation();
+            System.out.println("What can I do for you?");
+            printIndentation();
+            System.out.println("Type " + ANSI_BLUE + "help" + ANSI_RESET + " to see what I can do! " +
+                    "(ﾉ>ω<)ﾉ :｡･:*:･ﾟ’★,｡･:*:･ﾟ’☆");
+
+        } else {
+            System.out.println("Welcome back ! ~ I missed you (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)");
+        }
     }
 
     public static void printLines() {
@@ -175,7 +188,9 @@ public class Printer {
             printIndentation();
             System.out.println("Example: " + ANSI_BLUE + "deadline" + ANSI_RESET + " read book /by Sunday");
             break;
-
+        default :
+            System.out.println("Havent code yet");
+            break;
         }
 
         printLines();
@@ -185,6 +200,18 @@ public class Printer {
         printLines();
         printIndentation();
         System.out.printf("I'm sorry I don't understand this command: %s%s%s *(>д<)*\n", ANSI_RED, command, ANSI_RESET);
+        printLines();
+    }
+
+    public static void printHelp() {
+        printLines();
+        printIndentation();
+        System.out.println("Here is what I can do (◕‿◕✿)");
+        for (String command : Command.COMMAND_LIST) {
+            printIndentation();
+            printIndentation();
+            System.out.println("- " + command);
+        }
         printLines();
     }
 }

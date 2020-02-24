@@ -1,11 +1,19 @@
-package duke;
+package duke.commands;
+
+import duke.exceptions.BlankStringException;
+import duke.exceptions.DukeExceptionHandler;
+import duke.filemanager.FileSaver;
+import duke.parser.Parser;
+import duke.printer.Printer;
+import duke.storage.Storage;
+import duke.tasks.Event;
 
 import java.io.File;
 import java.util.List;
 
 /**
  * Represents an "event" command that user will input.
- * A <code>duke.EventCommand</code> object will be executed when the User types in "event" in the UI
+ * A <code>duke.commands.EventCommand</code> object will be executed when the User types in "event" in the UI
  * e.g., <code>event</code> team meeting /at NUS
  */
 public class EventCommand extends Command {

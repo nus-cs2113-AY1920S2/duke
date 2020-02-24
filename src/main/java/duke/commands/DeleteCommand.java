@@ -1,11 +1,16 @@
-package duke;
+package duke.commands;
+
+import duke.filemanager.FileSaver;
+import duke.printer.Printer;
+import duke.storage.Storage;
+import duke.tasks.Task;
 
 import java.io.File;
 import java.util.List;
 
 /**
  * Represents a "delete" command that user will input.
- * A <code>duke.DeleteCommand</code> object will be executed when the User types in "delete" in the UI
+ * A <code>duke.commands.DeleteCommand</code> object will be executed when the User types in "delete" in the UI
  * e.g., <code>delete</code> 5
  */
 public class DeleteCommand extends Command {

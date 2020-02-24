@@ -1,11 +1,13 @@
-package duke;
+package duke.commands;
+
+import duke.storage.Storage;
 
 import java.io.File;
 import java.util.List;
 
 /**
  * Represents an "list" command that user will input.
- * A <code>duke.ListCommand</code> object will be executed when the User types in "list" in the UI
+ * A <code>duke.commands.ListCommand</code> object will be executed when the User types in "list" in the UI
  * e.g., <code>list</code>
  */
 public class ListCommand extends Command {

@@ -1,4 +1,10 @@
-package duke;
+package duke.filemanager;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
 
 import java.io.File;
 import java.util.List;

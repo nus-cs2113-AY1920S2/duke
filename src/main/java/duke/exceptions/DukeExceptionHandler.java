@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * Customer handler for errors
@@ -6,7 +6,7 @@ package duke;
 public class DukeExceptionHandler {
     /**
      * Checks if the User supplied description is blank.
-     * If it is blank, throws a duke.BlankStringException.
+     * If it is blank, throws a duke.exceptions.BlankStringException.
      *
      * @param description The task description
      * @throws BlankStringException Throws exception for caller to catch and print error message
@@ -18,7 +18,7 @@ public class DukeExceptionHandler {
     }
 
     /**
-     * Throws a duke.UnknownCommandException when User supplied in an unknown command
+     * Throws a duke.exceptions.UnknownCommandException when User supplied in an unknown command
      *
      * @throws UnknownCommandException Throws exception for caller to catch and print error message.
      */

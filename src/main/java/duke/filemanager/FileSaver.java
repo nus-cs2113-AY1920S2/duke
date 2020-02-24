@@ -1,4 +1,6 @@
-package duke;
+package duke.filemanager;
+
+import duke.main.Duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,10 +19,16 @@ public class FileSaver {
 
     /**
      * Makes a new directory in the current working directory
+     * if mkdir returns false, we assume that user is not a new user (because he has existing directory)
      */
     public static void makeNewDirectory() {
         File f = new File("data");
-        f.mkdir();
+        boolean isSuccessful = f.mkdir();
+
+        if (!isSuccessful) {
+            Duke.isNewUser = false;
+            return;
+        }
     }
 
     /**

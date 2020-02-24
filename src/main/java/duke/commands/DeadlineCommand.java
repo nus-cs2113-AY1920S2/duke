@@ -1,11 +1,19 @@
-package duke;
+package duke.commands;
+
+import duke.exceptions.BlankStringException;
+import duke.exceptions.DukeExceptionHandler;
+import duke.filemanager.FileSaver;
+import duke.parser.Parser;
+import duke.printer.Printer;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
 
 import java.io.File;
 import java.util.List;
 
 /**
  * Represents a "deadline" command that user will input.
- * A <code>duke.DeadlineCommand</code> object will be executed when the User types in "deadline" in the UI
+ * A <code>duke.commands.DeadlineCommand</code> object will be executed when the User types in "deadline" in the UI
  * e.g., <code>deadline</code> submit iP /by March 2
  */
 public class DeadlineCommand extends Command {

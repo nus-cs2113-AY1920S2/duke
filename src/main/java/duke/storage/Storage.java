@@ -1,4 +1,7 @@
-package duke;
+package duke.storage;
+
+import duke.printer.Printer;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +22,11 @@ public class Storage {
      * User-specified index will need to subtract 1 as we are using 0 indexing.
      *
      * @param index Index that the User specified.
-     * @return duke.Task at index - 1, if it exists
+     * @return duke.tasks.Task at index - 1, if it exists
      */
     public Task getTask(int index) {
-
-        return myTasks.get(index - 1);
+        int actualIndex = index - 1;
+        return myTasks.get(actualIndex);
     }
 
     /**
