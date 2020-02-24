@@ -1,7 +1,9 @@
 package duke.exception;
 
+import static duke.util.Constants.FILE_OPERATION_IO_ERROR_MESSAGE;
+
 public class DukeLoadingException extends DukeException {
-    public DukeLoadingException(String dataFileName) {
-        super(dataFileName);
+    public DukeLoadingException() {
+        super(FILE_OPERATION_IO_ERROR_MESSAGE);
     }
 }

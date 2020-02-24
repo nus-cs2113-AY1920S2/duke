@@ -1,29 +1,33 @@
 package duke.task;
 
-import duke.exception.DukeException;
+import duke.exception.DukeNullDateException;
+import duke.exception.DukeNullDescriptionException;
 
 import static duke.util.Constants.EVENT_ICON;
 
 public class Event extends Task {
-    protected String atTime;
+    protected String atDate;
     protected String typeIcon;
 
-    public Event(String description, String atTime) throws DukeException {
+    public Event(String description, String atTime) throws DukeNullDescriptionException, DukeNullDateException {
         super(description);
         typeIcon = EVENT_ICON;
-        this.atTime = atTime;
+        if (atTime.equals("")) {
+            throw new DukeNullDateException();
+        }
+        this.atDate = atTime;
     }
 
     public String getIcon() {
         return typeIcon;
     }
 
-    public String getAtTime() {
-        return atTime;
+    public String getAtDate() {
+        return atDate;
     }
 
     @Override
     public String toString() {
-        return typeIcon + super.toString() + " (at: " + atTime + ")";
+        return typeIcon + super.toString() + " (at: " + atDate + ")";
     }
 }

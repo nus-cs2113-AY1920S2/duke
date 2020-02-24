@@ -2,10 +2,10 @@ package duke.util;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import duke.exception.DukeException;
 import duke.exception.DukeLoadingException;
-import duke.exception.DukeNullDescriptionException;
 import duke.exception.DukeWritingException;
+import duke.exception.DukeNullDateException;
+import duke.exception.DukeNullDescriptionException;
 import duke.task.Deadline;
 import duke.task.DummyTask;
 import duke.task.Event;
@@ -23,16 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static duke.util.Constants.CRYING_FACE;
-import static duke.util.Constants.DATA_FILE_NAME;
-import static duke.util.Constants.DATA_LOADED_SUCCESSFULLY_PROMPT;
-import static duke.util.Constants.DATA_SAVED_SUCCESSFULLY_PROMPT;
 import static duke.util.Constants.DEADLINE_ICON;
 import static duke.util.Constants.EVENT_ICON;
-import static duke.util.Constants.FILE_OPERATION_IO_ERROR_MESSAGE;
-import static duke.util.Constants.FIVE_SPACES;
-import static duke.util.Constants.LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING;
-import static duke.util.Constants.TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE;
 import static duke.util.Constants.YES_ICON;
 
 public class Storage {
@@ -42,14 +34,14 @@ public class Storage {
         this.dataFileName = dataFileName;
     }
 
-    public ArrayList<Task> load() throws DukeLoadingException, DukeNullDescriptionException {
+    public ArrayList<Task> load() throws DukeLoadingException, DukeNullDescriptionException, DukeNullDateException {
         Ui.showLoadDataPrompt();
 
         String jsonStr;
         try {
             jsonStr = loadJsonStringFromFile();
         } catch (DukeLoadingException e) {
-            throw new DukeLoadingException(dataFileName);
+            throw new DukeLoadingException();
         }
 
         List<DummyTask> taskList = extractDummyTasks(jsonStr);
@@ -59,8 +51,10 @@ public class Storage {
             try {
                 currentTask = convertDummyTaskToSpecificTask(i);
                 tasksList.add(currentTask);
-            } catch (DukeException e) {
+            } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
+            } catch (DukeNullDateException e) {
+                throw new DukeNullDateException();
             }
         }
         Ui.showLoadDataSuccessfulPrompt();
@@ -76,7 +70,7 @@ public class Storage {
             jsonStr = s.nextLine();
             s.close();
         } catch (FileNotFoundException e) {
-            throw new DukeLoadingException(dataFileName);
+            throw new DukeLoadingException();
         }
         return jsonStr;
     }
@@ -87,7 +81,7 @@ public class Storage {
         return gson.fromJson(jsonStr, listType);
     }
 
-    private Task convertDummyTaskToSpecificTask(DummyTask task) throws DukeException {
+    private Task convertDummyTaskToSpecificTask(DummyTask task) throws DukeNullDescriptionException, DukeNullDateException {
         Task convertedTask;
 
         switch (task.getIcon()) {
@@ -111,14 +105,14 @@ public class Storage {
     public void save(TaskList tasksList) throws DukeWritingException {
         Ui.showSaveDataToFilePrompt();
         try {
-            saveObjectsAsJsonStringToFile(dataFileName, tasksList.getList(), tasksList);
+            saveObjectsAsJsonStringToFile(dataFileName, tasksList.getList());
             Ui.showSaveDataToFileSuccessfulPrompt();
         } catch (IOException e) {
             throw new DukeWritingException(dataFileName);
         }
     }
 
-    static void saveObjectsAsJsonStringToFile(String dataFileName, ArrayList<Task> list, TaskList tasksList) throws IOException {
+    static void saveObjectsAsJsonStringToFile(String dataFileName, ArrayList<Task> list) throws IOException {
         Gson gson = new Gson();
         FileWriter fw = new FileWriter(dataFileName);
         String json = gson.toJson(list);

@@ -10,9 +10,12 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
+import duke.exception.DukeNullDateException;
+import duke.exception.DukeNullDescriptionException;
 
 import static duke.util.Constants.DEADLINE_COMMAND;
 import static duke.util.Constants.DEADLINE_COMMAND_SHORTCUT;
+import static duke.util.Constants.DEADLINE_FORMAT_ERROR_MESSAGE;
 import static duke.util.Constants.DEADLINE_TIME_DELIMITER;
 import static duke.util.Constants.DELETE_COMMAND;
 import static duke.util.Constants.DELETE_COMMAND_SHORTCUT;
@@ -27,7 +30,6 @@ import static duke.util.Constants.EXIT_COMMAND_QUIT;
 import static duke.util.Constants.HELP_COMMAND;
 import static duke.util.Constants.LIST_COMMAND;
 import static duke.util.Constants.LIST_COMMAND_SHORTCUT;
-import static duke.util.Constants.TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE;
 import static duke.util.Constants.TODO_COMMAND;
 import static duke.util.Constants.TODO_COMMAND_SHORTCUT;
 import static duke.util.Constants.UNKNOWN_COMMAND_RESPONSE;
@@ -57,8 +59,12 @@ public class Parser {
                 String taskDescriptions = extractTaskDescription(afterCommand, DEADLINE_TIME_DELIMITER);
                 String taskDate = extractTaskDate(afterCommand, DEADLINE_TIME_DELIMITER);
                 return new DeadlineCommand(taskDescriptions, taskDate);
+            } catch (DukeNullDescriptionException e) {
+                throw new DukeNullDescriptionException();
+            } catch (DukeNullDateException e) {
+                throw new DukeNullDateException();
             } catch (DukeException e) {
-                throw new DukeException(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
+                throw new DukeException(DEADLINE_FORMAT_ERROR_MESSAGE);
             }
         case EVENT_COMMAND:
         case EVENT_COMMAND_SHORTCUT:
@@ -66,8 +72,12 @@ public class Parser {
                 String taskDescriptions = extractTaskDescription(afterCommand, EVENT_TIME_DELIMITER);
                 String taskDate = extractTaskDate(afterCommand, EVENT_TIME_DELIMITER);
                 return new EventCommand(taskDescriptions, taskDate);
+            } catch (DukeNullDescriptionException e) {
+                throw new DukeNullDescriptionException();
+            } catch (DukeNullDateException e) {
+                throw new DukeNullDateException();
             } catch (DukeException e) {
-                throw new DukeException(TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE);
+                throw new DukeException(EVENT_FORMAT_ERROR_MESSAGE);
             }
         case DELETE_COMMAND:
         case DELETE_COMMAND_SHORTCUT:
@@ -82,7 +92,7 @@ public class Parser {
 
     private static String[] splitCommand(String userInput) {
         String commandWord = extractCommandWord(userInput);
-        String afterCommand = userInput.substring(commandWord.length()).trim();
+        String afterCommand = userInput.substring(commandWord.length());
         String[] commands = new String[]{commandWord, afterCommand};
         return commands;
     }

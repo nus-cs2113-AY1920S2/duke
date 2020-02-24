@@ -1,5 +1,7 @@
 package duke.exception;
 
+import static duke.util.Constants.FIVE_SPACES;
+
 public class DukeException extends Exception {
 
     public DukeException() {
@@ -7,7 +9,7 @@ public class DukeException extends Exception {
     }
 
     public DukeException(String ErrorMsg) {
-        super(ErrorMsg);
+        super(FIVE_SPACES + ErrorMsg);
     }
 
 }

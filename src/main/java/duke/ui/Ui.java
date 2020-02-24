@@ -9,7 +9,6 @@ import java.util.Scanner;
 import static duke.util.Constants.ADD_OR_DELETE_TASK_POST_PROMPT;
 import static duke.util.Constants.ADD_TASK_PROMPT;
 import static duke.util.Constants.BYE_WORD;
-import static duke.util.Constants.DATA_FILE_NAME;
 import static duke.util.Constants.DATA_LOADED_SUCCESSFULLY_PROMPT;
 import static duke.util.Constants.DATA_SAVED_SUCCESSFULLY_PROMPT;
 import static duke.util.Constants.DEADLINE_COMMAND;
@@ -38,9 +37,9 @@ import static duke.util.Constants.LIST_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.LIST_COMMAND_SHORTCUT;
 import static duke.util.Constants.LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING;
 import static duke.util.Constants.LIST_TASKS_PROMPT;
-import static duke.util.Constants.LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING;
+import static duke.util.Constants.LOAD_DATA_FROM_FILE_PROMPT;
 import static duke.util.Constants.LOGO;
-import static duke.util.Constants.SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING;
+import static duke.util.Constants.SAVE_DATA_TO_FILE_PROMPT;
 import static duke.util.Constants.SEVEN_SPACES;
 import static duke.util.Constants.TODO_COMMAND;
 import static duke.util.Constants.TODO_COMMAND_HELP_MESSAGE;
@@ -58,7 +57,7 @@ public class Ui {
     }
 
     public static void showLoadDataPrompt() {
-        System.out.printf(FIVE_SPACES + LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING, DATA_FILE_NAME);
+        System.out.println(FIVE_SPACES + LOAD_DATA_FROM_FILE_PROMPT);
     }
 
     public static void showSaveDataToFileSuccessfulPrompt() {
@@ -66,8 +65,8 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        System.out.println(LOGO);
         showLine();
+        System.out.println(LOGO);
         System.out.println(FIVE_SPACES + GREETING_WORD);
         showLine();
     }
@@ -82,10 +81,6 @@ public class Ui {
 
     public void showLine() {
         System.out.println(LINE_DIVIDER);
-    }
-
-    public void showLoadingError() {
-        System.out.println(FILE_OPERATION_IO_ERROR_MESSAGE);
     }
 
     public void showAddTaskSuccessfulPrompt(TaskList taskList, Task addedTask) {
@@ -164,6 +159,6 @@ public class Ui {
     }
 
     public static void showSaveDataToFilePrompt() {
-        System.out.printf(FIVE_SPACES + SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING, DATA_FILE_NAME);
+        System.out.println(SAVE_DATA_TO_FILE_PROMPT);
     }
 }
