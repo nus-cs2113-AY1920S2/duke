@@ -15,3 +15,5 @@ bin/
 text-ui-test/EXPECTED.txt
 text-ui-test/input.txt
 text-ui-test/runtest.bat
+src/main/java/META-INF/MANIFEST.MF
+data/duke.txt

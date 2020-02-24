@@ -1,4 +1,8 @@
-public class Task {
+package duke;
+
+import java.util.List;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -20,9 +24,16 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Overrides the default toString so that duke.Task gets printed in a specific format
+     *
+     * @return the formatted String to print
+     */
     public String toString() {
         String symbol = getStatusIcon();
         String toPrint = String.format("[%s] %s", symbol, this.description );
         return toPrint;
     }
+
+    public abstract void addIfMatchesKeyword(Task t, List<Task> foundTasks, String keyword);
 }
