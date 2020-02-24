@@ -4,6 +4,8 @@ import duke.exception.DukeException;
 import duke.exception.ExceptionType;
 import duke.ui.Ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -18,7 +20,6 @@ public class TaskList {
     public static final String DELETE_COMMAND = "delete";
     public static final String DONE_COMMAND = "done";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
-    private static final String FILE_PATH = "TaskList.txt";
 
     // Stores all the tasks provided
     public ArrayList<Task> tasks;
@@ -166,10 +167,31 @@ public class TaskList {
     // to the list if the correct format is used
     public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(DEADLINE_SPECIFIER);
-        if (!isCorrectFormat) {
+        if(!isCorrectFormat){
             throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
         }
+        String[] splitDeadline = commandSplit[1].substring(commandSplit[1].indexOf('/')).split(" ",3);
+        boolean hasThreeSegments = (splitDeadline.length == 3);
+        boolean hasCorrectDateAndTimeFormat =  hasThreeSegments && (isValidTime(splitDeadline[2]));
+
+        if (!hasCorrectDateAndTimeFormat) {
+            throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(splitDeadline[1]);
+        } catch (DateTimeParseException d) {
+            throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
+        }
+
         addTask(TaskType.Deadline, commandSplit[1]);
+    }
+
+    private boolean isValidTime(String time) {
+        boolean isCorrectSize = (time.length() == 4);
+        boolean hasCorrectHourFormat = (time.charAt(0) <= '1') || (time.charAt(0) == '2' && time.charAt(1) <= '3');
+        boolean hasCorrectMinuteFormat = (time.charAt(2) <= '5');
+        return isCorrectSize && hasCorrectHourFormat && hasCorrectMinuteFormat;
     }
 
     // Instructs the task manager to add the ToDo task specified by the user
