@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public static void parseUserCommands(ArrayList<Task> taskArrayList, ArrayList<Task> lastShownList, int taskListSize, Scanner scanner) {
+    public static void parseUserCommands(TaskList taskArray, ArrayList<Task> lastShownList, Scanner scanner) {
         int lastShownListSize;
         int exit = 0;
         while (exit == 0) {
@@ -17,18 +17,18 @@ public class Parser {
             case "bye":
                 System.out.println(Duke.GOODBYE);
                 exit = 1;
-                Storage.saveTasks(Duke.FILEPATH, taskArrayList, true);
+                Storage.saveTasks(Duke.FILEPATH, taskArray, true);
                 break;
             case "find":
                 String keyword = tokenizedInputs[1];
                 lastShownList.clear();
                 lastShownListSize = 0;
-                Ui.displayMatchingTasks(taskArrayList, lastShownList, lastShownListSize, keyword);
+                Ui.displayMatchingTasks(taskArray, lastShownList, lastShownListSize, keyword);
                 break;
             case "list":
-                Ui.printTasks(taskArrayList, taskListSize);
+                Ui.printTasks(taskArray);
                 lastShownList.clear();
-                lastShownList = (ArrayList<Task>) taskArrayList.clone();
+                lastShownList = (ArrayList<Task>) taskArray.tasks.clone();
                 break;
             case "done":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
@@ -41,31 +41,27 @@ public class Parser {
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 int taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
                 //to do more error handling here for index out of bounds
-                taskListSize--;
-                Ui.respondDeleteSuccess(taskListSize, lastShownList.get(taskToDelete));
-                taskArrayList.remove(lastShownList.get(taskToDelete));
+                Ui.respondDeleteSuccess(taskArray.size, lastShownList.get(taskToDelete));
+                taskArray.deleteTask(lastShownList.get(taskToDelete));
                 break;
             case "todo":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
-                taskArrayList.add(new ToDo(tokenizedInputs[1]));
-                Ui.respondAddedSuccess(taskListSize, taskArrayList.get(taskListSize));
-                taskListSize++;
+                taskArray.addTask(new ToDo(tokenizedInputs[1]));
+                Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
                 break;
             case "deadline":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 String[] deadlineInfo = tokenizedInputs[1].split(" /by ");
                 if (checkDateEntered(deadlineInfo)) break;
-                taskArrayList.add(new Deadline(deadlineInfo[0], deadlineInfo[1]));
-                Ui.respondAddedSuccess(taskListSize, taskArrayList.get(taskListSize));
-                taskListSize++;
+                taskArray.addTask(new Deadline(deadlineInfo[0], deadlineInfo[1]));
+                Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
                 break;
             case "event":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 String[] eventInfo = tokenizedInputs[1].split(" /at ");
                 if (checkDateEntered(eventInfo)) break;
-                taskArrayList.add(new Event(eventInfo[0], eventInfo[1]));
-                Ui.respondAddedSuccess(taskListSize, taskArrayList.get(taskListSize));
-                taskListSize++;
+                taskArray.addTask(new Event(eventInfo[0], eventInfo[1]));
+                Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
                 break;
             default:
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

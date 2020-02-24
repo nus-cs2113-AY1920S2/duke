@@ -16,19 +16,18 @@ public class Duke {
 
         File f = new File(FILEPATH);
 
-        ArrayList<Task> taskArrayList = new ArrayList<>();
-        int taskListSize = 0;
+        TaskList taskArray = new TaskList();
 
         try {
-            taskListSize = Storage.loadFileContents(FILEPATH, taskArrayList);
-            Ui.printTasks(taskArrayList, taskListSize);
+            Storage.loadFileContents(FILEPATH, taskArray);
+            Ui.printTasks(taskArray);
         } catch (FileNotFoundException e) {
             System.out.println("No saved file available");
         }
-        ArrayList<Task> lastShownList = (ArrayList<Task>) taskArrayList.clone();
+        ArrayList<Task> lastShownList = (ArrayList<Task>) taskArray.tasks.clone();
 
         Scanner scanner = new Scanner(System.in);
 
-        Parser.parseUserCommands(taskArrayList, lastShownList, taskListSize, scanner);
+        Parser.parseUserCommands(taskArray, lastShownList, scanner);
     }
 }

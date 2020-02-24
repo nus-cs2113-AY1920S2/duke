@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public static int loadFileContents(String filePath, ArrayList<Task> taskArrayList) throws FileNotFoundException {
+    public static void loadFileContents(String filePath, TaskList taskArray) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         int taskListSize = 0;
@@ -18,21 +18,17 @@ public class Storage {
             String type = tokenizedLine[2];
             switch (type) {
             case ("T"):
-                taskArrayList.add(new ToDo(tokenizedLine[1], tokenizedLine[0]));
-                taskListSize++;
+                taskArray.addTask(new ToDo(tokenizedLine[1], tokenizedLine[0]));
                 break;
             case ("E"):
-                taskArrayList.add(new Event(tokenizedLine[1], tokenizedLine[3], tokenizedLine[0]));
-                taskListSize++;
+                taskArray.addTask(new Event(tokenizedLine[1], tokenizedLine[3], tokenizedLine[0]));
                 break;
             case ("D"):
-                taskArrayList.add(new Deadline(tokenizedLine[1], tokenizedLine[3], tokenizedLine[0]));
-                taskListSize++;
+                taskArray.addTask(new Deadline(tokenizedLine[1], tokenizedLine[3], tokenizedLine[0]));
                 break;
             }
         }
         System.out.println("Previous tasks has been loaded successfully:");
-        return taskListSize;
     }
 
     static void writeToFile(String filePath, String textToAdd) throws IOException {
@@ -47,8 +43,8 @@ public class Storage {
         fw.close();
     }
 
-    public static void saveTasks(String filePath, ArrayList<Task> taskArrayList, boolean overWrite) {
-        for (Task currTask : taskArrayList) {
+    public static void saveTasks(String filePath, TaskList TaskArray, boolean overWrite) {
+        for (Task currTask : TaskArray.tasks) {
             if(overWrite == true) {
                 try {
                     Storage.writeToFile(filePath, currTask.toSaveFormat() + "\n");
