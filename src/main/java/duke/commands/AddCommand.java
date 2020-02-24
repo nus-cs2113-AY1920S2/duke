@@ -8,14 +8,30 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+/**
+ * Represents a command to add a task object to the list of tasks.
+ */
 public class AddCommand extends Command {
     String command;
 
+    /**
+     * Constructor to create a new add command.
+     *
+     * @param parameters the description and date (where applicable)
+     *                   of the task to be added.
+     * @param command the type of task to be added
+     */
     public AddCommand(String parameters, String command) {
         super(parameters);
         this.command = command;
     }
 
+    /**
+     * Adds the task specified by the user to the list of tasks. Then
+     * saves the list of tasks to a .txt file.
+     *
+     * @param tasks the list of tasks
+     */
     @Override
     public void Execute(TaskList tasks) {
         Task new_task;

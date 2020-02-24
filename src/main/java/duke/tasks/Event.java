@@ -2,6 +2,10 @@ package duke.tasks;
 
 import duke.DukeException;
 
+/**
+ * Represents an event task with a task description and the
+ * date of the event.
+ */
 public class Event extends Task {
 
     String timePeriod;
