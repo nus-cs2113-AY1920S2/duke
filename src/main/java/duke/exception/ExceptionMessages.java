@@ -86,6 +86,10 @@ public class ExceptionMessages {
             "Lumi needs you to put in either a " + toBold("task description") + " or a " +
             toBold("duration") + "!\n";
 
+    public final static String MISSING_SEARCH_WORD_MESSAGE =
+            THINKING_FACE + "Hmm... Lumi needs you to put in a " +
+            toBold("search word") + " too!\n";
+
     public final static String INVALID_DATETIME_FORMAT_MESSAGE =
             SHOCK_FACE + "Em... Lumi cannot understand this " + toBold("datetime")  + " given...\n" +
             "Lumi needs you to follow this datetime format:\n" + TAB +

@@ -9,8 +9,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.exception.CorruptedFileException;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -82,9 +80,8 @@ public class Storage {
             String taskType = taskData[0];
             String doneStatus = taskData[1];
             String taskDescription = taskData[2];
-            LocalDate taskDate = stringToDate(taskData[3]);
-            LocalTime taskTime = stringToTime(taskData[4]);
-            DateTime taskDateTime = new DateTime(taskDate, taskTime);
+            String dateString = taskData[3];
+            String timeString = taskData[4];
 
             if (!doneStatus.equals("1") && !doneStatus.equals("0")) {
                 throw new CorruptedFileException();
@@ -97,12 +94,14 @@ public class Storage {
                 list.add(newToDoTask);
                 break;
             case "D":
-                Deadline newDeadlineTask = new Deadline(taskDescription, taskDateTime);
+                Deadline newDeadlineTask =
+                        new Deadline(taskDescription, new DateTime(stringToDate(dateString), stringToTime(timeString)));
                 newDeadlineTask.setIsDone(doneStatus.equals("1"));
                 list.add(newDeadlineTask);
                 break;
             case "E":
-                Event newEventTask = new Event(taskDescription, taskDateTime);
+                Event newEventTask =
+                        new Event(taskDescription, new DateTime(stringToDate(dateString), stringToTime(timeString)));
                 newEventTask.setIsDone(doneStatus.equals("1"));
                 list.add(newEventTask);
                 break;
@@ -120,8 +119,8 @@ public class Storage {
         String taskType = getTaskType(task);
         String doneStatus = task.getIsDone() ? "1" : "0";
         String taskDescription = task.getTask();
-        String taskDate = task.getDateTime().getDate();
-        String taskTime = task.getDateTime().getTime();
+        String taskDate = (task.getDateTime() != null) ? task.getDateTime().getDate() : null;
+        String taskTime = (task.getDateTime() != null) ? task.getDateTime().getTime() : null;
 
         return String.join("__", new String[]{taskType, doneStatus, taskDescription, taskDate, taskTime});
     }

@@ -1,14 +1,15 @@
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.DoCommand;
-import duke.commands.AddToDoCommand;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
-import duke.commands.ListCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.Command;
 import duke.commands.DeleteCommand;
+import duke.commands.DoCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
 import duke.exception.InvalidFormatException;
 import duke.format.DateTime;
 import duke.format.DateTimeFormat;
@@ -24,6 +25,7 @@ import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_SEARCH_WORD_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
 import static duke.format.DateTimeFormat.stringToDateTime;
 
@@ -67,6 +69,9 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return createDeleteCommand(parameters);
 
+        case FindCommand.COMMAND_WORD:
+            return createFindCommand(parameters);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -90,20 +95,20 @@ public class Parser {
 
     private Command createToDoCommand(String parameters) {
         try {
-            String task = extractTaskDetails(parameters, null)[0];
+            String task = extractDetails(parameters, null)[0];
             return new AddToDoCommand(task);
-        } catch (MissingTaskDetailException e) {
+        } catch (MissingParameterException e) {
             return new InvalidCommand(MISSING_TODO_DESCRIPTION_MESSAGE);
         }
     }
 
     private Command createDeadlineCommand(String parameters) {
         try {
-            String[] taskDetails = extractTaskDetails(parameters, DEADLINE_PREFIX);
+            String[] taskDetails = extractDetails(parameters, DEADLINE_PREFIX);
             String task = taskDetails[0];
             DateTime deadline = stringToDateTime(taskDetails[1]);
             return new AddDeadlineCommand(task, deadline);
-        } catch (MissingTaskDetailException e) {
+        } catch (MissingParameterException e) {
             return new InvalidCommand(MISSING_DEADLINE_INFORMATION_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(INVALID_DEADLINE_FORMAT_MESSAGE);
@@ -118,11 +123,11 @@ public class Parser {
 
     private Command createEventCommand(String parameters) {
         try {
-            String[] taskDetails = extractTaskDetails(parameters, EVENT_PREFIX);
+            String[] taskDetails = extractDetails(parameters, EVENT_PREFIX);
             String task = taskDetails[0];
             DateTime dateTime = stringToDateTime(taskDetails[1]);
             return new AddEventCommand(task, dateTime);
-        } catch (MissingTaskDetailException e) {
+        } catch (MissingParameterException e) {
             return new InvalidCommand(MISSING_EVENT_INFORMATION_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(INVALID_EVENT_FORMAT_MESSAGE);
@@ -148,6 +153,15 @@ public class Parser {
         }
     }
 
+    private Command createFindCommand(String parameters) {
+        try {
+            String searchWord = extractDetails(parameters, null)[0];
+            return new FindCommand(searchWord);
+        } catch (MissingParameterException e) {
+            return new InvalidCommand(MISSING_SEARCH_WORD_MESSAGE);
+        }
+    }
+
     private int extractIndex(String parameters) throws MissingListNumberException, ExcessParameterException {
         if (parameters.isEmpty()) {
             throw new MissingListNumberException();
@@ -160,9 +174,9 @@ public class Parser {
         return Integer.parseInt(parameters) - 1; // 0-based indexing
     }
 
-    private String[] extractTaskDetails(String parameters, String prefix) throws MissingTaskDetailException {
+    private String[] extractDetails(String parameters, String prefix) throws MissingParameterException {
         if (parameters.isEmpty()) {
-            throw new MissingTaskDetailException();
+            throw new MissingParameterException();
         }
 
         if (prefix == null) {
@@ -175,7 +189,7 @@ public class Parser {
             String additionalDetail = parameters.substring(indexOfDateTimeDetail).trim(); // Deadline / duration info
 
             if (task.length() == 0 || additionalDetail.length() == 0) {
-                throw new MissingTaskDetailException();
+                throw new MissingParameterException();
             }
 
             return new String[]{task, additionalDetail};
@@ -192,5 +206,5 @@ public class Parser {
 
     public static class ExcessParameterException extends InvalidFormatException {}
 
-    public static class MissingTaskDetailException extends InvalidFormatException {}
+    public static class MissingParameterException extends InvalidFormatException {}
 }

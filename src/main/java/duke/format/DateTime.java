@@ -45,7 +45,7 @@ public class DateTime {
     }
 
     private boolean isTomorrow() {
-        return this.date.plusDays(1).isEqual(LocalDate.now());
+        return this.date.minusDays(1).isEqual(LocalDate.now());
     }
 
     private boolean isDue() {

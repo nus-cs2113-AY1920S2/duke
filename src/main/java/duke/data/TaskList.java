@@ -7,6 +7,14 @@ import java.util.ArrayList;
 public class TaskList {
     public static ArrayList<Task> taskList = new ArrayList<>();
 
+    public static Task get(int index) {
+        return taskList.get(index);
+    }
+
+    public static int size() {
+        return taskList.size();
+    }
+
     public static void add(Task task) {
         taskList.add(task);
     }
@@ -23,11 +31,16 @@ public class TaskList {
         return false;
     }
 
-    public static Task get(int index) {
-        return taskList.get(index);
-    }
+    public static ArrayList<Integer> find(String searchWord) {
+        ArrayList<Integer> indexList = new ArrayList<>();
 
-    public static int size() {
-        return taskList.size();
+        for (int i = 0; i < taskList.size(); ++i) {
+            String task = taskList.get(i).getTask();
+            if (task.contains(searchWord)) {
+                indexList.add(i);
+            }
+        }
+
+        return indexList;
     }
 }
