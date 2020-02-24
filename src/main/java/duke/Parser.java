@@ -6,14 +6,14 @@ import duke.exception.UnknownInputException;
 
 
 public class Parser {
-    public static final String DONE_COMMAND = "done";
-    public static final String LIST_COMMAND = "list";
-    public static final String TODO_COMMAND = "todo";
-    public static final String EVENT_COMMAND = "event";
-    public static final String DEADLINE_COMMAND = "deadline";
-    public static final String DELETE_COMMAND = "delete";
-    public static final String END_COMMAND = "bye";
-    public static final String FIND_COMMAND = "find";
+    private static final String DONE_COMMAND = "done";
+    private static final String LIST_COMMAND = "list";
+    private static final String TODO_COMMAND = "todo";
+    private static final String EVENT_COMMAND = "event";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String END_COMMAND = "bye";
+    private static final String FIND_COMMAND = "find";
 
 
     public static Command parse(String userInput) throws UnknownInputException {
