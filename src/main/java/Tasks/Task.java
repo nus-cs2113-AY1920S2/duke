@@ -1,3 +1,5 @@
+package Tasks;
+
 /**
  * Represents a Task object for tasks
  * AnTask object corresponds to a description, and boolean isDone to check if task has been completed

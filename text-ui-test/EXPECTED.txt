@@ -5,7 +5,7 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
- Hi! I am Duke, your next doooooorrrr friendly elf.....I mean bot
+ Hi! I am Duke.Duke, your next doooooorrrr friendly elf.....I mean bot
  How may Dukeeeeee help you today?
 _______________________________________________________________________
  ======================================================================
@@ -43,11 +43,11 @@ There are currently 1 task(s) queued
  Please check your input!
  ======================================================================
  ======================================================================
- Duke has marked the following tasks as done:
+ Duke.Duke has marked the following tasks as done:
   [T][ ? ] read book
  ======================================================================
  ======================================================================
- Duke has marked the following tasks as done:
+ Duke.Duke has marked the following tasks as done:
   [E][ ? ] project meeting(At: Mon 2-4pm)
  ======================================================================
  ======================================================================
@@ -66,7 +66,7 @@ There are currently 1 task(s) queued
     3. [E][ ? ] project meeting(At: Mon 2-4pm)
  ======================================================================
  ======================================================================
- Duke has marked the following tasks as done:
+ Duke.Duke has marked the following tasks as done:
   [D][ ? ] return book (By: Sunday)
  ======================================================================
  ======================================================================
@@ -74,5 +74,5 @@ There are currently 1 task(s) queued
  Please check your input!
  ======================================================================
  ======================================================================
- Bye! Duke is now a freeeeee elf again!!!!
+ Bye! Duke.Duke is now a freeeeee elf again!!!!
  ======================================================================

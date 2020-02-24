@@ -1,6 +1,8 @@
+package Tasks;
+
 /**
- * Represents a Deadline object for tasks
- * A Deadline object corresponds to a description, time/date, and boolean isDone to check if Deadline task has been
+ * Represents a Tasks.Deadline object for tasks
+ * A Deadline object corresponds to a description, time/date, and boolean isDone to check if Tasks.Deadline task has been
  * completed
  */
 

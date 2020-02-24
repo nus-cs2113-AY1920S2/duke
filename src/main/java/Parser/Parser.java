@@ -1,6 +1,8 @@
+package Parser;
+
 /**
  * Represents a parser for input by user
- * A Parser object corresponds to the String input by the user and extracts the command that the user wants to run
+ * A Parser.Parser object corresponds to the String input by the user and extracts the command that the user wants to run
  */
 public class Parser {
 

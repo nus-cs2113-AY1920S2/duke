@@ -1,3 +1,9 @@
+package Storage;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * Represents the location where text files are stored
- * A Storage object corresponds to filepath and file name
+ * A Storage.Storage object corresponds to filepath and file name
  */
 public class Storage {
 
@@ -42,7 +48,7 @@ public class Storage {
     }
 
     /**
-     * Adds Task from text file to ArrayList
+     * Adds Tasks.Task from text file to ArrayList
      * @param input String input by user
      * @param tasksList ArrayList to store tasks
      */

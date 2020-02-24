@@ -1,6 +1,8 @@
+package Tasks;
+
 /**
  * Represents a ToDo object for tasks
- * A ToDo object corresponds to a description, and boolean isDone to check if Event task has been completed
+ * A ToDo object corresponds to a description, and boolean isDone to check if Tasks.Event task has been completed
  */
 public class ToDo extends Task {
 

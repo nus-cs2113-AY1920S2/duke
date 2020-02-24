@@ -1,5 +1,7 @@
+package Duke;
+
 /**
- * Represents the help messages Duke displays
+ * Represents the help messages Duke.Duke displays
  */
 public class DukeHelp {
 
