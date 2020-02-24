@@ -3,7 +3,6 @@ package duke.tasks;
 import duke.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
     protected LocalDate by;
@@ -16,6 +15,10 @@ public class Deadline extends Task {
         }
         by = by.trim();
         this.by = LocalDate.parse(by);
+    }
+
+    public LocalDate getDate() {
+        return this.by;
     }
 
 

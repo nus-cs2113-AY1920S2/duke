@@ -19,6 +19,10 @@ public class Event extends Task {
         this.timePeriod = LocalDate.parse(t);
     }
 
+    public LocalDate getDate() {
+        return this.timePeriod;
+    }
+
     @Override
     public String saveFormat() {
         return "e//" + super.saveFormat() + "//" + timePeriod;
@@ -27,6 +31,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.timePeriod + ")";
+        return "[E]" + super.toString() + " (at: " + timePeriod.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
