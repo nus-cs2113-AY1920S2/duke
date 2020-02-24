@@ -1,5 +1,5 @@
-import Exceptions.MissingDescriptionException;
-import Exceptions.UnknownCommandException;
+import Exception.MissingDescriptionException;
+import Exception.UnknownCommandException;
 
 import java.io.IOException;
 

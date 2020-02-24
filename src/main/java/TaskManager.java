@@ -1,7 +1,7 @@
-import TaskObjects.Deadline;
-import TaskObjects.Event;
-import TaskObjects.Task;
-import TaskObjects.Todo;
+import TaskObject.Deadline;
+import TaskObject.Event;
+import TaskObject.Task;
+import TaskObject.Todo;
 
 import java.util.ArrayList;
 

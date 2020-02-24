@@ -1,4 +1,4 @@
-package TaskObjects;
+package TaskObject;
 
 public class Todo extends Task {
 
