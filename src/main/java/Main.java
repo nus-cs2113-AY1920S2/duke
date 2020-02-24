@@ -42,8 +42,9 @@ public class Main {
      * Initializes the required classes, loads any data from storage text file and 
      * prints a welcome message. 
      * 
-     * @param args arguments to be provided by the user at program launch.
-     * @throws throws a RuntimeException when if the storage text file is corrupted.
+     * @param args Arguments to be provided by the user at program launch.
+     * @throws RuntimeException If the storage text file does not have a 
+     *                          .txt extension or cannot be read or overwritten.
      */
     public void start(String[] args) {
         try {
@@ -101,7 +102,7 @@ public class Main {
         } 
     }
     
-    /** Exit the program with a goodbye message. */
+    /** Exits the program with a goodbye message. */
     private void exit() {
         ui.displayExitMessage();
         System.exit(0);

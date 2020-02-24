@@ -47,6 +47,8 @@ public class StorageEncoder {
      * the encodedTaskList so that it can be written collectively
      * into the storage text file. Throws an exception if the task 
      * cannot be written in a text format.
+     * 
+     * @throws StorageReadWriteException If a task cannot be cannot be encoded into a text format.
      */
     private static String encodeTask(Task task) 
             throws StorageReadWriteException {

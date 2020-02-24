@@ -58,7 +58,7 @@ public class StorageDecoder {
     
     /**
      * Decodes a list of string texts into an acceptable task arguments format
-     * and append it to the TaskList. Throws an exception whenever a task 
+     * and appends it to the TaskList. Throws an exception whenever a task 
      * cannot be decoded.
      * 
      * @param lines A list of string texts derived from Storage's load().
@@ -184,10 +184,11 @@ public class StorageDecoder {
     /** 
      * Decodes each line of string text into acceptable task arguments format. 
      * 
-     * @param line  The line of string text to be decoded.
-     * @throws StorageReadWriteException  If the storage text file is a blank file
-     *                                    or does not conform to the encoding 
-     *                                    standard.  
+     * @param line The line of string text to be decoded.
+     * @return A HashMap of task arguments to its specific decoded strings.
+     * @throws StorageReadWriteException If the storage text file is a blank file
+     *                                   or does not conform to the encoding 
+     *                                   standard.  
      */
     private static Map<String, String> decodeLineIntoTaskArguments(
             String line) 
@@ -273,13 +274,15 @@ public class StorageDecoder {
     }
     
     /** 
-     * Split a line of string text using the regex ("|to"). This is used only 
+     * Splits a line of string text using the regex ("|to"). This is used only 
      * to decode a string text that into an Event task argument format.
      * 
      * For example: E | 1 | homework | 1200-12-12T10:00 to 1200-12-12T11:00'
      * will be split into wordArray = {[E], [1], [homework],
      * [1200-12-12T10:00 to 1200-12-12T11:00]}.
      * 
+     * @param line The line of text that is to be split on.
+     * @return A String array containing the task arguments in the format specified. 
      */
     private static String[] splitLineIntoReadableEventDateTime(
             String line) {
@@ -300,6 +303,8 @@ public class StorageDecoder {
      * For example: D | 1 | homework | 1200-12-12T10:00'
      * will be split into wordArray = {[D], [1], [homework], [1200-12-12T10:00]}.
      * 
+     * @param line The line of text that is to be split on.
+     * @return A String array containing the task arguments in the format specified.
      */   
     private static String[] splitLineIntoWords(String line) {
         String[] wordArray = line.split("[|]");        

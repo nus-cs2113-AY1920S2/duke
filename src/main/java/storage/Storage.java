@@ -39,8 +39,8 @@ public class Storage {
      * Constructor of a Storage retrieved from Path.
      * 
      * @param filePath
-     * @throws InvalidStorageFilePathException  If the storage file does not match
-     *                                          a .txt extension.
+     * @throws InvalidStorageFilePathException If the storage file does not match
+     *                                         a .txt extension.
      */
     public Storage(String filePath) {
         this.path = Paths.get(filePath);
@@ -58,8 +58,8 @@ public class Storage {
      * named after 'storage.txt' as well.
      * 
      * @return A TaskList with all the data of tasks stored in it.
-     * @throws StorageReadWriteException  If the current storage file cannot be
-     *                                    loaded.  
+     * @throws StorageReadWriteException If the current storage file cannot be
+     *                                   loaded.  
      */
     public TaskList load() throws StorageReadWriteException {
         List<String> lines = new ArrayList<>();        
@@ -97,8 +97,8 @@ public class Storage {
      * Writes data into the storage text file. Throws an exception if the file 
      * cannot be read or written.
      * 
-     * @throws StorageReadWriteException  If the current storage file cannot be
-     *                                    overwritten.  
+     * @throws StorageReadWriteException If the current storage file cannot be
+     *                                   overwritten.  
      */
     public void save(String filePath, TaskList taskList) 
             throws StorageReadWriteException {

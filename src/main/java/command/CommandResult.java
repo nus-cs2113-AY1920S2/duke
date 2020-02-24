@@ -19,7 +19,7 @@ public class CommandResult extends Command {
      * Constructor for the CommandResult.
      * 
      * @param commandResult A String description of a command result after
-     * a command is being executed. 
+     *                      a command is being executed. 
      */
     public CommandResult(String commandResult) {
         this.commandResult = commandResult;

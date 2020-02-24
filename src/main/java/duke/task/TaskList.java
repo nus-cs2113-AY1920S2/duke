@@ -33,13 +33,14 @@ public class TaskList {
     
     /** 
      * Constructor for a new TaskList.
-     * Takes in a old TaskList and performs a deep copy of it.
+     * Takes in a previous TaskList that is already manipulated and updates 
+     * the current TaskList by deep-copying the previous one.
      * 
-     * @param oldTaskList
-     * @return An updated TaskList after a deep copy of old TaskList
+     * @param previousTaskList The previous TaskList to be deep copied over.
+     * @return An updated TaskList after a deep copy of previous TaskList.
      */
-    public TaskList(TaskList oldTaskList) {
-        this.tasks = oldTaskList.getTasks()
+    public TaskList(TaskList previousTaskList) {
+        this.tasks = previousTaskList.getTasks()
                 .stream()
                 .collect(Collectors.toList());
     }
@@ -128,8 +129,8 @@ public class TaskList {
      * not contain that ID.
      * 
      * @param taskId 
-     * @throws IndexOutOfBoundsException  If the index given by the user exceeds
-     *                                    size of List<Task>.
+     * @throws IndexOutOfBoundsException If the index given by the user exceeds
+     *                                   size of List<Task>.
      */
     public void deleteTask(int taskId) throws IndexOutOfBoundsException {
         if (taskId > this.tasks.size()) {
@@ -166,8 +167,8 @@ public class TaskList {
      * contain that ID.
      * 
      * @param taskId The ID of the task to be completed.
-     * @throws IndexOutOfBoundsException  If the index given by the user exceeds
-     *                                    size of List<Task>.
+     * @throws IndexOutOfBoundsException If the index given by the user exceeds
+     *                                   size of List<Task>.
      */
     public void completeTask(int taskId) throws IndexOutOfBoundsException {  
         if (taskId > this.tasks.size()) {

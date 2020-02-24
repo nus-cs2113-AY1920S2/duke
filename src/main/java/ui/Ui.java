@@ -11,7 +11,7 @@ import command.CommandResult;
 
 /**
  * Encapsulates the user interface of the program.
- * This class is responsible in displaying messages to the user.
+ * This class is responsible for displaying messages to the user.
  * 
  */
 public class Ui {
@@ -29,7 +29,7 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
     
-    /** Use the scanner to read the input from the user. */
+    /** Uses the scanner to read the input from the user. */
     public String getCommand() throws NoSuchElementException {
         String readLine = sc.nextLine();
         return readLine;  

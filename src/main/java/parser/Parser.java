@@ -103,14 +103,14 @@ public class Parser {
     }
     
     /** 
-     * Parse the input from the user into commands that can be executed.
+     * Parses the input from the user into commands that can be executed.
      * Throws an InvalidCommandException if a command cannot be created 
      * based on the user's input.
      * 
      * @param userInput The string text of input from the user.
      * @return A Command that is to be executed.
-     * @throws InvalidCommandException  An invalid command due to an invalid
-     *                                  function of the program.
+     * @throws InvalidCommandException An invalid command due to an invalid
+     *                                 function of the program.
      */
     public Command parseCommand(String userInput) {
         Parser parser = parseUserInputIntoCommandArguments(userInput);
@@ -176,7 +176,7 @@ public class Parser {
     }
     
     /** 
-     * Parse user's input into a string of task's description to be used as a parameter
+     * Parses user's input into a string of task's description to be used as a parameter
      * for creating a task, if the user's input does not contain a preposition. 
      */
     private Optional<String> parsePhraseWithoutPrepositionIntoTaskDescription(
@@ -195,7 +195,7 @@ public class Parser {
     }
     
     /** 
-     * Parse user's input into a string of task's description to be used as a parameter
+     * Parses user's input into a string of task's description to be used as a parameter
      * for creating a task, if the user's input contains a preposition.
      * 
      * @param userInputArray An array of words split from the user's input using the regex (" ").
@@ -227,7 +227,7 @@ public class Parser {
     }  
     
     /** 
-     * Parse user's input into a string of task's deadline to be used as a parameter
+     * Parses user's input into a string of task's deadline to be used as a parameter
      * for creating a deadline task.
      * 
      * @param userInputArray An array of words split from the user's input using the regex (" ").
@@ -253,7 +253,7 @@ public class Parser {
     }
     
     /** 
-     * Parse user's input into a string of task's start date and time to be used as a parameter
+     * Parses user's input into a string of task's start date and time to be used as a parameter
      * for creating an event task.
      * 
      * @param userInputArray An array of words split from the user's input using the regex (" ").
@@ -279,7 +279,7 @@ public class Parser {
     }
     
     /** 
-     * Parse user's input into a string of task's end date and time to be used as a parameter
+     * Parses user's input into a string of task's end date and time to be used as a parameter
      * for creating an event task.
      * 
      * @param userInputArray An array of words split from the user's input using the regex (" ").
@@ -305,7 +305,7 @@ public class Parser {
     } 
  
     /** 
-     * Parse a new phrase from the user's input starting after the preposition word to 
+     * Parses a new phrase from the user's input starting after the preposition word to 
      * the end of sentence. 
      * For example, the phrase 'event party /on 1200-12-12T10:00 to 1200-12-12T11:11' will
      * return 1200-12-12T10:00 to 1200-12-12T11:11'.
@@ -331,15 +331,15 @@ public class Parser {
     }
     
     /** 
-     * Parse a new phrase from the user's event phrase derived from parseEventPhraseAfterPreposition() 
+     * Parses a new phrase from the user's event phrase derived from parseEventPhraseAfterPreposition() 
      * For example, the phrase '1200-12-12T10:00 to 1200-12-12T11:11' will
      * return '1200-12-12T10:00'.
      * 
      * @param userInputArray An array of words split from the user's input using the regex (" ").
      * @param prepositionIndex The index of the preposition in the userInputArray.
      * @return A new phrase representing the event starting date and time.
-     * @throws InvalidTaskArgument  If a starting date and time is empty or not in
-     *                              a correct format of 'YYYY-MM-DDTHH:mm'.
+     * @throws InvalidTaskArgument If a starting date and time is empty or not in
+     *                             a correct format of 'YYYY-MM-DDTHH:mm'.
      */
     private String getStartDateTimeFromEventPhrase(
             String[] userInputArray, int prepositionIndex) {
@@ -365,15 +365,15 @@ public class Parser {
     }
     
     /** 
-     * Parse a new phrase from the user's event phrase derived from parseEventPhraseAfterPreposition() 
+     * Parses a new phrase from the user's event phrase derived from parseEventPhraseAfterPreposition() 
      * For example, the phrase '1200-12-12T10:00 to 1200-12-12T11:11' will
      * return '1200-12-12T11:11'.
      * 
      * @param userInputArray An array of words split from the user's input using the regex (" ").
      * @param prepositionIndex The index of the preposition in the userInputArray.
      * @return A new phrase representing the event ending date and time.
-     * @throws InvalidTaskArgument  If a ending date and time is empty or not in
-     *                              a correct format of 'YYYY-MM-DDTHH:mm'.
+     * @throws InvalidTaskArgument If a ending date and time is empty or not in
+     *                             a correct format of 'YYYY-MM-DDTHH:mm'.
      */
     private String getEndDateTimeFromEventPhrase(
             String[] userInputArray, int prepositionIndex) {
@@ -389,7 +389,7 @@ public class Parser {
     }
     
     /**
-     * Parse a user's input into a format specified by the constructor of a command.
+     * Parses a user's input into a format specified by the constructor of a command.
      * If the user's input contains a preposition, it can be parsed into command arguments
      * for both Deadlines task and Events task. Else, it can only be parsed into command
      * arguments for ToDos task only.
