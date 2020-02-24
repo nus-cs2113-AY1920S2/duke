@@ -1,16 +1,19 @@
 package duke;
 
+import duke.commands.CommandResult;
+import duke.commands.ExitCommand;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
+import duke.commands.Command;
 
 import java.util.ArrayList;
 
 public class Duke {
     
     private Ui ui;
-    
+    private Storage storage;
     public static ArrayList<Task> tasks = new ArrayList<>();
     
     public static void main(String[] args) {
@@ -20,7 +23,9 @@ public class Duke {
     private void start() {
         this.ui = new Ui();
         ui.showWelcomeMessage();
-        new Storage();
+        ui.showLoadMessage();
+        this.storage = new Storage();
+        ui.printToConsole(Ui.DIVIDER);
     }
     
     private void exit() {
@@ -35,10 +40,14 @@ public class Duke {
     }
     
     private void runCommandLoopUntilExitCommand() {
+        Command command;
         String userCommandText = "";
         do {
             userCommandText = ui.getUserCommand();
-            new Parser().executeCommand(userCommandText);
-        } while (!userCommandText.equals(Parser.COMMAND_BYE_WORD));
+            command = new Parser().parseCommand(userCommandText);
+            CommandResult result = new Parser().executeCommand(command);
+            ui.showResultToUser(result);
+        } while (!userCommandText.equals(ExitCommand.COMMAND_WORD));
     }
+    
 }
