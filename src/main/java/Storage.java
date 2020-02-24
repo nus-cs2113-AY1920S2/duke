@@ -2,6 +2,7 @@ import data.Deadline;
 import data.Event;
 import data.Task;
 import data.Todo;
+import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,8 +57,8 @@ public class Storage {
                 newTaskToLoad = new Deadline(tokenizedTaskString[2], tokenizedTaskString[3]);
                 break;
             default:
-                newTaskToLoad = new Todo("hello", "world");
-                //break;
+                //print invalid task loaded error message
+                return null;
             }
             //if task was previously marked done already, make sure to mark it as done when loading to taskList
             if (tokenizedTaskString[1].equals("1")) {

@@ -1,22 +1,26 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import common.Messages;
+import data.*;
+import tasklist.TaskList;
+
+import static common.Messages.SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE;
 
 public class Duke {
-
-    private static String underscoredLine = "\t____________________________________________________________";
 
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
+    private Messages messageContainer = new Messages();
 
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.loadFileToTaskList());
+            this.tasks = new TaskList(storage.loadFileToTaskList());
         } catch (FileNotFoundException e) {
             //ui.showLoadingError();
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -27,19 +31,24 @@ public class Duke {
         main.runExit();
     }
 
-    private void runStartup() {
-        this.ui = new Ui();
+    public void runStartup() {
         ui.sayIntro();
     }
 
     public void runLoopUntilExit() {
         Parser commandParser = new Parser(tasks);
-        while (true) {
-            String nextCommand = ui.getUserCommand();
-            /*processedCommand = */
-            commandParser.processCommand(nextCommand);
-            if (commandParser.isExitCommandInvoked) {
-                break;
+        while (commandParser.exitCommandNotEncountered()) {
+            try {
+                String userInputText = ui.getUserCommand();
+                /*processedCommand = */
+                Command nextCommand = commandParser.parseCommand(userInputText);
+                nextCommand.execute(tasks, ui);
+            } catch (NoRemarkException
+                    | IllegalKeywordException
+                    | NoDescriptionException
+                    | NumberFieldException
+                    | MissingParameterException e) {
+                ui.displayMessage(e.getMessage());
             }
         }
     }
@@ -49,9 +58,7 @@ public class Duke {
         try {
             storage.saveTaskListToFile(tasks);
         } catch (IOException e) {
-            System.out.println(underscoredLine);
-            System.out.println("\tError saving taskList to duke.txt");
-            System.out.println(underscoredLine);
+            ui.displayMessage(SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE);
         }
 
         ui.sayGoodbye();

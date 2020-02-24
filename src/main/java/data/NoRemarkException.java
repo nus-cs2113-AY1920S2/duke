@@ -1,5 +1,13 @@
 package data;
 
 public class NoRemarkException extends Exception {
-  //no other code needed
+    private String message;
+
+    public NoRemarkException(String messageInput) {
+        this.message = messageInput;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
 }

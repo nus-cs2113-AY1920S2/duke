@@ -1,13 +1,19 @@
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import common.Messages;
+
+import static common.Messages.START_MESSAGE;
+import static common.Messages.FIRST_EXIT_MESSAGE;
+import static common.Messages.SECOND_EXIT_MESSAGE;
+import static common.Messages.EMPTY_COMMAND_ERROR_MESSAGE;
+import static common.Messages.USER_INPUT_ARROWHEAD_DISPLAY;
 
 public class Ui {
 
-    private static String underscoredLine = "\t____________________________________________________________";
-    private static String curlyLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private final Scanner in;
     private final PrintStream out;
+    private final Messages messageContainer = new Messages();
 
     public Ui() {
         this(System.in, System.out);
@@ -19,35 +25,30 @@ public class Ui {
     }
 
     public void sayIntro(){
-        String introMessage = curlyLine + System.lineSeparator() + "Hello! I'm Duke\n"
-                + "What can I do for you?\n" + curlyLine + System.lineSeparator();
-
-        out.println(introMessage);
+        out.println(messageContainer.addCurlyBorders(START_MESSAGE));
     }
 
     public void sayGoodbye(){
-        String goodbyeMessage = curlyLine + System.lineSeparator() + "Bye! Hope to see you again soon\n"
-                + curlyLine + System.lineSeparator();
-        String goodbyeMessage2 = "********************CONNECTION TERMINATED********************";
-
-        out.println(goodbyeMessage);
-        out.println(goodbyeMessage2);
+        out.println(messageContainer.addCurlyBorders(FIRST_EXIT_MESSAGE));
+        out.println(SECOND_EXIT_MESSAGE);
     }
 
     public String getUserCommand() {
-        out.print(">>>");
+        out.print(USER_INPUT_ARROWHEAD_DISPLAY);
         String userInput = in.nextLine();
 
         //silently consume all empty/whitespace lines
         while (isInputEmpty(userInput)) {
-            out.println(underscoredLine);
-            out.println("\t\u2639 !!ERROR!! Command cannot be whitespaces.");
-            out.println(underscoredLine);
-            out.print(">>>");
+            displayMessage(EMPTY_COMMAND_ERROR_MESSAGE);
+            out.print(USER_INPUT_ARROWHEAD_DISPLAY);
             userInput = in.nextLine();
         }
 
         return userInput;
+    }
+
+    public void displayMessage(String errorMessage) {
+        out.println(messageContainer.addUnderscoreBorders(errorMessage));
     }
 
     private boolean isInputEmpty(String rawInput) {

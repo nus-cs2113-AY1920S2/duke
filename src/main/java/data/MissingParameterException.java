@@ -1,9 +1,9 @@
 package data;
 
-public class NoDescriptionException extends Exception {
+public class MissingParameterException extends Exception {
     private String message;
 
-    public NoDescriptionException(String messageInput) {
+    public MissingParameterException(String messageInput) {
         this.message = messageInput;
     }
 
