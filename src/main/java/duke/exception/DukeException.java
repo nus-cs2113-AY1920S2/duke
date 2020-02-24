@@ -11,6 +11,7 @@ public class DukeException extends Exception {
     
     @Override
     public String toString() {
-        return  DIVIDER + LS + getMessage() + LS + DIVIDER;
+        return DIVIDER + LS + getMessage() + LS + DIVIDER;
     }
+    
 }
