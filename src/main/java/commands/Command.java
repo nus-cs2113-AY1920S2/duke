@@ -16,7 +16,7 @@ public abstract class Command {
 
     /**
      * Constructs a default Command object with rawUserInput
-     * @param rawUserInput String object provided by user through System.in
+     * @param rawUserInput String provided by user through System.in
      */
     public Command(String rawUserInput) {
         this.isExit = false;
@@ -41,7 +41,7 @@ public abstract class Command {
 
     /**
      * Returns the value of boolean isExit
-     * @return boolean isExit
+     * @return boolean value of isExit
      */
     public boolean isExit() {
         return isExit;
@@ -50,7 +50,7 @@ public abstract class Command {
     /**
      * Returns an array of the separated command word and descriptions
      * Separates the command word from user input
-     * @param rawUserInput unedited String object provided from user
+     * @param rawUserInput unedited String provided from user
      * @return Array containing separated Command Word and description
      * @throws MissingDescriptionException throws Exception when user fails to provide description
      */
