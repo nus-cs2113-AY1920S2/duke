@@ -2,9 +2,17 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.command.Command;
+import duke.exception.DukeLoadingException;
+import duke.exception.DukeNullDescriptionException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Parser;
+import duke.util.Storage;
 import duke.util.TaskManager;
 import duke.exception.DukeException;
 
+import static duke.util.Constants.DATA_FILE_NAME;
 import static duke.util.Constants.DEADLINE_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.DELETE_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.DONE_COMMAND_HELP_MESSAGE;
@@ -13,11 +21,8 @@ import static duke.util.Constants.EXIT_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.LIST_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.TODO_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.HELP_COMMAND;
-import static duke.util.Constants.LOGO;
 import static duke.util.Constants.LINE_DIVIDER;
 import static duke.util.Constants.FIVE_SPACES;
-import static duke.util.Constants.GREETING_WORD;
-import static duke.util.Constants.BYE_WORD;
 import static duke.util.Constants.EXIT_COMMAND_BYE;
 import static duke.util.Constants.EXIT_COMMAND_QUIT;
 import static duke.util.Constants.EXIT_COMMAND_EXIT;
@@ -41,14 +46,43 @@ import static duke.util.Constants.CRYING_FACE;
 
 
 public class Duke {
-    private static boolean isExited = false;
+    private Ui ui;
+    private TaskList taskList;
+    private Storage storage;
 
-    private static void greet() {
-        System.out.println(LOGO);
-        System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES + GREETING_WORD);
-        System.out.println(LINE_DIVIDER);
+    public Duke()  {
+        ui = new Ui();
+        storage = new Storage(DATA_FILE_NAME);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeLoadingException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+            taskList = new TaskList();
+        }
     }
+
+
+    public void run() {
+        ui.showWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+/*
 
     private static void processUserInput(TaskManager taskMgr, String userInput) {
         String[] commands = splitCommand(userInput);
@@ -58,9 +92,7 @@ public class Duke {
         case EXIT_COMMAND_BYE:
         case EXIT_COMMAND_EXIT:
         case EXIT_COMMAND_QUIT:
-            bye();
             taskMgr.saveDataToFile();
-            isExited = true;
             break;
         case LIST_COMMAND:
         case LIST_COMMAND_SHORTCUT:
@@ -202,14 +234,11 @@ public class Duke {
         }
         System.out.println(LINE_DIVIDER);
     }
-
-    private static void bye() {
-        System.out.println(LINE_DIVIDER);
-        System.out.println(FIVE_SPACES + BYE_WORD);
-        System.out.println(LINE_DIVIDER);
-    }
+*/
 
     public static void main(String[] args) {
+        new Duke().run();
+        /*
         TaskManager taskMgr = new TaskManager();
 
         greet();
@@ -220,5 +249,6 @@ public class Duke {
             input = s.nextLine();
             processUserInput(taskMgr, input);
         } while (!isExited);
+         */
     }
 }

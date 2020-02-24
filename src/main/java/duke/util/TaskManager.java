@@ -1,7 +1,6 @@
 package duke.util;
 
 
-import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +19,6 @@ import duke.task.Todo;
 import duke.task.DummyTask;
 
 import static duke.util.Constants.DATA_LOADED_SUCCESSFULLY_PROMPT;
-import static duke.util.Constants.DATA_SAVED_SUCCESSFULLY_PROMPT;
 import static duke.util.Constants.DEADLINE_COMMAND;
 import static duke.util.Constants.DEADLINE_ICON;
 import static duke.util.Constants.EVENT_ICON;
@@ -38,7 +36,7 @@ import static duke.util.Constants.LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING;
 import static duke.util.Constants.TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE;
 import static duke.util.Constants.TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE;
 import static duke.util.Constants.CRYING_FACE;
-import static duke.util.Constants.DATA_FILE_PATH;
+import static duke.util.Constants.DATA_FILE_NAME;
 import static duke.util.Constants.FILE_NOT_FOUND_ERROR_MESSAGE;
 import static duke.util.Constants.FILE_OPERATION_IO_ERROR_MESSAGE;
 import static duke.util.Constants.YES_ICON;
@@ -49,7 +47,7 @@ public class TaskManager {
 
     public TaskManager() {
         tasks = new ArrayList<>();
-        loadDataFromFile(DATA_FILE_PATH);
+        loadDataFromFile(DATA_FILE_NAME);
     }
 
     public void listTasks() {
@@ -143,7 +141,7 @@ public class TaskManager {
 
     // I know this function sucks, give me some time to think of a better one plz.
     public void loadDataFromFile(String filePath) {
-        System.out.printf(FIVE_SPACES + LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING, DATA_FILE_PATH);
+        System.out.printf(FIVE_SPACES + LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING, DATA_FILE_NAME);
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
@@ -174,10 +172,10 @@ public class TaskManager {
         Task convertedTask;
         switch (typeIcon) {
         case DEADLINE_ICON:
-            convertedTask = new Deadline(task.getTaskDescription(), task.getByTime());
+            convertedTask = new Deadline(task.getTaskDescription(), task.getByDate());
             break;
         case EVENT_ICON:
-            convertedTask = new Event(task.getTaskDescription(), task.getAtTime());
+            convertedTask = new Event(task.getTaskDescription(), task.getAtDate());
             break;
         default:
             convertedTask = new Todo(task.getTaskDescription());
@@ -192,17 +190,13 @@ public class TaskManager {
     }
 
     public void saveDataToFile() {
-        System.out.printf(FIVE_SPACES + SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING, DATA_FILE_PATH);
+        System.out.printf(FIVE_SPACES + SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING, DATA_FILE_NAME);
+        /*
         try {
-            Gson gson = new Gson();
-            FileWriter fw = new FileWriter(DATA_FILE_PATH);
-            String json = gson.toJson(tasks);
-            fw.write(json);
-            fw.flush();
-            fw.close();
-            System.out.println(FIVE_SPACES + DATA_SAVED_SUCCESSFULLY_PROMPT);
+            Storage.saveObjectsAsJsonStringToFile(DATA_FILE_NAME, tasks, tasksList);
         } catch (IOException e) {
             System.out.println(FIVE_SPACES + CRYING_FACE + FILE_OPERATION_IO_ERROR_MESSAGE);
         }
+        */
     }
 }

@@ -12,19 +12,19 @@ public class DummyTask {
     private String description;
     private boolean isDone;
     private String typeIcon;
-    private String atTime;
-    private String byTime;
+    private String atDate;
+    private String byDate;
 
     public String getIcon() {
         return typeIcon;
     }
 
-    public String getAtTime() {
-        return atTime;
+    public String getAtDate() {
+        return atDate;
     }
 
-    public String getByTime() {
-        return byTime;
+    public String getByDate() {
+        return byDate;
     }
 
     public String getStatusIcon() {

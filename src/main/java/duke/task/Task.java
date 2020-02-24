@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.exception.DukeException;
+import duke.exception.DukeNullDateException;
+import duke.exception.DukeNullDescriptionException;
 
 import static duke.util.Constants.NO_ICON;
 import static duke.util.Constants.YES_ICON;
@@ -10,12 +11,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) throws DukeException {
+    public Task(String description) throws DukeNullDescriptionException {
         if (description.length() > 0) {
             this.description = description;
             this.isDone = false;
         } else {
-            throw new DukeException();
+            throw new DukeNullDescriptionException();
         }
     }
 

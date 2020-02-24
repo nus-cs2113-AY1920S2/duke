@@ -59,9 +59,10 @@ public class Constants {
     public static final String DEADLINE_ICON = "[D]";
     public static final String EVENT_ICON = "[E]";
     public static final String TODO_ICON = "[T]";
-    public static final String DATA_FILE_PATH = "tasks.json";
+    public static final String DATA_FILE_NAME = "tasks.json";
     public static final String FILE_NOT_FOUND_ERROR_MESSAGE = " OOPS!!! The DATA_FILE_PATH does not exist!";
-    public static final String FILE_OPERATION_IO_ERROR_MESSAGE = " OOPS!!! Something went wrong here!";
+    public static final String FILE_OPERATION_IO_ERROR_MESSAGE =
+            " OOPS!!! Something went wrong when accessing " + DATA_FILE_NAME + " !";
     public static final String LOAD_DATA_FROM_FILE_PROMPT_FORMAT_STRING = "Loading data from %s, please wait...\n";
     public static final String DATA_LOADED_SUCCESSFULLY_PROMPT = "Data loaded successfully!";
     public static final String SAVE_DATA_TO_FILE_PROMPT_FORMAT_STRING = "Saving data to %s, please wait...\n";
