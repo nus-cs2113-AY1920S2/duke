@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Structure for a deadline task.
+ */
+
 public class Deadline extends Task {
     private String time;
     private boolean isStandardTime;
