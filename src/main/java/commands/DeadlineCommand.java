@@ -12,7 +12,7 @@ import ui.Ui;
 public class DeadlineCommand extends Command {
     /**
      * Constructs a Deadline Object
-     * @param rawUserInput unedited String object provided by user
+     * @param rawUserInput unedited String provided by user
      */
     public DeadlineCommand(String rawUserInput) {
         super(rawUserInput);
