@@ -9,9 +9,13 @@ import duke.command.ExitCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.exception.DukeDateFormatException;
 import duke.exception.DukeException;
 import duke.exception.DukeNullDateException;
 import duke.exception.DukeNullDescriptionException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import static duke.util.Constants.DEADLINE_COMMAND;
 import static duke.util.Constants.DEADLINE_COMMAND_SHORTCUT;
@@ -127,5 +131,14 @@ public class Parser {
     private static String extractTaskDate(String taskInfo, String delimiter) {
         int taskTimeIndex = taskInfo.indexOf(delimiter) + delimiter.length();
         return taskInfo.substring(taskTimeIndex).trim();
+    }
+
+    private static LocalDate parseStringToDate(String dateString) throws DukeException {
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new DukeDateFormatException();
+        }
     }
 }
