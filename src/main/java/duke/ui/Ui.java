@@ -1,8 +1,8 @@
-package duke.print;
+package duke.ui;
 
-import duke.task.TaskManager;
+import duke.task.TaskList;
 
-public class PrintHelper {
+public class Ui {
 
     private static final String INVALID_COMMAND_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid format of declaration for event "
@@ -26,8 +26,8 @@ public class PrintHelper {
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String INVALID_TODO_FORMAT_MESSAGE = "OOPS!!! The description of a todo cannot be empty.";
     private static final String SINGLE_SPACE = " ";
-    private static final String DONE_COMMAND = TaskManager.DONE_COMMAND;
-    private static final String DELETE_COMMAND = TaskManager.DELETE_COMMAND;
+    private static final String DONE_COMMAND = TaskList.DONE_COMMAND;
+    private static final String DELETE_COMMAND = TaskList.DELETE_COMMAND;
 
 
     // Prints the number of spaces requested by the user
@@ -58,7 +58,7 @@ public class PrintHelper {
     }
 
     // Prints the welcome message
-    public static void printWelcomeMessage() {
+    public void printWelcomeMessage() {
         printLine();
         printWithIndentation(WELCOME_MESSAGE_LINE_1);
         printWithIndentation(WELCOME_MESSAGE_LINE_2);
@@ -67,7 +67,7 @@ public class PrintHelper {
     }
 
     // Prints the bye (exit) message
-    public static void printByeMessage() {
+    public void printByeMessage() {
         printLine();
         printWithIndentation(BYE_MESSAGE);
         printLine();
@@ -149,4 +149,9 @@ public class PrintHelper {
     public static void printInvalidDeleteFormat() {
         printIndexNotIntegerAlert(DELETE_COMMAND);
     }
+
+    public void printEmptyLine() {
+        System.out.println();
+    }
+
 }

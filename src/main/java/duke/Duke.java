@@ -1,120 +1,58 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
-import duke.exception.ExceptionType;
-import duke.print.PrintHelper;
-import duke.task.TaskManager;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
 
+    public static final String FILE_PATH = "TaskList.txt";
     public static final String BYE_COMMAND = "bye";
-    public static final String LIST_COMMAND = "list";
-    public static final String EMPTY_COMMAND = "";
-    public static final String DONE_COMMAND = "done";
-    public static final String DELETE_COMMAND = "delete";
-    public static final String TODO_COMMAND = "todo";
-    public static final String DEADLINE_COMMAND = "deadline";
-    public static final String EVENT_COMMAND = "event";
 
-    // Handles all the tasks
-    private static TaskManager taskManager = new TaskManager();
+    private static Storage storage;
+    private static Ui ui;
+    private static Parser parser;
+    private static TaskList taskList;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        ui = new Ui();
+        parser = new Parser();
+        taskList = new TaskList(storage.loadData());
+    }
+
+    public void run() {
+        ui.printWelcomeMessage();
+        parseAndExecuteCommands();
+        storage.storeTasksToFile(taskList);
+        ui.printByeMessage();
+    }
+
+    private void parseAndExecuteCommands() {
+        Scanner sc = new Scanner(System.in);
+        String fullCommand;
+        Command command;
+
+        fullCommand = sc.nextLine();
+        while (!fullCommand.equals(BYE_COMMAND)) {
+            try {
+                command = parser.parseCommand(fullCommand);
+                command.executeCommand(taskList);
+            } catch (DukeException dukeException) {
+                dukeException.printExceptionMessage();
+            }
+            ui.printEmptyLine();
+            fullCommand = sc.nextLine();
+        }
+    }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String command;
-        loadData();
-
-        PrintHelper.printWelcomeMessage();
-        command = sc.nextLine();
-        while (!command.equals(BYE_COMMAND)) {
-            try {
-                executeCommand(command);
-            } catch (DukeException exception) {
-                exception.printExceptionMessage();
-            }
-            command = sc.nextLine();
-        }
-
-        saveData();
-        PrintHelper.printByeMessage();
-    }
-
-    private static void loadData() {
-        try {
-            loadTasks();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void saveData() {
-        try {
-            TaskManager.storeTasksToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void loadTasks() throws IOException {
-        try {
-            TaskManager.loadTasksFromFile();
-        } catch (FileNotFoundException e) {
-            File file = new File("TaskList.txt");
-            file.createNewFile();
-        }
-    }
-
-    // Executes the command entered by the user
-    private static void executeCommand(String command) throws DukeException {
-        String[] commandSplit = command.split(" ",2);
-        String commandType = commandSplit[0];
-        boolean isOneWordCommand = commandSplit.length == 1 || commandSplit[1].isBlank();
-        try {
-            switch (commandType) {
-            case LIST_COMMAND:
-                taskManager.listTasks(isOneWordCommand);
-                break;
-            case DONE_COMMAND:
-                taskManager.markTaskAsDone(commandSplit);
-                break;
-            case TODO_COMMAND:
-                taskManager.addToDoTask(commandSplit);
-                break;
-            case DEADLINE_COMMAND:
-                taskManager.addDeadlineTask(commandSplit, isOneWordCommand);
-                break;
-            case DELETE_COMMAND:
-                taskManager.deleteTask(commandSplit);
-                break;
-            case EVENT_COMMAND:
-                taskManager.addEventTask(commandSplit, isOneWordCommand);
-                break;
-            case EMPTY_COMMAND:
-                throw new DukeException(ExceptionType.EmptyCommand);
-                // break statement can't be reached if added
-            default:
-                throw new DukeException(ExceptionType.InvalidCommand);
-                // break statement can't be reached if added
-            }
-        } catch (DukeException dukeException) {
-            dukeException.printExceptionMessage();
-        }
-        System.out.println();
-    }
-
-    // Prints that user entered an invalid Command
-    private static void invalidCommand() {
-        PrintHelper.printInvalidCommand();
-    }
-
-    // Prints that user entered an empty line
-    private static void emptyCommand() {
-        PrintHelper.printEmptyLineAlert();
+        new Duke(FILE_PATH).run();
     }
 
 }

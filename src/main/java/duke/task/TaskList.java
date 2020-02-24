@@ -2,16 +2,11 @@ package duke.task;
 
 import duke.exception.DukeException;
 import duke.exception.ExceptionType;
-import duke.print.PrintHelper;
+import duke.ui.Ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class TaskManager {
+public class TaskList {
 
     public static final String TASK_ALREADY_SET_ALERT = "Task was already set as done";
     public static final String TASK_MARKED_MESSAGE = "Nice! I've marked this task as done:";
@@ -26,67 +21,16 @@ public class TaskManager {
     private static final String FILE_PATH = "TaskList.txt";
 
     // Stores all the tasks provided
-    static ArrayList<Task> tasks = new ArrayList<Task>();
+    public ArrayList<Task> tasks;
 
-    // Loads the tasks saved previously
-    public static void loadTasksFromFile() throws FileNotFoundException {
-
-        File f = new File(FILE_PATH);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String taskDescription = s.nextLine();
-            String[] splitDescription = taskDescription.split("#",3);
-            char taskType = splitDescription[0].charAt(0);
-            boolean isDone = Boolean.parseBoolean(splitDescription[1].trim());
-            String description = splitDescription[2].trim();
-
-            switch (taskType) {
-            case 'T':
-                ToDo toDo = new ToDo(description);
-                toDo.setDone(isDone);
-                tasks.add(toDo);
-                break;
-            case 'D':
-                Deadline deadline = new Deadline(description);
-                deadline.setDone(isDone);
-                tasks.add(deadline);
-                break;
-            case 'E':
-                Event event = new Event(description);
-                event.setDone(isDone);
-                tasks.add(event);
-                break;
-            default:
-                // Add exception handling
-            }
-        }
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    // Saves the tasks for future usage
-    public static void storeTasksToFile() throws IOException {
-        FileWriter fw = new FileWriter(FILE_PATH);
-        for (Task task: tasks) {
-            switch (task.taskType) {
-            case 'T':
-                ToDo toDo = (ToDo) task;
-                fw.write("T # " + toDo.isDone + " # " + toDo.description + System.lineSeparator());
-                break;
-            case 'D':
-                Deadline deadline = (Deadline) task;
-                fw.write("D # " + deadline.isDone + " # " + deadline.description + "/by "
-                        + deadline.getByWithoutBraces() + System.lineSeparator());
-                break;
-            case 'E':
-                Event event = (Event) task;
-                fw.write("E # " + event.isDone + " # " + event.description + "/at "
-                        + event.getPeriodWithoutBraces() + System.lineSeparator());
-                break;
-            default:
-                // Add Exception handling
-            }
-        }
-        fw.close();
+    public TaskList() {
+        tasks = new ArrayList<Task>();
     }
+
 
     // Adds a new task with the descriptionWithDetails provided by the user
     public void addTask(TaskType taskType, String descriptionWithDetails) {
@@ -101,7 +45,7 @@ public class TaskManager {
             tasks.add(new Event(descriptionWithDetails));
             break;
         default:
-            PrintHelper.printWithIndentation("Error!!!");
+            Ui.printWithIndentation("Error!!!");
             break;
         }
         printLatestTaskAndTotalNumberOfTasks();
@@ -110,12 +54,12 @@ public class TaskManager {
     // Prints details about the latest task added along with
     // the total number of tasks present in the list
     private void printLatestTaskAndTotalNumberOfTasks() {
-        PrintHelper.printLine();
-        PrintHelper.printWithIndentation(TASK_ADDED_MESSAGE);
-        PrintHelper.printWithIndentation(tasks.get(tasks.size() - 1).getStatusWithDescription(),7);
-        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task"
+        Ui.printLine();
+        Ui.printWithIndentation(TASK_ADDED_MESSAGE);
+        Ui.printWithIndentation(tasks.get(tasks.size() - 1).getStatusWithDescription(),7);
+        Ui.printWithIndentation("Now you have " + tasks.size() + " task"
                 + (tasks.size() != 1 ? "s " : " ") + "in the list.");
-        PrintHelper.printLine();
+        Ui.printLine();
     }
 
     // Marks the task denoted by the task as done
@@ -153,13 +97,13 @@ public class TaskManager {
     // Deletes the task at specified index
     private void deleteTaskAtIndex(int taskNumber) {
         final String taskStatusWithDescription = tasks.get(taskNumber).getStatusWithDescription();
-        PrintHelper.printLine();
-        PrintHelper.printWithIndentation(TASK_DELETED_MESSAGE);
-        PrintHelper.printWithIndentation(taskStatusWithDescription,7);
+        Ui.printLine();
+        Ui.printWithIndentation(TASK_DELETED_MESSAGE);
+        Ui.printWithIndentation(taskStatusWithDescription,7);
         tasks.remove(taskNumber);
-        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task"
+        Ui.printWithIndentation("Now you have " + tasks.size() + " task"
                 + (tasks.size() != 1 ? "s " : " ") + "in the list.");
-        PrintHelper.printLine();
+        Ui.printLine();
     }
 
 
@@ -170,42 +114,42 @@ public class TaskManager {
         } catch (DukeException invalidDeleteCommand) {
             invalidDeleteCommand.printExceptionMessage();
         } catch (NumberFormatException indexNotInteger) {
-            PrintHelper.printIndexNotIntegerAlert(DELETE_COMMAND);
+            Ui.printIndexNotIntegerAlert(DELETE_COMMAND);
         } catch (IndexOutOfBoundsException indexOutOfBounds) {
-            PrintHelper.printInvalidIndexAlert(DELETE_COMMAND);
+            Ui.printInvalidIndexAlert(DELETE_COMMAND);
         }
     }
 
     // Marks the task denoted by a valid task index as done and prints the corresponding message
     public void markTaskAndPrintMessage(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
-        PrintHelper.printLine();
-        PrintHelper.printWithIndentation(TASK_MARKED_MESSAGE);
-        PrintHelper.printWithIndentation(tasks.get(taskNumber).getStatusWithDescription(),7);
-        PrintHelper.printLine();
+        Ui.printLine();
+        Ui.printWithIndentation(TASK_MARKED_MESSAGE);
+        Ui.printWithIndentation(tasks.get(taskNumber).getStatusWithDescription(),7);
+        Ui.printLine();
     }
 
     // Lists all the tasks provided by user so far
     public void printListOfTasks() {
         boolean isEmpty = (tasks.size() == 0);
-        PrintHelper.printLine();
+        Ui.printLine();
         if (isEmpty) {
-            PrintHelper.printWithIndentation(LIST_EMPTY_MESSAGE);
+            Ui.printWithIndentation(LIST_EMPTY_MESSAGE);
         } else {
-            PrintHelper.printWithIndentation(LIST_TASKS_MESSAGE);
+            Ui.printWithIndentation(LIST_TASKS_MESSAGE);
             for (int i = 0; i < tasks.size(); i++) {
-                PrintHelper.printWithIndentation((i + 1) + ". " + tasks.get(i).getStatusWithDescription());
+                Ui.printWithIndentation((i + 1) + ". " + tasks.get(i).getStatusWithDescription());
             }
         }
-        PrintHelper.printLine();
+        Ui.printLine();
     }
 
     // Prints that the user has already marked the specified task as done previously
     public void printAsAlreadyDone(int index) {
-        PrintHelper.printLine();
-        PrintHelper.printWithIndentation(TASK_ALREADY_SET_ALERT);
-        PrintHelper.printWithIndentation(tasks.get(index).getStatusWithDescription(),7);
-        PrintHelper.printLine();
+        Ui.printLine();
+        Ui.printWithIndentation(TASK_ALREADY_SET_ALERT);
+        Ui.printWithIndentation(tasks.get(index).getStatusWithDescription(),7);
+        Ui.printLine();
     }
 
     // Instructs the task manager to add the Event task specified by the user
@@ -230,8 +174,8 @@ public class TaskManager {
 
     // Instructs the task manager to add the ToDo task specified by the user
     //  to the list if the correct format is used
-    public void addToDoTask(String[] commandSplit) throws DukeException {
-        if (commandSplit.length == 1) {
+    public void addToDoTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
+        if (isOneWordCommand) {
             throw new DukeException(ExceptionType.InvalidToDoDeclaration);
         }
         addTask(TaskType.ToDo, commandSplit[1]);
@@ -244,9 +188,9 @@ public class TaskManager {
         } catch (DukeException invalidDoneCommand) {
             invalidDoneCommand.printExceptionMessage();
         } catch (NumberFormatException indexNotInteger) {
-            PrintHelper.printIndexNotIntegerAlert(DONE_COMMAND);
+            Ui.printIndexNotIntegerAlert(DONE_COMMAND);
         } catch (IndexOutOfBoundsException indexOutOfBounds) {
-            PrintHelper.printInvalidIndexAlert(DONE_COMMAND);
+            Ui.printInvalidIndexAlert(DONE_COMMAND);
         }
     }
 
@@ -255,7 +199,7 @@ public class TaskManager {
         if (isCorrectFormat) {
             printListOfTasks();
         } else {
-            PrintHelper.printInvalidCommand();
+            Ui.printInvalidCommand();
         }
     }
 }

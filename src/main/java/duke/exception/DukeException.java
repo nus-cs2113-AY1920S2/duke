@@ -1,6 +1,6 @@
 package duke.exception;
 
-import duke.print.PrintHelper;
+import duke.ui.Ui;
 
 public class DukeException extends Exception {
     ExceptionType exceptionType;
@@ -12,28 +12,28 @@ public class DukeException extends Exception {
     public void printExceptionMessage() {
         switch (exceptionType) {
         case InvalidCommand:
-            PrintHelper.printInvalidCommand();
+            Ui.printInvalidCommand();
             break;
         case InvalidDoneCommand:
-            PrintHelper.printInvalidDoneFormat();
+            Ui.printInvalidDoneFormat();
             break;
         case InvalidDeleteCommand:
-            PrintHelper.printInvalidDeleteFormat();
+            Ui.printInvalidDeleteFormat();
             break;
         case InvalidToDoDeclaration:
-            PrintHelper.printInvalidToDoFormat();
+            Ui.printInvalidToDoFormat();
             break;
         case InvalidDeadlineDeclaration:
-            PrintHelper.printInvalidDeadlineFormat();
+            Ui.printInvalidDeadlineFormat();
             break;
         case InvalidEventDeclaration:
-            PrintHelper.printInvalidEventFormat();
+            Ui.printInvalidEventFormat();
             break;
         case EmptyCommand:
-            PrintHelper.printEmptyLineAlert();
+            Ui.printEmptyLineAlert();
             break;
         default:
-            PrintHelper.printWithIndentation("Execution Error!!!");
+            Ui.printWithIndentation("Execution Error!!!");
             break;
         }
     }

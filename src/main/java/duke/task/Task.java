@@ -2,15 +2,15 @@ package duke.task;
 
 public class Task {
 
-    public static final String TICK_SYMBOL = "/";
-    public static final String X_SYMBOL = " ";
+    public static final String SLASH = "/";
+    public static final String SINGLE_SPACE = " ";
 
     // Stores the description of the task
-    protected String description;
+    public String description;
     // Denotes whether the task is done or not done
-    protected boolean isDone;
+    public boolean isDone;
     // Used to denote type of task
-    protected char taskType;
+    public char taskType;
 
     // Constructor
     public Task(String description) {
@@ -19,9 +19,8 @@ public class Task {
     }
 
     // Returns the status icon as a string
-    // tick -> Task is done ;  X symbol -> Task isn't done ;
     public String getStatusIcon() {
-        return (isDone ? TICK_SYMBOL : X_SYMBOL);
+        return (isDone ? SLASH : SINGLE_SPACE);
     }
 
     // Returns description of the task

@@ -5,9 +5,10 @@ if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
 del ACTUAL.TXT
+del TaskList.txt
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\exception\*.java ..\src\main\java\duke\print\*.java ..\src\main\java\duke\task\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\exception\*.java ..\src\main\java\duke\task\*.java ..\src\main\java\duke\parser\*.java ..\src\main\java\duke\storage\*.java ..\src\main\java\duke\ui\*.java ..\src\main\java\duke\command\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
