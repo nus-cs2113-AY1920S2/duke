@@ -1,8 +1,10 @@
 1. [T] [v] read book
 2. [D] [x] return book (by: June 6th)
-3. [E] [x] project meeting (at: Aug 6th 2-4pm)
+3. [E] [v] project meeting (at: Aug 6th 2-4pm)
 4. [T] [v] join sports club
 5. [E] [x] hang out (at: Sat)
 6. [T] [v] workout
 7. [E] [x] exam (at: Fri)
 8. [T] [x] book shopping
+9. [T] [x] read book
+10. [E] [x] project meeting (at: Feb 12 2020)
