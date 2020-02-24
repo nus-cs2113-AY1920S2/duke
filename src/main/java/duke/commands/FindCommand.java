@@ -8,7 +8,7 @@ import static duke.ui.Messages.FIND_MESSAGE;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    public static final String FORMAT = "find <search words>";
+    public static final String FORMAT = "find <search word(s)>";
 
     private String searchWord;
 
@@ -18,7 +18,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        ArrayList<Integer> searchedTaskIndices = TaskList.find(searchWord);
+        ArrayList<Integer> searchedTaskIndices = TaskList.filter(searchWord);
         return new CommandResult(FIND_MESSAGE, true, searchedTaskIndices);
     }
 }

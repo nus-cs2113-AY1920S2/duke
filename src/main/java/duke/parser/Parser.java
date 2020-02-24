@@ -6,6 +6,7 @@ import duke.commands.AddToDoCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoCommand;
+import duke.commands.DueCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
@@ -20,13 +21,16 @@ import static duke.exception.ExceptionMessages.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DEADLINE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DELETE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DUE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_DATE_FILTER_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_SEARCH_WORD_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
+import static duke.format.DateTimeFormat.stringToDate;
 import static duke.format.DateTimeFormat.stringToDateTime;
 
 public class Parser {
@@ -71,6 +75,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return createFindCommand(parameters);
+
+        case DueCommand.COMMAND_WORD:
+            return createDueCommand(parameters);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -159,6 +166,33 @@ public class Parser {
             return new FindCommand(searchWord);
         } catch (MissingParameterException e) {
             return new InvalidCommand(MISSING_SEARCH_WORD_MESSAGE);
+        }
+    }
+
+    private Command createDueCommand(String parameters) {
+        try {
+            String dateFilter = extractDetails(parameters, null)[0];
+            return processDateFilter(dateFilter);
+        } catch (MissingParameterException e) {
+            return new InvalidCommand(MISSING_DATE_FILTER_MESSAGE);
+        } catch (ExcessParameterException e) {
+            return new InvalidCommand(INVALID_DUE_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidDateException e) {
+            return new InvalidCommand(INVALID_DATETIME_FORMAT_MESSAGE);
+        }
+    }
+
+    private Command processDateFilter(String dateFilter) throws ExcessParameterException, DateTimeFormat.InvalidDateException {
+        String[] dateFilterData = dateFilter.split("\\s+");
+
+        if (dateFilterData.length > 2) {
+            throw new ExcessParameterException();
+        }
+
+        if (dateFilterData.length == 2) {
+            return new DueCommand(stringToDate(dateFilterData[1]), dateFilterData[0]);
+        } else {
+            return new DueCommand(stringToDate(dateFilterData[0]));
         }
     }
 
