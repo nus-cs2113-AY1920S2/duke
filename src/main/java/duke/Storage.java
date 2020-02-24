@@ -8,9 +8,19 @@ import duke.task.Todo;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Handles the loading of tasks from the file and saving of tasks to the file
+ */
 public class Storage {
+
+    /** Default file path used if the user doesn't provide the file name. */
     public static final String PATH = "duke.txt";
 
+    /**
+     * Saves the existing tasks in the TaskList to the specified file
+     * @param tasks
+     * @throws IOException
+     */
     public static void saveFile(TaskList tasks) throws IOException {
         File f = new File(PATH);
         FileOutputStream fos = new FileOutputStream(f);
@@ -42,6 +52,11 @@ public class Storage {
         fos.close();
     }
 
+    /**
+     * Inserts the tasks in the file into the TaskList
+     * @param tasks
+     * @throws IOException
+     */
     public static void insertFileContents(TaskList tasks) throws IOException {
         File f = new File(PATH); // create a File for the given file path
 

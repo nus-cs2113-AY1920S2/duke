@@ -1,9 +1,11 @@
 package duke;
 
 import duke.command.*;
-
 import java.util.Scanner;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     private static final String LIST = "list";
     private static final String TODO = "todo";
@@ -20,6 +22,10 @@ public class Parser {
         input = new Scanner(System.in);
     }
 
+    /**
+     * Parses user input into command for execution.
+     * @return the command based on the user input
+     */
     public Command getCommand() {
         Command command = null;
         String line;

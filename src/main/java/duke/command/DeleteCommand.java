@@ -3,6 +3,9 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Deletes a task from the task list based on the user specified index.
+ */
 public class DeleteCommand extends Command {
     public static final String BORDER = "____________________________________________________________\n";
 

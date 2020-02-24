@@ -7,6 +7,9 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.Ui;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
     String command;
     public static final int TODO = 5;
@@ -20,6 +23,10 @@ public class AddCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Adds task to the task list based on task type.
+     * @param tasks
+     */
     @Override
     public void executeCommand(TaskList tasks) {
         Task task;

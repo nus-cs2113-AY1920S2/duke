@@ -4,6 +4,10 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.command.ExitCommand;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
 
     private static TaskList tasks = new TaskList();

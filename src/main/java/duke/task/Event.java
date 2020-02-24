@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.task.Task;
 
+/**
+ * Represents an event in the task list
+ */
 public class Event extends Task {
 
     protected String at;

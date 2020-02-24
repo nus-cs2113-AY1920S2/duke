@@ -3,6 +3,9 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Marks a task from the task list as completed, based on the user specified index.
+ */
 public class DoneCommand extends Command {
     public static final String BORDER = "____________________________________________________________\n";
 

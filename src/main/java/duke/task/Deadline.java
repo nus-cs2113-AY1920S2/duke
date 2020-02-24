@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.task.Task;
 
+/**
+ * Represents a deadline in the task list
+ */
 public class Deadline extends Task {
 
     protected String by;

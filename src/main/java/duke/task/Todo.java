@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.task.Task;
 
+/**
+ * Represents an item to do in the task list
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
