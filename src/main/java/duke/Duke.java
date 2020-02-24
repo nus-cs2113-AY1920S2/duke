@@ -88,8 +88,11 @@ public class Duke {
             } else if (commands[0].equalsIgnoreCase("delete")) {
                 try {
                     manager.delete(Integer.parseInt(commands[1]));
+                    hasChanges = true;
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     printFormat(INVALID_DONE + CORRECT_FORMAT + DONE_DESCRIPTION.replace("done", "delete"));
+                } catch (IllegalIndexException e) {
+
                 }
             } else {
                 printFormat(INVALID_COMMAND);
