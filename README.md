@@ -1,4 +1,4 @@
-# JAN v0.1
+# JAN v1.0
 
 Jan is a task management bot that can remember all the tasks that you tell it. This user guide will
 help you get started and find out how you can play with it.
