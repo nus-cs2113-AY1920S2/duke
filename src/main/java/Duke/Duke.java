@@ -32,6 +32,7 @@ public class Duke {
         while (true) {
             String input = sc.nextLine().trim();
             parser.updateInput(input);
+            userInterface.printLine();
             try {
                 if (parser.isBye()) {
                     userInterface.printLeavingMessage();
