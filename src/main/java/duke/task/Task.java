@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Structure for a task.
+ */
+
 public class Task {
     public int taskID;
     protected String description;
@@ -11,10 +15,14 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /** Mark the task as done. **/
     public void setStatus () {
         this.isDone = true; // mark as done
     }
 
+    /**Gets the status icon of task.
+     * @return status icon.
+     */
     public String getStatusIcon () {
         return (isDone ? "[v]" : "[x]"); //return tick or X symbols
     }

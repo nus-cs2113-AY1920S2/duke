@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Structure for a deadline task.
+ */
+
 public class Deadline extends Task {
     private String time;
     public Deadline (int taskID, String description, boolean isDone, String time) {

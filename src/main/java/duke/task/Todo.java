@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Structure for a todo task.
+ */
+
 public class Todo extends Task {
     public Todo (int taskID, String description, boolean isDone) {
         super (taskID, description, isDone);

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Structure for an event task.
+ */
+
 public class Event extends Task {
     private String time;
     public Event (int taskID, String description, boolean isDone, String time) {

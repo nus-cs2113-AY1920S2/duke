@@ -1,6 +1,10 @@
 package duke.exception;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Find exceptions when Duke is running.
+ */
+
 public class FindDukeException extends Throwable {
     private String cmd;
     private String[] words;
@@ -12,12 +16,20 @@ public class FindDukeException extends Throwable {
         this.isWrongLength = words.length <= 1;
     }
 
+    /**
+     * Detect exception when todo command be processed.
+     * @throws DukeException if todo's task is missing.
+     */
     public void toDoException () throws DukeException {
         if (isWrongLength) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
+    /**
+     * Detect exception when deadline command be processed.
+     * @throws DukeException if deadline's task or time is missing.
+     */
     public void deadlineException () throws DukeException {
         boolean isMissingTime = (!cmd.contains("/by"));
         if (isWrongLength) {
@@ -27,6 +39,10 @@ public class FindDukeException extends Throwable {
         }
     }
 
+    /**
+     * Detect exception when event command be processed.
+     * @throws DukeException if event's task or time is missing.
+     */
     public void eventException () throws DukeException {
         boolean isMissingTime = (!cmd.contains("/at"));
         if (isWrongLength) {
@@ -36,6 +52,10 @@ public class FindDukeException extends Throwable {
         }
     }
 
+    /**
+     * Detect exception when command type can't be defined.
+     * @throws DukeException
+     */
     public void undefinedTypeException () throws DukeException{
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means..");
     }

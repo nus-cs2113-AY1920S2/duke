@@ -9,19 +9,24 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import duke.task.Todo;
 import duke.task.Task;
+import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.exception.DukeException;
 import duke.exception.FindDukeException;
+
+/**
+ * Duke application.
+ * Duke class includes user interface and some functions to be manipulated.
+ */
 
 public class Duke {
     public static final String FILE_PATH = "data/duke.txt";
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static final int charLengthToSkip = 5;
 
-    // let statement be printed in center
+    /** Let the statement be printed in center. **/
     public static void printInCenter (@NotNull String str) {
         int left = (60 - str.length()) / 2;
         int right = 60 - left - str.length();
@@ -31,6 +36,7 @@ public class Duke {
         System.out.println(buff);
     }
 
+    /** Show a ASCII code message to user. **/
     public static void greet () {
         System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("  _   _    _   _ U _____ u             ");
@@ -47,32 +53,14 @@ public class Duke {
         System.out.println();
     }
 
-    public static void echo (String cmd) {
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
-        printInCenter(cmd);
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
-        System.out.println("        What can I do for you? Type 'bye' to exit.");
-        System.out.println();
-    }
-
-    public static void add (String cmd) {
-        Task todo = new Task(tasks.size(), cmd, false);
-        tasks.add(todo);
-        System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
-        printInCenter("Added: " + cmd);
-        System.out.println("        ╚═══════════════════════════════════════════════════════════╝");
-        System.out.println("        What can I do for you? Type 'bye' to exit.");
-        System.out.println();
-    }
-
+    /** Delete the task by given a task number. **/
     public static void delete (int taskNumber) {
         Task task = tasks.get(taskNumber);
         tasks.remove(task);
 
         Iterator itr = tasks.iterator();
         int counter = 0;
-        while (itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Task t = (Task)itr.next();
             t.taskID = counter;
             counter++;
@@ -87,6 +75,7 @@ public class Duke {
         System.out.println();
     }
 
+    /** Print a task that be added into task list. **/
     private static void printTask (@NotNull Task t) {
         System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("Got it. I've added this task: ");
@@ -97,6 +86,7 @@ public class Duke {
         System.out.println();
     }
 
+    /** Deal with a todo command and add it to the list. **/
     public static void todo (String cmd) throws DukeException {
         FindDukeException findTodoException = new FindDukeException(cmd);
         findTodoException.toDoException();
@@ -108,6 +98,7 @@ public class Duke {
         printTask(todo);
     }
 
+    /** Deal with an event command and add it to the list. **/
     public static void event (String cmd) throws DukeException {
         FindDukeException findEventException = new FindDukeException(cmd);
         findEventException.eventException();
@@ -121,6 +112,7 @@ public class Duke {
         printTask(event);
     }
 
+    /** Deal with a deadline command and add it to the list. **/
     public static void deadline (String cmd) throws DukeException {
         FindDukeException findDeadlineException = new FindDukeException(cmd);
         findDeadlineException.deadlineException();
@@ -134,6 +126,7 @@ public class Duke {
         printTask(deadline);
     }
 
+    /** Mark a task as done. **/
     public static void done (int taskNumber) {
         tasks.get(taskNumber).setStatus();
         System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
@@ -144,6 +137,7 @@ public class Duke {
         System.out.println();
     }
 
+    /** List all tasks in the task list. **/
     public static void list () {
         System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("Here are the tasks in your list:");
@@ -158,6 +152,7 @@ public class Duke {
         System.out.println();
     }
 
+    /** Save each task into a file. **/
     public static void save () {
         try {
             for (Task ignored : tasks) {
@@ -170,6 +165,7 @@ public class Duke {
         }
     }
 
+    /** Called by save() function and do some implementation.**/
     private static void writeToFile() throws IOException {
         FileWriter fw = new FileWriter(Duke.FILE_PATH);
         for (Task task : tasks) {
@@ -178,6 +174,7 @@ public class Duke {
         fw.close();
     }
 
+    /** Check whether the file exists.**/
     public static void load() {
         File duke = new File("./data/duke.txt");
         if (!duke.exists()) {
@@ -197,6 +194,7 @@ public class Duke {
         }
     }
 
+    /** Load the file into Duke.**/
     public static void loadFile() throws FileNotFoundException {
         File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
@@ -209,6 +207,7 @@ public class Duke {
         }
     }
 
+    /** Add a task in the file into Duke.**/
     private static void addLoadedTask (@NotNull String cmd, ArrayList<Task> tasks) {
         String[] words = cmd.split(" ");
         String taskType = words[0];
@@ -249,6 +248,7 @@ public class Duke {
         }
     }
 
+    /** Exit smoothly from Duke.**/
     public static void exit () {
         System.out.println("        ╔═══════════════════════════════════════════════════════════╗");
         printInCenter("Bye! See you next time. :)");
@@ -256,6 +256,7 @@ public class Duke {
         System.exit(0);
     }
 
+    /** Driver function to Duke application. **/
     public static void main (String[] args) {
         int spacePosition;
         int taskNumber;
