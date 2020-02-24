@@ -1,5 +1,5 @@
 package duke.excpetions;
 
-public abstract class DukeException extends  Throwable {
+public  class DukeException extends  Throwable {
 
 }

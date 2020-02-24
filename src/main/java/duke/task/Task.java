@@ -2,7 +2,7 @@ package duke.task;
 
 public abstract class Task {
     public String description;
-    protected boolean isDone;
+    private boolean isDone;
 
     public Task(String description){
         this.description=description;
@@ -19,4 +19,8 @@ public abstract class Task {
 
     @Override
     abstract public String toString();
+
+    public void setDone() {
+        isDone = true;
+    }
 }
