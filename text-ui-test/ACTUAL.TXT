@@ -2,6 +2,8 @@ ____________________________________________________________
 Hello! I'm Duke
 What can i do for you?
 ____________________________________________________________
+Saved Data (if any) have been preloaded below:
+____________________________________________________________
 Enter a command: Command entered: help
 ____________________________________________________________
 help: Shows the program command line interface instructions
@@ -23,11 +25,11 @@ event: Adds a task to the list.
 	Example: event project meeting /at Mon 2-4pm
 
 done: Marks the task done in the list.
-	Parameter(s): NUMBER
+	Parameter(s): INDEX NUMBER
 	Example: done 1
 
 delete: Deletes the task from the list.
-	Parameter(s): NUMBER
+	Parameter(s): INDEX NUMBER
 	Example: delete 1
 
 bye: Exits the program.
@@ -99,10 +101,6 @@ Here are the tasks in your list:
 1.[T][✓] read book
 2.[D][✓] return book (by: Sunday)
 3.[E][✓] project meeting (at: Mon 2-4pm)
-____________________________________________________________
-Enter a command: Command entered: blah
-____________________________________________________________
-I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 Enter a command: Command entered: todo
 ____________________________________________________________
@@ -190,5 +188,6 @@ ____________________________________________________________
 ____________________________________________________________
 Enter a command: Command entered: bye
 ____________________________________________________________
+You are Exiting Duke at your Request :)
 	Bye. Hope to see you again soon!
 ____________________________________________________________
