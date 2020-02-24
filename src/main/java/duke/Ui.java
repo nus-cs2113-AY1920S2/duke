@@ -36,6 +36,21 @@ public class Ui {
         System.out.println("Now you have " + (tasks.getSize()) + " tasks in your list!\n" + BORDER);
     }
 
+    public static void printFindList(TaskList tasks, String keyword) {
+        Boolean found = false;
+        System.out.println(BORDER + "Here are the matching tasks in your list:\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            if (tasks.get(i).description.contains(keyword)) {
+                System.out.println(i+1 + ". " + tasks.get(i).toString());
+                found = true;
+            }
+        }
+        if (found.equals(false)) {
+            System.out.println("There are no matching task found!\n");
+        }
+        System.out.println(BORDER);
+    }
+
     public static void printByeMessage() {
         System.out.println(BORDER + "Bye! Hope to see you again soon!\n" + BORDER);
     }
