@@ -53,7 +53,7 @@ Duke save the tasks in the hard disk automatically whenever the task list change
 ### 2.7. Load
 Load the data automatically from the hard disk when Duke starts up.
 
-## Usage
+## 3. Usage
 ### Todo
 - Format: ```todo TASK```
 - Example of usage: ```todo read book```
