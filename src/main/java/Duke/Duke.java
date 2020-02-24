@@ -16,10 +16,8 @@ public class Duke {
 
         File f = new File(FILEPATH);
 
-        TaskList taskList = new TaskList().invoke();
-        ArrayList<Task> taskArrayList = taskList.getTaskArrayList();
-        ArrayList<Task> lastShownList = taskList.getLastShownList();
-        int taskListSize = taskList.getTaskListSize();
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        int taskListSize = 0;
 
         try {
             taskListSize = Storage.loadFileContents(FILEPATH, taskArrayList);
@@ -27,6 +25,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("No saved file available");
         }
+        ArrayList<Task> lastShownList = (ArrayList<Task>) taskArrayList.clone();
 
         Scanner scanner = new Scanner(System.in);
 
