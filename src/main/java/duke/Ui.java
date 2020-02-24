@@ -1,8 +1,14 @@
 package duke;
 
+/**
+ * Text UI of the application.
+ */
 public class Ui {
     public static final String BORDER = "____________________________________________________________ \n";
 
+    /**
+     * Generates and prints the welcome message upon the start of the application.
+     */
     public static void printWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,6 +18,10 @@ public class Ui {
         System.out.println("Hello from\n" + logo + BORDER + "Hello! I'm Duke!\n" + "What can I do for you?\n" + BORDER);
     }
 
+    /**
+     * Shows a list of tasks to the user, formatted as an indexed list.
+     * @param tasks
+     */
     public static void printList(TaskList tasks) {
         System.out.println(BORDER + "Here are the tasks in your list:");
         for (int i = 0; i < tasks.getSize(); i++){

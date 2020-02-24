@@ -1,12 +1,11 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
+/**
+ * Represents a deadline in the task list
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

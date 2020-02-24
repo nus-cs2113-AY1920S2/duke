@@ -3,6 +3,9 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Terminates the program.
+ */
 public class ExitCommand extends Command {
     public ExitCommand (String details) {
         super(details);
