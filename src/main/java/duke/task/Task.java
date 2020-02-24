@@ -2,8 +2,8 @@ package duke.task;
 
 public class Task {
 
-    public static final String TICK_SYMBOL = "\u2713";
-    public static final String X_SYMBOL = "\u2718";
+    public static final String TICK_SYMBOL = "/";
+    public static final String X_SYMBOL = " ";
 
     // Stores the description of the task
     protected String description;
@@ -35,12 +35,12 @@ public class Task {
     }
 
     // Marks the task as done
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
     // Returns the task's status along with it's description as a string
-    public String getStatusWithDescription(){
+    public String getStatusWithDescription() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 

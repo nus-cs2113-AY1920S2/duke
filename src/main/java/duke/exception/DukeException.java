@@ -5,12 +5,12 @@ import duke.print.PrintHelper;
 public class DukeException extends Exception {
     ExceptionType exceptionType;
 
-    public DukeException(ExceptionType exceptionType){
+    public DukeException(ExceptionType exceptionType) {
         this.exceptionType = exceptionType;
     }
 
-    public void printExceptionMessage(){
-        switch (exceptionType){
+    public void printExceptionMessage() {
+        switch (exceptionType) {
         case InvalidCommand:
             PrintHelper.printInvalidCommand();
             break;
@@ -31,6 +31,9 @@ public class DukeException extends Exception {
             break;
         case EmptyCommand:
             PrintHelper.printEmptyLineAlert();
+            break;
+        default:
+            PrintHelper.printWithIndentation("Execution Error!!!");
             break;
         }
     }

@@ -1,12 +1,12 @@
 package duke.task;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     // Stores information about deadline of task
     private String by;
 
     // Overloaded Constructor
-    public Deadline(String descriptionWithDeadline){
+    public Deadline(String descriptionWithDeadline) {
         super(getDescription(descriptionWithDeadline));
         taskType = 'D';
         this.by = getDeadline(descriptionWithDeadline);
@@ -25,18 +25,18 @@ public class Deadline extends Task{
     }
 
     // Returns the deadline in required format
-    public String getBy(){
+    public String getBy() {
         return "(by: " + by + ")";
     }
 
     // Returns the deadline
-    public String getByWithoutBraces(){
+    public String getByWithoutBraces() {
         return by;
     }
 
     // Returns the task's type and status along with it's description as a string
     @Override
-    public String getStatusWithDescription(){
+    public String getStatusWithDescription() {
         return "[" + this.taskType + "]" + super.getStatusWithDescription() + getBy();
     }
 }

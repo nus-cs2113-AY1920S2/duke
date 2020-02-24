@@ -6,7 +6,7 @@ public class Event extends Task {
     private String period;
 
     // Overloaded Constructor
-    public Event(String descriptionWithPeriod){
+    public Event(String descriptionWithPeriod) {
         super(getDescription(descriptionWithPeriod));
         taskType = 'E';
         this.period = getPeriod(descriptionWithPeriod);
@@ -25,17 +25,18 @@ public class Event extends Task {
     }
 
     // Returns the period in required format
-    public String getPeriod(){
+    public String getPeriod() {
         return "(at: " + period + ")";
     }
 
     // Returns the period
-    public String getPeriodWithoutBraces(){
+    public String getPeriodWithoutBraces() {
         return period;
     }
+
     // Returns the task's type and status along with it's description as a string
     @Override
-    public String getStatusWithDescription(){
+    public String getStatusWithDescription() {
         return "[" + this.taskType + "]" + super.getStatusWithDescription() + getPeriod();
     }
 }

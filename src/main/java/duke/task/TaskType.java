@@ -1,6 +1,6 @@
 package duke.task;
 
 // Used to denote type of task
-public enum TaskType{
+public enum TaskType {
     ToDo, Deadline, Event
 }

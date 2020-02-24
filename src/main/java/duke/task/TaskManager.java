@@ -32,14 +32,14 @@ public class TaskManager {
     public static void loadTasksFromFile() throws FileNotFoundException {
         File f = new File(FILE_PATH);
         Scanner s = new Scanner(f);
-        while(s.hasNext()){
+        while (s.hasNext()) {
             String taskDescription = s.nextLine();
             String[] splitDescription = taskDescription.split("#",3);
             char taskType = splitDescription[0].charAt(0);
             boolean isDone = Boolean.parseBoolean(splitDescription[1].trim());
             String description = splitDescription[2].trim();
 
-            switch (taskType){
+            switch (taskType) {
             case 'T':
                 ToDo toDo = new ToDo(description);
                 toDo.setDone(isDone);
@@ -64,19 +64,21 @@ public class TaskManager {
     // Saves the tasks for future usage
     public static void storeTasksToFile() throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
-        for(Task task: tasks){
-            switch(task.taskType){
+        for (Task task: tasks) {
+            switch (task.taskType) {
             case 'T':
                 ToDo toDo = (ToDo) task;
                 fw.write("T # " + toDo.isDone + " # " + toDo.description + System.lineSeparator());
                 break;
             case 'D':
                 Deadline deadline = (Deadline) task;
-                fw.write("D # " + deadline.isDone + " # " + deadline.description + "/by " + deadline.getByWithoutBraces() + System.lineSeparator());
+                fw.write("D # " + deadline.isDone + " # " + deadline.description + "/by "
+                        + deadline.getByWithoutBraces() + System.lineSeparator());
                 break;
             case 'E':
                 Event event = (Event) task;
-                fw.write("E # " + event.isDone + " # " + event.description + "/at " + event.getPeriodWithoutBraces() + System.lineSeparator());
+                fw.write("E # " + event.isDone + " # " + event.description + "/at "
+                        + event.getPeriodWithoutBraces() + System.lineSeparator());
                 break;
             default:
                 // Add Exception handling
@@ -86,7 +88,7 @@ public class TaskManager {
     }
 
     // Adds a new task with the descriptionWithDetails provided by the user
-    public void addTask(TaskType taskType, String descriptionWithDetails){
+    public void addTask(TaskType taskType, String descriptionWithDetails) {
         switch (taskType) {
         case ToDo:
             tasks.add(new ToDo(descriptionWithDetails));
@@ -97,6 +99,9 @@ public class TaskManager {
         case Event:
             tasks.add(new Event(descriptionWithDetails));
             break;
+        default:
+            PrintHelper.printWithIndentation("Error!!!");
+            break;
         }
         printLatestTaskAndTotalNumberOfTasks();
     }
@@ -106,16 +111,17 @@ public class TaskManager {
     private void printLatestTaskAndTotalNumberOfTasks() {
         PrintHelper.printLine();
         PrintHelper.printWithIndentation(TASK_ADDED_MESSAGE);
-        PrintHelper.printWithIndentation(tasks.get(tasks.size()-1).getStatusWithDescription(),7);
-        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task" + (tasks.size() != 1?"s ":" ") + "in the list.");
+        PrintHelper.printWithIndentation(tasks.get(tasks.size() - 1).getStatusWithDescription(),7);
+        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task"
+                + (tasks.size() != 1 ? "s " : " ") + "in the list.");
         PrintHelper.printLine();
     }
 
     // Marks the task denoted by the task as done
     // Also handles exceptions in case the index provided isn't valid
-    public void markTask (String[] commandSplit) throws DukeException {
+    public void markTask(String[] commandSplit) throws DukeException {
         int taskNumber;
-        if (commandSplit.length != 2){
+        if (commandSplit.length != 2) {
             throw new DukeException(ExceptionType.InvalidDoneCommand);
         }
         String taskIndex = commandSplit[1];
@@ -125,7 +131,7 @@ public class TaskManager {
         if (tasks.get(taskNumber).isDone) {
             printAsAlreadyDone(taskNumber);
         } else {
-            markTaskAsDone(taskNumber);
+            markTaskAndPrintMessage(taskNumber);
         }
     }
 
@@ -150,26 +156,27 @@ public class TaskManager {
         PrintHelper.printWithIndentation(TASK_DELETED_MESSAGE);
         PrintHelper.printWithIndentation(taskStatusWithDescription,7);
         tasks.remove(taskNumber);
-        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task" + (tasks.size() != 1?"s ":" ") + "in the list.");
+        PrintHelper.printWithIndentation("Now you have " + tasks.size() + " task"
+                + (tasks.size() != 1 ? "s " : " ") + "in the list.");
         PrintHelper.printLine();
     }
 
 
     // Instructs the task manager to delete the task if the correct format is used
     public void deleteTask(String[] commandSplit) {
-        try{
+        try {
             deleteTaskFromList(commandSplit);
         } catch (DukeException invalidDeleteCommand) {
             invalidDeleteCommand.printExceptionMessage();
         } catch (NumberFormatException indexNotInteger) {
             PrintHelper.printIndexNotIntegerAlert(DELETE_COMMAND);
-        } catch (IndexOutOfBoundsException indexOutOfBounds){
+        } catch (IndexOutOfBoundsException indexOutOfBounds) {
             PrintHelper.printInvalidIndexAlert(DELETE_COMMAND);
         }
     }
 
     // Marks the task denoted by a valid task index as done and prints the corresponding message
-    public void markTaskAsDone(int taskNumber){
+    public void markTaskAndPrintMessage(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
         PrintHelper.printLine();
         PrintHelper.printWithIndentation(TASK_MARKED_MESSAGE);
@@ -178,7 +185,7 @@ public class TaskManager {
     }
 
     // Lists all the tasks provided by user so far
-    public void listTasks(){
+    public void printListOfTasks() {
         boolean isEmpty = (tasks.size() == 0);
         PrintHelper.printLine();
         if (isEmpty) {
@@ -193,7 +200,7 @@ public class TaskManager {
     }
 
     // Prints that the user has already marked the specified task as done previously
-    public void printAsAlreadyDone(int index){
+    public void printAsAlreadyDone(int index) {
         PrintHelper.printLine();
         PrintHelper.printWithIndentation(TASK_ALREADY_SET_ALERT);
         PrintHelper.printWithIndentation(tasks.get(index).getStatusWithDescription(),7);
@@ -215,7 +222,7 @@ public class TaskManager {
     public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(DEADLINE_SPECIFIER);
         if (!isCorrectFormat) {
-           throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
+            throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
         }
         addTask(TaskType.Deadline, commandSplit[1]);
     }
@@ -223,7 +230,7 @@ public class TaskManager {
     // Instructs the task manager to add the ToDo task specified by the user
     //  to the list if the correct format is used
     public void addToDoTask(String[] commandSplit) throws DukeException {
-        if (commandSplit.length == 1){
+        if (commandSplit.length == 1) {
             throw new DukeException(ExceptionType.InvalidToDoDeclaration);
         }
         addTask(TaskType.ToDo, commandSplit[1]);
@@ -231,13 +238,13 @@ public class TaskManager {
 
     // Instructs the task manager to mark the task done if the correct format is used
     public void markTaskAsDone(String[] commandSplit) {
-        try{
+        try {
             markTask(commandSplit);
         } catch (DukeException invalidDoneCommand) {
             invalidDoneCommand.printExceptionMessage();
         } catch (NumberFormatException indexNotInteger) {
             PrintHelper.printIndexNotIntegerAlert(DONE_COMMAND);
-        } catch (IndexOutOfBoundsException indexOutOfBounds){
+        } catch (IndexOutOfBoundsException indexOutOfBounds) {
             PrintHelper.printInvalidIndexAlert(DONE_COMMAND);
         }
     }
@@ -245,7 +252,7 @@ public class TaskManager {
     // Instructs the task manager to list the tasks if the correct format is used
     public void listTasks(boolean isCorrectFormat) {
         if (isCorrectFormat) {
-            listTasks();
+            printListOfTasks();
         } else {
             PrintHelper.printInvalidCommand();
         }
