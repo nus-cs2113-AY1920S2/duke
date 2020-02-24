@@ -15,7 +15,8 @@ public class Utils {
         String DELETE = "delete";
         String BYE = "bye";
         String CLEAR = "clear";
-        if (type.equals(DONE) || type.equals(TODO) || type.equals(DEADLINE)
+        String FIND = "find";
+        if (type.equals(DONE) || type.equals(TODO) || type.equals(DEADLINE) || type.equals(FIND)
                 || type.equals(EVENT) || type.equals(LISTE) || type.equals(DELETE) || type.equals(BYE) || type.equals(CLEAR)){
             return true;
         }
