@@ -56,6 +56,8 @@ public class Ui {
         System.out.println("Try using the following commands:\n"
                 + "list                             -- to get a list of all the existing tasks\n"
                 + "done [item number]               -- mark task as completed\n"
+                + "delete [item number]             -- delete an existing task\n"
+                + "find [keyword]                   -- find tasks that contains the keyword\n"
                 + "todo [item]                      -- add new todo task\n"
                 + "deadline [item] /by [date][time] -- add new deadline task\n"
                 + "event [item] /at [date][time]    -- add new event task\n"
