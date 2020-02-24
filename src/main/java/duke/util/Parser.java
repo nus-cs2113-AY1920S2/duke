@@ -61,12 +61,13 @@ public class Parser {
         case DEADLINE_COMMAND_SHORTCUT:
             try {
                 String taskDescriptions = extractTaskDescription(afterCommand, DEADLINE_TIME_DELIMITER);
-                String taskDate = extractTaskDate(afterCommand, DEADLINE_TIME_DELIMITER);
+                String taskDateString = extractTaskDate(afterCommand, DEADLINE_TIME_DELIMITER);
+                LocalDate taskDate = parseStringToDate(taskDateString);
                 return new DeadlineCommand(taskDescriptions, taskDate);
             } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
-            } catch (DukeNullDateException e) {
-                throw new DukeNullDateException();
+            } catch (DukeDateFormatException e) {
+                throw new DukeDateFormatException();
             } catch (DukeException e) {
                 throw new DukeException(DEADLINE_FORMAT_ERROR_MESSAGE);
             }
@@ -74,12 +75,13 @@ public class Parser {
         case EVENT_COMMAND_SHORTCUT:
             try {
                 String taskDescriptions = extractTaskDescription(afterCommand, EVENT_TIME_DELIMITER);
-                String taskDate = extractTaskDate(afterCommand, EVENT_TIME_DELIMITER);
+                String taskDateString = extractTaskDate(afterCommand, EVENT_TIME_DELIMITER);
+                LocalDate taskDate = parseStringToDate(taskDateString);
                 return new EventCommand(taskDescriptions, taskDate);
             } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
-            } catch (DukeNullDateException e) {
-                throw new DukeNullDateException();
+            } catch (DateTimeParseException e) {
+                throw new DukeDateFormatException();
             } catch (DukeException e) {
                 throw new DukeException(EVENT_FORMAT_ERROR_MESSAGE);
             }
@@ -133,7 +135,7 @@ public class Parser {
         return taskInfo.substring(taskTimeIndex).trim();
     }
 
-    private static LocalDate parseStringToDate(String dateString) throws DukeException {
+    private static LocalDate parseStringToDate(String dateString) throws DukeDateFormatException {
         try {
             LocalDate date = LocalDate.parse(dateString);
             return date;

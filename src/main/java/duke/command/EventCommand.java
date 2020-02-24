@@ -6,11 +6,13 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
+import java.time.LocalDate;
+
 public class EventCommand implements Command{
     private String taskDescription;
-    private String atDate;
+    private LocalDate atDate;
 
-    public EventCommand(String taskDescription, String atDate) {
+    public EventCommand(String taskDescription, LocalDate atDate) {
         this.taskDescription = taskDescription;
         this.atDate = atDate;
     }

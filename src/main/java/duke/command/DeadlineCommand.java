@@ -6,11 +6,13 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
+import java.time.LocalDate;
+
 public class DeadlineCommand implements Command {
     private String taskDescription;
-    private String byDate;
+    private LocalDate byDate;
 
-    public DeadlineCommand(String taskDescription, String byDate) {
+    public DeadlineCommand(String taskDescription, LocalDate byDate) {
         this.taskDescription = taskDescription;
         this.byDate = byDate;
     }
