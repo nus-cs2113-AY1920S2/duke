@@ -24,20 +24,18 @@ public class Duke {
                 command = getCommand();
                 executeCommand(command);
             } catch (InvalidCommandException e) {
-                System.out.print("\n" + FOUR_SPACE_INDENT);
-                System.out.println("Sorry, me don't know what that means :-(");
+                System.out.print("\n");
+                System.out.println(FOUR_SPACE_INDENT + "Sorry, me don't know what that means :-(");
                 if (e.getMessage() != null) {
                     System.out.print(FOUR_SPACE_INDENT);
                     System.out.println(e.getMessage());
                 }
             } catch (NumberFormatException e) {
-                System.out.print("\n" + FOUR_SPACE_INDENT);
-                System.out.println("Sorry, me don't know what that means :-(");
-                System.out.print(FOUR_SPACE_INDENT);
-                System.out.println("Format: \"done <task index>\"");
+                System.out.print("\n");
+                System.out.println(FOUR_SPACE_INDENT + "Index must be an integer, like \"1\", but not \"one\".");
             } catch (TaskIndexOutOfBoundsException e) {
-                System.out.print("\n" + FOUR_SPACE_INDENT);
-                System.out.println("I need a valid task index!");
+                System.out.print("\n");
+                System.out.println(FOUR_SPACE_INDENT + "That index is outta range!");
             }
         }
     }
@@ -51,6 +49,8 @@ public class Duke {
             listTasks();
         } else if (commandSubstrings[0].equals("done")) {
             checkOffTask();
+        } else if (commandSubstrings[0].equals("delete")) {
+            deleteTask();
         } else if (commandSubstrings[0].equals("todo")) {
             addTodo(command.substring(5).trim());
         } else if (commandSubstrings[0].equals("deadline")) {
@@ -58,6 +58,14 @@ public class Duke {
         } else if (commandSubstrings[0].equals("event")) {
             addEvent(command.substring(6));
         }
+    }
+
+    private static void deleteTask() {
+        System.out.print("\n");
+        System.out.println(FOUR_SPACE_INDENT + "Noted. I've removed this task:");
+        System.out.println(SIX_SPACE_INDENT + tasks.get(taskIndex - 1).toString());
+        tasks.remove(taskIndex - 1);
+        System.out.println(FOUR_SPACE_INDENT + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     private static void addEvent(String info) {
@@ -118,7 +126,8 @@ public class Duke {
                 throw new InvalidCommandException();
             }
         } else if (!inputSubstrings[0].equals("done") && !inputSubstrings[0].equals("todo") &&
-                !inputSubstrings[0].equals("deadline") && !inputSubstrings[0].equals("event")) {
+                !inputSubstrings[0].equals("deadline") && !inputSubstrings[0].equals("event") &&
+                !inputSubstrings[0].equals("delete")) {
             throw new InvalidCommandException();
         } else if (inputSubstrings[0].equals("done")) {
             if (inputSubstrings.length > 2) {
@@ -128,6 +137,15 @@ public class Duke {
                if (taskIndex < 1 || taskIndex > tasks.size()) {
                    throw new TaskIndexOutOfBoundsException();
                }
+            }
+        } else if (inputSubstrings[0].equals("delete")) {
+            if (inputSubstrings.length > 2) {
+                throw new InvalidCommandException("Format: \"delete <task index>\"");
+            } else {
+                taskIndex = Integer.parseInt(inputSubstrings[1]);
+                if (taskIndex < 1 || taskIndex > tasks.size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
             }
         } else if (inputSubstrings[0].equals("deadline")) {
             if (inputSubstrings.length < 4) {
