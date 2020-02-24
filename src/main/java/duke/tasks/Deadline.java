@@ -1,13 +1,15 @@
 package duke.tasks;
 
 import duke.DukeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a deadline task with a task description and
  * a deadline field.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor to create a deadline task.
@@ -23,12 +25,14 @@ public class Deadline extends Task {
         {
             throw new DukeException();
         }
-        this.by = by.trim();
+        by = by.trim();
+        this.by = LocalDate.parse(by);
     }
 
-    public String getBy() {
+    public LocalDate getDate() {
         return this.by;
     }
+
 
     @Override
     public String saveFormat() {
@@ -37,6 +41,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

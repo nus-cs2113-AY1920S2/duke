@@ -1,9 +1,2 @@
-t//true//homework
-d//true//lab//19/2/2020
-e//true//test//22/2/2020
-t//false//read book
-d//false//return book//tmr
-t//false//grocery shopping
-t//true//finish duke
-d//false//duke//2 march
-t//true//watch tv
+e//false//Charlotte's Birthday Dinner//2020-02-22
+d//false//Lab//2020-02-29

@@ -13,11 +13,13 @@ import java.util.Scanner;
  */
 public class Parser {
     private static final String LIST = "list";
+    private static final String FIND = "find";
     private static final String DONE = "done";
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
+    private static final String DATE = "date";
     private static final String EXIT = "bye";
 
     Scanner scanner;
@@ -38,8 +40,18 @@ public class Parser {
             case (DELETE):
                 command = new DeleteCommand(instruction[1]);
                 break;
+            case (DATE):
+                try{
+                    command = new DateCommand(instruction[1]);
+                } catch (DukeException e) {
+                    System.out.println("Please enter a date!");
+                }
+                break;
             case (LIST):
                 command = new ListCommand("");
+                break;
+            case (FIND):
+                command = new FindCommand(instruction[1]);
                 break;
             case (TODO):
             case (DEADLINE):

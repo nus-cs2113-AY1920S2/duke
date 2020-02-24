@@ -7,6 +7,8 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import java.time.format.DateTimeParseException;
+
 
 /**
  * Represents a command to add a task object to the list of tasks.
@@ -59,6 +61,8 @@ public class AddCommand extends Command {
             System.out.println("Task description or date field is empty.");
         } catch (DukeException e) {
             System.out.println("Task description or date field is empty.");
+        } catch (DateTimeParseException e){
+            System.out.println("Please enter the date as: yyyy-mm-dd!");
         }
     }
 
