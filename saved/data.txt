@@ -1,2 +1,5 @@
 0|something|T
-0|newevent|E|kukubird
+0|test|D|sjdksjdk
+0|new thing|T
+1|new event|E|newtime
+0|new deadline|D|newdate
