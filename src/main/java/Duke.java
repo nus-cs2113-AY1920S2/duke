@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String ERROR_DELETE_MESSAGE = "|| OOPS! I can't delete that because"
+    private static final String ERROR_DELETE_MESSAGE = "I can't delete that because"
             + " you haven't" + " added task %s yet!";
-    private static final String ERROR_MESSAGE = "|| OOPS! The %s of a %s command cannot be empty.\n";
-    private static final String ERROR_DELETE_PARAM = "|| Parameters: delete [TASK NUMBER]\n";
-    private static final String ERROR_DELETE_EXAMPLE = "|| Example: delete 1";
+    private static final String ERROR_MESSAGE = "The %s of a %s command cannot be empty.\n";
+    private static final String ERROR_DELETE_PARAM = "Parameters: delete [TASK NUMBER]\n";
+    private static final String ERROR_DELETE_EXAMPLE = "Example: delete 1";
 
     private static Command splitCommand(String line) {
         String word;
