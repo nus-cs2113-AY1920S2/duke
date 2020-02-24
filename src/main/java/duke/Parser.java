@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Parser {
     private static final String LIST = "list";
+    private static final String FIND = "find";
     private static final String DONE = "done";
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
@@ -33,6 +34,9 @@ public class Parser {
                 break;
             case (LIST):
                 command = new ListCommand("");
+                break;
+            case (FIND):
+                command = new FindCommand(instruction[1]);
                 break;
             case (TODO):
             case (DEADLINE):
