@@ -5,14 +5,19 @@ import duke.exception.DukeException;
 import duke.command.Command;
 import java.io.FileNotFoundException;
 
-
+/**
+ * Duke is a command based task manager capable of handling:
+ * Todos, Events and Deadlines
+ */
 public class Duke {
 
-    //public static final String END_COMMAND = "bye";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for instantiation of Ui, Storage and TaskList classes.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("output.txt");
@@ -24,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts duke and listens to incoming inputs from User.
+     */
     public void run() {
         ui.startMessage();
         boolean isExit = false;
@@ -41,6 +49,11 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Invokes the run method.
+     * @param args Not used.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

@@ -13,14 +13,26 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Storage class for loading and saving data.
+ */
 public class Storage {
 
     private String filePath;
+
+    /**
+     * Constructor for Storage class
+     * @param filePath String containing input of filepath for storing data
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the save data from txt file.
+     * @return ArrayList containing data from saved txt file
+     * @throws FileNotFoundException If file indicated by file path is not found
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -56,10 +68,13 @@ public class Storage {
                 tasks.add(deadline);
             }
         }
-
         return tasks;
     }
 
+    /**
+     * Saves the tasks in ArrayList into a txt file.
+     * @param tasks TaskList object of the current tasks
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter("output.txt");

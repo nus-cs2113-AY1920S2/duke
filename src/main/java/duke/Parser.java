@@ -3,9 +3,11 @@ package duke;
 import duke.command.*;
 import duke.exception.UnknownInputException;
 
-
-
+/**
+ * Parser class for parsing user inputs.
+ */
 public class Parser {
+
     private static final String DONE_COMMAND = "done";
     private static final String LIST_COMMAND = "list";
     private static final String TODO_COMMAND = "todo";
@@ -15,7 +17,12 @@ public class Parser {
     private static final String END_COMMAND = "bye";
     private static final String FIND_COMMAND = "find";
 
-
+    /**
+     * Processes user inputs.
+     * @param userInput Full command that is given by the user
+     * @return Command object that corresponds to the input given by the user
+     * @throws UnknownInputException If command does not match commands supported by Duke
+     */
     public static Command parse(String userInput) throws UnknownInputException {
         String[] words = userInput.split(" ");
         if (words[0].equals(TODO_COMMAND)) {
