@@ -1,15 +1,17 @@
 package duke.task;
 
-public class Deadline extends Task {
-    protected String deadline;
+import duke.format.DateTime;
 
-    public Deadline(String task, String deadline) {
+public class Deadline extends Task {
+    protected DateTime deadline;
+
+    public Deadline(String task, DateTime deadline) {
         super(task);
         this.deadline = deadline;
     }
 
     @Override
-    public String getDateTime() {
+    public DateTime getDateTime() {
         return deadline;
     }
 

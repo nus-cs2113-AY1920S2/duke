@@ -4,7 +4,6 @@ import duke.data.TaskList;
 import duke.commands.CommandResult;
 
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -57,12 +56,12 @@ public class Ui {
 
         final String LIST_TOP =
                 "    +---------+\n" +
-                        "+---| L I S T |------------------------------------------------+\n" +
-                        "|   +---------+                                                |\n";
+                        "+---| L I S T |----------------------------------------------------------+\n" +
+                        "|   +---------+                                                          |\n";
         final String LIST_LEFT = "| ";
         final String LIST_RIGHT = " |";
-        final String LIST_BOTTOM = "+--------------------------------------------------------------+\n";
-        final int LIST_LENGTH = 60;
+        final String LIST_BOTTOM = "+------------------------------------------------------------------------+\n";
+        final int LIST_LENGTH = 70;
 
         String list = LIST_TOP;
 

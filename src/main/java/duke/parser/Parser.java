@@ -10,16 +10,22 @@ import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
 import duke.commands.InvalidCommand;
 import duke.exception.InvalidFormatException;
+import duke.format.DateTime;
+import duke.format.DateTimeFormat;
 
 import static duke.exception.ExceptionMessages.ILLEGAL_LIST_NUMBER_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DATETIME_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DEADLINE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DELETE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
+import static duke.format.DateTimeFormat.stringToDateTime;
 
 public class Parser {
     final int MAX_INPUT_LENGTH = 50;
@@ -95,12 +101,18 @@ public class Parser {
         try {
             String[] taskDetails = extractTaskDetails(parameters, DEADLINE_PREFIX);
             String task = taskDetails[0];
-            String deadline = taskDetails[1];
+            DateTime deadline = stringToDateTime(taskDetails[1]);
             return new AddDeadlineCommand(task, deadline);
         } catch (MissingTaskDetailException e) {
             return new InvalidCommand(MISSING_DEADLINE_INFORMATION_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(INVALID_DEADLINE_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidDateTimeException e) {
+            return new InvalidCommand(INVALID_DATETIME_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidDateException e) {
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidTimeException e) {
+            return new InvalidCommand(INVALID_TIME_FORMAT_MESSAGE);
         }
     }
 
@@ -108,12 +120,18 @@ public class Parser {
         try {
             String[] taskDetails = extractTaskDetails(parameters, EVENT_PREFIX);
             String task = taskDetails[0];
-            String duration = taskDetails[1];
-            return new AddEventCommand(task, duration);
+            DateTime dateTime = stringToDateTime(taskDetails[1]);
+            return new AddEventCommand(task, dateTime);
         } catch (MissingTaskDetailException e) {
             return new InvalidCommand(MISSING_EVENT_INFORMATION_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(INVALID_EVENT_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidDateTimeException e) {
+            return new InvalidCommand(INVALID_DATETIME_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidDateException e) {
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
+        } catch (DateTimeFormat.InvalidTimeException e) {
+            return new InvalidCommand(INVALID_TIME_FORMAT_MESSAGE);
         }
     }
 
