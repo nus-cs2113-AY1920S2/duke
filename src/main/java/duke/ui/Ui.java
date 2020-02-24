@@ -1,18 +1,14 @@
 package duke.ui;
 
-import duke.exception.DukeException;
+import duke.commands.*;
 
-import java.io.IOException;
-import java.util.Scanner;
 import java.io.InputStream;
 import java.io.PrintStream;
-
-import static duke.Duke.tasks;
-import static duke.storage.Storage.*;
+import java.util.Scanner;
 
 
 public class Ui {
-    private static final String DIVIDER = "____________________________________________________________";
+    public static final String DIVIDER = "____________________________________________________________";
     private static final String LS = System.lineSeparator();
     private static final String TAB = "\t";
     
@@ -20,62 +16,7 @@ public class Ui {
     private static final String COMMAND_ENTERED = "Command entered: ";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke" + LS + "What can i do for you?";
     private static final String GOODBYE_MESSAGE = TAB + "Bye. Hope to see you again soon!";
-    
-    private static final String COMMAND_LIST_EMPTY_MESSAGE = TAB + "The list is empty!";
-    private static final String COMMAND_LIST_MESSAGE = "Here are the tasks in your list:";
-    
-    private static final String COMMAND_BLAH_MESSAGE = "I'm sorry, but I don't know what that means :-(";
-    
-    private static final String COMMAND_DONE_MESSAGE = TAB + "Nice! I've marked this task as done:";
-    
-    private static final String COMMAND_ADD_MESSAGE =
-            "Got it. I've added this task:" + LS + TAB + "%s" + LS + "Now " + "you have %d task(s) in the list.";
-    
-    private static final String COMMAND_DELETE_MESSAGE =
-            "Noted. I've removed this task:" + LS + TAB + "%s" + LS + "Now " + "you have %d task(s) in the list.";
-    
-    private static final String COMMAND_INVALID_MESSAGE = "Invalid Command, please try another command" + LS +
-            "type \"help\" in the command line console for instructions";
-    private static final String COMMAND_INVALID_INDEX_MESSAGE = "Invalid Index";
-    
-    private static final String MESSAGE_COMMAND_HELP = "%s: %s";
-    private static final String MESSAGE_COMMAND_HELP_EXAMPLE = TAB + "Example: %s";
-    private static final String MESSAGE_COMMAND_HELP_PARAMETER = TAB + "Parameter(s): %s";
-    
-    private static final String COMMAND_HELP_WORD = "help";
-    private static final String COMMAND_HELP_DESC = "Shows the program command line interface instructions";
-    private static final String COMMAND_HELP_EXAMPLE = COMMAND_HELP_WORD;
-    
-    private static final String COMMAND_LIST_WORD = "list";
-    private static final String COMMAND_LIST_DESC = "Displays all the tasks in the list with index numbers.";
-    private static final String COMMAND_LIST_EXAMPLE = COMMAND_LIST_WORD;
-    
-    private static final String COMMAND_BYE_WORD = "bye";
-    private static final String COMMAND_BYE_DESC = "Exits the program.";
-    private static final String COMMAND_BYE_EXAMPLE = COMMAND_BYE_WORD;
-    
-    private static final String COMMAND_ADD_DESC = "Adds a task to the list.";
-    private static final String COMMAND_TODO_WORD = "todo";
-    private static final String COMMAND_TODO_PARAMETER = "TASK";
-    private static final String COMMAND_TODO_EXAMPLE = "todo read book";
-    
-    private static final String COMMAND_DEADLINE_WORD = "deadline";
-    private static final String COMMAND_DEADLINE_PARAMETER = "TASK /by DAY";
-    private static final String COMMAND_DEADLINE_EXAMPLE = "deadline return book /by Sunday";
-    
-    private static final String COMMAND_EVENT_WORD = "event";
-    private static final String COMMAND_EVENT_PARAMETER = "TASK /by DAY_AND_TIME";
-    private static final String COMMAND_EVENT_EXAMPLE = "event project meeting /at Mon 2-4pm";
-    
-    private static final String COMMAND_DONE_WORD = "done";
-    private static final String COMMAND_DONE_DESC = "Marks the task done in the list.";
-    private static final String COMMAND_DONE_PARAMETER = "NUMBER";
-    private static final String COMMAND_DONE_EXAMPLE = COMMAND_DONE_WORD + " 1";
-    
-    private static final String COMMAND_DELETE_WORD = "delete";
-    private static final String COMMAND_DELETE_DESC = "Deletes the task from the list.";
-    private static final String COMMAND_DELETE_PARAMETER = "NUMBER";
-    private static final String COMMAND_DELETE_EXAMPLE = COMMAND_DELETE_WORD + " 1";
+    private static final String LOAD_SAVE_DATA = "Saved Data (if any) have been preloaded below:";
     
     private final Scanner in;
     private final PrintStream out;
@@ -90,150 +31,37 @@ public class Ui {
     }
     
     public String getUserCommand() {
-        System.out.print(ENTER_COMMAND);
+        out.print(ENTER_COMMAND);
         String inputLine = in.nextLine().trim();
         echoUserInput(inputLine);
         return inputLine;
-        
     }
     
     private void echoUserInput(String userInput) {
-        System.out.println(COMMAND_ENTERED + userInput);
+        out.println(COMMAND_ENTERED + userInput);
     }
     
-    private static void printToConsole(String... message) {
-        for (String m : message) {
-            System.out.println(m);
-        }
-    }
-    
-    private void showToUser(String... message) {
+    public static void printToConsole(String... message) {
         for (String m : message) {
             System.out.println(m);
         }
     }
     
     public void showWelcomeMessage() {
-        showToUser(DIVIDER, WELCOME_MESSAGE, DIVIDER);
+        printToConsole(DIVIDER, WELCOME_MESSAGE, DIVIDER);
     }
     
     public void showGoodByeMessage() {
-        showToUser(DIVIDER, GOODBYE_MESSAGE, DIVIDER);
+        printToConsole(GOODBYE_MESSAGE, DIVIDER);
     }
     
-    private static String getUsageInfoForHelp() {
-        return String.format(MESSAGE_COMMAND_HELP, COMMAND_HELP_WORD, COMMAND_HELP_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_HELP_EXAMPLE) + LS;
+    public void showLoadMessage() {
+        printToConsole(LOAD_SAVE_DATA);
     }
     
-    private static String getUsageInfoForBye() {
-        return String.format(MESSAGE_COMMAND_HELP, COMMAND_BYE_WORD, COMMAND_BYE_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_BYE_EXAMPLE);
+    public void showResultToUser(CommandResult result) {
+        printToConsole(result.feedbackToUser);
     }
     
-    private static String getUsageInfoForList() {
-        return String.format(MESSAGE_COMMAND_HELP, COMMAND_LIST_WORD, COMMAND_LIST_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_LIST_EXAMPLE) + LS;
-    }
-    
-    private static String getUsageInfoForDone() {
-        return String.format(MESSAGE_COMMAND_HELP, COMMAND_DONE_WORD, COMMAND_DONE_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_PARAMETER, COMMAND_DONE_PARAMETER) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_DONE_EXAMPLE) + LS;
-    }
-    
-    private static String getUsageInfoForDelete() {
-        return String.format(MESSAGE_COMMAND_HELP, COMMAND_DELETE_WORD, COMMAND_DELETE_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_PARAMETER, COMMAND_DELETE_PARAMETER) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_DELETE_EXAMPLE) + LS;
-    }
-    
-    private static String getUsageInfoForAdd() {
-        return String.format(MESSAGE_COMMAND_HELP, COMMAND_TODO_WORD, COMMAND_ADD_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_PARAMETER, COMMAND_TODO_PARAMETER) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_TODO_EXAMPLE) + LS + LS +
-                String.format(MESSAGE_COMMAND_HELP, COMMAND_DEADLINE_WORD, COMMAND_ADD_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_PARAMETER, COMMAND_DEADLINE_PARAMETER) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_DEADLINE_EXAMPLE) + LS + LS +
-                String.format(MESSAGE_COMMAND_HELP, COMMAND_EVENT_WORD, COMMAND_ADD_DESC) + LS +
-                String.format(MESSAGE_COMMAND_HELP_PARAMETER, COMMAND_EVENT_PARAMETER) + LS +
-                String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_EVENT_EXAMPLE) + LS;
-    }
-    
-    public static void getUsageInfoForAllCommands() {
-        printToConsole(DIVIDER, getUsageInfoForHelp(), getUsageInfoForList(), getUsageInfoForAdd(),
-                getUsageInfoForDone(), getUsageInfoForDelete(), getUsageInfoForBye(), DIVIDER);
-    }
-    
-    public static void displayAddMessage() {
-        try {
-            printToConsole(DIVIDER, String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()),
-                    DIVIDER);
-            appendToFile(tasks.get(tasks.size() - 1).toStorage());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-    
-    public static void displayDoneMessage(String index) {
-        try {
-            if (index.equals("")) {
-                throw new IOException();
-            }
-            int doneTaskIndex = Integer.parseInt(index) - 1;
-            if (doneTaskIndex >= tasks.size()) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-            tasks.get(doneTaskIndex).markAsDone();
-            printToConsole(DIVIDER, COMMAND_DONE_MESSAGE, TAB + tasks.get(doneTaskIndex), DIVIDER);
-            modifyFileContent(doneTaskIndex, tasks.get(doneTaskIndex).toStorage());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
-        } catch (IOException e) {
-            printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
-        }
-    }
-    
-    public static void displayInvalidMessage() {
-        try {
-            throw new DukeException(COMMAND_INVALID_MESSAGE);
-        } catch (DukeException e) {
-            printToConsole(DIVIDER, COMMAND_INVALID_MESSAGE, DIVIDER);
-        }
-    }
-    
-    public static void displayBlahMessage() {
-        try {
-            throw new DukeException(COMMAND_BLAH_MESSAGE);
-        } catch (DukeException e) {
-            printToConsole(e.toString());
-        }
-    }
-    
-    public static void displayTaskList() {
-        if (tasks.isEmpty()) {
-            printToConsole(DIVIDER, COMMAND_LIST_EMPTY_MESSAGE, DIVIDER);
-            return;
-        }
-        printToConsole(DIVIDER, COMMAND_LIST_MESSAGE);
-        for (int i = 0; i < tasks.size(); ++i) {
-            System.out.println((i + 1) + "." + tasks.get(i));
-        }
-        printToConsole(DIVIDER);
-    }
-    
-    public static void displayRemoveMessage(String index) {
-        try {
-            int removeTaskIndex = Integer.parseInt(index) - 1;
-            if (removeTaskIndex >= tasks.size() || removeTaskIndex < 0) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-            printToConsole(DIVIDER, String.format(COMMAND_DELETE_MESSAGE, tasks.get(removeTaskIndex), tasks.size() - 1),
-                    DIVIDER);
-            deleteFileContent(removeTaskIndex);
-            tasks.remove(removeTaskIndex);
-        } catch (ArrayIndexOutOfBoundsException | IOException e) {
-            printToConsole(DIVIDER, COMMAND_INVALID_INDEX_MESSAGE, DIVIDER);
-        }
-    }
 }
+
