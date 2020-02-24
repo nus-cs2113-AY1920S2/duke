@@ -13,12 +13,12 @@ public class FindCommand extends Command {
 
     public void execute(Storage myTasks, File saveFile, List<String> commands, String command) {
         try {
-            String description = commands.get(TASK_DESCRIPTION);
-            description = description.trim();
+            String keyword = commands.get(TASK_DESCRIPTION);
+            keyword = keyword.trim();
 
-            DukeExceptionHandler.isBlank(description);
+            DukeExceptionHandler.isBlank(keyword);
 
-            List<Task> foundTasks = myTasks.findTasks(description);
+            List<Task> foundTasks = myTasks.findTasks(keyword);
             Printer.printTasks(command, foundTasks);
 
         } catch (BlankStringException | IndexOutOfBoundsException e) {
