@@ -38,50 +38,139 @@ Expected outcome:
 
 ![](help.PNG) 
 
-### `help` - Prints the entire list of command.
+### `bye` - Exits the application.
 
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
-
-### `help` - Prints the entire list of command.
-
-Describe action and its outcome.
+Exits the application upon input of this command
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`bye`
 
 Expected outcome:
 
-`outcome`
+![](bye.PNG)
 
-### `help` - Prints the entire list of command.
+### `todo` - Adds a `todo` command to the list.
 
-Describe action and its outcome.
+Adds a `todo` task to the list. Upon successful addition of task,
+a confirmation message will be printed. 
+
+An error message will be printed if the supplied format is wrong.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+* Correct format example: `todo homework`
+* Incorrect format example: `todo `
 
 Expected outcome:
+* If successful
 
-`outcome`
+    ![](todo_success.PNG)
+ 
+* If unsuccessful
 
-### `help` - Prints the entire list of command.
+    ![](todo_unsuccessful.PNG)
 
-Describe action and its outcome.
+### `event` - Adds a `event` task to the list. 
+
+Adds a `event` task to the list. Upon successful addition of task,
+a confirmation message will be printed. 
+
+An error message will be printed if the supplied format is wrong
 
 Example of usage: 
 
-`keyword (optional arguments)`
+* Correct format example: `event team meeting /at NUS 3-4pm`
+* Incorrect format example : `event team meeting at NUS 3-4pm`
+
+
+Expected outcome:
+* If successful
+
+    ![](event_successful.PNG)
+
+* If unsuccessful
+
+    ![](event_unsuccessful.PNG)
+
+### `deadline` - Adds a `deadline` task to the list.
+
+Adds a `deadline` task to the list. Upon successful addition of task,
+a confirmation message will be printed. 
+
+An error message will be printed if the supplied format is wrong
+
+Example of usage: 
+
+* Correct format example : `deadline submit iP /by March 2`
+
+* Incorrect format example : `deadline submit iP by March 2`
+
+Expected outcome:
+* If successful
+
+    ![](deadline_successful.PNG)
+* If unsuccessful
+
+    ![](deadline_unsuccessful.PNG)
+    
+### `list` - Prints the entire list of tasks added.
+
+Prints the entire list of tasks that was added by User.
+
+Example of usage:
+
+`list'
 
 Expected outcome:
 
-`outcome`
+![](list.PNG)
+
+### `done` - Marks a task in the list as done.
+
+Marks a task at the specified index in the list as done.
+
+Upon successful mark, a confirmation message will be printed.
+
+An error message will be printed if the task does not exist
+
+Example of usage:
+
+* Correct format example: `done 1`
+* Incorrect format example: `done 100000000000`
+
+Expected outcome:
+* If successful
+
+    ![](done_successful.PNG)
+* If unsuccessful
+
+    ![](done_unsuccessful.PNG)
+    
+### `find` - Finds all tasks that contains keyword
+
+Finds all tasks that matches supplied keyword exactly
+or contains a substring of keyword.
+
+If there are any tasks which matches the keyword, 
+a list will be printed out.
+
+If there are no task that matches a keyword, 
+no matching tasks will be printed.
+
+Example of usage:
+
+* Matching usage example: `find homework`
+
+* No matches usage example: `find homewk`
+
+Expected outcome:
+
+* If matches keyword
+    
+    ![](find_match.PNG)
+    
+* If no matches
+
+    ![](find_no_match.PNG)
+    
