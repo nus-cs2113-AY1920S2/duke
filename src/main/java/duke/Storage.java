@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Storage reads from the save file into an ArrayList
+ * of tasks and also saves the ArrayList of tasks to the
+ * save file.
+ */
 public class Storage {
 
     public static void saveToFile(TaskList tasks) throws IOException {

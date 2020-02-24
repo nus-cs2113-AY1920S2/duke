@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task with a task description and the
+ * date of the event.
+ */
 public class Event extends Task {
 
     protected LocalDate timePeriod;

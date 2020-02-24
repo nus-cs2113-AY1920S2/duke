@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Represents text that is printed to the screen to
+ * for the application to interact with the user.
+ */
 public class Ui {
     private static final String LINE = "____________________________________________________________ \n";
 

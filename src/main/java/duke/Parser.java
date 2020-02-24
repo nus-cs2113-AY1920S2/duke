@@ -4,6 +4,13 @@ import duke.commands.*;
 
 import java.util.Scanner;
 
+/**
+ * The parser reads in the input and parses it by
+ * determining what kind of command the user has inputted
+ * and then creating the corresponding Command with the
+ * relevant parameters. The command is then passed back to
+ * main for execution.
+ */
 public class Parser {
     private static final String LIST = "list";
     private static final String FIND = "find";
