@@ -3,38 +3,33 @@ package duke;
 import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.commands.ExitCommand;
-import duke.data.TaskList;
 import duke.exception.CorruptedFileException;
-import duke.exception.EmptyInputException;
-import duke.exception.InputLengthExceededException;
-import duke.exception.InvalidActionException;
 import duke.parser.Parser;
-import duke.task.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
-import static duke.exception.ExceptionMessage.CORRUPTED_FILE_MESSAGE;
-import static duke.exception.ExceptionMessage.EMPTY_INPUT_MESSAGE;
-import static duke.exception.ExceptionMessage.FILE_NOT_FOUND_MESSAGE;
-import static duke.exception.ExceptionMessage.INPUT_LENGTH_EXCEEDED_MESSAGE;
-import static duke.exception.ExceptionMessage.INVALID_ACTION_MESSAGE;
-import static duke.exception.ExceptionMessage.IO_ERROR_MESSAGE;
-import static duke.format.Printer.PROMPT_VALID_CREATE_CONFIRMATION_MESSAGE;
-import static duke.format.Printer.printAbortCreateNewFileMessage;
-import static duke.format.Printer.printCreateNewFileMessage;
-import static duke.format.Printer.printExitMessage;
-import static duke.format.Printer.printLoadMessage;
-import static duke.format.Printer.printReadyMessage;
-import static duke.format.Printer.printWelcomeMessage;
+import static duke.ui.Messages.WELCOME_MESSAGE;
+import static duke.ui.Messages.LOAD_MESSAGE;
+import static duke.ui.Messages.READY_MESSAGE;
+import static duke.ui.Messages.CREATE_NEW_FILE_MESSAGE;
+import static duke.ui.Messages.CREATE_CONFIRMATION_MESSAGE;
+import static duke.ui.Messages.PROMPT_VALID_CREATE_CONFIRMATION_MESSAGE;
+import static duke.ui.Messages.ABORT_CREATE_NEW_FILE_MESSAGE;
+import static duke.ui.Messages.EXIT_MESSAGE;
+import static duke.exception.ExceptionMessages.EMPTY_INPUT_MESSAGE;
+import static duke.exception.ExceptionMessages.INPUT_LENGTH_EXCEEDED_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_ACTION_MESSAGE;
+import static duke.exception.ExceptionMessages.FILE_NOT_FOUND_MESSAGE;
+import static duke.exception.ExceptionMessages.CORRUPTED_FILE_MESSAGE;
+import static duke.exception.ExceptionMessages.IO_ERROR_MESSAGE;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
-    private static ArrayList<Task> list = new ArrayList<>();
-    private static TaskList taskList;
-    Scanner scanner = new Scanner(System.in);
+    private Storage storage;
+    private Ui ui;
 
     public static void main(String[] args) {
         Duke chatBot = new Duke();
@@ -42,75 +37,63 @@ public class Duke {
     }
 
     private void runChat() {
-        printWelcomeMessage();
+        this.ui = new Ui();
+        this.storage = new Storage();
 
+        ui.showSystemMessage(WELCOME_MESSAGE);
+
+        // Initialise task list
         boolean canInitialise = false;
         try {
             canInitialise = initialiseChat();
         } catch (IOException e) {
-            System.out.println(IO_ERROR_MESSAGE);
+            ui.showSystemMessage(IO_ERROR_MESSAGE);
         }
 
         if (canInitialise) {
-            printReadyMessage();
+            ui.showSystemMessage(READY_MESSAGE);
             readInputUntilExit();
         }
 
-        scanner.close();
-        printExitMessage();
+        ui.showSystemMessage(EXIT_MESSAGE);
     }
 
     private boolean initialiseChat() throws IOException {
-        printLoadMessage();
+        ui.showSystemMessage(LOAD_MESSAGE);
         try {
-            FileManager.loadTaskList(list);
+            storage.loadTaskList();
         } catch (FileNotFoundException e) {
-            System.out.println(FILE_NOT_FOUND_MESSAGE);
-
-            // Create new task list file
-            FileManager.createTaskListFile();
+            ui.showSystemMessage(FILE_NOT_FOUND_MESSAGE);
+            storage.createTaskListFile(); // Create new task list file
         } catch (CorruptedFileException | IndexOutOfBoundsException e) {
-            System.out.println(CORRUPTED_FILE_MESSAGE);
+            ui.showSystemMessage(CORRUPTED_FILE_MESSAGE);
 
-            boolean canCreateNewFile = getConfirmation(PROMPT_VALID_CREATE_CONFIRMATION_MESSAGE);
+            boolean canCreateNewFile =
+                    ui.getConfirmation(CREATE_CONFIRMATION_MESSAGE, PROMPT_VALID_CREATE_CONFIRMATION_MESSAGE);
             if (canCreateNewFile) {
-                FileManager.createTaskListFile();
-                printCreateNewFileMessage();
+                storage.createTaskListFile();
+                ui.showSystemMessage(CREATE_NEW_FILE_MESSAGE);
             } else {
-                printAbortCreateNewFileMessage();
-                printExitMessage();
+                ui.showSystemMessage(ABORT_CREATE_NEW_FILE_MESSAGE);
                 return false;
             }
         }
         return true;
     }
 
-    private boolean getConfirmation(String validConfirmationMessage) {
-        while (true) {
-            String input = scanner.nextLine().trim().toLowerCase();
-            if (input.equals("yes") || input.equals("y")) {
-                return true;
-            } else if (input.equals("no") || input.equals("n")) {
-                return false;
-            } else {
-                System.out.println(validConfirmationMessage);
-            }
-        }
-    }
-
     private void readInputUntilExit() {
         Command command = null;
         do {
-            String input = scanner.nextLine().trim();
+            String input = ui.getInput();
             try {
                 command = new Parser().parseInput(input);
                 CommandResult result = command.execute();
-                System.out.println(result.getMessage());
-            } catch (InputLengthExceededException e) {
+                ui.showResult(result);
+            } catch (Parser.InputLengthExceededException e) {
                 System.out.println(INPUT_LENGTH_EXCEEDED_MESSAGE);
-            } catch (EmptyInputException e) {
+            } catch (Parser.EmptyInputException e) {
                 System.out.println(EMPTY_INPUT_MESSAGE);
-            } catch (InvalidActionException e) {
+            } catch (Parser.InvalidCommandException e) {
                 System.out.println(INVALID_ACTION_MESSAGE);
             }
         } while (!ExitCommand.isExit(command));

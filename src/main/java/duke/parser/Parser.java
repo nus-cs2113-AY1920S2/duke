@@ -9,28 +9,25 @@ import duke.commands.ListCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
 import duke.commands.InvalidCommand;
-
-import duke.exception.EmptyInputException;
-import duke.exception.InputLengthExceededException;
-import duke.exception.InvalidActionException;
 import duke.exception.InvalidFormatException;
 
-import static duke.exception.ExceptionMessage.ILLEGAL_LIST_NUMBER_MESSAGE;
-import static duke.exception.ExceptionMessage.MISSING_LIST_NUMBER_MESSAGE;
-import static duke.exception.ExceptionMessage.INVALID_DONE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessage.MISSING_TODO_DESCRIPTION_MESSAGE;
-import static duke.exception.ExceptionMessage.MISSING_DEADLINE_INFORMATION_MESSAGE;
-import static duke.exception.ExceptionMessage.INVALID_DEADLINE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessage.MISSING_EVENT_INFORMATION_MESSAGE;
-import static duke.exception.ExceptionMessage.INVALID_EVENT_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessage.INVALID_DELETE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.ILLEGAL_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DEADLINE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DELETE_FORMAT_MESSAGE;
 
 public class Parser {
     final int MAX_INPUT_LENGTH = 50;
     final String DEADLINE_PREFIX = "/by";
     final String EVENT_PREFIX = "/at";
 
-    public Command parseInput(String input) throws EmptyInputException, InputLengthExceededException, InvalidActionException {
+    public Command parseInput(String input)
+            throws EmptyInputException, InputLengthExceededException, InvalidCommandException {
         if (input.isEmpty()) {
             throw new EmptyInputException();
         }
@@ -68,10 +65,9 @@ public class Parser {
             return new ExitCommand();
 
         default:
-            throw new InvalidActionException();
+            throw new InvalidCommandException();
         }
     }
-
 
     private Command createDoCommand(String parameters) {
         try {
@@ -113,7 +109,7 @@ public class Parser {
             String[] taskDetails = extractTaskDetails(parameters, EVENT_PREFIX);
             String task = taskDetails[0];
             String duration = taskDetails[1];
-            return new AddDeadlineCommand(task, duration);
+            return new AddEventCommand(task, duration);
         } catch (MissingTaskDetailException e) {
             return new InvalidCommand(MISSING_EVENT_INFORMATION_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
@@ -154,11 +150,11 @@ public class Parser {
         if (prefix == null) {
             return new String[]{parameters};
         } else {
-            int endIndexOfTask = parameters.indexOf(prefix);
-            int indexOfAdditionalDetail = endIndexOfTask + prefix.length(); // Index of deadline / duration info
+            int endIndexOfTask = parameters.toLowerCase().indexOf(prefix);
+            int indexOfDateTimeDetail = endIndexOfTask + prefix.length(); // Index of deadline / duration info
 
             String task = parameters.substring(0, endIndexOfTask).trim();
-            String additionalDetail = parameters.substring(indexOfAdditionalDetail).trim(); // Deadline / duration info
+            String additionalDetail = parameters.substring(indexOfDateTimeDetail).trim(); // Deadline / duration info
 
             if (task.length() == 0 || additionalDetail.length() == 0) {
                 throw new MissingTaskDetailException();
@@ -167,6 +163,12 @@ public class Parser {
             return new String[]{task, additionalDetail};
         }
     }
+
+    public static class EmptyInputException extends InvalidFormatException {}
+
+    public static class InputLengthExceededException extends InvalidFormatException {}
+
+    public static class InvalidCommandException extends InvalidFormatException {}
 
     public static class MissingListNumberException extends InvalidFormatException {}
 

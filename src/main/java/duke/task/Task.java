@@ -17,11 +17,11 @@ public abstract class Task {
         return isDone;
     }
 
+    public abstract String getDateTime();
+
     public void setIsDone(boolean status) {
         isDone = status;
     }
-
-    public abstract String getDetails();
 
     public String getTaskStatus() {
         String statusIcon = isDone ? "\u2713" : "\u2718";

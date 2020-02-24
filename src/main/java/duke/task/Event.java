@@ -9,7 +9,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDetails() {
+    public String getDateTime() {
         return duration;
     }
 

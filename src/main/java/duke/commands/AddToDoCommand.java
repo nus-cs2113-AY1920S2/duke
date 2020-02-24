@@ -1,11 +1,13 @@
 package duke.commands;
 
 import duke.data.TaskList;
+import duke.task.ToDo;
 
-import static duke.format.Printer.addTaskMessage;
+import static duke.ui.Messages.addTaskMessage;
 
 public class AddToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
+    public static final String FORMAT = "todo <task description>";
 
     private final String task;
 
@@ -15,7 +17,7 @@ public class AddToDoCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        TaskList.addToDo(task);
+        TaskList.add(new ToDo(task));
         return new CommandResult(addTaskMessage());
     }
 }

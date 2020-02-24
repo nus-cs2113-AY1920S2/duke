@@ -10,7 +10,7 @@ public class TextFormatter {
 
     public final static String THINKING_FACE = "  \u0298o\u0298? "; // ʘoʘ?
 
-    public final static String SAD_FACE = "  \u0ca5-\u0ca5 "; // ಥ-ಥ
+    public final static String SAD_FACE = "\u0ca5-\u0ca5 "; // ಥ-ಥ
 
     public static String toBold(String string) {
         return "\033[1m" + string + "\033[0m";
@@ -27,5 +27,4 @@ public class TextFormatter {
     public static String createSpaces(int numberOfSpaces) {
         return " ".repeat(numberOfSpaces);
     }
-
 }

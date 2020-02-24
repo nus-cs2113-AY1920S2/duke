@@ -1,11 +1,10 @@
 package duke.commands;
 
-import duke.format.Printer;
-
-import static duke.format.Printer.LIST_MESSAGE;
+import static duke.ui.Messages.LIST_MESSAGE;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
+    public static final String FORMAT = "list";
 
     @Override
     public CommandResult execute() {

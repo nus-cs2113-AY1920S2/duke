@@ -2,12 +2,13 @@ package duke.commands;
 
 import duke.data.TaskList;
 
-import static duke.format.Printer.completeTaskMessage;
-import static duke.format.Printer.alreadyCompletedTaskMessage;
-import static duke.exception.ExceptionMessage.INVALID_LIST_NUMBER_MESSAGE;
+import static duke.ui.Messages.completeTaskMessage;
+import static duke.ui.Messages.alreadyCompletedTaskMessage;
+import static duke.exception.ExceptionMessages.INVALID_LIST_NUMBER_MESSAGE;
 
 public class DoCommand extends Command {
     public static final String COMMAND_WORD = "done";
+    public static final String FORMAT = "done <list number>";
 
     private final int index;
 
