@@ -1,7 +1,7 @@
 # User Guide
 ## Table of Contents
-- 1. **Introduction**
-- 2. **Features**
+1. **Introduction**
+2. **Features**
     - 2.1. **Add Tasks**
         - 2.1.a **Add Todo Task**
         - 2.1.b **Add Event Task**
@@ -12,7 +12,7 @@
     - 2.5. **Find Tasks**
     - 2.6. **Save**
     - 2.7. **Load**
-- 3. **Usage**
+3. **Usage**
 
 ## 1. Introduction
 Duke is a personal assistant chatbot that helps a person to keep track of upcoming tasks.
