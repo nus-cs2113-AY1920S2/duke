@@ -14,7 +14,7 @@ public class ToDo extends Task {
 
     @Override
     public String encodeTask() {
-        return TODO_SYMBOL + "|" + isDone + "|" + description;
+        return TODO_SYMBOL + DELIMITER + isDone + DELIMITER + description;
     }
 
     public static ToDo decodeTask(String encodedTask) {

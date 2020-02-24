@@ -1,4 +1,4 @@
-package alie;
+package alie.exceptions;
 
 public class InvalidCmdException extends Exception {
     //exceptions specific to ALIE

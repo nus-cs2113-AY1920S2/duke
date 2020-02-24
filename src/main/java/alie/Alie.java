@@ -1,220 +1,63 @@
 package alie;
 
-import alie.task.Deadlines;
-import alie.task.Events;
-import alie.task.ToDo;
+import alie.commands.Command;
+import alie.commands.CommandResult;
+import alie.commands.ExitCommand;
+import alie.exceptions.InvalidFileFormatException;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class Alie {
+    private Storage storage;
+    private TaskManager taskList;
+    private Ui ui;
 
-    public static final String logo =
-                      "    /\\       |        |   |‾‾‾‾‾" + System.lineSeparator()
-                    + "   /  \\      |        |   |"      + System.lineSeparator()
-                    + "  /____\\     |        |   |----"  + System.lineSeparator()
-                    + " /      \\    |        |   |"      + System.lineSeparator()
-                    + "/        \\ . |_____ . | . |_____ .";
-    protected static final int DONE_CMD_LENGTH = 5;
-    protected static final int TODO_CMD_LENGTH = 5;
-    protected static final int DELETE_CMD_LENGTH = 7;
-    protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
-    protected static final String EVENT_DETAILS_DIVIDER = " /at ";
+    public Alie(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskManager(storage.readFromFile());
+        } catch (FileNotFoundException | InvalidFileFormatException errorMsg) {
+            ui.showLoadingError();
+            taskList = new TaskManager();
+        }
+    }
 
     public static void main(String[] args) {
-        printWelcomeMsg();
+        new Alie(Storage.findStoragePath()).run();
+    }
 
-        TaskManager checkList = null;
-        Storage storage = new Storage(findStoragePath());
-        Scanner userInput = new Scanner(System.in);
+    public void run() {
+        start();
+        runCmdLoopTillExitCmd();
+        exit();
+    }
 
-        checkList = getDataFromStorage(storage);
-        while (true) {
-            printHeader();
-            String cmd = getUserInput(userInput);
+    private void start() {
+        ui.showWelcome();
+    }
+
+    private void runCmdLoopTillExitCmd() {
+        Command command = null;
+        do {
             try {
-                parseThenExecuteCmd(cmd, checkList);
-            } catch (Exception errorMsg) {
-                System.out.println(errorMsg);
+                String userCommandText = ui.getUserCommand();
+                command = new Parser().parseCommand(userCommandText);
+                CommandResult result = executeCommand(command);
+                ui.showCmdResult(result);
+                storage.save(taskList);
+            } catch (Exception e) {
+                ui.showError(e);
             }
-            saveCheckListToFile(checkList, storage);
-        }
+        } while (!ExitCommand.isExit(command));
     }
 
-    public static void printWelcomeMsg() {
-        System.out.println("Hello from\n" + logo);
-        printHeader();
-        System.out.println("What would you like to do?");
+    public CommandResult executeCommand(Command command) throws Exception {
+        return command.execute(taskList, ui, storage);
     }
 
-    public static String findStoragePath() {
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "storage.txt");
-        return path.toString();
-    }
-
-    public static void printHeader() {
-        System.out.print("ALIE> ");
-    }
-
-    private static String getUserInput(Scanner userInput) {
-        return userInput.nextLine();
-    }
-
-    private static void parseThenExecuteCmd(String cmd, TaskManager checkList)
-            throws InvalidCmdException {
-        String[] splitCmds = cmd.split(" ", 2);
-        String cmdType = splitCmds[0].toLowerCase();
-
-        switch (cmdType) {
-        case "bye":
-            //Exiting A.L.I.E
-            exitAlie(cmd, splitCmds);
-        case "list":
-            //Print list with all tasks
-            printChecklist(checkList, splitCmds);
-            break;
-        case "done":
-            //Mark task as complete
-            markAsDone(cmd, checkList);
-            break;
-        case "delete":
-            //Delete tasks
-            deleteTask(cmd, checkList);
-            break;
-        case "todo":
-            //Input format: <task type> <task name>
-            addToDoTask(cmd, checkList);
-            break;
-        case "deadline":
-            // Input format 1: <task type> <task name> /by <task details>
-            addDeadlineTask(cmd, checkList);
-            break;
-        case "event":
-            // Input format 1: <task type> <task name> /at <task details>
-            addEventTask(cmd, checkList);
-            break;
-        default:
-            throw new InvalidCmdException("Unable to execute \"" + cmd +
-                    "\". Please try again with valid command.");
-        }
-    }
-
-    private static void exitAlie(String cmd, String[] splitCmds) throws InvalidCmdException {
-        if (splitCmds.length > 1 ) {
-            throw new InvalidCmdException("To exit, use cmd: \"bye\".");
-        }
-        System.out.println("Bye-bye!");
+    private void exit() {
+        ui.showGoodbyeMessage();
         System.exit(0);
-    }
-
-    private static void printChecklist(TaskManager checkList, String[] splitCmds)
-            throws InvalidCmdException {
-        if (splitCmds.length > 1 ) {
-            throw new InvalidCmdException("Unable to append info to cmd: \"list\".");
-        }
-        checkList.printAllTasksAdded();
-        return;
-    }
-
-    private static void markAsDone(String cmd, TaskManager checkList) throws InvalidCmdException {
-        //Input format: done <task index>
-        try {
-            int indexOfTask = Integer.parseInt(cmd.substring(DONE_CMD_LENGTH));
-            checkList.markTaskCompleted(indexOfTask - 1);
-        } catch (NumberFormatException error) {
-            throw new InvalidCmdException("INDEX provided is not a number.");
-        } catch (IndexOutOfBoundsException | NullPointerException error) {
-            throw new InvalidCmdException("INDEX provided is not a valid index.");
-        }
-        return;
-    }
-
-    private static void deleteTask(String cmd, TaskManager checkList) throws InvalidCmdException {
-        //Input format: delete <task index>
-        try {
-            int indexOfTask = Integer.parseInt(cmd.substring(DELETE_CMD_LENGTH));
-            checkList.deleteTask(indexOfTask - 1);
-        } catch (NumberFormatException error) {
-            throw new InvalidCmdException("INDEX provided is not a number.");
-        } catch (IndexOutOfBoundsException error) {
-            throw new InvalidCmdException("INDEX provided is not a valid index.");
-        } catch (NullPointerException error) {
-            throw new InvalidCmdException("INDEX provided is not a valid index.");
-        }
-        return;
-    }
-
-    private static void addToDoTask(String cmd, TaskManager checkList) throws InvalidCmdException {
-        String taskName;
-        try {
-            taskName = cmd.substring(TODO_CMD_LENGTH);
-            if (taskName.equalsIgnoreCase("")) {
-                throw new InvalidCmdException("DESCRIPTION of TODO is missing.");
-            }
-            checkList.addNewTask(new ToDo(taskName));
-        } catch (StringIndexOutOfBoundsException error) {
-            throw new InvalidCmdException("DESCRIPTION of TODO is missing.");
-        }
-        return;
-    }
-
-    private static void addDeadlineTask(String cmd, TaskManager checkList)
-            throws InvalidCmdException {
-        int detailsDividerId;
-        String taskName;
-        String taskDetails;
-        try {
-            detailsDividerId = cmd.indexOf(DEADLINE_DETAIL_DIVIDER);
-            taskName = cmd.substring(0, detailsDividerId).trim();
-            taskDetails = cmd.substring(detailsDividerId +
-                    DEADLINE_DETAIL_DIVIDER.length()).trim();
-            checkList.addNewTask(new Deadlines(taskName, taskDetails));
-        } catch (StringIndexOutOfBoundsException error) {
-            throw new InvalidCmdException("DESCRIPTION and DATE of deadline is missing.");
-        }
-        return;
-    }
-
-    private static void addEventTask(String cmd, TaskManager checkList) throws InvalidCmdException {
-        int detailsDividerId;
-        String taskName;
-        String taskDetails;
-        try {
-            detailsDividerId = cmd.indexOf(EVENT_DETAILS_DIVIDER);
-            taskName = cmd.substring(0, detailsDividerId).trim();
-            taskDetails = cmd.substring(detailsDividerId +
-                    EVENT_DETAILS_DIVIDER.length()).trim();
-            checkList.addNewTask(new Events(taskName, taskDetails));
-        } catch (StringIndexOutOfBoundsException error) {
-            throw new InvalidCmdException("DESCRIPTION and DATE of event is missing.");
-        }
-    }
-
-    private static TaskManager getDataFromStorage(Storage storage) {
-        TaskManager checkList = null;
-        try {
-            checkList = storage.readFromFile();
-            System.out.println("File found. Imported data from file.");
-        } catch (FileNotFoundException e) {
-            checkList = new TaskManager();
-            System.out.println("File not found");
-        } catch (InvalidFileFormatException errorMsg) {
-            System.out.println(errorMsg);
-        } finally {
-            if (checkList == null) {
-                checkList = new TaskManager();
-            }
-        }
-        return checkList;
-    }
-
-    private static void saveCheckListToFile(TaskManager checkList, Storage storage) {
-        try {
-            storage.save(checkList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

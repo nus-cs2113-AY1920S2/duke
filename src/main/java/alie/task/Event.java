@@ -1,12 +1,16 @@
 package alie.task;
 
-public class Events extends Task {
+public class Event extends Task {
     private static final String EVENT_SYMBOL = "E";
     private String startDate;
 
-    public Events (String name, String date) {
+    public Event(String name, String date) {
         super(name);
         startDate = date;
+    }
+
+    public String getDate() {
+        return startDate;
     }
 
     @Override
@@ -16,15 +20,15 @@ public class Events extends Task {
 
     @Override
     public String encodeTask() {
-        return EVENT_SYMBOL + "|" + isDone + "|" + description + "|" + startDate;
+        return EVENT_SYMBOL + DELIMITER + isDone + DELIMITER + description + DELIMITER + startDate;
     }
 
-    public static Events decodeTask(String encodedTask) {
+    public static Event decodeTask(String encodedTask) {
         String[] task = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(task[1]);
         String description = task[2];
         String startDate = task[3];
-        Events eventTask = new Events(description, startDate);
+        Event eventTask = new Event(description, startDate);
         if (isDone) {
             eventTask.setTaskCompleted(eventTask);
         }

@@ -1,12 +1,16 @@
 package alie.task;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
     protected static final String DEADLINE_SYMBOL = "D";
     private String endDate;
 
-    public Deadlines(String name, String date) {
+    public Deadline(String name, String date) {
         super(name);
         endDate = date;
+    }
+
+    public String getDate() {
+        return endDate;
     }
 
     @Override
@@ -16,15 +20,15 @@ public class Deadlines extends Task {
 
     @Override
     public String encodeTask() {
-        return DEADLINE_SYMBOL + "|" + isDone + "|" + description + "|" + endDate;
+        return DEADLINE_SYMBOL + DELIMITER + isDone + DELIMITER + description + DELIMITER + endDate;
     }
 
-    public static Deadlines decodeTask(String encodedTask) {
+    public static Deadline decodeTask(String encodedTask) {
         String[] task = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(task[1]);
         String description = task[2];
         String endDate = task[3];
-        Deadlines deadlineTask = new Deadlines(description, endDate);
+        Deadline deadlineTask = new Deadline(description, endDate);
         if (isDone) {
             deadlineTask.setTaskCompleted(deadlineTask);
         }

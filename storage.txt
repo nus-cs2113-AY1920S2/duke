@@ -1,0 +1,3 @@
+T|false|help
+T|true|me
+T|false|die
