@@ -7,25 +7,22 @@ public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
+
     public static void main(String[] args) throws IOException, DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        welcomeMessage();
         loadFile();
         greetUser();
         conversation();
 
     }
 
-    private static String readCommand() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = null;
-        System.out.println("Type something");
-        str = br.readLine().toLowerCase();
-        return str;
+    public static void welcomeMessage(){
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
     }
 
     public static void greetUser() {
@@ -68,6 +65,14 @@ public class Duke {
             System.out.println("____________________________________________________________");
             conversation();
         }
+    }
+
+    private static String readCommand() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = null;
+        System.out.println("Type something");
+        str = br.readLine().toLowerCase();
+        return str;
     }
 
     public static void addTaskScreen() throws IOException, DukeException {
