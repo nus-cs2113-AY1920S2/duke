@@ -94,7 +94,7 @@ public class Storage {
                 case 'D':
                     Deadline deadline = (Deadline) task;
                     fw.write("D # " + deadline.isDone + " # " + deadline.description + "/by "
-                            + deadline.getByWithoutBraces() + System.lineSeparator());
+                            + deadline.getDeadlineInInputFormat() + System.lineSeparator());
                     break;
                 case 'E':
                     Event event = (Event) task;
