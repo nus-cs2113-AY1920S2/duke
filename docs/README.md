@@ -34,11 +34,11 @@ Example of usage: <code>event **CS2113T oral presentation** /at **2020-03-01 1.0
 Expected outcome:<br><pre>
 Got it . I've added this task: <br>
 [E][✘] CS2113T oral presentation (at: 3 MARCH 2020, SUNDAY 1.00pm) <br>
-Now you have 9 tasks in the list.</pre>
+Now you have x tasks in the list.</pre>
 
 ### Listing all tasks : <code>list</code>
 Shows all the tasks user has typed into. <br>
-Format: <code>list</code> <br>
+Example of usage: <code>list</code> <br>
 Expected outcome:<br> <pre>
 Here are the tasks in your list:
 1 .[T] Task 1
@@ -47,6 +47,7 @@ Here are the tasks in your list:
 ### Marking a task as complete: <code>done</code>
 Mark a specific task that user has typed in as completed. <br>
 Format: <code>done **index**</code> <br>
+Example of usage: <code>done **1**</code> <br>
 Expected outcome: <br> <pre>
 Nice! I've marked this task as done:
 [T] Task 1 </pre>
@@ -56,6 +57,7 @@ Nice! I've marked this task as done:
 ### Deleting a task: <code>delete</code>
 Deletes a specific task from the <code>list</code> of task. <br>
 Format: <code> delete **index**</code> <br>
+Example of usage: <code> delete **1** </code> <br>
 Expected outcome: <br> <pre>
 Noted, I've removed this task: 
 [D] Task 1</pre>
@@ -64,15 +66,16 @@ Noted, I've removed this task:
 ### Locating a certain task: <code>find</code>
 Find all the tasks which contains the keyword that user has typed in. <br>
 Format: <code>find **keyword [more keyword]**</code> <br>
+Example of usage: <code>find **CS2113T oral**</code> <br>
 Expected outcome: <br> <pre>
 Here are the matching task/s in your list:
 [D] Task 1
 [T] Task 2 </pre>
-* Tasks matching at least one keyword would be displayed.
-* Order of keywords matter: <code>find john roe</code> is not equivalent to <code>find roe john</code>
+* Tasks containing at least one of the keyword would be displayed.
+* Order of keyword matter: <code>find john roe</code> is not equivalent to <code>find roe john</code>
 ### Exiting the program: <code>bye</code>
 Ends the Duke application.<br>
-Format: <code>bye</code> <br>
+Example of usage: <code>**bye**</code> <br>
 ### Saving the task list
 * Duke automatically save the task list into the project folder directory under <code>/savedTasks.txt</code> <br>
 * Duke automatically loads the task list from previous session if the file <code>savedTasks.txt</code> exist
