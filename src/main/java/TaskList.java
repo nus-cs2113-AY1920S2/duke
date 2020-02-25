@@ -32,6 +32,9 @@ public class TaskList {
                 i++;
             }
         }
+        if (i == 1) {
+            System.out.println("\tNo matching tasks found!");
+        }
     }
 
     /**

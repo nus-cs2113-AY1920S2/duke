@@ -65,11 +65,24 @@ A storage file is created.
 	  [D][✓] return book (by: Sunday)
 	____________________________________________________________
 	____________________________________________________________
+	This task has already been marked as done!
+	  [D][✓] return book (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
 	Here are the tasks in your list:
 	1.[T][✗] borrow book
 	2.[D][✓] return book (by: Sunday)
 	3.[E][✗] project meeting (at: Mon 2-4pm)
 	4.[D][✓] do homework (by: no idea :P)
+	____________________________________________________________
+	____________________________________________________________
+	Here are the matching tasks in your list:
+	1.[T][✗] borrow book
+	2.[D][✓] return book (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	Here are the matching tasks in your list:
+	No matching tasks found!
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!

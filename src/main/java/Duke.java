@@ -69,9 +69,14 @@ public class Duke {
                 case "done":
                     // mark a task as done
                     indexOfTasks = Integer.parseInt(command[1]) - 1;
-                    tasks.setDoneByIndex(indexOfTasks);
-                    System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t  " + tasks.getByIndex(indexOfTasks));
+                    Task taskToBeMarkedAsDone = tasks.getByIndex(indexOfTasks);
+                    if (taskToBeMarkedAsDone.getDoneInBoolean() == true) {
+                        System.out.println("\tThis task has already been marked as done!");
+                    } else {
+                        tasks.setDoneByIndex(indexOfTasks);
+                        System.out.println("\tNice! I've marked this task as done:");
+                    }
+                    System.out.println("\t  " + taskToBeMarkedAsDone);
                     break;
                 case "delete":
                     indexOfTasks = Integer.parseInt(command[1]) - 1;

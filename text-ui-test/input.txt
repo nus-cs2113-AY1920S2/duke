@@ -10,5 +10,8 @@ deadline do homework /by no idea :P
 list
 done 4
 done 2
+done 2
 list
+find book
+find Mon
 bye
