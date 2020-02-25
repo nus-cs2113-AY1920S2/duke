@@ -1,57 +1,20 @@
 package duke;
 
-import java.io.FileNotFoundException;
+import duke.command.Command;
+
 import java.io.IOException;
-import java.util.Scanner;
 
-public class Duke implements Logo {
-    public static void main(String[] args) throws DukeException, IOException {
+public class Duke {
 
-        Data data = new Data();
-
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-
-        Scanner input = new Scanner(System.in);
-        String cmd = input.nextLine();
-
-
-        while (!cmd.equals("bye")) {
-            lineBreak();
-
-            if (cmd.equals("list")) {
-                System.out.println("  Here are the tasks in your list:");
-                for (int k = 1; k <= data.getSize(); ++k) {
-                    System.out.println("    " + k + ". " + data.printItem(k-1));
-                }
-
-            } else if (cmd.contains("done")){
-                int option = Integer.parseInt(cmd.substring(cmd.length()-1));
-                data.setDone(option-1);
-                System.out.println("  Nice! I've marked this task as done:");
-                System.out.println("  " + "[✓] " + data.getDescription(option-1));
-
-            } else {
-                try {
-                    Data.newTask(cmd);
-                } catch(DukeException e) {
-                    System.out.println(e);
-                }
-            }
-            
-            lineBreak();
-            System.out.println();
-            cmd = input.nextLine();
-
+    public static void main(String[] args) throws IOException, DukeException {
+        Ui ui = new Ui();
+        Command command = new Command("lib/data.txt");
+        while (command.isActive) {
+            command.commandInit();
+            Ui.printBreak();
         }
-        lineBreak();
-        System.out.println("  Bye. Hope to see you again soon!");
-        lineBreak();
-        data.saveToFile();
+        Ui.exit();
     }
 
-    public final static void lineBreak() {
-        System.out.println("  ____________________________________________________________");
-    }
+
 }
-// forgot to do branching and merging for exceptions
