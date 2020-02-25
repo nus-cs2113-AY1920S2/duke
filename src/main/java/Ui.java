@@ -1,3 +1,7 @@
+/**
+ * Represents a user interface object with various methods
+ * that helps Duke interact with the end user.
+ */
 public class Ui {
     private static final String logo = "  ____        _        \n"
             + " |  _ \\ _   _| | _____ \n"
@@ -6,6 +10,10 @@ public class Ui {
             + " |____/ \\__,_|_|\\_\\___|\n";
 
 
+    /**
+     * Method used to print the greeting message when the user
+     * launch the application.
+     */
     public void showWelcomeMessage() {
         printLine();
         System.out.println(logo);
@@ -14,6 +22,10 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Method used to print a horizontal line so it is easier
+     * to differentiate between the user input and program response.
+     */
     public void printLine() {
         for (int i = 0; i < 60; i += 1) {
             System.out.print("_");
@@ -21,6 +33,9 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Method used to terminate the program and print the exit message.
+     */
     public void exitFromApp() {
         printLine();
         System.out.println(" Bye. Hope to see you again soon!");
@@ -28,6 +43,9 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Method used to print an IO exception message.
+     */
     public void showLoadingError() {
         System.out.println("IO Exception occurred");
     }

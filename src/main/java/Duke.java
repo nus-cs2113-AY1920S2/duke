@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+/**
+ * Implements a chat bot named Duke that helps the user keep track
+ * of various things with its different functions.
+ */
 public class Duke {
 
     static String currDir = System.getProperty("user.dir");
@@ -10,6 +14,12 @@ public class Duke {
     private static Ui ui;
     private Parser parser;
 
+    /**
+     * Represents a constructor for the Duke Object. The constructor
+     * helps to initialise other object classes that is useful to the
+     * execution of the program.
+     * @param filepath relative filepath to store the data.txt file
+     */
     public Duke(String filepath) {
         ui = new Ui();
         parser = new Parser();
@@ -22,6 +32,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Waits for user input to determine the command to execute.
+     * Terminates the program only when the command 'bye' is received.
+     */
     public void run() {
         ui.showWelcomeMessage();
         while (true) {
@@ -78,6 +92,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Point of entry for the Duke program.
+     * @param args unused
+     */
     public static void main(String[] args) {
         new Duke(filePath).run();
     }
