@@ -1,6 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,9 +15,59 @@ public class Duke {
     private static boolean isExiting = false;
 
     public static void main(String[] args) {
+        loadDataFromDisk();
         greet();
         takeCommands();
         exit();
+    }
+
+    private static void loadDataFromDisk() {
+        String description;
+        int dividerIndex;
+        try {
+            File dir = new File("data");
+            if (!dir.exists()) {
+                System.out.println(FOUR_SPACE_INDENT + "Making directory: \"data\"");
+                dir.mkdir();
+            }
+            File file = new File("data/duke.txt");
+            if (!file.exists()) {
+                System.out.println(FOUR_SPACE_INDENT + "Creating file: \"duke.txt\"");
+            }
+            file.createNewFile();
+
+            System.out.println(FOUR_SPACE_INDENT + "Loading tasks from \"data/duke.txt\", if there are any...");
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                switch (line.charAt(1)) {
+                case 'T':
+                    description = line.substring(7);
+                    tasks.add(new ToDo(description));
+                    break;
+                case 'D':
+                    dividerIndex = line.indexOf("(by");
+                    description = line.substring(7, (dividerIndex - 1));
+                    String by = line.substring(dividerIndex + 5, line.length() - 1);
+                    tasks.add(new Deadline(description, by));
+                    break;
+                case 'E':
+                    dividerIndex = line.indexOf("(at");
+                    description = line.substring(7, (dividerIndex - 1));
+                    String at = line.substring(dividerIndex + 5, line.length() - 1);
+                    tasks.add(new Event(description, at));
+                    break;
+                default:
+                    break;
+                }
+                if (line.charAt(4) == '\u2713') {
+                    tasks.get(tasks.size() - 1).markAsDone();
+                }
+            }
+            System.out.println(FOUR_SPACE_INDENT + "Loading done." + "\n");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     private static void takeCommands() {
@@ -49,14 +102,31 @@ public class Duke {
             listTasks();
         } else if (commandSubstrings[0].equals("done")) {
             checkOffTask();
+            saveTaskstoDisk();
         } else if (commandSubstrings[0].equals("delete")) {
             deleteTask();
+            saveTaskstoDisk();
         } else if (commandSubstrings[0].equals("todo")) {
             addTodo(command.substring(5).trim());
+            saveTaskstoDisk();
         } else if (commandSubstrings[0].equals("deadline")) {
             addDeadline(command.substring(9));
+            saveTaskstoDisk();
         } else if (commandSubstrings[0].equals("event")) {
             addEvent(command.substring(6));
+            saveTaskstoDisk();
+        }
+    }
+
+    private static void saveTaskstoDisk() {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (Task task : tasks) {
+                fw.write(task.toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
@@ -185,11 +255,12 @@ public class Duke {
 
     private static void exit() {
         System.out.print("\n");
-        System.out.println(FOUR_SPACE_INDENT + "Bye human! See you next time!");
+        System.out.println(FOUR_SPACE_INDENT + "Ok, see ya!");
     }
 
     private static void greet() {
         System.out.println(FOUR_SPACE_INDENT + "Hello, I'm Taskmaster Yipyap.");
+        System.out.println(FOUR_SPACE_INDENT + "I can help manage your tasks, and save them automatically!");
         System.out.println(FOUR_SPACE_INDENT + "What can I do for you, human?");
     }
 }
