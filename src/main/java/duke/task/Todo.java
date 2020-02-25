@@ -1,6 +1,8 @@
 package duke.task;
 
-public class Todo {
+import duke.time.Time;
+
+public class Todo extends Time {
     private String description;
     private boolean isDone;
     private final static char taskType = 'T';

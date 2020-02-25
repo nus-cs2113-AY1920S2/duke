@@ -3,24 +3,24 @@ package duke;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-    private static ArrayList<Todo> todos;
+    public static ArrayList<Todo> todos;
 
 
 
 
     // Import data from file into program
-    public Data(String path) throws FileNotFoundException {
+    public Data(String path) throws FileNotFoundException, DateTimeParseException {
         todos = new ArrayList<Todo>();
         final Parser dataParser = new Parser();
         try {
