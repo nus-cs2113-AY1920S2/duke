@@ -81,12 +81,9 @@ public class Duke {
 
     private static LocalDate extractDate(String input){
         LocalDate date;
-        System.out.println(input);
         date = LocalDate.parse(input);
         return date;
-
     }
-
 
     public static void addTaskScreen() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
