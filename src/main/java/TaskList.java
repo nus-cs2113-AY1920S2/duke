@@ -10,9 +10,6 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task);
-        this.printSize();
     }
 
     public Task getByIndex(int index) {
@@ -22,19 +19,18 @@ public class TaskList {
     /**
      * Prints all tasks which contain the specified keyword
      * @param name the specified keyword to search from the list
+     * @return number of tasks found
      */
-    public void find(String name) {
-        System.out.println("\tHere are the matching tasks in your list:");
-        int i = 1;
+    public int find(String name) {
+        int taskCount = 0;
         for (Task task : tasks) {
             if (task.getDescription().contains(name)) {
-                System.out.printf("\t%d.%s%s", i, task, System.lineSeparator());
-                i++;
+                taskCount++;
+                System.out.printf("\t%d.%s%s", taskCount, task, 
+                        System.lineSeparator());
             }
         }
-        if (i == 1) {
-            System.out.println("\tNo matching tasks found!");
-        }
+        return taskCount;
     }
 
     /**
@@ -59,12 +55,6 @@ public class TaskList {
     }
 
     public void list() {
-        if (this.size() == 0) {
-            System.out.println("\tThere are no tasks in your list.");
-            System.out.println("\tTip: Try adding a task by typing `todo NAME`");
-            return;
-        }
-        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < this.size(); ++i) {
             System.out.printf("\t%d.%s", i+1, this.getByIndex(i));
             System.out.println();

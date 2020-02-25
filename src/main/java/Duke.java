@@ -12,7 +12,7 @@ public class Duke {
         io = new Parser();
         tasks = new TaskList();
         storage = new Storage("./data/duke.txt", tasks);
-        ui = new Ui();
+        ui = new Ui(tasks);
     }
 
     public void run() {
@@ -20,8 +20,6 @@ public class Duke {
         String taskType;
         String taskDescription;
         String[] taskDescriptionArgs;
-        String taskDescriptionBy;
-        String taskDescriptionAt;
         int indexOfTasks;
 
         ui.showWelcome("Duke");
@@ -36,61 +34,46 @@ public class Duke {
                 switch (taskType) {
                 case "bye":
                     // close the interpreter
-                    System.out.println("\tBye. Hope to see you again soon!");
+                    ui.bye();
                     storage.store();
                     break;
                 case "list":
-                    tasks.list();
+                    ui.list();
                     break;
                 case "todo":
                     if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
                         throw new NoDescriptionException();
                     }
-                    tasks.add(new ToDo(taskDescription));
+                    ui.todo(taskDescription);
                     break;
                 case "deadline":
                     if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
                         throw new NoDescriptionException();
                     }
                     taskDescriptionArgs = processArgs(taskDescription);
-                    taskDescription = taskDescriptionArgs[0];
-                    taskDescriptionBy = taskDescriptionArgs[1];
-                    tasks.add(new Deadline(taskDescription, taskDescriptionBy));
+                    ui.deadline(taskDescriptionArgs);
                     break;
                 case "event":
                     if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
                         throw new NoDescriptionException();
                     }
                     taskDescriptionArgs = processArgs(taskDescription);
-                    taskDescription = taskDescriptionArgs[0];
-                    taskDescriptionAt = taskDescriptionArgs[1];
-                    tasks.add(new Event(taskDescription, taskDescriptionAt));
+                    ui.event(taskDescriptionArgs);
                     break;
                 case "done":
                     // mark a task as done
                     indexOfTasks = Integer.parseInt(command[1]) - 1;
-                    Task taskToBeMarkedAsDone = tasks.getByIndex(indexOfTasks);
-                    if (taskToBeMarkedAsDone.getDoneInBoolean() == true) {
-                        System.out.println("\tThis task has already been marked as done!");
-                    } else {
-                        tasks.setDoneByIndex(indexOfTasks);
-                        System.out.println("\tNice! I've marked this task as done:");
-                    }
-                    System.out.println("\t  " + taskToBeMarkedAsDone);
+                    ui.done(indexOfTasks);
                     break;
                 case "delete":
                     indexOfTasks = Integer.parseInt(command[1]) - 1;
-                    Task removedTask = tasks.getByIndex(indexOfTasks);
-                    tasks.removeByIndex(indexOfTasks);
-                    System.out.println("\tNoted. I've removed this task:");
-                    System.out.println("\t  " + removedTask);
-                    tasks.printSize();
+                    ui.delete(indexOfTasks);
                     break;
                 case "find":
                     if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
                         throw new NoDescriptionException();
                     }
-                    tasks.find(taskDescription);
+                    ui.find(taskDescription);
                     break;
                 default:
                     throw new IllegalArgumentException();
