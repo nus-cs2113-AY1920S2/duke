@@ -1,5 +1,6 @@
 package duke.task;
 
+/* the abstract task class(superclass of Deadline, Event, Todo Class) */
 public abstract class Task {
     String name;
     boolean isDone;
