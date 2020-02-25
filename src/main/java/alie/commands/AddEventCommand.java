@@ -12,6 +12,7 @@ public class AddEventCommand extends Command {
     private final Event taskToAdd;
 
     public static final String COMMAND_KEYWORD = "event";
+    protected static final String EVENT_DETAIL_DIVIDER = " /at ";
     public String ADD_EVENTS_ACK =
             INDENTATION + "Got it. I've added this task:" + System.lineSeparator() +
                     MORE_INDENTATION + "%1$s" + System.lineSeparator() +
@@ -19,10 +20,10 @@ public class AddEventCommand extends Command {
 
     public AddEventCommand(String[] cmd) throws InvalidCmdException {
         try {
-            String[] details = new Parser().parseEventDetails(cmd[1]);
+            String[] details = Parser.parseDeadlineOrEventDetails(cmd[1], EVENT_DETAIL_DIVIDER);
             String taskName = details[0];
-            String taskDetails = details[1];
-            taskToAdd = new Event(taskName, taskDetails);
+            String eventDate = details[1];
+            taskToAdd = new Event(taskName, eventDate);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCmdException("Name or Date of Event cannot be empty!");
         }

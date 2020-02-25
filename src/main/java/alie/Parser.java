@@ -20,6 +20,8 @@ public class Parser {
             return new DoneCommand(splitCmds[1]);
         case DeleteCommand.COMMAND_KEYWORD:
             return new DeleteCommand(splitCmds[1]);
+        case FindCommand.COMMAND_KEYWORD:
+            return new FindCommand(splitCmds[1]);
         case AddTodoCommand.COMMAND_KEYWORD:
             return new AddTodoCommand(splitCmds);
         case AddDeadlineCommand.COMMAND_KEYWORD:
@@ -31,25 +33,26 @@ public class Parser {
         }
     }
 
-    public String[] parseDeadlineDetails(String details) throws InvalidCmdException {
-        String[] stringDetails = details.split(DEADLINE_DETAIL_DIVIDER);
+    public static String[] parseDeadlineOrEventDetails(String details, String divider)
+            throws InvalidCmdException {
+        String[] stringDetails = details.split(divider);
         if (stringDetails.length > 2) {
             throw new InvalidCmdException("Cannot have more than 2 dates provided.");
         } else if (stringDetails.length < 2) {
-            throw new InvalidCmdException("Name or Date of Event cannot be missing!");
+            throw new InvalidCmdException(String.format("Name or Date %1$s cannot be missing!"
+                    , eventOrDetails(divider)));
         } else {
             return stringDetails;
         }
     }
 
-    public String[] parseEventDetails(String details) throws InvalidCmdException {
-        String[] stringDetails = details.split(EVENT_DETAIL_DIVIDER);
-        if (stringDetails.length > 2) {
-            throw new InvalidCmdException("Cannot have more than 2 dates provided.");
-        } else if (stringDetails.length < 2) {
-            throw new InvalidCmdException("Name or Date of Event cannot be missing!");
+    private static String eventOrDetails(String divider) {
+        if (divider.equals(DEADLINE_DETAIL_DIVIDER)) {
+            return "of Deadline";
+        } else if (divider.equals(EVENT_DETAIL_DIVIDER)) {
+            return "of Event";
         } else {
-            return stringDetails;
+            return "";
         }
     }
 }
