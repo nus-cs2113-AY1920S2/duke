@@ -5,6 +5,7 @@ import data.*;
 import tasklist.TaskList;
 
 import static common.Messages.SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE;
+import static common.Messages.TASKLIST_SAVE_FILEPATH;
 
 public class Duke {
 
@@ -19,13 +20,12 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.loadFileToTaskList());
         } catch (FileNotFoundException e) {
-            //ui.showLoadingError();
             this.tasks = new TaskList();
         }
     }
 
     public static void main(String[] args) {
-        Duke main = new Duke("data/duke.txt");
+        Duke main = new Duke(TASKLIST_SAVE_FILEPATH);
         main.runStartup();
         main.runLoopUntilExit();
         main.runExit();
@@ -40,7 +40,6 @@ public class Duke {
         while (commandParser.exitCommandNotEncountered()) {
             try {
                 String userInputText = ui.getUserCommand();
-                /*processedCommand = */
                 Command nextCommand = commandParser.parseCommand(userInputText);
                 nextCommand.execute(tasks, ui);
             } catch (NoRemarkException
@@ -54,7 +53,6 @@ public class Duke {
     }
 
     public void runExit() {
-        //TODO: save tasklist to storage
         try {
             storage.saveTaskListToFile(tasks);
         } catch (IOException e) {

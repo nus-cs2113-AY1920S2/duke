@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -32,4 +34,8 @@ public abstract class Task {
     }
 
     public abstract String[] getTaskData();
+
+    public abstract void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword);
+
+
 }

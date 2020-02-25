@@ -1,19 +1,26 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Todo extends Task {
 
     public static final int TODO_NUMBER_OF_FIELDS = 3;
     public static final String TODO_NOTATION = "T";
-    protected String by;
 
-    public Todo(String description, String by) {
+    public Todo(String description) {
         super(description);
-        this.by = by;
     }
 
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
+        if (this.getDescription().contains(searchKeyword)) {
+            searchResults.add(this);
+        }
     }
 
     @Override

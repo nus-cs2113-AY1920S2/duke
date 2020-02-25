@@ -3,11 +3,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import common.Messages;
 
-import static common.Messages.START_MESSAGE;
-import static common.Messages.FIRST_EXIT_MESSAGE;
-import static common.Messages.SECOND_EXIT_MESSAGE;
-import static common.Messages.EMPTY_COMMAND_ERROR_MESSAGE;
-import static common.Messages.USER_INPUT_ARROWHEAD_DISPLAY;
+import static common.Messages.*;
 
 public class Ui {
 
