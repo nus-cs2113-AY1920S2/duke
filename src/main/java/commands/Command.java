@@ -4,6 +4,9 @@ import exceptions.InvalidTaskException;
 import exceptions.MissingDescriptionException;
 import task.TaskList;
 
+/**
+ * Represents the command entered by the user.
+ */
 public class Command {
     protected String description;
     protected TaskList tasks;

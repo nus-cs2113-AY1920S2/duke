@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileWriter;
 
+/**
+ * Handles loading and saving of tasks to a text file, so that data is preserved in future runs of the program.
+ */
 public class Storage {
 
     private String filepath;
@@ -13,7 +16,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    /** Load the tasks from txt file */
+    /**
+     * Returns a TaskList object containing tasks loaded from a .txt file.
+     * If the file is empty or does not exist, returns an empty TaskList.
+     *
+     * @return TaskList.
+     */
     public TaskList loadTasks() throws IOException {
         String localDir = System.getProperty("user.dir");
         File f = new File(localDir + filepath);
@@ -61,7 +69,11 @@ public class Storage {
         return tasks;
     }
 
-    /** Save the tasks to txt file */
+    /**
+     * Saves the tasks from the current TaskList to a .txt file.
+     *
+     * @param tasks Most updated TaskList.
+     */
     public void saveTasks(TaskList tasks) throws IOException {
         String localDir = System.getProperty("user.dir");
         FileWriter fw = new FileWriter(localDir + filepath);

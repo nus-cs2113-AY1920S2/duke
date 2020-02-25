@@ -3,6 +3,10 @@ import ui.UI;
 import exceptions.InvalidTaskException;
 import java.util.ArrayList;
 
+/**
+ * Represents the main task list, with operations to list, add and delete tasks.
+ * @see Task
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -11,7 +15,9 @@ public class TaskList {
         this.tasks = new ArrayList<> (100);
     }
 
-    /** Prints all tasks in the list */
+    /**
+     * Prints all tasks in the task list.
+     */
     public void listTasks() {
         UI.br();
         System.out.println("\t Dook will list your tasks now:");
@@ -30,11 +36,18 @@ public class TaskList {
         return tasks.size();
     }
 
-    /** Appends new task to the list */
+    /**
+     * Appends new task to the list.
+     * @param t Task to be appended.
+     */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Sets a task's completion status to true and prints done message.
+     * @param description String index of the task to be marked as done, based on its list position.
+     */
     public void markDone(String description) {
         UI.br();
         int taskIdx = Integer.parseInt(description) -1; // -1 for zero-based indexing
@@ -44,6 +57,12 @@ public class TaskList {
         UI.br();
     }
 
+    /**
+     * Deletes a task from the task list.
+     *
+     * @param description String index of the task to be deleted, based on its list position.
+     * @throws InvalidTaskException If task index is out of bounds.
+     */
     public void deleteTask(String description) throws InvalidTaskException {
         int taskIdx = Integer.parseInt(description) -1;
         if (taskIdx >= tasks.size() || taskIdx < 0) {

@@ -38,7 +38,7 @@ public class Duke {
             } catch (InvalidCommandException e) {
                 UI.showInvalidCommandError();
             } catch (MissingDescriptionException e) {
-                UI.showMissingDescriptionerror();
+                UI.showMissingDescriptionError();
             } catch (InvalidTaskException e) {
                 UI.showInvalidTaskError();
             }

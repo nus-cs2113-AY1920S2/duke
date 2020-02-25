@@ -1,5 +1,10 @@
 package task;
 
+/**
+ * Represents a task of the type Event.
+ * An Event object contains the time frame of the event in addition to information contained in its parent, Task.
+ * @see Task
+ */
 public class Event extends Task {
     protected String at;
 
