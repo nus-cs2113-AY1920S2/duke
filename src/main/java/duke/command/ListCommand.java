@@ -4,7 +4,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-public class ListCommand implements Command{
+public class ListCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
@@ -12,6 +12,6 @@ public class ListCommand implements Command{
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+        ui.showList(taskList.getList());
     }
 }

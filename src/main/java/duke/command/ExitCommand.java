@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-public class ExitCommand implements Command{
+public class ExitCommand implements Command {
     @Override
     public boolean isExit() {
         return true;

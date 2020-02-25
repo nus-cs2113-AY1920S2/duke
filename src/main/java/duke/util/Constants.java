@@ -26,6 +26,7 @@ public class Constants {
     public static final String EVENT_COMMAND_SHORTCUT = "evt";
     public static final String DELETE_COMMAND = "delete";
     public static final String DELETE_COMMAND_SHORTCUT = "del";
+    public static final String FIND_COMMAND = "find";
     public static final String HELP_COMMAND = "help";
     public static final String DEADLINE_TIME_DELIMITER = " -by ";
     public static final String EVENT_TIME_DELIMITER = " -at ";
@@ -36,6 +37,8 @@ public class Constants {
     public static final String ADD_TASK_PROMPT = "Got it. I've added this duke.task:";
     public static final String ADD_OR_DELETE_TASK_POST_PROMPT = "Now you have %d tasks in the list.\n";
     public static final String DELETE_TASKS_PROMPT = "Noted. I've removed this task:";
+    public static final String NOT_FOUND_TASK_PROMPT = "There are no matching tasks in your list!";
+    public static final String FOUND_TASK_PROMPT = "Here are the matching tasks in your list:";
     public static final String LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING = "%d.%s\n";
     public static final String TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE = "OOPS!!! The task id is not provided " +
             "or invalid!";
@@ -56,6 +59,8 @@ public class Constants {
     public static final String DELETE_COMMAND_HELP_MESSAGE = "key in `delete/del <task_id>` to delete the task of " +
             "<task_id>.";
     public static final String EXIT_COMMAND_HELP_MESSAGE = "key in `exit/bye/quit` to exit the programme.";
+    public static final String FIND_COMMAND_HELP_MESSAGE = "key in `find <search_term>` to find the tasks which " +
+            "contain the keyword <search_term>\n this function is case-insensitive";
     public static final String YES_ICON = "[v]";
     public static final String NO_ICON = "[x]";
     public static final String DEADLINE_ICON = "[D]";

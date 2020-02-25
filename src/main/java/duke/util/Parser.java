@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
@@ -31,6 +32,7 @@ import static duke.util.Constants.EVENT_TIME_DELIMITER;
 import static duke.util.Constants.EXIT_COMMAND_BYE;
 import static duke.util.Constants.EXIT_COMMAND_EXIT;
 import static duke.util.Constants.EXIT_COMMAND_QUIT;
+import static duke.util.Constants.FIND_COMMAND;
 import static duke.util.Constants.HELP_COMMAND;
 import static duke.util.Constants.LIST_COMMAND;
 import static duke.util.Constants.LIST_COMMAND_SHORTCUT;
@@ -56,7 +58,7 @@ public class Parser {
             return new DoneCommand(doneTaskId);
         case TODO_COMMAND:
         case TODO_COMMAND_SHORTCUT:
-            return new TodoCommand(afterCommand);
+            return new TodoCommand(afterCommand.trim());
         case DEADLINE_COMMAND:
         case DEADLINE_COMMAND_SHORTCUT:
             try {
@@ -89,6 +91,8 @@ public class Parser {
         case DELETE_COMMAND_SHORTCUT:
             int delTaskId = extractTaskId(userInput);
             return new DeleteCommand(delTaskId);
+        case FIND_COMMAND:
+            return new FindCommand(afterCommand.trim());
         case HELP_COMMAND:
             return new HelpCommand(afterCommand);
         default:

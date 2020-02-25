@@ -8,7 +8,7 @@ import duke.util.Storage;
 
 import java.time.LocalDate;
 
-public class EventCommand implements Command{
+public class EventCommand implements Command {
     private String taskDescription;
     private LocalDate atDate;
 
