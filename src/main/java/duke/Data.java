@@ -3,7 +3,6 @@ package duke;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-    private static ArrayList<Todo> todos;
+    public static ArrayList<Todo> todos;
 
 
 

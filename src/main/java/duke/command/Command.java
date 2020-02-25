@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.Data;
-import duke.DukeException;
-import duke.Parser;
-import duke.Ui;
+import duke.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -43,6 +40,9 @@ public class Command {
                     break;
                 case Ui.COMMAND_DONE:
                     markDoneCommand(input);
+                    break;
+                case Ui.COMMAND_FIND:
+                    findCommand(input);
                     break;
                 default:
                     System.out.println("Please specify a correct mode.");
@@ -113,6 +113,16 @@ public class Command {
             data.printItem(index);
         } catch(Exception e) {
             throw new DukeException("Please specify an index in the range.");
+        }
+    }
+
+    public void findCommand(String input) throws DukeException {
+        try {
+            String[] buffer = input.split(Ui.COMMAND_FIND + Ui.SPACE_SYMBOL);
+            String keywords = buffer[1];
+            new Find(keywords);
+        } catch (Exception e) {
+            throw new DukeException("Please specify at least one search term.");
         }
     }
 }
