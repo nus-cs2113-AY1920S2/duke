@@ -9,11 +9,19 @@ import duke.exception.DukeException;
 
 import static duke.util.Constants.DATA_FILE_NAME;
 
+/**
+ * The main entrance of the programme.
+ *
+ * @author A11riseforme
+ */
 public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Duke constructor
+     */
     public Duke()  {
         ui = new Ui();
         storage = new Storage(DATA_FILE_NAME);
@@ -25,7 +33,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Run the programme by receiving and executing users' command,
+     * until receiving the exit command from user.
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
@@ -44,6 +55,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Initializes new Duke user and runs the programme.
+     *
+     * @param args arguments of the programme
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
