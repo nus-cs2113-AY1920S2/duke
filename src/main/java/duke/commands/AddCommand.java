@@ -42,7 +42,7 @@ public class AddCommand extends Command {
     private String commandWord;
     private String dayAndTime;
     
-    public AddCommand(String commandWord,String description) {
+    public AddCommand(String commandWord, String description) {
         this.description = description;
         this.commandWord = commandWord;
         
@@ -71,7 +71,8 @@ public class AddCommand extends Command {
             }
             appendToFile(tasks.get(tasks.size() - 1).toStorage());
             return new CommandResult(
-                    DIVIDER + LS + String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()) + LS + DIVIDER);
+                    DIVIDER + LS + String.format(COMMAND_ADD_MESSAGE, tasks.get(tasks.size() - 1), tasks.size()) + LS +
+                            DIVIDER);
         } catch (IOException e) {
             return new CommandResult(e.toString());
         }
