@@ -10,7 +10,7 @@ If you like the freedom of command line, jump to *Quick Start* to get started. E
 1. Navigate to the folder in your Command Prompt (Windows) or Terminal (MacOS & Linux).
 1. Type `java -jar Duke.jar` to start the app.
 
-Refer to the next section *Feature* for details of each command.
+Refer to the next section [Features](#features) for details of each command.
 
 # Features
 
@@ -27,27 +27,25 @@ Refer to the next section *Feature* for details of each command.
 
 Syntax: `list`
 
-Expected output:
-
-- If you have no tasks in the list:
-```
-	Here are the tasks in your list:
-```
-- Otherwise:
+### Expected output:
 ```
 	Here are the tasks in your list:
 	1.[T][✗] borrow book
 	2.[D][✓] return book (by: Sunday)
 	3.[E][✗] project meeting (at: Mon 2-4pm)
 ```
+- If you have no tasks in the list:
+```
+	Here are the tasks in your list:
+```
 
 ## Add a To-Do
 
-Syntax: `todo NAME`
+### Syntax: `todo NAME`
 
-Example: `todo borrow book`
+> Example: `todo borrow book`
 
-Expected outcome:
+### Expected outcome:
 ```
 	Got it. I've added this task:
 	  [T][✗] borrow book
@@ -56,11 +54,11 @@ Expected outcome:
 
 ## Add a Deadline
 
-Syntax: `deadline NAME /by TIME`
+### Syntax: `deadline NAME /by TIME`
 
-Example: `deadline return book /by Sunday`
+> Example: `deadline return book /by Sunday`
 
-Expected outcome:
+### Expected outcome:
 ```
 	Got it. I've added this task:
 	  [D][✗] return book (by: Sunday)
@@ -69,11 +67,11 @@ Expected outcome:
 
 ## Add an Event
 
-Syntax: `event NAME /at TIME`
+### Syntax: `event NAME /at TIME`
 
-Example: `event project meeting /at Mon 2-4pm`
+> Example: `event project meeting /at Mon 2-4pm`
 
-Expected outcome:
+### Expected outcome:
 ```
 	Got it. I've added this task:
 	  [E][✗] project meeting (at: Mon 2-4pm)
@@ -82,26 +80,31 @@ Expected outcome:
 
 ## Mark a task as done
 
-Syntax: `done INDEX`
+### Syntax: `done INDEX`
 
 Tick an existing task.
 Note: a task that is already done will be left unchanged.
 
-Example: `done 2`
+> Example: `done 2`
 
-Expected outcome:
+### Expected outcome:
 ```
 	Nice! I've marked this task as done:
+	  [D][✓] return book (by: Sunday)
+```
+- If you have ticked this task before:
+```
+	This task has already been marked as done!
 	  [D][✓] return book (by: Sunday)
 ```
 
 ## Delete a task
 
-Syntax: `delete INDEX`
+### Syntax: `delete INDEX`
 
-Example: `delete 3`
+> Example: `delete 3`
 
-Expected outcome:
+### Expected outcome:
 ```
 	Noted. I've removed this task:
 	  [E][✗] project meeting (at: Mon 2-4pm)
@@ -110,33 +113,32 @@ Expected outcome:
 
 ## Find tasks by name
 
-Syntax: `find NAME`
+### Syntax: `find NAME`
 
 Search for all tasks with names that contain the search keyword.
-Does not search from any other parameters (e.g. `/by`, `/at`).
+Does not look into any other parameters (e.g. `/by`, `/at`).
 
-Example: `find book`
+> Example: `find book`
 
-Expected outcome:
-
-- If no result is found:
-```
-	Here are the matching tasks in your list:
-```
-- Otherwise:
+### Expected outcome:
 ```
 	Here are the matching tasks in your list:
 	1.[T][✗] borrow book
 	2.[D][✓] return book (by: Sunday)
 ```
+- If no result is found:
+```
+	Here are the matching tasks in your list:
+	No matching tasks found!
+```
 
 ## Exit
 
-Syntax: `bye`
+### Syntax: `bye`
 
 Exit the app and save all tasks in `/data/duke.txt`
 
-Expected outcome:
+### Expected outcome:
 ```
 	Bye. Hope to see you again soon!
 ```
