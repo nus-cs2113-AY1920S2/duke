@@ -11,6 +11,7 @@ public class Ui implements Logo {
     public static final String DEADLINE_SYMBOL = " /by ";
     public static final String EVENT_SYMBOL = " /at ";
     public static final String SPACE_SYMBOL = " ";
+    public static final String COMMAND_FIND = "find";
 
     public Ui() {
         System.out.println("Hello from\n" + logo);
@@ -40,5 +41,9 @@ public class Ui implements Logo {
 
     public static void deleteSuccessful() {
         System.out.println("  Noted. I've removed this task:");
+    }
+
+    public static void printFindStatement() {
+        System.out.println("  Here are the matching tasks in your list:");
     }
 }

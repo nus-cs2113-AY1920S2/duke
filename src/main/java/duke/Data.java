@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-    private static ArrayList<Todo> todos;
+    public static ArrayList<Todo> todos;
 
 
 
