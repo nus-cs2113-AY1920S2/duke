@@ -57,7 +57,7 @@ public class TaskList {
     public void listAllTasks() {
         ui.printLine();
         System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < listOfTasks.size(); i++) {
+        for (int i = 0; i < listOfTasks.size(); i += 1) {
             Task currTask = listOfTasks.get(i);
             System.out.println(" " + (i + 1) + ". " + currTask);
 
@@ -88,6 +88,25 @@ public class TaskList {
         System.out.println("  " + taskToDelete);
         System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
         ui.printLine();
+    }
 
+    public void findTask(String line) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        String[] splitLine = line.split(" ");
+        String keyword = splitLine[1];
+        for (int i = 0; i < listOfTasks.size(); i += 1) {
+            String taskDescription = listOfTasks.get(i).toString();
+            if (taskDescription.contains(keyword)) {
+                matchingTasks.add(listOfTasks.get(i));
+            }
+        }
+        ui.printLine();
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < matchingTasks.size(); i += 1) {
+            Task currTask = matchingTasks.get(i);
+            System.out.println(" " + (i + 1) + ". " + currTask);
+
+        }
+        ui.printLine();
     }
 }

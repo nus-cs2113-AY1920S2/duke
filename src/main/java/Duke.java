@@ -56,6 +56,9 @@ public class Duke {
                     ui.showLoadingError();
                 }
                 break;
+            case "find":
+                tasks.findTask(line);
+                break;
             default:
                 String taskInformation;
                 try {

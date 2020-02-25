@@ -4,7 +4,8 @@ public class Parser {
 
     private Ui ui = new Ui();
 
-    public static final String[] VALID_COMMANDS = {"done", "list", "bye", "todo", "deadline", "event", "delete"};
+    public static final String[] VALID_COMMANDS =
+            {"done", "list", "bye", "todo", "deadline", "event", "delete", "find"};
 
     public String getInput() {
         String line;
