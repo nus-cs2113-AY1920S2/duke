@@ -1,5 +1,0 @@
-T | 0 | hello
-T | 0 | sleep
-T | 0 | eat
-E | 0 | repeat | everyday
-D | 0 | sleep | now

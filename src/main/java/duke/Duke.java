@@ -1,277 +1,57 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
-import java.io.File;
+import duke.manager.Manager;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.TextUi;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
 
-    private static final String HAPPY_FACE = "(＾▽＾)";
-    private static final String SAD_FACE = "(╥_╥)";
-    private static final String DIVIDER = "===================================================";
+    private Storage storage;
+    private TextUi ui;
+    private TaskList tasks;
 
-    public static void main(String[] args) {
-        printWelcomeMessage();
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        printUserGreeting(name);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+    public Duke() {
+        ui = new TextUi();
+        storage = new Storage();
         try {
-            retrieve(tasks);
+            tasks = new TaskList();
+            storage.retrieve(tasks);
+        } catch (FileNotFoundException e) {
+            TextUi.showLoadingError();
+        }
+    }
+
+    /** Runs the program until termination.  */
+    public void run() {
+        ui.printWelcomeMessage();
+        String name = ui.InputUserName();
+        Scanner sc = new Scanner(System.in);
+        try {
+            storage.retrieve(tasks);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        manageTasks(sc, name, tasks);
-    }
 
-    private static ArrayList<Task> retrieve(ArrayList<Task> tasks) throws FileNotFoundException {
-        File f = new File("C:\\repos\\IP\\data\\duke.txt"); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String input = s.nextLine();
-            String[] parseInput = input.split("[|]");
-            switch (parseInput[0].trim()) {
-                case ("T"):
-                    tasks.add(new ToDo(parseInput[2].trim()));
-                    break;
-                case ("E"):
-                    tasks.add(new Event(parseInput[2].trim(), parseInput[3].trim()));
-                    break;
-                case ("D"):
-                    tasks.add(new Deadline(parseInput[2].trim(), parseInput[3].trim()));
-                    break;
-            }
-            if (parseInput[1].trim().equals("1")) {
-                tasks.get(tasks.size()-1).updateTask();
-            }
-        }
-        return tasks;
-    }
+        boolean isExit = false;
 
-    private static void manageTasks(Scanner sc, String name, ArrayList<Task> tasks) {
-
-        while (true) {
-            String input = sc.nextLine();
-            String[] parseInput = input.split(" ", 2);
-            String command = parseInput[0];
-            //parseInput[1].isEmpty() for empty string, not empty spaces
-
-            try {
-                if (command.equalsIgnoreCase("done")) {
-                    try {
-                        printDoneTasks(tasks, parseInput[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(String.format("%50s", "Please include task number " + SAD_FACE));
-                        System.out.println(DIVIDER);
-                    }
-                } else if (command.equalsIgnoreCase("list")) {
-                    printList(tasks);
-                } else if (command.equalsIgnoreCase("todo")) {
-                    addToDo(tasks, parseInput);
-                } else if (command.equalsIgnoreCase("bye")) {
-                    try {
-                        save(tasks);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    printByeMessage(name);
-                    break;
-                } else if (command.equalsIgnoreCase("event")) {
-                    try {
-                        addEvent(tasks, parseInput[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
-                        System.out.println(DIVIDER);
-                    }
-                } else if (command.equalsIgnoreCase("deadline")) {
-                    try {
-                        addDeadline(tasks, parseInput[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
-                        System.out.println(DIVIDER);
-                    }
-                } else if (command.equalsIgnoreCase("delete")) {
-                    try {
-                        deleteTask(tasks, parseInput[1]);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(String.format("%50s", "Please include task number in the list " + SAD_FACE));
-                        System.out.println(DIVIDER);
-                    } catch (NumberFormatException e) {
-                        System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
-                        System.out.println(DIVIDER);
-                    }
-                } else {
-                    throw new DukeException();
-                }
-            } catch (DukeException e) {
-                //catch invalid commands
-                System.out.println(String.format("%50s", "Oops! I don't know what that means " + SAD_FACE));
-                System.out.println(DIVIDER);
-            }
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            String[] parseInput = Parser.parser(fullCommand);
+            String command = Parser.getCommand(parseInput);
+            Manager.manager(parseInput, name, tasks, command);
+            isExit = Manager.isExit();
         }
     }
 
-    private static void deleteTask(ArrayList<Task> tasks, String s) {
-        int removeTask = Integer.parseInt(s)-1;
-        String taskInformation = String.valueOf(tasks.get(removeTask));
-        System.out.println(String.format("%50s", "Noted. I've removed this task: "+ HAPPY_FACE));
-        System.out.println(String.format("%50s", taskInformation));
-        tasks.remove(removeTask);
-        System.out.println(String.format("%50s", "Now you have " + tasks.size() + " tasks in the list."));
-        System.out.println(DIVIDER);
-    }
-
-    private static void save(ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter("C:\\repos\\IP\\data\\duke.txt",false);
-        for (Task i : tasks) {
-            fw.write(i.saveTask());
-            fw.write(System.lineSeparator());
-        }
-        fw.close();
-    }
-
-    private static void printList(ArrayList<Task> tasks) {
-        if (tasks.size() == 0) {
-            System.out.println(String.format("%50s", "YAYYYY! There are no tasks in your list " + HAPPY_FACE));
-            System.out.println(DIVIDER);
-            return;
-        }
-        System.out.println(String.format("%50s", "Here are the tasks in your list:"));
-        for (int i = 1; i <= tasks.size(); i++) { //is it better to start from 0 ?
-            System.out.println(String.format("%50s", i + ". " + tasks.get(i-1)));
-        }
-        System.out.println(DIVIDER);
-    }
-
-    private static void addDeadline(ArrayList<Task> tasks, String parseInput) {
-        try {
-            String[] deadline;
-            deadline = parseInput.split("/by", 2);
-            deadline[0] = deadline[0].trim();
-            if (!deadline[0].isEmpty()) {
-                String time = deadline[1].trim();
-                if (time.isEmpty()) {
-                    System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-                    System.out.println(DIVIDER);
-                }
-                tasks.add(new Deadline(deadline[0], time));
-                System.out.println(String.format("%50s", "Got it. I've added this deadline:"));
-                System.out.println(String.format("%50s", tasks.get(tasks.size()-1)));
-                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
-                System.out.println(DIVIDER);
-            } else {
-                //catch empty string
-                throw new DukeException();
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(String.format("%50s", "Oops! Please include /by follows by the date " + SAD_FACE));
-            System.out.println(DIVIDER);
-        } catch (DukeException e) {
-            System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-            System.out.println(DIVIDER);
-        }
-    }
-
-    private static void addEvent(ArrayList<Task> tasks, String parseInput) {
-        try {
-            String[] event;
-            event = parseInput.split("/at", 2);
-
-            event[0] = event[0].trim();
-            
-            if (!event[0].isEmpty()) {
-                String time = event[1].trim();
-                if (time.isEmpty()) {
-                    System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-                    System.out.println(DIVIDER);
-                }
-                tasks.add(new Event(event[0], time));
-                System.out.println(String.format("%50s", "Got it. I've added this event:"));
-                System.out.println(String.format("%50s", tasks.get(tasks.size()-1)));
-                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
-                System.out.println(DIVIDER);
-            } else {
-                //catch empty string
-                throw new DukeException();
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(String.format("%50s", "Oops! Please include /at follows by the date " + SAD_FACE));
-            System.out.println(DIVIDER);
-        } catch (DukeException e) {
-            System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-            System.out.println(DIVIDER);
-        }
-    }
-
-    private static void addToDo(ArrayList<Task> tasks, String[] parseInput) {
-        try {
-            if (!parseInput[1].isEmpty()) {
-                tasks.add(new ToDo(parseInput[1]));
-                System.out.println(String.format("%50s", "Got it. I've added this task:"));
-                System.out.println(String.format("%50s", tasks.get(tasks.size()-1)));
-                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
-                System.out.println(DIVIDER);
-            } else {
-                throw new DukeException();
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-            System.out.println(DIVIDER);
-        } catch (DukeException e) {
-            System.out.println(String.format("%50s", "Please include task description. " + SAD_FACE));
-            System.out.println(DIVIDER);
-        }
-    }
-
-    private static void printDoneTasks(ArrayList<Task> tasks, String s) {
-        try {
-            int doneTask = Integer.parseInt(s)-1;
-            tasks.get(doneTask).updateTask();
-            System.out.println(String.format("%50s", "Nice! I've marked this task as done:"));
-            System.out.println(String.format("%50s", tasks.get(doneTask)));
-            System.out.println(DIVIDER);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(String.format("Task not included in the list, please try again."));
-            System.out.println(DIVIDER);
-        } catch (Exception e) {
-            //done + empty string/invalid input
-            System.out.println(String.format("%50s", SAD_FACE + " Oops! Information is incomplete."));
-            System.out.println(DIVIDER);
-        }
-    }
-
-    private static void printByeMessage(String name) {
-        System.out.println(String.format("%50s", "Bye, " + name + ". Hope to see you again soon!"));
-        System.out.println(DIVIDER);
-    }
-
-    private static void printUserGreeting(String name) {
-        System.out.println(DIVIDER);
-        System.out.println(String.format("%50s", "Hello " + name + ", Anything I can help you with?"));
-        System.out.println(DIVIDER);
-    }
-
-    private static void printWelcomeMessage() {
-        String logo = " /$$   /$$                     /$$\n"
-                + "| $$  /$$/                    |__/\n"
-                + "| $$ /$$/   /$$$$$$   /$$$$$$$ /$$ /$$$$$$$\n"
-                + "| $$$$$/   /$$__  $$ /$$_____/| $$| $$__  $$\n"
-                + "| $$  $$  | $$$$$$$$|  $$$$$$ | $$| $$  \\ $$\n"
-                + "| $$\\  $$ | $$_____/ \\____  $$| $$| $$  | $$\n"
-                + "| $$ \\  $$|  $$$$$$$ /$$$$$$$/| $$| $$  | $$\n"
-                + "|__/  \\__/ \\_______/|_______/ |__/|__/  |__/";
-
-        System.out.println("Hello from\n" + logo);
-        System.out.println(DIVIDER);
-        String s1 = String.format("%50s", "What's your name?");
-        System.out.println(s1);
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

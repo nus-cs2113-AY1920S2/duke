@@ -19,7 +19,7 @@ Hello from
 ===================================================
          Oops! Information is incomplete (â•¥_â•¥)
 ===================================================
-  Please include task number in the list (â•¥_â•¥)
+Task not included in the list, please try again. (â•¥_â•¥)
 ===================================================
                  Got it. I've added this deadline:
                    [D][✘] return book (by: Monday)
@@ -59,7 +59,7 @@ Task not included in the list, please try again.
                      5 tasks in the list (â•¥_â•¥)
 ===================================================
                     Got it. I've added this event:
-          [E][✘] project meeting (at:Friday 2-4pm)
+         [E][✘] project meeting (at: Friday 2-4pm)
 
                      6 tasks in the list (â•¥_â•¥)
 ===================================================
@@ -76,7 +76,7 @@ Task not included in the list, please try again.
                                    3. [T][✘] study
                                 4. [T][✘] homework
                          5. [T][✘] CS2113T project
-       6. [E][✘] project meeting (at:Friday 2-4pm)
+      6. [E][✘] project meeting (at: Friday 2-4pm)
         7. [D][✘] report submission (by: Thursday)
 ===================================================
         Noted. I've removed this task: (ï¼¾â–½ï¼¾)
