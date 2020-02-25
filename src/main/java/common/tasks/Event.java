@@ -1,4 +1,4 @@
-package duke;
+package common.tasks;
 
 public class Event extends Task {
     private final String date;
@@ -6,6 +6,12 @@ public class Event extends Task {
     public Event(String description, String date) {
         super(description);
         this.date = date;
+    }
+    
+    public Event(String description, String date, boolean isDone) {
+        super(description);
+        this.date = date;
+        this.isDone = isDone;
     }
     
     @Override

@@ -1,4 +1,4 @@
-package duke;
+package common.tasks;
 
 public class Task {
     protected final String description;
@@ -20,7 +20,7 @@ public class Task {
      * @return Indication if task is done or not.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "Y" : "N"); //return tick or X symbols
     }
     
     /**
