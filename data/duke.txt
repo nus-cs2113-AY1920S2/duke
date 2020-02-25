@@ -1,1 +1,8 @@
-
+D | 1 | return book | Monday
+T | 0 | study
+D | 0 | CS2105 project | Thursday
+T | 1 | CS2102 project
+T | 0 | homework
+T | 0 | CS2113T project
+E | 0 | project meeting | Friday 2-4pm
+D | 0 | report submission | Thursday

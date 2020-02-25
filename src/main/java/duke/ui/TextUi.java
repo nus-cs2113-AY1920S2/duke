@@ -18,7 +18,7 @@ public class TextUi {
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Informs the user that there are missing information.
+     * Informs the user that there is missing information.
      */
     public static void printIncompleteInformation() {
         System.out.println(String.format("%50s", "Oops! Information is incomplete " + SAD_FACE));
@@ -34,9 +34,21 @@ public class TextUi {
     }
 
     /**
+     * Displays the to-do with relevant information entered by the user.
+     * Informs the user that the to-do task is successfully added to the list.
+     * Shows the total number of tasks in the list.
+     */
+    public static void printToDo(ArrayList<Task> tasks) {
+        System.out.println(String.format("%50s", "Got it. I've added this task:"));
+        System.out.println(String.format("%50s", tasks.get(tasks.size() - 1)));
+        System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
+        System.out.println(DIVIDER);
+    }
+
+    /**
      * Displays the event with relevant information entered by the user.
      * Informs the user that the event is successfully added to the list.
-     * Displays the total number of tasks in the list.
+     * Shows the total number of tasks in the list.
      */
     public static void printEvent(ArrayList<Task> tasks) {
         System.out.println(String.format("%50s", "Got it. I've added this event:"));
@@ -48,7 +60,7 @@ public class TextUi {
     /**
      * Displays the deadline with relevant information entered by the user.
      * Informs the user that the deadline is successfully added to the list.
-     * Displays the total number of tasks in the list.
+     * Shows the total number of tasks in the list.
      */
     public static void printDeadline(ArrayList<Task> tasks) {
         System.out.println(String.format("%50s", "Got it. I've added this deadline:"));
@@ -89,6 +101,7 @@ public class TextUi {
         System.out.println(String.format("%50s", "File not found"));
         System.out.println(DIVIDER);
     }
+
 
     public String readCommand() {
         String input = sc.nextLine();

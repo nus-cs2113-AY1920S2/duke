@@ -163,10 +163,7 @@ public class TaskList {
         try {
             if (!parseInput[1].isEmpty()) {
                 tasks.add(new ToDo(parseInput[1]));
-                System.out.println(String.format("%50s", "Got it. I've added this task:"));
-                System.out.println(String.format("%50s", tasks.get(tasks.size() - 1)));
-                System.out.println(String.format("\n%50s", tasks.size() + " tasks in the list " + SAD_FACE));
-                System.out.println(DIVIDER);
+                TextUi.printToDo(tasks);
             } else {
                 throw new DukeException();
             }
