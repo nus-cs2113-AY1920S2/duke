@@ -65,4 +65,15 @@ public class TaskList {
         taskList.remove(task);
         return description;
     }
+
+    public String[] findMatchingTasks(String keyword) {
+        ArrayList<String> matchingTasks = new ArrayList<>();
+        matchingTasks.add(Ui.FINDING);
+        int i = 1;
+        for (Task task : taskList) {
+            String taskDescription = task.print();
+            if (taskDescription.toLowerCase().contains(keyword.toLowerCase())) matchingTasks.add(i++ + "." + taskDescription);
+        }
+        return matchingTasks.toArray(new String[matchingTasks.size()]);
+    }
 }
