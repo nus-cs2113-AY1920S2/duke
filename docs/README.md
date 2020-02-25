@@ -1,16 +1,24 @@
 # User Guide
 
 ## Table Of Contents
-### 1. [Introduction](#intro)
-### 2. [Quick Start](#quick-start)
-### 3. [Features](#features)
-### 4. [FAQ](#faq)
-### 5. [Command Summary](#command-summary)
+    1. [Introduction](#intro)
+    2. [Quick Start](#quick-start)
+    3. [Features](#features)
+      3.1. [Add new ToDo task](#add-todo)
+      3.2. [Add new Deadline task](#add-deadline)
+      3.3. [Add new Event task](#add-event)
+      3.4. [Delete task](#delete)
+      3.5. [Mark task as done](#mark)
+      3.6. [List all tasks](#list)
+      3.7. [Exit](#exit)
+    4. [FAQ](#faq)
+    5. [Command Summary](#command-summary)
+
 
 <a name="intro"></a>
 
 ## 1. Introduction
-#intro
+
  Duke is a command line based personal chatbot application used for managing tasks.
  The various types of tasks it can handle are:
  * **ToDo** Tasks --> Contains a simple description of the task and completion status.
@@ -44,6 +52,9 @@
 
 ## 3. Features
 
+
+<a name="add-todo"></a>
+
 ### 1. Add new ToDo task
 Adds a new ToDo task to the list of tasks.
 
@@ -68,6 +79,9 @@ Upon success a response similar to the following one would appear:
      Now you have 1 task in the list.
     __________________________________________________________________________________________
 
+
+
+<a name="add-deadline"></a>
 
 ### 2. Add new Deadline task
 Adds a new Deadline task to the list of tasks.
@@ -97,6 +111,8 @@ Upon success a response similar to the following one would appear:
 
 
 
+<a name="add-event"></a>
+
 ### 3. Add new Event task
 Adds a new Event task to the list of tasks.
 
@@ -120,6 +136,9 @@ Upon success a response similar to the following one would appear:
         [E][ ] meeting (at: school)
      Now you have 3 tasks in the list.
     __________________________________________________________________________________________
+
+
+<a name="delete"></a>
 
 ### 4. Delete task
 Deletes the task at the specified index.
@@ -145,6 +164,9 @@ Upon success a response similar to the following one would appear:
      Now you have 2 tasks in the list.
     __________________________________________________________________________________________
 
+
+<a name="mark"></a>
+
 ### 5. Mark task as done
 Marks the task at the specified index as done.
 
@@ -167,7 +189,10 @@ Upon success a response similar to the following one would appear:
      Nice! I've marked this task as done:
        [T][/] homework
     __________________________________________________________________________________________
-    
+ 
+
+<a name="add-todo"></a>
+   
 ### 6. List all tasks
 List all current tasks stored.
 
@@ -192,6 +217,9 @@ A response similar to the following one would appear:
      2. [E][ ] meeting (at: school)
     __________________________________________________________________________________________
     
+
+<a name="list"></a>
+
 ### 6. Search tasks
 Performs a linear search of all tasks stored in the list at the point of execution and list
 all the tasks containing the keyword in their description in a numbered list.
@@ -216,8 +244,10 @@ A response similar to the following one would appear:
      1. [E][ ] meeting (at: school)
     __________________________________________________________________________________________   
 
+
+<a name="exit"></a>
     
-### 6. Exit 
+### 7. Exit 
 The command is used to exit the application. But before the actual application is exited the 
 tasks currently in the list are stored in a file.
 
