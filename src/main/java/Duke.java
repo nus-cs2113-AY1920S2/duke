@@ -2,6 +2,7 @@ import duke.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -75,6 +76,15 @@ public class Duke {
         return str;
     }
 
+    private static LocalDate extractDate(String input){
+        LocalDate date;
+        System.out.println(input);
+        date = LocalDate.parse(input);
+        return date;
+
+    }
+
+
     public static void addTaskScreen() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
         System.out.println("Please add tasks");
@@ -105,7 +115,8 @@ public class Duke {
             int dividerPositionSlash = str.indexOf("/");
             String task = str.substring(dividerPosition + 1, dividerPositionSlash);
             String by = str.substring(dividerPositionSlash + 4);
-            Deadlines newTask = new Deadlines(task, by);
+            LocalDate date = extractDate(by);
+            Deadlines newTask = new Deadlines(task, date);
             addTask(newTask);
             addTaskScreen();
         } else if ((str.contains("event"))) {
@@ -116,7 +127,8 @@ public class Duke {
             String task = str.substring(dividerPosition + 1, dividerPositionSlash);
             String calender = str.substring(dividerPositionSlash + 4);
             int dateAndTime = calender.indexOf(" ");
-            String date = calender.substring(0, dateAndTime);
+            String at = calender.substring(0, dateAndTime);
+            LocalDate date = extractDate(at);
             String time = calender.substring(dateAndTime + 1);
             Events newTask = new Events(task, date, time);
             addTask(newTask);
@@ -285,7 +297,8 @@ public class Duke {
             int timeSectionEnd = raw.indexOf(")");
             String taskDescription = raw.substring(6, timeSectionStart - 1);
             String timePeriod = raw.substring(timeSectionStart + 5, timeSectionEnd);
-            Deadlines newTask = new Deadlines(taskDescription, timePeriod);
+            LocalDate date = extractDate(timePeriod);
+            Deadlines newTask = new Deadlines(taskDescription, date);
             if (raw.contains("\u2713")) {
                 newTask.isDone = true;
             }
@@ -297,9 +310,10 @@ public class Duke {
             int colon = raw.indexOf(":");
             String timePeriod = raw.substring(colon + 2  , timeSectionEnd);
             int space = timePeriod.indexOf(" ");
-            String date = timePeriod.substring(0 , space );
-            String time = timePeriod.substring(space+1);
-            Events newTask = new Events(taskDescription, date, time);
+            String on = timePeriod.substring(0 , space );
+            String at = timePeriod.substring(space+1);
+            LocalDate date = extractDate(on);
+            Events newTask = new Events(taskDescription, date, at);
             if (raw.contains("\u2713")) {
                 newTask.isDone = true;
             }
