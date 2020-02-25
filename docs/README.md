@@ -1,13 +1,16 @@
 # User Guide
 
 ## Table Of Contents
-### 1. Introduction
-### 2. Quick Start
-### 3. Features
-### 4. FAQ
-### 5. Command Summary
+### 1. [Introduction](#intro)
+### 2. [Quick Start](#quick-start)
+### 3. [Features](#features)
+### 4. [FAQ](#faq)
+### 5. [Command Summary](#command-summary)
+
+<a name="intro"></a>
 
 ## 1. Introduction
+#intro
  Duke is a command line based personal chatbot application used for managing tasks.
  The various types of tasks it can handle are:
  * **ToDo** Tasks --> Contains a simple description of the task and completion status.
@@ -19,10 +22,12 @@
  of storing data to a physical location on the computer, so that the tasks always remain in memory.
  
 
+<a name="quick-start"></a>
+
 ## 2. Quick Start
  
  * Ensure you have Java 11 or above installed in your Computer.
- * Download the latest iP.jar from https://github.com/GanapathySanathBalaji/duke/releases and place it in an empty folder. 
+ * Download the latest iP.jar from [here](https://github.com/GanapathySanathBalaji/duke/releases) and place it in an empty folder. 
  * Double-click on iP.jar to open it.
  * If it fails do the following:
     * Open Command Prompt.
@@ -34,6 +39,8 @@
     * list
     * search homework
   * Refer to Section 3, Features for details of each command.
+
+<a name="features"></a>
 
 ## 3. Features
 
@@ -233,12 +240,15 @@ A response similar to the following one would appear:
      Bye. Hope to see you again soon!
     __________________________________________________________________________________________
 
+<a name="faq"></a>
+
 ## 4. FAQ
     Q: How to transfer the task list data from one computer to an other computer?
     A:      Just copy the "TaskList.txt" file which could be found at the same directory
         as the jar file and paste it to the location containing the jar file in the other
         computer. This should transfer the required data
 
+<a name="command-summary"></a>
 
 ## 5. Command Summary
 1. `todo description` - Adds a new ToDo task to the list of tasks
