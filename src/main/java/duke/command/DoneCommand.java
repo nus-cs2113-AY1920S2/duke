@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.exception.DukeTaskIdInvalidException;
 import duke.task.TaskList;
 import duke.ui.Ui;

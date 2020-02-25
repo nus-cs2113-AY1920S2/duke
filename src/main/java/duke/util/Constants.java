@@ -46,6 +46,8 @@ public class Constants {
     public static final String EVENT_FORMAT_ERROR_MESSAGE = "OOPS!!! The event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = "OOPS!!! The task description cannot be empty!";
     public static final String TASK_DATE_EMPTY_ERROR_MESSAGE = "OOPS!!! The task date cannot be empty!";
+    public static final String TASK_DATE_FORMAT_ERROR_MESSAGE = "OOPS!!! The task date should be in the format of " +
+            "yyyy-mm-dd (e.g., 2020-12-29).";
     public static final String DONE_COMMAND_HELP_MESSAGE = "key in `done <task_id>` to mark the task of <task_id> as " +
             "done.";
     public static final String LIST_COMMAND_HELP_MESSAGE = "key in `list` or `ls` to list all the tasks.";
