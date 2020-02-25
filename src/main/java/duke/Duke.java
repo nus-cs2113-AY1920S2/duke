@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static final String FILE_PATH = "TaskList.txt";
-    public static final String BYE_COMMAND = "bye";
+    private static final String FILE_PATH = "TaskList.txt";
+    private static final String BYE_COMMAND = "bye";
 
     private static Storage storage;
     private static Ui ui;

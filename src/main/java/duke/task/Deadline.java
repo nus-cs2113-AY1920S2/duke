@@ -1,15 +1,23 @@
 package duke.task;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
     // Stores information about deadline of task
-    private String by;
+    private String deadlineTime;
+    private LocalDate deadlineDate;
 
     // Overloaded Constructor
     public Deadline(String descriptionWithDeadline) {
         super(getDescription(descriptionWithDeadline));
         taskType = 'D';
-        this.by = getDeadline(descriptionWithDeadline);
+        String dateWithTime = getDeadline(descriptionWithDeadline);
+        String[] splitDeadline = dateWithTime.split(" ",2);
+        this.deadlineDate = LocalDate.parse(splitDeadline[0]);
+        this.deadlineTime = splitDeadline[1];
     }
 
     // Abstracts out the description from the user given input and returns it
@@ -26,12 +34,13 @@ public class Deadline extends Task {
 
     // Returns the deadline in required format
     public String getBy() {
-        return "(by: " + by + ")";
+        return "(by: " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " +  deadlineTime + " Hrs )";
     }
 
     // Returns the deadline
-    public String getByWithoutBraces() {
-        return by;
+    public String getDeadlineInInputFormat() {
+        return deadlineDate + " " + deadlineTime;
     }
 
     // Returns the task's type and status along with it's description as a string
