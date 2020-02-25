@@ -1,0 +1,5 @@
+T|Not complete|writeReadme
+E|Not complete|sleep|12 am
+T|Not complete|finishIP
+D|Not complete|launch|March
+E|Not complete|avengersConference|1800h
