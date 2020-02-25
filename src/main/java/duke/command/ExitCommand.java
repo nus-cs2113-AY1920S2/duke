@@ -10,7 +10,7 @@ import duke.util.Storage;
  *
  * @author A11riseforme
  */
-public class ExitCommand implements Command{
+public class ExitCommand implements Command {
     /**
      * Return true bacause the user enters `exit`, `bye` or `quit`.
      * @return true.

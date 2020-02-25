@@ -9,7 +9,7 @@ import duke.util.Storage;
  *
  * @author A11riseforme
  */
-public class ListCommand implements Command{
+public class ListCommand implements Command {
     /**
      * Return false because user does not want to exit the programme.
      *
@@ -29,6 +29,6 @@ public class ListCommand implements Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+        ui.showList(taskList.getList());
     }
 }

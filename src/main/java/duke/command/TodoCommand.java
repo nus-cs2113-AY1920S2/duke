@@ -11,7 +11,7 @@ import duke.util.Storage;
  *
  * @author A11riseforme
  */
-public class TodoCommand implements Command{
+public class TodoCommand implements Command {
     private String taskDescription;
 
     /**
