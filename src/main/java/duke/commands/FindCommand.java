@@ -6,6 +6,9 @@ import static duke.Duke.tasks;
 
 import java.util.ArrayList;
 
+/**
+ * Find tasks related to the specific keyword
+ */
 public class FindCommand extends Command {
     
     public static final String COMMAND_WORD = "find";
@@ -26,10 +29,20 @@ public class FindCommand extends Command {
     
     private ArrayList<Task> foundList = new ArrayList<>();
     
+    /**
+     * Constructor for FindCommand
+     *
+     * @param description the keyword to search for
+     */
     public FindCommand(String description) {
         this.description = description;
     }
     
+    /**
+     * Execute the find operation flow
+     *
+     * @return the list of tasks related to the keyword
+     */
     @Override
     public CommandResult execute() {
         for (int i = 0; i < tasks.size(); ++i) {

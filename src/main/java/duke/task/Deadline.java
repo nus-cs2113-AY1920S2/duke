@@ -26,6 +26,12 @@ public class Deadline extends Task {
         this.by = timeFormat.checkDay(this.by).trim();
     }
     
+    /**
+     * Remove the constant Day that user or storage load up for sync purpose
+     *
+     * @param input the string of the day, time and other information related
+     * @return string that does not contain Day constant value
+     */
     private String removeEnum(String input) {
         Day[] days = Day.values();
         for (Day day : days) {

@@ -45,7 +45,6 @@ public class DoneCommand extends Command {
      *
      * @return the done message to the user
      * @throws ArrayIndexOutOfBoundsException if index < 0 or index > tasks size
-     * @throws IOException                    if there is an error during an input-output operation
      */
     @Override
     public CommandResult execute() {

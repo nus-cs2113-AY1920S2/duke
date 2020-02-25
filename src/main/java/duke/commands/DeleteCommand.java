@@ -46,7 +46,6 @@ public class DeleteCommand extends Command {
      *
      * @return the delete message to be shown to the user
      * @throws ArrayIndexOutOfBoundsException if index < 0 or index > tasks size
-     * @throws IOException                    if there is an error during an input-output operation
      */
     @Override
     public CommandResult execute() {

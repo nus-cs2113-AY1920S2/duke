@@ -95,6 +95,12 @@ public class Parser {
         return new DoneCommand(argument);
     }
     
+    /**
+     * Parse argument in the context of find task command
+     *
+     * @param argument the parameter of find task command
+     * @return the prepared command
+     */
     private Command parseFindCommand(String argument) {
         return new FindCommand(argument);
     }

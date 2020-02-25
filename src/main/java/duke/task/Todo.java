@@ -1,4 +1,5 @@
 package duke.task;
+
 /**
  * Represent the Todo object
  */
