@@ -7,6 +7,10 @@ public class Event extends Task {
         this.by = by;
     }
 
+    public String getEvent(){
+        return description;
+    }
+
     @Override
     public String toString() {
         if (by.equals("")) {

@@ -1,19 +1,37 @@
 package Duke;
 
-import Duke.Exception.IllegalCommandException;
-import Duke.Exception.IllegalDeleteException;
-import Duke.Exception.IllegalDoneTaskException;
-import Duke.Exception.IllegalTypeException;
-
-import java.io.IOException;
-
-import static Duke.Library.Feature.*;
+import Duke.Commands.Command;
+import Duke.Commands.ExitCommand;
+import Duke.Exception.DukeException;
+import Duke.Parser.Parser;
+import Duke.Storage.Storage;
+import Duke.Ui.Ui;
 
 public class Duke{
 
-    public static void main(String[] args) throws IllegalTypeException, IllegalCommandException, IllegalDoneTaskException, IllegalDeleteException, IOException {
-        displayWelcomeMessage();
-        run();
-        exitProgram();
+    private static final String FILE_PATH = "Duke.txt";
+
+    public static void main(String[] args) {
+        new Duke();
     }
+
+    private Duke() {
+        Ui ui = new Ui();
+        ui.displayWelcomeMessage();
+        Storage storage = new Storage(FILE_PATH, ui);
+         while (true) {
+            String userInput = ui.readCommand();
+            try {
+                Command command = Parser.parse(userInput);
+                command.execute(ui, storage);
+                if (command instanceof ExitCommand) {
+                    break;
+                }
+            } catch (DukeException e) {
+                ui.displayError(e.getMessage());
+            }
+        }
+    }
+
+
 }

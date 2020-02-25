@@ -11,11 +11,17 @@ public class Task {
     public boolean isDone(){
         return isDone;
     }
+    public void setDone(boolean isDone){
+        this.isDone = isDone;
+    }
     public String getTaskStatus() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
     }
     public void markAsDone() {
         isDone = true;
+    }
+    public String getDescription(){
+        return description;
     }
     @Override
     public String toString() {

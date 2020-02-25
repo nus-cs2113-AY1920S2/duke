@@ -1,6 +1,5 @@
-package Duke.Parser;
+package Duke.Commands;
 
-import Duke.Commands.Command;
 import Duke.Exception.DukeException;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;

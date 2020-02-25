@@ -7,6 +7,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getDeadline(){
+        return description;
+    }
+
     @Override
     public String toString() {
         if (by.equals("")) {

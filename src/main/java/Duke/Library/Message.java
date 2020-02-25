@@ -26,6 +26,9 @@ public class Message {
     public static final String USERNAME = "USER";
     public static final String MESSAGE_WELCOME = "\n\tHello! I'm " + BOT_NAME + "\n\tWhat can I do for you?";
     public static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
+    public static final String MESSAGE_ADD = "\tGot it. I've added this ";
+    public static final String MESSAGE_MARK = "\tYou have marked -- ";
+    public static final String MESSAGE_DELETE = "\tYou have deleted --";
     public static final String LINE_DIVIDER = "\n\t___________________________________________________________________________";
     public static final String COMMAND_HELP_WORD = "HELP";
     public static final String COMMAND_HELP_DESC = "\n" +
@@ -38,11 +41,9 @@ public class Message {
             "\t\tadd in an event Duke.task, format ' event [Description] /at[Time] '\n" +
             "\t4. list\n" +
             "\t\tlist out all the tasks\n" +
-            "\t5. clear\n" +
-            "\t\tclear all items from Duke.task\n" +
-            "\t6. mark\n" +
+            "\t5. mark\n" +
             "\t\tmark a Duke.task by its index, format ' mark [index] '\n" +
-            "\t7. bye\n" +
+            "\t6. bye\n" +
             "\t\texit the program\n";
     public static final String COMMAND_LIST_WORD = "LIST";
     public static final String COMMAND_CLEAR_WORD = "CLEAR";
