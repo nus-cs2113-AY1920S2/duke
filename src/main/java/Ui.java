@@ -28,10 +28,17 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Print messages related to command "bye"
+     */
     public void bye() {
         System.out.println("\tBye. Hope to see you again soon!");
     }
 
+    /**
+     * Print messages related to command "list" accordingly, then
+     * trigger underlying method.
+     */
     public void list() {
         if (tasks.size() == 0) {
             System.out.println("\tThere are no tasks in your list.");
@@ -42,6 +49,10 @@ public class Ui {
         tasks.list();
     }
 
+    /**
+     * Print messages related to command "todo" accordingly, then
+     * trigger underlying method.
+     */
     public void todo(String description) {
         Task task = new ToDo(description);
         tasks.add(task);
@@ -50,6 +61,10 @@ public class Ui {
         tasks.printSize();
     }
 
+    /**
+     * Print messages related to command "deadline" accordingly, then
+     * trigger underlying method.
+     */
     public void deadline(String[] descriptionArgs) {
         String taskDescription = descriptionArgs[0];
         String taskDescriptionBy = descriptionArgs[1];
@@ -60,6 +75,10 @@ public class Ui {
         tasks.printSize();
     }
 
+    /**
+     * Print messages related to command "event" accordingly, then
+     * trigger underlying method.
+     */
     public void event(String[] descriptionArgs) {
         String taskDescription = descriptionArgs[0];
         String taskDescriptionAt = descriptionArgs[1];
@@ -70,6 +89,10 @@ public class Ui {
         tasks.printSize();
     }
 
+    /**
+     * Print messages related to command "done" accordingly, then
+     * trigger underlying method.
+     */
     public void done(int index) {
         Task taskToBeMarkedAsDone = tasks.getByIndex(index);
         if (taskToBeMarkedAsDone.getDoneInBoolean() == true) {
@@ -81,6 +104,10 @@ public class Ui {
         System.out.println("\t  " + taskToBeMarkedAsDone);
     }
 
+    /**
+     * Print messages related to command "delete" accordingly, then
+     * trigger underlying method.
+     */
     public void delete(int index) {
         Task removedTask = tasks.getByIndex(index);
         tasks.removeByIndex(index);
@@ -89,6 +116,10 @@ public class Ui {
         tasks.printSize();
     }
 
+    /**
+     * Print messages related to command "find" accordingly, then
+     * trigger underlying method.
+     */
     public void find(String description) {
         System.out.println("\tHere are the matching tasks in your list:");
         int numberOfTasksFound = tasks.find(description);
