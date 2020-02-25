@@ -1,14 +1,14 @@
-package Commands;
+package Duke.Commands;
 
-import Asset.Storage;
-import Asset.Ui;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import Duke.Asset.Storage;
+import Duke.Asset.Ui;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import Parser.*;
+import Duke.Parser.*;
 /**
  * This is the sub class of the Command class in Duke.
  *

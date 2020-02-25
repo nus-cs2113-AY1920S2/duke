@@ -1,6 +1,6 @@
-package Asset;
+package Duke.Asset;
 
-import Tasks.*;
+import Duke.Tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

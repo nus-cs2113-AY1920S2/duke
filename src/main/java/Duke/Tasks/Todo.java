@@ -1,4 +1,4 @@
-package Tasks;
+package Duke.Tasks;
 /**
  * This is the sub class of the Task class in Duke
  * Each of this class follows the same values and

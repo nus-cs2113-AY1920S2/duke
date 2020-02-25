@@ -1,4 +1,4 @@
-package Tasks;
+package Duke.Tasks;
 /**
  * This is the parent class for all tasks in Duke
  *

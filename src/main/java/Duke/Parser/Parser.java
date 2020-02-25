@@ -1,7 +1,7 @@
-package Parser;
+package Duke.Parser;
 
-import Commands.*;
-import Asset.IllegalDukeException;
+import Duke.Commands.*;
+import Duke.Asset.IllegalDukeException;
 import static java.lang.Integer.parseInt;
 /**
  * This class handles with making sense of commands

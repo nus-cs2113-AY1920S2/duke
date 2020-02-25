@@ -1,8 +1,8 @@
-package Commands;
+package Duke.Commands;
 
-import Asset.Storage;
-import Asset.Ui;
-import Tasks.Task;
+import Duke.Asset.Storage;
+import Duke.Asset.Ui;
+import Duke.Tasks.Task;
 import java.util.ArrayList;
 /**
  * This is a sub class of the Command class in Duke.

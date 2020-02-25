@@ -1,10 +1,11 @@
-import Asset.IllegalDukeException;
-import Asset.Storage;
-import Asset.Ui;
-import Commands.Command;
-import Parser.Parser;
-import Tasks.Task;
+package Duke;
 
+import Duke.Asset.IllegalDukeException;
+import Duke.Asset.Storage;
+import Duke.Asset.Ui;
+import Duke.Commands.Command;
+import Duke.Parser.Parser;
+import Duke.Tasks.Task;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 /**
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * @since   2020-02-21
  */
 
-public class Duke {
+public class Duke{
     private Storage storage;
     private Ui ui;
     private ArrayList<Task> l1;
@@ -58,6 +59,7 @@ public class Duke {
         }
         this.ui.close();
     }
+
     public static void main(String[] args) throws FileNotFoundException {
         new Duke("data/duke.txt").run();
     }
