@@ -8,7 +8,7 @@ public class Ui {
     private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid format of declaration for event "
             + "(event .......  /at ......)";
     private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid format of declaration for deadline "
-            + "(deadline .......  /by ......)";
+            + "(deadline .......  /by yyyy-mm-dd hhmm)";
     private static final String DASHED_LINE = "_________________________________________________________________"
             + "_________________________";
     private static final String WELCOME_MESSAGE_LINE_1 = "Hello! I'm Duke";
