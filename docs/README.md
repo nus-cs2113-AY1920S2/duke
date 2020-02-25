@@ -1,8 +1,42 @@
 # User Guide
 
-## Features 
+##Table Of Contents
+### 1. Introduction
+### 2. Quick Start
+### 3. Features
+### 4. FAQ
+### 5. Command Summary
 
-### Feature 1 
+## 1. Introduction
+
+	Duke is a command line based application used for managing tasks.
+ The various types of tasks it can handle are:
+ * **ToDo** Tasks --> Contains a simple description of the task and completion status.
+ * **Deadline** Tasks --> Contains the description, completion status and deadline timing details.
+ * **Event** Tasks --> Contains the description, completion status  and location details of the task.
+ 	The application can add, delete tasks. It also provides methods to search for tasks 
+ and has the ability of marking the tasks as done when they are completed. 
+
+## 2. Quick Start
+ 
+ * 1. Ensure you have Java 11 or above installed in your Computer.
+ * 2. Download the latest iP.jar from https://github.com/GanapathySanathBalaji/duke/releases
+      and place it in an empty folder. 
+ * 3a. Double-click on iP.jar to open it.
+ * 3b. If it fails do the following:
+   * 1. Open Command Prompt.
+   * 2. Navigate to the folder with the jar.
+   * 3. Type the following command:  java -jar iP.jar to run it.
+  * 4. A text based UI should appear.
+  * 5. Some example commands you can try:
+   * 1. todo homework
+   * 2. list
+   * 3. search homework
+  * 6. Refer to Section 3, Features for details of each command.
+
+## 3. Features
+
+### 1. Add 
 Description of feature.
 
 ## Usage
