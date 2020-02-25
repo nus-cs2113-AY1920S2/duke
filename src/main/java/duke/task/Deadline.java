@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.enumerations.Day;
+import duke.enumerations.Month;
 
 /**
  * Represent the Deadline object
@@ -23,6 +24,7 @@ public class Deadline extends Task {
         this.by = by.replace("by", "").trim();
         this.by = this.by.replaceAll("(\\.)|(/)", "-");
         this.by = removeEnum(this.by);
+        this.by = changeMonthToNumber(this.by);
         this.by = timeFormat.checkDay(this.by).trim();
     }
     
@@ -44,12 +46,32 @@ public class Deadline extends Task {
     }
     
     /**
+     * Change the shorthand of Month to number, e.g. Jan - 01, ..., Dec - 12
+     *
+     * @param input the date and time given by user
+     * @return the shorthand of Month to number
+     */
+    private String changeMonthToNumber(String input) {
+        Month[] months = Month.values();
+        for (Month month : months) {
+            if (input.contains(month.toString())) {
+                input = input.replace(month.toString(), month.getNumber());
+                break;
+            }
+        }
+        return input;
+    }
+    
+    /**
      * Return the information as a string
      *
      * @return the string of information relevant to the object
      */
     @Override
     public String toString() {
+        if (this.by.contains("Invalid")) {
+            return "[" + PREFIX + "]" + super.toString() + " (by: " + by + ")";
+        }
         return "[" + PREFIX + "]" + super.toString() + " (by: " + timeFormat.date + " " + timeFormat.day + " " + by +
                 ")";
     }
@@ -61,6 +83,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toStorage() {
+        if (this.by.contains("Invalid")) {
+            return PREFIX + super.toStorage() + PIPE + by;
+        }
         return PREFIX + super.toStorage() + PIPE + timeFormat.date + " " + timeFormat.day + " " + by;
     }
     

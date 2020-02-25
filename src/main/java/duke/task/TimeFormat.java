@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.enumerations.Day;
+import duke.enumerations.Month;
 import duke.parser.Parser;
 
 import java.time.DateTimeException;
@@ -20,14 +21,17 @@ public class TimeFormat {
     
     /**
      * Regex to check if yyyy-mm-dd or dd-mm-yyyy exist in the string
+     * Regex also check if yyyy-MMM-dd or dd-MMM-yyyy exist in the string
      */
-    private String timeRegex = "(\\d{4}[\\.\\-/]\\d{2}[\\.\\-/]\\d{2})|(\\d{2}[\\.\\-/]\\d{2}[\\.\\-/]\\d{4})";
+    private String timeRegex =
+            "(\\d{4}[\\.\\-/](\\d{2}|\\w{3})[\\.\\-/]\\d{2})|(\\d{2}[\\.\\-/](\\d{2}|\\w{3})[\\" + ".\\-/]\\d{4})";
     
     protected String date = "";
     protected String day = "";
     protected Day theDay = null;
     protected LocalDate localDate;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private String patternDayMonthYear = "dd-MMM-yyyy";
     
     /**
      * Check if the valid date format is given, otherwise, check if user gives in day format,
@@ -38,6 +42,7 @@ public class TimeFormat {
      * @return the rest of the string of date and time given by user
      */
     protected String checkDay(String by) {
+        by = changeMonthToNumber(by);
         try {
             if (hasDateFormat(by)) {
                 by = by.substring(END_INDEX);
@@ -47,7 +52,7 @@ public class TimeFormat {
                 } catch (DateTimeParseException e) {
                     localDate = LocalDate.parse(date);
                 }
-                date = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                date = localDate.format(DateTimeFormatter.ofPattern(patternDayMonthYear));
                 day = Day.valueOf(localDate.getDayOfWeek().toString()).toString().toLowerCase();
             } else if (hasDayFormat(by)) {
                 by = Parser.splitInputLine(by, Parser.SPILT_BY_SPACE)[1].trim();
@@ -56,17 +61,17 @@ public class TimeFormat {
                 int userDayValue = theDay.getDayNumber();
                 if (userDayValue > currentDayValue) {
                     localDate = LocalDate.now().plusDays(userDayValue - currentDayValue);
-                    date = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    date = localDate.format(DateTimeFormatter.ofPattern(patternDayMonthYear));
                 } else if (userDayValue == currentDayValue) {
-                    date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    date = LocalDate.now().format(DateTimeFormatter.ofPattern(patternDayMonthYear));
                 } else {
                     localDate = LocalDate.now().minusDays(currentDayValue - userDayValue);
-                    date = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    date = localDate.format(DateTimeFormatter.ofPattern(patternDayMonthYear));
                 }
             }
         } catch (DateTimeException | ArithmeticException e) {
-            date = "[Invalid Date]";
-            day = "[Invalid Day]";
+            date = "[Invalid]";
+            day = "[Invalid]";
         }
         return by.trim();
     }
@@ -120,5 +125,16 @@ public class TimeFormat {
             }
         }
         return false;
+    }
+    
+    private String changeMonthToNumber(String input) {
+        Month[] months = Month.values();
+        for (Month month : months) {
+            if (input.contains(month.toString())) {
+                input = input.replace(month.toString(), month.getNumber());
+                break;
+            }
+        }
+        return input;
     }
 }

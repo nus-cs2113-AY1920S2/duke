@@ -1,9 +1,10 @@
 package duke.task;
 
 import duke.enumerations.Day;
+import duke.enumerations.Month;
 
 /**
- * Represent the Event object
+ * Represent the Deadline object
  */
 public class Event extends Task {
     
@@ -20,9 +21,10 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         timeFormat = new TimeFormat();
-        this.at = at.replace("at", "").trim();
+        this.at = at.replaceFirst("at", "").trim();
         this.at = this.at.replaceAll("(\\.)|(/)", "-");
         this.at = removeEnum(this.at);
+        this.at = changeMonthToNumber(this.at);
         this.at = timeFormat.checkDay(this.at).trim();
     }
     
@@ -44,13 +46,33 @@ public class Event extends Task {
     }
     
     /**
+     * Change the shorthand of Month to number, e.g. Jan - 01, ..., Dec - 12
+     *
+     * @param input the date and time given by user
+     * @return the shorthand of Month to number
+     */
+    private String changeMonthToNumber(String input) {
+        Month[] months = Month.values();
+        for (Month month : months) {
+            if (input.contains(month.toString())) {
+                input = input.replace(month.toString(), month.getNumber());
+                break;
+            }
+        }
+        return input;
+    }
+    
+    /**
      * Return the information as a string
      *
      * @return the string of information relevant to the object
      */
     @Override
     public String toString() {
-        return "[" + PREFIX + "]" + super.toString() + " (by: " + timeFormat.date + " " + timeFormat.day + " " + at +
+        if (this.at.contains("Invalid")) {
+            return "[" + PREFIX + "]" + super.toString() + " (at: " + at + ")";
+        }
+        return "[" + PREFIX + "]" + super.toString() + " (at: " + timeFormat.date + " " + timeFormat.day + " " + at +
                 ")";
     }
     
@@ -61,7 +83,13 @@ public class Event extends Task {
      */
     @Override
     public String toStorage() {
+        if (this.at.contains("Invalid")) {
+            return PREFIX + super.toStorage() + PIPE + at;
+        }
         return PREFIX + super.toStorage() + PIPE + timeFormat.date + " " + timeFormat.day + " " + at;
     }
     
 }
+
+
+
