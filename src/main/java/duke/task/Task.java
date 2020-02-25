@@ -79,8 +79,16 @@ public class Task {
         return statusWithDescription;
     }
 
+    /**
+     * Searches for the keyword in the description of the task and returns the search result.
+     *
+     * @param Keyword The word to be searched for in the description
+     * @return hasKeyword Contains information with regards to the presence of keyword in the task's description
+     */
     public boolean hasKeyword(String Keyword) {
-        return description.contains(Keyword);
+        boolean hasKeyword;
+        hasKeyword = description.contains(Keyword);
+        return hasKeyword;
     }
 
 }

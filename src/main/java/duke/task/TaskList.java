@@ -306,6 +306,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Instructs {@link #printListOfTasksWithKeyword(String)} ()} to list the tasks with the search keyword
+     * if the correct format is used
+     *
+     * @param isCorrectFormat Denotes the condition to be satisfied for the list command to be valid.
+     * @param keyword The word used for search.
+     * @see #printListOfTasksWithKeyword(String) ().
+     */
     public void findTasks(boolean isCorrectFormat, String keyword) {
         if (isCorrectFormat) {
             printListOfTasksWithKeyword(keyword);
@@ -314,6 +322,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Performs linear search of the list to find all matched tasks and prints them.
+     * Also prints an empty search message if none of the tasks match.
+     *
+     * @param keyword The word used for search.
+     */
     private void printListOfTasksWithKeyword(String keyword) {
         boolean hasNoMatchedTasks = true;
         for (Task task: tasks){
