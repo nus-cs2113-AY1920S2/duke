@@ -2,8 +2,12 @@ package duke.task;
 
 import duke.DukeException;
 import duke.ui.TextUi;
+
 import java.util.ArrayList;
 
+/**
+ * Handles the different types of tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
     private TextUi ui = new TextUi();
@@ -12,6 +16,9 @@ public class TaskList {
     private static final String HAPPY_FACE = "(＾▽＾)";
     private static final String SAD_FACE = "(╥_╥)";
 
+    /**
+     * Stores all the tasks provided.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -20,11 +27,17 @@ public class TaskList {
         this.tasks = Tasks;
     }
 
+    /**
+     * Find related tasks according to the keyword given by the user.
+     * Creates a new ArrayList to hold the tasks relevant to the search.
+     *
+     * @param keyword the word used for search
+     */
     public void findTasks(String keyword) {
         ArrayList<Task> relatedTasks = new ArrayList<>();
         for (int i = 1; i <= tasks.size(); i++) {
-            if (tasks.get(i-1).getDescription().contains(keyword)) {
-                relatedTasks.add(tasks.get(i-1));
+            if (tasks.get(i - 1).getDescription().contains(keyword)) {
+                relatedTasks.add(tasks.get(i - 1));
             }
         }
         TextUi.printSearchInformation(relatedTasks, keyword);
@@ -34,23 +47,45 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Adds a new to-do to the tasks.
+     * Overloading used for the addToDo.
+     *
+     * @param description contains the information of the to-do task
+     */
     public void addToDo(String description) {
         tasks.add(new ToDo(description));
     }
 
+    /**
+     * Adds a new event to the tasks.
+     * Overloading used for the addEvent.
+     *
+     * @param description contains the information of the event
+     */
     public void addEvent(String description, String at) {
         tasks.add(new Event(description, at));
     }
 
+    /**
+     * Adds a new deadline to the tasks.
+     * Overloading used for the addDeadline.
+     *
+     * @param description contains the information of the deadline
+     */
     public void addDeadline(String description, String by) {
         tasks.add(new Deadline(description, by));
     }
-
 
     public int getSize() {
         return (tasks.size() - 1);
     }
 
+    /**
+     * Deletes a task in the list based on the user input.
+     *
+     * @param index contains the index of task to be deleted
+     */
     public void deleteTask(String index) {
         int removeTask = Integer.parseInt(index) - 1;
         String taskInformation = String.valueOf(tasks.get(removeTask));
@@ -61,6 +96,11 @@ public class TaskList {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Creates a new event.
+     *
+     * @param description contains the information of the deadline
+     */
     public void addEvent(String description) {
         try {
             String[] event;
@@ -85,6 +125,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new deadline.
+     *
+     * @param description contains the information of the deadline
+     */
     public void addDeadline(String description) {
         try {
             String[] deadline;
@@ -109,6 +154,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new to-do task.
+     *
+     * @param parseInput contains the information of the to-do task
+     */
     public void addToDo(String[] parseInput) {
         try {
             if (!parseInput[1].isEmpty()) {
@@ -128,6 +178,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * list down all the  tasks present in the list.
+     * Return to the caller method if there is no task in the list.
+     */
     public void list() {
         if (tasks.size() == 0) {
             TextUi.printEmptyList();

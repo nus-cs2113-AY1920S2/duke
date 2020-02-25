@@ -1,10 +1,19 @@
 package duke.task;
 
+/**
+ * Represents a parent class for all tasks in Duke.
+ */
 public abstract class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for parent class.
+     * Sets the isDone for all tasks to be false.
+     *
+     * @param description description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

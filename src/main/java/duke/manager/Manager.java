@@ -13,8 +13,15 @@ public class Manager {
 
     private static boolean isExit = false;
 
+    /**
+     * Execute the task according to the command given by the user.
+     *
+     * @param parseInput full user input string
+     * @param name user name string
+     * @param tasks the retrieved tasks from the storage
+     * @param command user command string
+     */
     public static void manager(String[] parseInput, String name, TaskList tasks, String command) {
-        //String command = parseInput[0];
         //parseInput[1].isEmpty() for empty string, not empty spaces
 
         try {
@@ -73,6 +80,10 @@ public class Manager {
         }
     }
 
+    /**
+     * To exit the program.
+     * @return true when the user command is equivalent to "bye"
+     */
     public static boolean isExit() {
         return isExit;
     }
