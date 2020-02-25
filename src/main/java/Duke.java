@@ -1,3 +1,4 @@
+import com.sun.source.util.TaskListener;
 import duke.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -61,6 +62,9 @@ public class Duke {
             markDone(str);
             System.out.println("Mark task done");
             conversation();
+        }else if(str.contains("find")) {
+            findTask(str);
+            conversation();
         }else {
             System.out.println(str);
             System.out.println("____________________________________________________________");
@@ -97,6 +101,9 @@ public class Duke {
         } else if (str.contains("done")) {
             markDone(str);
             System.out.println("Mark task done");
+            addTaskScreen();
+        }else if(str.contains("find")){
+            findTask(str);
             addTaskScreen();
         } else if (str.equals("list")) {
             listTask();
@@ -175,6 +182,35 @@ public class Duke {
 
         System.out.println("____________________________________________________________");
     }
+
+    public static void findTask(String input){
+        System.out.println("____________________________________________________________");
+        System.out.println(" Here are the matching tasks in your list:");
+        ArrayList<Task> searchResult = new ArrayList<>();
+        String keyword = input.substring(5);
+        for(Task task: taskList){
+            if(task.description.contains(keyword)){
+                searchResult.add(task);
+            }
+        }
+        listSearchResult(searchResult);
+    }
+
+    public static void listSearchResult(ArrayList<Task> input) {
+        System.out.println("____________________________________________________________");
+        int i = 0;
+        while (i < input.size()) {
+            int j = i + 1;
+            System.out.println(j + " ." + input.get(i).toString());
+            i++;
+        }
+
+        System.out.println("____________________________________________________________");
+    }
+
+
+
+
 
     public static void markDone(String str) throws IOException, DukeException {
         if (str.equals("done")) {
