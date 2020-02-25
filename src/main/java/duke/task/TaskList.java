@@ -89,7 +89,7 @@ public class TaskList {
     public void markTask(String[] commandSplit) throws DukeException {
         int taskNumber;
         if (commandSplit.length != 2) {
-            throw new DukeException(ExceptionType.InvalidDoneCommand);
+            throw new DukeException(ExceptionType.InvalidDoneCommandException);
         }
         String taskIndex = commandSplit[1];
         taskNumber = Integer.parseInt(taskIndex);
@@ -112,7 +112,7 @@ public class TaskList {
     public void deleteTaskFromList(String[] commandSplit) throws DukeException {
         int taskNumber;
         if (commandSplit.length != 2) {
-            throw new DukeException(ExceptionType.InvalidDeleteCommand);
+            throw new DukeException(ExceptionType.InvalidDeleteCommandException);
         }
         String taskIndex = commandSplit[1];
         taskNumber = Integer.parseInt(taskIndex);
@@ -211,7 +211,7 @@ public class TaskList {
     public void addEventTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(PERIOD_SPECIFIER);
         if (!isCorrectFormat) {
-            throw new DukeException(ExceptionType.InvalidEventDeclaration);
+            throw new DukeException(ExceptionType.InvalidEventDeclarationException);
         }
         addTask(TaskType.Event, commandSplit[1]);
     }
@@ -227,7 +227,7 @@ public class TaskList {
     public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(DEADLINE_SPECIFIER);
         if (!isCorrectFormat) {
-            throw new DukeException(ExceptionType.InvalidDeadlineDeclaration);
+            throw new DukeException(ExceptionType.InvalidDeadlineDeclarationException);
         }
         addTask(TaskType.Deadline, commandSplit[1]);
     }
@@ -242,7 +242,7 @@ public class TaskList {
      */
     public void addToDoTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         if (isOneWordCommand) {
-            throw new DukeException(ExceptionType.InvalidToDoDeclaration);
+            throw new DukeException(ExceptionType.InvalidToDoDeclarationException);
         }
         addTask(TaskType.ToDo, commandSplit[1]);
     }
