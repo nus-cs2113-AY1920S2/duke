@@ -1,18 +1,18 @@
 # User Guide
 
 ## Table Of Contents
-    1. [Introduction](#intro)
-    2. [Quick Start](#quick-start)
-    3. [Features](#features)
-      3.1. [Add new ToDo task](#add-todo)
-      3.2. [Add new Deadline task](#add-deadline)
-      3.3. [Add new Event task](#add-event)
-      3.4. [Delete task](#delete)
-      3.5. [Mark task as done](#mark)
-      3.6. [List all tasks](#list)
-      3.7. [Exit](#exit)
-    4. [FAQ](#faq)
-    5. [Command Summary](#command-summary)
+1. [Introduction](#intro)
+2. [Quick Start](#quick-start)
+3. [Features](#features)
+  3.1. [Add new ToDo task](#add-todo)
+  3.2. [Add new Deadline task](#add-deadline)
+  3.3. [Add new Event task](#add-event)
+  3.4. [Delete task](#delete)
+  3.5. [Mark task as done](#mark)
+  3.6. [List all tasks](#list)
+  3.7. [Exit](#exit)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
 
 <a name="intro"></a>
