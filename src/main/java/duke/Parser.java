@@ -44,6 +44,12 @@ public class Parser {
                 throw new DukeException(Ui.INVALID_TASKNO +Ui.DELETE_DESCRIPTION);
             }
         case "help": return new HelpCommand();
+        case "find":
+            try {
+                return new FindCommand(attributes[1]);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException(Ui.LACK_KEYWORD+Ui.FIND_DESCRIPTION);
+            }
         default: throw new DukeException(Ui.INVALID_COMMAND);
         }
     }
