@@ -4,11 +4,10 @@ public class Event extends Task {
     
     private String at;
     private final String PREFIX = "E";
-    private final int startIndexForSubstring = 3;
     
     public Event(String description, String at) {
         super(description);
-        this.at = at.substring(startIndexForSubstring);
+        this.at = at.replace("at", "").trim();
     }
     
     @Override
