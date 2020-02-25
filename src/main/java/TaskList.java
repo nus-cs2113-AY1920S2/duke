@@ -12,8 +12,9 @@ public class TaskList {
 
     /**
      * Constructor for the tasklist object.
+     *
      * @param listOfTasks an array list of tasks that will be used
-     * to populate the listOfTasks
+     *                    to populate the listOfTasks
      */
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
@@ -31,9 +32,10 @@ public class TaskList {
      * Method used to store tasks into the listOfTasks.
      * Formats the task information into two components
      * (description and dateAndTime) before storing.
+     *
      * @param taskInformation full information about the task
-     * @param separator used to format the taskInformation into its components
-     * @param command differentiate between deadline and event tasks
+     * @param separator       used to format the taskInformation into its components
+     * @param command         differentiate between deadline and event tasks
      */
     public void storeTaskIntoList(String taskInformation, String separator, String command) {
         int dividerPosition = taskInformation.indexOf(separator);
@@ -50,8 +52,9 @@ public class TaskList {
 
     /**
      * Method used to store tasks into the listOfTasks
+     *
      * @param taskInformation full information about the task
-     * @param command differentiate between the different type of tasks.
+     * @param command         differentiate between the different type of tasks.
      */
     public void storeTaskIntoList(String taskInformation, String command) {
         switch (command) {
@@ -91,7 +94,7 @@ public class TaskList {
     public void listAllTasks() {
         ui.printLine();
         System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < listOfTasks.size(); i++) {
+        for (int i = 0; i < listOfTasks.size(); i += 1) {
             Task currTask = listOfTasks.get(i);
             System.out.println(" " + (i + 1) + ". " + currTask);
 
@@ -102,6 +105,7 @@ public class TaskList {
     /**
      * Method used to print an acknowledgement message when
      * the user completes a task.
+     *
      * @param line a string that represents the task that is completed
      */
     public void markTaskAsDone(String line) {
@@ -117,6 +121,7 @@ public class TaskList {
 
     /**
      * Method used to delete a particular task from the listOfTasks.
+     *
      * @param line a string that represents the task to be deleted
      */
     public void deleteTask(String line) {
@@ -130,6 +135,26 @@ public class TaskList {
         System.out.println(" Noted. I've removed this task: ");
         System.out.println("   " + taskToDelete);
         System.out.println(" Now you have " + numOfTasksLeft + " tasks in the list.");
+        ui.printLine();
+    }
+
+    public void findTask(String line) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        String[] splitLine = line.split(" ");
+        String keyword = splitLine[1];
+        for (int i = 0; i < listOfTasks.size(); i += 1) {
+            String taskDescription = listOfTasks.get(i).toString();
+            if (taskDescription.contains(keyword)) {
+                matchingTasks.add(listOfTasks.get(i));
+            }
+        }
+        ui.printLine();
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < matchingTasks.size(); i += 1) {
+            Task currTask = matchingTasks.get(i);
+            System.out.println(" " + (i + 1) + ". " + currTask);
+
+        }
         ui.printLine();
     }
 }
