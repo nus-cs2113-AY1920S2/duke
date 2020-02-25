@@ -16,7 +16,7 @@ public class Duke {
     }
 
     public void run() {
-        String[] command = new String[2];
+        String[] command;
         String taskType;
         String taskDescription;
         String[] taskDescriptionArgs;
@@ -89,12 +89,6 @@ public class Duke {
             }
             ui.showLine();
         } while (!taskType.equals("bye"));
-
-        try {
-            storage.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
     }
 
     private String[] processArgs(String s) {
@@ -116,7 +110,20 @@ public class Duke {
         return tokens;
     }
 
+    /**
+     * Close all files used in Duke.
+     */
+    public void close() {
+        try {
+            storage.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        Duke duke = new Duke("./data/duke.txt");
+        duke.run();
+        duke.close();
     }
 }
