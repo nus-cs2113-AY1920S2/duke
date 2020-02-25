@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.enumerations.Day;
+
 /**
  * Represent the Deadline object
  */
@@ -7,7 +9,7 @@ public class Deadline extends Task {
     
     private String by;
     private final String PREFIX = "D";
-    private final int startIndexForSubstring = 3;
+    private TimeFormat timeFormat;
     
     /**
      * Constructor for Deadline
@@ -17,7 +19,22 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by.substring(startIndexForSubstring);
+        timeFormat = new TimeFormat();
+        this.by = by.replace("by", "").trim();
+        this.by = this.by.replaceAll("(\\.)|(/)", "-");
+        this.by = removeEnum(this.by);
+        this.by = timeFormat.checkDay(this.by).trim();
+    }
+    
+    private String removeEnum(String input) {
+        Day[] days = Day.values();
+        for (Day day : days) {
+            if (input.contains(day.toString().toLowerCase())) {
+                input = input.replace(day.toString().toLowerCase(), "");
+                break;
+            }
+        }
+        return input;
     }
     
     /**
@@ -27,7 +44,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + PREFIX + "]" + super.toString() + " (by: " + by + ")";
+        return "[" + PREFIX + "]" + super.toString() + " (by: " + timeFormat.date + " " + timeFormat.day + " " + by +
+                ")";
     }
     
     /**
@@ -37,7 +55,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toStorage() {
-        return PREFIX + super.toStorage() + PIPE + by;
+        return PREFIX + super.toStorage() + PIPE + timeFormat.date + " " + timeFormat.day + " " + by;
     }
     
 }
+
+
+

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.enumerations.Day;
+
 /**
  * Represent the Event object
  */
@@ -7,7 +9,7 @@ public class Event extends Task {
     
     private String at;
     private final String PREFIX = "E";
-    private final int startIndexForSubstring = 3;
+    private TimeFormat timeFormat;
     
     /**
      * Constructor for Event
@@ -17,7 +19,22 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at.substring(startIndexForSubstring);
+        timeFormat = new TimeFormat();
+        this.at = at.replace("at", "").trim();
+        this.at = this.at.replaceAll("(\\.)|(/)", "-");
+        this.at = removeEnum(this.at);
+        this.at = timeFormat.checkDay(this.at).trim();
+    }
+    
+    private String removeEnum(String input) {
+        Day[] days = Day.values();
+        for (Day day : days) {
+            if (input.contains(day.toString().toLowerCase())) {
+                input = input.replace(day.toString().toLowerCase(), "");
+                break;
+            }
+        }
+        return input;
     }
     
     /**
@@ -27,7 +44,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + PREFIX + "]" + super.toString() + " (at: " + at + ")";
+        return "[" + PREFIX + "]" + super.toString() + " (by: " + timeFormat.date + " " + timeFormat.day + " " + at +
+                ")";
     }
     
     /**
@@ -37,7 +55,7 @@ public class Event extends Task {
      */
     @Override
     public String toStorage() {
-        return PREFIX + super.toStorage() + PIPE + at;
+        return PREFIX + super.toStorage() + PIPE + timeFormat.date + " " + timeFormat.day + " " + at;
     }
     
 }

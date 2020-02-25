@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
     public CommandResult execute() {
         return new CommandResult(DIVIDER + LS + HelpCommand.MESSAGE_USAGE + LS + ListCommand.MESSAGE_USAGE + LS +
                 AddCommand.MESSAGE_USAGE + LS + DoneCommand.MESSAGE_USAGE + LS + DeleteCommand.MESSAGE_USAGE + LS +
-                ExitCommand.MESSAGE_USAGE + LS + DIVIDER);
+                FindCommand.MESSAGE_USAGE + LS + ExitCommand.MESSAGE_USAGE + LS + DIVIDER);
     }
     
 }

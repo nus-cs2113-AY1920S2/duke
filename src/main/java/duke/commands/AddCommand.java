@@ -45,6 +45,7 @@ public class AddCommand extends Command {
     private String commandWord;
     private String dayAndTime;
     
+    
     /**
      * Constructor for AddCommand
      *

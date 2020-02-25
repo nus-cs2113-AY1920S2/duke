@@ -10,7 +10,7 @@ import duke.commands.*;
  */
 public class Parser {
     
-    private static final String SPILT_BY_SPACE = "\\s+";
+    public static final String SPILT_BY_SPACE = "\\s+";
     private static final String SPILT_BY_SLASH = "/";
     
     /**
@@ -40,6 +40,8 @@ public class Parser {
             return parseDeleteCommand(arguments);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case FindCommand.COMMAND_WORD:
+            return parseFindCommand(arguments);
         default:
             return new InvalidCommand();
         }
@@ -91,6 +93,10 @@ public class Parser {
      */
     private Command parseDoneCommand(String argument) {
         return new DoneCommand(argument);
+    }
+    
+    private Command parseFindCommand(String argument) {
+        return new FindCommand(argument);
     }
     
     /**
