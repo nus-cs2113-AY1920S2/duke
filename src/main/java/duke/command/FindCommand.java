@@ -9,9 +9,9 @@ import duke.task.TaskList;
  */
 public class FindCommand extends Command {
 
-    /** Denotes whether the command is in the correct format */
+    /** Denotes whether the command is in the correct format. */
     private boolean isCorrectFormat;
-    /** The word used for search */
+    /** The word used for search. */
     private String keyword;
 
     /**
@@ -22,7 +22,7 @@ public class FindCommand extends Command {
      * @param commandSplit Contains information about the keyword to be searched for later.
      * @throws DukeException If the wrong format is used for the find command.
      */
-    public FindCommand(boolean isCorrectFormat, String[] commandSplit) throws DukeException{
+    public FindCommand(boolean isCorrectFormat, String[] commandSplit) throws DukeException {
         this.commandType = CommandType.FindCommand;
         this.isCorrectFormat = isCorrectFormat;
         try {
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Prints the list of tasks containing the keyword in their description
+     * Prints the list of tasks containing the keyword in their description.
      * by calling {@link TaskList#findTasks(boolean, String)}
      *
      * @param taskList Contains the list of tasks to be searched on.

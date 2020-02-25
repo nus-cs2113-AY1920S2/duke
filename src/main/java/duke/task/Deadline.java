@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    /** Stores information about the time of the task's deadline */
+    /** Stores information about the time of the task's deadline. */
     private String deadlineTime;
-    /** Stores information about the date of the task's deadline */
+    /** Stores information about the date of the task's deadline. */
     private LocalDate deadlineDate;
 
     /**
@@ -64,13 +64,13 @@ public class Deadline extends Task {
         return "(by: " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " " +  deadlineTime + " Hrs )";
     }
+
     /**
      * Returns the deadline of the task in the following format.<br>
      * Format : deadline
      *
      * @return deadline Represents the deadline of the task in the required format.
      */
-    // Returns the deadline
     public String getDeadlineInInputFormat() {
         return deadlineDate + " " + deadlineTime;
     }

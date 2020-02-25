@@ -10,11 +10,11 @@ public class Task {
     private static final String DONE_SYMBOL = "/";
     private static final String NOT_DONE_SYMBOL = " ";
 
-    /** Stores the description of the task */
+    /** Stores the description of the task. */
     public String description;
-    /** Denotes whether the task is done or not done */
+    /** Denotes whether the task is done or not done. */
     public boolean isDone;
-    /** Used to denote type of task */
+    /** Used to denote type of task. */
     public char taskType;
 
     /**
@@ -82,12 +82,12 @@ public class Task {
     /**
      * Searches for the keyword in the description of the task and returns the search result.
      *
-     * @param Keyword The word to be searched for in the description
-     * @return hasKeyword Contains information with regards to the presence of keyword in the task's description
+     * @param keyword The word to be searched for in the description.
+     * @return hasKeyword Contains information with regards to the presence of keyword in the task's description.
      */
-    public boolean hasKeyword(String Keyword) {
+    public boolean hasKeyword(String keyword) {
         boolean hasKeyword;
-        hasKeyword = description.contains(Keyword);
+        hasKeyword = description.contains(keyword);
         return hasKeyword;
     }
 

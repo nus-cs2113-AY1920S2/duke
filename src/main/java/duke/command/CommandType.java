@@ -2,6 +2,7 @@ package duke.command;
 
 /**
  * Enumeration used to denote type of Command.
+ *
  * <p><u>
  * The four types of commands are:
  * <br></u>

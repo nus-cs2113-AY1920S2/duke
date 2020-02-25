@@ -4,11 +4,11 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
- * Handles the deletion of existing tasks from the list
+ * Handles the deletion of existing tasks from the list.
  */
 public class DeleteCommand extends Command {
 
-    /** Contains information related to the index of the task to be deleted */
+    /** Contains information related to the index of the task to be deleted. */
     private String[] indexInformation;
 
     /**
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
      *
      * @param indexInformation Contains information related to the index of the task to be deleted
      */
-    public DeleteCommand(String[] indexInformation){
+    public DeleteCommand(String[] indexInformation) {
         this.commandType = CommandType.DeleteCommand;
         this.indexInformation = indexInformation;
     }

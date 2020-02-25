@@ -9,7 +9,7 @@ public class DukeException extends Exception {
 
     public static final String EXECUTION_ERROR_MESSAGE = "Execution Error!!!";
 
-    /** Contains the type of the exception */
+    /** Contains the type of the exception. */
     ExceptionType exceptionType;
 
     /**

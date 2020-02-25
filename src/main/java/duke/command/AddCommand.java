@@ -10,11 +10,11 @@ import duke.ui.Ui;
  */
 public class AddCommand extends Command {
 
-    /** Contains information related to the task */
+    /** Contains information related to the task. */
     private String[] taskInformation;
-    /** Denotes whether the command contains a single word */
+    /** Denotes whether the command contains a single word. */
     private boolean isOneWordCommand;
-    /** Denotes the type of the task to be added */
+    /** Denotes the type of the task to be added. */
     private TaskType taskType;
 
     /**

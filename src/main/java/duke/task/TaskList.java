@@ -26,7 +26,7 @@ public class TaskList {
     private static final String SEARCH_EMPTY_MESSAGE = "No tasks match the keyword";
     private static final String FOUND_MATCHED_TASKS_MESSAGE = "Here are the matching tasks in your list:";
 
-    /** Stores all the tasks provided */
+    /** Stores all the tasks provided. */
     public ArrayList<Task> tasks;
 
     /**
@@ -225,12 +225,13 @@ public class TaskList {
      * Also throws an exception if the wrong Deadline declaration format is used.
      *
      * @param commandSplit Contains information about the command used by user to create the Deadline task.
-     * @param isOneWordCommand Denotes whether the command used to create a new deadline task only contains a single word.
+     * @param isOneWordCommand Denotes whether the command used to create a new deadline task only
+     *                         contains a single word.
      * @throws DukeException If the wrong format is used to create an Deadline task.
      */
     public void addDeadlineTask(String[] commandSplit, boolean isOneWordCommand) throws DukeException {
         boolean isCorrectFormat = !isOneWordCommand && commandSplit[1].contains(DEADLINE_SPECIFIER);
-        if(!isCorrectFormat){
+        if (!isCorrectFormat) {
             throw new DukeException(ExceptionType.InvalidDeadlineDeclarationException);
         }
         String[] splitDeadline = commandSplit[1].substring(commandSplit[1].indexOf('/')).split(" ",3);
@@ -266,12 +267,23 @@ public class TaskList {
         addTask(TaskType.ToDo, commandSplit[1]);
     }
 
+    /**
+     * Verifies if the user given string identifies a valid time.
+     * Valid time should be of the format HHMM.
+     * HH should be between 0 and 23, both inclusive.
+     * MM should be between 0 and 59, both inclusive.
+     *
+     * @param time The user given input to be verified as a proper time identifier.
+     * @return isValidTime Denotes the validity of the input string as a time identifier.
+     */
     private boolean isValidTime(String time) {
         boolean isCorrectSize = (time.length() == 4);
         boolean hasCorrectHourFormat = (time.charAt(0) <= '1') || (time.charAt(0) == '2' && time.charAt(1) <= '3');
         boolean hasCorrectMinuteFormat = (time.charAt(2) <= '5');
-        return isCorrectSize && hasCorrectHourFormat && hasCorrectMinuteFormat;
+        boolean isValidTime = isCorrectSize && hasCorrectHourFormat && hasCorrectMinuteFormat;
+        return isValidTime;
     }
+
     /**
      * Relays message to {@link #markTask(String[])} to mark the task denoted as done if the index is valid.
      * Also handles exceptions in case the index provided isn't valid.
@@ -292,7 +304,7 @@ public class TaskList {
     }
 
     /**
-     * Instructs {@link #printListOfTasks()} to list the tasks if the correct format is used
+     * Instructs {@link #printListOfTasks()} to list the tasks if the correct format is used.
      *
      * @param isCorrectFormat Denotes the condition to be satisfied for the list command to be valid.
      * @see #printListOfTasks()
@@ -308,7 +320,7 @@ public class TaskList {
 
     /**
      * Instructs {@link #printListOfTasksWithKeyword(String)} ()} to list the tasks with the search keyword
-     * if the correct format is used
+     * if the correct format is used.
      *
      * @param isCorrectFormat Denotes the condition to be satisfied for the list command to be valid.
      * @param keyword The word used for search.
@@ -330,8 +342,8 @@ public class TaskList {
      */
     private void printListOfTasksWithKeyword(String keyword) {
         boolean hasNoMatchedTasks = true;
-        for (Task task: tasks){
-            if(task.hasKeyword(keyword)){
+        for (Task task: tasks) {
+            if (task.hasKeyword(keyword)) {
                 hasNoMatchedTasks = false;
                 break;
             }

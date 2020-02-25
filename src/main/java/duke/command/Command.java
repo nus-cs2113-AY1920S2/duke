@@ -10,7 +10,7 @@ import duke.task.TaskList;
  */
 public abstract class Command {
 
-    /** Specifies the type of command */
+    /** Specifies the type of command. */
     protected CommandType commandType;
 
     /**

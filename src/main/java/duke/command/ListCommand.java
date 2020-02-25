@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public class ListCommand extends Command {
 
-    /** Denotes whether the command contains a single word */
+    /** Denotes whether the command contains a single word. */
     private boolean isOneWordCommand;
 
     /**
@@ -23,7 +23,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Prints the current list of tasks by calling {@link TaskList#listTasks(boolean)}
+     * Prints the current list of tasks by calling {@link TaskList#listTasks(boolean)}.
      *
      * @param taskList Contains the list of tasks on which the commands are executed on.
      * @throws DukeException If the wrong format is used for list command.

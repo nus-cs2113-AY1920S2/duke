@@ -77,6 +77,9 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Prints a message to alert the user that the wrong format was used for find command.
+     */
     public static void printInvalidFindCommand() {
         printLine();
         printWithIndentation(INVALID_FIND_FORMAT_MESSAGE);

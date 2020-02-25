@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** The location of the data file */
+    /** The location of the data file. */
     private String filePath;
 
     /**

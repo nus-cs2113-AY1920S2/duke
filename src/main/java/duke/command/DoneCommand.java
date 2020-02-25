@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public class DoneCommand extends Command {
 
-    /** Contains information related to the index of the task to be deleted */
+    /** Contains information related to the index of the task to be deleted. */
     private String[] indexInformation;
 
     /**

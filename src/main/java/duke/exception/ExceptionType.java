@@ -2,6 +2,7 @@ package duke.exception;
 
 /**
  * Enumeration used to denote type of exception for DukeException.
+ *
  * <p><u>
  * The seven types of exceptions are:
  * <br></u>

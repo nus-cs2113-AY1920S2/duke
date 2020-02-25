@@ -10,20 +10,20 @@ import duke.ui.Ui;
 import java.util.Scanner;
 
 /**
- * Main Class of the application
+ * Main Class of the application.
  */
 public class Duke {
 
     private static final String FILE_PATH = "TaskList.txt";
     private static final String BYE_COMMAND = "bye";
 
-    /** Used for storing and loading tasks */
+    /** Used for storing and loading tasks. */
     private static Storage storage;
-    /** Used for interacting with the user */
+    /** Used for interacting with the user. */
     private static Ui ui;
-    /** Used for parsing user commands */
+    /** Used for parsing user commands. */
     private static Parser parser;
-    /** Used to store and manipulate the list of tasks */
+    /** Used to store and manipulate the list of tasks. */
     private static TaskList taskList;
 
     /**

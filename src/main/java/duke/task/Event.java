@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Event extends Task {
 
-    /** Stores information about period of task */
+    /** Stores information about period of task. */
     private String period;
 
     /**
