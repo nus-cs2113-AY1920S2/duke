@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task of the type Deadline.
+ * A Deadline object contains the required date of completion in addition to information contained in its parent class, Task.
+ * @see Task
+ */
 public class Deadline extends Task {
     protected String by;
 

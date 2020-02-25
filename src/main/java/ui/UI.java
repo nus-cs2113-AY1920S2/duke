@@ -14,7 +14,9 @@ public class UI {
         return input.nextLine();
     }
 
-    /** Prints line divider */
+    /**
+     * Prints the line divider.
+     */
     public static void br () {
         System.out.println("    ...................................................");
     }
@@ -45,6 +47,12 @@ public class UI {
         br();
     }
 
+    /**
+     * Prints the message shown after a task is added to the task list.
+     *
+     * @param t Task that needs to have its details printed.
+     * @param listSize Total number of tasks in the task list.
+     */
     public static void printAddedTaskMessage(Task t, int listSize) {
         UI.br();
         System.out.println("\t Dook has added task: ");
@@ -53,25 +61,36 @@ public class UI {
         UI.br();
     }
 
-    /** Prints the message shown when there is an IO exception */
+    /**
+     * Prints the message shown when there is an IO exception.
+     */
     public static void showLoadingError() {
         br();
         System.out.println("\t You did not have an old task list! Creating new one...");
         br();
     }
 
+    /**
+     * Prints the message shown when an invalid command is entered.
+     */
     public static void showInvalidCommandError() {
         UI.br();
         System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(");
         UI.br();
     }
 
-    public static void showMissingDescriptionerror() {
+    /**
+     * Prints the message shown when part(s) of the description of a task is missing.
+     */
+    public static void showMissingDescriptionError() {
         UI.br();
         System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(");
         UI.br();
     }
 
+    /**
+     * Prints the message shown when the task ID being deleted does not exist.
+     */
     public static void showInvalidTaskError() {
         UI.br();
         System.out.println("\t This task doesn't exist!");

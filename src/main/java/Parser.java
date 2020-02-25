@@ -4,7 +4,13 @@ import ui.UI;
 
 public class Parser {
 
-    /** Returns a Command object with the parsed descriptions obtained from userInput */
+    /**
+     * Returns a Command object based on the command parsed from userInput.
+     *
+     * @param userInput Input obtained from the user.
+     * @param tasks TaskList object containing all the tasks added to the list.
+     * @return an object that is a child class of Command.
+     */
     public static Command parse (String userInput, TaskList tasks) {
         if (userInput.equals("bye")) {
             return new ExitCommand("", tasks);

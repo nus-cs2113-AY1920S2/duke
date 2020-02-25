@@ -5,6 +5,9 @@ import exceptions.MissingDescriptionException;
 import task.*;
 import ui.UI;
 
+/**
+ * Represents the command to add any type of task to the task list.
+ */
 public class AddCommand extends Command {
     protected String command;
 
@@ -13,6 +16,11 @@ public class AddCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Identifies and adds the correct Task object to the task list.
+     * @throws MissingDescriptionException If the task description is incomplete.
+     * @throws InvalidCommandException If the command word is invalid.
+     */
     @Override
     public void execute() throws MissingDescriptionException, InvalidCommandException {
         Task t;
