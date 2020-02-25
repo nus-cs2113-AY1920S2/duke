@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 import static duke.util.Constants.NO_ICON;
 import static duke.util.Constants.YES_ICON;
 
@@ -12,18 +14,18 @@ public class DummyTask {
     private String description;
     private boolean isDone;
     private String typeIcon;
-    private String atDate;
-    private String byDate;
+    private LocalDate atDate;
+    private LocalDate byDate;
 
     public String getIcon() {
         return typeIcon;
     }
 
-    public String getAtDate() {
+    public LocalDate getAtDate() {
         return atDate;
     }
 
-    public String getByDate() {
+    public LocalDate getByDate() {
         return byDate;
     }
 

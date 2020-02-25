@@ -9,9 +9,13 @@ import duke.command.ExitCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.exception.DukeDateFormatException;
 import duke.exception.DukeException;
 import duke.exception.DukeNullDateException;
 import duke.exception.DukeNullDescriptionException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import static duke.util.Constants.DEADLINE_COMMAND;
 import static duke.util.Constants.DEADLINE_COMMAND_SHORTCUT;
@@ -57,12 +61,13 @@ public class Parser {
         case DEADLINE_COMMAND_SHORTCUT:
             try {
                 String taskDescriptions = extractTaskDescription(afterCommand, DEADLINE_TIME_DELIMITER);
-                String taskDate = extractTaskDate(afterCommand, DEADLINE_TIME_DELIMITER);
+                String taskDateString = extractTaskDate(afterCommand, DEADLINE_TIME_DELIMITER);
+                LocalDate taskDate = parseStringToDate(taskDateString);
                 return new DeadlineCommand(taskDescriptions, taskDate);
             } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
-            } catch (DukeNullDateException e) {
-                throw new DukeNullDateException();
+            } catch (DukeDateFormatException e) {
+                throw new DukeDateFormatException();
             } catch (DukeException e) {
                 throw new DukeException(DEADLINE_FORMAT_ERROR_MESSAGE);
             }
@@ -70,12 +75,13 @@ public class Parser {
         case EVENT_COMMAND_SHORTCUT:
             try {
                 String taskDescriptions = extractTaskDescription(afterCommand, EVENT_TIME_DELIMITER);
-                String taskDate = extractTaskDate(afterCommand, EVENT_TIME_DELIMITER);
+                String taskDateString = extractTaskDate(afterCommand, EVENT_TIME_DELIMITER);
+                LocalDate taskDate = parseStringToDate(taskDateString);
                 return new EventCommand(taskDescriptions, taskDate);
             } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
-            } catch (DukeNullDateException e) {
-                throw new DukeNullDateException();
+            } catch (DateTimeParseException e) {
+                throw new DukeDateFormatException();
             } catch (DukeException e) {
                 throw new DukeException(EVENT_FORMAT_ERROR_MESSAGE);
             }
@@ -127,5 +133,14 @@ public class Parser {
     private static String extractTaskDate(String taskInfo, String delimiter) {
         int taskTimeIndex = taskInfo.indexOf(delimiter) + delimiter.length();
         return taskInfo.substring(taskTimeIndex).trim();
+    }
+
+    private static LocalDate parseStringToDate(String dateString) throws DukeDateFormatException {
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new DukeDateFormatException();
+        }
     }
 }
