@@ -8,13 +8,11 @@ public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
-
     public static void main(String[] args) throws IOException, DukeException {
         welcomeMessage();
         loadFile();
         greetUser();
         conversation();
-
     }
 
     public static void welcomeMessage(){
@@ -31,7 +29,6 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you");
         System.out.println("____________________________________________________________");
-
     }
 
     public static void finishConversation() {
@@ -306,7 +303,6 @@ public class Duke {
         while (scanner.hasNext()) {
             String raw = scanner.nextLine();
             loadTaskList(raw, taskList);
-
         }
     }
 
