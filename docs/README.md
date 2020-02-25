@@ -41,9 +41,11 @@ Example of usage: `todo read book`
 
 Expected outcome: 
 
-`Got it. I've added this task:`\
-`[T][✘] read book`\
-`Now you have 11 tasks in the list.`
+````
+Got it. I've added this task:
+[T][✘] read book
+Now you have 11 tasks in the list.
+````
 
 ### `deadline` - Adds a Deadline task
 
@@ -55,9 +57,11 @@ Example of usage: `deadline return book /by Sunday 2359`
 
 Expected outcome:
 
-`Got it. I've added this task:`\
-`[D][✘] return book (by: Sunday 2359)`\
-`Now you have 12 tasks in the list.`
+````
+Got it. I've added this task:
+[D][✘] return book (by: Sunday 2359)
+Now you have 12 tasks in the list.
+````
 
 ### `event` - Adds a Event task
 
@@ -69,9 +73,11 @@ Example of usage: `event project meeting /at Mon 2-4pm`
 
 Expected outcome:
 
-`Got it. I've added this task:`\
-`[E][✘] project meeting (at: Mon 2-4pm)`\
-`Now you have 13 tasks in the list.`
+````
+Got it. I've added this task:
+[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 13 tasks in the list.
+````
 
 ### `done` - Mark a task as done
 
@@ -84,8 +90,10 @@ Example of usage: `done 11`\
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`\
-`[T][✓] read book`
+````
+Nice! I've marked this task as done:
+[T][✓] read book
+````
 
 ### `delete` - Delete a task from the task list
 
@@ -99,9 +107,11 @@ Example of usage: `delete 8`\
 
 Expected outcome:
 
-`Noted. I've removed this task:`\
-`[E][✘] skype meeting (at: 26/2/2020 2-5pm)`\
-`Now you have 9 tasks in the list.`
+````
+Noted. I've removed this task:
+[E][✘] skype meeting (at: 26/2/2020 2-5pm)
+Now you have 9 tasks in the list.
+````
 
 ### `list` - Display all the tasks in the task list
 
@@ -113,12 +123,14 @@ Syntax: `list`
 
 Expected outcome:
 
-`Here are the tasks in your list:`\
-`1. [D][✘] return book (by: June 6th)`\
-`2. [E][✓] project meeting (at: Aug 6th 2-4pm)`\
-`3. [T][✓] buy drinks`\
-`4. [D][✘] 2113 iP (by: monday)`\
-`5. [E][✘] watch movie (at: friday 4pm)`
+````
+Here are the tasks in your list:
+1. [D][✘] return book (by: June 6th)
+2. [E][✓] project meeting (at: Aug 6th 2-4pm)
+3. [T][✓] buy drinks
+4. [D][✘] 2113 iP (by: monday)
+5. [E][✘] watch movie (at: friday 4pm)
+````
 
 ### `find` - Find a task in the task list
 
@@ -131,7 +143,8 @@ Example of usage: `find book`
 
 Expected outcome:
 
-`Here are the matching tasks in your list:`\
-`1. [D][✘] return book (by: June 6th)`\
-`2. [T][✓] read book`
-
+````
+Here are the matching tasks in your list:
+1. [D][✘] return book (by: June 6th)
+2. [T][✓] read book
+````
