@@ -59,6 +59,11 @@ public class TaskList {
     }
 
     public void list() {
+        if (this.size() == 0) {
+            System.out.println("\tThere are no tasks in your list.");
+            System.out.println("\tTip: Try adding a task by typing `todo NAME`");
+            return;
+        }
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < this.size(); ++i) {
             System.out.printf("\t%d.%s", i+1, this.getByIndex(i));

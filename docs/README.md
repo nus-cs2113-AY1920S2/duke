@@ -36,7 +36,8 @@ Syntax: `list`
 ```
 - If you have no tasks in the list:
 ```
-	Here are the tasks in your list:
+	There are no tasks in your list.
+	Tip: Try adding a task by typing `todo NAME`
 ```
 
 ## Add a To-Do
