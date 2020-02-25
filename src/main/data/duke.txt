@@ -1,0 +1,3 @@
+D | 1|hw
+E | 1|seminar
+T | 1 | haritha
