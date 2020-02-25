@@ -132,7 +132,7 @@ public class Ui {
     public void showAddTaskSuccessfulPrompt(TaskList taskList, Task addedTask) {
         System.out.println(FIVE_SPACES + ADD_TASK_PROMPT);
         System.out.println(SEVEN_SPACES + addedTask);
-        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, taskList.getList().size());
+        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, taskList.getSize());
     }
 
     /**
@@ -153,9 +153,9 @@ public class Ui {
     public void showList(TaskList taskList) {
 
         System.out.println(FIVE_SPACES + LIST_TASKS_PROMPT);
-        int taskCount = taskList.size();
+        int taskCount = taskList.getSize();
         for (int i = 0; i < taskCount; ++i) {
-            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING, i, taskList.get(i));
+            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING, i, taskList.getTask(i));
         }
     }
 
@@ -179,7 +179,7 @@ public class Ui {
     public void showDeleteTaskSuccessfulPrompt(TaskList taskList, Task deletedTask) {
         System.out.println(FIVE_SPACES + DELETE_TASKS_PROMPT);
         System.out.println(SEVEN_SPACES + deletedTask);
-        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, taskList.getList().size());
+        System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, taskList.getSize());
     }
 
     /**

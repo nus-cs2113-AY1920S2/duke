@@ -46,11 +46,10 @@ public class DeleteCommand implements Command{
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeTaskIdInvalidException {
         try {
-            ArrayList<Task> list = taskList.getList();
-            Task deletedTask = list.get(taskId);
-            list.remove(taskId);
+            Task deletedTask = taskList.getTask(taskId);
+            taskList.delete(taskId);
             ui.showDeleteTaskSuccessfulPrompt(taskList, deletedTask);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (DukeTaskIdInvalidException e) {
             throw new DukeTaskIdInvalidException();
         }
     }

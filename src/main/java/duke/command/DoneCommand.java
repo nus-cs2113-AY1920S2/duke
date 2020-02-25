@@ -43,8 +43,8 @@ public class DoneCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeTaskIdInvalidException {
         try {
-            taskList.getList().get(taskId).markAsDone();
-            ui.showMarkAsDoneSuccessfulPrompt(taskList.getList().get(taskId));
+            taskList.getTask(taskId).markAsDone();
+            ui.showMarkAsDoneSuccessfulPrompt(taskList.getTask(taskId));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeTaskIdInvalidException();
         }

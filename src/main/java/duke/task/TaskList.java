@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeTaskIdInvalidException;
+
 import java.util.ArrayList;
 
 /**
@@ -17,20 +19,20 @@ public class TaskList {
     }
 
     /**
+     * Return an ArrayList of Task objects.
+     * @return an ArrayList of Task objects.
+     */
+    public ArrayList<Task> getList() {
+        return list;
+    }
+
+    /**
      * Constructor with an ArrayList of Task objects provided.
      *
      * @param list a list of the Task objects.
      */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
-    }
-
-    /**
-     * Return an ArrayList of Task objects.
-     * @return an ArrayList of Task objects.
-     */
-    public ArrayList<Task> getList() {
-        return list;
     }
 
     /**
@@ -42,5 +44,36 @@ public class TaskList {
         list.add(task);
     }
 
+    /**
+     * Delete a task from the list.
+     *
+     * @param taskId the id of the task which the user intends to delete
+     * @throws DukeTaskIdInvalidException exception is thrown when the task id provided by the user is invalid.
+     */
+    public void delete(int taskId) throws DukeTaskIdInvalidException {
+        try {
+            list.remove(taskId);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeTaskIdInvalidException();
+        }
+    }
 
+    /**
+     * Get the specific Task object with the given task id.
+     *
+     * @param taskId the id the the specific task.
+     * @return the Task object whichever is looking for.
+     */
+    public Task getTask(int taskId) {
+        return list.get(taskId);
+    }
+
+    /**
+     * Get the number of tasks the user has.
+     *
+     * @return the size of the task list.
+     */
+    public int getSize() {
+        return list.size();
+    }
 }
