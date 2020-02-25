@@ -79,4 +79,8 @@ public class Task {
         return statusWithDescription;
     }
 
+    public boolean hasKeyword(String Keyword) {
+        return description.contains(Keyword);
+    }
+
 }

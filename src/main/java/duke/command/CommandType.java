@@ -13,6 +13,6 @@ package duke.command;
  * </i>
  */
 public enum CommandType {
-    AddCommand, DeleteCommand, ListCommand, DoneCommand
+    AddCommand, DeleteCommand, ListCommand, DoneCommand, FindCommand
 }
 

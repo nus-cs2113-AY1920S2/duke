@@ -17,6 +17,5 @@ package duke.exception;
  */
 public enum ExceptionType {
     EmptyCommandException, InvalidCommandException, InvalidDeadlineDeclarationException, InvalidDeleteCommandException,
-    InvalidDoneCommandException, InvalidEventDeclarationException, InvalidToDoDeclarationException
-
+    InvalidDoneCommandException, InvalidEventDeclarationException, InvalidFindCommandException, InvalidToDoDeclarationException
 }

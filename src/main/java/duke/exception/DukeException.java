@@ -45,6 +45,9 @@ public class DukeException extends Exception {
         case InvalidEventDeclarationException:
             Ui.printInvalidEventFormat();
             break;
+        case InvalidFindCommandException:
+            Ui.printInvalidFindCommand();
+            break;
         case EmptyCommandException:
             Ui.printEmptyLineAlert();
             break;

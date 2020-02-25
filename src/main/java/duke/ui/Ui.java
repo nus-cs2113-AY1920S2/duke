@@ -32,6 +32,8 @@ public class Ui {
     private static final String DONE_COMMAND = TaskList.DONE_COMMAND;
     private static final String DELETE_COMMAND = TaskList.DELETE_COMMAND;
     private static final String EXECUTION_ERROR_MESSAGE = "Error found during execution";
+    private static final String INVALID_FIND_FORMAT_MESSAGE = "Invalid Command "
+            + "(find x : x should be a string)";
 
     /**
      * Prints the number of spaces requested by the user as output.
@@ -73,6 +75,12 @@ public class Ui {
     public static void printWithIndentation(String line, int numberOfSpaces) {
         printSpaces(numberOfSpaces);
         System.out.println(line);
+    }
+
+    public static void printInvalidFindCommand() {
+        printLine();
+        printWithIndentation(INVALID_FIND_FORMAT_MESSAGE);
+        printLine();
     }
 
     /**
