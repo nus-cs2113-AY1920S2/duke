@@ -28,7 +28,6 @@ import static duke.util.Constants.EXIT_COMMAND_BYE;
 import static duke.util.Constants.EXIT_COMMAND_EXIT;
 import static duke.util.Constants.EXIT_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.EXIT_COMMAND_QUIT;
-import static duke.util.Constants.FILE_OPERATION_IO_ERROR_MESSAGE;
 import static duke.util.Constants.FIVE_SPACES;
 import static duke.util.Constants.GREETING_WORD;
 import static duke.util.Constants.LINE_DIVIDER;
