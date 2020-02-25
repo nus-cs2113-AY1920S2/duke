@@ -1,5 +1,8 @@
 package duke.common;
 
+/**
+ * The common exception message
+ */
 public class ExceptionMessage {
     
     private static final String LS = System.lineSeparator();

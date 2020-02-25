@@ -9,6 +9,9 @@ import java.io.IOException;
 import static duke.Duke.tasks;
 import static duke.storage.Storage.appendToFile;
 
+/**
+ * Add the different type of tasks to the list
+ */
 public class AddCommand extends Command {
     
     private static final String COMMAND_ADD_DESC = "Adds a task to the list.";
@@ -42,12 +45,26 @@ public class AddCommand extends Command {
     private String commandWord;
     private String dayAndTime;
     
+    
+    /**
+     * Constructor for AddCommand
+     *
+     * @param commandWord command word from the user
+     * @param description the parameters of the command string
+     */
     public AddCommand(String commandWord, String description) {
         this.description = description;
         this.commandWord = commandWord;
         
     }
     
+    /**
+     * Constructor for AddCommand
+     *
+     * @param commandWord command word from the user
+     * @param description the parameters of the command string
+     * @param dayAndTime  the parameter for day and time
+     */
     public AddCommand(String commandWord, String description, String dayAndTime) {
         this.description = description;
         this.commandWord = commandWord;
@@ -55,6 +72,11 @@ public class AddCommand extends Command {
         
     }
     
+    /**
+     * Execute the add operation flow
+     *
+     * @return the add message to the user
+     */
     @Override
     public CommandResult execute() {
         try {

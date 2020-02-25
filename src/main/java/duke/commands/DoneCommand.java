@@ -7,6 +7,9 @@ import java.io.IOException;
 import static duke.Duke.tasks;
 import static duke.storage.Storage.modifyFileContent;
 
+/**
+ * Marks a task done identified by the targetIndex given by the user
+ */
 public class DoneCommand extends Command {
     
     public static final String COMMAND_WORD = "done";
@@ -24,6 +27,11 @@ public class DoneCommand extends Command {
     
     private String targetIndex;
     
+    /**
+     * Constructor for DoneCommand
+     *
+     * @param targetIndex the index string to be deleted
+     */
     public DoneCommand(String targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -32,6 +40,13 @@ public class DoneCommand extends Command {
         return targetIndex;
     }
     
+    /**
+     * Execute the done operation flow
+     *
+     * @return the done message to the user
+     * @throws ArrayIndexOutOfBoundsException if index < 0 or index > tasks size
+     * @throws IOException                    if there is an error during an input-output operation
+     */
     @Override
     public CommandResult execute() {
         String index = getTargetIndex();

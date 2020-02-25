@@ -2,12 +2,21 @@ package duke.task;
 
 import duke.enumerations.Day;
 
+/**
+ * Represent the Deadline object
+ */
 public class Deadline extends Task {
     
     private String by;
     private final String PREFIX = "D";
     private TimeFormat timeFormat;
     
+    /**
+     * Constructor for Deadline
+     *
+     * @param description the description of the task
+     * @param by          the timeline for the task to be completed
+     */
     public Deadline(String description, String by) {
         super(description);
         timeFormat = new TimeFormat();
@@ -28,12 +37,22 @@ public class Deadline extends Task {
         return input;
     }
     
+    /**
+     * Return the information as a string
+     *
+     * @return the string of information relevant to the object
+     */
     @Override
     public String toString() {
         return "[" + PREFIX + "]" + super.toString() + " (by: " + timeFormat.date + " " + timeFormat.day + " " + by +
                 ")";
     }
     
+    /**
+     * Return the information with a specific format to the storage
+     *
+     * @return the string of information relevant to the object
+     */
     @Override
     public String toStorage() {
         return PREFIX + super.toStorage() + PIPE + timeFormat.date + " " + timeFormat.day + " " + by;
