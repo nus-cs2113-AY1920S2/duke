@@ -15,11 +15,32 @@ public class Command {
     public boolean isActive = true;
     Data data;
 
-
+    /**
+     * Initialize the file used to store the tasks
+     * <p>
+     * This method creates a new Data object and throws an exception
+     * when the file is not found.
+     *
+     * @param url an absolute URL giving the base location of the image
+     * @return void
+     * @see Data
+     */
     public Command(String url) throws FileNotFoundException {
         data = new Data(url);
     }
 
+    /**
+     * Takes in the mode of user input and execute the mode using switch statement.
+     * <p>
+     * This method uses a switch statement to determine which mode to execute.
+     * Throws different exceptions depending on what the program catches such that
+     * the user can continue running the program.
+     *
+     * @param -
+     * @return void
+     * @see Parser
+     * @see Ui
+     */
     public void commandInit() throws IOException, DukeException {
         try {
             Parser commandParser = new Parser();
