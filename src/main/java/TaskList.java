@@ -26,7 +26,6 @@ public class TaskList {
         return tasks.get(index);
     }
 
-<<<<<<< HEAD
     /**
      * Prints all tasks which contain the specified keyword
      * @param name the specified keyword to search from the list
@@ -53,18 +52,6 @@ public class TaskList {
      * @param task task to be removed from this list, if present
      * @return {@code true} if this list contained the specified task
      */
-||||||| parent of 44183a8... Add JavaDoc
-=======
-    /**
-     * Removes the first occurrence of the specified task from this list,
-     * if it is present.  If the list does not contain the task, it is
-     * unchanged.
-     * Returns {@code true} if this list contained the specified element
-     * (or equivalently, if this list changed as a result of the call).
-     * @param task task to be removed from this list, if present
-     * @return {@code true} if this list contained the specified task
-     */
->>>>>>> 44183a8... Add JavaDoc
     public void removeByTask(Task task) {
         tasks.remove(task);
     }
