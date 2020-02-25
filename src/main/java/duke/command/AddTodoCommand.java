@@ -4,6 +4,7 @@ import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
 
+/* a command class that executes the operation to add a todo task to task list */
 public class AddTodoCommand extends Command {
 
     private String taskName;

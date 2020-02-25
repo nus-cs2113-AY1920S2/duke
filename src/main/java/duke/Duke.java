@@ -6,6 +6,7 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
+/* Duke class (the main class of this Duke project) */
 public class Duke {
 
     private Storage storage;
@@ -24,6 +25,7 @@ public class Duke {
         }
     }
 
+    /* run process method of Duke */
     public void run() {
         ui.greet();
         boolean isExit = false;

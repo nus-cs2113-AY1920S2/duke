@@ -5,6 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 
+/* a command class that executes the operation of marking a task as done in task list */
 public class DoneCommand extends Command {
 
     private int taskNo;

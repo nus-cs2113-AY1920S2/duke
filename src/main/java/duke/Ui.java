@@ -2,6 +2,7 @@ package duke;
 
 import java.util.Scanner;
 
+/* UI class: deals with interactions with the user(write to stdout, read from stdin) */
 public class Ui {
 
     public static final String FORMAT_LINE = "------------------------------------";
@@ -59,6 +60,7 @@ public class Ui {
         printFormat(errorDescription);
     }
 
+    /* a simple printout method that print well-formatted output */
     public void printFormat(String ...strs) {
         System.out.println(FORMAT_LINE);
         for(String str: strs) {
@@ -76,6 +78,7 @@ public class Ui {
         System.out.println(str);
     }
 
+    /* print user guide out when user types Help command */
     public void printUserGuide() {
         printFormatLine();
         printFormat(HELPING,

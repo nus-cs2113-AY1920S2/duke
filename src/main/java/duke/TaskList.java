@@ -7,6 +7,7 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+/* tasklist class:contains the task list and it can perform operations on task list such as addtask, deletetask etc. */
 public class TaskList {
 
     private ArrayList<Task> taskList;
@@ -23,24 +24,28 @@ public class TaskList {
         return taskList;
     }
 
+    /* add a todo task into the task list */
     public String addTodo(String taskName) {
         Todo todo = new Todo(taskName, false);
         taskList.add(todo);
         return todo.print();
     }
 
+    /* add a deadline task into the task list */
     public String addDeadline(String taskName, String deadLine) {
         Deadline deadline = new Deadline(taskName, false, deadLine);
         taskList.add(deadline);
         return deadline.print();
     }
 
+    /* add a event task into the task list */
     public String addEvent(String taskName, String timeSlot) {
         Event event = new Event(taskName, false, timeSlot);
         taskList.add(event);
         return event.print();
     }
 
+    /* list all tasks in the task list */
     public void listTask(Ui ui) {
         int i = 1;
         ui.printFormatLine();
@@ -53,12 +58,14 @@ public class TaskList {
         ui.printString("");
     }
 
+    /* mark a task in the task list as done */
     public String markTask(int taskNo) {
         Task task = taskList.get(taskNo-1);
         task.changeStatus(true);
         return task.print();
     }
 
+    /* delete a task in the task list */
     public String deleteTask(int taskNo) {
         Task task = taskList.get(taskNo-1);
         String description = task.print();
