@@ -17,19 +17,19 @@ public class Task {
         return (isDone ? "/" : " "); //return tick or X symbols
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
-    public String toFile(){
-        return ((isDone ? "1":"0") + " | " + this.description);
+    public String toFile() {
+        return ((isDone ? "1" : "0") + " | " + this.description);
     }
 }
