@@ -270,7 +270,7 @@ A response similar to the following one would appear:
     Q: How to transfer the task list data from one computer to an other computer?
     A:      Just copy the "TaskList.txt" file which could be found at the same directory
         as the jar file and paste it to the location containing the jar file in the other
-        computer. This should transfer the required data
+        computer. This should transfer the required data.
 
 <a name="command-summary"></a>
 
