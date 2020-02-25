@@ -1,4 +1,7 @@
 package duke.commands;
+/**
+ * Shows the list of tasks to the user
+ */
 
 import static duke.Duke.tasks;
 
@@ -16,6 +19,11 @@ public class ListCommand extends Command {
     private static final String COMMAND_LIST_EMPTY_MESSAGE = TAB + "The list is empty!";
     private static final String COMMAND_LIST_MESSAGE = "Here are the tasks in your list:";
     
+    /**
+     * Execute the list operation flow
+     *
+     * @return the list of tasks to the user
+     */
     @Override
     public CommandResult execute() {
         if (tasks.isEmpty()) {

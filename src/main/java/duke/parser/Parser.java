@@ -5,12 +5,20 @@ import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.commands.*;
 
-
+/**
+ * Parse user Input
+ */
 public class Parser {
     
     private static final String SPILT_BY_SPACE = "\\s+";
     private static final String SPILT_BY_SLASH = "/";
     
+    /**
+     * Parse user input into command for execution
+     *
+     * @param userInput full user Input string
+     * @return the command based on the user input
+     */
     public Command parseCommand(String userInput) {
         
         String[] words = splitInputLine(userInput, SPILT_BY_SPACE);
@@ -37,6 +45,13 @@ public class Parser {
         }
     }
     
+    /**
+     * Parse arguments in the context of add task command
+     *
+     * @param commandWord command word of the user input string
+     * @param arguments   the parameters of the command string
+     * @return the prepared command
+     */
     private Command parseAddCommand(String commandWord, String arguments) {
         
         String[] paramAndDate = splitInputLine(arguments, SPILT_BY_SLASH);
@@ -58,14 +73,32 @@ public class Parser {
         return new ExceptionCommand("Task adding has ended in failure");
     }
     
+    /**
+     * Parse arguments in the context of delete task command
+     *
+     * @param argument the parameter of the command String
+     * @return the prepared command
+     */
     private Command parseDeleteCommand(String argument) {
         return new DeleteCommand(argument);
     }
     
+    /**
+     * Parse arguments in the context of done task command
+     *
+     * @param argument the parameter of the command String
+     * @return the prepared command
+     */
     private Command parseDoneCommand(String argument) {
         return new DoneCommand(argument);
     }
     
+    /**
+     * Execute the command in context with the command type passed in
+     *
+     * @param command the type of command
+     * @return the result that is parse into CommandResult
+     */
     public CommandResult executeCommand(Command command) {
         try {
             CommandResult result = command.execute();
@@ -76,6 +109,13 @@ public class Parser {
         }
     }
     
+    /**
+     * Check if the add task command has empty description
+     *
+     * @param commandWord command word of the user input string
+     * @param commandArgs the parameters of the command string
+     * @throws DukeException if the description is empty string
+     */
     private static void hasEmptyDescription(String commandWord, String commandArgs) throws DukeException {
         if ((commandWord.equalsIgnoreCase(AddCommand.COMMAND_WORD_TODO) ||
                 commandWord.equalsIgnoreCase(AddCommand.COMMAND_WORD_DEADLINE) ||
@@ -84,6 +124,13 @@ public class Parser {
         }
     }
     
+    /**
+     * Check if the add task command has empty date
+     *
+     * @param commandWord command word of the user input string
+     * @param commandDate the parameters of the command string
+     * @throws DukeException if the date is empty string
+     */
     private static void hasEmptyDate(String commandWord, String commandDate) throws DukeException {
         if ((commandWord.equalsIgnoreCase(AddCommand.COMMAND_WORD_DEADLINE) ||
                 commandWord.equalsIgnoreCase(AddCommand.COMMAND_WORD_EVENT)) && commandDate.equals("")) {
@@ -91,6 +138,13 @@ public class Parser {
         }
     }
     
+    /**
+     * Split the user input into two parts with a specific regex
+     *
+     * @param rawUserInput full user input string
+     * @param regex        the quantifier to separate the string
+     * @return an array of size 2 separated by the quantifier
+     */
     /* Solution below adapted from
        https://github.com/nus-cs2113-AY1920S2/contacts/blob/master/src/main/java/Contacts1.java
      */

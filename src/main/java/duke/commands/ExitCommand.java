@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Exits the program
+ */
 public class ExitCommand extends Command {
     
     public static final String COMMAND_WORD = "bye";
@@ -12,6 +15,11 @@ public class ExitCommand extends Command {
     
     private static final String MESSAGE_EXIT = "You are Exiting Duke at your Request :)";
     
+    /**
+     * Execute the exit operation flow
+     *
+     * @return the exit message to be shown to the user
+     */
     @Override
     public CommandResult execute() {
         return new CommandResult(DIVIDER + LS + MESSAGE_EXIT);

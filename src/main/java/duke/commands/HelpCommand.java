@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Shows help instruction
+ */
 public class HelpCommand extends Command {
     
     public static final String COMMAND_WORD = "help";
@@ -10,6 +13,11 @@ public class HelpCommand extends Command {
             String.format(MESSAGE_COMMAND_HELP, COMMAND_WORD, COMMAND_HELP_DESC) + LS +
                     String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_HELP_EXAMPLE) + LS;
     
+    /**
+     * Execute the help operation flow
+     *
+     * @return shows the help list to the user
+     */
     @Override
     public CommandResult execute() {
         return new CommandResult(DIVIDER + LS + HelpCommand.MESSAGE_USAGE + LS + ListCommand.MESSAGE_USAGE + LS +

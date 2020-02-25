@@ -7,6 +7,9 @@ import java.io.IOException;
 import static duke.Duke.tasks;
 import static duke.storage.Storage.deleteFileContent;
 
+/**
+ * Deletes a task identified by the targetIndex given by the user
+ */
 public class DeleteCommand extends Command {
     
     public static final String COMMAND_WORD = "delete";
@@ -25,6 +28,11 @@ public class DeleteCommand extends Command {
     
     private String targetIndex;
     
+    /**
+     * Constructor for DeleteCommand
+     *
+     * @param targetIndex the index string to be deleted
+     */
     public DeleteCommand(String targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -33,6 +41,13 @@ public class DeleteCommand extends Command {
         return targetIndex;
     }
     
+    /**
+     * Execute the delete operation flow
+     *
+     * @return the delete message to be shown to the user
+     * @throws ArrayIndexOutOfBoundsException if index < 0 or index > tasks size
+     * @throws IOException                    if there is an error during an input-output operation
+     */
     @Override
     public CommandResult execute() {
         try {

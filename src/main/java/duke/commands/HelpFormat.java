@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Interface to facilitate string format for commands
+ */
 public interface HelpFormat {
     
     String DIVIDER = "____________________________________________________________";

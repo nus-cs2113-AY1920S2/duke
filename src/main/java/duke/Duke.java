@@ -10,6 +10,10 @@ import duke.commands.Command;
 
 import java.util.ArrayList;
 
+/**
+ * Entry point of the Duke application
+ * Initializes the application and starts the interaction with the user
+ */
 public class Duke {
     
     private Ui ui;
@@ -20,6 +24,9 @@ public class Duke {
         new Duke().run();
     }
     
+    /**
+     * Set up the required object and start up the program
+     */
     private void start() {
         this.ui = new Ui();
         ui.showWelcomeMessage();
@@ -28,17 +35,26 @@ public class Duke {
         ui.printToConsole(Ui.DIVIDER);
     }
     
+    /**
+     * Exit the program
+     */
     private void exit() {
         ui.showGoodByeMessage();
         System.exit(0);
     }
     
+    /**
+     * Run the program until terminated
+     */
     private void run() {
         start();
         runCommandLoopUntilExitCommand();
         exit();
     }
     
+    /**
+     * Reads the user command and executes it, until the user issues the exit command
+     */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         String userCommandText = "";

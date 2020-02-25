@@ -17,6 +17,9 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Storage for the tasks in file format
+ */
 public class Storage {
     
     private static final String T = "T";
@@ -26,6 +29,11 @@ public class Storage {
     private static final String MK_FILE_STRING = (getRelativePath() + "\\data\\duke.txt").replace("\\", "/");
     private static final String PIPE_REGEX = "\\s+\\|\\s+";
     
+    /**
+     * Constructor for Storage
+     *
+     * @throws IOException if unable to create file
+     */
     public Storage() {
         try {
             File dir = new File(MK_DIR_STRING);
@@ -42,6 +50,11 @@ public class Storage {
         }
     }
     
+    /**
+     * Gets the relative path of the project directory
+     *
+     * @return the relative path
+     */
     //@@author geoO-reused
     //Reused from https://stackoverflow.com/questions/4871051/getting-the-current-working-directory-in-java
     public static String getRelativePath() {
@@ -51,12 +64,25 @@ public class Storage {
     }
     //@@author geoO-reused
     
+    /**
+     * Append the text in the file
+     *
+     * @param textToAppend the string of information to be added
+     * @throws IOException if there is an error during input-output operation
+     */
     public static void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(MK_FILE_STRING, true);
         fw.write(textToAppend + System.lineSeparator());
         fw.close();
     }
     
+    /**
+     * Modify the text in the file
+     *
+     * @param lineNumber modify the file text according to the line number
+     * @param data       modify the file using this data
+     * @throws IOException if there is an error during input-output operation
+     */
     //@@author Paul Vargas-reused
     //Reused from https://stackoverflow.com/questions/31375972/how-to-replace-a-specific-line-in-a-file-using-java
     //with minor modifications
@@ -68,6 +94,12 @@ public class Storage {
     }
     //@@author Paul Vargas-reused
     
+    /**
+     * Delete the text in the file
+     *
+     * @param lineNumber delete the file text according to the line number
+     * @throws IOException if there is an error during input-output operation
+     */
     public static void deleteFileContent(int lineNumber) throws IOException {
         Path path = Paths.get(MK_FILE_STRING);
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
@@ -75,6 +107,11 @@ public class Storage {
         Files.write(path, lines, StandardCharsets.UTF_8);
     }
     
+    /**
+     * Print and load the contents found in the file
+     *
+     * @throws FileNotFoundException if file cannot be found
+     */
     public static void printAndLoadContents() throws FileNotFoundException {
         File f = new File(MK_FILE_STRING);
         Scanner s = new Scanner(f);
