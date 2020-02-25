@@ -176,7 +176,7 @@ public class Duke {
         int i = 0;
         while (i < taskList.size()) {
             int j = i + 1;
-            System.out.println(j + " ." + taskList.get(i).toString());
+            System.out.println(j + " ." + taskList.get(i).showSearch());
             i++;
         }
 
@@ -193,6 +193,9 @@ public class Duke {
                 searchResult.add(task);
             }
         }
+        if(searchResult.size() == 0){
+            System.out.println(" No matching results ");
+        }
         listSearchResult(searchResult);
     }
 
@@ -201,16 +204,12 @@ public class Duke {
         int i = 0;
         while (i < input.size()) {
             int j = i + 1;
-            System.out.println(j + " ." + input.get(i).toString());
+            System.out.println(j + " ." + input.get(i).showSearch());
             i++;
         }
 
         System.out.println("____________________________________________________________");
     }
-
-
-
-
 
     public static void markDone(String str) throws IOException, DukeException {
         if (str.equals("done")) {

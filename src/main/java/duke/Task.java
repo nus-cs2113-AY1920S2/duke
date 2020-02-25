@@ -25,6 +25,7 @@ public class Task {
         return "[" + getStatusIcon() + "]" + this.description ;
     }
 
+    public String showSearch() { return "[" + getStatusIcon() + "]" + this.description ;}
 
 
 }
