@@ -22,9 +22,9 @@ public class Duke {
 
     private static final Path FILENAME = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
     private static String fileDoneStatus;
-    private static final String ERROR_DELETE_MESSAGE = "I can't delete that because"
+    private static final String ERROR_DELETE_MESSAGE = "Sheena: I can't delete that because"
             + " you haven't" + " added task %s yet";
-    private static final String ERROR_MESSAGE = "The %s of a %s command should not be empty.\n";
+    private static final String ERROR_MESSAGE = "Sheena: The %s of a %s command should not be empty.\n";
     private static final String ERROR_DELETE_PARAM = "What to do: delete [TASK NUMBER]\n";
     private static final String ERROR_DELETE_EXAMPLE = "Example: delete 1";
 
@@ -46,7 +46,7 @@ public class Duke {
         if (List.size() == 0) {
             throw new DukeException();
         } else {
-            System.out.println("Here you go. These are tasks that you have saved ~ :");
+            System.out.println("Sheena: These are tasks that you have saved ~ :");
             for (Task t : List) {
                 System.out.print(count);
                 System.out.print(". ");
@@ -69,9 +69,9 @@ public class Duke {
         taskList.remove(index - 1);
         deleteOnFile(index);
         System.out.println("-------------------------------------------");
-        System.out.println(" Noted! I've removed this task:");
+        System.out.println("Sheena: Noted! I've removed this task:");
         System.out.println(t.toString());
-        System.out.printf(" Now you have %d tasks in your list.\n", taskList.size());
+        System.out.printf("Sheena: Now you have %d tasks in your list.\n", taskList.size());
         System.out.println("-------------------------------------------");
 
     }
@@ -204,15 +204,15 @@ public class Duke {
         String description;
         ArrayList<Task> list = new ArrayList<>();
         Scanner in = new Scanner (System.in);
-        System.out.println("Let me see if you have any previous saved file");
+        System.out.println("Sheena: Let me see if you have any previous saved file");
         try {
             readExistFile(list);
             printTasks(list);
-            System.out.println("Let's begin to add more tasks!");
+            System.out.println("Sheena: Let's begin to add more tasks!");
 
         } catch (IOException | DukeException e) {
             System.out.println("--------------------------------------");
-            System.out.println("Uhm, we shall create a new one ^^");
+            System.out.println("Sheena: Uhm, we shall create a new one ^^");
             System.out.println("---------------------------------------\n");
         }
 
@@ -231,11 +231,10 @@ public class Duke {
             String choice = option.getCommandName();
 
             if (choice.equals(option_1)) {
-                System.out.println("Let me save down everything ^^");
+                System.out.println("Sheena: Let me save down everything ^^");
                 saveTaskList(list);
                 System.out.println("------------------------");
-                System.out.println("Here's a message from Sheena: ");
-                System.out.println("Bye bye people, see you again soon!");
+                System.out.println("Sheena: Bye bye people, see you again soon!");
                 System.out.println("------------------------");
                 System.exit(0);
             } else if (choice.equals(option_2)) {
@@ -243,7 +242,7 @@ public class Duke {
                     printTasks(list);
                 } catch (DukeException e) {
                     System.out.println("------------------------");
-                    System.out.println("Erm. You don't have any task yet...");
+                    System.out.println("Sheena: Erm. You don't have any task yet...");
                     System.out.println("------------------------");
                 }
                 System.out.println("------------------------");
@@ -253,7 +252,7 @@ public class Duke {
                 t.markAsDone();
                 updateCommand(t,list,taskNumber-1);
                 System.out.println("------------------------------------------");
-                System.out.print("Nice! I've marked this task as done: [");
+                System.out.print("Sheena: Nice! I've marked this task as done: [");
                 System.out.print(t.getStatusIcon());
                 System.out.print("]");
                 System.out.println(t.description);
@@ -264,14 +263,14 @@ public class Duke {
                 if ( option.getArgs() == " ")
                 {
                     System.out.println("-------------------------------------------");
-                    System.out.println("Uh Oh! The description cannot be empty ~");
+                    System.out.println("Sheena: Uh Oh! The description cannot be empty ~");
                     System.out.println("-------------------------------------------");
                 } else {
                     list.add(newTask);
                     System.out.println("------------------------");
                     System.out.println("Added : ");
                     System.out.println(newTask.toString());
-                    System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
+                    System.out.printf("Sheena: You have %d tasks in your list ^^ \n" , list.size());
                     System.out.println("------------------------");
                     saveTaskList(list);
                 }
@@ -284,7 +283,7 @@ public class Duke {
                 System.out.println("------------------------");
                 System.out.println("Added: ");
                 System.out.println(newEvent.toString());
-                System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
+                System.out.printf("Sheena: You have %d tasks in your list ^^ \n" , list.size());
                 System.out.println("------------------------");
                 saveTaskList(list);
 
@@ -297,7 +296,7 @@ public class Duke {
                 System.out.println("------------------------");
                 System.out.println("Added : ");
                 System.out.println(newDeadline.toString());
-                System.out.printf("You have %d tasks in your list ^^ \n" , list.size());
+                System.out.printf("Sheena: You have %d tasks in your list ^^ \n" , list.size());
                 System.out.println("------------------------");
                 saveTaskList(list);
             } else if (choice.equals(option_7)){
@@ -316,7 +315,7 @@ public class Duke {
             } else {
                 // if there is no "done", "bye", "list" in the string
                 System.out.println("-------------------------------------------");
-                System.out.println("Try again maybe? Choose the right option :) ");
+                System.out.println("Sheena: Try again maybe? Choose the right option :) ");
                 System.out.println("--------------------------------------------");
             }
         }
