@@ -1,39 +1,31 @@
-# Setting up
+# Duke 
+**Version by: nigellenl**
 
-**Prerequisites**
+*  This is a CLI (Command Line Interface) Task Management application written in Java. 
+*  It allows the user to record and manage their tasks with a number of features.
+*  The tasks in the task list will be saved to a text file and the contents will be loaded into the list upon every start up.
+*  This user guide will explain how to run and use this application.
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+# Running the Application
+* Download the Jar file from https://github.com/nigellenl/duke/releases/tag/A-Jar
+* Open the Command Line and access the directory that the file is located at.
+* Run the application using _java -jar duke.jar_
+* Enjoy!
 
-**Importing the project into IntelliJ**
+# Application Features
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
-
-# Tutorials 
-
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+Feature | Syntax | Description
+--------|--------|------------
+List | _**list**_ | Displays the list of tasks
+Todo | _**todo** [task name]_ | Adds a todo task to the list
+Event | _**event** [task name] **/at** [date]_ | Adds an event with a specified date to the list
+Deadline | **deadline** [task name] **/at** [date]_ | Adds a deadline with a specified date to the list
+Done | _**done** [task number]_ | Marks the specified task as completed
+Find | _**find** [keyword]_ | Returns a list of tasks that contain the specified keyword
+Delete | _**delete** [task number]_ | Deletes the specified task from the list
+Exit | _**bye**_ | Closes the application 
 
 # Feedback, Bug Reports
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+* If you have feedback or bug reports, please contact me at e0028344@u.nus.edu.
+* You can also submit a pull request at [nigellenl/duke](https://github.com/nigellenl/duke/).
