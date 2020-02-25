@@ -11,17 +11,6 @@ public class TaskList {
         this.tasks = new ArrayList<> (100);
     }
 
-    /** Prints all tasks in the list */
-    public void listTasks() {
-        UI.br();
-        System.out.println("\t Dook will list your tasks now:");
-        for (int i=0; i<tasks.size(); i++) {
-            int taskNum = i+1;
-            System.out.println("\t " + taskNum + ". " + tasks.get(i));
-        }
-        UI.br();
-    }
-
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
@@ -33,6 +22,34 @@ public class TaskList {
     /** Appends new task to the list */
     public void addTask(Task t) {
         tasks.add(t);
+    }
+
+    /** Prints all tasks in the list */
+    public void listTasks() {
+        UI.br();
+        System.out.println("\t Dook will list your tasks now:");
+        for (int i=0; i<tasks.size(); i++) {
+            int taskNum = i+1;
+            System.out.println("\t " + taskNum + ". " + tasks.get(i));
+        }
+        UI.br();
+    }
+
+    /** Finds tasks with matching descriptions and lists them */
+    public void findTasks(String description) {
+        UI.br();
+        System.out.println("\t Dook has found the following tasks: ");
+        int i=1;
+        for (Task t : tasks) {
+            if (t.getDescription().contains(description)) {
+                System.out.println("\t  " + i + ". " + t);
+                i++;
+            }
+        }
+        if (i==1) {
+            System.out.println("\t  No matching tasks :(");
+        }
+        UI.br();
     }
 
     public void markDone(String description) {
