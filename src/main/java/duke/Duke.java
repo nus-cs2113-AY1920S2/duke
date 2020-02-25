@@ -4,6 +4,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import static duke.Constants.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -22,7 +23,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         greet();
         loadTasks();
         String userResponde;
@@ -30,7 +31,7 @@ public class Duke {
         do {
             userResponde = in.nextLine();
             dukeResponde(userResponde);
-        } while (!userResponde.equals("bye"));
+        } while (!userResponde.equals(BYE));
     }
 
     public static void greet() {
@@ -42,7 +43,7 @@ public class Duke {
     }
 
     public static void loadTasks() {
-        File f = new File("data/duke.txt");
+        File f = new File(FILE_PATH);
         try {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
@@ -85,15 +86,15 @@ public class Duke {
 
     public static void dukeResponde(String userResponde) {
         printLine();
-        if (userResponde.equals("bye")) {
+        if (userResponde.equals(BYE)) {
             sayBye();
-        } else if (userResponde.equals("list")) {
+        } else if (userResponde.equals(LIST)) {
             try {
                 listTask();
             } catch (DukeException e) {
                 System.out.println("\t:(OOPS!!! " + e.getMessage());
             }
-        } else if (userResponde.startsWith("done")) {
+        } else if (userResponde.startsWith(DONE)) {
             try {
                 markAsDone(userResponde);
             } catch (NumberFormatException e) {
@@ -104,7 +105,7 @@ public class Duke {
                 System.out.println("\t:(OOPS!!! Please enter the task number.");
             }
             outputTasks();
-        } else if (userResponde.startsWith("delete")) {
+        } else if (userResponde.startsWith(DELETE)) {
             try {
                 deleteTask(userResponde);
             } catch (NumberFormatException e) {
@@ -128,7 +129,7 @@ public class Duke {
     }
 
     public static void printLine() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println(LINE_BREAK);
     }
 
     public static void sayBye() {
@@ -146,14 +147,14 @@ public class Duke {
     }
 
     public static void markAsDone(String userResponde) {
-        int doneCount = Integer.parseInt(userResponde.substring(5)) - 1;
+        int doneCount = Integer.parseInt(userResponde.substring(DONE_LENGTH)) - 1;
         tasks.get(doneCount).markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t  yes! " + tasks.get(doneCount).getDescription());
     }
 
     public static void deleteTask(String userResponde) throws DukeException {
-        int deleteCount = Integer.parseInt(userResponde.substring(7)) - 1;
+        int deleteCount = Integer.parseInt(userResponde.substring(DELETE_LENGTH)) - 1;
         if (deleteCount > taskCount) {
             throw new DukeException("There is no task " + (deleteCount + 1) + ". Please reconsider the index.");
         }
@@ -170,7 +171,7 @@ public class Duke {
             if (responses.length < 2) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
-            tasks.add(new Todo(userResponde.substring(5)));
+            tasks.add(new Todo(userResponde.substring(TODO_LENGTH)));
         } else if (responses[0].equals("deadline")) {
             if (responses.length < 2) {
                 throw new DukeException("The description of a deadline cannot be empty.");
@@ -179,8 +180,8 @@ public class Duke {
             if (dividerPosition == -1) {
                 throw new DukeException("Please follow the format: deadline thingsToDo /by time");
             }
-            String taskName = userResponde.substring(9,dividerPosition);
-            String deadlineTime = userResponde.substring(dividerPosition + 5);
+            String taskName = userResponde.substring(DEADLINE_LENGTH,dividerPosition);
+            String deadlineTime = userResponde.substring(dividerPosition + FORMAT_LENGTH);
             tasks.add(new Deadline(taskName,deadlineTime));
         } else if (responses[0].equals("event")) {
             if (responses.length < 2) {
@@ -190,8 +191,8 @@ public class Duke {
             if (dividerPosition == -1) {
                 throw new DukeException("Please follow the format: event thingsToDo /at time");
             }
-            String taskName = userResponde.substring(6,dividerPosition);
-            String deadlineTime = userResponde.substring(dividerPosition + 5);
+            String taskName = userResponde.substring(EVENT_LENGTH,dividerPosition);
+            String deadlineTime = userResponde.substring(dividerPosition + FORMAT_LENGTH);
             tasks.add(new Event(taskName,deadlineTime));
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -204,7 +205,7 @@ public class Duke {
 
     public static void outputTasks() {
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
+            FileWriter fw = new FileWriter(FILE_PATH);
             for (int i = 0; i < taskCount; i++) {
                 fw.write(tasks.get(i).toFile() + "\n");
             }
