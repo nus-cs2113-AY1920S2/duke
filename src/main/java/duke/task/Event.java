@@ -1,5 +1,6 @@
 package duke.task;
 
+/* a event class that can be instantiated to event object */
 public class Event extends Task {
     String timeSlot;
 
@@ -8,6 +9,7 @@ public class Event extends Task {
         this.timeSlot = timeSlot;
     }
 
+    /* generate description of a event task that need to be stored in the file */
     public String textToFile() {
         String text = "E | 0 | ";
         if(isDone) text = "E | 1 | ";
