@@ -1,14 +1,20 @@
+import Exceptions.InvalidCommandException;
+import Exceptions.ToDoEmptyException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
-        welcomeMessage();
+        displayWelcomeMessage();
 
         try {
             File newFile = new File("./src/main/java/data/duke.txt");
@@ -86,7 +92,7 @@ public class Duke {
     private static void markDone(List<Task> tasks, String s) {
         int taskIndex = Integer.parseInt(s) - 1;
         Task doneTask = tasks.get(taskIndex);
-        doneTask.isDone = true;
+        doneTask.setDone(true);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(doneTask);
     }
@@ -130,7 +136,7 @@ public class Duke {
         }
     }
 
-    private static void welcomeMessage() {
+    private static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
