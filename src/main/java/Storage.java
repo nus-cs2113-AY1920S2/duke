@@ -1,26 +1,26 @@
-import task.Task;
-import task.Todo;
-import task.Deadline;
-import task.Event;
+import task.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 
-public class DataManager {
-    protected static ArrayList<Task> tasks = new ArrayList<> (100);
-    private static final String FILEPATH = "\\data\\tasks.txt";
+public class Storage {
+
+    private String filepath;
+
+    public Storage (String filepath) {
+        this.filepath = filepath;
+    }
 
     /** Load the tasks from txt file */
-    public static ArrayList<Task> loadTasks() throws IOException {
+    public TaskList loadTasks() throws IOException {
         String localDir = System.getProperty("user.dir");
-        File f = new File(localDir + FILEPATH);
+        File f = new File(localDir + filepath);
 
         if (!f.exists()) {
             f.createNewFile();
-            return tasks; // Returns empty task list
+            return new TaskList(); // Returns empty task list
         }
 
         Scanner scanner = new Scanner(f);
@@ -29,6 +29,7 @@ public class DataManager {
         String isDone;
         String description;
         String timeDescriptor;
+        TaskList tasks = new TaskList();
         while (scanner.hasNext()) { // Read the file line by line
             currLine = scanner.nextLine();
             String[] parsedLine = currLine.split(",");
@@ -52,7 +53,7 @@ public class DataManager {
                 System.out.println("Invalid task type recorded.");
                 break;
             }
-            tasks.add(t);
+            tasks.addTask(t);
             if (isDone.equals("1")) {
                 t.setDone();
             }
@@ -61,10 +62,10 @@ public class DataManager {
     }
 
     /** Save the tasks to txt file */
-    public static void saveTasks(ArrayList<Task> tasks) throws IOException {
+    public void saveTasks(TaskList tasks) throws IOException {
         String localDir = System.getProperty("user.dir");
-        FileWriter fw = new FileWriter(localDir + FILEPATH);
-        for (Task task : tasks) { // Write tasks line by line
+        FileWriter fw = new FileWriter(localDir + filepath);
+        for (Task task : tasks.getTaskList()) { // Write tasks line by line
             fw.write(task.getFileRecord());
         }
 
