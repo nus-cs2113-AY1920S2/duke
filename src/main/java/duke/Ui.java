@@ -19,6 +19,7 @@ public class Ui {
             "Type 'help' to find more commands";
     public static final String INVALID_TASKNO = "# of the task is invalid\n";
     public static final String INVALID_DESCRIPTION = "The description of the task is invalid\n";
+    public static final String LACK_KEYWORD = "A keyword is needed\n";
     public static final String TODO_DESCRIPTION = "[format] todo <Task Name>";
     public static final String DEADLINE_DESCRIPTION = "[format] deadline <Task Name> /by <Deadline>";
     public static final String DONE_DESCRIPTION = "[format] done <Task #>(within the range)";
@@ -27,6 +28,8 @@ public class Ui {
     public static final String LIST_DESCRIPTION = "[format] list";
     public static final String HELP_DESCRIPTION = "[format] help";
     public static final String BYE_DESCRIPTION = "[format] bye";
+    public static final String FIND_DESCRIPTION = "[format] find <keyWord>";
+    public static final String FINDING = "Here are the matching tasks in your list:";
 
     private static Scanner in = new Scanner(System.in);
 
@@ -56,9 +59,11 @@ public class Ui {
         printFormat(errorDescription);
     }
 
-    public void printFormat(String str) {
+    public void printFormat(String ...strs) {
         System.out.println(FORMAT_LINE);
-        System.out.println(str);
+        for(String str: strs) {
+            System.out.println(str);
+        }
         System.out.println(FORMAT_LINE);
         System.out.println();
     }
@@ -73,16 +78,15 @@ public class Ui {
 
     public void printUserGuide() {
         printFormatLine();
-        printString(HELPING);
-        printString("todo\nadd a todo task to your task list\n"+TODO_DESCRIPTION);
-        printString("deadline\nadd a deadline task to your task list\n"+DEADLINE_DESCRIPTION);
-        printString("event\nadd a event task to your task list\n"+EVENT_DESCRIPTION);
-        printString("delete\ndelete one task in your task list\n"+DELETE_DESCRIPTION);
-        printString("done\nmark one task as done in your task list\n"+DONE_DESCRIPTION);
-        printString("list\nlist all tasks in your task list\n"+ LIST_DESCRIPTION);
-        printString("help\nlist all commands and corresponding command format of Duke"+ HELP_DESCRIPTION);
-        printString("exit\nexit from Duke\n"+ BYE_DESCRIPTION);
-        printFormatLine();
-        printString("");
+        printFormat(HELPING,
+                "todo\nadd a todo task to your task list\n"+TODO_DESCRIPTION,
+                "deadline\nadd a deadline task to your task list\n"+DEADLINE_DESCRIPTION,
+                "event\nadd a event task to your task list\n"+EVENT_DESCRIPTION,
+                "delete\ndelete one task in your task list\n"+DELETE_DESCRIPTION,
+                "done\nmark one task as done in your task list\n"+DONE_DESCRIPTION,
+                "find\nfind tasks by searching for a keyword\n" + FIND_DESCRIPTION,
+                "list\nlist all tasks in your task list\n"+ LIST_DESCRIPTION,
+                "help\nlist all commands and corresponding command format of Duke"+ HELP_DESCRIPTION,
+                "exit\nexit from Duke\n"+ BYE_DESCRIPTION);
     }
 }
