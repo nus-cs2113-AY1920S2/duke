@@ -41,22 +41,16 @@ public class Duke {
                     ui.list();
                     break;
                 case "todo":
-                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
-                        throw new NoDescriptionException();
-                    }
+                    ensureValidDescription(taskDescription);
                     ui.todo(taskDescription);
                     break;
                 case "deadline":
-                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
-                        throw new NoDescriptionException();
-                    }
+                    ensureValidDescription(taskDescription);
                     taskDescriptionArgs = processArgs(taskDescription);
                     ui.deadline(taskDescriptionArgs);
                     break;
                 case "event":
-                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
-                        throw new NoDescriptionException();
-                    }
+                    ensureValidDescription(taskDescription);
                     taskDescriptionArgs = processArgs(taskDescription);
                     ui.event(taskDescriptionArgs);
                     break;
@@ -70,9 +64,7 @@ public class Duke {
                     ui.delete(indexOfTasks);
                     break;
                 case "find":
-                    if (taskDescription == null || taskDescription.isEmpty() || taskDescription.isBlank()) {
-                        throw new NoDescriptionException();
-                    }
+                    ensureValidDescription(taskDescription);
                     ui.find(taskDescription);
                     break;
                 default:
@@ -88,7 +80,13 @@ public class Duke {
                 System.out.println(m);
             }
             ui.showLine();
-        } while (!taskType.equals("bye"));
+        } while (hasNotSaidBye(String taskType));
+    }
+
+    private void ensureValidDescription(String description) throws NoDescriptionException {
+        if (description == null || description.isEmpty() || description.isBlank()) {
+            throw new NoDescriptionException();
+        }
     }
 
     private String[] processArgs(String s) {
@@ -108,6 +106,10 @@ public class Duke {
             }
         }
         return tokens;
+    }
+
+    private boolean hasNotSaidBye(String command) {
+        return !command.equals("bye");
     }
 
     /**
