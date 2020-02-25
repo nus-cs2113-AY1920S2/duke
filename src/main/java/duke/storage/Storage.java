@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,35 +14,72 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the task of loading and saving data as required.
+ */
 public class Storage {
 
+    /** The location of the data file */
     private String filePath;
 
+    /**
+     * Constructor for Storage Class.
+     * It assigns the filepath for the data file as provided by the user.
+     *
+     * @param filePath Location of the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns the data previously stored in the data file by calling {@link #loadTasks()}.
+     * Also handles IOException that might be thrown during the execution of {@link #loadTasks()},
+     * in which case it returns an empty list of tasks.
+     *
+     * @return taskList Contains all the tasks stored in the previous execution of the application.
+     * @see #loadTasks()
+     */
     public ArrayList<Task> loadData() {
+        ArrayList<Task> taskList;
         try {
-            return loadTasks();
+            taskList = loadTasks();
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>();
+            taskList = new ArrayList<>();
         }
+        return taskList;
     }
 
+    /**
+     * Returns the data previously stored in the data file by calling {@link #loadTasksFromFile()}.
+     * Also handles FileNotFoundException that might be thrown during the execution of {@link #loadTasksFromFile()},
+     * in which case it creates a new data(.txt) file at the predefined location and returns an empty list of tasks.
+     * It also throws an IOException.
+     *
+     * @return taskList Contains all the tasks stored in the previous execution of the application.
+     * @throws IOException If issues were encountered during loading of data.
+     * @see #loadTasksFromFile()
+     */
     private ArrayList<Task> loadTasks() throws IOException {
+        ArrayList<Task> taskList;
         try {
-            return loadTasksFromFile();
+            taskList = loadTasksFromFile();
         } catch (FileNotFoundException e) {
             File file = new File(filePath);
             file.createNewFile();
-            return new ArrayList<>();
+            taskList = new ArrayList<>();
         }
+        return  taskList;
     }
 
-    // Loads the tasks saved previously
-    public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
+    /**
+     * Returns the data previously stored in the data file as a TaskList Object.
+     *
+     * @return tasks Contains all the tasks stored in the previous execution of the application.
+     * @throws FileNotFoundException if the data file isn't present at the target location.
+     */
+    private ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -70,18 +108,18 @@ public class Storage {
                 tasks.add(event);
                 break;
             default:
-                // Add exception handling
+                Ui.printWithIndentation("Error encountered during Execution");
+                break;
             }
         }
         return tasks;
     }
 
-
-    public void saveData(TaskList tasks) {
-        storeTasksToFile(tasks);
-    }
-
-    // Saves the tasks for future usage
+    /**
+     * Saves the tasks provided by the user as a TaskList Object to the data (.txt) file.
+     *
+     * @param taskList Contains all the tasks provided by the user to be saved later.
+     */
     public void storeTasksToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);

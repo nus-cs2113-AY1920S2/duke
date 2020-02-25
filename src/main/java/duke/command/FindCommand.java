@@ -9,12 +9,12 @@ public class FindCommand extends Command {
     private String keyword;
 
     public FindCommand(boolean isCorrectFormat, String[] commandSplit) throws DukeException{
-        this.commandType = CommandType.Find;
+        this.commandType = CommandType.FindCommand;
         this.isCorrectFormat = isCorrectFormat;
         try {
             this.keyword = commandSplit[1];
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ExceptionType.InvalidFindCommand);
+            throw new DukeException(ExceptionType.InvalidFindCommandException);
         }
 
     }
