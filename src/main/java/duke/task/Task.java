@@ -43,4 +43,8 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 
+    public boolean hasKeyword(String Keyword) {
+        return description.contains(Keyword);
+    }
+
 }

@@ -20,6 +20,8 @@ public class TaskList {
     public static final String DELETE_COMMAND = "delete";
     public static final String DONE_COMMAND = "done";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
+    private static final String SEARCH_EMPTY_MESSAGE = "No tasks match the keyword";
+    private static final String FOUND_MATCHED_TASKS_MESSAGE = "Here are the matching tasks in your list:";
 
     // Stores all the tasks provided
     public ArrayList<Task> tasks;
@@ -223,5 +225,37 @@ public class TaskList {
         } else {
             Ui.printInvalidCommand();
         }
+    }
+
+    public void findTasks(boolean isCorrectFormat, String keyword) {
+        if (isCorrectFormat) {
+            printListOfTasksWithKeyword(keyword);
+        } else {
+            Ui.printInvalidCommand();
+        }
+    }
+
+    private void printListOfTasksWithKeyword(String keyword) {
+        boolean hasNoMatchedTasks = true;
+        for (Task task: tasks){
+            if(task.hasKeyword(keyword)){
+                hasNoMatchedTasks = false;
+                break;
+            }
+        }
+        Ui.printLine();
+        if (hasNoMatchedTasks) {
+            Ui.printWithIndentation(SEARCH_EMPTY_MESSAGE);
+        } else {
+            Ui.printWithIndentation(FOUND_MATCHED_TASKS_MESSAGE);
+            int matchedTaskNumber = 1;
+            for (Task task : tasks) {
+                if (task.hasKeyword(keyword)) {
+                    Ui.printWithIndentation((matchedTaskNumber) + ". " + task.getStatusWithDescription());
+                    matchedTaskNumber++;
+                }
+            }
+        }
+        Ui.printLine();
     }
 }

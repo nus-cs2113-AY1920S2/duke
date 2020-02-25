@@ -4,11 +4,11 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.ExceptionType;
 import duke.task.TaskType;
-import duke.ui.Ui;
 
 
 public class Parser {
@@ -20,6 +20,7 @@ public class Parser {
     public static final String ADD_TODO_COMMAND = "todo";
     public static final String ADD_DEADLINE_COMMAND = "deadline";
     public static final String ADD_EVENT_COMMAND = "event";
+    public static final String FIND_TASKS_COMMAND = "find";
 
     // Executes the command entered by the user
     public Command parseCommand(String fullCommand) throws DukeException {
@@ -44,6 +45,9 @@ public class Parser {
             // break statement can't be reached if added
         case DELETE_COMMAND:
             return new DeleteCommand(commandSplit);
+            // break statement can't be reached if added
+        case FIND_TASKS_COMMAND:
+            return new FindCommand(!isOneWordCommand,commandSplit);
             // break statement can't be reached if added
         case EMPTY_COMMAND:
             throw new DukeException(ExceptionType.EmptyCommand);
