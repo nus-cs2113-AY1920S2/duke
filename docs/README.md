@@ -85,7 +85,8 @@ Marks an existing task as done, i.e. changes the cross mark (X) to a check mark 
 
 Syntax: `done <task number>`
 
-Example of usage: `done 11`\
+Example of usage: `done 11`
+
 *To get the task number of a task, use the function list(will be elaborated below)*
 
 Expected outcome:
@@ -97,12 +98,13 @@ Nice! I've marked this task as done:
 
 ### `delete` - Delete a task from the task list
 
-Deletes a task and removes it from the task list. \
+Deletes a task and removes it from the task list. 
 *Immediately propagate the deletion to the local datafile stored on computer*.
 
 Syntax: `delete <task number>`
 
-Example of usage: `delete 8`\
+Example of usage: `delete 8`
+
 *To get the task number of a task, use the function list(will be elaborated below)*
 
 Expected outcome:
