@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * @author A11riseforme
  */
 public class DeleteCommand implements Command{
-
     int taskId;
 
     /**

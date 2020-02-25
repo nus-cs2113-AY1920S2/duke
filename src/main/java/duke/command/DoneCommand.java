@@ -10,7 +10,6 @@ import duke.util.Storage;
  *
  * @author A11riseforme
  */
-
 public class DoneCommand implements Command {
     int taskId;
 

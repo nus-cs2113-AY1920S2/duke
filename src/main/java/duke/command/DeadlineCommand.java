@@ -24,7 +24,6 @@ public class DeadlineCommand implements Command {
      * @param taskDescription the description of the deadline task.
      * @param byDate the date of the deadline task.
      */
-
     public DeadlineCommand(String taskDescription, LocalDate byDate) {
         this.taskDescription = taskDescription;
         this.byDate = byDate;

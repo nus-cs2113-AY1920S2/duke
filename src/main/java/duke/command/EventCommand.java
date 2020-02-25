@@ -23,7 +23,6 @@ public class EventCommand implements Command {
      * @param taskDescription the description of the event task.
      * @param atDate the date of the event task.
      */
-
     public EventCommand(String taskDescription, LocalDate atDate) {
         this.taskDescription = taskDescription;
         this.atDate = atDate;
