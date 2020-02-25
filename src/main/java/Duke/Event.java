@@ -3,8 +3,14 @@ package Duke;
 public class Event extends Task {
 
     protected String at;
+
     public Event(String description, String at){
         super(description);
+        this.at = at;
+    }
+
+    public Event(String description, String at, Boolean isDone){
+        super(description, isDone);
         this.at = at;
     }
 
@@ -13,4 +19,9 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+    @Override
+    public String toText(){
+        return "E | " + (this.isDone? "1" : "0") + " | " + this.description;
+    }
 }
+

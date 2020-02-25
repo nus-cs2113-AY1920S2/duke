@@ -150,11 +150,13 @@ public class Duke {
 
     public static void main(String[] args) {
         greetUser();
+        tasksList = readExistingData();
         while(true){
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine().trim();
             if(input.equals(BYE_COMMAND)) {
                 printMessage("Bye. Hope to see you again soon!");
+                writeNewData();
                 break;
             }
             printBorder();
@@ -167,8 +169,51 @@ public class Duke {
         }
     }
 
+    public static List<Task> readExistingData(){
+        try{
+            List<Task> tasks = new ArrayList<>();
+            File file = new File(System.getProperty("user.dir") + "/src/main/data/duke.txt");
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNext()){
+                String[] line = scanner.nextLine().split("\\|");
+                boolean isDone = false;
+                if (line[1].equals("1")){
+                    isDone = true;
+                }
+                switch (line[0]){
+                case "D":
+                    tasks.add(new Deadline(line[2], line[3], isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(line[2], line[3], isDone));
+                    break;
+                case "T":
+                    tasks.add(new Todo(line[2], isDone));
+                    break;
+                }
+            }
+            return tasks;
+        } catch (FileNotFoundException e) {
+            System.err.println("File does not exist");
+            return new ArrayList<>();
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.err.println("Invalid file contents");
+            return new ArrayList<>();
+        }
 
+    }
 
-
+    public static void writeNewData(){
+        try {
+            FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/src/main/data/duke.txt");
+            for (Task task : tasksList) {
+                fileWriter.write(task.toText() + "\n");
+            }
+            fileWriter.close();
+        }
+        catch (IOException e) {
+            System.err.println("An error occurred while writing to file");
+        }
+    }
 
 }
