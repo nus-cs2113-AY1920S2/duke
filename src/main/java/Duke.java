@@ -13,8 +13,39 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class Duke {
+
+    private static String DUKE_LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static String LINE_SEPARATOR = "____________________________________________________________";
+    private static String WELCOME_MESSAGE = "Hello! I'm Duke\n What can I do for you?";
+    private static String GOODBYE_MESSAGE = "Goodbye. Hope to see you again soon!";
+    private static String DISPLAY_LIST_MESSAGE = "Here are the tasks in your list:";
+    private static String ADD_TODO_MESSAGE = "Noted! I have added a new todo.";
+    private static String ADD_DEADLINE_MESSAGE = "Noted! I have added a new deadline.";
+    private static String ADD_EVENT_MESSAGE = "Noted! I have added a new event.";
+    private static String LIST_CLEAR_MESSAGE = "Your task list has been cleared successfully!";
+    private static String LIST_CLEAR_CONFIRMATION_MESSAGE = "Are you sure you want to clear all tasks in your list? (Y/N)";
+    private static String LIST_SIZE_MESSAGE = "You now have %d tasks in the list.\n";
+    private static String DELETE_TASK_MESSAGE = "Got it! The following task has been successfully deleted.";
+    private static String INVALID_TODO_MESSAGE = "Oops! Please follow the following format when adding a todo:";
+    private static String INVALID_DEADLINE_MESSAGE = "Oops! Please follow the following format when adding a deadline:";
+    private static String INVALID_EVENT_MESSAGE = "Oops! Please follow the following format when adding an event:";
+    private static String INVALID_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :(.";
+    private static String ERROR_MESSAGE = "Hmm, an error has occurred...";
+    private static String PROMPT_HELP_MESSAGE = "Type /help for a list of available commands";
+
+
+
     public static void main(String[] args) {
-        displayWelcomeMessage();
+
+        System.out.println(DUKE_LOGO);
+        System.out.println(LINE_SEPARATOR);
+        System.out.println(WELCOME_MESSAGE);
+        System.out.println(LINE_SEPARATOR);
 
         try {
             File newFile = new File("./src/main/java/data/duke.txt");
@@ -41,20 +72,48 @@ public class Duke {
             try {
                 FileWriter fileWriter = new FileWriter("./src/main/java/data/duke.txt");
                 if (input.equals("list")) {
-                    viewList(tasks);
+                    System.out.println(DISPLAY_LIST_MESSAGE);
+                    int counter = 0;
+                    for (Task task : tasks) {
+                        counter++;
+                        System.out.println(counter + ". " + task);
+                    }
                 } else if (inputArray[0].equals("todo")) {
                     if (inputArray.length < 2) throw new ToDoEmptyException();
-                    addToDo(tasks, inputArray[1]);
+                    ToDo newToDo = new ToDo(inputArray[1]);
+                    tasks.add(newToDo);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newToDo);
+                    System.out.format(LIST_SIZE_MESSAGE, tasks.size());
                 } else if (inputArray[0].equals("deadline")) {
-                    addDeadline(tasks, inputArray[1]);
+                    String[] deadlineInfo = inputArray[1].split("/by ", 2);
+                    Deadline newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+                    tasks.add(newDeadline);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newDeadline);
+                    System.out.format("Now you have %d tasks in the list.\n", tasks.size());
                 } else if (inputArray[0].equals("event")) {
-                    addEvent(tasks, inputArray[1]);
+                    String[] eventInfo = inputArray[1].split("/at ", 2);
+                    Event newEvent = new Event(eventInfo[0], eventInfo[1]);
+                    tasks.add(newEvent);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newEvent);
+                    System.out.format("Now you have %d tasks in the list.\n", tasks.size());
                 } else if (inputArray[0].equals("done")) {
-                    markDone(tasks, inputArray[1]);
+                    int taskIndex = Integer.parseInt(inputArray[1]) - 1;
+                    Task doneTask = tasks.get(taskIndex);
+                    doneTask.setDone(true);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(doneTask);
                 } else if (inputArray[0].equals("delete")) {
-                    deleteTask(tasks, inputArray[1]);
+                    int taskIndex = Integer.parseInt(inputArray[1]) - 1;
+                    Task deleteTask = tasks.get(taskIndex);
+                    tasks.remove(deleteTask);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(deleteTask);
+                    System.out.format("Now you have %d tasks in the list.\n", tasks.size());
                 } else if (input.equals("bye")) {
-                    exitMessage();
+                    System.out.println(GOODBYE_MESSAGE);
                     exitProgram = true;
                 } else {
                     throw new InvalidCommandException();
@@ -80,72 +139,4 @@ public class Duke {
 
     }
 
-    private static void deleteTask(List<Task> tasks, String s) {
-        int taskIndex = Integer.parseInt(s) - 1;
-        Task deleteTask = tasks.get(taskIndex);
-        tasks.remove(deleteTask);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deleteTask);
-        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
-    }
-
-    private static void markDone(List<Task> tasks, String s) {
-        int taskIndex = Integer.parseInt(s) - 1;
-        Task doneTask = tasks.get(taskIndex);
-        doneTask.setDone(true);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(doneTask);
-    }
-
-    private static void exitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    private static void addEvent(List<Task> tasks, String s) {
-        String[] eventInfo = s.split("/at ", 2);
-        Event newEvent = new Event(eventInfo[0], eventInfo[1]);
-        tasks.add(newEvent);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newEvent);
-        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
-    }
-
-    private static void addDeadline(List<Task> tasks, String s) {
-        String[] deadlineInfo = s.split("/by ", 2);
-        Deadline newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-        tasks.add(newDeadline);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newDeadline);
-        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
-    }
-
-    private static void addToDo(List<Task> tasks, String description) {
-        ToDo newToDo = new ToDo(description);
-        tasks.add(newToDo);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newToDo);
-        System.out.format("Now you have %d tasks in the list.\n", tasks.size());
-    }
-
-    private static void viewList(List<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
-        int counter = 0;
-        for (Task task : tasks) {
-            counter++;
-            System.out.println(counter + ". " + task);
-        }
-    }
-
-    private static void displayWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
-    }
 }
