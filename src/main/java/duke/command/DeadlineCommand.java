@@ -6,6 +6,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
+import java.time.LocalDate;
+
 /**
  * This class handles the deadline command, implements the Command interface.
  *
@@ -13,7 +15,8 @@ import duke.util.Storage;
  */
 public class DeadlineCommand implements Command {
     private String taskDescription;
-    private String byDate;
+    private LocalDate byDate;
+
 
     /**
      * Constructor with two arguments.
@@ -21,7 +24,8 @@ public class DeadlineCommand implements Command {
      * @param taskDescription the description of the deadline task.
      * @param byDate the date of the deadline task.
      */
-    public DeadlineCommand(String taskDescription, String byDate) {
+
+    public DeadlineCommand(String taskDescription, LocalDate byDate) {
         this.taskDescription = taskDescription;
         this.byDate = byDate;
     }

@@ -3,6 +3,9 @@ package duke.task;
 import duke.exception.DukeNullDateException;
 import duke.exception.DukeNullDescriptionException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static duke.util.Constants.DEADLINE_ICON;
 
 /**
@@ -11,7 +14,7 @@ import static duke.util.Constants.DEADLINE_ICON;
  * @author A11riseforme
  */
 public class Deadline extends Task {
-    protected String byDate;
+    protected LocalDate byDate;
     protected  String typeIcon;
 
     /**
@@ -20,14 +23,10 @@ public class Deadline extends Task {
      * @param description the description of the deadline task.
      * @param byDate the date of the deadline task.
      * @throws DukeNullDescriptionException exception is thrown if the description is empty.
-     * @throws DukeNullDateException exception is thrown if the date is empty.
      */
-    public Deadline(String description, String byDate) throws DukeNullDescriptionException, DukeNullDateException {
+    public Deadline(String description, LocalDate byDate) throws DukeNullDescriptionException {
         super(description);
         typeIcon = DEADLINE_ICON;
-        if (byDate.equals("")) {
-            throw new DukeNullDateException();
-        }
         this.byDate = byDate;
     }
 
@@ -45,7 +44,7 @@ public class Deadline extends Task {
      *
      * @return a String of the date of the deadline task.
      */
-    public String getByDate() {
+    public LocalDate getByDate() {
         return byDate;
     }
 
@@ -56,6 +55,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return typeIcon + super.toString() + " (by: " + byDate + ")";
+        return typeIcon + super.toString() + " (by: " + byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

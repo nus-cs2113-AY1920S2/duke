@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 import static duke.util.Constants.NO_ICON;
 import static duke.util.Constants.YES_ICON;
 
@@ -14,8 +16,8 @@ public class DummyTask {
     private String description;
     private boolean isDone;
     private String typeIcon;
-    private String atDate;
-    private String byDate;
+    private LocalDate atDate;
+    private LocalDate byDate;
 
     /**
      * Get the Icon representation of the event task.
@@ -29,18 +31,18 @@ public class DummyTask {
     /**
      * Get the date of the event task.
      *
-     * @return a String of the date of the event task.
+     * @return a LocalDate of the date of the event task.
      */
-    public String getAtDate() {
+    public LocalDate getAtDate() {
         return atDate;
     }
 
     /**
      * Get the date of the deadline task.
      *
-     * @return a String of the date of the deadline task.
+     * @return a LocalDate of the date of the deadline task.
      */
-    public String getByDate() {
+    public LocalDate getByDate() {
         return byDate;
     }
 

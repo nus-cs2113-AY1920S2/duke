@@ -11,9 +11,10 @@ import duke.util.Storage;
  *
  * @author A11riseforme
  */
+import java.time.LocalDate;
 public class EventCommand implements Command{
     private String taskDescription;
-    private String atDate;
+    private LocalDate atDate;
 
     /**
      * Constructor with two arguments.
@@ -21,7 +22,8 @@ public class EventCommand implements Command{
      * @param taskDescription the description of the event task.
      * @param atDate the date of the event task.
      */
-    public EventCommand(String taskDescription, String atDate) {
+
+    public EventCommand(String taskDescription, LocalDate atDate) {
         this.taskDescription = taskDescription;
         this.atDate = atDate;
     }

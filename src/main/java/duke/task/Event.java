@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.exception.DukeNullDateException;
 import duke.exception.DukeNullDescriptionException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static duke.util.Constants.EVENT_ICON;
 
@@ -11,7 +13,7 @@ import static duke.util.Constants.EVENT_ICON;
  * @author A11riseforme
  */
 public class Event extends Task {
-    protected String atDate;
+    protected LocalDate atDate;
     protected String typeIcon;
 
     /**
@@ -20,14 +22,10 @@ public class Event extends Task {
      * @param description the description of the event task.
      * @param atDate the date of the event task.
      * @throws DukeNullDescriptionException exception is thrown if the description is empty.
-     * @throws DukeNullDateException exception is thrown if the date is empty.
      */
-    public Event(String description, String atDate) throws DukeNullDescriptionException, DukeNullDateException {
+    public Event(String description, LocalDate atDate) throws DukeNullDescriptionException {
         super(description);
         typeIcon = EVENT_ICON;
-        if (atDate.equals("")) {
-            throw new DukeNullDateException();
-        }
         this.atDate = atDate;
     }
 
@@ -43,9 +41,10 @@ public class Event extends Task {
     /**
      * Get the date of the event task.
      *
-     * @return a String of the date of the event task.
+     * @return a LocalDate of the date of the event task.
      */
-    public String getAtDate() {
+
+    public LocalDate getAtDate() {
         return atDate;
     }
 
@@ -56,6 +55,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return typeIcon + super.toString() + " (at: " + atDate + ")";
+        return typeIcon + super.toString() + " (at: " + atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
