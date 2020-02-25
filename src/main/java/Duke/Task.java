@@ -9,6 +9,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, Boolean isDone){
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -17,13 +22,13 @@ public class Task {
         this.isDone = true;
     }
 
-    /*public String getDescription(){
-        return description;
-    }*/
-
     @Override
     public String toString(){
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String toText(){
+        return " ";
     }
 
 
