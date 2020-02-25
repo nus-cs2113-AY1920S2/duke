@@ -9,7 +9,7 @@ import Duke.Ui.Ui;
 
 public class Duke{
 
-    private static final String FILE_PATH = "Duke.txt";
+    private static final String FILE_PATH = "daDuke.txt";
 
     public static void main(String[] args) {
         new Duke();
