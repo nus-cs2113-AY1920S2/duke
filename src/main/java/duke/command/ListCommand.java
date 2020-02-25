@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * Constructor for ListCommand Class.
      * It creates a new ListCommand Object.
      *
-     * @param isOneWordCommand Denotes whether the command contains a single word
+     * @param isOneWordCommand Denotes whether the command contains a single word.
      */
     public ListCommand(boolean isOneWordCommand) {
         this.commandType = CommandType.ListCommand;

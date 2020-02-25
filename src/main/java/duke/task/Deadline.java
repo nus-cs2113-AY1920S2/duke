@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Deadline task.
  */
-
 public class Deadline extends Task {
 
-    // Stores information about deadline of task
+    /** Stores information about the time of the task's deadline */
     private String deadlineTime;
+    /** Stores information about the date of the task's deadline */
     private LocalDate deadlineDate;
 
     /**
