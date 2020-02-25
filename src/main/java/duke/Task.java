@@ -14,7 +14,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "1" : "0"); //"1" for done, "0" for not done
     }
 
     public void markAsDone() {
