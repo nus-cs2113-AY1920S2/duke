@@ -4,12 +4,6 @@ public abstract class Task {
     String name;
     boolean isDone;
 
-
-    public Task(String name) {
-        this.name = name;
-        isDone = false;
-    }
-
     public Task(String name, boolean status) {
         this.name = name;
         isDone = status;
@@ -21,10 +15,6 @@ public abstract class Task {
 
     public void changeStatus(boolean newStatus) {
         isDone = newStatus;
-    }
-
-    public boolean getStatus() {
-        return isDone;
     }
 
     public abstract String textToFile();
