@@ -6,13 +6,14 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
+import java.time.LocalDate;
+
 /**
  * This class handles the event command, implements the Command interface.
  *
  * @author A11riseforme
  */
-import java.time.LocalDate;
-public class EventCommand implements Command{
+public class EventCommand implements Command {
     private String taskDescription;
     private LocalDate atDate;
 

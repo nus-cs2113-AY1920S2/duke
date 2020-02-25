@@ -28,7 +28,9 @@ import static duke.util.Constants.EXIT_COMMAND_BYE;
 import static duke.util.Constants.EXIT_COMMAND_EXIT;
 import static duke.util.Constants.EXIT_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.EXIT_COMMAND_QUIT;
+import static duke.util.Constants.FIND_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.FIVE_SPACES;
+import static duke.util.Constants.FOUND_TASK_PROMPT;
 import static duke.util.Constants.GREETING_WORD;
 import static duke.util.Constants.LINE_DIVIDER;
 import static duke.util.Constants.LIST_COMMAND;
@@ -38,6 +40,7 @@ import static duke.util.Constants.LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING;
 import static duke.util.Constants.LIST_TASKS_PROMPT;
 import static duke.util.Constants.LOAD_DATA_FROM_FILE_PROMPT;
 import static duke.util.Constants.LOGO;
+import static duke.util.Constants.NOT_FOUND_TASK_PROMPT;
 import static duke.util.Constants.SAVE_DATA_TO_FILE_PROMPT;
 import static duke.util.Constants.SEVEN_SPACES;
 import static duke.util.Constants.TODO_COMMAND;
@@ -148,11 +151,23 @@ public class Ui {
      * @param taskList the TaskList object used by the programme to store the tasks.
      */
     public void showList(TaskList taskList) {
+
         System.out.println(FIVE_SPACES + LIST_TASKS_PROMPT);
-        ArrayList<Task> list = taskList.getList();
-        int taskCount = list.size();
+        int taskCount = taskList.size();
         for (int i = 0; i < taskCount; ++i) {
-            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING, i, list.get(i));
+            System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING, i, taskList.get(i));
+        }
+    }
+
+    public void showFind(ArrayList<Task> foundTasks) {
+        if (foundTasks.size() == 0) {
+            System.out.println(FIVE_SPACES + NOT_FOUND_TASK_PROMPT);
+        } else {
+            System.out.println(FIVE_SPACES + FOUND_TASK_PROMPT);
+            int taskCount = foundTasks.size();
+            for (int i = 0; i < taskCount; ++i) {
+                System.out.printf(SEVEN_SPACES + LIST_SINGLE_TASK_MESSAGE_FORMAT_STRING, i, foundTasks.get(i));
+            }
         }
     }
 
@@ -201,6 +216,9 @@ public class Ui {
         case DELETE_COMMAND_SHORTCUT:
             System.out.println(FIVE_SPACES + DELETE_COMMAND_HELP_MESSAGE);
             break;
+        case FIND_COMMAND_HELP_MESSAGE:
+            System.out.println(FIVE_SPACES + FIND_COMMAND_HELP_MESSAGE);
+            break;
         default:
             showAllHelpMessage();
         }
@@ -217,6 +235,7 @@ public class Ui {
         System.out.println(FIVE_SPACES + DEADLINE_COMMAND_HELP_MESSAGE);
         System.out.println(FIVE_SPACES + EVENT_COMMAND_HELP_MESSAGE);
         System.out.println(FIVE_SPACES + DELETE_COMMAND_HELP_MESSAGE);
+        System.out.println(FIVE_SPACES + FIND_COMMAND_HELP_MESSAGE);
     }
 
     /**
