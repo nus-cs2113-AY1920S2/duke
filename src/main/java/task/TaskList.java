@@ -44,6 +44,27 @@ public class TaskList {
         tasks.add(t);
     }
 
+
+    /**
+     * Finds tasks with matching descriptions and lists them.
+     * @param description Text to search for.
+     */
+    public void findTasks(String description) {
+        UI.br();
+        System.out.println("\t Dook has found the following tasks: ");
+        int i=1;
+        for (Task t : tasks) {
+            if (t.getDescription().contains(description)) {
+                System.out.println("\t  " + i + ". " + t);
+                i++;
+            }
+        }
+        if (i==1) {
+            System.out.println("\t  No matching tasks :(");
+        }
+        UI.br();
+    }
+
     /**
      * Sets a task's completion status to true and prints done message.
      * @param description String index of the task to be marked as done, based on its list position.
@@ -59,7 +80,6 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
-     *
      * @param description String index of the task to be deleted, based on its list position.
      * @throws InvalidTaskException If task index is out of bounds.
      */

@@ -19,6 +19,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Returns tick if task has been marked as completed, or X otherwise.
      * @return Tick symbol if completed, cross symbol otherwise.
