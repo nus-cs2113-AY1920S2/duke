@@ -80,7 +80,7 @@ public class Duke {
                 System.out.println(m);
             }
             ui.showLine();
-        } while (hasNotSaidBye(String taskType));
+        } while (hasNotSaidBye(taskType));
     }
 
     private void ensureValidDescription(String description) throws NoDescriptionException {
@@ -109,7 +109,7 @@ public class Duke {
     }
 
     private boolean hasNotSaidBye(String command) {
-        return !command.equals("bye");
+        return !command.equals(command);
     }
 
     /**
