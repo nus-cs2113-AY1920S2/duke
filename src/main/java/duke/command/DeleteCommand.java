@@ -8,7 +8,7 @@ import duke.util.Storage;
 
 import java.util.ArrayList;
 
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     int taskId;
 
     public DeleteCommand(int taskId) {

@@ -6,7 +6,7 @@ import duke.task.Todo;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-public class TodoCommand implements Command{
+public class TodoCommand implements Command {
     private String taskDescription;
 
     public TodoCommand(String taskDescription) {

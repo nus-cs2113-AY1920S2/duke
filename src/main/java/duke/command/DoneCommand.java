@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-public class DoneCommand implements Command{
+public class DoneCommand implements Command {
     int taskId;
 
     public DoneCommand(int taskId) {

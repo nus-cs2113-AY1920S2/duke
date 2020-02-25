@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-public class EventCommand implements Command{
+public class EventCommand implements Command {
     private String taskDescription;
     private String atDate;
 
