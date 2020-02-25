@@ -8,7 +8,7 @@ import duke.commands.*;
 
 public class Parser {
     
-    private static final String SPILT_BY_SPACE = "\\s+";
+    public static final String SPILT_BY_SPACE = "\\s+";
     private static final String SPILT_BY_SLASH = "/";
     
     public Command parseCommand(String userInput) {

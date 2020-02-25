@@ -13,6 +13,7 @@ import java.util.List;
 
 import static duke.Duke.tasks;
 
+import duke.enumerations.Day;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -92,13 +93,13 @@ public class Storage {
                 }
                 break;
             case D:
-                tasks.add(new Deadline(argumentLine[2], "/by" + argumentLine[3]));
+                tasks.add(new Deadline(argumentLine[2], argumentLine[3]));
                 if (isDone) {
                     tasks.get(tasks.size() - 1).markAsDone();
                 }
                 break;
             case E:
-                tasks.add(new Event(argumentLine[2], "/at" + argumentLine[3]));
+                tasks.add(new Event(argumentLine[2], argumentLine[3]));
                 if (isDone) {
                     tasks.get(tasks.size() - 1).markAsDone();
                 }
@@ -106,5 +107,6 @@ public class Storage {
             }
         }
     }
+    
     
 }
