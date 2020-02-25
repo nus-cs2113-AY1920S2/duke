@@ -1,3 +1,5 @@
 T | 1 | read book
 D | 0 | return book | Sunday
 E | 0 | meeting | Monday 2-4pm
+T | 1 | eat ice-cream
+E | 0 | phone call | Monday 7-7:20pm
