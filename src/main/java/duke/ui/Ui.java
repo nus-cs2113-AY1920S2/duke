@@ -44,25 +44,61 @@ import static duke.util.Constants.TODO_COMMAND;
 import static duke.util.Constants.TODO_COMMAND_HELP_MESSAGE;
 import static duke.util.Constants.TODO_COMMAND_SHORTCUT;
 
+/**
+ * This class is used as an interface to interact with the user. It can read the input from the user as well as print
+ * message to the user.
+ *
+ * @author A11riseforme
+ */
 public class Ui {
     private Scanner in;
 
+    /**
+     * Constructor to initialize `in` as a scanner object for reading the input from the user.
+     */
     public Ui() {
         in = new Scanner(System.in);
     }
 
-    public static void showLoadDataSuccessfulPrompt() {
-        System.out.println(FIVE_SPACES + DATA_LOADED_SUCCESSFULLY_PROMPT);
+    /**
+     * Read the input from the user.
+     * @return a String, which contains a line of input from the user.
+     */
+    public String readCommand() {
+        return in.nextLine();
     }
 
+    /**
+     * Show the user that the programme is about to load the data file.
+     */
     public static void showLoadDataPrompt() {
         System.out.println(FIVE_SPACES + LOAD_DATA_FROM_FILE_PROMPT);
     }
 
+    /**
+     * After successfully loading the data file, prompt user.
+     */
+    public static void showLoadDataSuccessfulPrompt() {
+        System.out.println(FIVE_SPACES + DATA_LOADED_SUCCESSFULLY_PROMPT);
+    }
+
+    /**
+     * Show the user that the programme is about to save the data into the file.
+     */
+    public static void showSaveDataToFilePrompt() {
+        System.out.println(SAVE_DATA_TO_FILE_PROMPT);
+    }
+
+    /**
+     * After successfully save the data into the data file, prompt user.
+     */
     public static void showSaveDataToFileSuccessfulPrompt() {
         System.out.println(FIVE_SPACES + DATA_SAVED_SUCCESSFULLY_PROMPT);
     }
 
+    /**
+     * Show the welcome message to user when programme starts.
+     */
     public void showWelcomeMessage() {
         showLine();
         System.out.println(LOGO);
@@ -70,29 +106,47 @@ public class Ui {
         showLine();
     }
 
-    public String readCommand() {
-        return in.nextLine();
-    }
-
+    /**
+     * Show the exit message when user exit the programme.
+     */
     public void showGoodbyeMessage() {
         System.out.println(FIVE_SPACES + BYE_WORD);
     }
 
+    /**
+     * Show a line-divider to separate each command and output.
+     */
     public void showLine() {
         System.out.println(LINE_DIVIDER);
     }
 
+    /**
+     * After successfully adding one task, prompt the user.
+     *
+     * @param taskList the TaskList object used by the programme to store the tasks.
+     * @param addedTask the Task object which refers to the newly added task.
+     */
     public void showAddTaskSuccessfulPrompt(TaskList taskList, Task addedTask) {
         System.out.println(FIVE_SPACES + ADD_TASK_PROMPT);
         System.out.println(SEVEN_SPACES + addedTask);
         System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, taskList.getList().size());
     }
 
+    /**
+     * After successfully mark the task as done, prompt the user.
+     *
+     * @param doneTask the Task object which refers to the task which the user wishes to mark as done.
+     */
     public void showMarkAsDoneSuccessfulPrompt(Task doneTask) {
         System.out.println(FIVE_SPACES + DONE_TASK_PROMPT);
         System.out.println(SEVEN_SPACES + doneTask);
     }
 
+    /**
+     * Print every task in taskList
+     *
+     * @param taskList the TaskList object used by the programme to store the tasks.
+     */
     public void showList(TaskList taskList) {
         System.out.println(FIVE_SPACES + LIST_TASKS_PROMPT);
         ArrayList<Task> list = taskList.getList();
@@ -102,12 +156,21 @@ public class Ui {
         }
     }
 
+    /**
+     * After successfully deleting one task, prompt the user.
+     * @param taskList the TaskList object used by the programme to store the tasks.
+     * @param deletedTask the Task object which refers to the newly deleted task.
+     */
     public void showDeleteTaskSuccessfulPrompt(TaskList taskList, Task deletedTask) {
         System.out.println(FIVE_SPACES + DELETE_TASKS_PROMPT);
         System.out.println(SEVEN_SPACES + deletedTask);
         System.out.printf(FIVE_SPACES + ADD_OR_DELETE_TASK_POST_PROMPT, taskList.getList().size());
     }
 
+    /**
+     * Show the usage of a specific command, if no argument or wrong argument provided, show all the commands' usage.
+     * @param commandWord the command which the user want to know about how to use.
+     */
     public void showHelpMessage(String commandWord) {
         switch (commandWord) {
         case EXIT_COMMAND_BYE:
@@ -143,6 +206,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Show all the available commands and their respective usage.
+     */
     private void showAllHelpMessage() {
         System.out.println(FIVE_SPACES + EXIT_COMMAND_HELP_MESSAGE);
         System.out.println(FIVE_SPACES + LIST_COMMAND_HELP_MESSAGE);
@@ -153,11 +219,13 @@ public class Ui {
         System.out.println(FIVE_SPACES + DELETE_COMMAND_HELP_MESSAGE);
     }
 
+    /**
+     * Print the error message.
+     *
+     * @param message the error message.
+     */
     public void showError(String message) {
         System.out.println(message);
     }
 
-    public static void showSaveDataToFilePrompt() {
-        System.out.println(SAVE_DATA_TO_FILE_PROMPT);
-    }
 }

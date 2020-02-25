@@ -34,7 +34,23 @@ import static duke.util.Constants.TODO_COMMAND;
 import static duke.util.Constants.TODO_COMMAND_SHORTCUT;
 import static duke.util.Constants.UNKNOWN_COMMAND_RESPONSE;
 
+/**
+ * Parser class to parse the users' input.
+ *
+ * @author A11riseforme
+ */
 public class Parser {
+    /**
+     * parse the users' input.
+     *
+     * This method try to identify the command user intends to call, and parse the full command into different parts.
+     * Then pass required arguments to the command.
+     *
+     * @param userInput the entire input from the user.
+     * @return a Command object corresponding to the command the user intends to call.
+     * @throws DukeException exception is thrown when task description is empty, the required date is
+     * empty or the format is wrong.
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] commands = splitCommand(userInput);
         String commandWord = commands[0];
@@ -90,6 +106,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Split user's input into two parts, the first part is the command word, the second part is the rest
+     *
+     * @param userInput the entire input from the user.
+     * @return an array of two Strings, command word and the rest.
+     */
     private static String[] splitCommand(String userInput) {
         String commandWord = extractCommandWord(userInput);
         String afterCommand = userInput.substring(commandWord.length());
@@ -97,6 +119,12 @@ public class Parser {
         return commands;
     }
 
+    /**
+     * Extract the command word from the user input.
+     *
+     * @param userInput the entire input from the user.
+     * @return the command word which the user intend to call.
+     */
     private static String extractCommandWord(String userInput) {
         int spaceIndex = userInput.indexOf(' ');
         if (spaceIndex == -1) {
@@ -105,6 +133,12 @@ public class Parser {
         return userInput.substring(0, spaceIndex);
     }
 
+    /**
+     * Extract the task id from the user input which intends to call `done` command
+     *
+     * @param userInput the entire input from the user.
+     * @return the task id which user intends to mark as done.
+     */
     private static int extractTaskId(String userInput) {
         int taskIdIndex = userInput.indexOf(" ") + 1;
         String doneTaskIdString = userInput.substring(taskIdIndex);
@@ -115,6 +149,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Extract the task description from the user input.
+     *
+     * @param taskInfo the second part of the user input.
+     * @param delimiter the delimiter for the date in the user input.
+     * @return the description of the task which user intends to add.
+     * @throws DukeException exception is thrown when can't extract the task description.
+     */
     private static String extractTaskDescription(String taskInfo, String delimiter) throws DukeException {
         int taskTimeIndex = taskInfo.indexOf(delimiter);
         try {
@@ -124,6 +166,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Extract the task date from the user input when the user intend to call `deadline` or `event`
+     * @param taskInfo
+     * @param delimiter
+     * @return
+     */
     private static String extractTaskDate(String taskInfo, String delimiter) {
         int taskTimeIndex = taskInfo.indexOf(delimiter) + delimiter.length();
         return taskInfo.substring(taskTimeIndex).trim();

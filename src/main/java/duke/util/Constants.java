@@ -1,5 +1,10 @@
 package duke.util;
 
+/**
+ * This class contains all the constants involved in interaction with users.
+ *
+ * @author A11riseforme
+ */
 public class Constants {
     public static final String LOGO = "          __ __      _           __                          \n"
                                     + "     /\\  /_ /_ |    (_)         / _|                         \n"

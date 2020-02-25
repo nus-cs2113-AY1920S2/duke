@@ -27,13 +27,33 @@ import static duke.util.Constants.DEADLINE_ICON;
 import static duke.util.Constants.EVENT_ICON;
 import static duke.util.Constants.YES_ICON;
 
+/**
+ * This class handles the storage related operation in the programme.
+ *
+ * @author A11riseforme
+ */
 public class Storage {
     private String dataFileName;
 
+    /**
+     * Constructor with name of the data file as argument.
+     *
+     * @param dataFileName the name of the file in which the data is stored.
+     */
     public Storage(String dataFileName) {
         this.dataFileName = dataFileName;
     }
 
+    /**
+     * Load the json string from the file and convert into an ArrayList of Tasks
+     *
+     * @return a list of Task objects, which represents the tasks.
+     * @throws DukeLoadingException exception is thrown if error occurs when loading from the file.
+     * @throws DukeNullDescriptionException exception is thrown if error occurs when parsing the json string and any
+     * task with empty description.
+     * @throws DukeNullDateException exception is thrown if error occurs when parsing the json strings and any
+     * deadline/event task with empty date.
+     */
     public ArrayList<Task> load() throws DukeLoadingException, DukeNullDescriptionException, DukeNullDateException {
         Ui.showLoadDataPrompt();
 
@@ -62,6 +82,12 @@ public class Storage {
         return tasksList;
     }
 
+    /**
+     * Read the file and return its content, which is a json string.
+     *
+     * @return the content of the date file, which is a json string.
+     * @throws DukeLoadingException exception is thrown if error occurs when loading from the file.
+     */
     private String loadJsonStringFromFile() throws DukeLoadingException {
         String jsonStr;
         try {
@@ -75,12 +101,25 @@ public class Storage {
         return jsonStr;
     }
 
+    /**
+     * Extract the DummyTask objects from the jsonstr, and return as a List.
+     *
+     * @param jsonStr the content of the date file, which is a json string.
+     * @return a List of DummyTask objects, which will be further converted into specific tasks.
+     */
     private List<DummyTask> extractDummyTasks(String jsonStr) {
         Type listType = new TypeToken<List<DummyTask>>(){}.getType();
         Gson gson = new Gson();
         return gson.fromJson(jsonStr, listType);
     }
 
+    /**
+     * Convert a DummyTask to its actual task type.
+     * @param task the DummyTask object to be converted.
+     * @return the actual task object
+     * @throws DukeNullDescriptionException exception is thrown when the task has empty description.
+     * @throws DukeNullDateException exception is thrown when the deadline/event task has empty date.
+     */
     private Task convertDummyTaskToSpecificTask(DummyTask task) throws DukeNullDescriptionException, DukeNullDateException {
         Task convertedTask;
 
@@ -102,16 +141,29 @@ public class Storage {
         return convertedTask;
     }
 
+    /**
+     * Save the whole list of tasks into the date file.
+     *
+     * @param tasksList the TaskList object used to store the task information.
+     * @throws DukeWritingException exception is thrown if error occurs when writing to the file.
+     */
     public void save(TaskList tasksList) throws DukeWritingException {
         Ui.showSaveDataToFilePrompt();
         try {
             saveObjectsAsJsonStringToFile(dataFileName, tasksList.getList());
             Ui.showSaveDataToFileSuccessfulPrompt();
         } catch (IOException e) {
-            throw new DukeWritingException(dataFileName);
+            throw new DukeWritingException();
         }
     }
 
+    /**
+     * Save a list of Task objects as json string into the file.
+     *
+     * @param dataFileName the name of the file in which the data is stored.
+     * @param list a list of the Task objects which represents the tasks.
+     * @throws IOException exception is thrown if error occurs when writing to the file.
+     */
     static void saveObjectsAsJsonStringToFile(String dataFileName, ArrayList<Task> list) throws IOException {
         Gson gson = new Gson();
         FileWriter fw = new FileWriter(dataFileName);
