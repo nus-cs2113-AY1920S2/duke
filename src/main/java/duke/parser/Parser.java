@@ -8,9 +8,10 @@ import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.ExceptionType;
 import duke.task.TaskType;
-import duke.ui.Ui;
 
-
+/**
+ * Used to make sense of the user command.
+ */
 public class Parser {
 
     public static final String LIST_COMMAND = "list";
@@ -21,36 +22,44 @@ public class Parser {
     public static final String ADD_DEADLINE_COMMAND = "deadline";
     public static final String ADD_EVENT_COMMAND = "event";
 
-    // Executes the command entered by the user
+    /**
+     * Makes sense of the command entered by the user and returns the corresponding Command Object.
+     *
+     * @param fullCommand Contains the entire command entered by the user as a String.
+     * @return command Contains information required for the execution of the command.
+     * @throws DukeException If the command issued doesn't follow the required format.
+     */
     public Command parseCommand(String fullCommand) throws DukeException {
         String[] commandSplit = fullCommand.split(" ",2);
         String commandType = commandSplit[0];
+        Command command;
         boolean isOneWordCommand = commandSplit.length == 1 || commandSplit[1].isBlank();
         switch (commandType) {
         case ADD_TODO_COMMAND:
-            return new AddCommand(commandSplit,isOneWordCommand, TaskType.ToDo);
-            // break statement can't be reached if added
+            command = new AddCommand(commandSplit,isOneWordCommand, TaskType.ToDo);
+            break;
         case ADD_DEADLINE_COMMAND:
-            return new AddCommand(commandSplit,isOneWordCommand, TaskType.Deadline);
-            // break statement can't be reached if added
+            command = new AddCommand(commandSplit,isOneWordCommand, TaskType.Deadline);
+            break;
         case ADD_EVENT_COMMAND:
-            return new AddCommand(commandSplit,isOneWordCommand, TaskType.Event);
-            // break statement can't be reached if added
+            command = new AddCommand(commandSplit,isOneWordCommand, TaskType.Event);
+            break;
         case LIST_COMMAND:
-            return new ListCommand(isOneWordCommand);
-            // break statement can't be reached if added
+            command = new ListCommand(isOneWordCommand);
+            break;
         case DONE_COMMAND:
-            return new DoneCommand(commandSplit);
-            // break statement can't be reached if added
+            command = new DoneCommand(commandSplit);
+            break;
         case DELETE_COMMAND:
-            return new DeleteCommand(commandSplit);
-            // break statement can't be reached if added
+            command = new DeleteCommand(commandSplit);
+            break;
         case EMPTY_COMMAND:
-            throw new DukeException(ExceptionType.EmptyCommand);
+            throw new DukeException(ExceptionType.EmptyCommandException);
             // break statement can't be reached if added
         default:
-            throw new DukeException(ExceptionType.InvalidCommand);
+            throw new DukeException(ExceptionType.InvalidCommandException);
             // break statement can't be reached if added
         }
+        return command;
     }
 }
