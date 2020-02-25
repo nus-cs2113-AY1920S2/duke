@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /** Returns tick or X based on task completion */
     public String getStatusIcon() {
         // Return tick or X symbols

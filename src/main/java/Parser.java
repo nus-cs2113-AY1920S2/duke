@@ -25,6 +25,8 @@ public class Parser {
                 return new DoneCommand(description, tasks);
             case "delete":
                 return new DeleteCommand(description, tasks);
+            case "find":
+                return new FindCommand(description, tasks);
             default: // Add a task
                 return new AddCommand(description, tasks, command);
             }
