@@ -18,12 +18,10 @@ import Parser.*;
 public class AddCommand extends Command   {
     private String action;
     private String timing;
-    private String type;
-    public Task task;
+    private Task task;
 
     public AddCommand(String[] fullCommand) {
         super(fullCommand);
-        this.type=fullCommand[0];
         String [] temp = Parser.getTaskInfo(fullCommand);
         this.action=temp[0];
         this.timing=temp[1];

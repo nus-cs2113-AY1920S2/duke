@@ -18,6 +18,8 @@ public class Ui  {
     public static final String MISSING_FILE = "Please check if data.txt exist!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
+    public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
+
     private final Scanner in;
     private final PrintStream out;
 
@@ -32,6 +34,7 @@ public class Ui  {
     }
     /**
      * This methods gets the User input.
+     * @return this returns the User input.
      */
     public String getUserIn(){
         return in.nextLine();
@@ -65,12 +68,19 @@ public class Ui  {
     }
     /**
      * This method prints all the error message thrown in Duke.run().
+     * @param message This is the first argument of this method. It is
+     *                the error message thrown by exceptions caught
+     *                in Duke.run
      */
     public void printError(String message){
         out.println(message);
     }
     /**
      * This method informs User that a new Task class has been created and added to list
+     * @param l1 This is the first argument of this method. It is the list of current
+     *           Tasks in Duke.
+     * @param task This is the second argument. This is the task that is to be printed to inform
+     *             user that the stated task has just been added.
      */
     public void printAddTask(ArrayList<Task> l1, Task task){
         out.println("\t Got it. I've added this task:");
@@ -85,6 +95,8 @@ public class Ui  {
     }
     /**
      * This method informs User that stated Task has been marked as done.
+     * @param task This is the only argument for this method. It is the
+     *             task that User wants to mark as done.
      */
     public void printDone(Task task){
         out.println("\t Nice! I've marked this task as done:");
@@ -92,6 +104,10 @@ public class Ui  {
     }
     /**
      * This method informs User that stated Task has been deleted.
+     * @param task  This is the first argument of this method. It is
+     *              the task that the User wants to delete.
+     * @param l1    This is the second argument of this method. It is
+     *              the current list of Tasks.
      */
     public void printDelete(Task task, ArrayList<Task> l1){
         out.println("\t Noted. I've removed this task: ");
@@ -100,6 +116,7 @@ public class Ui  {
     }
     /**
      * This method informs User that all Tasks has been marked as done.
+     * @param l1 This is the current list of Tasks.
      */
     public void printDoneAll(ArrayList<Task> l1){
         out.println("\t All tasks have been marked as done!");
@@ -123,10 +140,11 @@ public class Ui  {
         out.println("\t Type Y for Yes and N for No");
     }
     /**
-     * This method receives confirmation with User if they want all Tasks to be deleted.
+     * This method informs User that the delete ALL command is ignored.
      */
-    public String receiveDeleteAllConfirmation(){
-        return in.nextLine();
+    public void ignoreDeleteAll(){
+        out.println("\t List was not modified!");
+        out.println("\t Enter \"list\" to ensure all tasks are still in the list!");
     }
     /**
      * This method shows User of all available Tasks.
@@ -151,6 +169,10 @@ public class Ui  {
      */
     public void printWrongInput(){
         out.println(WRONG_INPUT);
+    }
+
+    public void printYesOrNoOnly(){
+        out.println(YES_OR_NO_ONLY);
     }
     /**
      * This method lists the supported commands for User.

@@ -20,7 +20,11 @@ public class Task {
         this.isDone=false;
     }
     /**
-     * This method returns the status of the task.
+     * This method returns the value of isDone of the task.
+     * @return This returns the value of isDone in the form of
+     *         [isDone]. Unicode value of Check Mark and Ballot
+     *         is used to indicate true and false value of
+     *         isDone.
      */
     public String getStatus(){
         String temp=this.isDone ? "\u2713" : "\u2718";
@@ -37,6 +41,8 @@ public class Task {
     }
     /**
      * This method writes the Task details to data.txt.
+     * @return This returns the data to be written into
+     * data.txt in String format.
      */
     public String toFile(){
         String done = this.isDone ? "Y" : "N" ;
