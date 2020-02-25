@@ -1,18 +1,40 @@
 import java.util.ArrayList;
 
+
+/**
+ * Represents a tasklist object with various methods that
+ * helps Duke to keep track of the tasks details.
+ */
 public class TaskList {
 
     private Ui ui = new Ui();
     public ArrayList<Task> listOfTasks;
 
+    /**
+     * Constructor for the tasklist object.
+     * @param listOfTasks an array list of tasks that will be used
+     * to populate the listOfTasks
+     */
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
 
+    /**
+     * Constructor for the tasklist object.
+     * Used to initialise an empty listOfTasks
+     */
     public TaskList() {
         this.listOfTasks = new ArrayList<>();
     }
 
+    /**
+     * Method used to store tasks into the listOfTasks.
+     * Formats the task information into two components
+     * (description and dateAndTime) before storing.
+     * @param taskInformation full information about the task
+     * @param separator used to format the taskInformation into its components
+     * @param command differentiate between deadline and event tasks
+     */
     public void storeTaskIntoList(String taskInformation, String separator, String command) {
         int dividerPosition = taskInformation.indexOf(separator);
         String description = taskInformation.substring(0, dividerPosition);
@@ -26,6 +48,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method used to store tasks into the listOfTasks
+     * @param taskInformation full information about the task
+     * @param command differentiate between the different type of tasks.
+     */
     public void storeTaskIntoList(String taskInformation, String command) {
         switch (command) {
         case "todo":
@@ -42,6 +69,10 @@ public class TaskList {
         showStoredTask();
     }
 
+    /**
+     * Method used to print an acknowledgement message when
+     * the user adds a task.
+     */
     private void showStoredTask() {
         int sizeOfList = listOfTasks.size();
         Task lastTask = listOfTasks.get(sizeOfList - 1);
@@ -54,6 +85,9 @@ public class TaskList {
         ui.printLine();
     }
 
+    /**
+     * Method used to print all the tasks in the listOfTasks.
+     */
     public void listAllTasks() {
         ui.printLine();
         System.out.println(" Here are the tasks in your list:");
@@ -65,6 +99,11 @@ public class TaskList {
         ui.printLine();
     }
 
+    /**
+     * Method used to print an acknowledgement message when
+     * the user completes a task.
+     * @param line a string that represents the task that is completed
+     */
     public void markTaskAsDone(String line) {
         int dividerPosition = line.indexOf("done");
         int taskNumber = Integer.parseInt(line.substring(dividerPosition + 5));
@@ -76,6 +115,10 @@ public class TaskList {
         ui.printLine();
     }
 
+    /**
+     * Method used to delete a particular task from the listOfTasks.
+     * @param line a string that represents the task to be deleted
+     */
     public void deleteTask(String line) {
         String[] splitLine = line.split(" ");
         int taskNumber = Integer.parseInt(splitLine[1]);
@@ -84,10 +127,9 @@ public class TaskList {
         int numOfTasksLeft = listOfTasks.size();
 
         ui.printLine();
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("  " + taskToDelete);
-        System.out.println("Now you have " + numOfTasksLeft + " tasks in the list.");
+        System.out.println(" Noted. I've removed this task: ");
+        System.out.println("   " + taskToDelete);
+        System.out.println(" Now you have " + numOfTasksLeft + " tasks in the list.");
         ui.printLine();
-
     }
 }
