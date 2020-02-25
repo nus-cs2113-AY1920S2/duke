@@ -1,0 +1,20 @@
+list
+todo borrow book
+deadline return book /by 2020-03-25 1750
+todo
+event project meeting /at Mon 2-4pm
+list events
+deadline return book by Monday
+list
+event class meeting at Tue 12-2pm
+done 1
+done
+event
+
+done 0
+list
+done two
+done 1
+deadline
+list
+bye
