@@ -1,10 +1,9 @@
-
 # User Guide
 
 ## Table Of Contents
 1. [Introduction](#intro)
 2. [Quick Start](#quick-start)
-3. [Features](#features)<br>3.1. [Add new ToDo task](#add-todo)<br>3.2. [Add new Deadline task](#add-deadline)<br>3.3. [Add new Event task](#add-event)<br>3.4. [Delete task](#delete)<br>3.5. [Mark task as done](#mark)<br>3.6. [List all tasks](#list)<br>3.7. [Exit](#exit)
+3. [Features](#features)<br>3.1. [Add new ToDo task](#add-todo)<br>3.2. [Add new Deadline task](#add-deadline)<br>3.3. [Add new Event task](#add-event)<br>3.4. [Delete task](#delete)<br>3.5. [Mark task as done](#mark)<br>3.6. [List all tasks](#list)<br>3.7. [Search tasks](#search)<br>3.8. [Exit](#exit)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
@@ -185,7 +184,7 @@ Upon success a response similar to the following one would appear:
     __________________________________________________________________________________________
  
 
-<a name="add-todo"></a>
+<a name="list"></a>
    
 ### 6. List all tasks
 List all current tasks stored.
@@ -212,9 +211,9 @@ A response similar to the following one would appear:
     __________________________________________________________________________________________
     
 
-<a name="list"></a>
+<a name="search"></a>
 
-### 6. Search tasks
+### 7. Search tasks
 Performs a linear search of all tasks stored in the list at the point of execution and list
 all the tasks containing the keyword in their description in a numbered list.
 
@@ -241,7 +240,7 @@ A response similar to the following one would appear:
 
 <a name="exit"></a>
     
-### 7. Exit 
+### 8. Exit 
 The command is used to exit the application. But before the actual application is exited the 
 tasks currently in the list are stored in a file.
 
@@ -280,5 +279,6 @@ A response similar to the following one would appear:
 3. `event description /at location` - Adds a new ToDo task to the list of tasks
 4. `delete index` - Deletes task at specified index
 5. `done index` - Marks the task at specified index as done
-6. `find keyword` - Lists all matching tasks in the list containing the keyword
-7. `bye` - Exits the application
+6. `list` - Lists all the tasks in the list
+7. `find keyword` - Lists all matching tasks in the list containing the keyword
+8. `bye` - Exits the application
