@@ -18,6 +18,9 @@ public class Duke {
     private TextUi ui;
     private TaskList tasks;
 
+    /**
+     * Sets up the required objects, loads up the data from the storage file.
+     */
     public Duke() {
         ui = new TextUi();
         storage = new Storage();
@@ -34,11 +37,6 @@ public class Duke {
         ui.printWelcomeMessage();
         String name = ui.InputUserName();
         Scanner sc = new Scanner(System.in);
-        try {
-            storage.retrieve(tasks);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
         boolean isExit = false;
 

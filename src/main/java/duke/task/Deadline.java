@@ -18,13 +18,27 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the string, description and deadline of the task in save-able format.<br>
+     * Overrides the corresponding method in the parent class.
+     *
+     * @return save Represents the information related to the task as save-able format.
+     */
     @Override
     public String saveTask() {
-        return "D | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + by;
+        String save = "D | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + by;
+        return save;
     }
 
+    /**
+     * Returns the string, description and deadline of the task.<br>
+     * Overrides the corresponding method in the parent class.
+     *
+     * @return s Represents the information related to the task.
+     */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String s = "[D]" + super.toString() + " (by: " + by + ")";
+        return s;
     }
 }

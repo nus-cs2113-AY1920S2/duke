@@ -67,6 +67,9 @@ public class Manager {
                 }
             } else if (command.equalsIgnoreCase("find")) {
                 try {
+                    if (parseInput[1].isEmpty()) {
+                        throw new DukeException();
+                    }
                     tasks.findTasks(parseInput[1]);
                 } catch (IndexOutOfBoundsException e) {
                     TextUi.printIncompleteInformation();

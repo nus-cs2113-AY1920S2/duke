@@ -15,6 +15,9 @@ public class TextUi {
     private static final String HAPPY_FACE = "(＾▽＾)";
     private static final String SAD_FACE = "(╥_╥)";
 
+    /**
+     * To read from user input.
+     */
     private Scanner sc = new Scanner(System.in);
 
     /**
@@ -102,7 +105,9 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-
+    /**
+     * Read the next input line from user.
+     */
     public String readCommand() {
         String input = sc.nextLine();
         return input;

@@ -17,6 +17,8 @@ public class Storage {
     public static final String DEFAULT_PATH = "C:\\repos\\IP\\data\\duke.txt";
 
     /**
+     * Saves the {@code TaskList} data to the storage file.
+     *
      * @throws IOException if there is a failure in saving of the file.
      */
     public static void save(TaskList tasks) throws IOException {
@@ -29,6 +31,9 @@ public class Storage {
     }
 
     /**
+     * Loads the {@code TaskList} data from this storage file, and then returns it.
+     * Returns an empty {@code TaskList} if the file does not exist, or is not a regular file.
+     *
      * @throws FileNotFoundException if the default path is invalid.
      */
     public static void retrieve(TaskList tasks) throws FileNotFoundException {

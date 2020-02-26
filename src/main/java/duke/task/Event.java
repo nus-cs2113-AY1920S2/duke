@@ -18,13 +18,27 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the string, description and event of the task in save-able format.<br>
+     * Overrides the corresponding method in the parent class.
+     *
+     * @return save Represents the information related to the task as save-able format.
+     */
     @Override
     public String saveTask() {
-        return "E | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + at;
+        String save = "E | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + at;
+        return save;
     }
 
+    /**
+     * Returns the string, description and event of the task.<br>
+     * Overrides the corresponding method in the parent class.
+     *
+     * @return s Represents the information related to the task.
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String s = "[E]" + super.toString() + " (at: " + at + ")";
+        return s;
     }
 }

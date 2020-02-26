@@ -105,6 +105,9 @@ public class TaskList {
         try {
             String[] event;
             event = description.split("/at", 2);
+            if (event[1].trim().isEmpty()) {
+                throw new DukeException();
+            }
             event[0] = event[0].trim();
             if (!event[0].isEmpty()) {
                 String time = event[1].trim();
@@ -134,6 +137,9 @@ public class TaskList {
         try {
             String[] deadline;
             deadline = description.split("/by", 2);
+            if (deadline[1].trim().isEmpty()) {
+                throw new DukeException();
+            }
             deadline[0] = deadline[0].trim();
             if (!deadline[0].isEmpty()) {
                 String time = deadline[1].trim();
@@ -186,6 +192,7 @@ public class TaskList {
         }
         TextUi.printTasks(tasks);
     }
+
 
     public ArrayList<Task> getTaskArray() {
         return tasks;

@@ -14,13 +14,27 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Returns both the status and description of the task in save-able format.<br>
+     * Overrides the corresponding method in the parent class.
+     *
+     * @return output Represents the description of the task in save-able format.
+     */
     @Override
     public String saveTask() {
-        return "T | " + (super.isDone ? 1 : 0) + " | " + super.description;
+        String save ="T | " + (super.isDone ? 1 : 0) + " | " + super.description;
+        return save;
     }
 
+    /**
+     * Returns both the status and description of the task.<br>
+     * Overrides the corresponding method in the parent class.
+     *
+     * @return s Represents the description of the task.
+     */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String s ="[T]" + super.toString();
+        return s;
     }
 }
