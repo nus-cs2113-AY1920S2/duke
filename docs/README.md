@@ -4,6 +4,7 @@
 * Duke features adding of three types of task: `todo deadline event`. <br>
 * Duke is also able to `delete` existing task, `find` specific task from a populated list of task and mark task as `done`. <br>
 * In addition, Duke is able to convert user input description of `deadline` and `event` task if date-time is of the format `yyyy-mm-dd`
+
 ## Features
 - [Usage](#usage)
 	- [Add a todo](#adding-a-task-todo)
