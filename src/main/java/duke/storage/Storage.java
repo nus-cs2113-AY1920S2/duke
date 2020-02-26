@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the file used to store duke data.
+ */
 public class Storage {
     public static final String FILE_PATH = "C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt";
 

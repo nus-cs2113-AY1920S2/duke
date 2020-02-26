@@ -5,7 +5,7 @@ package duke.data.exception;
  */
 public class DukeException extends Exception {
     /**
-     * @param message should contain relevant information on the failed constraint(s)
+     * @param message Contain relevant information on the failed constraint(s)
      */
     public DukeException(String message) {
         super(message);
