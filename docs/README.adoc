@@ -4,7 +4,7 @@
 * Duke is also able to `delete` existing task, `find` specific task from a populated list of task and mark task as `done`. <br>
 * In addition, Duke is able to convert user input description of `deadline` and `event` task if date-time is of the format `yyyy-mm-dd`
 
-==Usage
+== Usage
 
 === Adding a task: <code>todo</code>
 Adds a new task to Duke. <br>
