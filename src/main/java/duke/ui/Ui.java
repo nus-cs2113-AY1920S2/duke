@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.command.HelpCommand;
 import duke.task.TaskList;
 
 /**
@@ -95,6 +96,9 @@ public class Ui {
         printWithIndentation(WELCOME_MESSAGE_LINE_2);
         printLine();
         System.out.println();
+        Ui.printLine();
+        Ui.printWithIndentation(HelpCommand.listOfCommandsWithFormat);
+        Ui.printLine();
     }
 
     /**

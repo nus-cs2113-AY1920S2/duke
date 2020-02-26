@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.ExceptionType;
@@ -23,6 +24,7 @@ public class Parser {
     public static final String ADD_DEADLINE_COMMAND = "deadline";
     public static final String ADD_EVENT_COMMAND = "event";
     public static final String FIND_TASKS_COMMAND = "find";
+    public static final String HELP_COMMAND = "help";
 
     /**
      * Makes sense of the command entered by the user and returns the corresponding Command Object.
@@ -57,6 +59,9 @@ public class Parser {
             break;
         case FIND_TASKS_COMMAND:
             command = new FindCommand(!isOneWordCommand,commandSplit);
+            break;
+        case HELP_COMMAND:
+            command = new HelpCommand();
             break;
         case EMPTY_COMMAND:
             throw new DukeException(ExceptionType.EmptyCommandException);
