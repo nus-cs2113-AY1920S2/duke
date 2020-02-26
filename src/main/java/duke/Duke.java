@@ -3,14 +3,13 @@ package duke;
 import duke.commands.Command;
 import duke.common.Messages;
 import duke.data.exception.DukeException;
-import duke.data.task.*;
+import duke.data.task.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.TextUi;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
 
@@ -24,7 +23,6 @@ public class Duke {
             storage = new Storage();
             tasks = storage.load();
         } catch (FileNotFoundException e) {
-            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -44,9 +42,9 @@ public class Duke {
                     Command c = Parser.parse(fullCommand);
                     c.execute(tasks);
                     isExit = c.isExit();
-                }catch (DukeException e) {
+                } catch (DukeException e) {
                     System.out.println(e.getMessage());
-                }catch (NumberFormatException nfe) {
+                } catch (NumberFormatException nfe) {
                     System.out.println(Messages.MESSAGE_INDEX_NOT_AN_INTEGER);
                 } catch (Exception e) {
                     System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -60,4 +58,3 @@ public class Duke {
         }
     }
 }
-

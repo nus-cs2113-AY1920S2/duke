@@ -10,7 +10,9 @@ import static duke.common.Messages.*;
 
 public class TextUi {
 
-    /** A platform independent line separator. */
+    /**
+     * A platform independent line separator.
+     */
     private static final String LS = System.lineSeparator();
 
     private Scanner in = new Scanner(System.in);
@@ -55,21 +57,20 @@ public class TextUi {
         System.out.println("    Now you have " + taskCounter + " task(s) in the list.");
     }
 
-    public static void printTaskNotFound(String description) {
-        System.out.println("    " + description + MESSAGE_TASK_NOT_FOUND);
+    public static void printKeyNotFound(String description) {
+        System.out.println("    " + description + MESSAGE_KEY_NOT_FOUND);
     }
 
     public static void printTaskFound(String description, TaskList tasklist) {
         int counter = 1;
         System.out.println(Messages.MESSAGE_TASK_FOUND);
-        for (Task task: tasklist) {
-            if (task.getDescription().matches(description)){
+        for (Task task : tasklist) {
+            if (task.getDescription().contains(description)) {
                 System.out.println("       " + counter + "." + task);
                 counter++;
             }
         }
     }
-
 
     public void showWelcome() {
         String logo = MESSAGE_WELCOME;
@@ -85,5 +86,4 @@ public class TextUi {
     public String readCommand() {
         return in.nextLine();
     }
-
 }

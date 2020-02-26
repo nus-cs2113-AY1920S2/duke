@@ -1,6 +1,9 @@
 package duke.commands;
 
-import duke.data.task.*;
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.TaskList;
+import duke.data.task.ToDo;
 
 import static duke.ui.TextUi.printTask;
 

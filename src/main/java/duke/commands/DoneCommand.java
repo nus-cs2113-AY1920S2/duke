@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasklist) throws DukeException {
-        if (index >= tasklist.size()){
+        if (index >= tasklist.size()) {
             throw new DukeException(Messages.MESSAGE_INDEX_OUT_OF_BOUND);
         }
         tasklist.get(index).taskDone();
