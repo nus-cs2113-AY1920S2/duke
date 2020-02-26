@@ -5,87 +5,74 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+	Creating back up file in the hard disk...
 	____________________________________________________________
 	Hello! I'm duke.Duke
 	What can I do for you?
 	____________________________________________________________
 
 	____________________________________________________________
-	:(OOPS!!! Please enter the task number.
+	Please input a task number that you want to mark as done
 	____________________________________________________________
-
 	____________________________________________________________
-	:(OOPS!!! No tasks!!!
+	Currently, there is no task in the list!
 	____________________________________________________________
-
 	____________________________________________________________
 	Got it. I've added this task:
-	  [T][?] eat
+	  [T][ ] eat
 	Now you have 1 tasks in the list
 	____________________________________________________________
-
 	____________________________________________________________
 	Got it. I've added this task:
-	  [T][?] sleep
+	  [T][ ] sleep
 	Now you have 2 tasks in the list
 	____________________________________________________________
-
 	____________________________________________________________
-	:(OOPS!!! The description of a todo cannot be empty.
+	The description of a todo cannot be empty.
 	____________________________________________________________
-
 	____________________________________________________________
-	:(OOPS!!! I'm sorry, but I don't know what that means :-(
+	 Sorry.I do not understand you.
 	____________________________________________________________
-
 	____________________________________________________________
 	Got it. I've added this task:
-	  [D][?] cs2113 (by: Tuesday)
+	  [D][ ] cs2113 (by: Tuesday)
 	Now you have 3 tasks in the list
 	____________________________________________________________
-
 	____________________________________________________________
 	Got it. I've added this task:
-	  [E][?] project meeting (at: Mon 2-4pm)
+	  [E][ ] project meeting (at: Mon 2-4pm)
 	Now you have 4 tasks in the list
 	____________________________________________________________
-
 	____________________________________________________________
-	:(OOPS!!! The description of a event cannot be empty.
+	The description of a event cannot be empty.
 	____________________________________________________________
-
 	____________________________________________________________
 	Nice! I've marked this task as done:
-	  [?] sleep
+	  yes! sleep
 	____________________________________________________________
-
 	____________________________________________________________
 	Nice! I've marked this task as done:
-	  [?] cs2113
+	  yes! cs2113
 	____________________________________________________________
-
 	____________________________________________________________
 	Here are the tasks in your list:
-	1.[T][?] eat
-	2.[T][?] sleep
-	3.[D][?] cs2113 (by: Tuesday)
-	4.[E][?] project meeting (at: Mon 2-4pm)
+	1.[T][ ] eat
+	2.[T][/] sleep
+	3.[D][/] cs2113 (by: Tuesday)
+	4.[E][ ] project meeting (at: Mon 2-4pm)
 	____________________________________________________________
-
 	____________________________________________________________
 	Noted. I've removed this task:
-	  [T][?] sleep
+	  [T][/] sleep
 	Now you have 3 tasks in the list.
 	____________________________________________________________
-
 	____________________________________________________________
 	Here are the tasks in your list:
-	1.[T][?] eat
-	2.[D][?] cs2113 (by: Tuesday)
-	3.[E][?] project meeting (at: Mon 2-4pm)
+	1.[T][ ] eat
+	2.[D][/] cs2113 (by: Tuesday)
+	3.[E][ ] project meeting (at: Mon 2-4pm)
 	____________________________________________________________
-
+	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
 	____________________________________________________________
-

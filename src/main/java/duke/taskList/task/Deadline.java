@@ -1,6 +1,6 @@
-package duke.task;
+package duke.taskList.task;
 
-import duke.task.Task;
+import static duke.common.Constants.DEADLINE;
 
 public class Deadline extends Task {
 
@@ -19,5 +19,10 @@ public class Deadline extends Task {
     @Override
     public String toFile() {
         return "D | " + super.toFile() + " | " + by;
+    }
+
+    @Override
+    public String type() {
+        return DEADLINE;
     }
 }

@@ -1,6 +1,6 @@
-package duke.task;
+package duke.taskList.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -31,5 +31,9 @@ public class Task {
 
     public String toFile() {
         return ((isDone ? "1" : "0") + " | " + this.description);
+    }
+
+    public String type() {
+        return null;
     }
 }

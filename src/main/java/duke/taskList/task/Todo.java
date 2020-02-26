@@ -1,4 +1,6 @@
-package duke.task;
+package duke.taskList.task;
+
+import static duke.common.Constants.TODO;
 
 public class Todo extends Task {
 
@@ -14,5 +16,10 @@ public class Todo extends Task {
     @Override
     public String toFile() {
         return "T | " + super.toFile();
+    }
+
+    @Override
+    public String type() {
+        return TODO;
     }
 }

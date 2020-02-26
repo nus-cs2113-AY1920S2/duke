@@ -1,4 +1,6 @@
-package duke.task;
+package duke.taskList.task;
+
+import static duke.common.Constants.EVENT;
 
 public class Event extends Task {
 
@@ -17,5 +19,10 @@ public class Event extends Task {
     @Override
     public String toFile() {
         return "E | " + super.toFile() + " | " + at;
+    }
+
+    @Override
+    public String type() {
+        return EVENT;
     }
 }
