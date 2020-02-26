@@ -170,61 +170,13 @@ public class Duke {
         }
     }
 
-    private static void saveDuke(File file) throws DukeException {
-        try{
-            // File stream to write to file
-            FileOutputStream fileWrite = new FileOutputStream(file);
-            // Object stream to be write object to file stream
-            ObjectOutputStream objWrite = new ObjectOutputStream(fileWrite);
-
-            // write the ArrayList into the file
-            objWrite.writeObject(taskArrList);
-            objWrite.flush();
-            objWrite.close();
-        }
-        catch (IOException e) {
-            throw new DukeException("Save error");
-        }
-    }
-
-    private static void loadDuke(File file) throws DukeException {
-        //first load of program
-        if(!file.exists()) {
-            try {
-                // creates all sub dir if not exist
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-            catch (IOException e){
-                throw new DukeException("File creation error");
-            }
-        }
-        else {
-            try{
-                FileInputStream fileRead = new FileInputStream(file);
-                ObjectInputStream objRead = new ObjectInputStream(fileRead);
-
-                taskArrList = (ArrayList<Task>) objRead.readObject();
-                objRead.close();
-            }
-            catch (IOException | ClassNotFoundException e) {
-                throw new DukeException("Load error");
-            }
-        }
-    }
-
     /** Main method Start **/
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean continueRun = true;
         String userCmd = "";
-
-        String dir = System.getProperty("user.dir");
-        Path filepath = Paths.get(dir, "data", "taskList.txt");
-        String filepathStr = String.valueOf(filepath);
-        File dukeFile = new File(filepathStr);
         try {
-            loadDuke(dukeFile);
+            taskArrList = Storage.loadDuke(taskArrList);
         }
         catch (DukeException e){
             System.out.println("Read error, please rerun program");
@@ -280,7 +232,7 @@ public class Duke {
                     System.out.println("Wrong syntax!");
                     printHelp();
                 }
-                saveDuke(dukeFile);
+                Storage.saveDuke(taskArrList);
             }
             catch (DukeException e){
                 System.out.println(e +"\nPlease try again");
