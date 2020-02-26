@@ -45,9 +45,9 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        for (int i = 0; i < tasks.size(); ++i) {
-            if (tasks.get(i).toString().contains(description)) {
-                foundList.add(tasks.get(i));
+        for (Task task : tasks) {
+            if (task.toString().toLowerCase().contains(description.toLowerCase())) {
+                foundList.add(task);
             }
         }
         

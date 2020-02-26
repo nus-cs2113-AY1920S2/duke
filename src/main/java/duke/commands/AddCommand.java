@@ -23,16 +23,17 @@ public class AddCommand extends Command {
     
     public static final String COMMAND_WORD_DEADLINE = "deadline";
     private static final String COMMAND_DEADLINE_EXAMPLE =
-           LS + TAB + "deadline return book /by Sun 2pm" + LS + TAB + "deadline return book /by 2020-02-18 2pm" + LS + TAB +
-                    "deadline return book /by 18-Feb-2020 2pm";
+            LS + TAB + "deadline return book /by Sun 2pm" + LS + TAB + "deadline return book /by 2020-02-18 2pm" + LS +
+                    TAB + "deadline return book /by 18-Feb-2020 2pm";
     
     private static final String COMMAND_DEADLINE_EVENT_PARAMETER = "<DESCRIPTION> /by <[DATE|DAY]> <INFO>" + LS + TAB +
-            "DATE Format: yyyy-mm-dd or dd-mm-yyyy or dd-MMM-yyyy or yyyy-MMM-dd" + LS + TAB + "MMM: Jan - Dec" + LS + TAB + "DAY Format: Mon - Sun";
+            "DATE Format: yyyy-mm-dd or dd-mm-yyyy or dd-MMM-yyyy or yyyy-MMM-dd" + LS + TAB + "MMM: Jan - Dec" + LS +
+            TAB + "DAY Format: Mon - Sun";
     
     public static final String COMMAND_WORD_EVENT = "event";
     private static final String COMMAND_EVENT_EXAMPLE =
-           LS+ TAB+ "event project meeting /at Mon 2-4pm" + LS + TAB + "event project meeting /at 2020-02-18 2-4pm" + LS + TAB +
-                    "event project meeting /at 18-Feb-2020 2-4pm";
+            LS + TAB + "event project meeting /at Mon 2-4pm" + LS + TAB + "event project meeting /at 2020-02-18 2-4pm" +
+                    LS + TAB + "event project meeting /at 18-Feb-2020 2-4pm";
     
     private static final String COMMAND_ADD_MESSAGE =
             "Got it. I've added this task:" + LS + TAB + "%s" + LS + "Now " + "you have %d task(s) in the list.";
