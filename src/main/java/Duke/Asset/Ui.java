@@ -4,18 +4,16 @@ import Duke.Tasks.*;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 /**
  * This class handles with the interaction with User.
  */
 public class Ui  {
     public static final String LINE = "\t__________________________________________________________";
-    public static final String[] COMMAND= {"todo", "deadline", "event", "done", "bye", "list", "help"};
     public static final String WRONG_INPUT="\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
             "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
-    public static final String MISSING_FILE = "Please check if data.txt exist!";
+    public static final String MISSING_FILE = "\t Data file \"data.txt\" is missing!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
     public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
@@ -178,7 +176,27 @@ public class Ui  {
      * This method lists the supported commands for User.
      */
     public void printHelp(){
-        out.println("\t "+ Arrays.toString(COMMAND));
+        String Help = "\t 1. [Todo] - Adds a Task of type Todo.\n" +
+                "\t    To add a Todo Task, type {todo} {task description}\n"+
+                "\t 2. [Event] - Adds a Task of type Event.\n" +
+                "\t    To add an Event Task, type {event} {task description} {/} {timing}\n" +
+                "\t 3. [Deadline] - Adds a Task of type Deadline.\n" +
+                "\t    To add a Deadline Task, type {event} {task description} {/} {timing}\n" +
+                "\t 4. [Done] - Marks a specific Task as completed.\n" +
+                "\t    To mark a Task as completed, type {done} {task index}\n" +
+                "\t    To mark ALL Tasks as completed, type {done} {all}\n" +
+                "\t 5. [Delete] - Delete Tasks from Task List.\n" +
+                "\t    To delete Tasks from Task List, type {delete} {task index}\n" +
+                "\t    To delete ALL Tasks from the Task List, type {delete} {all}\n" +
+                "\t    ***Note: when using this command, Nini will prompt the User to\n" +
+                "\t    confirm if they intend on deleting _ALL_ Tasks. User is then\n"+
+                "\t    required to type Y for Yes or N for No.***\n" +
+                "\t 6. [List] - Lists all currently available Tasks in the Task List.\n" +
+                "\t    To retrieve the current list of Tasks, type {list}\n "+
+                "\t 7. [Find] - Finds a list Tasks that matches the search key.\n"+
+                "\t    To find a list of matching Tasks, type {find}";
+        out.println("\t Below would be a list of commands that you will find useful!");
+        out.println(Help);
     }
     /**
      * This method informs User that data.txt is missing.
@@ -208,6 +226,9 @@ public class Ui  {
     /**
      * This method closes the System.in class of Duke.
      */
+    public void promptUser(String message){
+        out.println(message);
+    }
     public void close(){
         this.in.close();
     }

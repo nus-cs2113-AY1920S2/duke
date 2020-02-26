@@ -7,6 +7,7 @@ import Duke.Commands.Command;
 import Duke.Parser.Parser;
 import Duke.Tasks.Task;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 /**
  *Hello, World!
@@ -27,14 +28,15 @@ public class Duke{
     private Ui ui;
     private ArrayList<Task> l1;
 
-    public Duke(String filePath) throws FileNotFoundException {
+    public Duke(String filePath) throws FileNotFoundException, IOException {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
         try {
+            this.storage = new Storage(filePath);
             this.l1=storage.loadFile();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             this.ui.showLoadingError();
             this.l1 = new ArrayList<>();
+            this.storage = new Storage(ui);
         }
     }
 /**
@@ -51,7 +53,7 @@ public class Duke{
                 Command command = Parser.parse(input);
                 command.execute(this.l1, this.ui, this.storage);
                 status=command.getStatus();
-            }catch(IllegalDukeException | FileNotFoundException e){
+            }catch(IllegalDukeException | FileNotFoundException e ){
                 this.ui.printError(e.getMessage());
             }finally{
                 this.ui.printLine();
@@ -60,8 +62,8 @@ public class Duke{
         this.ui.close();
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        new Duke("data/duke.txt").run();
+    public static void main(String[] args) throws IOException {
+            new Duke("data/duke.txt").run();
     }
 }
 

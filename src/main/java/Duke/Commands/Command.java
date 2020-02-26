@@ -34,6 +34,7 @@ public class  Command  {
         }else if(this.fullCommand[0].equals("list")){
             ui.printList(l1);
         }
+        storage.saveFile(l1);
         return;
     }
     public int getStatus(){

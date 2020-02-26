@@ -3,6 +3,7 @@ package Duke.Asset;
 import Duke.Tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,6 +15,21 @@ public class Storage {
 
     private File inFile;
 
+    public Storage(Ui ui) throws IOException, FileNotFoundException {
+                ui.promptUser("Creating new data file for Nini");
+                String dir= "data2";
+                File file = new File(dir);
+                boolean bool = file.mkdir();
+                dir+="/duke2.txt";
+                File file2 = new File(dir);
+                if(bool && file2.createNewFile()){
+                    System.out.println("Directory created successfully.\n Data for Nini is stored at:\n" +
+                            file2.getAbsolutePath());
+                    this.inFile = new File (dir);
+                }else{
+                    System.out.println("Sorry could not create specified directory");
+                }
+    }
     public Storage(String filePath) throws FileNotFoundException {
         this.inFile= new File(filePath);
     }
