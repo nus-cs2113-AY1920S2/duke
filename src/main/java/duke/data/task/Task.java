@@ -1,4 +1,4 @@
-package duke.task;
+package duke.data.task;
 
 public abstract class Task {
     protected String description;
@@ -15,6 +15,10 @@ public abstract class Task {
 
     public void taskDone() {
         this.isDone = true;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public abstract String toOutput();

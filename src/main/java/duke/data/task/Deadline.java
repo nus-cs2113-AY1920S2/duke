@@ -1,9 +1,9 @@
-package duke.task;
+package duke.data.task;
 
-public class DeadLine extends Task {
+public class Deadline extends Task {
     protected String by;
 
-    public DeadLine(String description, String by) {
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
