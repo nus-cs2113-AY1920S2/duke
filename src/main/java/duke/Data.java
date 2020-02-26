@@ -25,7 +25,11 @@ public class Data {
         final Parser dataParser = new Parser();
         try {
             File f = new File(path);
-
+            if (f.createNewFile()) {
+                System.out.println("lib/data.txt is not found. It has been generated for you.");
+            } else {
+                System.out.println("lib/data.txt is found.");
+            }
             // Adapted from https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics.html
             Scanner s = new Scanner(f);
             int i = 1;
