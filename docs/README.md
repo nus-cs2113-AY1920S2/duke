@@ -9,11 +9,11 @@
 
 ## Introduction
 
-*Nini* is a Task Manager that assists Users with their
-lists of tasks. User can use *Nini* to manage a list 
-of Todos or Events or Deadlines. For more details of 
-how *Nini* manages the list of Tasks, refer to the 
-*Features* section below.
+*Nini* is a Task Manager built upon Duke's starter 
+code that assists Users with their lists of tasks. 
+User can use *Nini* to manage a list of Todos or 
+Events or Deadlines. For more details of how *Nini*
+manages the list of Tasks, refer to the *Features* section below.
 
 ## Quick Start
 
