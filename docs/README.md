@@ -1,14 +1,13 @@
 # User Guide
 
-1. Introduction
-2. Quick Start
-3. Features  
+<a href = "#intro">1. Introduction</a>  
+[2. Quick Start](#2-quick-start)  
+[3. Features](#3-features)  
     3.1 Viewing help: help  
     3.2 Adding task: 
      + Todo: todo  
      + Deadline: deadline  
      + Event: event  
-     
     3.3 Listing all tasks: list  
     3.4 Mark task as completed: done  
     3.5 Delete a task: delete  
@@ -17,7 +16,7 @@
 4. FAQ
 5. Command Summary
 
-## 1. Introduction  
+## <a name ="intro">1. Introduction</a>  
 Duke is for those who prefers to use a desktop application to manage the tasks they have in life.
    More importantly, Duke is optimized for people who preferred to use Command Line Interface (CLI).  
 ## 2. Quick Start
@@ -34,17 +33,17 @@ Duke is for those who prefers to use a desktop application to manage the tasks t
 ## 3. Features 
 #### Command Format:    
 ```
-- Words in UPPERCASE inside ANGULAR BRACKETS <>, are the PARAMETERS to be supplied by the user e.g. find <KEYWORD>, 
-KEYWORD is a parameter which can be used.
+- Words in UPPERCASE inside ANGULAR BRACKETS <>, are the PARAMETERS to be supplied by the user 
+Example: find <KEYWORD>, KEYWORD is a parameter which can be used.
 Example: find duke
 - Items in SQUARE BRACKETS [] with a pipe |, [|], specify user to input either ONE of the PARAMETERS
 Example: <[DATE|DAY]> <INFO>. 
 Command such as: deadline return book /by 2020-02-18 3pm or deadline return book /by Sun 3pm
 ```
 ## 3.1. Viewing help: help
-`help` : Shows the program duke CLI instructions.
-  
+`help` : Shows the program duke CLI instructions.  
 `Format:` help  
+`Example: help`  
 ## 3.2 Adding task  
 #### Todo: todo  
 `todo:` Adds a todo task to the list.  
@@ -74,7 +73,7 @@ Here are THREE things you can take note of:
         Consist of 3 Letter: Mon, Tue, Wed, Thu, Fri, Sat, Sun
         Note: Capitalize the first letter of the Day            
 
-Cautionary:   
+CAUTIONARY:   
 Inputing invalid date can throw an error - [Invalid] or set to the last date of the month 
 ```
 #### Deadline: deadline  
@@ -88,6 +87,7 @@ Inputing invalid date can throw an error - [Invalid] or set to the last date of 
 ## 3.3 Listing all tasks: list  
 `list:` Displays all the tasks in the list with index number.  
 `Format:` list  
+`Example: list`
 ## 3.4 Mark task as completed: done  
 `done:` Marks the task as completed in the list with index number.  
 `Format:` done **\<INDEX\>**   
@@ -99,11 +99,11 @@ Inputing invalid date can throw an error - [Invalid] or set to the last date of 
 ## 3.6 Locating all information using keyword: find  
 `find:` Finds the list of information using specific keyword.   
 `Format:` find **\<KEYWORD\>**   
-`Example: event project meeting /at 2020-02-26 2-4pm NUS`
+`Example: find book`
 ## 3.7 Exit the program: bye  
 `bye:` Terminate the program.  
-`Format:` deadline **\<DESCRIPTION\>** /at **\<\[DATE|DAY\]\>** **\<INFO\>**   
-`Example: event project meeting /at 2020-02-26 2-4pm NUS`
+`Format:` bye  
+`Example: bye`
 ## 4.FAQ  
 Q: Does the application save the data automatically?  
 A: Yes, the application will save the tasks input by automatically creating a directory folder
@@ -122,3 +122,4 @@ Refer back to Section 3 for more information on the usage of the commands.
    - `Delete` delete \<INDEX\>  
    - `Find` find \<KEYWORD\>  
    - `Exit` bye  
+   
