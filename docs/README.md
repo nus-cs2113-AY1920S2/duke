@@ -12,7 +12,7 @@
 ### Adding a task: <code>todo</code>
 Adds a new task to Duke. <br>
 Format: <code>todo **task**</code> <br>
-Example of usage: <code>todo **CS2113T tutorial 5**</code> <br>
+Example of usage: `todo **CS2113T tutorial 5**` <br>
 Expected outcome: 
 ```
 Got it . I've added this task:
