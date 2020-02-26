@@ -2,14 +2,7 @@ package Duke.parser;
 
 import Duke.data.Storage;
 import Duke.data.TaskList;
-import Duke.data.objects.Task;
-import Duke.data.objects.Deadline;
-import Duke.data.objects.Delete;
-import Duke.data.objects.Done;
-import Duke.data.objects.Event;
-import Duke.data.objects.Help;
-import Duke.data.objects.List;
-import Duke.data.objects.ToDo;
+import Duke.data.objects.*;
 import Duke.ui.TextUi;
 import java.util.ArrayList;
 
@@ -47,6 +40,9 @@ public class Parser {
             return true;
         case Help.COMMAND_WORD:
             executeHelpCommand(ui);
+        case Find.COMMAND_WORD:
+            executeFindCommand(ui, taskList, arguments);
+            return true;
         case "bye":
             return false;
         default:
@@ -76,6 +72,16 @@ public class Parser {
             printInvalidDeadlineException();
         }
 
+    }
+    private void executeFindCommand(TextUi ui, TaskList taskList, String arguments){
+        ArrayList<Task> taskArrayList = taskList.getList();
+        ArrayList<Task> tempFindList = new ArrayList<Task>();
+        for(Task a : taskArrayList){
+            if(a.getDescription().contains(arguments)){
+                tempFindList.add(a);
+            }
+        }
+        ui.showFindList(tempFindList);
     }
     private void executeEventCommand(TextUi ui, TaskList taskList, String arguments){
         String[] argumentArray = arguments.split(" /at ");

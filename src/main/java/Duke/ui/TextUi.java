@@ -18,6 +18,7 @@ import static Duke.common.Messages.MESSAGE_GETLIST;
 import static Duke.common.Messages.MESSAGE_FAREWELL;
 import static Duke.common.Messages.MESSAGE_GREETING;
 import static Duke.common.Messages.MESSAGE_HELP;
+import static Duke.common.Messages.MESSAGE_FIND;
 import static Duke.data.exceptions.DukeExceptions.printInvalidCommandException;
 
 
@@ -69,6 +70,22 @@ public class TextUi {
         );
         for(int i = 0; i< tasks.size(); i++){
             System.out.println("\t"+(i+1)+"."+tasks.get(i).toString());
+        }
+        showToUser(
+                DIVIDER
+        );
+    }
+    public void showFindList(ArrayList<Task> tempList){
+        showToUser(
+                DIVIDER,
+                MESSAGE_FIND
+        );
+        if(tempList.size() != 0){
+            for(int i = 0; i< tempList.size(); i++){
+                System.out.println("\t"+(i+1)+"."+tempList.get(i).toString());
+            }
+        }else{
+            System.out.println("\tNo Result Found! Please try again!");
         }
         showToUser(
                 DIVIDER

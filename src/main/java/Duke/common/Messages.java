@@ -12,5 +12,6 @@ public class Messages {
             "\tdone <item number>\t\t\t\t\t- Mark item number as done. Ex 'done 1' to mark item(1) as done\n" +
             "\tevent <item> /at <location>\t\t\t\t\t- Add Duke.data.objects.Event item into List."+
             "\thelp \t\t\t\t\t- Displays all function";
+    public static final String MESSAGE_FIND = "\tHere are the matching tasks in your list:";
 
 }
