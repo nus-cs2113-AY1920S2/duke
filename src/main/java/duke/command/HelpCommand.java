@@ -43,6 +43,7 @@ public class HelpCommand extends Command {
         Ui.printLine();
         Ui.printWithIndentation(listOfCommandsWithFormat);
         Ui.printLine();
+        System.out.println();
     }
 
 }

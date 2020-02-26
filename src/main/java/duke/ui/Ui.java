@@ -110,6 +110,7 @@ public class Ui {
         Ui.printLine();
         Ui.printWithIndentation(HelpCommand.listOfCommandsWithFormat);
         Ui.printLine();
+        System.out.println();
     }
 
     /**
