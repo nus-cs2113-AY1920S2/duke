@@ -3,6 +3,7 @@
 ## Table of Contents
 1. Introduction
 1. Quick Start
+1. FAQ
 1. Features
 1. Command Summary
 
@@ -22,6 +23,14 @@ how *Nini* manages the list of Tasks, refer to the
 * Navigate through command prompt to the directory that the Jar 
   file has been downloaded into.
 * Type {java -jar duke.jar} to start using *Nini*
+
+## FAQ 
+
+1. __The software says I have a missing duke file and it could not create one for me__
+	Please create a text file called 'duke.txt' file inside a folder called 'data'.
+	Ensure that the data folder is under the same directory as the Jar file.
+	Example:
+	![data folder image](https://github.com/NizarMohd/duke/blob/master/Capture.PNG)
 
 
 ## Features 
