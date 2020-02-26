@@ -87,6 +87,7 @@ Here are THREE things you can take note of:
 CAUTIONARY:   
 Inputing invalid date can throw an error - [Invalid] or set to the last date of the month 
 ```
+![Todo Command Image](../docs/image/invalid_date.png) <br>
 #### Deadline: deadline  
 `deadline:` Adds a deadline task to the list.  
 `Format:` deadline **\<DESCRIPTION\>** /by **\<\[DATE|DAY\]\>** **\<INFO\>**   
