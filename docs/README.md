@@ -12,7 +12,7 @@
 ### Adding a task: <code>todo</code>
 Adds a new task to Duke. <br>
 Format: <code>todo <strong>task</strong> </code> <br>
-Example of usage: `todo <strong>CS2113T tutorial 5</strong>` <br>
+Example of usage: <code>todo <strong>CS2113T tutorial 5</strong></code> <br>
 Expected outcome: 
 ```
 Got it . I've added this task:
@@ -69,7 +69,7 @@ Expected outcome:
 Noted, I've removed this task: 
 [D] Task 1
 ```
-* <strong>index</strong> must be shown in the displayed task <code>list</code>
+* <strong>index</strong> must be within the range of the displayed task <code>list</code>
 * <strong>index</strong> must start from 1
 ### Locating a certain task: <code>find</code>
 Find all the tasks which contains the keyword that user has typed in. <br>
@@ -82,11 +82,11 @@ Here are the matching task/s in your list:
 [T] Task 2
 ```
 * Tasks containing at least one of the keyword would be displayed.
-* Order of keyword matter: <code>find john roe</code> is not equivalent to <code>find roe john</code>
+* Order of keyword matters: <code>find john roe</code> is not equivalent to <code>find roe john</code>
 ### Exiting the program: <code>bye</code>
 Ends the Duke application.<br>
 Example of usage: <code><strong>bye</strong></code> <br>
 ### Saving the task list
 * Duke automatically save the task list into the project folder directory under <code>/savedTasks.txt</code> <br>
-* Duke automatically loads the task list from previous session if the file <code>savedTasks.txt</code> exist
+* Duke automatically loads the task list from previous session if the file <code>/savedTasks.txt</code> exist
 
