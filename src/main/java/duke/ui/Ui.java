@@ -89,7 +89,7 @@ public class Ui {
      * Show the user that the programme is about to save the data into the file.
      */
     public static void showSaveDataToFilePrompt() {
-        System.out.println(SAVE_DATA_TO_FILE_PROMPT);
+        System.out.println(FIVE_SPACES + SAVE_DATA_TO_FILE_PROMPT);
     }
 
     /**
