@@ -12,7 +12,6 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeDateFormatException;
 import duke.exception.DukeException;
-import duke.exception.DukeNullDateException;
 import duke.exception.DukeNullDescriptionException;
 
 import java.time.LocalDate;

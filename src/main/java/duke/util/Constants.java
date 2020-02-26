@@ -33,8 +33,8 @@ public class Constants {
     public static final String DELETE_COMMAND_SHORTCUT = "del";
     public static final String FIND_COMMAND = "find";
     public static final String HELP_COMMAND = "help";
-    public static final String DEADLINE_TIME_DELIMITER = " -by ";
-    public static final String EVENT_TIME_DELIMITER = " -at ";
+    public static final String DEADLINE_TIME_DELIMITER = " /by ";
+    public static final String EVENT_TIME_DELIMITER = " /at ";
     public static final String UNKNOWN_COMMAND_RESPONSE = "OOPS!!! I don't know what that means\n" + FIVE_SPACES +
             "You may enter `help` to check available commands!";
     public static final String LIST_TASKS_PROMPT = "Here are the tasks in your list:";
