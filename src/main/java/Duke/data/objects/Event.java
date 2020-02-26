@@ -1,5 +1,7 @@
 package Duke.data.objects;
-
+/**
+ * Represents the Event command. Upon execution, prints out unique Strings.
+ */
 public class Event extends Task {
 
     protected String at;

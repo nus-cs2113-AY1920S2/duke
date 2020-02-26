@@ -3,7 +3,9 @@ package Duke.data.objects;
 public class Task {
     protected String description;
     protected boolean isDone;
-
+    /**
+     * Represents the Task class. Parent class of Deadline, Event, ToDo.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
