@@ -24,7 +24,9 @@ public class TaskList {
     public static final String DONE_COMMAND = "done";
     private static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
     private static final String SEARCH_EMPTY_MESSAGE = "No tasks match the keyword";
-    private static final String FOUND_MATCHED_TASKS_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String FOUND_MATCHED_TASKS_MESSAGE = "Here are the matching task(s) in your list:";
+    private static final String DUE_EMPTY_MESSAGE = "No deadline tasks are due on the specified date";
+    private static final String FOUND_DUE_DEADLINES_MESSAGE = "Here are the deadline(s) due on the specified date:";
 
     /** Stores all the tasks provided. */
     public ArrayList<Task> tasks;
@@ -319,10 +321,63 @@ public class TaskList {
     }
 
     /**
+     * Instructs {@link #printListOfDueDeadlines(LocalDate)} ()} to list the deadline
+     * tasks with the specified due date if the correct format is used.
+     *
+     * @param isCorrectFormat Denotes the condition to be satisfied for the due command to be valid.
+     * @param dueDate The date for which a list of matching deadlines are found.
+     * @see #printListOfDueDeadlines(LocalDate) .
+     */
+    public void dueTasks(boolean isCorrectFormat, LocalDate dueDate) {
+        if (isCorrectFormat) {
+            printListOfDueDeadlines(dueDate);
+        } else {
+            Ui.printInvalidCommand();
+        }
+    }
+
+    /**
+     * Performs linear search of the list to find all deadlines with matching due dates.
+     * Also prints an empty search message if none of the deadlines are due on the specified date.
+     *
+     * @param dueDate The date for which a list of matching deadlines are found.
+     */
+    private void printListOfDueDeadlines(LocalDate dueDate) {
+        boolean hasNoMatchedDeadlines = true;
+        for (Task task: tasks) {
+            if (task instanceof Deadline)  {
+                Deadline deadline = (Deadline) task;
+                if (deadline.isDue(dueDate)) {
+                    hasNoMatchedDeadlines = false;
+                    break;
+                }
+            }
+        }
+        Ui.printLine();
+        if (hasNoMatchedDeadlines) {
+            Ui.printWithIndentation(DUE_EMPTY_MESSAGE);
+        } else {
+            Ui.printWithIndentation(FOUND_DUE_DEADLINES_MESSAGE);
+            int dueDeadlineNumber = 1;
+            for (Task task : tasks) {
+                if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    if (deadline.isDue(dueDate)) {
+                        Ui.printWithIndentation((dueDeadlineNumber) + ". " + task.getStatusWithDescription());
+                        dueDeadlineNumber++;
+                    }
+                }
+            }
+        }
+        Ui.printLine();
+    }
+
+
+    /**
      * Instructs {@link #printListOfTasksWithKeyword(String)} ()} to list the tasks with the search keyword
      * if the correct format is used.
      *
-     * @param isCorrectFormat Denotes the condition to be satisfied for the list command to be valid.
+     * @param isCorrectFormat Denotes the condition to be satisfied for the find command to be valid.
      * @param keyword The word used for search.
      * @see #printListOfTasksWithKeyword(String) ().
      */

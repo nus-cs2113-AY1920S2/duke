@@ -87,4 +87,16 @@ public class Deadline extends Task {
         taskInformation = "[" + this.taskType + "]" + super.getStatusWithDescription() + getBy();
         return taskInformation;
     }
+
+    /**
+     * Returns whether the task is due on the specified date.
+     *
+     * @param deadlineDate Is the LocalDate object compared with the objects date.
+     * @return isDueOnGivenDate Represents whether the user given date matches with the task's deadline date.
+     */
+    public boolean isDue(LocalDate deadlineDate) {
+        boolean isDueOnGivenDate;
+        isDueOnGivenDate = (this.deadlineDate.isEqual(deadlineDate));
+        return  isDueOnGivenDate;
+    }
 }

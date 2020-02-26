@@ -35,6 +35,8 @@ public class Ui {
     private static final String EXECUTION_ERROR_MESSAGE = "Error found during execution";
     private static final String INVALID_FIND_FORMAT_MESSAGE = "Invalid Command "
             + "(find x : x should be a string)";
+    private static final String INVALID_DUE_FORMAT_MESSAGE = "Invalid Command "
+            + "(due yyyy-mm-dd : Should contain a valid date)";
 
     /**
      * Prints the number of spaces requested by the user as output.
@@ -88,7 +90,16 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message as output.
+     * Prints a message to alert the user that the wrong format was used for find command.
+     */
+    public static void printInvalidDueCommand() {
+        printLine();
+        printWithIndentation(INVALID_DUE_FORMAT_MESSAGE);
+        printLine();
+    }
+
+    /**
+     * Prints the welcome message and a list of valid commands with their formats.
      */
     public void printWelcomeMessage() {
         printLine();
@@ -180,12 +191,16 @@ public class Ui {
     }
 
     /**
-     * Prints a message to alert that the user that he entered an invalid command.
+     * Prints a message to alert that the user that he entered an invalid command and also prints
+     * a list of valid commands with their formats.
      */
     public static void printInvalidCommand() {
         printLine();
         printWithIndentation(INVALID_COMMAND_MESSAGE);
         printLine();
+        Ui.printLine();
+        Ui.printWithIndentation(HelpCommand.listOfCommandsWithFormat);
+        Ui.printLine();
     }
 
     /**
