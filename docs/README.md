@@ -95,6 +95,7 @@ Here are the matching task/s in your list:
 ```
 * Tasks containing at least one of the keyword would be displayed.
 * Order of keyword matters: <code>find john roe</code> is not equivalent to <code>find roe john</code>
+
 ### Exiting the program: <code>bye</code>
 Ends the Duke application.<br>
 Example of usage: <code><strong>bye</strong></code> <br>
