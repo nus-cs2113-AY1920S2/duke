@@ -26,10 +26,10 @@ how *Nini* manages the list of Tasks, refer to the
 
 ## FAQ 
 
-1. __The software says I have a missing duke file and it could not create one for me__
+1. __The software says I have a missing duke file and it could not create one for me__ <br/>
 	Please create a text file called 'duke.txt' file inside a folder called 'data'.
-	Ensure that the data folder is under the same directory as the Jar file.
-	Example:
+	Ensure that the data folder is under the same directory as the Jar file. <br/>
+	Example: <br/>
 	![data folder image](https://github.com/NizarMohd/duke/blob/master/Capture.PNG)
 
 
