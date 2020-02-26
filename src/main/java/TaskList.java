@@ -2,7 +2,6 @@ import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
-import tasks.TaskType;
 
 import java.util.ArrayList;
 
@@ -57,7 +56,7 @@ public class TaskList {
             throw new DukeException("There must be a description for a todo task. Syntax: todo buy food");
         }
 
-        Task newTask = new Task(TaskType.TODO, todoStr);
+        Task newTask = new Task(todoStr);
         taskArrList.add(newTask);
         System.out.println("Got it. I've added this task: ");
         System.out.println("\t" +newTask.toString() );
@@ -78,7 +77,7 @@ public class TaskList {
             throw new DukeException("Wrong syntax for deadline tasks. Syntax: deadline buy food /by Sunday");
         }
 
-        Deadline newDeadline = new Deadline(TaskType.DEADLINE, taskStr, deadlineStr);
+        Deadline newDeadline = new Deadline(taskStr, deadlineStr);
         taskArrList.add(newDeadline);
 
         System.out.println("Got it. I've added this task: ");
@@ -102,7 +101,7 @@ public class TaskList {
             throw new DukeException("Wrong syntax for event tasks. Syntax: event food fair /at Mon 2-4pm");
         }
 
-        Event newEvent = new Event(TaskType.EVENT, eventStr, dateStr);
+        Event newEvent = new Event(eventStr, dateStr);
         taskArrList.add(newEvent);
         System.out.println("Got it. I've added this event: ");
         System.out.println("\t" +newEvent.toString() );

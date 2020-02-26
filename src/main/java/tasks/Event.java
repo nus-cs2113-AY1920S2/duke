@@ -7,8 +7,8 @@ package tasks;
 public class Event extends Task {
     protected String dateStr;
 
-    public Event(TaskType category, String taskName, String dateStr) {
-        super(category, taskName);
+    public Event(String taskName, String dateStr) {
+        super(taskName);
         this.category = 'E';
         this.dateStr = dateStr;
     }

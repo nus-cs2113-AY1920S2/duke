@@ -11,7 +11,7 @@ public class Task implements Serializable {
     protected boolean isDone;
     protected char category;
 
-    public Task(TaskType category, String taskName) {
+    public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
         this.category = 'T';

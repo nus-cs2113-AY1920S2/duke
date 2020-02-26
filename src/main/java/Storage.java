@@ -44,7 +44,7 @@ public class Storage {
         return loadTasks;
     }
 
-    public void saveDuke(ArrayList<Task> taskArrList) throws DukeException {
+    public ArrayList<Task> saveDuke(ArrayList<Task> taskArrList) throws DukeException {
         try{
             // File stream to write to file
             FileOutputStream fileWrite = new FileOutputStream(dukeFile);
@@ -59,6 +59,6 @@ public class Storage {
         catch (IOException e) {
             throw new DukeException("Save error");
         }
+        return taskArrList;
     }
-
 }

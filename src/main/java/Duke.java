@@ -31,7 +31,7 @@ public class Duke {
                 userCmd = UI.getUserCommand();
                 //immediate exit if userCmd has 'bye'
                 taskArrList = parser.runParser(userCmd, taskArrList);
-                storage.saveDuke(taskArrList);
+                taskArrList = storage.saveDuke(taskArrList);
             }
         }
         catch (DukeException e){

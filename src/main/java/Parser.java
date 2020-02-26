@@ -2,18 +2,22 @@ import exceptions.DukeException;
 import tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
 Deals with making sense of the user command
  */
 public class Parser {
-    // TODO: Check if this method will help, may be unhelpful
-    protected static String[] splitString(String[] strArr, String userCmd, String splitCase){
-        strArr = userCmd.split(splitCase);
-        return strArr;
+
+    //[event, food, fair, /at, Mon, 2-4pm]
+    //[deadline, buy, food, /by, Sunday]
+    protected static String[] splitString(String userCmd){
+        String[] strArr = userCmd.split(" ");
+        return strArr; //todo remove
     }
 
     protected static ArrayList<Task> runParser(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
+        System.out.println(Arrays.toString(splitString(userCmd)) );
 
         // end program
         if (userCmd.toLowerCase().equals("bye")) {

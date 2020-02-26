@@ -7,8 +7,8 @@ package tasks;
 public class Deadline extends Task {
     protected String dueBy;
 
-    public Deadline(TaskType category, String taskName, String dueBy) {
-        super(category, taskName);
+    public Deadline(String taskName, String dueBy) {
+        super(taskName);
         this.category = 'D';
         this.dueBy = dueBy;
     }
