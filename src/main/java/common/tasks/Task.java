@@ -22,6 +22,13 @@ public class Task implements Comparable<Task> {
         this.isDone = false;
     }
     
+    /**
+     * Constructor for Task class.
+     * 
+     * @param description Description of the task.
+     * @param date Date of the task (only for Event and Deadline).
+     * @param time Time of the task (optional for Event and Deadline).
+     */
     public Task(String description, Optional<LocalDate> date, Optional<LocalTime> time) {
         this.description = description;
         this.date = date;
@@ -30,7 +37,7 @@ public class Task implements Comparable<Task> {
     }
     
     public String getDescription() {
-    	return this.description;
+        return this.description;
     }
     
     /**
@@ -43,19 +50,19 @@ public class Task implements Comparable<Task> {
     }
     
     public Optional<LocalDate> getOptionalDate() {
-    	return this.date;
+        return this.date;
     }
     
     public Optional<LocalTime> getOptionalTime() {
-    	return this.time;
+        return this.time;
     }
     
     public LocalDate getDate() {
-    	return this.date.get();
+        return this.date.get();
     }
     
     public LocalTime getTime() {
-    	return this.time.get();
+        return this.time.get();
     }
     
     /**
@@ -68,29 +75,36 @@ public class Task implements Comparable<Task> {
     }
     
     public boolean isDone() {
-    	return this.isDone;
+        return this.isDone;
     }
     
+    /**
+     * Custom comparable between two tasks. Sorted by date then time.
+     * If time is not present, then time taken to be until 2359.
+     * 
+     * @param o Other task to compare against.
+     * @return Integer depicting result of comparison.
+     */
     @Override
     public int compareTo(Task o) {
-		if (!this.date.get().equals(o.getDate())) {
-			return this.date.get().compareTo(o.getDate());
-		} else {
-			if (!this.time.isPresent()) {
-				if (o.getOptionalTime().isPresent()) {
-					return 1;
-				} else {
-					return 0;
-				}
-			} else {
-				if (!o.getOptionalTime().isPresent()) {
-					return -1;
-				} else {
-					return this.time.get().compareTo(o.getTime());
-				}
-			}
-		}
-	}
+        if (!this.date.get().equals(o.getDate())) {
+            return this.date.get().compareTo(o.getDate());
+        } else {
+            if (!this.time.isPresent()) {
+                if (o.getOptionalTime().isPresent()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                if (!o.getOptionalTime().isPresent()) {
+                    return -1;
+                } else {
+                    return this.time.get().compareTo(o.getTime());
+                }
+            }
+        }
+    }
     
     /**
      * Returns String representation of Task.

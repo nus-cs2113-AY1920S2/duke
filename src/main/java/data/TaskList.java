@@ -11,64 +11,82 @@ import commands.Command;
 import commands.CommandExecution;
 
 public class TaskList {
-	private ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private ArrayList<Task> removedTasks;
     private CommandExecution commandExecution;
     private boolean isExit;
     
+    /**
+     * Constructor for TaskList class, which stores all the tasks for the current
+     * instance of the chatbot. Tasks are imported from the Storage and added to
+     * the currant instance of the chatbot.
+     * 
+     * @param storage Storage that imports saved tasks.
+     */
     public TaskList(Storage storage) {
-    	this.tasks = storage.list;
-    	this.removedTasks = new ArrayList<>();
-    	this.commandExecution = new CommandExecution(tasks, removedTasks);
-    	this.isExit = false;
+        this.tasks = storage.list;
+        this.removedTasks = new ArrayList<>();
+        this.commandExecution = new CommandExecution(tasks, removedTasks);
+        this.isExit = false;
     }
     
     public boolean isTerminated() {
-    	return this.isExit;
+        return this.isExit;
     }
     
+    /**
+     * Executes the given command on the stored classes. Prints out the corresponding
+     * chatbot reply, and updates the stored tasks in the text file when there are
+     * any changes to the tasks in the current instance.
+     * 
+     * @param ui TextUi that prints out the corresponding chatbot reply.
+     * @param storage Storage for updating the stored tasks in the text file.
+     * @param command Command to be executed.
+     * @throws DukeException
+     * @throws IOException
+     */
     public void executeCommand(TextUi ui, Storage storage, Command command) throws DukeException, IOException {
-    	String commandType = command.getCommandType();
-    	String msg = "  ";
+        String commandType = command.getCommandType();
+        String msg = "  ";
         try {
             switch (commandType) {
                 case "bye":
                     // exits the program
-                	this.isExit = true;
-                	return;
+                    this.isExit = true;
+                    return;
                 case "exception":
-                	throw command.getException();
+                    throw command.getException();
                 case "list":
                     msg += list();
                     break;
                 case "show_deleted":
-                	msg += showRemoved();
-                	break;
+                    msg += showRemoved();
+                    break;
                 case "find":
-                	msg += commandExecution.findTask(command);
-                	break;
+                    msg += commandExecution.findTask(command);
+                    break;
                 case "show_upcoming":
-                	msg += commandExecution.showUpcoming(command);
-                	break;
+                    msg += commandExecution.showUpcoming(command);
+                    break;
                 case "show_overdue":
-                	msg += commandExecution.showOverdue(command);
-                	break;
+                    msg += commandExecution.showOverdue(command);
+                    break;
                 case "clear_all":
-                	msg += commandExecution.clearAll();
-                	storage.writeToFile(tasks);
-                	break;
+                    msg += commandExecution.clearAll();
+                    storage.writeToFile(tasks);
+                    break;
                 case "remove_completed":
-                	msg += commandExecution.removeCompleted();
-                	storage.writeToFile(tasks);
-                	break;
+                    msg += commandExecution.removeCompleted();
+                    storage.writeToFile(tasks);
+                    break;
                 case "remove_past":
-                	msg += commandExecution.removePast();
-                	storage.writeToFile(tasks);
-                	break;
+                    msg += commandExecution.removePast();
+                    storage.writeToFile(tasks);
+                    break;
                 case "delete":
-                	msg += commandExecution.removeTask(command);
-                	storage.writeToFile(tasks);
-                	break;
+                    msg += commandExecution.removeTask(command);
+                    storage.writeToFile(tasks);
+                    break;
                 case "done":
                     msg += commandExecution.makeDone(command);
                     storage.writeToFile(tasks);
@@ -94,6 +112,12 @@ public class TaskList {
         ui.outputMessage(msg);
     }
     
+    /**
+     * Lists out all tasks
+     * 
+     * @return msg Chatbot reply.
+     * @throws DukeException
+     */
     public String list() throws DukeException {
         String msg = "";
         // accesses the list
@@ -112,8 +136,14 @@ public class TaskList {
         return msg;
     }
     
+    /**
+     * Lists all tasks that have been removed in the current instance of the chatbot.
+     * 
+     * @return msg Chatbot reply.
+     * @throws DukeException
+     */
     public String showRemoved() throws DukeException {
-    	String msg = "";
+        String msg = "";
         // accesses the list
         if (removedTasks.isEmpty()) {
             throw new DukeException("Oops!! No removed tasks.");
