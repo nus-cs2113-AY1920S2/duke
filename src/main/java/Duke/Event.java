@@ -23,5 +23,6 @@ public class Event extends Task {
     public String toText(){
         return "E | " + (this.isDone? "1" : "0") + " | " + this.description;
     }
+
 }
 

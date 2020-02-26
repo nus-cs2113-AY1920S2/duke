@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-D | 1|hw
-E | 1|seminar
-T | 1 | haritha
-=======
-D | 0 | hi
->>>>>>> branch-Level-7

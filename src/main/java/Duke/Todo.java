@@ -19,4 +19,5 @@ public class Todo extends Task {
     public String toText(){
         return "T | " + (this.isDone? "1" : "0") + " | " + this.description;
     }
+
 }
