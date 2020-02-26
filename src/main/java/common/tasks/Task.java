@@ -1,7 +1,13 @@
 package common.tasks;
 
-public class Task {
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+
+public class Task implements Comparable<Task> {
     protected final String description;
+    protected final Optional<LocalDate> date;
+    protected final Optional<LocalTime> time;
     protected boolean isDone;
     
     /**
@@ -11,6 +17,15 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
+        this.date = Optional.empty();
+        this.time = Optional.empty();
+        this.isDone = false;
+    }
+    
+    public Task(String description, Optional<LocalDate> date, Optional<LocalTime> time) {
+        this.description = description;
+        this.date = date;
+        this.time = time;
         this.isDone = false;
     }
     
@@ -27,6 +42,22 @@ public class Task {
         return (isDone ? "Y" : "N"); //return tick or X symbols
     }
     
+    public Optional<LocalDate> getOptionalDate() {
+    	return this.date;
+    }
+    
+    public Optional<LocalTime> getOptionalTime() {
+    	return this.time;
+    }
+    
+    public LocalDate getDate() {
+    	return this.date.get();
+    }
+    
+    public LocalTime getTime() {
+    	return this.time.get();
+    }
+    
     /**
      * Sets task as done.
      * 
@@ -39,6 +70,27 @@ public class Task {
     public boolean isDone() {
     	return this.isDone;
     }
+    
+    @Override
+    public int compareTo(Task o) {
+		if (!this.date.get().equals(o.getDate())) {
+			return this.date.get().compareTo(o.getDate());
+		} else {
+			if (!this.time.isPresent()) {
+				if (o.getOptionalTime().isPresent()) {
+					return 1;
+				} else {
+					return 0;
+				}
+			} else {
+				if (!o.getOptionalTime().isPresent()) {
+					return -1;
+				} else {
+					return this.time.get().compareTo(o.getTime());
+				}
+			}
+		}
+	}
     
     /**
      * Returns String representation of Task.

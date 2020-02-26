@@ -7,6 +7,7 @@ import common.exceptions.DukeException;
 import common.tasks.Task;
 import storage.Storage;
 import ui.TextUi;
+import commands.Command;
 import commands.CommandExecution;
 
 public class TaskList {
@@ -26,41 +27,64 @@ public class TaskList {
     	return this.isExit;
     }
     
-    public void executeCommand(TextUi ui, Storage storage, String cmd, String input) throws DukeException, IOException {
+    public void executeCommand(TextUi ui, Storage storage, Command command) throws DukeException, IOException {
+    	String commandType = command.getCommandType();
     	String msg = "  ";
         try {
-            switch (cmd) {
+            switch (commandType) {
                 case "bye":
                     // exits the program
                 	this.isExit = true;
                 	return;
+                case "exception":
+                	throw command.getException();
                 case "list":
                     msg += list();
                     break;
                 case "show_deleted":
                 	msg += showRemoved();
                 	break;
+<<<<<<< HEAD
                 case "find":
                 	msg += commandExecution.findTask(input);
+=======
+                case "show_upcoming":
+                	msg += commandExecution.showUpcoming(command);
+                	break;
+                case "show_overdue":
+                	msg += commandExecution.showOverdue(command);
+                	break;
+                case "clear_all":
+                	msg += commandExecution.clearAll();
+                	storage.writeToFile(tasks);
+                	break;
+                case "remove_completed":
+                	msg += commandExecution.removeCompleted();
+                	storage.writeToFile(tasks);
+                	break;
+                case "remove_past":
+                	msg += commandExecution.removePast();
+                	storage.writeToFile(tasks);
+>>>>>>> master
                 	break;
                 case "delete":
-                	msg += commandExecution.removeTask(input);
+                	msg += commandExecution.removeTask(command);
                 	storage.writeToFile(tasks);
                 	break;
                 case "done":
-                    msg += commandExecution.makeDone(input);
+                    msg += commandExecution.makeDone(command);
                     storage.writeToFile(tasks);
                     break;
                 case "todo":
-                    msg += commandExecution.addTodo(input);
+                    msg += commandExecution.addTodo(command);
                     storage.writeToFile(tasks);
                     break;
                 case "deadline":
-                    msg += commandExecution.addDeadline(input);
+                    msg += commandExecution.addDeadline(command);
                     storage.writeToFile(tasks);
                     break;
                 case "event":
-                    msg += commandExecution.addEvent(input);
+                    msg += commandExecution.addEvent(command);
                     storage.writeToFile(tasks);
                     break;
                 default:

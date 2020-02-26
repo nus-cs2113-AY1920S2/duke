@@ -1,22 +1,30 @@
 package common.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 public class Event extends Task {
-    private final String date;
     
-    public Event(String description, String date) {
-        super(description);
-        this.date = date;
+    public Event(String description, Optional<LocalDate> date, Optional<LocalTime> time) {
+        super(description, date, time);
     }
     
-    public Event(String description, String date, boolean isDone) {
-        super(description);
-        this.date = date;
+    public Event(String description, Optional<LocalDate> date, Optional<LocalTime> time, boolean isDone) {
+        super(description, date, time);
         this.isDone = isDone;
     }
     
     @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.description
-            + "(at: " + this.date + ")";
-    }
+		if (this.time.isPresent()) {
+			return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: "
+					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " 
+					+ this.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+		} else {
+			return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: "
+					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+		}
+	}
 }

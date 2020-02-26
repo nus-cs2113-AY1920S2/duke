@@ -4,61 +4,73 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import common.tasks.Deadline;
 import common.tasks.Event;
 import common.tasks.Task;
 import common.tasks.ToDo;
+import parser.Parser;
 import common.exceptions.DukeException;
 
 public class Storage {
 	public ArrayList<Task> list = new ArrayList<>();
+	public static int COMMAND_TYPE = 0;
+	public static int COMMAND_DESCRIPTION = 1;
+	public static int COMMAND_CHECK = 2;
+	public static int COMMAND_DATE = 3;
+	public static int COMMAND_TIME = 4;
 	
 	public void writeToFile(ArrayList<Task> tasks) throws IOException, DukeException {
-    	if (list.isEmpty()) {
-    		throw new DukeException("Oops!! List is empty.");
-    	}
-    	FileWriter fw = new FileWriter("duke.txt");
-    	try {
-    		for (Task task : tasks) {
-    			fw.write(task.toString() + '\n');
-    		}
-    		fw.close();
-    	} catch (IOException e) {
-    		System.out.println("Something went wrong: " + e.getMessage());
-    	}
+		FileWriter fw = new FileWriter("duke.txt");
+		if (list.isEmpty()) {
+			fw.write("<duke.java> No saved tasks yet! :)");
+		} else if (!list.isEmpty()) {
+			try {
+				fw.write("<duke.java> Saved tasks: (Please do not edit)" + '\n');
+				for (Task task : tasks) {
+					fw.write(task.toString() + '\n');
+				}
+			} catch (IOException e) {
+				System.out.println("Something went wrong: " + e.getMessage());
+			}
+		} else {
+			fw.close();
+			throw new DukeException("Oops!! Something went wrong.");
+		}
+		fw.close();
     }
     
     public void readFromFile() throws IOException, DukeException {
     	BufferedReader br;
     	try {
     		br = new BufferedReader(new FileReader("duke.txt"));
+    		br.readLine();
     	} catch (Exception e) {
     		return;
     	}
-		String string;
+		String input;
 		try {
-			while ((string = br.readLine()) != null) {
-				boolean isDone = string.charAt(4) == 'Y';
-				String task;
-				String by;
-				int index;
-				switch (string.charAt(1)) {
-					case 'T':
-						list.add(new ToDo(string.substring(7), isDone));
+			while ((input = br.readLine()) != null) {
+				Parser parser = new Parser();
+				boolean isDone = input.charAt(4) == 'Y';
+				String[] commandParts = parser.parseFromStorage(input);
+				String commandType = commandParts[COMMAND_TYPE];
+				String commandDescription = commandParts[COMMAND_DESCRIPTION];
+				Optional<LocalDate> date = parser.parseDate(commandParts[COMMAND_DATE]);
+				Optional<LocalTime> time = parser.parseTime(commandParts[COMMAND_TIME]);
+				switch (commandType) {
+					case "T":
+						list.add(new ToDo(commandDescription, isDone));
 						break;
-					case 'D':
-						index = string.indexOf('(');
-						task = string.substring(7, index);
-						by = string.substring(index + 5, string.length() - 1);
-						list.add(new Deadline(task, by, isDone));
+					case "D":
+						list.add(new Deadline(commandDescription, date, time, isDone));
 						break;
-					case 'E':
-						index = string.indexOf('(');
-						task = string.substring(7, index);
-						by = string.substring(index + 5, string.length() - 1);
-						list.add(new Event(task, by, isDone));
+					case "E":
+						list.add(new Event(commandDescription, date, time, isDone));
 						break;
 				}
 			}
@@ -66,4 +78,5 @@ public class Storage {
     		System.out.println("Something went wrong: " + e.getMessage());
     	}
     }
+    
 }
