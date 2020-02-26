@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import commands.Command;
 import ui.TextUi;
 import storage.Storage;
 import common.exceptions.DukeException;
@@ -25,7 +26,7 @@ public class Duke {
     }
     
     public void run() throws DukeException, IOException{
-        ui.greet();
+        ui.greet(tasks);
         initialiseChatbot();
         ui.goodbye();
         System.exit(0);
@@ -35,8 +36,8 @@ public class Duke {
     	boolean isTerminated = false;
     	while (!isTerminated) {
             String input = ui.getUserCommand();
-            String cmd = new Parser().parse(input);
-            tasks.executeCommand(ui, storage, cmd, input);
+            Command command = new Parser().parse(input);
+            tasks.executeCommand(ui, storage, command);
             isTerminated = tasks.isTerminated();
         }
     }

@@ -1,22 +1,30 @@
 package common.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 public class Deadline extends Task {
-    private final String deadline;
     
-    public Deadline(String description, String deadline) {
-        super(description);
-        this.deadline = deadline;
+    public Deadline(String description, Optional<LocalDate> date, Optional<LocalTime> time) {
+        super(description, date, time);
     }
     
-    public Deadline(String description, String deadline, boolean isDone) {
-        super(description);
-        this.deadline = deadline;
+    public Deadline(String description, Optional<LocalDate> date, Optional<LocalTime> time, boolean isDone) {
+        super(description, date, time);
         this.isDone = isDone;
     }
     
-    @Override
-    public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.description
-            + "(by: " + this.deadline + ")";
-    }
+	@Override
+	public String toString() {
+		if (this.time.isPresent()) {
+			return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: "
+					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " 
+					+ this.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+		} else {
+			return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: "
+					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+		}
+	}
 }

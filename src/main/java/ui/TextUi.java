@@ -1,7 +1,13 @@
 package ui;
 
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Optional;
 import java.util.Scanner;
+
+import commands.Command;
+import common.exceptions.DukeException;
+import data.TaskList;
 
 import static common.Messages.MESSAGE_GREETING;
 import static common.Messages.MESSAGE_GOODBYE;
@@ -16,8 +22,10 @@ public class TextUi {
 		this.out = System.out;
 	}
 	
-	public void greet() {
+	public void greet(TaskList tasks) throws DukeException, IOException {
 		outputMessage(MESSAGE_GREETING);
+		Command startingCommand = new Command("show_upcoming", Optional.of("0"));
+		tasks.executeCommand(this, null, startingCommand);
 	}
 	
 	public void goodbye() {
