@@ -5,14 +5,14 @@ Kesin chat bot allows users to easily organise their tasks.
 ## Table of Contents
 
 
-- Requirements()
-- Features()
+- [Requirements](https://github.com/itskesin/duke/tree/master/docs#requirements)
+- [Features](https://github.com/itskesin/duke/tree/master/docs#features)
     
-    - Add a new task()
-    - Find your tasks()
-    - Deletes a task in the list()
-    - View all tasks()
-    - Marks tasks as done()
+    - [Add a new task](https://github.com/itskesin/duke/tree/master/docs#add-a-new-task)
+    - [Find your tasks](https://github.com/itskesin/duke/tree/master/docs#find-your-tasks)
+    - [Deletes a task in the list](https://github.com/itskesin/duke/tree/master/docs#deletes-a-task-in-the-list)
+    - [View all tasks](https://github.com/itskesin/duke/tree/master/docs#view-all-tasks)
+    - [Marks tasks as done](https://github.com/itskesin/duke/tree/master/docs#marks-tasks-as-done)
 
 ## Requirements 
 Java 11 or later.
