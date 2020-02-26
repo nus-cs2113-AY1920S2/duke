@@ -40,6 +40,9 @@ public class TaskList {
                 case "show_deleted":
                 	msg += showRemoved();
                 	break;
+                case "find":
+                	msg += commandExecution.findTask(input);
+                	break;
                 case "delete":
                 	msg += commandExecution.removeTask(input);
                 	storage.writeToFile(tasks);
