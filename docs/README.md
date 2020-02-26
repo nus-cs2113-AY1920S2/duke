@@ -33,9 +33,9 @@ Example of usage:
 Expected outcome:
 
     ...................................................
- 	 Dook has added task: 
- 	  [T][✘] complete individual project
- 	 1 task(s) in the list now!
+	 Dook has added task: 
+	  [T][✘] complete individual project
+	 1 task(s) in the list now!
     ...................................................
 
 ### `event` - add an Event task to the list
