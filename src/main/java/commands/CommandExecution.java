@@ -21,31 +21,39 @@ public class CommandExecution {
 		this.tasks = tasks;
 		this.removedTasks = removedTasks;
 	}
-	
-<<<<<<< HEAD
-	public String findTask(String line) throws DukeException {
+
+	public String findTask(Command command) throws DukeException {
 		ArrayList<Task> foundTasks = new ArrayList<>();
-		String[] cmds = line.split(" ");
-        if (cmds.length == 1) {
-            throw new DukeException("Oops!! Please specify a task.");
-        }
-        String msg = "";
-        String toFind = line.substring(5);
-        for (Task task : list) {
+		CommandValidation.validate(command, "find");
+		Optional<String> commandDescription = command.getDescription();
+        String toFind = commandDescription.get();
+        for (Task task : tasks) {
         	if (task.getDescription().contains(toFind)) {
         		foundTasks.add(task);
         	}
         }
-        msg += list(foundTasks);
+        String msg = listFound(foundTasks);
         return msg;
 	}
-
-	public String makeDone(String line) throws DukeException {
-        String[] cmds = line.split(" ");
-        if (cmds.length == 1) {
-            throw new DukeException("Oops!! Please specify a task.");
+	
+	public String listFound(ArrayList<Task> list) {
+        String msg = "";
+        // accesses the list
+        if (list.isEmpty()) {
+        	msg = "No matching tasks found!";
+        } else {
+        	msg = "Here are the matching tasks in your list:" + '\n';
+            msg += '\n';
+            int counter = 1;
+            for (Task s : list) {
+                msg += "    " + counter + ". " + s.toString();
+                counter++;
+                msg += '\n';
+            }
         }
-=======
+        return msg;
+    }
+
 	public String clearAll() {
 		tasks.removeAll(tasks);
 		String msg = "All tasks have been cleared.";
@@ -73,7 +81,6 @@ public class CommandExecution {
 	}
 	
 	public String listUpcoming(ArrayList<Task> list, int days) {
->>>>>>> master
         String msg = "";
         // accesses the list
         if (list.isEmpty()) {
@@ -212,25 +219,7 @@ public class CommandExecution {
 		String msg = outputMessage(deadline);
 		return msg;
     }
-    
-<<<<<<< HEAD
-    public String list(ArrayList<Task> tasks) throws DukeException {
-        String msg = "";
-        // accesses the list
-        if (list.isEmpty()) {
-            throw new DukeException("Oops!! List is empty.");
-        } else {
-            msg += "Here are the found tasks:" + '\n';
-            msg += '\n';
-            int counter = 1;
-            for (Task s : tasks) {
-                msg += "    " + counter + ". " + s.toString();
-                counter++;
-                msg += '\n';
-            }
-        }
-        return msg;
-=======
+
     public String addEvent(Command command) throws DukeException {
     	CommandValidation.validate(command, "event");
     	Optional<String> commandDescription = command.getDescription();
@@ -241,7 +230,6 @@ public class CommandExecution {
 		tasks.add(event);
 		String msg = outputMessage(event);
 		return msg;
->>>>>>> master
     }
     
     public String outputMessage(Task task) {
