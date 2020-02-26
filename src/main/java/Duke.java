@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
+/**
+ * Main class of the Duke project containing UI display, storage handling, input handling
+ * and task list operations.
+ */
+
 public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
@@ -38,6 +43,12 @@ public class Duke {
 
     }
 
+    /**
+     * Takes in input string from terminal and calls various
+     * functions according to different keywords.
+     *
+     * @throws IOException or DukeException If input does not match format.
+     */
     public static void conversation() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
         String str = readCommand();
@@ -76,12 +87,25 @@ public class Duke {
         return str;
     }
 
+    /**
+     * Takes a string pre-processed
+     * and turns it into a LocalDate object
+     *
+     * @param input A string from the duke.txt file
+     */
     private static LocalDate extractDate(String input){
         LocalDate date;
         date = LocalDate.parse(input);
         return date;
     }
 
+    /**
+     * Triggered after entering "add task" in terminal
+     * In adding Task mode, keywords are used to put tasks in different categories
+     * and handle the status of the task list.
+     *
+     * @throws IOException or DukeException If input does not match format.
+     */
     public static void addTaskScreen() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
         System.out.println("Please add tasks");
@@ -141,6 +165,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Add a task item into taskList
+     * and prints a message
+     *
+     * @throws IOException
+     */
     public static void addTask(Task newTask) throws IOException {
         System.out.println("Got it. I've added this task: " + newTask.description);
         taskList.add(newTask);
@@ -148,6 +178,13 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list");
     }
 
+    /**
+     * Deletes a task according to the index
+     * Raises error if index is missing or out of range
+     *
+     * @param str A string from the terminal
+     * @throws IOException DukeException if index is missing or out of range
+     */
     public static void deleteTask(String str) throws IOException, DukeException {
         if (str.equals("delete")) {
             missingIndexError();
@@ -163,7 +200,10 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list");
     }
 
-
+    /**
+     * Takes in the list in taskList
+     * and list the input to the terminal.
+     */
     public static void listTask() {
         System.out.println("____________________________________________________________");
         int i = 0;
@@ -176,6 +216,12 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * finds tasks  according to the index.
+     * Raises errors if keyword is missing
+     * Return a emppty list if no match
+     * @param input A string from the terminal
+     */
     public static void findTask(String input){
         System.out.println("____________________________________________________________");
         System.out.println(" Here are the matching tasks in your list:");
@@ -192,6 +238,11 @@ public class Duke {
         listSearchResult(searchResult);
     }
 
+    /**
+     * Takes in the list generated using findTask instead of the taskList
+     * and list the input to the terminal.
+     * @param  input A list of tasks found using keywords
+     */
     public static void listSearchResult(ArrayList<Task> input) {
         System.out.println("____________________________________________________________");
         int i = 0;
@@ -204,6 +255,13 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+
+    /**
+     * Mark a task done according to the index.
+     * Raises errors if index is missing or index out of range
+     *
+     * @throws IOException DukeException if index is missing or out of range
+     */
     public static void markDone(String str) throws IOException, DukeException {
         if (str.equals("done")) {
             missingIndexError();
@@ -253,6 +311,12 @@ public class Duke {
         throw new DukeException("OOPS!!! The index cannot be empty.");
     }
 
+    /**
+     * Save the task items in taskList one by one.
+     * It calls writeToFile every time it finds a valid task item.
+     *
+     * @throws IOException if new file can not be created.
+     */
     public static void saveTask() throws IOException {
         System.out.println("Tasks are being saved now");
         try {
@@ -265,6 +329,13 @@ public class Duke {
 
     }
 
+    /**
+     * Write taskList into a txt file named Duke.txt
+     * A new blank file will be created if the programme
+     * can not fina a existing one.
+     *
+     * @throws IOException if new file can not be created.
+     */
     private static void writeToFile() throws IOException {
         File duke = new File("duke.txt");
         if (!duke.exists()) {
@@ -282,6 +353,13 @@ public class Duke {
         fw.close();
     }
 
+
+    /**
+     * Searches for a duke.txt file.
+     * Display a message if such file does not exist
+     * but does not terminate the programme
+     *
+     */
     public static void loadFile() {
         try {
             readFromFile();
@@ -297,6 +375,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Read from a duke.txt file using a scanner to capture
+     * the strings and calls loadTaskList.
+     *
+     * @throws IOException if new file can not be read.
+     */
     public static void readFromFile() throws IOException {
         File file = new File("duke.txt");
         Scanner scanner = new Scanner(file);
@@ -306,6 +390,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Handle raw string inputs from the duke.txt
+     * and creates respective task items with details
+     * and stores in a list
+     *
+     * @param raw A string from the duke file containing task details
+     * @param  tasks A list used to store task items
+     * @throws IOException if new file can not be read.
+     */
     private static void loadTaskList(String raw, ArrayList<Task> tasks) throws IOException {
         if (raw.contains("[T]")) {
             if (raw.contains("\u2713")) {

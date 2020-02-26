@@ -1,5 +1,8 @@
 package duke;
-
+/**
+ * Task item class of the Duke project
+ *  Has three extensions
+ */
 public class Task {
     public String description;
     public boolean isDone;
