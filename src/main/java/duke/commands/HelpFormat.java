@@ -13,4 +13,3 @@ public interface HelpFormat {
     String MESSAGE_COMMAND_HELP_PARAMETER = TAB + "Parameter(s): %s";
     
 }
-
