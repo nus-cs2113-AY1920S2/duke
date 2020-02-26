@@ -6,6 +6,23 @@
 1. Features
 1. Command Summary
 
+## Introduction
+
+*Nini* is a Task Manager that assists Users with their
+lists of tasks. User can use *Nini* to manage a list 
+of Todos or Events or Deadlines. For more details of 
+how *Nini* manages the list of Tasks, refer to the 
+*Features* section below.
+
+## Quick Start
+
+* Ensure you have at least Java 11 or above to run the Jar file.
+* Ensure you have downloaded the Jar file successfully.
+	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Jar/duke.jar) for Jar file)
+* Navigate through command prompt to the directory that the Jar 
+  file has been downloaded into.
+* Type {java -jar duke.jar} to start using *Nini*
+
 
 ## Features 
 
