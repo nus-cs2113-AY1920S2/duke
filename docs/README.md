@@ -1,40 +1,27 @@
 # User Guide
 
+## Table of Contents
+1. Introduction
+1. Quick Start
+1. Features
+1. Command Summary
+
+
 ## Features 
 
 ###  Feature 1 
 User can _add_ Tasks. There exists 
-three different tasks: 
+three different Tasks: 
 * Todo
 * Event 
 * Deadline. 
 
 Note: Event and Deadline Tasks have an additional
 aspect in which timing is also stored on top of 
-task description.
+Task description.
 
-When a task is added, *Nini* will
-inform the User accordingly:
-
- If the Task is Todo:
-
-	 Got it. I've added this task:
-	   [T][✘] {task description}
-	 Now you have {list size} tasks in the list.
-   
-If the Task is Event:
-
-	 Got it. I've added this task:
-	   [E][✘] {task description} {timing}
-	 Now you have {list size} tasks in the list.
-   
-If the Task is Deadline:
-
-	  Got it. I've added this task:
-	   [D][✘] {task description} {timing}
-	 Now you have {list size} tasks in the list.
-
-
+When a Task is added, *Nini* will
+inform the User accordingly.
 
 ### Feature 2
 User can mark Tasks as _done_. 
@@ -43,45 +30,37 @@ User must indicate the index in the Task List
 that the Task is assigned to. 
 
 When a task is marked as _done_,
-*Nini* will inform the User as follows:
-
-	 Nice! I've marked this task as done:
-	   [T][✓] read books
+*Nini* will inform the User and update
+the check box with a check mark.
 
 User also has the option to mark all as done. 
-In which *Nini* will inform:
-
-	 All tasks have been marked as done!
-	 1.[T][✓] read books
-	 2.[T][✓] finish homework
-	 3.[E][✓] student ambassador interview (at: 26 feb 2019 14:00)
-	 4.[E][✓] friend's birthday (at: tomorrow)
-	 5.[D][✓] cg2027 assignment (by: 23 feb 2019 09:00)
-   
-   
+In which *Nini* will show the user that all Tasks
+has its check box converted into a check mark.
+      
 ### Feature 3 
 User can _delete_ Tasks.
 
 User must indicate the index in the Task List
 that the Task is assigned to. 
 
-When a task is deleted, *Nini* will update
-as follows: 
-
-	 Noted. I've removed this task: 
-	   [E][✓] student ambassador interview (at: 26 feb 2019 14:00)
-	 Now you have 4 tasks in the list.
+When a Task is deleted, *Nini* will update
+the User on the specific Task deleted. 
 
 User also has the option to delete all Tasks.
 
-In doing so, *Nini* will inform the User as follows:
-	
-    All tasks have been deleted!
+In doing so, *Nini* will inform the User that all
+Tasks have been deleted.
+
 ### Feature 4
 User can list Tasks.
 
 *Nini* will inform User of the all the 
-Tasks currently stored in his Task List
+Tasks currently stored in his Task List.
+
+Tasks with a check mark indicates Tasks that
+are deemed as completed by User while Tasks
+with a ballot are Tasks that are not yet 
+deemed as complete by the User.
 
 ### Feature 5 
 User can find Tasks
@@ -89,20 +68,191 @@ User can find Tasks
 *Nini* will search for Tasks that matches
 the key entered by the User.
 
-	 Here are the matching tasks in your list!
-	 1.[T][✓] read books
+### Feature 6
+User can ask for help from *Nini*
+
+In response, *Nini* will list out a list
+of commands that *Nini* is programmed to 
+do. 
 
 
 ##  Usage
 
-### `Keyword` - Describe action
+### `Todo` - Adds a Task of type Todo.
 
-Describe action and its outcome.
+To add a Todo Task, type {todo} {task description} 
 
 Example of usage: 
 
-`keyword (optional arguments)`
+    todo read books
 
 Expected outcome:
 
-`outcome`
+    __________________________________________________________
+     Got it. I've added this task:
+      [T][✘] read books
+     Now you have 1 tasks in the list.
+    __________________________________________________________
+
+### `Event` - Adds a Task of type Event.
+
+To add an Event Task, type {event} {task description} {/} {timing}
+
+Example of usage: 
+
+      event celebrate birthday / 16 Feb 2020 14:00 
+
+Expected outcome:
+
+    __________________________________________________________
+     Got it. I've added this task:
+      [E][✘] celebrate birthday (at:  16 feb 2020 14:00)
+     Now you have 2 tasks in the list.
+    __________________________________________________________
+
+
+### `Deadline` - Adds a Task of type Deadline.
+
+To add a Deadline Task, type {deadline} {task Description} {/} {timing}
+
+Example of usage: 
+
+     deadline finish homework / 18 Feb 2020 09:00
+
+Expected outcome:
+
+     __________________________________________________________
+      Got it. I've added this task:
+       [D][✘] finish homework (by:  18 feb 2020 09:00)
+      Now you have 3 tasks in the list.  
+     __________________________________________________________  
+
+### `Done` - Marks a specific Task as completed.
+
+To mark a Task as completed, type {done} {task index}
+
+Example of usage: 
+
+    done 1
+
+Expected outcome:
+
+    __________________________________________________________  
+	   Nice! I've marked this task as done:  
+	    [T][✓] read books  
+    __________________________________________________________  
+    
+To mark _ALL_ Tasks as completed, type {done} {all}
+
+Example of usage: 
+
+    done all
+
+Expected outcome:
+
+    __________________________________________________________  
+    All tasks have been marked as done!
+    1.[T][✓] read books  
+    2.[E][✓] celebrate birthday (at:  16 feb 2020 14:00)  
+    3.[D][✓] finish homework (by:  18 feb 2020 09:00)  
+    __________________________________________________________  
+
+### `Delete` - Delete Tasks from Task List.
+
+To delete Tasks from Task List, type {delete} {task index}
+
+Example of usage: 
+
+    delete 1
+
+Expected outcome:
+
+    __________________________________________________________
+     Noted. I've removed this task: 
+       [T][✓] read books
+     Now you have 3 tasks in the list.
+    __________________________________________________________
+    
+To delete _ALL_ Tasks from the Task List, type {delete} {all}
+Note: when using this command, *Nini* will prompt the User to
+confirm if they intend on deleteing _ALL_ Tasks. User is then 
+required to type Y for Yes or N for No.
+
+Example of usage: 
+    
+    delete all
+  
+Expected outcome:
+
+    __________________________________________________________
+     Are you sure that you want ALL tasks to be deleted?
+     Type Y for Yes and N for No
+    __________________________________________________________
+  
+    Y _(USER INPUT)_
+    __________________________________________________________
+       All tasks have been deleted!
+    __________________________________________________________
+  
+### `List` - Lists all currently available Tasks in the Task List.
+  
+To retrieve the current list of Tasks, type {list}
+  
+Example of usage:
+  
+     List
+  
+Expected outcome:
+
+     __________________________________________________________
+     Here are the tasks in your list:
+     1.[T][✘] read books
+     2.[E][✘] celebrate birthday (at:  16 feb 2020 14:00)
+     3.[D][✘] finish homework (by:  18 feb 2020 09:00)
+    __________________________________________________________
+
+### `Find` - Finds a list Tasks that matches the search key.
+
+Example of usage:
+
+    Find books
+
+Expected outcome: 
+
+    __________________________________________________________
+     Here are the matching tasks in your list!
+     1.[T][✘] read books
+    __________________________________________________________
+    
+### `Help`- Lists commands that can be carried out by *Nini*
+
+Example of usage:
+
+    help
+ 
+Expected outcome: 
+
+	__________________________________________________________
+	 Below would be a list of commands that you will find useful!
+	 1. [Todo] - Adds a Task of type Todo.
+	    To add a Todo Task, type {todo} {task description}
+	 2. [Event] - Adds a Task of type Event.
+	    To add an Event Task, type {event} {task description} {/} {timing}
+	 3. [Deadline] - Adds a Task of type Deadline.
+	    To add a Deadline Task, type {event} {task description} {/} {timing}
+	 4. [Done] - Marks a specific Task as completed.
+	    To mark a Task as completed, type {done} {task index}
+	    To mark ALL Tasks as completed, type {done} {all}
+	 5. [Delete] - Delete Tasks from Task List.
+	    To delete Tasks from Task List, type {delete} {task index}
+	    To delete ALL Tasks from the Task List, type {delete} {all}
+	    ***Note: when using this command, Nini will prompt the User to
+	    confirm if they intend on deleting _ALL_ Tasks. User is then
+	    required to type Y for Yes or N for No.***
+	 6. [List] - Lists all currently available Tasks in the Task List.
+	    To retrieve the current list of Tasks, type {list}
+	 7. [Find] - Finds a list Tasks that matches the search key.
+	    To find a list of matching Tasks, type {find}
+	__________________________________________________________
+
+    
