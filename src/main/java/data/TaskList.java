@@ -44,6 +44,10 @@ public class TaskList {
                 case "show_deleted":
                 	msg += showRemoved();
                 	break;
+<<<<<<< HEAD
+                case "find":
+                	msg += commandExecution.findTask(input);
+=======
                 case "show_upcoming":
                 	msg += commandExecution.showUpcoming(command);
                 	break;
@@ -61,6 +65,7 @@ public class TaskList {
                 case "remove_past":
                 	msg += commandExecution.removePast();
                 	storage.writeToFile(tasks);
+>>>>>>> master
                 	break;
                 case "delete":
                 	msg += commandExecution.removeTask(command);
