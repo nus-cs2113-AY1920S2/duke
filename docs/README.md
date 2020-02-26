@@ -10,7 +10,7 @@
 	- [Add a todo](#adding-a-task-todo)
 	- [Add a deadline](#adding-a-deadline-deadline)
 	- [Add an event](#adding-an-event-event)
-	- [List all tasks](#listing-all-tasks-list)
+	- [List all tasks](#listing-all-tasks--list)
 	- [Mark task as complete](#marking-a-task-as-complete-done)
 	- [Delete a task](#deleting-a-task-delete)
 	- [Find a task](#locating-a-certain-task-find)
