@@ -1,3 +1,3 @@
-[T][✓] buy bread
 [E][✓] proj meeting (at: 2pm)
 [T][✘] buy book
+[D][✘] this proj (by: Monday)
