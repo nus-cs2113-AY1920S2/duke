@@ -58,7 +58,7 @@ Nice! I've marked this task as done:
 [T] Task 1
 ```
 * A tick[✔] will be shown instead of a cross[✘] to indicate task is completed.
-* <strong>index</strong> must be shown in the displayed task <code>list</code> 
+* <strong>index</strong> must be within the range of the displayed task <code>list</code> 
 * <strong>index</strong> must start from 1 
 
 ### Deleting a task: <code>delete</code>
