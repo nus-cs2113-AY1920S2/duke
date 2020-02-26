@@ -3,7 +3,7 @@
 ## Table Of Contents
 1. [Introduction](#intro)
 2. [Quick Start](#quick-start)
-3. [Features](#features)<br>3.1. [Add new ToDo task](#add-todo)<br>3.2. [Add new Deadline task](#add-deadline)<br>3.3. [Add new Event task](#add-event)<br>3.4. [Delete task](#delete)<br>3.5. [Mark task as done](#mark)<br>3.6. [List all tasks](#list)<br>3.7. [Search tasks](#search)<br>3.8. [Exit](#exit)
+3. [Features](#features)<br>3.1. [Add new ToDo task](#add-todo)<br>3.2. [Add new Deadline task](#add-deadline)<br>3.3. [Add new Event task](#add-event)<br>3.4. [Delete task](#delete)<br>3.5. [Mark task as done](#mark)<br>3.6. [List all tasks](#list)<br>3.7. [Search tasks](#search)<br>3.8. [Find due deadlines](#due)<br>3.9. [View commands supported](#help)<br>3.10. [Exit](#exit)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
@@ -14,9 +14,9 @@
 
  Duke is a command line based personal chatbot application used for managing tasks.
  The various types of tasks it can handle are:
- * **ToDo** Tasks --> Contains a simple description of the task and completion status.
- * **Deadline** Tasks --> Contains the description, completion status and deadline timing details.
- * **Event** Tasks --> Contains the description, completion status  and location details of the task.
+ * **ToDo** Tasks - Contains a simple description of the task and completion status.
+ * **Deadline** Tasks - Contains the description, completion status and deadline timing details.
+ * **Event** Tasks - Contains the description, completion status  and location details of the task.
 
  The application can add, delete tasks. It also provides methods to search for tasks 
  and has the ability of marking the tasks as done when they are completed. It also has the ability
@@ -34,7 +34,27 @@
     * Open Command Prompt.
     * Navigate to the folder with the jar.
     * Type the following command:  java -jar iP.jar to run it.
-  * A text based UI should appear with a welcome message.
+  * A text based UI should with appear with the following welcome message and the list of commands supported.
+  
+          __________________________________________________________________________________________
+           Hello! I'm Duke
+           What can I do for you?
+          __________________________________________________________________________________________
+      
+          __________________________________________________________________________________________
+           The list of supported commands along with their formats are as follows:
+            todo description - Adds a new ToDo task to the list of tasks
+            deadline description /by yyyy-mm-dd hhmm - Adds a new Deadline task to the list of tasks
+            event description /at location - Adds a new ToDo task to the list of tasks
+            delete index - Deletes task at specified index
+            done index - Marks the task at specified index as done
+            list - Lists all the tasks in the list
+            find keyword - Lists all matching tasks in the list containing the keyword
+            due yyyy-mm-dd - Lists all deadline tasks which are due on the specified date
+            help - Displays a list of supported commands along with their format
+            bye - Exits the application
+          __________________________________________________________________________________________
+
   * Some example commands you can try:
     * todo homework
     * list
@@ -229,7 +249,7 @@ Example of usage:
 `find meeting`
 
 Expected outcome:
-All tasks in the list would be displayed in a numbered list.
+All matching tasks in the list would be displayed in a numbered list.
 A response similar to the following one would appear:
 
     __________________________________________________________________________________________
@@ -237,10 +257,70 @@ A response similar to the following one would appear:
      1. [E][ ] meeting (at: school)
     __________________________________________________________________________________________   
 
+<a name="due"></a>
+
+### 8. Find due deadlines
+Performs a linear search of all deadlines stored in the list at the point of execution and list
+all those deadlines which are due on the specified date in a numbered list.
+
+### Usage
+
+#### `due yyyy-mm-dd` - Lists all deadline tasks which are due on the specified date
+
+The command displays all the deadline tasks which are due on the specified date in a numbered list.
+Upon success a successful message similar to the one in the example would appear.
+If the wrong format is used an alert would be displayed.
+
+Example of usage: 
+`due 2020-03-25`
+
+Expected outcome:
+All matching deadlines in the list would be displayed in a numbered list.
+A response similar to the following one would appear:
+
+    __________________________________________________________________________________________
+     Here are the deadline(s) due on the specified date:
+     1. [D][ ] assignment (by: Mar 25 2020 1700 Hrs )
+    __________________________________________________________________________________________ 
+
+
+<a name="help"></a>
+    
+### 9. View commands supported 
+The command displays the list of commands supported by the application.
+
+### Usage
+
+#### `help` - Displays list of commands supported 
+
+The command displays the list of commands supported by the application.
+If the wrong format is used an invalid command alert would be displayed.
+
+Example of usage: 
+`help`
+
+Expected outcome:
+The application would be exited successfully.
+A response similar to the following one would appear:
+
+    __________________________________________________________________________________________
+     The list of supported commands along with their formats are as follows:
+      todo description - Adds a new ToDo task to the list of tasks
+      deadline description /by yyyy-mm-dd hhmm - Adds a new Deadline task to the list of tasks
+      event description /at location - Adds a new ToDo task to the list of tasks
+      delete index - Deletes task at specified index
+      done index - Marks the task at specified index as done
+      list - Lists all the tasks in the list
+      find keyword - Lists all matching tasks in the list containing the keyword
+      due yyyy-mm-dd - Lists all deadline tasks which are due on the specified date
+      help - Displays a list of supported commands along with their format
+      bye - Exits the application
+    __________________________________________________________________________________________
+
 
 <a name="exit"></a>
     
-### 8. Exit 
+### 10. Exit 
 The command is used to exit the application. But before the actual application is exited the 
 tasks currently in the list are stored in a file.
 
@@ -250,7 +330,7 @@ tasks currently in the list are stored in a file.
 
 The command when issued performs an exit.
 Upon success a successful message similar to the one in the example would appear and the application would be exited.
-If the wrong format is used an alert would be displayed.
+If the wrong format is used an invalid command alert would be displayed.
 
 Example of usage: 
 `bye`
@@ -281,4 +361,6 @@ A response similar to the following one would appear:
 5. `done index` - Marks the task at specified index as done
 6. `list` - Lists all the tasks in the list
 7. `find keyword` - Lists all matching tasks in the list containing the keyword
-8. `bye` - Exits the application
+8. `due yyyy-mm-dd` - Lists all deadline tasks which are due on the specified date
+9. `help` - Displays list of commands supported 
+10. `bye` - Exits the application
