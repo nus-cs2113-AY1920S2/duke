@@ -6,7 +6,9 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
-/* Duke class (the main class of this Duke project) */
+/**
+ * Duke class (the main class of this Duke project)
+ */
 public class Duke {
 
     private Storage storage;
@@ -20,12 +22,14 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    /* run process method of Duke */
+    /**
+     * run process method of Duke
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;

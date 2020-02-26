@@ -2,12 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
-/* UI class: deals with interactions with the user(write to stdout, read from stdin) */
+/**
+ * UI class: deals with interactions with the user(write to stdout, read from stdin)
+ */
 public class Ui {
 
     public static final String FORMAT_LINE = "------------------------------------";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
-    public static final String LOADING_ERROR = "Errors happen when loading file";
     public static final String ADD_TASK = "Got it! I have added this task into your list:";
     public static final String DONE_TASK = "Good job! You have done this task:";
     public static final String GREETING = String.format("%s\n%s", "Hello, I'm Duke!", "What can I do for you?");
@@ -52,15 +53,14 @@ public class Ui {
         printFormat(GOODBYE);
     }
 
-    public void showLoadingError() {
-        printFormat(LOADING_ERROR);
-    }
-
     public void showLoadingError(String errorDescription) {
         printFormat(errorDescription);
     }
 
-    /* a simple printout method that print well-formatted output */
+    /**
+     * a simple printout method that print well-formatted output
+     * @param strs a variable parameter
+     * */
     public void printFormat(String ...strs) {
         System.out.println(FORMAT_LINE);
         for(String str: strs) {
@@ -78,7 +78,9 @@ public class Ui {
         System.out.println(str);
     }
 
-    /* print user guide out when user types Help command */
+    /**
+     * print user guide out when user types Help command
+     */
     public void printUserGuide() {
         printFormatLine();
         printFormat(HELPING,

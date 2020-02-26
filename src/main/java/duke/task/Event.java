@@ -9,7 +9,10 @@ public class Event extends Task {
         this.timeSlot = timeSlot;
     }
 
-    /* generate description of a event task that need to be stored in the file */
+    /**
+     * generate description of a event task that need to be stored in the file
+     * @return a string that will be stored in the local file
+     */
     public String textToFile() {
         String text = "E | 0 | ";
         if(isDone) text = "E | 1 | ";
@@ -17,6 +20,10 @@ public class Event extends Task {
         return  text;
     }
 
+    /**
+     * generate a string that display all attributes of a event task
+     * @return a string that describes the task
+     */
     public String print() {
         String str = "[E]";
         if(isDone) {

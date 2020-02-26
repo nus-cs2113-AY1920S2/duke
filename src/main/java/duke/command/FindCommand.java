@@ -4,6 +4,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 
+/**
+ * a command class that execute operation of searching tasks in the task list in terms of a keyword entered by users
+ */
 public class FindCommand extends Command {
     private String keyword;
 

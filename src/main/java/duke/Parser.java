@@ -3,10 +3,17 @@ package duke;
 import duke.command.*;
 import duke.exception.DukeException;
 
-/* parser class that is used to deal with making sense of user commands */
+/**
+ * parser class that is used to deal with making sense of user commands
+ */
 public class Parser {
 
-    /* split user command into different parts and decide which operation should be implement on the task list */
+    /**
+     * split user command into different parts and decide which operation should be implement on the task list
+     * @param commandLine command entered by user which need to be split
+     * @return a command object
+     * @throws DukeException if the commandLine user entered is invalid
+     * */
     public static Command parse(String commandLine) throws DukeException {
         String[] attributes = commandLine.split(" ", 2);
         attributes[0] = attributes[0].toLowerCase();

@@ -13,7 +13,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/* storage class: deals with loading tasks from the file and saving tasks in the file */
+/**
+ * storage class: deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     private ArrayList<Task> taskList;
@@ -23,7 +25,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /* load data from file to initialize task list at the beginning of the launching Duke */
+    /**
+     * load data from file to initialize task list at the beginning of the launching Duke
+     * @return a ArrayList that contains all task stored in the local file
+     * @throws DukeException if file cannot be found
+     * */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
         Scanner fileIn;
@@ -52,7 +58,11 @@ public class Storage {
         return taskList;
     }
 
-    /* save data to file if there are some changes made to the task list before exiting from Duke */
+    /**
+     * save data to file if there are some changes made to the task list before exiting from Duke
+     * @param taskList the task list stored in the tasks object
+     * @throws DukeException if the file cannot be written
+     * */
     public void save(ArrayList<Task> taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
