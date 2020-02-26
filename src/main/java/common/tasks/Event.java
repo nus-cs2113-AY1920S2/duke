@@ -18,13 +18,13 @@ public class Event extends Task {
     
     @Override
     public String toString() {
-		if (this.time.isPresent()) {
-			return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: "
-					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " 
-					+ this.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
-		} else {
-			return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: "
-					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
-		}
-	}
+        if (this.time.isPresent()) {
+            return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: "
+                + this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " 
+                + this.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+        } else {
+            return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: "
+                + this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        }
+    }
 }

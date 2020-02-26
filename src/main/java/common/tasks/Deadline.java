@@ -16,15 +16,15 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
     
-	@Override
-	public String toString() {
-		if (this.time.isPresent()) {
-			return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: "
-					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " 
-					+ this.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
-		} else {
-			return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: "
-					+ this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
-		}
-	}
+    @Override
+    public String toString() {
+        if (this.time.isPresent()) {
+            return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: "
+                + this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " 
+                + this.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+        } else {
+            return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: "
+                + this.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        }
+    }
 }
