@@ -18,7 +18,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
    `File` > `Project Structure` > `Libraries` > `+` > `Java` > `{JAVAFX_HOME}/lib`
 
-1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `main` classes.
+1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `duke` classes.
 
    `--module-path {JAVAFX_HOME}/lib --add-modules javafx.controls,javafx.fxml`<br>
    e.g., `--module-path C:/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml`
@@ -86,7 +86,7 @@ import javafx.application.Application;
  * A launcher class to workaround classpath issues.
  */
 public class Launcher {
-    public static void main(String[] args) {
+    public static void duke(String[] args) {
         Application.launch(Duke.class, args);
     }
 }

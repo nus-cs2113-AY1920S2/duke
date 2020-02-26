@@ -57,7 +57,7 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    public static void main(String[] args) {
+    public static void duke(String[] args) {
         // ... 
     }
 

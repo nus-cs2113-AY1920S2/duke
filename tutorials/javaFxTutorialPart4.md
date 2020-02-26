@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `Duke` need to know that `DialogBox` needs a `Label`? 
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -18,7 +18,7 @@ While we have produced a fully functional prototype, there are a few major probl
 1. The code is untidy and long:
    Why is all the code in one place?
 
-   The `Main` class attempts to do it all. 
+   The `Duke` class attempts to do it all. 
    Code for visual tweaks, listeners and even utility methods are all in one file.
    This makes it difficult to find and make changes to existing code.
 
@@ -35,7 +35,7 @@ Let's return to Duke and convert it to use FXML instead.
 
 Scene Builder is a tool developed by Oracle and currently maintained by Gluon. It is a What-You-See-Is-What-You-Get GUI creation tool. [Download](https://gluonhq.com/products/scene-builder/#download) the appropriate version for your OS and install it.
 
-Create the following files in `src/main/resources/view`:
+Create the following files in `src/duke/resources/view`:
 
 **MainWindow.fxml**
 ```xml
@@ -82,8 +82,8 @@ Create the following files in `src/main/resources/view`:
 
 1. Let’s explore the provided FXML files in Scene Builder. 
     
-    Running the tool brings up the main screen.
-    Select `Open Project` > `src/main/resources/view/MainWindow.fxml`. Inspect each control and its properties.
+    Running the tool brings up the duke screen.
+    Select `Open Project` > `src/duke/resources/view/MainWindow.fxml`. Inspect each control and its properties.
 
    ![SceneBuilder opening MainWindow.fxml](assets/SceneBuilder.png)
 
@@ -95,7 +95,7 @@ We will get to that later.
    ![Controller for MainWindow](assets/MainWindowController.png)
 
 1. Let’s repeat the process for `DialogBox`.
-   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
+   The duke difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
 
    ![Settings for DialogBox](assets/DialogBoxController.png)
 
@@ -168,9 +168,9 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `Duke` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
 
-**Main.java**
+**Duke.java**
 ```java
 @Override
 import java.io.IOException;
@@ -184,14 +184,14 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
-public class Main extends Application {
+public class Duke extends Application {
 
     private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
@@ -278,7 +278,7 @@ The last change that we have to make is to point our `Launcher` class in the rig
 In `Launcher.java`
 ```java
 //...    
-Application.launch(Main.class, args);
+Application.launch(Duke.class, args);
 //...
 ```
 [todo]: # (Discussion on the fx:root pattern.)
