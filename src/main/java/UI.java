@@ -1,11 +1,18 @@
 import tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
 Deals with interactions with the user
  */
-public class Ui {
+public class UI {
+    private static Scanner sc = new Scanner(System.in);
+
+    public UI() {
+        printGreeting();
+    }
+
     protected static void printGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,6 +32,12 @@ public class Ui {
                 + "\tdelete x:  remove the xth task (syntax: delete 3)\n"
                 + "\thelp:      launch the help screen (syntax: help)";
         System.out.println(helpMsg);
+    }
+
+    protected static String getUserCommand() {
+        System.out.println("==========================");
+        System.out.println("How can I help you?");
+        return sc.nextLine();
     }
 
     protected static void listTasks(ArrayList<Task> taskArrList) {

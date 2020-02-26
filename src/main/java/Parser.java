@@ -22,7 +22,7 @@ public class Parser {
         }
         // List commands
         else if (userCmd.toLowerCase().equals("list")) {
-            Ui.listTasks(taskArrList);
+            UI.listTasks(taskArrList);
         }
         // Mark task as done
         else if (userCmd.contains("done")) {
@@ -42,14 +42,13 @@ public class Parser {
         }
         // Help command
         else if (userCmd.contains("help")) {
-            Ui.printHelp();
+            UI.printHelp();
         } else if (userCmd.contains("delete")) {
             taskArrList = TaskList.deleteTask(userCmd, taskArrList);
         } else {
             System.out.println("Wrong syntax!");
-            Ui.printHelp();
+            UI.printHelp();
         }
-        Storage.saveDuke(taskArrList);
         return taskArrList;
     }
 }

@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import exceptions.DukeException;
 import tasks.Task;
@@ -6,27 +5,43 @@ import tasks.Task;
 public class Duke {
     private static ArrayList<Task> taskArrList = new ArrayList<>();
 
-    public static void main(String[] args) throws DukeException {
-        Scanner sc = new Scanner(System.in);
+    private static Storage storage;
+    private static Parser parser;
+    private static UI ui;
+//    TODO private static TaskList taskList;
+//    TODO convert taskArrList to TaskList
+
+    public static void init() throws DukeException {
+        ui = new UI(); //prints greeting
+        storage = new Storage();
+        try {
+            taskArrList = storage.loadDuke();
+            //taskList = storage.loadDuke();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+        parser = new Parser();
+    }
+
+    public static void runDuke() throws DukeException {
         boolean continueRun = true;
         String userCmd = "";
-        Ui.printGreeting();
-
         try {
-            taskArrList = Storage.loadDuke(taskArrList);
-
             while (continueRun) {
-                System.out.println("==========================");
-                System.out.println("How can I help you?");
-                userCmd = sc.nextLine();
-
+                userCmd = UI.getUserCommand();
                 //immediate exit if userCmd has 'bye'
-                taskArrList = Parser.runParser(userCmd, taskArrList);
+                taskArrList = parser.runParser(userCmd, taskArrList);
+                storage.saveDuke(taskArrList);
             }
         }
         catch (DukeException e){
             System.out.println(e +"\nPlease try again");
         }
+    }
+
+    public static void main(String[] args) throws DukeException {
+        init();
+        runDuke();
     }
 }
 

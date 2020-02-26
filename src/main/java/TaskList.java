@@ -10,6 +10,12 @@ import java.util.ArrayList;
 Contains the task list e.g., it has operations to add/delete tasks in the list
  */
 public class TaskList {
+    public static ArrayList<Task> taskList;
+
+    public TaskList() {
+        taskList = new ArrayList<>();
+    }
+
     protected static ArrayList<Task> markTaskDone(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");
