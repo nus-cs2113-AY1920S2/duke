@@ -6,7 +6,7 @@
 * In addition, Duke is able to convert user input description of `deadline` and `event` task if date-time is of the format `yyyy-mm-dd`
 
 ## Features
-- [Usage](#usage)
+- [Features](#features)
 	- [Add a todo](#adding-a-task-todo)
 	- [Add a deadline](#adding-a-deadline-deadline)
 	- [Add an event](#adding-an-event-event)
