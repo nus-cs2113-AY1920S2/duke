@@ -1,10 +1,10 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
-    public static final String TICK = "\u2713";
-    public static final String CROSS = "\u2718";
+    public static final String TICK = "1";
+    public static final String CROSS = "0";
 
     /**
      * Returns the task created with the specified
@@ -33,6 +33,13 @@ public class Task {
         }
     }
 
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    public abstract String getExtra();
 
 
     /**

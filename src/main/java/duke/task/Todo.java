@@ -12,6 +12,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getExtra() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
