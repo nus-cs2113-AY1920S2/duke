@@ -6,6 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/*
+Deals with loading tasks from the file and saving tasks in the file
+ */
+
 public class Storage {
 
     private static String dir = System.getProperty("user.dir");

@@ -25,33 +25,6 @@ public class Duke {
         return strArr;
     }
 
-    public static void printHelp() {
-        String helpMsg = "Here is a list of things you can do: \n"
-                + "\ttodo:      tasks without a date/time (syntax: todo buy food)\n"
-                + "\tlist:      list your current tasks (syntax: list)\n"
-                + "\tdeadline:  tasks that need to be done by a date/time (syntax: deadline buy food /by Sunday)\n"
-                + "\tevent:     tasks that start/end by a specific time (syntax: event food fair /at Mon 2-4pm)\n"
-                + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
-                + "\tdelete x:  remove the xth task (syntax: delete 3)\n"
-                + "\thelp:      launch the help screen (syntax: help)";
-        System.out.println(helpMsg);
-    }
-
-    /** Duke Functions Start**/
-    private static void listTasks() {
-        if (taskArrList.size() == 0) {
-            System.out.println("List is empty!");
-        }
-        else {
-            System.out.println("Current task list: ");
-            int index = 1;
-            for (Task t : taskArrList) {
-                System.out.println("\t" +index +". " +t.toString());
-                index++;
-            }
-        }
-    }
-
     // java.lang.NumberFormatException
     private static void markTaskDone(String userCmd) throws DukeException {
         // syntax: done 2
@@ -177,24 +150,13 @@ public class Duke {
         String userCmd = "";
         try {
             taskArrList = Storage.loadDuke(taskArrList);
-        }
-        catch (DukeException e){
-            System.out.println("Read error, please rerun program");
-        }
+            Ui.printGreeting();
 
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+            while (continueRun) {
+                System.out.println("==========================");
+                System.out.println("How can I help you?");
+                userCmd = sc.nextLine();
 
-        while (continueRun) {
-            System.out.println("==========================");
-            System.out.println("How can I help you?");
-            userCmd = sc.nextLine();
-
-            try {
                 // end program
                 if (userCmd.toLowerCase().equals("bye")) {
                     System.out.println("Bye. Hope to see you again!");
@@ -203,7 +165,7 @@ public class Duke {
                 }
                 // List commands
                 else if (userCmd.toLowerCase().equals("list")) {
-                    listTasks();
+                    Ui.listTasks(taskArrList);
                 }
                 // Mark task as done
                 else if (userCmd.contains("done")) {
@@ -223,18 +185,17 @@ public class Duke {
                 }
                 // Help command
                 else if (userCmd.contains("help")) {
-                    printHelp();
-                }
-                else if (userCmd.contains("delete")) {
+                    Ui.printHelp();
+                } else if (userCmd.contains("delete")) {
                     deleteTask(userCmd);
-                }
-                else {
+                } else {
                     System.out.println("Wrong syntax!");
-                    printHelp();
+                    Ui.printHelp();
                 }
                 Storage.saveDuke(taskArrList);
             }
-            catch (DukeException e){
+        }
+        catch (DukeException e){
                 System.out.println(e +"\nPlease try again");
             }
         }
