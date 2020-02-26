@@ -14,8 +14,8 @@ public class DoneCommand extends Command {
     
     public static final String COMMAND_WORD = "done";
     
-    private static final String COMMAND_DONE_DESC = "Marks the task done in the list.";
-    private static final String COMMAND_DONE_PARAMETER = "INDEX NUMBER";
+    private static final String COMMAND_DONE_DESC = "Marks the task as completed in the list.";
+    private static final String COMMAND_DONE_PARAMETER = "<INDEX>";
     private static final String COMMAND_DONE_EXAMPLE = COMMAND_WORD + " 1";
     
     private static final String COMMAND_DONE_MESSAGE = TAB + "Nice! I've marked this task as done:";

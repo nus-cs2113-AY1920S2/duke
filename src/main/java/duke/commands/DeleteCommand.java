@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     
     private static final String COMMAND_DELETE_DESC = "Deletes the task from the list.";
-    private static final String COMMAND_DELETE_PARAMETER = "INDEX NUMBER";
+    private static final String COMMAND_DELETE_PARAMETER = "<INDEX>";
     private static final String COMMAND_DELETE_EXAMPLE = COMMAND_WORD + " 1";
     
     public static final String MESSAGE_USAGE =

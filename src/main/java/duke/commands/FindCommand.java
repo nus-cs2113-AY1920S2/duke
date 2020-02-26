@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     
     public static final String COMMAND_WORD = "find";
     private static final String COMMAND_FIND_DESC = "Finds the list of tasks using a specific keyword";
-    private static final String COMMAND_FIND_PARAMETER = "KEYWORD";
+    private static final String COMMAND_FIND_PARAMETER = "<KEYWORD>";
     private static final String COMMAND_FIND_EXAMPLE = COMMAND_WORD + " book";
     
     public static final String MESSAGE_USAGE =
