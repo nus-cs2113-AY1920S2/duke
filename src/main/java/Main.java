@@ -10,6 +10,8 @@ import ui.TextUi;
 
 import java.util.Scanner;
 
+import static ui.TextUi.printDivider;
+
 public class Main  {
     private CommandResult commandResult;
     public TaskManager taskManager;
@@ -51,6 +53,7 @@ public class Main  {
         Scanner scanner = new Scanner(System.in);
         do {
             String userCommandText = scanner.nextLine();
+            printDivider();
             command = new Parser().parseCommand(taskManager, userCommandText);
             executeCommand(command);
         } while (!ExitCommand.isExit(command));

@@ -1,15 +1,16 @@
 package common;
 import data.task.*;
+import ui.TextUi;
 
 /**
  * Container for user visible messages.
  */
 public class Messages {
-    public static final String LOGO = "    __ ____  ______  ____\n" +
-            "   / //_/ / / / __ \\/  _/\n" +
-            "  / ,< / / / / /_/ // /  \n" +
-            " / /| / /_/ / _, _// /   \n" +
-            "/_/ |_\\____/_/ |_/___/   \n" +
+    public static final String LOGO = "                     __ ____  ______  ____\n" +
+            "                    / //_/ / / / __ \\/  _/\n" +
+            "                   / ,< / / / / /_/ // /  \n" +
+            "                  / /| / /_/ / _, _// /   \n" +
+            "                 /_/ |_\\____/_/ |_/___/   \n" +
             "                         \n";
     public static final int INDEX_OFF_SET = -1;
     public static final char EVENT_TYPE = 'E';
@@ -36,8 +37,12 @@ public class Messages {
     public static final String MESSAGE_THANKS_FOR_CLI = "Thanks for choosing CLI";
     public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice!";
     public static final String MESSAGE_ALERT = "[ALERT!]";
+    public static final String MESSAGE_SHOW_TASK_NUMBER = "There are total %d task(s) in the list";
     public static StringBuilder taskListMessage;
     public static final String respondFormat = "===-             %-70s-===%n";
+    public static final String MESSAGE_LIST_RESPOND_Format = "%-60s";
+    public static final String MESSAGE_RS = "-===";
+    public static final String MESSAGE_LS = "===-             ";
 
     /**
      * Print all tasks in the task list
@@ -57,78 +62,26 @@ public class Messages {
     private static void getTaskListMessage(TaskList tasklist, String taskMessage) {
         for (int index = 1; index <= tasklist.getInternalList().size() ; index++) {
             Task task = tasklist.getInternalList().get(index+ INDEX_OFF_SET);
-            taskMessage = getTaskMessage(taskMessage, index, task);
-            taskListMessage = taskListMessage.append(taskMessage).append("\n");
+            printTaskMessage(index, task);
         }
-        taskListMessage.append(String.format("There are total %d task(s) in the list",
-                tasklist.getInternalList().size()));
+        TextUi.printMessage(TextUi.SYSTEM_COLOR_RESPONSE,
+                String.format(MESSAGE_SHOW_TASK_NUMBER,
+                tasklist.getInternalList().size()) );
     }
 
     /**
      * get task message
-     * @param taskMessage
      * @param index
      * @param task
      * @return
      */
-    private static String getTaskMessage(String taskMessage, int index, Task task) {
+    private static void printTaskMessage(int index, Task task) {
         if (task instanceof TodoTask) {
-            taskMessage = printTodoTask((TodoTask) task, index);
+            TextUi.printTodoTask((TodoTask) task, index);
         } else if (task instanceof DeadlineTask) {
-            taskMessage = printDeadlineTask((DeadlineTask) task, index);
+            TextUi.printDeadlineTask((DeadlineTask) task, index);
         } else if( task instanceof EventTask) {
-            taskMessage = printEventTask((EventTask) task, index);
+            TextUi.printEventTask((EventTask) task, index);
         }
-        return taskMessage;
-    }
-
-    /**
-     * print todo-type task
-     * @param todoTask
-     * @param index
-     * @return
-     */
-    public static String printTodoTask(TodoTask todoTask, int index){
-        return String.format(
-                MESSAGE_TODO_LIST,
-                index,
-                todoTask.getTaskIndex(),
-                todoTask.getTaskType(),
-                todoTask.getChar(),
-                todoTask.getTaskDescription());
-    }
-
-    /**
-     * print deadline-type task
-     * @param deadlineTask
-     * @param index
-     * @return
-     */
-    public static String printDeadlineTask(DeadlineTask deadlineTask, int index){
-        return String.format(
-                MESSAGE_DEADLINE_LIST,
-                index,
-                deadlineTask.getTaskIndex(),
-                deadlineTask.getTaskType(),
-                deadlineTask.getChar(),
-                deadlineTask.getTaskDescription(),
-                deadlineTask.getTaskDeadline());
-    }
-
-    /**
-     * print event-type task
-     * @param eventTask
-     * @param index
-     * @return
-     */
-    public static String printEventTask(EventTask eventTask, int index){
-        return String.format(
-                MESSAGE_EVENT_LIST,
-                index,
-                eventTask.getTaskIndex(),
-                eventTask.getTaskType(),
-                eventTask.getChar(),
-                eventTask.getTaskDescription(),
-                eventTask.getTaskStartTime());
     }
 }
