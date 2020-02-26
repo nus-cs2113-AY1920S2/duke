@@ -1,18 +1,16 @@
 package Duke;
 
-import Exceptions.NoParameterException;
-import Exceptions.emptyListException;
+import Command.Command;
+import Exceptions.DukeException;
+import Storage.Storage;
+import Task.TaskList;
+import UI.Ui;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import Parser.Parser;
 
     /*
     List of exceptions handled:
@@ -34,17 +32,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
-    public static final int LENGTH_DEADLINE = 9;
-    public static final int LENGTH_EVENT = 6;
-    public static final int LENGTH_TODO = 5;
-    public static final int SIZE_DONE_COMMAND = 2;
-    public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
-    public static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke");
-    public static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
-    public static final int SIZE_DELETE_COMMAND = 2;
-    public static final int LIST_TO_INDEX = 1;
-
-
     public static void getDateTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -52,26 +39,46 @@ public class Duke {
         System.out.println(formattedDate);
     }
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList();
 
+        // search for folder, create if not found
+        storage.checkFolderPath();
 
+        // populate if data file is found
+        if (storage.checkFileExists()) {
+            storage.populateList(tasks);
+        }
+    }
 
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parseCommand(fullCommand);
+                c.setCommandVariables(tasks, storage, ui);
+                c.execute();
+                isExit = c.isExit();
+            } catch (Exception e) {
+                System.out.println("ERROR AT RUN\n");
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
 
     public static void main(String[] args) {
-
-        printWelcomeMessage();
-        checkFolderPath();
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        if (checkFileExists()) {
-            populateList(tasks);
-        }
-
-        runCommandLoop(tasks);
+        new Duke().run();
     }
 
-    private static void runCommandLoop(ArrayList<Task> tasks) {
-        Scanner input = new Scanner(System.in);
-        String userCommand = input.nextLine();
 
-    }
 }

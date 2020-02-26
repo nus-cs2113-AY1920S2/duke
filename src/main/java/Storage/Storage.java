@@ -5,20 +5,26 @@ import Duke.Event;
 import Duke.Task;
 import Duke.ToDo;
 
+import Task.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class StorageFile {
+public class Storage {
 
-    public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
-    public static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke");
-    public static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
+    private static final char TASK_TODO = 'T';
+    private static final char TASK_EVENT = 'E';
+    private static final char TASK_DEADLINE = 'D';
+    private static final String WORKING_DIRECTORY = System.getProperty("user.dir");
+    private static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke");
+    private static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
 
     public static void checkFolderPath() {
         // Locate folder location, if missing create folder
@@ -26,7 +32,9 @@ public class StorageFile {
         try {
             if (!directoryExists) {
                 Files.createDirectory(FOLDER_PATH);
-                System.out.println("Directory created");
+                System.out.println("Directory created\n");
+            } else {
+                System.out.println("Directory found\n");
             }
         } catch (IOException e) {
             System.out.println("Error creating folder!\n");
@@ -62,7 +70,7 @@ public class StorageFile {
         }
     }
 
-    public static void populateList(ArrayList<Task> tasks) {
+    public static void populateList(TaskList tasks) {
         try {
             List<String> allLines = Files.readAllLines(Paths.get(String.valueOf(FILE_PATH)));
             for (String oneLine : allLines) {
@@ -71,10 +79,32 @@ public class StorageFile {
         } catch (IOException e) {
             System.out.println("Error reading data file! \n");
         }
+
+    }
+
+    public static void processDataFile(String oneLine, TaskList tasks) {
+        String[] words = oneLine.split(" \\| ");
+        switch (words[0].charAt(0)) {
+            case TASK_TODO:
+                tasks.loadFromFileTodo(words);
+                break;
+            case TASK_DEADLINE:
+                tasks.loadFromFileDeadline(words);
+                break;
+            case TASK_EVENT:
+                tasks.loadFromFileEvent(words);
+                break;
+            default:
+                // in case user touches txt file and fills with random data
+                System.out.println("Line not added: " + oneLine + "\n");
+                break;
+        }
+
     }
 
     public static void rebuildTaskFile(ArrayList<Task> tasks) {
         // replace current list with new updated list
+
         try {
             File file = new File(String.valueOf(FILE_PATH));
             FileWriter myWriter = new FileWriter(file, false);
@@ -88,57 +118,7 @@ public class StorageFile {
         }
     }
 
-    public static void uploadTodo(ArrayList<Task> tasks, String[] words) {
-        boolean taskStatus = Boolean.parseBoolean(words[1]);
-        String taskDescription = words[2];
-        Task newTask = new ToDo(taskDescription);
-        if (taskStatus) {
-            newTask.markAsDone();
-        }
-        tasks.add(newTask);
-    }
 
-    public static void uploadDeadline(ArrayList<Task> tasks, String[] words) {
-        boolean taskStatus = Boolean.parseBoolean(words[1]);
-        String taskDescription = words[2];
-        String taskDate = words[3];
-        Task newTask = new Deadline(taskDescription, taskDate);
-        if (taskStatus) {
-            newTask.markAsDone();
-        }
-        tasks.add(newTask);
 
-    }
 
-    public static void uploadEvent(ArrayList<Task> tasks, String[] words ) {
-        boolean taskStatus = Boolean.parseBoolean(words[1]);;
-        String taskDescription = words[2];
-        String taskDate = words[3];
-        Task newTask = new Event(taskDescription, taskDate);
-        if (taskStatus) {
-            newTask.markAsDone();
-        }
-        tasks.add(newTask);
-    }
-
-    public static void processDataFile(String oneLine, ArrayList<Task> tasks) {
-        String[] words = oneLine.split(" \\| ");
-
-        switch (words[0]) {
-            case "T":
-                uploadTodo(tasks, words);
-                break;
-            case "D":
-                uploadDeadline(tasks, words);
-                break;
-            case "E":
-                uploadEvent(tasks, words);
-                break;
-            default:
-                // in case user touches txt file and fills with random data
-                System.out.println("Line not added: " + oneLine + "\n");
-                break;
-        }
-
-    }
 }
