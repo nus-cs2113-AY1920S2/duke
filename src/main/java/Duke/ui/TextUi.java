@@ -95,7 +95,10 @@ public class TextUi {
                 DIVIDER
         );
     }
-<<<<<<< HEAD
+    /**
+     * Prints out MESSAGE_FIND message from Messages class & Loops through tempList
+     * @param tempList - TaskList object
+     */
     public void showFindList(ArrayList<Task> tempList){
         showToUser(
                 DIVIDER,
@@ -112,12 +115,10 @@ public class TextUi {
                 DIVIDER
         );
     }
-=======
     /**
      * Prints out MESSAGE_ADDTASK message from Messages class & the Task size
      * @param taskList - TaskList object
      */
->>>>>>> branch-A-JavaDoc
     public void showAddTask(TaskList taskList){
         ArrayList<Task> taskArrayList = taskList.getList();
         showToUser(
