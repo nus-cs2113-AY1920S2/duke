@@ -36,6 +36,7 @@ public class FindCommand implements Command {
 
     /**
      * show all the task with whose description contains the search term the user provided.
+     * This is function is case insensitive, so 'asdf' will match 'AsdF'
      *
      * @param taskList the TaskList object which contains the Task objects.
      * @param ui the user interface to output message.
