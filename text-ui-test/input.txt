@@ -2,10 +2,13 @@ list
 todo borrow book
 deadline return book /by 2020-03-25 1750
 todo
-event project meeting /at Mon 2-4pm
+event project meeting /at School
 list events
+find events
 deadline return book by Monday
 list
+due
+find book
 event class meeting at Tue 12-2pm
 done 1
 done
@@ -13,8 +16,11 @@ event
 
 done 0
 list
+help
 done two
+due 2020-03-25
 done 1
 deadline
 list
+delete 2
 bye

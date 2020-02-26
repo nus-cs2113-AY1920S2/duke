@@ -4,6 +4,19 @@
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
+     The list of supported commands along with their formats are as follows:
+      todo description - Adds a new ToDo task to the list of tasks
+      deadline description /by yyyy-mm-dd hhmm - Adds a new Deadline task to the list of tasks
+      event description /at location - Adds a new ToDo task to the list of tasks
+      delete index - Deletes task at specified index
+      done index - Marks the task at specified index as done
+      list - Lists all the tasks in the list
+      find keyword - Lists all matching tasks in the list containing the keyword
+      due yyyy-mm-dd - Lists all deadline tasks which are due on the specified date
+      help - Displays a list of supported commands along with their format
+      bye - Exits the application
+    __________________________________________________________________________________________
+    __________________________________________________________________________________________
      The list is empty
     __________________________________________________________________________________________
 
@@ -25,12 +38,29 @@
 
     __________________________________________________________________________________________
      Got it. I've added this task:
-       [E][ ] project meeting (at: Mon 2-4pm)
+       [E][ ] project meeting (at: School)
      Now you have 3 tasks in the list.
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
      OOPS!!! I'm sorry, but I don't know what that means :-(
+    __________________________________________________________________________________________
+    __________________________________________________________________________________________
+     The list of supported commands along with their formats are as follows:
+      todo description - Adds a new ToDo task to the list of tasks
+      deadline description /by yyyy-mm-dd hhmm - Adds a new Deadline task to the list of tasks
+      event description /at location - Adds a new ToDo task to the list of tasks
+      delete index - Deletes task at specified index
+      done index - Marks the task at specified index as done
+      list - Lists all the tasks in the list
+      find keyword - Lists all matching tasks in the list containing the keyword
+      due yyyy-mm-dd - Lists all deadline tasks which are due on the specified date
+      help - Displays a list of supported commands along with their format
+      bye - Exits the application
+    __________________________________________________________________________________________
+
+    __________________________________________________________________________________________
+     No tasks match the keyword
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
@@ -41,7 +71,17 @@
      Here are the tasks in your list:
      1. [T][ ] borrow book
      2. [D][ ] return book (by: Mar 25 2020 1750 Hrs )
-     3. [E][ ] project meeting (at: Mon 2-4pm)
+     3. [E][ ] project meeting (at: School)
+    __________________________________________________________________________________________
+
+    __________________________________________________________________________________________
+     Invalid Command (due yyyy-mm-dd : Should contain a valid date)
+    __________________________________________________________________________________________
+
+    __________________________________________________________________________________________
+     Here are the matching task(s) in your list:
+     1. [T][ ] borrow book
+     2. [D][ ] return book (by: Mar 25 2020 1750 Hrs )
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
@@ -73,11 +113,30 @@
      Here are the tasks in your list:
      1. [T][/] borrow book
      2. [D][ ] return book (by: Mar 25 2020 1750 Hrs )
-     3. [E][ ] project meeting (at: Mon 2-4pm)
+     3. [E][ ] project meeting (at: School)
+    __________________________________________________________________________________________
+
+    __________________________________________________________________________________________
+     The list of supported commands along with their formats are as follows:
+      todo description - Adds a new ToDo task to the list of tasks
+      deadline description /by yyyy-mm-dd hhmm - Adds a new Deadline task to the list of tasks
+      event description /at location - Adds a new ToDo task to the list of tasks
+      delete index - Deletes task at specified index
+      done index - Marks the task at specified index as done
+      list - Lists all the tasks in the list
+      find keyword - Lists all matching tasks in the list containing the keyword
+      due yyyy-mm-dd - Lists all deadline tasks which are due on the specified date
+      help - Displays a list of supported commands along with their format
+      bye - Exits the application
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
      Invalid Command (done x : x should be an integer)
+    __________________________________________________________________________________________
+
+    __________________________________________________________________________________________
+     Here are the deadline(s) due on the specified date:
+     1. [D][ ] return book (by: Mar 25 2020 1750 Hrs )
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
@@ -93,7 +152,13 @@
      Here are the tasks in your list:
      1. [T][/] borrow book
      2. [D][ ] return book (by: Mar 25 2020 1750 Hrs )
-     3. [E][ ] project meeting (at: Mon 2-4pm)
+     3. [E][ ] project meeting (at: School)
+    __________________________________________________________________________________________
+
+    __________________________________________________________________________________________
+     Noted. I've removed this task:
+       [D][ ] return book (by: Mar 25 2020 1750 Hrs )
+     Now you have 2 tasks in the list.
     __________________________________________________________________________________________
 
     __________________________________________________________________________________________
