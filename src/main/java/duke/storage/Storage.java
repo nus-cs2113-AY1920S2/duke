@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileIO {
+public class Storage {
     public static void saveToFile(String filePath, String message) throws IOException {
         File d = new File(filePath.substring(0, filePath.indexOf("/")));
         if (!d.exists()) {
