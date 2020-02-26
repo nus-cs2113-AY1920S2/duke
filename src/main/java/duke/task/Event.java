@@ -23,43 +23,9 @@ public class Event extends Task {
         timeFormat = new TimeFormat();
         this.at = at.replaceFirst("at", "").trim();
         this.at = this.at.replaceAll("(\\.)|(/)", "-");
-        this.at = removeEnum(this.at);
-        this.at = changeMonthToNumber(this.at);
+        this.at = Day.removeEnum(this.at);
+        this.at = Month.changeMonthToNumber(this.at);
         this.at = timeFormat.checkDay(this.at).trim();
-    }
-    
-    /**
-     * Remove the constant Day that user or storage load up for sync purpose
-     *
-     * @param input the string of the day, time and other information related
-     * @return string that does not contain Day constant value
-     */
-    private String removeEnum(String input) {
-        Day[] days = Day.values();
-        for (Day day : days) {
-            if (input.contains(day.toString().toLowerCase())) {
-                input = input.replace(day.toString().toLowerCase(), "");
-                break;
-            }
-        }
-        return input;
-    }
-    
-    /**
-     * Change the shorthand of Month to number, e.g. Jan - 01, ..., Dec - 12
-     *
-     * @param input the date and time given by user
-     * @return the shorthand of Month to number
-     */
-    private String changeMonthToNumber(String input) {
-        Month[] months = Month.values();
-        for (Month month : months) {
-            if (input.contains(month.toString())) {
-                input = input.replace(month.toString(), month.getNumber());
-                break;
-            }
-        }
-        return input;
     }
     
     /**
@@ -90,6 +56,3 @@ public class Event extends Task {
     }
     
 }
-
-
-

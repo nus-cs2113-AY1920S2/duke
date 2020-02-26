@@ -42,7 +42,7 @@ public class TimeFormat {
      * @return the rest of the string of date and time given by user
      */
     protected String checkDay(String by) {
-        by = changeMonthToNumber(by);
+        by = Month.changeMonthToNumber(by);
         try {
             if (hasDateFormat(by)) {
                 by = by.substring(END_INDEX);
@@ -125,16 +125,5 @@ public class TimeFormat {
             }
         }
         return false;
-    }
-    
-    private String changeMonthToNumber(String input) {
-        Month[] months = Month.values();
-        for (Month month : months) {
-            if (input.contains(month.toString())) {
-                input = input.replace(month.toString(), month.getNumber());
-                break;
-            }
-        }
-        return input;
     }
 }

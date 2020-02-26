@@ -27,4 +27,20 @@ public enum Month {
         return number;
     }
     
+    /**
+     * Change the shorthand of Month to number, e.g. Jan - 01, ..., Dec - 12
+     *
+     * @param input the date and time given by user
+     * @return the shorthand of Month to number
+     */
+    public static String changeMonthToNumber(String input) {
+        Month[] months = Month.values();
+        for (Month month : months) {
+            if (input.contains(month.toString())) {
+                input = input.replace(month.toString(), month.getNumber());
+                break;
+            }
+        }
+        return input;
+    }
 }
