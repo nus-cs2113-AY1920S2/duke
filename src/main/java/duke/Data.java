@@ -69,7 +69,7 @@ public class Data {
     }
 
     public void saveToFile() throws IOException {
-        FileWriter fw = new FileWriter("lib/data.txt");
+        FileWriter fw = new FileWriter("data.txt");
         for (Todo todo : todos) {
             String description = todo.getDescription();
             boolean isDone = todo.isItDone();
