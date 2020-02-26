@@ -17,6 +17,7 @@
 ## Features
 
   ### Adding a Task
+  
   To add a todo: 
     
     todo [task description]
@@ -31,16 +32,21 @@
   You're encouraged to enter date in the format YYYY-MM-DD.
   
   ### Listing all Tasks
+  
     list
     
   ### Deleting a Task
+  
     delete [task number]
     
   ### Marking a Task as Done
+  
     done [task number]
     
   ### Finding a Task based on Keywords
+  
     find [description]
     
   ### To exit the program
+  
     bye
