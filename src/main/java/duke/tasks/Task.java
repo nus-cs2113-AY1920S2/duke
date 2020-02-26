@@ -26,6 +26,10 @@ public abstract class Task {
 
     public abstract String toFormattedString();
 
+    public boolean containsWord(String word) {
+        return description.contains(word);
+    }
+
     public static Task getTaskFromFormattedLine(String line) throws BadLineFormatException {
         String[] tokens = line.split(",");
         if (tokens.length == 0) {

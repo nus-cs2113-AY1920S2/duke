@@ -74,6 +74,21 @@ public class TaskList {
         Ui.printPretty("Task " + (taskIndex + 1) + " has been marked as done\n" + task.toString());
     }
 
+    public void find(String word) {
+        String result = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.containsWord(word)) {
+                if (!result.equals("")) {
+                    result += System.lineSeparator();
+                }
+                result += (String.format("%d. %s", i + 1, tasks.get(i).toString()));
+            }
+        }
+
+        Ui.printPretty("Here are your search results:" + System.lineSeparator() + result);
+    }
+
     public void writeTasksToFile() {
         try {
             Storage.saveToFile(filePath, getFormattedTasks());

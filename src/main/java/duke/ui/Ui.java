@@ -4,6 +4,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
 
@@ -15,7 +16,7 @@ public class Ui {
     private static final String GOODBYE_MESSAGE = "Leaving so soon? :(";
     private static final String NEWLINE = System.lineSeparator();
     private static final String GREETING = "Hello! This is Quinn's chat bot" + NEWLINE +
-            "Currently supported commands: todo, deadline, event, list, done, delete" + NEWLINE +
+            "Currently supported commands: todo, deadline, event, list, done, delete, find" + NEWLINE +
             "Example usage:" + NEWLINE +
             ToDoCommand.EXAMPLE_USAGE + NEWLINE +
             DeadlineCommand.EXAMPLE_USAGE+ NEWLINE +
@@ -23,6 +24,7 @@ public class Ui {
             ListCommand.EXAMPLE_USAGE + NEWLINE +
             DoneCommand.EXAMPLE_USAGE + NEWLINE +
             DeleteCommand.EXAMPLE_USAGE + NEWLINE +
+            FindCommand.EXAMPLE_USAGE + NEWLINE +
             "Type \"" + duke.Main.END_STRING + "\" to exit";
 
 
