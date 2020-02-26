@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-  Pupu is a task organiser that keeps your tasks, deadlines and events all in one place.
+Pupu is a task organiser that keeps your tasks, deadlines and events all in one place.
 
 ## Getting Started
 1. Install Java 11 from oracle.
@@ -16,31 +16,37 @@
 
 ## Features
 
-  ### Adding a Task
-  To add a todo: 
-    
+### Adding a Task
+To add a todo: 
+
     todo [task description]
     
-  To add an event:
+To add an event:
     
     event [event description] /at [location]
       
-  To add a deadline:
+To add a deadline:
   
     deadline [deadline description] /at [date]
-  You're encouraged to enter date in the format YYYY-MM-DD.
+    
+You're encouraged to enter date in the format YYYY-MM-DD.
   
-  ### Listing all Tasks
+### Listing all Tasks
+  
     list
     
-  ### Deleting a Task
+### Deleting a Task
+  
     delete [task number]
     
-  ### Marking a Task as Done
+### Marking a Task as Done
+  
     done [task number]
     
-  ### Finding a Task based on Keywords
+### Finding a Task based on Keywords
+  
     find [description]
     
-  ### To exit the program
+### To exit the program
+  
     bye
