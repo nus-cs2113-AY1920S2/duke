@@ -22,7 +22,7 @@ public class Command {
      * @return void
      * @see Data
      */
-    public Command(String url) throws FileNotFoundException {
+    public Command(String url) throws IOException {
         data = new Data(url);
     }
 

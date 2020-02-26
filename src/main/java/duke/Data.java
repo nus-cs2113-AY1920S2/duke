@@ -20,15 +20,16 @@ public class Data {
 
 
     // Import data from file into program
-    public Data(String path) throws FileNotFoundException, DateTimeParseException {
+    public Data(String path) throws DateTimeParseException, IOException, FileNotFoundException {
         todos = new ArrayList<Todo>();
         final Parser dataParser = new Parser();
+
         try {
             File f = new File(path);
             if (f.createNewFile()) {
-                System.out.println("lib/data.txt is not found. It has been generated for you.");
+                System.out.println("data.txt is not found. It has been generated for you.");
             } else {
-                System.out.println("lib/data.txt is found.");
+                System.out.println("data.txt is found.");
             }
             // Adapted from https://nus-cs2113-ay1920s2.github.io/website/schedule/week6/topics.html
             Scanner s = new Scanner(f);
@@ -61,8 +62,9 @@ public class Data {
                 i++;
             }
         } catch (Exception e) {
-            throw new FileNotFoundException();
+
         }
+
 
     }
 
