@@ -1,39 +1,69 @@
-# Setting up
+# 1. Introduction
 
-**Prerequisites**
+**Duke** is a *task management system* that can help you keep track of various tasks. It is a **Command Line Interface(CLI)**.
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+# 2. Quick Start
 
-**Importing the project into IntelliJ**
+1. Ensure you have a Java **`11`** or above installed in your computer
+1. Download the latest **`duke.jar`**
+1. Copy the file to the folder you want to use as the working directory for your Duke
+1. Create a new file **`tasks.txt`** and the location should be **`[working_directory]/data/tasks.txt`**
+1. Open Command Prompt(CMD) of your computer and direct to the working directory of **Duke**
+1. Type the command **`java -jar duke.jar`** to launch the software
+1. Type the command to manage your tasks in **`Duke`**
+1. Some example commands you can try:
+   * **`help`**: show a simple user guide
+   * **`list`**: list all tasks in the task list
+   * **`todo read book`**: add a todo task called **`read book`** into the task list
+   * **`delete 3`**: delete the 3rd task in the task list
+   * **`bye`**: exit the software
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+# 3. Features
 
-# Tutorials 
+### 3.1 Viewing help: **`help`**
+Format: `help`
 
-duke.Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for duke.Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+### 3.2 Adding a Todo task: **`todo`**
+Format: `todo [TaskName]`
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+### 3.3 Adding a Deadline task: **`deadline`**
+Format: `deadline [TaskName] /by [Deadline]`
 
-# Feedback, Bug Reports
+### 3.4 Addding a Event task: **`event`**
+Format: `event [TaskName] /at [Timeslot]`
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+### 3.5 Marking a task as Done: **`done`**
+Format: `done [Task#]`
+
+### 3.6 Deleteing a task: **`delete`**
+Format: `delete [Task#]`
+
+### 3.7 Finding tasks by searching for a keyword: **`find`**
+Format: `find [Keyword]`
+
+### 3.8 Listing all tasks: **`list`**
+Format: `list`
+
+### 3.9 Exiting the program: **`bye`**
+Format: `bye`
+
+### 3.10 Saving the data
+The task list is saved in the hard disk automatically after any command that changes the list and saved date will be loaded up when launching the program.
+There is no need to save manually.
+
+# 4. Command Summary
+* **todo**: `todo [TaskName]`
+   e.g. `todo read book`
+* **deadline**: `deadline [TaskName] /by [Deadline]`
+   e.g. `deadline return book /by Sunday`
+* **event**: `event [TaskName] /at [Timeslot]`
+   e.g. `event project meeting /at Monday 2-4pm`
+* **done**: `done [Task#]`
+   e.g. `done 3`
+* **delete**: `delete [Task#]`
+   e.g. `delete 2`
+* **find**: `find [Keyword]`
+   e.g. `find book`
+* **list**: `list`
+* **help**: `help`
+* **bye**: `bye`
