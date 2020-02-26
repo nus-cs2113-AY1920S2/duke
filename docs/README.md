@@ -7,12 +7,8 @@ Pupu is a task organiser that keeps your tasks, deadlines and events all in one 
 1. Install Java 11 from oracle.
   
 2. Download the jar file from released section.
-  
-3. Ensure that data.txt file is stored in a "lib" folder.
-  
-4. "lib" folder is in the same directory as the jar file.
-  
-5. To run, enter "java -jar duke.jar" in terminal in correct directory.
+
+3. To run, enter "java -jar duke.jar" in terminal in correct directory.
 
 ## Features
 
