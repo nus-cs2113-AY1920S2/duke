@@ -22,9 +22,10 @@
 Duke is for those who prefers to use a desktop application to manage the tasks they have in life.
    More importantly, Duke is optimized for people who preferred to use Command Line Interface (CLI).  
 ## 2. Quick Start  
-   1. Ensure you have Java 11 or above installed in your Computer.
+   <br>
+    1. Ensure you have Java 11 or above installed in your Computer.
      
-   ![Version Check Image](../docs/image/version_check.png)
+   ![Version Check Image](../docs/image/version_check.png)  <br><br>
     2. Download the latest Duke.jar [here](https://github.com/jinfayap/duke/releases/download/v0.2/Duke.jar).  
     3. Copy the file to the folder you want to use as the home folder for your Duke.  
     4. Use Command Prompt or Integrated Development Environment's (IDE) terminal.
