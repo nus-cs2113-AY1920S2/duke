@@ -7,7 +7,9 @@ import duke.ui.TextUi;
 
 public class DoneCommand extends Command {
 
-    /** Contains the index of the task to be done. */
+    /**
+     * Contains the index of the task to be done.
+     */
     int index;
 
     /**
@@ -26,7 +28,7 @@ public class DoneCommand extends Command {
      *
      * @param tasklist Contains the list of tasks on which the commands are executed on.
      * @throws DukeException If the index provided is invalid.
-     * @see  TextUi#printDone(TaskList, int)
+     * @see TextUi#printDone(TaskList, int)
      */
     @Override
     public void execute(TaskList tasklist) throws DukeException {
@@ -36,6 +38,6 @@ public class DoneCommand extends Command {
         tasklist.get(index).taskDone();
         TextUi.printDone(tasklist, index);
         int taskCounter = tasklist.size();
-        TextUi.printRemaining(taskCounter);
+        //TextUi.printRemaining(taskCounter);
     }
 }

@@ -5,16 +5,19 @@ package duke.data.task;
  */
 public class Event extends Task {
 
-    /** Stores additional detail about the event */
+    /**
+     * Stores additional detail about the event
+     */
     protected String at;
 
     /**
      * Constructor for Event Task Class.
      * <p> <br>
      * It creates a new Event task with the description provided by the user.
-     *</p>
+     * </p>
+     *
      * @param description Contains the description of event.
-     * @param at Contains detail additional of event.
+     * @param at          Contains detail additional of event.
      */
     public Event(String description, String at) {
         super(description);

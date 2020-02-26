@@ -6,9 +6,13 @@ package duke.data.task;
  */
 public abstract class Task {
 
-    /** Stores the description of the task. */
+    /**
+     * Stores the description of the task.
+     */
     protected String description;
-    /** Denotes whether the task is done or not done. */
+    /**
+     * Denotes whether the task is done or not done.
+     */
     protected boolean isDone;
 
     /**

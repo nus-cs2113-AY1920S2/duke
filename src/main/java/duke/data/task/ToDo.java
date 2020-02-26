@@ -9,7 +9,8 @@ public class ToDo extends Task {
      * Constructor for ToDo Task Class.
      * <p> <br>
      * It creates a new ToDo task with the description provided by the user.
-     *</p>
+     * </p>
+     *
      * @param description Description of the task to be created.
      */
     public ToDo(String description) {

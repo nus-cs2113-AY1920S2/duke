@@ -10,7 +10,9 @@ import java.util.ArrayList;
  */
 public class TaskList extends ArrayList<Task> {
 
-    /** Stores all the tasks provided. */
+    /**
+     * Stores all the tasks provided.
+     */
     private ArrayList<Task> tasks;
 
     /**
@@ -26,7 +28,7 @@ public class TaskList extends ArrayList<Task> {
      * if the correct format is used.
      *
      * @param taskList Current list of tasks..
-     * @param keyword The word used for search.
+     * @param keyword  The word used for search.
      */
     public boolean findKeyword(String keyword, TaskList taskList) {
         for (Task task : taskList) {

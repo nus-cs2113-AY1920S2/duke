@@ -12,20 +12,26 @@ import static duke.ui.TextUi.printTask;
  */
 public class AddCommand extends Command {
 
-    /** Contains information related to taskType. */
+    /**
+     * Contains information related to taskType.
+     */
     String taskType;
-    /** Contains description related to the task. */
+    /**
+     * Contains description related to the task.
+     */
     String description;
-    /** Contains addition information related to the task's extension . */
+    /**
+     * Contains addition information related to the task's extension .
+     */
     String extension;
 
     /**
      * Constructor for AddCommand Class.
      * It creates a new AddCommand Object with the information provided.
      *
-     * @param extension Contains addition information related to the task.
+     * @param extension   Contains addition information related to the task.
      * @param description Contains description on the task.
-     * @param taskType Denotes the type of the task to be added.
+     * @param taskType    Denotes the type of the task to be added.
      */
     public AddCommand(String taskType, String description, String extension) {
         this.taskType = taskType;
@@ -39,7 +45,7 @@ public class AddCommand extends Command {
      * Set extension to null.
      *
      * @param description Contains description on the task
-     * @param taskType Denotes the type of the task to be added
+     * @param taskType    Denotes the type of the task to be added
      */
     public AddCommand(String taskType, String description) {
         this.taskType = taskType;

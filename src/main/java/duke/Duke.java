@@ -45,7 +45,9 @@ public class Duke {
      * @see Ui#printByeMessage()
      */
 
-    /** Runs the program until termination.  */
+    /**
+     * Runs the program until termination.
+     */
     private void run() {
         ui.showWelcome();
         boolean isExit = false;

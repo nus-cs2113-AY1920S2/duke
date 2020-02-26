@@ -10,7 +10,9 @@ import duke.data.task.TaskList;
  */
 public abstract class Command {
 
-    /** Contain boolean to check for exit condition */
+    /**
+     * Contain boolean to check for exit condition
+     */
     protected boolean isExit;
 
     /**

@@ -5,16 +5,19 @@ package duke.data.task;
  */
 public class Deadline extends Task {
 
-    /** Stores detail about the deadline */
+    /**
+     * Stores detail about the deadline
+     */
     protected String by;
 
     /**
      * Constructor for Deadline Task Class.
      * <p> <br>
      * It creates a new Deadline task with the description provided by the user.
-     *</p>
+     * </p>
+     *
      * @param description Contains the description of deadline.
-     * @param by Contains detail additional of deadline.
+     * @param by          Contains detail additional of deadline.
      */
     public Deadline(String description, String by) {
         super(description);

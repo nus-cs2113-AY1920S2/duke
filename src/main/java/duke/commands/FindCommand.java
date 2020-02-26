@@ -9,7 +9,9 @@ import duke.ui.TextUi;
  */
 public class FindCommand extends Command {
 
-    /** The word used for search. */
+    /**
+     * The word used for search.
+     */
     String keyword;
 
     /**

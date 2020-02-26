@@ -45,8 +45,9 @@ public class TextUi {
 
     /**
      * Prints the done task upon completion.
+     *
      * @param tasklist Current list of tasks.
-     * @param index Index to indicate the done task.
+     * @param index    Index to indicate the done task.
      */
     public static void printDone(TaskList tasklist, int index) {
         System.out.println(Messages.MESSAGE_TASK_DONE);
@@ -55,8 +56,9 @@ public class TextUi {
 
     /**
      * Print the deleted task upon completion.
+     *
      * @param tasklist Current list of tasks.
-     * @param index Index to indicate the done task.
+     * @param index    Index to indicate the done task.
      */
     public static void printDelete(TaskList tasklist, int index) {
         System.out.println("    Noted. I've removed this task:");
@@ -65,6 +67,7 @@ public class TextUi {
 
     /**
      * Prints the reminding tasks.
+     *
      * @param taskCounter index to indicate the reminding task.
      */
     public static void printRemaining(int taskCounter) {
@@ -73,7 +76,8 @@ public class TextUi {
 
     /**
      * Prints the new task that is added in the task list.
-     * @param task New task that is currently added.
+     *
+     * @param task        New task that is currently added.
      * @param taskCounter Index to indicate the total number of tasks.
      */
     public static void printTask(Task task, int taskCounter) {
@@ -93,7 +97,8 @@ public class TextUi {
     /**
      * Prints to show the user that keyword is found in the task list.
      * Generate a list of tasks to show the user which task are involved.
-     * @param keyword The word used for search
+     *
+     * @param keyword  The word used for search
      * @param tasklist Current list of tasks.
      */
     public static void printTaskFound(String keyword, TaskList tasklist) {

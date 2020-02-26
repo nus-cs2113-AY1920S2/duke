@@ -6,7 +6,9 @@ import duke.data.task.TaskList;
 import duke.ui.TextUi;
 
 public class DeleteCommand extends Command {
-    /** Contains the index of the task to be deleted. */
+    /**
+     * Contains the index of the task to be deleted.
+     */
     int index;
 
     /**
@@ -24,7 +26,7 @@ public class DeleteCommand extends Command {
      *
      * @param tasklist Contains the list of tasks on which the commands are executed on.
      * @throws DukeException If the index provided is invalid.
-     * @see  TextUi#printDelete(TaskList, int)
+     * @see TextUi#printDelete(TaskList, int)
      */
     @Override
     public void execute(TaskList tasklist) throws DukeException {
