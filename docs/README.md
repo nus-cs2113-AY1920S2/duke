@@ -5,18 +5,17 @@
 * Duke is also able to `delete` existing task, `find` specific task from a populated list of task and mark task as `done`. <br>
 * In addition, Duke is able to convert user input description of `deadline` and `event` task if date-time is of the format `yyyy-mm-dd`
 ## Features
-[Usage](#usage)
-    * [Add a todo](#adding-a-task-todo)
-    * [Add a deadline](#adding-a-deadline-deadline)
-    * [Add an event](#adding-an-event-event)
-    * [List all tasks](#listing-all-tasks-list)
-    * [Mark task as complete](#marking-a-task-as-complete-done)
-    * [Delete a task](#deleting-a-task-delete)
-    * [Find a task](#locating-a-certain-task-find)
-    * [Exit Duke](#exiting-the-program-bye)
-    * [Save to hard disk](#saving-the-task-list)
+- [Usage](#usage)
+	- [Add a todo](#adding-a-task-todo)
+	- [Add a deadline](#adding-a-deadline-deadline)
+        - [Add an event](#adding-an-event-event)
+        - [List all tasks](#listing-all-tasks-list)
+        - [Mark task as complete](#marking-a-task-as-complete-done)
+        - [Delete a task](#deleting-a-task-delete)
+        - [Find a task](#locating-a-certain-task-find)
+        - [Exit Duke](#exiting-the-program-bye)
+        - [Save to hard disk](#saving-the-task-list)
 	
-
 ## Usage
 
 ### Adding a task: <code>todo</code>
