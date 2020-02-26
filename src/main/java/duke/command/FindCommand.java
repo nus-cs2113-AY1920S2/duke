@@ -5,7 +5,7 @@ import duke.exception.ExceptionType;
 import duke.task.TaskList;
 
 /**
- * Handles the task of searching the list of tasks and prints those which contain the search keyword.
+ * Handles the task of searching the list of tasks and printing those which contain the search keyword.
  */
 public class FindCommand extends Command {
 
@@ -25,6 +25,9 @@ public class FindCommand extends Command {
     public FindCommand(boolean isCorrectFormat, String[] commandSplit) throws DukeException {
         this.commandType = CommandType.FindCommand;
         this.isCorrectFormat = isCorrectFormat;
+        if (!isCorrectFormat) {
+            throw new DukeException(ExceptionType.InvalidFindCommandException);
+        }
         try {
             this.keyword = commandSplit[1];
         } catch (IndexOutOfBoundsException e) {
