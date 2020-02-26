@@ -1,6 +1,5 @@
 package commands;
 import exceptions.InvalidCommandException;
-import exceptions.InvalidTaskException;
 import exceptions.MissingDescriptionException;
 import task.TaskList;
 
@@ -18,7 +17,7 @@ public class Command {
         this.isExit = false;
     }
 
-    public void execute() throws InvalidTaskException, MissingDescriptionException, InvalidCommandException {
+    public void execute() throws MissingDescriptionException, InvalidCommandException {
         // To be implemented by child classes
     }
 

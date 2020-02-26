@@ -3,7 +3,6 @@ import commands.Command;
 
 import exceptions.InvalidCommandException;
 import exceptions.MissingDescriptionException;
-import exceptions.InvalidTaskException;
 import ui.UI;
 
 import java.io.IOException;
@@ -39,15 +38,13 @@ public class Duke {
                 UI.showInvalidCommandError();
             } catch (MissingDescriptionException e) {
                 UI.showMissingDescriptionError();
-            } catch (InvalidTaskException e) {
-                UI.showInvalidTaskError();
             }
         }
         UI.printEndMessage();
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("/data/tasks.txt").run();
+        new Duke("/data").run();
     }
 
 }

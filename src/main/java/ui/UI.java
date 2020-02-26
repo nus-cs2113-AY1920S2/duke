@@ -66,7 +66,7 @@ public class UI {
      */
     public static void showLoadingError() {
         br();
-        System.out.println("\t You did not have an old task list! Creating new one...");
+        System.out.println("\t Task list not found! Creating new one...");
         br();
     }
 
@@ -75,7 +75,7 @@ public class UI {
      */
     public static void showInvalidCommandError() {
         UI.br();
-        System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(");
+        System.out.println("\t Dook does not recognise this command! :(");
         UI.br();
     }
 
@@ -84,16 +84,7 @@ public class UI {
      */
     public static void showMissingDescriptionError() {
         UI.br();
-        System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(");
-        UI.br();
-    }
-
-    /**
-     * Prints the message shown when the task ID being deleted does not exist.
-     */
-    public static void showInvalidTaskError() {
-        UI.br();
-        System.out.println("\t This task doesn't exist!");
+        System.out.println("\t Please enter the full task description!");
         UI.br();
     }
 }

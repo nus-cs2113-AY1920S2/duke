@@ -1,6 +1,5 @@
 package task;
 import ui.UI;
-import exceptions.InvalidTaskException;
 import java.util.ArrayList;
 
 /**
@@ -71,28 +70,33 @@ public class TaskList {
      */
     public void markDone(String description) {
         UI.br();
-        int taskIdx = Integer.parseInt(description) -1; // -1 for zero-based indexing
-        tasks.get(taskIdx).setDone();
-        System.out.println("\t Dun dun dun dun! This task is done:");
-        System.out.println("\t   " + tasks.get(taskIdx));
+        try {
+            int taskIdx = Integer.parseInt(description) - 1; // -1 for zero-based indexing
+            tasks.get(taskIdx).setDone();
+            System.out.println("\t Dun dun dun dun! This task is done:");
+            System.out.println("\t   " + tasks.get(taskIdx));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\t Dook does not recognise this task!");
+        }
         UI.br();
     }
 
     /**
      * Deletes a task from the task list.
      * @param description String index of the task to be deleted, based on its list position.
-     * @throws InvalidTaskException If task index is out of bounds.
      */
-    public void deleteTask(String description) throws InvalidTaskException {
-        int taskIdx = Integer.parseInt(description) -1;
-        if (taskIdx >= tasks.size() || taskIdx < 0) {
-            throw new InvalidTaskException();
-        }
+    public void deleteTask(String description) {
         UI.br();
-        System.out.println("\t This task has been whisked out of existence:");
-        System.out.println("\t  " + tasks.get(taskIdx));
-        tasks.remove(taskIdx);
-        System.out.println("\t " + tasks.size() + " task(s) remaining.");
+        try {
+            int taskIdx = Integer.parseInt(description) - 1;
+            Task t = tasks.get(taskIdx);
+            System.out.println("\t This task has been whisked out of existence:");
+            System.out.println("\t  " + t);
+            tasks.remove(taskIdx);
+            System.out.println("\t " + tasks.size() + " task(s) remaining.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\t Dook does not recognise this task!");
+        }
         UI.br();
     }
 }

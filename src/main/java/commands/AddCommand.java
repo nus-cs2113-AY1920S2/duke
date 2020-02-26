@@ -27,10 +27,14 @@ public class AddCommand extends Command {
         // Parse input to obtain text and timeDescriptor
         String timeDescriptor = "";
         String text = "";
-        int slashPos = description.indexOf('/');
-        if (slashPos != -1) {
-            timeDescriptor = description.substring(slashPos + 4);
-            text = description.substring(0, slashPos);
+        try {
+            int slashPos = description.indexOf('/');
+            if (slashPos != -1) {
+                timeDescriptor = description.substring(slashPos + 4);
+                text = description.substring(0, slashPos);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new MissingDescriptionException();
         }
 
         if (command.equals("todo")) {

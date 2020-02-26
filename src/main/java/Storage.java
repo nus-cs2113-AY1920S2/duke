@@ -10,10 +10,11 @@ import java.io.FileWriter;
  */
 public class Storage {
 
-    private String filepath;
+    private String path;
+    private static final String FILENAME = "/tasks.txt";
 
-    public Storage (String filepath) {
-        this.filepath = filepath;
+    public Storage (String path) {
+        this.path = path;
     }
 
     /**
@@ -24,8 +25,13 @@ public class Storage {
      */
     public TaskList loadTasks() throws IOException {
         String localDir = System.getProperty("user.dir");
-        File f = new File(localDir + filepath);
+        File f = new File(localDir + path);
 
+        if (!f.exists()) {
+            f.mkdir();
+        }
+
+        f = new File(localDir + path + FILENAME);
         if (!f.exists()) {
             f.createNewFile();
             return new TaskList(); // Returns empty task list
@@ -76,7 +82,7 @@ public class Storage {
      */
     public void saveTasks(TaskList tasks) throws IOException {
         String localDir = System.getProperty("user.dir");
-        FileWriter fw = new FileWriter(localDir + filepath);
+        FileWriter fw = new FileWriter(localDir + path + FILENAME);
         for (Task task : tasks.getTaskList()) { // Write tasks line by line
             fw.write(task.getFileRecord());
         }

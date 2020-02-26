@@ -57,7 +57,7 @@ Expected outcome:
 ### `deadline` - add a Deadline task to the list
 
 Adds a task of type 'Deadline' to the task list. Use /by to specify the deadline.
-Input deadline in format YYYY-MM-DD for Dook to recognise and print the date in MM DD YYYY style.
+Input deadline in format YYYY-MM-DD for Dook to recognise and print the date in MMM DD YYYY style.
 
 Example of usage: 
 
