@@ -18,6 +18,14 @@ import static Duke.data.exceptions.DukeExceptions.printInvalidDeadlineException;
 
 
 public class Parser {
+    /**
+     * Executes the command and returns a boolean whether the while loop continues.
+     *
+     * @param ui - TextUi object
+     *           taskList - TaskList object
+     *           String - String command Line
+     * @return boolean
+     */
     public Boolean execute(TextUi ui, TaskList taskList, String userInput) {
         String[] commands = userInput.trim().split(" ", 2);  // split the input into command and arguments
         if (commands.length == 0) {
@@ -54,13 +62,29 @@ public class Parser {
             return true;
         }
     }
-
+    /**
+     * Executes showTaskList from TextUi object to print out Task List items.
+     *
+     * @param ui - TextUi object
+     *           taskList - TaskList object
+     */
     public void executeListCommand(TextUi ui, TaskList taskList){
         ui.showTaskList(taskList);
     }
+    /**
+     * Executes showHelpMessage from TextUi object to print out all Functions usage guide.
+     *
+     * @param ui - TextUi object
+     */
     public void executeHelpCommand(TextUi ui){
         ui.showHelpMessage();
     }
+    /**
+     * Adds Task object into TaskList
+     *
+     * @param taskList - TaskList object
+     *                 task - Task Object
+     */
     public void addTask(TaskList taskList, Task task){
         ArrayList<Task> taskArrayList = taskList.getList();
         taskArrayList.add(task);

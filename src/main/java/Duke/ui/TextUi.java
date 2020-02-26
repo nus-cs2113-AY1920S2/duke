@@ -34,17 +34,29 @@ public class TextUi {
         this.out = out;
     }
 
-    /** Shows message(s) to the user */
+    /**
+     * Prints out the String array given
+     *
+     * @param message - String... object
+     */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(m);
         }
     }
+    /**
+     * Prints out MESSAGE_HELP message from Messages class
+     *
+     */
     public void showHelpMessage(){
         showToUser(
                 MESSAGE_HELP
         );
     }
+    /**
+     * Prints out MESSAGE_GREETING message from Messages class
+     *
+     */
     public void showWelcomeMessage(String version) {
         showToUser(
                 DIVIDER,
@@ -52,6 +64,10 @@ public class TextUi {
                 MESSAGE_GREETING,
                 DIVIDER);
     }
+    /**
+     * Prints out MESSAGE_FAREWELL message from Messages class
+     *
+     */
     public void showFarewellMessage(){
         showToUser(
                 DIVIDER,
@@ -61,6 +77,10 @@ public class TextUi {
     private boolean shouldIgnore(String rawInputLine) {
         return rawInputLine.trim().isEmpty();
     }
+    /**
+     * Prints out MESSAGE_GETLIST message from Messages class & Loops through taskList
+     * @param taskList - TaskList object
+     */
     public void showTaskList(TaskList taskList){
         ArrayList<Task> tasks = taskList.getList();
         showToUser(
@@ -74,6 +94,10 @@ public class TextUi {
                 DIVIDER
         );
     }
+    /**
+     * Prints out MESSAGE_ADDTASK message from Messages class & the Task size
+     * @param taskList - TaskList object
+     */
     public void showAddTask(TaskList taskList){
         ArrayList<Task> taskArrayList = taskList.getList();
         showToUser(
@@ -83,6 +107,11 @@ public class TextUi {
                 "\tNow you have "+ taskArrayList.size() +" tasks in the list."
         );
     }
+    /**
+     * Prints out MESSAGE_DELTASK message from Messages class & the Task size
+     * @param taskList - TaskList object
+     *                 taskNumber - the number(int) of the task being deleted
+     */
     public void showDeleteTask(TaskList taskList, int taskNumber){
         ArrayList<Task> taskArrayList = taskList.getList();
         showToUser(
@@ -93,6 +122,11 @@ public class TextUi {
                 DIVIDER
         );
     }
+    /**
+     * Prints out MESSAGE_TASKDONE message from Messages class & the Task that is marked Done
+     * @param taskList - TaskList object
+     *                 taskNumber - the number(int) of the task being marked as Done
+     */
     public void showDoneTask(TaskList taskList, int taskNumber){
         ArrayList<Task> taskArrayList = taskList.getList();
         showToUser(
@@ -104,7 +138,7 @@ public class TextUi {
     }
     /**
      * Prompts for the command and reads the text entered by the user.
-     * Ignores empty, pure whitespace, and comment lines.
+     * Ignores empty and pure whitespace.
      * Echos the command back to the user.
      * @return command (full line) entered by the user
      */
