@@ -18,7 +18,7 @@ how *Nini* manages the list of Tasks, refer to the
 
 * Ensure you have at least Java 11 or above to run the Jar file.
 * Ensure you have downloaded the Jar file successfully.
-	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Jar/duke.jar) for Jar file)
+	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Jar-Test/duke.jar) for Jar file)
 * Navigate through command prompt to the directory that the Jar 
   file has been downloaded into.
 * Type {java -jar duke.jar} to start using *Nini*
@@ -35,7 +35,8 @@ three different Tasks:
 
 Note: Event and Deadline Tasks have an additional
 aspect in which timing is also stored on top of 
-Task description.
+Task description. Timing has to be input as follows:
+`yyyy-MM-dd HH:mm`
 
 When a Task is added, *Nini* will
 inform the User accordingly.
@@ -117,15 +118,15 @@ To add an Event Task, type {event} {task description} {/} {timing}
 
 Example of usage: 
 
-      event celebrate birthday / 16 Feb 2020 14:00 
+     event celebrate birthday / 2020-02-16 14:00 
 
 Expected outcome:
 
-    __________________________________________________________
-     Got it. I've added this task:
-      [E][✘] celebrate birthday (at:  16 feb 2020 14:00)
-     Now you have 2 tasks in the list.
-    __________________________________________________________
+	__________________________________________________________
+	 Got it. I've added this task:
+	   [E][✘] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )
+	 Now you have 2 tasks in the list.
+	__________________________________________________________
 
 
 ### `Deadline` - Adds a Task of type Deadline.
@@ -134,15 +135,15 @@ To add a Deadline Task, type {deadline} {task Description} {/} {timing}
 
 Example of usage: 
 
-     deadline finish homework / 18 Feb 2020 09:00
+     deadline finish homework / 2020-02-18 09:00
 
 Expected outcome:
 
-     __________________________________________________________
-      Got it. I've added this task:
-       [D][✘] finish homework (by:  18 feb 2020 09:00)
-      Now you have 3 tasks in the list.  
-     __________________________________________________________  
+	__________________________________________________________
+	 Got it. I've added this task:
+	   [D][✘] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )
+	 Now you have 1 tasks in the list.
+	__________________________________________________________ 
 
 ### `Done` - Marks a specific Task as completed.
 
@@ -170,8 +171,8 @@ Expected outcome:
     __________________________________________________________  
     All tasks have been marked as done!
     1.[T][✓] read books  
-    2.[E][✓] celebrate birthday (at:  16 feb 2020 14:00)  
-    3.[D][✓] finish homework (by:  18 feb 2020 09:00)  
+    2.[E][✓] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
+    3.[D][✓] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )  
     __________________________________________________________  
 
 ### `Delete` - Delete Tasks from Task List.
@@ -221,11 +222,11 @@ Example of usage:
   
 Expected outcome:
 
-     __________________________________________________________
+    __________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] read books
-     2.[E][✘] celebrate birthday (at:  16 feb 2020 14:00)
-     3.[D][✘] finish homework (by:  18 feb 2020 09:00)
+	 1.[T][✓] read books  
+	 2.[E][✓] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
+	 3.[D][✓] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 ) 
     __________________________________________________________
 
 ### `Find` - Finds a list Tasks that matches the search key.
