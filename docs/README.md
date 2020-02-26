@@ -11,8 +11,8 @@
 
 ### Adding a task: <code>todo</code>
 Adds a new task to Duke. <br>
-Format: <code>todo **task**</code> <br>
-Example of usage: `todo **CS2113T tutorial 5**` <br>
+Format: <code>todo <strong>task</strong> </code> <br>
+Example of usage: `todo <strong>CS2113T tutorial 5<strong>` <br>
 Expected outcome: 
 ```
 Got it . I've added this task:
@@ -21,8 +21,8 @@ Now you have x tasks in the list.
 ```
 ### Adding a deadline: <code>deadline</code>
 Adds a new task with deadline to Duke. <br>
-Format: <code>deadline **task** /by **description of task**</code> <br>
-Example of usage: <code>deadline **CS2113T tutorial 5** /by **2020-05-25 6.00pm**</code> <br>
+Format: <code>deadline <strong>task</strong> /by <strong>description of task</strong></code> <br>
+Example of usage: <code>deadline <strong>CS2113T tutorial 5</strong> /by <strong>2020-05-25 6.00pm</strong></code> <br>
 Expected outcome: 
 ```
 Got it . I've added this task:
@@ -31,8 +31,8 @@ Now you have x tasks in the list.
 ```
 ### Adding an event: <code>event</code>
 Adds a new event task to Duke.<br>
-Format: <code>event **task** /at **description**</code> <br>
-Example of usage: <code>event **CS2113T oral presentation** /at **2020-03-01 1.00pm**</code> <br>
+Format: <code>event <strong>task</strong> /at <strong>description</strong></code> <br>
+Example of usage: <code>event <strong>CS2113T oral presentation</strong> /at <strong>2020-03-01 1.00pm</strong></code> <br>
 Expected outcome:
 ```
 Got it . I've added this task: <br>
@@ -50,31 +50,31 @@ Here are the tasks in your list:
 ```
 ### Marking a task as complete: <code>done</code>
 Mark a specific task that user has typed in as completed. <br>
-Format: <code>done **index**</code> <br>
-Example of usage: <code>done **1**</code> <br>
+Format: <code>done <strong>index</strong></code> <br>
+Example of usage: <code>done <strong>1</strong></code> <br>
 Expected outcome:
 ```
 Nice! I've marked this task as done:
 [T] Task 1
 ```
-* **index** must be shown in the displayed task <code>list</code> 
-* **index** must start from 1 
+* <strong>index</strong> must be shown in the displayed task <code>list</code> 
+* <strong>index</strong> must start from 1 
 
 ### Deleting a task: <code>delete</code>
 Deletes a specific task from the <code>list</code> of task. <br>
-Format: <code> delete **index**</code> <br>
-Example of usage: <code> delete **1** </code> <br>
+Format: <code> delete <strong>index</strong></code> <br>
+Example of usage: <code> delete <strong>1</strong> </code> <br>
 Expected outcome:
 ```
 Noted, I've removed this task: 
 [D] Task 1
 ```
-* **index** must be shown in the displayed task <code>list</code>
-* **index** must start from 1
+* <strong>index</strong> must be shown in the displayed task <code>list</code>
+* <strong>index</strong> must start from 1
 ### Locating a certain task: <code>find</code>
 Find all the tasks which contains the keyword that user has typed in. <br>
-Format: <code>find **keyword [more keyword]**</code> <br>
-Example of usage: <code>find **CS2113T oral**</code> <br>
+Format: <code>find <strong>keyword [more keyword]</strong></code> <br>
+Example of usage: <code>find <strong>CS2113T oral</strong></code> <br>
 Expected outcome:
 ```
 Here are the matching task/s in your list:
@@ -85,7 +85,7 @@ Here are the matching task/s in your list:
 * Order of keyword matter: <code>find john roe</code> is not equivalent to <code>find roe john</code>
 ### Exiting the program: <code>bye</code>
 Ends the Duke application.<br>
-Example of usage: <code>**bye**</code> <br>
+Example of usage: <code><strong>bye</strong></code> <br>
 ### Saving the task list
 * Duke automatically save the task list into the project folder directory under <code>/savedTasks.txt</code> <br>
 * Duke automatically loads the task list from previous session if the file <code>savedTasks.txt</code> exist
