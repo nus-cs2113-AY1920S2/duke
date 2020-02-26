@@ -14,6 +14,23 @@
 -[Find a task]
 -[Save to hard disk]
 
+- [Getting started with Markdown](#getting-started-with-markdown)
+- [Titles](#titles)
+- [Paragraph](#paragraph)
+- [List](#list)
+	- [List CheckBox](#list-checkbox)
+- [Link](#link)
+	- [Anchor links](#anchor-links)
+- [Blockquote](#blockquote)
+- [Image | GIF](#image--gif)
+- [Style Text](#style-text)
+	- [Italic](#italic)
+	- [Bold](#bold)
+	- [Strikethrough](#strikethrough)
+- [Code](#code)
+- [Email](#email)
+- [Table](#table)
+	
 
 ## Usage
 
