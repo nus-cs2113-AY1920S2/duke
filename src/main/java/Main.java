@@ -50,9 +50,7 @@ public class Main  {
         Command command;
         Scanner scanner = new Scanner(System.in);
         do {
-            //read in user input
             String userCommandText = scanner.nextLine();
-            //construct a command from user input
             command = new Parser().parseCommand(taskManager, userCommandText);
             executeCommand(command);
         } while (!ExitCommand.isExit(command));

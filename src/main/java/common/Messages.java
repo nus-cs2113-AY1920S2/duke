@@ -16,15 +16,18 @@ public class Messages {
     public static final char DEADLINE_TYPE = 'D';
     public static final char DONE = 'D';
     public static final char notDONE = 'N';
-    public static final String DIVIDER = "+----------------------------------------------------+";
-    public static final String MESSAGE_WELCOME = "  Hello! I'm Kuri\n  What can I do for you?";
-    public static final String MESSAGE_FAREWELL = "  Bye. Hope to see you again soon!";
+    public static final String DIVIDER = "----------------------------------------------------";
+    public static final String MESSAGE_SPLITTER = "=============================" +
+            "====================================================";
+    public static final String MESSAGE_WELCOME_1 = "Welcome to KURI Task Management System?";
+    public static final String MESSAGE_WELCOME_2 = "What can I do for you?";
+    public static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
     public static final String MESSAGE_TASK_NOT_IN_TASKLIST = "The Task could not be found in address book";
-    public static final String MESSAGE_TODO_LIST = "  %d. [Id:%d][%c][%c] %s";
-    public static final String MESSAGE_DEADLINE_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
-    public static final String MESSAGE_EVENT_LIST = "  %d. [Id:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_TODO_LIST = "%d. [Id:%d][%c][%c] %s";
+    public static final String MESSAGE_DEADLINE_LIST = "%d. [Id:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_EVENT_LIST = "%d. [Id:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "Error writing to file: %s";
     public static final String MESSAGE_DUPLICATE_TASK_ALERT = "This task is similar to task Index %d\nDo you want to add a duplicate task? Press Y to add and others to not add: ";
     public static final String MESSAGE_DUPLICATE_TASK_NOT_ADDED = "The duplicate task is not added!";
@@ -34,6 +37,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice!";
     public static final String MESSAGE_ALERT = "[ALERT!]";
     public static StringBuilder taskListMessage;
+    public static final String respondFormat = "===-             %-70s-===%n";
 
     /**
      * Print all tasks in the task list
@@ -126,9 +130,5 @@ public class Messages {
                 eventTask.getChar(),
                 eventTask.getTaskDescription(),
                 eventTask.getTaskStartTime());
-    }
-
-    public static void consumeLine(){
-        System.out.println("");
     }
 }

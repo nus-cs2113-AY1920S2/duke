@@ -132,7 +132,7 @@ public class Parser {
         case ACKNOWLEDGEMENT:
             return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
         default:
-            System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
+            TextUi.printDuplicateTaskNotAdded();
             return new ListCommand();
         }
     }
@@ -172,7 +172,7 @@ public class Parser {
                 return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
             }
         default:
-            System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
+            TextUi.printDuplicateTaskNotAdded();
             return new ListCommand();
         }
     }
@@ -214,7 +214,7 @@ public class Parser {
         case ACKNOWLEDGEMENT:
             return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
         default:
-            System.out.println(Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
+            TextUi.printDuplicateTaskNotAdded();
             return new ListCommand();
         }
     }
@@ -273,5 +273,4 @@ public class Parser {
         }
         return Integer.parseInt(args.substring(index));
     }
-
 }

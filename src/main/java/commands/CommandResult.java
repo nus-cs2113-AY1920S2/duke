@@ -4,7 +4,6 @@ import ui.TextUi;
 
 /** Display the execute result, by constructing a CommandResult object **/
 public class CommandResult {
-
     public final String feedbackToUser;
 
     /**

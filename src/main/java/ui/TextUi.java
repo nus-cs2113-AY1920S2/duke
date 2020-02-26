@@ -16,7 +16,9 @@ public class TextUi {
 
     public static final int DISPLAYED_INDEX_OFFSET = 1;
     public static final Ansi.Color SYSTEM_COLOR_MESSAGE = BLUE;
-    public static final Ansi.Color SYSTEM_COLOR_DIVIDER = GREEN;
+    public static final Ansi.Color SYSTEM_COLOR_RESPONSE = YELLOW;
+    public static final Ansi.Color SYSTEM_COLOR_DIVIDER = BLACK;
+    public static final Ansi.Color SYSTEM_COLOR_LOGO = MAGENTA;
     public static final Ansi.Color SYSTEM_COLOR_ALERT = RED;
 
 
@@ -24,7 +26,10 @@ public class TextUi {
     public static void showWelcomeMessage (){
         AnsiConsole.systemInstall();
         printDivider();
-        System.out.println( ansi().bold().fg(SYSTEM_COLOR_MESSAGE).a(Messages.MESSAGE_WELCOME).reset() );
+        System.out.print(String.format(Messages.respondFormat,
+                ansi().bold().fg(SYSTEM_COLOR_MESSAGE).a(Messages.MESSAGE_WELCOME_1).reset()) );
+        System.out.print(String.format(Messages.respondFormat,
+                ansi().bold().fg(SYSTEM_COLOR_MESSAGE).a(Messages.MESSAGE_WELCOME_2).reset()) );
         printDivider();
         AnsiConsole.systemUninstall();
     }
@@ -40,27 +45,24 @@ public class TextUi {
 
     //echo function, display user's input
     public static void showResult(String text) {
-        AnsiConsole.systemInstall();
-        ansi().reset();
         printDivider();
-        System.out.println( ansi().fg(SYSTEM_COLOR_MESSAGE).a(text).reset() );
+        printMessage(CYAN, text);
         printDivider();
-        AnsiConsole.systemUninstall();
     }
 
     public static void displayLogo() {
         AnsiConsole.systemInstall();
-        printMessage(SYSTEM_COLOR_MESSAGE,Messages.LOGO);
+        ansi().reset();
+        System.out.print(ansi().bold().fg(SYSTEM_COLOR_LOGO).a(Messages.LOGO).reset());
         printDivider();
         AnsiConsole.systemUninstall();
     }
 
     public static int getUserChoice() {
+        printDivider();
+        printMessage(SYSTEM_COLOR_RESPONSE, Messages.MESSAGE_ASK_TO_CHOOSE_UI);
+        printDivider();
         int userChoice;
-        AnsiConsole.systemInstall();
-        printDivider();
-        printMessage(SYSTEM_COLOR_MESSAGE, Messages.MESSAGE_ASK_TO_CHOOSE_UI);
-        printDivider();
         try {
             Scanner sc = new Scanner(System.in);
             userChoice = sc.nextInt();
@@ -80,10 +82,10 @@ public class TextUi {
     public static void acknowledgementUserChoice(int userChoice){
         switch (userChoice){
         case 1:
-            printMessage(SYSTEM_COLOR_MESSAGE, Messages.MESSAGE_THANKS_FOR_GUI);
+            printMessage(SYSTEM_COLOR_RESPONSE, Messages.MESSAGE_THANKS_FOR_GUI);
             break;
         case 2:
-            printMessage(SYSTEM_COLOR_MESSAGE, Messages.MESSAGE_THANKS_FOR_CLI);
+            printMessage(SYSTEM_COLOR_RESPONSE, Messages.MESSAGE_THANKS_FOR_CLI);
             break;
         }
     }
@@ -92,7 +94,17 @@ public class TextUi {
      * print a divider
      */
     public static void printDivider(){
-        System.out.println( ansi().bold().fg(SYSTEM_COLOR_DIVIDER).a(Messages.DIVIDER).reset() );
+        System.out.println( ansi().bold().fg(SYSTEM_COLOR_DIVIDER).a(Messages.MESSAGE_SPLITTER).reset() );
+    }
+
+    public static void alertToAddDuplicateTask(Task toCheck){
+        printAlert();
+        printMessage(SYSTEM_COLOR_MESSAGE,
+                String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
+    }
+
+    public static void printDuplicateTaskNotAdded(){
+        printMessage(SYSTEM_COLOR_MESSAGE, Messages.MESSAGE_DUPLICATE_TASK_NOT_ADDED);
     }
 
     /**
@@ -104,23 +116,19 @@ public class TextUi {
         AnsiConsole.systemUninstall();
     }
 
-    public static void alertToAddDuplicateTask(Task toCheck){
-        AnsiConsole.systemInstall();
-        printAlert();
-        printMessage(SYSTEM_COLOR_MESSAGE,
-                String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
-        AnsiConsole.systemUninstall();
-    }
-
     public static void printAlert(){
         AnsiConsole.systemInstall();
-        System.out.print( ansi().bold().fg(SYSTEM_COLOR_ALERT).a(Messages.MESSAGE_ALERT).reset() );
+        ansi().reset();
+        System.out.print(String.format(Messages.respondFormat,
+                ansi().bold().fg(SYSTEM_COLOR_ALERT).a(Messages.MESSAGE_ALERT).reset()) );
         AnsiConsole.systemUninstall();
     }
 
     public static void printMessage(Ansi.Color color, String message){
         AnsiConsole.systemInstall();
-        System.out.println(ansi().fg(color).a(message).reset() );
+        ansi().reset();
+        System.out.print(String.format(Messages.respondFormat,
+                ansi().bold().fg(color).a(message).reset()));
         AnsiConsole.systemUninstall();
     }
 }
