@@ -3,14 +3,14 @@ Nyan chat bot allows users to take down their notes.
 
 # Table of Contents
 
-- [Requirements]()
-- [Features]()
+- [Requirements](https://github.com/NyanWunPaing/duke/tree/master/docs#requirements)
+- [Features](https://github.com/NyanWunPaing/duke/tree/master/docs#features)
     
-    - [Add a new task]()
-    - [Find your tasks]()
-    - [Remove a task in the list]()
-    - [List all tasks]()
-    - [Mark tasks as done]()
+    - [Add a new task](https://github.com/NyanWunPaing/duke/tree/master/docs#add-a-new-task)
+    - [Find your tasks](https://github.com/NyanWunPaing/duke/tree/master/docs#find-your-tasks)
+    - [Remove a task in the list](https://github.com/NyanWunPaing/duke/tree/master/docs#remove-a-task-in-the-list)
+    - [List all tasks](https://github.com/NyanWunPaing/duke/tree/master/docs#list-all-tasks)
+    - [Mark tasks as done](https://github.com/NyanWunPaing/duke/tree/master/docs#marks-tasks-as-done)
 
 # Requirements 
 Java 11 or later.
