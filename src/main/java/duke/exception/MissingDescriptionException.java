@@ -1,4 +1,4 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
  * The custom exception thrown when the task is missing information in the description field

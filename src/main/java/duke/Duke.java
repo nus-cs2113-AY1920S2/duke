@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.Exception.*;
+import duke.exception.*;
 
 
 import java.time.DateTimeException;
@@ -62,24 +62,20 @@ public class Duke {
      * @see Command#execute
      */
     private void runDukeTillExit() {
-        String userInput = ui.getUserInput();
+        String userInput = ui.getUserInput().trim();
         Command command;
-        while (parser.isNotBye(userInput)) {
+        while (parser.checkIsNotBye(userInput)) {
             try {
                 command = parser.parseUserInput(userInput);
                 command.execute(tasks);
-            } catch (InvalidTaskException
-                    | MissingDescriptionException
-                    | MissingNumberFieldException
-                    | MissingTimeFieldException
-                    | NumberFormatException
-                    | DateTimeException
-                    | IndexOutOfBoundsException
-                    | MissingSlashWordException m) {
+            } catch (InvalidTaskException | MissingDescriptionException | MissingNumberFieldException
+                    | MissingTimeFieldException | NumberFormatException | DateTimeException | IndexOutOfBoundsException
+                    | MissingSlashWordException | WrongSlashWordException m) {
+                Ui.displayLineSeparator();
                 Ui.displayExceptionError(m);
             }
             Ui.displayPrompt();
-            userInput = ui.getUserInput();
+            userInput = ui.getUserInput().trim();
         }
     }
 

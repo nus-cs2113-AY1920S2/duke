@@ -1,4 +1,4 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
  * The custom exception thrown when no slash word is given despite expecting it

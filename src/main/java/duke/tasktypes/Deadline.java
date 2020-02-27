@@ -1,20 +1,20 @@
-package Duke.TaskTypes;
+package duke.tasktypes;
 
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The <code>EVENT</code> type class
+ * The <code>DEADLINE</code> type class
  * @see Task
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected String by;
     protected LocalDate actualTime;
     protected String slashWord;
 
-    public Event(String description, String by) {
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
         if (!this.by.equals("")) {
@@ -28,33 +28,34 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (by.equals("")) {
-            return "[E]" + super.toString();
+            return "[D]" + super.toString();
         }
-        return "[E]" + super.toString() + "(" + this.slashWord + ": " +
+        String[] bySplit = by.split(" ", 2);
+        return "[D]" + super.toString() + "(" + this.slashWord + ": " +
                 this.actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
-     * Gets the <code>EVENT</code> information stored nicely in a <code>String[]</code> array
+     * Gets the <code>DEADLINE</code> information stored nicely in a <code>String[]</code> array
      * <p></p>
      * <p>
-     * Used in the {@link Duke.Storage} class for retrieving the <code>EVENT</code> task's information to store it as
+     * Used in the {@link duke.Storage} class for retrieving the <code>DEADLINE</code> task's information to store it as
      * offline saved data
      * </p>
      * @return a <code>String[]</code> array containing the description, the time and whether the event is done
-     * @see Duke.Storage#save
+     * @see duke.Storage#save
      */
     @Override
     public String[] getTaskInfo() {
         String[] taskInfoArray = new String[4];
-        taskInfoArray[0] = "E";
+        taskInfoArray[0] = "D";
         if (super.isDone) {
             taskInfoArray[1] = "1";
         } else {
             taskInfoArray[1] = "0";
         }
         taskInfoArray[2] = super.description;
-        taskInfoArray[3] = by;
+        taskInfoArray[3] = this.slashWord + " " +  this.actualTime;
         return taskInfoArray;
 
     }

@@ -1,4 +1,7 @@
-D | 0 | makesure | at 2018-12-19
-E | 0 | makesure | by 1996-12-19
-T | 1 | finally | kek 1915-02-19
-D | 0 | asdasdsad | at 2020-12-19
+T | 1 | make list | 
+D | 1 | english homework | by 2020-11-14
+T | 1 | go polyclinic | 
+T | 0 | go visit friends | 
+E | 0 | group project | at 2020-09-14
+E | 0 | sports meeting | on 2019-11-13
+T | 0 | buy chocolate | 

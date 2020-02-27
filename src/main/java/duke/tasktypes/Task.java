@@ -1,6 +1,4 @@
-package Duke.TaskTypes;
-
-import java.util.ArrayList;
+package duke.tasktypes;
 
 /**
  * The superclass of all the possible tasks that is stored in duke
@@ -21,7 +19,7 @@ public abstract class Task {
      * This method gets overridden by its subclass. It returns the task's information in a nicely packaged
      * <code>String[]</code> data structure that can be easily used
      * <p></p>
-     * <p>Used by the {@link Duke.Storage} <code>save()</code> function to save the task into the offline saved
+     * <p>Used by the {@link duke.Storage} <code>save()</code> function to save the task into the offline saved
      * data</p>
      * <p></p>
      * <p>See the respective subclasses for more details</p>
@@ -29,7 +27,7 @@ public abstract class Task {
      * @see Todo
      * @see Event
      * @see Deadline
-     * @see Duke.Storage#save
+     * @see duke.Storage#save
      */
     public abstract String[] getTaskInfo();
 

@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
-import Duke.TaskTypes.Deadline;
-import Duke.TaskTypes.Event;
-import Duke.TaskTypes.Task;
-import Duke.TaskTypes.Todo;
+import duke.tasktypes.Deadline;
+import duke.tasktypes.Event;
+import duke.tasktypes.Task;
+import duke.tasktypes.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,13 +16,14 @@ import java.util.ArrayList;
 public class Command {
 
     public static final String FIND = "find";
+    public static final String DELETE_UPPERCASE = "DELETE";
+    public static final String DONE_UPPERCASE = "DONE";
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String LIST = "list";
     private static final String DONE = "done";
     private static final String DELETE = "delete";
-
     private String typeOfCommand;
     private String descriptionOfCommand;
     private String timeOfCommand;
@@ -109,8 +110,10 @@ public class Command {
      * Execute the actual user command. Need the list of task to modify the task in the task list (either
      * add/delete/update tasks) and to update the task list after the task is done
      * @param tasks list of Task
-     * @throws NumberFormatException exception only thrown for the DONE and DELETE if task number provided is not an
-     *                               integer
+     * @throws NumberFormatException     exception only thrown for <code>DONE</code> and <code>DELETE</code> if task
+     *                                   number provided is not an integer
+     * @throws IndexOutOfBoundsException exception only thrown for <code>DONE</code> and <code>DELETE</code> if task
+     *                                   number chosen is out of range
      * @see TaskList
      */
     public void execute(TaskList tasks) throws NumberFormatException, IndexOutOfBoundsException {
@@ -131,6 +134,7 @@ public class Command {
             break;
         case FIND:
             findTask(tasks);
+            break;
         default:
             break;
         }
@@ -148,7 +152,7 @@ public class Command {
         Task newTask = null;
         switch (typeOfCommand.toLowerCase()) {
         case TODO:
-            newTask = new Todo(descriptionOfCommand, timeOfCommand);
+            newTask = new Todo(descriptionOfCommand);
             break;
         case DEADLINE:
             newTask = new Deadline(descriptionOfCommand, timeOfCommand);
@@ -172,14 +176,16 @@ public class Command {
      */
     private void displayList(TaskList tasks) {
         int numberOfTasks = tasks.getNumberOfTask();
-        if (numberOfTasks > 0) {
-            for (int i = 0; i < numberOfTasks; i++) {
-                Ui.displayEachTask(i, tasks);
-            }
-        } else if (numberOfTasks == 0) {
-            System.out.println("Nothing yet");
+        if (numberOfTasks == 0) {
+            Ui.displayNothingInList();
+            return;
+        }
+        Ui.displayStartOfList();
+        for (int i = 0; i < numberOfTasks; i++) {
+            Ui.displayEachTask(i, tasks);
         }
     }
+
 
     /**
      * This method marks a {@link Task} object (as chosen by its task number) in the {@link TaskList} list as "done". If
@@ -191,7 +197,8 @@ public class Command {
      * </p>
      * @param tasks      the list of tasks
      * @param taskNumber the task number of the task to be marked as done
-     * @throws NumberFormatException the exception thrown when the task number given is not a number
+     * @throws NumberFormatException     the exception thrown when the task number given is not a number
+     * @throws IndexOutOfBoundsException the exception thrown when there is no task corresponding to task number
      * @see TaskList
      * @see NumberFormatException
      * @see IndexOutOfBoundsException
@@ -203,9 +210,9 @@ public class Command {
             tasks.markTaskAsDone(taskListNumber - 1);
             Ui.displayTaskMarkedAsDone(tasks, taskListNumber);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Done number field is not a number!");
+            throw new NumberFormatException(Ui.displayInputNotANumber(DONE_UPPERCASE));
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Task number chosen is out of range!");
+            throw new IndexOutOfBoundsException(Ui.displayTaskNumberOutOfRange());
         }
     }
 
@@ -220,7 +227,8 @@ public class Command {
      * </p>
      * @param taskList   the list of tasks
      * @param taskNumber the task number of the task to be deleted
-     * @throws NumberFormatException the exception thrown when the task number chosen is not a number
+     * @throws NumberFormatException     the exception thrown when the task number chosen is not a number
+     * @throws IndexOutOfBoundsException the exception thrown when there is no task corresponding to task number
      * @see TaskList
      * @see NumberFormatException
      * @see IndexOutOfBoundsException
@@ -238,9 +246,9 @@ public class Command {
             Ui.displayTaskRemoved(removedTask, currentNumberOfTasks);
 
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Delete number field is not a number!");
+            throw new NumberFormatException(Ui.displayInputNotANumber(DELETE_UPPERCASE));
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Task number chosen is out of range!");
+            throw new IndexOutOfBoundsException(Ui.displayTaskNumberOutOfRange());
         }
     }
 

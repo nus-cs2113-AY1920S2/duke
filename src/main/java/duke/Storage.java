@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
-import Duke.TaskTypes.Deadline;
-import Duke.TaskTypes.Event;
-import Duke.TaskTypes.Task;
-import Duke.TaskTypes.Todo;
+import duke.tasktypes.Deadline;
+import duke.tasktypes.Event;
+import duke.tasktypes.Task;
+import duke.tasktypes.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,6 +26,10 @@ public class Storage {
     public static final int SAVED_TIME = 3;
     public static final String ERROR_IN_WRITING_FILE = ": Error in writing file!";
     public static final String FILE_NOT_FOUND = ": File not found!";
+    public static final String SAVED_TXT_PATH = "data/duke.txt";
+    public static final String DIRECTORY_NAME = "data";
+    public static final String ONE = "1";
+    public static final String EMPTY = "";
     private static final int DESCRIPTION = 2;
     private static final int TIME = 3;
     private static final String T = "T";
@@ -78,25 +82,25 @@ public class Storage {
      */
     public void save(ArrayList<Task> taskList, int numberOfTasks) {
 
-        Path directoryPath = Paths.get("data");
+        Path directoryPath = Paths.get(DIRECTORY_NAME);
         boolean isFileExists = Files.exists(directoryPath);
 
         /* If there is no previous saved data, create the directory to store the saved data text file first before
         doing the actual saving of data */
         if (!isFileExists) {
-            File directory = new File("data");
+            File directory = new File(DIRECTORY_NAME);
             directory.mkdir();
         }
 
         /* The actual writing of the task into the saved file */
-        File f = new File("data/duke.txt");
+        File f = new File(SAVED_TXT_PATH);
         try {
             FileWriter fw = new FileWriter(f);
 
             /* If the task list is empty, the saved data will not contain anything in it. Hence, filewriter will just
              write a "" to the file */
             if (numberOfTasks == 0) {
-                fw.write("");
+                fw.write(EMPTY);
             }
 
             /* Loop through the array list and store the tasks into the task list itself */
@@ -154,7 +158,7 @@ public class Storage {
         if (obtainedLine.length == 4 && !obtainedLine[3].equals(" ")) {
             splitTaskDescriptionArray[TIME] = obtainedLine[3].trim();
         } else {
-            splitTaskDescriptionArray[TIME] = "";
+            splitTaskDescriptionArray[TIME] = EMPTY;
         }
         return splitTaskDescriptionArray;
     }
@@ -169,7 +173,7 @@ public class Storage {
         Task newTask;
         switch (splitTaskDescriptionArray[FIRST_LETTER_OF_TASK_TYPE]) {
         case T:
-            newTask = new Todo(splitTaskDescriptionArray[DESCRIPTION], splitTaskDescriptionArray[TIME]);
+            newTask = new Todo(splitTaskDescriptionArray[DESCRIPTION]);
             checkIfTaskDone(newTask, splitTaskDescriptionArray[IS_TASK_DONE]);
             taskList.add(newTask);
             break;
@@ -184,9 +188,21 @@ public class Storage {
             taskList.add(newTask);
             break;
         default:
-            Ui.displayErrorImportingTask(splitTaskDescriptionArray[FIRST_LETTER_OF_TASK_TYPE]);
+            String tempMessage = formatTaskToBeDisplayed(splitTaskDescriptionArray);
+            Ui.displayErrorImportingTask(tempMessage);
             break;
         }
+    }
+
+    /**
+     * Help to format the task which produced the error
+     * @param splitTaskDescriptionArray the array that contains the split erroneous task
+     * @return the string that can be used by the {@link Ui} class to display error importing task
+     * @see Ui#displayErrorImportingTask
+     */
+    private String formatTaskToBeDisplayed(String[] splitTaskDescriptionArray) {
+        return splitTaskDescriptionArray[FIRST_LETTER_OF_TASK_TYPE] + " | " +
+                splitTaskDescriptionArray[DESCRIPTION];
     }
 
     /**
@@ -196,7 +212,7 @@ public class Storage {
      * @see Task#markAsDone
      */
     private void checkIfTaskDone(Task newTask, String s) {
-        if (s.equals("1")) {
+        if (s.equals(ONE)) {
             newTask.markAsDone();
         }
     }
