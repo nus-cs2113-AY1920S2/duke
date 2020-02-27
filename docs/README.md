@@ -68,25 +68,25 @@ Noted: If the users input a time in the format of `yyyy-mm-dd`, Duke can recogni
 
 ### 2.2 Mark Tasks As `Done`
 
-Users can mark a task as done with the index of a task when they finish it.\
+Users can mark a task as done with the index of a task when they finish it.
 
 Format: ​`done TASK_INDEX`
 
 ### 2.3 `Delete` Tasks
 
-Users can delete a task as done with the index of a task when they finish it.\
+Users can delete a task as done with the index of a task when they finish it.
 
 Format: ​`delete TASK_INDEX`
 
 ### 2.4 `List` Tasks
 
-Users can list all the tasks in the task list when they need to look through it.\
+Users can list all the tasks in the task list when they need to look through it.
 
 Format: ​`list`
 
 ### 2.5 `Find` Tasks
 
-Users can find all the tasks which contains a certain keyword(Case sensitive).\
+Users can find all the tasks which contains a certain keyword(Case sensitive).
 
 Format: ​`find KEYWORD`
 
