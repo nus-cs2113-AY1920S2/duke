@@ -22,6 +22,7 @@ manages the list of Tasks, refer to the *Features* section below.
 	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Jar-Test/duke.jar) for Jar file)
 * Navigate through command prompt to the directory that the Jar 
   file has been downloaded into.
+* Ensure the encoding in your terminal allows for UTF8 characters to be printed.
 * Type {java -jar duke.jar} to start using *Nini*
 
 ## FAQ 
@@ -31,6 +32,9 @@ manages the list of Tasks, refer to the *Features* section below.
 	Ensure that the data folder is under the same directory as the Jar file. <br/>
 	Example: <br/>
 	![Capture](Capture.PNG)
+1. __The status for the Task is shown as question mark__
+	Copy the command within the braces and run the Jar file accordingly : <br/>
+	{java -Dfile.encoding=UTF8 -jar duke.jar}
 
 
 ## Features 
