@@ -39,7 +39,7 @@ Words enclosed by `<` and `>` are parameters that are supplied by you.
 1. Extract the jar folder into an empty folder
 2. Enter your preferred terminal and move to the location of the folder
 3. Run the Command-Line interface(CLI) with `java -jar Duke.jar` in your terminal
-![Setting up Duke](images/startup.png)
+![Setting up Duke](images/startup.PNG)
 
 ## Usage
 #### <a id="deadline"></a> `deadline` - Adds a Deadline Task to your Task List
