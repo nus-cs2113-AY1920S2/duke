@@ -1,4 +1,7 @@
 package Duke;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public abstract class Task {
 
@@ -6,24 +9,36 @@ public abstract class Task {
     public static final String CROSS = "✘";
 
     protected String description;
-    protected String date;
+    //protected String date;
+    protected LocalDate date;
     protected boolean isDone;
+    protected String time;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     public Task(String description) {
         this.description = description;
-        this.date = "";
+        this.date = null;
         this.isDone = false;
+        this.time = "";
     }
 
-    public Task(String description, String date) {
+    public Task(String description, String date, String time) {
         this.description = description;
-        this.date = date;
+        this.date = LocalDate.parse(date, formatter);
         this.isDone = false;
+        this.time = time;
     }
 
     public String getDate() {
-        return date;
+        return date.toString();
     }
+
+    public String getTime() {
+        return time;
+    }
+
     public boolean getStatus() {
         return isDone;
     }

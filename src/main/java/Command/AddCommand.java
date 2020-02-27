@@ -1,5 +1,6 @@
 package Command;
 
+import Exceptions.MissingParameterException;
 import Exceptions.NoParameterException;
 import Storage.Storage;
 import Task.TaskList;
@@ -42,6 +43,8 @@ public class AddCommand extends Command {
 
         } catch (NoParameterException e) {
             System.out.println("Missing parameters");
+        } catch (MissingParameterException e) {
+            System.out.println("Missing Date or Time field");
         }
     }
 }
