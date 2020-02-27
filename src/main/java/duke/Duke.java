@@ -5,16 +5,32 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import javax.sql.rowset.serial.SerialStruct;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Scanner;
 
 public class Duke {
     private static final String STANDARD_SEPARATOR = "____________________________________________________________";
     private static final String SHANNON = "Shannon";
+    public static final String filePath = "duke.txt";
+    private static final String ioErrorMessage = " OOPS!! There is an error in input or output";
+    private static final String unknownCommandMessage = " OOPS!!! I'm sorry, but I don't know what that means :-(";
+
     private static Task[] listOfTasks = new Task[100]; // array of tasks that is <=100
     private static int sizeOfList = 0; // number of items in the list
 
     public static void main(String[] args) {
         printWelcomeMessage();
+        try {
+            addExistingList();
+        } catch (IOException e) {
+            System.out.println(ioErrorMessage);
+        }
+
 
         // Reads in the first command from the user
         Scanner scanner = new Scanner(System.in);
@@ -23,39 +39,113 @@ public class Duke {
 
         while (!inputCommand.contains("bye")) {
             if (inputCommand.contains("lis")) {
-                // prints out the list
-                printsOutTheList();
-
+                printsOutTheList(); // prints out the list
             } else if (inputCommand.contains("don")) {
-                // marks task in the stated index as done
-                indicateTaskAsDone(inputLine);
+                indicateTaskAsDone(inputLine); // marks task in the stated index as done
 
             } else {
-
                 try {
                     addInNewTask(inputLine);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(STANDARD_SEPARATOR);
-                    System.out.println("\u2639 OOPS!!! The description of a " + inputLine + " cannot be empty.");
+                    System.out.println("OOPS!!! The details of a " + inputLine + " cannot be empty.");
                     System.out.println(STANDARD_SEPARATOR);
                 } catch (DukeException e) {
                     System.out.println(STANDARD_SEPARATOR);
-                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(unknownCommandMessage);
                     System.out.println(STANDARD_SEPARATOR);
                 }
-                // adds a new task into the list
-                //addInNewTask(inputLine);
 
             }
             // take in the next command
-
             inputLine = scanner.nextLine();
             inputCommand = inputLine.substring(0, 3);
+        }
+
+        try {
+            File f = new File(filePath);
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            writeToFile("");
+            for (int i = 0; i < sizeOfList; i++) {
+                String currentListLine = listOfTasks[i].toString();
+                String typeOfTask = currentListLine.substring(1, 2);
+                String markedOrUnmarked = listOfTasks[i].getStatusIcon(); //currentListLine.substring(4, 5);
+                String description = listOfTasks[i].getDescription();
+                String extra = listOfTasks[i].getExtra();
+                String textToAppend;
+                if (extra == null) {
+                    textToAppend = typeOfTask + " | " + markedOrUnmarked + " | " + description;
+                } else {
+                    textToAppend = typeOfTask + " | " + markedOrUnmarked + " | " + description + " | " + extra;
+                }
+
+                appendToFile(textToAppend + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.out.println(ioErrorMessage);
         }
 
         printExitMessage();
     }
 
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    private static void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+
+
+    /**
+     * Adds the items in the existing list in
+     * the file to system so that changes can
+     * be made to existing list
+     * @throws IOException
+     */
+    private static void addExistingList() throws IOException {
+        File f = new File(filePath);
+        if (!f.exists()) {
+            // when file does not exist in the first place
+            f.createNewFile();
+        }
+        // now file exists
+        Scanner scan = new Scanner(f);
+        while (scan.hasNext()) {
+            String lineInList = scan.nextLine();
+            String[] itemInLine = lineInList.split(" \\| ");
+            System.out.println(lineInList);
+
+            if (itemInLine[0].contains("T")) {
+                //System.out.println(itemInLine[2]);
+                Todo newTodo = new Todo(itemInLine[2]);
+                listOfTasks[sizeOfList] = newTodo;
+                if (itemInLine[1].contains("1")) { listOfTasks[sizeOfList].markAsDone(); }
+                sizeOfList++;
+
+            } else if (itemInLine[0].contains("D")) {
+                //System.out.println(itemInLine);
+                Deadline newDeadline = new Deadline(itemInLine[2], itemInLine[3]);
+                listOfTasks[sizeOfList] = newDeadline;
+                if (itemInLine[1].contains("1")) { listOfTasks[sizeOfList].markAsDone(); }
+                sizeOfList++;
+
+            } else {
+                Event newEvent = new Event(itemInLine[2], itemInLine[3]);
+                listOfTasks[sizeOfList] = newEvent;
+                if (itemInLine[1].contains("1")) { listOfTasks[sizeOfList].markAsDone(); }
+                sizeOfList++;
+
+            }
+        }
+    }
 
 
     /**
@@ -68,14 +158,12 @@ public class Duke {
     }
 
 
-
     /**
      * Differentiates task and adds into array
      *
      * @param inputLine name of the task to add
      */
     private static void addInNewTask(String inputLine) throws DukeException {
-
         String inputCommand = inputLine.substring(0, 4);
 
         if (inputCommand.contains("todo")) {
@@ -90,7 +178,7 @@ public class Duke {
             }
             addDeadline(inputLine);
 
-        } else if (inputCommand.contains("even")){
+        } else if (inputCommand.contains("even")) {
             if (inputLine.equals("event")) {
                 throw new IndexOutOfBoundsException();
             }
@@ -104,11 +192,10 @@ public class Duke {
         // informs user that task has been added to list
         System.out.println(STANDARD_SEPARATOR);
         System.out.println(" Got it. I've added this task:");
-        System.out.println("  " + listOfTasks[sizeOfList-1].toString());
+        System.out.println("  " + listOfTasks[sizeOfList - 1].toString());
         System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         System.out.println(STANDARD_SEPARATOR);
     }
-
 
 
     /**
@@ -130,7 +217,6 @@ public class Duke {
     }
 
 
-
     /**
      * Adds in new Deadline to the array,
      *
@@ -148,7 +234,6 @@ public class Duke {
         listOfTasks[sizeOfList] = newDeadline;
         sizeOfList++;
     }
-
 
 
     /**
@@ -183,10 +268,8 @@ public class Duke {
     }
 
 
-
     /**
      * Prints out the entire list
-     *
      */
     private static void printsOutTheList() {
         System.out.println(STANDARD_SEPARATOR);
@@ -197,7 +280,6 @@ public class Duke {
         }
         System.out.println(STANDARD_SEPARATOR);
     }
-
 
 
     /**

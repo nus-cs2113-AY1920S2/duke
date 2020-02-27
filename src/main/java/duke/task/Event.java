@@ -15,6 +15,12 @@ public class Event extends Task {
         this.at = at;
     }
 
+
+    @Override
+    public String getExtra() {
+        return at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
