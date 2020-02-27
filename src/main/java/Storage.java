@@ -6,10 +6,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-/*
-Deals with loading tasks from the file and saving tasks in the file
- */
+//TODO: Possibility of further abstraction
 
+/**
+ * <h1>Storage</h1>
+ * The Storage class deals with saving and loading the task list to/from
+ * the preset file
+ */
 public class Storage  {
 
     String dir = System.getProperty("user.dir");
@@ -17,6 +20,15 @@ public class Storage  {
     String filepathStr  = String.valueOf(filepath);;
     File dukeFile = new File(filepathStr);
 
+    /**
+     * Attempts to load a preexisting task list from the preset file.
+     * If the file is not found, the file is created and a new ArrayList is created
+     * Else, the preexisting task list is loaded into Duke
+     * @return the preexising task list, or a new (clean) task list
+     * @throws DukeException of IOException if the file cannot be created
+     * @throws DukeException of IOException if the file cannot be read
+     * @throws DukeException of ClassNotFoundException if the saved class type cannot be identified
+     */
     public ArrayList<Task> loadDuke() throws DukeException {
         ArrayList<Task> loadTasks = new ArrayList<>();
         if(!dukeFile.exists()) {
@@ -44,16 +56,17 @@ public class Storage  {
         return loadTasks;
     }
 
+    /**
+     * Saves the current task list to the preset file
+     * @param saveTasks the current TaskList
+     * @throws DukeException of IOException if the task list cannot be saved
+     */
     public void saveDuke(TaskList saveTasks) throws DukeException {
         try{
-            // File stream to write to file
             FileOutputStream fileWrite = new FileOutputStream(dukeFile);
-            // Object stream to be write object to file stream
             ObjectOutputStream objWrite = new ObjectOutputStream(fileWrite);
 
-            // write the ArrayList into the file
             objWrite.writeObject(saveTasks.getTaskList());
-
             objWrite.flush();
             objWrite.close();
         }
