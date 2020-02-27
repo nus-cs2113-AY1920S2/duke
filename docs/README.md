@@ -22,7 +22,7 @@ Use a keyword to find tasks that include the keyword in their task description.
 
 ## Usage
 
-### `todo` - add a Todo task to the list
+### `todo [taskName]`
 
 Adds a task of type 'Todo' to the task list.
 
@@ -38,7 +38,7 @@ Expected outcome:
 	 1 task(s) in the list now!
     ...................................................
 
-### `event` - add an Event task to the list
+### `event [taskName] /at [timeFrame]`
 
 Adds a task of type 'Event' to the task list. Use /at to specify event date or time.
 
@@ -54,7 +54,7 @@ Expected outcome:
 	 2 task(s) in the list now!
     ...................................................
     
-### `deadline` - add a Deadline task to the list
+### `deadline [taskName] /by [deadline]`
 
 Adds a task of type 'Deadline' to the task list. Use /by to specify the deadline.
 Input deadline in format YYYY-MM-DD for Dook to recognise and print the date in MMM DD YYYY style.
@@ -71,7 +71,7 @@ Expected outcome:
 	 3 task(s) in the list now!
     ...................................................
     
-### `list` - list all existing tasks
+### `list`
 
  Shows a numbered list of all existing tasks, with their descriptions and completion statuses.
 
@@ -88,9 +88,9 @@ Expected outcome:
 	 3. [D][✘] homework  (by: Feb 26 2020)
     ...................................................
     
-### `done` - mark a task as done
+### `done [n]`
 
-Set a task's completion status to done.
+Sets the nth task in the current list to done.
 
 Example of usage: 
 
@@ -103,9 +103,9 @@ Expected outcome:
 	   [T][✓] complete individual project
     ...................................................
     
-### `delete` - remove a task from the list
+### `delete [n]`
 
-Removes an existing task from the task list.
+Removes the nth existing task from the task list.
 
 Example of usage: 
 
@@ -119,7 +119,7 @@ Expected outcome:
 	 2 task(s) remaining.
     ...................................................
     
-### `find` - find matching tasks
+### `find [keyword]`
 
 Finds and shows tasks which contain the matching keyword.
 
@@ -134,7 +134,7 @@ Expected outcome:
 	  1. [E][✘] party  (at: 1800-2200h)
     ...................................................
     
-### `bye` - exit the program
+### `bye`
 
 Exits Dook. All existing tasks are saved in a .txt file and restored upon startup.
 
