@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
 
+/**
+ * A class to store all the tasks and perform operations to/on the list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private String filePath;
@@ -37,6 +40,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a task to the list of tasks
+     * @param newTask the task to be added
+     */
     public void addTask(Task newTask) {
         tasks.add(newTask);
         String message = "Added this task:" + System.lineSeparator() + newTask.toString() + System.lineSeparator() +
@@ -44,6 +51,9 @@ public class TaskList {
         Ui.printPretty(message);
     }
 
+    /**
+     * Print a list of all the tasks
+     */
     public void listTasks() {
         String message = "These are your tasks:" + System.lineSeparator();
         for (int i = 0; i < tasks.size(); i++) {
@@ -53,6 +63,11 @@ public class TaskList {
         Ui.printPretty(message);
     }
 
+    /**
+     * Delete a task specified by <code>taskIndex</code>
+     * @param taskIndex the index of the task to be deleted
+     * @throws BadTaskChoiceFormatException if <code>taskIndex</code> is out of bounds of the list of tasks
+     */
     public void deleteTask(int taskIndex) throws BadTaskChoiceFormatException {
         if (taskIndex > tasks.size() - 1 || taskIndex < 0) {
             throw new BadTaskChoiceFormatException("Task number is invalid");
@@ -64,6 +79,11 @@ public class TaskList {
                 + tasks.size() + " tasks left in your list");
     }
 
+    /**
+     * Mark a task specified by <code>taskIndex</code> as done
+     * @param taskIndex the index of the task to be marked as done
+     * @throws BadTaskChoiceFormatException if <code>taskIndex</code> is out of bounds of the list of tasks
+     */
     public void markAsDone(int taskIndex) throws BadTaskChoiceFormatException {
         if (taskIndex > tasks.size() - 1 || taskIndex < 0) {
             throw new BadTaskChoiceFormatException("Task number is invalid");
@@ -74,6 +94,9 @@ public class TaskList {
         Ui.printPretty("Task " + (taskIndex + 1) + " has been marked as done\n" + task.toString());
     }
 
+    /**
+     * Save the list of tasks to file
+     */
     public void writeTasksToFile() {
         try {
             Storage.saveToFile(filePath, getFormattedTasks());
@@ -83,7 +106,11 @@ public class TaskList {
         }
     }
 
-    protected String getFormattedTasks() {
+    /**
+     * Convert the list of tasks as a formatted string so that it can be saved
+     * @return a string compliant with the format for saving to file
+     */
+    private String getFormattedTasks() {
         String formattedTasks = "";
         for (Task t : tasks) {
             formattedTasks += t.toFormattedString() + System.lineSeparator();
@@ -91,7 +118,12 @@ public class TaskList {
         return formattedTasks;
     }
 
-    protected void readFileToTasks(ArrayList<String> fileContents) throws BadFileFormatException {
+    /**
+     * Populate the tasks list with contents from file
+     * @param fileContents file contents split line by line
+     * @throws BadFileFormatException if the file was not formatted correctly
+     */
+    private void readFileToTasks(ArrayList<String> fileContents) throws BadFileFormatException {
         int lineCounter = 1;
         String errors = "";
 

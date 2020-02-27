@@ -6,6 +6,10 @@ import duke.tasks.Event;
 
 import java.util.Arrays;
 
+/**
+ * Class for an event command that error checks user's input and can be executed to add the task to the
+ * <code>TaskList</code>
+ */
 public class EventCommand extends Command {
     public static final String EXAMPLE_USAGE = "event math class /at Monday 8am-10am";
     public static final String KEYWORD = "event";
@@ -36,6 +40,9 @@ public class EventCommand extends Command {
         event = new Event(description, startEndDateTime);
     }
 
+    /**
+     * Adds the event task to the referenced <code>TaskList</code>
+     */
     public void execute() {
         taskList.addTask(event);
     }

@@ -4,6 +4,10 @@ import duke.exceptions.BadLineFormatException;
 import duke.exceptions.BadTaskChoiceFormatException;
 import duke.tasklist.TaskList;
 
+/**
+ * Abstract class that extends regular Command class. Used for commands that need to specify a task number
+ * e.g. delete, done
+ */
 public abstract class TaskSelectionCommand extends Command {
     public TaskSelectionCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
         super(keyword, tokens, taskList);
@@ -14,6 +18,11 @@ public abstract class TaskSelectionCommand extends Command {
         }
     }
 
+    /**
+     * Get the index in taskList based on user input
+     * @return index into taskList parsed from user input
+     * @throws BadTaskChoiceFormatException if the user inputs something NaN as a task number
+     */
     protected int getTaskIndex() throws BadTaskChoiceFormatException {
         try {
             return Integer.parseInt(tokens[1]) - 1;

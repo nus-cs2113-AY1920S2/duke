@@ -2,6 +2,9 @@ package duke.tasks;
 
 import duke.exceptions.BadLineFormatException;
 
+/**
+ * Abstract class to represent a task
+ */
 public abstract class Task {
     protected boolean isDone;
     protected String description;
@@ -11,21 +14,41 @@ public abstract class Task {
         setIsDone(false);
     }
 
-    // getStatusIcon() is from the website
+    /**
+     * @return Tick mark or X based on completion status of this task
+     */
     protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Set the description
+     * @param description new description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Set whether this task is done
+     * @param isDone new done status
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
 
+    /**
+     * get the string representation of this task
+     * @return string representation of this task
+     */
     public abstract String toFormattedString();
 
+    /**
+     * static method to get correct task given a line read from file
+     * @param line line that is read from file
+     * @return the corresponding <code>Task</code> based on the line read from file
+     * @throws BadLineFormatException if the line from the file is formatted badly
+     */
     public static Task getTaskFromFormattedLine(String line) throws BadLineFormatException {
         String[] tokens = line.split(",");
         if (tokens.length == 0) {

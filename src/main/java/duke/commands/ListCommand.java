@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.tasklist.TaskList;
 
+/**
+ * Class for a list command that can be executed to list all tasks
+ */
 public class ListCommand extends Command {
     public static final String EXAMPLE_USAGE = "list";
     public static final String KEYWORD = "list";
@@ -11,6 +14,9 @@ public class ListCommand extends Command {
         isPersistentCommand = false;
     }
 
+    /**
+     * Lists all tasks
+     */
     public void execute() {
         taskList.listTasks();
     }
