@@ -34,6 +34,39 @@ public class TaskList implements Serializable{
         }
     }
 
+    protected static void findTask(String userCmd) throws DukeException {
+        String findStr;
+        try{
+            String[] splitCmd = userCmd.split(" ");
+            findStr = splitCmd[1].trim();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("There must be keyword to search for. Syntax: find book");
+        }
+
+        int index = 1;
+        boolean hasMatch = false;
+        String matchingTask = "";
+        for (Task t : taskList){
+            if (t.getTaskName().contains(findStr)){
+                hasMatch = true;
+                matchingTask += "\t" +index +". " +t.toString() +"\n";
+                //numbering is dependent on if getting the list index or numbering those with match
+                index++;
+            }
+        }
+
+        System.out.println("Given keyword: " +findStr);
+        if (hasMatch){
+            System.out.println("Here are the matching tasks: ");
+            System.out.println(matchingTask);
+        }
+        else{
+            System.out.println("There are no matching tasks");
+        }
+
+    }
+
     protected static void markTaskDone(String userCmd) throws DukeException {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");

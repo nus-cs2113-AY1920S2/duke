@@ -53,9 +53,13 @@ public class Parser {
         // Help command
         else if (userCmd.contains("help")) {
             UI.printHelp();
-        } else if (userCmd.contains("delete")) {
+        }
+        else if (userCmd.contains("delete")) {
             currTasks.deleteTask(userCmd);
-        } else {
+        }
+        else if (userCmd.contains("find")) {
+            currTasks.findTask(userCmd);
+        }else {
             System.out.println("Wrong syntax!");
             UI.printHelp();
         }
