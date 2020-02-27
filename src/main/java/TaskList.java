@@ -1,6 +1,14 @@
+import Tasks.Task;
+import Tasks.ToDo;
+import Tasks.Deadline;
+import Tasks.Event;
+
 import java.util.ArrayList;
 
 public class TaskList {
+    public static final String EMPTY_LIST = "Your task list is empty! Try adding a task first!";
+    public static final String INVALID_TASK_INDEX = "The task index you've entered is invalid.";
+
     private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> savedList) {
@@ -15,22 +23,22 @@ public class TaskList {
         return taskList.size();
     }
 
-    public void listCommand() throws EmptyListException {
+    public void listCommand() throws DukeException {
         if (taskList.isEmpty()) {
-            throw new EmptyListException();
+            throw new DukeException(EMPTY_LIST);
         }
     }
 
-    public void markDone(int taskIndex) throws InvalidTaskIndexException {
+    public void markDone(int taskIndex) throws DukeException, NumberFormatException {
         if ((taskIndex < 0) || (taskIndex >= taskList.size())) {
-            throw new InvalidTaskIndexException();
+            throw new DukeException(INVALID_TASK_INDEX);
         }
         taskList.get(taskIndex).setDone(true);
     }
 
-    public void deleteTask(int taskIndex) throws EmptyListException, InvalidTaskIndexException {
-        if (taskList.isEmpty()) {
-            throw new EmptyListException();
+    public void deleteTask(int taskIndex) throws DukeException, NumberFormatException {
+        if ((taskIndex < 0) || (taskIndex >= taskList.size())) {
+            throw new DukeException(INVALID_TASK_INDEX);
         }
 
         taskList.remove(taskList.get(taskIndex));
