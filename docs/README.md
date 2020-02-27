@@ -56,4 +56,4 @@ Expected Outcome:
 
 `Got it. I've added this task: <item details>. Now you have <amount> tasks in list.`
 
-[deadline](images/deadline.PNG)
+![deadline](images/deadline.PNG)
