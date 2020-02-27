@@ -19,7 +19,8 @@ import java.util.Scanner;
  * Saves and loads the file of Duke's data.
  */
 public class Storage {
-    public static final String DEFAULT_FILEPATH = "data/tasks.txt";
+    public static final String DEFAULT_FILEPATH = "/data/tasks.txt";
+    public static final String FOLDER_PATH = "data";
     private final String filePath;
 
     public Storage(){
@@ -39,7 +40,7 @@ public class Storage {
         try {
             return loadFileContents();
         }catch (FileNotFoundException e) {
-            throw new DukeException("File Path is wrong!");
+            throw new DukeException("No data file exits. I will make a new one later!");
         }
     }
 
@@ -49,6 +50,7 @@ public class Storage {
      * @throws FileNotFoundException if file path is wrong.
      */
     public TaskList loadFileContents() throws FileNotFoundException {
+        checkDir();
         File fileToBeLoad = new File(filePath);
         Scanner s = new Scanner(fileToBeLoad);
         TaskList tasks = new TaskList();
@@ -60,6 +62,16 @@ public class Storage {
             addLoadedTask(command,tasks);
         }
         return tasks;
+    }
+
+    /**
+     * Checks whether the data folder exits. If not, make this dir.
+     */
+    private void checkDir() {
+        File dir = new File(FOLDER_PATH);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
     }
 
     /**

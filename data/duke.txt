@@ -1,5 +1,0 @@
-1. [T] [✘] go to sleep
-2. [T] [✓] return books
-3. [D] [✓] finish homework (by: 10pm)
-4. [D] [✘] cook (by: 7pm)
-5. [E] [✓] watch a film (at: 4:00 pm)
