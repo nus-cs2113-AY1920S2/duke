@@ -4,6 +4,7 @@ import duke.common.DukeException;
 import duke.taskList.TaskList;
 import duke.taskList.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static duke.common.Constants.LINE_BREAK;
@@ -65,6 +66,17 @@ public class Ui {
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t  " + deleteTask);
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+    }
+
+    public void showCheckTask (TaskList tasks, ArrayList<Integer> findCount) {
+        if (findCount.size() > 0) {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (Integer i : findCount) {
+                System.out.println("\t" + (i + 1) + "." + tasks.getATask(i));
+            }
+        } else {
+            System.out.println("\t No matching tasks.");
+        }
     }
 
     /**

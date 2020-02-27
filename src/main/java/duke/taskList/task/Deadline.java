@@ -22,6 +22,7 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
     public LocalDate getTime() {
         return this.time;
     }

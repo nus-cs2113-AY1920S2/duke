@@ -22,6 +22,7 @@ public class Event extends Task {
         }
     }
 
+    @Override
     public LocalDate getTime() {
         return this.time;
     }
