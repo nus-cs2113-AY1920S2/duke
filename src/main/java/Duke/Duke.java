@@ -3,9 +3,10 @@ package Duke;
 import Duke.Commands.Command;
 import Duke.Commands.ExitCommand;
 import Duke.Exception.DukeException;
-import Duke.Parser.Parser;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
+
+import static Duke.Task.TaskList.executeCommand;
 
 public class Duke{
 
@@ -22,7 +23,7 @@ public class Duke{
          while (true) {
             String userInput = ui.readCommand();
             try {
-                Command command = Parser.parse(userInput);
+                Command command = executeCommand(userInput);
                 command.execute(ui, storage);
                 if (command instanceof ExitCommand) {
                     break;

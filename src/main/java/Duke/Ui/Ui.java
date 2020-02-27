@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public static final void displayWelcomeMessage() {
-        System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER);
+        System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER + BOT_DESC + LINE_DIVIDER);
     }
 
     public static final void displayAddTask(Task task) {
