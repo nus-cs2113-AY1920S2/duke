@@ -17,7 +17,7 @@ stores your tasks locally, so that your data persists between sessions.
 * [Exit](#bye) - Exit Duke
 
 ## Usage
-### Add a Task
+### Add a Task  
 Duke can track 3 different types of tasks, which are `todo`, `deadline`, and `event`\
 The format for adding a task is `<TASK_TYPE> <TASK_PARAMETERS>`
 ---
@@ -155,5 +155,6 @@ Example
 `bye`
 
 Expected Outcome  
-`Bye then`
+`Bye then`  
+
 ---
