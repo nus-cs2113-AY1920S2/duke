@@ -12,6 +12,8 @@ public class Task {
         totalNumberOfTask++;
     }
 
+    public static int getTotalNumberOfTask() { return totalNumberOfTask; }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
