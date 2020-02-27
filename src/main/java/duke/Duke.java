@@ -5,12 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import javax.sql.rowset.serial.SerialStruct;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
+import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -19,9 +19,9 @@ public class Duke {
     public static final String filePath = "duke.txt";
     private static final String ioErrorMessage = " OOPS!! There is an error in input or output";
     private static final String unknownCommandMessage = " OOPS!!! I'm sorry, but I don't know what that means :-(";
-
-    private static Task[] listOfTasks = new Task[100]; // array of tasks that is <=100
+    private static ArrayList<Task> listOfTasks = new ArrayList<>(); // array of tasks that is <=100
     private static int sizeOfList = 0; // number of items in the list
+    private static String inputLine = null;
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -31,35 +31,43 @@ public class Duke {
             System.out.println(ioErrorMessage);
         }
 
+        runCommandLoop();  // Reads in the first command from the user
+        printExitMessage();
 
-        // Reads in the first command from the user
+    }
+
+
+    private static void runCommandLoop() {
         Scanner scanner = new Scanner(System.in);
-        String inputLine = scanner.nextLine();
-        String inputCommand = inputLine.substring(0, 3);
+        inputLine = scanner.nextLine();
 
-        while (!inputCommand.contains("bye")) {
-            if (inputCommand.contains("lis")) {
-                printsOutTheList(); // prints out the list
-            } else if (inputCommand.contains("don")) {
-                indicateTaskAsDone(inputLine); // marks task in the stated index as done
+        while (!inputLine.equals("bye")) {
+            try {
+                if (inputLine.substring(0, 4).equals("list")) {
+                    printsOutTheList(); // prints out the list
 
-            } else {
-                try {
-                    addInNewTask(inputLine);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(STANDARD_SEPARATOR);
-                    System.out.println("OOPS!!! The details of a " + inputLine + " cannot be empty.");
-                    System.out.println(STANDARD_SEPARATOR);
-                } catch (DukeException e) {
-                    System.out.println(STANDARD_SEPARATOR);
-                    System.out.println(unknownCommandMessage);
-                    System.out.println(STANDARD_SEPARATOR);
+                } else if (inputLine.substring(0, 4).equals("done")) {
+                    indicateTaskAsDone(); // marks task in the stated index as done
+
+                } else if (inputLine.substring(0, 6).equals("remove")) {
+                    removeTaskFromList(); // removes task in the stated index
+
+                } else {
+                    addInNewTask();// adds a new task into the list
                 }
 
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(STANDARD_SEPARATOR);
+                System.out.println("OOPS!!! The description of a " + inputLine + " cannot be empty.");
+                System.out.println(STANDARD_SEPARATOR);
+            } catch (DukeException e) {
+                System.out.println(STANDARD_SEPARATOR);
+                System.out.println(unknownCommandMessage);
+                System.out.println(STANDARD_SEPARATOR);
             }
+
             // take in the next command
             inputLine = scanner.nextLine();
-            inputCommand = inputLine.substring(0, 3);
         }
 
         try {
@@ -67,13 +75,13 @@ public class Duke {
             if (!f.exists()) {
                 f.createNewFile();
             }
-            writeToFile("");
+            writeToFile();
             for (int i = 0; i < sizeOfList; i++) {
-                String currentListLine = listOfTasks[i].toString();
+                String currentListLine = listOfTasks.get(i).toString();
                 String typeOfTask = currentListLine.substring(1, 2);
-                String markedOrUnmarked = listOfTasks[i].getStatusIcon(); //currentListLine.substring(4, 5);
-                String description = listOfTasks[i].getDescription();
-                String extra = listOfTasks[i].getExtra();
+                String markedOrUnmarked = listOfTasks.get(i).getStatusIcon(); //currentListLine.substring(4, 5);
+                String description = listOfTasks.get(i).getDescription();
+                String extra = listOfTasks.get(i).getExtra();
                 String textToAppend;
                 if (extra == null) {
                     textToAppend = typeOfTask + " | " + markedOrUnmarked + " | " + description;
@@ -96,9 +104,9 @@ public class Duke {
         fw.close();
     }
 
-    private static void writeToFile(String textToAdd) throws IOException {
+    private static void writeToFile() throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
+        fw.write("");
         fw.close();
     }
 
@@ -121,30 +129,48 @@ public class Duke {
         while (scan.hasNext()) {
             String lineInList = scan.nextLine();
             String[] itemInLine = lineInList.split(" \\| ");
-            System.out.println(lineInList);
 
             if (itemInLine[0].contains("T")) {
                 //System.out.println(itemInLine[2]);
                 Todo newTodo = new Todo(itemInLine[2]);
-                listOfTasks[sizeOfList] = newTodo;
-                if (itemInLine[1].contains("1")) { listOfTasks[sizeOfList].markAsDone(); }
+                listOfTasks.add(newTodo);
+                if (itemInLine[1].contains("1")) { listOfTasks.get(sizeOfList).markAsDone(); }
                 sizeOfList++;
 
             } else if (itemInLine[0].contains("D")) {
                 //System.out.println(itemInLine);
                 Deadline newDeadline = new Deadline(itemInLine[2], itemInLine[3]);
-                listOfTasks[sizeOfList] = newDeadline;
-                if (itemInLine[1].contains("1")) { listOfTasks[sizeOfList].markAsDone(); }
+                listOfTasks.add(newDeadline);
+                if (itemInLine[1].contains("1")) { listOfTasks.get(sizeOfList).markAsDone(); }
                 sizeOfList++;
 
             } else {
                 Event newEvent = new Event(itemInLine[2], itemInLine[3]);
-                listOfTasks[sizeOfList] = newEvent;
-                if (itemInLine[1].contains("1")) { listOfTasks[sizeOfList].markAsDone(); }
+                listOfTasks.add(newEvent);
+                if (itemInLine[1].contains("1")) { listOfTasks.get(sizeOfList).markAsDone(); }
                 sizeOfList++;
 
             }
         }
+    }
+
+    private static void removeTaskFromList() throws DukeException {
+
+        String[] commandArray = inputLine.split(" ");
+        if (commandArray.length < 2) { throw new IndexOutOfBoundsException(); }
+        if (commandArray.length > 2) { throw new DukeException(); }
+        int indexToRemove = Integer.parseInt(commandArray[1]) - 1; // obtain index of task to remove
+        if (indexToRemove >= sizeOfList) { throw new DukeException(); }
+        Task taskToDelete = listOfTasks.get(indexToRemove);
+
+        listOfTasks.remove(taskToDelete);
+        sizeOfList--;
+
+        System.out.println(STANDARD_SEPARATOR);
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println("   " + taskToDelete.toString());
+        System.out.println(" Now you have " + sizeOfList + " in the list.");
+        System.out.println(STANDARD_SEPARATOR);
     }
 
 
@@ -161,9 +187,8 @@ public class Duke {
     /**
      * Differentiates task and adds into array
      *
-     * @param inputLine name of the task to add
      */
-    private static void addInNewTask(String inputLine) throws DukeException {
+    private static void addInNewTask() throws DukeException {
         String inputCommand = inputLine.substring(0, 4);
 
         if (inputCommand.contains("todo")) {
@@ -192,7 +217,7 @@ public class Duke {
         // informs user that task has been added to list
         System.out.println(STANDARD_SEPARATOR);
         System.out.println(" Got it. I've added this task:");
-        System.out.println("  " + listOfTasks[sizeOfList - 1].toString());
+        System.out.println("  " + listOfTasks.get(sizeOfList - 1).toString());
         System.out.println(" Now you have " + sizeOfList + " tasks in the list.");
         System.out.println(STANDARD_SEPARATOR);
     }
@@ -212,7 +237,7 @@ public class Duke {
         description = inputLine.substring(descriptionStart, descriptionEnd);
         String at = inputLine.substring(indexOfEvent);
         Event newEvent = new Event(description, at);
-        listOfTasks[sizeOfList] = newEvent;
+        listOfTasks.add(newEvent);
         sizeOfList++;
     }
 
@@ -231,7 +256,7 @@ public class Duke {
         description = inputLine.substring(descriptionStart, descriptionEnd);
         String by = inputLine.substring(indexOfDeadline);
         Deadline newDeadline = new Deadline(description, by);
-        listOfTasks[sizeOfList] = newDeadline;
+        listOfTasks.add(newDeadline);
         sizeOfList++;
     }
 
@@ -244,7 +269,7 @@ public class Duke {
     private static void addToDo(String inputLine) {
         String description = inputLine.substring(5);
         Todo newToDo = new Todo(description);
-        listOfTasks[sizeOfList] = newToDo;
+        listOfTasks.add(newToDo);
         sizeOfList++;
     }
 
@@ -253,17 +278,21 @@ public class Duke {
      * Prints acknowledgment that the specified task is done,
      * sets the task in the array to be done
      *
-     * @param inputLine name of task to set as done
+
      */
-    private static void indicateTaskAsDone(String inputLine) {
+    private static void indicateTaskAsDone() throws DukeException {
+        String[] commandArray = inputLine.split(" ");
+        if (commandArray.length < 2) { throw new IndexOutOfBoundsException(); }
+        if (commandArray.length > 2) { throw new DukeException(); }
+        // obtain index of task to set as done
+        //String indexInString = inputLine.substring(5);
+        int index = Integer.parseInt(commandArray[1]) - 1;
+        if (index >= sizeOfList) { throw new DukeException(); }
+        // mark as done
+        listOfTasks.get(index).markAsDone();
         System.out.println(STANDARD_SEPARATOR);
         System.out.println(" Nice! I've marked this task as done:");
-        // obtain index of task to set as done
-        String indexInString = inputLine.substring(5);
-        int index = Integer.parseInt(indexInString) - 1;
-        // mark as done
-        listOfTasks[index].markAsDone();
-        System.out.println("   " + listOfTasks[index].toString());
+        System.out.println("   " + listOfTasks.get(index).toString());
         System.out.println(STANDARD_SEPARATOR);
     }
 
@@ -276,7 +305,7 @@ public class Duke {
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < sizeOfList; i++) {
             int k = i + 1;
-            System.out.println(" " + k + "." + listOfTasks[i].toString());
+            System.out.println(" " + k + "." + listOfTasks.get(i).toString());
         }
         System.out.println(STANDARD_SEPARATOR);
     }
