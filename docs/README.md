@@ -18,8 +18,8 @@ stores your tasks locally, so that your data persists between sessions.
 
 ## Usage
 ### Add a Task  
-Duke can track 3 different types of tasks, which are `todo`, `deadline`, and `event`\
-The format for adding a task is `<TASK_TYPE> <TASK_PARAMETERS>`
+Duke can track 3 different types of tasks, which are `todo`, `deadline`, and `event`.
+
 ---
 #### `todo`
 Add a `todo` task to the task list. The `todo` contains a description of the task.
@@ -155,6 +155,8 @@ Example
 `bye`
 
 Expected Outcome  
-`Bye then`  
+```
+Bye then
+```  
 
 ---
