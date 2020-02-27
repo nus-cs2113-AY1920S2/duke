@@ -25,7 +25,7 @@ public class Event extends Task {
     @Override
     public void printListDetails(int count) {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
-                            count + ". " + super.description + " (by: " + super.date + ")");
+                            count + ". " + super.description + " (by: " + super.date + " at " + time +")");
     }
 
 }

@@ -6,6 +6,8 @@ import Storage.Storage;
 import Task.TaskList;
 import UI.Ui;
 
+import java.time.format.DateTimeParseException;
+
 public class AddCommand extends Command {
 
     private static final char TASK_TODO = 'T';
@@ -38,13 +40,17 @@ public class AddCommand extends Command {
                 tasks.addTodo(userInput, wordArrayLength);
                 break;
             default:
-                System.out.println("Keyword not recognised!\n");
+                System.out.println("[Error] Keyword not recognised!\n");
             }
 
         } catch (NoParameterException e) {
-            System.out.println("Missing parameters");
-        } catch (MissingParameterException e) {
-            System.out.println("Missing Date or Time field");
+            System.out.println("[Error] Missing parameters");
+        } catch (MissingParameterException | NullPointerException e) {
+            System.out.println("[Error] Missing Date or Time field");
+        } catch (DateTimeParseException e) {
+            System.out.println("[Error] Wrong format for date\nPlease record in YYYY-DD-MM format");
+        } catch (NumberFormatException e) {
+            System.out.println("[Error] time should be all numbers in 24Hr format: HHMM");
         }
     }
 }

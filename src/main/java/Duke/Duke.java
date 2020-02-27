@@ -70,6 +70,7 @@ public class Duke {
             } catch (Exception e) {
                 System.out.println("ERROR AT RUN\n");
                 ui.showError(e.getMessage());
+                System.out.println(e);
             } finally {
                 ui.showLine();
             }

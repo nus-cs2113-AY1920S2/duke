@@ -12,7 +12,7 @@ public abstract class Task {
     //protected String date;
     protected LocalDate date;
     protected boolean isDone;
-    protected String time;
+    protected Integer time;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -21,22 +21,19 @@ public abstract class Task {
         this.description = description;
         this.date = null;
         this.isDone = false;
-        this.time = "";
+        this.time = null;
     }
 
     public Task(String description, String date, String time) {
+
         this.description = description;
         this.date = LocalDate.parse(date, formatter);
         this.isDone = false;
-        this.time = time;
+        this.time = Integer.parseInt(time);
     }
 
-    public String getDate() {
-        return date.toString();
-    }
-
-    public String getTime() {
-        return time;
+    public LocalDate getDate() {
+        return date;
     }
 
     public boolean getStatus() {
@@ -57,6 +54,10 @@ public abstract class Task {
 
     public String getTaskType() {
         return null;
+    }
+
+    public Integer getTime() {
+        return time;
     }
 
     public void printAddDetails(int taskCounter) {

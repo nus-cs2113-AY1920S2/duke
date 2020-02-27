@@ -91,8 +91,11 @@ public class TaskList {
     public static String[] formatDatetime(String dateTime) throws MissingParameterException {
         try {
             String[] splitDateTime = dateTime.trim().split(" ");
-            System.out.println("1: " + splitDateTime[0]);
-            System.out.println("2: " + splitDateTime[1]);
+
+            if (splitDateTime.length != DATETIME_PARAMETER_SIZE) {
+                throw new NullPointerException();
+            }
+
             for (int i = 0; i < splitDateTime.length; i++) { // checking for blank tasks, including one char of space
                 if (splitDateTime[i].isBlank()){
                     throw new MissingParameterException();
@@ -125,8 +128,6 @@ public class TaskList {
         try {
             String[] words = processDatedTasks(userInput, wordLength, LENGTH_EVENT);
             String[] splitDateTime = formatDatetime(words[1]);
-            System.out.println("Date: " + splitDateTime[0]);
-            System.out.println("Time: " + splitDateTime[1]);
             if (splitDateTime.length != DATETIME_PARAMETER_SIZE) {
                 throw new MissingParameterException();
             }
