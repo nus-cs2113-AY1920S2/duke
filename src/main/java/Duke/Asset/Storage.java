@@ -17,17 +17,18 @@ public class Storage {
 
     public Storage(Ui ui) throws IOException, FileNotFoundException {
                 ui.promptUser("Creating new data file for Nini");
-                String dir= "data2";
+                String dir= "data";
                 File file = new File(dir);
                 boolean bool = file.mkdir();
-                dir+="/duke2.txt";
+                dir+="/duke.txt";
                 File file2 = new File(dir);
                 if(bool && file2.createNewFile()){
-                    System.out.println("Directory created successfully.\n Data for Nini is stored at:\n" +
+                    ui.promptUser("Directory created successfully.\n Data for Nini is stored at:\n" +
                             file2.getAbsolutePath());
                     this.inFile = new File (dir);
                 }else{
-                    System.out.println("Sorry could not create specified directory");
+                    throw new FileNotFoundException("Sorry could not create specified directory, refer to User guide "
+                            + "on missing file error");
                 }
     }
     public Storage(String filePath) throws FileNotFoundException {
@@ -38,7 +39,7 @@ public class Storage {
         Scanner in = new Scanner(this.inFile);
         ArrayList<Task> l1= new ArrayList<>();
         while (in.hasNextLine()) {
-            String[] temp = in.nextLine().split("-");
+            String[] temp = in.nextLine().split("~");
             initList(temp, l1);
         }
         in.close();

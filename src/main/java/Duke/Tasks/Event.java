@@ -28,6 +28,6 @@ public class Event extends Task {
     }
     @Override
     public String toFile(){
-        return "E-" + this.at + "-" + super.toFile();
+        return String.format("E~%s~%s", this.at, super.toFile());
     }
 }

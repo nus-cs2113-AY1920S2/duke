@@ -46,7 +46,7 @@ public class Task {
      */
     public String toFile(){
         String done = this.isDone ? "Y" : "N" ;
-        return done + "-" + action;
+        return String.format("%s~%s", done, this.action);
     }
     public String getAction(){
         return this.action;

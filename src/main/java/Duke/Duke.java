@@ -28,7 +28,7 @@ public class Duke{
     private Ui ui;
     private ArrayList<Task> l1;
 
-    public Duke(String filePath) throws FileNotFoundException, IOException {
+    public Duke(String filePath) throws IOException {
         this.ui = new Ui();
         try {
             this.storage = new Storage(filePath);
@@ -63,7 +63,11 @@ public class Duke{
     }
 
     public static void main(String[] args) throws IOException {
+        try {
             new Duke("data/duke.txt").run();
+        } catch(FileNotFoundException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
 

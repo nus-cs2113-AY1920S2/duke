@@ -15,37 +15,41 @@ import static java.lang.Integer.parseInt;
  * number stated by the User.
  */
 public class DoneCommand extends Command  {
-    private int index;
+    private int index=0 ;
+    boolean isAll= false;
     public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
             "\t available list of task numbers";
 
     public DoneCommand(String[] fullCommand){
         super(fullCommand);
         if(fullCommand[1].equals("all")){
-            this.index=-1;
+            this.isAll= true;
         }else {
             this.index = parseInt(fullCommand[1]) - 1;
         }
     }
     @Override
-    public void execute(ArrayList<Task> l1, Ui ui, Storage storage) throws IllegalDukeException, FileNotFoundException {
-        if (this.index >= l1.size() || this.index < -1) {
-            throw new IllegalDukeException(INDEX_OUT_OF_RANGE);
-        }else if(this.index == -1){
-            if(l1.isEmpty()){
+    public void execute(ArrayList<Task> l1, Ui ui, Storage storage) throws IllegalDukeException,
+            FileNotFoundException {
+            if (l1.isEmpty()) {
                 ui.printList(l1);
-            }else {
-                for (int i = 0; i < l1.size(); i++) {
-                    Task task = l1.get(i);
-                    task.done();
+            } else {
+                if (this.isAll) {
+                    for (int i = 0; i < l1.size(); i++) {
+                        Task task = l1.get(i);
+                        task.done();
+                    }
+                    ui.printDoneAll(l1);
+                } else {
+                    if (this.index >= l1.size()) {
+                        throw new IllegalDukeException(INDEX_OUT_OF_RANGE);
+                    } else {
+                        Task task = l1.get(this.index);
+                        task.done();
+                        ui.printDone(task);
+                    }
                 }
             }
-            ui.printDoneAll(l1);
-        }else {
-            Task task = l1.get(this.index);
-            task.done();
-            ui.printDone(task);
-        }
         storage.saveFile(l1);
     }
 }

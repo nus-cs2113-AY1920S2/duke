@@ -15,6 +15,7 @@ import static java.lang.Integer.parseInt;
  */
 public class DeleteCommand extends Command  {
     private int index;
+    boolean isAll= false;
     public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
             "\t available list of task numbers";
     public static final String ALL_TASKS_ALREADY_DELETED ="\t List is already empty!";
@@ -22,7 +23,7 @@ public class DeleteCommand extends Command  {
     public DeleteCommand(String[] fullCommand){
         super(fullCommand);
         if(fullCommand[1].equals("all")){
-            this.index=-1;
+            this.isAll=true;
         }else {
             this.index = parseInt(fullCommand[1]) - 1;
         }
@@ -30,33 +31,36 @@ public class DeleteCommand extends Command  {
     @Override
     public void execute(ArrayList<Task> l1, Ui ui, Storage storage) throws IllegalDukeException, FileNotFoundException {
 
-        if (this.index >= l1.size() || this.index < -1) {
-            throw new IllegalDukeException(INDEX_OUT_OF_RANGE);
-        }else if(this.index == -1){
             if(l1.isEmpty()){
                 throw new IllegalDukeException(ALL_TASKS_ALREADY_DELETED);
+            }else {
+                if (this.isAll) {
+                    ui.confirmDeleteAll();
+                    ui.printLine();
+                    String confirmation = ui.getUserIn().toLowerCase();
+                    ui.printLine();
+                    while (!confirmation.equals("y") && !confirmation.equals("n")) {
+                        ui.printYesOrNoOnly();
+                        ui.printLine();
+                        confirmation = ui.getUserIn().toLowerCase();
+                        ui.printLine();
+                    }
+                    if (confirmation.equals("y")) {
+                        l1.clear();
+                        ui.printDeleteAll();
+                    } else if (confirmation.equals("n")) {
+                        ui.ignoreDeleteAll();
+                    }
+                } else {
+                    if (this.index >= l1.size()) {
+                        throw new IllegalDukeException(INDEX_OUT_OF_RANGE);
+                    } else {
+                        Task task = l1.get(this.index);
+                        l1.remove(this.index);
+                        ui.printDelete(task, l1);
+                    }
+                }
             }
-            ui.confirmDeleteAll();
-            ui.printLine();;
-            String confirmation = ui.getUserIn().toLowerCase();
-            ui.printLine();;
-            while(!confirmation.equals("y") && !confirmation.equals("n")){
-                ui.printYesOrNoOnly();
-                ui.printLine();
-                confirmation=ui.getUserIn().toLowerCase();
-                ui.printLine();
-            }
-            if(confirmation.equals("y")) {
-                l1.clear();
-                ui.printDeleteAll();
-            }else if(confirmation.equals("n")){
-                ui.ignoreDeleteAll();
-            }
-        }else {
-            Task task=l1.get(this.index);
-            l1.remove(this.index);
-            ui.printDelete(task, l1);
-        }
         storage.saveFile(l1);
     }
 

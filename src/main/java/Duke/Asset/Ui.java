@@ -17,6 +17,32 @@ public class Ui  {
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
     public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
+    public static final String DAB= "\t ``````````````````````````````````````````````````````````\n" +
+            "\t ````````````````````````````````:v(v'`````````````````````\n" +
+            "\t ```````````````````````````,)4|ex` `L}````````````````````\n" +
+            "\t `````````````````````````!s\"'h `M:   ^z_;)T```````````````\n" +
+            "\t `````````````````````````Z   u|}Z:        \"}``````````````\n" +
+            "\t ``````````````````````:=?)                'B?L'```````````\n" +
+            "\t `````````````````````'Z                    ;Yp\"```````````\n" +
+            "\t `````````````````````.e                      ?_```````````\n" +
+            "\t ```````````````````'QDGH                    .5````````````\n" +
+            "\t ````````````````````I#g'         '_`        ||````````````\n" +
+            "\t ```````````:mX_``````YhL`      `'q!`   ?     h````````````\n" +
+            "\t ```````````'Qbs)|L=_V\" 'Y}     ^'q@&b=c=_`  ,Z````````````\n" +
+            "\t ````````````q>     'T,   ,o\"    ;\"@c.   .sVx~`````````````\n" +
+            "\t ````````````c!             \"bh` `,p       z:``````````````\n" +
+            "\t `````````````q.              ngDQmh8s     X'``````````````\n" +
+            "\t ``````````````LY\"             :n}>``b;   _V```````````````\n" +
+            "\t ````````````````q?,                ?;   \"V````````````````\n" +
+            "\t ``````````````KvR                  '  )x_`````````````````\n" +
+            "\t ``````````````zjL                  GLY\"```````````````````\n" +
+            "\t ```````````````M                 .I)``````````````````````\n" +
+            "\t ```````````````Lz                `D:``````````````````````\n" +
+            "\t ``````````````vu`    (I)_;\"\".      P.`````````````````````\n" +
+            "\t ``````````````p     :X.':^,\"=n    \"q``````````````````````\n" +
+            "\t `````````````)0X?^:)I````````m'   :j``````````````````````\n" +
+            "\t `````````````.IGD8k'`````````<&G55M```````````````````````\n" +
+            "\t ````````````````.'`````````````>)_````````````````````````";
 
     private final Scanner in;
     private final PrintStream out;
@@ -90,6 +116,7 @@ public class Ui  {
      */
     public void printGoodByeMessage(){
         out.println("\t Bye.Hope to see you again soon!");
+        out.println(DAB);
     }
     /**
      * This method informs User that stated Task has been marked as done.
@@ -179,23 +206,29 @@ public class Ui  {
         String Help = "\t 1. [Todo] - Adds a Task of type Todo.\n" +
                 "\t    To add a Todo Task, type {todo} {task description}\n"+
                 "\t 2. [Event] - Adds a Task of type Event.\n" +
-                "\t    To add an Event Task, type {event} {task description} {/} {timing}\n" +
+                "\t    To add an Event Task, type {event} {task description}\n " +
+                "\t    {/} {timing}\n" +
                 "\t 3. [Deadline] - Adds a Task of type Deadline.\n" +
-                "\t    To add a Deadline Task, type {event} {task description} {/} {timing}\n" +
+                "\t    To add a Deadline Task, type {event} {task description}\n" +
+                "\t    {/} {timing}\n" +
                 "\t 4. [Done] - Marks a specific Task as completed.\n" +
                 "\t    To mark a Task as completed, type {done} {task index}\n" +
                 "\t    To mark ALL Tasks as completed, type {done} {all}\n" +
                 "\t 5. [Delete] - Delete Tasks from Task List.\n" +
-                "\t    To delete Tasks from Task List, type {delete} {task index}\n" +
-                "\t    To delete ALL Tasks from the Task List, type {delete} {all}\n" +
-                "\t    ***Note: when using this command, Nini will prompt the User to\n" +
-                "\t    confirm if they intend on deleting _ALL_ Tasks. User is then\n"+
-                "\t    required to type Y for Yes or N for No.***\n" +
-                "\t 6. [List] - Lists all currently available Tasks in the Task List.\n" +
+                "\t    To delete Tasks from Task List, type {delete}\n " +
+                "\t    {task index}\n" +
+                "\t    To delete ALL Tasks from the Task List, type {delete}\n" +
+                "\t    {all}\n" +
+                "\t    ***Note: when using this command, Nini will prompt the\n" +
+                "\t    User to confirm if they intend on deleting _ALL_ Tasks.\n" +
+                "\t    User is then required to type Y for Yes or N for No.***\n" +
+                "\t 6. [List] - Lists all currently available Tasks in the Task\n" +
+                "\t    List.\n" +
                 "\t    To retrieve the current list of Tasks, type {list}\n "+
                 "\t 7. [Find] - Finds a list Tasks that matches the search key.\n"+
                 "\t    To find a list of matching Tasks, type {find}";
-        out.println("\t Below would be a list of commands that you will find useful!");
+        out.println("\t Below would be a list of commands that you will find\n" +
+                "\t useful!");
         out.println(Help);
     }
     /**

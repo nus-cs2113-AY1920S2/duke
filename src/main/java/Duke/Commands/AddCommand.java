@@ -1,5 +1,6 @@
 package Duke.Commands;
 
+import Duke.Asset.IllegalDukeException;
 import Duke.Asset.Storage;
 import Duke.Asset.Ui;
 import Duke.Tasks.Deadline;
@@ -20,7 +21,7 @@ public class AddCommand extends Command   {
     private String timing;
     private Task task;
 
-    public AddCommand(String[] fullCommand) {
+    public AddCommand(String[] fullCommand) throws IllegalDukeException {
         super(fullCommand);
         String [] temp = Parser.getTaskInfo(fullCommand);
         this.action=temp[0];

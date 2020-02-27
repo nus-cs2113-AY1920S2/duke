@@ -20,8 +20,6 @@ import java.util.ArrayList;
 public class  Command  {
     protected int status;
     protected String[] fullCommand;
-    public static final String OUT_OF_BOUND_INDEX = "\t Task number provided is not valid. Press \"list\" to see\n" +
-            "\t available list of task numbers";
 
     public Command(String[] fullCommand) {
         this.status = 1;

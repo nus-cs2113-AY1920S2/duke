@@ -2,6 +2,12 @@ package Duke.Parser;
 
 import Duke.Commands.*;
 import Duke.Asset.IllegalDukeException;
+
+import javax.swing.text.DateFormatter;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import static java.lang.Integer.parseInt;
 /**
  * This class handles with making sense of commands
@@ -20,7 +26,12 @@ public class Parser  {
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
     public static final String WRONG_USAGE_OF_COMMAND = " cannot be used with other commands";
     public static final String NOT_INTEGER = "\t Argument after command used is not an integer!";
-    public static final String INDICATE_TIMING = "\t Use \"/\" to indicate timing!";
+    public static final String INDICATE_TIMING_INDICATOR = "\t Use \"/\" to indicate timing!";
+    public static final String NON_POSITIVE_INTEGER = "\t Task index cannot be negative or zero!";
+    public static final String INDICATE_TIMING ="\t Please enter a timing!";
+    public static final String WRONG_TIMING_FORMAT="\t Timing format is wrong! Ensure it is either \"yyyy-MM-dd\"\n" +
+            "\t or \"yyyy-MM-dd HH:mm\" ***Hours are in 24 hrs format***";
+
 /**
  * This method splits User input by spaces into an array of Strings
  *
@@ -38,28 +49,78 @@ public class Parser  {
  * @param temp This is the array of Strings that was split by parseCommand().
  * @return String[]  This returns the two Strings, Action and Timing.
  */
-    public static String[] getTaskInfo(String[] temp) {
+    public static String[] getTaskInfo(String[] temp) throws IllegalDukeException {
         String action = "";
         String timing = "";
         boolean flip = false;
-        for (int i = 1; i < (temp.length); i++) {
-            if (temp[i].charAt(0) == '/') {
-                flip = true;
+        if(temp[0].equals("todo")){
+            for(int i=1; i<temp.length; i++){
+                action+=temp[i] + " ";
             }
-            if (flip) {
-                timing += temp[i] + " ";
-            } else {
-                action += temp[i] + " ";
+        }else {
+            for (int i = 1; i < (temp.length); i++) {
+                if (temp[i].charAt(0) == '/') {
+                    flip = true;
+                }
+                if (flip) {
+                    timing += temp[i] + " ";
+                } else {
+                    action += temp[i] + " ";
+                }
             }
+            timing=timing.replace('/',' ');
+            timing = timing.trim();
+            validateTiming(timing);
+            timing= convertToDateFormat(timing);
         }
         action = action.trim();
-        timing = timing.trim();
-        timing=timing.replace('/',' ');
         String[] temp2 = new String[2];
         temp2[0] = action;
         temp2[1] = timing;
         return temp2;
     }
+    /**
+     * This method converts timing from LocalDateTime
+     * format to a meaningful String format.
+     *
+     * @param inTiming This is the timing in LocalDateTime.
+     * @return timing in the following format: dd Month yyyy HH:mm
+     */
+    public static String convertToDateFormat(String inTiming){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(inTiming, formatter);
+        Integer day = dateTime.getDayOfMonth();
+        DayOfWeek dayOfWeek= dateTime.getDayOfWeek();
+        Month month =dateTime.getMonth();
+        Integer year =dateTime.getYear();
+        Integer hour =dateTime.getHour();
+        Integer min =dateTime.getMinute();
+        String minute;
+        if(min<10){
+            minute= "0" + min.toString();
+        }else{
+            minute= min.toString();
+        }
+       String outTiming = " " + dayOfWeek.toString() + ", " + day.toString() + " " + month.toString() + " " +
+               year.toString() + " " + hour.toString() + ":" + minute + " ";
+       return outTiming;
+    }
+    /**
+     * This method ensures that timing entered by User is valid.
+     *
+     * @param timing This is the timing given by User.
+     * @throws IllegalDukeException if timing entered is invalid
+     */
+    public static void validateTiming(String timing) throws IllegalDukeException {
+        try{
+            String[] temp =timing.split(MULTIPLE_WHITE_SPACES);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(timing, formatter);
+        }catch(DateTimeParseException e){
+            throw new IllegalDukeException(WRONG_TIMING_FORMAT);
+        }
+    }
+
 /**
  * This method ensures that User input is valid and legal
  *
@@ -89,6 +150,9 @@ public class Parser  {
                     try {
                         if(!userCommand[1].equals("all")){
                             int number = parseInt(userCommand[1]) - 1;
+                            if(number<=-1){
+                                throw new IllegalDukeException(NON_POSITIVE_INTEGER);
+                            }
                         }
                     } catch (NumberFormatException e) {
                             throw new IllegalDukeException(NOT_INTEGER);
@@ -105,15 +169,13 @@ public class Parser  {
                     );
                 }else if (userCommand[0].equals("deadline") || userCommand[0].equals("event")){
                     int i=1;
-                    boolean hasTiming=false;
-                    while(i<userCommand.length) {
-                        if (userCommand[i].charAt(0) == '/') {
-                            hasTiming = true;
-                        }
-                        i++;
+                    boolean hasTimingIndicator=false;
+                    String[]tempCommand =inCommand.split("/");
+                    if(tempCommand.length==2){
+                        hasTimingIndicator = true;
                     }
-                    if (!hasTiming) {
-                            throw new IllegalDukeException(INDICATE_TIMING);
+                    if (!hasTimingIndicator) {
+                            throw new IllegalDukeException(INDICATE_TIMING_INDICATOR);
                     }
                 }
                 break;
