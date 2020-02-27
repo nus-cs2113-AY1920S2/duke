@@ -37,6 +37,7 @@ public class TaskList {
 
     /**
      * Appends new task to the list.
+     *
      * @param t Task to be appended.
      */
     public void addTask(Task t) {
@@ -46,6 +47,7 @@ public class TaskList {
 
     /**
      * Finds tasks with matching descriptions and lists them.
+     *
      * @param description Text to search for.
      */
     public void findTasks(String description) {
@@ -66,6 +68,7 @@ public class TaskList {
 
     /**
      * Sets a task's completion status to true and prints done message.
+     *
      * @param description String index of the task to be marked as done, based on its list position.
      */
     public void markDone(String description) {
@@ -83,6 +86,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
+     *
      * @param description String index of the task to be deleted, based on its list position.
      */
     public void deleteTask(String description) {

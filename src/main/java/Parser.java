@@ -2,6 +2,9 @@ import commands.*;
 import task.TaskList;
 import ui.UI;
 
+/**
+ * Interprets the user input.
+ */
 public class Parser {
 
     /**

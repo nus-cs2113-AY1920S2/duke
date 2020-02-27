@@ -4,13 +4,21 @@ import exceptions.MissingDescriptionException;
 import task.TaskList;
 
 /**
- * Represents the command entered by the user.
+ * Represents the command entered by the user, inherited by child classes which represent the specific commands.
  */
 public class Command {
     protected String description;
     protected TaskList tasks;
     protected boolean isExit;
 
+    /**
+     * Constructor for Command class.
+     * <p> <br>
+     * Creates a new Command with the task description and task list.
+     *</p>
+     * @param description Description of the task provided by the user.
+     * @param tasks Main task list containing all existing tasks.
+     */
     public Command (String description, TaskList tasks) {
         this.description = description;
         this.tasks = tasks;

@@ -3,6 +3,9 @@ package ui;
 import java.util.Scanner;
 import task.Task;
 
+/**
+ * Handles user interactions.
+ */
 public class UI {
     protected static Scanner input;
 
@@ -10,6 +13,11 @@ public class UI {
         input = new Scanner(System.in);
     }
 
+    /**
+     * Returns the next line of user input.
+     *
+     * @return The String containing the next line of user input.
+     */
     public static String readCommand() {
         return input.nextLine();
     }

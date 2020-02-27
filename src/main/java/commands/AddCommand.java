@@ -11,6 +11,15 @@ import ui.UI;
 public class AddCommand extends Command {
     protected String command;
 
+    /**
+     * Constructor for AddCommand class.
+     * <p> <br>
+     * Creates a new AddCommand with the task description, task list and command word.
+     *</p>
+     * @param description Description of the task provided by the user.
+     * @param tasks Main task list containing all existing tasks.
+     * @param command Command word provided by the user.
+     */
     public AddCommand (String description, TaskList tasks, String command) {
         super(description, tasks);
         this.command = command;
@@ -18,6 +27,7 @@ public class AddCommand extends Command {
 
     /**
      * Identifies and adds the correct Task object to the task list.
+     *
      * @throws MissingDescriptionException If the task description is incomplete.
      * @throws InvalidCommandException If the command word is invalid.
      */
@@ -37,22 +47,26 @@ public class AddCommand extends Command {
             throw new MissingDescriptionException();
         }
 
-        if (command.equals("todo")) {
+        switch (command) {
+        case "todo":
             t = new Todo(description);
             if (description.equals("")) {
                 throw new MissingDescriptionException();
             }
-        } else if (command.equals("deadline")) {
+            break;
+        case "deadline":
             t = new Deadline(text, timeDescriptor);
             if (text.equals("") || timeDescriptor.equals("")) {
                 throw new MissingDescriptionException();
             }
-        } else if (command.equals("event")) {
+            break;
+        case "event":
             t = new Event(text, timeDescriptor);
             if (text.equals("") || timeDescriptor.equals("")) {
                 throw new MissingDescriptionException();
             }
-        } else {
+            break;
+        default:
             throw new InvalidCommandException();
         }
 

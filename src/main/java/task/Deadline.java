@@ -12,6 +12,15 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected String by;
 
+    /**
+     * Constructor for Deadline Task class.
+     * <p> <br>
+     * Creates a new Deadline with the task description and deadline.
+     * Also sets the taskType to "D", representing Deadline.
+     *</p>
+     * @param description Description of the task provided by the user.
+     * @param by Deadline of the task provided by the user.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -24,6 +33,12 @@ public class Deadline extends Task {
         return String.format("%s,%d,%s,%s\n", taskType, doneValue, description.strip(), by);
     }
 
+    /**
+     * Returns task description for displaying of task details.
+     * Allows re-formatting of deadline description from yyyy-mm-dd to mm-d-yyyy.
+     *
+     * @return String of re-formatted task details.
+     */
     @Override
     public String toString() {
         LocalDate date = null;
