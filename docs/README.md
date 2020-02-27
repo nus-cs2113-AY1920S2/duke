@@ -155,6 +155,8 @@ Example
 `bye`
 
 Expected Outcome  
-`Bye then`  
+```
+Bye then
+```  
 
 ---
