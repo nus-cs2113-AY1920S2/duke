@@ -234,7 +234,7 @@ What else do you want to do?
 (」°ロ°)」
 
 Exception occurred: duke.exception.WrongSlashWordException: Wrong slash word!
-for EVENT: the slash word can only be 'at' or 'by'
+for EVENT: the slash word can only be 'at' or 'on'
 for DEADLINE: the slash word can only be 'by' 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
@@ -333,7 +333,7 @@ What else do you want to do?
 (」°ロ°)」
 
 Exception occurred: duke.exception.WrongSlashWordException: Wrong slash word!
-for EVENT: the slash word can only be 'at' or 'by'
+for EVENT: the slash word can only be 'at' or 'on'
 for DEADLINE: the slash word can only be 'by' 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?

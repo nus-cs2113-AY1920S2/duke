@@ -233,7 +233,7 @@ public class Ui {
      */
     public static String displayWrongSlashWord() {
         return "Wrong slash word!" + System.lineSeparator() +
-                "for EVENT: the slash word can only be 'at' or 'by'" + System.lineSeparator() +
+                "for EVENT: the slash word can only be 'at' or 'on'" + System.lineSeparator() +
                 "for DEADLINE: the slash word can only be 'by' ";
     }
 
