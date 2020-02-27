@@ -1,9 +1,9 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.Asset.IllegalDukeException;
-import Duke.Asset.Storage;
-import Duke.Asset.Ui;
-import Duke.Tasks.Task;
+import duke.asset.IllegalDukeException;
+import duke.asset.Storage;
+import duke.asset.Ui;
+import duke.tasks.Task;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;

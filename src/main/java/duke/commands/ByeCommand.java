@@ -1,8 +1,8 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.Asset.Storage;
-import Duke.Asset.Ui;
-import Duke.Tasks.Task;
+import duke.asset.Storage;
+import duke.asset.Ui;
+import duke.tasks.Task;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 /**

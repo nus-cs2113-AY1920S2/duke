@@ -1,6 +1,6 @@
-package Duke.Asset;
+package duke.asset;
 
-import Duke.Tasks.*;
+import duke.tasks.*;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Ui  {
     public static final String LINE = "\t__________________________________________________________";
-    public static final String WRONG_INPUT="\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
             "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
     public static final String MISSING_FILE = "\t Data file \"data.txt\" is missing!";

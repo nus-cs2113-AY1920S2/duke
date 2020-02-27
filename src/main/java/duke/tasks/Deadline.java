@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.tasks;
 /**
  * This is a sub class of the Task class in Duke.
  *

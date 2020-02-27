@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.tasks;
 /**
  * This is the parent class for all tasks in Duke
  *
@@ -27,8 +27,8 @@ public class Task {
      *         isDone.
      */
     public String getStatus(){
-        String temp=this.isDone ? "\u2713" : "\u2718";
-        return "[" + temp + "]";
+        String temp=this.isDone ? "DONE" : "PENDING";
+        return "[Status: " + temp + "]";
     }
     public void done(){
         this.isDone=true;

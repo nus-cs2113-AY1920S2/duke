@@ -1,4 +1,4 @@
-package Duke.Asset;
+package duke.asset;
 /**
  * This is an extension of Exception that is unique to Duke.
  */

@@ -1,9 +1,7 @@
-package Duke.Parser;
+package duke.parser;
 
-import Duke.Commands.*;
-import Duke.Asset.IllegalDukeException;
-
-import javax.swing.text.DateFormatter;
+import duke.commands.*;
+import duke.asset.IllegalDukeException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
