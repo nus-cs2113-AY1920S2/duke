@@ -23,7 +23,7 @@ public class Storage {
                 dir+="/duke.txt";
                 File file2 = new File(dir);
                 if(bool && file2.createNewFile()){
-                    ui.promptUser("Directory created successfully.\n Data for Nini is stored at:\n" +
+                    ui.promptUser("Directory created successfully.\nData for Nini is stored at:\n" +
                             file2.getAbsolutePath());
                     this.inFile = new File (dir);
                 }else{

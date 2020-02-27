@@ -13,7 +13,7 @@ public class Ui  {
     public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
             "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
-    public static final String MISSING_FILE = "\t Data file \"data.txt\" is missing!";
+    public static final String MISSING_FILE = "Data file \"data.txt\" is missing!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
     public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";

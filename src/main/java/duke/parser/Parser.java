@@ -29,6 +29,8 @@ public class Parser  {
     public static final String INDICATE_TIMING ="\t Please enter a timing!";
     public static final String WRONG_TIMING_FORMAT="\t Timing format is wrong! Ensure it is either \"yyyy-MM-dd\"\n" +
             "\t or \"yyyy-MM-dd HH:mm\" ***Hours are in 24 hrs format***";
+    public static final String AVOID_DELIMITER = "\t Please refrain from using any \"~\" as it will lead to\n" +
+            "\t improper storage of your list!";
 
 /**
  * This method splits User input by spaces into an array of Strings
@@ -72,6 +74,9 @@ public class Parser  {
             timing= convertToDateFormat(timing);
         }
         action = action.trim();
+        if(action.contains("~")){
+            throw new IllegalDukeException(AVOID_DELIMITER);
+        }
         String[] temp2 = new String[2];
         temp2[0] = action;
         temp2[1] = timing;
