@@ -20,6 +20,7 @@ stores your tasks locally, so that your data persists between sessions.
 ### Add a Task  
 Duke can track 3 different types of tasks, which are `todo`, `deadline`, and `event`.
 
+---
 #### `todo`
 Add a `todo` task to the task list. The `todo` contains a description of the task.
 
