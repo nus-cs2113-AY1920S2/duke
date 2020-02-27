@@ -21,6 +21,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     public static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
     public static final DateTimeFormatter PRINT_DATE_FORMAT = DateTimeFormatter.ofPattern("EEE dd MMM yyyy HH':'mm");
+    public static final DateTimeFormatter PRINT_TIME_FORMAT = DateTimeFormatter.ofPattern("HH':'mm");
 
     /**
      * Returns a Command object depending on the command input by the user.
@@ -69,27 +70,8 @@ public class Parser {
         return LocalDateTime.parse(formattedDateTimeString, INPUT_DATE_FORMAT);
     }
 
-    public static void main(String[] args) {
-        String d1 = "12/3/2020 1800";
-        String d2 = "2020-3-12T18:00:00";
-        String d3 = "12/03/2020     1830";
-        String[] d3split = d3.split("\\s+", 2);
-        String d4 = d3split[0] + " " + d3split[1];
-        System.out.println(d4);
-        String d5 = "12/03/2020 1830";
-        DateTimeFormatter output = DateTimeFormatter.ofPattern("EEE dd MMM yyyy");
-
-        try {
-//            System.out.println(parseDate(d1).toString());
-//            System.out.println(parseDate(d4).format(output));
-            System.out.println(parseDate(d4).toString());
-        } catch (DateTimeParseException e){
-            System.out.println(e);
-        }
-    }
-
     private static Command prepareDeadlineCommand(String fullCommand) {
-        // deadline command follows format: <taskType> <taskName> /by <date>
+        // deadline command follows format: <taskType> <taskName> /by <date time>
         String[] deadlineInfo = null;
         try {
             deadlineInfo = fullCommand
@@ -142,8 +124,8 @@ public class Parser {
     }
 
     private static Command prepareEventCommand(String fullCommand) {
-        // event command follows format: <taskType> <taskName> /at <date>
-        String[] eventInfo = null;
+        // event command follows format: <taskType> <taskName> /at <date startTime - endTime>
+        String[] eventInfo;
         try {
             eventInfo = fullCommand
                     .substring(EventCommand.EVENT_COMMAND_NAME.length() + 1)
@@ -153,17 +135,26 @@ public class Parser {
             return new IncorrectCommand(Ui.EVENT_INSUFFICIENT_ARGS_MESSAGE);
         }
 
-        if (eventInfo.length != 2) {
+        if (eventInfo.length != 2) { // insufficient arguments
             return new IncorrectCommand(Ui.EVENT_INSUFFICIENT_ARGS_MESSAGE);
         }
         String eventName = eventInfo[0].trim();
-        LocalDateTime eventDate;
+        String eventDate = eventInfo[1].trim();
+        LocalDateTime startTime;
+        LocalDateTime endTime;
         try {
-            eventDate = parseDate(eventInfo[1].trim());
-        } catch (DateTimeParseException dtpe) {
-            return new IncorrectCommand(Ui.INVALID_DATE_FORMAT_MESSAGE);
+            String[] eventDateAndTime = eventDate.split("\\s+", 2);
+            String[] startAndEndTime = eventDateAndTime[1].split(EventCommand.COMMAND_START_END_TIME_DELIMITER, 2);
+            startTime = parseDate(eventDateAndTime[0] + " " + startAndEndTime[0]);
+            endTime = parseDate(eventDateAndTime[0] + " " + startAndEndTime[1]);
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
+            return new IncorrectCommand(Ui.INVALID_EVENT_DATE_FORMAT_MESSAGE);
         }
-        return new EventCommand(eventName, eventDate);
+
+        if (startTime.isAfter(endTime)) {
+            return new IncorrectCommand(Ui.INVALID_START_AND_END_TIME_MESSAGE);
+        }
+        return new EventCommand(eventName, startTime, endTime);
     }
 
     private static Command prepareFindCommand(String fullCommand) {

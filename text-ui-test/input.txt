@@ -2,7 +2,7 @@ delete 1
 todo borrow book
 list
 deadline return book /by 12/03/20 1845
-event project meeting /at 28/02/20 1000
+event project meeting /at 28/02/20 1000 - 1200
 list
 done 2
 list
@@ -24,11 +24,13 @@ deadline  hello /by
 deadline    to-trim deadline      /by    22/02/20    2020
 deadline wrong date format test /by 30-02-20 1234
 event
-event   /at  01/01/01 0101
+event   /at  01/01/01 0101 - 1010
 event  yes  no  /at
-event       to-trim event    /at   22/02/20      2020
-event wrong date format test /at 31/6/20 1234
-todo 8
+event       to-trim event    /at   22/02/20      2020    -     2040
+event no space between start end time dash /at 12/12/12 2345-2359
+event no date test /at 2345-2359
+event wrong date format test /at 31/6/20 1234 - 2345
+event wrong start end time test /at 12/12/12 2359 - 0000
 todo 9
 todo 10
 list

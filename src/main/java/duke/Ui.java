@@ -38,7 +38,11 @@ public class Ui {
             + LS
             + "Exit now to manually fix and retain saved data";
     public static final String INVALID_DATE_FORMAT_MESSAGE  =
-            "Please specify the date and time using the format DD/MM/YYYY HHMM";
+            "Please specify the date and time using the format DD/MM/YY HHMM";
+    public static final String INVALID_EVENT_DATE_FORMAT_MESSAGE  =
+            "Please specify the starting and ending date and time using the format DD/MM/YY HHMM - HHMM";
+    public static final String INVALID_START_AND_END_TIME_MESSAGE =
+            "The starting time should be before the ending time";
 
     private final Scanner in;
     private final PrintStream out;

@@ -11,18 +11,22 @@ public class Event extends Task {
     /** Icon used to represent an Event */
     public static final char EVENT_ICON = 'E';
 
-    /** Date at which the Event will be held */
-    protected LocalDateTime time;
+    /** Starting and ending time of the Event */
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
-    public Event(String description, LocalDateTime time) {
+    public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
         super(description);
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
     public String encodeTask() {
-        return String.format("%s|%s|%s|%s",
-                EVENT_ICON, isDone, description, time.format(Parser.INPUT_DATE_FORMAT));
+        return String.format("%s|%s|%s|%s|%s",
+                EVENT_ICON, isDone, description,
+                startTime.format(Parser.INPUT_DATE_FORMAT),
+                endTime.format(Parser.INPUT_DATE_FORMAT));
     }
 
     /**
@@ -34,8 +38,9 @@ public class Event extends Task {
         String[] tokens = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(tokens[1]);
         String description = tokens[2];
-        LocalDateTime time = Parser.parseDate(tokens[3]);
-        Event event = new Event(description, time);
+        LocalDateTime startTime = Parser.parseDate(tokens[3]);
+        LocalDateTime endTime = Parser.parseDate(tokens[4]);
+        Event event = new Event(description, startTime, endTime);
         if (isDone) {
             event.markAsDone();
         }
@@ -46,6 +51,10 @@ public class Event extends Task {
     public String toString() {
         return "[" + EVENT_ICON + "]"
                 + super.toString()
-                + " (at: " + time.format(Parser.PRINT_DATE_FORMAT) + ")";
+                + " (at: "
+                + startTime.format(Parser.PRINT_DATE_FORMAT)
+                + " - "
+                + endTime.format(Parser.PRINT_TIME_FORMAT)
+                + ")";
     }
 }
