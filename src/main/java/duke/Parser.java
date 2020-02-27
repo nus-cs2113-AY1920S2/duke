@@ -63,7 +63,8 @@ public class Parser {
         }
     }
 
-    public static LocalDateTime parseDate(String dateTimeString) throws DateTimeParseException {
+    public static LocalDateTime parseDate(String dateTimeString)
+            throws DateTimeParseException, IndexOutOfBoundsException {
         // handle issue where there are multiple spaces between the date and the time
         String[] dateAndTime = dateTimeString.split("\\s+", 2);
         String formattedDateTimeString = dateAndTime[0] + " " + dateAndTime[1];
@@ -90,7 +91,7 @@ public class Parser {
         LocalDateTime deadlineDate;
         try {
             deadlineDate = parseDate(deadlineInfo[1].trim());
-        } catch (DateTimeParseException dtpe) {
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             return new IncorrectCommand(Ui.INVALID_DATE_FORMAT_MESSAGE);
         }
         return new DeadlineCommand(deadlineName, deadlineDate);
