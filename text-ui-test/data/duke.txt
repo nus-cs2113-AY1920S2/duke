@@ -1,3 +1,5 @@
 T | 0 | eat
 D | 1 | cs2113 | Tuesday
+D | 0 | assignment | Feb 28 2020, FRIDAY
 E | 0 | project meeting | Mon 2-4pm
+E | 0 | concert | Mar 21 2020, SATURDAY
