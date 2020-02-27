@@ -1,3 +1,0 @@
-T | 0 | eat
-D | 1 | cs2113 | Tuesday
-E | 0 | project meeting | Mon 2-4pm

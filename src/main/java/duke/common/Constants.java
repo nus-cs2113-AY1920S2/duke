@@ -14,6 +14,7 @@ public final class Constants {
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
+    public static final String FIND = "find";
 
     public static final String LINE_BREAK = "\t____________________________________________________________";
 
