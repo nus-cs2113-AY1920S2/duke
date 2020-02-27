@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
@@ -47,6 +48,13 @@ public class Storage {
 
         while (scanner.hasNextLine()) {
             String taskLine = scanner.nextLine();
+            decodeAndAddTask(taskList, taskLine);
+        }
+        return taskList;
+    }
+
+    private void decodeAndAddTask(TaskList taskList, String taskLine) throws DukeException {
+        try {
             switch (taskLine.charAt(0)) {
             case Todo.TODO_ICON:
                 // todo
@@ -63,8 +71,9 @@ public class Storage {
             default:
                 throw new DukeException(Ui.UNKNOWN_STORAGE_FORMAT_MESSAGE);
             }
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+            throw new DukeException(Ui.UNKNOWN_STORAGE_FORMAT_MESSAGE);
         }
-        return taskList;
     }
 
     /**

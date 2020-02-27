@@ -3,6 +3,7 @@ package duke.task;
 import duke.Parser;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Type of Task that should be done before a specified date.
@@ -30,8 +31,10 @@ public class Deadline extends Task {
      * Returns the object representation of an encoded Deadline.
      * @param encodedTask a string returned by method Task.encodeTask()
      * @return a Deadline object whose information was stored in encodedTask
+     * @throws IndexOutOfBoundsException if encodedTask is not a string returned by Task.encodeTask()
+     * @throws DateTimeParseException if date or time fields in encodedTask are of incorrect format
      */
-    public static Deadline decodeTask(String encodedTask) {
+    public static Deadline decodeTask(String encodedTask) throws DateTimeParseException, IndexOutOfBoundsException {
         String[] tokens = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(tokens[1]);
         String description = tokens[2];
