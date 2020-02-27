@@ -45,7 +45,7 @@ public class Storage {
         ArrayList<Command> list = new ArrayList<Command>();
         Scanner reader = new Scanner(f);
         while (reader.hasNext()) {
-            list.add(new loader(reader.nextLine()));
+            list.add(new Loader(reader.nextLine()));
         }
         return list;
     }

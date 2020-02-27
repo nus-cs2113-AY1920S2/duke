@@ -27,9 +27,15 @@ public class Parser {
             return prepareDeadline(commandDetails);
         case "event":
             return prepareEvent(commandDetails);
+        case "find":
+            return prepareFind(commandDetails);
         default:
             return prepareNonExistent();
         }
+    }
+
+    private static Command prepareFind(String commandDetails) {
+        return new Find(commandDetails.trim());
     }
 
     private static Command prepareNonExistent() {
