@@ -17,8 +17,8 @@ public class Ui {
             + "_________________________";
     private static final String WELCOME_MESSAGE_LINE_1 = "Hello! I'm Duke";
     private static final String WELCOME_MESSAGE_LINE_2 = "What can I do for you?";
-    private static final String EMPTY_LINE_ALERT_MESSAGE = "You have entered a empty line, Please enter a valid"
-            + " command";
+    private static final String EMPTY_LINE_ALERT_MESSAGE = "You have entered an empty line / Invalid command , "
+            + "Please enter a valid command";
     private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE_FOR_DONE_COMMAND = "Invalid Command "
             + "(done x : x should be a valid integer index)";
     private static final String ARRAY_INDEX_OUT_OF_BOUNDS_MESSAGE_FOR_DELETE_COMMAND = "Invalid Command "
