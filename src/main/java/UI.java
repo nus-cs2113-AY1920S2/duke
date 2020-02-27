@@ -36,6 +36,7 @@ public class UI {
                 + "\tevent:     tasks that start/end by a specific time (syntax: event food fair /at Mon 2-4pm)\n"
                 + "\tdone x:    mark the xth task as done (syntax: done 3)\n"
                 + "\tdelete x:  remove the xth task (syntax: delete 3)\n"
+                + "\tfind:      find a task with the given keyword (syntax: find apple)\n"
                 + "\thelp:      launch the help screen (syntax: help)";
         System.out.println(helpMsg);
     }

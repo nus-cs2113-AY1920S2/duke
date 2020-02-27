@@ -50,6 +50,43 @@ public class TaskList implements Serializable{
     }
 
     /**
+     * Finds tasks with given keyword
+     * @param userCmd the user command with the search keyword
+     * @throws DukeException of ArrayIndexOutOfBoundsException if no keyword is given
+     */
+    protected static void findTask(String userCmd) throws DukeException {
+        String findStr;
+        try{
+            String[] splitCmd = userCmd.split(" ");
+            findStr = splitCmd[1].trim();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("There must be keyword to search for. Syntax: find book");
+        }
+
+        int index = 1;
+        boolean hasMatch = false;
+        String matchingTask = "";
+        for (Task t : taskList){
+            if (t.getTaskName().contains(findStr)){
+                hasMatch = true;
+                matchingTask += "\t" +index +". " +t.toString() +"\n";
+                //numbering is dependent on if getting the list index or numbering those with match
+                index++;
+            }
+        }
+
+        System.out.println("Given keyword: " +findStr);
+        if (hasMatch){
+            System.out.println("Here are the matching tasks: ");
+            System.out.println(matchingTask);
+        }
+        else{
+            System.out.println("There are no matching tasks");
+        }
+    }
+
+    /**
      * Marks the given task as done
      * @param userCmd the given user command
      * @throws DukeException of NumberFormatException if the number is not an integer

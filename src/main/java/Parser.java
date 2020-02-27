@@ -58,7 +58,10 @@ public class Parser {
         }
         else if (userCmd.contains("delete")) {
             currTasks.deleteTask(userCmd);
-        } else {
+        }
+        else if (userCmd.contains("find")) {
+            currTasks.findTask(userCmd);
+        }else {
             System.out.println("Wrong syntax!");
             UI.printHelp();
         }
