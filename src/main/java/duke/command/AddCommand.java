@@ -57,6 +57,11 @@ public class AddCommand extends Command {
 
         /*Set up a new Deadline Task */
         String[] words = super.args.split(" /by ");
+        if(words.length < 2){
+            throw new DukeException("Args for deadline is wrong!" + System.lineSeparator() +
+                    "\tPlease input your command in the format of:" + System.lineSeparator() +
+                    "\tdeadline TASK_NAME /by TIME.");
+        }
         String name = words[0];
         String time = words[1];
         return new Deadline(name, time);
@@ -74,6 +79,11 @@ public class AddCommand extends Command {
 
         /*Set up a new Event Task */
         String[] words = super.args.split(" /at ");
+        if(words.length < 2){
+            throw new DukeException("Args for event is wrong!" + System.lineSeparator() +
+                    "\tPlease input your command in the format of" + System.lineSeparator() +
+                    "\tevent TASK_NAME /at TIME.");
+        }
         String name = words[0];
         String time = words[1];
         return new Event(name, time);
