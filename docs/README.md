@@ -1,6 +1,6 @@
 # User Guide For Duke
 
-#Table of content
+# Table of content
 <!-- TOC -->
 - [Introduction](#introduction)
 - [Features](#features)
