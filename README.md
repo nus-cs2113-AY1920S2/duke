@@ -1,5 +1,7 @@
 # Setting up
 
+[User guide for Duke is found here](https://andy-aw-why.github.io/duke/)
+
 **Prerequisites**
 
 * JDK 11
