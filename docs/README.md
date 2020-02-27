@@ -1,5 +1,83 @@
 # User Guide For Duke
 
+#Table of content
+<!-- TOC -->
+- [Introduction](#introduction)
+- [Features](#features)
+    - [Add task](#add-task)
+    - [List task](#list-task)
+    - [Delete task](#delete-task)
+    - [Find task](#find-task)
+    - [Mark task as done](#mark-task-as-done)
+    - [Exit Duke](#exit-duke)
+- [Usage](#usage)
+    - [`todo [description]` - Adds a **TODO** task into Duke](#todo-description---adds-a-todo-task-into-duke)
+        - [Example of usage:](#example-of-usage)
+            - [Expected outcome:](#expected-outcome)
+        - [Example of wrong usage (missing description):](#example-of-wrong-usage-missing-description)
+            - [Expected error outcome:](#expected-error-outcome)
+    - [`event [description] /[slash word] [yyyy-mm-dd]` - Adds an **EVENT** task into Duke](#event-description-slash-word-yyyy-mm-dd---adds-an-event-task-into-duke)
+        - [Example of usage:](#example-of-usage-1)
+            - [Expected outcome:](#expected-outcome-1)
+        - [Example of usage:](#example-of-usage-2)
+            - [Expected outcome:](#expected-outcome-2)
+        - [Example of wrong usage (missing description):](#example-of-wrong-usage-missing-description-1)
+            - [Expected error outcome:](#expected-error-outcome-1)
+        - [Example of wrong usage (missing slash word):](#example-of-wrong-usage-missing-slash-word)
+            - [Expected error outcome:](#expected-error-outcome-2)
+        - [Example of wrong usage (wrong slash word):](#example-of-wrong-usage-wrong-slash-word)
+            - [Expected error outcome:](#expected-error-outcome-3)
+        - [Example of wrong usage (missing date):](#example-of-wrong-usage-missing-date)
+            - [Expected error outcome:](#expected-error-outcome-4)
+        - [Example of wrong usage (wrong date format):](#example-of-wrong-usage-wrong-date-format)
+            - [Expected error outcome:](#expected-error-outcome-5)
+    - [`deadline [description] /[slash word] [yyyy-mm-dd]` - Adds a **DEADLINE** task into Duke](#deadline-description-slash-word-yyyy-mm-dd---adds-a-deadline-task-into-duke)
+        - [Example of usage:](#example-of-usage-3)
+            - [Expected outcome:](#expected-outcome-3)
+        - [Example of wrong usage (missing description):](#example-of-wrong-usage-missing-description-2)
+            - [Expected error outcome:](#expected-error-outcome-6)
+        - [Example of wrong usage (missing slash word):](#example-of-wrong-usage-missing-slash-word-1)
+            - [Expected error outcome:](#expected-error-outcome-7)
+        - [Example of wrong usage (wrong slash word):](#example-of-wrong-usage-wrong-slash-word-1)
+            - [Expected error outcome:](#expected-error-outcome-8)
+        - [Example of wrong usage (missing date):](#example-of-wrong-usage-missing-date-1)
+            - [Expected error outcome:](#expected-error-outcome-9)
+        - [Example of wrong usage (wrong date format):](#example-of-wrong-usage-wrong-date-format-1)
+            - [Expected error outcome:](#expected-error-outcome-10)
+    - [`list` - List all the tasks stored by duke](#list---list-all-the-tasks-stored-by-duke)
+        - [Example of usage:](#example-of-usage-4)
+            - [Expected outcome if there are tasks:](#expected-outcome-if-there-are-tasks)
+            - [Expected outcome if there isn't any tasks:](#expected-outcome-if-there-isnt-any-tasks)
+    - [`delete [tasknumber in list]` - Delete a task in duke by the list's task number](#delete-tasknumber-in-list---delete-a-task-in-duke-by-the-lists-task-number)
+        - [Example of usage:](#example-of-usage-5)
+            - [Expected outcome:](#expected-outcome-4)
+        - [Example of wrong usage (no task number given):](#example-of-wrong-usage-no-task-number-given)
+            - [Expected error outcome:](#expected-error-outcome-11)
+        - [Example of wrong usage (task number is not a number):](#example-of-wrong-usage-task-number-is-not-a-number)
+            - [Expected error outcome:](#expected-error-outcome-12)
+        - [Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range):](#example-of-wrong-usage-task-number-chosen-do-not-correspond-to-any-task-in-the-list-due-to-being-out-of-range)
+            - [Expected error outcome:](#expected-error-outcome-13)
+    - [`find [keyword or sentence]` - Find a task based on the keyword or the sentence given](#find-keyword-or-sentence---find-a-task-based-on-the-keyword-or-the-sentence-given)
+        - [Example of usage:](#example-of-usage-6)
+            - [Expected outcome:](#expected-outcome-5)
+        - [Example of usage:](#example-of-usage-7)
+            - [Example outcome:](#example-outcome)
+        - [Example of usage:](#example-of-usage-8)
+            - [Expected outcome if keyword/sentence cannot be found:](#expected-outcome-if-keywordsentence-cannot-be-found)
+    - [`done [tasknumber in list]` - Mark a task as done in duke by the list's task number](#done-tasknumber-in-list---mark-a-task-as-done-in-duke-by-the-lists-task-number)
+        - [Example of usage:](#example-of-usage-9)
+            - [Expected outcome:](#expected-outcome-6)
+        - [Example of wrong usage (no task number given):](#example-of-wrong-usage-no-task-number-given-1)
+            - [Expected error outcome:](#expected-error-outcome-14)
+        - [Example of wrong usage (task number is not a number):](#example-of-wrong-usage-task-number-is-not-a-number-1)
+            - [Expected error outcome:](#expected-error-outcome-15)
+        - [Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range):](#example-of-wrong-usage-task-number-chosen-do-not-correspond-to-any-task-in-the-list-due-to-being-out-of-range-1)
+            - [Expected error outcome:](#expected-error-outcome-16)
+    - [`bye` - exit Duke](#bye---exit-duke)
+        - [Example of usage:](#example-of-usage-10)
+            - [Expected outcome:](#expected-outcome-7)
+<!-- /TOC -->
+
 ## Introduction
 
 ```
@@ -22,7 +100,8 @@ Duke is a personal chatbot that helps the user to store tasks such as todos, eve
 
 When Duke starts, it loads the list of tasks from `data\duke.txt` if it exist.
 
-## Features 
+
+## Features
 
 ### Add task 
 Adds a **TODO**, **EVENT** or a **DEADLINE** task
@@ -44,13 +123,13 @@ Exit duke and save the task into an offline data
 
 ## Usage
 
-
-
 ### `todo [description]` - Adds a **TODO** task into Duke
 
 Duke supports **TODO** tasks. In a **TODO** task, it contains:
 1. the `todo` keyword
-2. the task (the `description`) of the **TODO** task  
+2. the task (the `description`) of the **TODO** task
+
+Format: `todo [description]`
 
 ##### Example of usage: 
 - `todo eat noodles`
@@ -86,6 +165,8 @@ Duke supports **EVENT** tasks. In a **EVENT** task, it contains:
 2. the task (the `description`) of the **EVENT** task
 3. the slash word (only accepted slash words are `at` and `on`)
 4. the date (in the `yyyy-mm-dd` format) 
+
+Format: `event [description] /[slash word] [yyyy-mm-dd]`
 
 ##### Example of usage: 
 - `event meet friends /at 2020-12-12`
@@ -126,6 +207,7 @@ Exception occurred: duke.exception.MissingDescriptionException: Missing descript
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (missing slash word): 
 
 - `event sports meeting`
@@ -141,6 +223,7 @@ Exception occurred: duke.exception.MissingSlashWordException: Missing slash word
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (wrong slash word): 
 
 - `event sports meeting /through`
@@ -156,6 +239,7 @@ for DEADLINE: the slash word can only be 'by'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (missing date): 
 
 - `event sports meeting /on `
@@ -170,6 +254,7 @@ Exception occurred: duke.exception.MissingTimeFieldException: Missing date!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (wrong date format): 
 
 - `event sports meeting /on 12-12-1990`
@@ -193,7 +278,10 @@ Duke supports **DEADLINE** tasks. In a **DEADLINE** task, it contains:
 3. the slash word (Only accepted slash word is `by`)
 4. the date (in the `yyyy-mm-dd` format) 
 
-##### Example of usage: `deadline math homework /by 2020-12-12`
+Format: `deadline [description] /[slash word] [yyyy-mm-dd]`
+
+##### Example of usage: 
+`deadline math homework /by 2020-12-12`
 
 ##### Expected outcome:
 ```
@@ -218,6 +306,7 @@ Exception occurred: duke.exception.MissingDescriptionException: Missing descript
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (missing slash word): 
 
 - `deadline Math homework`
@@ -233,6 +322,7 @@ Exception occurred: duke.exception.MissingSlashWordException: Missing slash word
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (wrong slash word): 
 
 - `deadline Math homework /in`
@@ -248,6 +338,7 @@ for DEADLINE: the slash word can only be 'by'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (missing date): 
 
 - `deadline Math homework /by  `
@@ -262,6 +353,7 @@ Exception occurred: duke.exception.MissingTimeFieldException: Missing date!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (wrong date format): 
 
 - `deadline Math homework /by 12-12-1990`
@@ -281,6 +373,7 @@ What else do you want to do?
 
 If there is any task stored in Duke, it will display all of them. However, if there is no tasks present, it will report that there is no tasks present
 
+Format: `list`
 ##### Example of usage: 
 - `list`
 
@@ -300,6 +393,7 @@ Here is the list of tasks:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Expected outcome if there isn't any tasks:
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -315,6 +409,8 @@ What else do you want to do?
 Duke supports the deletion of tasks by its task number in list. The `delete` command contains:
 1. the `delete` keyword
 2. the task number (as seen in the list) of task to be deleted 
+
+Format: `delete [tasknumber in list]`
 
 Given this list:
 ```
@@ -370,6 +466,7 @@ Exception occurred: java.lang.NumberFormatException: DELETE's number field does 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range): 
 
 - `delete 0`
@@ -390,6 +487,8 @@ What else do you want to do?
 Duke supports finding tasks by a keyword or a sentence The `find` command contains:
 1. the `find` keyword
 2. the keyword or sentence used to search for the task
+
+Format: `find [keyword or sentence]`
 
 Given this list:
 ```
@@ -416,6 +515,7 @@ Given this list:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of usage: 
 - `find english homework`
 
@@ -443,11 +543,14 @@ This word/sentence is not found!
 What else do you want to do?
 
 ```
+
 ### `done [tasknumber in list]` - Mark a task as done in duke by the list's task number
 
 Duke supports marking of tasks as done by its task number in list. The `done` command contains:
 1. the `done` keyword
 2. the task number (as seen in the list) to be marked as done
+
+Format: `done [tasknumber in list]`
 
 Given this list:
 ```
@@ -472,6 +575,7 @@ Nice! I marked this as done: [E][✓] group project (at: Sep 14 2020)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (no task number given): 
 
 - `done`
@@ -500,6 +604,7 @@ Exception occurred: java.lang.NumberFormatException: DONE's number field does no
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
+
 ##### Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range): 
 
 - `done 0`
@@ -519,6 +624,7 @@ What else do you want to do?
 ### `bye` - exit Duke
 
 When the command 'bye' is given, the list of tasks is saved as a txt document at `data\duke.txt`.
+Format: `bye`
 
 ##### Example of usage: 
 - `bye`
