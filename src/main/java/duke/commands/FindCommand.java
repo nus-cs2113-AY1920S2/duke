@@ -5,14 +5,17 @@ import duke.asset.Ui;
 import duke.tasks.Task;
 import java.util.ArrayList;
 /**
- * This is a sub class of the Command class in Duke.
- *
- * This class finds any Task which description matches
- * the key entered by User.
+ * This is a sub class of the Command class in Duke.<br>
+ * This class finds any Task which description matches<br>
+ * the key entered by User.<br>
  */
 
 public class FindCommand extends Command {
-
+    /**
+     * This constructor creates a FindCommand.<br>
+     * @param fullCommand This is the input entered by user that has<br>
+     *                    been split into an array of Strings.<br>
+     */
     public FindCommand(String[] fullCommand){
         super(fullCommand);
     }

@@ -8,14 +8,13 @@ import java.time.format.DateTimeParseException;
 
 import static java.lang.Integer.parseInt;
 /**
- * This class handles with making sense of commands
- * entered by Users
- *
- * This class has four methods:
- * 1) parseCommand() : splits User input by spaces
- * 2) getTaskInfo() : separates the User input into two Strings (Action and Timing)
- * 3) validateCommand() : ensures that User input is valid and legal
- * 4) parse() : assigns each command enter by User to the suitable Command class
+ * This class handles with making sense of commands<br>
+ * entered by Users<br>
+ * This class has four methods:<br>
+ * 1) parseCommand() : splits User input by spaces<br>
+ * 2) getTaskInfo() : separates the User input into two Strings (Action and Timing)<br>
+ * 3) validateCommand() : ensures that User input is valid and legal<br>
+ * 4) parse() : assigns each command enter by User to the suitable Command class<br>
  */
 public class Parser  {
     public static final String WRONG_INPUT="\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
@@ -33,10 +32,10 @@ public class Parser  {
             "\t improper storage of your list!";
 
 /**
- * This method splits User input by spaces into an array of Strings
+ * This method splits User input by spaces into an array of Strings<br>
  *
- * @param inCommand  This is the full input entered by User.
- * @return String[]  This returns the array of Strings that is split by spaces.
+ * @param inCommand  This is the full input entered by User.<br>
+ * @return This returns the array of Strings that is split by spaces.<br>
  */
     public static String[] parseCommand(String inCommand) {
         inCommand = inCommand.trim();
@@ -44,10 +43,11 @@ public class Parser  {
         return temp;
     }
 /**
- * This method separates User input into two Strings (Action and Timing)
+ * This method separates User input into two Strings (Action and Timing)<br>
  *
- * @param temp This is the array of Strings that was split by parseCommand().
- * @return String[]  This returns the two Strings, Action and Timing.
+ * @param temp This is the array of Strings that was split by parseCommand().<br>
+ * @return String[]  This returns the two Strings, Action and Timing.<br>
+ * @throws IllegalDukeException if command entered by the User is invalid.<br>
  */
     public static String[] getTaskInfo(String[] temp) throws IllegalDukeException {
         String action = "";
@@ -83,11 +83,11 @@ public class Parser  {
         return temp2;
     }
     /**
-     * This method converts timing from LocalDateTime
-     * format to a meaningful String format.
+     * This method converts timing from LocalDateTime<br>
      *
-     * @param inTiming This is the timing in LocalDateTime.
-     * @return timing in the following format: dd Month yyyy HH:mm
+     * format to a meaningful String format.<br>
+     * @param inTiming This is the timing in LocalDateTime.<br>
+     * @return timing in the following format: dd Month yyyy HH:mm<br>
      */
     public static String convertToDateFormat(String inTiming){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -109,10 +109,9 @@ public class Parser  {
        return outTiming;
     }
     /**
-     * This method ensures that timing entered by User is valid.
-     *
-     * @param timing This is the timing given by User.
-     * @throws IllegalDukeException if timing entered is invalid
+     * This method ensures that timing entered by User is valid.<br>
+     * @param timing This is the timing given by User.<br>
+     * @throws IllegalDukeException if timing entered is invalid.<br>
      */
     public static void validateTiming(String timing) throws IllegalDukeException {
         try{
@@ -125,13 +124,12 @@ public class Parser  {
     }
 
 /**
- * This method ensures that User input is valid and legal
+ * This method ensures that User input is valid and legal.<br>
  *
- * @param inCommand This is the full input given by User.
- * @return String[] This is the validated array of Strings
- * to be used in the parse().
- * @throws IllegalDukeException if command enter is invalid
- * or illegal.
+ * @param inCommand This is the full input given by User.<br>
+ * @return String[] This is the validated array of Strings<br>
+ * to be used in the parse().<br>
+ * @throws IllegalDukeException if command enter is invalid or illegal.<br>
  */
    public static String[] validateCommand(String inCommand) throws IllegalDukeException {
         inCommand=inCommand.toLowerCase();
@@ -189,16 +187,14 @@ public class Parser  {
         return out;
     }
 /**
- * This method assigns each command enter by User to the suitable Command class
+ * This method assigns each command enter by User to the suitable Command class.<br>
+ * This method ensures that User input is validated before assigning to<br>
+ * designated Command class. Therefore it calls validateCommand() before<br>
+ * assigning commands through switch statement.<br>
  *
- * This method ensures that User input is validated before assigning to
- * designated Command class. Therefore it calls validateCommand() before
- * assigning commands through switch statement.
- *
- * @param input is the full command entered by User.
- * @return outCommand This is the designated command based on user input.
- * @throws IllegalDukeException if command enter is invalid
- * or illegal.
+ * @param input is the full command entered by User.<br>
+ * @return outCommand This is the designated command based on user input.<br>
+ * @throws IllegalDukeException if command enter is invalid or illegal.<br>
  */
     public static Command parse(String input) throws IllegalDukeException {
         String[] fullCommand = validateCommand(input);

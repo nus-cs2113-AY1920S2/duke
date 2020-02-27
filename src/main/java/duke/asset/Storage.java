@@ -8,13 +8,20 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * This is the class that stores the list of tasks in an ArrayList.
- * This class also saves and loads the ArrayList into data.txt
+ * This is the class that stores the list of tasks in an ArrayList.<br>
+ * This class also saves and loads the ArrayList into data.txt.<br>
  */
 public class Storage {
 
     private File inFile;
-
+    /**
+     * This constructor is called only when data folder is missing.<br>
+     * @param ui This is the input. Allows for the software to inform<br>
+     *           Users on missing data folder and that the software is<br>
+     *           creating one.<br>
+     * @throws IOException if data directory is missing.<br>
+     * @throws FileNotFoundException if duke.txt is missing.<br>
+     */
     public Storage(Ui ui) throws IOException, FileNotFoundException {
                 ui.promptUser("Creating new data file for Nini");
                 String dir= "data";
@@ -31,10 +38,22 @@ public class Storage {
                             + "on missing file error");
                 }
     }
+
+    /**
+     * This constructor creates a new Storage class.<br>
+     *
+     * @param filePath This is the path of the data file (duke.txt) required for Duke.<br>
+     * @throws FileNotFoundException if data file (duke.txt) does not exist.<br>
+     */
     public Storage(String filePath) throws FileNotFoundException {
         this.inFile= new File(filePath);
     }
-
+    /**
+     * This method loads data onto the software.<br>
+     *
+     * @return The method returns an ArrayList of Tasks.<br>
+     * @throws FileNotFoundException if duke.txt does not exist.<br>
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
         Scanner in = new Scanner(this.inFile);
         ArrayList<Task> l1= new ArrayList<>();
@@ -45,7 +64,13 @@ public class Storage {
         in.close();
         return l1;
     }
-
+    /**
+     * This method initialises the ArrayList before using it.<br>
+     *
+     * @param temp This is the data from the text file that has<br>
+     *             been split into arrays of Strings.<br>
+     * @param l1 This is the ArrayList of Tasks that is used by the software.<br>
+     */
     public static void initList(String[] temp, ArrayList<Task> l1){
         switch(temp[0]){
             case "T" :
@@ -75,6 +100,12 @@ public class Storage {
                 break;
         }
     }
+    /**
+     * This method saves the data entered by the User into a text file.<br>
+     *
+     * @param l1 This is the ArrayList of Tasks that is used by the software.<br>
+     * @throws FileNotFoundException if duke.txt does not exist.<br>
+     */
     public void saveFile(ArrayList<Task> l1) throws FileNotFoundException {
             PrintWriter outText= new PrintWriter(this.inFile);
             for(int i=0; i< l1.size(); i++){

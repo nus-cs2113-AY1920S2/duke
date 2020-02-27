@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * This class handles with the interaction with User.
+ * This class handles with the interaction with User.<br>
  */
 public class Ui  {
     public static final String LINE = "\t__________________________________________________________";
@@ -46,8 +46,11 @@ public class Ui  {
 
     private final Scanner in;
     private final PrintStream out;
-
-
+    /**
+     * This constructor is called during the run process of Duke<br>
+     * to create a IO class for Ui.<br>
+     *
+     */
     public Ui() {
         this(System.in, System.out);
     }
@@ -57,14 +60,14 @@ public class Ui  {
         this.out = out;
     }
     /**
-     * This methods gets the User input.
-     * @return this returns the User input.
+     * This methods gets the User input.<br>
+     * @return the User input.<br>
      */
     public String getUserIn(){
         return in.nextLine();
     }
     /**
-     * This method prints the welcome message to User.
+     * This method prints the welcome message to User.<br>
      */
     public void printWelcomeMessage() {
         String banner = "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
@@ -85,26 +88,26 @@ public class Ui  {
         out.println(LINE);
     }
     /**
-     * This method prints constant LINE
+     * This method prints constant LINE<br>
      */
     public void printLine(){
         out.println(LINE);
     }
     /**
-     * This method prints all the error message thrown in Duke.run().
-     * @param message This is the first argument of this method. It is
-     *                the error message thrown by exceptions caught
-     *                in Duke.run
+     * This method prints all the error message thrown in Duke.run().<br>
+     * @param message This is the first argument of this method. It is<br>
+     *                the error message thrown by exceptions caught<br>
+     *                in Duke.run<br>
      */
     public void printError(String message){
         out.println(message);
     }
     /**
-     * This method informs User that a new Task class has been created and added to list
-     * @param l1 This is the first argument of this method. It is the list of current
-     *           Tasks in Duke.
-     * @param task This is the second argument. This is the task that is to be printed to inform
-     *             user that the stated task has just been added.
+     * This method informs User that a new Task class has been created and added to list<br>
+     * @param l1 This is the first argument of this method. It is the list of current<br>
+     *           Tasks in Duke.<br>
+     * @param task This is the second argument. This is the task that is to be printed to inform<br>
+     *             user that the stated task has just been added.<br>
      */
     public void printAddTask(ArrayList<Task> l1, Task task){
         out.println("\t Got it. I've added this task:");
@@ -112,27 +115,27 @@ public class Ui  {
         out.println("\t Now you have " + l1.size()+ " tasks in the list.");
     }
     /**
-     * This method prints good bye message to User.
+     * This method prints good bye message to User.<br>
      */
     public void printGoodByeMessage(){
         out.println("\t Bye.Hope to see you again soon!");
         out.println(DAB);
     }
     /**
-     * This method informs User that stated Task has been marked as done.
-     * @param task This is the only argument for this method. It is the
-     *             task that User wants to mark as done.
+     * This method informs User that stated Task has been marked as done.<br>
+     * @param task This is the only argument for this method. It is the<br>
+     *             task that User wants to mark as done.<br>
      */
     public void printDone(Task task){
         out.println("\t Nice! I've marked this task as done:");
         out.println("\t   "+task.toString());
     }
     /**
-     * This method informs User that stated Task has been deleted.
-     * @param task  This is the first argument of this method. It is
-     *              the task that the User wants to delete.
-     * @param l1    This is the second argument of this method. It is
-     *              the current list of Tasks.
+     * This method informs User that stated Task has been deleted.<br>
+     * @param task  This is the first argument of this method. It is<br>
+     *              the task that the User wants to delete.<br>
+     * @param l1    This is the second argument of this method. It is<br>
+     *              the current list of Tasks.<br>
      */
     public void printDelete(Task task, ArrayList<Task> l1){
         out.println("\t Noted. I've removed this task: ");
@@ -140,8 +143,8 @@ public class Ui  {
         out.println("\t Now you have " + l1.size() + " tasks in the list.");
     }
     /**
-     * This method informs User that all Tasks has been marked as done.
-     * @param l1 This is the current list of Tasks.
+     * This method informs User that all Tasks has been marked as done.<br>
+     * @param l1 This is the current list of Tasks.<br>
      */
     public void printDoneAll(ArrayList<Task> l1){
         out.println("\t All tasks have been marked as done!");
@@ -152,30 +155,30 @@ public class Ui  {
             }
     }
     /**
-     * This method informs User that all Tasks has been deleted.
+     * This method informs User that all Tasks has been deleted.<br>
      */
     public void printDeleteAll(){
         out.println("\t All tasks have been deleted!");
     }
     /**
-     * This method confirms with User if they want all Tasks to be deleted.
+     * This method confirms with User if they want all Tasks to be deleted.<br>
      */
     public void confirmDeleteAll(){
         out.println("\t Are you sure that you want ALL tasks to be deleted?");
         out.println("\t Type Y for Yes and N for No");
     }
     /**
-     * This method informs User that the delete ALL command is ignored.
+     * This method informs User that the delete ALL command is ignored.<br>
      */
     public void ignoreDeleteAll(){
         out.println("\t List was not modified!");
         out.println("\t Enter \"list\" to ensure all tasks are still in the list!");
     }
     /**
-     * This method shows User of all available Tasks.
-     * @param l1 is the current list of available Tasks.
-     * If l1 is empty, method will inform user that no Tasks
-     * are available.
+     * This method shows User of all available Tasks.<br>
+     * @param l1 is the current list of available Tasks.<br>
+     * If l1 is empty, method will inform user that no Tasks<br>
+     * are available.<br>
      */
     public void printList(ArrayList<Task> l1){
         if(l1.isEmpty()){
@@ -190,17 +193,20 @@ public class Ui  {
         }
     }
     /**
-     * This method informs User that command entered is not supported by Duke.
+     * This method informs User that command entered is not supported by Duke.<br>
      */
     public void printWrongInput(){
         out.println(WRONG_INPUT);
     }
-
+    /**
+     * This method informs User that command entered needs to be only Y for Yes or<br>
+     * N for No.<br>
+     */
     public void printYesOrNoOnly(){
         out.println(YES_OR_NO_ONLY);
     }
     /**
-     * This method lists the supported commands for User.
+     * This method lists the supported commands for User.<br>
      */
     public void printHelp(){
         String Help = "\t 1. [Todo] - Adds a Task of type Todo.\n" +
@@ -232,17 +238,17 @@ public class Ui  {
         out.println(Help);
     }
     /**
-     * This method informs User that data.txt is missing.
+     * This method informs User that data.txt is missing.<br>
      */
     public void showLoadingError(){
         out.println(MISSING_FILE);
     }
     /**
-     * This method shows User the list of Tasks that matches with
-     * User search key.
+     * This method shows User the list of Tasks that matches with<br>
+     * User search key.<br>
      *
-     * @param l1 is the list of all Tasks.
-     * @param l2 is the list of matching Tasks.
+     * @param l1 is the list of all Tasks.<br>
+     * @param l2 is the list of matching Tasks.<br>
      */
     public void printFindList(ArrayList<Task> l1, ArrayList<Integer> l2){
         if(l2.isEmpty()){
@@ -257,11 +263,16 @@ public class Ui  {
         }
     }
     /**
-     * This method closes the System.in class of Duke.
+     * This method allows for other classes to prompt a message to the User.<br>
+     *
+     * @param message This is the message that the other classes wish to prompt.<br>
      */
     public void promptUser(String message){
         out.println(message);
     }
+/**
+ * This method closes the System.in class of Duke.<br>
+ */
     public void close(){
         this.in.close();
     }

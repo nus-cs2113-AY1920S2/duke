@@ -10,17 +10,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 /**
- *Hello, World!
- *The program implements an application .
- *that keeps a list of Tasks
+ *Hello, World!<br>
+ *The program implements an application .<br>
+ *that keeps a list of Tasks<br>
  *
- *
- *
- *
- *
- * @author  Nizar Mohamed
- * @version 1.0
- * @since   2020-02-21
+ * @author  Nizar Mohamed<br>
+ * @version 1.0<br>
+ * @since   2020-02-21<br>
  */
 
 public class Duke{
@@ -40,8 +36,8 @@ public class Duke{
         }
     }
 /**
- * This method runs continuously, asking user for inputs
- * until user input 'bye'
+ * This method runs continuously, asking user for inputs<br>
+ * until user input 'bye'<br>
  */
     public void run(){
         int status = 1;
@@ -62,6 +58,11 @@ public class Duke{
         this.ui.close();
     }
 
+    /**
+     * This is the main method for Duke.<br>
+     * @param args This is the argument enter (if any) by User when running Duke.<br>
+     * @throws IOException if the data directory is missing.<br>
+     */
     public static void main(String[] args) throws IOException {
         try {
             new Duke("data/duke.txt").run();

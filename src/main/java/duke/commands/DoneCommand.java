@@ -9,17 +9,20 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 /**
- * This is a sub class of the Command class in Duke.
- *
- * This class marks a Task as done based on the task
- * number stated by the User.
+ * This is a sub class of the Command class in Duke.<br>
+ * This class marks a Task as done based on the task<br>
+ * number stated by the User.<br>
  */
 public class DoneCommand extends Command  {
     private int index=0 ;
     boolean isAll= false;
     public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
             "\t available list of task numbers";
-
+    /**
+     * This constructor creates a DoneCommand.<br>
+     * @param fullCommand This is the input entered by user that has<br>
+     *                    been split into an array of Strings.<br>
+     */
     public DoneCommand(String[] fullCommand){
         super(fullCommand);
         if(fullCommand[1].equals("all")){
