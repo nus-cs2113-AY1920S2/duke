@@ -6,20 +6,35 @@ import tasks.Task;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/*
-Contains the task list e.g., it has operations to add/delete tasks in the list
+//TODO Abstract this class further
+
+/**
+ * <h1>TaskList</h1>
+ * Contains all functions related to the Task List, such as:
+ * adding, deleting and listing tasks in the task list,
  */
 public class TaskList implements Serializable{
     public static ArrayList<Task> taskList;
 
+    /**
+     * Initialises an ArrayList of Task type for the TaskList
+     * @param currTask the current task list retrieved from Storage
+     */
     public TaskList(ArrayList<Task> currTask) {
         taskList = currTask;
     }
 
+    /**
+     * Retrieves the ArrayList of tasks
+     * @return the task ArrayList
+     */
     public static ArrayList<Task> getTaskList() {
         return taskList;
     }
 
+    /**
+     * Lists all the tasks in the task list
+     */
     protected static void listTasks() {
         if (taskList.size() == 0) {
             System.out.println("List is empty!");
@@ -34,6 +49,12 @@ public class TaskList implements Serializable{
         }
     }
 
+    /**
+     * Marks the given task as done
+     * @param userCmd the given user command
+     * @throws DukeException of NumberFormatException if the number is not an integer
+     * @throws DukeException of ArrayIndexOutOfBoundsException if no number is provided
+     */
     protected static void markTaskDone(String userCmd) throws DukeException {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");
@@ -64,6 +85,11 @@ public class TaskList implements Serializable{
         }
     }
 
+    /**
+     * Adds a To-do task to the current task list
+     * @param userCmd the user command stating the given task
+     * @throws DukeException of ArrayIndexOutOfBoundsException if no description is given
+     */
     protected static void addTask(String userCmd) throws DukeException {
         String todoStr;
         try{
@@ -81,6 +107,11 @@ public class TaskList implements Serializable{
 
     }
 
+    /**
+     * Adds a Deadline task to the current task list
+     * @param userCmd the user command stating the given deadline
+     * @throws DukeException of ArrayIndexOutOfBoundsException if a wrong description was given
+     */
     protected static void addDeadline(String userCmd) throws DukeException {
         String taskStr, deadlineStr;
         // Syntax: deadline return book /by Sunday
@@ -102,6 +133,11 @@ public class TaskList implements Serializable{
 
     }
 
+    /**
+     * Adds an Event task to the current task list
+     * @param userCmd the user command stating the given event
+     * @throws DukeException of ArrayIndexOutOfBoundsException if a wrong description was given
+     */
     protected static void addEvent(String userCmd) throws DukeException {
         // Syntax: event project meeting /at Mon 2-4pm
         String dateStr, eventStr;
@@ -123,6 +159,12 @@ public class TaskList implements Serializable{
         System.out.println("\t" +newEvent.toString() );
     }
 
+    /**
+     * Removes the given task from the current task list
+     * @param userCmd the user command stating the task to be deleted
+     * @throws DukeException of NumberFormatException if the task number is not an integer
+     * @throws DukeException of ArrayIndexOutOfBoundsException if a no task number is given
+     */
     protected static void deleteTask(String userCmd) throws DukeException {
         // syntax: done 2
         String[] splitCmd = userCmd.split(" ");

@@ -1,11 +1,9 @@
 import exceptions.DukeException;
-import tasks.Task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-/*
-Deals with making sense of the user command
+/**
+ * <h1>Parser</h1>
+ * Deals with making sense of the user command,
+ * directs the program to execute the corresponding TaskList command
  */
 public class Parser {
 
@@ -17,14 +15,18 @@ public class Parser {
 
     //[event, food, fair, /at, Mon, 2-4pm]
     //[deadline, buy, food, /by, Sunday]
+    //TODO: For further abstraction, related to TaskList further abstraction. To remove if abstraction is not done
     protected static String[] splitString(String userCmd){
         String[] strArr = userCmd.split(" ");
-        return strArr; //todo remove
+        return strArr;
     }
 
+    /**
+     * Assesses the given user command and decides what TaskList function to execute
+     * @param userCmd the given user command
+     * @throws DukeException from TaskList exceptions
+     */
     protected static void runParser(String userCmd) throws DukeException {
-        System.out.println(Arrays.toString(splitString(userCmd)) );
-
         // end program
         if (userCmd.toLowerCase().equals("bye")) {
             System.out.println("Bye. Hope to see you again!");
@@ -53,7 +55,8 @@ public class Parser {
         // Help command
         else if (userCmd.contains("help")) {
             UI.printHelp();
-        } else if (userCmd.contains("delete")) {
+        }
+        else if (userCmd.contains("delete")) {
             currTasks.deleteTask(userCmd);
         } else {
             System.out.println("Wrong syntax!");

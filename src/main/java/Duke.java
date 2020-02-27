@@ -1,28 +1,35 @@
-import java.util.ArrayList;
 import exceptions.DukeException;
-import tasks.Task;
 
+/**
+ * <h1>Duke</h1>
+ * The main running class. Duke is a task management program,
+ * allowing users to add/delete/find tasks.
+ */
 public class Duke {
     private static Storage storage;
     private static Parser parser;
     private static UI ui;
     private static TaskList taskList;
-//    TODO convert taskArrList to TaskList
 
-    public static void init() throws DukeException {
+    /**
+     * Initialises the relevant functions for Duke to run
+     * Starts up the Duke UI and Parser, loads preexisting list (if any) from file
+     */
+    public static void init() {
         ui = new UI(); //prints greeting
         storage = new Storage();
         try {
-//            taskArrList = storage.loadDuke();
             taskList = new TaskList(storage.loadDuke());
         } catch (DukeException e) {
             System.out.println(e);
         }
-//        parser = new Parser();
         parser = new Parser(taskList);
     }
 
-    public static void runDuke() throws DukeException {
+    /**
+     * Starts running the program.
+     */
+    public static void runDuke() {
         boolean continueRun = true;
         String userCmd = "";
         try {
@@ -38,7 +45,10 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    /**
+     * Main method to run
+     */
+    public static void main(String[] args) {
         init();
         runDuke();
     }
