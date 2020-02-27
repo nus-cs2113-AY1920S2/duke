@@ -7,16 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
-
-    public static ArrayList<Task> listOfTasks = new ArrayList<>(); // array of tasks that is <=100
-    public static int sizeOfList = 0; // number of items in the list
     public static String inputLine = null; //most updated line of input
-
+    public static boolean isEnd = false;
 
     public static void main(String[] args) {
         run("duke.txt");
 
     }
+
 
     private static void run(String filePath) {
         Ui.printWelcomeMessage();
@@ -36,17 +34,10 @@ public class Duke {
      * Goes into loop
      */
     public static void runCommandLoop() {
-        boolean isEnd = false;
-
         while (!isEnd) {
             try {
                 inputLine = Ui.readInput();
-                if (inputLine.equals("bye")) {
-                    isEnd = true;
-                } else {
-                    Parser.determineCommand();
-                }
-
+                Parser.determineCommand();
             } catch (IndexOutOfBoundsException e) {
                 Ui.printErrMsg(Constants.errMissingParam);
             } catch (DukeException e) {
@@ -54,6 +45,4 @@ public class Duke {
             }
         }
     }
-
-
 }

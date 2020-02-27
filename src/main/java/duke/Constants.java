@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * contains all the common constants used throughout program
+ */
 public class Constants {
     public static final String STANDARD_SEPARATOR = "____________________________________________________________";
     public static final String SHANNON = "Shannon";

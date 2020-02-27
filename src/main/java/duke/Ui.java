@@ -1,8 +1,14 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.Scanner;
 
+/**
+ * deals with interactions with the user.
+ * Handles the input from the user and also the
+ * output that the user sees
+ */
 public class Ui {
 
     /**
@@ -21,9 +27,9 @@ public class Ui {
     public static void printsOutTheList() {
         System.out.println(Constants.STANDARD_SEPARATOR);
         System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < Duke.sizeOfList; i++) {
+        for (int i = 0; i < TaskList.sizeOfList; i++) {
             int k = i + 1;
-            System.out.println(" " + k + "." + Duke.listOfTasks.get(i).toString());
+            System.out.println(" " + k + "." + TaskList.listOfTasks.get(i).toString());
         }
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
@@ -56,7 +62,7 @@ public class Ui {
         System.out.println(Constants.STANDARD_SEPARATOR);
         System.out.println(s);
         System.out.println(s2 + currTask.toString());
-        System.out.println(" Now you have " + Duke.sizeOfList + s3);
+        System.out.println(" Now you have " + TaskList.sizeOfList + s3);
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
 
@@ -69,19 +75,30 @@ public class Ui {
     public static void printWhenMarked(int index) {
         System.out.println(Constants.STANDARD_SEPARATOR);
         System.out.println(" Nice! I've marked this task as done:");
-        System.out.println("   " + Duke.listOfTasks.get(index).toString());
+        System.out.println("   " + TaskList.listOfTasks.get(index).toString());
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
 
 
+    /**
+     * reads the command from the user
+     *
+     * @return what is read from user
+     */
     public static String readInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
-    public static void printErrMsg(String errMissingParam) {
+
+    /**
+     * prints the error message depending on the kind of error it is
+     *
+     * @param errorMsg the error Msg to print
+     */
+    public static void printErrMsg(String errorMsg) {
         System.out.println(Constants.STANDARD_SEPARATOR);
-        System.out.println(errMissingParam);
+        System.out.println(errorMsg);
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
 }
