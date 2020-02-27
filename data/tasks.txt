@@ -2,4 +2,5 @@
 2. [D] [✘] finish iP (by: Mar 2 2020)
 3. [E] [✘] watch a moive (at: tomorrow)
 4. [E] [✓] watch two moives (at: Feb 21 2020)
-5. [E] [✘] get hair cut (at: Feb 27 2020)
+5. [E] [✓] get hair cut (at: Feb 27 2020)
+6. [D] [✘] release iP (by: 2 Mar.)

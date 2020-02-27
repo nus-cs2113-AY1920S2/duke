@@ -22,13 +22,7 @@ public class Parser {
         taskType = words[0];
 
         String taskTypeLowerCase = getTaskTypeLowerCase(taskType);
-
-        boolean isNotEmpty = words.length > 1;
-        if(isNotEmpty){
-            args = fullCommand.replace(taskType + " ", "");
-        } else {
-            args = "";
-        }
+        args = getArgs(fullCommand, taskType, words);
 
         switch (taskTypeLowerCase) {
         case AddCommand.COMMAND_WORD :
@@ -46,6 +40,24 @@ public class Parser {
         default:
             throw new DukeException("Your command cannot be used.");
         }
+    }
+
+    /**
+     * Gets user input's args.
+     * @param fullCommand full user input command.
+     * @param taskType the user input task type.
+     * @param words full user input's string array.
+     * @return user input's args.
+     */
+    private static String getArgs(String fullCommand, String taskType, String[] words) {
+        String args;
+        boolean isNotEmpty = words.length > 1;
+        if(isNotEmpty){
+            args = fullCommand.replace(taskType + " ", "");
+        } else {
+            args = "";
+        }
+        return args;
     }
 
     /**
