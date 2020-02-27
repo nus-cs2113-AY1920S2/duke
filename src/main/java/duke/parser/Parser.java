@@ -21,15 +21,7 @@ public class Parser {
         words = fullCommand.split("\\s+",2);
         taskType = words[0];
 
-        boolean isTodo = taskType.equalsIgnoreCase("todo");
-        boolean isDeadline = taskType.equalsIgnoreCase("deadline");
-        boolean isEvent = taskType.equalsIgnoreCase("event");
-        boolean isExit = taskType.equalsIgnoreCase("bye");
-        boolean isList = taskType.equalsIgnoreCase("list");
-        boolean isDone = taskType.equalsIgnoreCase("done");
-        boolean isDelete = taskType.equalsIgnoreCase("delete");
-        boolean isFind = taskType.equalsIgnoreCase("find");
-        boolean isAdd = isTodo || isDeadline || isEvent;
+        String taskTypeLowerCase = getTaskTypeLowerCase(taskType);
 
         boolean isNotEmpty = words.length > 1;
         if(isNotEmpty){
@@ -38,22 +30,40 @@ public class Parser {
             args = "";
         }
 
-        if(isAdd) {
+        switch (taskTypeLowerCase) {
+        case AddCommand.COMMAND_WORD :
             return new AddCommand(fullCommand, taskType, args);
-        } else if(isList) {
+        case ListCommand.COMMAND_WORD :
             return new ListCommand(fullCommand, taskType, args);
-        } else if(isDelete) {
+        case DeleteCommand.COMMAND_WORD :
             return new DeleteCommand(fullCommand, taskType, args);
-        } else if(isDone){
+        case DoneCommand.COMMAND_WORD :
             return new DoneCommand(fullCommand, taskType, args);
-        } else if(isExit){
+        case ExitCommand.COMMAND_WORD :
             return new ExitCommand(fullCommand, taskType, args);
-        } else if(isFind){
+        case FindCommand.COMMAND_WORD :
             return new FindCommand(fullCommand, taskType, args);
-        } else {
+        default:
             throw new DukeException("Your command cannot be used.");
         }
-
     }
+
+    /**
+     * Translates user input into task type string in lower case.
+     * @param taskType the user input task type.
+     * @return task type string in lower case.
+     */
+    private static String getTaskTypeLowerCase(String taskType) {
+        String taskTypeLowerCase = taskType.toLowerCase();
+
+        boolean isAdd = taskTypeLowerCase.equals(AddCommand.TODO_COMMAND_WORD)
+                || taskTypeLowerCase.equals(AddCommand.DEADLINE_COMMAND_WORD)
+                || taskTypeLowerCase.equals(AddCommand.EVENT_COMMAND_WORD);
+        if (isAdd){
+            taskTypeLowerCase = AddCommand.COMMAND_WORD;
+        }
+        return taskTypeLowerCase;
+    }
+
 
 }

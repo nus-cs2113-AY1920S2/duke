@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * Marks a task as done using it's index from the task list.
  */
 public class DoneCommand extends Command {
+    public static final String COMMAND_WORD = "done";
     public DoneCommand(String fullCommand, String taskType, String args) {
         super(fullCommand, taskType, args);
     }

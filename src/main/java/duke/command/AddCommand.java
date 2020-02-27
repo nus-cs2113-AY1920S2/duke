@@ -15,6 +15,10 @@ import duke.ui.Ui;
  */
 public class AddCommand extends Command {
 
+    public static final String COMMAND_WORD = "add";
+    public static final String TODO_COMMAND_WORD = "todo";
+    public static final String DEADLINE_COMMAND_WORD = "deadline";
+    public static final String EVENT_COMMAND_WORD = "event";
     public AddCommand(String fullCommand, String taskType, String args) {
         super(fullCommand, taskType, args);
     }

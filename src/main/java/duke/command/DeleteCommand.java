@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * Deletes a task using it's index from the task list.
  */
 public class DeleteCommand extends Command {
+    public static final String COMMAND_WORD = "delete";
     public DeleteCommand(String fullCommand, String taskType, String args) {
         super(fullCommand, taskType, args);
     }

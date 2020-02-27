@@ -8,6 +8,8 @@ import duke.ui.Ui;
 /** Gives users a way to find a task by searching for a keyword. */
 public class FindCommand extends Command {
 
+    public static final String COMMAND_WORD = "find";
+
     public FindCommand(String fullCommand, String taskType, String args) {
         super(fullCommand, taskType, args);
     }
