@@ -86,7 +86,7 @@ Format: ​`list`
 
 ### 2.5 `Find` Tasks
 
-Users can find all the tasks which contains a certain keyword.\
+Users can find all the tasks which contains a certain keyword(Case sensitive).\
 
 Format: ​`find KEYWORD`
 
