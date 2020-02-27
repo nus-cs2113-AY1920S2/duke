@@ -42,4 +42,18 @@ Words enclosed by `<` and `>` are parameters that are supplied by you.
 ![Setting up Duke](images/startup.png)
 
 ## Usage
-<a id="deadline"></a>`deadline` - Adds a Deadline Task to your Task List
+#### <a id="deadline"></a> `deadline` - Adds a Deadline Task to your Task List
+
+Syntax:
+
+`deadline <details> /by <date/time>`
+
+Example of usage: 
+
+`deadline finish A-UserGuide /by March 2nd 2020`
+
+Expected Outcome:
+
+`Got it. I've added this task: <item details>. Now you have <amount> tasks in list.`
+
+[deadline](images/deadline.PNG)
