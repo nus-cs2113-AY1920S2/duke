@@ -30,7 +30,7 @@ manages the list of Tasks, refer to the *Features* section below.
 	Please create a text file called 'duke.txt' file inside a folder called 'data'.
 	Ensure that the data folder is under the same directory as the Jar file. <br/>
 	Example: <br/>
-	![Capture](https://github.com/NizarMohd/duke/blob/master/Capture.PNG)
+	![Capture](Capture.PNG)
 
 
 ## Features 
