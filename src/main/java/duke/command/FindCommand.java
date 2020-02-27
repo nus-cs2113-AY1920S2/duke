@@ -37,7 +37,7 @@ public class FindCommand extends Command {
             if(task.toString().contains(args)){
                 boolean isFirstOne = id == 0;
                 if (isFirstOne){
-                    ui.printInfoHead("\tHere are the matching tasks in your list:");
+                    ui.printInfoHead("Here are the matching tasks in your list:");
                 }
                 id ++;
                 ui.printOneTask(task, id);
