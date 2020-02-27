@@ -1,7 +1,8 @@
-package duke.taskList.task;
+package duke.tasklist.task;
 
-import static duke.common.Constants.TODO;
-
+/**
+ * Stores a todo task.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -16,10 +17,5 @@ public class Todo extends Task {
     @Override
     public String toFile() {
         return "T | " + super.toFile();
-    }
-
-    @Override
-    public String type() {
-        return TODO;
     }
 }

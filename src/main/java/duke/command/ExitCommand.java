@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.common.DukeException;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
-
-public class ExitCommand extends Command{
+/**
+ * Deals with command related to exit the Duke.
+ */
+public class ExitCommand extends Command {
     public ExitCommand() {
 
     }
@@ -17,8 +17,15 @@ public class ExitCommand extends Command{
         return true;
     }
 
+    /**
+     * Updates ui to show Goodbye.
+     *
+     * @param tasks stores all tasks, useless here.
+     * @param ui deals with user interface.
+     * @param storage deals with back up file, useless here.
+     */
     @Override
-    public void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodByeMessage();
     }
 }

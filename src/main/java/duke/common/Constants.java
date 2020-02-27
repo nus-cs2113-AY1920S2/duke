@@ -1,5 +1,8 @@
 package duke.common;
 
+/**
+ * Stores all constant values.
+ */
 public final class Constants {
     public static final String LOGO = " ____        _        \n"
                                 + "|  _ \\ _   _| | _____ \n"

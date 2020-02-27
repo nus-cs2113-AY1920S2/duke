@@ -1,18 +1,18 @@
-package duke.taskList;
+package duke.tasklist;
 
-import duke.taskList.task.Task;
+import duke.tasklist.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Contains the task list.
+ * It has operations to add/delete tasks in the list.
+ */
 public class TaskList {
     private static ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
-    }
-
-    public TaskList(ArrayList<Task> storage) {
-        this.tasks = storage;
     }
 
     public static void addTask(Task task) {

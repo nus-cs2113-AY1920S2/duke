@@ -1,7 +1,8 @@
-package duke.taskList.task;
+package duke.tasklist.task;
 
-import static duke.common.Constants.EVENT;
-
+/**
+ * Stores an event class.
+ */
 public class Event extends Task {
 
     protected  String at;
@@ -19,10 +20,5 @@ public class Event extends Task {
     @Override
     public String toFile() {
         return "E | " + super.toFile() + " | " + at;
-    }
-
-    @Override
-    public String type() {
-        return EVENT;
     }
 }

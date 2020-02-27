@@ -1,7 +1,8 @@
-package duke.taskList.task;
+package duke.tasklist.task;
 
-import static duke.common.Constants.DEADLINE;
-
+/**
+ * Stores a deadline task.
+ */
 public class Deadline extends Task {
 
     protected  String by;
@@ -19,10 +20,5 @@ public class Deadline extends Task {
     @Override
     public String toFile() {
         return "D | " + super.toFile() + " | " + by;
-    }
-
-    @Override
-    public String type() {
-        return DEADLINE;
     }
 }

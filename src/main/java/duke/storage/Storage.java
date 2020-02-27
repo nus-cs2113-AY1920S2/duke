@@ -1,9 +1,9 @@
 package duke.storage;
 
-import duke.taskList.TaskList;
-import duke.taskList.task.Deadline;
-import duke.taskList.task.Event;
-import duke.taskList.task.Todo;
+import duke.tasklist.TaskList;
+import duke.tasklist.task.Deadline;
+import duke.tasklist.task.Event;
+import duke.tasklist.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private static String filePath;
 
@@ -23,8 +25,11 @@ public class Storage {
     }
 
     /**
-     * Helper function that change the format of a task in file to correct format of a task in taskList
-     * @param oneTask a line in the hard disk
+     * Changes the format of a task in file to correct format of a task in taskList.
+     * Then stores the right format task to list.
+     *
+     * @param oneTask a line in the hard disk.
+     * @param tasks stores taskList.
      */
     public static void loadATask(String oneTask, TaskList tasks) {
         String[] taskSplit = oneTask.split(" \\| ");
@@ -47,8 +52,10 @@ public class Storage {
     }
 
     /**
-     * Load the content in the file to storage
-     * @return a list of tasks
+     * Loads the content in the file to taskList.
+     *
+     * @param tasks stores taskList.
+     * @throws FileNotFoundException if there is no back up file.
      */
     public void load(TaskList tasks) throws FileNotFoundException {
         File f = new File(filePath);
@@ -62,9 +69,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes a list of tasks to hard disk file.
+     *
+     * @param tasks stores taskList.
+     * @throws IOException there is no back up file.
+     */
     public static void write(TaskList tasks) throws IOException {
         File f = new File(filePath);
-        if(!f.exists()) {
+        if (!f.exists()) {
             throw new IOException();
         }
         FileWriter fw = new FileWriter(filePath);
