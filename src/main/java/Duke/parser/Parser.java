@@ -48,6 +48,7 @@ public class Parser {
             return true;
         case Help.COMMAND_WORD:
             executeHelpCommand(ui);
+            return true;
         case Find.COMMAND_WORD:
             executeFindCommand(ui, taskList, arguments);
             return true;
@@ -101,7 +102,7 @@ public class Parser {
         ArrayList<Task> taskArrayList = taskList.getList();
         ArrayList<Task> tempFindList = new ArrayList<Task>();
         for(Task a : taskArrayList){
-            if(a.getDescription().contains(arguments)){
+            if(a.getDescription().toLowerCase().contains(arguments.toLowerCase())){
                 tempFindList.add(a);
             }
         }

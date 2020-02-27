@@ -57,3 +57,131 @@ Expected Outcome:
 `Got it. I've added this task: <item details>. Now you have <amount> tasks in list.`
 
 ![deadline](images/deadline.PNG)
+
+#### <a id="event"></a> `event` - Adds a Event Task to your Task List
+
+Syntax:
+
+`event <details> /at <location>`
+
+Example of usage: 
+
+`event submit A-UserGuide /at GitHub`
+
+Expected Outcome:
+
+`Got it. I've added this task: <item details>. Now you have <amount> tasks in list.`
+
+![event](images/event.PNG)
+
+#### <a id="todo"></a> `todo` - Adds a ToDo Task to your Task List
+
+Syntax:
+
+`todo <details>`
+
+Example of usage: 
+
+`todo Eat Lunch`
+
+Expected Outcome:
+
+`Got it. I've added this task: <item details>. Now you have <amount> tasks in list.`
+
+![todo](images/ToDo.PNG)
+
+#### <a id="list"></a> `list` - List displays all the task you have added to your Task List
+
+Syntax:
+
+`list`
+
+Example of usage: 
+
+`list`
+
+Expected Outcome:
+
+`Here are the tasks in your list: <item details>`
+
+![list](images/list.PNG)
+
+#### <a id="done"></a> `done` - Done marks your task as complete
+
+Syntax:
+
+`done <item number>`
+
+Example of usage: 
+
+`done 2`
+
+Expected Outcome:
+
+`Nice! I've marked this ask as done: <item details>`
+
+![done](images/done.PNG)
+
+#### <a id="delete"></a> `delete` - Delete your tasks from Task List
+
+Syntax:
+
+`delete <item number>`
+
+Example of usage: 
+
+`delete 2`
+
+Expected Outcome:
+
+`Noted. I've removed this task: <item details>`
+
+![delete](images/delete.PNG)
+
+#### <a id="find"></a> `find` - Find allows you to find task from Task list based on keyword
+
+Syntax:
+
+`find <keyword>`
+
+Example of usage: 
+
+`find lunch`
+
+Expected Outcome:
+
+`Here are the matching tasks in your list: <item details>`
+
+![find](images/find.PNG)
+
+#### <a id="help"></a> `help` - Help displays all function
+
+Syntax:
+
+`help`
+
+Example of usage: 
+
+`help`
+
+Expected Outcome:
+
+`Here is a list of command: <command details>`
+
+![help](images/help.PNG)
+
+#### <a id="bye"></a> `bye` - Bye exits the program
+
+Syntax:
+
+`bye`
+
+Example of usage: 
+
+`bye`
+
+Expected Outcome:
+
+`Bye. Hope to see you again soon!`
+
+![bye](images/bye.PNG)
