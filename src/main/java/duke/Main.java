@@ -34,7 +34,7 @@ public class Main {
 
         while (!userInput.toLowerCase().equals(END_STRING)) {
             try {
-                command = Parser.parseLine(userInput, taskList);
+                command = Parser.parseUserInput(userInput, taskList);
                 command.execute();
                 if (command.getIsPersistentCommand()) {
                     taskList.writeTasksToFile();

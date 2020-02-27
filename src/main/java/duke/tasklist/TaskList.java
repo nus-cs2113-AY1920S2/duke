@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import duke.parser.Parser;
 import duke.ui.Ui;
 import duke.exceptions.BadFileFormatException;
 import duke.exceptions.BadLineFormatException;
@@ -119,7 +120,7 @@ public class TaskList {
 
         for (String s : fileContents) {
             try {
-                tasks.add(Task.getTaskFromFormattedLine(s));
+                tasks.add(Parser.parseFormattedLine(s));
             } catch (BadLineFormatException e) {
                 errors += e.getMessage() + " on line " + lineCounter + " of " + filePath + System.lineSeparator();
             }
