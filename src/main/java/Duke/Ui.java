@@ -60,8 +60,23 @@ public class Ui {
         printMessage("Bye. Hope to see you again soon!");
     }
 
+    public String getWord(String s){
+        return s.substring(5).toLowerCase();
+    }
+
     public void showLoadingError(){
 
     }
+
+    public void printNoMatchingTasks(){
+        printMessage("There are no matching tasks in your list.");
+    }
+
+    public void printMatchingTasks(TaskList task){
+        for (int i = 0; i < task.getSize(); i++){
+            printMessage((i + 1) + "." + task.getTasks().get(i).toString());
+        }
+    }
+
 
 }
