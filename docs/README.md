@@ -44,15 +44,15 @@ to be entered and will store the tasks in a list.
 
 Example of usage: 
 
-`add task`
-`todo meeting`
+<br />`add task`
+<br />`todo meeting`
 
 Expected outcome:
 
-`Please add tasks`
-`Got it. I've added this task: meeting`
-`added : [T][✘]meeting`
-`Now you have 1 tasks in the list`
+<br />`Please add tasks`
+<br />`Got it. I've added this task: meeting`
+<br />`added : [T][✘]meeting`
+<br />`Now you have 1 tasks in the list`
 
 ### `list` -List the current tasks
 
@@ -61,13 +61,13 @@ with reepective date and time details.
 
 Example of usage: 
 
-`list`
+<br />`list`
 
 Expected outcome:
 
-`1 .[T][✘]dinner`
-`2 .[T][✘]football`
-`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
+<br />`1 .[T][✘]dinner`
+<br />`2 .[T][✘]football`
+<br />`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
 
 ### `delete index` -Delete a task according to the index
 
@@ -75,17 +75,18 @@ This command deletes a task at the given index
 
 Example of usage: 
 
-`list`
-`delete 1`
+<br />`list`
+<br />`delete 1`
+
 Expected outcome:
 
-`1 .[T][✘]dinner`
-`2 .[T][✘]football`
-`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
+<br />`1 .[T][✘]dinner`
+<br />`2 .[T][✘]football`
+<br />`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
 
-`Noted. I've removed this task:` 
-`Removed : [T][✘]dinner`
-`Now you have 2 tasks in the list`
+<br />`Noted. I've removed this task:` 
+<br />`Removed : [T][✘]dinner`
+<br />`Now you have 2 tasks in the list`
 
 ### `done index` -Mark a task done according to the index
 
@@ -94,13 +95,14 @@ This command marks a task done at the given index
 Example of usage: 
 
 `done 1`
+
 Expected outcome:
 
-`1 .[T][✓]dinner`
-`2 .[T][✘]football`
-`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
+<br />`1 .[T][✓]dinner`
+<br />`2 .[T][✘]football`
+<br />`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
 
-`Mark task done` 
+<br />`Mark task done` 
 
 ### `find keyword` -fina a list of tasks containing the keyword
 
@@ -109,21 +111,21 @@ Or it returns a error message
 
 Example of usage: 
 
-`list`
-`find dinner`
-`find lunch`
+<br />`list`
+<br />`find dinner`
+<br />`find lunch`
+
 Expected outcome:
 
-`1 .[T][✓]dinner`
-`2 .[T][✘]football`
-`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
+<br />`1 .[T][✓]dinner`
+<br />`2 .[T][✘]football`
+<br />`3 .[E][✘]meeting (at: Nov. 11 2020 1800)`
 
-` Here are the matching tasks in your list:`
-`____________________________________________________________`
-`1 .[T][✓]dinner`
+<br />` Here are the matching tasks in your list:`
+<br />`1 .[T][✓]dinner`
 
-`Here are the matching tasks in your list:`
-`No matching results `
+<br />`Here are the matching tasks in your list:`
+<br />`No matching results `
 
 ### `bye` -Close the programme and saves to a local file
 
@@ -135,7 +137,5 @@ Example of usage:
 
 Expected outcome:
 
-`Tasks are being saved now`
-`____________________________________________________________`
-`Bye. Hope to see you again soon!`
-`___________________________________`
+<br />`Tasks are being saved now`
+<br />`Bye. Hope to see you again soon!`
