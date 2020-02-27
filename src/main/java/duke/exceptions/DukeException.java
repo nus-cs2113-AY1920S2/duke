@@ -14,6 +14,7 @@ public class DukeException extends Exception{
     public String commandType;
     public String parameters;
 
+
     public DukeException(int exceptionCode, String commandType){
         this.exceptionCode = exceptionCode;
         this.commandType = commandType;

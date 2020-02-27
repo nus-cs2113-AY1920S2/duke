@@ -8,9 +8,13 @@ public class Delete extends Command {
         super(commandDetails);
     }
 
+    /**
+     * @param tasks     the tasks that will be augmented
+     * @param ui        the messages that will be displayed
+     * @param storage   the storage to be added into
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-
         try {
             int index = Integer.parseInt(command.replaceAll("[^\\d]",""))-1;
             ui.showDeleteOutput(tasks.list.get(index).command,tasks.list.size()-1);
@@ -21,6 +25,9 @@ public class Delete extends Command {
         }
     }
 
+    /**
+     * @return false, since this is not a "bye" command.
+     */
     @Override
     public boolean isExit(){
         return false;

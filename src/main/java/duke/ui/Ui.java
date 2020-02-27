@@ -5,6 +5,8 @@ import duke.commands.Command;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Ui {
 
     public static void showWelcome(){

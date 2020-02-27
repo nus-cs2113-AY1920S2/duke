@@ -14,10 +14,22 @@ import java.util.Scanner;
 public class Storage {
     File f;
 
+    /**
+     * Constructor specifying file path.
+     * @param filePath the file path to store on hard drive
+     * @throws FileNotFoundException If file is not found
+     */
     public Storage (String filePath) throws FileNotFoundException {
         f = new File("data/duke_list.txt");
     }
 
+    /**
+     * Update list onto hard drive.
+     *
+     * Creates the file and directory if they do not exist.
+     *
+     * @param list
+     */
     public void updateListDataOnDisk(ArrayList<Command> list){
         try {
             Files.createDirectory(Paths.get("data"));
@@ -41,6 +53,12 @@ public class Storage {
 
     }
 
+    /**
+     * Loads file from hard drive on start of program.
+     *
+     * @return list from hard drive
+     * @throws FileNotFoundException If file is not found
+     */
     public ArrayList <Command> loadListDataFromDisk() throws FileNotFoundException {
         ArrayList<Command> list = new ArrayList<Command>();
         Scanner reader = new Scanner(f);
