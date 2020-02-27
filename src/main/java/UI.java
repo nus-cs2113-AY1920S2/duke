@@ -40,18 +40,6 @@ public class UI {
         return sc.nextLine();
     }
 
-    protected static void listTasks(ArrayList<Task> taskArrList) {
-        if (taskArrList.size() == 0) {
-            System.out.println("List is empty!");
-        }
-        else {
-            System.out.println("Current task list: ");
-            int index = 1;
-            for (Task t : taskArrList) {
-                System.out.println("\t" +index +". " +t.toString());
-                index++;
-            }
-        }
-    }
+
 
 }

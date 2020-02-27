@@ -9,6 +9,12 @@ Deals with making sense of the user command
  */
 public class Parser {
 
+    private static TaskList currTasks;
+
+    public Parser(TaskList taskList) {
+        currTasks = taskList;
+    }
+
     //[event, food, fair, /at, Mon, 2-4pm]
     //[deadline, buy, food, /by, Sunday]
     protected static String[] splitString(String userCmd){
@@ -16,7 +22,7 @@ public class Parser {
         return strArr; //todo remove
     }
 
-    protected static ArrayList<Task> runParser(String userCmd, ArrayList<Task> taskArrList) throws DukeException {
+    protected static void runParser(String userCmd) throws DukeException {
         System.out.println(Arrays.toString(splitString(userCmd)) );
 
         // end program
@@ -26,33 +32,32 @@ public class Parser {
         }
         // List commands
         else if (userCmd.toLowerCase().equals("list")) {
-            UI.listTasks(taskArrList);
+            currTasks.listTasks();
         }
         // Mark task as done
         else if (userCmd.contains("done")) {
-            taskArrList = TaskList.markTaskDone(userCmd, taskArrList);
+            currTasks.markTaskDone(userCmd);
         }
         // Add task type todos (normal tasks)
         else if (userCmd.contains("todo")) {
-            taskArrList = TaskList.addTask(userCmd, taskArrList);
+            currTasks.addTask(userCmd);
         }
         // Add task type deadline
         else if (userCmd.contains("deadline")) {
-            taskArrList = TaskList.addDeadline(userCmd, taskArrList);
+            currTasks.addDeadline(userCmd);
         }
         // Add task type events
         else if (userCmd.contains("event")) {
-            taskArrList = TaskList.addEvent(userCmd, taskArrList);
+            currTasks.addEvent(userCmd);
         }
         // Help command
         else if (userCmd.contains("help")) {
             UI.printHelp();
         } else if (userCmd.contains("delete")) {
-            taskArrList = TaskList.deleteTask(userCmd, taskArrList);
+            currTasks.deleteTask(userCmd);
         } else {
             System.out.println("Wrong syntax!");
             UI.printHelp();
         }
-        return taskArrList;
     }
 }

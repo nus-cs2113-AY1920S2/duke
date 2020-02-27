@@ -10,7 +10,7 @@ import java.util.ArrayList;
 Deals with loading tasks from the file and saving tasks in the file
  */
 
-public class Storage {
+public class Storage  {
 
     String dir = System.getProperty("user.dir");
     Path filepath = Paths.get(dir, "data", "taskList.txt");
@@ -38,13 +38,13 @@ public class Storage {
                 objRead.close();
             }
             catch (IOException | ClassNotFoundException e) {
-                throw new DukeException("Load error");
+                throw new DukeException( e+ "\nLoad error");
             }
         }
         return loadTasks;
     }
 
-    public ArrayList<Task> saveDuke(ArrayList<Task> taskArrList) throws DukeException {
+    public void saveDuke(TaskList saveTasks) throws DukeException {
         try{
             // File stream to write to file
             FileOutputStream fileWrite = new FileOutputStream(dukeFile);
@@ -52,13 +52,13 @@ public class Storage {
             ObjectOutputStream objWrite = new ObjectOutputStream(fileWrite);
 
             // write the ArrayList into the file
-            objWrite.writeObject(taskArrList);
+            objWrite.writeObject(saveTasks.getTaskList());
+
             objWrite.flush();
             objWrite.close();
         }
         catch (IOException e) {
-            throw new DukeException("Save error");
+            throw new DukeException(e+"\nSave error");
         }
-        return taskArrList;
     }
 }
