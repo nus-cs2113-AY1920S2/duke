@@ -15,4 +15,6 @@ public class Event extends Task {
     public String toString() {
         return "[" + taskType + "]" + super.toString() + " (at: " + date + ")";
     }
+
+    public String writeInFile() { return super.writeInFile() + " | " + date; }
 }

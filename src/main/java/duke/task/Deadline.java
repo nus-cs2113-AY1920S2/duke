@@ -14,4 +14,6 @@ public class Deadline extends Task {
     public String toString() {
         return "[" + taskType + "]" + super.toString() + " (by: " + date + ")";
     }
+
+    public String writeInFile() { return super.writeInFile() + " | " + date;}
 }

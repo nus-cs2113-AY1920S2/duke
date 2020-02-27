@@ -3,10 +3,13 @@ package src.main.java;
 import src.main.java.duke.exceptions.AlreadyDoneException;
 import src.main.java.duke.exceptions.InvalidDateException;
 import src.main.java.duke.exceptions.InvalidDoneException;
+import src.main.java.duke.exceptions.UnknownLineFromSavedFileException;
 import src.main.java.duke.task.Deadline;
 import src.main.java.duke.task.Event;
 import src.main.java.duke.task.Task;
 import src.main.java.duke.task.Todo;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class Duke_Static_Methods {
     static void addNewEvent(Task[] taskList, String s) throws InvalidDateException {
@@ -30,6 +33,7 @@ class Duke_Static_Methods {
     }
 
     static void printAddedTask(Task[] taskList) {
+        System.out.println("Got it. I've added this task");
         System.out.println("  " + taskList[Task.getTotalNumberOfTask() - 1].toString());
         System.out.println("Now you have " + Task.getTotalNumberOfTask() + " tasks in the list");
     }
@@ -40,7 +44,6 @@ class Duke_Static_Methods {
     }
 
     static void addTaskInList(Task taskDescription, Task[] taskList) {
-        System.out.println("Got it. I've added this task");
         taskList[Task.getTotalNumberOfTask() - 1] = taskDescription;
     }
 
@@ -69,5 +72,44 @@ class Duke_Static_Methods {
         Todo toDo = new Todo(taskDescription);
         addTaskInList(toDo, taskList);
         printAddedTask(taskList);
+    }
+
+    static void addSavedTasks(Task[] taskList, String[] savedTaskDetails) throws UnknownLineFromSavedFileException {
+        switch (savedTaskDetails[0]) {
+            case "T":
+                Todo todo = new Todo(savedTaskDetails[2]);
+                updateTaskStatus(todo, savedTaskDetails[1]);
+                addTaskInList(todo, taskList);
+                break;
+            case "D":
+                Deadline deadline = new Deadline(savedTaskDetails[2], savedTaskDetails[3]);
+                updateTaskStatus(deadline, savedTaskDetails[1]);
+                addTaskInList(deadline, taskList);
+                break;
+            case "E":
+                Event event = new Event(savedTaskDetails[2], savedTaskDetails[3]);
+                updateTaskStatus(event, savedTaskDetails[1]);
+                addTaskInList(event, taskList);
+                break;
+            default:
+                throw new UnknownLineFromSavedFileException();
+        }
+    }
+
+    private static void updateTaskStatus(Task task, String taskStatus){
+        if (taskStatus.equals("1")) {
+            task.completedTask();
+        }
+    }
+
+    static void writeToFile(Task[] taskList) throws IOException {
+        FileWriter fw = new FileWriter("duke.txt");
+        String fileText = "";
+        for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
+            fileText += taskList[i].writeInFile();
+            fileText += System.lineSeparator();
+        }
+        fw.write(fileText);
+        fw.close();
     }
 }

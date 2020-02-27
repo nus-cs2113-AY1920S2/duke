@@ -26,6 +26,11 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public boolean getIsDone() {return isDone;}
+    public boolean getIsDone() { return isDone; }
+
+    public String writeInFile() {
+        String taskStatus = (isDone ? "1" : "0");
+        String s = taskType + " | " + taskStatus + " | " + description;
+        return s; }
 }
 
