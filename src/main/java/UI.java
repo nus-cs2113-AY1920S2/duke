@@ -1,10 +1,9 @@
-import tasks.Task;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-Deals with interactions with the user
+/**
+ * <h1>UI</h1>
+ * This class deals with interactions with the user.
+ * It contains functions for general Duke-user interaction
  */
 public class UI {
     private static Scanner sc = new Scanner(System.in);
@@ -13,6 +12,9 @@ public class UI {
         printGreeting();
     }
 
+    /**
+     * Prints the greeting message when Duke is started
+     */
     protected static void printGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -22,6 +24,10 @@ public class UI {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Prints the help message when the user executes a
+     * wrong command or if the 'help' command is run
+     */
     protected static void printHelp() {
         String helpMsg = "Here is a list of things you can do: \n"
                 + "\ttodo:      tasks without a date/time (syntax: todo buy food)\n"
@@ -35,12 +41,13 @@ public class UI {
         System.out.println(helpMsg);
     }
 
+    /**
+     * Prepares to receive a user input
+     * @return the user input
+     */
     protected static String getUserCommand() {
         System.out.println("==========================");
         System.out.println("How can I help you?");
         return sc.nextLine();
     }
-
-
-
 }
