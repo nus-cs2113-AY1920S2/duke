@@ -1,16 +1,30 @@
 package duke.tasks;
 
-public class Deadline extends Task {
-    protected String dueDateTime;
+import duke.Main;
 
-    public Deadline(String description, String dueDateTime) {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
+public class Deadline extends Task {
+    private LocalDateTime dueDateTime;
+
+    public Deadline(String description, String dueDateTime) throws DateTimeParseException {
         super(description);
-        this.dueDateTime = dueDateTime;
+        this.dueDateTime = LocalDateTime.parse(dueDateTime, Main.DTF);
     }
 
-    public Deadline(String description, String dueDateTime, boolean isDone) {
+    public Deadline(String description, String dueDateTime, boolean isDone) throws DateTimeParseException {
         this(description, dueDateTime);
         this.isDone = isDone;
+    }
+
+    public boolean getIsBy(LocalDateTime dateTime) {
+        return dueDateTime.isBefore(dateTime);
+    }
+
+    public boolean getIsOn(LocalDate date) {
+        return dueDateTime.toLocalDate().equals(date);
     }
 
     @Override

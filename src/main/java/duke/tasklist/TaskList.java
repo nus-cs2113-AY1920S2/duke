@@ -10,6 +10,8 @@ import duke.tasks.Task;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -49,6 +51,26 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             String lineEnd = i == tasks.size() - 1 ? "" : System.lineSeparator(); // Do this so no extra newline
             message += (String.format("%d. %s", i + 1, tasks.get(i).toString()) + lineEnd);
+        }
+        Ui.printPretty(message);
+    }
+
+    public void listTasksByDateTime(LocalDateTime dateTime) {
+        String message = "These are your tasks by " + dateTime;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getIsBy(dateTime)) {
+                message += (System.lineSeparator() + String.format("%d. %s", i + 1, tasks.get(i).toString()));
+            }
+        }
+        Ui.printPretty(message);
+    }
+
+    public void listTasksOnDate(LocalDate date) {
+        String message = "These are your tasks on " + date + ":";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getIsOn(date)) {
+                message += (System.lineSeparator() + String.format("%d. %s", i + 1, tasks.get(i).toString()));
+            }
         }
         Ui.printPretty(message);
     }

@@ -2,6 +2,9 @@ package duke.tasks;
 
 import duke.exceptions.BadLineFormatException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public abstract class Task {
     protected boolean isDone;
     protected String description;
@@ -23,6 +26,10 @@ public abstract class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
+
+    public abstract boolean getIsBy(LocalDateTime dateTime);
+
+    public abstract boolean getIsOn(LocalDate date);
 
     public abstract String toFormattedString();
 

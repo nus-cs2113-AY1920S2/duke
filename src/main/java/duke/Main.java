@@ -7,8 +7,12 @@ import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.time.format.DateTimeFormatter;
+
 public class Main {
     public static final String END_STRING = "bye";
+    public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d/M/yyyy H:mm");
+    public static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("d/M/yyyy");
     private static final String FILE_PATH = "data/tasks.txt";
     private static TaskList taskList;
 
