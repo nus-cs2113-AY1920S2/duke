@@ -10,7 +10,7 @@ public class Parser {
     private static int numArguments;
 
     public static void prepareInput(String input) throws InvalidCommandException {
-        String[] inputArray = input.toLowerCase().trim().split(" ", 2);
+        String[] inputArray = input.trim().toLowerCase().split(" ", 2);
         numArguments = inputArray.length;
         if (numArguments == 0) {
             throw new InvalidCommandException();
@@ -19,6 +19,10 @@ public class Parser {
             description = inputArray[1];
         }
         commandPrompt = inputArray[0];
+    }
+
+    public static String simpleParse(String input) {
+        return input.trim().toLowerCase();
     }
 
     public static Command parseInput(String input) throws InvalidCommandException, InvalidDeadlineException, InvalidEventException, InvalidToDoException, InvalidFormatException {
@@ -55,6 +59,12 @@ public class Parser {
             case "find":
                 if (numArguments != 2) throw new InvalidFormatException();
                 command = new findCommand(commandPrompt, description);
+                break;
+            case "clear":
+                command = new clearCommand(commandPrompt);
+                break;
+            case "/help":
+                command = new helpCommand(commandPrompt);
                 break;
             case "bye":
                 command = new byeCommand(commandPrompt);

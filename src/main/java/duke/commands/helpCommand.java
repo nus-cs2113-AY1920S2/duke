@@ -2,16 +2,19 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import duke.ui.HelpList;
 import duke.ui.UI;
 
-public class ListCommand extends Command {
+public class helpCommand extends Command {
 
-    public ListCommand(String command) {
+    protected String description;
+
+    public helpCommand(String command) {
         super(command);
     }
 
     @Override
     public void execute(TaskList tasklist, UI ui, Storage storage) {
-        ui.displayShowListMessage(tasklist.getTaskList());
+        ui.displayHelpListMessage();
     }
 }

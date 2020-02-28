@@ -29,6 +29,7 @@ public class UI {
     public void displayWelcomeMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.DUKE_LOGO + MessageBank.NEW_LINE + MessageBank.WELCOME_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayGoodbyeMessage() {
@@ -59,11 +60,15 @@ public class UI {
     }
     public void displayShowListMessage(List<Task> taskList) {
         displayLineSeparator();
-        System.out.println(MessageBank.SHOW_LIST_MESSAGE);
-        int counter = 0;
-        for (Task task : taskList) {
-            counter++;
-            System.out.println(counter + ". " + task);
+        if (taskList.size() == 0) {
+            System.out.println(MessageBank.SHOW_LIST_EMPTY_MESSAGE);
+        } else {
+            System.out.println(MessageBank.SHOW_LIST_MESSAGE);
+            int counter = 0;
+            for (Task task : taskList) {
+                counter++;
+                System.out.println(counter + ". " + task);
+            }
         }
         displayLineSeparator();
     }
@@ -92,6 +97,11 @@ public class UI {
         System.out.println(MessageBank.LIST_CLEAR_MESSAGE);
         displayLineSeparator();
     }
+    public void displayListNotClearedMessage() {
+        displayLineSeparator();
+        System.out.println(MessageBank.LIST_NOT_CLEARED_MESSAGE);
+        displayLineSeparator();
+    }
     public void displayListClearConfirmationMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.LIST_CLEAR_CONFIRMATION_MESSAGE);
@@ -108,42 +118,52 @@ public class UI {
     public void displayInvalidToDoMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.INVALID_TODO_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayInvalidDeadlineMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.INVALID_DEADLINE_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayInvalidEventMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.INVALID_EVENT_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayInvalidFormatMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.INVALID_FORMAT_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayInvalidCommandMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.INVALID_COMMAND_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayInvalidIndexMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.INVALID_INDEX_MESSAGE);
+        displayPromptHelpMessage();
         displayLineSeparator();
     }
     public void displayErrorMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.ERROR_MESSAGE);
+        displayPromptHelpMessage();
+        displayLineSeparator();
+    }
+    public void displayHelpListMessage() {
+        displayLineSeparator();
+        System.out.println(HelpList.HelpListMessage());
         displayLineSeparator();
     }
     public void displayPromptHelpMessage() {
-        displayLineSeparator();
         System.out.println(MessageBank.PROMPT_HELP_MESSAGE);
-        displayLineSeparator();
     }
 
 }
