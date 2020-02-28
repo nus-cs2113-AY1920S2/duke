@@ -20,17 +20,13 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
-
-    public boolean isDone() {
-        return this.isDone;
-    }
-
+    
     public void markAsDone() {
         isDone = true;
     }
     
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return this.description;
     }
     
     public abstract String getFileString();
