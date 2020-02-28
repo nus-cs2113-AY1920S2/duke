@@ -2,13 +2,15 @@ package parser;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Contains the accepted formats for parsing LocalDate and LocalTime.
+ */
 public class DateTimeParser {
     public DateTimeFormatter dateKey;
     public DateTimeFormatter timeKey;
     
     /**
-     * Constructor for a DateTimeParser object. A DateTimeParser contains the
-     * accepted formats for parsing LocalDate and LocalTime.
+     * Constructor for a DateTimeParser object.
      */
     public DateTimeParser() {
         this.dateKey = DateTimeFormatter.ofPattern("[dd/MM/yyyy][d/M/yyyy][dd/MM/yy][d/M/yy]"

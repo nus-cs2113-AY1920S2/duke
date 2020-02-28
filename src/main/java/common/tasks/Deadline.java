@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Deadline subclass of a task.
+ */
 public class Deadline extends Task {
     
     public Deadline(String description, Optional<LocalDate> date, Optional<LocalTime> time) {

@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Event subclass of a task.
+ */
 public class Event extends Task {
     
     public Event(String description, Optional<LocalDate> date, Optional<LocalTime> time) {

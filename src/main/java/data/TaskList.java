@@ -10,6 +10,10 @@ import ui.TextUi;
 import commands.Command;
 import commands.CommandExecution;
 
+/**
+ * Stores all the tasks for the current instance of the chatbot. Tasks are imported from 
+ * the Storage and added to the currant instance of the chatbot.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private ArrayList<Task> removedTasks;
@@ -17,9 +21,7 @@ public class TaskList {
     private boolean isExit;
     
     /**
-     * Constructor for TaskList class, which stores all the tasks for the current
-     * instance of the chatbot. Tasks are imported from the Storage and added to
-     * the currant instance of the chatbot.
+     * Constructor for TaskList class.
      * 
      * @param storage Storage that imports saved tasks.
      */
@@ -75,7 +77,7 @@ public class TaskList {
                     msg += commandExecution.clearAll();
                     storage.writeToFile(tasks);
                     break;
-                case "remove_completed":
+                case "remove_done":
                     msg += commandExecution.removeCompleted();
                     storage.writeToFile(tasks);
                     break;

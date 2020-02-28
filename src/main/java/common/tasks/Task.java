@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+/**
+ * Represents a task which the user inputs in the chatbot.
+ */
 public class Task implements Comparable<Task> {
     protected final String description;
     protected final Optional<LocalDate> date;

@@ -9,6 +9,10 @@ import common.exceptions.DukeException;
 import data.TaskList;
 import parser.Parser;
 
+/**
+ * Duke chatbot. Stores and keeps tracks of tasks which the user inputs.
+ * Also provides company to lonely souls who lack friends.
+ */
 public class Duke {
     private TextUi ui;
     private Storage storage;

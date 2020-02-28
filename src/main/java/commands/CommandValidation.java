@@ -7,6 +7,14 @@ import java.util.Optional;
 import common.exceptions.DukeException;
 import common.tasks.Task;
 
+/**
+ * Validates certain commands, making sure that they are correctly formatted for their 
+ * supposed command type. If any incorrect commands are found, outputs a DukeException 
+ * specifying what caused the error.
+ * <p> e.g adding an event requires a description and a "/at" substring, as well as a
+ * acceptable date format and an optional time. Any missing or incorrectly formatted 
+ * fields will result in the respective DukeException. </p>
+ */
 public class CommandValidation {
     
     /**
@@ -15,7 +23,7 @@ public class CommandValidation {
      * 
      * @param command Command to be checked for validity.
      * @param type Command type to check validity for.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public static void validate(Command command, String type) throws DukeException {
         Optional<String> commandDescription = command.getDescription();
@@ -59,7 +67,7 @@ public class CommandValidation {
      * @param command Command to be checked for validity.
      * @param type Command type to check validity for.
      * @param tasks List of current tasks for reference.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public static void validate(Command command, String type, ArrayList<Task> tasks) throws DukeException {
         Optional<String> commandDescription = command.getDescription();

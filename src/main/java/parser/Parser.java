@@ -8,6 +8,9 @@ import java.util.Optional;
 import commands.Command;
 import common.exceptions.DukeException;
 
+/**
+ * Deals with making sense of user input and stored data.
+ */
 public class Parser {
     public static int COMMAND_TYPE = 0;
     public static int COMMAND_DESCRIPTION = 1;
@@ -22,7 +25,7 @@ public class Parser {
      * 
      * @param input User input that has been obtained by the UI.
      * @return command Command that contains all necessary information for the chatbot to process.
-     * @throws DukeException
+     * @throws DukeException if the date or time formats are incorrect.
      */
     public Command parse(String input) throws DukeException {
         String[] inputCommand = input.split(" ");
@@ -101,7 +104,7 @@ public class Parser {
      * 
      * @param commandParts String[] that is to be processed into a Command.
      * @return Command Command that is understood by the chatbot.
-     * @throws DukeException
+     * @throws DukeException if the date or time formats are incorrect.
      */
     public Command process(String[] commandParts) throws DukeException {
         String commandType = commandParts[COMMAND_TYPE];
@@ -119,7 +122,7 @@ public class Parser {
      * 
      * @param date String representation of a date.
      * @return parsedDate Optional<LocalDate> that contains a LocalDate if the input date is valid.
-     * @throws DukeException
+     * @throws DukeException if the date format is incorrect.
      */
     public Optional<LocalDate> parseDate(String date) throws DukeException {
         DateTimeParser dateParser = new DateTimeParser();
@@ -141,7 +144,7 @@ public class Parser {
      * 
      * @param time String representation of a date.
      * @return parsedTime Optional<LocalTime> that contains a LocalTime if the input time is valid.
-     * @throws DukeException
+     * @throws DukeException if the time format is incorrect.
      */
     public Optional<LocalTime> parseTime(String time) throws DukeException {
         DateTimeParser timeParser = new DateTimeParser();

@@ -13,6 +13,10 @@ import static common.Messages.MESSAGE_GREETING;
 import static common.Messages.MESSAGE_GOODBYE;
 import static common.Messages.line;
 
+/**
+ * Deals with interactions with the user, accepting input and returning a reply
+ * based on the input received.
+ */
 public class TextUi {
     private final Scanner in;
     private final PrintStream out;

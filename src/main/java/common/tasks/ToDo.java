@@ -1,5 +1,8 @@
 package common.tasks;
 
+/**
+ * Todo subclass of a task.
+ */
 public class ToDo extends Task {
     
     public ToDo(String description) {

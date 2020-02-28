@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * Stored messages for greeting and bidding farewell to the user.
+ */
 public class Messages {
     public final static String name = "Rick";
     public final static String line = "____________________________________________________________";

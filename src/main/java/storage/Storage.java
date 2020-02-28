@@ -16,6 +16,9 @@ import common.tasks.ToDo;
 import parser.Parser;
 import common.exceptions.DukeException;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     public ArrayList<Task> list = new ArrayList<>();
     public static int COMMAND_TYPE = 0;
@@ -28,8 +31,8 @@ public class Storage {
      * Writes all tasks to a text file in the home directory.
      * 
      * @param tasks List of tasks to be written to a text file.
-     * @throws IOException
-     * @throws DukeException
+     * @throws IOException when file cannot be read.
+     * @throws DukeException when an unexpected error occurs.
      */
     public void writeToFile(ArrayList<Task> tasks) throws IOException, DukeException {
         FileWriter fw = new FileWriter("duke.txt");
@@ -55,8 +58,8 @@ public class Storage {
      * Reads and import stored tasks from a text file in the home directory.
      * The text file has to be named "duke.txt".
      * 
-     * @throws IOException
-     * @throws DukeException
+     * @throws IOException when file cannot be written.
+     * @throws DukeException when date or time formats are wrong.
      */
     public void readFromFile() throws IOException, DukeException {
         BufferedReader br;

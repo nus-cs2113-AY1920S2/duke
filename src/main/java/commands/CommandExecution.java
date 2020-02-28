@@ -2,7 +2,7 @@ package commands;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
@@ -13,13 +13,15 @@ import common.tasks.Event;
 import common.tasks.Task;
 import common.tasks.ToDo;
 
+/**
+ * Handles all the execution and validation of commands.
+ */
 public class CommandExecution {
     public ArrayList<Task> tasks;
     public ArrayList<Task> removedTasks;
     
     /**
      * Constructor for CommandExecution class.
-     * Handles all the execution and validation of commands.
      * 
      * @param tasks List of tasks that references TaskList.
      * @param removedTasks List of removed tasks that references TaskList.
@@ -35,7 +37,7 @@ public class CommandExecution {
      * 
      * @param command Command containing the substring to be found.
      * @return msg String representation of a list of all tasks containing the substring.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String findTask(Command command) throws DukeException {
         CommandValidation.validate(command, "find");
@@ -91,7 +93,7 @@ public class CommandExecution {
      * 
      * @param command Command containing the timeframe in days.
      * @return msg String representation of a list of all upcoming tasks in the time frame.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String showUpcoming(Command command) throws DukeException {
         CommandValidation.validate(command, "show");
@@ -102,8 +104,8 @@ public class CommandExecution {
         for (Task task : tasks) {
             if (task.getOptionalDate().isPresent()) {
                 LocalDate date = task.getDate();
-                Period period = Period.between(today, date);
-                if (period.getDays() <= days && period.getDays() >= 0) {
+                long period = today.until(date, ChronoUnit.DAYS);
+                if (period <= days && period >= 0) {
                     upcomingTasks.add(task);
                 }
             }
@@ -238,7 +240,7 @@ public class CommandExecution {
      * 
      * @param command Command to be executed.
      * @return msg Chatbot reply acknowledging that the command has been executed.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String makeDone(Command command) throws DukeException {
         CommandValidation.validate(command, "done", tasks);
@@ -258,7 +260,7 @@ public class CommandExecution {
      * 
      * @param command Command to be executed.
      * @return msg Chatbot reply acknowledging that the command has been executed.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String removeTask(Command command) throws DukeException {
         CommandValidation.validate(command, "remove", tasks);
@@ -279,7 +281,7 @@ public class CommandExecution {
      * 
      * @param command Command to be executed.
      * @return msg Chatbot reply acknowledging that the command has been executed.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String addTodo(Command command) throws DukeException {
         CommandValidation.validate(command, "todo");
@@ -297,7 +299,7 @@ public class CommandExecution {
      * 
      * @param command Command to be executed.
      * @return msg Chatbot reply acknowledging that the command has been executed.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String addDeadline(Command command) throws DukeException {
         CommandValidation.validate(command, "deadline");
@@ -316,7 +318,7 @@ public class CommandExecution {
      * 
      * @param command Command to be executed.
      * @return msg Chatbot reply acknowledging that the command has been executed.
-     * @throws DukeException
+     * @throws DukeException if the command is invalid.
      */
     public String addEvent(Command command) throws DukeException {
         CommandValidation.validate(command, "event");
