@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * a type of task that has an additional deadline to it,
+ * comes in the form of the 'by'
+ */
 public class Deadline extends Task {
 
     protected String by;

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * a type of task that simply needs to be done at
+ * own time and own target, anywhere and anytime
+ */
 public class Todo extends Task {
     /**
      * Returns the task created with the specified

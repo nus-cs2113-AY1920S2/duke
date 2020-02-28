@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * a type of task that has an additional venue/time/date to it,
+ * comes in the form of the 'at'
+ */
 public class Event extends Task {
 
     protected String at;
