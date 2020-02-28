@@ -1,5 +1,3 @@
-[D] | ✓ | duck (by: tom)
-[T] | ✓ | eaer
 [T] | ✓ | eat
 [T] | ✓ | add
 [T] | ✘ | run

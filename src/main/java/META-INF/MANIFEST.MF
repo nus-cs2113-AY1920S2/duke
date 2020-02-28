@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: hiroshi.Hiroshi
+Main-Class: duke.Hiroshi
 
