@@ -89,6 +89,17 @@ public class Ui {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
     }
 
+    public void showFindTask (TaskList tasks, ArrayList<Integer> findCount) {
+        if (findCount.size() > 0) {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (Integer i : findCount) {
+                System.out.println("\t" + (i + 1) + "." + tasks.getATask(i));
+            }
+        } else {
+            System.out.println("\t No matching tasks.");
+        }
+    }
+
     public void showLoadingError() {
         System.out.println("\tCreating back up file in the hard disk...");
     }

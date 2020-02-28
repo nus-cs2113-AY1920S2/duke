@@ -1,6 +1,6 @@
 done
 list
-todo eat
+todo read book
 todo sleep
 todo
 heyhey
@@ -10,9 +10,14 @@ event project meeting /at Mon 2-4pm
 event concert /at 2020-03-21
 check 2020-03-21
 event
+find book
+find
+find exam
 done 2
 done 3
+done 10
 list
 delete 2
+delete
 list
 bye

@@ -39,7 +39,7 @@ public class Parser {
         switch (responses[0]) {
         case TODO:
             if (responses.length < 2) {
-            throw new DukeException("\tThe description of a todo cannot be empty.");
+                throw new DukeException("\tThe description of a todo cannot be empty.");
             }
             return new AddCommand(new Todo(fullCommand.substring(TODO_LENGTH)));
         case DEADLINE:
@@ -75,6 +75,11 @@ public class Parser {
             }
             int deleteCount = Integer.parseInt(responses[1]);
             return new DeleteCommand(deleteCount);
+        case FIND:
+            if (responses.length < 2 ) {
+                throw new DukeException("\tPlease input the thing you want to find");
+            }
+            return new FindCommand(responses[1]);
         case CHECK:
             if (responses.length < 2) {
                 throw new DukeException("\tPlease input the date you want to check");
