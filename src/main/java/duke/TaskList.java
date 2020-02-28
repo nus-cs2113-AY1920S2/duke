@@ -1,7 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
-import duke.excpetions.EmptyDescriptionException;
+
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ManageCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -18,12 +21,8 @@ public class TaskList {
     public TaskList() {
     }
 
-    public void deleteTask(String command) throws EmptyDescriptionException{
-        if(command.indexOf(" ")==-1) {
-            System.out.println("☹ OOPS!!! Please specify the index of the task you want to delete.");
-            throw new EmptyDescriptionException();
-        }
-        int index = Integer.parseInt(command.split(" ")[1])-1;
+    public void deleteTask(DeleteCommand deleteCommand){
+        int index = deleteCommand.getIndex()-1;
         System.out.println("Noted. I've removed this task: ");
         System.out.println(tasks.remove(index));
         printNumOfTasks();
@@ -34,50 +33,32 @@ public class TaskList {
         System.out.println("Now you have "+ tasks.size()+" tasks in the list.");
     }
 
-    public void addEvent(String command) throws EmptyDescriptionException {
-        if(command.indexOf(" ")==-1) {
-            System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
-            throw new EmptyDescriptionException();
-        }
-        String description=command.substring(command.indexOf(" "),command.indexOf("/"));
-        String period=command.substring(command.indexOf("/at")+4);
-        Event newEvent = new Event(description, period);
+    public void addEvent(AddCommand addCommand){
+        Event newEvent = new Event(addCommand);
         getTasks().add(newEvent);
         System.out.println("Got it. I've added this task:");
         System.out.println(newEvent);
         printNumOfTasks();
     }
 
-    public void addDeadline(String command) throws EmptyDescriptionException {
-        if(command.indexOf(" ")==-1) {
-            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-            throw new EmptyDescriptionException();
-        }
-        String description=command.substring(command.indexOf(" "),command.indexOf("/"));
-        String by=command.substring(command.indexOf("/by")+4);
-        Deadline newDeadline = new Deadline(description,by);
+    public void addDeadline(AddCommand addCommand){
+        Deadline newDeadline = new Deadline(addCommand);
         getTasks().add(newDeadline);
         System.out.println("Got it. I've added this task:");
         System.out.println(newDeadline);
         printNumOfTasks();
     }
 
-    public void addToDo  (String command) throws EmptyDescriptionException {
-        if(command.indexOf(" ")==-1) {
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-            throw new EmptyDescriptionException();
-        }
-        String description=command.substring(command.indexOf(" "));
-        ToDo newTodo = new ToDo(description);
+    public void addToDo  (AddCommand addCommand){
+        ToDo newTodo = new ToDo(addCommand);
         tasks.add(newTodo);
         System.out.println("Got it. I've added this task:");
         System.out.println(newTodo);
         printNumOfTasks();
     }
 
-    public void doneTask(String command) {
-        String[] splitCommand=command.split(" ");
-        int taskIndex=Integer.parseInt(splitCommand[1])-1;
+    public void doneTask(ManageCommand manageCommand) {
+        int taskIndex=manageCommand.getIndex()-1;
         if(taskIndex < tasks.size()) {
             getTasks().get(taskIndex).markAsDone();
             System.out.println("Nice! I've marked this task as done:");

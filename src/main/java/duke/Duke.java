@@ -1,8 +1,6 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
+import duke.command.Command;
 import duke.excpetions.DukeException;
 
 public class Duke {
@@ -27,20 +25,20 @@ public class Duke {
     }
 
     public void run(){
-        try {
-            Ui.welcomeMessage();
-            ui.getNextCommand();
-            while(!ui.getCommand().equals("bye")){
-                Ui.printDividingLine();
-                Parser.executeCommand(ui.getCommand(),tasks);
-                ui.getNextCommand();
+        Ui.showWelcome();
+        boolean isExit = false;
+        while(!isExit){
+            try{
+                String fullCommand = ui.readCommand();
+                Ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError();
+            }finally{
+                ui.showLine();
             }
-            storage.writeFile(tasks);
-            Ui.exitMessage();
-        }catch (FileNotFoundException e){
-            System.out.println("File can not be found!");
-        }catch (IOException e){
-            System.out.println("Something goes wrong.");
         }
     }
 

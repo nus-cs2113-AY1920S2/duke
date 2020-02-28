@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.AddCommand;
+
 public class Event extends Task {
     protected String period;
 
@@ -7,6 +9,12 @@ public class Event extends Task {
         super(description);
         this.period=period;
     }
+
+    public Event(AddCommand addCommand){
+        super(addCommand);
+        this.period = addCommand.getTimeNotes();
+    }
+
 
     @Override
     public String toString(){

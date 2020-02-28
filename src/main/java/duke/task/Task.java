@@ -1,12 +1,19 @@
 package duke.task;
 
+import duke.command.AddCommand;
+
 public abstract class Task {
     public String description;
     private boolean isDone;
 
     public Task(String description){
-        this.description=description;
-        this.isDone=false;
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public Task(AddCommand addCommand){
+        this.description = addCommand.getDescription();
+        this.isDone = false;
     }
 
     public String getStatusIcon(){

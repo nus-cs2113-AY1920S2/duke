@@ -1,43 +1,51 @@
 package duke;
 
-import duke.excpetions.EmptyDescriptionException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ManageCommand;
+import duke.command.WrongCommand;
+import duke.excpetions.DukeException;
 
 public class Parser {
 
-    public static void executeCommand(String command,TaskList tasks) {
-        String commandType = commandDivider(command);
+    public static Command parse(String fullCommand) throws DukeException {
         try{
-            switch(commandType) {
-            case "list":
-                tasks.listTasks();
-                break;
-            case "done":
-                tasks.doneTask(command);
-                break;
-            case "todo":
-                tasks.addToDo(command);
-                break;
-            case "deadline":
-                tasks.addDeadline(command);
-                break;
-            case "event":
-                tasks.addEvent(command);
-                break;
-            default:
-                System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            if (fullCommand.contains(" ")) {
+                String type = fullCommand.substring(0, fullCommand.indexOf(" "));
+                switch (type) {
+                case "delete":
+                    int index = Integer.parseInt(fullCommand.substring(fullCommand.indexOf(" ")+1));
+                    return new DeleteCommand(type,index);
+                case "done":
+                    index = Integer.parseInt(fullCommand.substring(fullCommand.indexOf(" ")+1));
+                   return new ManageCommand(type,index);
+                case "todo":
+                    String description=fullCommand.substring(fullCommand.indexOf(" "));
+                    return new AddCommand(type,description,null);
+                case "deadline":
+                    description=fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
+                    String by=fullCommand.substring(fullCommand.indexOf("/by")+4);
+                    return new AddCommand(type,description,by);
+                case "event":
+                    description=fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
+                    String period=fullCommand.substring(fullCommand.indexOf("/at")+4);
+                    return new AddCommand(type,description,period);
+                default:
+                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    return new WrongCommand("wrong");
+                }
+            }else if(fullCommand.equals("list")){
+                return new ManageCommand(fullCommand,-1);
+            }else if (fullCommand.equals("bye")){
+                return new ExitCommand("bye");
+            }else{
+                throw new DukeException();
             }
-            Ui.printDividingLine();
-            System.out.println("Do you have any other commands? ");
-        } catch (EmptyDescriptionException e){
-            System.out.println("Please re-enter your command with a description.");
-        }
-    }
-
-    private static String commandDivider(String command){
-        if (command.contains(" ")){
-             return command.substring(0,command.indexOf(" "));
-        }else{
-            return command;
+        } catch (DukeException e){
+            System.out.println("The command is not correct.");
+            return new WrongCommand("wrong");
         }
     }
 }

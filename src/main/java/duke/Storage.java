@@ -20,7 +20,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    static void writeFile(TaskList usersTasks) throws IOException {
+    public static void writeFile(TaskList usersTasks) throws IOException {
         File filePath = new File("data");
         if(!filePath.exists()){
             filePath.mkdir();
@@ -29,7 +29,7 @@ public class Storage {
         if(!file.exists()){
             file.createNewFile();
         }
-        FileWriter fw = new FileWriter("data/tasksList.txt",true);
+        FileWriter fw = new FileWriter("data/tasksList.txt");
         for (Task task: usersTasks.getTasks()){
             if (task!=null){
                 fw.write(task.toString());
