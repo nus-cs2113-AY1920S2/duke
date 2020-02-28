@@ -84,4 +84,9 @@ public class Ui {
     public void showError(Exception errorMsg) {
         out.println(errorMsg);
     }
+
+    public static void printTimeWarning() {
+        System.out.println("Warning: DateTime provided does not fit format, unable to parse " +
+                "correctly.");
+    }
 }
