@@ -31,6 +31,10 @@ manages the list of Tasks, refer to the *Features* section below.
 	Ensure that the data folder is under the same directory as the Jar file. <br/>
 	Example: <br/>
 	![Capture](Capture.PNG)
+1. __I am unable to add Tasks that contains "~" asa Task description__
+	Tilde or also known as "~" is used a delimiter when storing data. Therefore using 
+	tilde as part of the Task description will lead to inaccurate storage of data. 
+	Please find an alternative for the usage of tilde.
 
 ## Features 
 
