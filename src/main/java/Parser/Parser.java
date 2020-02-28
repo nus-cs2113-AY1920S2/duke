@@ -8,6 +8,7 @@ import Command.HelpCommand;
 import Command.AddCommand;
 import Command.DeleteCommand;
 import Command.ExitCommand;
+import Command.FindCommand;
 
 import Exceptions.NoParameterException;
 import Exceptions.EmptyListException;
@@ -43,32 +44,16 @@ public class Parser {
 
             case "todo":
                 return new AddCommand(userCommand, wordLength, TASK_TODO);
-               // break;
+
             case "event":
                 return new AddCommand(userCommand, wordLength, TASK_EVENT);
-                /*
-                try {
-                    int taskCounter = tasks.size() + 1;
-                    addEvent(tasks, userCommand, taskCounter, wordLength);
-                } catch (NoParameterException e){
-                    System.out.println("Missing Parameters detected!\n");
-                }
-                break;
-
-                 */
 
             case "deadline":
                 return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
-                /*
-                try {
-                    int taskCounter = tasks.size() + 1;
-                    addDeadline(tasks, userCommand, taskCounter, wordLength);
-                } catch (NoParameterException e){
-                    System.out.println("Missing Parameters detected!\n");
-                }
-                break;
 
-                 */
+            case "find":
+                return new FindCommand(words[1]);
+
             case "bye":
                 return new ExitCommand();
 
