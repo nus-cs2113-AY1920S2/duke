@@ -1,4 +1,6 @@
 # Duke User Guide
+
+---
 Duke is a command line interface program capable of handling tasks such as Todo, Events and Deadlines.
 This User Guide will demonstrate the capabilities of Duke. 
 ---
