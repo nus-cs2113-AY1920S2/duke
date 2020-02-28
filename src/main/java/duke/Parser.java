@@ -28,6 +28,13 @@ public class Parser {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Parses the user input and determines what kind of command
+     * the user has inputed. Then creates an instance of the relevant
+     * command and passes the new command object back to main.
+     *
+     * @return a command that the user has inputted
+     */
     public Command scanCommand() {
         Command command = null;
         String inputString = scanner.nextLine();
@@ -56,6 +63,7 @@ public class Parser {
             case (TODO):
             case (DEADLINE):
             case (EVENT):
+                // fallthrough: TODO, DEADLINE and EVENT are all AddCommands.
                 command = new AddCommand(instruction[1], instruction[0]);
                 break;
             case (EXIT):

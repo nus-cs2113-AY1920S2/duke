@@ -8,7 +8,6 @@ import duke.Ui;
  */
 public class DoneCommand extends Command {
     int index;
-
     /**
      * Constructor to create a new done command.
      *
@@ -27,7 +26,7 @@ public class DoneCommand extends Command {
      * @param tasks the list of tasks
      */
     @Override
-    public void Execute(TaskList tasks){
+    public void execute(TaskList tasks) {
         try {
             index = Integer.parseInt(this.parameters);
             if (!tasks.get(index - 1).getIsDone()) {
@@ -41,6 +40,6 @@ public class DoneCommand extends Command {
         } catch (NumberFormatException e) {
             System.out.println("Please specify a task number!");
         }
-        super.Execute(tasks);
+        super.execute(tasks);
     }
 }

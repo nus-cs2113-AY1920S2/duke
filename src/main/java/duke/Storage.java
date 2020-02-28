@@ -17,6 +17,12 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    /**
+     * Saves the list of tasks to a .txt file.
+     *
+     * @param tasks the list of tasks
+     * @throws IOException
+     */
     public static void saveToFile(TaskList tasks) throws IOException {
         File file = new File("save2.txt");
 
@@ -30,6 +36,12 @@ public class Storage {
         fo.close();
     }
 
+    /**
+     * Reads the tasks from a .txt file and stores it into a TaskList.
+     *
+     * @param tasks the TaskList where the tasks will be added to
+     * @throws IOException
+     */
     public static void readFromFile(TaskList tasks) throws IOException {
         File file = new File("save2.txt");
         Scanner scanner = new Scanner(file);

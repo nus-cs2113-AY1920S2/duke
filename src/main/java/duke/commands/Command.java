@@ -23,13 +23,13 @@ public class Command {
     /**
      * Saves the list of tasks to a .txt file.
      *
-     * @param tasks
+     * @param tasks the list of tasks
      */
-    public void Execute(TaskList tasks) {
+    public void execute(TaskList tasks) {
         try {
             Storage.saveToFile(tasks);
         } catch (IOException e) {
-            System.out.println("Error Saving");
+            System.out.println("Error saving!");
         }
     }
 }

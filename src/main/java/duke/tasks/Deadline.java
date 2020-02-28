@@ -21,7 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException {
         super(description.trim());
-        if(description.isBlank() | by.isBlank())
+        if (description.isBlank() | by.isBlank())
         {
             throw new DukeException();
         }
@@ -29,16 +29,30 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Method to get the deadline of the task.
+     *
+     * @return date of deadline
+     */
     public LocalDate getDate() {
         return this.by;
     }
 
-
+    /**
+     * Format which the tasks are saved into the .txt file.
+     *
+     * @return String with the save format
+     */
     @Override
     public String saveFormat() {
         return "d//" + super.saveFormat() + "//" + by;
     }
 
+    /**
+     * Format which the tasks are printed.
+     *
+     * @return String with the print format
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

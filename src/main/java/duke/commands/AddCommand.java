@@ -35,10 +35,10 @@ public class AddCommand extends Command {
      * @param tasks the list of tasks
      */
     @Override
-    public void Execute(TaskList tasks) {
+    public void execute(TaskList tasks) {
         Task new_task;
-        int findSeparator = 0;
         try {
+            int findSeparator;
             switch (this.command) {
             case ("todo"):
                 new_task = new Todo(this.parameters);
@@ -54,15 +54,17 @@ public class AddCommand extends Command {
                 new_task = new Event(this.parameters.substring(0, findSeparator), this.parameters.substring(findSeparator + 1));
                 tasks.add(new_task);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + this.command);
             }
             Ui.printAddMessage(tasks.getSize());
-            super.Execute(tasks);
-        } catch (StringIndexOutOfBoundsException e) {
+            super.execute(tasks);
+        } catch (StringIndexOutOfBoundsException | DukeException e) {
             System.out.println("Task description or date field is empty.");
-        } catch (DukeException e) {
-            System.out.println("Task description or date field is empty.");
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             System.out.println("Please enter the date as: yyyy-mm-dd!");
+        } catch (IllegalStateException e) {
+            System.out.println("This is not a valid task.");
         }
     }
 

@@ -30,7 +30,7 @@ public class Duke {
                 ((ExitCommand) command).Execute();
                 break;
             }
-            command.Execute(tasks);
+            command.execute(tasks);
         }
     }
 }

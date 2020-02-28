@@ -18,7 +18,11 @@ public class ListCommand extends Command {
      * @param tasks the list of tasks
      */
     @Override
-    public void Execute(TaskList tasks){
-        Ui.printList(tasks);
+    public void execute(TaskList tasks) {
+        if (tasks.getSize() == 0) {
+            System.out.println("There are no tasks in your list!");
+        } else {
+            Ui.printList(tasks);
+        }
     }
 }

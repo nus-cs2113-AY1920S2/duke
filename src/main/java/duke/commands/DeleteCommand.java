@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param tasks the list of tasks
      */
     @Override
-    public void Execute(TaskList tasks){
+    public void execute(TaskList tasks) {
         try {
             index = Integer.parseInt(this.parameters);
             System.out.println("  You have deleted: " + tasks.get(index - 1).getDescription() + "\n");
@@ -34,6 +34,6 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             System.out.println("Please specify a task number!");
         }
-        super.Execute(tasks);
+        super.execute(tasks);
     }
 }

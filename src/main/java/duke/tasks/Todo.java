@@ -15,11 +15,21 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Format which the tasks are saved into the .txt file.
+     *
+     * @return String with the save format
+     */
     @Override
     public String saveFormat() {
         return "t//" + super.saveFormat();
     }
 
+    /**
+     * Format which the tasks are printed.
+     *
+     * @return String with the print format
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
