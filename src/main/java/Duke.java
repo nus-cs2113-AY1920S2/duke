@@ -108,6 +108,11 @@ public class Duke {
                 ui.printListCount(taskList);
                 ui.printBorder();
                 break;
+            case "find":
+                String findKeywords = parser.parseFind(words);
+                ArrayList<Task> foundList = tasks.findTask(findKeywords);
+                ui.printFindResults(foundList);
+                break;
             default:
                 throw new DukeException(INVALID_COMMAND);
         }

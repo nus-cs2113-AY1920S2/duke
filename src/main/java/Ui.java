@@ -50,6 +50,15 @@ public class Ui {
         printBorder();
     }
 
+    public static void printFindResults(ArrayList<Task> foundList) {
+        printBorder();
+        System.out.println("\t Here are the matching tasks in your list:");
+        for (int i = 0; i < foundList.size(); ++i) { // Print list of tasks
+            System.out.println("\t " + (i + 1) + ". " + foundList.get(i).toString());
+        }
+        printBorder();
+    }
+
     public static void printListCount(ArrayList<Task> taskList) {
         System.out.println("\t Now you have " + taskList.size() + " tasks in the list."); // Print list count
     }
