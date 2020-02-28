@@ -5,6 +5,7 @@ package duke;
  * gets what the user inputs then makes sense of
  * the input, sorting and passing on to carry out the command
  */
+
 public class Parser {
 
     /**
@@ -27,8 +28,13 @@ public class Parser {
         } else if (Duke.inputLine.substring(0, 6).equals("remove")) {
             TaskList.removeTaskFromList(); // removes task in the stated index
 
+        } else if (Duke.inputLine.substring(0, 4).equals("find")) {
+            TaskList.findTasks(); // finds tasks with the keyword
+
         } else {
             TaskList.addInNewTask();// adds a new task into the list
         }
     }
+
 }
+
