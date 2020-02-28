@@ -7,7 +7,10 @@ import alie.Ui;
 import alie.exceptions.InvalidCmdException;
 import alie.task.Event;
 
-// Input format: <task type> <task name> /at <task details>
+/**
+ * Command to add deadline task with specific input format:
+ * task_type task_name /at task_startDate
+ */
 public class AddEventCommand extends Command {
     private final Event taskToAdd;
 
@@ -17,6 +20,11 @@ public class AddEventCommand extends Command {
                     MORE_INDENTATION + "%1$s" + System.lineSeparator() +
                     INDENTATION + "Now you have %2$s tasks in the list.";
 
+    /**
+     * Construct a Deadline Object after parsing spiltCommands.
+     * @param cmd Array of String containing details in each index.
+     * @throws InvalidCmdException If there are any illegal inputs detected.
+     */
     public AddEventCommand(String[] cmd) throws InvalidCmdException {
         try {
             String[] details = new Parser().parseEventDetails(cmd[1]);

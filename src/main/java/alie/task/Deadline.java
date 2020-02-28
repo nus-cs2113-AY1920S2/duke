@@ -1,14 +1,26 @@
 package alie.task;
 
+/**
+ * Task that should be completed before a specific date or time.
+ */
 public class Deadline extends Task {
     protected static final String DEADLINE_SYMBOL = "D";
     private String endDate;
 
+    /**
+     * Default constructor to initialise task's name and due date.
+     * @param name Name of task.
+     * @param date Due Date of task.
+     */
     public Deadline(String name, String date) {
         super(name);
         endDate = date;
     }
 
+    /**
+     * Getter to obtain due date of task.
+     * @return String containing due date of task.
+     */
     public String getDate() {
         return endDate;
     }
@@ -23,6 +35,11 @@ public class Deadline extends Task {
         return DEADLINE_SYMBOL + DELIMITER + isDone + DELIMITER + description + DELIMITER + endDate;
     }
 
+    /**
+     * Decipher a string containing information of a task (deadline)
+     * @param encodedTask String containing information of the task (deadline)
+     * @return Deadline object with information from encodedTask.
+     */
     public static Deadline decodeTask(String encodedTask) {
         String[] task = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(task[1]);

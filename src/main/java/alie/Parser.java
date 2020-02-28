@@ -3,10 +3,19 @@ package alie;
 import alie.commands.*;
 import alie.exceptions.InvalidCmdException;
 
+/**
+ * Parses all user inputs
+ */
 public class Parser {
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
     protected static final String EVENT_DETAIL_DIVIDER = " /at ";
 
+    /**
+     * Parses user input and categorise them into a specific command using the first word in param.
+     * @param userCommandText String input provided by user.
+     * @return Specific Command Object based on first word in param.
+     * @throws InvalidCmdException If any invalid command is detected.
+     */
     public Command parseCommand(String userCommandText) throws InvalidCmdException {
         String[] splitCmds = userCommandText.split(" ", 2);
         String cmdType = splitCmds[0].toLowerCase();
@@ -31,6 +40,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Splits details of Deadline for easy usage and also check for error or invalid command
+     * in input
+     * @param details The details for a deadline provided by user
+     * @return A string array with each relevant index containing specific information
+     * @throws InvalidCmdException If command provided is detected to be invalid.
+     */
     public String[] parseDeadlineDetails(String details) throws InvalidCmdException {
         String[] stringDetails = details.split(DEADLINE_DETAIL_DIVIDER);
         if (stringDetails.length > 2) {

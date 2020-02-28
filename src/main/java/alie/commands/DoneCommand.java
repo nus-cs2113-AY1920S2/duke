@@ -6,6 +6,9 @@ import alie.Ui;
 import alie.exceptions.InvalidCmdException;
 import alie.task.Task;
 
+/**
+ * Command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_KEYWORD = "done";
     public static final String DONE_CMD_ACK =
@@ -14,6 +17,12 @@ public class DoneCommand extends Command {
 
     public final int taskIndex;
 
+    /**
+     * Default constructor to initialise taskIndex to reflect correctly the index of the task
+     * to be marked as done.
+     * @param index Index provided by User that is one-based numbering.
+     * @throws InvalidCmdException If index provided by user is not a number.
+     */
     public DoneCommand(String index) throws InvalidCmdException {
         try {
             taskIndex = convertToZeroBased(Integer.parseInt(index));

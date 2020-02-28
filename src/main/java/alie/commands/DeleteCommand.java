@@ -6,6 +6,9 @@ import alie.Ui;
 import alie.exceptions.InvalidCmdException;
 import alie.task.Task;
 
+/**
+ * Command to delete task from task list.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_KEYWORD = "delete";
     public static final String DELETE_CMD_ACK =
@@ -15,6 +18,12 @@ public class DeleteCommand extends Command {
 
     public int taskIndex = -1;
 
+    /**
+     * Default constructor to initialise taskIndex to reflect correctly the index of the task
+     * to be deleted.
+     * @param index Index provided by User that is one-based numbering.
+     * @throws InvalidCmdException If index provided by user is not a number.
+     */
     public DeleteCommand(String index) throws InvalidCmdException {
         try {
             taskIndex = convertToZeroBased(Integer.parseInt(index));
