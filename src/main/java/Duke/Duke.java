@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Duke {
     //private static List<Task> tasksList = new ArrayList<>(100);
     private static final String LIST_COMMAND = "list";
@@ -25,6 +26,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke
+     *
+     * @param filePath path of the file where tasks will be stored.
+     */
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
@@ -40,6 +46,9 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Executes Duke.
+     */
     public void run() {
         ui.greetUser();
         Scanner scanner =  new Scanner(System.in);
