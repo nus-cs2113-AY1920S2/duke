@@ -39,7 +39,7 @@ Example of usage:
 Expected outcome:
 
 <code>Got it. I've added this task:<br/>
-&nbsp&nbsp[T][N] read book<br/>
+&nbsp;&nbsp;[T][N] read book<br/>
 Now you have 1 task(s) in the list.</code>
 
 #### `event` - Adds an event task
@@ -56,7 +56,7 @@ Example of usage:
 Expected outcome:
 
 <code>Got it. I've added this task:<br/>
-&nbsp&nbsp[E][N] CCA meeting(at: 2020-01-01 18:00)<br/>
+&nbsp;&nbsp;[E][N] CCA meeting(at: 2020-01-01 18:00)<br/>
 Now you have 2 task(s) in the list.</code>
 
 #### `deadline` - Adds a deadline task
@@ -73,7 +73,7 @@ Example of usage (1):
 Expected outcome (1):
 
 <code>Got it. I've added this task:<br/>
-&nbsp&nbsp[D][N] finish reading book(by: 2020-03-03 10:15)<br/>
+&nbsp;&nbsp;[D][N] finish reading book(by: 2020-03-03 10:15)<br/>
 Now you have 3 task(s) in the list.</code>
 
 Example of usage (2):
@@ -83,7 +83,7 @@ Example of usage (2):
 Expected outcome (2):
 
 <code>Got it. I've added this task:<br/>
-&nbsp&nbsp[D][N] return book(by: 2020-03-04)<br/>
+&nbsp;&nbsp;[D][N] return book(by: 2020-03-04)<br/>
 Now you have 4 task(s) in the list.</code>
 
 #### `list` - Lists out all tasks
@@ -97,10 +97,10 @@ Example of usage:
 Expected outcome:
 
 <code>Here are the tasks in your list:<br/>
-&nbsp&nbsp1. [T][N] read book<br/>
-&nbsp&nbsp2. [E][N] CCA meeting(at: 2020-01-01 18:00)<br/>
-&nbsp&nbsp3. [D][N] finish reading book(by: 2020-03-03 10:15)<br/>
-&nbsp&nbsp4. [D][N] return book(by: 2020-03-04)</code>
+&nbsp;&nbsp;1. [T][N] read book<br/>
+&nbsp;&nbsp;2. [E][N] CCA meeting(at: 2020-01-01 18:00)<br/>
+&nbsp;&nbsp;3. [D][N] finish reading book(by: 2020-03-03 10:15)<br/>
+&nbsp;&nbsp;4. [D][N] return book(by: 2020-03-04)</code>
 
 #### `done` - Marks a selected task as done
 
@@ -115,7 +115,7 @@ Example of usage:
 Expected outcome:
 
 <code>Nice! I've marked this task as done:<br/>
-&nbsp&nbsp[D][Y] finish reading book(by: 2020-03-03 10:15)</code>
+&nbsp;&nbsp;[D][Y] finish reading book(by: 2020-03-03 10:15)</code>
 
 #### `delete` - Deletes a selected task
 
@@ -130,7 +130,7 @@ Example of usage:
 Expected outcome:
 
 <code>Noted. I've removed this task:<br/>
-&nbsp&nbsp[D][N] return book(by: 2020-03-04)</code>
+&nbsp;&nbsp;[D][N] return book(by: 2020-03-04)</code>
 
 #### `find` - Lists all upcoming tasks
 
@@ -145,8 +145,8 @@ Example of usage:
 Expected outcome:
 
 <code>Here are the matching tasks in your list:<br/>
-&nbsp&nbsp1. [T][N] read book<br/>
-&nbsp&nbsp2. [D][Y] finish reading book(by: 2020-03-03 10:15)</code>
+&nbsp;&nbsp;1. [T][N] read book<br/>
+&nbsp;&nbsp;2. [D][Y] finish reading book(by: 2020-03-03 10:15)</code>
 
 #### `show_overdue` - Lists all overdue tasks
 
@@ -159,7 +159,7 @@ Example of usage:
 Expected outcome:
 
 <code>Here are the uncompleted overdue tasks:<br/>
-&nbsp&nbsp1. [E][N] CCA meeting(at: 2020-01-01 18:00)</code>
+&nbsp;&nbsp;1. [E][N] CCA meeting(at: 2020-01-01 18:00)</code>
 
 #### `show_upcoming` - Lists all upcoming tasks
 
@@ -174,7 +174,7 @@ Example of usage:
 Expected outcome:
 
 <code>Here are the upcoming tasks within 5 day(s):<br/>
-&nbsp&nbsp1. [D][Y] finish reading book(by: 2020-03-03 10:15)</code>
+&nbsp;&nbsp;1. [D][Y] finish reading book(by: 2020-03-03 10:15)</code>
 
 #### `remove_past` - Removes all tasks that have passed
 
@@ -211,9 +211,9 @@ Example of usage:
 Expected outcome:
 
 <code>Here are the tasks that have been removed:<br/>
-&nbsp&nbsp1. [D][N] return book(by: 2020-03-04)<br/>
-&nbsp&nbsp2. [E][N] CCA meeting(at: 2020-01-01 18:00)<br/>
-&nbsp&nbsp3. [D][Y] finish reading book(by: 2020-03-03 10:15)</code>
+&nbsp;&nbsp;1. [D][N] return book(by: 2020-03-04)<br/>
+&nbsp;&nbsp;2. [E][N] CCA meeting(at: 2020-01-01 18:00)<br/>
+&nbsp;&nbsp;3. [D][Y] finish reading book(by: 2020-03-03 10:15)</code>
 
 #### `clear_all` - Deletes all tasks
 
