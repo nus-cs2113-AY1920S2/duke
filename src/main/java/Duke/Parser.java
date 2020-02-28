@@ -11,7 +11,7 @@ public class Parser {
      * @param input String to be parsed.
      * @return Parsed input as a String array.
      */
-    public static String[] parseInput(String input){
+    public static String[] parseInput (String input) {
         return input.split(" ");
     }
 
@@ -21,7 +21,7 @@ public class Parser {
      * @param arguments List of String containing parsed Todo task.
      * @return Description of todo as a string.
      */
-    public static String getTodoDescription(List<String> arguments){
+    public static String getTodoDescription (List<String> arguments) {
         return String.join(" ", arguments);
     }
 
@@ -32,12 +32,12 @@ public class Parser {
      * @return Description of deadline as a string.
      * @throws DukeException When user does not input date and time of deadlilne.
      */
-    public static String getDeadlineDescription(List<String> parsedList) throws DukeException{
+    public static String getDeadlineDescription (List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/by");
-        if(i == -1){
+        if (i == -1) {
             throw new DukeException("Please enter again with the following format: D/NAME /by yyyy-mm-dd HHmm");
         }
-        else{
+        else {
             return String.join(" ", parsedList.subList(1, i));
         }
     }
@@ -49,12 +49,12 @@ public class Parser {
      * @return Description of event as a string.
      * @throws DukeException When user does not input date and time of event.
      */
-    public static String getEventDescription(List<String> parsedList) throws DukeException{
+    public static String getEventDescription (List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/at");
-        if(i == -1){
+        if (i == -1) {
             throw new DukeException("Please enter again with the following format: E/NAME /at yyyy-mm-dd HHmm");
         }
-        else{
+        else {
             return String.join(" ", parsedList.subList(1, i));
         }
     }
@@ -66,12 +66,12 @@ public class Parser {
      * @return Time and date of deadline task as a string.
      * @throws DukeException When user does not input date and time of deadline.
      */
-    public static String getBy(List<String> parsedList) throws DukeException{
+    public static String getBy(List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/by");
-        if(i == -1){
+        if (i == -1) {
             throw new DukeException("Please enter again with the following format: D/NAME /by D/TIME");
         }
-        else{
+        else {
             return String.join(" ", parsedList.subList(i + 1, parsedList.size()));
         }
     }
@@ -83,12 +83,12 @@ public class Parser {
      * @return Time and date of event task as a string.
      * @throws DukeException When user does not input date and time of event.
      */
-    public static String getAt(List<String> parsedList) throws DukeException{
+    public static String getAt (List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/at");
-        if(i == -1){
+        if(i == -1) {
             throw new DukeException("Please enter again with the following format: E/NAME /at D/TIME");
         }
-        else{
+        else {
             return String.join(" ", parsedList.subList(i + 1, parsedList.size()));
         }
     }
@@ -107,5 +107,4 @@ public class Parser {
         }
         return true;
     }
-
 }

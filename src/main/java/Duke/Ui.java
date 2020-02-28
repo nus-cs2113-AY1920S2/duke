@@ -11,14 +11,14 @@ public class Ui {
      *
      * @param s String to be printed.
      */
-    public void printMessage(String s){
+    public void printMessage (String s) {
         System.out.println(INDENT + s);
     }
 
     /**
      * Prints a border.
      */
-    public void printBorder(){
+    public void printBorder() {
         System.out.println(BORDER);
     }
 
@@ -37,13 +37,13 @@ public class Ui {
      *
      * @param tasks List of tasks.
      */
-    public void list(TaskList tasks){
-        if(tasks.getSize() == 0){
+    public void list (TaskList tasks) {
+        if (tasks.getSize() == 0) {
             printMessage("There are no tasks in your list.");
         }
-        else{
+        else {
             printMessage("Here are the tasks in your list");
-            for (int i = 0; i < tasks.getSize(); i++){ //unsure of getSize()
+            for (int i = 0; i < tasks.getSize(); i++) { //unsure of getSize()
                 printMessage(i+1 + "." + tasks.getTasks().get(i).toString());
             }
         }
@@ -54,7 +54,7 @@ public class Ui {
      *
      * @param taskDescription String that refers to details of the task.
      */
-    public void showDoneMessage(String taskDescription){
+    public void showDoneMessage (String taskDescription) {
         printBorder();
         printMessage("Nice! I've marked this task as done: ");
         printMessage(taskDescription);
@@ -65,7 +65,7 @@ public class Ui {
      *
      * @param taskDescription String that refers to the details of the task.
      */
-    public void showAddedTask(String taskDescription){
+    public void showAddedTask (String taskDescription) {
         printMessage("Got it! I've added this task");
         printMessage(taskDescription);
     }
@@ -75,7 +75,7 @@ public class Ui {
      *
      * @param taskDescription String that refers to the details of the task.
      */
-    public void showDeletedTask(String taskDescription){
+    public void showDeletedTask (String taskDescription) {
         printMessage("Noted. I've removed this task: ");
         printMessage(taskDescription);
     }
@@ -85,35 +85,33 @@ public class Ui {
      *
      * @param tasks List of tasks.
      */
-    public void showTasksLeft(TaskList tasks){
+    public void showTasksLeft (TaskList tasks) {
         printMessage("Now you have " + tasks.getSize() + " tasks left in your list.");
     }
 
-    public void showTaskErrorMessage(){
+    public void showTaskErrorMessage() {
         printMessage(TASK_ERROR_MESSAGE);
     }
 
-    public void exitProgram(){
+    public void exitProgram() {
         printMessage("Bye. Hope to see you again soon!");
     }
 
-    public String getWord(String s){
+    public String getWord (String s) {
         return s.substring(5).toLowerCase();
     }
 
-    public void showLoadingError(){
+    public void showLoadingError() {
 
     }
 
-    public void printNoMatchingTasks(){
+    public void printNoMatchingTasks() {
         printMessage("There are no matching tasks in your list.");
     }
 
-    public void printMatchingTasks(TaskList task){
-        for (int i = 0; i < task.getSize(); i++){
+    public void printMatchingTasks (TaskList task) {
+        for (int i = 0; i < task.getSize(); i++) {
             printMessage((i + 1) + "." + task.getTasks().get(i).toString());
         }
     }
-
-
 }

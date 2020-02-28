@@ -8,7 +8,7 @@ public class Todo extends Task {
      *
      * @param description The description of Todo.
      */
-    public Todo(String description){
+    public Todo (String description) {
         super(description);
     }
 
@@ -17,7 +17,7 @@ public class Todo extends Task {
      * @param description The description of Todo.
      * @param isDone isDone is true if task is done, else false.
      */
-    public Todo(String description,  Boolean isDone){
+    public Todo (String description,  Boolean isDone) {
         super(description, isDone);
     }
 
@@ -32,7 +32,7 @@ public class Todo extends Task {
      * @return Formatted String.
      */
     @Override
-    public String toText(){
+    public String toText() {
         return "T | " + (this.isDone? "1" : "0") + " | " + this.description;
     }
 

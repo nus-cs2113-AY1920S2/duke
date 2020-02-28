@@ -13,7 +13,7 @@ public class Storage {
     private String filePath;
     private static Ui ui;
 
-    public Storage(String filePath){
+    public Storage (String filePath) {
         this.filePath = filePath;
     }
 
@@ -24,21 +24,21 @@ public class Storage {
      * @return List of tasks.
      * @throws DukeException If file does not exist and unwanted text in file.
      */
-    public static List<Task> load() throws DukeException{
-        try{
+    public static List<Task> load() throws DukeException {
+        try {
             List<Task> tasks = new ArrayList<>();
             File file = new File("data/duke.txt");
             Scanner scanner = new Scanner(file);
-            if(!scanner.hasNext()){
+            if (!scanner.hasNext()) {
                 throw new DukeException("Task List is empty.");
             }
-            while(scanner.hasNext()){
+            while (scanner.hasNext()) {
                 String[] line = scanner.nextLine().split(" \\| ");
                 boolean isDone = false;
-                if (line[1].equals("1")){
+                if (line[1].equals("1")) {
                     isDone = true;
                 }
-                switch (line[0]){
+                switch (line[0]) {
                 case "D":
                     tasks.add(new Deadline(line[2], line[3], isDone));
                     break;
@@ -65,7 +65,7 @@ public class Storage {
      *
      * @param tasks List of tasks.
      */
-    public static void writeNewData(TaskList tasks){
+    public static void writeNewData (TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter( "data/duke.txt");
             for (Task task : tasks.getTasks()) {
@@ -76,5 +76,4 @@ public class Storage {
             ui.printMessage("An error occurred while writing to file");
         }
     }
-
 }

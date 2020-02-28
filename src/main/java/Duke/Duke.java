@@ -29,10 +29,10 @@ public class Duke {
      *
      * @param filePath path of the file where tasks will be stored.
      */
-    public Duke(String filePath){
+    public Duke (String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try{
+        try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -40,7 +40,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         new Duke("data/duke.txt").run();
     }
 
@@ -51,8 +51,8 @@ public class Duke {
         ui.greetUser();
         Scanner scanner =  new Scanner(System.in);
         boolean isExit = false ;
-        while(!isExit){
-            try{
+        while (!isExit) {
+            try {
                 String input = scanner.nextLine().trim();
                 String[] parsedInput = Parser.parseInput(input);
                 int inputLength = parsedInput.length;
@@ -60,7 +60,7 @@ public class Duke {
                 String command = parsedInput[0];
                 List<String> arguments = parsedList.subList(1, parsedList.size());
 
-                switch(command){
+                switch (command) {
                 case BYE_COMMAND:
                     storage.writeNewData(tasks);
                     ui.exitProgram();
@@ -72,37 +72,37 @@ public class Duke {
                     break;
 
                 case DONE_COMMAND:
-                    if(inputLength == 2 && Parser.isNumeric(parsedInput[1])){
+                    if (inputLength == 2 && Parser.isNumeric(parsedInput[1])) {
                         int taskNumber = Integer.parseInt(parsedInput[1]);
-                        try{
+                        try {
                             tasks.markAsDone(taskNumber - 1);
                             ui.showDoneMessage(tasks.getTasks().get(taskNumber-1).toString());
                         } catch (IndexOutOfBoundsException e) {
                             ui.showTaskErrorMessage();
                         }
                     }
-                    else{
+                    else {
                         throw new DukeException(INVALID_COMMAND_MESSAGE);
                     }
                     break;
 
                 case DELETE_COMMAND:
-                    if(inputLength == 2 && Parser.isNumeric(parsedInput[1])){
+                    if (inputLength == 2 && Parser.isNumeric(parsedInput[1])) {
                         int taskNumber = Integer.parseInt(parsedInput[1]);
-                        try{
+                        try {
                             tasks.delete(taskNumber - 1);
                             ui.showTasksLeft(tasks);
                         } catch (IndexOutOfBoundsException e) {
                             ui.showTaskErrorMessage();
                         }
                     }
-                    else{
+                    else {
                         throw new DukeException(INVALID_COMMAND_MESSAGE);
                     }
                     break;
 
                 case TODO_COMMAND:
-                    if(inputLength ==  1){
+                    if (inputLength ==  1) {
                         throw new DukeException(TODO_ERROR_MESSAGE);
                     }
                     String todoDescription = Parser.getTodoDescription(arguments);
@@ -111,7 +111,7 @@ public class Duke {
                     break;
 
                 case DEADLINE_COMMAND:
-                    if(inputLength == 1){
+                    if (inputLength == 1) {
                         throw new DukeException(DEADLINE_ERROR_MESSAGE);
                     }
                     String deadlineDescription = Parser.getDeadlineDescription(parsedList);
@@ -121,7 +121,7 @@ public class Duke {
                     break;
 
                 case EVENT_COMMAND:
-                    if(inputLength == 1){
+                    if (inputLength == 1) {
                         throw new DukeException(EVENT_ERROR_MESSAGE);
                     }
                     String eventDescription = Parser.getEventDescription(parsedList);
@@ -131,21 +131,21 @@ public class Duke {
                     break;
 
                 case FIND_COMMAND:
-                    if (inputLength != 1){
+                    if (inputLength != 1) {
                         TaskList foundTasks = new TaskList();
-                        for(Task t : tasks.getTasks()){
-                            if (t.getDescription().toLowerCase().contains(ui.getWord(input))){
+                        for (Task t : tasks.getTasks()) {
+                            if (t.getDescription().toLowerCase().contains(ui.getWord(input))) {
                                 foundTasks.addToFindList(t);
                             }
                         }
-                        if (foundTasks.getSize() == 0){
+                        if (foundTasks.getSize() == 0) {
                             ui.printNoMatchingTasks();
                         }
-                        else{
+                        else {
                             ui.printMatchingTasks(foundTasks);
                         }
                     }
-                    else{
+                    else {
                         throw new DukeException(INVALID_COMMAND_MESSAGE);
                     }
                     break;
@@ -162,5 +162,4 @@ public class Duke {
             }
         }
     }
-
 }

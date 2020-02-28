@@ -9,13 +9,13 @@ public class Event extends Task {
     protected String at;
     String atFormat;
 
-    public Event(String description, String at){
+    public Event (String description, String at) {
         super(description);
         this.at = at;
         this.atFormat = getAtFormat();
     }
 
-    public Event(String description, String at, Boolean isDone){
+    public Event (String description, String at, Boolean isDone) {
         super(description, isDone);
         this.at = at;
         this.atFormat = getAtFormat();
@@ -27,7 +27,7 @@ public class Event extends Task {
      *
      * @return String in a different format of MMM dd yyyy HHmm.
      */
-    public String getAtFormat(){
+    public String getAtFormat() {
         LocalDateTime localDateTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         return localDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
     }
@@ -38,9 +38,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String toText(){
+    public String toText() {
         return "E | " + (this.isDone? "1" : "0") + " | " + this.description + " | " + this.at;
     }
-
 }
 
