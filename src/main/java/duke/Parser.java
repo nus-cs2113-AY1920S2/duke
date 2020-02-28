@@ -19,6 +19,10 @@ public class Parser {
     public static void determineCommand() throws DukeException {
         if (Duke.inputLine.equals("bye")) {
             Duke.isEnd = true;
+
+        } else if (Duke.inputLine.substring(0, 4).equals("help")) {
+            Ui.printHelpManual(); //prints out help manual
+
         } else if (Duke.inputLine.substring(0, 4).equals("list")) {
             Ui.printsOutTheList(); // prints out the list
 

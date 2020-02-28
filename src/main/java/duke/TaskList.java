@@ -56,29 +56,21 @@ public class TaskList {
         if (commandArray.length < 2) {
             throw new IndexOutOfBoundsException();
         } else {
-            String keyword = Duke.inputLine.substring(5);
-            keyword = keyword.toLowerCase();
-            for (int i = 0; i < TaskList.sizeOfList; i++) {
-                String description = TaskList.listOfTasks.get(i).getDescription();
-                description = description.toLowerCase();
-                if (description.contains(keyword)) {
-                    indexOfFound.add(i);
+
+            for (int j = 1; j < commandArray.length; j++) { // checks list for every keyword
+                String keyword = commandArray[j];
+                keyword = keyword.toLowerCase(); // make it not case-sensitive
+                for (int i = 0; i < TaskList.sizeOfList; i++) {
+                    String description = TaskList.listOfTasks.get(i).toString();
+                    description = description.toLowerCase(); // make it not case-sensitive
+                    if (description.contains(keyword) && !indexOfFound.contains(i)) {
+                        indexOfFound.add(i);
+                    }
                 }
             }
             Ui.printOutFound();
-            clearFindingList();
+            indexOfFound.clear(); // clears list after each find
 
-        }
-    }
-
-
-    /**
-     * clear the list used to find tasks
-     * with the stated keyword
-     */
-    private static void clearFindingList() {
-        while (indexOfFound.size() != 0) {
-            indexOfFound.remove(0);
         }
     }
 

@@ -16,10 +16,19 @@ public class Ui {
      */
     public static void printExitMessage() {
         System.out.println(Constants.STANDARD_SEPARATOR);
-        System.out.println(" Bye. Hope to see you again soon!");
+        System.out.println(" Aww man so soon? Alright!! Really hope to see you again soon! <3");
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
 
+
+    /**
+     * Prints help manual
+     */
+    public static void printHelpManual() {
+        System.out.println(Constants.STANDARD_SEPARATOR);
+        System.out.println(Constants.helpManual);
+        System.out.println(Constants.STANDARD_SEPARATOR);
+    }
 
     /**
      * Prints out the entire list
