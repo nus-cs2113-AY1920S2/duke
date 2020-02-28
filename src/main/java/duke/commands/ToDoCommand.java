@@ -5,11 +5,11 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.UI;
 
-public class todoCommand extends Command {
+public class ToDoCommand extends Command {
 
     protected String description;
 
-    public todoCommand(String command, String description) {
+    public ToDoCommand(String command, String description) {
         super(command);
         this.description = description;
     }

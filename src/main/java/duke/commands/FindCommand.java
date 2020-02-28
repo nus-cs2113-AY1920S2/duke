@@ -8,11 +8,11 @@ import duke.ui.UI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class findCommand extends Command {
+public class FindCommand extends Command {
 
     protected String description;
 
-    public findCommand(String command, String description) {
+    public FindCommand(String command, String description) {
         super(command);
         this.description = description;
     }

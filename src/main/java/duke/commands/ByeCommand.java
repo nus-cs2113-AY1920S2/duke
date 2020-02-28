@@ -4,9 +4,9 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 
-public class byeCommand extends Command {
+public class ByeCommand extends Command {
 
-    public byeCommand(String command) {
+    public ByeCommand(String command) {
         super(command);
     }
 

@@ -6,11 +6,11 @@ import duke.ui.UI;
 
 import java.util.Scanner;
 
-public class clearCommand extends Command {
+public class ClearCommand extends Command {
 
     protected String description;
 
-    public clearCommand(String command) {
+    public ClearCommand(String command) {
         super(command);
     }
 

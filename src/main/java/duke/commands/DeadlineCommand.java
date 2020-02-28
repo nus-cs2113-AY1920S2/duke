@@ -9,12 +9,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class deadlineCommand extends Command {
+public class DeadlineCommand extends Command {
 
     protected String by;
     protected String description;
 
-    public deadlineCommand(String command, String description, String by) {
+    public DeadlineCommand(String command, String description, String by) {
         super(command);
         this.description = description;
         this.by = by;

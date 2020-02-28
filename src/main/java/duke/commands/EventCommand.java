@@ -5,12 +5,12 @@ import duke.tasks.TaskList;
 import duke.tasks.Event;
 import duke.ui.UI;
 
-public class eventCommand extends Command {
+public class EventCommand extends Command {
 
     protected String at;
     protected String description;
 
-    public eventCommand(String command, String description, String at) {
+    public EventCommand(String command, String description, String at) {
         super(command);
         this.description = description;
         this.at =at;

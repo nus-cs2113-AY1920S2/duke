@@ -34,40 +34,40 @@ public class Parser {
                 break;
             case "todo":
                 if (numArguments != 2) throw new InvalidToDoException();
-                command = new todoCommand(commandPrompt, description);
+                command = new ToDoCommand(commandPrompt, description);
                 break;
             case "deadline":
                 if (numArguments != 2) throw new InvalidDeadlineException();
                 String[] deadlineInfo = description.split("/by ", 2);
                 if (deadlineInfo.length != 2) throw new InvalidDeadlineException();
-                command = new deadlineCommand(commandPrompt, deadlineInfo[0], deadlineInfo[1]);
+                command = new DeadlineCommand(commandPrompt, deadlineInfo[0], deadlineInfo[1]);
                 break;
             case "event":
                 if (numArguments != 2) throw new InvalidEventException();
                 String[] eventInfo = description.split("/at ", 2);
                 if (eventInfo.length != 2) throw new InvalidEventException();
-                command = new eventCommand(commandPrompt, eventInfo[0], eventInfo[1]);
+                command = new EventCommand(commandPrompt, eventInfo[0], eventInfo[1]);
                 break;
             case "done":
                 if (!description.matches("-?\\d+") || numArguments != 2) throw new InvalidFormatException();
-                command = new doneCommand(commandPrompt, description);
+                command = new DoneCommand(commandPrompt, description);
                 break;
             case "delete":
                 if (!description.matches("-?\\d+") || numArguments != 2) throw new InvalidFormatException();
-                command = new deleteCommand(commandPrompt, description);
+                command = new DeleteCommand(commandPrompt, description);
                 break;
             case "find":
                 if (numArguments != 2) throw new InvalidFormatException();
-                command = new findCommand(commandPrompt, description);
+                command = new FindCommand(commandPrompt, description);
                 break;
             case "clear":
-                command = new clearCommand(commandPrompt);
+                command = new ClearCommand(commandPrompt);
                 break;
             case "/help":
-                command = new helpCommand(commandPrompt);
+                command = new HelpCommand(commandPrompt);
                 break;
             case "bye":
-                command = new byeCommand(commandPrompt);
+                command = new ByeCommand(commandPrompt);
                 break;
             default:
                 throw new InvalidCommandException();

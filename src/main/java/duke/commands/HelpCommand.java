@@ -5,11 +5,11 @@ import duke.tasks.TaskList;
 import duke.ui.HelpList;
 import duke.ui.UI;
 
-public class helpCommand extends Command {
+public class HelpCommand extends Command {
 
     protected String description;
 
-    public helpCommand(String command) {
+    public HelpCommand(String command) {
         super(command);
     }
 
