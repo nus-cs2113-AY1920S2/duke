@@ -19,7 +19,7 @@ Adds a new ToDo task to your list.
 
 Example of usage: 
 <pre>
-<b>todo<b> borrow book
+<b>todo</b> borrow book
 </pre>
 
 Expected outcome:
@@ -36,7 +36,7 @@ Adds a new Deadline task to your list.
 
 Example of usage: 
 <pre>
-<b>deadline<b> return book <b>/by<b> Sunday
+<b>deadline</b> return book <b>/by</b> Sunday
 </pre>
 
 Expected outcome:
@@ -53,7 +53,7 @@ Adds a new Event task to your list.
 
 Example of usage: 
 <pre>
-<b>event<b> project meeting <b>/at<b> Mon 2-4pm
+<b>event</b> project meeting <b>/at</b> Mon 2-4pm
 </pre>
 
 Expected outcome:
@@ -70,7 +70,7 @@ Shows all tasks in your list.
 
 Example of usage: 
 <pre>
-<b>list<b>
+<b>list</b>
 </pre>
 
 Expected outcome:
@@ -88,7 +88,7 @@ Marks a specific task as done.
 
 Example of usage: 
 <pre>
-<b>done<b> 2
+<b>done</b> 2
 </pre>
 
 Expected outcome:
@@ -104,7 +104,7 @@ Removes a specific task from the list.
 
 Example of usage: 
 <pre>
-<b>delete<b> 1
+<b>delete</b> 1
 </pre>
 
 Expected outcome:
@@ -121,7 +121,7 @@ Shows all tasks from the list which contains the keyword.
 
 Example of usage: 
 <pre>
-<b>find<b> book
+<b>find</b> book
 </pre>
 
 Expected outcome:
@@ -138,7 +138,7 @@ Exits the program.
 
 Example of usage: 
 <pre>
-<b>bye<b>
+<b>bye</b>
 </pre>
 
 Expected outcome:
