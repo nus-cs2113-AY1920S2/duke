@@ -1,8 +1,21 @@
 package duke;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
-    public static String parse(String input, int listSize) throws DukeException, NumberFormatException{
+    /**
+     * This method checks if an input is a valid command. It also formats the
+     * input to make processing easier later on.
+     * @param input The input given.
+     * @param listSize The size of the task list.
+     * @return Formatted and valid command.
+     * @throws DukeException If the command is invalid.
+     * @throws NumberFormatException If the index given cannot be parsed to an Integer.
+     */
+    public static String parse(String input, int listSize) throws DukeException, NumberFormatException {
+
         int taskIndex;
         String[] inputSubstrings = input.split("\\s+");
         inputSubstrings[0] = inputSubstrings[0].toLowerCase();

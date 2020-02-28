@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
 
     private static final String FOUR_SPACE_INDENT = "    ";
@@ -30,6 +33,11 @@ public class Ui {
             "\"event <description> /at <date/time>\": add an event",
             "\"thanks\": if you're feeling thankful"};
 
+    /**
+     * Get an input from the user that is not empty (an input of only
+     * whitespaces is considered empty).
+     * @return User input.
+     */
     public String readCommand() {
         Scanner in = new Scanner(System.in);
         String input = "";
@@ -53,6 +61,10 @@ public class Ui {
         printFormattedString(EXIT_MESSAGE);
     }
 
+    /**
+     * Inform the user that a task has been added.
+     * @param tasks The list to which the task was added.
+     */
     public void printAddedTask(ArrayList<Task> tasks) {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + "Got it. I've added this task:");
@@ -62,6 +74,11 @@ public class Ui {
         System.out.print("\n");
     }
 
+    /**
+     * Inform the user that a task has been marked as done.
+     * @param tasks The list in which the task resides.
+     * @param taskIndex The index of the task being marked.
+     */
     public void printDoneTask(ArrayList<Task> tasks, int taskIndex) {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + "Nice! I've marked this task as done:");
@@ -70,6 +87,11 @@ public class Ui {
         System.out.print("\n");
     }
 
+    /**
+     * Inform the user that a task has been deleted.
+     * @param tasks The list from which the task was deleted.
+     * @param taskIndex The index of the deleted task.
+     */
     public void printDeletedTask(ArrayList<Task> tasks, int taskIndex) {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + "Noted. I've removed this task:");
@@ -91,6 +113,10 @@ public class Ui {
         System.out.println(FOUR_SPACE_INDENT + str);
     }
 
+    /**
+     * Show the list of tasks in memory.
+     * @param tasks The task list.
+     */
     public void printTasks(ArrayList<Task> tasks) {
         int bulletNum = 1;
         System.out.println(BORDER);
@@ -103,6 +129,10 @@ public class Ui {
         System.out.print("\n");
     }
 
+    /**
+     * Show the list of tasks that were found.
+     * @param foundTasks The list of found tasks.
+     */
     public void printFoundTasks(ArrayList<String> foundTasks) {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + "Here are the matching tasks in your list:");
@@ -113,6 +143,9 @@ public class Ui {
         System.out.print("\n");
     }
 
+    /**
+     * Provides a list of commands.
+     */
     public void helpUser() {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + HELP_RESPONSE);
