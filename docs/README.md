@@ -22,7 +22,6 @@ manages the list of Tasks, refer to the *Features* section below.
 	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Jar/duke.jar) for Jar file)
 * Navigate through command prompt to the directory that the Jar 
   file has been downloaded into.
-* Ensure the encoding in your terminal allows for UTF8 characters to be printed.
 * Type {java -jar duke.jar} to start using *Nini*
 
 ## FAQ 
@@ -32,10 +31,6 @@ manages the list of Tasks, refer to the *Features* section below.
 	Ensure that the data folder is under the same directory as the Jar file. <br/>
 	Example: <br/>
 	![Capture](Capture.PNG)
-1. __The status for the Task is shown as question mark__
-	Copy the command within the braces and run the Jar file accordingly : <br/>
-	{java -Dfile.encoding=UTF8 -jar duke.jar}
-
 
 ## Features 
 
@@ -62,11 +57,11 @@ that the Task is assigned to.
 
 When a task is marked as _done_,
 *Nini* will inform the User and update
-the check box with a check mark.
+the status.
 
 User also has the option to mark all as done. 
 In which *Nini* will show the user that all Tasks
-has its check box converted into a check mark.
+has its status updated.
       
 ### Feature 3 
 User can _delete_ Tasks.
@@ -88,9 +83,9 @@ User can list Tasks.
 *Nini* will inform User of the all the 
 Tasks currently stored in his Task List.
 
-Tasks with a check mark indicates Tasks that
+Tasks with "DONE" indicates Tasks that
 are deemed as completed by User while Tasks
-with a ballot are Tasks that are not yet 
+with "PENDING" are Tasks that have yet to be 
 deemed as complete by the User.
 
 ### Feature 5 
@@ -121,7 +116,7 @@ Expected outcome:
 
     __________________________________________________________
      Got it. I've added this task:
-      [T][✘] read books
+      [T][Status: PENDING] read books
      Now you have 1 tasks in the list.
     __________________________________________________________
 
@@ -137,7 +132,7 @@ Expected outcome:
 
 	__________________________________________________________
 	 Got it. I've added this task:
-	   [E][✘] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )
+	   [E][Status: PENDING] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )
 	 Now you have 2 tasks in the list.
 	__________________________________________________________
 
@@ -154,7 +149,7 @@ Expected outcome:
 
 	__________________________________________________________
 	 Got it. I've added this task:
-	   [D][✘] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )
+	   [D][Status: PENDING] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )
 	 Now you have 1 tasks in the list.
 	__________________________________________________________ 
 
@@ -170,7 +165,7 @@ Expected outcome:
 
     __________________________________________________________  
 	   Nice! I've marked this task as done:  
-	    [T][✓] read books  
+	    [T][Status: DONE] read books  
     __________________________________________________________  
     
 To mark _ALL_ Tasks as completed, type {done} {all}
@@ -183,9 +178,9 @@ Expected outcome:
 
     __________________________________________________________  
     All tasks have been marked as done!
-    1.[T][✓] read books  
-    2.[E][✓] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
-    3.[D][✓] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )  
+    1.[T][Status: DONE] read books  
+    2.[E][Status: DONE] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
+    3.[D][Status: DONE] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )  
     __________________________________________________________  
 
 ### `Delete` - Delete Tasks from Task List.
@@ -200,7 +195,7 @@ Expected outcome:
 
     __________________________________________________________
      Noted. I've removed this task: 
-       [T][✓] read books
+       [T][Status: DONE] read books
      Now you have 3 tasks in the list.
     __________________________________________________________
     
@@ -237,9 +232,9 @@ Expected outcome:
 
     __________________________________________________________
      Here are the tasks in your list:
-	 1.[T][✓] read books  
-	 2.[E][✓] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
-	 3.[D][✓] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 ) 
+	 1.[T][Status: DONE] read books  
+	 2.[E][Status: DONE] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
+	 3.[D][Status: DONE] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 ) 
     __________________________________________________________
 
 ### `Find` - Finds a list Tasks that matches the search key.
@@ -252,7 +247,7 @@ Expected outcome:
 
     __________________________________________________________
      Here are the matching tasks in your list!
-     1.[T][✘] read books
+     1.[T][Status: PENDING] read books
     __________________________________________________________
     
 ### `Help`- Lists commands that can be carried out by *Nini*
