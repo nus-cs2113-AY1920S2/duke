@@ -1,7 +1,20 @@
 package alie;
 
-import alie.commands.*;
+import alie.commands.AddDeadlineCommand;
+import alie.commands.AddEventCommand;
+import alie.commands.AddTodoCommand;
+import alie.commands.Command;
+import alie.commands.DeleteCommand;
+import alie.commands.DoneCommand;
+import alie.commands.ExitCommand;
+import alie.commands.FindCommand;
+import alie.commands.IncorrectCommand;
+import alie.commands.ListCommand;
 import alie.exceptions.InvalidCmdException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
@@ -55,4 +68,15 @@ public class Parser {
             return "";
         }
     }
+
+    public static String parseDate(String stringDate) {
+        try {
+            LocalDate date = LocalDate.parse(stringDate);
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            Ui.printTimeWarning();
+            return stringDate;
+        }
+    }
 }
+

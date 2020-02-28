@@ -22,8 +22,8 @@ public class AddEventCommand extends Command {
         try {
             String[] details = Parser.parseDeadlineOrEventDetails(cmd[1], EVENT_DETAIL_DIVIDER);
             String taskName = details[0];
-            String eventDate = details[1];
-            taskToAdd = new Event(taskName, eventDate);
+            String taskDetails = Parser.parseDate(details[1]);
+            taskToAdd = new Event(taskName, taskDetails);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCmdException("Name or Date of Event cannot be empty!");
         }

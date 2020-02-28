@@ -23,8 +23,8 @@ public class AddDeadlineCommand extends Command {
             String[] details = Parser.parseDeadlineOrEventDetails(spiltCommands[1],
                     DEADLINE_DETAIL_DIVIDER);
             String taskName = details[0];
-            String deadlineDate = details[1];
-            taskToAdd = new Deadline(taskName, deadlineDate);
+            String taskDeadline = Parser.parseDate(details[1]);
+            taskToAdd = new Deadline(taskName, taskDeadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCmdException("Name or Date of Deadline cannot be empty!");
         }
