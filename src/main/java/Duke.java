@@ -5,20 +5,18 @@ import src.main.java.duke.exceptions.InvalidCommandException;
 import src.main.java.duke.exceptions.InvalidDateException;
 import src.main.java.duke.exceptions.InvalidDoneException;
 import src.main.java.duke.task.Task;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    static final int MAX_TASK_AMOUNT = 100;
-
     public static void main(String[] args) {
         Duke_Static_Methods.greetUser();
-        Task[] taskList = new Task[MAX_TASK_AMOUNT];
+        ArrayList<Task> taskList = new ArrayList<>();
         inputAndExecute(taskList);
     }
 
-    private static void inputAndExecute(Task[] taskList) {
+    private static void inputAndExecute(ArrayList<Task> taskList) {
         String userInput;
         do {
             userInput = scanInput();
@@ -35,18 +33,18 @@ public class Duke {
                 System.out.println("Unable to process done statement");
             } catch (AlreadyDoneException e) {
                 System.out.println("Task has already been completed.");
-                System.out.println("  " + taskList[Integer.parseInt(userCommand[1]) - 1].toString());
+                System.out.println("  " + taskList.get(Integer.parseInt(userCommand[1]) - 1).toString());
             }
         } while (!userInput.equalsIgnoreCase("bye"));
     }
 
-    private static void executeCommand(Task[] taskList, String[] userCommand) throws InvalidCommandException, InvalidDateException, InvalidDoneException, AlreadyDoneException {
+    private static void executeCommand(ArrayList<Task> taskList, String[] userCommand) throws InvalidCommandException, InvalidDateException, InvalidDoneException, AlreadyDoneException {
         switch (userCommand[0]) {
             case "list":
-                Duke_Static_Methods.listTasks(taskList);
+                Duke_Static_Methods.listTasks(taskList); //List out task list
                 break;
             case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!"); //terminate method
                 break;
             case "todo":
                 Duke_Static_Methods.addNewTodo(taskList, userCommand[1]);
@@ -58,7 +56,10 @@ public class Duke {
                 Duke_Static_Methods.addNewEvent(taskList, userCommand[1]);
                 break;
             case "done":
-                Duke_Static_Methods.markedAsDone(userCommand[1], taskList);
+                Duke_Static_Methods.markedAsDone(taskList, userCommand[1]);
+                break;
+            case "delete":
+                Duke_Static_Methods.deleteTask(taskList, userCommand[1]);
                 break;
             default:
                 throw new InvalidCommandException();
