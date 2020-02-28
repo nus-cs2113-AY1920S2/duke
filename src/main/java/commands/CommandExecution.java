@@ -13,6 +13,8 @@ import common.tasks.Event;
 import common.tasks.Task;
 import common.tasks.ToDo;
 
+import static common.HelpPage.HelpMessage;
+
 /**
  * Handles all the execution and validation of commands.
  */
@@ -29,6 +31,15 @@ public class CommandExecution {
     public CommandExecution(ArrayList<Task> tasks, ArrayList<Task> removedTasks) {
         this.tasks = tasks;
         this.removedTasks = removedTasks;
+    }
+    
+    /**
+     * Returns a help message detailing all accepted commands and formats.
+     * 
+     * @return HelpMessage
+     */
+    public String getHelp() {
+    	return HelpMessage;
     }
     
     /**

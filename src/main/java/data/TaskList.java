@@ -64,6 +64,9 @@ public class TaskList {
                 case "show_deleted":
                     msg += showRemoved();
                     break;
+                case "help":
+                	msg += commandExecution.getHelp();
+                	break;
                 case "find":
                     msg += commandExecution.findTask(command);
                     break;

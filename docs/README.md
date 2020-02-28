@@ -26,6 +26,7 @@ Upon initialisation of the chatbot, it will prompt the user on tasks that are du
 All tasks will be automatically saved in an external text file `Duke.txt`. Please do not tamper with the location or contents of the text file, as this could result in the loss of your stored data.
 
 
+
 ## Usage
 
 #### `todo` - Adds a todo task
@@ -45,7 +46,7 @@ Now you have 1 task(s) in the list.</code>
 #### `event` - Adds an event task
 
 An event task will be added to the chatbot. By default, the event task will be marked as undone. The chatbot will then reply with a confirmation that the command has been executed, and will inform the user of the number of tasks currently in the list.<br/>
-Events need to be added with a date, while a time is optional. For the full list of accepted date and time formats, please refer to the help page after initialising the chatbot.<br/>
+Events need to be added with a date, while a time is optional. For the full list of accepted date and time formats, please refer to the date and time format section below.<br/>
 
 Events are added using the following format: `event <description of event> /at <date> <time>`
 
@@ -62,7 +63,7 @@ Now you have 2 task(s) in the list.</code>
 #### `deadline` - Adds a deadline task
 
 A deadline task will be added to the chatbot. By default, the deadline task will be marked as undone. The chatbot will then reply with a confirmation that the command has been executed, and will inform the user of the number of tasks currently in the list.<br/>
-Deadlines need to be added with a date, while a time is optional. For the full list of accepted date and time formats, please refer to the help page after initialising the chatbot.<br/>
+Deadlines need to be added with a date, while a time is optional. For the full list of accepted date and time formats, please refer to the date and time format section below.<br/>
 
 Deadlines are added using the following format: `deadline <description of deadline> /by <date> <time>`
 
@@ -132,11 +133,11 @@ Expected outcome:
 <code>Noted. I've removed this task:<br/>
 &nbsp;&nbsp;[D][N] return book(by: 2020-03-04)</code>
 
-#### `find` - Lists all upcoming tasks
+#### `find` - Finds for certain tasks
 
 Searches for and returns all tasks that contain the specified keyword or character sequence.
 
-Upcoming tasks are shown using the following format: `find <keyword / characters>`
+Tasks are searched using the following format: `find <keyword / characters>`
 
 Example of usage: 
 
@@ -200,7 +201,7 @@ Expected outcome:
 
 <code>All completed tasks have been removed.</code>
 
-#### `show_deleted` - Lists all upcoming tasks
+#### `show_deleted` - Lists all deleted tasks
 
 Shows all tasks that have been deleted in this instance of the chatbot. This is cleared everytime the chatbot is terminated.
 
@@ -238,3 +239,17 @@ Example of usage:
 Expected outcome:
 
 <code>Bye. Hope to see you again soon!</code>
+
+
+
+## Acceptable Date and Time Formats
+
+#### Acceptable date formats:
+1. date/month/year  (e.g. 1/3/19, 01/03/19, 1/3/2019, 01/03/2019, 2019/03/01)
+1. date-month-year  (e.g. 1-3-19, 01-03-19, 1-3-2019, 01-03-2019)
+1. date.month.year  (e.g. 1.3.19, 01.03.19, 1.3.2019, 01.03.2019)
+1. date-MMM-year  (e.g. 1-Mar-19, 1-Mar-2019, 01-Mar-2019)
+
+#### Acceptable time formats:
+1. 12-hr time  (e.g. 10PM, 10:15PM, 10:15:00PM)
+2. 24-hr time  (e.g. 2215, 22:15, 22:15:00)
