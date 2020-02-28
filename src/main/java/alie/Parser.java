@@ -7,6 +7,7 @@ import alie.commands.Command;
 import alie.commands.DeleteCommand;
 import alie.commands.DoneCommand;
 import alie.commands.ExitCommand;
+import alie.commands.FindCommand;
 import alie.commands.IncorrectCommand;
 import alie.commands.ListCommand;
 import alie.exceptions.InvalidCmdException;
@@ -32,6 +33,8 @@ public class Parser {
             return new DoneCommand(splitCmds[1]);
         case DeleteCommand.COMMAND_KEYWORD:
             return new DeleteCommand(splitCmds[1]);
+        case FindCommand.COMMAND_KEYWORD:
+            return new FindCommand(splitCmds[1]);
         case AddTodoCommand.COMMAND_KEYWORD:
             return new AddTodoCommand(splitCmds);
         case AddDeadlineCommand.COMMAND_KEYWORD:
