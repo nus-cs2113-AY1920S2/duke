@@ -3,6 +3,8 @@ package duke.commands;
 import duke.Main;
 import duke.exceptions.BadLineFormatException;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 public class OnCommand extends Command {
     public static final String KEYWORD = "on";
     public static final String EXAMPLE_USAGE = "by 16/3/2021";
+    private String message;
+
     private LocalDate date;
 
     public OnCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
@@ -20,6 +24,7 @@ public class OnCommand extends Command {
             throw new BadLineFormatException("Command needs to be in form: on d/M/yyyy");
         }
         this.date = LocalDate.parse(tokens[1], Main.DF);
+        this.message = "These are your tasks on " + date + ":";
         this.isPersistentCommand = false;
     }
 
@@ -27,6 +32,7 @@ public class OnCommand extends Command {
      * List all tasks that occur on specified date
      */
     public void execute() {
-        taskList.listTasksOnDate(date);
+        String tasks = taskList.getTasksByFilter((Task t) -> t.getIsOn(date));
+        Ui.printPretty(message + tasks);
     }
 }

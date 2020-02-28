@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import duke.commands.ListCommand;
 import duke.parser.Parser;
 import duke.ui.Ui;
 import duke.exceptions.BadFileFormatException;
@@ -39,7 +40,8 @@ public class TaskList {
         }
 
         if (tasks.size() != 0) {
-            listTasks();
+            String tasks = getTasksByFilter((Task t) -> true);
+            Ui.printPretty(ListCommand.MESSAGE + tasks);
         }
     }
 
@@ -55,43 +57,18 @@ public class TaskList {
     }
 
     /**
-     * Print a list of all the tasks
+     * Get a string of the formatted list of tasks based on a filter specified in TaskFilter object
+     * @param tf functional interface representing the condition to filter tasks on
+     * @return string of formatted list of tasks. Newline is prepended.
      */
-    public void listTasks() {
-        String message = "These are your tasks:" + System.lineSeparator();
+    public String getTasksByFilter(TaskFilter tf) {
+        String filteredTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
-            String lineEnd = i == tasks.size() - 1 ? "" : System.lineSeparator(); // Do this so no extra newline
-            message += (String.format("%d. %s", i + 1, tasks.get(i).toString()) + lineEnd);
-        }
-        Ui.printPretty(message);
-    }
-
-    /**
-     * List all the tasks that occur before target dateTime
-     * @param dateTime target dateTime
-     */
-    public void listTasksByDateTime(LocalDateTime dateTime) {
-        String message = "These are your tasks by " + dateTime;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIsBy(dateTime)) {
-                message += (System.lineSeparator() + String.format("%d. %s", i + 1, tasks.get(i).toString()));
+            if (tf.filter(tasks.get(i))) {
+                filteredTasks += (System.lineSeparator() + String.format("%d. %s", i + 1, tasks.get(i).toString()));
             }
         }
-        Ui.printPretty(message);
-    }
-
-    /**
-     * List all the tasks that occur on target date
-     * @param date target date
-     */
-    public void listTasksOnDate(LocalDate date) {
-        String message = "These are your tasks on " + date + ":";
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIsOn(date)) {
-                message += (System.lineSeparator() + String.format("%d. %s", i + 1, tasks.get(i).toString()));
-            }
-        }
-        Ui.printPretty(message);
+        return filteredTasks;
     }
 
     /**
@@ -123,25 +100,6 @@ public class TaskList {
         Task task = tasks.get(taskIndex);
         task.setIsDone(true);
         Ui.printPretty("Task " + (taskIndex + 1) + " has been marked as done\n" + task.toString());
-    }
-
-    /**
-     * List all the tasks that contain target word
-     * @param word target word
-     */
-    public void find(String word) {
-        String result = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            if (t.containsWord(word)) {
-                if (!result.equals("")) {
-                    result += System.lineSeparator();
-                }
-                result += (String.format("%d. %s", i + 1, tasks.get(i).toString()));
-            }
-        }
-
-        Ui.printPretty("Here are your search results:" + System.lineSeparator() + result);
     }
 
     /**
