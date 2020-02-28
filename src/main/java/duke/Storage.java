@@ -7,11 +7,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private ArrayList<Task> tasks = new ArrayList<>();
     private String filePath;
 
+    /**
+     * Create a task list from the information stored on a text file. Keeps the
+     * user informed of what is happening.
+     * @param ui The ui object used to communicate with the user.
+     * @return A task list.
+     * @throws DukeException If there are problems with loading.
+     */
     public ArrayList<Task> load(Ui ui) throws DukeException {
         String description;
         int dividerIndex;
@@ -65,10 +75,14 @@ public class Storage {
             }
         }
         ui.printLine(Ui.LOADING_DONE);
-
         return tasks;
     }
 
+    /**
+     * Save the tasks to a text file.
+     * @param ui The ui object used to report an error while saving.
+     * @param taskList The list of tasks.
+     */
     public void saveTaskstoDisk(Ui ui, TaskList taskList) {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
