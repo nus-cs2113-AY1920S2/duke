@@ -6,6 +6,9 @@ import duke.tasklist.TaskList;
 
 import java.time.LocalDate;
 
+/**
+ * Class for on command
+ */
 public class OnCommand extends Command {
     public static final String KEYWORD = "on";
     public static final String EXAMPLE_USAGE = "by 16/3/2021";
@@ -20,6 +23,9 @@ public class OnCommand extends Command {
         this.isPersistentCommand = false;
     }
 
+    /**
+     * List all tasks that occur on specified date
+     */
     public void execute() {
         taskList.listTasksOnDate(date);
     }

@@ -3,6 +3,9 @@ package duke.commands;
 import duke.exceptions.BadLineFormatException;
 import duke.tasklist.TaskList;
 
+/**
+ * Class for find command
+ */
 public class FindCommand extends Command {
     public static final String EXAMPLE_USAGE = "find <search term>";
     public static final String KEYWORD = "find";
@@ -17,6 +20,9 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * List all tasks that contain target word
+     */
     public void execute() {
         taskList.find(tokens[1]);
     }

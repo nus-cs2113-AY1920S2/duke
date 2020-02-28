@@ -74,6 +74,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse a line that is read from file
+     * @param line line that is read from file
+     * @return <code>Task</code> generated based on line
+     * @throws BadLineFormatException if the line from file is badly formatted
+     */
     public static Task parseFormattedLine(String line) throws BadLineFormatException {
         String[] tokens = line.split(",");
         if (tokens.length == 0) {

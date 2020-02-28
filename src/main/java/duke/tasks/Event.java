@@ -6,7 +6,6 @@ import duke.exceptions.BadLineFormatException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Class to represent an event task
@@ -28,10 +27,20 @@ public class Event extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Get if the event's associated dateTime is before the target dateTime
+     * @param dateTime target dateTime
+     * @return if the event's associated dateTime is before the target dateTime
+     */
     public boolean getIsBy(LocalDateTime dateTime) {
         return startDateTime.isBefore(dateTime);
     }
 
+    /**
+     * Get if the event's associated dateTime is on the same day as the target date
+     * @param date target date
+     * @return if the event's associated dateTime is on the same day as the target date
+     */
     public boolean getIsOn(LocalDate date) {
         return startDateTime.toLocalDate().equals(date);
     }

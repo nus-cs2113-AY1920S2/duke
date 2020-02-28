@@ -6,6 +6,9 @@ import duke.tasklist.TaskList;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class to represent by command
+ */
 public class ByCommand extends Command {
     public static final String KEYWORD = "by";
     public static final String EXAMPLE_USAGE = "by 24/6/2022 16:30";
@@ -20,6 +23,9 @@ public class ByCommand extends Command {
         this.isPersistentCommand = false;
     }
 
+    /**
+     * List all tasks that occur before target dateTime
+     */
     public void execute() {
         taskList.listTasksByDateTime(dateTime);
     }

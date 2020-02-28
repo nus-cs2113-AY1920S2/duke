@@ -66,6 +66,10 @@ public class TaskList {
         Ui.printPretty(message);
     }
 
+    /**
+     * List all the tasks that occur before target dateTime
+     * @param dateTime target dateTime
+     */
     public void listTasksByDateTime(LocalDateTime dateTime) {
         String message = "These are your tasks by " + dateTime;
         for (int i = 0; i < tasks.size(); i++) {
@@ -76,6 +80,10 @@ public class TaskList {
         Ui.printPretty(message);
     }
 
+    /**
+     * List all the tasks that occur on target date
+     * @param date target date
+     */
     public void listTasksOnDate(LocalDate date) {
         String message = "These are your tasks on " + date + ":";
         for (int i = 0; i < tasks.size(); i++) {
@@ -117,6 +125,10 @@ public class TaskList {
         Ui.printPretty("Task " + (taskIndex + 1) + " has been marked as done\n" + task.toString());
     }
 
+    /**
+     * List all the tasks that contain target word
+     * @param word target word
+     */
     public void find(String word) {
         String result = "";
         for (int i = 0; i < tasks.size(); i++) {

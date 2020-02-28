@@ -27,10 +27,20 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Get if the deadline's associated dateTime is before the target dateTime
+     * @param dateTime target dateTime
+     * @return if the deadline's associated dateTime is before the target dateTime
+     */
     public boolean getIsBy(LocalDateTime dateTime) {
         return dueDateTime.isBefore(dateTime);
     }
 
+    /**
+     * Get if the deadline's associated dateTime is on the same day as the target date
+     * @param date target date
+     * @return if the deadline's associated dateTime is on the same day as the target date
+     */
     public boolean getIsOn(LocalDate date) {
         return dueDateTime.toLocalDate().equals(date);
     }

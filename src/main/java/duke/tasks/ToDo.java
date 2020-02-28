@@ -16,10 +16,20 @@ public class ToDo extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Get if the ToDo is on a specified date. ToDo doesn't have a date so always return false
+     * @param date the target date
+     * @return false
+     */
     public boolean getIsOn(LocalDate date) {
         return false;
     }
 
+    /**
+     * Get if the ToDo is due by/on a specified date. ToDo doesn't have a date so always return false
+     * @param dateTime the target date
+     * @return false
+     */
     public boolean getIsBy(LocalDateTime dateTime) {
         return false;
     }
