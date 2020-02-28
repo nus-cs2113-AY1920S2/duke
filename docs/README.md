@@ -18,7 +18,9 @@
 Adds a new ToDo task to your list.
 
 Example of usage: 
-<code>**todo** borrow book</code>
+<pre>
+<b>todo<b> borrow book
+</pre>
 
 Expected outcome:
 ```
@@ -33,7 +35,9 @@ ____________________________________________________________
 Adds a new Deadline task to your list.
 
 Example of usage: 
-<code>**deadline** return book **/by** Sunday</code>
+<pre>
+<b>deadline<b> return book <b>/by<b> Sunday
+</pre>
 
 Expected outcome:
 ```
@@ -48,7 +52,9 @@ ____________________________________________________________
 Adds a new Event task to your list.
 
 Example of usage: 
-<code>**event** project meeting **/at** Mon 2-4pm</code>
+<pre>
+<b>event<b> project meeting <b>/at<b> Mon 2-4pm
+</pre>
 
 Expected outcome:
 ```
@@ -63,7 +69,9 @@ ____________________________________________________________
 Shows all tasks in your list.
 
 Example of usage: 
-<code>**list**</code>
+<pre>
+<b>list<b>
+</pre>
 
 Expected outcome:
 ```
@@ -79,7 +87,9 @@ ____________________________________________________________
 Marks a specific task as done.
 
 Example of usage: 
-<code>**done** 2</code>
+<pre>
+<b>done<b> 2
+</pre>
 
 Expected outcome:
 ```
@@ -93,7 +103,9 @@ ____________________________________________________________
 Removes a specific task from the list.
 
 Example of usage: 
-<code>**delete** 1</code>
+<pre>
+<b>delete<b> 1
+</pre>
 
 Expected outcome:
 ```
@@ -108,7 +120,9 @@ ____________________________________________________________
 Shows all tasks from the list which contains the keyword.
 
 Example of usage: 
-<code>**find** book</code>
+<pre>
+<b>find<b> book
+</pre>
 
 Expected outcome:
 ```
@@ -123,7 +137,9 @@ ____________________________________________________________
 Exits the program.
 
 Example of usage: 
-<code>**bye**</code>
+<pre>
+<b>bye<b>
+</pre>
 
 Expected outcome:
 ```
