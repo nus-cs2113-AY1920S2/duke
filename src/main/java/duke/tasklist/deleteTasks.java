@@ -4,15 +4,18 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
+/** Represents command that is used to call a method to delete tasks to taskList. */
 public class deleteTasks extends TaskList {
+
     public deleteTasks(){
         super();
     }
+
     /**
      * Deletes the task at index taskNumber from the tasklist
      *
-     * @param taskList Tasklist of all available tasks
-     * @param ogString The index of the task we are trying delete
+     * @param taskList List that stores the tasks mentioned until now.
+     * @param ogString Original command that was fed to the user.
      */
     public static void execute(ArrayList<Task> taskList, String ogString) {
         String[] words = ogString.split(" ");

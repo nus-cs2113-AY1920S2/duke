@@ -1,4 +1,5 @@
 package duke.commands;
+
 import duke.common.Utils;
 import duke.parser.Parser;
 import duke.tasks.Task;
@@ -6,18 +7,19 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/** Represents a subclass of Command, RunCommand, that can execute the program based on the command of the user */
 public class RunCommand extends Commands {
 
     public RunCommand(String command, ArrayList<Task> taskList, String filePath) {
         super(command, taskList,filePath);
     }
+
     /**
      * Reads what type of task if given and calls the required method accordingly.
      *
      * @param command  Line that represents the task that is supposed to marked as done.
      * @param taskList Tasklist of  all available tasks.
      */
-
     @Override
     public void execute(String command, ArrayList<Task> taskList, String filePath) {
         String taskType = Parser.returnTaskType(finalCommand);
@@ -58,6 +60,5 @@ public class RunCommand extends Commands {
             AddCommand.execute(taskList, ogString, taskType);
         }
     }
+
 }
-
-

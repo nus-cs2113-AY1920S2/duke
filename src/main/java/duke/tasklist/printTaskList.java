@@ -12,7 +12,7 @@ public class printTaskList extends TaskList{
     /**
      * Print all available tasks.
      *
-     * @param taskList Tasklist of all available tasks
+     * @param taskList List that stores the tasks mentioned until now.
      */
     public static void execute(ArrayList<Task> taskList) {
         int taskCounter = 1;

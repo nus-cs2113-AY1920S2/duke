@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-
-
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /** Retutns the type of task, eg. event or deadline, given the user command
+     * @param line Original command that was fed to the user.
+     */
     public static String returnTaskType(String line){
         String[] words = line.split(" ");
         String taskType = words[0].trim();
         return taskType;
     }
-
 
     public static Boolean isFindStatementCorrect (String ogString){
         String[] wordss = ogString.split(" ");
@@ -34,6 +36,9 @@ public class Parser {
         }
     }
 
+    /** Checks if Clear Statement is correct
+     * @param ogString Original command that was fed to the user.
+     */
     public static Boolean isClearStatementCorrect (String ogString){
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
@@ -45,6 +50,9 @@ public class Parser {
         }
     }
 
+    /** Checks if List Statement is correct
+     * @param ogString Original command that was fed to the user.
+     */
     public static Boolean isListStatementCorrect (String ogString){
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
@@ -62,7 +70,10 @@ public class Parser {
         return KEY_WORD;
     }
 
-
+    /** Checks if delete Statement is correct
+     * @param ogString Original command that was fed to the user.
+     * @param taskList List that stores the tasks mentioned until now.
+     */
     public static Boolean isDeleteStatementCorrect(String ogString, ArrayList<Task> taskList) {
         String[] words = ogString.split(" ");
         int LENG_DELETE_STATEMENT = words.length;
@@ -157,7 +168,15 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Returns the desctipton of a given task that is to be added to the Tasklist.
+     *
+     * @param t Task that is taken into consideration.
+     * @param description Description og task.
+     * @param typeIcon Icon of the Task t.
+     * @param statusIcon Status Icon representing if the task is done.
+     * @return stringToAdd String that is added to the description of the Task in the TaskList
+     */
     public static String returnDescription(Task t, String description, String typeIcon, String statusIcon) {
         String stringToAdd;
         if (typeIcon.equals("[T]")){
@@ -173,6 +192,5 @@ public class Parser {
         }
         return stringToAdd;
     }
-
 
 }

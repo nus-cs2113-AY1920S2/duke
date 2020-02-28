@@ -1,8 +1,11 @@
 package duke.common;
 
+/** Utility methods that are used in the Command Line Application*/
 public class Utils {
+
     /**
      * Checks if the given task is valid
+     *
      * @param type Type of task
      * @return Checks if the task type is valid
      */
@@ -22,4 +25,5 @@ public class Utils {
         }
         return false;
     }
+
 }

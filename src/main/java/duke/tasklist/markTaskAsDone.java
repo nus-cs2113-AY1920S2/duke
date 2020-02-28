@@ -4,16 +4,20 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a class that marks a task as done.
+ */
 public class markTaskAsDone extends TaskList {
+
     public markTaskAsDone(){
             super();
         }
+
     /**
-     * Returns a boolean that marks a task as done if it exists
      * Marks a task as done
      *
-     * @param taskList TaskList containg all tasks
-     * @param ogString Inputted command by the user that is fed as a string
+     * @param taskList List that stores the tasks mentioned until now.
+     * @param ogString Original command that was fed to the user.
      */
     public static void execute(ArrayList<Task> taskList, String ogString) {
         String[] words = ogString.split(" ");

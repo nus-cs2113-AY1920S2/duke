@@ -17,11 +17,14 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     * Represents the file used to store TaskList data.
+     */
     public Storage(String filePath){
         createTaskList(filePath, TaskList.taskList);
     }
 
-
+    /** Given the checked or crossed Icon, returns a Bool value */
     public static Boolean convertMarkToBool(String mark){
         if (mark.equals("\u2713")){
             return true;
@@ -31,6 +34,7 @@ public class Storage {
         }
     }
 
+    /** Creates a taskList at the begenning og the program */
     public static ArrayList<Task> createTaskList(String filepathe, ArrayList<Task> taskList) {
         try {
             File f = new File(filepathe);
@@ -63,7 +67,6 @@ public class Storage {
                 }
 
             }
-
         } catch(Exception e){
             taskList.clear();
             Ui.markLoadingError();
@@ -71,6 +74,7 @@ public class Storage {
         return taskList;
     }
 
+    /** Saves the taskList at the termination of the the program */
     public static void saveTaskList(String filePath, ArrayList<Task> taskList) {
         try {
             for (int i = 0; i < taskList.size(); i++){
@@ -97,6 +101,5 @@ public class Storage {
             //We do not need tp fill this part because we hardcode the known relative path  of the file where the data is saved
         }
     }
-
 
 }
