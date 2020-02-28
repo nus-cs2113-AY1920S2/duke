@@ -1,4 +1,4 @@
-package Tasks;
+package duke.tasks;
 
 public class Task {
     protected String description;
@@ -11,6 +11,10 @@ public class Task {
 
     public void setDone(boolean update) {
         this.isDone = update;
+    }
+
+    public boolean getDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {
