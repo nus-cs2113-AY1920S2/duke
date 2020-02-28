@@ -36,14 +36,17 @@ public class Duke {
         while (!input.equals("bye")) {
             String[] words = input.split(" ", 2); // Split command from rest of sentence
             try {
-                storage.writeToFile(tasks.getTaskList());
                 manageCommand(words);
             } catch (DukeException e) {
                 ui.printErrorMessage(OOPS + e.getMessage());
-            } catch (IOException e) {
-                ui.printErrorMessage(OOPS + FILE_NOT_FOUND);
             } catch (NumberFormatException e) {
                 ui.printErrorMessage(OOPS + INVALID_NUMBER);
+            }
+
+            try {
+                storage.writeToFile(tasks.getTaskList());
+            } catch (IOException e) {
+                ui.printErrorMessage(OOPS + FILE_NOT_FOUND);
             }
             input = in.nextLine(); // Get string input
         }
