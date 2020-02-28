@@ -18,7 +18,7 @@
 Adds a new ToDo task to your list.
 
 Example of usage: 
-`<strong>todo</strong> borrow book`
+`**todo** borrow book`
 
 Expected outcome:
 ```
@@ -33,7 +33,7 @@ ____________________________________________________________
 Adds a new Deadline task to your list.
 
 Example of usage: 
-`<strong>deadline</strong> return book <strong>/by</strong> Sunday`
+`**deadline** return book **/by** Sunday`
 
 Expected outcome:
 ```
@@ -48,7 +48,7 @@ ____________________________________________________________
 Adds a new Event task to your list.
 
 Example of usage: 
-`<strong>event</strong> project meeting <strong>/at</strong> Mon 2-4pm`
+`**event** project meeting **/at** Mon 2-4pm`
 
 Expected outcome:
 ```
@@ -63,7 +63,7 @@ ____________________________________________________________
 Shows all tasks in your list.
 
 Example of usage: 
-`<strong>list</strong>`
+`**list**`
 
 Expected outcome:
 ```
@@ -79,7 +79,7 @@ ____________________________________________________________
 Marks a specific task as done.
 
 Example of usage: 
-`<strong>done</strong> 2`
+`**done** 2`
 
 Expected outcome:
 ```
@@ -93,7 +93,7 @@ ____________________________________________________________
 Removes a specific task from the list.
 
 Example of usage: 
-`<strong>delete</strong> 1`
+`**delete** 1`
 
 Expected outcome:
 ```
@@ -108,7 +108,7 @@ ____________________________________________________________
 Shows all tasks from the list which contains the keyword.
 
 Example of usage: 
-`<strong>find</strong> book`
+`**find** book`
 
 Expected outcome:
 ```
@@ -123,7 +123,7 @@ ____________________________________________________________
 Exits the program.
 
 Example of usage: 
-`<strong>find</strong> book`
+`**find** book`
 
 Expected outcome:
 ```
