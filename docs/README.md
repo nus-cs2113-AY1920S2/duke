@@ -3,8 +3,8 @@
 ---
 Duke is a command line interface program capable of handling tasks such as Todo, Events and Deadlines.
 This User Guide will demonstrate the capabilities of Duke. 
----
 
+---
 ## Running duke Duke 
 1. Download the latest version of Java 11
 2. Navigate to path of `Duke.jar` file
@@ -26,6 +26,7 @@ This User Guide will demonstrate the capabilities of Duke.
 3. Mark task as done
 4. Find tasks from list 
 5. Delete a task from list
+
 ---
 ## Feature List
 
