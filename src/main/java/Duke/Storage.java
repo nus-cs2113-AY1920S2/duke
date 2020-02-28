@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/** Deals with loading tasks from user and saving tasks in text file */
 public class Storage {
     private String filePath;
     private static Ui ui;
@@ -16,6 +17,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns list of tasks that was saved in the text file
+     * to be added to the tasks in duke class.
+     *
+     * @return List of tasks.
+     * @throws DukeException If file does not exist and unwanted text in file.
+     */
     public static List<Task> load() throws DukeException{
         try{
             List<Task> tasks = new ArrayList<>();
@@ -52,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds tasks to the text file, duke.txt.
+     *
+     * @param tasks List of tasks.
+     */
     public static void writeNewData(TaskList tasks){
         try {
             FileWriter fileWriter = new FileWriter( "data/duke.txt");

@@ -1,5 +1,6 @@
 package Duke;
 
+/** Manages Event task operations */
 public class Event extends Task {
 
     protected String at;
