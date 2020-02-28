@@ -1,5 +1,14 @@
 # User Guide
 
+## Running the program
+1. Make sure your computer has Java 11.
+
+2. Copy the jar file into an empty folder.
+
+3. Open a command window in that folder.
+
+4. Run the command `java -jar Duke.jar` (i.e. run the command in the same folder as the jar file).
+
 ## Features 
 
 ### 1. List
