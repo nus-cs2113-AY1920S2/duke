@@ -1,5 +1,6 @@
 package Duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -135,6 +136,8 @@ public class Duke {
                 }
             } catch (DukeException de) {
                 ui.printMessage(de.getMessage());
+            } catch(DateTimeParseException e) {
+                ui.printMessage("Please give the following format for date and time: yyyy-mm-dd HHmm");
             } finally {
                 ui.printBorder();
             }
