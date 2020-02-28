@@ -34,15 +34,20 @@ public class Ui {
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
 
+
+    /**
+     * Prints out the tasks with the stated keywords inside
+     */
     public static void printOutFound() {
         System.out.println(Constants.STANDARD_SEPARATOR);
-        if (TaskList.indexOfFound.size() == 0 ) {
+        if (TaskList.indexOfFound.size() == 0) { // if list is empty
             System.out.println("OOPS!! Could not find any matching tasks");
         } else {
             System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < TaskList.indexOfFound.size(); i++) {
                 int index = TaskList.indexOfFound.get(i) + 1;
-                System.out.println(" " + index + "." + TaskList.listOfTasks.get(index-1).toString());
+                System.out.println(" " + index + "." +
+                        TaskList.listOfTasks.get(index - 1).toString());
             }
         }
         System.out.println(Constants.STANDARD_SEPARATOR);

@@ -45,7 +45,12 @@ public class TaskList {
     }
 
 
-
+    /**
+     * find tasks in the list (description, 'at' and 'by')
+     * with the stated keyword from user
+     *
+     * @throws DukeException if user does not state keyword to find with
+     */
     public static void findTasks() throws DukeException {
         String[] commandArray = Duke.inputLine.split(" ");
         if (commandArray.length < 2) {
@@ -66,8 +71,13 @@ public class TaskList {
         }
     }
 
+
+    /**
+     * clear the list used to find tasks
+     * with the stated keyword
+     */
     private static void clearFindingList() {
-        while(indexOfFound.size() != 0) {
+        while (indexOfFound.size() != 0) {
             indexOfFound.remove(0);
         }
     }

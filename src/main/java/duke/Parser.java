@@ -24,7 +24,7 @@ public class Parser {
             TaskList.removeTaskFromList(); // removes task in the stated index
 
         } else if (Duke.inputLine.substring(0, 4).equals("find")) {
-            TaskList.findTasks();
+            TaskList.findTasks(); // finds tasks with the keyword
 
         } else {
             TaskList.addInNewTask();// adds a new task into the list
