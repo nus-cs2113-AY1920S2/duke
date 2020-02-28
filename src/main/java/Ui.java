@@ -30,6 +30,9 @@ public class Ui {
         System.out.println("\t FIND KEYWORD IN LIST:");
         System.out.println("\t\t find <keyword>");
         printBorder();
+        System.out.println("\t EXIT DUKE:");
+        System.out.println("\t\t bye");
+        printBorder();
     }
 
     public static void printDeleteMessage(ArrayList<Task> taskList, int taskIndex) {
