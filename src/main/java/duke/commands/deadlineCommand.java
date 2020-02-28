@@ -5,6 +5,10 @@ import duke.tasks.TaskList;
 import duke.tasks.Deadline;
 import duke.ui.UI;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class deadlineCommand extends Command {
 
     protected String by;
@@ -18,7 +22,15 @@ public class deadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasklist, UI ui, Storage storage) {
-        Deadline deadline = new Deadline(this.description, this.by);
+        Deadline deadline;
+        try {
+            LocalDate date = LocalDate.parse(this.by);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            String formattedDate = date.format(formatter);
+            deadline = new Deadline(this.description, formattedDate);
+        } catch (Exception e) {
+            deadline = new Deadline(this.description, this.by);
+        }
         tasklist.addTask(deadline);
         ui.displayAddDeadlineMessage(deadline, tasklist.getTaskList());
     }

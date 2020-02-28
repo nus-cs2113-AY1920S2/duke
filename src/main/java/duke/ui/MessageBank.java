@@ -22,7 +22,7 @@ public class MessageBank {
     public static String LIST_SIZE_MESSAGE = "You now have %d tasks in the list.";
     public static String DELETE_TASK_MESSAGE = "Got it! The following task has been successfully deleted.";
     public static String INVALID_TODO_MESSAGE = "Oops! To add a todo, enter: todo {description}";
-    public static String INVALID_DEADLINE_MESSAGE = "Oops! To add a deadline, enter: deadline /by {date}";
+    public static String INVALID_DEADLINE_MESSAGE = "Oops! To add a deadline, enter: deadline /by {date(yyyy-mm-dd)}";
     public static String INVALID_EVENT_MESSAGE = "Oops! To add an event, enter: event /at {location}";
     public static String INVALID_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :(.";
     public static String INVALID_FORMAT_MESSAGE = "Please follow the correct format when entering a command.";
