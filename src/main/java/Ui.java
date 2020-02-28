@@ -80,7 +80,7 @@ public class Ui {
 
     public static void printExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("\t  _                \n"
+        System.out.println(" _                \n"
                 + "| |               \n"
                 + "| |__  _   _  ___ \n"
                 + "| '_ \\| | | |/ _ \\\n"
