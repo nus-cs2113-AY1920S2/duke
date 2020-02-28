@@ -114,7 +114,7 @@ public class Duke {
     }
 
     private boolean hasNotSaidBye(String command) {
-        return !command.equals(command);
+        return !command.equals("bye");
     }
 
     /**
