@@ -1,8 +1,8 @@
-package Parser;
+package parser;
 
 /**
  * Represents a parser for input by user
- * A Parser.Parser object corresponds to the String input by the user and extracts the command that the user wants to run
+ * A Parser object corresponds to the String input by the user and extracts the command that the user wants to run
  */
 public class Parser {
 
@@ -27,6 +27,7 @@ public class Parser {
 
     /**
      * Updates String input by user
+     * Updates command that user wants to run
      * @param input String input by user
      */
     public void updateInput(String input) {
@@ -35,72 +36,72 @@ public class Parser {
     }
 
     /**
-     * Checks if command is 'bye'
-     * @return true if command is 'bye'; false otherwise
+     * Returns true if command is bye, false otherwise
+     * @return boolean value
      */
     public boolean isBye() {
         return firstWord.equals("bye");
     }
 
     /**
-     * Checks if command is 'list'
-     * @return true if command is 'list'; false otherwise
+     * Returns true if command is list, false otherwise
+     * @return boolean value
      */
     public boolean isList() {
         return firstWord.equals("list");
     }
 
     /**
-     * Checks if command is 'done'
-     * @return true if command is 'done'; false otherwise
+     * Returns true if command is done, false otherwise
+     * @return boolean value
      */
     public boolean isDone() {
         return firstWord.equals("done");
     }
 
     /**
-     * Checks if command is 'todo'
-     * @return true if command is 'todo'; false otherwise
+     * Returns true if command is todo, false otherwise
+     * @return boolean value
      */
     public boolean isToDo() {
         return firstWord.equals("todo");
     }
 
     /**
-     * Checks if command is 'event'
-     * @return true if command is 'event'; false otherwise
+     * Returns true if command is event, false otherwise
+     * @return boolean value
      */
     public boolean isEvent() {
         return firstWord.equals("event");
     }
 
     /**
-     * Checks if command is 'deadline'
-     * @return true if command is 'deadline'; false otherwise
+     * Returns true if command is deadline, false otherwise
+     * @return boolean value
      */
     public boolean isDeadline() {
         return firstWord.equals("deadline");
     }
 
     /**
-     * Checks if command is 'delete'
-     * @return true if command is 'delete' ; false otherwise
+     * Returns true if command is delete, false otherwise
+     * @return boolean value
      */
     public boolean isDelete() {
         return firstWord.equals("delete");
     }
 
     /**
-     * Checks if command is 'help'
-     * @return true if command is 'help' ; false otherwise
+     * Returns true if command is help, false otherwise
+     * @return boolean value
      */
     public boolean isHelp() {
         return firstWord.equals("help");
     }
 
     /**
-     * Checks if command is 'find'
-     * @return true if command is 'find' ; false otherwise
+     * Returns true if command is find, false otherwise
+     * @return boolean value
      */
     public boolean isFind() {
         return firstWord.equals("find");

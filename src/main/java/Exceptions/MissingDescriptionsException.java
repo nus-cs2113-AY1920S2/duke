@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Represents the exception when description is missing

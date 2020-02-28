@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * Represents a Task object for tasks
@@ -20,15 +20,15 @@ public class Task {
     }
 
     /**
-     * Returns boolean status of task
-     * @return true if task is completed ; false otherwise
+     * Returns true if task has been completed, false otherwise
+     * @return boolean value
      */
     public boolean getStatus() {
         return isDone;
     }
 
     /**
-     * Returns status icon of Task object based on its status
+     * Returns status icon of Task object based on its completion status
      * @return status icon
      */
     public String getStatusIcon() {

@@ -1,3 +1,3 @@
 [T],true,read book,
-[E],false,project meeting,NUS SOC
-[D],false,submit CS2113T assignment,Sundat
+[D],false,project submission,sunday 2359
+[E],true,project orbital,nus soc Sunday

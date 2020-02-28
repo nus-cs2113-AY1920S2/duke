@@ -1,8 +1,8 @@
-package Tasks;
+package tasks;
 
 /**
- * Represents a Tasks.Deadline object for tasks
- * A Deadline object corresponds to a description, time/date, and boolean isDone to check if Tasks.Deadline task has been
+ * Represents a Deadline object for tasks
+ * A Deadline object corresponds to a description, time/date, and boolean isDone to check if Deadline task has been
  * completed
  */
 
@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns String of date/time of deadline
+     * Returns String format of date/time of deadline
      * @return String by
      */
     public String getBy() {

@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * Represents a ToDo object for tasks

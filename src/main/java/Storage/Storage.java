@@ -1,9 +1,9 @@
-package Storage;
+package storage;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * Represents the location where text files are stored
- * A Storage.Storage object corresponds to filepath and file name
+ * A Storage object corresponds to filepath and file name
  */
 public class Storage {
 
@@ -28,7 +28,7 @@ public class Storage {
 
     /**
      * Saves the tasks in ArrayList into text file
-     * Prints an error message if there is an IOException
+     * Checks for IOException
      * @param tasks ArrayList of Tasks
      * @throws IOException if IO is invalid
      */
@@ -48,7 +48,7 @@ public class Storage {
     }
 
     /**
-     * Adds Tasks.Task from text file to ArrayList
+     * Adds Task from text file to ArrayList
      * @param input String input by user
      * @param tasksList ArrayList to store tasks
      */
@@ -74,7 +74,7 @@ public class Storage {
 
     /**
      * Adds database file if file cannot be found
-     * Prints error message if there is an IOException
+     * Checks for IOException
      * @param file database file
      * @exception IOException if IO is invalid
      */
@@ -102,9 +102,9 @@ public class Storage {
 
     /**
      * Returns an ArrayList containing all the updated tasks
-     * Creates text file if FileNotFoundException
+     * Checks for FileNotFoundException and creates file
      * @return ArrayList containing tasks
-     * @exception FileNotFoundException if text file cannot be found
+     * @throws FileNotFoundException if text file cannot be found
      */
     public ArrayList <Task> loadTasks() {
         ArrayList <Task> tasksList = new ArrayList<Task>();

@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Represents exception when user tries to mark a completed task as done

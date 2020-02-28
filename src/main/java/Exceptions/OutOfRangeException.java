@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Represents exceptions when index is out of range

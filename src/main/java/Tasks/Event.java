@@ -1,8 +1,8 @@
-package Tasks;
+package tasks;
 
 /**
- * Represents an Tasks.Event object for tasks
- * An Event object corresponds to a description, location/time, and boolean isDone to check if Tasks.Event task has been
+ * Represents an Event object for tasks
+ * An Event object corresponds to a description, location/time, and boolean isDone to check if Event has been
  * completed
  */
 public class Event extends Task {
@@ -21,7 +21,7 @@ public class Event extends Task {
 
     /**
      * Returns the location/time of Event
-     * @return eventDetails location/time of Event
+     * @return location/time of Event
      */
     public String getEventDetails() {
         return eventDetails;

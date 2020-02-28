@@ -1,7 +1,7 @@
-package Exceptions;
+package exceptions;
 
 /**
- * Represents exception when index is not a number
+ * Represents exception when index is not a number for done and delete commands
  */
 public class IndexFormatException extends DukeExceptions {
 

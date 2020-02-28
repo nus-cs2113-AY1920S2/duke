@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Represents exceptions when all fields of deadline and event tasks are missing

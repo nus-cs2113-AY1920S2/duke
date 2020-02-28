@@ -1,7 +1,7 @@
-package Exceptions;
+package exceptions;
 
 /**
- * Represents exception when details of task is missing
+ * Represents exception when date/time/location of task is missing
  */
 public class MissingDetailsException extends DukeExceptions {
     public MissingDetailsException() {
@@ -9,7 +9,7 @@ public class MissingDetailsException extends DukeExceptions {
     }
 
     /**
-     * Returns string format of error message when details of task is missing
+     * Returns string format of error message when date/time/location of task is missing
      * @return String format of error message
      */
     public String toString() {
