@@ -70,15 +70,15 @@ public class Parser {
             }
         } else if (inputSubstrings[0].equals("event")) {
             if (inputSubstrings.length < 4) {
-                throw new DukeException("Invalid command. Format: \"event <description> /at <date/time>\"");
+                throw new DukeException("Invalid command. Format: \"event <description> /at <time-slot>\"");
             }
             for (int i = 1; i < inputSubstrings.length; i++) {
                 if (i == (inputSubstrings.length - 1)) {
-                    throw new DukeException("Invalid command. Format: \"event <description> /at <date/time>\"");
+                    throw new DukeException("Invalid command. Format: \"event <description> /at <time-slot>\"");
                 }
                 if (inputSubstrings[i].toLowerCase().equals("/at")) {
                     if (i == 1) {
-                        throw new DukeException("Invalid command. Format: \"event <description> /at <date/time>\"");
+                        throw new DukeException("Invalid command. Format: \"event <description> /at <time-slot>\"");
                     } else {
                         inputSubstrings[i] = inputSubstrings[i].toLowerCase();
                         break;

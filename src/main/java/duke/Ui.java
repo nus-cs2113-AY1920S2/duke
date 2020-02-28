@@ -32,9 +32,10 @@ public class Ui {
             "\"find <keyword>\": search for tasks using a keyword",
             "\"done <task index>\": mark a task as done",
             "\"delete <task index>\": delete a task",
+            "\"clear\": delete all tasks in the list",
             "\"todo <description>\": add a todo",
             "\"deadline <description> /by <deadline>\": add a deadline",
-            "\"event <description> /at <date/time>\": add an event",
+            "\"event <description> /at <time-slot>\": add an event",
             "\"thanks\": if you're feeling thankful"};
 
     /**
