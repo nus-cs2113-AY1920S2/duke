@@ -45,7 +45,7 @@ public class Storage {
                         savedTaskList.add(new Event(words[2], words[3]));
                         break;
                 }
-                if (words[1].equals("1")) {
+                if (words[1].equals("x")) {
                     savedTaskList.get(savedTaskList.size() - 1).setDone(true);
                 }
             }
