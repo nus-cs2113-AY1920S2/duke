@@ -43,9 +43,9 @@ Duke is for those who prefers to use a desktop application to manage the tasks t
 - Words in UPPERCASE inside ANGULAR BRACKETS <>, are the PARAMETERS to be supplied by the user 
 Example: find <KEYWORD>, KEYWORD is a parameter which can be used.
 Example: find duke
-- Items in SQUARE BRACKETS [] with a pipe |, [PARAMETER 1| PARAMETER 2], 
+- Items in SQUARE BRACKETS [] with a forward slash / , [PARAMETER 1 / PARAMETER 2], 
   specify user to input either ONE of the PARAMETERS
-Example: <[DATE|DAY]> <INFO>. 
+Example: <[DATE/DAY]> <INFO>. 
 Command such as: deadline return book /by 2020-02-18 3pm or deadline return book /by Sun 3pm
 ```
 ## 3.1. Viewing help: help
@@ -88,14 +88,14 @@ Inputing invalid date can throw an error - [Invalid] or set to the last date of 
 ![Todo Command Image](image/invalid_date.png) <br>
 #### Deadline: deadline  
 `deadline:` Adds a deadline task to the list.  
-`Format:` deadline **\<DESCRIPTION\>** /by **\<\[DATE|DAY\]\>** **\<INFO\>**   
+`Format:` deadline **\<DESCRIPTION\>** /by **\<\[DATE/DAY\]\>** **\<INFO\>**   
 `Example: deadline return book /by Sun 2pm`  
 
 ![Deadline Command Image](image/deadline_command.png)
 
 #### Event: event
 `event:` Adds a event task to the list.  
-`Format:` event **\<DESCRIPTION\>** /at **\<\[DATE|DAY\]\>** **\<INFO\>**   
+`Format:` event **\<DESCRIPTION\>** /at **\<\[DATE/DAY\]\>** **\<INFO\>**   
 `Example: event project meeting /at 2020-02-26 2-4pm NUS`  
 
 ![Event Command Image](image/event_command.png)
@@ -150,8 +150,8 @@ Refer back to Section 3 for more information on the usage of the commands.
    - `Help` help  
    - `List` list  
    - `Todo` todo \<DESCRIPTION\>  
-   - `Deadline` deadline \<DESCRIPTION\> /by \<\[DATE|DAY\]\> \<INFO\>  
-   - `Event` event \<DESCRIPTION\> /at \<\[DATE|DAY\]\> \<INFO\>  
+   - `Deadline` deadline \<DESCRIPTION\> /by \<\[DATE/DAY\]\> \<INFO\>  
+   - `Event` event \<DESCRIPTION\> /at \<\[DATE/DAY\]\> \<INFO\>  
    - `Done` done \<INDEX\>  
    - `Delete` delete \<INDEX\>  
    - `Find` find \<KEYWORD\>  

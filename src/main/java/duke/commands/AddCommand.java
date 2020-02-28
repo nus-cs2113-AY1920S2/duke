@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             LS + TAB + "deadline return book /by Sun 2pm" + LS + TAB + "deadline return book /by 2020-02-18 2pm" + LS +
                     TAB + "deadline return book /by 18-Feb-2020 2pm";
     
-    private static final String COMMAND_DEADLINE_EVENT_PARAMETER = "<DESCRIPTION> /by <[DATE|DAY]> <INFO>" + LS + TAB +
+    private static final String COMMAND_DEADLINE_EVENT_PARAMETER = "<DESCRIPTION> /by <[DATE/DAY]> <INFO>" + LS + TAB +
             "DATE Format: yyyy-mm-dd or dd-mm-yyyy or dd-MMM-yyyy or yyyy-MMM-dd" + LS + TAB + "MMM: Jan - Dec" + LS +
             TAB + "DAY Format: Mon - Sun";
     
