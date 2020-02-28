@@ -7,14 +7,12 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class Command {
+public abstract class Command {
     public Command(){
 
     }
 
-    public void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-
-    }
+    public  abstract void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException ;
 
     public Boolean isExit() {
         return false;

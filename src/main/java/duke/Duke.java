@@ -57,34 +57,10 @@ public class Duke {
                 ui.showLine();
             }
         }
-        ui.showGoodByeMessage();
-        ui.showLine();
     }
 
     public static void main(String[] args) {
         new Duke(FILE_PATH).run();
     }
-
-
-    /*public static void loadTasks() {
-        File f = new File(FILE_PATH);
-        try {
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String oneTask;
-                oneTask = s.nextLine();
-                loadATask(oneTask);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("\tCreating back up file in hard disk... ");
-            System.out.println();
-            try {
-                f.createNewFile();
-            } catch (IOException error) {
-
-                System.out.println("\tSomething went wrong: " + error.getMessage());
-            }
-        }
-    }*/
 }
 

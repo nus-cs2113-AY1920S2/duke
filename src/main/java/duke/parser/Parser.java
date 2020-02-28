@@ -75,6 +75,11 @@ public class Parser {
             }
             int deleteCount = Integer.parseInt(responses[1]);
             return new DeleteCommand(deleteCount);
+        case CHECK:
+            if (responses.length < 2) {
+                throw new DukeException("\tPlease input the date you want to check");
+            }
+            return new CheckCommand((responses[1]));
         case LIST:
             return new ListCommand();
         case BYE:

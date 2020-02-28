@@ -23,10 +23,6 @@ public class TaskList {
         return tasks.remove(deleteCount);
     }
 
-    public ArrayList<Task> getTaskList() {
-        return this.tasks;
-    }
-
     public Task getATask(int taskCount) {
         return this.tasks.get(taskCount);
     }
