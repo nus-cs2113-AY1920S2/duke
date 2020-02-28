@@ -12,6 +12,8 @@ import duke.ui.Ui;
 import duke.parser.Parser;
 
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.util.zip.DataFormatException;
 
 
 public class Duke {
@@ -52,10 +54,12 @@ public class Duke {
                 ui.displayTimeMissingMessage();
             } catch (InvalidTaskNumberException e) {
                 ui.displayInvalidTaskNumberMessage();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.displayErrorMessage(e);
             } catch (ChatboxException e) {
                 ui.displayErrorMessage(e);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                ui.displayErrorMessage(e);
+            } catch (DateTimeException e) {
+                ui.displayTimeFormatErrorMessage();
             }
         }
     }

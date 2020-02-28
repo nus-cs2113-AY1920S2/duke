@@ -10,6 +10,8 @@ import duke.tasks.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -73,7 +75,8 @@ public class Storage {
             break;
         case "D":
             String by = arrays[3].trim();
-            Task deadline = new Deadline(description, by);
+            LocalDate byDate = LocalDate.parse(by);
+            Task deadline = new Deadline(description, byDate);
             if (isDone == "1") {
                 deadline.markAsDone();
             }
@@ -81,7 +84,8 @@ public class Storage {
             break;
         case "E":
             String at = arrays[3].trim();
-            Task event = new Event(description, at);
+            LocalDate atDate = LocalDate.parse(at);
+            Task event = new Event(description, atDate);
             if (isDone == "1") {
                 event.markAsDone();
             }

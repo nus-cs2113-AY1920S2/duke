@@ -9,6 +9,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static duke.utils.Constants.EVENT_COMMAND;
 import static duke.utils.Constants.EVENT_MARKER;
@@ -31,7 +32,10 @@ public class EventCommand extends AddCommand {
 
         String taskDescription = taskAt[0].trim();
         String at = taskAt[1].trim();
-        Task task = new Event(taskDescription, at);
+
+        LocalDate atDate = LocalDate.parse(at);
+        
+        Task task = new Event(taskDescription, atDate);
         tasks.addTask(task);
         
         ui.displayAddTaskMessage(task, tasks.getListSize());
