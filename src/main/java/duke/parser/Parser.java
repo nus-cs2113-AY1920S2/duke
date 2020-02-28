@@ -215,7 +215,7 @@ public class Parser {
      * Extracts the command word from the user supplied command.
      *
      * @param command Command supplied by the user.
-     * @throws InvalidInputException If user entered no command.
+     * @throws InvalidInputException If user entered no command or command has more arguments than required.
      */
     public static void prepareCommand(String command) throws InvalidInputException {
         phrases = command.split(" ");
