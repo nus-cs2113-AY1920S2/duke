@@ -12,7 +12,7 @@ public class FindCommand extends Command{
     public void Execute(TaskList tasks) {
         boolean isFound = false;
         for(int i = 0; i < tasks.getSize(); i++) {
-            if(tasks.get(i).getDescription().contains(parameters)) {
+            if(tasks.get(i).getDescription().toLowerCase().contains(parameters.toLowerCase())) {
                 System.out.println(tasks.get(i));
                 isFound = true;
             }
