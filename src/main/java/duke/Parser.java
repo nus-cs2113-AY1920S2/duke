@@ -21,7 +21,8 @@ public class Parser {
         inputSubstrings[0] = inputSubstrings[0].toLowerCase();
         if (inputSubstrings.length == 1) {
             if (!inputSubstrings[0].equals("list") && !inputSubstrings[0].equals("bye") &&
-                    !inputSubstrings[0].equals("help") && !inputSubstrings[0].equals("thanks")) {
+                    !inputSubstrings[0].equals("help") && !inputSubstrings[0].equals("thanks") &&
+                    !inputSubstrings[0].equals("clear")) {
                 throw new DukeException("Invalid command.");
             }
         } else if (!inputSubstrings[0].equals("done") && !inputSubstrings[0].equals("todo") &&

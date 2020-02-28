@@ -107,4 +107,11 @@ public class TaskList {
             ui.printFoundTasks(foundTasks);
         }
     }
+
+    public void clearTasks(Ui ui, TaskList taskList, Storage storage) {
+        if (ui.isClear()) {
+            tasks.clear();
+            storage.saveTaskstoDisk(ui, taskList);
+        }
+    }
 }

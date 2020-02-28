@@ -21,8 +21,12 @@ public class Ui {
     public static final String NUM_FORMAT_ERROR = "Index must be an integer, like \"1\", but not \"one\".";
     public static final String SAVE_ERROR = "An IO error was encountered while saving.";
     public static final String NO_TASKS = "No tasks found.";
-    public static final String HELP_RESPONSE = "Here are the list of commands:";
-    public static final String[] COMMAND_LIST = new String[] {
+    private static final String HELP_RESPONSE = "Here are the list of commands:";
+    private static final String CONFIRM_CLEAR = "Are you sure?";
+    private static final String ANSWER_FORMAT = "Answer y/n";
+    private static final String LIST_CLEARED = "Ok, list cleared.";
+    private static final String LIST_NOT_CLEARED = "Ok, list not cleared.";
+    private static final String[] COMMAND_LIST = new String[] {
             "\"bye\": exit program",
             "\"list\": show a list of tasks",
             "\"find <keyword>\": search for tasks using a keyword",
@@ -154,5 +158,24 @@ public class Ui {
         }
         System.out.println(BORDER);
         System.out.print("\n");
+    }
+
+    public boolean isClear() {
+        printFormattedString(CONFIRM_CLEAR + " " + ANSWER_FORMAT);
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+        input = input.trim().toLowerCase();
+        while (!input.equals("y") && !input.equals("n") &&
+                !input.equals("yes") && !input.equals("no")) {
+            printFormattedString(ANSWER_FORMAT);
+            input = in.nextLine();
+            input = input.trim().toLowerCase();
+        }
+        if (input.equals("y") || input.equals("yes")) {
+            printFormattedString(LIST_CLEARED);
+            return true;
+        }
+        printFormattedString(LIST_NOT_CLEARED);
+        return false;
     }
 }

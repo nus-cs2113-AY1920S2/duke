@@ -80,6 +80,9 @@ public class Duke {
         switch (commandSubstrings[0]) {
         case "bye":
             return true;
+        case "clear":
+            taskList.clearTasks(ui, taskList, storage);
+            break;
         case "help":
             ui.helpUser();
             break;
