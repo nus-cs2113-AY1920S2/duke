@@ -1,12 +1,14 @@
-package duke.taskList.task;
+package duke.tasklist.task;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
-import static duke.common.Constants.DEADLINE;
-
+/**
+ * Stores a deadline task.
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -35,10 +37,5 @@ public class Deadline extends Task {
     @Override
     public String toFile() {
         return "D | " + super.toFile() + " | " + by;
-    }
-
-    @Override
-    public String type() {
-        return DEADLINE;
     }
 }

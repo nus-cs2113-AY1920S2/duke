@@ -1,5 +1,8 @@
 package duke.common;
 
+/**
+ * Stores all constant values.
+ */
 public final class Constants {
     public static final String LOGO = " ____        _        \n"
                                 + "|  _ \\ _   _| | _____ \n"
@@ -14,8 +17,6 @@ public final class Constants {
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
-    public static final String FIND = "find";
-    public static final String CHECK = "check";
 
     public static final String LINE_BREAK = "\t____________________________________________________________";
 
@@ -27,3 +28,4 @@ public final class Constants {
     public static final String FILE_PATH = "data/duke.txt";
     public static final String CREATE_FILE_PATH = System.getProperty("user.dir") + "/data";
 }
+

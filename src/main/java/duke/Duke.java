@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.common.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 import java.io.File;
@@ -20,6 +20,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes Duke object.
+     *
+     * @param filePath place where hard disk data stores
+     */
     public Duke(String filePath) {
         ui = new Ui();
         tasks = new TaskList();
@@ -30,7 +35,7 @@ public class Duke {
             ui.showLoadingError();
             File newFolder = new File(CREATE_FILE_PATH);
             newFolder.mkdirs();
-            try{
+            try {
                 File f = new File(FILE_PATH);
                 f.createNewFile();
             } catch (IOException error) {
@@ -39,6 +44,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke object.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
