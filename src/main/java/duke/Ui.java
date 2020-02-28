@@ -66,6 +66,12 @@ public class Ui {
         System.out.println("    Please use ' ' to split a task type and its description");
     }
 
+    public static void showCannotGetTargetWordsInfo(String input){
+        System.out.println("    Invalid input! Cannot find target words in given input");
+        System.out.println("    Your input: "+input+".");
+        System.out.println("    Please use ' ' to split 'find' and 'keywords'");
+    }
+
     public static void showUnknownTaskIndexInfo(){
         System.out.println("    You have to point out clearly which task to mark as done or delete!!!");
     }
@@ -107,4 +113,5 @@ public class Ui {
         System.out.println("    " + input);
         showSplitLine();
     }
+
 }
