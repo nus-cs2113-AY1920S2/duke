@@ -1,5 +1,6 @@
 package duke;
 
+
 public class Parser {
 
     /**
@@ -22,11 +23,12 @@ public class Parser {
         } else if (Duke.inputLine.substring(0, 6).equals("remove")) {
             TaskList.removeTaskFromList(); // removes task in the stated index
 
+        } else if (Duke.inputLine.substring(0, 4).equals("find")) {
+            TaskList.findTasks();
+
         } else {
             TaskList.addInNewTask();// adds a new task into the list
         }
     }
 }
 
-
-}

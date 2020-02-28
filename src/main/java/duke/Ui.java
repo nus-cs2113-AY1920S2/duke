@@ -34,6 +34,20 @@ public class Ui {
         System.out.println(Constants.STANDARD_SEPARATOR);
     }
 
+    public static void printOutFound() {
+        System.out.println(Constants.STANDARD_SEPARATOR);
+        if (TaskList.indexOfFound.size() == 0 ) {
+            System.out.println("OOPS!! Could not find any matching tasks");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < TaskList.indexOfFound.size(); i++) {
+                int index = TaskList.indexOfFound.get(i) + 1;
+                System.out.println(" " + index + "." + TaskList.listOfTasks.get(index-1).toString());
+            }
+        }
+        System.out.println(Constants.STANDARD_SEPARATOR);
+    }
+
 
     /**
      * Prints out the welcome message

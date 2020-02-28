@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class TaskList {
     public static ArrayList<Task> listOfTasks = new ArrayList<>(); // array of tasks that is <=100
     public static int sizeOfList = 0; // number of items in the list
+    public static ArrayList<Integer> indexOfFound = new ArrayList<>();
 
 
     /**
@@ -41,6 +42,34 @@ public class TaskList {
 
         Ui.printWhenCommand(taskToDelete,
                 " Noted. I've removed this task:", "   ", " in the list.");
+    }
+
+
+
+    public static void findTasks() throws DukeException {
+        String[] commandArray = Duke.inputLine.split(" ");
+        if (commandArray.length < 2) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            String keyword = Duke.inputLine.substring(5);
+            keyword = keyword.toLowerCase();
+            for (int i = 0; i < TaskList.sizeOfList; i++) {
+                String description = TaskList.listOfTasks.get(i).getDescription();
+                description = description.toLowerCase();
+                if (description.contains(keyword)) {
+                    indexOfFound.add(i);
+                }
+            }
+            Ui.printOutFound();
+            clearFindingList();
+
+        }
+    }
+
+    private static void clearFindingList() {
+        while(indexOfFound.size() != 0) {
+            indexOfFound.remove(0);
+        }
     }
 
 
