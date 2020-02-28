@@ -12,6 +12,9 @@ import duke.commands.ToDoCommand;
 
 import java.util.Scanner;
 
+/**
+ * A class to handle user interactions
+ */
 public class Ui {
     private static Scanner scannerObject;
     private static final String LINE_SEPARATOR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -32,18 +35,31 @@ public class Ui {
             "Type \"" + duke.Main.END_STRING + "\" to exit";
 
 
+    /**
+     * Must be called before reading in user input
+     */
     public static void initialize() {
         scannerObject = new Scanner(System.in);
     }
 
+    /**
+     * Greet the user
+     */
     public static void greet() {
         printPretty(GREETING);
     }
 
+    /**
+     * Say goodbye to the user
+     */
     public static void sayGoodbye() {
         printPretty(GOODBYE_MESSAGE);
     }
 
+    /**
+     * Print a nicely formatted message to the user
+     * @param message the message to be printed
+     */
     public static void printPretty(String message) {
         System.out.println();
         System.out.println(LINE_SEPARATOR);
@@ -52,6 +68,10 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Read in the next line that the user types
+     * @return a line of user input
+     */
     public static String getNextLine() {
         return scannerObject.nextLine();
     }

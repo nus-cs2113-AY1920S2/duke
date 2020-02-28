@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to represent a deadline task
+ */
 public class Deadline extends Task {
     private LocalDateTime dueDateTime;
 
@@ -32,11 +35,19 @@ public class Deadline extends Task {
         return dueDateTime.toLocalDate().equals(date);
     }
 
+    /**
+     * get the string representation of this deadline
+     * @return string representation of this deadline
+     */
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + description + " (by: " + dueDateTime + ")";
     }
 
+    /**
+     * get the string representation of this deadline formatted for saving to file
+     * @return the string representation of this deadline formatted for saving to file
+     */
     public String toFormattedString() {
         String done = isDone ? "y" : "n";
         return "D," + done + "," + description + "," + Main.DTF.format(dueDateTime);

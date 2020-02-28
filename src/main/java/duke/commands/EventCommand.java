@@ -7,6 +7,10 @@ import duke.tasks.Event;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * Class for an event command that error checks user's input and can be executed to add the task to the
+ * <code>TaskList</code>
+ */
 public class EventCommand extends Command {
     public static final String EXAMPLE_USAGE = "event math class /at 31/7/2020 8:30";
     public static final String KEYWORD = "event";
@@ -42,6 +46,9 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * Adds the event task to the referenced <code>TaskList</code>
+     */
     public void execute() {
         taskList.addTask(event);
     }

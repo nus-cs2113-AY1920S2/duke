@@ -5,6 +5,9 @@ import duke.exceptions.BadLineFormatException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Abstract class to represent a task
+ */
 public abstract class Task {
     protected boolean isDone;
     protected String description;
@@ -14,15 +17,25 @@ public abstract class Task {
         setIsDone(false);
     }
 
-    // getStatusIcon() is from the website
+    /**
+     * @return Tick mark or X based on completion status of this task
+     */
     protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Set the description
+     * @param description new description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Set whether this task is done
+     * @param isDone new done status
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -31,9 +44,13 @@ public abstract class Task {
 
     public abstract boolean getIsOn(LocalDate date);
 
-    public abstract String toFormattedString();
-
     public boolean containsWord(String word) {
         return description.contains(word);
     }
+
+    /**
+     * get the string representation of this task
+     * @return string representation of this task
+     */
+    public abstract String toFormattedString();
 }

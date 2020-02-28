@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
+/**
+ * Class to represent an event task
+ */
 public class Event extends Task {
     private LocalDateTime startDateTime;
 
@@ -33,11 +36,19 @@ public class Event extends Task {
         return startDateTime.toLocalDate().equals(date);
     }
 
+    /**
+     * get the string representation of this event
+     * @return string representation of this event
+     */
     @Override
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + description + " (at: " + startDateTime + ")";
     }
 
+    /**
+     * get the string representation of this event formatted for saving to file
+     * @return the string representation of this event formatted for saving to file
+     */
     public String toFormattedString() {
         String done = isDone ? "y" : "n";
         return "E," + done + "," + description + "," + Main.DTF.format(startDateTime);
