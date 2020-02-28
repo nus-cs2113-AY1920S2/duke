@@ -51,8 +51,6 @@ public class Storage {
      * @throws DukeLoadingException exception is thrown if error occurs when loading from the file.
      * @throws DukeNullDescriptionException exception is thrown if error occurs when parsing the json string and any
      *      task with empty description.
-     * @throws DukeNullDateException exception is thrown if error occurs when parsing the json strings and any
-     *      deadline/event task with empty date.
      */
     public ArrayList<Task> load() throws DukeLoadingException, DukeNullDescriptionException {
         Ui.showLoadDataPrompt();
@@ -64,10 +62,11 @@ public class Storage {
             throw new DukeLoadingException();
         }
 
-        List<DummyTask> taskList = extractDummyTasks(jsonStr);
+        List<DummyTask> dummyTaskList = extractDummyTasks(jsonStr);
         ArrayList<Task> tasksList = new ArrayList<>();
+
         Task currentTask;
-        for (DummyTask i : taskList) {
+        for (DummyTask i : dummyTaskList) {
             try {
                 currentTask = convertDummyTaskToSpecificTask(i);
                 tasksList.add(currentTask);
@@ -109,6 +108,7 @@ public class Storage {
         Type listType = new TypeToken<List<DummyTask>>(){}.getType();
         Gson gson = new Gson();
         return gson.fromJson(jsonStr, listType);
+
     }
 
     /**
