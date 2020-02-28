@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Thrown when input command is invalid.

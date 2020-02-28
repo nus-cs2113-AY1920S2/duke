@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import exceptions.InvalidCommandException;
-import exceptions.MissingDescriptionException;
-import task.*;
-import ui.UI;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.MissingDescriptionException;
+import duke.task.*;
+import duke.ui.UI;
 
 /**
  * Represents the command to add any type of task to the task list.

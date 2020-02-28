@@ -1,6 +1,6 @@
-package commands;
+package duke.commands;
 
-import task.TaskList;
+import duke.task.TaskList;
 
 public class FindCommand extends Command {
     public FindCommand (String description, TaskList tasks) {

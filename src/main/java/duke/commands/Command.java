@@ -1,7 +1,7 @@
-package commands;
-import exceptions.InvalidCommandException;
-import exceptions.MissingDescriptionException;
-import task.TaskList;
+package duke.commands;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.MissingDescriptionException;
+import duke.task.TaskList;
 
 /**
  * Represents the command entered by the user, inherited by child classes which represent the specific commands.

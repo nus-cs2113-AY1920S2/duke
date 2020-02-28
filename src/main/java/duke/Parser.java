@@ -1,6 +1,8 @@
-import commands.*;
-import task.TaskList;
-import ui.UI;
+package duke;
+
+import duke.commands.*;
+import duke.task.TaskList;
+import duke.ui.UI;
 
 /**
  * Interprets the user input.

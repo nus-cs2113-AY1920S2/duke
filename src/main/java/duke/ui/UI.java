@@ -1,7 +1,7 @@
-package ui;
+package duke.ui;
 
 import java.util.Scanner;
-import task.Task;
+import duke.task.Task;
 
 /**
  * Handles user interactions.

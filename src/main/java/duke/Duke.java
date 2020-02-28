@@ -1,8 +1,10 @@
-import task.*;
-import commands.Command;
-import exceptions.InvalidCommandException;
-import exceptions.MissingDescriptionException;
-import ui.UI;
+package duke;
+
+import duke.task.*;
+import duke.commands.Command;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.MissingDescriptionException;
+import duke.ui.UI;
 import java.io.IOException;
 
 public class Duke {

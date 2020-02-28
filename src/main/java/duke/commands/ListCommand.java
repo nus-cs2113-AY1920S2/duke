@@ -1,6 +1,6 @@
-package commands;
+package duke.commands;
 
-import task.TaskList;
+import duke.task.TaskList;
 
 /**
  * Represents the command to list all existing tasks.
