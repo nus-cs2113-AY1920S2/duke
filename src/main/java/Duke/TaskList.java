@@ -18,6 +18,10 @@ public class TaskList {
         ui.showAddedTask(task.toString());
     }
 
+    public void addToFindList(Task task){
+        tasks.add(task);
+    }
+
     public void delete(int i){
         ui.showDeletedTask(tasks.get(i).toString());
         tasks.remove(i);
