@@ -6,6 +6,7 @@ public class ToDo extends Task{
 
     public ToDo(String description) {
         super(description);
+        this.category="todo";
     }
 
     public ToDo(AddCommand addCommand){
@@ -15,7 +16,7 @@ public class ToDo extends Task{
     @Override
     public String toString(){
         String taskType="[T]";
-        String detail = taskType + " [" + getStatusIcon() + "] " + description;
+        String detail = taskType + " [" + getStatusIcon() + "] " + getDescription();
         return detail;
     }
 }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.command.AddCommand;
@@ -19,6 +21,28 @@ public class TaskList {
     }
 
     public TaskList() {
+    }
+
+    public void showOneDayTasks(ManageCommand manageCommand){
+        LocalDate date = manageCommand.getDate();
+        for(Task task:tasks){
+            boolean isDeadline = (task.getCategory().equals("deadline"));
+            boolean isEvent = (task.getCategory().equals("event"));
+            if(isDeadline){
+                Deadline d = (Deadline) task;
+                LocalDate by = d.getBy().toLocalDate();
+                if(date.equals(by)){
+                    System.out.println(d);
+                }
+            }
+            if(isEvent){
+                Event e = (Event) task;
+                LocalDate at = e.getPeriod().toLocalDate();
+                if(date.equals(at)){
+                    System.out.println(e);
+                }
+            }
+        }
     }
 
     public void deleteTask(DeleteCommand deleteCommand){
@@ -62,7 +86,7 @@ public class TaskList {
         if(taskIndex < tasks.size()) {
             getTasks().get(taskIndex).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  ["+ getTasks().get(taskIndex).getStatusIcon() + "] " + getTasks().get(taskIndex).description);
+            System.out.println("  ["+ getTasks().get(taskIndex).getStatusIcon() + "] " + getTasks().get(taskIndex).getDescription());
         }else{
             System.out.println("There is no task No."+(taskIndex+1));
         }
