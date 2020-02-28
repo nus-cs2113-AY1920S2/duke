@@ -36,7 +36,7 @@ public class Duke {
 
     /**
      * This is the main method which makes use of the run method.
-     * @param args
+     * @param args Not used.
      */
     public static void main(String[] args) {
         new Duke().run();
@@ -56,12 +56,12 @@ public class Duke {
         while(!isExiting) {
             try {
                 input = ui.readCommand();
-                command = Parser.parse(input, taskList);
+                command = Parser.parse(input, taskList.getTaskList().size());
                 isExiting = executeCommand(command, ui, taskList, storage);
             } catch (DukeException e) {
-                ui.printFormattedMessage(e.getMessage());
+                ui.printFormattedString(e.getMessage());
             } catch (NumberFormatException e) {
-                ui.printFormattedMessage(Ui.NUM_FORMAT_ERROR);
+                ui.printFormattedString(Ui.NUM_FORMAT_ERROR);
             }
         }
     }
@@ -77,28 +77,43 @@ public class Duke {
      */
     private static boolean executeCommand(String command, Ui ui, TaskList taskList, Storage storage) {
         String[] commandSubstrings = command.split("\\s+");
-        if (command.equals("bye")) {
+        switch (commandSubstrings[0]) {
+        case "bye":
             return true;
-        }
-        if (command.equals("list")) {
+        case "help":
+            ui.helpUser();
+            break;
+        case "list":
             taskList.listTasks(ui);
-        } else if (command.equals("thanks")) {
-            ui.printFormattedMessage(Ui.THANKS_RESPONSE);
-        } else if (commandSubstrings[0].equals("done")) {
+            break;
+        case "thanks":
+            ui.printFormattedString(Ui.THANKS_RESPONSE);
+            break;
+        case "find":
+            taskList.findTasks(ui, commandSubstrings[1]);
+            break;
+        case "done":
             taskList.checkOffTask(ui, Integer.parseInt(commandSubstrings[1]));
             storage.saveTaskstoDisk(ui, taskList);
-        } else if (commandSubstrings[0].equals("delete")) {
+            break;
+        case "delete":
             taskList.deleteTask(ui, Integer.parseInt(commandSubstrings[1]));
             storage.saveTaskstoDisk(ui, taskList);
-        } else if (commandSubstrings[0].equals("todo")) {
+            break;
+        case "todo":
             taskList.addTodo(command.substring(5), ui);
             storage.saveTaskstoDisk(ui, taskList);
-        } else if (commandSubstrings[0].equals("deadline")) {
+            break;
+        case "deadline":
             taskList.addDeadline(command.substring(9), ui);
             storage.saveTaskstoDisk(ui, taskList);
-        } else {
+            break;
+        case "event":
             taskList.addEvent(command.substring(6), ui);
             storage.saveTaskstoDisk(ui, taskList);
+            break;
+        default:
+            break;
         }
         return false;
     }
