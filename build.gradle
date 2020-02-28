@@ -62,7 +62,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "Main"
+    mainClassName = 'sample.Main'
 }
 
 run {

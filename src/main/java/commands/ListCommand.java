@@ -1,6 +1,6 @@
 package commands;
 
-import common.Messages;
+import ui.TextUi;
 
 /**
  * Lists all persons in the address book to the user.
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      */
     public CommandResult execute() {
         if (taskManager.getTaskList().getInternalList().size()>0){
-            taskListMessage = Messages.printAllTasks(taskManager.getTaskList());
+            taskListMessage = TextUi.printAllTasks(taskManager.getTaskList());
             return new CommandResult((taskListMessage));
         } else {
             return new CommandResult(MESSAGE_EMPTY_LIST);

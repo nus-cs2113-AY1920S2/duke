@@ -1,18 +1,14 @@
 package ui;
 
 import common.Messages;
-import data.task.DeadlineTask;
-import data.task.EventTask;
-import data.task.Task;
-import data.task.TodoTask;
+import data.task.*;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static common.Messages.MESSAGE_LS;
-import static common.Messages.MESSAGE_RS;
+import static common.Messages.*;
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -170,8 +166,7 @@ public class TextUi {
     public static void printTodoTask(TodoTask todoTask, int index){
         printTask(SYSTEM_COLOR_RESPONSE,String.format(Messages.MESSAGE_LIST_RESPOND_Format, String.format(
                 Messages.MESSAGE_TODO_LIST,
-                index,
-                todoTask.getTaskIndex(),
+                todoTask.getTaskIndex()+LIST_INDEX_OFFSET,
                 todoTask.getTaskType(),
                 todoTask.getChar(),
                 todoTask.getTaskDescription()))) ;
@@ -186,8 +181,7 @@ public class TextUi {
     public static void printDeadlineTask(DeadlineTask deadlineTask, int index){
         printTask(SYSTEM_COLOR_RESPONSE,String.format(Messages.MESSAGE_LIST_RESPOND_Format, String.format(
                 Messages.MESSAGE_DEADLINE_LIST,
-                index,
-                deadlineTask.getTaskIndex(),
+                deadlineTask.getTaskIndex()+LIST_INDEX_OFFSET,
                 deadlineTask.getTaskType(),
                 deadlineTask.getChar(),
                 deadlineTask.getTaskDescription(),
@@ -203,11 +197,51 @@ public class TextUi {
     public static void printEventTask(EventTask eventTask, int index){
         printTask(SYSTEM_COLOR_RESPONSE,String.format(Messages.MESSAGE_LIST_RESPOND_Format, String.format(
                 Messages.MESSAGE_EVENT_LIST,
-                index,
-                eventTask.getTaskIndex(),
+                eventTask.getTaskIndex()+LIST_INDEX_OFFSET,
                 eventTask.getTaskType(),
                 eventTask.getChar(),
                 eventTask.getTaskDescription(),
                 eventTask.getTaskStartTime())));
+    }
+
+    /**
+     * Print all tasks in the task list
+     */
+    public static String printAllTasks(TaskList tasklist){
+        String taskMessage = "";
+        taskListMessage = new StringBuilder();
+        getTaskListMessage(tasklist, taskMessage);
+        return taskListMessage.toString();
+    }
+
+    /**
+     * get tasklist message
+     * @param tasklist
+     * @param taskMessage
+     */
+    private static void getTaskListMessage(TaskList tasklist, String taskMessage) {
+        for (int index = + LIST_INDEX_OFFSET; index <= tasklist.getInternalList().size() ; index++) {
+            Task task = tasklist.getInternalList().get(index+ INDEX_OFF_SET);
+            printTaskMessage(index, task);
+        }
+        TextUi.printMessage(TextUi.SYSTEM_COLOR_RESPONSE,
+                String.format(MESSAGE_SHOW_TASK_NUMBER,
+                        tasklist.getInternalList().size()) );
+    }
+
+    /**
+     * get task message
+     * @param index
+     * @param task
+     * @return
+     */
+    private static void printTaskMessage(int index, Task task) {
+        if (task instanceof TodoTask) {
+            TextUi.printTodoTask((TodoTask) task, index);
+        } else if (task instanceof DeadlineTask) {
+            TextUi.printDeadlineTask((DeadlineTask) task, index);
+        } else if( task instanceof EventTask) {
+            TextUi.printEventTask((EventTask) task, index);
+        }
     }
 }

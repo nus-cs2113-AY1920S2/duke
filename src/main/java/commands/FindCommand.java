@@ -2,6 +2,7 @@ package commands;
 
 import common.Messages;
 import data.task.TaskList;
+import ui.TextUi;
 
 public class FindCommand extends Command {
 
@@ -38,9 +39,8 @@ public class FindCommand extends Command {
         if (qualifiedTasks.getInternalList().isEmpty()){
             return true;
         } else {
-            taskListMessage = Messages.printAllTasks(qualifiedTasks);
+            taskListMessage = TextUi.printAllTasks(qualifiedTasks);
         }
         return false;
     }
-
 }

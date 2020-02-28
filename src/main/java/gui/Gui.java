@@ -1,3 +1,6 @@
+package gui;
+
+import sample.Main;
 import common.Messages;
 import data.exceptions.StorageOperationException;
 import javafx.application.Application;

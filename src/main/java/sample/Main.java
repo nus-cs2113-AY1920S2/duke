@@ -1,8 +1,11 @@
+package sample;
+
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
 import data.TaskManager;
 import data.exceptions.StorageOperationException;
+import gui.Gui;
 import javafx.application.Application;
 import parser.Parser;
 import storage.StorageFile;
