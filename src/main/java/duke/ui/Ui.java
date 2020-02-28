@@ -91,8 +91,21 @@ public class Ui {
     public static void markAsIncorrectFormat() {
         System.out.println("Your inputs can only be of the following forms: \n 1. todo {task description} \n 2." +
                 " deadline {task description} /by {dedline eg. 6 PM} \n 3. event {event description} " +
-                "/at {event date\\time eg. 6 PM} \n 4. delete {taskNumber} \n 5. list \n 6. done {task number}" );
+                "/at {event date\\time eg. 6 PM} \n 4. delete {taskNumber} \n 5. list \n 6. done {task number}" +
+                "\n 7. find {keyword} \n 8. clear");
         System.out.println("Try again!");
+    }
+
+    public static void markIncorrectFindStatement(){
+        System.out.println("OOPS! Please specify (eg: find 2)");
+    }
+
+    public static void markIncorrectListStatement(){
+        System.out.println("OOPS! Please just write \"list\" with the correct index number");
+    }
+
+    public static void markIncorrectClearStatement(){
+        System.out.println("OOPS! Please just write clear");
     }
 
     public static void markIncorrectDoneStatement(){

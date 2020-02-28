@@ -5,6 +5,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.ui.Ui;
+import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class Parser {
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
         if (LENG_DONE_STATEMENT != 2) {
-            DukeException.markIncorrectFindStatement();
+            Ui.markIncorrectFindStatement();
             return false;
         } else {
             return true;
@@ -37,7 +38,7 @@ public class Parser {
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
         if (LENG_DONE_STATEMENT != 1) {
-            DukeException.markIncorrectClearStatement();
+            Ui.markIncorrectClearStatement();
             return false;
         } else {
             return true;
@@ -48,7 +49,7 @@ public class Parser {
         String[] wordss = ogString.split(" ");
         int LENG_DONE_STATEMENT = wordss.length;
         if (LENG_DONE_STATEMENT != 1) {
-            DukeException.markIncorrectListStatement();
+            Ui.markIncorrectListStatement();
             return false;
         } else {
             return true;

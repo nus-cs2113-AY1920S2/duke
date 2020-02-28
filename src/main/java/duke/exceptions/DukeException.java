@@ -1,6 +1,5 @@
 package duke.exceptions;
 
-import duke.ui.Ui;
 
 public class DukeException extends Exception  {
 
