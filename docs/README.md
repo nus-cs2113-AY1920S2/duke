@@ -1,12 +1,12 @@
-# Duke - User Guide
-Duke is a personal task tracker that stores and records your to-dos, deadlines and events.This user guide demonstrates
-how to set up Duke and how use the basic features of Duke.
+# duke - User Guide
+duke is a personal task tracker that stores and records your to-dos, deadlines and events.This user guide demonstrates
+how to set up duke and how use the basic features of duke.
 
 ## Setting Up
 1. Extract the jar folder into an empty folder
 2. Enter your preferred terminal and move to the location of the folder
-3. Run the Command-Line interface(CLI) with `java -jar Duke.Duke.jar` in your terminal
-![Setting up Duke](/images/startup.JPG)
+3. Run the Command-Line interface(CLI) with `java -jar duke.duke.jar` in your terminal
+![Setting up duke](/images/startup.JPG)
 
 ### Features
 + [ToDo](#todo)

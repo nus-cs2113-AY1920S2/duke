@@ -13,7 +13,6 @@ public class FindCommand extends TaskList{
     protected Storage storage;
     protected ArrayList<Task> tasks;
     protected ErrorMessages errorMessages;
-    protected static final int LENGTH_OF_COMMAND = 4;
 
     public FindCommand() {
         storage = new Storage();
@@ -63,7 +62,8 @@ public class FindCommand extends TaskList{
      * @throws MissingSearchQueryException if search query is missing
      */
     public void findSearchQuery(String input) throws MissingSearchQueryException {
-        String searchQuery = input.substring(LENGTH_OF_COMMAND).trim();
+        int lengthOfCommand = 4;
+        String searchQuery = input.substring(lengthOfCommand).trim();
         if (searchQuery.length() == 0) {
             errorMessages.findErrorMessage();
             throw new MissingSearchQueryException();
