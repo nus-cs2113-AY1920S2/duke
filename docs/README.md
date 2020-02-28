@@ -1,5 +1,11 @@
 # User Guide
 
+## Using Duke
+Create a folder named *data*, and save a .txt file named *duke.txt* inside the folder.    
+The folder should be in the same path as *duke.jar* file.  
+This should be done **before** running duke.
+
+
 ## Features 
 
 ### Feature 1 
@@ -72,7 +78,7 @@
 `find`  - Find a task by its keyword
  
 *Example of usage:*
-> **find** Buy
+> **find** buy
  
 *Expected outcome:*  
 >  1. [T][x] Buy eggs  

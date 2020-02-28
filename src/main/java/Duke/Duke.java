@@ -1,14 +1,12 @@
 package Duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Duke {
-    //private static List<Task> tasksList = new ArrayList<>(100);
     private static final String LIST_COMMAND = "list";
     private static final String BYE_COMMAND = "bye";
     private static final String DONE_COMMAND = "done";

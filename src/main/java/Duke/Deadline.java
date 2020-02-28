@@ -3,6 +3,7 @@ package Duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** Manages deadline task operations */
 public class Deadline extends Task {
 
     protected String by;
@@ -18,6 +19,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by, Boolean isDone){
         super(description, isDone);
         this.by = by;
+        this.byFormat = getByFormat();
     }
 
     public String getByFormat(){
@@ -32,7 +34,7 @@ public class Deadline extends Task {
 
     @Override
     public String toText(){
-        return "D | " + (this.isDone? "1" : "0") + " | " + this.description;
+        return "D | " + (this.isDone? "1" : "0") + " | " + this.description + " | " + this.by;
     }
 
 }
