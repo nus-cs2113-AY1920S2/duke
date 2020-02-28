@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static final String INVALID_COMMAND = "I'm sorry, but I don't know what that means :-( \n\t Type 'help' for the list of commands available.";
-    public static final String OOPS = "\t ☹ OOPS!!! ";
+    public static final String OOPS = "\t OOPS!!! ";
     public static final String FILE_NOT_FOUND = "File is not found!";
     public static final String INVALID_NUMBER = "You entered an invalid number!";
 
