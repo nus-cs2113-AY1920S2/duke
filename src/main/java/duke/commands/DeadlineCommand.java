@@ -4,10 +4,11 @@ import duke.tasklist.TaskList;
 import duke.exceptions.BadLineFormatException;
 import duke.tasks.Deadline;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 public class DeadlineCommand extends Command {
-    public static final String EXAMPLE_USAGE = "deadline finish math homework /by Monday";
+    public static final String EXAMPLE_USAGE = "deadline finish math homework /by 5/10/2021 16:30";
     public static final String KEYWORD = "deadline";
     private Deadline deadline;
 
@@ -33,7 +34,12 @@ public class DeadlineCommand extends Command {
 
         String description = String.join(" ", Arrays.copyOfRange(tokens, 1, byIndex));
         String dueDateTime = String.join(" ", Arrays.copyOfRange(tokens, byIndex + 1, tokens.length));
-        deadline = new Deadline(description, dueDateTime);
+
+        try {
+            deadline = new Deadline(description, dueDateTime);
+        } catch (DateTimeParseException e) {
+            throw new BadLineFormatException(e.getMessage());
+        }
     }
 
     public void execute() {

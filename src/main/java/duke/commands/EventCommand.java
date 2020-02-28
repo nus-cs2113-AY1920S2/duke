@@ -4,10 +4,11 @@ import duke.tasklist.TaskList;
 import duke.exceptions.BadLineFormatException;
 import duke.tasks.Event;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 public class EventCommand extends Command {
-    public static final String EXAMPLE_USAGE = "event math class /at Monday 8am-10am";
+    public static final String EXAMPLE_USAGE = "event math class /at 31/7/2020 8:30";
     public static final String KEYWORD = "event";
     private Event event;
 
@@ -33,7 +34,12 @@ public class EventCommand extends Command {
 
         String description = String.join(" ", Arrays.copyOfRange(tokens, 1, atIndex));
         String startEndDateTime = String.join(" ", Arrays.copyOfRange(tokens, atIndex + 1, tokens.length));
-        event = new Event(description, startEndDateTime);
+
+        try {
+            event = new Event(description, startEndDateTime);
+        } catch (DateTimeParseException e) {
+            throw new BadLineFormatException(e.getMessage());
+        }
     }
 
     public void execute() {

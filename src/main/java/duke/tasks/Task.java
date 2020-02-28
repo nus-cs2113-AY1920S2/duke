@@ -2,6 +2,9 @@ package duke.tasks;
 
 import duke.exceptions.BadLineFormatException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public abstract class Task {
     protected boolean isDone;
     protected String description;
@@ -24,30 +27,9 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public abstract boolean getIsBy(LocalDateTime dateTime);
+
+    public abstract boolean getIsOn(LocalDate date);
+
     public abstract String toFormattedString();
-
-    public static Task getTaskFromFormattedLine(String line) throws BadLineFormatException {
-        String[] tokens = line.split(",");
-        if (tokens.length == 0) {
-            throw new BadLineFormatException("Empty line");
-        } else if (tokens.length < 3) {
-            throw new BadLineFormatException("Not enough tokens");
-        } else if ((tokens[0].equals("D") || tokens[0].equals("E")) && tokens.length < 4) {
-            throw new BadLineFormatException("Not enough tokens");
-        } else if (!(tokens[1].equals("y") || tokens[1].equals("n"))) {
-            throw new BadLineFormatException("Second token must be y or n");
-        }
-
-        boolean isDone = tokens[1].equals("y");
-        switch(tokens[0]) {
-        case "T":
-            return new ToDo(tokens[2], isDone);
-        case "D":
-            return new Deadline(tokens[2], tokens[3], isDone);
-        case "E":
-            return new Event(tokens[2], tokens[3], isDone);
-        default:
-            throw new BadLineFormatException("First token must be T, D, or E");
-        }
-    }
 }

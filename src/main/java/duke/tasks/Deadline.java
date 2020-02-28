@@ -1,16 +1,35 @@
 package duke.tasks;
 
-public class Deadline extends Task {
-    protected String dueDateTime;
+import duke.Main;
+import duke.exceptions.BadLineFormatException;
 
-    public Deadline(String description, String dueDateTime) {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
+public class Deadline extends Task {
+    private LocalDateTime dueDateTime;
+
+    public Deadline(String description, String dueDateTime) throws BadLineFormatException {
         super(description);
-        this.dueDateTime = dueDateTime;
+        try {
+            this.dueDateTime = LocalDateTime.parse(dueDateTime, Main.DTF);
+        } catch (DateTimeParseException e) {
+            throw new BadLineFormatException(e.getMessage());
+        }
     }
 
-    public Deadline(String description, String dueDateTime, boolean isDone) {
+    public Deadline(String description, String dueDateTime, boolean isDone) throws BadLineFormatException {
         this(description, dueDateTime);
         this.isDone = isDone;
+    }
+
+    public boolean getIsBy(LocalDateTime dateTime) {
+        return dueDateTime.isBefore(dateTime);
+    }
+
+    public boolean getIsOn(LocalDate date) {
+        return dueDateTime.toLocalDate().equals(date);
     }
 
     @Override
@@ -20,6 +39,6 @@ public class Deadline extends Task {
 
     public String toFormattedString() {
         String done = isDone ? "y" : "n";
-        return "D," + done + "," + description + "," + dueDateTime;
+        return "D," + done + "," + description + "," + Main.DTF.format(dueDateTime);
     }
 }
