@@ -28,3 +28,4 @@ public final class Constants {
     public static final String FILE_PATH = "data/duke.txt";
     public static final String CREATE_FILE_PATH = System.getProperty("user.dir") + "/data";
 }
+

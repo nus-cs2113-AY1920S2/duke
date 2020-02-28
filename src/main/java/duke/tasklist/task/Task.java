@@ -1,5 +1,7 @@
 package duke.tasklist.task;
 
+import java.time.LocalDate;
+
 /**
  * Stores a task.
  * Since there is no task without type, this super class is an abstract class.
@@ -23,6 +25,10 @@ public abstract class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public LocalDate getTime() {
+        return null;
     }
 
     public void markAsDone() {

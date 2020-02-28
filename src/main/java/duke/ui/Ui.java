@@ -4,6 +4,7 @@ import duke.common.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasklist.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static duke.common.Constants.LINE_BREAK;
@@ -83,6 +84,17 @@ public class Ui {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
     }
 
+    public void showCheckTask (TaskList tasks, ArrayList<Integer> findCount) {
+        if (findCount.size() > 0) {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (Integer i : findCount) {
+                System.out.println("\t" + (i + 1) + "." + tasks.getATask(i));
+            }
+        } else {
+            System.out.println("\t No matching tasks.");
+        }
+    }
+
     /**
      * Displays prompt message that a new task is added in the task list.
      * Displays the newly added task and current task count.
@@ -93,6 +105,17 @@ public class Ui {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + tasks.getATask(tasks.size() - 1));
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list");
+    }
+
+    public void showFindTask (TaskList tasks, ArrayList<Integer> findCount) {
+        if (findCount.size() > 0) {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (Integer i : findCount) {
+                System.out.println("\t" + (i + 1) + "." + tasks.getATask(i));
+            }
+        } else {
+            System.out.println("\t No matching tasks.");
+        }
     }
 
     public void showLoadingError() {
