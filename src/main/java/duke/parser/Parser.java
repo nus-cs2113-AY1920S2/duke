@@ -223,6 +223,14 @@ public class Parser {
             throw new InvalidInputException();
         } else {
             commandWord = phrases[0];
+            String[] keywords = {"bye","clear","help","list"};
+            if (phrases.length != 1) {
+                for (String t : keywords) {
+                    if (commandWord.equals(t)) {
+                        throw new InvalidInputException();
+                    }
+                }
+            }
         }
     }
 }
