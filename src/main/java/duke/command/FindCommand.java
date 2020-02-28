@@ -16,7 +16,7 @@ public class FindCommand implements Command {
     private String searchTerm;
 
     /**
-     * Default constructor
+     * Default constructor.
      *
      * @param searchTerm the search pattern provided by the user.
      */

@@ -8,7 +8,7 @@ import static duke.util.Constants.TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE;
  *
  * @author A11riseforme
  */
-public class DukeNullDescriptionException extends DukeException{
+public class DukeNullDescriptionException extends DukeException {
     /**
      * Default constructor.
      */

@@ -39,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Cast the task to String type by returning a string of its description
+     * Cast the task to String type by returning a string of its description.
      *
      * @return the description of the task in String.
      */

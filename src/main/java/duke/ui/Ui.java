@@ -146,7 +146,7 @@ public class Ui {
     }
 
     /**
-     * Print every task in taskList
+     * Print every task in taskList.
      *
      * @param taskList the TaskList object used by the programme to store the tasks.
      */
@@ -159,6 +159,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Print all the tasks which matches the key word provided by the user.
+     *
+     * @param foundTasks ArrayList of Task objects that match the key word provided by the user.
+     */
     public void showFind(ArrayList<Task> foundTasks) {
         if (foundTasks.size() == 0) {
             System.out.println(FIVE_SPACES + NOT_FOUND_TASK_PROMPT);

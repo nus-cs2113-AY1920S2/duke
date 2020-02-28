@@ -47,14 +47,12 @@ import static duke.util.Constants.UNKNOWN_COMMAND_RESPONSE;
 public class Parser {
     /**
      * parse the users' input.
-     *
      * This method try to identify the command user intends to call, and parse the full command into different parts.
      * Then pass required arguments to the command.
      *
      * @param userInput the entire input from the user.
      * @return a Command object corresponding to the command the user intends to call.
-     * @throws DukeException exception is thrown when task description is empty, the required date is
-     * empty or the format is wrong.
+     * @throws DukeException exception is thrown when task description or required date is empty or format is wrong.
      */
     public static Command parse(String userInput) throws DukeException {
         String[] commands = splitCommand(userInput);
@@ -116,7 +114,7 @@ public class Parser {
     }
 
     /**
-     * Split user's input into two parts, the first part is the command word, the second part is the rest
+     * Split user's input into two parts, the first part is the command word, the second part is the rest.
      *
      * @param userInput the entire input from the user.
      * @return an array of two Strings, command word and the rest.
@@ -143,7 +141,7 @@ public class Parser {
     }
 
     /**
-     * Extract the task id from the user input which intends to call `done` command
+     * Extract the task id from the user input which intends to call `done` command.
      *
      * @param userInput the entire input from the user.
      * @return the task id which user intends to mark as done.
@@ -176,16 +174,23 @@ public class Parser {
     }
 
     /**
-     * Extract the task date from the user input when the user intend to call `deadline` or `event`
-     * @param taskInfo
-     * @param delimiter
-     * @return
+     * Extract the task date from the user input when the user intend to call `deadline` or `event`.
+     * @param taskInfo the second part of the user input.
+     * @param delimiter the delimiter for the date in the user input.
+     * @return a String of the task date.
      */
     private static String extractTaskDate(String taskInfo, String delimiter) {
         int taskTimeIndex = taskInfo.indexOf(delimiter) + delimiter.length();
         return taskInfo.substring(taskTimeIndex).trim();
     }
 
+    /**
+     * Cast a String of date in the format of "yyyy-mm-dd" to the LocalDate type.
+     *
+     * @param dateString a String of the task date. in the format of "yyyy-mm-dd".
+     * @return a LocalDate type date.
+     * @throws DukeDateFormatException exception is thrown when the String of the date is of wrong format.
+     */
     private static LocalDate parseStringToDate(String dateString) throws DukeDateFormatException {
         try {
             LocalDate date = LocalDate.parse(dateString);

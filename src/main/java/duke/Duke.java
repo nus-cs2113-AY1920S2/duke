@@ -20,7 +20,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Duke constructor
+     * Duke constructor.
      */
     public Duke()  {
         ui = new Ui();

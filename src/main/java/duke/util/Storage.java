@@ -45,16 +45,16 @@ public class Storage {
     }
 
     /**
-     * Load the json string from the file and convert into an ArrayList of Tasks
+     * Load the json string from the file and convert into an ArrayList of Tasks.
      *
      * @return a list of Task objects, which represents the tasks.
      * @throws DukeLoadingException exception is thrown if error occurs when loading from the file.
      * @throws DukeNullDescriptionException exception is thrown if error occurs when parsing the json string and any
-     * task with empty description.
+     *      task with empty description.
      * @throws DukeNullDateException exception is thrown if error occurs when parsing the json strings and any
-     * deadline/event task with empty date.
+     *      deadline/event task with empty date.
      */
-    public ArrayList<Task> load() throws DukeLoadingException, DukeNullDescriptionException, DukeNullDateException {
+    public ArrayList<Task> load() throws DukeLoadingException, DukeNullDescriptionException {
         Ui.showLoadDataPrompt();
 
         String jsonStr;
@@ -73,8 +73,6 @@ public class Storage {
                 tasksList.add(currentTask);
             } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
-            } catch (DukeNullDateException e) {
-                throw new DukeNullDateException();
             }
         }
         Ui.showLoadDataSuccessfulPrompt();
@@ -120,7 +118,7 @@ public class Storage {
      * @throws DukeNullDescriptionException exception is thrown when the task has empty description.
      * @throws DukeNullDateException exception is thrown when the deadline/event task has empty date.
      */
-    private Task convertDummyTaskToSpecificTask(DummyTask task) throws DukeNullDescriptionException, DukeNullDateException {
+    private Task convertDummyTaskToSpecificTask(DummyTask task) throws DukeNullDescriptionException {
         Task convertedTask;
 
         switch (task.getIcon()) {

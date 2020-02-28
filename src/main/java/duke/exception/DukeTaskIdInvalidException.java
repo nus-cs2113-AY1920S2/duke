@@ -8,7 +8,7 @@ import static duke.util.Constants.TASK_ID_NOT_PROVIDED_OR_INVALID_ERROR_MESSAGE;
  *
  * @author A11riseforme
  */
-public class DukeTaskIdInvalidException extends DukeException{
+public class DukeTaskIdInvalidException extends DukeException {
     /**
      * Default constructor.
      */

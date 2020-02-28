@@ -45,6 +45,6 @@ public class TodoCommand implements Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Todo todoTask = new Todo(taskDescription);
         taskList.add(todoTask);
-        ui.showAddTaskSuccessfulPrompt(taskList, todoTask );
+        ui.showAddTaskSuccessfulPrompt(taskList, todoTask);
     }
 }
