@@ -18,6 +18,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 
 /**
  * Parses user input.
@@ -119,6 +121,7 @@ public class Parser {
                 if (checkDuplicateTask(toCheck, temp[DESCRIPTION_INDEX])) return getUserDecisionForDuplicate(Messages.EVENT_TYPE,nextTaskIndex, temp);
             }
         } catch (ArrayIndexOutOfBoundsException aiobex){
+
             aiobex.printStackTrace();
         }
         return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
@@ -154,6 +157,7 @@ public class Parser {
                 if (checkDuplicateTask(toCheck, temp[DESCRIPTION_INDEX])) return getUserDecisionForDuplicate(Messages.DEADLINE_TYPE,nextTaskIndex, temp);
             }
         } catch (ArrayIndexOutOfBoundsException aiobex){
+
             aiobex.printStackTrace();
         }
         return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
@@ -187,12 +191,16 @@ public class Parser {
     private Command prepareAddTodoTask(TaskManager taskManager,int nextTaskIndex, String commandDescription) {
         TextUi.printDivider();
         try{
+            if (commandDescription.length() == 0){
+                return new IncorrectCommand (MESSAGE_INVALID_COMMAND_FORMAT);
+            }
             for (Task toCheck:taskManager.getTaskList().getInternalList()
             ) {
                 if (checkDuplicateTask(toCheck, commandDescription))
                     return getUserDecisionForTodoDuplicate(nextTaskIndex, commandDescription);
             }
         } catch (NullPointerException npex) {
+
             npex.printStackTrace();
         }
         return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
@@ -230,10 +238,13 @@ public class Parser {
             final int targetIndex = parseArgsAsDisplayedIndex(args, DONE_INDEX);
             return new DoneCommand(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         } catch (NumberFormatException nfe) {
+
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         } catch (StringIndexOutOfBoundsException nfe) {
+
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }
@@ -249,8 +260,13 @@ public class Parser {
             final int targetIndex = parseArgsAsDisplayedIndex(args, DELETE_INDEX);
             return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         } catch (NumberFormatException nfe) {
+
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        } catch (StringIndexOutOfBoundsException sioobe) {
+
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }
@@ -266,10 +282,12 @@ public class Parser {
             StringIndexOutOfBoundsException{
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
+
             throw new ParseException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         if (args.length() < index) {
-            throw new StringIndexOutOfBoundsException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+
+            throw new StringIndexOutOfBoundsException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         return Integer.parseInt(args.substring(index));
     }

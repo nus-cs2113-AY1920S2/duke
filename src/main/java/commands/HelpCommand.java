@@ -1,5 +1,7 @@
 package commands;
 
+import static ui.TextUi.printHelpMessage;
+
 /**
  * Shows help instructions. (after user input is wrong)
  */
@@ -14,18 +16,7 @@ public class HelpCommand  extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(
-                commands.add.AddTodoCommand.MESSAGE_USAGE
-                        + "\n" + "  "+ commands.add.AddDeadlineCommand.MESSAGE_USAGE
-                        + "\n" + "  "+ commands.add.AddEventCommand.MESSAGE_USAGE
-                        //+ "\n" + "  "+DeleteCommand.MESSAGE_USAGE
-                        + "\n" + "  "+ClearCommand.MESSAGE_USAGE
-                        //+ "\n" + "  "+FindCommand.MESSAGE_USAGE
-                        + "\n" + "  "+ ListCommand.MESSAGE_USAGE
-                        //+ "\n" + "  "+ ViewCommand.MESSAGE_USAGE
-                        //+ "\n" + ViewAllCommand.MESSAGE_USAGE
-                        + "\n" + "  "+ HelpCommand.MESSAGE_USAGE
-                        + "\n" + "  "+ ExitCommand.MESSAGE_USAGE
-        );
+        printHelpMessage();
+        return new CommandResult("");
     }
 }

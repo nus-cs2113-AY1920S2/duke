@@ -1,6 +1,6 @@
 package commands;
 
-import common.Messages;
+import ui.TextUi;
 
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
@@ -16,6 +16,7 @@ public class IncorrectCommand extends Command{
 
     @Override
     public CommandResult execute() {
+        TextUi.printAlert();
         return new CommandResult(feedbackToUser);
     }
 

@@ -1,5 +1,12 @@
 package ui;
 
+import commands.ClearCommand;
+import commands.DeleteCommand;
+import commands.ExitCommand;
+import commands.FindCommand;
+import commands.add.AddDeadlineCommand;
+import commands.add.AddEventCommand;
+import commands.add.AddTodoCommand;
 import common.Messages;
 import data.task.*;
 import org.fusesource.jansi.Ansi;
@@ -17,7 +24,7 @@ public class TextUi {
 
     public static final int DISPLAYED_INDEX_OFFSET = 1;
     public static final Ansi.Color SYSTEM_COLOR_MESSAGE = BLUE;
-    public static final Ansi.Color SYSTEM_COLOR_RESPONSE = YELLOW;
+    public static final Ansi.Color SYSTEM_COLOR_RESPONSE = GREEN;
     public static final Ansi.Color SYSTEM_COLOR_DIVIDER = BLACK;
     public static final Ansi.Color SYSTEM_COLOR_LOGO = MAGENTA;
     public static final Ansi.Color SYSTEM_COLOR_ALERT = RED;
@@ -46,7 +53,7 @@ public class TextUi {
 
     //echo function, display user's input
     public static void showResult(String text) {
-        printDivider();
+        //printDivider();
         printMessage(CYAN, text);
         printDivider();
     }
@@ -101,7 +108,11 @@ public class TextUi {
     public static void alertToAddDuplicateTask(Task toCheck){
         printAlert();
         printMessage(SYSTEM_COLOR_MESSAGE,
-                String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT, toCheck.getTaskIndex()));
+                String.format(Messages.MESSAGE_DUPLICATE_TASK_ALERT_1, toCheck.getTaskIndex()));
+        printMessage(SYSTEM_COLOR_MESSAGE,
+                Messages.MESSAGE_DUPLICATE_TASK_ALERT_2);
+        printMessage(SYSTEM_COLOR_MESSAGE,
+               Messages.MESSAGE_DUPLICATE_TASK_ALERT_3);
     }
 
     public static void printDuplicateTaskNotAdded(){
@@ -135,21 +146,18 @@ public class TextUi {
 
     public static void printLS(){
         AnsiConsole.systemInstall();
-        ansi().reset();
-        System.out.print(MESSAGE_LS); //black
+        System.out.print(ansi().bold().fg(SYSTEM_COLOR_DIVIDER).a(MESSAGE_LS).reset());
         AnsiConsole.systemUninstall();
     }
 
     public static void printRS(){
         AnsiConsole.systemInstall();
-        ansi().reset();
-        System.out.println(MESSAGE_RS); //black
+        System.out.println(ansi().bold().fg(SYSTEM_COLOR_DIVIDER).a(MESSAGE_RS).reset());
         AnsiConsole.systemUninstall();
     }
 
     public static void printTask(Ansi.Color color, String message){
         AnsiConsole.systemInstall();
-        ansi().reset();
         printLS();
         System.out.print(
                 ansi().bold().fg(color).a(message).reset());
@@ -166,7 +174,7 @@ public class TextUi {
     public static void printTodoTask(TodoTask todoTask, int index){
         printTask(SYSTEM_COLOR_RESPONSE,String.format(Messages.MESSAGE_LIST_RESPOND_Format, String.format(
                 Messages.MESSAGE_TODO_LIST,
-                todoTask.getTaskIndex()+LIST_INDEX_OFFSET,
+                index,
                 todoTask.getTaskType(),
                 todoTask.getChar(),
                 todoTask.getTaskDescription()))) ;
@@ -181,7 +189,7 @@ public class TextUi {
     public static void printDeadlineTask(DeadlineTask deadlineTask, int index){
         printTask(SYSTEM_COLOR_RESPONSE,String.format(Messages.MESSAGE_LIST_RESPOND_Format, String.format(
                 Messages.MESSAGE_DEADLINE_LIST,
-                deadlineTask.getTaskIndex()+LIST_INDEX_OFFSET,
+                index,
                 deadlineTask.getTaskType(),
                 deadlineTask.getChar(),
                 deadlineTask.getTaskDescription(),
@@ -197,7 +205,7 @@ public class TextUi {
     public static void printEventTask(EventTask eventTask, int index){
         printTask(SYSTEM_COLOR_RESPONSE,String.format(Messages.MESSAGE_LIST_RESPOND_Format, String.format(
                 Messages.MESSAGE_EVENT_LIST,
-                eventTask.getTaskIndex()+LIST_INDEX_OFFSET,
+                index,
                 eventTask.getTaskType(),
                 eventTask.getChar(),
                 eventTask.getTaskDescription(),
@@ -210,17 +218,16 @@ public class TextUi {
     public static String printAllTasks(TaskList tasklist){
         String taskMessage = "";
         taskListMessage = new StringBuilder();
-        getTaskListMessage(tasklist, taskMessage);
+        getTaskListMessage(tasklist);
         return taskListMessage.toString();
     }
 
     /**
      * get tasklist message
      * @param tasklist
-     * @param taskMessage
      */
-    private static void getTaskListMessage(TaskList tasklist, String taskMessage) {
-        for (int index = + LIST_INDEX_OFFSET; index <= tasklist.getInternalList().size() ; index++) {
+    private static void getTaskListMessage(TaskList tasklist) {
+        for (int index =  LIST_INDEX_OFFSET; index <= tasklist.getInternalList().size() ; index++) {
             Task task = tasklist.getInternalList().get(index+ INDEX_OFF_SET);
             printTaskMessage(index, task);
         }
@@ -231,7 +238,6 @@ public class TextUi {
 
     /**
      * get task message
-     * @param index
      * @param task
      * @return
      */
@@ -243,5 +249,38 @@ public class TextUi {
         } else if( task instanceof EventTask) {
             TextUi.printEventTask((EventTask) task, index);
         }
+    }
+
+
+    public static void printHelpMessage() {
+        TextUi.printMessage(YELLOW, MESSAGE_HELP);
+        TextUi.printMessage(Ansi.Color.MAGENTA, AddTodoCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, AddTodoCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, AddTodoCommand.MESSAGE_USAGE_2);
+
+        TextUi.printMessage(Ansi.Color.MAGENTA, AddDeadlineCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, AddDeadlineCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, AddDeadlineCommand.MESSAGE_USAGE_2);
+
+        TextUi.printMessage(Ansi.Color.MAGENTA, AddEventCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, AddEventCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, AddEventCommand.MESSAGE_USAGE_2);
+
+        TextUi.printMessage(Ansi.Color.MAGENTA, DeleteCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, DeleteCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, DeleteCommand.MESSAGE_USAGE_2);
+        TextUi.printMessage(Ansi.Color.BLUE, DeleteCommand.MESSAGE_USAGE_3);
+
+        TextUi.printMessage(Ansi.Color.MAGENTA, ClearCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, ClearCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, ClearCommand.MESSAGE_USAGE_2);
+
+        TextUi.printMessage(Ansi.Color.MAGENTA, FindCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, FindCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, FindCommand.MESSAGE_USAGE_2);
+
+        TextUi.printMessage(Ansi.Color.MAGENTA, ExitCommand.COMMAND_WORD);
+        TextUi.printMessage(Ansi.Color.BLUE, ExitCommand.MESSAGE_USAGE_1);
+        TextUi.printMessage(Ansi.Color.BLUE, ExitCommand.MESSAGE_USAGE_2);
     }
 }

@@ -23,6 +23,7 @@ public class ListCommand extends Command {
      * If the list is empty, display the empty list message by return a CommandResult object.
      */
     public CommandResult execute() {
+        taskManager.updateTaskIndex();
         if (taskManager.getTaskList().getInternalList().size()>0){
             taskListMessage = TextUi.printAllTasks(taskManager.getTaskList());
             return new CommandResult((taskListMessage));

@@ -6,9 +6,8 @@ package commands;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = "Clears task list permanently.\n"
-            + "    Example: " + COMMAND_WORD;
-
+    public static final String MESSAGE_USAGE_1 = "Clears task list permanently.";
+    public static final String MESSAGE_USAGE_2 ="    Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Task List has been cleared!";
 
     @Override

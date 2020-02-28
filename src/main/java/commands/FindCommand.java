@@ -7,9 +7,9 @@ import ui.TextUi;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Find all tasks matches the given description.\n"
-            + "    Example: " + COMMAND_WORD + " read a book.";
+    public static final String MESSAGE_USAGE_1 = COMMAND_WORD
+            + ": Find all tasks matches the given description.";
+    public static final String MESSAGE_USAGE_2 ="    Example: " + COMMAND_WORD + " read a book.";
     public static final String MESSAGE_EMPTY_LIST = "Can not find any task description " +
             "contains this keyword";
 

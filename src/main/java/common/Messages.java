@@ -21,14 +21,16 @@ public class Messages {
     public static final String MESSAGE_WELCOME_1 = "Welcome to KURI Task Management System?";
     public static final String MESSAGE_WELCOME_2 = "What can I do for you?";
     public static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
     public static final String MESSAGE_TASK_NOT_IN_TASKLIST = "The Task could not be found in address book";
     public static final String MESSAGE_TODO_LIST = "%d. [%c][%c] %s";
     public static final String MESSAGE_DEADLINE_LIST = "%d. [%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_LIST = "%d. [%c][%c] %s (%s)";
     public static final String MESSAGE_FILE_OPERATION_IO_ERROR = "Error writing to file: %s";
-    public static final String MESSAGE_DUPLICATE_TASK_ALERT = "This task is similar to task Index %d\nDo you want to add a duplicate task? Press Y to add and others to not add: ";
+    public static final String MESSAGE_DUPLICATE_TASK_ALERT_1 = "This task is similar to task Index %d";
+    public static final String MESSAGE_DUPLICATE_TASK_ALERT_2 = "Do you want to add a duplicate task?";
+    public static final String MESSAGE_DUPLICATE_TASK_ALERT_3 = "Press Y to add and others to not add: ";
     public static final String MESSAGE_DUPLICATE_TASK_NOT_ADDED = "The duplicate task is not added!";
     public static final String MESSAGE_ASK_TO_CHOOSE_UI = "Please enter '1' for GUI and '2' for CLI: ";
     public static final String MESSAGE_THANKS_FOR_GUI = "Thanks for choosing GUI";
@@ -41,5 +43,9 @@ public class Messages {
     public static final String MESSAGE_LIST_RESPOND_Format = "%-60s";
     public static final String MESSAGE_RS = "-===";
     public static final String MESSAGE_LS = "===-             ";
+    public static final String MESSAGE_TODO_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s";
+    public static final String MESSAGE_DEADLINE_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_EVENT_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_HELP = "Here are the possible commands: ";
 
 }

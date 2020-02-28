@@ -126,4 +126,10 @@ public class TaskManager {
         //find the task
         allTasks.getInternalList().get(doneId).setDone(true);
     }
+
+    public void updateTaskIndex(){
+        for (int index = 1; index <= allTasks.getInternalList().size(); index++) {
+            allTasks.getInternalList().get(index - 1).setTaskIndex(index);
+        }
+    }
 }

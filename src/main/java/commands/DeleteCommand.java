@@ -10,10 +10,11 @@ import data.task.Task;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "    Parameters: INDEX\n"
-            + "    Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE_1 = COMMAND_WORD
+            + ": Deletes the task by the index number.";
+            ;
+    public static final String MESSAGE_USAGE_2 = "    Parameters: INDEX";
+    public static final String MESSAGE_USAGE_3 = "    Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public DeleteCommand(int targetVisibleIndex) {
