@@ -27,6 +27,18 @@ import static duke.exception.ExceptionMessages.IO_ERROR_MESSAGE;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
+/**
+ * <h2>LumiChat</h2>
+ * This Duke program is a Chat Box application named <b>LumiChat</b> that maintains a list of user-created tasks.
+ * <p></p>
+ * User interacts with the application via the command line, and performs various actions like adding, deleting and
+ * viewing tasks.
+ *
+ * @author iceclementi
+ * @version 5.6.1.4
+ * @since 2020, January
+ */
 public class Duke {
 
     private Storage storage;
@@ -37,6 +49,11 @@ public class Duke {
         chatBot.runChat();
     }
 
+    /**
+     * Prints welcome message, initialises task list and runs program until termination.
+     * <p></p>
+     * <b>Note:</b> Program exits if task list initialisation fails.
+     */
     private void runChat() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -59,6 +76,14 @@ public class Duke {
         ui.showSystemMessage(EXIT_MESSAGE);
     }
 
+    /**
+     * Initialises the program by loading up the task list saved in the storage file.
+     * <p></p>
+     * If file is corrupted, user will be prompted whether to allow file to be overwritten by a new <b>empty</b> file.
+     *
+     * @return <code>TRUE</code> if task list is successfully initialised, or <code>FALSE</code> otherwise
+     * @throws IOException If there is a error accessing or creating the task list file
+     */
     private boolean initialiseChat() throws IOException {
         ui.showSystemMessage(LOAD_MESSAGE);
         try {
@@ -83,6 +108,13 @@ public class Duke {
         return true;
     }
 
+    /**
+     *  Reads user input from the command line until an <b><i>exit</i></b> command is given.
+     *  Each user input is converted into a command by the <b>Parser</b> and executed. The <b>Ui</b> then displays
+     *  any feedback message or necessary information to the user.
+     * @see Parser
+     * @see Ui
+     */
     private void readInputUntilExit() {
         Command command = null;
         do {

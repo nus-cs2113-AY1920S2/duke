@@ -12,10 +12,14 @@ import static duke.format.TextFormatter.createSpaces;
 import static duke.format.TextFormatter.toBold;
 import static duke.format.TextFormatter.toBoldAndItalic;
 
+/**
+ * Collection of messages to be displayed by the {@link Ui}.
+ * @see Ui
+ */
 public class Messages {
 
     private static final String TAB = createSpaces(4);
-    private static final String VERSION = "v5.6.1.2";
+    private static final String VERSION = "v5.6.1.4";
     private static final String LOGO =
             "  __       _______  _______  ________  _______  _______  _______  ________\n" +
             " |\\_\\     |\\___\\__\\|\\ __\\__\\|\\ ______\\|\\______\\|\\___\\__\\|\\______\\|\\ ______\\\n" +
@@ -46,11 +50,11 @@ public class Messages {
 
     public static final String CREATE_CONFIRMATION_MESSAGE =
             "Do you want to overwrite the corrupted task list with a new " +
-                    toBold("empty") + " task list?\n";
+            toBold("empty") + " task list?\n";
 
     public static final String PROMPT_VALID_CREATE_CONFIRMATION_MESSAGE =
             "Please enter either " + toBoldAndItalic("YES") + " to confirm creating a new task list or " +
-                    toBoldAndItalic("NO") + " to abort the LumiChat program.\n";
+            toBoldAndItalic("NO") + " to abort the LumiChat program.\n";
 
     public static final String SUCCESSFUL_SAVE_MESSAGE = HAPPY_FACE + "Lumi saves your task list successfully!\n";
 
@@ -58,6 +62,11 @@ public class Messages {
 
 
     /* Add task messages */
+    /**
+     * Returns the <i>add task</i> message based on the recently added task.
+     *
+     * @return The corresponding <i>add task</i> message
+     */
     public static String addTaskMessage() {
         int latestTaskIndex = TaskList.size() - 1; // 0-based indexing
 
@@ -69,12 +78,27 @@ public class Messages {
 
 
     /* Do task messages */
-    public static String completeTaskMessage(int index) {
+
+    /**
+     * Returns the <i>do task</i> message based on task on the <b>Task List</b>
+     * indicated by the <code>index</code>.
+     *
+     * @param index The index of the task to be done on the <b>Task List</b>
+     * @return The corresponding <i>do task</i> message
+     */
+    public static String doTaskMessage(int index) {
         return HAPPY_FACE + "Well done! Lumi marks this task as completed!\n" +
                 TAB + TaskList.get(index).getTaskStatus() +"\n";
     }
 
-    public static String alreadyCompletedTaskMessage(int index) {
+    /**
+     * Returns the <i>already done</i> message based on task on the <b>Task List</b>
+     * indicated by the <code>index</code>.
+     *
+     * @param index The index of the task that is already done on the <b>Task List</b>
+     * @return The corresponding <i>already done/i> message
+     */
+    public static String alreadyDoneTaskMessage(int index) {
         return ANGRY_FACE + "Hey!! Lumi already marked <" + TaskList.get(index).getTask() +
                 "> as completed!\n";
     }
@@ -85,6 +109,12 @@ public class Messages {
 
 
     /* Delete task messages */
+    /**
+     * Returns the <i>delete task confirmation</i> message based on the given <code>task</code>.
+     *
+     * @param task The task to be prompted for deletion
+     * @return The corresponding <i>delete task confirmation</i> message
+     */
     public static String DELETE_TASK_CONFIRMATION_MESSAGE(String task) {
         return THINKING_FACE + "Umm... Lumi needs you to confirm to delete this task:\n" +
                 createSpaces(8) + task + "\n";
@@ -95,6 +125,12 @@ public class Messages {
         toBoldAndItalic("YES") + " to confirm deletion or " +
         toBoldAndItalic("NO") + " to cancel...\n";
 
+    /**
+     * Returns the <i>delete task</i> message based on the given <code>taskToDelete</code>.
+     *
+     * @param taskToDelete The task to be deleted
+     * @return The corresponding <i>delete task</i> message
+     */
     public static String deleteTaskMessage(String taskToDelete) {
         int listSize = TaskList.size();
 

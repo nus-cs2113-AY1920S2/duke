@@ -19,7 +19,7 @@ public class DueCommand extends Command {
 
     public DueCommand(LocalDate date, String specifier) {
         searchDate = date;
-        timeSpecifier = specifier;
+        timeSpecifier = (specifier != null) ? specifier.toLowerCase() : "on";
     }
 
     public DueCommand(LocalDate date) {
@@ -36,9 +36,11 @@ public class DueCommand extends Command {
             searchedTaskIndices = filterDate(searchDate);
             return new CommandResult(FIND_MESSAGE, true, searchedTaskIndices);
         case "before":
+        case "b":
             searchedTaskIndices = filterDateBefore(searchDate);
             return new CommandResult(FIND_MESSAGE, true, searchedTaskIndices);
         case "after":
+        case "a":
             searchedTaskIndices = filterDateAfter(searchDate);
             return new CommandResult(FIND_MESSAGE, true, searchedTaskIndices);
         default:
