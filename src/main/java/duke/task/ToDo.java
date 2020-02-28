@@ -9,6 +9,11 @@ public class ToDo extends Task{
         this.taskType = "[T]";
     }
 
+    public ToDo(String taskName,String taskStatus){
+        this(taskName);
+        this.setTaskStatus(taskStatus);
+    }
+
     public static int getToDoNum(){
         return toDoNum;
     }

@@ -5,26 +5,26 @@ import java.util.ArrayList;
 
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    protected static ArrayList<Task> taskList;
 
     public TaskList(){
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     public Task getOneTask(int taskIndex){
         return taskList.get(taskIndex);
     }
 
-    public int getLenOfList(){
-        return this.taskList.size();
+    public static int getLenOfList(){
+        return taskList.size();
     }
 
     public void append(Task task){
-        this.taskList.add(task);
+        taskList.add(task);
     }
 
     public void remove(int taskIndex){
-        this.taskList.remove(taskIndex-1);
+        taskList.remove(taskIndex-1);
         Task.setTaskNum(Task.getTaskNum()-1);
     }
 
