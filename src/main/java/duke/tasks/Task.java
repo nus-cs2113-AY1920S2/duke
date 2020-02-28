@@ -32,4 +32,8 @@ public abstract class Task {
     public abstract boolean getIsOn(LocalDate date);
 
     public abstract String toFormattedString();
+
+    public boolean containsWord(String word) {
+        return description.contains(word);
+    }
 }

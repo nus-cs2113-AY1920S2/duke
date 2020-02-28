@@ -6,6 +6,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.OnCommand;
 import duke.commands.ToDoCommand;
@@ -44,6 +45,8 @@ public class Parser {
             return new DoneCommand(keyword, tokens, taskList);
         case EventCommand.KEYWORD:
             return new EventCommand(keyword, tokens, taskList);
+        case FindCommand.KEYWORD:
+            return new FindCommand(keyword, tokens, taskList);
         case ListCommand.KEYWORD:
             return new ListCommand(keyword, tokens, taskList);
         case ToDoCommand.KEYWORD:
