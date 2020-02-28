@@ -209,7 +209,7 @@ public class CommandExecution {
             }
         }
         tasks.removeAll(completedTasks);
-        String msg = "All completed tasks have been removed";
+        String msg = "All completed tasks have been removed.";
         return msg;
     }
     
@@ -227,11 +227,12 @@ public class CommandExecution {
                 LocalDate date = task.getDate();
                 if (date.isBefore(today)) {
                     pastTasks.add(task);
+                    removedTasks.add(task);
                 }
             }
         }
         tasks.removeAll(pastTasks);
-        String msg = "All past tasks have been removed";
+        String msg = "All past tasks have been removed.";
         return msg;
     }
     

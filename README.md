@@ -21,7 +21,7 @@ This chatbot is inspired by the legendary Duke chatbot, and is aptly named Rick 
 
 **Usage**
 1. Upon initialisation, Rick will prompt you about all tasks that are due today (based on your system time).
-1. If this is your first time using this chatbot, please enter the `help` command to get a detailed list of valid commands and formats.
+1. If this is your first time using this chatbot, please enter the `help` command to get a detailed list of valid commands and formats, or refer to the attached User Guide for more information.
 1. Enter your desired command and press enter. If your command is valid, Rick will carry out the operation and reply with a confirmation that the command has been executed. If your command is invalid, Rick will reply with a prompt explaining why the command was invalid.
 1. Add and delete your tasks as required. For events and deadlines, a date has to be specified, while specifying a time is optional. (e.g. `event watch the next episode of Rick and Morty /at 2020-03-03 03:30`)
 1. Please enter the `help` command for a full list of all valid commands and formats.
