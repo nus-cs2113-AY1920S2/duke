@@ -68,6 +68,17 @@ public class Ui {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
     }
 
+    public void showCheckTask (TaskList tasks, ArrayList<Integer> findCount) {
+        if (findCount.size() > 0) {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (Integer i : findCount) {
+                System.out.println("\t" + (i + 1) + "." + tasks.getATask(i));
+            }
+        } else {
+            System.out.println("\t No matching tasks.");
+        }
+    }
+
     /**
      * Displays prompt message that a new task is added in the task list
      * @param tasks store the task list

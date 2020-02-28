@@ -80,6 +80,11 @@ public class Parser {
                 throw new DukeException("\tPlease input the thing you want to find");
             }
             return new FindCommand(responses[1]);
+        case CHECK:
+            if (responses.length < 2) {
+                throw new DukeException("\tPlease input the date you want to check");
+            }
+            return new CheckCommand((responses[1]));
         case LIST:
             return new ListCommand();
         case BYE:

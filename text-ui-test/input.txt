@@ -5,8 +5,10 @@ todo sleep
 todo
 heyhey
 deadline cs2113 /by Tuesday
+deadline assignment /by 2020-03-21
 event project meeting /at Mon 2-4pm
-deadline book review /by Friday
+event concert /at 2020-03-21
+check 2020-03-21
 event
 find book
 find

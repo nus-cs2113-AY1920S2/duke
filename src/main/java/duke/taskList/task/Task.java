@@ -1,5 +1,7 @@
 package duke.taskList.task;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -19,6 +21,10 @@ public abstract class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public LocalDate getTime() {
+        return null;
     }
 
     public void markAsDone() {

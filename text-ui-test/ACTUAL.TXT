@@ -40,13 +40,23 @@ Hello from
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-	  [E][ ] project meeting (at: Mon 2-4pm)
+	  [D][ ] assignment (by: Mar 21 2020, SATURDAY)
 	Now you have 4 tasks in the list
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-	  [D][ ] book review (by: Friday)
+	  [E][ ] project meeting (at: Mon 2-4pm)
 	Now you have 5 tasks in the list
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+	  [E][ ] concert (at: Mar 21 2020, SATURDAY)
+	Now you have 6 tasks in the list
+	____________________________________________________________
+	____________________________________________________________
+	Here are the matching tasks in your list:
+	4.[D][ ] assignment (by: Mar 21 2020, SATURDAY)
+	6.[E][ ] concert (at: Mar 21 2020, SATURDAY)
 	____________________________________________________________
 	____________________________________________________________
 	The description of a event cannot be empty.
@@ -78,13 +88,14 @@ Hello from
 	1.[T][ ] read book
 	2.[T][/] sleep
 	3.[D][/] cs2113 (by: Tuesday)
-	4.[E][ ] project meeting (at: Mon 2-4pm)
-	5.[D][ ] book review (by: Friday)
+	4.[D][ ] assignment (by: Mar 21 2020, SATURDAY)
+	5.[E][ ] project meeting (at: Mon 2-4pm)
+	6.[E][ ] concert (at: Mar 21 2020, SATURDAY)
 	____________________________________________________________
 	____________________________________________________________
 	Noted. I've removed this task:
 	  [T][/] sleep
-	Now you have 4 tasks in the list.
+	Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please input a task number that you want to delete
@@ -93,8 +104,9 @@ Hello from
 	Here are the tasks in your list:
 	1.[T][ ] read book
 	2.[D][/] cs2113 (by: Tuesday)
-	3.[E][ ] project meeting (at: Mon 2-4pm)
-	4.[D][ ] book review (by: Friday)
+	3.[D][ ] assignment (by: Mar 21 2020, SATURDAY)
+	4.[E][ ] project meeting (at: Mon 2-4pm)
+	5.[E][ ] concert (at: Mar 21 2020, SATURDAY)
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
