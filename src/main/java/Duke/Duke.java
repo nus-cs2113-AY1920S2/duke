@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 public class Duke {
-    private static List<Task> tasksList = new ArrayList<>(100);
+    //private static List<Task> tasksList = new ArrayList<>(100);
     private static final String LIST_COMMAND = "list";
     private static final String BYE_COMMAND = "bye";
     private static final String DONE_COMMAND = "done";
@@ -16,6 +16,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String FIND_COMMAND = "find";
     private static final String TODO_ERROR_MESSAGE = "Oops! The description of todo cannot be empty.";
     private static final String DEADLINE_ERROR_MESSAGE = "Oops! The description of deadline cannot be empty.";
     private static final String EVENT_ERROR_MESSAGE = "Oops! The description of event cannot be empty.";
@@ -129,6 +130,26 @@ public class Duke {
                     String at = Parser.getAt(parsedList);
                     tasks.add(new Event(eventDescription, at));
                     ui.showTasksLeft(tasks);
+                    break;
+
+                case FIND_COMMAND:
+                    if (inputLength != 1){
+                        TaskList foundTasks = new TaskList();
+                        for(Task t : tasks.getTasks()){
+                            if (t.getDescription().toLowerCase().contains(ui.getWord(input))){
+                                foundTasks.addToFindList(t);
+                            }
+                        }
+                        if (foundTasks.getSize() == 0){
+                            ui.printNoMatchingTasks();
+                        }
+                        else{
+                            ui.printMatchingTasks(foundTasks);
+                        }
+                    }
+                    else{
+                        throw new DukeException(INVALID_COMMAND_MESSAGE);
+                    }
                     break;
 
                 default:
