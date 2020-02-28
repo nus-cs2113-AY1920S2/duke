@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * deals with making sense of the user command
+ * gets what the user inputs then makes sense of
+ * the input, sorting and passing on to carry out the command
+ */
 public class Parser {
 
     /**
@@ -26,7 +31,4 @@ public class Parser {
             TaskList.addInNewTask();// adds a new task into the list
         }
     }
-}
-
-
 }

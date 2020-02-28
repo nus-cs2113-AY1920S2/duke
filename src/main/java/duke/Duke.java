@@ -1,11 +1,13 @@
 package duke;
 
-import duke.task.Task;
-
-
 import java.io.IOException;
-import java.util.ArrayList;
 
+/**
+ * runs Duke, the program to help you
+ * keep track of the work that you need to do,
+ * the deadlines that you need to meet and the
+ * events that you need to be at.
+ */
 public class Duke {
     public static String inputLine = null; //most updated line of input
     public static boolean isEnd = false;
@@ -16,6 +18,11 @@ public class Duke {
     }
 
 
+    /**
+     * start the program
+     *
+     * @param filePath the path to file of offline list
+     */
     private static void run(String filePath) {
         Ui.printWelcomeMessage();
         try {
