@@ -27,6 +27,9 @@ public class Ui {
         System.out.println("\t DELETE TASK FROM LIST:");
         System.out.println("\t\t delete <task index>");
         printBorder();
+        System.out.println("\t FIND KEYWORD IN LIST:");
+        System.out.println("\t\t find <keyword>");
+        printBorder();
     }
 
     public static void printDeleteMessage(ArrayList<Task> taskList, int taskIndex) {
