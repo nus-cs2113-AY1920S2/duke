@@ -7,6 +7,9 @@ import alie.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Command to print all the tasks added to task list
+ */
 public class ListCommand extends Command {
     public static final String COMMAND_KEYWORD = "list";
 
@@ -16,6 +19,11 @@ public class ListCommand extends Command {
         return new CommandResult(stringAllTasksTogether(allTasks));
     }
 
+    /**
+     * Converting taskList into a string for printing.
+     * @param taskList
+     * @return String containing all the tasks in taskList with proper spacing and line separator.
+     */
     public String stringAllTasksTogether(ArrayList<Task> taskList) {
         StringBuilder allTasks = new StringBuilder();
         if (taskList.size() == 0) {
