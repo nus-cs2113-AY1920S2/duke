@@ -21,6 +21,8 @@ public class MessageBank {
     public static String LIST_CLEAR_CONFIRMATION_MESSAGE = "Are you sure you want to clear all tasks in your list? (Y/N)";
     public static String LIST_SIZE_MESSAGE = "You now have %d tasks in the list.";
     public static String DELETE_TASK_MESSAGE = "Got it! The following task has been successfully deleted.";
+    public static String FOUND_TASK_MESSAGE = "Here are the matching tasks in your list:";
+    public static String UNABLE_TO_FIND_TASK_MESSAGE = "Sorry, I am unable to find any matching tasks in your list :(";
     public static String INVALID_TODO_MESSAGE = "Oops! To add a todo, enter: todo {description}";
     public static String INVALID_DEADLINE_MESSAGE = "Oops! To add a deadline, enter: deadline /by {date(yyyy-mm-dd)}";
     public static String INVALID_EVENT_MESSAGE = "Oops! To add an event, enter: event /at {location}";

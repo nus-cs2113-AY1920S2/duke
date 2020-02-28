@@ -52,6 +52,10 @@ public class Parser {
                 if (!description.matches("-?\\d+") || numArguments != 2) throw new InvalidFormatException();
                 command = new deleteCommand(commandPrompt, description);
                 break;
+            case "find":
+                if (numArguments != 2) throw new InvalidFormatException();
+                command = new findCommand(commandPrompt, description);
+                break;
             case "bye":
                 command = new byeCommand(commandPrompt);
                 break;

@@ -72,6 +72,21 @@ public class UI {
         System.out.println(MessageBank.DONE_TASK_MESSAGE + MessageBank.NEW_LINE + task);
         displayLineSeparator();
     }
+    public void displayFoundTaskMessage(List<Task> foundList) {
+        displayLineSeparator();
+        System.out.println(MessageBank.FOUND_TASK_MESSAGE);
+        int counter = 0;
+        for (Task task : foundList) {
+            counter++;
+            System.out.println(counter + ". " + task);
+        }
+        displayLineSeparator();
+    }
+    public void displayUnableToFindTaskMessage() {
+        displayLineSeparator();
+        System.out.println(MessageBank.UNABLE_TO_FIND_TASK_MESSAGE);
+        displayLineSeparator();
+    }
     public void displayListClearMessage() {
         displayLineSeparator();
         System.out.println(MessageBank.LIST_CLEAR_MESSAGE);
