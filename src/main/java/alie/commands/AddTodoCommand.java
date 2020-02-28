@@ -14,32 +14,29 @@ public class AddTodoCommand extends Command {
     private final ToDo taskToAdd;
 
     public static final String COMMAND_KEYWORD = "todo";
-    public String ADD_TODO_ACK =
-            INDENTATION + "Got it. I've added this task:" + System.lineSeparator() +
-            MORE_INDENTATION + "%1$s" + System.lineSeparator() +
-            INDENTATION + "Now you have %2$s tasks in the list.";
 
     /**
-     * Construct a Deadline Object after parsing spiltCommands.
-     * @param splitCommand Array of String containing details in each index.
-     * @throws InvalidCmdException If there are any illegal inputs detected.
+     * Construct a ToDo Object after parsing spiltCommands.
+     * @param splitCommands Array of String containing details in each index.
+     * @throws InvalidCmdException If Name of ToDo Object is missing.
      */
-    public AddTodoCommand(String[] splitCommand) throws InvalidCmdException {
+    public AddTodoCommand(String[] splitCommands) throws InvalidCmdException {
         try {
-            taskToAdd = new ToDo(splitCommand[1]);
+            if (splitCommands[1].equals("")) {
+                throw new InvalidCmdException(String.format(
+                        InvalidCmdException.TODO_MISSING_NAME_ERROR, COMMAND_KEYWORD));
+            }
+            taskToAdd = new ToDo(splitCommands[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidCmdException("Description cannot be missing!");
+            throw new InvalidCmdException(String.format(
+                    InvalidCmdException.TODO_MISSING_NAME_ERROR, COMMAND_KEYWORD));
         }
     }
 
     @Override
-    public CommandResult execute(TaskManager taskLists, Ui ui, Storage storage)
-            throws InvalidCmdException {
-        if (taskToAdd.getName().equals("")) {
-            throw new InvalidCmdException("Description cannot be missing!");
-        }
+    public CommandResult execute(TaskManager taskLists, Ui ui, Storage storage) {
         taskLists.addNewTask(taskToAdd);
-        return new CommandResult(String.format(ADD_TODO_ACK, taskToAdd.getTaskInfo(),
+        return new CommandResult(String.format(ADD_TASK_ACK, taskToAdd.getTaskInfo(),
                 taskLists.getNumOfTasks()));
     }
 }

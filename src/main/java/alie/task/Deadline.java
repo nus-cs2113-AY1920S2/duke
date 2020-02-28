@@ -17,14 +17,6 @@ public class Deadline extends Task {
         endDate = date;
     }
 
-    /**
-     * Getter to obtain due date of task.
-     * @return String containing due date of task.
-     */
-    public String getDate() {
-        return endDate;
-    }
-
     @Override
     public String getTaskInfo() {
         return ("[D]" + super.getTaskInfo() + " (by: " + endDate + ")");

@@ -17,14 +17,6 @@ public class Event extends Task {
         startDate = date;
     }
 
-    /**
-     * Getter to obtain due date of task.
-     * @return String containing due date of task.
-     */
-    public String getDate() {
-        return startDate;
-    }
-
     @Override
     public String getTaskInfo() {
         return ("[E]" + super.getTaskInfo() + " (at: " + startDate + ")");

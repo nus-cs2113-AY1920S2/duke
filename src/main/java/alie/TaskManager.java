@@ -65,7 +65,7 @@ public class TaskManager {
      */
     public void markTaskCompleted(int index) {
         Task taskCompleted = taskList.get(index);
-        taskList.set(index, taskCompleted.setTaskCompleted(taskCompleted));
+        taskCompleted.setTaskCompleted(taskCompleted);
     }
 
     /**

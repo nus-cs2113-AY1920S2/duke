@@ -21,16 +21,24 @@ public abstract class Task {
      * Getter to obtain the name of the Task added.
      * @return String containing Name of the task.
      */
-    public String getName() {
+    public String getDescription() {
         return this.description;
     }
 
     /**
+     * Getter to obtain the condition of isDone of the Task added.
+     * @return True if task is marked done. False if task is not.
+     */
+    public boolean getisDone() {
+        return this.isDone;
+    }
+
+    /**
      * Getter to check whether the task is done
-     * @return "O" if task is done and "X" if task is not done.
+     * @return "Y" if task is done and "N" if task is not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "O" : "X");
+        return (isDone ? "Y" : "N");
     }
 
     /**

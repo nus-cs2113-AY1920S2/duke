@@ -11,24 +11,22 @@ import alie.task.Task;
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_KEYWORD = "delete";
-    public static final String DELETE_CMD_ACK =
-            INDENTATION + "Noted. I've removed this task:" + System.lineSeparator() +
-            MORE_INDENTATION +  "%1$s" + System.lineSeparator() +
-            INDENTATION + "Now you have %2$s tasks in the list.";
 
-    public int taskIndex = -1;
+    public int taskIndex;
 
     /**
      * Default constructor to initialise taskIndex to reflect correctly the index of the task
      * to be deleted.
-     * @param index Index provided by User that is one-based numbering.
+     * @param spiltCommands Array of String with first index containing index of interested task.
      * @throws InvalidCmdException If index provided by user is not a number.
      */
-    public DeleteCommand(String index) throws InvalidCmdException {
+    public DeleteCommand(String[] spiltCommands) throws InvalidCmdException {
         try {
-            taskIndex = convertToZeroBased(Integer.parseInt(index));
+            taskIndex = convertToZeroBased(Integer.parseInt(spiltCommands[1]));
         } catch (NumberFormatException e) {
-            throw new InvalidCmdException("INDEX provided is not a number.");
+            throw new InvalidCmdException(InvalidCmdException.INVALID_NUM_ERROR);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCmdException(InvalidCmdException.MISSING_INDEX_ERROR);
         }
     }
 
@@ -38,10 +36,11 @@ public class DeleteCommand extends Command {
         try {
             Task deletedTask = taskLists.getTaskFromIndex(taskIndex);
             taskLists.deleteTask(taskIndex);
-            return new CommandResult(String.format(DELETE_CMD_ACK, deletedTask.getTaskInfo(),
+            return new CommandResult(String.format(DELETE_TASK_ACK, deletedTask.getTaskInfo(),
                     taskLists.getNumOfTasks()));
         } catch (IndexOutOfBoundsException | NullPointerException e) {
-            throw new InvalidCmdException("INDEX provided is not a valid index.");
+            throw new InvalidCmdException(String.format(InvalidCmdException.INVALID_ID_ERROR,
+                    getRangeOfValidIndex(taskLists)));
         }
     }
 }

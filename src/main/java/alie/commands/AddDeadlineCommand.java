@@ -16,36 +16,34 @@ public class AddDeadlineCommand extends Command {
 
     public static final String COMMAND_KEYWORD = "deadline";
     protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
-    public String ADD_DEADLINE_ACK =
-            INDENTATION + "Got it. I've added this task:" + System.lineSeparator() +
-                    MORE_INDENTATION + "%1$s" + System.lineSeparator() +
-                    INDENTATION + "Now you have %2$s tasks in the list.";
 
     /**
      * Construct a Deadline Object after parsing spiltCommands.
      * @param spiltCommands Array of String containing details in each index.
-     * @throws InvalidCmdException If there are any illegal inputs detected.
+     * @throws InvalidCmdException If Name, Date or Deadline of Deadline Object is missing or empty.
      */
     public AddDeadlineCommand(String[] spiltCommands) throws InvalidCmdException {
         try {
             String[] details = Parser.parseDeadlineOrEventDetails(spiltCommands[1],
-                    DEADLINE_DETAIL_DIVIDER);
+                    DEADLINE_DETAIL_DIVIDER, COMMAND_KEYWORD);
             String taskName = details[0];
             String taskDeadline = Parser.parseDate(details[1]);
+            if (taskName.equals("") || taskDeadline.equals("")) {
+                throw new InvalidCmdException(String.format(
+                        InvalidCmdException.DEADLINE_OR_EVENT_MISSING_DETAILS_ERROR,
+                        COMMAND_KEYWORD));
+            }
             taskToAdd = new Deadline(taskName, taskDeadline);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidCmdException("Name or Date of Deadline cannot be empty!");
+            throw new InvalidCmdException(String.format(
+                    InvalidCmdException.DEADLINE_OR_EVENT_MISSING_DETAILS_ERROR, COMMAND_KEYWORD));
         }
     }
 
     @Override
-    public CommandResult execute(TaskManager taskLists, Ui ui, Storage storage)
-            throws InvalidCmdException {
-        if (taskToAdd.getName().equals("") || taskToAdd.getDate().equals("")) {
-            throw new InvalidCmdException("Name or Date of Deadline cannot be empty!");
-        }
+    public CommandResult execute(TaskManager taskLists, Ui ui, Storage storage) {
         taskLists.addNewTask(taskToAdd);
-        return new CommandResult(String.format(ADD_DEADLINE_ACK, taskToAdd.getTaskInfo(),
+        return new CommandResult(String.format(ADD_TASK_ACK, taskToAdd.getTaskInfo(),
                 taskLists.getNumOfTasks()));
     }
 }

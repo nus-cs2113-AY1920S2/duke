@@ -3,16 +3,27 @@ package alie.commands;
 import alie.Storage;
 import alie.TaskManager;
 import alie.Ui;
+import alie.task.Task;
+
+import java.util.ArrayList;
 
 /**
  * Commands given by user to be executed
  */
 public abstract class Command {
-    /**
-     * Indentation strings to make sure the messages printed by ALIE is aligned.
-     */
-    protected static final String INDENTATION = "      ";
-    protected static final String MORE_INDENTATION = "        ";
+    protected static final String RANGE_OF_VALID_TASKS_INDEX_MSG = "Any number from 1 --- %1$s";
+    protected static final String NO_TASK_MSG = "Please add tasks first.";
+
+    public String ADD_TASK_ACK =
+            "Got it. I've added this task:" + System.lineSeparator() + "  %1$s" +
+                    System.lineSeparator() + "Now you have %2$s tasks in the list.";
+    public static final String DELETE_TASK_ACK =
+            "Noted. I've removed this task:" + System.lineSeparator() + "  %1$s" +
+                    System.lineSeparator() + "Now you have %2$s tasks in the list.";
+    public static final String DONE_ACK =
+            "Nice! I've marked this task as done:" + System.lineSeparator() + "  %1$s. %2$s";
+    public static final String FIND_COMMAND_ACK =
+            "Here are the matching tasks in your list: " + System.lineSeparator() + "%1$s";
 
     /**
      * Perform the desired actions of the specific Command.
@@ -41,5 +52,42 @@ public abstract class Command {
      */
     protected int convertToOneBased (int index) {
         return index + 1;
+    }
+
+    /**
+     * Obtain a range of numbers that is valid for usage on taskList
+     * @param taskList The interested list in TaskManager to find the range of values
+     * @return A string with the range of valid numbers.
+     */
+    protected String getRangeOfValidIndex(TaskManager taskList) {
+        int maxTasks = taskList.getNumOfTasks();
+        if (maxTasks > 0) {
+            return String.format(RANGE_OF_VALID_TASKS_INDEX_MSG, maxTasks);
+        } else {
+            return NO_TASK_MSG;
+        }
+    }
+
+    /**
+     * Converting taskList into a string for printing.
+     * @param targetTaskList TaskList containing the tasks that needs to be converted into a String.
+     * @param originalTaskList TaskList that contains all the tasks added. Used as reference for
+     *                         finding the correct index of the task to be listed in targetTaskList.
+     * @return String containing all the tasks in taskList with proper spacing and line separator.
+     */
+    public String stringAllTasksInList(ArrayList<Task> targetTaskList,
+                                       ArrayList<Task> originalTaskList) {
+        StringBuilder allTasks = new StringBuilder();
+        if (targetTaskList.size() == 0) {
+            allTasks.append(Ui.NO_TASK_FOUND_MSG);
+        } else {
+            allTasks.append(Ui.TASK_FOUND_MSG);
+            for (Task task : targetTaskList) {
+                allTasks.append(String.format("%d.%s",
+                        convertToOneBased(originalTaskList.indexOf(task)),
+                        task.getTaskInfo() + System.lineSeparator()));
+            }
+        }
+        return allTasks.toString();
     }
 }

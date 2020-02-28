@@ -40,11 +40,13 @@ public class Storage {
 
     /**
      * Loads information from local file containing information from past ALIE usage.
-     * @return TaskManager constructed from the stored information.
+     * @param ui Ui to deal with any input and output after reading from file.
+     * @return ArrayList constructed from the stored information.
      * @throws FileNotFoundException If storage file cannot be found.
      * @throws InvalidFileFormatException If storage file is corrupted or cannot be deciphered.
      */
-    public ArrayList<Task> readFromFile() throws FileNotFoundException, InvalidFileFormatException {
+    public ArrayList<Task> readFromFile(Ui ui) throws FileNotFoundException,
+            InvalidFileFormatException {
         File f = new File(filePath);
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner s = new Scanner(f);
@@ -62,10 +64,11 @@ public class Storage {
                  taskList.add(Event.decodeTask(encodedTasks));
                  break;
              default:
-                 throw new InvalidFileFormatException("File format is not correct.");
+                 throw new InvalidFileFormatException(
+                         InvalidFileFormatException.INCORRECT_FILE_FORMAT_MSG);
              }
          }
-        System.out.println("File found. Imported data from file.");
+        ui.print(Ui.FILE_FOUND_MSG);
         return taskList;
     }
 

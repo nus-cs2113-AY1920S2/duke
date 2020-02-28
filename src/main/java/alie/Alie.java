@@ -7,7 +7,6 @@ import alie.exceptions.InvalidFileFormatException;
 
 import java.io.FileNotFoundException;
 
-
 public class Alie {
     private Storage storage;
     private TaskManager taskList;
@@ -16,15 +15,15 @@ public class Alie {
     /**
      * Construct ALIE object by instantiating Ui, Storage and TaskManager classes
      * then loads saved data if any.
-     * @param filePath Desired filepath for where saved data is kept at
+     * @param filePath Desired file path for where saved data is kept at
      */
     public Alie(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new TaskManager(storage.readFromFile());
+            taskList = new TaskManager(storage.readFromFile(ui));
         } catch (FileNotFoundException | InvalidFileFormatException errorMsg) {
-            ui.showLoadingError();
+            ui.print(Ui.FILE_NOT_FOUND_ERROR);
             taskList = new TaskManager();
         }
     }
@@ -47,15 +46,15 @@ public class Alie {
     }
 
     /**
-     * Starts up ALIE with default welcome message.
+     * Starts up ALIE with welcome message.
      */
     private void start() {
-        ui.showWelcome();
+        ui.print(Ui.WELCOME_MSG);
     }
 
     /**
      * Main logic of app; Repeatedly read input from user and execute ALIE
-     * commands until "bye" input is entered.
+     * commands until "bye" input is detected.
      */
     private void runCmdLoopTillExitCmd() {
         Command command = null;
@@ -66,17 +65,20 @@ public class Alie {
                 CommandResult result = executeCommand(command);
                 ui.showCmdResult(result);
                 storage.save(taskList);
-            } catch (Exception e) {
-                ui.showError(e);
+            } catch (Exception errorMsg) {
+                ui.print(errorMsg.toString());
+            } finally {
+                ui.print(ui.DIVIDER);
             }
         } while (!ExitCommand.isExit(command));
     }
 
     /**
-     * Executes the command provided as input by user
-     * @param command Command provided by user to be executed
-     * @return Result from executing command
-     * @throws Exception Any exceptions that could be thrown while executing command
+     * Executes the command provided by user input
+     * @param command Command object provided by user to be executed
+     * @return CommandResult object containing result from executing command
+     * @throws Exception Any exceptions that could be thrown while executing all the
+     * different command
      */
     public CommandResult executeCommand(Command command) throws Exception {
         return command.execute(taskList, ui, storage);
@@ -86,7 +88,7 @@ public class Alie {
      * Exits app after showing goodbye message
      */
     private void exit() {
-        ui.showGoodbyeMessage();
+        ui.print(Ui.GOODBYE_MSG);
         System.exit(0);
     }
 }

@@ -20,14 +20,14 @@ import java.time.format.DateTimeParseException;
  * Parses all user inputs
  */
 public class Parser {
-    protected static final String DEADLINE_DETAIL_DIVIDER = " /by ";
-    protected static final String EVENT_DETAIL_DIVIDER = " /at ";
-
+    public static final DateTimeFormatter PRINT_DATE_FORMAT =
+            DateTimeFormatter.ofPattern("dd MMM YYYY");
     /**
-     * Parses user input and categorise them into a specific command using the first word in param.
+     * Parses user input and categorise them into a specific Command object using the first word
+     * in param.
      * @param userCommandText String input provided by user.
-     * @return Specific Command Object based on first word in param.
-     * @throws InvalidCmdException If any invalid command is detected.
+     * @return Specific Command object based on first word in param.
+     * @throws InvalidCmdException If any invalid command is detected while executing command.
      */
     public Command parseCommand(String userCommandText) throws InvalidCmdException {
         String[] splitCmds = userCommandText.split(" ", 2);
@@ -39,9 +39,9 @@ public class Parser {
         case ListCommand.COMMAND_KEYWORD:
             return new ListCommand();
         case DoneCommand.COMMAND_KEYWORD:
-            return new DoneCommand(splitCmds[1]);
+            return new DoneCommand(splitCmds);
         case DeleteCommand.COMMAND_KEYWORD:
-            return new DeleteCommand(splitCmds[1]);
+            return new DeleteCommand(splitCmds);
         case FindCommand.COMMAND_KEYWORD:
             return new FindCommand(splitCmds[1]);
         case AddTodoCommand.COMMAND_KEYWORD:
@@ -56,43 +56,45 @@ public class Parser {
     }
 
     /**
-     * Splits details of Deadline for easy usage and also check for error or invalid command
-     * in input
+     * Splits details of Deadline and Event objects for easy differentiation based on given
+     * divider and also check for error or invalid inputs given.
      * @param details The details for a deadline provided by user
-     * @return A string array with each relevant index containing specific information
-     * @throws InvalidCmdException If command provided is detected to be invalid.
+     * @param divider Regex expression used to differentiate different details for the task
+     *                object provided.
+     * @param commandType COMMAND_KEYWORD of deadline or event to know which object is invoking
+     *                    the function.
+     * @return A string array with index 0 containing name of event and index 1 containing event
+     *         time (that could be a deadline or event start date).
+     * @throws InvalidCmdException If an unknown format is encountered.
      */
-    public static String[] parseDeadlineOrEventDetails(String details, String divider)
+    public static String[] parseDeadlineOrEventDetails(String details, String divider,
+                                                       String commandType)
             throws InvalidCmdException {
         String[] stringDetails = details.split(divider);
         if (stringDetails.length > 2) {
-            throw new InvalidCmdException("Cannot have more than 2 dates provided.");
+            throw new InvalidCmdException(InvalidCmdException.TOO_MANY_DATES_ERROR);
         } else if (stringDetails.length < 2) {
-            throw new InvalidCmdException(String.format("Name or Date %1$s cannot be missing!"
-                    , eventOrDetails(divider)));
+            throw new InvalidCmdException(String.format(
+                    InvalidCmdException.DEADLINE_OR_EVENT_MISSING_DETAILS_ERROR, commandType));
         } else {
             return stringDetails;
         }
     }
 
-    private static String eventOrDetails(String divider) {
-        if (divider.equals(DEADLINE_DETAIL_DIVIDER)) {
-            return "of Deadline";
-        } else if (divider.equals(EVENT_DETAIL_DIVIDER)) {
-            return "of Event";
-        } else {
-            return "";
-        }
-    }
-
+    /**
+     * Converting a string of specific date-time-format to another format if applicable, else
+     * will simply print an warning message.
+     * @param stringDate A string specifying the date or time.
+     * @return LocalDate with pattern of MMM-dd-YYYY if stringDate matches pattern YYYY-MM-DD.
+     *         Else unedited stringDate.
+     */
     public static String parseDate(String stringDate) {
         try {
             LocalDate date = LocalDate.parse(stringDate);
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return date.format(PRINT_DATE_FORMAT);
         } catch (DateTimeParseException e) {
-            Ui.printTimeWarning();
+            Ui.printDateWarning();
             return stringDate;
         }
     }
 }
-

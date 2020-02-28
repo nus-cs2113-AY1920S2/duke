@@ -11,23 +11,23 @@ import alie.task.Task;
  */
 public class DoneCommand extends Command {
     public static final String COMMAND_KEYWORD = "done";
-    public static final String DONE_CMD_ACK =
-            INDENTATION + "Nice! I've marked this task as done:" + System.lineSeparator() +
-            INDENTATION +  "%1$s. %2$s";
+
 
     public final int taskIndex;
 
     /**
      * Default constructor to initialise taskIndex to reflect correctly the index of the task
      * to be marked as done.
-     * @param index Index provided by User that is one-based numbering.
+     * @param spiltCommands Array of String with first index containing index of interested task.
      * @throws InvalidCmdException If index provided by user is not a number.
      */
-    public DoneCommand(String index) throws InvalidCmdException {
+    public DoneCommand(String[] spiltCommands) throws InvalidCmdException {
         try {
-            taskIndex = convertToZeroBased(Integer.parseInt(index));
+            taskIndex = convertToZeroBased(Integer.parseInt(spiltCommands[1]));
         } catch (NumberFormatException e) {
-            throw new InvalidCmdException("INDEX provided is not a number.");
+            throw new InvalidCmdException(InvalidCmdException.INVALID_NUM_ERROR);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCmdException(InvalidCmdException.MISSING_INDEX_ERROR);
         }
     }
 
@@ -35,12 +35,16 @@ public class DoneCommand extends Command {
     public CommandResult execute(TaskManager taskLists, Ui ui, Storage storage)
             throws InvalidCmdException {
         try {
+            Task targetTask = taskLists.getTaskFromIndex(taskIndex);
+            if (targetTask.getisDone()) {
+                throw new InvalidCmdException(InvalidCmdException.COMPLETED_TASK_ERROR);
+            }
             taskLists.markTaskCompleted(taskIndex);
-            Task completedTask = taskLists.getTaskFromIndex(taskIndex);
-            return new CommandResult(String.format(DONE_CMD_ACK, convertToOneBased(taskIndex),
-                    completedTask.getTaskInfo()));
+            return new CommandResult(String.format(DONE_ACK, convertToOneBased(taskIndex),
+                    targetTask.getTaskInfo()));
         } catch (IndexOutOfBoundsException | NullPointerException e) {
-            throw new InvalidCmdException("INDEX provided is not a valid index.");
+            throw new InvalidCmdException(String.format(InvalidCmdException.INVALID_ID_ERROR,
+                    getRangeOfValidIndex(taskLists)));
         }
     }
 }

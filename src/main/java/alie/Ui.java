@@ -16,7 +16,19 @@ public class Ui {
                     + "   /  \\      |        |   |"      + System.lineSeparator()
                     + "  /____\\     |        |   |----"  + System.lineSeparator()
                     + " /      \\    |        |   |"      + System.lineSeparator()
-                    + "/        \\ . |_____ . | . |_____ .";
+                    + "/        \\ . |_____ . | . |_____ ."+ System.lineSeparator();
+    public static final String DIVIDER = "-------------------------------------";
+    public static final String WELCOME_MSG = "Hello from" + System.lineSeparator() + logo + "What" +
+            " would you like to do today?";
+    public static final String GOODBYE_MSG = "Bye-bye! Hope to see you again soon.";
+    public static final String FILE_FOUND_MSG = "File found. Imported data from file.";
+    public static final String FILE_NOT_FOUND_ERROR = "ERROR: file not found or invalid file " +
+            "format.";
+    public static final String NO_TASK_FOUND_MSG = "No tasks found.";
+    public static final String TASK_FOUND_MSG = "Here are the tasks in your list: "
+            + System.lineSeparator();
+    public static final String DATE_FORMAT_WARNING = "Warning: DateTime provided does not fit " +
+            "format, unable to parse correctly.";
 
     private final Scanner in;
     private final PrintStream out;
@@ -34,42 +46,22 @@ public class Ui {
     }
 
     /**
-     * Prints ALIE's welcome message.
+     * Print any messages with a line separator in between.
+     * @param msgs Strings to be printed.
      */
-    public void showWelcome() {
-        out.println("Hello from\n" + logo);
+    public void print(String... msgs) {
+        for (String msg : msgs) {
+            out.println(msg);
+        }
     }
 
     /**
-     * Prints header for ALIE's response.
-     */
-    public static void printHeader() {
-        System.out.print("ALIE> ");
-    }
-
-    /**
-     * Getter to obtain input from the user
+     * Getter to obtain input without leading and trailing spaces from the user
      * @return String containing user's unfiltered input.
      */
     public String getUserCommand() {
-        printHeader();
-        out.println("What would you like to do?");
-
-        return in.nextLine();
-    }
-
-    /**
-     * Prints ALIE's goodbye message before termination.
-     */
-    public void showGoodbyeMessage() {
-        out.println("Bye-bye! Hope to see you again soon.");
-    }
-
-    /**
-     * Prints ALIE's default error message
-     */
-    public void showLoadingError() {
-        out.println("ERROR: file not found or invalid file format.");
+        out.print("> ");
+        return in.nextLine().trim();
     }
 
     /**
@@ -81,12 +73,10 @@ public class Ui {
         out.println(command.feedbackToUser);
     }
 
-    public void showError(Exception errorMsg) {
-        out.println(errorMsg);
-    }
-
-    public static void printTimeWarning() {
-        System.out.println("Warning: DateTime provided does not fit format, unable to parse " +
-                "correctly.");
+    /**
+     * Prints warning message for erroneous date provided.
+     */
+    public static void printDateWarning() {
+        System.out.println(DATE_FORMAT_WARNING);
     }
 }
