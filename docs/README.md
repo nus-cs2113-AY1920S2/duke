@@ -1,7 +1,8 @@
 # Duke User Guide
 Duke is a command line interface program capable of handling tasks such as Todo, Events and Deadlines.
-This User Guide will demonstrate the capabilities of Duke.  
+This User Guide will demonstrate the capabilities of Duke. 
 ---
+
 ## Running duke Duke 
 1. Download the latest version of Java 11
 2. Navigate to path of `Duke.jar` file
@@ -24,22 +25,20 @@ This User Guide will demonstrate the capabilities of Duke.
 4. Find tasks from list 
 5. Delete a task from list
 ---
+## Feature List
+
 ### 1.1. Add Todo task 
 Users are able to add todo tasks into Duke.
 
 #### Usage
-
 `todo <description of todo task>`
-
 * Adds a single todo task into task list
 
-####Example of usage: 
-
+#### Example of usage: 
 `todo buy bread`
 
-####Expected outcome:
-
-\____________________________
+#### Expected outcome:
+\_________________________________________________
 
 Got it! You've added a todo task: 
 
@@ -47,7 +46,7 @@ Got it! You've added a todo task:
 
 You now have 1 task in the list
 
-\____________________________
+\_________________________________________________
 
 ---
 ### 1.2. Add Event task
@@ -61,7 +60,7 @@ Users are able to add events into Duke.
 `event project meeting /at Monday 2pm`
 
 #### Expected outcome:
-\________________________________
+\_________________________________________________
 
 Got it! You've added an event task: 
 
@@ -69,7 +68,8 @@ Got it! You've added an event task:
 
 You now have 2 tasks in the list
 
-\________________________________
+\_________________________________________________
+
 
 ---
 ### 1.3. Add Deadline task
@@ -83,7 +83,7 @@ Users are able to add deadline into Duke
 `deadline CS2113T assignment /by Monday 12pm`
 
 #### Expected outcome:
-\_______________________________________
+\_________________________________________________
 
 Got it! You've added a deadline task: 
 
@@ -91,7 +91,7 @@ Got it! You've added a deadline task:
  
  You now have 3 tasks in the list
  
-\_______________________________________
+\_________________________________________________
 
 ---
 ### 2. List all tasks
@@ -105,14 +105,14 @@ Users are able to view all tasks in their list
 `list`
 
 #### Expected outcome:
-\___________________________________________
+\_________________________________________________
 
 Here are the tasks in your list: 
 1. \[T][&#10008;] buy bread
 2. \[E][&#10008;] project meeting (at: Monday 2pm)
 3. \[D][&#10008;] CS2113T assignment (by: Monday 12pm)
 
-\___________________________________________
+\_________________________________________________
 
 ---
 ### 3. Mark task as done
@@ -122,17 +122,17 @@ Users are able to mark a task in the list as done
 `done <index of task on list>`
 * Marks a single task as done
 
-### Example of usage:
+#### Example of usage:
 `done 1`
 
-### Expected outcome:
-\_________________________________________
+#### Expected outcome:
+\________________________________________________
 
 Awesome! I've marked the following task as done:
 
 \[T][&#10003;] buy bread
 
-\_________________________________________
+\_________________________________________________
 
 ---
 ### 4. Find tasks 
@@ -146,13 +146,12 @@ Users are able to find tasks in task list based on keywords.
 `find bread`
 
 #### Expected outcome:
-
-\__________________________________________
+\_________________________________________________
 
 I've found the following tasks matching your search: 
 1. \[T][&#10003;] buy bread
 
-\__________________________________________
+\_________________________________________________
 
 ---
 ### 5. Delete task
@@ -166,8 +165,7 @@ Users are able to delete tasks in task list
 `delete 1`
 
 #### Expected outcome:
-
-\__________________________
+\_________________________________________________
 
 Got it! I've removed this task:
 
@@ -175,9 +173,5 @@ Got it! I've removed this task:
 
 You now have 2 tasks in the list
 
-\__________________________
-
-
-
-
+\_________________________________________________
 
