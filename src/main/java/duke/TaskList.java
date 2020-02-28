@@ -151,7 +151,7 @@ public class TaskList {
         }
 
         if (matchList.size() > 0) {
-            System.out.println("I've found the follow tasks matching your search: ");
+            System.out.println("I've found the following tasks matching your search: ");
             for (int i = 0; i < matchList.size(); i++) {
                 String index = matchList.get(i).toString();
                 System.out.println(index + "." + tasks.get(matchList.get(i) - 1));

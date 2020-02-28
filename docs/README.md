@@ -1,20 +1,183 @@
-# User Guide
+# Duke User Guide
+Duke is a command line interface program capable of handling tasks such as Todo, Events and Deadlines.
+This User Guide will demonstrate the capabilities of Duke.  
+---
+## Running duke Duke 
+1. Download the latest version of Java 11
+2. Navigate to path of `Duke.jar` file
+3. Run `java -jar Duke.jar` 
+4. Duke will automatically save any tasks added into an `output.txt` file
+5. On start up, Duke will also load existing tasks from `output.txt` file
+6. To exit Duke, input `bye` command
 
-## Features 
+---
+## Duke Task Types
+* Todo 
+* Event 
+* Deadline
 
-### Feature 1 
-Description of feature.
+---
+## Main Features
+1. Add different types of tasks
+2. List all tasks 
+3. Mark task as done
+4. Find tasks from list 
+5. Delete a task from list
+---
+### 1.1. Add Todo task 
+Users are able to add todo tasks into Duke.
 
-## Usage
+#### Usage
 
-### `Keyword` - Describe action
+`todo <description of todo task>`
 
-Describe action and its outcome.
+* Adds a single todo task into task list
 
-Example of usage: 
+####Example of usage: 
 
-`keyword (optional arguments)`
+`todo buy bread`
 
-Expected outcome:
+####Expected outcome:
 
-`outcome`
+\____________________________
+
+Got it! You've added a todo task: 
+
+\[T][&#10008;] buy bread
+
+You now have 1 task in the list
+
+\____________________________
+
+---
+### 1.2. Add Event task
+Users are able to add events into Duke. 
+
+### Usage
+`event <description of event> /at <date and time of event>`
+* Adds an event into task list
+
+#### Example of usage:
+`event project meeting /at Monday 2pm`
+
+#### Expected outcome:
+\________________________________
+
+Got it! You've added an event task: 
+
+\[E][&#10008;] project meeting (at: Monday 2pm)
+
+You now have 2 tasks in the list
+
+\________________________________
+
+---
+### 1.3. Add Deadline task
+Users are able to add deadline into Duke
+
+### Usage
+`deadline <description of deadline> /by <date and time of deadline>`
+* Adds a deadline into task list
+
+#### Example of usage:
+`deadline CS2113T assignment /by Monday 12pm`
+
+#### Expected outcome:
+\_______________________________________
+
+Got it! You've added a deadline task: 
+
+\[D][&#10008;] CS2113T assignment (by: Monday 12pm)
+ 
+ You now have 3 tasks in the list
+ 
+\_______________________________________
+
+---
+### 2. List all tasks
+Users are able to view all tasks in their list
+
+### Usage
+`list`
+* Lists all tasks in task list
+
+#### Example of usage:
+`list`
+
+#### Expected outcome:
+\___________________________________________
+
+Here are the tasks in your list: 
+1. \[T][&#10008;] buy bread
+2. \[E][&#10008;] project meeting (at: Monday 2pm)
+3. \[D][&#10008;] CS2113T assignment (by: Monday 12pm)
+
+\___________________________________________
+
+---
+### 3. Mark task as done
+Users are able to mark a task in the list as done 
+
+### Usage
+`done <index of task on list>`
+* Marks a single task as done
+
+### Example of usage:
+`done 1`
+
+### Expected outcome:
+\_________________________________________
+
+Awesome! I've marked the following task as done:
+
+\[T][&#10003;] buy bread
+
+\_________________________________________
+
+---
+### 4. Find tasks 
+Users are able to find tasks in task list based on keywords.
+
+### Usage
+`find <keywords to search for>`
+* Finds all tasks that contains keywords
+
+#### Example of usage: 
+`find bread`
+
+#### Expected outcome:
+
+\__________________________________________
+
+I've found the following tasks matching your search: 
+1. \[T][&#10003;] buy bread
+
+\__________________________________________
+
+---
+### 5. Delete task
+Users are able to delete tasks in task list
+
+### Usage
+`delete <index of task to be deleted>`
+* Deletes a single task from the task list
+
+#### Example of Usage:
+`delete 1`
+
+#### Expected outcome:
+
+\__________________________
+
+Got it! I've removed this task:
+
+\[T][&#10003;] buy bread
+
+You now have 2 tasks in the list
+
+\__________________________
+
+
+
+
+
