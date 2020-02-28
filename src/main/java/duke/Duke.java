@@ -2,7 +2,10 @@ package duke;
 
 import duke.commands.Command;
 import duke.exceptions.ChatboxException;
+import duke.exceptions.CommandNotFoundException;
 import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.TimeMissingException;
+import duke.exceptions.InvalidTaskNumberException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -33,20 +36,26 @@ public class Duke {
 
     public void run() {
         boolean isExit = false;
-        String command = null;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                command = c.getCommand();
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (ChatboxException e) {
-                ui.displayErrorMessage(e);
             } catch (NumberFormatException e) {
                 ui.displayInvalidTaskNumberMessage();
+            } catch (CommandNotFoundException e) {
+                ui.displayCommandNotFoundMessage();
             } catch (EmptyDescriptionException e) {
                 ui.displayEmptyDescriptionMessage(e.getCommand());
+            } catch (TimeMissingException e) {
+                ui.displayTimeMissingMessage();
+            } catch (InvalidTaskNumberException e) {
+                ui.displayInvalidTaskNumberMessage();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                ui.displayErrorMessage(e);
+            } catch (ChatboxException e) {
+                ui.displayErrorMessage(e);
             }
         }
     }

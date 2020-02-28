@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.TimeMissingException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -25,7 +26,7 @@ public class DeadlineCommand extends AddCommand {
         String[] taskBy = description.split(DEADLINE_MARKER);
 
         if (taskBy.length != 2) {
-            throw new ChatboxException();
+            throw new TimeMissingException();
         }
 
         String taskDescription = taskBy[0].trim();

@@ -6,6 +6,11 @@ import duke.tasks.Task;
 import java.util.Scanner;
 
 public class Ui {
+    private Scanner in;
+    
+    public Ui() {
+        in = new Scanner(System.in);
+    }
     public void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,7 +26,6 @@ public class Ui {
     
     // command related
     public String readCommand() {
-        Scanner in = new Scanner(System.in);
         String input = in.nextLine();
         return input;
     }
@@ -55,6 +59,10 @@ public class Ui {
 
         // display the message first, then delete the task
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.getListSize() - 1)); 
+    }
+    
+    public void displayClearAllMessage() {
+        System.out.println("All tasks cleared.");
     }
 
     public void displayExitMessage() {

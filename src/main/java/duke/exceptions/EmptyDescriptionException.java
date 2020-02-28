@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class EmptyDescriptionException extends Exception {
+public class EmptyDescriptionException extends ChatboxException {
     private String command;
     
     public EmptyDescriptionException(String command) {

@@ -92,7 +92,8 @@ public class Storage {
 
     public void updateTasksToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (int i = 1; i <= taskList.getListSize(); i++) {
+        int listSize = taskList.getListSize();
+        for (int i = 1; i <= listSize; i++) {
             fw.write(taskList.getTask(i).getFileString() + System.lineSeparator());
         }
         fw.close();

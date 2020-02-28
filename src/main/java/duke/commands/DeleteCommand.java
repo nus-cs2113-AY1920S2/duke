@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.InvalidTaskNumberException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -20,7 +21,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatboxException {
         if (taskNumber > tasks.getListSize() || taskNumber <= 0) {
-            throw new ChatboxException();
+            throw new InvalidTaskNumberException();
         }
         
         ui.displayDeleteTaskMessage(tasks, taskNumber);

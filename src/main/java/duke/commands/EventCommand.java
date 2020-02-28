@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.TimeMissingException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -25,7 +26,7 @@ public class EventCommand extends AddCommand {
         String[] taskAt = description.split(EVENT_MARKER);
 
         if (taskAt.length != 2) {
-            throw new ChatboxException();
+            throw new TimeMissingException();
         }
 
         String taskDescription = taskAt[0].trim();
