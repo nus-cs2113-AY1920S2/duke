@@ -13,8 +13,8 @@ import static duke.format.TextFormatter.toBold;
 import static duke.format.TextFormatter.toBoldAndItalic;
 
 /**
- * Collection of messages to be displayed by the {@link Ui}.
- * @see Ui
+ * Collection of messages to be displayed by the <b>UI</b>.
+ * @see UI
  */
 public class Messages {
 

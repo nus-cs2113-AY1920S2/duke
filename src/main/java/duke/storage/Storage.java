@@ -130,19 +130,19 @@ public class Storage {
             switch (taskType) {
             case "T":
                 ToDo newToDoTask = new ToDo(taskDescription);
-                newToDoTask.setIsDone(doneStatus.equals("1"));
+                newToDoTask.setDone(doneStatus.equals("1"));
                 list.add(newToDoTask);
                 break;
             case "D":
                 Deadline newDeadlineTask =
                         new Deadline(taskDescription, new DateTime(stringToDate(dateString), stringToTime(timeString)));
-                newDeadlineTask.setIsDone(doneStatus.equals("1"));
+                newDeadlineTask.setDone(doneStatus.equals("1"));
                 list.add(newDeadlineTask);
                 break;
             case "E":
                 Event newEventTask =
                         new Event(taskDescription, new DateTime(stringToDate(dateString), stringToTime(timeString)));
-                newEventTask.setIsDone(doneStatus.equals("1"));
+                newEventTask.setDone(doneStatus.equals("1"));
                 list.add(newEventTask);
                 break;
             default:

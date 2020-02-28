@@ -16,15 +16,15 @@ import static duke.ui.Messages.NO_MATCHES_MESSAGE;
  * The <b>User Interface (UI)</b> manages the reading of user input and displaying of feedback messages and other important
  * information to the user.
  */
-public class Ui {
+public class UI {
     private static final String LS = System.lineSeparator();
     private static final String INDENT = createSpaces(2);
 
     private final Scanner in;
     private final PrintStream out;
 
-    /** Constructs the <code>Ui</code>. */
-    public Ui() {
+    /** Constructs the <code>UI</code>. */
+    public UI() {
         in = new Scanner(System.in);
         out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
     }
@@ -47,8 +47,8 @@ public class Ui {
      */
     public void showResult(CommandResult result) {
         out.println(result.getMessage().replace("\n", LS + INDENT));
-        if (result.getPrintStatus()) {
-            ArrayList<Integer> searchedTaskIndices = result.getPrintListIndices();
+        if (result.getShowListStatus()) {
+            ArrayList<Integer> searchedTaskIndices = result.getSearchedIndices();
             if (searchedTaskIndices == null) {
                 out.println(createList().replace("\n", LS));
             } else {

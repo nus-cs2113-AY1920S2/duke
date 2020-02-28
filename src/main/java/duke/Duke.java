@@ -7,7 +7,7 @@ import duke.exception.CorruptedFileException;
 import duke.format.DateTimeFormat;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.ui.Ui;
+import duke.ui.UI;
 
 import static duke.ui.Messages.WELCOME_MESSAGE;
 import static duke.ui.Messages.LOAD_MESSAGE;
@@ -30,7 +30,7 @@ import java.io.IOException;
 
 /**
  * <h2>LumiChat</h2>
- * This Duke program is a Chat Box application named <b>LumiChat</b> that maintains a list of user-created tasks.
+ * This Duke program is a Chat Box application named <b>LumiChat</b> that manages a list of user-created tasks.
  * <p></p>
  * User interacts with the application via the command line, and performs various actions like adding, deleting and
  * viewing tasks.
@@ -42,7 +42,7 @@ import java.io.IOException;
 public class Duke {
 
     private Storage storage;
-    private Ui ui;
+    private UI ui;
 
     public static void main(String[] args) {
         Duke chatBot = new Duke();
@@ -55,7 +55,7 @@ public class Duke {
      * <b>Note:</b> Program exits if task list initialisation fails.
      */
     private void runChat() {
-        this.ui = new Ui();
+        this.ui = new UI();
         this.storage = new Storage();
 
         ui.showSystemMessage(WELCOME_MESSAGE);
@@ -110,17 +110,16 @@ public class Duke {
 
     /**
      *  Reads user input from the command line until an <b><i>exit</i></b> command is given.
-     *  Each user input is converted into a command by the <b>Parser</b> and executed. The <b>Ui</b> then displays
+     *  Each user input is converted into a command by the <b>Parser</b> and executed. The <b>UI</b> then displays
      *  any feedback message or necessary information to the user.
      * @see Parser
-     * @see Ui
+     * @see UI
      */
     private void readInputUntilExit() {
-        Command command = null;
         do {
             String input = ui.getInput();
             try {
-                command = new Parser().parseInput(input);
+                Command command = new Parser().parseInput(input);
                 CommandResult result = command.execute();
                 ui.showResult(result);
             } catch (Parser.InputLengthExceededException e) {
@@ -130,6 +129,6 @@ public class Duke {
             } catch (Parser.InvalidCommandException e) {
                 System.out.println(INVALID_ACTION_MESSAGE);
             }
-        } while (!ExitCommand.isExit(command));
+        } while (!ExitCommand.isExit());
     }
 }
