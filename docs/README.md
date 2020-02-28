@@ -5,11 +5,11 @@
 * [Add a Deadline](#adding-a-deadline-deadline)
 * [Add an Event](#adding-an-event-event)
 * [Display list of tasks](#displaying-list-of-tasks-list)
-* [Mark task as done](marking-task-as-done-done)
-* [Delete task from list](deleting-task-from-list-delete)
-* [Find keyword in list](finding-keyword-in-list-find)
-* [Exit Duke](exiting-duke-bye)
-* [Save task list](saving-task-list)
+* [Mark task as done](#marking-task-as-done-done)
+* [Delete task from list](#deleting-task-from-list-delete)
+* [Find keyword in list](#finding-keyword-in-list-find)
+* [Exit Duke](#exiting-duke-bye)
+* [Save task list](#saving-task-list)
 
 ## Usage
 
@@ -18,7 +18,7 @@
 Adds a new ToDo task to your list.
 
 Example of usage: 
-`**todo** borrow book`
+<code>**todo** borrow book</code>
 
 Expected outcome:
 ```
@@ -33,7 +33,7 @@ ____________________________________________________________
 Adds a new Deadline task to your list.
 
 Example of usage: 
-`**deadline** return book **/by** Sunday`
+<code>**deadline** return book **/by** Sunday</code>
 
 Expected outcome:
 ```
@@ -48,7 +48,7 @@ ____________________________________________________________
 Adds a new Event task to your list.
 
 Example of usage: 
-`**event** project meeting **/at** Mon 2-4pm`
+<code>**event** project meeting **/at** Mon 2-4pm</code>
 
 Expected outcome:
 ```
@@ -63,7 +63,7 @@ ____________________________________________________________
 Shows all tasks in your list.
 
 Example of usage: 
-`**list**`
+<code>**list**</code>
 
 Expected outcome:
 ```
@@ -79,7 +79,7 @@ ____________________________________________________________
 Marks a specific task as done.
 
 Example of usage: 
-`**done** 2`
+<code>**done** 2</code>
 
 Expected outcome:
 ```
@@ -93,7 +93,7 @@ ____________________________________________________________
 Removes a specific task from the list.
 
 Example of usage: 
-`**delete** 1`
+<code>**delete** 1</code>
 
 Expected outcome:
 ```
@@ -108,7 +108,7 @@ ____________________________________________________________
 Shows all tasks from the list which contains the keyword.
 
 Example of usage: 
-`**find** book`
+<code>**find** book</code>
 
 Expected outcome:
 ```
@@ -123,7 +123,7 @@ ____________________________________________________________
 Exits the program.
 
 Example of usage: 
-`**find** book`
+<code>**bye**</code>
 
 Expected outcome:
 ```
