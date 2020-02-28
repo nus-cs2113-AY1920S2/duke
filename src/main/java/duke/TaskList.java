@@ -20,9 +20,9 @@ public class TaskList {
 
     public void listTasks(Ui ui) {
         if (tasks.size() == 0) {
-            ui.printFormattedMessage("No tasks found.");
+            ui.printFormattedString(Ui.NO_TASKS);
         } else {
-            ui.printList(tasks);
+            ui.printTasks(tasks);
         }
     }
 
@@ -54,5 +54,21 @@ public class TaskList {
         String at = info.substring(dividerIndex + 4);
         tasks.add(new Event(description, at));
         ui.printAddedTask(tasks);
+    }
+
+    public void findTasks(Ui ui, String keyword) {
+        ArrayList<String> foundTasks = new ArrayList<>();
+        int i = 1;
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                foundTasks.add(i + "." + task.toString());
+            }
+            i++;
+        }
+        if (foundTasks.size() == 0) {
+            ui.printFormattedString(Ui.NO_TASKS);
+        } else {
+            ui.printFoundTasks(foundTasks);
+        }
     }
 }

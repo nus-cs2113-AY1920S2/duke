@@ -17,7 +17,18 @@ public class Ui {
     public static final String THANKS_RESPONSE = "The great Taskmaster Yipyap appreciates your gratitude :-)";
     public static final String NUM_FORMAT_ERROR = "Index must be an integer, like \"1\", but not \"one\".";
     public static final String SAVE_ERROR = "An IO error was encountered while saving.";
-
+    public static final String NO_TASKS = "No tasks found.";
+    public static final String HELP_RESPONSE = "Here are the list of commands:";
+    public static final String[] COMMAND_LIST = new String[] {
+            "\"bye\": exit program",
+            "\"list\": show a list of tasks",
+            "\"find <keyword>\": search for tasks using a keyword",
+            "\"done <task index>\": mark a task as done",
+            "\"delete <task index>\": delete a task",
+            "\"todo <description>\": add a todo",
+            "\"deadline <description> /by <deadline>\": add a deadline",
+            "\"event <description> /at <date/time>\": add an event",
+            "\"thanks\": if you're feeling thankful"};
 
     public String readCommand() {
         Scanner in = new Scanner(System.in);
@@ -33,13 +44,13 @@ public class Ui {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + "Hello, I'm Taskmaster Yipyap.");
         System.out.println(FOUR_SPACE_INDENT + "I can manage your tasks, and save them automatically!");
-        System.out.println(FOUR_SPACE_INDENT + "So what can I do for you, human?");
+        System.out.println(FOUR_SPACE_INDENT + "Type \"help\" to see exactly what I can do!");
         System.out.println(BORDER);
         System.out.print("\n");
     }
 
     public void exit() {
-        printFormattedMessage(EXIT_MESSAGE);
+        printFormattedString(EXIT_MESSAGE);
     }
 
     public void printAddedTask(ArrayList<Task> tasks) {
@@ -69,7 +80,7 @@ public class Ui {
         System.out.print("\n");
     }
 
-    public void printFormattedMessage(String str) {
+    public void printFormattedString(String str) {
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + str);
         System.out.println(BORDER);
@@ -80,7 +91,7 @@ public class Ui {
         System.out.println(FOUR_SPACE_INDENT + str);
     }
 
-    public void printList(ArrayList<Task> tasks) {
+    public void printTasks(ArrayList<Task> tasks) {
         int bulletNum = 1;
         System.out.println(BORDER);
         System.out.println(FOUR_SPACE_INDENT + "Here are the tasks in your list:");
@@ -92,4 +103,23 @@ public class Ui {
         System.out.print("\n");
     }
 
+    public void printFoundTasks(ArrayList<String> foundTasks) {
+        System.out.println(BORDER);
+        System.out.println(FOUR_SPACE_INDENT + "Here are the matching tasks in your list:");
+        for (String indexedTask : foundTasks) {
+            System.out.println(FOUR_SPACE_INDENT + indexedTask);
+        }
+        System.out.println(BORDER);
+        System.out.print("\n");
+    }
+
+    public void helpUser() {
+        System.out.println(BORDER);
+        System.out.println(FOUR_SPACE_INDENT + HELP_RESPONSE);
+        for (String command : COMMAND_LIST) {
+            System.out.println(FOUR_SPACE_INDENT + command);
+        }
+        System.out.println(BORDER);
+        System.out.print("\n");
+    }
 }
