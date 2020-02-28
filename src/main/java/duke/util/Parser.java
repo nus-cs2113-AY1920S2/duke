@@ -109,7 +109,7 @@ public class Parser {
         case FIND_COMMAND:
             return new FindCommand(afterCommand.trim());
         case HELP_COMMAND:
-            return new HelpCommand(afterCommand);
+            return new HelpCommand(afterCommand.trim());
         default:
             throw new DukeException(UNKNOWN_COMMAND_RESPONSE);
         }
