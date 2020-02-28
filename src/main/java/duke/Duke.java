@@ -7,6 +7,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static final String FILE_PATH = "TaskList.txt";
+    private static final String FILE_PATH = "data" + File.separator + "TaskList.txt";
     private static final String BYE_COMMAND = "bye";
 
     /** Used for storing and loading tasks. */

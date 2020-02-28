@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,6 +24,8 @@ public class Storage {
 
     /** The location of the data file. */
     private String filePath;
+    /** Directory of data file. */
+    private Path fileDirectory;
 
     /**
      * Constructor for Storage Class.
@@ -30,6 +35,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        this.fileDirectory = Paths.get(filePath).getParent();
     }
 
     /**
@@ -66,8 +72,8 @@ public class Storage {
         try {
             taskList = loadTasksFromFile();
         } catch (FileNotFoundException e) {
-            File file = new File(filePath);
-            file.createNewFile();
+            Files.createDirectories(fileDirectory);
+            Files.createFile(Paths.get(filePath));
             taskList = new ArrayList<>();
         }
         return  taskList;
@@ -140,7 +146,8 @@ public class Storage {
                             + event.getPeriodWithoutBraces() + System.lineSeparator());
                     break;
                 default:
-                    // Add Exception handling
+                    Ui.printWithIndentation("Error encountered during Execution");
+                    break;
                 }
             }
             fw.close();
