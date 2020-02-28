@@ -21,7 +21,7 @@ public class Messages {
     public static final String MESSAGE_WELCOME_1 = "Welcome to KURI Task Management System?";
     public static final String MESSAGE_WELCOME_2 = "What can I do for you?";
     public static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
     public static final String MESSAGE_TASK_NOT_IN_TASKLIST = "The Task could not be found in address book";
     public static final String MESSAGE_TODO_LIST = "%d. [%c][%c] %s";

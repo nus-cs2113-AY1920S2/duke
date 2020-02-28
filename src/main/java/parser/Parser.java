@@ -72,13 +72,13 @@ public class Parser {
             return new FindCommand(commandWordDescription);
         //add event task
         case AddEventCommand.COMMAND_WORD:
-            return prepareAddEventTask(taskManager, nextTaskIndex, commandWordDescription);
+            return prepareAddEventTask(taskManager, nextTaskIndex, commandWordDescription.trim());
         //add deadline task
         case AddDeadlineCommand.COMMAND_WORD:
-            return prepareAddDeadlineTask(taskManager, nextTaskIndex, commandWordDescription);
+            return prepareAddDeadlineTask(taskManager, nextTaskIndex, commandWordDescription.trim());
         //add todo task
         case AddTodoCommand.COMMAND_WORD:
-            return prepareAddTodoTask(taskManager, nextTaskIndex, commandWordDescription);
+            return prepareAddTodoTask(taskManager, nextTaskIndex, commandWordDescription.trim());
         //done
         case DoneCommand.COMMAND_WORD:
             return prepareDone(commandWord);
@@ -115,6 +115,9 @@ public class Parser {
         TextUi.printDivider();
         String [] temp = new String[DESCRIPTION_MAXIMUM_SECTIONS];
         try {
+            if (!isValid(commandDescription)) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
             temp = commandDescription.split(DATE_SPLITTER);
             for (Task toCheck: taskManager.getTaskList().getInternalList()
             ) {
@@ -151,17 +154,26 @@ public class Parser {
         TextUi.printDivider();
         String [] temp = new String[DESCRIPTION_MAXIMUM_SECTIONS];
         try {
+            if (!isValid(commandDescription)) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
             temp = commandDescription.split(DATE_SPLITTER);
             for (Task toCheck: taskManager.getTaskList().getInternalList()
             ) {
                 if (checkDuplicateTask(toCheck, temp[DESCRIPTION_INDEX])) return getUserDecisionForDuplicate(Messages.DEADLINE_TYPE,nextTaskIndex, temp);
+            }
+            if (!isValid(temp[DESCRIPTION_INDEX])){
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+            if (!isValid(temp[TIME_INDEX])){
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
             }
         } catch (ArrayIndexOutOfBoundsException aiobex){
 
             aiobex.printStackTrace();
         }
         return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
-    }
+}
 
     private Command getUserDecisionForDuplicate(char taskType, int nextTaskIndex, String[] temp) {
         Scanner scanner = new Scanner(System.in);
@@ -191,8 +203,8 @@ public class Parser {
     private Command prepareAddTodoTask(TaskManager taskManager,int nextTaskIndex, String commandDescription) {
         TextUi.printDivider();
         try{
-            if (commandDescription.length() == 0){
-                return new IncorrectCommand (MESSAGE_INVALID_COMMAND_FORMAT);
+            if (!isValid(commandDescription)) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             for (Task toCheck:taskManager.getTaskList().getInternalList()
             ) {
@@ -290,5 +302,13 @@ public class Parser {
             throw new StringIndexOutOfBoundsException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         return Integer.parseInt(args.substring(index));
+    }
+
+    private Boolean isValid (String str) {
+        if (str.length() <= 0){
+            return false;
+        } else {
+            return true;
+        }
     }
 }
