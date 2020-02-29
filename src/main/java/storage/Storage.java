@@ -53,7 +53,7 @@ public class Storage {
      * @param tasksList ArrayList to store tasks
      */
     public void addTask(String input, ArrayList <Task> tasksList) {
-        String [] parameters = input.split(",");
+        String [] parameters = input.split("/");
         String type = parameters[0];
         boolean isDone = Boolean.parseBoolean(parameters[1]);
         String description = parameters[2];

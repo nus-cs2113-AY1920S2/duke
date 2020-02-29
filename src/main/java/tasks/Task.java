@@ -63,6 +63,6 @@ public class Task {
      * @return String format of Task tasks
      */
     public String storeText() {
-        return isDone + "," + getDescription();
+        return isDone + "/" + getDescription();
     }
 }

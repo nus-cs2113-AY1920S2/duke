@@ -32,6 +32,6 @@ public class ToDo extends Task {
      */
     @Override
     public String storeText() {
-        return "[T]," + super.getStatus() + "," + super.getDescription() + ",";
+        return "[T]/" + super.getStatus() + "/" + super.getDescription() + "/";
     }
 }

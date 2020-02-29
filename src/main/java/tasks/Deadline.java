@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String storeText() {
-        return "[D]," + super.getStatus() + "," + super.getDescription() + "," + by;
+        return "[D]/" + super.getStatus() + "/" + super.getDescription() + "/" + by;
     }
 
     /**

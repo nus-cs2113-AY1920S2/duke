@@ -42,6 +42,6 @@ public class Event extends Task {
      */
     @Override
     public String storeText() {
-        return "[E]," +  super.getStatus() + "," + super.getDescription() + "," + getEventDetails();
+        return "[E]/" +  super.getStatus() + "/" + super.getDescription() + "/" + getEventDetails();
     }
 }
