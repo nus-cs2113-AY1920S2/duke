@@ -22,8 +22,7 @@ public class Parser {
             case "find":
                 String keyword = tokenizedInputs[1];
                 lastShownList.clear();
-                lastShownListSize = 0;
-                Ui.displayMatchingTasks(taskArray, lastShownList, lastShownListSize, keyword);
+                Ui.displayMatchingTasks(taskArray, lastShownList, keyword);
                 break;
             case "list":
                 Ui.printTasks(taskArray);
@@ -41,7 +40,7 @@ public class Parser {
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 int taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
                 //to do more error handling here for index out of bounds
-                Ui.respondDeleteSuccess(taskArray.size, lastShownList.get(taskToDelete));
+                Ui.respondDeleteSuccess(taskArray.size-1, lastShownList.get(taskToDelete));
                 taskArray.deleteTask(lastShownList.get(taskToDelete));
                 break;
             case "todo":
@@ -70,6 +69,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a date has been entered for new Events and Deadlines.
+     * @param information the information portion of the user input, further split into the description and date
+     *                    portions.
+     * @return true if the date portion is empty and false if the date portion is valid
+     */
     static boolean checkDateEntered(String[] information) {
         if (information.length == 1) {
             System.out.println("☹ OOPS!!! You did not enter a date");
@@ -81,9 +86,9 @@ public class Parser {
     /**
      * Checks if the description portion of a command is empty.
      *
-     * @param tokens
-     * @param instruction
-     * @return
+     * @param tokens an array containing the user input tokenized into the instruction and the task information
+     * @param instruction the instruction requested
+     * @return true if the description is empty and false if it is not empty
      */
     static boolean checkEmptyDescription(String[] tokens, String instruction) {
         if (tokens.length == 1) {

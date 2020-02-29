@@ -23,10 +23,16 @@ public class Task {
         return ("[" + this.getStatusIcon() + "] "+ this.description);
     }
 
+    /**
+     * @return a string containing the task status and description for printing
+     */
     public String toString() {
         return ("["+ this.getStatusIcon() + "] " + this.description);
     }
 
+    /**
+     * @return a string of containing the task status and description for saving
+     */
     public String toSaveFormat() {
         if (this.isDone == true) {
             return ("1|" + this.description+ "|");
