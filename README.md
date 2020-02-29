@@ -7,7 +7,7 @@
 *  This user guide will explain how to run and use this application.
 
 # Running the Application
-* Download the Jar file from https://github.com/nigellenl/duke/releases/tag/A-Release
+* Download the Jar file from https://github.com/nigellenl/duke/releases
 * Open the Command Line and access the directory that the file is located at.
 * Run the application using _java -jar duke.jar_
 * Enjoy!
