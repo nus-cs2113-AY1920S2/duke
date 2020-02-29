@@ -11,7 +11,7 @@ import java.util.Scanner;
 /** Deals with loading tasks from user and saving tasks in text file */
 public class Storage {
     private String filePath;
-    private static Ui ui;
+    private static Ui ui = new Ui();
 
     public Storage (String filePath) {
         this.filePath = filePath;
@@ -27,7 +27,7 @@ public class Storage {
     public static List<Task> load() throws DukeException {
         try {
             List<Task> tasks = new ArrayList<>();
-            File file = new File("data/duke.txt");
+            File file = new File("duke.txt");
             Scanner scanner = new Scanner(file);
             if (!scanner.hasNext()) {
                 throw new DukeException("Task List is empty.");
@@ -52,7 +52,8 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            ui.printMessage("File does not exist");
+            ui.printBorder();
+            ui.printMessage("***** duke.txt file not created by user. Created automatically by duke.*****");
             return new ArrayList<>();
         } catch (ArrayIndexOutOfBoundsException e){
             ui.printMessage("Invalid file contents");
@@ -67,7 +68,7 @@ public class Storage {
      */
     public static void writeNewData (TaskList tasks) {
         try {
-            FileWriter fileWriter = new FileWriter( "data/duke.txt");
+            FileWriter fileWriter = new FileWriter( "duke.txt");
             for (Task task : tasks.getTasks()) {
                 fileWriter.write(task.toText() + "\n");
             }

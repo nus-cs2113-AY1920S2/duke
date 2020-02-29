@@ -15,6 +15,7 @@ public class Parser {
         return input.split(" ");
     }
 
+
     /**
      * Gets description of todo from string list.
      *
@@ -35,7 +36,7 @@ public class Parser {
     public static String getDeadlineDescription (List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/by");
         if (i == -1) {
-            throw new DukeException("Please enter again with the following format: D/NAME /by yyyy-mm-dd HHmm");
+            throw new DukeException("Please enter again with the following format: deadline *NAME* /by *yyyy-mm-dd HHmm*");
         }
         else {
             return String.join(" ", parsedList.subList(1, i));
@@ -52,7 +53,7 @@ public class Parser {
     public static String getEventDescription (List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/at");
         if (i == -1) {
-            throw new DukeException("Please enter again with the following format: E/NAME /at yyyy-mm-dd HHmm");
+            throw new DukeException("Please enter again with the following format: event *NAME* /at *yyyy-mm-dd HHmm*");
         }
         else {
             return String.join(" ", parsedList.subList(1, i));
@@ -69,7 +70,7 @@ public class Parser {
     public static String getBy(List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/by");
         if (i == -1) {
-            throw new DukeException("Please enter again with the following format: D/NAME /by D/TIME");
+            throw new DukeException("Please enter again with the following format: deadline *NAME* /by *yyyy-mm-dd HHmm*");
         }
         else {
             return String.join(" ", parsedList.subList(i + 1, parsedList.size()));
@@ -86,7 +87,7 @@ public class Parser {
     public static String getAt (List<String> parsedList) throws DukeException {
         int i = parsedList.indexOf("/at");
         if(i == -1) {
-            throw new DukeException("Please enter again with the following format: E/NAME /at D/TIME");
+            throw new DukeException("Please enter again with the following format: event *NAME* /at *yyyy-mm-dd HHmm*");
         }
         else {
             return String.join(" ", parsedList.subList(i + 1, parsedList.size()));

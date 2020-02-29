@@ -1,8 +1,7 @@
 # User Guide
 
 ## Using Duke
-Create a folder named *data*, and save a .txt file named *duke.txt* inside the folder.    
-The folder should be in the same path as *duke.jar* file.  
+Create a .txt file named *duke.txt* in the same path as *duke.jar* folder.    
 This should be done **before** running duke.
 
 
@@ -27,7 +26,7 @@ This should be done **before** running duke.
  
 *Expected outcome:*
 >Got it! I've added this task  
-> [D][x] Project (by: Sep 6 2020 2359) 
+> [D][x] Project (by: Sep 6 2020 2359)   
 >Now you have 2 tasks left in your list.
 
 ### Feature 3
@@ -38,7 +37,7 @@ This should be done **before** running duke.
  
 *Expected outcome:*
 >Got it! I've added this task  
-> [E][x] Seminar (at: Apr 3 2020 1230) 
+> [E][x] Seminar (at: Apr 3 2020 1230)   
 >Now you have 3 tasks left in your list.
 
 ### Feature 4
