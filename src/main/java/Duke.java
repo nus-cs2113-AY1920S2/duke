@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,8 +12,15 @@ public class Duke {
 
     public static void printTasks() {
         System.out.println("Here are the tasks in your list:");
+        String output = "";
         for (Task task : tasks) {
             System.out.println(String.format("%d. %s", task.getTaskId(), task.toString()));
+            output += String.format("%d. %s\n", task.getTaskId(), task.toString());
+        }
+        try (PrintWriter printer = new PrintWriter("out.txt")) {
+            printer.println(output);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
