@@ -15,9 +15,16 @@ public class Event extends Task {
     protected String at;
     protected LocalDate time;
 
+    /**
+     * Initializes the deadline class.
+     * Transforms the user input time to LocalDate format if the input format is correct.
+     *
+     * @param description User task.
+     * @param at Time slot to do the event.
+     */
     public Event(String description,String at) {
         super(description);
-        try{
+        try {
             this.time = LocalDate.parse(at);
             this.at = time.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.US)) + ", " + time.getDayOfWeek();
         } catch (DateTimeParseException e) {

@@ -20,9 +20,9 @@ public class ExitCommand extends Command {
     /**
      * Updates ui to show Goodbye.
      *
-     * @param tasks stores all tasks, useless here.
-     * @param ui deals with user interface.
-     * @param storage deals with back up file, useless here.
+     * @param tasks Stores all tasks, useless here.
+     * @param ui Deals with user interface.
+     * @param storage Deals with back up file, useless here.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

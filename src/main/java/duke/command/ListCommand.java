@@ -12,10 +12,10 @@ public class ListCommand extends Command {
     /**
      * Lists all tasks and asks ui to show tasks.
      *
-     * @param tasks stores all tasks.
-     * @param ui deals with user interface.
-     * @param storage deals with back up file, useless here.
-     * @throws DukeException exists since there is no task in list.
+     * @param tasks Stores all tasks.
+     * @param ui Deals with user interface.
+     * @param storage Deals with back up file, useless here.
+     * @throws DukeException If there is no task in list.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

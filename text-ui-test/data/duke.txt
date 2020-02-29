@@ -1,0 +1,5 @@
+T | 0 | read book
+D | 1 | cs2113 | Tuesday
+D | 0 | assignment | Mar 21 2020, SATURDAY
+E | 0 | project meeting | Mon 2-4pm
+E | 0 | concert | Mar 21 2020, SATURDAY

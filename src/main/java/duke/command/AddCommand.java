@@ -20,10 +20,10 @@ public class AddCommand extends Command {
     /**
      * Adds a new task in taskList, updates ui and backup file.
      *
-     * @param tasks stores all tasks.
-     * @param ui deals with user interface.
-     * @param storage deals with back up file.
-     * @throws IOException if cannot find back up file in the hard disk.
+     * @param tasks Stores all tasks.
+     * @param ui Deals with user interface.
+     * @param storage Deals with back up file.
+     * @throws IOException If cannot find back up file in the hard disk.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {

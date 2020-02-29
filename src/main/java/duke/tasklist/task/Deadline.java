@@ -14,9 +14,16 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDate time;
 
+    /**
+     * Initializes the deadline class.
+     * Transforms the user input time to LocalDate format if the input format is correct.
+     *
+     * @param description User task.
+     * @param by Time limit.
+     */
     public Deadline(String description,String by) {
         super(description);
-        try{
+        try {
             this.time = LocalDate.parse(by);
             this.by = time.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.US)) + ", " + time.getDayOfWeek();
         } catch (DateTimeParseException e) {

@@ -1,27 +1,31 @@
 package duke.parser;
 
-import duke.common.DukeException;
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.InvalidCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
 import duke.command.Command;
+import duke.command.ListCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.InvalidCommand;
+import duke.command.ExitCommand;
+import duke.command.AddCommand;
+import duke.command.FindCommand;
+import duke.command.CheckCommand;
+import duke.common.DukeException;
 import duke.tasklist.task.Deadline;
 import duke.tasklist.task.Event;
 import duke.tasklist.task.Todo;
 
-import static duke.common.Constants.TODO;
-import static duke.common.Constants.DEADLINE;
-import static duke.common.Constants.EVENT;
 import static duke.common.Constants.LIST;
-import static duke.common.Constants.DELETE;
 import static duke.common.Constants.DONE;
-import static duke.common.Constants.BYE;
+import static duke.common.Constants.TODO;
 import static duke.common.Constants.TODO_LENGTH;
+import static duke.common.Constants.DEADLINE;
 import static duke.common.Constants.DEADLINE_LENGTH;
+import static duke.common.Constants.EVENT;
 import static duke.common.Constants.EVENT_LENGTH;
+import static duke.common.Constants.DELETE;
+import static duke.common.Constants.BYE;
+import static duke.common.Constants.CHECK;
+import static duke.common.Constants.FIND;
 import static duke.common.Constants.FORMAT_LENGTH;
 
 /**
@@ -35,8 +39,8 @@ public class Parser {
     /**
      * Checks if a string is integer.
      *
-     * @param str input string.
-     * @return returns true if it is integer, else returns false.
+     * @param str Input string.
+     * @return True if it is integer, else returns false.
      */
     public static boolean isNumeric(String str) {
         try {
@@ -50,9 +54,9 @@ public class Parser {
     /**
      * Deals with making sense of the user command.
      *
-     * @param fullCommand user input.
-     * @return returns different types of command.
-     * @throws DukeException when user's command does not match with command standard.
+     * @param fullCommand User input.
+     * @return Returns different types of command.
+     * @throws DukeException When user's command does not match with command standard.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] responses = fullCommand.split(" ");
@@ -95,6 +99,16 @@ public class Parser {
             }
             int deleteCount = Integer.parseInt(responses[1]);
             return new DeleteCommand(deleteCount);
+        case FIND:
+            if (responses.length < 2) {
+                throw new DukeException("\tPlease input the thing you want to find.");
+            }
+            return new FindCommand(responses[1]);
+        case CHECK:
+            if (responses.length < 2) {
+                throw new DukeException("\tPlease input the thing you want to check.");
+            }
+            return new CheckCommand(responses[1]);
         case LIST:
             return new ListCommand();
         case BYE:

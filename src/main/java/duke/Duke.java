@@ -23,7 +23,7 @@ public class Duke {
     /**
      * Initializes Duke object.
      *
-     * @param filePath place where hard disk data stores
+     * @param filePath Place where hard disk data stores
      */
     public Duke(String filePath) {
         ui = new Ui();

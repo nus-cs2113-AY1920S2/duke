@@ -21,11 +21,11 @@ public class DoneCommand extends Command {
     /**
      * Marks a task as done, asks ui to show task marked as done, and updates back up file.
      *
-     * @param tasks stores all tasks.
-     * @param ui deals with user interface.
-     * @param storage deals with back up file.
-     * @throws IOException if cannot find back up file in the hard disk.
-     * @throws DukeException if the intended task to mark as done is invalid e.g. not exist.
+     * @param tasks Stores all tasks.
+     * @param ui Deals with user interface.
+     * @param storage Deals with back up file.
+     * @throws IOException If cannot find back up file in the hard disk.
+     * @throws DukeException If the intended task to mark as done is invalid e.g. not exist.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {

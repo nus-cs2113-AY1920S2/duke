@@ -38,7 +38,7 @@ public abstract class Task {
     /**
      * Prints a task appropriately.
      *
-     * @return a string.
+     * @return A string to display.
      */
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
@@ -47,7 +47,7 @@ public abstract class Task {
     /**
      * Stores a task according to back up file standard.
      *
-     * @return a string.
+     * @return A string to store.
      */
     public String toFile() {
         return ((isDone ? "1" : "0") + " | " + this.description);

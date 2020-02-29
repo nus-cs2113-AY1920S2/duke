@@ -18,11 +18,11 @@ public abstract class Command {
     /**
      * Deals with iteration between tasks, ui and storage.
      *
-     * @param tasks stores all tasks.
-     * @param ui deals with user interface.
-     * @param storage deals with back up file.
-     * @throws IOException if cannot find back up file in the hard disk.
-     * @throws DukeException deals with other exception.
+     * @param tasks Stores all tasks.
+     * @param ui Deals with user interface.
+     * @param storage Deals with back up file.
+     * @throws IOException If cannot find back up file in the hard disk.
+     * @throws DukeException Deals with other exception.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException;
 

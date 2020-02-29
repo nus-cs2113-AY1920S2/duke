@@ -16,10 +16,10 @@ public class InvalidCommand extends Command {
     /**
      * Throws exception since there is invalid command.
      *
-     * @param tasks stores all tasks, useless here.
-     * @param ui deals with user interface, useless here.
-     * @param storage deals with back up file, useless here.
-     * @throws DukeException exists since the command is invalid.
+     * @param tasks Stores all tasks, useless here.
+     * @param ui Deals with user interface, useless here.
+     * @param storage Deals with back up file, useless here.
+     * @throws DukeException Exists since the command is invalid.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

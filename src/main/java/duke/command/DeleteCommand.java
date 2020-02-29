@@ -14,18 +14,18 @@ public class DeleteCommand extends Command {
     private int deleteCount;
 
     public DeleteCommand(int deleteCount) {
-        // The array index will be actual count minus one.
+        /** The array index will be actual count minus one.*/
         this.deleteCount = deleteCount - 1;
     }
 
     /**
      * Delete tasks, asks ui to show deleted task, and updates backup files.
      *
-     * @param tasks stores all tasks.
-     * @param ui deals with user interface.
-     * @param storage deals with back up file.
-     * @throws IOException if cannot find back up file in the hard disk.
-     * @throws DukeException if the intended delete index is invalid e.g. not exist.
+     * @param tasks Stores all tasks.
+     * @param ui Deals with user interface.
+     * @param storage Deals with back up file.
+     * @throws IOException If cannot find back up file in the hard disk.
+     * @throws DukeException If the intended delete index is invalid e.g. not exist.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {

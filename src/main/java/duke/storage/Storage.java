@@ -28,8 +28,8 @@ public class Storage {
      * Changes the format of a task in file to correct format of a task in taskList.
      * Then stores the right format task to list.
      *
-     * @param oneTask a line in the hard disk.
-     * @param tasks stores taskList.
+     * @param oneTask A line in the hard disk.
+     * @param tasks Stores taskList.
      */
     public static void loadATask(String oneTask, TaskList tasks) {
         String[] taskSplit = oneTask.split(" \\| ");
@@ -54,8 +54,8 @@ public class Storage {
     /**
      * Loads the content in the file to taskList.
      *
-     * @param tasks stores taskList.
-     * @throws FileNotFoundException if there is no back up file.
+     * @param tasks Stores taskList.
+     * @throws FileNotFoundException If there is no back up file.
      */
     public void load(TaskList tasks) throws FileNotFoundException {
         File f = new File(filePath);
@@ -72,8 +72,8 @@ public class Storage {
     /**
      * Writes a list of tasks to hard disk file.
      *
-     * @param tasks stores taskList.
-     * @throws IOException there is no back up file.
+     * @param tasks Stores taskList.
+     * @throws IOException There is no back up file.
      */
     public static void write(TaskList tasks) throws IOException {
         File f = new File(filePath);
