@@ -20,9 +20,13 @@ run {
     standardInput = System.in
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 shadowJar {
     archiveBaseName = "chattychatbot"
-    archiveVersion = "v0.1.2"
+    archiveVersion = "v0.2.0"
     archiveClassifier = null
     archiveAppendix = null
 }
