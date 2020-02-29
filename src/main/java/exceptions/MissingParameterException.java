@@ -1,5 +1,8 @@
-package data;
+package exceptions;
 
+/**
+ * This custom exception is thrown when the user input is missing additional parameters (ie less substrings than expected)
+ */
 public class MissingParameterException extends Exception {
     private String message;
 

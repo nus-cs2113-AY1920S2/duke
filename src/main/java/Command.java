@@ -1,10 +1,16 @@
 import data.*;
 import common.Messages;
+import exceptions.*;
 import tasklist.TaskList;
 
 import static common.Messages.*;
 
 
+/**
+ * This class represents an individual command. The call for command execution is done through here. It also executes the relevant
+ * operations on the {@link TaskList} containing the Tasks.
+ * @see TaskList
+ */
 public class Command {
 
     private Messages messageContainer = new Messages();
@@ -28,6 +34,26 @@ public class Command {
         this.taskDescriptionRemarksFieldsInput = processedUserInput;
     }
 
+    //TODO
+    /**
+     * This method parses the keyword attribute of the {@link Command} object, and carries out the operation corresponding to the keyword on a {@link TaskList} list.
+     * <p></p>
+     * <p>
+     * If any exception is encountered during the operation, they will be thrown and caught by the exception handler
+     * in the main class ({@link Duke})
+     * </p>
+     *
+     * @param taskListInput         the list of tasks
+     * @param uiInput           for displaying Ui elements
+     * @throws MissingParameterException
+     * @throws NumberFieldException an exception thrown in DONE and DELETE command operations; when the task number given is not a number, or outside the range of existing tasks
+     * @throws NoRemarkException an exception thrown in EVENT and DEADLINE command operations; when the new task does not contain a remarks field
+     * @throws IllegalKeywordException an exception thrown when the command keyword is not recognized as a valid command
+     * @throws NoDescriptionException an exception thrown in TODO, EVENT and DEADLINE command operations; when the new task does not contain a description field
+     * @see TaskList
+     * @see NumberFieldException
+     * @see Ui
+     */
     public void execute(TaskList taskListInput, Ui uiInput) throws MissingParameterException,
             NumberFieldException, NoRemarkException, IllegalKeywordException, NoDescriptionException {
         switch (keyword.toLowerCase()) {
@@ -41,35 +67,29 @@ public class Command {
             break;
         case (DELETE_COMMAND):
             deleteTask(taskListInput, uiInput, queryTaskNumberText);
-            /*
-            try {
-                deleteTask(taskListInput, uiInput, tokenizedInput[1]);
-            } catch (NumberFieldException e) {
-                uiInput.displayMessage(INVALID_TASK_NUMBER_ERROR_MESSAGE);
-            } catch (MissingParameterException e) {
-                uiInput.displayMessage(INSUFFICIENT_COMMAND_PARAMETERS_ERROR_MESSAGE);
-            }
-
-             */
             break;
         default:
             insertNewTask(taskListInput, uiInput, tokenizedInput);
-            /*
-            try {
-                insertNewTask(taskListInput, uiInput, tokenizedInput);
-            } catch (IllegalKeywordException e) {
-                uiInput.displayMessage(INVALID_COMMAND_ERROR_MESSAGE);
-            } catch (NoDescriptionException e) {
-                uiInput.displayMessage(messageContainer.addTaskEmptyDescriptionErrorMessage(tokenizedInput[0]));
-            } catch (NoRemarkException e) {
-                uiInput.displayMessage(messageContainer.addTaskEmptyRemarksErrorMessage(tokenizedInput[0]));
-            }
-
-             */
             break;
         }
     }
 
+    /**
+     * This method prints out the {@link Task} objects that are currently existing in the given {@link TaskList} list.
+     * <p></p>
+     * <p>
+     * The list includes the type ({@link Todo}, {@link Event}, {@link Deadline}) of each Task and the completion status
+     * of each task. If there are no tasks in the TaskList, an empty list message is printed instead.
+     * </p>
+     *
+     * @param listInput         the list of Tasks
+     * @param uiInput           for displaying Ui elements
+     * @see TaskList
+     * @see Ui
+     * @see Todo
+     * @see Event
+     * @see Deadline
+     */
     public void printTaskList(TaskList listInput, Ui uiInput) {
         String taskListPrintOutput = new String();
 
@@ -87,6 +107,21 @@ public class Command {
         return;
     }
 
+    /**
+     * This method marks a {@link Task} object (denoted by task number) in the {@link TaskList} list as "done".
+     * <p></p>
+     * <p>
+     * If the task number given is not a valid number or falls outside the range of existing tasks, an error message will be shown stating that the number chosen is out of range
+     * </p>
+     *
+     * @param listInput         the list of tasks
+     * @param taskNumberInput   the task number of the task to be marked as done
+     * @param uiInput           for displaying Ui elements
+     * @throws NumberFieldException the exception thrown when the task number given is not a number, or outside the range of existing tasks
+     * @see TaskList
+     * @see NumberFieldException
+     * @see Ui
+     */
     public void updateTaskDone(TaskList listInput, Ui uiInput, String taskNumberInput) throws NumberFieldException {
         int queryNumber;
         try {
@@ -115,6 +150,25 @@ public class Command {
         uiInput.displayMessage(taskDoneMessage);
     }
 
+    //TODO
+    /**
+     * This method constructs a new {@link Task} from the attributes of the {@link Command} object, and inserts it into a given {@link TaskList} list.
+     * <p></p>
+     * <p>
+     * If the task number given is not a valid number or falls outside the range of existing tasks, an error message will be shown stating that the number chosen is out of range
+     * </p>
+     *
+     * @param listInput         the list of Tasks
+     * @param uiInput           for displaying Ui elements
+     * @throws MissingParameterException
+     * @throws NumberFieldException the exception thrown when the task number given is not a number, or outside the range of existing tasks
+     * @throws NoRemarkException
+     * @throws IllegalKeywordException
+     * @throws NoDescriptionException
+     * @see TaskList
+     * @see NumberFieldException
+     * @see Ui
+     */
     private void insertNewTask(TaskList listInput, Ui uiInput, String[] tokenizedInput) throws
     IllegalKeywordException, NoDescriptionException, NoRemarkException {
         Task newTask;
@@ -138,20 +192,29 @@ public class Command {
         uiInput.displayMessage(taskAddedMessage);
     }
 
+    /**
+     * This method deletes a {@link Task} object (denoted by task number) in the {@link TaskList} list.
+     * <p></p>
+     * <p>
+     * If the task number input given is not an integer or falls outside the range of existing tasks, an error message will be shown stating that the number input is invalid.
+     * </p>
+     *
+     * @param listInput         the list of Tasks
+     * @param uiInput           for displaying Ui elements
+     * @param taskNumberInput   the task number of the task to be deleted
+     * @throws NumberFieldException the exception thrown when the task number given is not an integer, or outside the range of existing tasks
+     * @see TaskList
+     * @see NumberFieldException
+     * @see Ui
+     */
     private void deleteTask(TaskList listInput, Ui uiInput, String taskNumberInput) throws NumberFieldException {
         int taskNumberForRemoval;
-        //TODO: exceptions - second input out of bounds, not integer, no second input, only whitespaces after firstinput
         try {
             taskNumberForRemoval = Integer.parseInt(taskNumberInput);
         } catch (NumberFormatException e) {
-            //throw NumberFieldException if taskNumber is a string eg. "remove foo" OR whitespaces only
             throw new NumberFieldException(INVALID_TASK_NUMBER_ERROR_MESSAGE);
-        } /*catch (ArrayIndexOutOfBoundsException e) {
-            //throw MissingParameterException if remove cmd given without 2nd input (ie "remove") HANDLED IN PARSER.JAVA
-            throw new MissingParameterException(INSUFFICIENT_COMMAND_PARAMETERS_ERROR_MESSAGE);
-        }*/
+        }
 
-        //throw NumberFieldException if task number out of range
         boolean isOutOfBounds = (taskNumberForRemoval <= 0 || taskNumberForRemoval > listInput.getTaskCount());
         if (isOutOfBounds) {
             throw new NumberFieldException(INVALID_TASK_NUMBER_ERROR_MESSAGE);

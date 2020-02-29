@@ -1,9 +1,14 @@
 import common.Messages;
-import data.*;
+import exceptions.*;
 import tasklist.TaskList;
 
 import static common.Messages.*;
 
+/**
+ * This class parses the user input. It helps to process and convert input into a {@link Command} object.
+ * <p></p>
+ * <p>
+ */
 public class Parser {
 
     public static final int MAX_SUBSTRING_FIELDS = 2;
@@ -15,12 +20,25 @@ public class Parser {
         this.taskList = taskListInput;
     }
 
-    //command to validate task
+    /**
+     * This method attempts to validate the user input and construct the required {@link Command} based on the parameters.
+     * <p></p>
+     * <p>The command keywords in the user input follow specified formats. If there are inconsistencies in the input,
+     * an exception will be thrown with an error message informing the user of the inconsistency and advice for proper usage.
+     * </p>
+     * @param userInput a String containing the processed command input provided by the user
+     * @return a Command object that can be used to execute the intended operation for the user
+     * @throws NumberFieldException an exception thrown in DONE and DELETE command operations; when the task number given is not a number, or outside the range of existing tasks
+     * @throws NoRemarkException an exception thrown in EVENT and DEADLINE command operations; when the new task does not contain a remarks field
+     * @throws IllegalKeywordException an exception thrown when the command keyword is not recognized as a valid command
+     * @throws NoDescriptionException an exception thrown in TODO, EVENT and DEADLINE command operations; when the new task does not contain a description field
+     * @see TaskList
+     * @see NumberFieldException
+     * @see Ui
+     */
     public Command parseCommand(String userInput) throws NoRemarkException, IllegalKeywordException,
             NoDescriptionException, MissingParameterException {
-
         Command newCommand;
-
         String[] tokenizedInput = userInput.split(WHITESPACE_DELIMITER);
         String commandKeyword = tokenizedInput[0];
         switch (commandKeyword.toLowerCase()) {
@@ -52,7 +70,18 @@ public class Parser {
         return newCommand;
     }
 
-    public String[] splitUserInput(String originalInput) throws MissingParameterException,
+    /**
+     * This method attempts to split the user input into substrings containing the description and remarks (if applicable) of the Task.
+     * <p></p>
+     * <p>It is only applicable for the TODO, COMMAND and DEADLINE commands.</p>
+     * @param originalInput
+     * @return a String array of size 2, containing the description and remarks for creation of a Task. If the Task is a
+     * @throws MissingParameterException this exception occurs if either the description or remarks field is not detected (ie. the amount of substrings is lesser than expected)
+     * @throws NoDescriptionException this exception occurs if the description field (the section before the " /") of the Task is empty
+     * @throws NoRemarkException this exception occurs if the remarks field (the section after the " /") of the Task is empty
+     * @throws IllegalKeywordException this exception occurs if the command keyword in the input is not TODO/EVENT/DEADLINE
+     */
+    private String[] splitUserInput(String originalInput) throws MissingParameterException,
             NoDescriptionException, NoRemarkException, IllegalKeywordException {
         String[] returnValue = new String[MAX_SUBSTRING_FIELDS];
         if (originalInput.contains(REMARKS_DELIMITER)){
@@ -63,9 +92,7 @@ public class Parser {
                 throw new IllegalKeywordException(TODO_HAS_REMARK_SECTION_ERROR_MESSAGE);
             }
 
-            try {
-                String testForMissingRemarks = separatedSections[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
+            if (Integer.valueOf(separatedSections.length).equals(Integer.valueOf(1))){
                 throw new MissingParameterException(executeCommandInsufficientParameterErrorMessage(commandWord));
             }
 
@@ -77,14 +104,14 @@ public class Parser {
             }
 
             if (returnValue[0].trim().length() == 0) {
-                throw new NoDescriptionException(/*description is empty message*/messageContainer.addTaskEmptyDescriptionErrorMessage(commandWord));
+                throw new NoDescriptionException(messageContainer.addTaskEmptyDescriptionErrorMessage(commandWord));
             }
             // get additional remark part of userInput
             returnValue[1] = separatedSections[1];
             boolean isRemarksEmpty = ((commandWord.toLowerCase().equals(EVENT_COMMAND)
                     || commandWord.toLowerCase().equals(DEADLINE_COMMAND))  && returnValue[1].trim().length() == 0);
             if (isRemarksEmpty){
-                throw new NoRemarkException(/*remarks is empty message*/messageContainer.addTaskEmptyRemarksErrorMessage(commandWord));
+                throw new NoRemarkException(messageContainer.addTaskEmptyRemarksErrorMessage(commandWord));
             }
             return returnValue;
         } else {
@@ -101,8 +128,8 @@ public class Parser {
             }
             returnValue[0] = originalInput.trim().split(WHITESPACE_DELIMITER, 2)[1];
 
-            // remark column is an empty string
-            returnValue[1] = "";
+            // remark column is null (for todo, it won't be used)
+            returnValue[1] = null;
             return returnValue;
         }
     }

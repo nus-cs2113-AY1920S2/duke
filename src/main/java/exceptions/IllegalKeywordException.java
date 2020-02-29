@@ -1,5 +1,9 @@
-package data;
+package exceptions;
 
+
+/**
+ * This custom exception is thrown when the command keyword is not recognised.
+ */
 public class IllegalKeywordException extends Exception {
     private String message;
 

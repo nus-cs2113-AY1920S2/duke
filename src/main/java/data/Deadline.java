@@ -1,5 +1,8 @@
 package data;
 
+/**
+ * This class represents the DEADLINE subtype of Tasks that can be stored in Duke. It contains a description and a deadline.
+ */
 public class Deadline extends Task {
 
     public static final int DEADLINE_NUMBER_OF_FIELDS = 4;
@@ -20,6 +23,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * This method converts the data for a DEADLINE object into a String array for easy parsing and application.
+     * @return a String array consisting of the initial denoting the Task, its completion status and the description
+     */
     @Override
     public String[] getTaskData(){
         String[] taskValues = new String[DEADLINE_NUMBER_OF_FIELDS];
