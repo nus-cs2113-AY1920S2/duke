@@ -16,7 +16,7 @@ public class Parser {
      *
      * @throws DukeException if command is unreadable
      */
-    public static void determineCommand() throws DukeException {
+    public static void determineCommand(String filePath) throws DukeException {
         if (Duke.inputLine.equals("bye")) {
             Duke.isEnd = true;
 
@@ -28,15 +28,18 @@ public class Parser {
 
         } else if (Duke.inputLine.substring(0, 4).equals("done")) {
             TaskList.indicateTaskAsDone(); // marks task in the stated index as done
+            Storage.saveListOffline(filePath); // save current list to be offline
 
         } else if (Duke.inputLine.substring(0, 6).equals("remove")) {
             TaskList.removeTaskFromList(); // removes task in the stated index
+            Storage.saveListOffline(filePath); // save current list to be offline
 
         } else if (Duke.inputLine.substring(0, 4).equals("find")) {
             TaskList.findTasks(); // finds tasks with the keyword
 
         } else {
             TaskList.addInNewTask();// adds a new task into the list
+            Storage.saveListOffline(filePath); // save current list to be offline
         }
     }
 

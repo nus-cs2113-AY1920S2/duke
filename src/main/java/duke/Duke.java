@@ -31,8 +31,7 @@ public class Duke {
             System.out.println(Constants.ioErrorMessage);
         }
 
-        runCommandLoop();  // Reads in the first command from the user
-        Storage.saveListOffline(filePath); // save current list to be offline
+        runCommandLoop(filePath);  // Reads in the first command from the user
         Ui.printExitMessage();
     }
 
@@ -40,11 +39,11 @@ public class Duke {
     /**
      * Goes into loop
      */
-    public static void runCommandLoop() {
+    public static void runCommandLoop(String filePath) {
         while (!isEnd) {
             try {
                 inputLine = Ui.readInput();
-                Parser.determineCommand();
+                Parser.determineCommand(filePath);
             } catch (IndexOutOfBoundsException e) {
                 Ui.printErrMsg(Constants.errMissingParam);
             } catch (DukeException e) {
