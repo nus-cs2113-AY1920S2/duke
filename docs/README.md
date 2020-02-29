@@ -14,7 +14,7 @@ every start up.
 
 * Open the Command Line and access the directory that the file 
 is located at.
-* Run the application using *java -jar Duke.jar*
+* Run the application using `java -jar Duke.jar`
 * Have fun!
 
 ## Features 
@@ -29,10 +29,10 @@ Next, similarly, key in  `1` `2` or `3` to select the type of your event.
 
 After selected the task type,  
 `1`: Todo task. Only task name is required.  
-`2`: Deadline task. Upon seeing `Please enter the task:`, enter the
+`2`: Deadline task. Upon seeing `Please enter the task:` enter the
 task name **ONLY**. After that, you will see the instruction 
-`  Please enter the deadline of your task:`, that is when you can
-input the deadline of your task.    
+`Please enter the deadline of your task:` that is when you can
+input the deadline of your task.  
 `3`: Event task. Similar to the deadline task, enter the task name 
 and venue of your event task **ONLY** when the application is asking.
 
@@ -68,7 +68,7 @@ showing the list.
 
 ### Feature 5 - Find a task
 **Do note that this is case sensitive**  
-At the main page, key in `5` and key in ` your keyword`. 
+At the main page, key in `5` and key in `your keyword`. 
 The application will show you list of tasks that contains 
 the keyword.  
 
@@ -78,7 +78,7 @@ At the main page, key in `6` to clear all tasks in the list.
 
 ### Feature 7 - Close the application
 At the main page, key in `7` to safely close the application.
-
+   
 ##Feedback, Bug Reports
 * If you have feedback or encountered any problems when using
 Duke, please contact me at e0322837@u.nus.edu.  
