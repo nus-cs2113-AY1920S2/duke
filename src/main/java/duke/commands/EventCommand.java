@@ -11,17 +11,31 @@ import duke.tasks.Task;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static duke.utils.Constants.EVENT_COMMAND;
 import static duke.utils.Constants.EVENT_MARKER;
 
 public class EventCommand extends AddCommand {
     private String description;
-    
+
+    /**
+     * Defines the constructor.
+     * Fills in the task content.
+     *
+     * @param description Task content.
+     */
     public EventCommand(String description) {
         this.description = description;
-        this.command = EVENT_COMMAND;
     }
-    
+
+    /**
+     * Executes command "event".
+     * Creates a new Event task with event date.
+     * Adds the task into the existing task list.
+     * Updates txt file whenever the task list changes.
+     *
+     * @param tasks Task list that stores all the existing tasks.
+     * @param ui Interaction with users.
+     * @param storage Files related operation object.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatboxException {
         String[] taskAt = description.split(EVENT_MARKER);
