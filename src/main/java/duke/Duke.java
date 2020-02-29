@@ -12,40 +12,53 @@ import java.io.FileNotFoundException;
 
 
 public class Duke {
-    private static TaskList tasks = new TaskList();
-    private static Ui ui = new Ui();
-    private static Storage storage = new Storage();
-    private static Parser parser = new Parser();
+    private static TaskList tasks;
+    protected static Storage storage;
+    private static Parser parser;
 
-    private static final String FILE_PATH = "data/duke.txt";
-
-    public static void main(String[] args) {
-        ui.showWelcomeMessage();
-
-        File f = new File(FILE_PATH);
+    public Duke(String filePath) {
+        tasks = new TaskList();
+        storage = new Storage(filePath);
+        parser = new Parser();
 
         try {
-            storage.loadFileData(f,tasks);
+            storage.loadFileData(tasks);
         } catch (FileNotFoundException e) {
             Ui.printFileNotFound();
         }
-
-        String input = parser.getAndProcessInput();
-        Boolean isInputValid = Boolean.FALSE;
-
-        chooseOneModeAndRun(input, isInputValid);
     }
 
-    private static void chooseOneModeAndRun(String input, Boolean isInputValid) {
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
+    public void run(){
+        prepare();
+        chooseOneModeAndRun();
+        exit();
+    }
+
+    public static void prepare(){
+        Ui.showWelcomeMessage();
+    }
+
+    public static void exit(){
+        Ui.sayBye();
+    }
+
+    private static void chooseOneModeAndRun() {
+        String input = parser.getAndProcessInput();
+        boolean isInputValid = false;
+
         while (!isInputValid) {
             switch (input) {
             case "1":
-                runInEchoMode(input);
-                isInputValid = Boolean.TRUE;
+                runInEchoMode();
+                isInputValid = true;
                 break;
             case "2":
-                runInCommandMode(input);
-                isInputValid = Boolean.TRUE;
+                runInCommandMode();
+                isInputValid = true;
                 break;
             default:
                 Ui.showUnknownModeInfo();
@@ -55,21 +68,19 @@ public class Duke {
         }
     }
 
-    public static void runInEchoMode(String input) {
+    public static void runInEchoMode() {
         Ui.showEchoModeGuideInfo();
-        input = parser.getAndProcessInput();
+        String input = parser.getAndProcessInput();
 
         while (!parser.isByeCommand(input)) {
             Ui.repeatInput(input);
             input = parser.getAndProcessInput();
         }
-
-        Ui.sayBye();
     }
 
-    public static void runInCommandMode(String input) {
+    public static void runInCommandMode() {
         Ui.showCommandModeGuideInfo();
-        input = parser.getAndProcessInput();
+        String input = parser.getAndProcessInput();
 
         while (!parser.isByeCommand(input)) {
             Ui.showSplitLine();
@@ -77,8 +88,6 @@ public class Duke {
             Ui.showSplitLine();
             input = parser.getAndProcessInput();
         }
-
-        Ui.sayBye();
     }
 
     private static void parseAndExecuteCommand(String input) {
@@ -99,7 +108,7 @@ public class Duke {
             int taskIndex = parser.getTaskIndex(input);
             Task cur_task = tasks.getOneTask(taskIndex-1);
             tasks.remove(taskIndex);
-            storage.saveToFile(FILE_PATH,tasks);
+            storage.saveToFile(tasks);
             Ui.printTaskRemovedInfo(cur_task);
             Ui.showTotalTaskNum();
         } catch (NumberFormatException e){
@@ -113,7 +122,7 @@ public class Duke {
         try {
             String type = parser.parseTaskType(input);
             String newTaskName = newTaskAndReturnName(input, type);
-            storage.saveToFile(FILE_PATH,tasks);
+            storage.saveToFile(tasks);
             Ui.showAddTaskInfo(newTaskName);
         } catch(StringIndexOutOfBoundsException e){
             Ui.showCannotResolveTaskNameInfo(input);
@@ -129,7 +138,7 @@ public class Duke {
             int taskIndex = parser.getTaskIndex(input);
             Task cur_task = tasks.getOneTask(taskIndex-1);
             cur_task.setTaskStatus(Task.DONE);
-            storage.saveToFile(FILE_PATH,tasks);
+            storage.saveToFile(tasks);
             Ui.printTaskDoneInfo(cur_task);
         } catch (NumberFormatException e){
             Ui.showUnknownTaskIndexInfo();
@@ -139,7 +148,8 @@ public class Duke {
     }
 
 
-    private static String newTaskAndReturnName(String input, String type) throws UnknownCommandException, InexplicitTimeDescription {
+    private static String newTaskAndReturnName(String input, String type)
+            throws UnknownCommandException, InexplicitTimeDescription {
         String newTaskName = "";
         switch (type) {
         case "todo":

@@ -15,7 +15,7 @@ public class Ui {
 
 
 
-    public void showWelcomeMessage(){
+    public static void showWelcomeMessage(){
         System.out.println("    Hello from\n" + logo);
         showSplitLine();
         System.out.println("    Hello,I'm little pepper. Your personal sweetheart.");
@@ -77,7 +77,7 @@ public class Ui {
     }
 
     public static void printFileNotFound(){
-        System.out.println("    File not found!");
+        System.out.println("    File not found! I will make a new one to you!");
     }
 
     public static void showTaskNotFoundInfo(){

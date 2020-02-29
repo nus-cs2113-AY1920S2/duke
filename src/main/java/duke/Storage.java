@@ -12,12 +12,30 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    public void loadFileData(File f,TaskList tasks) throws FileNotFoundException {
+    private String FILE_PATH;
+    private String DIR_PATH;
+    private File f;
+
+    public Storage(String filePath){
+        this.FILE_PATH = filePath;
+        this.DIR_PATH = FILE_PATH.substring(0,FILE_PATH.indexOf("/"));
+        this.f = new File(FILE_PATH);
+    }
+
+    public void loadFileData(TaskList tasks) throws FileNotFoundException {
+        checkDirectory();
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String record = s.nextLine().replace("[", "")
                     .replace("]", "");
             restoreTasks(record,tasks);
+        }
+    }
+
+    private void checkDirectory() {
+        File dir = new File(DIR_PATH);
+        if(!dir.exists()){
+            dir.mkdir();
         }
     }
 
@@ -45,16 +63,16 @@ public class Storage {
         }
     }
 
-    public void saveToFile(String filePath,TaskList tasks){
+    public void saveToFile(TaskList tasks){
         try {
-            rewriteFile(filePath,tasks);
+            rewriteFile(tasks);
         } catch (IOException e) {
             Ui.printIoWrongInfo();
         }
     }
 
-    private void rewriteFile(String file_path,TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(file_path);
+    private void rewriteFile(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 0; i < TaskList.getLenOfList(); i++) {
             Task cur_task = tasks.getOneTask(i);
             String taskInfo = cur_task.showTaskInfo();
