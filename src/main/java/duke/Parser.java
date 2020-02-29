@@ -40,8 +40,6 @@ public class Parser {
                 return new AddDeadlineCommand(taskName, deadline);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException(Ui.INVALID_DESCRIPTION+Ui.DEADLINE_DESCRIPTION);
-            } catch (DukeException e) {
-                throw e;
             }
         case "event":
             try {
@@ -51,8 +49,6 @@ public class Parser {
                 return new AddEventCommand(taskName, timeSlot);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException(Ui.INVALID_DESCRIPTION+Ui.EVENT_DESCRIPTION);
-            } catch (DukeException e) {
-                throw e;
             }
         case "delete":
             try {
