@@ -105,12 +105,3 @@ ____________________________________________________________
  Bye. Hope to see you again soon!
 ____________________________________________________________
 ```
-
-
-*Usage format
-*### `Keyword` - Describe action
-*Describe action and its outcome.
-*Example of usage: 
-*`keyword (optional arguments)`
-*Expected outcome:
-*`outcome`
