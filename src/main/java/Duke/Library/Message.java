@@ -57,4 +57,5 @@ public class Message {
     public static final String COMMAND_BYE_WORD = "BYE";
     public static final String COMMAND_EVENT_WORD = "EVENT";
     public static final String COMMAND_TODO_WORD = "TODO";
+    public static final String COMMAND_FIND_WORD = "FIND";
 }
