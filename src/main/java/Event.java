@@ -8,9 +8,9 @@ public class Event extends Task {
 
     /**
      * Constructor for the event object.
-     * @param description information about the event
+     * @param description information about the event.
      * @param timePeriod the date and the time period
-     * where the event will take place
+     * where the event will take place.
      */
     public Event(String description, String timePeriod) {
         super(description);
@@ -19,7 +19,7 @@ public class Event extends Task {
 
     /**
      * Method used to format the event description before printing.
-     * @return a string that describes the event object
+     * @return a string that describes the event object.
      */
     @Override
     public String showFullDescription() {
@@ -29,7 +29,7 @@ public class Event extends Task {
     /**
      * Getter for time period of event object.
      * @return a string that represents the date and the time period
-     * of the event
+     * of the event.
      */
     public String getTimePeriod() {
         return timePeriod;
@@ -38,7 +38,7 @@ public class Event extends Task {
     /**
      * Getter for the icon of the event object.
      * @return a string that acts as a icon to differentiate
-     * between the various types of tasks
+     * between the various types of tasks.
      */
     @Override
     public String getTypeIcon() {

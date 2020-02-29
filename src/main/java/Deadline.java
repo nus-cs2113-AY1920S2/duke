@@ -7,8 +7,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor for the deadline object.
-     * @param description information about the deadline
-     * @param dueDate the date and time where the deadline is due
+     * @param description information about the deadline.
+     * @param dueDate the date and time where the deadline is due.
      */
     public Deadline(String description, String dueDate) {
         super(description);
@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     /**
      * Method used to format the deadline description before printing.
-     * @return a string that describes the deadline object
+     * @return a string that describes the deadline object.
      */
     @Override
     public String showFullDescription() {
@@ -26,7 +26,7 @@ public class Deadline extends Task {
 
     /**
      * Getter for due date of deadline object.
-     * @return a string that represents the due date
+     * @return a string that represents the due date.
      */
     public String getDueDate() {
         return dueDate;
@@ -35,7 +35,7 @@ public class Deadline extends Task {
     /**
      * Getter for the icon of the deadline object.
      * @return a string that acts as a icon to differentiate
-     * between the various types of tasks
+     * between the various types of tasks.
      */
     @Override
     public String getTypeIcon() {

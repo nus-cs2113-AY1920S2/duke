@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for the todo object.
-     * @param description information about the activity to be done
+     * @param description information about the activity to be done.
      */
     public Todo(String description) {
         super(description);
@@ -16,7 +16,7 @@ public class Todo extends Task {
     /**
      * Getter for the icon of the todo object.
      * @return a string that acts as a icon to differentiate
-     * between the various types of tasks
+     * between the various types of tasks.
      */
     @Override
     public String getTypeIcon() {

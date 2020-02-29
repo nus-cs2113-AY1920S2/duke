@@ -13,7 +13,7 @@ public class Parser {
 
     /**
      * Method used to scan user input.
-     * @return a string that corresponds to user input
+     * @return a string that corresponds to user input.
      */
     public String getInput() {
         String line;
@@ -24,8 +24,8 @@ public class Parser {
 
     /**
      * Method used to extract the relevant command from user input.
-     * @param line a string that corresponds to user input
-     * @return a string that represents the command called by user
+     * @param line a string that corresponds to user input.
+     * @return a string that represents the command called by user.
      * @throws InvalidCommandException if the command called by user is invalid or not defined.
      */
     public  String getCommand(String line) throws InvalidCommandException {
@@ -52,9 +52,9 @@ public class Parser {
 
     /**
      * Method used to extract the task description from user input.
-     * @param line a string that corresponds to user input
-     * @return a string that represents the task description
-     * @throws IndexOutOfBoundsException if task description could not be found
+     * @param line a string that corresponds to user input.
+     * @return a string that represents the task description.
+     * @throws IndexOutOfBoundsException if task description could not be found.
      */
     public String getTaskInformation(String line) throws IndexOutOfBoundsException {
         int dividerPosition = line.indexOf(" ");
@@ -78,7 +78,7 @@ public class Parser {
     /**
      * Method used to handle tasks with no task description.
      * Prints an error message to notify user of the error.
-     * @param command a string that represents the command called by user
+     * @param command a string that represents the command called by user.
      */
     public void handleIndexOutOfBounds(String command) {
         ui.printLine();
@@ -88,7 +88,7 @@ public class Parser {
 
     /**
      * Method used to parse datafile and populate the tasklists database.
-     * @param line represents a line read from the datafile
+     * @param line represents a line read from the datafile.
      * @return a Task object that is interpreted from the line.
      */
     public Task readTaskFromFile(String line) {

@@ -11,7 +11,7 @@ public class Task {
      * Constructor for the task object. The constructor
      * initialises the isDone to be false to show that
      * the task is not yet completed.
-     * @param description information about the task
+     * @param description information about the task.
      */
     public Task(String description) {
         this.description = description;
@@ -39,7 +39,7 @@ public class Task {
 
     /**
      * Getter for the description of the Task.
-     * @return a string that describes the task object
+     * @return a string that describes the task object.
      */
     public String getDescription() {
         return description;
@@ -50,7 +50,7 @@ public class Task {
      * is a parent class, there is no icon for the task object.
      * This method is overridden by child classes.
      * @return a string that acts as a icon to differentiate
-     * between the various types of tasks
+     * between the various types of tasks.
      */
     public String getTypeIcon() {
         return "";
@@ -58,7 +58,7 @@ public class Task {
 
     /**
      * Getter for the status of the task.
-     * @return true if the task is done and false otherwise
+     * @return true if the task is done and false otherwise.
      */
     public boolean getIsDone() {
         return isDone;
@@ -66,7 +66,7 @@ public class Task {
 
     /**
      * Setter to set the status of the task.
-     * @param isDone boolean description on the status of the task
+     * @param isDone boolean description on the status of the task.
      */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
@@ -83,7 +83,7 @@ public class Task {
     /**
      * Override the default method to provide a more meaningful string
      * representation on the description of the task.
-     * @return a formatted string that describes the tasks in more details
+     * @return a formatted string that describes the tasks in more details.
      */
     @Override
     public String toString() {
