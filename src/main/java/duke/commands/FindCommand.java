@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public class FindCommand extends Command {
     public static final Pattern FORMAT = Pattern.compile("^find\\s+\\w+\\s*", Pattern.CASE_INSENSITIVE);
-    public static final String EXAMPLE_USAGE = "find homework>";
+    public static final String EXAMPLE_USAGE = "find homework";
     public static final String ERROR_MESSAGE = "Command needs to be in form: find <search term>";
     public static final String KEYWORD = "find";
     private static final String MESSAGE = "Here are your search results:";

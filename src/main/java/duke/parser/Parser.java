@@ -72,7 +72,7 @@ public class Parser {
         case ByCommand.KEYWORD:
             return new CommandInfo(ByCommand.FORMAT, ByCommand.ERROR_MESSAGE);
         case DeadlineCommand.KEYWORD:
-            return new CommandInfo(DeadlineCommand.FORMAT, OnCommand.ERROR_MESSAGE);
+            return new CommandInfo(DeadlineCommand.FORMAT, DeadlineCommand.ERROR_MESSAGE);
         case DeleteCommand.KEYWORD:
             return new CommandInfo(DeleteCommand.FORMAT, DeleteCommand.ERROR_MESSAGE);
         case DoneCommand.KEYWORD:
