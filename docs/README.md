@@ -2,7 +2,7 @@
 DUKE is a chat bot that helps users manage their tasks.
 
 ## Table of Contents
-- [Requirements](https://github.com/sitinadiah25/duke/tree/master/docs#requirements)
+- [Quick Start](https://github.com/sitinadiah25/duke/tree/master/docs#quick-start)
 - [Features](https://github.com/sitinadiah25/duke/tree/master/docs#features)
     
     - [Add a new task](https://github.com/sitinadiah25/duke/tree/master/docs#add-a-new-task)
@@ -10,9 +10,21 @@ DUKE is a chat bot that helps users manage their tasks.
     - [Delete task](https://github.com/sitinadiah25/duke/tree/master/docs#delete-task)
     - [List tasks](https://github.com/sitinadiah25/duke/tree/master/docs#list-tasks)
     - [Mark task as done](https://github.com/sitinadiah25/duke/tree/master/docs#mark-task-as-done)
+    - [Exit program](https://github.com/sitinadiah25/duke/tree/master/docs#exit-program)
+
 - [Feedback](https://github.com/sitinadiah25/duke/tree/master/docs#feedback) 
-## Requirements 
-Java 11 or later.
+
+## Quick Start 
+
+1. Ensure that you have `Java 11` or later installed in your computer 
+
+2. Download `DUKE v0.2` [here](https://github.com/sitinadiah25/duke/releases/tag/A-Release) 
+
+3. Move `duke.jar` onto your Desktop
+
+4. Navigate to your Desktop folder and open Terminal or Command Prompt 
+
+5. Enter `java -jar duke.jar` to start up the program
 
 ## Features 
 ### Add a new task
@@ -123,6 +135,20 @@ Mark a task as done according to the task number given
 >     ____________________________________________________________
 >     Nice! I've marked this task as done: 
 >        [E][✓] sleep (at: 12am)
+>     ____________________________________________________________
+
+### Exit program
+
+Exit the program 
+
+##### Usage example:
+
+`bye`
+
+> ***Expected outcome:***
+>
+>     ____________________________________________________________
+>     Bye. Hope to see you again soon!
 >     ____________________________________________________________
 
 ## Feedback
