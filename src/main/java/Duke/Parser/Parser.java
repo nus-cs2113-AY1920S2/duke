@@ -1,5 +1,6 @@
 package Duke.Parser;
 
+
 public class Parser {
 
     public static String getCommandWord(String userInput) {

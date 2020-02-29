@@ -1,5 +1,8 @@
 package Duke.Library;
 
+/**
+ * Error Messages used by duke.Duke.
+ */
 public class ErrorMessage {
     public static final String INVALID_COMMAND = "\tInvalid Command!";
     public static final String DESC_EMPTY = "\tDescription cannot be empty!";

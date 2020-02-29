@@ -1,5 +1,8 @@
 package Duke.Task;
 
+/**
+ * Class representing a task.
+ */
 public class Task {
     
     protected String description;

@@ -8,8 +8,11 @@ import Duke.Parser.ParserUtil;
 import static Duke.Library.Message.*;
 import static Duke.Parser.Parser.getCommandWord;
 
+/**
+ * Parser for duke.commands entered by the duke.Duke user. It reads from standard input and
+ * returns Command objects.
+ */
 public class TaskList {
-
 
     public static Command executeCommand(String userInput) throws DukeException {
         String commandWord = getCommandWord(userInput);

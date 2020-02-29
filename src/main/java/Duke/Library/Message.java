@@ -1,5 +1,8 @@
 package Duke.Library;
 
+/**
+ * Messages used by duke.Duke.
+ */
 public class Message {
 
     public static final String BOT_NAME = "E.D.I.T.H.";
