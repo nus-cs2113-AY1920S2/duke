@@ -10,6 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import static common.Messages.TASKLIST_SAVE_DIRECTORY;
+import static common.Messages.TASKLIST_SAVE_FILEPATH;
+import static common.Messages.TASKLIST_SAVE_PIPE_DELIMITER;
+
 
 /**
  * This class is used to load and save the data of Tasks in the {@link TaskList} object to a local .txt file.
@@ -33,10 +37,10 @@ public class Storage {
     public ArrayList<Task> loadFileToTaskList() throws FileNotFoundException {
         File f = new File(this.filePath);
         if (!f.exists()) {
-            File newDirectory = new File("data");
+            File newDirectory = new File(TASKLIST_SAVE_DIRECTORY);
             boolean isNewDirectoryCreated = newDirectory.mkdir();
             if (isNewDirectoryCreated) {
-                File newFile = new File("data/duke.txt");
+                File newFile = new File(TASKLIST_SAVE_FILEPATH);
                 try {
                     newFile.createNewFile();
                 } catch (IOException ex) {
@@ -54,11 +58,11 @@ public class Storage {
             //add task (each line) to ArrayList taskList
             //1. process each line first, construct new Todo/Event/Deadline object
             String taskString = s.nextLine();
-            String[] tokenizedTaskString = taskString.split(" \\| ");
+            String[] tokenizedTaskString = taskString.split(TASKLIST_SAVE_PIPE_DELIMITER);
             Task newTaskToLoad;
             switch(tokenizedTaskString[0].toUpperCase()) {
             case ("T"):
-                newTaskToLoad = new Todo(tokenizedTaskString[2], "");
+                newTaskToLoad = new Todo(tokenizedTaskString[2]);
                 break;
             case ("E"):
                 newTaskToLoad = new Event(tokenizedTaskString[2], tokenizedTaskString[3]);

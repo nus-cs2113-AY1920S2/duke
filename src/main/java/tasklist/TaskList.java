@@ -54,4 +54,12 @@ public class TaskList {
     public Task deleteTask(int taskNumber) {
         return this.tasks.remove(taskNumber);
     }
+
+    public ArrayList<Task> findSearchResults(ArrayList<Task> taskListToSearch, String searchKeyword) {
+        ArrayList<Task> matchingResults = new ArrayList<>();
+        for (Task task : taskListToSearch) {
+            task.addIfContainsKeyword(matchingResults, searchKeyword);
+        }
+        return matchingResults;
+    }
 }

@@ -39,6 +39,8 @@ public class Messages {
 
     public static final String DONE_COMMAND = "done";
 
+    public static final String FIND_COMMAND = "find";
+
     public static final String DELETE_COMMAND = "delete";
 
     public static final String TODO_COMMAND = "todo";
@@ -50,6 +52,15 @@ public class Messages {
     public static final String WHITESPACE_DELIMITER = " ";
 
     public static final String REMARKS_DELIMITER = " /";
+
+    public static final String TASKLIST_SAVE_DIRECTORY = "data";
+
+    public static final String TASKLIST_SAVE_FILEPATH = "data/duke.txt";
+
+    public static final String TASKLIST_SAVE_PIPE_DELIMITER = " \\| ";
+
+    public static final String NO_MATCHING_SEARCH_RESULTS_MESSAGE =
+            "\tNo tasks containing the search keyword were found.";
 
     public static final String EMPTY_COMMAND_ERROR_MESSAGE = "\t\u2639 !!ERROR!! Command cannot be whitespaces.";
 

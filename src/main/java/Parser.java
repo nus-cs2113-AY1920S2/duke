@@ -51,9 +51,11 @@ public class Parser {
             break;
         case(DONE_COMMAND):
         case(DELETE_COMMAND):
+        case(FIND_COMMAND):
             try {
                 newCommand = new Command(commandKeyword, tokenizedInput[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
+                //throw MissingParameterException if any of the commands given without additional par
                 throw new MissingParameterException(
                         messageContainer.executeCommandInsufficientParameterErrorMessage(commandKeyword));
             }
@@ -119,7 +121,7 @@ public class Parser {
             String[] separatedSections = originalInput.split(WHITESPACE_DELIMITER);
             String commandWord = separatedSections[0].split(WHITESPACE_DELIMITER, 2)[0];
             //only the keyword input
-            if (Integer.valueOf(separatedSections.length) == Integer.valueOf(1)) {
+            if (Integer.valueOf(separatedSections.length).equals(Integer.valueOf(1))) {
                 throw new MissingParameterException(messageContainer.executeCommandInsufficientParameterErrorMessage(commandWord));
             }
             //similar to above, event and deadline should not be missing a description section

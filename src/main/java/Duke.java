@@ -5,6 +5,7 @@ import exceptions.*;
 import tasklist.TaskList;
 
 import static common.Messages.SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE;
+import static common.Messages.TASKLIST_SAVE_FILEPATH;
 
 /**
  * This is the main class that runs the entire Duke program.
@@ -39,7 +40,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke main = new Duke("data/duke.txt");
+        Duke main = new Duke(TASKLIST_SAVE_FILEPATH);
         main.runStartup();
         main.runLoopUntilExit();
         main.runExit();

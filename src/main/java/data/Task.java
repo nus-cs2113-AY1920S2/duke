@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 /**
  * This class is the superclass of all tasks that can be stored in Duke.
  * <p></p>
@@ -49,4 +51,8 @@ public abstract class Task {
      * @see Deadline
      */
     public abstract String[] getTaskData();
+
+    public abstract void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword);
+
+
 }
