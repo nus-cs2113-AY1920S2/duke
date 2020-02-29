@@ -8,9 +8,9 @@
 1. Download the latest **`duke.jar`**
 1. Copy the file to the folder you want to use as the working directory for your Duke
 1. Create a new file **`tasks.txt`** and the location should be **`[working_directory]/data/tasks.txt`**
-1. Open Command Prompt(CMD) of your computer and direct to the working directory of **Duke**
-1. Type the command **`java -jar duke.jar`** to launch the software
-1. Type the command to manage your tasks in **`Duke`**
+1. Open Command Prompt(CMD) of your computer and direct to the working directory of **`Duke`**
+1. Type the command **`java -jar duke.jar`** to launch the program
+1. Type the command in CLI to manage your tasks in **`Duke`**
 1. Some example commands you can try:
    * **`help`**: show a simple user guide
    * **`list`**: list all tasks in the task list
@@ -29,13 +29,13 @@ Format: `todo [TaskName]`
 ### 3.3 Adding a Deadline task: **`deadline`**
 Format: `deadline [TaskName] /by [Deadline]`
 
-### 3.4 Addding a Event task: **`event`**
+### 3.4 Adding a Event task: **`event`**
 Format: `event [TaskName] /at [Timeslot]`
 
 ### 3.5 Marking a task as Done: **`done`**
 Format: `done [Task#]`
 
-### 3.6 Deleteing a task: **`delete`**
+### 3.6 Deleting a task: **`delete`**
 Format: `delete [Task#]`
 
 ### 3.7 Finding tasks by searching for a keyword: **`find`**
@@ -48,8 +48,8 @@ Format: `list`
 Format: `bye`
 
 ### 3.10 Saving the data
-The task list is saved in the hard disk automatically after any command that changes the list and saved date will be loaded up when launching the program.
-There is no need to save manually.
+The task list is saved in the hard disk automatically after any command that changes the list and saved data will be loaded up when launching the program.
+There is no need to save or load data manually.
 
 # 4. Command Summary
 * **todo**: `todo [TaskName]`
