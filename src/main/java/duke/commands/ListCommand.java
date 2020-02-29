@@ -19,10 +19,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks) {
-        if (tasks.getSize() == 0) {
-            System.out.println("There are no tasks in your list!");
-        } else {
-            Ui.printList(tasks);
-        }
+        Ui.printList(tasks);
     }
 }

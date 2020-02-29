@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a command to delete a task from the list of tasks.
@@ -27,12 +28,12 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks) {
         try {
             index = Integer.parseInt(this.parameters);
-            System.out.println("  You have deleted: " + tasks.get(index - 1).getDescription() + "\n");
+            Ui.printDeleteMessage(tasks.get(index - 1).getDescription(), tasks.getSize() - 1);
             tasks.remove(index - 1);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            System.out.println("This task does not exist!");
+            Ui.printDoesNotExist();
         } catch (NumberFormatException e) {
-            System.out.println("Please specify a task number!");
+            Ui.printInvalidTaskNum();
         }
         super.execute(tasks);
     }

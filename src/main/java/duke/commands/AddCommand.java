@@ -60,9 +60,9 @@ public class AddCommand extends Command {
             Ui.printAddMessage(tasks.getSize());
             super.execute(tasks);
         } catch (StringIndexOutOfBoundsException | DukeException e) {
-            System.out.println("Task description or date field is empty.");
+            Ui.printFieldEmpty();
         } catch (DateTimeParseException e) {
-            System.out.println("Please enter the date as: yyyy-mm-dd!");
+            Ui.printInvalidDate();
         } catch (IllegalStateException e) {
             System.out.println("This is not a valid task.");
         }

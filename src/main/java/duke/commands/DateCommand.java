@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.TaskList;
+import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -57,10 +58,12 @@ public class DateCommand extends Command {
                 }
             }
             if (!dateIsFound) {
-                System.out.println("There were no tasks with this date.");
+                // parameter "date" passed to tell Ui to
+                // print that date is not found
+                Ui.printNotFound("date");
             }
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date!");
+            Ui.printInvalidDate();
         }
     }
 }

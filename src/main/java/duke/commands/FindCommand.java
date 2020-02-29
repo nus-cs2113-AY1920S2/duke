@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a command to find a task in the list of tasks.
@@ -32,7 +33,9 @@ public class FindCommand extends Command {
             }
         }
         if (!isFound) {
-            System.out.println("There were no tasks containing this keyword.");
+            // parameter "keyword" passed to tell Ui to
+            // print that the keyword is not found
+            Ui.printNotFound("keyword");
         }
     }
 }

@@ -70,12 +70,11 @@ public class Parser {
                 command = new ExitCommand("");
                 break;
             default:
-                System.out.println("Huh? I do not understand :(");
                 Ui.printHelp();
                 break;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Task description or date field is empty.");
+            Ui.printFieldEmpty();
             command = null;
         }
         return command;

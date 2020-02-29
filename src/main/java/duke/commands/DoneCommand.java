@@ -30,15 +30,15 @@ public class DoneCommand extends Command {
         try {
             index = Integer.parseInt(this.parameters);
             if (!tasks.get(index - 1).getIsDone()) {
+                Ui.printDoneMessage(tasks.get(index - 1).getDescription(), !tasks.get(index - 1).getIsDone());
                 tasks.get(index - 1).markAsDone();
-                Ui.printDone(tasks.get(index - 1).getDescription());
             } else {
-                System.out.println("You have already done this task!");
+                Ui.printDoneMessage(tasks.get(index - 1).getDescription(), !tasks.get(index - 1).getIsDone());
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            System.out.println("This task does not exist!");
+            Ui.printDoesNotExist();
         } catch (NumberFormatException e) {
-            System.out.println("Please specify a task number!");
+            Ui.printInvalidTaskNum();
         }
         super.execute(tasks);
     }

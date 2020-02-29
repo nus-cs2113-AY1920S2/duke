@@ -12,25 +12,38 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        try {
-            Storage.readFromFile(tasks);
-        } catch (IOException e) {
-            System.out.println("Creating save file...");
-        }
-
+        readFromFile();
         Ui.printWelcomeMessage();
+        executeCommands();
+    }
 
+    /**
+     * Parses the user input and executes the commands inputted
+     * by the user.
+     */
+    private static void executeCommands() {
         while (true) {
-
             Command command = parser.scanCommand();
             if (command == null) {
                 continue;
-            }
-            if (command instanceof ExitCommand) {
+            } else if (command instanceof ExitCommand) {
                 ((ExitCommand) command).Execute();
                 break;
+            } else {
+                command.execute(tasks);
             }
-            command.execute(tasks);
+        }
+    }
+
+    /**
+     * Reads the list of tasks from the save file upon start up.
+     */
+    private static void readFromFile() {
+        try {
+            Storage.readFromFile(tasks);
+        } catch (IOException e) {
+            // Save file does not exist, creating one in the same folder
+            System.out.println("Creating save file...");
         }
     }
 }

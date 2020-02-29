@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.Ui;
+
 /**
  * Represents a command to exit the application.
  */
@@ -18,6 +20,6 @@ public class ExitCommand extends Command {
      * Prints the exit message and exits loop in the main function.
      */
     public void Execute() {
-        System.out.println(" Bye. Hope to see you again soon!\n");
+        Ui.printExitMessage();
     }
 }
