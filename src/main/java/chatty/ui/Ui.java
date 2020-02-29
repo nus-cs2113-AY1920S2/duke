@@ -71,7 +71,7 @@ public class Ui {
     /**
      * Prints out all tasks in the list with a certain keyword.
      * @param taskList The list of tasks to be printed out.
-     * @param date The keyword which the tasks contain.
+     * @param keyword The keyword which the tasks contain.
      */
     public void listTasksWithKeyword(TaskList taskList, String keyword) {
         if (taskList.getTotalTaskNum() == 0) {

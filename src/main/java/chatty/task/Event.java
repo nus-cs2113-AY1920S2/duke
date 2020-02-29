@@ -14,7 +14,8 @@ public class Event extends Task {
     /**
      * Constructor for event task.
      * @param description Description of the event task.
-     * @param eventPeriod Event period of the event task.
+     * @param startTime Event start time of the event task.
+     * @param endTime Event end time of the event task.
      */
     public Event(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
@@ -39,7 +40,7 @@ public class Event extends Task {
      */
     @Override
     public String getFileString() {
-        return String.format("E|%s|%s|%s to %s", this.isDone, this.description, this.startTime, this.endTime);
+        return String.format("E|%s|%s|%s to %s", this.getDoneStatus(), this.getDescription(), this.startTime, this.endTime);
     }
 
     /**

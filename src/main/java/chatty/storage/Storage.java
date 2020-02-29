@@ -6,7 +6,6 @@ import chatty.task.Task;
 import chatty.task.TaskList;
 import chatty.task.ToDo;
 
-import javax.xml.stream.events.DTD;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -21,7 +21,6 @@ import chatty.task.ToDo;
 import chatty.ui.Ui;
 
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
 import static chatty.util.Constants.BYE_STRING;

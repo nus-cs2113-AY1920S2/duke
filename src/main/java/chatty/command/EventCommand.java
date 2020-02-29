@@ -13,7 +13,8 @@ public class EventCommand extends TaskCommand {
     /**
      * Constructor for event command.
      * @param description Description of the event task in the command.
-     * @param eventPeriod Event period of the event task in the command.
+     * @param startTime Event start time in the event command.
+     * @param endTime Event end time in the event command.
      */
     public EventCommand(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
