@@ -27,7 +27,7 @@ Adds a `Task` to the list of `Task` kept by Duke.
 > `<Task type> <Task description> </seperator> <Date if applicable>`
 
 #### Usage
-####1.1 Adding a `Todo`
+#### 1.1 Adding a `Todo`
 Adds a `Todo` to the list of `Task`
 
 Example of usage:
@@ -40,7 +40,7 @@ Expected outcome:
     &nbsp;&nbsp;&nbsp;&nbsp;`[T][✘] do IP progress`\
     `Now you have 1 tasks in the list!`
 
-####1.2 Adding a `Deadline`
+#### 1.2 Adding a `Deadline`
 Adds a `Deadline` to the list of `Task`
 
 Example of usage:
@@ -51,7 +51,7 @@ Expected outcome:
    &nbsp;&nbsp;&nbsp;&nbsp;`[D][✘] do IP progress(by: monday)`\
    `Now you have 2 tasks in the list!`
 
-####1.3 Adding an `Event`
+#### 1.3 Adding an `Event`
 Adds an Event to the list of `Task` 
  
 Example of usage:
@@ -78,10 +78,10 @@ Expected outcome:
 ### Feature 3 - Marking `Task` as done
 Marks the `task` in the `task` list corresponding to the `index` supplied as done
 
-####Format 
+#### Format 
 > `done <index of task to be marked done>`
 
-####Usage
+#### Usage
 Example of usage:
 >`done 1`
 
@@ -91,7 +91,7 @@ Expected outcome:
 ### Feature 4 - Finding `Task` by keywords
 Finds all related `task` using the keywords provided by user
 
-####Format
+#### Format
 >`find <keyword>`
 
 #### Usage
@@ -106,10 +106,10 @@ Expected outcome:
 ### Feature 5 - Deleting a `Task`
 Deletes the `task` in the `task` list corresponding to the `index` supplied
 
-####Format
+#### Format
 >`delete <index of task to be deleted>`
 
-####Usage
+#### Usage
 Example of usage:
 >`delete 2>
 
@@ -118,10 +118,10 @@ Expected outcome:
   &nbsp;&nbsp;&nbsp;&nbsp;`[D][✘] do IP progress(by: monday)`\
   `Now you have 2 tasks in the list!`
 
-###Feature 6 - Exiting the program
+### Feature 6 - Exiting the program
 Exits the program
 
-####Usage
+#### Usage
 Example of usage:
 >`bye`
 
