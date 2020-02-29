@@ -220,10 +220,6 @@ public class Parser  {
             case "bye":
                 outCommand = new ByeCommand(fullCommand);
                 break;
-            case "list":
-            case "help":
-                outCommand = new Command(fullCommand);
-                break;
             case "done":
                 outCommand = new DoneCommand(fullCommand);
                 break;
@@ -239,7 +235,7 @@ public class Parser  {
                 outCommand = new FindCommand(fullCommand);
                 break;
             default:
-                outCommand = new WrongCommand(fullCommand);
+                outCommand = new Command(fullCommand);
                 break;
         }
         return outCommand;

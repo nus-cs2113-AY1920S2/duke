@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class  Command  {
     protected int status;
     protected String[] fullCommand;
+    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+            "\t Input command is wrong. Enter \"help\" for list of accepted commands";
 
     /**
      * This constructor creates a Command.<br>
@@ -41,6 +43,8 @@ public class  Command  {
             ui.printHelp();
         }else if(this.fullCommand[0].equals("list")){
             ui.printList(l1);
+        }else{
+            throw new IllegalDukeException(WRONG_INPUT);
         }
         storage.saveFile(l1);
         return;

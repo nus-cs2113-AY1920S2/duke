@@ -12,8 +12,6 @@ import java.util.StringTokenizer;
  */
 public class Ui  {
     public static final String LINE = "\t__________________________________________________________";
-    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
-            "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
     public static final String MISSING_FILE = "Data file \"data.txt\" is missing!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
@@ -45,7 +43,7 @@ public class Ui  {
             "\t ``````````````p     :X.':^,\"=n    \"q``````````````````````\n" +
             "\t `````````````)0X?^:)I````````m'   :j``````````````````````\n" +
             "\t `````````````.IGD8k'`````````<&G55M```````````````````````\n" +
-            "\t ````````````````.'`````````````>)_````````````````````````";
+            "\t ``````````````````````````````````````````````````````````";
 
     private final Scanner in;
     private final PrintStream out;
@@ -224,12 +222,6 @@ public class Ui  {
                 out.println(standardLengthMessage);
             }
         }
-    }
-    /**
-     * This method informs User that command entered is not supported by Duke.<br>
-     */
-    public void printWrongInput(){
-        out.println(WRONG_INPUT);
     }
     /**
      * This method informs User that command entered needs to be only Y for Yes or<br>
