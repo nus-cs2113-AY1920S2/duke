@@ -17,7 +17,7 @@ public class Duke {
         try {
             Storage.insertFileContents(tasks);
         } catch (IOException e) {
-            System.out.println("Input Error!");
+            System.out.println("Creating a new file!");
         }
 
         Ui.printWelcomeMessage();
