@@ -1,10 +1,14 @@
 package Duke.Task;
 
+import Duke.Exception.DukeDateParseException;
+
+import static Duke.Parser.ParserDate.parseStringToDate;
+
 public class Event extends Task {
     protected String by;
-    public Event(String description, String by) {
+    public Event(String description, String by) throws DukeDateParseException {
         super(description);
-        this.by = by;
+        this.by = parseStringToDate(by);
     }
 
     public String getEvent(){

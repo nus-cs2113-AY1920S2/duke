@@ -1,5 +1,6 @@
 package Duke.Parser;
 
+import Duke.Exception.DukeDateParseException;
 import Duke.Exception.DukeException;
 import Duke.Library.ErrorMessage;
 import Duke.Task.Deadline;
@@ -30,7 +31,7 @@ public class ParserUtil {
         return new Deadline(deadlineDetails[0].strip(),deadlineDetails[1].strip());
     }
 
-    public static Event createEvent(String userInput) throws DukeException {
+    public static Event createEvent(String userInput) throws DukeException, DukeDateParseException {
         String[] eventDetails = userInput.substring("event".length()).strip().split("/at");
 
         if (eventDetails.length != 2 || eventDetails[1] == null) {
