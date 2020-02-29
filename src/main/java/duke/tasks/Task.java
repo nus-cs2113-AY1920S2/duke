@@ -23,17 +23,9 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);
     }
-
-    public boolean isDone() {
-        return this.isDone;
-    }
-
+    
     public void markAsDone() {
         this.isDone = true;
-    }
-    
-    public String getType() {
-        return this.type;
     }
     
     public LocalDate getDate() {

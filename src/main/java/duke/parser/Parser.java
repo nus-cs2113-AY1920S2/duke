@@ -4,8 +4,6 @@ import duke.commands.*;
 import duke.exceptions.CommandNotFoundException;
 import duke.exceptions.EmptyDescriptionException;
 
-import java.util.zip.DataFormatException;
-
 import static duke.utils.Constants.LIST_COMMAND;
 import static duke.utils.Constants.BYE_COMMAND;
 import static duke.utils.Constants.DONE_COMMAND;
@@ -15,6 +13,7 @@ import static duke.utils.Constants.DEADLINE_COMMAND;
 import static duke.utils.Constants.EVENT_COMMAND;
 import static duke.utils.Constants.CHECK_COMMAND;
 import static duke.utils.Constants.CLEAR_COMMAND;
+import static duke.utils.Constants.FIND_COMMAND;
 
 
 public class Parser {    
@@ -32,13 +31,15 @@ public class Parser {
             case DELETE_COMMAND:
                 return new DeleteCommand(Integer.parseInt(split[1].trim()));
             case TODO_COMMAND:
-                return new TodoCommand(split[1]);
+                return new TodoCommand(split[1].trim());
             case DEADLINE_COMMAND:
-                return new DeadlineCommand(split[1]);
+                return new DeadlineCommand(split[1].trim());
             case EVENT_COMMAND:
-                return new EventCommand(split[1]);
+                return new EventCommand(split[1].trim());
             case CHECK_COMMAND:
-                return new CheckCommand(split[1]);
+                return new CheckCommand(split[1].trim());
+            case FIND_COMMAND:
+                return new FindCommand(split[1].trim());
             case CLEAR_COMMAND:
                 return new ClearCommand();
             case BYE_COMMAND:
