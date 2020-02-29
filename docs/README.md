@@ -76,14 +76,14 @@
             - [Expected error outcome:](#expected-error-outcome-16)
         - [Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range):](#example-of-wrong-usage-task-number-chosen-do-not-correspond-to-any-task-in-the-list-due-to-being-out-of-range-1)
             - [Expected error outcome:](#expected-error-outcome-17)
-    - [`bye` - exit Duke](#bye---exit-duke)
-        - [Example of usage:](#example-of-usage-10)
-            - [Expected outcome:](#expected-outcome-7)
-    - [Others](#others)
+    - [Other errors](#other-errors)
         - [Example of wrong usage (giving an empty input):](example-of-wrong-usage-giving-an-empty-input)
             - [Expected error outcome:](#expected-error-outcome-18)
         - [Example of wrong usage (giving an invalid task):](example-of-wrong-usage-giving-an-invalid-task)
             - [Expected error outcome:](#expected-error-outcome-19)
+   - [`bye` - exit Duke](#bye---exit-duke)
+        - [Example of usage:](#example-of-usage-10)
+            - [Expected outcome:](#expected-outcome-7)
 <!-- /TOC -->
 
 ## Introduction
@@ -111,7 +111,7 @@ Duke is a personal chatbot that helps the user to store tasks such as todos, eve
 When Duke starts, it loads the list of tasks from `data\duke.txt` if it exist. Likewise, upon exit, it save the task
  into `data\duke.txt` too.
  
-To run duke, run this command in terminal:
+To run Duke, run this command in terminal:
 
 `$ java -jar duke-0.2.jar`
 
@@ -655,26 +655,8 @@ Exception occurred: java.lang.IndexOutOfBoundsException: Task number chosen is o
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
-
-### `bye` - exit Duke
-
-When the command 'bye' is given, the list of tasks is saved as a txt document at `data\duke.txt`.
-Format: `bye`
-
-#### Example of usage: 
-- `bye`
-
-##### Expected outcome:
-
-```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(x_x)⌒☆
-
-Bye! Hope to see you again soon! Maybe next time!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-```
-### Others
-These are some other errors that may pop up:
+### Other errors
+These are some other miscellaneous errors that may pop up:
 #### Example of wrong usage (giving an empty input):
 - ` `
 ##### Expected error outcome:
@@ -698,3 +680,22 @@ What else do you want to do?
 Exception occurred: duke.exception.InvalidTaskException: Input is invalid. No such task
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
+```
+
+### `bye` - exit Duke
+
+When the command 'bye' is given, the list of tasks is saved as a txt document at `data\duke.txt`.
+Format: `bye`
+
+#### Example of usage: 
+- `bye`
+
+##### Expected outcome:
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(x_x)⌒☆
+
+Bye! Hope to see you again soon! Maybe next time!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
