@@ -32,7 +32,7 @@ it will read from the written text file to pick up where it left off.
 
 ## Usage
 
-### `todo`
+### *todo*
 
 Example of usage: 
 
@@ -46,7 +46,7 @@ Expected outcome:
 
 `Now you have 1 tasks in the list.`
 
-### `event`
+### *event*
 
 Example of usage: 
 
@@ -60,7 +60,7 @@ Expected outcome:
 
 `Now you have 2 tasks in the list.`
 
-### `deadline`
+### *deadline*
 
 Example of usage: 
 
@@ -74,7 +74,7 @@ Expected outcome:
 
 `Now you have 3 tasks in the list.`
 
-### `find`
+### *find*
 
 Example of usage: 
 
@@ -88,7 +88,7 @@ Expected outcome:
 
 `2. [D][✘]  return book  (by: Tuesday)`
 
-### `done`
+### *done*
 
 Example of usage: 
 
@@ -100,7 +100,7 @@ Expected outcome:
 
 `1. [T][✓]  read book`
 
-### `list`
+### *list*
 
 Example of usage: 
 
@@ -116,7 +116,7 @@ Expected outcome:
 
 `3. [D][✘]  return book  (by: Tuesday)`
 
-### `delete`
+### *delete*
 
 Example of usage: 
 
@@ -130,7 +130,7 @@ Expected outcome:
 
 `Now you have 2 tasks in the list.`
 
-### `bye`
+### *bye*
 
 Example of usage: 
 
