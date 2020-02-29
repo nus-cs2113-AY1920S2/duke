@@ -1,20 +1,177 @@
-# User Guide
+= Project Duke - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/alaukiknpant/duke
 
-## Features 
+By: `Alaukik Nath Pant`      Since: `Feb 2020`      Licence: `MIT`
 
-### Feature 1 
-Description of feature.
+== Introduction
 
-## Usage
+Hiroshi Nagai Task Tracker(HNTT) is for those who *prefer to use a desktop app for managing their tasks*. It is worth noting that HNTT is *optimized for those who prefer to work with a Command Line Interface* (CLI). Jump to the <<Quick Start>> to get started. Enjoy!
 
-### `Keyword` - Describe action
+== Quick Start
 
-Describe action and its outcome.
+.  Ensure you have Java `11` or above installed in your Computer.
+.  Download the latest `hiroshi.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Task tracker.
+.  Go to the directory where the Jar file is stored and type: `java -jar Hiroshi.jar`
++
 
-Example of usage: 
++
+.  Type the command in the terminal and it will execute +
+When the application executes, all possible commands that can help you manage your tasks are shown.
+.  Some example commands you can try:
 
-`keyword (optional arguments)`
+* *`list`* : lists all tasks that have been added and saved. until now
+* **`todo`**`finish all your Computer Science homework` : adds a todo task with the corresponding description to the Task List.
+* **`delete`**`1` : deletes the 1st item in your current task list
+* *`bye`* : exits the app
 
-Expected outcome:
+.  Refer to <<Features>> for details of each command.
 
-`outcome`
+[[Features]]
+== Features
+
+====
+*Command Format*
+
+* The words in `UPPER_CASE` are to be supplied by the user e.g. in `todo TASK`, `TASK` is a parameter which can be used to add a task `todo Go running`.
+* The date for tasks that are `deadline` or `event` are to be supplied in the corresponding format where `DATE` is of the format `YYYY-MM-DD`: `deadline TASK \by DATE`, `event TASK \at DATE`.
+* The `TASK_NUMBER` is the interger index of a task in the tasklist and is of the format `delete TASKNUMBER`, `done TASK_NUMBER`.
+* The `KEY_WORD` is the string that you are searching for in the task list.`find food`, `find homework`.
+====
+
+=== Adding a todo task : `todo`
+
+Adds a todo task to the tasklist+
+Format: `todo TASK`
+
+[TIP]
+A todo task just needs to be a string but cannot be empty.
+
+Examples:
+
+* `todo Run beside Clementi Park.`
+* `todo Cook for mom.`
+
+=== Adding a `deadline` task: `deadline ` 
+
+Adds a dedline to the tasklist +
+Format: `deadline TASK /by DATE`
+
+[TIP]
+A deadline task must necessarily have a date mentioned.
+
+Examples:
+
+* `deadline Homework 5 \by 2020-01-01`
+* `deadline Problem Set 2 \by 2020-01-02`
+
+
+=== Adding an `event` task: `event ` 
+
+Adds a event to the tasklist +
+Format: `event TASK /at DATE`
+
+[TIP]
+A event task must necessarily have a date mentioned.
+
+Examples:
+
+* `event Marathon \at 2020-01-01`
+* `event Garden Beats \by 2020-01-02`
+
+=== Deleting a person : `delete`
+
+Deletes an existing task in the task list. +
+Format: `delete TASK_NUMBER`
+
+****
+* Deletes the task at the specified `TASK_NUMBER`. The task number refers to the index number shown in the displayed task list. Remember that the index *must be a positive integer* 1, 2, 3, ...
+* When a task is deleted, all subsequest tasks in the task list will have their index reduced by 1.
+****
+
+Examples:
+
+* `delete 2` +
+Deletes the task number 2 in the task list.
+
+
+=== Listing all tasks in the tasklist : `list`
+
+Shows a list of all tasks in tasklist. +
+Format: `list`
+
+
+=== Marking a task as done : `done`
+
+Marks an existing task in the task list as done. +
+Format: `done TASK_NUMBER`
+
+****
+* Marks the task at the specified `TASK_NUMBER` as done. The task number refers to the index number shown in the displayed task list. Remember that the index *must be a positive integer* 1, 2, 3, ...
+* If a task is already marked as done, the app remarks it as done.
+****
+
+Examples:
+
+* `done 2` +
+Marks the task number 2 in the task list as done.
+
+
+=== Locating a task by key word: `find`
+
+Finds tasks whose description contains a specified keyword. +
+Format: `find KEYWORD`
+
+****
+* The search is case sensitive. e.g `run` will not match `Run`
+****
+
+Examples:
+
+* `find eat` 
+Returns a task like `1. [D] [✘] eat (by: Jan 1 2010)`
+
+=== Clearing the task list : `clear`
+
+Clears the task list. +
+Format: `clear`
+
+
+=== Exiting the program : `bye`
+
+Exits the program. +
+Format: `bye`
+
+== FAQ
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: Copy the file that has saved your task list into the folder in which you store the application in your new computer.
+
+== Command Summary
+* *Todo*  : `todo TASK` +
+e.g. `todo Run beside Clementi Park.`
+* *Deadline* : `deadline TASK /by DATE` +
+eg. `deadline Problem Set 2 \by 2020-01-02`
+* *Event* : `event TASK /at DATE` +
+eg. `event Marathon \at 2020-01-01`
+* *List* : `list`
+* *Done* : `done TASK_NUMBER`+
+eg. `done 2`
+* *Delete* : `delete TASK_NUMBER`+
+e.g. `delete 3`
+* *Find* : `find KEYWORD` +
+e.g. `find eat`
+* *Clear* : `clear`
+* *Exit* : `bye`
