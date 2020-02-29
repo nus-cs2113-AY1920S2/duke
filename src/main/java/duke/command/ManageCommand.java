@@ -6,10 +6,12 @@ import duke.excpetions.DukeException;
 public class ManageCommand extends Command{
 
     private int index;
+    private String searchTerm;
 
-    public ManageCommand(String type,int index){
+    public ManageCommand(String type,int index,String searchTerm){
         super(type);
         this.index = index;
+        this.searchTerm = searchTerm;
     }
 
     @Override
@@ -21,6 +23,9 @@ public class ManageCommand extends Command{
         case "list":
             tasks.listTasks();
             break;
+        case "find":
+            tasks.searchTasks(this);
+            break;
         default:
             throw new DukeException();
         }
@@ -28,5 +33,9 @@ public class ManageCommand extends Command{
 
     public int getIndex() {
         return index;
+    }
+
+    public String getSearchTerm() {
+        return searchTerm;
     }
 }

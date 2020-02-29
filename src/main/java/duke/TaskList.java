@@ -62,7 +62,7 @@ public class TaskList {
         if(taskIndex < tasks.size()) {
             getTasks().get(taskIndex).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  ["+ getTasks().get(taskIndex).getStatusIcon() + "] " + getTasks().get(taskIndex).description);
+            System.out.println("  ["+ getTasks().get(taskIndex).getStatusIcon() + "] " + getTasks().get(taskIndex).getDescription());
         }else{
             System.out.println("There is no task No."+(taskIndex+1));
         }
@@ -75,6 +75,20 @@ public class TaskList {
                 break;
             }
             System.out.println((i+1)+". "+ getTasks().get(i));
+        }
+    }
+
+    public void searchTasks(ManageCommand manageCommand){
+        System.out.println("Here are the matching tasks in your list:");
+        String searchTerm = manageCommand.getSearchTerm();
+        int index = 0;
+        for(Task t : tasks){
+            String description = t.getDescription();
+            if (description.contains(searchTerm)){
+                index++;
+                System.out.print(index + ". ");
+                System.out.println(t);
+            }
         }
     }
 

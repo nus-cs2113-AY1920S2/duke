@@ -20,24 +20,27 @@ public class Parser {
                     return new DeleteCommand(type,index);
                 case "done":
                     index = Integer.parseInt(fullCommand.substring(fullCommand.indexOf(" ")+1));
-                   return new ManageCommand(type,index);
+                   return new ManageCommand(type,index,null);
                 case "todo":
                     String description=fullCommand.substring(fullCommand.indexOf(" "));
                     return new AddCommand(type,description,null);
                 case "deadline":
-                    description=fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
-                    String by=fullCommand.substring(fullCommand.indexOf("/by")+4);
+                    description = fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
+                    String by = fullCommand.substring(fullCommand.indexOf("/by")+4);
                     return new AddCommand(type,description,by);
                 case "event":
-                    description=fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
-                    String period=fullCommand.substring(fullCommand.indexOf("/at")+4);
+                    description = fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
+                    String period = fullCommand.substring(fullCommand.indexOf("/at")+4);
                     return new AddCommand(type,description,period);
+                case "find":
+                    description = fullCommand.substring(fullCommand.indexOf(" ")+1);
+                    return new ManageCommand(type,-1,description);
                 default:
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     return new WrongCommand("wrong");
                 }
             }else if(fullCommand.equals("list")){
-                return new ManageCommand(fullCommand,-1);
+                return new ManageCommand(fullCommand,-1,null);
             }else if (fullCommand.equals("bye")){
                 return new ExitCommand("bye");
             }else{

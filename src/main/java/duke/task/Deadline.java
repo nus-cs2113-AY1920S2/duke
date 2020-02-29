@@ -18,7 +18,7 @@ public class Deadline extends Task {
     @Override
     public String toString(){
         String taskType="[D]";
-        String detail = taskType + " [" + getStatusIcon() + "] " + description+" (by: "+by+" )";
+        String detail = taskType + " [" + getStatusIcon() + "] " + getDescription() +" (by: "+by+" )";
         return detail;
     }
 }

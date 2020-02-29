@@ -19,7 +19,7 @@ public class Event extends Task {
     @Override
     public String toString(){
         String taskType="[E]";
-        String detail = taskType + " [" + getStatusIcon() + "] " + description+" (at: "+period+")";
+        String detail = taskType + " [" + getStatusIcon() + "] " + getDescription() +" (at: "+period+")";
         return detail;
     }
 }

@@ -3,7 +3,7 @@ package duke.task;
 import duke.command.AddCommand;
 
 public abstract class Task {
-    public String description;
+    private String description;
     private boolean isDone;
 
     public Task(String description){
@@ -29,5 +29,9 @@ public abstract class Task {
 
     public void setDone() {
         isDone = true;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
