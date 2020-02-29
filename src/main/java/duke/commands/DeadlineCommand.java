@@ -9,6 +9,8 @@ import duke.tasks.Deadline;
 import duke.tasks.Task;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static duke.utils.Constants.DEADLINE_COMMAND;
 import static duke.utils.Constants.DEADLINE_MARKER;
@@ -31,7 +33,10 @@ public class DeadlineCommand extends AddCommand {
 
         String taskDescription = taskBy[0].trim();
         String by = taskBy[1].trim();
-        Task task = new Deadline(taskDescription, by);
+
+        LocalDate byDate = LocalDate.parse(by);
+        
+        Task task = new Deadline(taskDescription, byDate);
         tasks.addTask(task);
         
         ui.displayAddTaskMessage(task, tasks.getListSize());

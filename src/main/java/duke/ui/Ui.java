@@ -11,6 +11,7 @@ public class Ui {
     public Ui() {
         in = new Scanner(System.in);
     }
+    
     public void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -31,7 +32,12 @@ public class Ui {
     }
 
     public void listTasks(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+//        System.out.println("Here are the tasks in your list:");
+        if (tasks.getListSize() == 0) {
+            System.out.println("Empty List.");
+            return;
+        }
+        
         for (int i = 1; i <= tasks.getListSize(); i++) {
             Task task = tasks.getTask(i);
             System.out.print(String.format("%d.", i));
@@ -93,6 +99,10 @@ public class Ui {
 
     public void displayTimeMissingMessage() {
         System.out.println("Oops! Time is missing!");
+    }
+    
+    public void displayTimeFormatErrorMessage() {
+        System.out.println("The time format is wrong. Please follow: yyyy-mm-dd, thank you!");
     }
 
     public void displayErrorMessage(Exception e) {
