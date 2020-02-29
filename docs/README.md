@@ -120,5 +120,5 @@ ____________________________________________________________
 ```
  
 ### Local data storage
-On start up, if it exists, Duke loads past list from `\[project_root]/data/duke.txt`, or else it creates one.
+On start up, if it exists, Duke loads past list from `[project_root]/data/duke.txt`, or else it creates one.
 On exit, Duke saves the created list in the same location.
