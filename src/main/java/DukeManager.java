@@ -12,7 +12,6 @@ public class DukeManager {
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String DELETE_COMMAND = "delete";
-    private static final String FIND_COMMAND = "find";
 
     private boolean isExit = false;
     private TaskList taskList;
@@ -46,9 +45,6 @@ public class DukeManager {
                 break;
             case (DELETE_COMMAND):
                 taskList.deleteTask(arr);
-                break;
-            case (FIND_COMMAND):
-                taskList.findKeyword(arr);
                 break;
             default:
                 Ui.showError("I'm sorry but I don't understand ●︿●");
