@@ -13,9 +13,17 @@ import static duke.utils.Constants.DEADLINE_COMMAND;
 import static duke.utils.Constants.EVENT_COMMAND;
 import static duke.utils.Constants.CLEAR_COMMAND;
 
-
-public class Parser {    
-    
+/**
+ * Deals with making sense of the user command
+ */
+public class Parser {
+    /**
+     * 
+     * @param input Raw input string from the user.
+     * @return Corresponding command object.
+     * @throws CommandNotFoundException If the input does not start with valid command.
+     * @throws EmptyDescriptionException If the description of commands that require description(eg. event) is missing.
+     */
     public static Command parse(String input) throws CommandNotFoundException, EmptyDescriptionException{
         String[] split = input.split("\\s+", 2); // limit: the number of segments after split
         String command = split[0];

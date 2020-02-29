@@ -14,19 +14,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String dirPath;
-    private String fileName;
     private String filePath;
     
     private List<Task> fileTasks = new ArrayList<>();
-    
+
+    /**
+     * Defines the constructor.
+     * Specifies the location of the txt file.
+     * 
+     * @param dirPath
+     * @param fileName
+     */
     public Storage(String dirPath, String fileName) {
         this.dirPath = dirPath;
-        this.fileName = fileName;
         this.filePath = dirPath + File.separator + fileName;
     }
 
+    /**
+     * Loads the content of the txt files into the task list.
+     * Prints the task list to the screen.
+     * Creates the directory and the file if the directory and file do not exist.
+     * 
+     * @return ArrayList of tasks read from the txt file.
+     * @throws IOException If error occurs during creating and loading the txt file.
+     * @throws ChatboxException If the txt file is empty at the first place.
+     */
     public List<Task> loadFileContents() throws IOException, ChatboxException {
         if (dirPath != "") {
             File directory = new File(dirPath);
@@ -58,6 +75,12 @@ public class Storage {
         return fileTasks;
     }
 
+    /**
+     * Converts the task string from the txt file to Task object.
+     * Adds the converted tasks into the ArrayList of Task.
+     * 
+     * @param fileLine Task string read from the txt file.
+     */
     public void saveStringtoTask(String fileLine) {
         String[] arrays = fileLine.split("\\|");
         String type = arrays[0].trim();
@@ -90,6 +113,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the all tasks inside the task list to the txt file whenever the task list changes.
+     * 
+     * @param taskList Existing list of tasks.
+     * @throws IOException If error occurs during opening the txt file and writing to it.
+     */
     public void updateTasksToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         int listSize = taskList.getListSize();

@@ -10,11 +10,26 @@ import java.io.IOException;
 
 public class TodoCommand extends AddCommand {
     private String description;
-    
+
+    /**
+     * Defines the constructor.
+     * Fills in the task content.
+     * 
+     * @param description Task content.
+     */
     public TodoCommand(String description) {
         this.description = description;
     }
-    
+
+    /**
+     * Executes command "todo".
+     * Creates a new Todo_task and adds the task into the existing task list.
+     * Updates txt file whenever the task list changes.
+     * 
+     * @param tasks Task list that stores all the existing tasks.
+     * @param ui Interaction with users.
+     * @param storage Files related operation object.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String taskDescription = description.trim();
@@ -23,7 +38,7 @@ public class TodoCommand extends AddCommand {
         
         ui.displayAddTaskMessage(task, tasks.getListSize());
 
-        // update the file
+        // update the txt file
         try {
             storage.updateTasksToFile(tasks);
         } catch (IOException e) {

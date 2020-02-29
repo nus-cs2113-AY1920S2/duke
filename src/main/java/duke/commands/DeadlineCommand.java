@@ -10,17 +10,31 @@ import duke.tasks.Task;
 
 import java.io.IOException;
 
-import static duke.utils.Constants.DEADLINE_COMMAND;
 import static duke.utils.Constants.DEADLINE_MARKER;
 
 public class DeadlineCommand extends AddCommand {
     private String description;
-    
+
+    /**
+     * Defines the constructor.
+     * Fills in the task content.
+     *
+     * @param description Task content.
+     */
     public DeadlineCommand(String description) {
         this.description = description;
-        this.command = DEADLINE_COMMAND;
     }
-    
+
+    /**
+     * Executes command "deadline".
+     * Creates a new Deadline task with deadline date.
+     * Adds the task into the existing task list.
+     * Updates txt file whenever the task list changes.
+     *
+     * @param tasks Task list that stores all the existing tasks.
+     * @param ui Interaction with users.
+     * @param storage Files related operation object.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatboxException {
         String[] taskBy = description.split(DEADLINE_MARKER);
@@ -36,7 +50,7 @@ public class DeadlineCommand extends AddCommand {
         
         ui.displayAddTaskMessage(task, tasks.getListSize());
 
-        // update the file
+        // update the txt file
         try {
             storage.updateTasksToFile(tasks);
         } catch (IOException e) {
