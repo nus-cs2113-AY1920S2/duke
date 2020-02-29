@@ -9,7 +9,7 @@ ChattyChatBot is a chatbot for those who prefer to use a desktop application for
 1. Install `Java 11` or above in your computer
 2. Download the latest JAR file for ChattyChatBot [here](https://github.com/Zhilin-Huang/duke/releases).
 3. Move the JAR file to the folder you want to use as the home folder for your ChattyChatBot.
-4. Double-click the file to start the application or run the command `java -jar [path-tochatty-chat-bot-jar-file]` from terminal
+4. Double-click the file to start the application or run the command `java -jar [path-to-chatty-chat-bot-jar-file]` from terminal
 5. Type in commands and start chatting with ChattyChatBot!
 
 ## Command Summary
