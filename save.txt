@@ -1,2 +1,5 @@
-d//false//test//2020-01-01
 e//false//test two//2020-01-01
+t//false//Exercise
+t//false//eat dinner
+t//false//Eat dinner
+t//true//jog

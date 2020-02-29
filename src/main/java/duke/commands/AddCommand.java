@@ -39,7 +39,7 @@ public class AddCommand extends Command {
         Task new_task;
         try {
             int findSeparator;
-            switch (this.command) {
+            switch (this.command.toLowerCase()) {
             case ("todo"):
                 new_task = new Todo(this.parameters);
                 tasks.add(new_task);
@@ -63,8 +63,6 @@ public class AddCommand extends Command {
             Ui.printFieldEmpty();
         } catch (DateTimeParseException e) {
             Ui.printInvalidDate();
-        } catch (IllegalStateException e) {
-            System.out.println("This is not a valid task.");
         }
     }
 

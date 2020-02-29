@@ -40,7 +40,7 @@ public class Parser {
         String inputString = scanner.nextLine();
         String[] instruction = inputString.split(" ", 2);
         try {
-            switch (instruction[0]) {
+            switch (instruction[0].toLowerCase()) {
             case (DONE):
                 try {
                     command = new DoneCommand(instruction[1]);
