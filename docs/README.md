@@ -207,7 +207,7 @@ Expected outcome:
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-These are your tasks on 2021-10-05:
+These are your tasks on 5/10/2021:
 2. [D][✘] finish math homework (by: 5/10/2021 16:30)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```

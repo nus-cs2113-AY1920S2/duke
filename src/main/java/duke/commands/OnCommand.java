@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -26,7 +27,7 @@ public class OnCommand extends Command {
     public OnCommand(TaskList taskList, LocalDate date) {
         super(taskList);
         this.date = date;
-        this.message = "These are your tasks on " + date + ":";
+        this.message = "These are your tasks on " + date.format(Parser.DF) + ":";
         this.isPersistentCommand = false;
     }
 
