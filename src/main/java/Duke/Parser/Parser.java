@@ -21,4 +21,13 @@ public class Parser {
         }
     }
 
+    public static int getIndex(String userInput) throws DukeException {
+        try {
+            int index = Integer.parseInt(userInput.replaceAll("\\D+", ""));
+            return index - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException(ErrorMessage.INVALID_FORMAT);
+        }
+    }
+
 }

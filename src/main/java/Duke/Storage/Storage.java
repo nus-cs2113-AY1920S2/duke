@@ -42,7 +42,8 @@ public class Storage {
             }
             s.close();
         } catch (DukeException | FileNotFoundException e) {
-            Ui.displayError(e.getMessage());
+            Ui.displayError(ErrorMessage.FILE_NOT_FOUND);
+            Ui.displayError(ErrorMessage.NEW_FILE_CREATED);
         }
         tasks = newTasks;
     }
@@ -54,10 +55,8 @@ public class Storage {
                 writer.write(ParserStorage.toStorageString(task) + "\n");
             }
             writer.close();
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             Ui.displayError(ErrorMessage.FILE_NOT_SAVE);
-        } catch (DukeException e) {
-            Ui.displayError(e.getMessage());
         }
     }
 

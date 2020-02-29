@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import static Duke.Library.Message.*;
 
+/**
+ * Class that handles user input and messages shown to user of this application.
+ */
 public class Ui {
 
     private Scanner sc;
@@ -27,7 +30,7 @@ public class Ui {
         System.out.println(MESSAGE_ADD + task);
     }
 
-    public static final void displayDeleteTask(Task task){
+    public static final void displayDeletedTask(Task task){
         System.out.println(MESSAGE_DELETE + task);
     }
 
@@ -36,7 +39,7 @@ public class Ui {
     }
 
     public static final void displayHelpMenu() {
-        System.out.print(COMMAND_HELP_DESC);
+        System.out.println(COMMAND_HELP_DESC);
     }
 
     public static final void displayNumberOfTasks(ArrayList TaskList) {
@@ -53,7 +56,7 @@ public class Ui {
             }
             displayNumberOfTasksFound(TaskList);
         } else {
-            System.out.println("\tEMPTY!!");
+            System.out.println("\tItem not found!!!");
         }
     }
 

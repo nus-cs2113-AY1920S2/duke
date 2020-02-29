@@ -1,9 +1,9 @@
 package Duke.Task;
 
 import Duke.Commands.*;
-import Duke.Exception.DukeDateParseException;
 import Duke.Exception.DukeException;
 import Duke.Library.ErrorMessage;
+import Duke.Parser.Parser;
 import Duke.Parser.ParserUtil;
 
 import static Duke.Library.Message.*;
@@ -11,12 +11,11 @@ import static Duke.Parser.Parser.getCommandWord;
 import static Duke.Parser.Parser.getWord;
 
 /**
- * Parser for duke.commands entered by the duke.Duke user. It reads from standard input and
- * returns Command objects.
+ * Class contains the operations for the TaskList
  */
 public class TaskList {
 
-    public static Command executeCommand(String userInput) throws DukeException, DukeDateParseException {
+    public static Command executeCommand(String userInput) throws DukeException {
 
         String commandWord = getCommandWord(userInput);
         switch (commandWord.toUpperCase()) {
@@ -35,9 +34,9 @@ public class TaskList {
             case COMMAND_LIST_WORD:
                 return new ListCommand();
             case COMMAND_MARK_WORD:
-                return new MarkDoneCommand(ParserUtil.getIndex(userInput));
+                return new MarkDoneCommand(Parser.getIndex(userInput));
             case COMMAND_DELETE_WORD:
-                return new DeleteCommand(ParserUtil.getIndex(userInput));
+                return new DeleteCommand(Parser.getIndex(userInput));
             default:
                 throw new DukeException(ErrorMessage.UNKNOWN_COMMAND);
         }
