@@ -1,6 +1,7 @@
 package Duke.Task;
 
 import Duke.Commands.*;
+import Duke.Exception.DukeDateParseException;
 import Duke.Exception.DukeException;
 import Duke.Library.ErrorMessage;
 import Duke.Parser.ParserUtil;
@@ -11,7 +12,7 @@ import static Duke.Parser.Parser.getCommandWord;
 public class TaskList {
 
 
-    public static Command executeCommand(String userInput) throws DukeException {
+    public static Command executeCommand(String userInput) throws DukeException, DukeDateParseException {
         String commandWord = getCommandWord(userInput);
         switch (commandWord.toUpperCase()) {
             case COMMAND_HELP_WORD:

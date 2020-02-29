@@ -2,6 +2,7 @@ package Duke;
 
 import Duke.Commands.Command;
 import Duke.Commands.ExitCommand;
+import Duke.Exception.DukeDateParseException;
 import Duke.Exception.DukeException;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
@@ -28,7 +29,7 @@ public class Duke{
                 if (command instanceof ExitCommand) {
                     break;
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | DukeDateParseException e) {
                 ui.displayError(e.getMessage());
             }
         }
