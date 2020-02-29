@@ -1,4 +1,4 @@
-package duke.Util;
+package duke.util;
 
 public enum TaskType {
     TODO ("1"),

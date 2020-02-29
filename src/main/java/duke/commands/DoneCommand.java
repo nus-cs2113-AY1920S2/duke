@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Util.TaskList;
-import duke.Util.UI;
+import duke.util.TaskList;
+import duke.util.UI;
 import duke.exceptions.IllegalDoneTaskException;
 import duke.taskmanager.Tasks;
 

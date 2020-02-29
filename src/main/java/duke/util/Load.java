@@ -1,4 +1,4 @@
-package duke.Util;
+package duke.util;
 
 import duke.taskmanager.Deadline;
 import duke.taskmanager.Event;

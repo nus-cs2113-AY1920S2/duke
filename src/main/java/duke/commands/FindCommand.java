@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.Util.UI;
+import duke.util.UI;
 import duke.taskmanager.Tasks;
 
 import java.util.List;

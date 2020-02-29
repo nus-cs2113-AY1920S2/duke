@@ -1,4 +1,4 @@
-package duke.Util;
+package duke.util;
 
 import duke.taskmanager.Tasks;
 
