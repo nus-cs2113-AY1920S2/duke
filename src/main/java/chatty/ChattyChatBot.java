@@ -2,6 +2,7 @@ package chatty;
 
 import chatty.command.ByeCommand;
 import chatty.command.Command;
+import chatty.command.DateCommand;
 import chatty.command.DeadlineCommand;
 import chatty.command.DeleteCommand;
 import chatty.command.DoneCommand;
@@ -19,6 +20,8 @@ import chatty.task.TaskList;
 import chatty.task.ToDo;
 import chatty.ui.Ui;
 
+import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 import static chatty.util.Constants.BYE_STRING;
@@ -79,7 +82,7 @@ public class ChattyChatBot {
                     ui.sendTaskAddedMessage(deadline, taskList.getTotalTaskNum());
                 } else if (command instanceof EventCommand) {
                     Event event = new Event(((EventCommand) command).getDescription(),
-                            ((EventCommand) command).getEventPeriod());
+                            ((EventCommand) command).getStartTime(), ((EventCommand) command).getEndTime());
                     taskList.addTask(event);
                     ui.sendTaskAddedMessage(event, taskList.getTotalTaskNum());
                 } else if (command instanceof DeleteCommand) {
@@ -89,6 +92,9 @@ public class ChattyChatBot {
                     String keyword = ((FindCommand) command).getKeyword();
                     TaskList taskListWithKeyword = taskList.findTaskWithKeyword(keyword);
                     ui.listTasksWithKeyword(taskListWithKeyword, keyword);
+                } else if (command instanceof DateCommand) {
+                    TaskList tasksOnDate = taskList.getTasksOnDate(((DateCommand) command).getDateTime());
+                    ui.listTasksOnDate(tasksOnDate, ((DateCommand) command).getDateTime());
                 } else if (command instanceof ByeCommand) {
                     if (storage.saveDataToFile(taskList)) {
                         ui.sendSaveTaskSuccessMessage();
@@ -105,6 +111,8 @@ public class ChattyChatBot {
                 ui.sendTaskNumberOutOfBoundMessage();
             } catch (NumberFormatException e) {
                 ui.sendWrongTaskNumberFormatMessage();
+            } catch (DateTimeParseException e) {
+                ui.sendWrongDateTimeFormatMessage();
             }
             ui.sendLineBreak();
         } while (!userInput.equals(BYE_STRING));

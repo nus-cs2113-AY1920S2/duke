@@ -1,15 +1,23 @@
 package chatty.command;
 
+import java.time.LocalDate;
+
 public class EventCommand extends TaskCommand {
 
-    private String eventPeriod;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
-    public EventCommand(String description, String eventPeriod) {
+    public EventCommand(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
-        this.eventPeriod = eventPeriod.trim();
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    public String getEventPeriod() {
-        return eventPeriod;
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
     }
 }

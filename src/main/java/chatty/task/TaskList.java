@@ -1,5 +1,6 @@
 package chatty.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,5 +46,22 @@ public class TaskList {
             }
         }
         return taskListWithKeyword;
+    }
+  
+    public TaskList getTasksOnDate(LocalDate date) {
+        TaskList tasksOnDate = new TaskList();
+        for (Task task : tasks) {
+            if (task instanceof Event) {
+                LocalDate startTime = ((Event) task).getStartTime();
+                LocalDate endTime = ((Event) task).getEndTime();
+                if ((startTime.isBefore(date) || startTime.equals(date))
+                        && (endTime.isAfter(date) || endTime.equals(date))) {
+                    tasksOnDate.addTask(task);
+                }
+            } else if (task instanceof Deadline && ((Deadline) task).getDateTime().equals(date)) {
+                tasksOnDate.addTask(task);
+            }
+        }
+        return tasksOnDate;
     }
 }

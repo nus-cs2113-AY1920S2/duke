@@ -2,12 +2,12 @@ package chatty.command;
 
 import java.time.LocalDate;
 
-public class DeadlineCommand extends TaskCommand {
+public class DateCommand extends Command {
 
     private LocalDate dateTime;
 
-    public DeadlineCommand(String description, LocalDate dateTime) {
-        super(description);
+    public DateCommand(LocalDate dateTime) {
+        super();
         this.dateTime = dateTime;
     }
 

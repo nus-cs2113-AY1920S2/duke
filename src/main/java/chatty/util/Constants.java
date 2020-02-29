@@ -12,12 +12,14 @@ public class Constants {
     public static final String EVENT_STRING = "event";
     public static final String DELETE_STRING = "delete";
     public static final String FIND_STRING = "find";
+    public static final String DATE_STRING = "date";
 
     public static final String SPACE_SEPARATOR = " ";
     public static final String DOT_CHARACTER = ".";
     public static final String REGEX_MATCH_ALL_CHARACTER = ".*";
     public static final String BY_STRING = "/by";
     public static final String AT_STRING = "/at";
+    public static final String TO_STRING = " to ";
 
     public static final String TRUE_STRING = "true";
     public static final String FALSE_STRING = "false";
