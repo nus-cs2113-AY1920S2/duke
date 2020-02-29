@@ -80,8 +80,7 @@ public class Duke {
                         } catch (IndexOutOfBoundsException e) {
                             ui.showTaskErrorMessage();
                         }
-                    }
-                    else {
+                    } else {
                         throw new DukeException(INVALID_COMMAND_MESSAGE);
                     }
                     break;
@@ -95,8 +94,7 @@ public class Duke {
                         } catch (IndexOutOfBoundsException e) {
                             ui.showTaskErrorMessage();
                         }
-                    }
-                    else {
+                    } else {
                         throw new DukeException(INVALID_COMMAND_MESSAGE);
                     }
                     break;
@@ -140,12 +138,10 @@ public class Duke {
                         }
                         if (foundTasks.getSize() == 0) {
                             ui.printNoMatchingTasks();
-                        }
-                        else {
+                        } else {
                             ui.printMatchingTasks(foundTasks);
                         }
-                    }
-                    else {
+                    } else {
                         throw new DukeException(INVALID_COMMAND_MESSAGE);
                     }
                     break;

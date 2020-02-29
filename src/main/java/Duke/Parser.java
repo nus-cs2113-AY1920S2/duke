@@ -37,8 +37,7 @@ public class Parser {
         int i = parsedList.indexOf("/by");
         if (i == -1) {
             throw new DukeException("Please enter again with the following format: deadline *NAME* /by *yyyy-mm-dd HHmm*");
-        }
-        else {
+        } else {
             return String.join(" ", parsedList.subList(1, i));
         }
     }
@@ -54,8 +53,7 @@ public class Parser {
         int i = parsedList.indexOf("/at");
         if (i == -1) {
             throw new DukeException("Please enter again with the following format: event *NAME* /at *yyyy-mm-dd HHmm*");
-        }
-        else {
+        } else {
             return String.join(" ", parsedList.subList(1, i));
         }
     }
@@ -71,8 +69,7 @@ public class Parser {
         int i = parsedList.indexOf("/by");
         if (i == -1) {
             throw new DukeException("Please enter again with the following format: deadline *NAME* /by *yyyy-mm-dd HHmm*");
-        }
-        else {
+        } else {
             return String.join(" ", parsedList.subList(i + 1, parsedList.size()));
         }
     }
@@ -88,8 +85,7 @@ public class Parser {
         int i = parsedList.indexOf("/at");
         if(i == -1) {
             throw new DukeException("Please enter again with the following format: event *NAME* /at *yyyy-mm-dd HHmm*");
-        }
-        else {
+        } else {
             return String.join(" ", parsedList.subList(i + 1, parsedList.size()));
         }
     }
