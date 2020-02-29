@@ -31,20 +31,46 @@ public class Storage {
         System.out.println("Previous tasks has been loaded successfully:");
     }
 
+    /**
+     * Creates a new save file overwriting the existing one.
+     *
+     * @param filePath destination for the new save file
+     * @param textToAdd the pre-formatted text string to be written to the file
+     * @throws IOException
+     */
     static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Appends task to a pre-existing save file without overwriting.
+     *
+     * @param filePath file of the existing save file to be appended to
+     * @param textToAppend the pre-formatted text string to append to the file
+     * @throws IOException
+     */
     static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
-    public static void saveTasks(String filePath, TaskList TaskArray, boolean overWrite) {
-        for (Task currTask : TaskArray.tasks) {
+    /**
+     * Saves the current state of the task list to a save file.
+     *
+     * @param filePath the destination file path where the file will be stored
+     * @param taskArray the list of tasks to be saved in the file
+     * @see Storage#writeToFile(String, String) writeToFile
+     * @see Storage#appendToFile(String, String) appendToFile
+     * @see ToDo#toSaveFormat() ToDo
+     * @see Deadline#toSaveFormat() Deadline
+     * @see Event#toSaveFormat() Event
+     */
+    public static void saveTasks(String filePath, TaskList taskArray) {
+        boolean overWrite = true;
+        for (Task currTask : taskArray.tasks) {
             if(overWrite == true) {
                 try {
                     Storage.writeToFile(filePath, currTask.toSaveFormat() + "\n");

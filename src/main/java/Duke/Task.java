@@ -9,11 +9,15 @@ public class Task {
         this.isDone = false;
     }
 
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-
+    /**
+     * Updates the status of a task to done.
+     * @return a response string showing the updated status icon of the task
+     */
     public String markAsDone () {
         this.isDone = true;
         return ("[" + this.getStatusIcon() + "] "+ this.description);

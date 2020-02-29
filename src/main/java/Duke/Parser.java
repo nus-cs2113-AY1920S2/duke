@@ -17,7 +17,7 @@ public class Parser {
             case "bye":
                 System.out.println(Duke.GOODBYE);
                 exit = 1;
-                Storage.saveTasks(Duke.FILEPATH, taskArray, true);
+                Storage.saveTasks(Duke.FILEPATH, taskArray);
                 break;
             case "find":
                 String keyword = tokenizedInputs[1];
@@ -78,6 +78,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Checks if the description portion of a command is empty.
+     *
+     * @param tokens
+     * @param instruction
+     * @return
+     */
     static boolean checkEmptyDescription(String[] tokens, String instruction) {
         if (tokens.length == 1) {
             System.out.println("☹ OOPS!!! The description of a " + instruction + " cannot be empty.");

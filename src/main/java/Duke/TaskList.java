@@ -17,13 +17,6 @@ public class TaskList {
     }
 
 
-    /*
-    public void deleteTask (int i) {
-        tasks.remove(i);
-        size--;
-    }
-     */
-
     public void deleteTask (Task task) {
         tasks.remove(task);
         size--;
