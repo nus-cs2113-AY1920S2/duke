@@ -1,6 +1,5 @@
 # User Guide
 
-##ALIE
 ALIE is a personal task tracker app that uses command line interface.
 It helps its users keep track of tasks that are entered into the app, keeping them in a task list.
 It is also able to store tasks added into the app and store them, allowing it to 
@@ -18,13 +17,14 @@ be retrieved again when the user starts the app again.
 
 
 ## Usage 
-### 1. Add Task
+### 1. Add Task 
 ALIE keep track of 3 types of task - `todo`, `deadline` and `event`.
 For each task, its type is marked by a symbol. 
 If the task is completed, `[Y]` will be shown. If it is not, `[N]` will be shown.
 <br/>
 
-* #### keyword: `todo`
+* ## `todo` <a name="todo"></a>
+  #### keyword: `todo` 
   Add a `todo` task to the task list in ALIE, keeping only a description of the task.
   `todo` tasks are marked with the symbol `[T]`.
   The `todo` task will be added to the list in ALIE and also in local file storage.
@@ -40,7 +40,8 @@ If the task is completed, `[Y]` will be shown. If it is not, `[N]` will be shown
   Now you have 1 tasks in the list.    
   ```
 ___
-* #### keyword: `deadline`
+* ## `deadline` <a name="deadline"></a>
+  #### keyword: `deadline`
   Add a `deadline` task to the list in ALIE, keeping a description and due date of the task.
   It is able to keep track of time in the format `YYYY-MM-DD`, converting them to `dd MMM YYYY`. 
   `deadline` tasks are marked with the symbol `[D]`.
@@ -60,6 +61,7 @@ ___
   > Although other date formats are accepted, a warning will be shown as it is unable to convert the date properly.
 
 ___
+* ## `event` <a name="event"></a>
 * #### keyword: `event` 
   Add an `event` task to the list in ALIE, keeping a description and duedate of the task.
   It it able to keep track of time in the format `YYYY-MM-DD`, converting them to `dd MMM YYYY`.
@@ -78,8 +80,9 @@ ___
   ```
    > Although other date formats are accepted, a warning will be shown as it is unable to convert
    the date properly.
+
 ___
-### 2. List Task
+### 2. List Task <a name="list"></a>
 #### keyword: `list`
 Displays a numbered list with all the tasks stored in ALIE.
 
@@ -94,7 +97,7 @@ Here are the tasks in your list:
 4.[T][Y] assignment 4
 ```
 ___
-### 3. Complete Task
+### 3. Complete Task <a name="done"></a>
 #### keyword: `done`
 Mark a task in the list in ALIE as done. Changing the symbol from `[N]` to `[Y]` 
 
@@ -108,7 +111,8 @@ Nice! I've marked this task as done:
   1. [T][Y] quiz for CS2113T
 ```
 ___
-### 4. Delete Task
+
+### 4. Delete Task <a name="delete"></a>
 #### keyword: `delete`
 Delete/Remove a task from the list in ALIE.
 
@@ -123,7 +127,8 @@ Noted. I've removed this task:
 Now you have 3 tasks in the list.
 ```
 ___
-### 5. Find Task
+
+### 5. Find Task <a name="find"></a>
 #### keyword: `find`
 Find tasks by searching for a specified key. 
 The key can be a word, phrase or task name.
@@ -140,7 +145,7 @@ Here are the tasks in your list:
 2.[D][N] CS2113T iP final submission (by: 02 Mar 2020)
 ```
 ___
-### 6. Exit ALIE
+### 6. Exit ALIE <a name="exit"></a>
 #### keyword: `bye`
 Exit the program.
 
