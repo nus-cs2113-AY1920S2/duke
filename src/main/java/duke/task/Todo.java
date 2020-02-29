@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import duke.task.Task;
 
 /**
@@ -7,8 +8,18 @@ import duke.task.Task;
  */
 public class Todo extends Task {
 
-    public Todo(String description) {
+    /**
+     * Constructor to create a new to do task.
+     *
+     * @param description description of the task
+     * @throws DukeException throws an exception if the description or date of the task is empty
+     */
+    public Todo(String description) throws DukeException {
         super(description);
+
+        if(description.isBlank()) {
+            throw new DukeException();
+        }
     }
 
     @Override

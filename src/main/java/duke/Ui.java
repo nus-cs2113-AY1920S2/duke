@@ -19,8 +19,8 @@ public class Ui {
     }
 
     /**
-     * Shows a list of tasks to the user, formatted as an indexed list.
-     * @param tasks
+     * Method to display a list of tasks to the user, formatted as an indexed list.
+     * @param tasks list of tasks.
      */
     public static void printList(TaskList tasks) {
         System.out.println(BORDER + "Here are the tasks in your list:");
@@ -30,22 +30,45 @@ public class Ui {
         System.out.println(BORDER);
     }
 
+    /**
+     * Method to display a confirmation of adding a task to the list and
+     * the current number of tasks in the list.
+     * @param tasks list of tasks.
+     * @param counter the number of tasks in the list.
+     */
     public static void printAcknowledgement(TaskList tasks, int counter) {
         System.out.println(BORDER + "Got it! I've added this task: ");
         System.out.println(tasks.get(counter - 1));
         System.out.println("Now you have " + counter + " tasks in your list!\n" + BORDER);
     }
 
+    /**
+     * Method to display a confirmation of marking a task as done.
+     * @param tasks list of tasks.
+     * @param doneTaskNum the task number of the task that has been marked done.
+     */
     public static void doneAcknowledgement(TaskList tasks, int doneTaskNum) {
         System.out.println(BORDER + "Nice! I've marked this task as done: " + tasks.get(doneTaskNum - 1).description);
         System.out.println(BORDER);
     }
 
+    /**
+     * Method to display a confirmation of deleting a task from the list and
+     * the current number of tasks in the list.
+     * @param tasks list of tasks.
+     * @param delTaskName the name of the task that has been deleted from the list.
+     */
     public static void deleteAcknowledgement(TaskList tasks, String delTaskName) {
         System.out.println(BORDER + "Noted! I've removed this task:  " + delTaskName);
         System.out.println("Now you have " + (tasks.getSize()) + " tasks in your list!\n" + BORDER);
     }
 
+    /**
+     * Method to display a list of tasks containing the user-specified keyword to the user,
+     * formatted as an indexed list.
+     * @param tasks list of tasks.
+     * @param keyword user-specified keyword that is searched in the list.
+     */
     public static void printFindList(TaskList tasks, String keyword) {
         Boolean found = false;
         System.out.println(BORDER + "Here are the matching tasks in your list:\n");
@@ -61,6 +84,9 @@ public class Ui {
         System.out.println(BORDER);
     }
 
+    /**
+     * Method to display a goodbye message to the user.
+     */
     public static void printByeMessage() {
         System.out.println(BORDER + "Bye! Hope to see you again soon!\n" + BORDER);
     }

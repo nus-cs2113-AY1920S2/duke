@@ -45,13 +45,14 @@ public class Storage {
 
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
-        while (s.hasNext()) {
-            String line;
-            line = s.nextLine();
-            String[] sentence = line.split("\\|");
-            String taskType = sentence[0].toLowerCase();
-            Task task;
-            switch(taskType) {
+        try {
+            while (s.hasNext()) {
+                String line;
+                line = s.nextLine();
+                String[] sentence = line.split("\\|");
+                String taskType = sentence[0].toLowerCase();
+                Task task;
+                switch (taskType) {
                 case "t":
                     task = new Todo(sentence[2]);
                     tasks.add(task);
@@ -75,6 +76,9 @@ public class Storage {
                     break;
                 }
             }
+        } catch (DukeException e) {
+            System.out.println("Error!");
+        }
 
         s.close();
     }

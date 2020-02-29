@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -9,7 +10,7 @@ import duke.Ui;
 import java.time.format.DateTimeParseException;
 
 /**
- * Adds a task to the task list.
+ * Represents a command to add a task to the task list.
  */
 public class AddCommand extends Command {
     String command;
@@ -19,6 +20,12 @@ public class AddCommand extends Command {
     public static final int DATE = 3;
     public static final String BORDER = "____________________________________________________________\n";
 
+    /**
+     * Constructor to add a new command.
+     *
+     * @param details the parameters of the command
+     * @param command the type of task to be added
+     */
     public AddCommand(String details, String command) {
         super(details);
         this.command = command;
@@ -26,7 +33,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds task to the task list based on task type.
-     * @param tasks
+     * @param tasks list of tasks.
      */
     @Override
     public void executeCommand(TaskList tasks) {
@@ -55,14 +62,12 @@ public class AddCommand extends Command {
             Ui.printAcknowledgement(tasks, tasks.getSize());
             super.executeCommand(tasks);
 
-        } catch (NullPointerException e) {
-            System.out.println(BORDER + "☹ OH NO!!! There is no such task to be done! :o(\n" + BORDER);
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println(BORDER + "☹ OH NO!!! The description of a " + this.command + " cannot be empty! :o(\n" + BORDER);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(BORDER + "☹ OH NO!!! The description of a " + this.command + " cannot be empty! :o(\n" + BORDER);
-        } catch (DateTimeParseException e) {
+        }  catch (DateTimeParseException e) {
             System.out.println(BORDER + "☹ OH NO!!! The date format is: yyyy-mm-dd.\n" + BORDER);
+        }  catch (StringIndexOutOfBoundsException | DukeException e) {
+            System.out.println(BORDER + "☹ OH NO!!! The description/date of the command '" + this.command + "' cannot be empty! :o(\n" + BORDER);
+        }  catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(BORDER + "☹ OH NO!!! The description/date of the command '" + this.command + "' cannot be empty! :o(\n" + BORDER);
         }
     }
 }

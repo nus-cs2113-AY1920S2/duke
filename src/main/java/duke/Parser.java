@@ -64,7 +64,7 @@ public class Parser {
                 System.out.println(BORDER + "☹ OH NO!!! I'm sorry, but I don't know what that means! :o(\n" + BORDER);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(BORDER + "☹ OH NO!!! The description of a " + command + " cannot be empty! :o(\n" + BORDER);
+            System.out.println(BORDER + "☹ OH NO!!! The description of the command '" + taskType + "' cannot be empty! :o(\n" + BORDER);
             command = null;
         }
         return command;

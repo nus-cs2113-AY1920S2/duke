@@ -28,6 +28,7 @@ public class Duke {
                 continue;
             }
             if (ExitCommand.isExit(command)) {
+                Ui.printByeMessage();
                 break;
             }
             command.executeCommand(tasks);

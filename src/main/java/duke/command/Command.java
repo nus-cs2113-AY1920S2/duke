@@ -11,6 +11,11 @@ import java.io.IOException;
 public class Command {
     protected String details;
 
+    /**
+     * Constructor to create a new command.
+     *
+     * @param details the parameters of the command
+     */
     public Command(String details) {
         this.details = details;
     }
