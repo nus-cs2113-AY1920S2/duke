@@ -6,10 +6,10 @@ DUKE is a chat bot that helps users manage their tasks.
 - [Features](https://github.com/sitinadiah25/duke/tree/master/docs#features)
     
     - [Add a new task](https://github.com/sitinadiah25/duke/tree/master/docs#add-a-new-task)
-    - [Find tasks](https://github.com/sitinadiah25/duke/tree/master/docs#find-tasks)
-    - [Delete task](https://github.com/sitinadiah25/duke/tree/master/docs#deletes-task)
+    - [Find tasks](https://github.com/sitinadiah25/duke/tree/master/docs#find-task)
+    - [Delete task](https://github.com/sitinadiah25/duke/tree/master/docs#delete-task)
     - [List tasks](https://github.com/sitinadiah25/duke/tree/master/docs#list-tasks)
-    - [Mark tasks as done](https://github.com/sitinadiah25/duke/tree/master/docs#mark-tasks-as-done)
+    - [Mark task as done](https://github.com/sitinadiah25/duke/tree/master/docs#mark-task-as-done)
 - [Feedback](https://github.com/sitinadiah25/duke/tree/master/docs#feedback) 
 ## Requirements 
 Java 11 or later.
