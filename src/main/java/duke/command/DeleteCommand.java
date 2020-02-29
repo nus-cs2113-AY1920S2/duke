@@ -6,7 +6,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-import java.util.ArrayList;
 
 /**
  * This class handles the delete command, implements the Command interface.

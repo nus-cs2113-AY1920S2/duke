@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import duke.exception.DukeLoadingException;
 import duke.exception.DukeWritingException;
-import duke.exception.DukeNullDateException;
 import duke.exception.DukeNullDescriptionException;
 import duke.task.Deadline;
 import duke.task.DummyTask;
@@ -116,7 +115,6 @@ public class Storage {
      * @param task the DummyTask object to be converted.
      * @return the actual task object
      * @throws DukeNullDescriptionException exception is thrown when the task has empty description.
-     * @throws DukeNullDateException exception is thrown when the deadline/event task has empty date.
      */
     private Task convertDummyTaskToSpecificTask(DummyTask task) throws DukeNullDescriptionException {
         Task convertedTask;
