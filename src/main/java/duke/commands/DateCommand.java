@@ -16,18 +16,16 @@ import java.time.format.DateTimeParseException;
  */
 public class DateCommand extends Command {
 
+    private static final String LINE = "____________________________________________________________ \n";
+
     /**
      * Constructor to create a new Date command.
      *
      * @param parameters the date the user wishes to search
      * @throws DukeException throws this exception if no date is supplied
      */
-    public DateCommand(String parameters) throws DukeException {
+    public DateCommand(String parameters) {
         super(parameters.trim());
-
-        if (parameters.isBlank()) {
-            throw new DukeException();
-        }
     }
 
     /**
@@ -41,18 +39,19 @@ public class DateCommand extends Command {
         try {
             boolean dateIsFound = false;
             LocalDate date = LocalDate.parse(parameters);
+            System.out.println(LINE);
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task task = tasks.get(i);
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
                     if (deadline.getDate().equals(date)) {
-                        System.out.println(deadline);
+                        System.out.println("  " + deadline);
                         dateIsFound = true;
                     }
                 } else if (task instanceof Event) {
                     Event event = (Event) task;
                     if (event.getDate().equals(date)) {
-                        System.out.println(event);
+                        System.out.println("  " + event);
                         dateIsFound = true;
                     }
                 }
@@ -61,6 +60,8 @@ public class DateCommand extends Command {
                 // parameter "date" passed to tell Ui to
                 // print that date is not found
                 Ui.printNotFound("date");
+            } else {
+                System.out.println(LINE);
             }
         } catch (DateTimeParseException e) {
             Ui.printInvalidDate();

@@ -3,4 +3,4 @@ d//true//Lab//2020-02-29
 d//false//Duke//2020-03-02
 e//false//Family gathering//2020-03-14
 t//false//2108 tutorial
-t//false//Homework
+t//true//Homework

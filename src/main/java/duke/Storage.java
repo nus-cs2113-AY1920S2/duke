@@ -24,7 +24,7 @@ public class Storage {
      * @throws IOException
      */
     public static void saveToFile(TaskList tasks) throws IOException {
-        File file = new File("save2.txt");
+        File file = new File("save.txt");
 
         FileOutputStream fo = new FileOutputStream(file);
         PrintWriter pw = new PrintWriter(fo);
@@ -43,7 +43,7 @@ public class Storage {
      * @throws IOException
      */
     public static void readFromFile(TaskList tasks) throws IOException {
-        File file = new File("save2.txt");
+        File file = new File("save.txt");
         Scanner scanner = new Scanner(file);
         try {
             while (scanner.hasNextLine()) {

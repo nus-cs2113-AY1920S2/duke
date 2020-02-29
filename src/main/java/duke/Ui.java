@@ -12,8 +12,8 @@ public class Ui {
      */
     public static void printWelcomeMessage() {
         System.out.println(LINE +
-                " Hello! I'm Duke :)\n" +
-                " What can I do for you?\n" + LINE);
+                "  Hello! I'm Duke :)\n" +
+                "  What can I do for you?\n" + LINE);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Ui {
     public static void printDeleteMessage(String description, int numTasks) {
         System.out.println(LINE +
                 "  You have deleted: " + description + "\n" +
-                "  Now you have " + numTasks + " tasks on your list.\n" +LINE);
+                "  Now you have " + numTasks + " task(s) on your list.\n" +LINE);
     }
 
     /**
@@ -66,8 +66,8 @@ public class Ui {
      */
     public static void printHelp() {
         System.out.println( LINE +
-                "I'm sorry I do not understand :(\n\n" +
-                "I can help you with the following: \n" +
+                "  I'm sorry I do not understand :(\n\n" +
+                "  I can help you with the following: \n" +
                 "[list] - lists tasks \n" +
                 "[todo <task_name>] - adds a todo task \n" +
                 "[deadline <task_name> / <date in format: YYYY-MM-DD>] - adds a deadline task \n" +
@@ -84,15 +84,15 @@ public class Ui {
      */
     public static void printList(TaskList tasks) {
         if(tasks.getSize() != 0) {
-            System.out.println(LINE + "These are the tasks on your list: ");
+            System.out.println(LINE + "  These are the task(s) on your list: ");
             for (int i = 0; i < tasks.getSize(); i++) {
-                System.out.print((i + 1) + ". ");
+                System.out.print("  " + (i + 1) + ". ");
                 System.out.println(tasks.get(i));
             }
             System.out.println(LINE);
         } else {
             System.out.println(LINE +
-                    "There are no tasks in your list!\n" + LINE);
+                    "  There are no tasks in your list!\n" + LINE);
         }
 
     }
@@ -104,6 +104,16 @@ public class Ui {
     public static void printFieldEmpty() {
         System.out.println(LINE +
                 "  Task description or date field is empty.\n" + LINE);
+    }
+
+    public static void printNoDate() {
+        System.out.println(LINE +
+                "  Please enter a date.\n" + LINE);
+    }
+
+    public static void printNoKeyword() {
+        System.out.println(LINE +
+                "  Please enter a keyword.\n" + LINE);
     }
 
     /**
@@ -136,8 +146,7 @@ public class Ui {
      * @param type type of task
      */
     public static void printNotFound(String type) {
-        System.out.println(LINE +
-                "  Sorry, there were no tasks with this " + type + " found. :(\n" + LINE);
+        System.out.println("  Sorry, there were no tasks with this " + type + " found. :(\n" + LINE);
     }
 
     /**

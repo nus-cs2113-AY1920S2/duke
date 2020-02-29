@@ -1,3 +1,2 @@
-t//true//homework
-d//false//lab//19/2/2020
-e//false//test//22/2/2020
+d//false//test//2020-01-01
+e//false//test two//2020-01-01

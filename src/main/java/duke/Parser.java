@@ -42,23 +42,35 @@ public class Parser {
         try {
             switch (instruction[0]) {
             case (DONE):
-                command = new DoneCommand(instruction[1]);
+                try {
+                    command = new DoneCommand(instruction[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Ui.printInvalidTaskNum();
+                }
                 break;
             case (DELETE):
-                command = new DeleteCommand(instruction[1]);
+                try {
+                    command = new DeleteCommand(instruction[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Ui.printInvalidTaskNum();
+                }
                 break;
             case (DATE):
-                try{
+                try {
                     command = new DateCommand(instruction[1]);
-                } catch (DukeException e) {
-                    System.out.println("Please enter a date!");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Ui.printNoDate();
                 }
                 break;
             case (LIST):
                 command = new ListCommand("");
                 break;
             case (FIND):
-                command = new FindCommand(instruction[1]);
+                try {
+                    command = new FindCommand(instruction[1]);
+                } catch (DukeException | ArrayIndexOutOfBoundsException e ) {
+                    Ui.printNoKeyword();
+                }
                 break;
             case (TODO):
             case (DEADLINE):
