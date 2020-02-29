@@ -39,15 +39,10 @@ public class Ui {
         System.out.print(COMMAND_HELP_DESC);
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch-A-JavaDoc
     public static final void displayNumberOfTasks(ArrayList TaskList) {
         System.out.print("\tNow you have " + TaskList.size() + " tasks in the list.\n");
     }
 
-<<<<<<< HEAD
     public static void displaySearchResults(ArrayList TaskList) {
         if (!TaskList.isEmpty()) {
             for (int i = 0; i < TaskList.size(); i++) {
@@ -66,8 +61,6 @@ public class Ui {
         System.out.print("\tThere are " + TaskList.size() + " items found.\n");
     }
 
-=======
->>>>>>> branch-A-JavaDoc
     public static void displayTaskList(ArrayList TaskList) {
         if (!TaskList.isEmpty()) {
             for (int i = 0; i < TaskList.size(); i++) {

@@ -1,13 +1,15 @@
 package Duke.Parser;
 
 
+import Duke.Exception.DukeException;
+import Duke.Library.ErrorMessage;
+
 public class Parser {
 
     public static String getCommandWord(String userInput) {
         return userInput.strip().split(" ")[0];
     }
 
-<<<<<<< HEAD
     public static String getWord(String userInput) throws DukeException {
         try {
             return userInput.strip().split(" ")[1];
@@ -15,6 +17,5 @@ public class Parser {
             throw new DukeException(ErrorMessage.INVALID_FORMAT);
         }
     }
-=======
->>>>>>> branch-A-JavaDoc
+
 }

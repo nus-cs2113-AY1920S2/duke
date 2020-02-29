@@ -29,13 +29,8 @@ public class Duke{
                 if (command instanceof ExitCommand) {
                     break;
                 }
-<<<<<<< HEAD
-            } catch (DukeException | DukeDateParseException e) {
-                ui.displayError(e.getMessage());
-=======
             } catch (DukeException e) {
                 Ui.displayError(e.getMessage());
->>>>>>> branch-A-JavaDoc
             }
         }
     }

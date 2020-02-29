@@ -16,12 +16,8 @@ import static Duke.Parser.Parser.getWord;
  */
 public class TaskList {
 
-<<<<<<< HEAD
-
     public static Command executeCommand(String userInput) throws DukeException, DukeDateParseException {
-=======
-    public static Command executeCommand(String userInput) throws DukeException {
->>>>>>> branch-A-JavaDoc
+
         String commandWord = getCommandWord(userInput);
         switch (commandWord.toUpperCase()) {
             case COMMAND_FIND_WORD:
