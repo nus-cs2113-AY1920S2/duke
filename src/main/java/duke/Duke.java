@@ -1,6 +1,16 @@
 package duke;
 
-import duke.exception.*;
+import duke.command.Command;
+import duke.exception.InvalidTaskException;
+import duke.exception.MissingDateFieldException;
+import duke.exception.MissingDescriptionException;
+import duke.exception.MissingNumberFieldException;
+import duke.exception.MissingSlashWordException;
+import duke.exception.WrongSlashWordException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 
 import java.time.DateTimeException;
@@ -69,7 +79,7 @@ public class Duke {
                 command = parser.parseUserInput(userInput);
                 command.execute(tasks);
             } catch (InvalidTaskException | MissingDescriptionException | MissingNumberFieldException
-                    | MissingTimeFieldException | NumberFormatException | DateTimeException | IndexOutOfBoundsException
+                    | MissingDateFieldException | NumberFormatException | DateTimeException | IndexOutOfBoundsException
                     | MissingSlashWordException | WrongSlashWordException m) {
                 Ui.displayLineSeparator();
                 Ui.displayExceptionError(m);

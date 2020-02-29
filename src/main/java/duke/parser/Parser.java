@@ -1,6 +1,13 @@
-package duke;
+package duke.parser;
 
-import duke.exception.*;
+import duke.command.Command;
+import duke.exception.InvalidTaskException;
+import duke.exception.MissingDateFieldException;
+import duke.exception.MissingDescriptionException;
+import duke.exception.MissingNumberFieldException;
+import duke.exception.MissingSlashWordException;
+import duke.exception.WrongSlashWordException;
+import duke.ui.Ui;
 
 
 import java.time.DateTimeException;
@@ -16,16 +23,18 @@ import java.time.format.DateTimeParseException;
  * </p>
  */
 public class Parser {
-    public static final int TYPE_OF_COMMAND = 0;
-    public static final int TASK_NUMBER = 1;
-    public static final String FIND = "find";
-    public static final int MISSING_SLASH = 3;
-    public static final String BYE = "bye";
-    public static final String YES = "yes";
-    public static final String EMPTY = "";
-    public static final String WRONG = "wrong";
-    public static final int SLASH_WORD = 4;
-    public static final String ON = "on";
+    private static final int TYPE_OF_COMMAND = 0;
+    private static final int TASK_NUMBER = 1;
+    private static final String FIND = "find";
+    private static final int MISSING_SLASH = 3;
+    private static final String BYE = "bye";
+    private static final String YES = "yes";
+    private static final String EMPTY = "";
+    private static final String WRONG = "wrong";
+    private static final int SLASH_WORD = 4;
+    private static final String ON = "on";
+    private static final String BY = "by";
+    private static final String AT = "at";
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -33,10 +42,8 @@ public class Parser {
     private static final String DONE = "done";
     private static final String DELETE = "delete";
     private static final int DESCRIPTION = 0;
-    private static final int TIME = 1;
-    private static final int TIME_INCLUDED = 2;
-    public static final String BY = "by";
-    public static final String AT = "at";
+    private static final int DATE = 1;
+    private static final int DATE_INCLUDED = 2;
 
 
     public Parser() {
@@ -55,7 +62,7 @@ public class Parser {
      *                                     despite expecting it
      * @throws MissingNumberFieldException exception thrown when the task given lacks a number field. Only used for
      *                                     <code>DELETE</code> and <code>DONE</code> commands
-     * @throws MissingTimeFieldException   exception thrown when no date or time given despite expecting it
+     * @throws MissingDateFieldException   exception thrown when no date given despite expecting it
      * @throws MissingSlashWordException   exception thrown when no slash word is given despite expecting it
      * @throws DateTimeException           exception thrown when the date given cannot be parsed
      * @throws WrongSlashWordException     exception thrown when the slash word provided is not correct. Only used for
@@ -64,7 +71,7 @@ public class Parser {
      */
     public Command parseUserInput(String userInput)
             throws InvalidTaskException, MissingDescriptionException, MissingNumberFieldException,
-            MissingTimeFieldException, DateTimeException, MissingSlashWordException, WrongSlashWordException {
+            MissingDateFieldException, DateTimeException, MissingSlashWordException, WrongSlashWordException {
         Command command = new Command();
 
         /* Format and split up the user input task so as to be checked by the validateTask method */
@@ -78,7 +85,7 @@ public class Parser {
         command.setSplitCommand(spaceUserInputSplit);
         command.setTypeOfCommand(spaceUserInputSplit[TYPE_OF_COMMAND]);
         command.setDescriptionOfCommand(partialUserInputSplit[DESCRIPTION]);
-        command.setTimeOfCommand(partialUserInputSplit[TIME]);
+        command.setDateOfCommand(partialUserInputSplit[DATE]);
         if (spaceUserInputSplit[TYPE_OF_COMMAND].toLowerCase().equals(DONE) ||
                 spaceUserInputSplit[TYPE_OF_COMMAND].toLowerCase().equals(DELETE)) {
             command.setNumber(partialUserInputSplit[DESCRIPTION]);
@@ -116,11 +123,11 @@ public class Parser {
     }
 
     /**
-     * Help split up the user input so as to separate the description and time of the task in the user's raw input,
+     * Help split up the user input so as to separate the description and date of the task in the user's raw input,
      * which makes it easier to use for command creation.
      * <p></p>
      * <p>
-     * Not only that, the array also contains addition information such as whether if the time or slash word is
+     * Not only that, the array also contains addition information such as whether if the date or slash word is
      * missing for input that expects them. It also checks if the slash word provided is correct.
      * </p>
      * @param input the user input
@@ -137,24 +144,24 @@ public class Parser {
             return formatEmptyInput();
         }
 
-        /* For the user input task that supposed to contain time/date, format the input and return the array */
+        /* For the user input task that supposed to contain date, format the input and return the array */
         if (tempTaskType.toLowerCase().equals("event") || tempTaskType.toLowerCase().equals("deadline")) {
             return formatInputIntoArray(input);
         }
 
-        /* For the user input task that do not expect to contain time/date, format the input and return the array */
+        /* For the user input task that do not expect to contain date, format the input and return the array */
         return formatNoDateInputIntoArray(input);
     }
 
     /**
      * For the raw input that contains nothing
-     * @return an empty array to denote there is nothing in the input
+     * @return a <code>String[]</code> array with all empty values to denote there is nothing in the input
      */
     private String[] formatEmptyInput() {
         String[] returnSplit = new String[5];
         returnSplit[DESCRIPTION] = EMPTY;
-        returnSplit[TIME] = EMPTY;
-        returnSplit[TIME_INCLUDED] = EMPTY;
+        returnSplit[DATE] = EMPTY;
+        returnSplit[DATE_INCLUDED] = EMPTY;
         returnSplit[MISSING_SLASH] = EMPTY;
         returnSplit[SLASH_WORD] = EMPTY;
         return returnSplit;
@@ -162,7 +169,7 @@ public class Parser {
 
 
     /**
-     * To split and format the raw input that do not contain any date into an array to be returned.
+     * To split and format the raw input (that do not contain any date) into an array to be returned.
      * @param input the raw user input
      * @return a <code>String[]</code> array which contains the separated user input.
      */
@@ -182,15 +189,15 @@ public class Parser {
         }
 
         /* Placing the leftover details into the array */
-        returnSplit[TIME] = EMPTY;
-        returnSplit[TIME_INCLUDED] = EMPTY;
+        returnSplit[DATE] = EMPTY;
+        returnSplit[DATE_INCLUDED] = EMPTY;
         returnSplit[MISSING_SLASH] = EMPTY;
         returnSplit[SLASH_WORD] = EMPTY;
         return returnSplit;
     }
 
     /**
-     * To split and format the raw input that expects and contains the date into an array to be returned.
+     * To split and format the raw input (that expects the date) into an array to be returned.
      * @param input the raw user input
      * @return a <code>String[]</code> array which contains the separated user input.
      */
@@ -204,39 +211,39 @@ public class Parser {
         String[] obtainedDescription = obtainedSplit[0].split(" ", 2);
 
 
-        /* Placing the description into the array as well as the time */
+        /* Placing the description into the array as well as the date */
         if (obtainedDescription.length == 1 || obtainedDescription[1].isBlank()) {
             returnSplit[DESCRIPTION] = EMPTY;
-            returnSplit[TIME] = EMPTY;
+            returnSplit[DATE] = EMPTY;
         } else {
             returnSplit[DESCRIPTION] = obtainedDescription[1].trim();
 
             /* Check for missing slash word */
             if (obtainedSplit.length == 1 || Character.isWhitespace(obtainedSplit[1].charAt(0))) {
                 returnSplit[MISSING_SLASH] = YES;
-                returnSplit[TIME_INCLUDED] = YES;
-                returnSplit[TIME] = EMPTY;
+                returnSplit[DATE_INCLUDED] = YES;
+                returnSplit[DATE] = EMPTY;
                 returnSplit[SLASH_WORD] = EMPTY;
                 return returnSplit;
             }
 
-            String[] slashWordTimeArray = obtainedSplit[1].trim().split(" ", 2);
+            String[] slashWordDateArray = obtainedSplit[1].trim().split(" ", 2);
 
             /* Check for the correctness of slash word */
             if (obtainedDescription[0].toLowerCase().equals(DEADLINE) &&
-                    !slashWordTimeArray[0].toLowerCase().equals(BY)) {
+                    !slashWordDateArray[0].toLowerCase().equals(BY)) {
                 returnSplit[MISSING_SLASH] = WRONG;
             } else if (obtainedDescription[0].toLowerCase().equals(EVENT) &&
-                    !(slashWordTimeArray[0].toLowerCase().equals(ON) ||
-                            slashWordTimeArray[0].toLowerCase().equals(AT))) {
+                    !(slashWordDateArray[0].toLowerCase().equals(ON) ||
+                            slashWordDateArray[0].toLowerCase().equals(AT))) {
                 returnSplit[MISSING_SLASH] = WRONG;
             } else {
                 returnSplit[MISSING_SLASH] = EMPTY;
             }
 
-            /* Get the time in the input given */
-            returnSplit[TIME] = obtainedSplit[1].trim();
-            returnSplit[TIME_INCLUDED] = YES;
+            /* Get the date in the input given */
+            returnSplit[DATE] = obtainedSplit[1].trim();
+            returnSplit[DATE_INCLUDED] = YES;
         }
         return returnSplit;
     }
@@ -245,18 +252,16 @@ public class Parser {
      * The actual method used to check the task input by the user. If there is any error in the user input, it will
      * throw the respective exception calls
      * @param spaceUserInputSplit   the <code>String[]</code> array which contains the user input split by space (so as
-     *                              to
-     *                              obtain the type of command)
+     *                              to obtain the type of command)
      * @param partialUserInputSplit the <code>String[]</code> array which contains the user input split into its
-     *                              description
-     *                              and time/date
+     *                              description and date
      * @throws InvalidTaskException        exception thrown when the task given is not a valid task and hence not a
      *                                     valid command
      * @throws MissingDescriptionException exception thrown when the task given has no description attached to it
      *                                     despite expecting it
      * @throws MissingNumberFieldException exception thrown when the task given lacks a number field. Only used for
      *                                     <code>DELETE</code> and <code>DONE</code> commands
-     * @throws MissingTimeFieldException   exception thrown when no date or time given despite expecting it
+     * @throws MissingDateFieldException   exception thrown when no date given despite expecting it
      * @throws MissingSlashWordException   exception thrown when no slash word is given despite expecting it
      * @throws DateTimeException           exception thrown when the date given cannot be parsed
      * @throws WrongSlashWordException     exception thrown when the slash word provided is not correct. Only used for
@@ -264,7 +269,7 @@ public class Parser {
      */
     private void validateTask(String[] spaceUserInputSplit, String[] partialUserInputSplit)
             throws InvalidTaskException, MissingDescriptionException, MissingNumberFieldException,
-            MissingTimeFieldException, DateTimeException, MissingSlashWordException, WrongSlashWordException {
+            MissingDateFieldException, DateTimeException, MissingSlashWordException, WrongSlashWordException {
 
         String nameOfTask = spaceUserInputSplit[TYPE_OF_COMMAND].toLowerCase();
 
@@ -289,16 +294,16 @@ public class Parser {
                 /* The task is missing its description */
                 throw new MissingDescriptionException(Ui.displayMissingDescriptionError());
             }
-            if (partialUserInputSplit[TIME_INCLUDED].equals(YES)) {
+            if (partialUserInputSplit[DATE_INCLUDED].equals(YES)) {
 
                 /* Test for the correct slash word */
                 testSlashWord(partialUserInputSplit);
 
-                String obtainedTime = partialUserInputSplit[1];
-                String[] timeCheck = obtainedTime.split(" ", 2);
+                String obtainedDate = partialUserInputSplit[1];
+                String[] dateCheck = obtainedDate.split(" ", 2);
 
                 /* Test if the date is present and if so, if the date is formatted correctly */
-                testParseDate(timeCheck);
+                testParseDate(dateCheck);
 
             }
 
@@ -308,7 +313,7 @@ public class Parser {
     /**
      * Helper method to test and check if the input is missing or have the wrong slash word
      * @param partialUserInputSplit the <code>String[]</code> array which contains the user input split into its
-     *                              description and time/date
+     *                              description and date
      * @throws MissingSlashWordException exception thrown when no slash word is given despite expecting it
      * @throws WrongSlashWordException   exception thrown when the slash word given is wrong
      */
@@ -325,17 +330,17 @@ public class Parser {
 
     /**
      * Helper method to test and check if the input date is missing (if duke expects it) or is formatted wrongly
-     * @param timeCheck the supposed string that should contain a date itself
-     * @throws MissingTimeFieldException exception thrown when no date given despite expecting it
+     * @param dateCheck the supposed string that should contain a date itself
+     * @throws MissingDateFieldException exception thrown when no date given despite expecting it
      * @throws DateTimeException         exception thrown when the date given cannot be parsed
      */
-    private void testParseDate(String[] timeCheck)
-            throws MissingTimeFieldException, DateTimeException {
-        if (timeCheck.length == 1 || timeCheck[1].isBlank()) {
-            throw new MissingTimeFieldException(Ui.displayMissingTimeError());
+    private void testParseDate(String[] dateCheck)
+            throws MissingDateFieldException, DateTimeException {
+        if (dateCheck.length == 1 || dateCheck[1].isBlank()) {
+            throw new MissingDateFieldException(Ui.displayMissingDateError());
         }
         try {
-            LocalDate d1 = LocalDate.parse(timeCheck[1].trim());
+            LocalDate d1 = LocalDate.parse(dateCheck[1].trim());
 
         } catch (DateTimeParseException m) {
             throw new DateTimeException(

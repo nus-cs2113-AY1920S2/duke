@@ -1,9 +1,12 @@
-package duke;
+package duke.ui;
 
+import duke.tasklist.TaskList;
 import duke.tasktypes.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static duke.storage.Storage.*;
 
 /**
  * Represent the UI that the user uses to interact with Duke. Contains the display methods and user input methods.
@@ -22,6 +25,10 @@ public class Ui {
     private static final String HAPPY = "ヽ(*・ω・)ﾉ \n";
     private static final String SIGH = "＼(￣▽￣)／ \n";
     private static final String SURPRISED_2 = "(*´▽`*) \n";
+    private static final int FIRST_LETTER_OF_TASK_TYPE = 0;
+    private static final int SAVED_DESCRIPTION = 2;
+    private static final int IS_TASK_DONE = 1;
+    private static final int SAVED_DATE = 3;
     private Scanner myInput;
 
     public Ui() {
@@ -197,9 +204,9 @@ public class Ui {
 
     /**
      * The message shown if the date is missing despite duke expecting for it
-     * @return the message to indicate that time is missing
+     * @return the message to indicate that date is missing
      */
-    public static String displayMissingTimeError() {
+    public static String displayMissingDateError() {
         return "Missing date!";
     }
 
@@ -269,6 +276,22 @@ public class Ui {
      */
     public static void displayLineSeparator() {
         System.out.println(LINE_SEPARATOR);
+    }
+
+    /**
+     * Format the data into a string that can be used by the filewrite to write into saved data
+     * @param getTaskInfo the <code>String[]</code> array that contains the information needed for saving the data
+     * @return a string that can be used by filewriter to write into data
+     */
+    public static String formatSavedDataInput(String[] getTaskInfo) {
+        return getTaskInfo[FIRST_LETTER_OF_TASK_TYPE]
+                + " | "
+                + getTaskInfo[IS_TASK_DONE]
+                + " | "
+                + getTaskInfo[SAVED_DESCRIPTION]
+                + " | "
+                + getTaskInfo[SAVED_DATE]
+                + System.lineSeparator();
     }
 
     /**

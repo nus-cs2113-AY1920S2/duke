@@ -1,9 +1,11 @@
-package duke;
+package duke.command;
 
+import duke.tasklist.TaskList;
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
 import duke.tasktypes.Todo;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -82,7 +84,7 @@ public class Command {
      * </p>
      * @param timeOfCommand the date with the slash word
      */
-    public void setTimeOfCommand(String timeOfCommand) {
+    public void setDateOfCommand(String timeOfCommand) {
         this.timeOfCommand = timeOfCommand;
     }
 

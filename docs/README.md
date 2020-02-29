@@ -64,15 +64,17 @@
             - [Example outcome:](#example-outcome)
         - [Example of usage:](#example-of-usage-8)
             - [Expected outcome if keyword/sentence cannot be found:](#expected-outcome-if-keywordsentence-cannot-be-found)
+        - [Example of wrong usage (missing keyword/sentence):](#example-of-wrong-usage-missing-keyword/sentence)
+            - [Expected error outcome:](#expected-error-outcome-14)
     - [`done [tasknumber in list]` - Mark a task as done in duke by the list's task number](#done-tasknumber-in-list---mark-a-task-as-done-in-duke-by-the-lists-task-number)
         - [Example of usage:](#example-of-usage-9)
             - [Expected outcome:](#expected-outcome-6)
         - [Example of wrong usage (no task number given):](#example-of-wrong-usage-no-task-number-given-1)
-            - [Expected error outcome:](#expected-error-outcome-14)
-        - [Example of wrong usage (task number is not a number):](#example-of-wrong-usage-task-number-is-not-a-number-1)
             - [Expected error outcome:](#expected-error-outcome-15)
-        - [Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range):](#example-of-wrong-usage-task-number-chosen-do-not-correspond-to-any-task-in-the-list-due-to-being-out-of-range-1)
+        - [Example of wrong usage (task number is not a number):](#example-of-wrong-usage-task-number-is-not-a-number-1)
             - [Expected error outcome:](#expected-error-outcome-16)
+        - [Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range):](#example-of-wrong-usage-task-number-chosen-do-not-correspond-to-any-task-in-the-list-due-to-being-out-of-range-1)
+            - [Expected error outcome:](#expected-error-outcome-17)
     - [`bye` - exit Duke](#bye---exit-duke)
         - [Example of usage:](#example-of-usage-10)
             - [Expected outcome:](#expected-outcome-7)
@@ -131,7 +133,7 @@ Duke supports **TODO** tasks. In a **TODO** task, it contains:
 
 Format: `todo [description]`
 
-##### Example of usage: 
+#### Example of usage: 
 - `todo eat noodles`
 
 ##### Expected outcome:
@@ -145,7 +147,7 @@ Got it. I've added this task: [T][✘] eat noodles
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing description): 
+#### Example of wrong usage (missing description): 
 - `todo`
 
 ##### Expected error outcome:
@@ -168,7 +170,7 @@ Duke supports **EVENT** tasks. In a **EVENT** task, it contains:
 
 Format: `event [description] /[slash word] [yyyy-mm-dd]`
 
-##### Example of usage: 
+#### Example of usage: 
 - `event meet friends /at 2020-12-12`
 
 ##### Expected outcome:
@@ -181,7 +183,7 @@ Got it. I've added this task: [E][✘] meet friends (at: Dec 12 2020)
 What else do you want to do?
 ```
 
-##### Example of usage: 
+#### Example of usage: 
 - `event group project /on 2020-12-13`
 
 ##### Expected outcome:
@@ -194,7 +196,7 @@ Got it. I've added this task: [E][✘] group project (on: Dec 13 2020)
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing description): 
+#### Example of wrong usage (missing description): 
 
 - `event`
 
@@ -208,7 +210,7 @@ Exception occurred: duke.exception.MissingDescriptionException: Missing descript
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing slash word): 
+#### Example of wrong usage (missing slash word): 
 
 - `event sports meeting`
 - `event sports meeting /`
@@ -224,7 +226,7 @@ Exception occurred: duke.exception.MissingSlashWordException: Missing slash word
 What else do you want to do?
 ```
 
-##### Example of wrong usage (wrong slash word): 
+#### Example of wrong usage (wrong slash word): 
 
 - `event sports meeting /through`
 
@@ -240,7 +242,7 @@ for DEADLINE: the slash word can only be 'by'
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing date): 
+#### Example of wrong usage (missing date): 
 
 - `event sports meeting /on `
 
@@ -250,12 +252,12 @@ What else do you want to do?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 (」°ロ°)」
 
-Exception occurred: duke.exception.MissingTimeFieldException: Missing date!
+Exception occurred: duke.exception.MissingDateFieldException: Missing date!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
 
-##### Example of wrong usage (wrong date format): 
+#### Example of wrong usage (wrong date format): 
 
 - `event sports meeting /on 12-12-1990`
 
@@ -280,7 +282,7 @@ Duke supports **DEADLINE** tasks. In a **DEADLINE** task, it contains:
 
 Format: `deadline [description] /[slash word] [yyyy-mm-dd]`
 
-##### Example of usage: 
+#### Example of usage: 
 `deadline math homework /by 2020-12-12`
 
 ##### Expected outcome:
@@ -293,7 +295,7 @@ Got it. I've added this task: [D][✘] math homework (by: Dec 12 2020)
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing description): 
+#### Example of wrong usage (missing description): 
 
 - `deadline`
 
@@ -307,7 +309,7 @@ Exception occurred: duke.exception.MissingDescriptionException: Missing descript
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing slash word): 
+#### Example of wrong usage (missing slash word): 
 
 - `deadline Math homework`
 - `deadline Math homework /`
@@ -323,7 +325,7 @@ Exception occurred: duke.exception.MissingSlashWordException: Missing slash word
 What else do you want to do?
 ```
 
-##### Example of wrong usage (wrong slash word): 
+#### Example of wrong usage (wrong slash word): 
 
 - `deadline Math homework /in`
 
@@ -339,7 +341,7 @@ for DEADLINE: the slash word can only be 'by'
 What else do you want to do?
 ```
 
-##### Example of wrong usage (missing date): 
+#### Example of wrong usage (missing date): 
 
 - `deadline Math homework /by  `
 
@@ -349,12 +351,12 @@ What else do you want to do?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 (」°ロ°)」
 
-Exception occurred: duke.exception.MissingTimeFieldException: Missing date!
+Exception occurred: duke.exception.MissingDateFieldException: Missing date!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 ```
 
-##### Example of wrong usage (wrong date format): 
+#### Example of wrong usage (wrong date format): 
 
 - `deadline Math homework /by 12-12-1990`
 
@@ -374,7 +376,7 @@ What else do you want to do?
 If there is any task stored in Duke, it will display all of them. However, if there is no tasks present, it will report that there is no tasks present
 
 Format: `list`
-##### Example of usage: 
+#### Example of usage: 
 - `list`
 
 ##### Expected outcome if there are tasks:
@@ -423,7 +425,7 @@ Given this list:
 7. [T][✘] buy chocolate
 ```
 
-##### Example of usage: 
+#### Example of usage: 
 - `delete 3`
 
 ##### Expected outcome:
@@ -438,7 +440,7 @@ Now you have 6 tasks in the list
 What else do you want to do?
 ```
 
-##### Example of wrong usage (no task number given): 
+#### Example of wrong usage (no task number given): 
 
 - `delete`
 
@@ -452,7 +454,7 @@ Exception occurred: duke.exception.MissingNumberFieldException: DELETE's number 
 What else do you want to do?
 ```
 
-##### Example of wrong usage (task number is not a number): 
+#### Example of wrong usage (task number is not a number): 
 
 - `delete words`
 - `delete 3 dreams`
@@ -467,7 +469,7 @@ Exception occurred: java.lang.NumberFormatException: DELETE's number field does 
 What else do you want to do?
 ```
 
-##### Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range): 
+#### Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range): 
 
 - `delete 0`
 - `delete 10` (when there is < 10 tasks) 
@@ -501,7 +503,7 @@ Given this list:
 7. [T][✘] buy chocolate
 ```
 
-##### Example of usage: 
+#### Example of usage: 
 - `find go`
 
 ##### Expected outcome:
@@ -516,7 +518,7 @@ Given this list:
 What else do you want to do?
 ```
 
-##### Example of usage: 
+#### Example of usage: 
 - `find english homework`
 
 ##### Example outcome:
@@ -530,7 +532,7 @@ What else do you want to do?
 What else do you want to do?
 ```
 
-##### Example of usage: 
+#### Example of usage: 
 - `find johnny`
 
 ##### Expected outcome if keyword/sentence cannot be found:
@@ -539,6 +541,21 @@ What else do you want to do?
 ╮(￣ω￣;)╭ 
 
 This word/sentence is not found!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+What else do you want to do?
+
+```
+
+#### Example of wrong usage (missing keyword/sentence):
+- `find`
+- `find `
+
+##### Expected error outcome:
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(」°ロ°)」
+
+Exception occurred: duke.exception.MissingDescriptionException: Missing description!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 What else do you want to do?
 

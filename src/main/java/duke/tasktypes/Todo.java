@@ -1,8 +1,7 @@
 package duke.tasktypes;
 
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import duke.storage.Storage;
 
 /**
  * The <code>TODO</code> type class
@@ -25,11 +24,11 @@ public class Todo extends Task {
      * Gets the <code>TODO</code> information stored nicely in a <code>String[]</code> array
      * <p></p>
      * <p>
-     * Used in the {@link duke.Storage} class for retrieving the <code>TODO</code> task's information to store it as
+     * Used in the {@link Storage} class for retrieving the <code>TODO</code> task's information to store it as
      * offline saved data
      * </p>
-     * @return a <code>String[]</code> array containing the description, the time and whether the event is done
-     * @see duke.Storage#save
+     * @return a <code>String[]</code> array containing the description, the date and whether the event is done
+     * @see Storage#save
      */
     @Override
     public String[] getTaskInfo() {

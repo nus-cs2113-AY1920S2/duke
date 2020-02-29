@@ -1,9 +1,11 @@
-package duke;
+package duke.storage;
 
+import duke.tasklist.TaskList;
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
 import duke.tasktypes.Todo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,18 +22,18 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    public static final int SAVED_DESCRIPTION = 2;
-    public static final int FIRST_LETTER_OF_TASK_TYPE = 0;
-    public static final int IS_TASK_DONE = 1;
-    public static final int SAVED_TIME = 3;
-    public static final String ERROR_IN_WRITING_FILE = ": Error in writing file!";
-    public static final String FILE_NOT_FOUND = ": File not found!";
-    public static final String SAVED_TXT_PATH = "data/duke.txt";
-    public static final String DIRECTORY_NAME = "data";
-    public static final String ONE = "1";
-    public static final String EMPTY = "";
+    private static final int SAVED_DESCRIPTION = 2;
+    private static final int FIRST_LETTER_OF_TASK_TYPE = 0;
+    private static final int IS_TASK_DONE = 1;
+    private static final int SAVED_DATE = 3;
+    private static final String ERROR_IN_WRITING_FILE = ": Error in writing file!";
+    private static final String FILE_NOT_FOUND = ": File not found!";
+    private static final String SAVED_TXT_PATH = "data/duke.txt";
+    private static final String DIRECTORY_NAME = "data";
+    private static final String ONE = "1";
+    private static final String EMPTY = "";
     private static final int DESCRIPTION = 2;
-    private static final int TIME = 3;
+    private static final int DATE = 3;
     private static final String T = "T";
     private static final String E = "E";
     private static final String D = "D";
@@ -41,9 +43,9 @@ public class Storage {
     }
 
     /**
-     * The actual loading of the data from the saved data before return a task list. If there is no saved data present,
-     * this will return an empty task list. Else, it will load the tasks found in the task list and return the filled
-     * task list
+     * The actual loading of the data from the saved data before returning a task list. If there is no saved data
+     * present, this will return an empty task list. Else, it will load the tasks found in the task list and return
+     * the filled task list
      * @return an <code>ArrayList<Task></code> containing the tasks. Will be empty if there is no saved tasks
      */
     public ArrayList<Task> load() {
@@ -58,7 +60,7 @@ public class Storage {
                 Scanner s = initializeFileScanner(f);
                 while (s.hasNext()) {
                     String[] obtainedLine = extractData(s);
-                    String[] splitTaskDescriptionArray = formatDescriptionAndTime(obtainedLine);
+                    String[] splitTaskDescriptionArray = formatDescriptionAndDate(obtainedLine);
 
                     /* Import the tasks into the task list and check if the task is saved as done. If it is so, mark
                     the task as done */
@@ -106,14 +108,7 @@ public class Storage {
             /* Loop through the array list and store the tasks into the task list itself */
             for (int i = 0; i < numberOfTasks; i++) {
                 String[] getTaskInfo = taskList.get(i).getTaskInfo();
-                fw.write(getTaskInfo[FIRST_LETTER_OF_TASK_TYPE]
-                        + " | "
-                        + getTaskInfo[IS_TASK_DONE]
-                        + " | "
-                        + getTaskInfo[SAVED_DESCRIPTION]
-                        + " | "
-                        + getTaskInfo[SAVED_TIME]
-                        + System.lineSeparator());
+                fw.write(Ui.formatSavedDataInput(getTaskInfo));
             }
             fw.close();
 
@@ -123,6 +118,7 @@ public class Storage {
 
 
     }
+
 
     private Path getSaveDataPath() {
         return Paths.get("data", "duke.txt");
@@ -146,19 +142,19 @@ public class Storage {
     }
 
     /**
-     * Get the type of task, is task done, its description and time (if present) from the line of data
+     * Get the type of task, is task done, its description and date (if present) from the line of data
      * @param obtainedLine the line of data to parsed in <code>String[]</code> format
-     * @return a <code>String[]</code> array that contains the description and time as different array element
+     * @return a <code>String[]</code> array that contains the description and date as different array element
      */
-    private String[] formatDescriptionAndTime(String[] obtainedLine) {
+    private String[] formatDescriptionAndDate(String[] obtainedLine) {
         String[] splitTaskDescriptionArray = new String[4];
         splitTaskDescriptionArray[FIRST_LETTER_OF_TASK_TYPE] = obtainedLine[0].trim();
         splitTaskDescriptionArray[IS_TASK_DONE] = obtainedLine[1].trim();
         splitTaskDescriptionArray[DESCRIPTION] = obtainedLine[2].trim();
         if (obtainedLine.length == 4 && !obtainedLine[3].equals(" ")) {
-            splitTaskDescriptionArray[TIME] = obtainedLine[3].trim();
+            splitTaskDescriptionArray[DATE] = obtainedLine[3].trim();
         } else {
-            splitTaskDescriptionArray[TIME] = EMPTY;
+            splitTaskDescriptionArray[DATE] = EMPTY;
         }
         return splitTaskDescriptionArray;
     }
@@ -167,7 +163,7 @@ public class Storage {
      * The actual method used to insert a task (from the imported data) into the task list.
      * @param taskList                  the list of task to import the task into
      * @param splitTaskDescriptionArray the <code>String[]</code> array that contains the first letter of task type, is
-     *                                  the task done, the description and (if present) time of the task itself
+     *                                  the task done, the description and (if present) date of the task itself
      */
     private void importToList(ArrayList<Task> taskList, String[] splitTaskDescriptionArray) {
         Task newTask;
@@ -178,12 +174,12 @@ public class Storage {
             taskList.add(newTask);
             break;
         case E:
-            newTask = new Event(splitTaskDescriptionArray[DESCRIPTION], splitTaskDescriptionArray[TIME]);
+            newTask = new Event(splitTaskDescriptionArray[DESCRIPTION], splitTaskDescriptionArray[DATE]);
             checkIfTaskDone(newTask, splitTaskDescriptionArray[IS_TASK_DONE]);
             taskList.add(newTask);
             break;
         case D:
-            newTask = new Deadline(splitTaskDescriptionArray[DESCRIPTION], splitTaskDescriptionArray[TIME]);
+            newTask = new Deadline(splitTaskDescriptionArray[DESCRIPTION], splitTaskDescriptionArray[DATE]);
             checkIfTaskDone(newTask, splitTaskDescriptionArray[IS_TASK_DONE]);
             taskList.add(newTask);
             break;
