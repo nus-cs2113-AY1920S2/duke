@@ -20,8 +20,11 @@ Marks an item as completed.
  
 ### Feature 6 - delete
 Deletes an item from your todo list.
+
+### Feature 7 - find
+Finds all items that matches your search query.
  
-### Feature 7 - bye
+### Feature 8 - bye
 Quit the application, storing all items in your todo list onto your hard drive.
  
  
@@ -38,6 +41,8 @@ Expected outcome:
 ```
 ____________________________________________________________
  Here are the tasks in your list:
+ 1. [T][1] Wash the dishes
+ 2. [E][ ] Attend interview for the news (at: 1 March 1pm)
 ____________________________________________________________
 
 ```
@@ -49,8 +54,8 @@ Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task: 
-   [T][✗] Practice coding
- Now you have 1 tasks in the list.
+   [T][ ] Practice coding
+ Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
  
@@ -61,8 +66,8 @@ Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
-   [E][✗] Watch the News (at: 1am)
- Now you have 2 tasks in the list.
+   [E][ ] Watch the news (at: 1am)
+ Now you have 4 tasks in the list.
  ____________________________________________________________
 ```
  
@@ -73,31 +78,43 @@ Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
-   [D][✗] Submit 1st draft for Joker 2 (by: 1st March 5pm)
- Now you have 3 tasks in the list.
+   [D][ ] Submit 1st draft for Joker 2 (by: 1st March 5pm)
+ Now you have 5 tasks in the list.
 ____________________________________________________________
 ```
  
 ### `done` - marks an item as completed
 Example of usage: 
-`done 1`
+`done 3`
 Expected outcome:
 ```
 ____________________________________________________________
  Nice! I've marked this task as done:
-   [T][✓] Practice coding
+   [T][1] Practice coding
 ____________________________________________________________
 ```
  
 ### `delete` - deletes an item
 Example of usage: 
-`delete 1`
+`delete 3`
 Expected outcome:
 ```
 ____________________________________________________________
  Noted. I've removed this task: 
-   [T][✓] Practice coding
- Now you have 2 tasks in the list.
+   [T][1] Practice coding
+ Now you have 4 tasks in the list.
+____________________________________________________________
+```
+ 
+### `find` - find all matching tasks
+Example of usage: 
+`find news`
+Expected outcome:
+```
+____________________________________________________________
+ Here are the matching tasks in your list:
+ 2.[E][ ] Attend interview for the news (at: 1 March 1pm)
+ 3.[E][ ] Watch the news (at: 1am)
 ____________________________________________________________
 ```
  
