@@ -18,7 +18,7 @@ public class AddEventCommand extends Command {
      * @param taskName task name
      * @param timeSlot time slot of the task
      */
-    public AddEventCommand(String taskName, String timeSlot) throws DukeException{
+    public AddEventCommand(String taskName, String timeSlot){
         this.taskName = taskName;
         this.timeSlot = timeSlot;
     }

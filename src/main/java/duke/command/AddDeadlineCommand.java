@@ -18,7 +18,7 @@ public class AddDeadlineCommand extends Command {
      * @param taskName task name
      * @param deadline deadline of the task
      */
-    public AddDeadlineCommand(String taskName, String deadline) throws DukeException {
+    public AddDeadlineCommand(String taskName, String deadline){
         this.taskName = taskName;
         this.deadline = deadline;
     }
