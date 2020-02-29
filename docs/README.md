@@ -33,9 +33,9 @@ Add a new task for DUKE to store
 
 `todo [description]`
 
-`deadline [description] /by [by deadline]`
+`deadline [description] /by [deadline]`
 
-`event [description] /at [at place/time]`
+`event [description] /at [place/time]`
 
 ###### Example: 
  
