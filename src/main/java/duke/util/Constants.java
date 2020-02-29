@@ -57,9 +57,9 @@ public class Constants {
             + "done.";
     public static final String LIST_COMMAND_HELP_MESSAGE = "key in `list` or `ls` to list all the tasks.";
     public static final String TODO_COMMAND_HELP_MESSAGE = "key in `todo/td <task_description>` to add a todo task.";
-    public static final String DEADLINE_COMMAND_HELP_MESSAGE = "key in `deadline/ddl <task_description> -by "
+    public static final String DEADLINE_COMMAND_HELP_MESSAGE = "key in `deadline/ddl <task_description> /by "
             + "<deadline>` to add a deadline task.";
-    public static final String EVENT_COMMAND_HELP_MESSAGE = "key in `event/evt <task_description> -at <event_date>` "
+    public static final String EVENT_COMMAND_HELP_MESSAGE = "key in `event/evt <task_description> /at <event_date>` "
             + "to add an event task.";
     public static final String DELETE_COMMAND_HELP_MESSAGE = "key in `delete/del <task_id>` to delete the task of "
             + "<task_id>.";
