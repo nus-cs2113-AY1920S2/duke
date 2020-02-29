@@ -34,11 +34,11 @@ it will read from the written text file to pick up where it left off.
 
 ### `todo`
 
-Example of usage:
+**Example of usage:**
 
 *todo read book*
 
-Expected outcome:
+**Expected outcome:**
 
 *Got it. I've added this task:*
 
@@ -48,11 +48,11 @@ Expected outcome:
 
 ### `event`
 
-Example of usage: 
+**Example of usage:**
 
 *event concert /at March 23rd*
 
-Expected outcome:
+**Expected outcome:**
 
 *Got it. I've added this task:*
 
@@ -62,11 +62,11 @@ Expected outcome:
 
 ### `deadline`
 
-Example of usage: 
+**Example of usage:** 
 
 *deadline return book /by Tuesday*
 
-Expected outcome:
+**Expected outcome:**
 
 *Got it. I've added this task:*
 
@@ -76,11 +76,11 @@ Expected outcome:
 
 ### `find`
 
-Example of usage: 
+**Example of usage:** 
 
 *find book*
 
-Expected outcome:
+**Expected outcome:**
 
 *Here are matching tasks in your list:*
 
@@ -90,11 +90,11 @@ Expected outcome:
 
 ### `done`
 
-Example of usage: 
+**Example of usage:** 
 
 *done 1*
 
-Expected outcome:
+**Expected outcome:**
 
 *Good work! I've marked this task as done!*
 
@@ -102,11 +102,11 @@ Expected outcome:
 
 ### `list`
 
-Example of usage: 
+**Example of usage:** 
 
 *list*
 
-Expected outcome:
+**Expected outcome:**
 
 *Here are the tasks in your list:*
 
@@ -118,11 +118,11 @@ Expected outcome:
 
 ### `delete`
 
-Example of usage: 
+**Example of usage:** 
 
 *delete 3*
 
-Expected outcome:
+**Expected outcome:**
 
 *Noted. I've removed this task:*
 
@@ -132,10 +132,10 @@ Expected outcome:
 
 ### `bye`
 
-Example of usage: 
+**Example of usage:** 
 
 *bye*
 
-Expected outcome:
+**Expected outcome:**
 
 *Bye! See ya next time :)*
