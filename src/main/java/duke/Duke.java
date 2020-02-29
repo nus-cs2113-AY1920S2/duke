@@ -33,25 +33,25 @@ public class Duke {
             } else if (cWord.equals("done")) {
                 try {
                     doneCommand(input, f);
-                } catch (DukeException e){
+                } catch (DukeException e) {
                     System.out.println("    You must include the number of the completed task!");
                 }
             } else if (cWord.equals("todo")) {
                 try {
                     todoCommand(task, f);
-                } catch (DukeException e){
+                } catch (DukeException e) {
                     System.out.println("    You must include what needs to be done!");
                 }
             } else if (cWord.equals("deadline")) {
                 try {
                     deadlineCommand(task, f);
-                } catch (DukeException e){
+                } catch (DukeException e) {
                     System.out.println("    You must specify when the deadline is by!");
                 }
             } else if (cWord.equals("event")) {
                 try {
                     eventCommand(task, f);
-                } catch (DukeException e){
+                } catch (DukeException e) {
                     System.out.println("    You must specify when the event is at!");
                 }
             } else if (cWord.equals("delete")) {
