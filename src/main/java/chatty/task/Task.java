@@ -67,5 +67,5 @@ public abstract class Task {
      *
      * @return String representing the task which should be stored in file.
      */
-    abstract public String getFileString();
+    public abstract String getFileString();
 }

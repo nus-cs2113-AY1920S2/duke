@@ -39,8 +39,7 @@ public class Parser {
      *
      * @param userInput The user input to be parsed.
      * @return The parsed command.
-     * @throws ChattyChatBotException         Throws ChattyChatBotException if the user input does not match with any
-     * command.
+     * @throws ChattyChatBotException         Throws ChattyChatBotException if user input does not match any command.
      * @throws ArrayIndexOutOfBoundsException Throws ArrayIndexOutOfBoundsException if there are not enough fields
      *                                        when parsing deadline or event command.
      */
