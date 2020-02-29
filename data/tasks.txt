@@ -1,4 +1,0 @@
-T | 0 | read book
-D | 1| return book | sunday
-E | 0 | project meeting | Monday 1:20-2:20pm
-T | 0 | read materials
