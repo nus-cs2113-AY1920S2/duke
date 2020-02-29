@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.commands.Command;
+import duke.commands.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,6 +26,13 @@ public class Ui {
         System.out.println("    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                 "    ____________________________________________________________");
+    }
+
+    public static void showInvalidFindError() {
+        System.out.println("    ____________________________________________________________\n" +
+                "     There is no such item in the list, try again!\n" +
+                "    ____________________________________________________________");
+
     }
 
     public void showNonExistentTaskInList(){
@@ -57,6 +65,25 @@ public class Ui {
                 + m
                 + "\n     Now you have " + size + " tasks in the list."
                 + "\n    ____________________________________________________________");
+    }
+
+    public void showFindOutput(String target) {
+        int printCheck = 0;
+        for (int i = 0; i < TaskList.list.size(); i++){
+            if (TaskList.list.get(i).command.contains(target)) {
+                if (printCheck == 0) {
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     Here are the matching tasks in your list:");
+                    printCheck++;
+                }
+                System.out.println("     "+ (i+1) + "." + TaskList.list.get(i).command);
+            }
+        }
+        if (printCheck == 1) {
+            System.out.println("    ____________________________________________________________");
+        } else {
+            showInvalidFindError();
+        }
     }
 
     public void showDeleteOutput(String m, int size){

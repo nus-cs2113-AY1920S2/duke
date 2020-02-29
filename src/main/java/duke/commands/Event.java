@@ -16,10 +16,10 @@ public class Event extends Command {
         super("[E][✗] "
                 + input.replaceFirst("/at","(at:").trim() + ")");
         if (input.replaceFirst("/at(.*)","").matches("\\s*")){
-            throw new DukeException(1,"event");
+            throw new DukeException("event", 1);
         }
         if (!input.matches(".*/at\\s+\\w+.*")){
-            throw new DukeException(2,"event");
+            throw new DukeException("event", 2);
         }
     }
 

@@ -15,10 +15,10 @@ public class Deadline extends Command {
         super("[D][✗] "
                 + input.replaceFirst("/by","(by:").trim() + ")");
         if (input.replaceFirst("/by(.*)","").matches("\\s*")){
-            throw new DukeException(1,"deadline");
+            throw new DukeException("deadline",1);
         }
         if (!input.matches(".*/by\\s+\\w+.*")){
-            throw new DukeException(2,"deadline");
+            throw new DukeException("deadline", 2);
         }
     }
 
