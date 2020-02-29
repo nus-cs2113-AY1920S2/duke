@@ -75,7 +75,6 @@ public class Manager {
                 throw new DukeException();
             }
         } catch (DukeException e) {
-            //catch invalid commands
             TextUi.printInvalidCommand();
         }
     }
