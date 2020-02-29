@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -26,7 +27,7 @@ public class ByCommand extends Command {
     public ByCommand(TaskList taskList, LocalDateTime dateTime) {
         super(taskList);
         this.dateTime = dateTime;
-        this.message = "These are your tasks by " + this.dateTime + ":";
+        this.message = "These are your tasks by " + this.dateTime.format(Parser.DTF) + ":";
         this.isPersistentCommand = false;
     }
 

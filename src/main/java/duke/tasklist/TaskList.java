@@ -58,7 +58,7 @@ public class TaskList {
     public void addTask(Task newTask) {
         tasks.add(newTask);
         String message = "Added this task:" + System.lineSeparator() + newTask.toString() + System.lineSeparator() +
-                "Now you have " + tasks.size() + " tasks in the list";
+                "Now you have " + tasks.size() + " task(s) in your list";
         Ui.printPretty(message);
     }
 
