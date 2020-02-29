@@ -1,5 +1,8 @@
 package types;
 
+/**
+ * Represents an event and where it is at
+ */
 public class Event extends Task {
 
     /**

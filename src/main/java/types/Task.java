@@ -1,5 +1,8 @@
 package types;
 
+/**
+ * Represents a single task, which can be a to do, event, or deadline
+ */
 public class Task {
 
     /**

@@ -2,6 +2,9 @@ package duke;
 
 import types.Task;
 
+/**
+ * Represents the task list and corresponding methods for Duke
+ */
 public class TaskList {
 
     /**

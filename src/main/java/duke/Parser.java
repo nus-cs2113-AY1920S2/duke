@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Makes sense of all user input for Duke
+ */
 public class Parser {
 
     /**

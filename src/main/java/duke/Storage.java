@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the classes for all saving/writing in Duke
+ */
 public class Storage {
 
     /**
