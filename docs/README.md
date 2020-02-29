@@ -9,7 +9,7 @@ There are 3 types of tasks that can be added. They are:
 1. Deadline - A task that is due at a specified date. Users must indicate the date of the deadline, while indicating the time is optional.
 
 #### 2) Mark Tasks as Done
-Users are able to mark Tasks as done once they have finished it. This allows for the chatbot to accurately check the status of all saved tasks for other functions that take into account the completion status of each task.
+Users are able to mark tasks as done once they have finished it. This allows for the chatbot to accurately check the status of all saved tasks for other functions that take into account the completion status of each task.
 
 #### 3) Search for Tasks
 The chatbot comes with a search function, and will return all tasks that contain the keyword or character sequence that the user has input.
@@ -28,6 +28,21 @@ All tasks will be automatically saved in an external text file `Duke.txt`. Pleas
 
 
 ## Usage
+
+#### `help` - Accesses the help page
+
+Shows the help page which contains all accepted commands and formats. Please check the help page if you are using this program for the first time.
+
+Example of usage: 
+
+`help`
+
+Expected outcome:
+
+<code>Welcome to the Help Page<br/>
+Here is a list of valid commands and formats:<br/>
+&nbsp;&nbsp;1) todo <task description>  -  adds a todo task<br/>
+&nbsp;&nbsp;&nbsp; ...&nbsp;&nbsp;...&nbsp;&nbsp;...</code>
 
 #### `todo` - Adds a todo task
 

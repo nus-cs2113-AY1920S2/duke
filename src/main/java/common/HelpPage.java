@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * Help page containing all valid commands and formats.
+ */
 public class HelpPage {
 	
 	public final static String HelpMessage = "Welcome to the Help Page" + '\n'

@@ -112,7 +112,8 @@ public class TaskList {
                     throw new DukeException("Oops!! Unknown Command.");
             }
         } catch (DukeException exception) {
-            msg += exception.getMessage();
+            msg += exception.getMessage() + '\n';
+            msg += "  Enter 'help' for a list of accepted commands and formats.";
         }
         ui.outputMessage(msg);
     }
