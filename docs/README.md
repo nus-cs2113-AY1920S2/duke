@@ -50,6 +50,7 @@ ____________________________________________________________
 ### `todo` - adds a general item
 Example of usage: 
 `todo Practice coding`
+
 Expected outcome:
 ```
 ____________________________________________________________
@@ -62,6 +63,7 @@ ____________________________________________________________
 ### `event` - adds an event at a specified time
 Example of usage: 
 `event Watch the News /at 1am`
+
 Expected outcome:
 ```
 ____________________________________________________________
@@ -74,6 +76,7 @@ ____________________________________________________________
 ### `deadline` - adds an item with a deadline
 Example of usage: 
 `deadline Submit 1st draft for Joker 2 /by: 1st March 5pm`
+
 Expected outcome:
 ```
 ____________________________________________________________
@@ -86,6 +89,7 @@ ____________________________________________________________
 ### `done` - marks an item as completed
 Example of usage: 
 `done 3`
+
 Expected outcome:
 ```
 ____________________________________________________________
@@ -97,6 +101,7 @@ ____________________________________________________________
 ### `delete` - deletes an item
 Example of usage: 
 `delete 3`
+
 Expected outcome:
 ```
 ____________________________________________________________
@@ -109,6 +114,7 @@ ____________________________________________________________
 ### `find` - find all matching tasks
 Example of usage: 
 `find news`
+
 Expected outcome:
 ```
 ____________________________________________________________
@@ -121,6 +127,7 @@ ____________________________________________________________
 ### `bye` - exits program
 Example of usage: 
 `bye`
+
 Expected outcome:
 ```
 ____________________________________________________________
