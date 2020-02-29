@@ -10,7 +10,14 @@ import chatty.command.EventCommand;
 import chatty.command.FindCommand;
 import chatty.command.ListCommand;
 import chatty.command.TodoCommand;
+import chatty.exception.ChattyChatBotDateCommandException;
+import chatty.exception.ChattyChatBotDeadlineCommandException;
+import chatty.exception.ChattyChatBotDeleteCommandException;
+import chatty.exception.ChattyChatBotDoneCommandException;
+import chatty.exception.ChattyChatBotEventCommandException;
 import chatty.exception.ChattyChatBotException;
+import chatty.exception.ChattyChatBotFindCommandException;
+import chatty.exception.ChattyChatBotTodoCommandException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,32 +60,54 @@ public class Parser {
         case LIST_STRING:
             return new ListCommand();
         case DONE_STRING:
-            return new DoneCommand(Integer.parseInt(array[1]) - 1);
+            try {
+                return new DoneCommand(Integer.parseInt(array[1]) - 1);
+            } catch (Exception e) {
+                throw new ChattyChatBotDoneCommandException();
+            }
         case TODO_STRING:
-            return new TodoCommand(array[1]);
+            try {
+                return new TodoCommand(array[1]);
+            } catch (Exception e) {
+                throw new ChattyChatBotTodoCommandException();
+            }
         case DEADLINE_STRING:
-            String deadlineStr = array[1];
-            String[] deadlineFields = deadlineStr.split(BY_STRING);
-            if (deadlineFields.length != 2) {
-                throw new ArrayIndexOutOfBoundsException();
+            try {
+                String deadlineStr = array[1];
+                String[] deadlineFields = deadlineStr.split(BY_STRING);
+                return new DeadlineCommand(deadlineFields[0],
+                        LocalDate.parse(deadlineFields[1].trim(), DateTimeFormatter.ISO_DATE));
+            } catch (Exception e) {
+                throw new ChattyChatBotDeadlineCommandException();
             }
-            return new DeadlineCommand(deadlineFields[0],
-                    LocalDate.parse(deadlineFields[1].trim(), DateTimeFormatter.ISO_DATE));
         case EVENT_STRING:
-            String eventStr = array[1];
-            String[] eventFields = eventStr.split(AT_STRING);
-            if (eventFields.length != 2) {
-                throw new ArrayIndexOutOfBoundsException();
+            try {
+                String eventStr = array[1];
+                String[] eventFields = eventStr.split(AT_STRING);
+                String[] times = eventFields[1].split(TO_STRING);
+                return new EventCommand(eventFields[0], LocalDate.parse(times[0].trim(), DateTimeFormatter.ISO_DATE),
+                        LocalDate.parse(times[1].trim(), DateTimeFormatter.ISO_DATE));
+            } catch (Exception e) {
+                throw new ChattyChatBotEventCommandException();
             }
-            String[] times = eventFields[1].split(TO_STRING);
-            return new EventCommand(eventFields[0], LocalDate.parse(times[0].trim(), DateTimeFormatter.ISO_DATE),
-                    LocalDate.parse(times[1].trim(), DateTimeFormatter.ISO_DATE));
         case DELETE_STRING:
-            return new DeleteCommand(Integer.parseInt(array[1]) - 1);
+            try {
+                return new DeleteCommand(Integer.parseInt(array[1]) - 1);
+            } catch (Exception e) {
+                throw new ChattyChatBotDeleteCommandException();
+            }
         case FIND_STRING:
-            return new FindCommand(array[1]);
+            try {
+                return new FindCommand(array[1]);
+            } catch (Exception e) {
+                throw new ChattyChatBotFindCommandException();
+            }
         case DATE_STRING:
-            return new DateCommand(LocalDate.parse(array[1], DateTimeFormatter.ISO_DATE));
+            try {
+                return new DateCommand(LocalDate.parse(array[1], DateTimeFormatter.ISO_DATE));
+            } catch (Exception e) {
+                throw new ChattyChatBotDateCommandException();
+            }
         case BYE_STRING:
             return new ByeCommand();
         default:

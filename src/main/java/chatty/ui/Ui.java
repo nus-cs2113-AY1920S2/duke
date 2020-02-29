@@ -145,10 +145,53 @@ public class Ui {
     }
 
     /**
-     * Sends message to ask for more details from the user.
+     * Sends message to ask user follow done command format.
      */
-    public void askForMoreDetails() {
-        System.out.println("Please let me know more details so that I can help you");
+    public void sendDoneCommandExceptionMessage() {
+        System.out.println("Please follow the format 'done INDEX' for done command");
+    }
+
+    /**
+     * Sends message to ask user follow todo command format.
+     */
+    public void sendTodoCommandExceptionMessage() {
+        System.out.println("Please follow the format 'todo DESCRIPTION' for done command");
+    }
+
+    /**
+     * Sends message to ask user follow deadline command format.
+     */
+    public void sendDeadlineCommandExceptionMessage() {
+        System.out.println("Please follow the format 'deadline DESCRIPTION /by yyyy-mm-dd' for deadline command");
+    }
+
+    /**
+     * Sends message to ask user follow event command format.
+     */
+    public void sendEventCommandExceptionMessage() {
+        System.out.println("Please follow the format 'event DESCRIPTION /at yyyy-mm-dd to yyyy-mm-dd' " +
+                "for event command");
+    }
+
+    /**
+     * Sends message to ask user follow delete command format.
+     */
+    public void sendDeleteCommandExceptionMessage() {
+        System.out.println("Please follow the format 'delete INDEX' for delete command");
+    }
+
+    /**
+     * Sends message to ask user follow find command format.
+     */
+    public void sendFindCommandExceptionMessage() {
+        System.out.println("Please follow the format 'find KEYWORD' for find command");
+    }
+
+    /**
+     * Sends message to ask user follow date command format.
+     */
+    public void sendDateCommandExceptionMessage() {
+        System.out.println("Please follow the format 'date yyyy-mm-dd' for date command");
     }
 
     /**
@@ -156,20 +199,6 @@ public class Ui {
      */
     public void sendTaskNumberOutOfBoundMessage() {
         System.out.println("The number you entered does not match any task in your list");
-    }
-
-    /**
-     * Sends message to notify the user that the input task number is invalid.
-     */
-    public void sendWrongTaskNumberFormatMessage() {
-        System.out.println("Please enter a valid task number");
-    }
-
-    /**
-     * Sends message to notify user that the input date time does not follow the required format.
-     */
-    public void sendWrongDateTimeFormatMessage() {
-        System.out.println("Please use correct date time format: yyyy-mm-dd");
     }
 
     /**
@@ -206,10 +235,6 @@ public class Ui {
      */
     public void sendSaveTaskFailMessage() {
         System.out.println("Oops! Exception occurred when saving data to file.");
-    }
-
-    public void sendUnexpectedExceptionMessage() {
-        System.out.println("An unexpected exception occurred! Please try again.");
     }
 
     /**

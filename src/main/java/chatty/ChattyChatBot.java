@@ -1,13 +1,17 @@
 package chatty;
 
 import chatty.command.Command;
-import chatty.exception.ChattyChatBotException;
+import chatty.exception.ChattyChatBotDateCommandException;
+import chatty.exception.ChattyChatBotDeadlineCommandException;
+import chatty.exception.ChattyChatBotDeleteCommandException;
+import chatty.exception.ChattyChatBotDoneCommandException;
+import chatty.exception.ChattyChatBotEventCommandException;
+import chatty.exception.ChattyChatBotFindCommandException;
+import chatty.exception.ChattyChatBotTodoCommandException;
 import chatty.parser.Parser;
 import chatty.storage.Storage;
 import chatty.task.TaskList;
 import chatty.ui.Ui;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Entry point of ChattyChatBot where the application is initialized.
@@ -62,18 +66,24 @@ public class ChattyChatBot {
                 Command command = parser.parseCommand(fullCommand);
                 command.execute(taskList, ui, storage);
                 isBye = command.isBye();
-            } catch (ChattyChatBotException e) {
-                ui.sendDefaultResponse();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.askForMoreDetails();
+            } catch (ChattyChatBotDoneCommandException e) {
+                ui.sendDoneCommandExceptionMessage();
+            } catch (ChattyChatBotTodoCommandException e) {
+                ui.sendTodoCommandExceptionMessage();
+            } catch (ChattyChatBotDeadlineCommandException e) {
+                ui.sendDeadlineCommandExceptionMessage();
+            } catch (ChattyChatBotEventCommandException e) {
+                ui.sendEventCommandExceptionMessage();
+            } catch (ChattyChatBotDeleteCommandException e) {
+                ui.sendDeleteCommandExceptionMessage();
+            } catch (ChattyChatBotFindCommandException e) {
+                ui.sendFindCommandExceptionMessage();
+            } catch (ChattyChatBotDateCommandException e) {
+                ui.sendDateCommandExceptionMessage();
             } catch (IndexOutOfBoundsException e) {
                 ui.sendTaskNumberOutOfBoundMessage();
-            } catch (NumberFormatException e) {
-                ui.sendWrongTaskNumberFormatMessage();
-            } catch (DateTimeParseException e) {
-                ui.sendWrongDateTimeFormatMessage();
             } catch (Exception e) {
-                ui.sendUnexpectedExceptionMessage();
+                ui.sendDefaultResponse();
             } finally {
                 ui.sendLineBreak();
             }
