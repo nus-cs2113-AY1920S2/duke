@@ -269,7 +269,7 @@ Expected outcome:
 
 ```
     ____________________________________________________________
-		Here are the matching tasks in your list:
+	Here are the matching tasks in your list:
 	1.[D] [✘] finish iP (by: Mar 2 2020)
     ____________________________________________________________
 
