@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Text UI of the application.
+ * Text UI of the Duke application.
  */
 public class TextUi {
     private static final String DIVIDER = "===================================================";
