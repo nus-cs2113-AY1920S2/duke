@@ -62,7 +62,7 @@ ___
 
 ___
 * ## `event` <a name="event"></a>
-* #### keyword: `event` 
+  #### keyword: `event` 
   Add an `event` task to the list in ALIE, keeping a description and duedate of the task.
   It it able to keep track of time in the format `YYYY-MM-DD`, converting them to `dd MMM YYYY`.
   `event` tasks are marked with the symbol `[E]`.
@@ -131,7 +131,7 @@ ___
 ### 5. Find Task <a name="find"></a>
 #### keyword: `find`
 Find tasks by searching for a specified key. 
-The key can be a word, phrase or task name.
+The key can be a word, phrase or task name. <br/>
 It will display any task whose name matches the specific key.
 
 Syntax: `find <key>` 
