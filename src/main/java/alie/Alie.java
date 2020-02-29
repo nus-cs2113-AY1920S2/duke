@@ -7,6 +7,11 @@ import alie.exceptions.InvalidFileFormatException;
 
 import java.io.FileNotFoundException;
 
+/*
+@@author e0309556-reused
+Adapted logic for refactoring of Storage, Ui from https://github.com/nus-cs2113-AY1920S2/personbook
+with minor modification in the public class Alie.
+*/
 public class Alie {
     private Storage storage;
     private TaskManager taskList;
