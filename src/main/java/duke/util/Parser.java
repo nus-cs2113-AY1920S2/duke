@@ -95,7 +95,7 @@ public class Parser {
                 return new EventCommand(taskDescriptions, taskDate);
             } catch (DukeNullDescriptionException e) {
                 throw new DukeNullDescriptionException();
-            } catch (DateTimeParseException e) {
+            } catch (DukeDateFormatException e) {
                 throw new DukeDateFormatException();
             } catch (DukeException e) {
                 throw new DukeException(EVENT_FORMAT_ERROR_MESSAGE);
