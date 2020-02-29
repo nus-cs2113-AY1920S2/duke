@@ -42,7 +42,7 @@ For example: In `todo <TASK_DESCRIPTION>`,`TASK_DESCRIPTION` is a parameter used
 ### `2.1 Choose Mode`
 Select one mode from two options:
 1.  echo mode (simply repeat user's input)
-2.  command mode (help manage user's tasks) `(Recommended)`\
+2.  command mode (help manage user's tasks) `(Recommended)`
 
 Format: `mode <MODE_INDEX>`
 
@@ -84,8 +84,8 @@ Format: `bye`
 All tasks in the list will be automatically saved in the hard disk before program exits.\
 The saved tasks will be restored automatically when launching the program later.
 
-##Command Summary
-###todo
+## Command Summary
+### todo
 Example:
 ~~~
 todo read book
@@ -98,7 +98,7 @@ Expected Output
     ________________________________
 ~~~
 
-###event 
+### event 
 ~~~
 event attend meeting /at 2020-03-01
 ~~~
@@ -110,7 +110,7 @@ Expected Output
     ________________________________
 ~~~
 
-###deadline
+### deadline
 Example
 ~~~
 deadline finish IP /by tomorrow
@@ -123,7 +123,7 @@ Expected Output
     ________________________________
 ~~~
 
-###list 
+### list 
 Example
 ~~~
 list
@@ -150,7 +150,7 @@ Expected Output
     ________________________________
 ~~~
 
-###delete
+### delete
 Example
 ~~~
 delete 3
@@ -164,7 +164,7 @@ Expected Output
     ________________________________
 ~~~
 
-###find
+### find
 Example
 ~~~
 find book
@@ -177,7 +177,7 @@ Expected Output
     ________________________________
 ~~~
 
-###bye
+### bye
 Example
 ~~~
 bye
