@@ -61,7 +61,9 @@ Add a new Todo task to your list of tasks
 
 Example of usage: 
 
-`todo math homework`
+```
+todo math homework
+```
 
 Expected outcome:
 
@@ -78,8 +80,9 @@ Now you have 1 task(s) in your list
 Add a new Event task to your list of tasks
 
 Example of usage: 
-
-`event math class /at 31/7/2020 8:30`
+```
+event math class /at 31/7/2020 8:30
+```
 
 Expected outcome:
 
@@ -97,7 +100,9 @@ Add a new Deadline task to your list of tasks
 
 Example of usage: 
 
-`deadline finish math homework /by 5/10/2021 16:30`
+```
+deadline finish math homework /by 5/10/2021 16:30
+```
 
 Expected outcome:
 
@@ -115,7 +120,9 @@ Print a list of your tasks to the console
 
 Example of usage: 
 
-`list`
+```
+list
+```
 
 Expected outcome:
 
@@ -134,7 +141,9 @@ Mark a specified task as done based on task number
 
 Example of usage: 
 
-`done 2`
+```
+done 2
+```
 
 Expected outcome:
 
@@ -151,7 +160,9 @@ Delete a specified task based on task number
 
 Example of usage: 
 
-`delete 1`
+```
+delete 1
+```
 
 Expected outcome:
 
@@ -169,7 +180,9 @@ List all tasks before a specified date/time
 
 Example of usage: 
 
-`by 20/2/2021 4:30`
+```
+by 20/2/2021 4:30
+```
 
 Expected outcome:
 
@@ -186,7 +199,9 @@ List all tasks on a specified date
 
 Example of usage: 
 
-`on 5/10/2021`
+```
+on 5/10/2021
+```
 
 Expected outcome:
 
@@ -203,7 +218,9 @@ List all tasks whose descriptions contain specified search term
 
 Example of usage: 
 
-`find homework`
+```
+find homework
+```
 
 Expected outcome:
 
