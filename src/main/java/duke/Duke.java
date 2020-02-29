@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *that keeps a list of Tasks<br>
  *
  * @author  Nizar Mohamed<br>
- * @version 1.0<br>
+ * @version 2.0<br>
  * @since   2020-02-21<br>
  */
 
