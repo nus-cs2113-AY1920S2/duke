@@ -34,11 +34,7 @@ public class TaskList {
     }
 
     public void getList() {
-        if (tasks.size() == 0) {
-            ui.showError("No tasks found!");
-        } else {
-            ui.printList(tasks, tasks.size());
-        }
+        ui.printList(tasks, tasks.size());
     }
 
     public void addTodo(String[] arr) throws DukeException {
@@ -90,4 +86,15 @@ public class TaskList {
         }
     }
 
+    public void findKeyword(String[] arr) {
+        String word = String.join(" ", arr[1]);
+        ArrayList<Task> findTask = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i++) {
+            String desc = tasks.get(i).getDescription();
+            if (desc.contains(word)) {
+                findTask.add(tasks.get(i));
+            }
+        }
+        ui.findList(findTask, findTask.size());
+    }
 }
