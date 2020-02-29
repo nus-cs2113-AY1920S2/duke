@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<>();
+    static String options = "Here is the list of commands available\n"
+            + "\"bye\": to exit\n\"list\": to show the list of all your tasks\n\"todo\": add a todo\n" +
+            "\"deadline\": add a deadline\n\"event\": add an event\n" +
+            "\"done\": check off a task on your list";
 
     public static void printTasks() {
         System.out.println("Here are the tasks in your list:");
@@ -32,14 +36,12 @@ public class Duke {
             tasks.add(task);
             System.out.println("Got it. I've added this task:\n  " + task.toString()
                     + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
-        } else if (userInput.startsWith("delete")) {
-            //deleteTask(userInput.charAt(7));
-            System.out.println("hello mewo");
-            try {
-                System.out.println(userInput.charAt(7));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        } else if (userInput.startsWith("delete")) { // output is wrong once we have double digits. like i fI input 21, it actually works and won't give error
+            int taskId = Integer.parseInt(Character.toString(userInput.charAt(7)));
+            Task task = tasks.get(taskId - 1);
+            tasks.remove(task);
+            System.out.println("I have removed this task:\n" + task.toString() +
+                    String.format("\nYou only have %d tasks left to do. 加油!", tasks.size()));
         } else {
             throw new IllegalArgumentException();
         }
@@ -51,23 +53,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
-
-        /*String logo = "|  |  \n" +
-                "|--| .\n" +
-                "|  | |\n";
-        */
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println("Here is the list of commands available\n"
-                + "\"bye\": to exit\n\"list\": to show the list of all your tasks\n\"todo\": add a todo\n" +
-                "\"deadline\": add a deadline\n\"event\": add an event\n" +
-                "\"done\": check off a task on your list");
-        System.out.println("OIOIOIO");
-    }
-
-    public static void deleteTask(int taskId) {
-
+        System.out.println(options);
     }
 
     public static void main(String[] args) {
@@ -80,11 +67,10 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("You have given the wrong number of arguments\n" +
                         "Please try again or input \"bye\" to exit");
+                System.out.println(e.getMessage());
             } catch (IllegalArgumentException e) {
-                System.out.println("Sorry I don't understand that command. Here is the list of commands available\n"
-                        + "\"bye\": to exit\n\"list\": to show the list of all your tasks\n\"todo\": add a todo\n" +
-                        "\"deadline\": add a deadline\n\"event\": add an event\n" +
-                        "\"done\": check off a task on your list");
+                System.out.println("Sorry I don't understand that command.\n" + options);
+                System.out.println(e.getMessage());
             }
             userInput = scan.nextLine();
         }
