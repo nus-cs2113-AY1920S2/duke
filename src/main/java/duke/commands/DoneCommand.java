@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.IllegalDeleteException;
 import duke.util.TaskList;
 import duke.util.UI;
 import duke.exceptions.IllegalDoneTaskException;

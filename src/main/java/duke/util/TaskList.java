@@ -1,6 +1,5 @@
 package duke.util;
 
-import duke.exceptions.IllegalDeleteException;
 import duke.taskmanager.Tasks;
 
 import java.io.IOException;
