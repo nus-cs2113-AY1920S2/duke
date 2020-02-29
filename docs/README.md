@@ -64,7 +64,7 @@
             - [Example outcome:](#example-outcome)
         - [Example of usage:](#example-of-usage-8)
             - [Expected outcome if keyword/sentence cannot be found:](#expected-outcome-if-keywordsentence-cannot-be-found)
-        - [Example of wrong usage (missing keyword/sentence):](#example-of-wrong-usage-missing-keyword/sentence)
+        - [Example of wrong usage (missing keyword):](#example-of-wrong-usage-missing-keyword)
             - [Expected error outcome:](#expected-error-outcome-14)
     - [`done [tasknumber in list]` - Mark a task as done in duke by the list's task number](#done-tasknumber-in-list---mark-a-task-as-done-in-duke-by-the-lists-task-number)
         - [Example of usage:](#example-of-usage-9)
@@ -546,7 +546,7 @@ What else do you want to do?
 
 ```
 
-#### Example of wrong usage (missing keyword/sentence):
+#### Example of wrong usage (missing keyword):
 - `find`
 - `find `
 
