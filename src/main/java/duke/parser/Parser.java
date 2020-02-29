@@ -26,8 +26,8 @@ public class Parser  {
     public static final String INDICATE_TIMING_INDICATOR = "\t Use \"/\" to indicate timing!";
     public static final String NON_POSITIVE_INTEGER = "\t Task index cannot be negative or zero!";
     public static final String INDICATE_TIMING ="\t Please enter a timing!";
-    public static final String WRONG_TIMING_FORMAT="\t Timing format is wrong! Ensure it is either \"yyyy-MM-dd\"\n" +
-            "\t or \"yyyy-MM-dd HH:mm\" ***Hours are in 24 hrs format***";
+    public static final String WRONG_TIMING_FORMAT="\t Timing format is wrong! Ensure it is either \"yyyy-MM-dd\"" +
+            " or \"yyyy-MM-dd HH:mm\" ***Hours are in 24 hrs format***";
     public static final String AVOID_DELIMITER = "\t Please refrain from using any \"~\" as it will lead to" +
             " improper storage of your list!";
 
