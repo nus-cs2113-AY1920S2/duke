@@ -1,15 +1,16 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 import duke.task.TaskManager;
-import duke.ui.Output;
-import duke.utility.InputHandler;
+import duke.ui.Ui;
+import duke.parser.Parser;
 
 
 public class Duke {
 
     /** Printer contains methods to print messages for the user */
-    private static Output printer;
+    private static Ui printer;
 
     /** duke.command.Command contains the names of each command */
     private static Command command;
@@ -18,7 +19,7 @@ public class Duke {
     private static TaskManager taskManager;
 
     /** Handles user input */
-    private static InputHandler inputHandler;
+    private static Parser parser;
 
     /**
      * Initializes objects to handle the list, display output, and for
@@ -27,9 +28,9 @@ public class Duke {
     public static void init () {
 
         taskManager = new TaskManager();
-        printer = new Output();
+        printer = new Ui();
 
-        inputHandler = new InputHandler(taskManager, printer);
+        parser = new Parser(taskManager, printer);
 
         taskManager.loadTasks();
     }
@@ -44,10 +45,12 @@ public class Duke {
         String userResponse;
 
         while (true) {
-            userResponse = inputHandler.getUserInput();
+            userResponse = parser.getUserInput();
 
-            command = inputHandler.processUserInput(userResponse);
-            command.execute();
+            command = parser.getCommandFromInput(userResponse);
+            CommandResult userFeedback = command.execute();
+
+            printer.displayFeedback(userFeedback);
         }
 
     }

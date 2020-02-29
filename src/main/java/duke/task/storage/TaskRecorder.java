@@ -1,7 +1,8 @@
-package duke.task;
+package duke.task.storage;
 
 import com.google.gson.Gson;
-import duke.ui.Output;
+import duke.task.tasktypes.Task;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +13,7 @@ public class TaskRecorder {
 
     private Gson gson;
     private FileWriter fileWriter;
-    private Output printer;
+    private Ui printer;
 
     private String filepath;
     private String fileDirectory;
@@ -20,7 +21,7 @@ public class TaskRecorder {
     private File file;
 
 
-    public TaskRecorder (Output printer) {
+    public TaskRecorder (Ui printer) {
         gson = new Gson();
         this.printer = printer;
 

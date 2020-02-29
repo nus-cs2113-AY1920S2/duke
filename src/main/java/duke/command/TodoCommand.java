@@ -1,15 +1,20 @@
 package duke.command;
 
-import duke.exception.TaskException;
+import duke.exception.TaskException.TaskEmptyDescriptionException;
 import duke.task.TaskManager;
-import duke.task.Todo;
-import duke.ui.Output;
+import duke.task.tasktypes.Task;
+import duke.task.tasktypes.Todo;
+import duke.ui.Ui;
+import duke.utility.Messages;
 
 public class TodoCommand extends Command {
 
     private String userInput;
+    private final String BULLET = "\t\t\u2023";
 
-    public TodoCommand (TaskManager manager, Output printer, String userInput) {
+    public final static String USAGE = "todo [description]";
+
+    public TodoCommand (TaskManager manager, Ui printer, String userInput) {
         super(manager, printer);
         this.userInput = userInput;
     }
@@ -19,20 +24,42 @@ public class TodoCommand extends Command {
      * to the list
      */
     @Override
-    public void execute() {
+    public CommandResult execute() {
+
+        String feedback = "";
 
         try {
-            String taskDescription = userInput.trim();
+            String taskDescription = getDescription(userInput);
 
-            if (taskDescription.length() == 0) {
-                throw new TaskException("Failed to add todo. Reason: missing description");
-            }
+            Task toAdd = new Todo(taskDescription);
+            taskManager.addTask(toAdd);
 
-            taskManager.addTask(new Todo(taskDescription));
+            feedback = getAddedTaskSuccessfullyMsg(toAdd);
 
-        } catch (TaskException e) {
-            printer.displayMessage(e.toString());
+        } catch (TaskEmptyDescriptionException e) {
+
+            feedback = String.format(Messages.EMPTY_FIELD, CMD_ADD_TODO, e.toString());
+            feedback += String.format(Messages.PROPER_USAGE, USAGE);
+
+        } finally {
+            return new CommandResult(feedback);
         }
 
+    }
+
+    private String getDescription (String userInput) throws TaskEmptyDescriptionException {
+
+        String taskDescription = userInput.trim();
+
+        if (taskDescription.length() == 0) {
+            throw new TaskEmptyDescriptionException();
+        }
+
+        return taskDescription;
+    }
+
+    private String getAddedTaskSuccessfullyMsg (Task toPrint) {
+        return String.format(Messages.ADDED_TASK, BULLET, toPrint, taskManager.getListSize(),
+                taskManager.getTaskListNoun());
     }
 }

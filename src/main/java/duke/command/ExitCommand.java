@@ -1,16 +1,20 @@
 package duke.command;
 
-import duke.ui.Output;
+import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
-    public ExitCommand (Output printer) {
+    public final static String USAGE = "bye";
+
+    public ExitCommand (Ui printer) {
         super(null,printer);
     }
 
     @Override
-    public void execute() {
+    public CommandResult execute() {
         printer.displayFarewell();
         System.exit(0);
+
+        return null;
     }
 }

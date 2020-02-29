@@ -1,7 +1,11 @@
-package duke.task;
+package duke.task.storage;
 
 import com.google.gson.*;
-import duke.ui.Output;
+import duke.task.tasktypes.Deadline;
+import duke.task.tasktypes.Event;
+import duke.task.tasktypes.Task;
+import duke.task.tasktypes.Todo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +16,7 @@ public class TaskLoader {
 
     private Scanner input;
     private File file;
-    private Output printer;
+    private Ui printer;
     private String filepath;
     private Gson gson;
 
@@ -21,7 +25,7 @@ public class TaskLoader {
     private final String DEADLINE = "D";
 
 
-    public TaskLoader (Output printer) {
+    public TaskLoader (Ui printer) {
         this.printer = printer;
         gson = new Gson();
 
@@ -57,7 +61,7 @@ public class TaskLoader {
             }
 
         } catch (FileNotFoundException e) {
-            printer.displayMessage("Unable to load past tasks from file");
+            printer.displayMessage("**** Unable to load past tasks from file ****");
         }
 
         return savedTasks;

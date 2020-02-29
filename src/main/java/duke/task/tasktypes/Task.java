@@ -1,4 +1,4 @@
-package duke.task;
+package duke.task.tasktypes;
 
 public abstract class Task {
 
@@ -9,7 +9,7 @@ public abstract class Task {
     /** Completion status for the task **/
     protected boolean isDone;
 
-    /** duke.task.Task description given by the user**/
+    /** duke.task.tasktype.Task description given by the user**/
     protected String description;
 
     public enum TaskType {
@@ -33,7 +33,7 @@ public abstract class Task {
         return "[" + (isDone ? checkMark : crossMark) + "]";
     }
 
-    protected boolean getCompletionStatus () {
+    public boolean getCompletionStatus () {
         return isDone;
     }
 

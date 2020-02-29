@@ -1,18 +1,20 @@
-package duke.utility;
+package duke.parser;
 
 import duke.command.*;
 import duke.task.TaskManager;
-import duke.ui.Output;
+import duke.ui.Ui;
 
 import java.util.Scanner;
 
-public class InputHandler {
+public class Parser {
 
     private Scanner input;
     private TaskManager taskManager;
-    private Output printer;
+    private Ui printer;
 
-    public InputHandler (TaskManager taskManager, Output printer) {
+    private final String PROMPT_SYMBOL = "> ";
+
+    public Parser(TaskManager taskManager, Ui printer) {
         input = new Scanner(System.in);
         this.taskManager = taskManager;
         this.printer = printer;
@@ -25,8 +27,9 @@ public class InputHandler {
      * @return input given by the user
      */
     public String getUserInput () {
-
+        System.out.print(PROMPT_SYMBOL);
         String userInput = input.nextLine();
+
         return userInput.trim();
     }
 
@@ -37,7 +40,7 @@ public class InputHandler {
      *
      * @param userResponse Raw input as entered by the user
      */
-    public Command processUserInput(String userResponse) {
+    public Command getCommandFromInput (String userResponse) {
 
         String cmd = userResponse.split(" ")[0];
         userResponse = userResponse.replace(cmd, "");

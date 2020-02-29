@@ -1,4 +1,4 @@
-package duke.task;
+package duke.task.tasktypes;
 
 public class Deadline extends Task {
 

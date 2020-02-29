@@ -1,15 +1,16 @@
 package duke.command;
 
-import duke.ui.Output;
+import duke.ui.Ui;
+import duke.utility.Messages;
 
 public class InvalidCommand extends Command {
 
-    public InvalidCommand (Output printer) {
+    public InvalidCommand (Ui printer) {
         super(null, printer);
     }
 
     @Override
-    public void execute () {
-        printer.printInvalidCommand();
+    public CommandResult execute () {
+        return new CommandResult(Messages.INVALID_COMMAND);
     }
 }

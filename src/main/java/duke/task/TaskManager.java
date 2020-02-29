@@ -1,9 +1,14 @@
 package duke.task;
 
-import duke.ui.Output;
-import duke.exception.TaskException;
-
+import duke.exception.TaskException.TaskAlreadyMarkedException;
+import duke.task.storage.TaskLoader;
+import duke.task.tasktypes.Task;
+import duke.task.storage.TaskRecorder;
+import duke.ui.Ui;
+import duke.exception.TaskException.TaskOutOfBoundsException;
+import duke.exception.TaskException.TaskListEmptyException;
 import java.util.ArrayList;
+
 
 public class TaskManager {
 
@@ -11,13 +16,13 @@ public class TaskManager {
     private ArrayList<Task> tasks;
 
     /** Helps display the output to the user */
-    private Output printer;
+    private Ui printer;
     private TaskRecorder recorder;
     private TaskLoader loader;
 
     public TaskManager () {
-        tasks = new ArrayList<Task>();
-        printer = new Output();
+        tasks = new ArrayList<>();
+        printer = new Ui();
 
         recorder = new TaskRecorder(printer);
         loader = new TaskLoader(printer);
@@ -31,7 +36,6 @@ public class TaskManager {
      */
     public void addTask (Task task) {
         tasks.add(task);
-        printer.printTaskAdded(tasks.size(), task);
 
         recorder.recordAllTasks(tasks);
     }
@@ -41,78 +45,86 @@ public class TaskManager {
      *
      * @param taskIndex The list number of the task to mark as done
      */
-    public void markTaskAsDone (int taskIndex) throws TaskException {
+    public Task markTaskAsDone (int taskIndex) throws TaskListEmptyException, TaskOutOfBoundsException,
+            TaskAlreadyMarkedException {
 
         if (tasks.isEmpty()) {
-            String msg = "Your list is empty... I cannot mark something that doesn't exist as done >:(";
-            throw new TaskException(msg);
+            throw new TaskListEmptyException();
         }
 
         if (taskIndexOutOfBounds(taskIndex)) {
-            String msg = String.format("The task number %d doesn't exist. There %s only %d %s",
-                    taskIndex + 1, getNounDescriptor(), tasks.size(), getTaskNoun());
-            throw new TaskException(msg);
+            throw new TaskOutOfBoundsException(taskIndex);
         }
 
-        if (!tasks.get(taskIndex).getCompletionStatus()) {
-            tasks.get(taskIndex).setTaskAsDone();
-            printer.printMarkedTask(tasks.get(taskIndex));
-
-
-            recorder.recordAllTasks(tasks);
-
-        } else {
-            printer.printTaskAlreadyMarked(tasks.get(taskIndex));
+        if (tasks.get(taskIndex).getCompletionStatus()) {
+            throw new TaskAlreadyMarkedException(tasks.get(taskIndex));
         }
 
-    }
-
-    public void removeTask (int taskIndex) throws TaskException {
-
-        if (tasks.isEmpty()) {
-            String msg = "Your list is empty... I cannot delete something that doesn't exist";
-            throw new TaskException(msg);
-        }
-
-        if (taskIndexOutOfBounds(taskIndex)) {
-            String msg = String.format("The task number %d doesn't exist. There %s only %d %s",
-                    taskIndex + 1, getNounDescriptor(), tasks.size(), getTaskNoun());
-            throw new TaskException(msg);
-        }
-
-        printer.printTaskRemoved(tasks.get(taskIndex), tasks.size() - 1);
-        tasks.remove(taskIndex);
+        tasks.get(taskIndex).setTaskAsDone();
 
         recorder.recordAllTasks(tasks);
+
+        return tasks.get(taskIndex);
     }
 
-    private boolean taskIndexOutOfBounds (int taskIndex) {
-        return (taskIndex >= tasks.size() || taskIndex < 0);
-    }
+    public Task removeTask (int taskIndex) throws TaskOutOfBoundsException, TaskListEmptyException {
 
-    private String getTaskNoun () {
-        return (tasks.size() == 1) ? "task": "tasks";
-    }
+        if (tasks.isEmpty()) {
+            throw new TaskListEmptyException();
+        }
 
-    private String getNounDescriptor () {
-        return (tasks.size() == 1) ? "is": "are";
+        if (taskIndexOutOfBounds(taskIndex)) {
+            throw new TaskOutOfBoundsException(taskIndex);
+        }
+
+        Task toPrint = tasks.get(taskIndex);
+        tasks.remove(taskIndex);
+
+        // Record tasks before returning
+        recorder.recordAllTasks(tasks);
+
+        return toPrint;
     }
 
     /**
      * Lists all the user tasks in the program
      */
-    public void listTasks () {
+    public String listTasks () throws TaskListEmptyException {
         if (tasks.isEmpty()) {
-
-            printer.printListIsEmpty();
-            return;
+            throw new TaskListEmptyException();
         }
 
-        printer.printList(tasks);
+        String msg = "Here is your list so far:" + System.lineSeparator() + System.lineSeparator();
+        for (int i = 0; i < tasks.size(); i++) {
+
+            if (i == tasks.size() - 1) {
+                msg += "\t" + (i + 1) + "." + tasks.get(i);
+                continue;
+            }
+            msg += "\t" + (i + 1) + "." + tasks.get(i) + System.lineSeparator();
+
+        }
+
+        return msg;
     }
 
     public void loadTasks () {
         this.tasks = loader.loadTasks();
     }
 
+    private boolean taskIndexOutOfBounds (int taskIndex) {
+        return (taskIndex >= tasks.size() || taskIndex < 0);
+    }
+
+    public int getListSize () {
+        return tasks.size();
+    }
+
+    public String getTaskListNoun () {
+        return (tasks.size() > 1) ? "tasks": "task";
+    }
+
+    public String getTaskListNounDescriptor () {
+        return (tasks.size() > 1) ? "are": "is";
+    }
 }
