@@ -1,6 +1,5 @@
 package duke;
 
-import duke.TaskList;
 import duke.task.Task;
 
 public class Ui {
@@ -76,7 +75,7 @@ public class Ui {
         System.out.println("    You have to point out clearly which task to mark as done or delete!!!");
     }
 
-    public static void printFileNotFound(){
+    public static void printFileNotFoundInfo(){
         System.out.println("    File not found! I will make a new one to you!");
     }
 
