@@ -140,6 +140,20 @@ public class TaskList {
         }
     }
 
+    public void searchTasks(ManageCommand manageCommand){
+        System.out.println("Here are the matching tasks in your list:");
+        String searchTerm = manageCommand.getKeywords();
+        int index = 0;
+        for(Task t : tasks){
+            String description = t.getDescription();
+            if (description.contains(searchTerm)){
+                index++;
+                System.out.print(index + ". ");
+                System.out.println(t);
+            }
+        }
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }

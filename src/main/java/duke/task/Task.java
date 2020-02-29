@@ -8,6 +8,7 @@ import duke.command.AddCommand;
  * description about the task and the state of the task.
  */
 public abstract class Task {
+
     protected String category;
     private String description;
     private boolean isDone;

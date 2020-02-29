@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import duke.TaskList;
 import duke.excpetions.DukeException;
-import duke.task.Task;
 
 /**
  * A subtype of command which is used to manage the tasks already in the task list.
@@ -12,19 +11,24 @@ import duke.task.Task;
 public class ManageCommand extends Command{
 
     private int index;
+    private String keywords;
     private LocalDate date;
 
     /**
      * A constructor that creates a manage command with type and index.
      *
-     * @param type The type of a management command including : done ,list and show.
-     * @param index The index of a "list" management command should be null.
-     *              And for "done" command, it refers to the index number of the task to be done.
-     * @param date Refers to the date that the users want to search for.
+     * @param type The type of a management command including : done ,list ,find and show.
+     * @param index For "done" command, it refers to the index number of the task to be done.
+     *              And the index of any other types of management command should be -1.
+     * @param keywords It refers to the keyword the users want to search if the management command is type "find"
+     *                 It should be null when the manage command is any other types.
+     * @param date It refers to the date of the users wan to search for if the management command is type "show"
+     *             It should be null when the manage command is any other types.
      */
-    public ManageCommand(String type,int index,LocalDate date){
+    public ManageCommand(String type, int index, String keywords, LocalDate date){
         super(type);
         this.index = index;
+        this.keywords = keywords;
         this.date = date;
     }
 
@@ -43,6 +47,9 @@ public class ManageCommand extends Command{
         case "list":
             tasks.listTasks();
             break;
+        case "find":
+            tasks.searchTasks(this);
+            break;
         case "show":
             tasks.showOneDayTasks(this);
             break;
@@ -53,6 +60,10 @@ public class ManageCommand extends Command{
 
     public int getIndex() {
         return index;
+    }
+
+    public String getKeywords() {
+        return keywords;
     }
 
     public LocalDate getDate() {
