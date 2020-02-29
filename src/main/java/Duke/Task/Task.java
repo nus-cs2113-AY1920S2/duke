@@ -1,5 +1,8 @@
 package Duke.Task;
 
+/**
+ * Class representing a task.
+ */
 public class Task {
     
     protected String description;
@@ -16,9 +19,6 @@ public class Task {
     }
     public String getTaskStatus() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
-    }
-    public void markAsDone() {
-        isDone = true;
     }
     public String getDescription(){
         return description;

@@ -19,7 +19,7 @@ public class Duke{
 
     private Duke() {
         Ui ui = new Ui();
-        ui.displayWelcomeMessage();
+        Ui.displayWelcomeMessage();
         Storage storage = new Storage(FILE_PATH, ui);
          while (true) {
             String userInput = ui.readCommand();
@@ -29,8 +29,13 @@ public class Duke{
                 if (command instanceof ExitCommand) {
                     break;
                 }
+<<<<<<< HEAD
             } catch (DukeException | DukeDateParseException e) {
                 ui.displayError(e.getMessage());
+=======
+            } catch (DukeException e) {
+                Ui.displayError(e.getMessage());
+>>>>>>> branch-A-JavaDoc
             }
         }
     }

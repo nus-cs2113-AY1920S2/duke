@@ -1,5 +1,8 @@
 package Duke.Task;
 
+/**
+ * Class representing a Todo Task.
+ */
 public class Todo extends Task{
 
     protected boolean isDone;

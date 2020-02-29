@@ -9,6 +9,9 @@ import Duke.Task.Todo;
 
 import static Duke.Library.ErrorMessage.CORRUPTED_TASK;
 
+/**
+ * Parser for Storage related operations.
+ */
 public class ParserStorage {
 
     public static Task createTaskFromStorage(String line) throws DukeException {
@@ -19,9 +22,9 @@ public class ParserStorage {
             String description = taskParts[2].strip();
             Task task;
             if (type.equals("D")) {
-                    task = new Deadline(description, "2359");
+                    task = new Deadline(description, taskParts[3].strip());
             } else if (type.equals("E")) {
-                    task = new Event(description, "2359");
+                    task = new Event(description, taskParts[3].strip());
             } else {
                 task = new Todo(description);
             }

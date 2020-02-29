@@ -10,10 +10,18 @@ import static Duke.Library.Message.*;
 import static Duke.Parser.Parser.getCommandWord;
 import static Duke.Parser.Parser.getWord;
 
+/**
+ * Parser for duke.commands entered by the duke.Duke user. It reads from standard input and
+ * returns Command objects.
+ */
 public class TaskList {
 
+<<<<<<< HEAD
 
     public static Command executeCommand(String userInput) throws DukeException, DukeDateParseException {
+=======
+    public static Command executeCommand(String userInput) throws DukeException {
+>>>>>>> branch-A-JavaDoc
         String commandWord = getCommandWord(userInput);
         switch (commandWord.toUpperCase()) {
             case COMMAND_FIND_WORD:

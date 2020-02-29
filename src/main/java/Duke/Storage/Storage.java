@@ -39,7 +39,7 @@ public class Storage {
             }
             s.close();
         } catch (DukeException | FileNotFoundException e) {
-            ui.displayError(e.getMessage());
+            Ui.displayError(e.getMessage());
         }
         tasks = newTasks;
     }
@@ -52,9 +52,9 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            ui.displayError(ErrorMessage.FILE_NOT_SAVE);
+            Ui.displayError(ErrorMessage.FILE_NOT_SAVE);
         } catch (DukeException e) {
-            ui.displayError(e.getMessage());
+            Ui.displayError(e.getMessage());
         }
     }
 
