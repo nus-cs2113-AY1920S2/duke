@@ -53,6 +53,7 @@ public class AddCommand extends Command {
                 break;
             }
             Ui.printAcknowledgement(tasks, tasks.getSize());
+            super.executeCommand(tasks);
 
         } catch (NullPointerException e) {
             System.out.println(BORDER + "☹ OH NO!!! There is no such task to be done! :o(\n" + BORDER);
