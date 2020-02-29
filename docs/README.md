@@ -659,7 +659,9 @@ What else do you want to do?
 These are some other miscellaneous errors that may pop up:
 #### Example of wrong usage (giving an empty input):
 - ` `
+-
 ##### Expected error outcome:
+
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 (」°ロ°)」
@@ -673,6 +675,7 @@ What else do you want to do?
 - `task`
 
 ##### Expected error outcome:
+
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 (」°ロ°)」
