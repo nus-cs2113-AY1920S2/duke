@@ -7,7 +7,6 @@
 1. Ensure you have a Java **`11`** or above installed in your computer
 1. Download the latest **`duke.jar`**
 1. Copy the file to the folder you want to use as the working directory for your Duke
-1. Create a new file **`tasks.txt`** and the location should be **`[working_directory]/data/tasks.txt`**
 1. Open Command Prompt(CMD) of your computer and direct to the working directory of **`Duke`**
 1. Type the command **`java -jar duke.jar`** to launch the program
 1. Type the command in CLI to manage your tasks in **`Duke`**
