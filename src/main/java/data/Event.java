@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Event extends Task {
 
     public static final int EVENT_NUMBER_OF_FIELDS = 4;
@@ -18,6 +20,13 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + by + ")";
+    }
+
+    @Override
+    public void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
+        if (this.getDescription().contains(searchKeyword) || this.getBy().contains(searchKeyword)) {
+            searchResults.add(this);
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Deadline extends Task {
 
     public static final int DEADLINE_NUMBER_OF_FIELDS = 4;
@@ -18,6 +20,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
+        if (this.getDescription().contains(searchKeyword) || this.getBy().contains(searchKeyword)) {
+            searchResults.add(this);
+        }
     }
 
     @Override
