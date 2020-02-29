@@ -8,7 +8,7 @@ public class Todo extends Command {
     public Todo (String input) throws DukeException {
         super("[T][✗] " + input.trim());
         if (input.matches("\\s*")) {
-            throw new DukeException(1,"todo");
+            throw new DukeException("todo", 1);
         }
     }
 

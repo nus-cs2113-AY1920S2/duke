@@ -5,8 +5,8 @@ import duke.commands.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-public class loader extends Command {
-    public loader(String pastListItem) {
+public class Loader extends Command {
+    public Loader(String pastListItem) {
         super(pastListItem);
     }
 
