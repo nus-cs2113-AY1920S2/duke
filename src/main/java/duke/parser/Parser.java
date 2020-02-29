@@ -1,31 +1,33 @@
 package duke.parser;
 
 import duke.command.Command;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.InvalidCommand;
-import duke.command.ExitCommand;
 import duke.command.AddCommand;
-import duke.command.FindCommand;
+import duke.command.ExitCommand;
 import duke.command.CheckCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.InvalidCommand;
 import duke.common.DukeException;
 import duke.tasklist.task.Deadline;
 import duke.tasklist.task.Event;
 import duke.tasklist.task.Todo;
 
-import static duke.common.Constants.LIST;
-import static duke.common.Constants.DONE;
 import static duke.common.Constants.TODO;
-import static duke.common.Constants.TODO_LENGTH;
 import static duke.common.Constants.DEADLINE;
-import static duke.common.Constants.DEADLINE_LENGTH;
 import static duke.common.Constants.EVENT;
-import static duke.common.Constants.EVENT_LENGTH;
-import static duke.common.Constants.DELETE;
 import static duke.common.Constants.BYE;
 import static duke.common.Constants.CHECK;
+import static duke.common.Constants.DELETE;
+import static duke.common.Constants.DONE;
 import static duke.common.Constants.FIND;
+import static duke.common.Constants.HELP;
+import static duke.common.Constants.LIST;
+import static duke.common.Constants.TODO_LENGTH;
+import static duke.common.Constants.DEADLINE_LENGTH;
+import static duke.common.Constants.EVENT_LENGTH;
 import static duke.common.Constants.FORMAT_LENGTH;
 
 /**
@@ -88,31 +90,33 @@ public class Parser {
             String eventName = fullCommand.substring(EVENT_LENGTH,eventDividerPosition);
             String eventTime = fullCommand.substring(eventDividerPosition + FORMAT_LENGTH);
             return new AddCommand(new Event(eventName,eventTime));
-        case DONE:
-            if (responses.length < 2 || !isNumeric(responses[1])) {
-                throw new DukeException("\tPlease input a task number that you want to mark as done");
+        case BYE:
+            return new ExitCommand();
+        case CHECK:
+            if (responses.length < 2) {
+                throw new DukeException("\tPlease input the thing you want to check.");
             }
-            return new DoneCommand(Integer.parseInt(responses[1]));
+            return new CheckCommand(responses[1]);
         case DELETE:
             if (responses.length < 2 || !isNumeric(responses[1])) {
                 throw new DukeException("\tPlease input a task number that you want to delete");
             }
             int deleteCount = Integer.parseInt(responses[1]);
             return new DeleteCommand(deleteCount);
+        case DONE:
+            if (responses.length < 2 || !isNumeric(responses[1])) {
+                throw new DukeException("\tPlease input a task number that you want to mark as done");
+            }
+            return new DoneCommand(Integer.parseInt(responses[1]));
         case FIND:
             if (responses.length < 2) {
                 throw new DukeException("\tPlease input the thing you want to find.");
             }
             return new FindCommand(responses[1]);
-        case CHECK:
-            if (responses.length < 2) {
-                throw new DukeException("\tPlease input the thing you want to check.");
-            }
-            return new CheckCommand(responses[1]);
+        case HELP:
+            return new HelpCommand();
         case LIST:
             return new ListCommand();
-        case BYE:
-            return new ExitCommand();
         default:
             return new InvalidCommand();
         }

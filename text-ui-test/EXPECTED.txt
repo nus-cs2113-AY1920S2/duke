@@ -12,6 +12,18 @@ Hello from
 	____________________________________________________________
 
 	____________________________________________________________
+	Below is what Duke can do for you:
+	  todo task : add a task that needs to do
+	  deadline task /by time(dddd-mm-yy) : add a task that has a certain deadline
+	  event task /at time(dddd-mm-yy) : add a task that happens on a day
+	  bye : exit the program
+	  check dddd-mm-yy : check deadline/event occuring on that day
+	  delete index : delete a task by its number index
+	  done index : mark a task as done by its number index
+	  find keyword : find a task by its keyword
+	  list : list all tasks
+	____________________________________________________________
+	____________________________________________________________
 	Please input a task number that you want to mark as done
 	____________________________________________________________
 	____________________________________________________________

@@ -1,3 +1,4 @@
+help
 done
 list
 todo read book
