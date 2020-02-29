@@ -113,10 +113,34 @@ public class Ui {
      */
     public static void printList(ArrayList<Task> Task, int numOfTasks) {
         showLine();
-        System.out.println("Here are the tasks in your list: \n");
-        for (int i = 0; i < numOfTasks; i++) {
-            int num = i + 1;
-            System.out.println(num + ". " + Task.get(i));
+        if (numOfTasks == 0) {
+            showError("No tasks found!");
+        } else {
+            System.out.println("Here are the tasks in your list: \n");
+            for (int i = 0; i < numOfTasks; i++) {
+                int num = i + 1;
+                System.out.println(num + ". " + Task.get(i));
+            }
+        }
+        showLine();
+    }
+
+    /**
+     * Displays the list of tasks that have descriptions matching keyword
+     *
+     * @param Task The list of tasks
+     * @param numOfTasks The number of tasks in the list
+     */
+    public static void findList(ArrayList<Task> Task, int numOfTasks) {
+        showLine();
+        if (numOfTasks == 0) {
+            showError("No tasks found!");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < numOfTasks; i++) {
+                int num = i + 1;
+                System.out.println(num + ". " + Task.get(i));
+            }
         }
         showLine();
     }

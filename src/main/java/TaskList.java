@@ -124,4 +124,16 @@ public class TaskList {
         }
     }
 
+    public void findKeyword(String[] arr) {
+        String word = String.join(" ", arr[1]);
+        ArrayList<Task> findTask = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i++) {
+            String desc = tasks.get(i).getDescription();
+            if (desc.contains(word)) {
+                findTask.add(tasks.get(i));
+            }
+        }
+        ui.findList(findTask, findTask.size());
+    }
+
 }
