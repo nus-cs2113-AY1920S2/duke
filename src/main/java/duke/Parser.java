@@ -9,7 +9,14 @@ import duke.command.WrongCommand;
 import duke.excpetions.DukeException;
 
 public class Parser {
-
+    /**
+     * Returns a command which contains the information extract from the users' input.
+     * If the command given is meaningless or is not in the right format, then it will return a wrong command.
+     *
+     * @param fullCommand The input given by the users.
+     * @return A command.
+     * @throws DukeException If the input gives an unacceptable command.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try{
             if (fullCommand.contains(" ")) {
@@ -44,7 +51,7 @@ public class Parser {
                 throw new DukeException();
             }
         } catch (DukeException e){
-            System.out.println("The command is not correct.");
+            Ui.showError();
             return new WrongCommand("wrong");
         }
     }
