@@ -10,9 +10,15 @@ import java.util.regex.Pattern;
  * Class to represent a deadline task
  */
 public class Deadline extends Task {
-    public static final Pattern LINE_FORMAT = Pattern.compile("^D,[yn],(\\w\\s*)+,\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}");
+    public static final Pattern LINE_FORMAT = Pattern.compile("^D,[yn],(\\w\\s*)+," +
+            "\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}");
     private LocalDateTime dueDateTime;
 
+    /**
+     * @param description deadline description
+     * @param dueDateTime deadline due dateTime
+     * @param isDone whether deadline is done or not
+     */
     public Deadline(String description, LocalDateTime dueDateTime, boolean isDone) {
         super(description);
         this.dueDateTime = dueDateTime;
@@ -43,8 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + " (by: " +
-                Parser.DTF.format(dueDateTime) + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (by: " + Parser.DTF.format(dueDateTime) + ")";
     }
 
     /**

@@ -33,6 +33,14 @@ public class Parser {
     public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d/M/yyyy H:mm");
     public static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("d/M/yyyy");
 
+    /**
+     * Given a user inputted line extract the corresponding command. Handle badly formatted input gracefully
+     * Enforce command formats by checking if input matches command regex pattern
+     * @param userInput raw user inputted line
+     * @param taskList <code>TaskList</code> needed to be used to construct <code>Command</code>s
+     * @return the <code>Command</code> parsed from the user input
+     * @throws BadLineFormatException if the user inputted line is not properly formatted
+     */
     public static Command parseUserInput(String userInput, TaskList taskList) throws BadLineFormatException {
         if (userInput.length() == 0) {
             throw new BadLineFormatException("Empty line");
@@ -53,6 +61,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Get a corresponding <code>CommandInfo</code> object given a command word
+     * @param commandWord The first token in the user input. Should represent a command word
+     * @return corresponding <code>CommandInfo</code> object
+     * @throws BadLineFormatException if the keyword is not recognized
+     */
     private static CommandInfo getCommandInfo(String commandWord) throws BadLineFormatException {
         switch(commandWord) {
         case ByCommand.KEYWORD:
@@ -80,6 +94,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the index of /at or /by for <code>DeadlineCommand</code> and <code>EventCommand</code>
+     * @param tokens the tokens of the user input
+     * @param target the string to match. Should be /at or /by
+     * @return index where /at or /by is found
+     */
     private static int getIndex(String[] tokens, String target) {
         int index = -1;
         for (int i = 0; i < tokens.length; i++) {
@@ -91,8 +111,18 @@ public class Parser {
         return index;
     }
 
-    private static Command getCommand(String commandWord, String[] tokens, TaskList taskList) throws BadLineFormatException,
-            DateTimeParseException, NumberFormatException {
+    /**
+     * Get the corresponding <code>Command</code> based on user input
+     * @param commandWord The first token in the user input. Should represent a command word
+     * @param tokens the tokens of the user input
+     * @param taskList the <code>TaskList</code> used. Required to construct <code>Commands</code>
+     * @return Constructed <code>Command</code>
+     * @throws BadLineFormatException if unrecognized command word
+     * @throws DateTimeParseException if dateTime couldn't be parsed
+     * @throws NumberFormatException if number couldn't be parsed
+     */
+    private static Command getCommand(String commandWord, String[] tokens, TaskList taskList)
+            throws BadLineFormatException, DateTimeParseException, NumberFormatException {
         switch(commandWord) {
         case ByCommand.KEYWORD: {
             LocalDateTime dateTime = LocalDateTime.parse(tokens[1] + " " + tokens[2], DTF);
@@ -116,7 +146,8 @@ public class Parser {
         case EventCommand.KEYWORD: {
             int atIndex = getIndex(tokens, "/at");
             String description = String.join(" ", Arrays.copyOfRange(tokens, 1, atIndex));
-            String dateTimeString = String.join(" ", Arrays.copyOfRange(tokens, atIndex + 1, tokens.length));
+            String dateTimeString = String.join(" ",
+                    Arrays.copyOfRange(tokens, atIndex + 1, tokens.length));
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, DTF);
             return new EventCommand(taskList, description, dateTime);
         }
@@ -166,6 +197,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the corresponding file format regex pattern for a given task
+     * @param taskType "T", "D", or "E", representing ToDo, Deadline, Event
+     * @return file format regex pattern for given task
+     * @throws BadLineFormatException if <code>taskType</code> is not "T", "D", or "E"
+     */
     public static Pattern getPattern(String taskType) throws BadLineFormatException {
         switch (taskType) {
         case "T":
@@ -179,6 +216,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the corresponding <code>Task</code> given task type and tokens from file input line
+     * @param taskType "T", "D", or "E", representing ToDo, Deadline, Event
+     * @param tokens tokens from file line, split by ,
+     * @return Constructed <code>Task</code>
+     * @throws BadLineFormatException if <code>taskType</code> is not "T", "D", or "E"
+     * @throws DateTimeParseException if the dateTime can't be parsed
+     */
     public static Task getTask(String taskType, String[] tokens) throws BadLineFormatException, DateTimeParseException {
         boolean isDone = tokens[1].equals("y");
         switch(taskType) {

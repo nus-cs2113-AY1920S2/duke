@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.Main;
 import duke.parser.Parser;
 
 import java.time.LocalDate;
@@ -11,9 +10,15 @@ import java.util.regex.Pattern;
  * Class to represent an event task
  */
 public class Event extends Task {
-    public static final Pattern LINE_FORMAT = Pattern.compile("^E,[yn],(\\w\\s*)+,\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}");
+    public static final Pattern LINE_FORMAT = Pattern.compile("^E,[yn],(\\w\\s*)+," +
+            "\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}");
     private LocalDateTime startDateTime;
 
+    /**
+     * @param description event description
+     * @param startDateTime event start dateTime
+     * @param isDone whether event is done or not
+     */
     public Event(String description, LocalDateTime startDateTime, boolean isDone) {
         super(description);
         this.startDateTime = startDateTime;
@@ -44,8 +49,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + " (at: " +
-                Parser.DTF.format(startDateTime) + ")";
+        return "[E][" + getStatusIcon() + "] " + description + " (at: " + Parser.DTF.format(startDateTime) + ")";
     }
 
     /**

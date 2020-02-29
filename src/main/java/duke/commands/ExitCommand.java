@@ -9,10 +9,14 @@ public class ExitCommand extends Command {
     public static final String KEYWORD = "bye";
     public static final String EXAMPLE_USAGE = "bye";
     public static final String ERROR_MESSAGE = "Command needs to be in form: bye";
+
     public ExitCommand() {
         super(null);
     }
 
+    /**
+     * Print goodbye message and exit the program.
+     */
     public void execute() {
         Ui.sayGoodbye();
         System.exit(0);

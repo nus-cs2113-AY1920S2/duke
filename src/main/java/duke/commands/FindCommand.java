@@ -17,6 +17,10 @@ public class FindCommand extends Command {
     private static final String MESSAGE = "Here are your search results:";
     private String targetWord;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     * @param targetWord the word to find. Currently support only one word
+     */
     public FindCommand(TaskList taskList, String targetWord) {
         super(taskList);
         this.targetWord = targetWord;

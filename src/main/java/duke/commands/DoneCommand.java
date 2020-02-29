@@ -15,6 +15,10 @@ public class DoneCommand extends Command {
     public static final String KEYWORD = "done";
     private int taskIndex;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     * @param taskIndex the index of the task to be marked as done
+     */
     public DoneCommand(TaskList taskList, int taskIndex) {
         super(taskList);
         this.taskIndex = taskIndex;

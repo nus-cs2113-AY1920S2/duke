@@ -16,6 +16,10 @@ public class ToDoCommand extends Command {
     public static final String KEYWORD = "todo";
     public ToDo toDo;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     * @param description the description
+     */
     public ToDoCommand(TaskList taskList, String description) {
         super(taskList);
         this.toDo = new ToDo(description);

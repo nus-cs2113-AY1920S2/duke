@@ -11,6 +11,9 @@ public abstract class Command {
     protected TaskList taskList;
     protected boolean isPersistentCommand = true;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     */
     public Command(TaskList taskList) {
         this.taskList = taskList;
     }

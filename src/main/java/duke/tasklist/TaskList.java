@@ -21,10 +21,18 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private String filePath;
 
+    /**
+     * Initialize the <code>TaskList</code>
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Attempt to load <code>TaskList</code>> from file. Handle cases when file doesn't exist and when file
+     * is badly formatted.
+     * @param filePath the path to the file to read from
+     */
     public TaskList(String filePath) {
         this();
         this.filePath = filePath;

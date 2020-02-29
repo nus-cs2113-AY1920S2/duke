@@ -15,6 +15,10 @@ public class DeleteCommand extends Command {
     public static final String KEYWORD = "delete";
     private int taskIndex;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     * @param taskIndex the index of the task to be deleted
+     */
     public DeleteCommand(TaskList taskList, int taskIndex) {
         super(taskList);
         this.taskIndex = taskIndex;

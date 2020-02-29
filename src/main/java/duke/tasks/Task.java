@@ -10,6 +10,9 @@ public abstract class Task {
     protected boolean isDone;
     protected String description;
 
+    /**
+     * @param description the description of the task
+     */
     public Task(String description) {
         setDescription(description);
         setIsDone(false);

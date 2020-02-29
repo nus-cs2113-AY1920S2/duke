@@ -13,13 +13,17 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * @param description todo description
+     * @param isDone whether the todo is done or not
+     */
     public ToDo(String description, boolean isDone) {
         this(description);
         this.isDone = isDone;
     }
 
     /**
-     * Get if the ToDo is on a specified date. ToDo doesn't have a date so always return false
+     * Get if the todo is on a specified date. todo doesn't have a date so always return false
      * @param date the target date
      * @return false
      */
@@ -28,7 +32,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get if the ToDo is due by/on a specified date. ToDo doesn't have a date so always return false
+     * Get if the todo is due by/on a specified date. todo doesn't have a date so always return false
      * @param dateTime the target date
      * @return false
      */

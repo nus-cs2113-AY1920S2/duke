@@ -19,6 +19,10 @@ public class ByCommand extends Command {
     private String message;
     private LocalDateTime dateTime;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     * @param dateTime the dateTime to search for tasks before
+     */
     public ByCommand(TaskList taskList, LocalDateTime dateTime) {
         super(taskList);
         this.dateTime = dateTime;

@@ -19,6 +19,10 @@ public class OnCommand extends Command {
     private String message;
     private LocalDate date;
 
+    /**
+     * @param taskList the <code>TaskList</code>
+     * @param date the date to search for tasks on
+     */
     public OnCommand(TaskList taskList, LocalDate date) {
         super(taskList);
         this.date = date;

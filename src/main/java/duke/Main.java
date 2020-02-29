@@ -11,7 +11,6 @@ import duke.ui.Ui;
  * The main class. Initialized the system, lets the user enter commands and executes them, then exits.
  */
 public class Main {
-    public static final String END_STRING = "bye";
     private static final String FILE_PATH = "data/tasks.txt";
     private static TaskList taskList;
 
@@ -23,6 +22,9 @@ public class Main {
         runLoop();
     }
 
+    /**
+     * Initialize the Ui. Greet the user. Initialize the <code>TaskList</code>
+     */
     private static void initialize() {
         Ui.initialize();
         Ui.greet();
