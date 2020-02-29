@@ -14,13 +14,13 @@ public class Parser {
         return arr;
     }
 
-    /**
-     * Get the user's command
-     *
-     * @param arr User's input split into an array of strings
-     * @return the command executed by the user
-     */
-    public static String getCommand(String[] arr) {
-        return arr[0];
+    public static String[] parseEvent(String[] arr) {
+        String arr2[] = arr[1].split("/at ", 2);
+        return arr2;
+    }
+
+    public static String[] parseDeadline(String[] arr) {
+        String arr2[] = arr[1].split("/by ", 2);
+        return arr2;
     }
 }
