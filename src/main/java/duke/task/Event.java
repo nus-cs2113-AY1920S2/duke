@@ -1,14 +1,26 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+
 public class Event extends Task {
     private static int eventNum = 0;
     private String date;
+    private LocalDate standardTime;
+    private boolean isStandardTime = false;
 
     public Event(String taskName,String date){
         super(taskName);
         this.date = date;
         this.taskType = "[E]";
         eventNum++;
+        try{
+            standardTime = LocalDate.parse(date);
+            isStandardTime = true;
+        } catch (DateTimeParseException ignored){
+        }
     }
 
     public Event(String taskName,String date,String taskStatus){
@@ -25,7 +37,11 @@ public class Event extends Task {
     }
 
     public String getDate(){
-        return this.date;
+        if(isStandardTime) {
+            return this.standardTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy",Locale.ENGLISH));
+        } else {
+            return this.date;
+        }
     }
 
     @Override
