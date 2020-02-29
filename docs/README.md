@@ -141,7 +141,7 @@ Example of usage: `find CS2113T`
 Expected outcome:
 ```
 Here are the tasks in your list: 
-1.[T][N] quiz for CS2113T
+1.[T][Y] quiz for CS2113T
 2.[D][N] CS2113T iP final submission (by: 02 Mar 2020)
 ```
 ___
