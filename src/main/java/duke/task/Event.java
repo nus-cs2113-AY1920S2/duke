@@ -1,25 +1,35 @@
 package duke.task;
 
 import duke.command.AddCommand;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Event extends Task {
-    protected String period;
+    private LocalDateTime period;
 
-    public Event(String description,String period) {
+    public Event(String description,LocalDateTime period) {
         super(description);
+        this.category="event";
         this.period=period;
     }
 
     public Event(AddCommand addCommand){
         super(addCommand);
-        this.period = addCommand.getTimeNotes();
+        this.period = LocalDateTime.parse(addCommand.getTimeNotes());
     }
-
 
     @Override
     public String toString(){
         String taskType="[E]";
-        String detail = taskType + " [" + getStatusIcon() + "] " + getDescription() +" (at: "+period+")";
+        FormatStyle dateFormat = FormatStyle.MEDIUM;
+        FormatStyle timeFormat = FormatStyle.MEDIUM;
+        String detail = taskType + " [" + getStatusIcon() + "] " + getDescription() +
+                " (at: "+period.format(DateTimeFormatter.ofLocalizedDateTime(dateFormat,timeFormat))+")";
         return detail;
+    }
+
+    public LocalDateTime getPeriod() {
+        return period;
     }
 }

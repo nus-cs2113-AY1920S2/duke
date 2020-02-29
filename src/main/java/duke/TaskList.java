@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.command.AddCommand;
@@ -19,6 +20,28 @@ public class TaskList {
     }
 
     public TaskList() {
+    }
+
+    public void showOneDayTasks(ManageCommand manageCommand){
+        LocalDate date = manageCommand.getDate();
+        for(Task task:tasks){
+            boolean isDeadline = (task.getCategory().equals("deadline"));
+            boolean isEvent = (task.getCategory().equals("event"));
+            if(isDeadline){
+                Deadline d = (Deadline) task;
+                LocalDate by = d.getBy().toLocalDate();
+                if(date.equals(by)){
+                    System.out.println(d);
+                }
+            }
+            if(isEvent){
+                Event e = (Event) task;
+                LocalDate at = e.getPeriod().toLocalDate();
+                if(date.equals(at)){
+                    System.out.println(e);
+                }
+            }
+        }
     }
 
     public void deleteTask(DeleteCommand deleteCommand){
@@ -80,7 +103,7 @@ public class TaskList {
 
     public void searchTasks(ManageCommand manageCommand){
         System.out.println("Here are the matching tasks in your list:");
-        String searchTerm = manageCommand.getSearchTerm();
+        String searchTerm = manageCommand.getKeywords();
         int index = 0;
         for(Task t : tasks){
             String description = t.getDescription();

@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -15,6 +18,10 @@ public class Parser {
             if (fullCommand.contains(" ")) {
                 String type = fullCommand.substring(0, fullCommand.indexOf(" "));
                 switch (type) {
+                case "show":
+                    String dateInString=fullCommand.substring(fullCommand.indexOf(" ")+1);
+                    LocalDate date = LocalDate.parse(dateInString);
+                    return new ManageCommand(type,-1,date);
                 case "delete":
                     int index = Integer.parseInt(fullCommand.substring(fullCommand.indexOf(" ")+1));
                     return new DeleteCommand(type,index);

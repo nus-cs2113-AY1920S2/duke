@@ -6,6 +6,7 @@ public class ToDo extends Task{
 
     public ToDo(String description) {
         super(description);
+        this.category="todo";
     }
 
     public ToDo(AddCommand addCommand){
