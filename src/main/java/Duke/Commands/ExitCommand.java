@@ -7,6 +7,6 @@ import Duke.Ui.Ui;
 public class ExitCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws DukeException {
-        ui.displayExitMessage();
+        Ui.displayExitMessage();
     }
 }

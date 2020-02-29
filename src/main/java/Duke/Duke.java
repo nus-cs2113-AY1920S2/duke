@@ -18,7 +18,7 @@ public class Duke{
 
     private Duke() {
         Ui ui = new Ui();
-        ui.displayWelcomeMessage();
+        Ui.displayWelcomeMessage();
         Storage storage = new Storage(FILE_PATH, ui);
          while (true) {
             String userInput = ui.readCommand();
@@ -29,7 +29,7 @@ public class Duke{
                     break;
                 }
             } catch (DukeException e) {
-                ui.displayError(e.getMessage());
+                Ui.displayError(e.getMessage());
             }
         }
     }

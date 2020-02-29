@@ -39,22 +39,9 @@ public class Ui {
         System.out.print(COMMAND_HELP_DESC);
     }
 
-    public static final void displayLineDivider() {
-        System.out.println(LINE_DIVIDER);
-    }
 
     public static final void displayNumberOfTasks(ArrayList TaskList) {
         System.out.print("\tNow you have " + TaskList.size() + " tasks in the list.\n");
-    }
-
-    public static void echoUserCommand(String userCommand) {
-        System.out.println("\t[Command entered: " + userCommand + "]");
-    }
-
-
-
-    public static void exitProgram() {
-        displayExitMessage();
     }
 
     public static void displayTaskList(ArrayList TaskList) {

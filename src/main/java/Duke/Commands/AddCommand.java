@@ -5,7 +5,12 @@ import Duke.Exception.DukeException;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
 
+
+/**
+ *
+ */
 public class AddCommand extends Command {
+
     private final Task task;
 
     public AddCommand(Task task) {
@@ -15,7 +20,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws DukeException {
         storage.getTasks().add(task);
-        ui.displayAddTask(task);
+        Ui.displayAddTask(task);
         storage.write();
     }
 }

@@ -1,19 +1,7 @@
 package Duke.Library;
 
-import Duke.Task.Task;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Message {
 
-    // Library of common words
-    public static final int MAX_TASKS = 100;
-    public static ArrayList<Task> TaskList = new ArrayList(MAX_TASKS);
-    public static boolean run = true;
-    public static Scanner sc = new Scanner(System.in);
-    public static String userCommand;
-    public static String description;
     public static final String BOT_NAME = "E.D.I.T.H.";
     public static final String BOT_LOGO = "\n"
             + " _______         ______           _________        __________          __     __                \n"
@@ -24,7 +12,6 @@ public class Message {
             + "|_______|  |_|  |_______/   |_|   |________|   |_|    |__|      |_|   |__|   |__|   |_|         \n";
     public static final String BOT_DESC = "\n"
             + "\tHi There! My Name is E.D.I.T.H, your personal assistant\n";
-    public static final String USERNAME = "USER";
     public static final String MESSAGE_WELCOME = "\n\tHello! I'm " + BOT_NAME + "\n\tWhat can I do for you?";
     public static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
     public static final String MESSAGE_ADD = "\tGot it. I've added this ";
@@ -32,28 +19,11 @@ public class Message {
     public static final String MESSAGE_DELETE = "\tYou have deleted --";
     public static final String LINE_DIVIDER = "\n\t_______________________________________________________________________";
     public static final String COMMAND_HELP_WORD = "HELP";
-    public static final String COMMAND_HELP_DESC = "\n" +
-            "\tHere's the help list\n" +
-            "\t1. todo [Description]\n" +
-            "\t\tadd in a todo Duke.task, format ' todo [Description] '\n" +
-            "\t2. deadline\n" +
-            "\t\tadd in a deadline Duke.task, format \n\t' Deadline [Deadline Description] /by[DD/MM/YY] ' \n" +
-            "\t3. event\n" +
-            "\t\tadd in an event Duke.task, format \n\t' Event [Event Description] /at[DD/MM/YY] '\n" +
-            "\t4. list\n" +
-            "\t\tlist out all the tasks\n" +
-            "\t5. mark\n" +
-            "\t\tmark a Duke.task by its index, format ' mark [index] '\n" +
-            "\t6. bye\n" +
-            "\t\texit the program\n" +
-            "\tFor more information, please read the user guide!";
+    public static final String COMMAND_HELP_DESC = "\tFor more information, please read the user guide!";
     public static final String COMMAND_LIST_WORD = "LIST";
-    public static final String COMMAND_CLEAR_WORD = "CLEAR";
     public static final String COMMAND_MARK_WORD = "MARK";
     public static final String COMMAND_DEADLINE_WORD = "DEADLINE";
     public static final String COMMAND_DELETE_WORD = "DELETE";
-    public static final String COMMAND_REMOVE_WORD = "REMOVE";
-    public static final String COMMAND_EXIT_WORD = "EXIT";
     public static final String COMMAND_BYE_WORD = "BYE";
     public static final String COMMAND_EVENT_WORD = "EVENT";
     public static final String COMMAND_TODO_WORD = "TODO";
