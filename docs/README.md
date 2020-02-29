@@ -3,6 +3,7 @@
 # Table of content
 <!-- TOC -->
 - [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
 - [Features](#features)
     - [Add task](#add-task)
     - [List task](#list-task)
@@ -78,6 +79,11 @@
     - [`bye` - exit Duke](#bye---exit-duke)
         - [Example of usage:](#example-of-usage-10)
             - [Expected outcome:](#expected-outcome-7)
+    - [Others](#others)
+        - [Example of wrong usage (giving an empty input):](example-of-wrong-usage-giving-an-empty-input)
+            - [Expected error outcome:](#expected-error-outcome-18)
+        - [Example of wrong usage (giving an invalid task):](example-of-wrong-usage-giving-an-invalid-task)
+            - [Expected error outcome:](#expected-error-outcome-19)
 <!-- /TOC -->
 
 ## Introduction
@@ -98,9 +104,20 @@ Hello! I'm Duke
 What can I do for you?
 ```
 
-Duke is a personal chatbot that helps the user to store tasks such as todos, events and deadlines. Not only does it store tasks, Duke has the ability to find tasks and also to mark tasks as done. In addition, Duke can delete and remove any task that the user chooses. Duke also has the ability to save the list of tasks offline upon Duke exit and can load back the tasks again when Duke restarts.
+Duke is a personal chatbot that helps the user to store tasks such as todos, events and deadlines. Not only is it
+ able to store tasks, Duke has the ability to find tasks and also to mark tasks as done. In addition, Duke can delete
+  and remove any task that the user chooses. Duke also has the ability to save the list of tasks offline upon Duke exit and can load back the tasks again when Duke restarts.
 
-When Duke starts, it loads the list of tasks from `data\duke.txt` if it exist.
+When Duke starts, it loads the list of tasks from `data\duke.txt` if it exist. Likewise, upon exit, it save the task
+ into `data\duke.txt` too.
+ 
+To run duke, run this command in terminal:
+
+`$ java -jar duke-0.2.jar`
+
+## Prerequisites
+Duke's system requirements
+1. JDK 11
 
 
 ## Features
@@ -109,7 +126,7 @@ When Duke starts, it loads the list of tasks from `data\duke.txt` if it exist.
 Adds a **TODO**, **EVENT** or a **DEADLINE** task
 
 ### List task
-List all the tasks that Duke supports
+List all the tasks that Duke have currently
 
 ### Delete task
 Delete a task by its task number 
@@ -121,7 +138,7 @@ Find tasks that corresponds to the keywords used
 Mark a task as done
 
 ### Exit Duke
-Exit duke and save the task into an offline data
+Exit duke and save the task into an offline data file (in `/data/duke.txt`)
 
 ## Usage
 
@@ -229,6 +246,7 @@ What else do you want to do?
 #### Example of wrong usage (wrong slash word): 
 
 - `event sports meeting /through`
+- `event sports meeting /like 2012-01-01`
 
 ##### Expected error outcome:
 ```
@@ -328,6 +346,7 @@ What else do you want to do?
 #### Example of wrong usage (wrong slash word): 
 
 - `deadline Math homework /in`
+- `deadline Math homework /because 1980-12-12`
 
 ##### Expected error outcome:
 ```
@@ -408,7 +427,7 @@ What else do you want to do?
 
 ### `delete [tasknumber in list]` - Delete a task in duke by the list's task number
 
-Duke supports the deletion of tasks by its task number in list. The `delete` command contains:
+Duke supports the deletion of tasks by its task number in the list. The `delete` command contains:
 1. the `delete` keyword
 2. the task number (as seen in the list) of task to be deleted 
 
@@ -548,7 +567,6 @@ What else do you want to do?
 
 #### Example of wrong usage (missing keyword):
 - `find`
-- `find `
 
 ##### Expected error outcome:
 ```
@@ -580,7 +598,7 @@ Given this list:
 7. [T][✘] buy chocolate
 ```
 
-##### Example of usage: 
+#### Example of usage: 
 - `done 5`
 
 ##### Expected outcome:
@@ -593,7 +611,7 @@ Nice! I marked this as done: [E][✓] group project (at: Sep 14 2020)
 What else do you want to do?
 ```
 
-##### Example of wrong usage (no task number given): 
+#### Example of wrong usage (no task number given): 
 
 - `done`
 
@@ -607,7 +625,7 @@ Exception occurred: duke.exception.MissingNumberFieldException: DONE's number fi
 What else do you want to do?
 ```
 
-##### Example of wrong usage (task number is not a number): 
+#### Example of wrong usage (task number is not a number): 
 
 - `done words`
 - `done 3 dreams`
@@ -622,7 +640,7 @@ Exception occurred: java.lang.NumberFormatException: DONE's number field does no
 What else do you want to do?
 ```
 
-##### Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range): 
+#### Example of wrong usage (task number chosen do not correspond to any task in the list due to being out of range): 
 
 - `done 0`
 - `done 10` (when there is < 10 tasks) 
@@ -643,7 +661,7 @@ What else do you want to do?
 When the command 'bye' is given, the list of tasks is saved as a txt document at `data\duke.txt`.
 Format: `bye`
 
-##### Example of usage: 
+#### Example of usage: 
 - `bye`
 
 ##### Expected outcome:
@@ -655,3 +673,28 @@ Format: `bye`
 Bye! Hope to see you again soon! Maybe next time!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
+### Others
+These are some other errors that may pop up:
+#### Example of wrong usage (giving an empty input):
+- ` `
+##### Expected error outcome:
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(」°ロ°)」
+
+Exception occurred: duke.exception.InvalidTaskException: Input is invalid. No such task
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+What else do you want to do?
+```
+#### Example of wrong usage (giving an invalid task):
+- `hello`
+- `task`
+
+##### Expected error outcome:
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(」°ロ°)」
+
+Exception occurred: duke.exception.InvalidTaskException: Input is invalid. No such task
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+What else do you want to do?
