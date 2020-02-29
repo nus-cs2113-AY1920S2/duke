@@ -24,10 +24,10 @@ public class Event extends Task {
  */
     @Override
     public String toString(){
-        return "[E]" + super.toString()  + "\n\t (at:" + this.at + ")";
+        return "[E]" + super.toString()  + " (at:" + this.at + ")";
     }
     @Override
     public String toFile(){
-        return String.format("E~%s~%s", this.at, super.toFile());
+        return String.format("E" + STORAGE_DELIMITER + "%s" + STORAGE_DELIMITER+ "%s", this.at, super.toFile());
     }
 }

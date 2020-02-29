@@ -30,6 +30,9 @@ public class Parser  {
             " or \"yyyy-MM-dd HH:mm\" ***Hours are in 24 hrs format***";
     public static final String AVOID_DELIMITER = "\t Please refrain from using any \"~\" as it will lead to" +
             " improper storage of your list!";
+    public static final String TIMING_INDICATOR = "/";
+    public static final String SPACE = " ";
+    public static final String EMPTY_TIMING_CHECKER = "*";
 
 /**
  * This method splits User input by spaces into an array of Strings<br>
@@ -41,74 +44,6 @@ public class Parser  {
         inCommand = inCommand.trim();
         String[] temp = inCommand.split(MULTIPLE_WHITE_SPACES);
         return temp;
-    }
-/**
- * This method separates User input into two Strings (Action and Timing)<br>
- *
- * @param temp This is the array of Strings that was split by parseCommand().<br>
- * @return String[]  This returns the two Strings, Action and Timing.<br>
- * @throws IllegalDukeException if command entered by the User is invalid.<br>
- */
-    public static String[] getTaskInfo(String[] temp) throws IllegalDukeException {
-        String action = "";
-        String timing = "";
-        boolean flip = false;
-        if(temp[0].equals("todo")){
-            for(int i=1; i<temp.length; i++){
-                action+=temp[i] + " ";
-            }
-        }else {
-            for (int i = 1; i < (temp.length); i++) {
-                if (temp[i].charAt(0) == '/') {
-                    flip = true;
-                }
-                if (flip) {
-                    timing += temp[i] + " ";
-                } else {
-                    action += temp[i] + " ";
-                }
-            }
-            timing=timing.replace('/',' ');
-            timing = timing.trim();
-            validateTiming(timing);
-            timing= convertToDateFormat(timing);
-        }
-        action = action.trim();
-        if(action.contains("~")){
-            throw new IllegalDukeException(AVOID_DELIMITER);
-        }else if(action.isEmpty()){
-            throw new IllegalDukeException("\t OOPS!!! The description of a " + temp[0] +
-                    " cannot be empty.");
-        }
-        String[] temp2 = new String[2];
-        temp2[0] = action;
-        temp2[1] = timing;
-        return temp2;
-    }
-    /**
-     * This method converts timing from LocalDateTime<br>
-     *
-     * format to a meaningful String format.<br>
-     * @param inTiming This is the timing in LocalDateTime.<br>
-     * @return timing in the following format: dd Month yyyy HH:mm<br>
-     */
-    public static String convertToDateFormat(String inTiming){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(inTiming, formatter);
-        Integer day = dateTime.getDayOfMonth();
-        DayOfWeek dayOfWeek= dateTime.getDayOfWeek();
-        Month month =dateTime.getMonth();
-        Integer year =dateTime.getYear();
-        Integer hour =dateTime.getHour();
-        Integer min =dateTime.getMinute();
-        String minute;
-        if(min<10){
-            minute= "0" + min.toString();
-        }else{
-            minute= min.toString();
-        }
-        return String.format(" %s, %s %s %s %s:%s ", dayOfWeek.toString(), day.toString(), month.toString(),
-                year.toString(), hour.toString(), minute);
     }
     /**
      * This method ensures that timing entered by User is valid.<br>
@@ -125,15 +60,101 @@ public class Parser  {
         }
     }
     /**
+     * This method converts timing from LocalDateTime<br>
+     * format to a meaningful String format.<br>
+     * @param inTiming This is the timing in LocalDateTime.<br>
+     * @return timing in the following format: dd Month yyyy HH:mm<br>
+     */
+    public static String convertToDateFormat(String inTiming){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(inTiming, formatter);
+        Integer day = dateTime.getDayOfMonth();
+        DayOfWeek dayOfWeek= dateTime.getDayOfWeek();
+        Month month =dateTime.getMonth();
+        Integer year =dateTime.getYear();
+        Integer hour =dateTime.getHour();
+        Integer min =dateTime.getMinute();
+        String minute = formatTiming(min);
+        String hourString = formatTiming(hour);
+        return String.format(" %s, %s %s %s %s:%s ", dayOfWeek.toString(), day.toString(), month.toString(),
+                year.toString(), hourString, minute);
+    }
+/**
+ * This method separates User input into two Strings (Action and Timing)<br>
+ *
+ * @param temp This is the array of Strings that was split by parseCommand().<br>
+ * @return String[]  This returns the two Strings, Action and Timing.<br>
+ * @throws IllegalDukeException if command entered by the User is invalid.<br>
+ */
+    public static String[] getTaskInfo(String[] fullCommand) throws IllegalDukeException {
+        StringBuilder action = new StringBuilder();
+        StringBuilder timing = new StringBuilder();
+        boolean flip = false;
+        if(fullCommand[0].equals("todo")){
+            for(int i=1; i<fullCommand.length; i++){
+                action.append(fullCommand[i]).append(" ");
+            }
+        }else {
+            for (int i = 1; i < (fullCommand.length); i++) {
+                if (fullCommand[i].contains(TIMING_INDICATOR)) {
+                    flip = true;
+                    if(fullCommand[i].charAt(0)=='/'){
+                        timing.append(fullCommand[i]).append(SPACE);
+                    }else{
+                        String[] temp = fullCommand[i].split(TIMING_INDICATOR);
+                        action.append(temp[0]).append(SPACE);
+                        timing.append(temp[1]).append(SPACE);
+                    }
+                }else {
+                    if (flip) {
+                        timing.append(fullCommand[i]).append(SPACE);
+                    } else {
+                        action.append(fullCommand[i]).append(SPACE);
+                    }
+                }
+            }
+            timing = new StringBuilder(timing.toString().replace(TIMING_INDICATOR, SPACE));
+            timing = new StringBuilder(timing.toString().trim());
+            validateTiming(timing.toString());
+            timing = new StringBuilder(convertToDateFormat(timing.toString()));
+        }
+        action = new StringBuilder(action.toString().trim());
+        if(action.toString().contains("~")){
+            throw new IllegalDukeException(AVOID_DELIMITER);
+        }else if(action.length() == 0){
+            throw new IllegalDukeException("\t OOPS!!! The description of a " + fullCommand[0] +
+                    " cannot be empty.");
+        }
+        String[] temp2 = new String[2];
+        temp2[0] = action.toString();
+        temp2[1] = timing.toString();
+        return temp2;
+    }
+    /**
+     * This method formats timing with an Integer value smaller<br>
+     * than 10 to be printed with a "0" at the front<br>
+     * @param timing This is the timing
+     * @return String that represents two digits.
+     */
+    public static String formatTiming(Integer timing){
+        String formattedTiming;
+        if(timing<10){
+            formattedTiming= "0" + timing.toString();
+        }else{
+            formattedTiming= timing.toString();
+        }
+        return formattedTiming;
+    }
+    /**
      * This method checks is User indicated timing and its indicator, "/". <br>
      * @param inCommand This is the full command entered by User. <br>
      * @throws IllegalDukeException if the command entered is invalid or illegal.
      */
     public static void checkTimingIndicator(String inCommand) throws IllegalDukeException{
-        if(inCommand.contains("/")){
-            String check = inCommand + "*";
-            String[] tempCommand = check.split("/");
-            if(tempCommand[1].equals("*")){
+        if(inCommand.contains(TIMING_INDICATOR)){
+            String check = inCommand + EMPTY_TIMING_CHECKER;
+            String[] tempCommand = check.split(TIMING_INDICATOR);
+            if(tempCommand[1].equals(EMPTY_TIMING_CHECKER)){
                 throw new IllegalDukeException(INDICATE_TIMING);
             }
         }else{

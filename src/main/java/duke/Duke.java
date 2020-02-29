@@ -23,6 +23,7 @@ public class Duke{
     private Storage storage;
     private Ui ui;
     private ArrayList<Task> l1;
+    public static final String FILEPATH ="data/duke.txt";
 
     public Duke(String filePath) throws IOException {
         this.ui = new Ui();
@@ -50,7 +51,7 @@ public class Duke{
                 command.execute(this.l1, this.ui, this.storage);
                 status=command.getStatus();
             }catch(IllegalDukeException | FileNotFoundException e ){
-                this.ui.printError(e.getMessage());
+                this.ui.promptUser(e.getMessage());
             }finally{
                 this.ui.printLine();
             }
@@ -65,7 +66,7 @@ public class Duke{
      */
     public static void main(String[] args) throws IOException {
         try {
-            new Duke("data/duke.txt").run();
+            new Duke(FILEPATH).run();
         } catch(FileNotFoundException e){
             System.err.println(e.getMessage());
         }

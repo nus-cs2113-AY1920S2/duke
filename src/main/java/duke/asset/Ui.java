@@ -11,13 +11,24 @@ import java.util.StringTokenizer;
  * This class handles with the interaction with User.<br>
  */
 public class Ui  {
+    public static final int MAX_LINE_LENGTH= 58;
     public static final String LINE = "\t__________________________________________________________";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
     public static final String MISSING_FILE = "Data file \"data.txt\" is missing!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
     public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
-    public static final int MAX_LINE_LENGTH= 58;
+    public static final String TASK_ADDED = "\t Got it. I've added this task:";
+    public static final String AVAILABLE_TASKS = "\t Here are the tasks in your list:\n";
+    public static final String GOODBYE_MESSAGE = "\t Bye.Hope to see you again soon!";
+    public static final String REMOVE_ACKNOWLEDGEMENT = "\t Noted. I've removed this task: ";
+    public static final String DONE_ACKNOWLEDGEMENT = "\t Nice! I've marked this task as done:";
+    public static final String DONE_ALL_ACKNOWLEDGEMENT = "\t All tasks have been marked as done!";
+    public static final String DELETE_ALL_ACKNOWLEDGEMENT = "\t All tasks have been deleted!";
+    public static final String DELETE_ALL_CONFIRMATION = "\t Are you sure that you want ALL tasks to be deleted? " +
+            "Type Y for Yes and N for No";
+    public static final String IGNORE_DELETE_ALL = "\t List was not modified! Enter \"list\" to ensure all tasks are" +
+            " still in the list!";
     public static final String DAB= "\t ``````````````````````````````````````````````````````````\n" +
             "\t ````````````````````````````````:v(v'`````````````````````\n" +
             "\t ```````````````````````````,)4|ex` `L}````````````````````\n" +
@@ -44,7 +55,6 @@ public class Ui  {
             "\t `````````````)0X?^:)I````````m'   :j``````````````````````\n" +
             "\t `````````````.IGD8k'`````````<&G55M```````````````````````\n" +
             "\t ``````````````````````````````````````````````````````````";
-
     private final Scanner in;
     private final PrintStream out;
 
@@ -118,16 +128,6 @@ public class Ui  {
         return standardLengthMessage.toString().stripTrailing();
     }
     /**
-     * This method prints all the error message thrown in Duke.run().<br>
-     * @param message This is the first argument of this method. It is<br>
-     *                the error message thrown by exceptions caught<br>
-     *                in Duke.run<br>
-     */
-    public void printError(String message) {
-        String standardLengthMessage = formatMessage(message);
-        out.println(standardLengthMessage);
-    }
-    /**
      * This method informs User that a new Task class has been created and added to list<br>
      * @param l1 This is the first argument of this method. It is the list of current<br>
      *           Tasks in Duke.<br>
@@ -135,9 +135,8 @@ public class Ui  {
      *             user that the stated task has just been added.<br>
      */
     public void printAddTask(ArrayList<Task> l1, Task task){
-        out.println("\t Got it. I've added this task:");
-        String standardLengthMessage = formatMessage(task.toString());
-        out.println("\t  " + standardLengthMessage);
+        out.println(TASK_ADDED);
+        out.println("\t  " + formatMessage(task.toString()));
         out.println("\t Now you have " + l1.size()+ " tasks in the list.");
     }
 
@@ -150,8 +149,7 @@ public class Ui  {
         for (int i = 0; i < l1.size(); i++) {
             int count = i + 1;
             Task task = l1.get(i);
-            String standardLengthMessage = formatMessage(count + "." + task.toString());
-            out.println("\t " + standardLengthMessage);
+            out.println("\t " + formatMessage(count + "." + task.toString()));
         }
     }
     /**
@@ -164,7 +162,7 @@ public class Ui  {
         if(l1.isEmpty()){
             out.println(LIST_EMPTY);
         }else {
-            out.print("\t Here are the tasks in your list:\n");
+            out.print(AVAILABLE_TASKS);
             printList(l1);
         }
     }
@@ -172,7 +170,7 @@ public class Ui  {
      * This method prints good bye message to User.<br>
      */
     public void printGoodByeMessage(){
-        out.println("\t Bye.Hope to see you again soon!");
+        out.println(GOODBYE_MESSAGE);
         out.println(DAB);
     }
     /**
@@ -181,9 +179,8 @@ public class Ui  {
      *             task that User wants to mark as done.<br>
      */
     public void printDone(Task task){
-        out.println("\t Nice! I've marked this task as done:");
-        String standardLengthMessage = formatMessage("\t   "+task.toString());
-        out.println(standardLengthMessage);
+        out.println(DONE_ACKNOWLEDGEMENT);
+        out.println(formatMessage("\t   "+task.toString()));
     }
     /**
      * This method informs User that stated Task has been deleted.<br>
@@ -193,9 +190,8 @@ public class Ui  {
      *              the current list of Tasks.<br>
      */
     public void printDelete(Task task, ArrayList<Task> l1){
-        out.println("\t Noted. I've removed this task: ");
-        String standardLengthMessage = formatMessage(task.toString());
-        out.println("\t   " + standardLengthMessage);
+        out.println(REMOVE_ACKNOWLEDGEMENT);
+        out.println("\t   " + formatMessage(task.toString()));
         out.println("\t Now you have " + l1.size() + " tasks in the list.");
     }
     /**
@@ -203,28 +199,26 @@ public class Ui  {
      * @param l1 This is the current list of Tasks.<br>
      */
     public void printDoneAll(ArrayList<Task> l1){
-        out.println("\t All tasks have been marked as done!");
+        out.println(DONE_ALL_ACKNOWLEDGEMENT);
         printList(l1);
     }
     /**
      * This method informs User that all Tasks has been deleted.<br>
      */
     public void printDeleteAll(){
-        out.println("\t All tasks have been deleted!");
+        out.println(DELETE_ALL_ACKNOWLEDGEMENT);
     }
     /**
      * This method confirms with User if they want all Tasks to be deleted.<br>
      */
     public void confirmDeleteAll(){
-        out.println("\t Are you sure that you want ALL tasks to be deleted?");
-        out.println("\t Type Y for Yes and N for No");
+        out.println(formatMessage(DELETE_ALL_CONFIRMATION));
     }
     /**
      * This method informs User that the delete ALL command is ignored.<br>
      */
     public void ignoreDeleteAll(){
-        out.println("\t List was not modified!");
-        out.println("\t Enter \"list\" to ensure all tasks are still in the list!");
+        out.println(formatMessage(IGNORE_DELETE_ALL));
     }
     /**
      * This method informs User that command entered needs to be only Y for Yes or<br>
@@ -285,8 +279,7 @@ public class Ui  {
             for (int i = 0; i < l2.size(); i++) {
                 int count = i + 1;
                 Task task = l1.get(l2.get(i));
-                String standardLengthMessage = formatMessage(count + "." + task.toString());
-                out.println("\t " + standardLengthMessage);
+                out.println("\t " + formatMessage(count + "." + task.toString()));
             }
         }
     }
@@ -295,8 +288,7 @@ public class Ui  {
      * @param message This is the message that the other classes wish to prompt.<br>
      */
     public void promptUser(String message){
-            message=formatMessage(message);
-            out.println(message);
+            out.println(formatMessage(message));
     }
 /**
  * This method closes the System.in class of Duke.<br>

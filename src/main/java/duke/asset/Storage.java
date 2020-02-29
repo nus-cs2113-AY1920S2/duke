@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class Storage {
 
     private File inFile;
+    public static final String STORAGE_DELIMITER = "~";
     /**
      * This constructor is called only when data folder is missing.<br>
      * @param ui This is the input. Allows for the software to inform<br>
@@ -58,7 +59,7 @@ public class Storage {
         Scanner in = new Scanner(this.inFile);
         ArrayList<Task> l1= new ArrayList<>();
         while (in.hasNextLine()) {
-            String[] temp = in.nextLine().split("~");
+            String[] temp = in.nextLine().split(STORAGE_DELIMITER);
             initList(temp, l1);
         }
         in.close();

@@ -14,7 +14,7 @@ package duke.tasks;
 public class Task {
     private String action;
     protected boolean isDone;
-
+    public static final String STORAGE_DELIMITER= "~";
     public Task(String action){
         this.action=action;
         this.isDone=false;
@@ -46,7 +46,7 @@ public class Task {
      */
     public String toFile(){
         String done = this.isDone ? "Y" : "N" ;
-        return String.format("%s~%s", done, this.action);
+        return String.format("%s" + STORAGE_DELIMITER + "%s", done, this.action);
     }
     public String getAction(){
         return this.action;
