@@ -4,16 +4,17 @@ import java.time.LocalDate;
 
 import duke.TaskList;
 import duke.excpetions.DukeException;
-import duke.task.Task;
 
 public class ManageCommand extends Command{
 
     private int index;
+    private String keywords;
     private LocalDate date;
 
-    public ManageCommand(String type,int index,LocalDate date){
+    public ManageCommand(String type, int index, String keywords, LocalDate date){
         super(type);
         this.index = index;
+        this.keywords = keywords;
         this.date = date;
     }
 
@@ -26,6 +27,9 @@ public class ManageCommand extends Command{
         case "list":
             tasks.listTasks();
             break;
+        case "find":
+            tasks.searchTasks(this);
+            break;
         case "show":
             tasks.showOneDayTasks(this);
             break;
@@ -36,6 +40,10 @@ public class ManageCommand extends Command{
 
     public int getIndex() {
         return index;
+    }
+
+    public String getKeywords() {
+        return keywords;
     }
 
     public LocalDate getDate() {

@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.command.AddCommand;
@@ -99,6 +98,20 @@ public class TaskList {
                 break;
             }
             System.out.println((i+1)+". "+ getTasks().get(i));
+        }
+    }
+
+    public void searchTasks(ManageCommand manageCommand){
+        System.out.println("Here are the matching tasks in your list:");
+        String searchTerm = manageCommand.getKeywords();
+        int index = 0;
+        for(Task t : tasks){
+            String description = t.getDescription();
+            if (description.contains(searchTerm)){
+                index++;
+                System.out.print(index + ". ");
+                System.out.println(t);
+            }
         }
     }
 

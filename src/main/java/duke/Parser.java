@@ -32,13 +32,16 @@ public class Parser {
                     String description=fullCommand.substring(fullCommand.indexOf(" "));
                     return new AddCommand(type,description,null);
                 case "deadline":
-                    description=fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
-                    String by=fullCommand.substring(fullCommand.indexOf("/by")+4);
+                    description = fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
+                    String by = fullCommand.substring(fullCommand.indexOf("/by")+4);
                     return new AddCommand(type,description,by);
                 case "event":
-                    description=fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
-                    String period=fullCommand.substring(fullCommand.indexOf("/at")+4);
+                    description = fullCommand.substring(fullCommand.indexOf(" "),fullCommand.indexOf("/"));
+                    String period = fullCommand.substring(fullCommand.indexOf("/at")+4);
                     return new AddCommand(type,description,period);
+                case "find":
+                    description = fullCommand.substring(fullCommand.indexOf(" ")+1);
+                    return new ManageCommand(type,-1,description);
                 default:
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     return new WrongCommand("wrong");

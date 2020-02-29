@@ -3,6 +3,7 @@ package duke.task;
 import duke.command.AddCommand;
 
 public abstract class Task {
+
     protected String category;
     private String description;
     private boolean isDone;
