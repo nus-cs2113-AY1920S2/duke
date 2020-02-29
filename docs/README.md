@@ -8,7 +8,7 @@
 
 ## Features 
 
-###1. Creating new `Todo`:
+### Feature 1. Creating new `Todo`:
 Adds a new Todo to the TaskList 
 
 Format:
@@ -23,7 +23,7 @@ Expected outcome:
 
     1. [T][N] buy lunch
     
-###2. Creating new `Deadline`:
+### Feature 2. Creating new `Deadline`:
 Adds a new deadline to the TaskList.
 
 Format:
@@ -38,7 +38,7 @@ Expected outcome:
 
     2. [D][N] complete CS1010 Assignment ( by: 10-03-2022 ) 
 
-###3. Creating new `Event`: 
+### Feature 3. Creating new `Event`: 
 Adds a new event to the TaskList.
 
 Format:
@@ -53,7 +53,7 @@ Expected outcome:
 
     3. [E][N] attend cousin wedding  ( at: 01-04-2022 ) 
         
-###4. `List` Command:
+### Feature 4. `List` Command:
 List out all the existing tasks in the TaskList
 
 Format:
@@ -79,7 +79,7 @@ Expected outcome (if there are no existing tasks):
 
     Empty!
 
-###5. `Mark` existing tasks:
+### Feature 5. `Mark` existing tasks:
 Format:
 
 >list
@@ -112,24 +112,3 @@ Example of usage:
 Expected outcome:
 
     Bye. Hope to see you again soon!
-
-###6. :
-
-###7. :
-
-
-
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
