@@ -35,9 +35,13 @@ event New event /at invalid format to invalid format
 list
 deadline New deadline /by invalid format
 list
+date
+date random date
+date 0000-1234
 date 2019-12-02
 date 2020-03-02
 date 2020-02-11
+find
 find without
 find with
 find an
