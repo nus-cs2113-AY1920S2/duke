@@ -45,6 +45,7 @@ Here are all the commands that Duke understands, do note that they are all case-
     todo <description>
   
 **Adds a new todo task to the list.**
+
 Example: `todo Homework`
 
 
@@ -52,17 +53,20 @@ Example: `todo Homework`
     
 **Adds a new deadline task to the list.** 
 Date must be entered in the format YYYY-MM-DD.
+
 Example: `deadline Book Report / 2020-02-29`
 
     event <description> / <YYYY-MM-DD>
     
 **Adds a new event to the list.** 
 Date must be entered in the format YYYY-MM-DD.
+
 Example: `event Natalie's Birthday / 2020-10-05`
 
     delete <task number>
     
 **Deletes the task.**
+
 Example: `delete 1`
 This will delete the task **English Homework** in the example given above.
 
@@ -73,25 +77,36 @@ This will delete the task **English Homework** in the example given above.
     done <task number>
     
 **Marks the task  as done.**
+
 Example: `done 2`
+
 This will change the [✘] for **German Homework** to a [✓] in the example given above.
 
     find <keyword>
     
 **Finds all tasks containing the keyword.** 
 Find is case-insensitive.
+
 Example: `find HoMeWoRk`
+
 For the example above, this will return:
+
 [T][✓] English homework 
+
 [T][✘] German homework 
 
     date <date>
     
 **Finds all events or deadlines with that date.**
+
 Date must be entered in the format YYYY-MM-DD.
+
 Example:`date 2020-03-01`
+
 For the example above, this will return:
+
 [D][✓] Physics assignment (by: Mar 1 2020)
+
 [E][✓] Field trip to the zoo (at: Mar 1 2020)
 
     bye
