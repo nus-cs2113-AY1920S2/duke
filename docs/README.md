@@ -95,7 +95,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
  
-### `find` - find all matching tasks
+### `find` - finds all matching tasks
 Example of usage: 
 `find news`
 
