@@ -10,7 +10,6 @@ public class Event extends Task {
     /**
      * An event that takes place at a certain time
      * @param description what the event is
-     * @param taskNumber what number the task is on our list
      * @param at time the event is at
      */
     public Event(String description, String at) {

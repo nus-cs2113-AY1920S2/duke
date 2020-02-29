@@ -8,11 +8,6 @@ public class Task {
     private String name;
 
     /**
-     * Number of task
-     */
-    private int taskNumber;
-
-    /**
      * Whether task is done or not
      */
     private boolean isDone;
@@ -20,11 +15,9 @@ public class Task {
     /**
      * A types.Task object: something to be done
      * @param name name of task
-     * @param taskNumber number of task
      */
     public Task(String name) {
         this.name = name;
-        this.taskNumber = taskNumber;
         isDone = false;
     }
 
@@ -38,7 +31,6 @@ public class Task {
 
     /**
      * Returns if task is done
-     * @param isDone whether task is done
      * @return if task is done
      */
     public int getDone() {
@@ -47,14 +39,6 @@ public class Task {
         } else {
             return 0;
         }
-    }
-
-    /**
-     * Get task number
-     * @return task number
-     */
-    public int getTaskNumber() {
-        return taskNumber;
     }
 
     /**
