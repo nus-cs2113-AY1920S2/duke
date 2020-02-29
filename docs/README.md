@@ -19,7 +19,7 @@ manages the list of Tasks, refer to the *Features* section below.
 
 * Ensure you have at least Java 11 or above to run the Jar file.
 * Ensure you have downloaded the Jar file successfully.
-	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Jar/duke.jar) for Jar file)
+	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Release/duke.jar) for Jar file)
 * Navigate through command prompt to the directory that the Jar 
   file has been downloaded into.
 * Type {java -jar duke.jar} to start using *Nini*
@@ -31,8 +31,8 @@ manages the list of Tasks, refer to the *Features* section below.
 	Ensure that the data folder is under the same directory as the Jar file. <br/>
 	Example: <br/>
 	![Capture](Capture.PNG)
-1. __I am unable to add Tasks that contains "~" asa Task description__
-	Tilde or also known as "~" is used a delimiter when storing data. Therefore using 
+1. __I am unable to add Tasks that contains "~" as a Task description__
+	Tilde or also known as "~" is used as a delimiter when storing data. Therefore, using 
 	tilde as part of the Task description will lead to inaccurate storage of data. 
 	Please find an alternative for the usage of tilde.
 
@@ -47,7 +47,7 @@ three different Tasks:
 
 Note: Event and Deadline Tasks have an additional
 aspect in which timing is also stored on top of 
-Task description. Timing has to be input as follows:
+Task description. Timing has to be entered as follows:
 `yyyy-MM-dd HH:mm`
 
 When a Task is added, *Nini* will
@@ -63,9 +63,9 @@ When a task is marked as _done_,
 *Nini* will inform the User and update
 the status.
 
-User also has the option to mark all as done. 
-In which *Nini* will show the user that all Tasks
-has its status updated.
+User also has the option to mark all Tasks as 
+done. In which *Nini* will show the user that 
+all Taskshas its status updated.
       
 ### Feature 3 
 User can _delete_ Tasks.
@@ -85,25 +85,23 @@ Tasks have been deleted.
 User can list Tasks.
 
 *Nini* will inform User of the all the 
-Tasks currently stored in his Task List.
+Tasks currently stored in the Task List.
 
-Tasks with "DONE" indicates Tasks that
-are deemed as completed by User while Tasks
-with "PENDING" are Tasks that have yet to be 
-deemed as complete by the User.
+Tasks with "DONE" are Tasks that were deemed as completed 
+by User while Tasks with "PENDING" are Tasks that have yet 
+to be deemed as complete by the User.
 
 ### Feature 5 
-User can find Tasks
+User can find Tasks.
 
-*Nini* will search for Tasks that matches
+*Nini* will search for a list of Tasks that matches
 the key entered by the User.
 
 ### Feature 6
-User can ask for help from *Nini*
+User can ask for help from *Nini*.
 
-In response, *Nini* will list out a list
-of commands that *Nini* is programmed to 
-do. 
+In response, *Nini* will display a list
+of commands that *Nini* is capable of doing. 
 
 
 ##  Usage
@@ -136,7 +134,8 @@ Expected outcome:
 
 	__________________________________________________________
 	 Got it. I've added this task:
-	   [E][Status: PENDING] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )
+	   [E][Status: PENDING] celebrate birthday (at: SUNDAY, 16
+	 FEBRUARY 2020 14:00 )
 	 Now you have 2 tasks in the list.
 	__________________________________________________________
 
@@ -153,7 +152,8 @@ Expected outcome:
 
 	__________________________________________________________
 	 Got it. I've added this task:
-	   [D][Status: PENDING] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )
+	   [D][Status: PENDING] finish homework (by: TUESDAY, 18 
+	 FEBRUARY 2020 9:00 )
 	 Now you have 1 tasks in the list.
 	__________________________________________________________ 
 
@@ -168,8 +168,8 @@ Example of usage:
 Expected outcome:
 
     __________________________________________________________  
-	   Nice! I've marked this task as done:  
-	    [T][Status: DONE] read books  
+     Nice! I've marked this task as done:  
+      [T][Status: DONE] read books  
     __________________________________________________________  
     
 To mark _ALL_ Tasks as completed, type {done} {all}
@@ -183,8 +183,10 @@ Expected outcome:
     __________________________________________________________  
     All tasks have been marked as done!
     1.[T][Status: DONE] read books  
-    2.[E][Status: DONE] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
-    3.[D][Status: DONE] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 )  
+    2.[E][Status: DONE] celebrate birthday (at: SUNDAY, 16 
+    FEBRUARY 2020 14:00 )  
+    3.[D][Status: DONE] finish homework (by: TUESDAY, 18 
+    FEBRUARY 2020 9:00 )  
     __________________________________________________________  
 
 ### `Delete` - Delete Tasks from Task List.
@@ -236,9 +238,11 @@ Expected outcome:
 
     __________________________________________________________
      Here are the tasks in your list:
-	 1.[T][Status: DONE] read books  
-	 2.[E][Status: DONE] celebrate birthday (at: SUNDAY, 16 FEBRUARY 2020 14:00 )  
-	 3.[D][Status: DONE] finish homework (by: TUESDAY, 18 FEBRUARY 2020 9:00 ) 
+     1.[T][Status: DONE] read books  
+     2.[E][Status: DONE] celebrate birthday (at: SUNDAY, 
+     16 FEBRUARY 2020 14:00 )  
+     3.[D][Status: DONE] finish homework (by: TUESDAY, 
+     18 FEBRUARY 2020 9:00 ) 
     __________________________________________________________
 
 ### `Find` - Finds a list Tasks that matches the search key.
@@ -263,23 +267,29 @@ Example of usage:
 Expected outcome: 
 
 	__________________________________________________________
-	 Below would be a list of commands that you will find useful!
+	 Below would be a list of commands that you will find 
+	 useful!
 	 1. [Todo] - Adds a Task of type Todo.
 	    To add a Todo Task, type {todo} {task description}
 	 2. [Event] - Adds a Task of type Event.
-	    To add an Event Task, type {event} {task description} {/} {timing}
+	    To add an Event Task, type {event} {task description} 
+	    {/} {timing}
 	 3. [Deadline] - Adds a Task of type Deadline.
-	    To add a Deadline Task, type {event} {task description} {/} {timing}
+	    To add a Deadline Task, type {event} {task description} 
+	    {/} {timing}
 	 4. [Done] - Marks a specific Task as completed.
 	    To mark a Task as completed, type {done} {task index}
 	    To mark ALL Tasks as completed, type {done} {all}
 	 5. [Delete] - Delete Tasks from Task List.
-	    To delete Tasks from Task List, type {delete} {task index}
-	    To delete ALL Tasks from the Task List, type {delete} {all}
-	    ***Note: when using this command, Nini will prompt the User to
-	    confirm if they intend on deleting _ALL_ Tasks. User is then
-	    required to type Y for Yes or N for No.***
-	 6. [List] - Lists all currently available Tasks in the Task List.
+	    To delete Tasks from Task List, type {delete} 
+	    {task index}
+	    To delete ALL Tasks from the Task List, type {delete}
+	    {all}
+	    ***Note: when using this command, Nini will prompt the 
+	    User to confirm if they intend on deleting _ALL_ Tasks.
+	    User is then required to type Y for Yes or N for No.***
+	 6. [List] - Lists all currently available Tasks in the Task 
+	    List.
 	    To retrieve the current list of Tasks, type {list}
 	 7. [Find] - Finds a list Tasks that matches the search key.
 	    To find a list of matching Tasks, type {find}
