@@ -8,7 +8,8 @@ import duke.command.AddCommand;
  * description about the task and the state of the task.
  */
 public abstract class Task {
-    public String description;
+    protected String category;
+    private String description;
     private boolean isDone;
 
     /**
@@ -52,4 +53,12 @@ public abstract class Task {
      */
     @Override
     abstract public String toString();
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

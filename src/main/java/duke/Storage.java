@@ -5,6 +5,10 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileReader;
@@ -101,13 +105,17 @@ public class Storage {
             break;
         case 'D':
             description = nextLine.substring(9,nextLine.indexOf(" ("));
-            String by = nextLine.substring(nextLine.indexOf("by")+4,nextLine.indexOf(")"));
+            String byInString = nextLine.substring(nextLine.indexOf("by")+4,nextLine.indexOf(")"));
+            LocalDateTime by =LocalDateTime.parse(byInString,
+                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.MEDIUM));
             Deadline deadline = new Deadline(description,by);
             tasks.add(deadline);
             break;
         case 'E':
             description = nextLine.substring(9,nextLine.indexOf(" ("));
-            String at = nextLine.substring(nextLine.indexOf("at")+4,nextLine.indexOf(")"));
+            String atInString = nextLine.substring(nextLine.indexOf("at")+4,nextLine.indexOf(")"));
+            LocalDateTime at =LocalDateTime.parse(atInString,
+                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.MEDIUM));
             Event event = new Event(description,at);
             tasks.add(event);
             break;

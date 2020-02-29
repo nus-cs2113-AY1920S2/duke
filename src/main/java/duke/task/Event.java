@@ -1,12 +1,15 @@
 package duke.task;
 
 import duke.command.AddCommand;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Event is a subtype of task with description and period.
  */
 public class Event extends Task {
-    protected String period;
+    private LocalDateTime period;
 
     /**
      * A constructor create an event task using description and period.
@@ -14,8 +17,9 @@ public class Event extends Task {
      * @param description A description of the task.
      * @param period The time period to do the task.
      */
-    public Event(String description,String period) {
+    public Event(String description,LocalDateTime period) {
         super(description);
+        this.category="event";
         this.period=period;
     }
 
@@ -26,7 +30,7 @@ public class Event extends Task {
      */
     public Event(AddCommand addCommand){
         super(addCommand);
-        this.period = addCommand.getTimeNotes();
+        this.period = LocalDateTime.parse(addCommand.getTimeNotes());
     }
 
     /**
@@ -37,7 +41,14 @@ public class Event extends Task {
     @Override
     public String toString(){
         String taskType="[E]";
-        String detail = taskType + " [" + getStatusIcon() + "] " + description+" (at: "+period+")";
+        FormatStyle dateFormat = FormatStyle.MEDIUM;
+        FormatStyle timeFormat = FormatStyle.MEDIUM;
+        String detail = taskType + " [" + getStatusIcon() + "] " + getDescription() +
+                " (at: "+period.format(DateTimeFormatter.ofLocalizedDateTime(dateFormat,timeFormat))+")";
         return detail;
+    }
+
+    public LocalDateTime getPeriod() {
+        return period;
     }
 }
