@@ -48,7 +48,7 @@ public class DeleteCommand implements Command {
             Task deletedTask = taskList.getTask(taskId);
             taskList.delete(taskId);
             ui.showDeleteTaskSuccessfulPrompt(taskList, deletedTask);
-        } catch (DukeTaskIdInvalidException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeTaskIdInvalidException();
         }
     }
