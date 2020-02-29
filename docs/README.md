@@ -30,13 +30,15 @@
     
 
 ## Introduction
-Duke is a task management software which help people keep track of daily tasks.\
+Duke is a task management software which help people keep track of daily tasks.
+
 It is a java application optimized for users who want to type fast with Command Line Interface(CLI).
 
 ## Features
 ###`Command Format`
 
-Words in `UPPER_CASE` are the parameters to be supplied by the users.\
+Words in `UPPER_CASE` are the parameters to be supplied by the users.
+
 For example: In `todo <TASK_DESCRIPTION>`,`TASK_DESCRIPTION` is a parameter used to describe a ToDo task.
 
 ### `2.1 Choose Mode`
@@ -49,15 +51,18 @@ Format: `mode <MODE_INDEX>`
 ### `2.2 Add Task`
 
 #### `2.2.1 Add ToDo Task`
-Add a todo task to the list.\
+Add a todo task to the list.
+
 Format: `todo <TASK_DESCRIPTION>`
 
 #### `2.2.2 Add Event Task`
-Add a event task to the list.\
+Add a event task to the list.
+
 Format: `event <TASK_DESCRIPTION> /at <TIME_DESCRIPTION>`
 
 #### `2.2.3 Add Deadline Task`
-Add a deadline task to the list.\
+Add a deadline task to the list.
+
 Format: `deadline <TASK_DESCRIPTION> /by <TIME_DESCRIPTION>`
 
 ### `2.3 Mark Task As Done`
@@ -65,23 +70,28 @@ Mark a task as done with its index.
 Format: `done <TASK_INDEX>`
 
 ### `2.4 List Tasks`
-List all the tasks in the list.\
+List all the tasks in the list.
+
 Format: `list`
 
 ### `2.5 Delete Task`
-Remove a task from the list with its index. \
+Remove a task from the list with its index.
+
 Format: `delete <TASK_INDEX>`
 
 ### `2.6 Find Related Task`
-Search for all tasks that relate to certain keywords.\
+Search for all tasks that relate to certain keywords.
+
 Format: `find <KEYWORDS>`
 
 ### `2.7 Exit Program`
-Exit the program after use.\
+Exit the program after use.
+
 Format: `bye`
 
 ### `2.8 Save And Load Data`
-All tasks in the list will be automatically saved in the hard disk before program exits.\
+All tasks in the list will be automatically saved in the hard disk before program exits.
+
 The saved tasks will be restored automatically when launching the program later.
 
 ## Command Summary
