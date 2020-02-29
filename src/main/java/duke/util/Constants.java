@@ -51,7 +51,7 @@ public class Constants {
     public static final String EVENT_FORMAT_ERROR_MESSAGE = "OOPS!!! The event format is not correct!";
     public static final String TASK_DESCRIPTION_EMPTY_ERROR_MESSAGE = "OOPS!!! The task description cannot be empty!";
     public static final String TASK_DATE_FORMAT_ERROR_MESSAGE = "OOPS!!! The task date should be in the format of "
-            + "yyyy-mm-dd (e.g., 2020-12-29).";
+            + "yyyy-mm-dd (e.g., 2020-02-29).";
     public static final String DONE_COMMAND_HELP_MESSAGE = "key in `done <task_id>` to mark the task of <task_id> as "
             + "done.";
     public static final String LIST_COMMAND_HELP_MESSAGE = "key in `list` or `ls` to list all the tasks.";
@@ -64,7 +64,7 @@ public class Constants {
             + "<task_id>.";
     public static final String EXIT_COMMAND_HELP_MESSAGE = "key in `exit/bye/quit` to exit the programme.";
     public static final String FIND_COMMAND_HELP_MESSAGE = "key in `find <search_term>` to find the tasks which "
-            + "contain the keyword <search_term>\n this function is case-insensitive";
+            + "contain the keyword <search_term>. This function is case-insensitive";
     public static final String YES_ICON = "[v]";
     public static final String NO_ICON = "[x]";
     public static final String DEADLINE_ICON = "[D]";
