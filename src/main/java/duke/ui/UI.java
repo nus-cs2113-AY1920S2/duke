@@ -34,7 +34,7 @@ public class UI {
     }
     public void displayGoodbyeMessage() {
         displayLineSeparator();
-        System.out.println(MessageBank.GOODBYE_MESSAGE + MessageBank.NEW_LINE + MessageBank.DUKE_LOGO );
+        System.out.println(MessageBank.GOODBYE_MESSAGE);
         displayLineSeparator();
     }
     public void displayLineSeparator() {
