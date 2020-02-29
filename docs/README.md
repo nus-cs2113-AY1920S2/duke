@@ -1,4 +1,11 @@
 # User Guide
+Duke is a a Personal Assistant Chatbot that helps a person to keep track of various `Task` they have. 
+
+## Startup
+1. Put the .jar in any folder.
+2. Open up command prompt and navigate to that folder containing the .jar file 
+3. Enter the following command to start the program: 
+* `$ java -jar duke.jar`
 
 ## Task Types
 * `Todo`
