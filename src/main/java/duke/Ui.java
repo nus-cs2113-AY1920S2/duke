@@ -82,7 +82,6 @@ public class Ui {
      * print user guide out when user types Help command
      */
     public void printUserGuide() {
-        printFormatLine();
         printFormat(HELPING,
                 "todo\nadd a todo task to your task list\n"+TODO_DESCRIPTION,
                 "deadline\nadd a deadline task to your task list\n"+DEADLINE_DESCRIPTION,

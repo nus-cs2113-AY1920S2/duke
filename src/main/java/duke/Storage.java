@@ -36,7 +36,7 @@ public class Storage {
         try {
             fileIn = new Scanner(f);
         } catch (FileNotFoundException e) {
-            throw new DukeException("Cannot find the file!");
+            throw new DukeException("Creat a new file called tasks.txt");
         }
         taskList = new ArrayList<Task>();
         String record;

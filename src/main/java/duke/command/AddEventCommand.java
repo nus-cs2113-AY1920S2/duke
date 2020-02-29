@@ -3,6 +3,7 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /**
  * a command class that executes the operation to add a event task to task list
@@ -14,12 +15,12 @@ public class AddEventCommand extends Command {
 
     /**
      * constructor of this class (need to split user command to find more information about the event task)
-     * @param command command entered by user that contains attributes of this event task
+     * @param taskName task name
+     * @param timeSlot time slot of the task
      */
-    public AddEventCommand(String command) {
-        String[] attributes = command.split("/", 2);
-        this.taskName = attributes[0].trim();
-        this.timeSlot = attributes[1].split(" ",2)[1];
+    public AddEventCommand(String taskName, String timeSlot) throws DukeException{
+        this.taskName = taskName;
+        this.timeSlot = timeSlot;
     }
 
     @Override

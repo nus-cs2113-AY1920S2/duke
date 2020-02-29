@@ -3,6 +3,7 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /**
  * a command class that executes the operation to add a deadline task to task list
@@ -14,12 +15,12 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * constructor of this class (need to split user command to find more information about the deadline task)
-     * @param command command entered by user that contains attributes of this deadline task
+     * @param taskName task name
+     * @param deadline deadline of the task
      */
-    public AddDeadlineCommand(String command) {
-        String[] attributes = command.split("/",2);
-        this.taskName = attributes[0].trim();
-        this.deadline = attributes[1].split(" ",2)[1];
+    public AddDeadlineCommand(String taskName, String deadline) throws DukeException {
+        this.taskName = taskName;
+        this.deadline = deadline;
     }
 
     @Override

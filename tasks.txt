@@ -1,0 +1,7 @@
+T | 0 | read book
+D | 0 | hy/by /bykjojad | /by Sunday
+D | 0 | read | /by Sunday
+D | 0 | read/by | 
+D | 0 | read /by/by | Sunday
+D | 0 | read | 
+D | 0 | r | jijdsf

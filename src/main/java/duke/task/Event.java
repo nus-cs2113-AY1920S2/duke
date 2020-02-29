@@ -27,9 +27,9 @@ public class Event extends Task {
     public String print() {
         String str = "[E]";
         if(isDone) {
-            str += "[\u2713]";
+            str += "[Y]";
         } else {
-            str += "[\u274c]";
+            str += "[N]";
         }
         return str = str + " " + name + " (at: " + timeSlot + ")";
     }

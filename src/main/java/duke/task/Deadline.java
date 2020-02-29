@@ -29,9 +29,9 @@ public class Deadline extends Task {
     public String print() {
         String str = "[D]";
         if(isDone) {
-            str += "[\u2713]";
+            str += "[Y]";
         } else {
-            str += "[\u274c]";
+            str += "[N]";
         }
         return str = str + " " + name + " (by: " + deadline + ")";
 

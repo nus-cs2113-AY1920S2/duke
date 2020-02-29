@@ -34,15 +34,25 @@ public class Parser {
             }
         case "deadline":
             try {
-                return new AddDeadlineCommand(attributes[1]);
+                int index = attributes[1].indexOf(" /by ");
+                String taskName = attributes[1].substring(0, index);
+                String deadline = attributes[1].substring(index+1).trim().split(" ",2)[1];
+                return new AddDeadlineCommand(taskName, deadline);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException(Ui.INVALID_DESCRIPTION+Ui.DEADLINE_DESCRIPTION);
+            } catch (DukeException e) {
+                throw e;
             }
         case "event":
             try {
-                return new AddEventCommand(attributes[1]);
+                int index = attributes[1].indexOf(" /at ");
+                String taskName = attributes[1].substring(0, index);
+                String timeSlot = attributes[1].substring(index+1).trim().split(" ",2)[1];
+                return new AddEventCommand(taskName, timeSlot);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException(Ui.INVALID_DESCRIPTION+Ui.EVENT_DESCRIPTION);
+            } catch (DukeException e) {
+                throw e;
             }
         case "delete":
             try {

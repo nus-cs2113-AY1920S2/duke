@@ -23,9 +23,9 @@ public class Todo extends Task {
     public String print(){
         String str = "[T]";
         if(isDone) {
-            str += "[\u2713]";
+            str += "[Y]";
         } else {
-            str += "[\u274c]";
+            str += "[N]";
         }
         return str = str + " " + name;
     }
