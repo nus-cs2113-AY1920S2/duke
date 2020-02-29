@@ -12,10 +12,19 @@ import java.util.Locale;
 
 import static duke.utils.Constants.CHECK_MARKER;
 
+/**
+ * Command that checks all the tasks on a specific date.
+ */
 public class CheckCommand extends Command {
     private String description;
     private TaskList taskList;
-    
+
+    /**
+     * Defines the constructor.
+     * Starts the target list with empty list and specifies the target date.
+     *
+     * @param description Check marker with target date.
+     */
     public CheckCommand(String description) {
         this.description = description;
         this.taskList = new TaskList();
@@ -33,11 +42,9 @@ public class CheckCommand extends Command {
         String on = taskOn[1].trim();
 
         LocalDate date = LocalDate.parse(on);
-        System.out.println(date);
         
         for (int i = 1; i <= tasks.getListSize(); i++) {
             Task task = tasks.getTask(i);
-            System.out.println(task.getDate());
             
             if (task.getDate() == null) {
                 continue;

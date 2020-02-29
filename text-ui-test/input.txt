@@ -1,9 +1,13 @@
 todo read book
 deadline return book
 deadline return book /by June 6th
+deadline return book /by 2020-6-6
+deadline return book /by 2020-06-06
 event
 event project meeting
-event project meeting /at Aug 6th 2-4pm
+event project meeting /at March 1st 2-4pm
+event project meeting /at 2020-3-1
+event project meeting /at 2020-03-01
 list
 odne 1
 done 1
@@ -14,10 +18,15 @@ todo join sports club
 todo
 todo borrow book
 done 4
+deadline CS2113 iP project /by 2020-03-01
 list
-delete 3
+delete 4
 delete 8
 delete -2
 list
+find book
+find basketball
+check /on 2020-03-1
+check /on 2020-03-03
 clear
 bye

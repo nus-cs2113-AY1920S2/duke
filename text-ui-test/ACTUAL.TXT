@@ -13,25 +13,29 @@ Got it. I've added this task:
   [T][✘] read book
 Now you have 1 tasks in the list.
 Oops! Time is missing!
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
 Got it. I've added this task:
-  [D][✘] return book (by: June 6th)
+  [D][✘] return book (by: Jun 06 2020)
 Now you have 2 tasks in the list.
 OOPS!!! The description of a event cannot be empty.
 Oops! Time is missing!
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
 Got it. I've added this task:
-  [E][✘] project meeting (at: Aug 6th 2-4pm)
+  [E][✘] project meeting (at: Mar 01 2020)
 Now you have 3 tasks in the list.
 Here are the tasks in your list:
 1.[T][✘] read book
-2.[D][✘] return book (by: June 6th)
-3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+2.[D][✘] return book (by: Jun 06 2020)
+3.[E][✘] project meeting (at: Mar 01 2020)
 OOPS!!! I'm sorry, but I don't know what that means :-(
 Nice! I've marked this task as done:
   [T][✓] read book
 Please enter a valid task number~
 Please enter a valid task number~
 Nice! I've marked this task as done:
-  [D][✓] return book (by: June 6th)
+  [D][✓] return book (by: Jun 06 2020)
 Got it. I've added this task:
   [T][✘] join sports club
 Now you have 4 tasks in the list.
@@ -41,21 +45,35 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 Nice! I've marked this task as done:
   [T][✓] join sports club
+Got it. I've added this task:
+  [D][✘] CS2113 iP project (by: Mar 01 2020)
+Now you have 6 tasks in the list.
 Here are the tasks in your list:
 1.[T][✓] read book
-2.[D][✓] return book (by: June 6th)
-3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+2.[D][✓] return book (by: Jun 06 2020)
+3.[E][✘] project meeting (at: Mar 01 2020)
 4.[T][✓] join sports club
 5.[T][✘] borrow book
+6.[D][✘] CS2113 iP project (by: Mar 01 2020)
 Noted. I've removed this task: 
-  [E][✘] project meeting (at: Aug 6th 2-4pm)
-Now you have 4 tasks in the list.
+  [T][✓] join sports club
+Now you have 5 tasks in the list.
 Please enter a valid task number~
 Please enter a valid task number~
 Here are the tasks in your list:
 1.[T][✓] read book
-2.[D][✓] return book (by: June 6th)
-3.[T][✓] join sports club
+2.[D][✓] return book (by: Jun 06 2020)
+3.[E][✘] project meeting (at: Mar 01 2020)
 4.[T][✘] borrow book
+5.[D][✘] CS2113 iP project (by: Mar 01 2020)
+Here are the tasks matching "book" in your list:
+1.[T][✓] read book
+2.[D][✓] return book (by: Jun 06 2020)
+3.[T][✘] borrow book
+Here are the tasks matching "basketball" in your list:
+Empty List.
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+Here are the tasks on Mar 03 2020:
+Empty List.
 All tasks cleared.
 Bye. Hope to see you again soon!

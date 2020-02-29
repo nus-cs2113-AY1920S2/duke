@@ -10,7 +10,6 @@ import duke.tasks.Task;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static duke.utils.Constants.DEADLINE_MARKER;
 
@@ -21,7 +20,7 @@ public class DeadlineCommand extends AddCommand {
      * Defines the constructor.
      * Fills in the task content.
      *
-     * @param description Task content.
+     * @param description Task content with date.
      */
     public DeadlineCommand(String description) {
         this.description = description;

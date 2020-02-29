@@ -20,7 +20,7 @@ public class EventCommand extends AddCommand {
      * Defines the constructor.
      * Fills in the task content.
      *
-     * @param description Task content.
+     * @param description Task content with date.
      */
     public EventCommand(String description) {
         this.description = description;

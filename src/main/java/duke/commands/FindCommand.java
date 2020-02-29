@@ -5,13 +5,16 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+/**
+ * Command that finds all the tasks with a keyword.
+ */
 public class FindCommand extends Command {
     private String targetWord;
     private TaskList targetList;
 
     /**
      * Defines the constructor.
-     * Starts the target list with empty list.
+     * Starts the target list with empty list and specifies the keyword.
      * 
      * @param targetWord Word that user want to find.
      */
@@ -22,7 +25,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the command "find".
-     * Displays all the tasks on a certain date.
+     * Displays all the tasks with a keyword.
      *
      * @param tasks Task list that stores all the existing tasks.
      * @param ui Interaction with users.
@@ -38,7 +41,7 @@ public class FindCommand extends Command {
             }
         }
 
-        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(String.format("Here are the tasks matching \"%s\" in your list:", targetWord));
         ui.listTasks(targetList);
     }
 }
