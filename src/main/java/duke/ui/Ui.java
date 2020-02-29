@@ -18,7 +18,7 @@ public class Ui {
             + "\t|  _  /  |  __|  | |\\   |   / /   | | | | \n"
             + "\t| | \\ \\  | |___  | | \\  |  / /__  | |_| | \n"
             + "\t|_|  \\_\\ |_____| |_|  \\_| /_____| \\_____/ \n";
-    public static final String TAP = "\t";
+    public static final String TAB = "\t";
 
     private Scanner in;
     private PrintStream out;
@@ -80,7 +80,7 @@ public class Ui {
     public void printTask(Task newTask, TaskList tasks, String taskType) {
         out.println(CUTTING_LINE);
         out.println("\tGot it. I've "+ taskType+ " this task:");
-        out.println(TAP + newTask.toString());
+        out.println(TAB + newTask.toString());
         out.printf("\tNow you have %d task(s) in the list\n", tasks.size());
         printOutputTail();
     }
@@ -93,7 +93,7 @@ public class Ui {
     public void printTask(Task newTask, String taskType) {
         out.println(CUTTING_LINE);
         out.println("\tGot it. I've "+ taskType+ " this task:");
-        out.println(TAP + newTask.toString());
+        out.println(TAB + newTask.toString());
         printOutputTail();
     }
 
@@ -103,7 +103,7 @@ public class Ui {
      * @param ID the task ID.
      */
     public void printOneTask(Task task, int ID) {
-        out.println(TAP + ID + "." + task.toString());
+        out.println(TAB + ID + "." + task.toString());
     }
 
     /**
@@ -112,7 +112,7 @@ public class Ui {
      */
     public void printInfoHead(String infoHead) {
         out.println(CUTTING_LINE);
-        out.println(TAP +infoHead);
+        out.println(TAB +infoHead);
     }
 
 }
