@@ -1,7 +1,9 @@
 package duke;
 
+/**
+ * Handles all user interface for Duke
+ */
 public class Ui {
-
 
     /**
      * Line that divides text

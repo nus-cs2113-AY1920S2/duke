@@ -4,6 +4,9 @@ import types.Task;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * Main class for the Duke Personal Assistant
+ */
 public class Duke {
 
     /**
