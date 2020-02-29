@@ -27,6 +27,9 @@ public class Duke {
         new Duke().start();
     }
 
+    /*
+     * Set up the required classes
+     */
     private void start() {
         this.ui = new Ui();
         this.dukeManager = new DukeManager();
@@ -35,6 +38,9 @@ public class Duke {
         run();
     }
 
+    /*
+     * Run DUKE until user terminates
+     */
     public void run() {
         ui.printWelcomeMessage();
         boolean isExit = false;

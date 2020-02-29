@@ -9,15 +9,26 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui = new Ui();
 
+    /**
+     * Stores all of the user's task and opens previous data from file
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.tasks = Storage.openData();
     }
 
+    /**
+     * Stores task list into text file
+     */
     public void exitAndSave() {
         Storage.saveData(tasks);
     }
 
+    /**
+     * Set user task as done
+     *
+     * @param taskNum The task number for the task to be set as done
+     */
     public void setTaskDone(String taskNum) throws DukeException {
         try {
             int taskNumInt = Integer.parseInt(taskNum);
@@ -33,6 +44,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Get and print the list of tasks
+     */
     public void getList() {
         if (tasks.size() == 0) {
             ui.showError("No tasks found!");
@@ -41,6 +55,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add new todo task into the last list
+     *
+     * @param arr The string array command input by user split by spaces
+     */
     public void addTodo(String[] arr) throws DukeException {
         try {
             Todo todo = new Todo(arr[1]);
@@ -52,6 +71,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add new event task into the task list
+     *
+     * @param arr The string array command input by user split by spaces
+     */
     public void addEvent(String[] arr) throws DukeException {
         try {
             String arr2[] = Parser.parseEvent(arr);
@@ -64,6 +88,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add new deadline task into the task list
+     *
+     * @param arr The string array command input by user split by spaces
+     */
     public void addDeadline(String[] arr) throws DukeException {
         try {
             String arr2[] = Parser.parseDeadline(arr);
@@ -76,6 +105,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a task from the task list
+     *
+     * @param arr The string array command input by user split by spaces
+     */
     public void deleteTask(String[] arr) throws DukeException {
         try {
             int taskNum = Integer.parseInt(arr[1]) - 1;
