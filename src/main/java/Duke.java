@@ -71,12 +71,27 @@ public class Duke {
             handleDeleteCommand(line);
             break;
         case "find":
-            tasks.findTask(line);
+            handleFindCommand(line);
             break;
         default:
             handleAddCommands(line, command);
             break;
         }
+    }
+
+    /**
+     * Method to handle command that involves finding a task
+     * from the task list based on a keyword.
+     * @param line a string that gives information on the task to find.
+     */
+    private void handleFindCommand(String line) {
+        try {
+            parser.getKeyWord(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds("find");
+            return;
+        }
+        tasks.findTask(line);
     }
 
     /**
@@ -92,7 +107,11 @@ public class Duke {
             parser.handleIndexOutOfBounds(command);
             return;
         }
-        tasks.storeTaskIntoList(taskInformation, command);
+        try {
+            tasks.storeTaskIntoList(taskInformation, command);
+        } catch (InvalidCommandException c) {
+            parser.handleInvalidDescription();
+        }
         try {
             storage.saveToFile(tasks);
         } catch (IOException e) {
@@ -105,6 +124,19 @@ public class Duke {
      * @param line a string that gives information on the task to delete.
      */
     private void handleDeleteCommand(String line) {
+        String taskNumber;
+        try {
+            taskNumber = parser.getTaskNumber(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds("delete");
+            return;
+        }
+        try {
+            tasks.checkIfNumberExists(taskNumber);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleInvalidIndex();
+            return;
+        }
         tasks.deleteTask(line);
         try {
             storage.saveToFile(tasks);
@@ -118,6 +150,19 @@ public class Duke {
      * @param line a string that gives information on the task done.
      */
     private void handleDoneCommand(String line) {
+        String taskNumber;
+        try {
+            taskNumber = parser.getTaskNumber(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds("done");
+            return;
+        }
+        try {
+            tasks.checkIfNumberExists(taskNumber);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleInvalidIndex();
+            return;
+        }
         tasks.markTaskAsDone(line);
         try {
             storage.saveToFile(tasks);

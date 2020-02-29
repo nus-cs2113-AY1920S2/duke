@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 /**
- * Represents a tasklist object with various methods that
+ * Represents a Tasklist object with various methods that
  * helps Duke to keep track of the tasks details.
  */
 public class TaskList {
@@ -11,7 +11,7 @@ public class TaskList {
     public ArrayList<Task> listOfTasks;
 
     /**
-     * Constructor for the tasklist object.
+     * Constructor for the Tasklist object.
      * @param listOfTasks an array list of tasks that will be used
      * to populate the listOfTasks.
      */
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for the tasklist object.
+     * Constructor for the Tasklist object.
      * Used to initialise an empty listOfTasks.
      */
     public TaskList() {
@@ -32,11 +32,15 @@ public class TaskList {
      * Formats the task information into two components
      * (description and dateAndTime) before storing.
      * @param taskInformation full information about the task.
-     * @param separator       used to format the taskInformation into its components.
-     * @param command         differentiate between deadline and event tasks.
+     * @param separator used to format the taskInformation into its components.
+     * @param command differentiate between deadline and event tasks.
      */
-    public void storeTaskIntoList(String taskInformation, String separator, String command) {
+    public void storeTaskIntoList(String taskInformation,
+                                  String separator, String command) throws InvalidCommandException {
         int dividerPosition = taskInformation.indexOf(separator);
+        if (dividerPosition == -1) {
+            throw new InvalidCommandException();
+        }
         String description = taskInformation.substring(0, dividerPosition);
         String dateAndTime = taskInformation.substring(dividerPosition + 5);
         if (command.equals("deadline")) {
@@ -51,9 +55,9 @@ public class TaskList {
     /**
      * Method used to store tasks into the listOfTasks.
      * @param taskInformation full information about the task.
-     * @param command         differentiate between the different type of tasks.
+     * @param command differentiate between the different type of tasks.
      */
-    public void storeTaskIntoList(String taskInformation, String command) {
+    public void storeTaskIntoList(String taskInformation, String command) throws InvalidCommandException {
         switch (command) {
         case "todo":
             Todo todoToAdd = new Todo(taskInformation);
@@ -155,5 +159,17 @@ public class TaskList {
 
         }
         ui.printLine();
+    }
+
+    /**
+     * Method to check if a particular taskNumber is valid.
+     * @param taskNumber a string that represents the taskNumber to check.
+     * @throws IndexOutOfBoundsException if taskNumber is invalid.
+     */
+    public void checkIfNumberExists(String taskNumber) throws IndexOutOfBoundsException{
+        int number = Integer.parseInt(taskNumber);
+        if (number <= 0 || number > listOfTasks.size()) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 }

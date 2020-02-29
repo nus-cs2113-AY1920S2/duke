@@ -66,6 +66,32 @@ public class Parser {
     }
 
     /**
+     * Method to check if the task number is provided for done and delete commands.
+     * @param line a string that corresponds to user input.
+     * @throws IndexOutOfBoundsException if the task number could not be found.
+     */
+    public String getTaskNumber(String line) throws IndexOutOfBoundsException {
+        int dividerPosition = line.indexOf(" ");
+        if (dividerPosition == -1) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            return line.substring(dividerPosition + 1);
+        }
+    }
+
+    /**
+     * Method to check if keyword is provided for find command.
+     * @param line a string that corresponds to user input.
+     * @throws IndexOutOfBoundsException if the keyword could not be found.
+     */
+    public void getKeyWord(String line) throws IndexOutOfBoundsException {
+        int dividerPosition = line.indexOf(" ");
+        if (dividerPosition == -1) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
      * Method used to handle invalid commands.
      * Prints an error message to notify user of the invalid input.
      */
@@ -87,7 +113,16 @@ public class Parser {
     }
 
     /**
-     * Method used to parse datafile and populate the tasklists database.
+     * Method used to handle done or delete commands with invalid index.
+     */
+    public void handleInvalidIndex() {
+        ui.printLine();
+        System.out.println(" ☹ OOPS!!! The index is invalid.");
+        ui.printLine();
+    }
+
+    /**
+     * Method used to parse datafile and populate the task list database.
      * @param line represents a line read from the datafile.
      * @return a Task object that is interpreted from the line.
      */
@@ -111,5 +146,14 @@ public class Parser {
         boolean isDone = Boolean.parseBoolean(isDoneString);
         task.setIsDone(isDone);
         return task;
+    }
+
+    /**
+     * Method used to handle invalid descriptions for deadline and event tasks.
+     */
+    public void handleInvalidDescription() {
+        ui.printLine();
+        System.out.println(" ☹ OOPS!!! The description format is invalid.");
+        ui.printLine();
     }
 }

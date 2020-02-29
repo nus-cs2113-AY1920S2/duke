@@ -31,7 +31,7 @@ public class Task {
      * Method used to get the description of the task for printing.
      * This method is overridden by child classes
      * which requires additional formatting/information.
-     * @return a string that describes the task object
+     * @return a string that describes the task object.
      */
     public String showFullDescription() {
         return description;
