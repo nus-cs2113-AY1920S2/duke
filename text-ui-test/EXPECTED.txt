@@ -12,16 +12,18 @@ Empty List.
 Got it. I've added this task:
   [T][✘] read book
 Now you have 1 tasks in the list.
-Oops! Time is missing!
+The marker is missing~ The marker for this command is /by.
 The time format is wrong. Please follow: yyyy-mm-dd, thank you!
 The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The marker is missing~ The marker for this command is /by.
 Got it. I've added this task:
   [D][✘] return book (by: Jun 06 2020)
 Now you have 2 tasks in the list.
 OOPS!!! The description of a event cannot be empty.
-Oops! Time is missing!
+The marker is missing~ The marker for this command is /at.
 The time format is wrong. Please follow: yyyy-mm-dd, thank you!
 The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The marker is missing~ The marker for this command is /at.
 Got it. I've added this task:
   [E][✘] project meeting (at: Mar 01 2020)
 Now you have 3 tasks in the list.
@@ -73,7 +75,10 @@ Here are the tasks matching "book" in your list:
 Here are the tasks matching "basketball" in your list:
 Empty List.
 The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The marker is missing~ The marker for this command is /on.
 Here are the tasks on Mar 03 2020:
 Empty List.
 All tasks cleared.
+Here are the tasks in your list:
+Empty List.
 Bye. Hope to see you again soon!

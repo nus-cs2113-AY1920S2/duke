@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.exceptions.MarkerMissingException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
@@ -48,7 +49,6 @@ public class Ui {
      * @param tasks Task list that needs to be presented on the screen.
      */
     public void listTasks(TaskList tasks) {
-//        System.out.println("Here are the tasks in your list:");
         if (tasks.getListSize() <= 0) {
             System.out.println("Empty List.");
             return;
@@ -140,6 +140,15 @@ public class Ui {
      */
     public void displayEmptyDescriptionMessage(String command) {
         System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", command));
+    }
+
+    /**
+     * Tells the user that the marker of the certain command is missing.
+     * 
+     * @param e MarkerMissingException to get the proper marker.
+     */
+    public void displayMarkerMissingMessage(MarkerMissingException e) {
+        System.out.println(String.format("The marker is missing~ The marker for this command is %s.", e.getMarker()));
     }
 
     /** Tells the user that the time of some command is missing. */

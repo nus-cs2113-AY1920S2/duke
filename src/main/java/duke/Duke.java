@@ -1,11 +1,7 @@
 package duke;
 
 import duke.commands.Command;
-import duke.exceptions.ChatboxException;
-import duke.exceptions.CommandNotFoundException;
-import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.TimeMissingException;
-import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.*;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -66,6 +62,8 @@ public class Duke {
                 ui.displayCommandNotFoundMessage();
             } catch (EmptyDescriptionException e) {
                 ui.displayEmptyDescriptionMessage(e.getCommand());
+            } catch (MarkerMissingException e) {
+                ui.displayMarkerMissingMessage(e);
             } catch (TimeMissingException e) {
                 ui.displayTimeMissingMessage();
             } catch (InvalidTaskNumberException e) {

@@ -12,6 +12,9 @@ public abstract class Command {
     /** Represents if this command means "Exit" or not. */
     protected boolean isExit = false;
 
+    /** Deliminator between the task content and the date. */
+    protected String marker; // to be assigned in subclasses
+
     /**
      * Returns if this command means "Exit" or not.
      * 
@@ -19,6 +22,15 @@ public abstract class Command {
      */
     public boolean isExit() {
         return this.isExit;
+    }
+
+    /**
+     * Returns the marker for the command: /by for deadline, /at for event, /on for check.
+     * 
+     * @return Marker of the command.
+     */
+    public String getMarker() {
+        return this.marker;
     }
 
     /**

@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.exceptions.ChatboxException;
+import duke.exceptions.MarkerMissingException;
 import duke.exceptions.TimeMissingException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -10,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import static duke.utils.Constants.CHECK_MARKER;
+import static duke.utils.Constants.*;
 
 /**
  * Command that checks all the tasks on a specific date.
@@ -21,17 +23,21 @@ public class CheckCommand extends Command {
 
     /**
      * Defines the constructor.
-     * Starts the target list with empty list and specifies the target date.
+     * Starts the target list with empty list, specifies the target date, and specifies the marker.
      *
      * @param description Check marker with target date.
      */
     public CheckCommand(String description) {
         this.description = description;
         this.taskList = new TaskList();
+        this.marker = CHECK_MARKER;
     }
     
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws TimeMissingException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatboxException{
+        if (!description.contains(CHECK_MARKER)) {
+            throw new MarkerMissingException(CHECK_MARKER);
+        }
         String[] taskOn = description.split(CHECK_MARKER);
         
         // "", "date"

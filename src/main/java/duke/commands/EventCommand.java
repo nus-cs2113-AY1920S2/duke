@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.MarkerMissingException;
 import duke.exceptions.TimeMissingException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -18,12 +19,13 @@ public class EventCommand extends AddCommand {
 
     /**
      * Defines the constructor.
-     * Fills in the task content.
+     * Fills in the task content and specifies the marker.
      *
      * @param description Task content with date.
      */
     public EventCommand(String description) {
         this.description = description;
+        this.marker = EVENT_MARKER;
     }
 
     /**
@@ -38,6 +40,10 @@ public class EventCommand extends AddCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatboxException {
+        if (!description.contains(EVENT_MARKER)) { // time marker is missing
+            throw new MarkerMissingException(EVENT_MARKER);
+        }
+
         String[] taskAt = description.split(EVENT_MARKER);
 
         if (taskAt.length != 2) {
