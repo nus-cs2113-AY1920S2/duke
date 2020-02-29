@@ -26,6 +26,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints welcome message as the application starts
+     */
     public static void printWelcomeMessage() {
         String logo = "     _____          ___           ___           ___     \n" +
                 "    /  /::\\        /__/\\         /__/|         /  /\\    \n" +
@@ -49,6 +52,13 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays the task which the user has deleted
+     * Shows the number of tasks remaining in the task list
+     *
+     * @param task The task which the user wants to delete from the list
+     * @param numOfTasks The number of tasks in the list
+     */
     public static void printDelete(Task task, int numOfTasks) {
         showLine();
         System.out.println("Noted. I've removed this task: ");
@@ -58,6 +68,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays the task which the user has marked as done
+     *
+     * @param task The task which the user has marked as done
+     */
     public static void printDone(Task task) {
         showLine();
         System.out.println("Nice! I've marked this task as done: ");
@@ -65,6 +80,13 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays a confirmation message to show that the task was added into the list
+     * Shows the number of tasks in the list
+     *
+     * @param Task The list of tasks
+     * @param numOfTasks The number of tasks in the list
+     */
     public static void printConfirm(Task task, int numOfTasks) {
         showLine();
         System.out.println("Got it! I've added this task:");
@@ -73,6 +95,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints the exit message when the user exits the application
+     */
     public static void printExitMessage() {
         showLine();
         String outro = "Bye. Hope to see you again soon!";
@@ -80,16 +105,32 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays the list of tasks that are in the list
+     *
+     * @param Task The list of tasks
+     * @param numOfTasks The number of tasks in the list
+     */
     public static void printList(ArrayList<Task> Task, int numOfTasks) {
         showLine();
-        System.out.println("Here are the tasks in your list: \n");
-        for (int i = 0; i < numOfTasks; i++) {
-            int num = i + 1;
-            System.out.println(num + ". " + Task.get(i));
+        if (numOfTasks == 0) {
+            showError("No tasks found!");
+        } else {
+            System.out.println("Here are the tasks in your list: \n");
+            for (int i = 0; i < numOfTasks; i++) {
+                int num = i + 1;
+                System.out.println(num + ". " + Task.get(i));
+            }
         }
         showLine();
     }
 
+    /**
+     * Displays the list of tasks that have descriptions matching keyword
+     *
+     * @param Task The list of tasks
+     * @param numOfTasks The number of tasks in the list
+     */
     public static void findList(ArrayList<Task> Task, int numOfTasks) {
         showLine();
         if (numOfTasks == 0) {
@@ -104,6 +145,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays an error message
+     *
+     * @param error The message to be displayed
+     */
     public static void showError(String error) {
         showLine();
         System.out.println(error);

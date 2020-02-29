@@ -18,10 +18,19 @@ public class DukeManager {
     private TaskList taskList;
 
 
+    /**
+     * Constructor for the DukeManager class
+     * create a new TaskList
+     */
     public DukeManager() {
         taskList = new TaskList();
     }
 
+    /**
+     * Manage the command input by user
+     *
+     * @param arr The string array command input by user split by spaces
+     */
     public void execute(String[] arr) {
         try {
             switch (arr[0]) {
@@ -58,6 +67,11 @@ public class DukeManager {
         }
     }
 
+    /**
+     * Get the boolean value of isExit
+     *
+     * @return true if user exits, false otherwise
+     */
     public boolean getIsExit() {
         return isExit;
     }

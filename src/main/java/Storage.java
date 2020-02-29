@@ -8,13 +8,18 @@ import java.util.ArrayList;
 
 public class Storage {
 
+    /**
+     * Save the task list into a text file
+     *
+     * @param Tasks The ArrayList of tasks to be saved
+     */
     public static void saveData(ArrayList<Task> Tasks) {
         try {
             File file = new File("duke.txt");
             file.createNewFile();
             FileWriter fileWriter = new FileWriter("duke.txt", false);
             for (Task task : Tasks) {
-                fileWriter.write(task.saveTask());
+                fileWriter.write(task.getDescription());
                 fileWriter.write(System.lineSeparator());
             }
             fileWriter.close();
@@ -25,6 +30,11 @@ public class Storage {
 
     }
 
+    /**
+     * Open the text file that contains the previous task list data
+     *
+     * @return ArrayList of saved tasks
+     */
     public static ArrayList<Task> openData() {
         ArrayList<Task> Tasks = new ArrayList<Task>();
         try {

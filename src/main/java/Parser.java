@@ -14,11 +14,23 @@ public class Parser {
         return arr;
     }
 
+    /**
+     * Parse the command for an event task
+     *
+     * @param arr user's command
+     * @return string of array split by '/at'
+     */
     public static String[] parseEvent(String[] arr) {
         String arr2[] = arr[1].split("/at ", 2);
         return arr2;
     }
 
+    /**
+     * Parse the command for an deadline task
+     *
+     * @param arr user's command
+     * @return string of array split by '/by'
+     */
     public static String[] parseDeadline(String[] arr) {
         String arr2[] = arr[1].split("/by ", 2);
         return arr2;
