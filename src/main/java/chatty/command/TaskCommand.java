@@ -1,7 +1,7 @@
 package chatty.command;
 
 public abstract class TaskCommand extends Command {
-    protected  String description;
+    private String description;
 
     public TaskCommand(String description) {
         super();

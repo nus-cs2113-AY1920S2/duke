@@ -26,6 +26,9 @@ import java.util.Scanner;
 
 import static chatty.util.Constants.BYE_STRING;
 
+/**
+ * Entry point of ChattyChatBot where the application is initialized.
+ */
 public class ChattyChatBot {
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -35,6 +38,9 @@ public class ChattyChatBot {
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Constructor for ChattyChatBot.
+     */
     public ChattyChatBot() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -46,6 +52,12 @@ public class ChattyChatBot {
         new ChattyChatBot().run();
     }
 
+    /**
+     * Runs the main program which involves multiple steps:
+     * 1. Reads tasks from file
+     * 2. Interacts with the user
+     * 3. Saves tasks to file
+     */
     public void run() {
         ui.sendLineBreak();
         ui.sendWelcomeMessage();
