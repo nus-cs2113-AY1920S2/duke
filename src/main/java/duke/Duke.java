@@ -88,6 +88,9 @@ public class Duke {
             removeCertainTask(input);
         } else if(parser.isListCommand(input)){
             tasks.printTaskList();
+        } else if(parser.isFindCommand(input)){
+            String targetWords = parser.getTargetWords(input);
+            tasks.showAllRelatedTasks(targetWords);
         } else addNewTask(input);
     }
 

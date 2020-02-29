@@ -36,4 +36,18 @@ public class TaskList {
             System.out.println(prefix+task.showTaskInfo());
         }
     }
+
+    public void showAllRelatedTasks(String targetWords){
+        int index = 0;
+
+        for(Task task:taskList){
+            if(!task.showTaskInfo().contains(targetWords)) continue;
+            index++;
+            String prefix = "    "+index+".";
+            if(index==1) System.out.println("    Here are the matching tasks in your list:");
+            System.out.println(prefix+task.showTaskInfo());
+        }
+
+        if(index==0) System.out.println("    No matching tasks found!");
+    }
 }

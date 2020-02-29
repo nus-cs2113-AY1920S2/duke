@@ -28,6 +28,10 @@ public class Parser {
         return input.startsWith("list");
     }
 
+    public boolean isFindCommand(String input){
+        return input.startsWith("find");
+    }
+
     public int getTaskIndex(String input) throws NumberFormatException {
         int dividePosition = input.indexOf(" ");
         try {
@@ -61,5 +65,17 @@ public class Parser {
     public String parseTaskType(String input){
         int dividePosition = input.indexOf(" ");
         return input.substring(0,dividePosition);
+    }
+
+    public String getTargetWords(String input){
+        String targetWords = "";
+        try{
+            int splitIndex = input.indexOf(" ");
+            targetWords = input.substring(splitIndex).trim();
+        } catch (StringIndexOutOfBoundsException e){
+            Ui.showCannotGetTargetWordsInfo(input);
+        }
+
+        return targetWords;
     }
 }
