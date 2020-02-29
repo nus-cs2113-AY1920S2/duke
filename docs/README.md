@@ -3,36 +3,20 @@
 
 ## Features :notebook:
  
-### Feature 1 - list  
-List every task that is currently in your todo list.
- 
-### Feature 2 - todo  
-Adds an item into your todo list.
- 
-### Feature 3 - event 
-Adds an event into your todo list at a specified time.
- 
-### Feature 4 - deadline
-Adds an item with a deadline into your todo list with its specified time.
- 
-### Feature 5 - done
-Marks an item as completed.
- 
-### Feature 6 - delete
-Deletes an item from your todo list.
-
-### Feature 7 - find
-Finds all items that matches your search query.
- 
-### Feature 8 - bye
-Quit the application, storing all items in your todo list onto your hard drive.
- 
- 
+- [List all items in your todo list](#list---list-all-items-in-your-todo-list)
+- [Adds a todo item](#todo---adds-a-general-todo-item)
+- [Adds an event item](#event---adds-an-event-item-at-a-specified-time)
+- [Adds a deadline item](#deadline---adds-a-deadline-item-at-a-specified-time)
+- [Marks an item as done](#done---marks-an-item-as-done)
+- [Deletes an item](#delete---deletes-an-item)
+- [Find an item](#find---find-all-matching-tasks)
+- [Exits program](#bye---exits-program)
+- [Local data storage](#Local-data-storage)
  
  
 ## Usage :memo:	
  
-### `list` - display all items currently in your todo list
+### `list` - list all items in your todo list
 
 Example of usage: 
 `list`
@@ -47,7 +31,7 @@ ____________________________________________________________
 
 ```
  
-### `todo` - adds a general item
+### `todo` - adds a general todo item
 Example of usage: 
 `todo Practice coding`
 
@@ -60,7 +44,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
  
-### `event` - adds an event at a specified time
+### `event` - adds an event item at a specified time
 Example of usage: 
 `event Watch the News /at 1am`
 
@@ -73,7 +57,7 @@ ____________________________________________________________
  ____________________________________________________________
 ```
  
-### `deadline` - adds an item with a deadline
+### `deadline` - adds a deadline item at a specified time
 Example of usage: 
 `deadline Submit 1st draft for Joker 2 /by: 1st March 5pm`
 
@@ -86,7 +70,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
  
-### `done` - marks an item as completed
+### `done` - marks an item as done
 Example of usage: 
 `done 3`
 
@@ -135,3 +119,6 @@ ____________________________________________________________
 ____________________________________________________________
 ```
  
+### Local data storage
+On start up, if it exists, Duke loads past list from `\[project_root]/data/duke.txt`, or else it creates one.
+On exit, Duke saves the created list in the same location.
