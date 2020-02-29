@@ -2,17 +2,17 @@ blahblah
 todo This is a todo task
 todo
 list
-event This is an event happening /at Feb 10th 2-4pm
+event This is an event happening /at 2020-03-01 to 2020-03-03
 event
 event This is an event without a specified time
 list
-deadline This is a task with deadline /by tomorrow 6pm
+deadline This is a task with deadline /by 2019-12-02
 deadline
 deadline This is a deadline task without a specified deadline
 list
 todo Another todo task
 list
-event Another event /at Nov 7th 10-11am
+event Another event /at 2020-02-10 to 2020-02-12
 list
 done
 done -1
@@ -31,4 +31,11 @@ delete 0
 list
 delete 3
 list
+event New event /at invalid format to invalid format
+list
+deadline New deadline /by invalid format
+list
+date 2019-12-02
+date 2020-03-02
+date 2020-02-11
 bye
