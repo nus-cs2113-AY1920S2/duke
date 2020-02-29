@@ -16,8 +16,8 @@ import static java.lang.Integer.parseInt;
 public class DoneCommand extends Command  {
     private int index=0 ;
     boolean isAll= false;
-    public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
-            "\t available list of task numbers";
+    public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see" +
+            " available list of task numbers";
     /**
      * This constructor creates a DoneCommand.<br>
      * @param fullCommand This is the input entered by user that has<br>

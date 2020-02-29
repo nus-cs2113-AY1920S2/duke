@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class  Command  {
     protected int status;
     protected String[] fullCommand;
-    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
-            "\t Input command is wrong. Enter \"help\" for list of accepted commands";
+    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means. :(" +
+            " Input command is wrong. Enter \"help\" for list of accepted commands";
 
     /**
      * This constructor creates a Command.<br>

@@ -15,8 +15,8 @@ import static java.lang.Integer.parseInt;
 public class DeleteCommand extends Command  {
     private int index;
     boolean isAll= false;
-    public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see\n" +
-            "\t available list of task numbers";
+    public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see" +
+            " available list of task numbers";
     public static final String ALL_TASKS_ALREADY_DELETED ="\t List is already empty!";
     /**
      * This constructor creates a DeleteCommand.<br>
