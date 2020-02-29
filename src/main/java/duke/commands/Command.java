@@ -42,12 +42,11 @@ public class  Command  {
         if(this.fullCommand[0].equals("help")){
             ui.printHelp();
         }else if(this.fullCommand[0].equals("list")){
-            ui.printList(l1);
+            ui.printCurrentList(l1);
         }else{
             throw new IllegalDukeException(WRONG_INPUT);
         }
         storage.saveFile(l1);
-        return;
     }
 
     /**

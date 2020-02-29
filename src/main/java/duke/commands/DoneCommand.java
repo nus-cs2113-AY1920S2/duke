@@ -18,6 +18,7 @@ public class DoneCommand extends Command  {
     boolean isAll= false;
     public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see" +
             " available list of task numbers";
+    public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
     /**
      * This constructor creates a DoneCommand.<br>
      * @param fullCommand This is the input entered by user that has<br>
@@ -35,7 +36,7 @@ public class DoneCommand extends Command  {
     public void execute(ArrayList<Task> l1, Ui ui, Storage storage) throws IllegalDukeException,
             FileNotFoundException {
             if (l1.isEmpty()) {
-                ui.printList(l1);
+                throw new IllegalDukeException(LIST_EMPTY);
             } else {
                 if (this.isAll) {
                     for (int i = 0; i < l1.size(); i++) {

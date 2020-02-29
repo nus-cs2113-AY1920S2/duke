@@ -47,7 +47,6 @@ public class Ui  {
 
     private final Scanner in;
     private final PrintStream out;
-    private String message;
 
     /**
      * This constructor is called during the run process of Duke<br>
@@ -137,9 +136,37 @@ public class Ui  {
      */
     public void printAddTask(ArrayList<Task> l1, Task task){
         out.println("\t Got it. I've added this task:");
-        String standardLengthMessage = formatMessage("\t   "+task.toString());
-        out.println(standardLengthMessage);
+        String standardLengthMessage = formatMessage(task.toString());
+        out.println("\t  " + standardLengthMessage);
         out.println("\t Now you have " + l1.size()+ " tasks in the list.");
+    }
+
+    /**
+     * This method is to print the ArrayList that has been given to it.
+     * @param l1 This is the ArrayList that needs to be printed.
+     */
+
+    public void printList(ArrayList<Task> l1){
+        for (int i = 0; i < l1.size(); i++) {
+            int count = i + 1;
+            Task task = l1.get(i);
+            String standardLengthMessage = formatMessage(count + "." + task.toString());
+            out.println("\t " + standardLengthMessage);
+        }
+    }
+    /**
+     * This method shows User of all available Tasks.<br>
+     * @param l1 is the current list of available Tasks.<br>
+     * If l1 is empty, method will inform user that no Tasks<br>
+     * are available.<br>
+     */
+    public void printCurrentList(ArrayList<Task> l1){
+        if(l1.isEmpty()){
+            out.println(LIST_EMPTY);
+        }else {
+            out.print("\t Here are the tasks in your list:\n");
+            printList(l1);
+        }
     }
     /**
      * This method prints good bye message to User.<br>
@@ -167,8 +194,8 @@ public class Ui  {
      */
     public void printDelete(Task task, ArrayList<Task> l1){
         out.println("\t Noted. I've removed this task: ");
-        String standardLengthMessage = formatMessage("\t   " + task.toString());
-        out.println(standardLengthMessage);
+        String standardLengthMessage = formatMessage(task.toString());
+        out.println("\t   " + standardLengthMessage);
         out.println("\t Now you have " + l1.size() + " tasks in the list.");
     }
     /**
@@ -177,12 +204,7 @@ public class Ui  {
      */
     public void printDoneAll(ArrayList<Task> l1){
         out.println("\t All tasks have been marked as done!");
-            for (int i = 0; i < l1.size(); i++) {
-                int count = i + 1;
-                Task task = l1.get(i);
-                String standardLengthMessage = formatMessage("\t " + count + "." + task.toString());
-                out.println(standardLengthMessage);
-            }
+        printList(l1);
     }
     /**
      * This method informs User that all Tasks has been deleted.<br>
@@ -203,25 +225,6 @@ public class Ui  {
     public void ignoreDeleteAll(){
         out.println("\t List was not modified!");
         out.println("\t Enter \"list\" to ensure all tasks are still in the list!");
-    }
-    /**
-     * This method shows User of all available Tasks.<br>
-     * @param l1 is the current list of available Tasks.<br>
-     * If l1 is empty, method will inform user that no Tasks<br>
-     * are available.<br>
-     */
-    public void printList(ArrayList<Task> l1){
-        if(l1.isEmpty()){
-            out.println(LIST_EMPTY);
-        }else {
-            out.print("\t Here are the tasks in your list:\n");
-            for (int i = 0; i < l1.size(); i++) {
-                int count = i + 1;
-                Task task = l1.get(i);
-                String standardLengthMessage = formatMessage("\t " + count + "." + task.toString());
-                out.println(standardLengthMessage);
-            }
-        }
     }
     /**
      * This method informs User that command entered needs to be only Y for Yes or<br>
@@ -282,8 +285,8 @@ public class Ui  {
             for (int i = 0; i < l2.size(); i++) {
                 int count = i + 1;
                 Task task = l1.get(l2.get(i));
-                String standardLengthMessage = formatMessage("\t " + count + "." + task.toString());
-                out.println(standardLengthMessage);
+                String standardLengthMessage = formatMessage(count + "." + task.toString());
+                out.println("\t " + standardLengthMessage);
             }
         }
     }
