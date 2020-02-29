@@ -22,6 +22,7 @@ public class TaskList {
 
     /**
      * Add a task to the list.
+     *
      * @param task The task to be added to the list.
      */
     public void addTask(Task task) {
@@ -30,6 +31,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list.
+     *
      * @param idx The index of the task to be deleted.
      * @return The deleted task.
      */
@@ -41,6 +43,7 @@ public class TaskList {
 
     /**
      * Gets the total number of tasks in the list.
+     *
      * @return Total number of tasks in the list.
      */
     public int getTotalTaskNum() {
@@ -49,6 +52,7 @@ public class TaskList {
 
     /**
      * Gets the task at a specific index.
+     *
      * @param idx The index.
      * @return The task at the specified index.
      */
@@ -58,6 +62,7 @@ public class TaskList {
 
     /**
      * Marks the task at a specific index as done.
+     *
      * @param idx The index.
      * @return The task marked as done.
      */
@@ -69,6 +74,7 @@ public class TaskList {
 
     /**
      * Finds the tasks with the specified keyword.
+     *
      * @param keyword The specified keyword.
      * @return The task list of the found tasks.
      */
@@ -81,9 +87,10 @@ public class TaskList {
         }
         return taskListWithKeyword;
     }
-  
+
     /**
      * Finds the tasks on the specified date.
+     *
      * @param date The specified date.
      * @return The task list of the found tasks.
      */

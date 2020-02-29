@@ -31,6 +31,7 @@ public class Storage {
 
     /**
      * Reads and parses tasks stored in file and writes the result to the list of tasks.
+     *
      * @param taskList The list where the tasks read from file should be added to.
      * @return Boolean value indicating whether or not the operation of reading tasks from file is successful.
      */
@@ -54,6 +55,7 @@ public class Storage {
 
     /**
      * Saves a list of tasks to file.
+     *
      * @param taskList The list of tasks to be stored in the file.
      * @return Boolean value indicating whether or not the operation of saving tasks to the file is successful.
      */
@@ -72,6 +74,7 @@ public class Storage {
 
     /**
      * Parses a string to create a task.
+     *
      * @param taskStr The string which represents a task.
      * @return The task created from the input string.
      */

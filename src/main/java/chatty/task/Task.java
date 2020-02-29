@@ -10,6 +10,7 @@ public abstract class Task {
 
     /**
      * Constructor for task.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -19,6 +20,7 @@ public abstract class Task {
 
     /**
      * Gets description of the task.
+     *
      * @return Description of the task.
      */
     public String getDescription() {
@@ -27,6 +29,7 @@ public abstract class Task {
 
     /**
      * Gets status icon of the task.
+     *
      * @return Status icon of the task.
      */
     public String getStatusIcon() {
@@ -42,6 +45,7 @@ public abstract class Task {
 
     /**
      * Gets done status of the task.
+     *
      * @return Boolean value indicating whether or not the task is done.
      */
     public boolean getDoneStatus() {
@@ -50,6 +54,7 @@ public abstract class Task {
 
     /**
      * Converts the task to string.
+     *
      * @return String representing the task.
      */
     @Override
@@ -59,6 +64,7 @@ public abstract class Task {
 
     /**
      * Converts the task to a string to be stored in file.
+     *
      * @return String representing the task which should be stored in file.
      */
     abstract public String getFileString();

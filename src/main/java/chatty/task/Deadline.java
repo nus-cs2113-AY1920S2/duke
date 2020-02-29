@@ -12,8 +12,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline task.
+     *
      * @param description Description of the deadline task.
-     * @param dateTime Datetime of the deadline.
+     * @param dateTime    Datetime of the deadline.
      */
     public Deadline(String description, LocalDate dateTime) {
         super(description);
@@ -22,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Converts the deadline task to string.
+     *
      * @return String representing the deadline task.
      */
     @Override
@@ -32,6 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Converts the deadline task to a string to be stored in file.
+     *
      * @return String representing the deadline task which should be stored in file.
      */
     @Override
@@ -41,6 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the date time of the deadline.
+     *
      * @return Date time of the deadline.
      */
     public LocalDate getDateTime() {

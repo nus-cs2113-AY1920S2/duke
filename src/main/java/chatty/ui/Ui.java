@@ -4,6 +4,7 @@ import chatty.task.Task;
 import chatty.task.TaskList;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 import static chatty.util.Constants.ADDED_TASK_CONFIRMATION;
 import static chatty.util.Constants.BOT_NAME;
@@ -13,16 +14,29 @@ import static chatty.util.Constants.SPACE_SEPARATOR;
 import static chatty.util.Constants.TASK_SUMMARY;
 
 /**
- * Sends messages to the user.
+ * Handles interaction with users.
  */
 public class Ui {
+
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+    /**
+     * Reads next user command.
+     *
+     * @return The user command read in.
+     */
+    public String readCommand() {
+        return SCANNER.nextLine();
+    }
 
     /**
      * Sends welcome message to the user.
      */
     public void sendWelcomeMessage() {
+        this.sendLineBreak();
         System.out.println("Hello from " + BOT_NAME);
         System.out.println("Glad to be at your service!");
+        this.sendLineBreak();
     }
 
     /**
@@ -35,6 +49,7 @@ public class Ui {
 
     /**
      * Prints out all tasks in the list.
+     *
      * @param taskList The list of tasks to be printed out.
      */
     public void listAllTasks(TaskList taskList) {
@@ -52,8 +67,9 @@ public class Ui {
 
     /**
      * Prints out all tasks in the list on a certain date.
+     *
      * @param taskList The list of tasks to be printed out.
-     * @param date The date on which the tasks occur.
+     * @param date     The date on which the tasks occur.
      */
     public void listTasksOnDate(TaskList taskList, LocalDate date) {
         if (taskList.getTotalTaskNum() == 0) {
@@ -70,8 +86,9 @@ public class Ui {
 
     /**
      * Prints out all tasks in the list with a certain keyword.
+     *
      * @param taskList The list of tasks to be printed out.
-     * @param keyword The keyword which the tasks contain.
+     * @param keyword  The keyword which the tasks contain.
      */
     public void listTasksWithKeyword(TaskList taskList, String keyword) {
         if (taskList.getTotalTaskNum() == 0) {
@@ -97,7 +114,8 @@ public class Ui {
 
     /**
      * Sends message to confirm a new task added.
-     * @param newTask The new task added.
+     *
+     * @param newTask        The new task added.
      * @param totalTaskCount The total task number.
      */
     public void sendTaskAddedMessage(Task newTask, int totalTaskCount) {
@@ -108,6 +126,7 @@ public class Ui {
 
     /**
      * Sends message to confirm task deletion.
+     *
      * @param deletedTask The task deleted.
      */
     public void sendTaskDeletedMessage(Task deletedTask) {
@@ -117,6 +136,7 @@ public class Ui {
 
     /**
      * Sends message to confirm a task is marked as done.
+     *
      * @param doneTask The task marked as done.
      */
     public void sendTaskDoneMessage(Task doneTask) {
@@ -147,14 +167,14 @@ public class Ui {
 
     /**
      * Sends message to notify user that the input date time does not follow the required format.
-     */ 
+     */
     public void sendWrongDateTimeFormatMessage() {
         System.out.println("Please use correct date time format: yyyy-mm-dd");
     }
 
     /**
      * Sends message to indicate that the application is reading tasks from disk.
-     */    
+     */
     public void sendReadingTaskMessage() {
         System.out.println("Reading tasks from disk...");
     }
@@ -186,6 +206,10 @@ public class Ui {
      */
     public void sendSaveTaskFailMessage() {
         System.out.println("Oops! Exception occurred when saving data to file.");
+    }
+
+    public void sendUnexpectedExceptionMessage() {
+        System.out.println("An unexpected exception occurred! Please try again.");
     }
 
     /**

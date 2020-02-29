@@ -9,6 +9,7 @@ public abstract class TaskCommand extends Command {
 
     /**
      * Constructor for task command.
+     *
      * @param description Description of the task in the command.
      */
     public TaskCommand(String description) {
@@ -18,6 +19,7 @@ public abstract class TaskCommand extends Command {
 
     /**
      * Gets description of the task in the command.
+     *
      * @return Description of the task in the command.
      */
     public String getDescription() {
