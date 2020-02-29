@@ -57,6 +57,12 @@ public class Duke {
                } catch (DukeException e) {
                    System.out.println("    You must include the number of deleted task!");
                }
+            } else if (cWord.equals("find")) {
+                try {
+                    findCommand(task);
+                } catch (DukeException e) {
+                    System.out.println("    You must include a keyword!");
+                }
             } else {
                 System.out.println("    I'm sorry! I don't know what that means :( ");
             }
@@ -153,6 +159,31 @@ public class Duke {
             System.out.println("    Now you have " + TaskList.getNumTasks() + " tasks in the list.");
         }
         Storage.saveChanges(f);
+    }
+
+    /**
+     * Command to search for tasks by keyword
+     * @param keyword keyword to search by
+     * @throws DukeException exception
+     */
+    private static void findCommand(String keyword) throws DukeException{
+        if (keyword.isEmpty()) {
+            throw new DukeException();
+        }
+        types.Task[] temp = new types.Task[100];
+        int counter = 0;
+        for (int i = 0; i < TaskList.getNumTasks(); i++) {
+            Task currTask = TaskList.getTaskList()[i];
+            if (currTask.getName().contains(keyword)) {
+                temp[counter] = currTask;
+                counter++;
+            }
+        }
+        System.out.println("    Here are matching tasks in your list:");
+        for (int k = 0; k < counter; k++) {
+            System.out.print("    " + (k + 1) + ".");
+            System.out.println(temp[k].toString());
+        }
     }
 
     /**
