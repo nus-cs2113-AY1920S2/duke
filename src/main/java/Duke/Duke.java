@@ -9,6 +9,12 @@ import Duke.Ui.Ui;
 
 import static Duke.Task.TaskList.executeCommand;
 
+/**
+ * This Duke program, Edith, is a Personal Assistant Chatbot
+ * that helps a person to keep track of various things in a list format.
+ *
+ * @author  Benchan911
+ */
 public class Duke{
 
     private static final String FILE_PATH = "Duke.txt";
@@ -29,7 +35,7 @@ public class Duke{
                 if (command instanceof ExitCommand) {
                     break;
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | DukeDateParseException e) {
                 Ui.displayError(e.getMessage());
             }
         }

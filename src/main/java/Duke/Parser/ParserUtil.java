@@ -7,6 +7,9 @@ import Duke.Task.Deadline;
 import Duke.Task.Event;
 import Duke.Task.Todo;
 
+/**
+ * Parser for utility functions.
+ */
 public class ParserUtil {
 
     protected static String description;

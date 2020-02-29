@@ -4,6 +4,9 @@ import Duke.Exception.DukeException;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
 
+/**
+ * Abstract class for all commands
+ */
 public abstract class Command {
     /**
      * Executes this command on the given task list and user interface.

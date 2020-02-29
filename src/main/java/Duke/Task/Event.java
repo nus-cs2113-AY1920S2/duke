@@ -17,6 +17,6 @@ public class Event extends Task {
         if (by.equals("")) {
             return "[E]" + super.toString();
         }
-        return "[E]" + super.toString() + "( at: " + by + ")";
+        return "[E]" + super.toString() + "( at: " + by + " )";
     }
 }

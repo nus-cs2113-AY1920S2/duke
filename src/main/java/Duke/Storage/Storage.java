@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class that manages duke.storage of duke.Duke data in local duke.storage.
+ */
 public class Storage {
     private String filePath;
     private ArrayList<Task> tasks;

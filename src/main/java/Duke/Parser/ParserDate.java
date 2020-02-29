@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser for DateTime functions.
+ */
 public class ParserDate {
     public static String parseStringToDate(String date) throws DukeDateParseException {
         try{

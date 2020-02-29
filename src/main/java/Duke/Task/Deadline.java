@@ -19,6 +19,6 @@ public class Deadline extends Task {
         if (by.equals("")) {
             return "[D]" + super.toString();
         }
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " ( by: " + by + " )";
     }
 }

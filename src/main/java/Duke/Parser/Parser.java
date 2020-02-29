@@ -4,6 +4,9 @@ package Duke.Parser;
 import Duke.Exception.DukeException;
 import Duke.Library.ErrorMessage;
 
+/**
+ * Parser to read String words.
+ */
 public class Parser {
 
     public static String getCommandWord(String userInput) {
