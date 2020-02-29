@@ -1,29 +1,22 @@
 package duke.tasks;
 
 import duke.Main;
-import duke.exceptions.BadLineFormatException;
+import duke.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
+import java.util.regex.Pattern;
 
 /**
  * Class to represent an event task
  */
 public class Event extends Task {
+    public static final Pattern LINE_FORMAT = Pattern.compile("^E,[yn],(\\w\\s*)+,\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}");
     private LocalDateTime startDateTime;
 
-    public Event(String description, String startDateTime) throws BadLineFormatException {
+    public Event(String description, LocalDateTime startDateTime, boolean isDone) {
         super(description);
-        try {
-            this.startDateTime = LocalDateTime.parse(startDateTime, Main.DTF);
-        } catch (DateTimeParseException e) {
-            throw new BadLineFormatException(e.getMessage());
-        }
-    }
-
-    public Event(String description, String startDateTime, boolean isDone) throws BadLineFormatException {
-        this(description, startDateTime);
+        this.startDateTime = startDateTime;
         this.isDone = isDone;
     }
 
@@ -51,7 +44,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + " (at: " + startDateTime + ")";
+        return "[E][" + getStatusIcon() + "] " + description + " (at: " +
+                Parser.DTF.format(startDateTime) + ")";
     }
 
     /**
@@ -60,6 +54,6 @@ public class Event extends Task {
      */
     public String toFormattedString() {
         String done = isDone ? "y" : "n";
-        return "E," + done + "," + description + "," + Main.DTF.format(startDateTime);
+        return "E," + done + "," + description + "," + Parser.DTF.format(startDateTime);
     }
 }

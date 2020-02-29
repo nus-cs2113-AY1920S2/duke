@@ -7,15 +7,11 @@ import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * The main class. Initialized the system, lets the user enter commands and executes them, then exits.
  */
 public class Main {
     public static final String END_STRING = "bye";
-    public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d/M/yyyy H:mm");
-    public static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("d/M/yyyy");
     private static final String FILE_PATH = "data/tasks.txt";
     private static TaskList taskList;
 
@@ -25,7 +21,6 @@ public class Main {
     public static void main(String[] args) {
         initialize();
         runLoop();
-        Ui.sayGoodbye();
     }
 
     private static void initialize() {
@@ -39,10 +34,11 @@ public class Main {
      * Save the new list of tasks if necessary. Repeat.
      */
     private static void runLoop() {
-        String userInput = Ui.getNextLine();
+        String userInput;
         Command command;
 
-        while (!userInput.toLowerCase().equals(END_STRING)) {
+        while (true) {
+            userInput = Ui.getNextLine();
             try {
                 command = Parser.parseUserInput(userInput, taskList);
                 command.execute();
@@ -52,8 +48,6 @@ public class Main {
             } catch (BadLineFormatException | BadTaskChoiceFormatException e) {
                 Ui.printPretty(e.getMessage());
             }
-
-            userInput = Ui.getNextLine();
         }
     }
 }

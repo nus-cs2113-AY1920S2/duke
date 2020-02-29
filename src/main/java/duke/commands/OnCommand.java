@@ -1,29 +1,27 @@
 package duke.commands;
 
-import duke.Main;
-import duke.exceptions.BadLineFormatException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 /**
  * Class for on command
  */
 public class OnCommand extends Command {
+    public static final Pattern FORMAT = Pattern.compile("^on\\s+\\d{1,2}/\\d{1,2}/\\d{4}\\s*",
+            Pattern.CASE_INSENSITIVE);
     public static final String KEYWORD = "on";
-    public static final String EXAMPLE_USAGE = "by 16/3/2021";
+    public static final String EXAMPLE_USAGE = "on 16/3/2021";
+    public static final String ERROR_MESSAGE = "Command needs to be in form: on dd/mm/yyyy hh:mm";
     private String message;
-
     private LocalDate date;
 
-    public OnCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
-        super(keyword, tokens, taskList);
-        if (tokens.length != 2) {
-            throw new BadLineFormatException("Command needs to be in form: on d/M/yyyy");
-        }
-        this.date = LocalDate.parse(tokens[1], Main.DF);
+    public OnCommand(TaskList taskList, LocalDate date) {
+        super(taskList);
+        this.date = date;
         this.message = "These are your tasks on " + date + ":";
         this.isPersistentCommand = false;
     }

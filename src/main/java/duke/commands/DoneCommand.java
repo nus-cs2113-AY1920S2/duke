@@ -1,18 +1,23 @@
 package duke.commands;
 
 import duke.tasklist.TaskList;
-import duke.exceptions.BadLineFormatException;
 import duke.exceptions.BadTaskChoiceFormatException;
+
+import java.util.regex.Pattern;
 
 /**
  * Class for a done command that can be executed to mark a task as done
  */
-public class DoneCommand extends TaskSelectionCommand {
-    public static final String EXAMPLE_USAGE = "done <Task Number>";
+public class DoneCommand extends Command {
+    public static final Pattern FORMAT = Pattern.compile("^done\\s*\\d+\\s+", Pattern.CASE_INSENSITIVE);
+    public static final String EXAMPLE_USAGE = "done 2";
+    public static final String ERROR_MESSAGE = "Command needs to be in form: done <Task Number>";
     public static final String KEYWORD = "done";
+    private int taskIndex;
 
-    public DoneCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
-        super(keyword, tokens, taskList);
+    public DoneCommand(TaskList taskList, int taskIndex) {
+        super(taskList);
+        this.taskIndex = taskIndex;
     }
 
     /**
@@ -20,7 +25,6 @@ public class DoneCommand extends TaskSelectionCommand {
      * @throws BadTaskChoiceFormatException if task number does not exist
      */
     public void execute() throws BadTaskChoiceFormatException {
-        int taskIndex = getTaskIndex();
         taskList.markAsDone(taskIndex);
     }
 }

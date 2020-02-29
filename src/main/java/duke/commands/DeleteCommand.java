@@ -1,18 +1,23 @@
 package duke.commands;
 
 import duke.tasklist.TaskList;
-import duke.exceptions.BadLineFormatException;
 import duke.exceptions.BadTaskChoiceFormatException;
+
+import java.util.regex.Pattern;
 
 /**
  * Class for a delete command that can be executed to delete the task from the <code>TaskList</code>
  */
-public class DeleteCommand extends TaskSelectionCommand {
-    public static final String EXAMPLE_USAGE = "delete <Task Number>";
+public class DeleteCommand extends Command {
+    public static final Pattern FORMAT = Pattern.compile("^delete\\s+\\d+\\s*", Pattern.CASE_INSENSITIVE);
+    public static final String EXAMPLE_USAGE = "delete 3";
+    public static final String ERROR_MESSAGE = "Command needs to be in form: delete <Task Number>";
     public static final String KEYWORD = "delete";
+    private int taskIndex;
 
-    public DeleteCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
-        super(keyword, tokens, taskList);
+    public DeleteCommand(TaskList taskList, int taskIndex) {
+        super(taskList);
+        this.taskIndex = taskIndex;
     }
 
     /**
@@ -20,7 +25,6 @@ public class DeleteCommand extends TaskSelectionCommand {
      * @throws BadTaskChoiceFormatException if task number does not exist
      */
     public void execute() throws BadTaskChoiceFormatException {
-        int taskIndex = getTaskIndex();
         taskList.deleteTask(taskIndex);
     }
 }

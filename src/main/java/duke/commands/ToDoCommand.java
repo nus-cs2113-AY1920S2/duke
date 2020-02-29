@@ -1,29 +1,24 @@
 package duke.commands;
 
 import duke.tasklist.TaskList;
-import duke.exceptions.BadLineFormatException;
 import duke.tasks.ToDo;
 
-import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * Class for a todo command that error checks user's input and can be executed to add the task to the
  * <code>TaskList</code>
  */
 public class ToDoCommand extends Command {
+    public static final Pattern FORMAT = Pattern.compile("^todo\\s+(\\w\\s*)+", Pattern.CASE_INSENSITIVE);
     public static final String EXAMPLE_USAGE = "todo math homework";
+    public static final String ERROR_MESSAGE = "Command needs to be in form: todo <description>";
     public static final String KEYWORD = "todo";
     public ToDo toDo;
 
-    public ToDoCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
-        super(keyword, tokens, taskList);
-
-        if (tokens.length < 2) {
-            throw new BadLineFormatException("Input does not contain a description");
-        }
-
-        String description = String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length));
-        toDo = new ToDo(description);
+    public ToDoCommand(TaskList taskList, String description) {
+        super(taskList);
+        this.toDo = new ToDo(description);
     }
 
     /**

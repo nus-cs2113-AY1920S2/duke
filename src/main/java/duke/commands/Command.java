@@ -8,14 +8,10 @@ import duke.exceptions.BadTaskChoiceFormatException;
  * user's input and keeps a reference to a <code>TaskList</code>
  */
 public abstract class Command {
-    protected String keyword;
-    protected String[] tokens;
     protected TaskList taskList;
     protected boolean isPersistentCommand = true;
 
-    public Command(String keyword, String[] tokens, TaskList taskList) {
-        this.keyword = keyword;
-        this.tokens = tokens;
+    public Command(TaskList taskList) {
         this.taskList = taskList;
     }
 

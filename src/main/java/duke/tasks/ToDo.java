@@ -2,11 +2,13 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 /**
  * Class to represent a todo task
  */
 public class ToDo extends Task {
+    public static final Pattern LINE_FORMAT = Pattern.compile("^T,[yn],(\\w\\s*)+");
     public ToDo(String description) {
         super(description);
     }

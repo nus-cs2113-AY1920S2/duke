@@ -1,49 +1,26 @@
 package duke.commands;
 
 import duke.tasklist.TaskList;
-import duke.exceptions.BadLineFormatException;
 import duke.tasks.Event;
 
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 /**
  * Class for an event command that error checks user's input and can be executed to add the task to the
  * <code>TaskList</code>
  */
 public class EventCommand extends Command {
+    public static final Pattern FORMAT = Pattern.compile("^event\\s+(\\w\\s*)+\\s/at\\s+\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}\\s*",
+            Pattern.CASE_INSENSITIVE);
     public static final String EXAMPLE_USAGE = "event math class /at 31/7/2020 8:30";
+    public static final String ERROR_MESSAGE = "Command needs to be in form: event <description> /at dd/mm/yyyy hh:mm";
     public static final String KEYWORD = "event";
     private Event event;
 
-    public EventCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
-        super(keyword, tokens, taskList);
-        if (!Arrays.asList(tokens).contains("/at")) {
-            throw new BadLineFormatException("Input does not contain \" /at \"");
-        }
-
-        int atIndex = -1;
-        for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i].equals("/at")) {
-                atIndex = i;
-                break;
-            }
-        }
-
-        if (atIndex == tokens.length - 1) {
-            throw new BadLineFormatException("Input does not contain a date/time");
-        } else if (atIndex == 1) {
-            throw new BadLineFormatException("Input does not contain a description");
-        }
-
-        String description = String.join(" ", Arrays.copyOfRange(tokens, 1, atIndex));
-        String startEndDateTime = String.join(" ", Arrays.copyOfRange(tokens, atIndex + 1, tokens.length));
-
-        try {
-            event = new Event(description, startEndDateTime);
-        } catch (DateTimeParseException e) {
-            throw new BadLineFormatException(e.getMessage());
-        }
+    public EventCommand(TaskList taskList, String description, LocalDateTime dateTime) {
+        super(taskList);
+        this.event = new Event(description, dateTime, false);
     }
 
     /**

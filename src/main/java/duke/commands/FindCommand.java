@@ -1,28 +1,25 @@
 package duke.commands;
 
-import duke.exceptions.BadLineFormatException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
+
+import java.util.regex.Pattern;
 
 /**
  * Class for find command
  */
 public class FindCommand extends Command {
-    public static final String EXAMPLE_USAGE = "find <search term>";
+    public static final Pattern FORMAT = Pattern.compile("^find\\s+\\w\\s*", Pattern.CASE_INSENSITIVE);
+    public static final String EXAMPLE_USAGE = "find homework>";
+    public static final String ERROR_MESSAGE = "Command needs to be in form: find <search term>";
     public static final String KEYWORD = "find";
     private static final String MESSAGE = "Here are your search results:";
     private String targetWord;
 
-    public FindCommand(String keyword, String[] tokens, TaskList taskList) throws BadLineFormatException {
-        super(keyword, tokens, taskList);
-
-        if (tokens.length <= 1) {
-            throw new BadLineFormatException("Specify a word to search for");
-        } else if (tokens.length > 2) {
-            throw new BadLineFormatException("Too many tokens. Only one word supported");
-        }
-        targetWord = tokens[1];
+    public FindCommand(TaskList taskList, String targetWord) {
+        super(taskList);
+        this.targetWord = targetWord;
     }
 
     /**

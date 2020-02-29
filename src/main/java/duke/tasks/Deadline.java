@@ -1,29 +1,21 @@
 package duke.tasks;
 
-import duke.Main;
-import duke.exceptions.BadLineFormatException;
+import duke.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
+import java.util.regex.Pattern;
 
 /**
  * Class to represent a deadline task
  */
 public class Deadline extends Task {
+    public static final Pattern LINE_FORMAT = Pattern.compile("^D,[yn],(\\w\\s*)+,\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}");
     private LocalDateTime dueDateTime;
 
-    public Deadline(String description, String dueDateTime) throws BadLineFormatException {
+    public Deadline(String description, LocalDateTime dueDateTime, boolean isDone) {
         super(description);
-        try {
-            this.dueDateTime = LocalDateTime.parse(dueDateTime, Main.DTF);
-        } catch (DateTimeParseException e) {
-            throw new BadLineFormatException(e.getMessage());
-        }
-    }
-
-    public Deadline(String description, String dueDateTime, boolean isDone) throws BadLineFormatException {
-        this(description, dueDateTime);
+        this.dueDateTime = dueDateTime;
         this.isDone = isDone;
     }
 
@@ -51,7 +43,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + " (by: " + dueDateTime + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (by: " +
+                Parser.DTF.format(dueDateTime) + ")";
     }
 
     /**
@@ -60,6 +53,6 @@ public class Deadline extends Task {
      */
     public String toFormattedString() {
         String done = isDone ? "y" : "n";
-        return "D," + done + "," + description + "," + Main.DTF.format(dueDateTime);
+        return "D," + done + "," + description + "," + Parser.DTF.format(dueDateTime);
     }
 }
