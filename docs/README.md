@@ -23,7 +23,7 @@ To add an event:
       
 To add a deadline:
   
-    deadline [deadline description] /at [date]
+    deadline [deadline description] /by [date]
     
 You're encouraged to enter date in the format YYYY-MM-DD.
   
