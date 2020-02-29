@@ -17,7 +17,7 @@ import static java.lang.Integer.parseInt;
  * 4) parse() : assigns each command enter by User to the suitable Command class<br>
  */
 public class Parser  {
-    public static final String WRONG_INPUT="\t ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
             "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
     public static final String NO_TASK_NUMBER = "\t Please enter a task number!";
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
@@ -76,6 +76,9 @@ public class Parser  {
         action = action.trim();
         if(action.contains("~")){
             throw new IllegalDukeException(AVOID_DELIMITER);
+        }else if(action.isEmpty()){
+            throw new IllegalDukeException("\t OOPS!!! The description of a " + temp[0] +
+                    " cannot be empty.");
         }
         String[] temp2 = new String[2];
         temp2[0] = action;
@@ -104,9 +107,8 @@ public class Parser  {
         }else{
             minute= min.toString();
         }
-       String outTiming = " " + dayOfWeek.toString() + ", " + day.toString() + " " + month.toString() + " " +
-               year.toString() + " " + hour.toString() + ":" + minute + " ";
-       return outTiming;
+        return String.format(" %s, %s %s %s %s:%s ", dayOfWeek.toString(), day.toString(), month.toString(),
+                year.toString(), hour.toString(), minute);
     }
     /**
      * This method ensures that timing entered by User is valid.<br>
@@ -122,7 +124,40 @@ public class Parser  {
             throw new IllegalDukeException(WRONG_TIMING_FORMAT);
         }
     }
+    /**
+     * This method checks is User indicated timing and its indicator, "/". <br>
+     * @param inCommand This is the full command entered by User. <br>
+     * @throws IllegalDukeException if the command entered is invalid or illegal.
+     */
+    public static void checkTimingIndicator(String inCommand) throws IllegalDukeException{
+        if(inCommand.contains("/")){
+            String check = inCommand + "*";
+            String[] tempCommand = check.split("/");
+            if(tempCommand[1].equals("*")){
+                throw new IllegalDukeException(INDICATE_TIMING);
+            }
+        }else{
+            throw new IllegalDukeException(INDICATE_TIMING_INDICATOR);
+        }
+    }
 
+    /**
+     * This method checks if User entered an Integer for the Task Number. <br>
+     * @param userCommand This is the full command that has been split into an array of Strings<br>
+     * @throws IllegalDukeException if the command entered by User is invalid or illegal.<br>
+     */
+    public static void checkInteger(String[] userCommand) throws IllegalDukeException{
+        try {
+            if(!userCommand[1].equals("all")){
+                int number = parseInt(userCommand[1]) - 1;
+                if(number<=-1){
+                    throw new IllegalDukeException(NON_POSITIVE_INTEGER);
+                }
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalDukeException(NOT_INTEGER);
+        }
+    }
 /**
  * This method ensures that User input is valid and legal.<br>
  *
@@ -148,36 +183,18 @@ public class Parser  {
                 if(userCommand.length==1) {
                     throw new IllegalDukeException(NO_TASK_NUMBER);
                 } else {
-                    try {
-                        if(!userCommand[1].equals("all")){
-                            int number = parseInt(userCommand[1]) - 1;
-                            if(number<=-1){
-                                throw new IllegalDukeException(NON_POSITIVE_INTEGER);
-                            }
-                        }
-                    } catch (NumberFormatException e) {
-                            throw new IllegalDukeException(NOT_INTEGER);
-                    }
+                    checkInteger(userCommand);
                 }
                 break;
             case "todo":
             case "deadline":
             case "event":
             case "find" :
-                if(userCommand.length==1){
-                    throw new IllegalDukeException("\t ☹ OOPS!!! The description of a " + userCommand[0] +
-                            " cannot be empty."
-                    );
+                if(userCommand.length==1) {
+                    throw new IllegalDukeException("\t OOPS!!! The description of a " + userCommand[0] +
+                            " cannot be empty.");
                 }else if (userCommand[0].equals("deadline") || userCommand[0].equals("event")){
-                    int i=1;
-                    boolean hasTimingIndicator=false;
-                    String[]tempCommand =inCommand.split("/");
-                    if(tempCommand.length==2){
-                        hasTimingIndicator = true;
-                    }
-                    if (!hasTimingIndicator) {
-                            throw new IllegalDukeException(INDICATE_TIMING_INDICATOR);
-                    }
+                    checkTimingIndicator(inCommand);
                 }
                 break;
             default:

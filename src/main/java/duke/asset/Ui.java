@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+
 /**
  * This class handles with the interaction with User.<br>
  */
@@ -17,6 +19,7 @@ public class Ui  {
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
     public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
+    public static final int MAX_LINE_LENGTH= 58;
     public static final String DAB= "\t ``````````````````````````````````````````````````````````\n" +
             "\t ````````````````````````````````:v(v'`````````````````````\n" +
             "\t ```````````````````````````,)4|ex` `L}````````````````````\n" +
@@ -46,6 +49,8 @@ public class Ui  {
 
     private final Scanner in;
     private final PrintStream out;
+    private String message;
+
     /**
      * This constructor is called during the run process of Duke<br>
      * to create a IO class for Ui.<br>
@@ -61,7 +66,7 @@ public class Ui  {
     }
     /**
      * This methods gets the User input.<br>
-     * @return the User input.<br>
+     * @return the Scanner class to read User input.<br>
      */
     public String getUserIn(){
         return in.nextLine();
@@ -94,13 +99,36 @@ public class Ui  {
         out.println(LINE);
     }
     /**
+     * This method also ensures that the message printed is within the standard<br>
+     * length, which is the length of the constant LINE, 58 characters.
+     * @param message is the String that we intend to format to a standard length<br>
+     *                per line.<br>
+     * @return String of standard length per line
+     */
+    public String formatMessage(String message) {
+        StringTokenizer token = new StringTokenizer(message, " ");
+        StringBuilder standardLengthMessage = new StringBuilder(message.length());
+        int lineLength = 0;
+        while (token.hasMoreTokens()) {
+            String word = token.nextToken();
+            if (lineLength + word.length() > MAX_LINE_LENGTH) {
+                standardLengthMessage.append("\n\t ");
+                lineLength = 0;
+            }
+            standardLengthMessage.append(word + " ");
+            lineLength += word.length() + 1;
+        }
+        return standardLengthMessage.toString().stripTrailing();
+    }
+    /**
      * This method prints all the error message thrown in Duke.run().<br>
      * @param message This is the first argument of this method. It is<br>
      *                the error message thrown by exceptions caught<br>
      *                in Duke.run<br>
      */
-    public void printError(String message){
-        out.println(message);
+    public void printError(String message) {
+        String standardLengthMessage = formatMessage(message);
+        out.println(standardLengthMessage);
     }
     /**
      * This method informs User that a new Task class has been created and added to list<br>
@@ -111,7 +139,8 @@ public class Ui  {
      */
     public void printAddTask(ArrayList<Task> l1, Task task){
         out.println("\t Got it. I've added this task:");
-        out.println("\t   "+task.toString());
+        String standardLengthMessage = formatMessage("\t   "+task.toString());
+        out.println(standardLengthMessage);
         out.println("\t Now you have " + l1.size()+ " tasks in the list.");
     }
     /**
@@ -128,7 +157,8 @@ public class Ui  {
      */
     public void printDone(Task task){
         out.println("\t Nice! I've marked this task as done:");
-        out.println("\t   "+task.toString());
+        String standardLengthMessage = formatMessage("\t   "+task.toString());
+        out.println(standardLengthMessage);
     }
     /**
      * This method informs User that stated Task has been deleted.<br>
@@ -139,7 +169,8 @@ public class Ui  {
      */
     public void printDelete(Task task, ArrayList<Task> l1){
         out.println("\t Noted. I've removed this task: ");
-        out.println("\t   " + task.toString());
+        String standardLengthMessage = formatMessage("\t   " + task.toString());
+        out.println(standardLengthMessage);
         out.println("\t Now you have " + l1.size() + " tasks in the list.");
     }
     /**
@@ -151,7 +182,8 @@ public class Ui  {
             for (int i = 0; i < l1.size(); i++) {
                 int count = i + 1;
                 Task task = l1.get(i);
-                out.println("\t " + count + "." + task.toString());
+                String standardLengthMessage = formatMessage("\t " + count + "." + task.toString());
+                out.println(standardLengthMessage);
             }
     }
     /**
@@ -188,7 +220,8 @@ public class Ui  {
             for (int i = 0; i < l1.size(); i++) {
                 int count = i + 1;
                 Task task = l1.get(i);
-                out.println("\t " + count + "." + task.toString());
+                String standardLengthMessage = formatMessage("\t " + count + "." + task.toString());
+                out.println(standardLengthMessage);
             }
         }
     }
@@ -246,7 +279,6 @@ public class Ui  {
     /**
      * This method shows User the list of Tasks that matches with<br>
      * User search key.<br>
-     *
      * @param l1 is the list of all Tasks.<br>
      * @param l2 is the list of matching Tasks.<br>
      */
@@ -258,17 +290,18 @@ public class Ui  {
             for (int i = 0; i < l2.size(); i++) {
                 int count = i + 1;
                 Task task = l1.get(l2.get(i));
-                out.println("\t " + count + "." + task.toString());
+                String standardLengthMessage = formatMessage("\t " + count + "." + task.toString());
+                out.println(standardLengthMessage);
             }
         }
     }
     /**
-     * This method allows for other classes to prompt a message to the User.<br>
-     *
+     * This method allows for other classes to print a message to the User.<br>
      * @param message This is the message that the other classes wish to prompt.<br>
      */
     public void promptUser(String message){
-        out.println(message);
+            message=formatMessage(message);
+            out.println(message);
     }
 /**
  * This method closes the System.in class of Duke.<br>

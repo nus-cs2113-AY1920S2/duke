@@ -24,7 +24,7 @@ public class Event extends Task {
  */
     @Override
     public String toString(){
-        return "[E]" + super.toString()  + " (at:" + this.at + ")";
+        return "[E]" + super.toString()  + "\n\t (at:" + this.at + ")";
     }
     @Override
     public String toFile(){
