@@ -25,25 +25,33 @@ Duke allows you to save 3 different types of task into a task list. Upon complet
 Adds a new todo task to the list
 
     deadline <description> / <YYYY-MM-DD>
+    
 Adds a new deadline task to the list
 
     event <description> / <YYYY-MM-DD>
+    
 Adds a new event to the list
 
     delete <task number>
+    
 Deletes the task
 
     list
+    
 List all tasks in the order they were added
 
     done <task number>
+    
 Marks the task  as done
 
     find <keyword>
+    
 Finds all tasks containing the keyword 
 
     date <YYYY-MM-DD>
+    
 Finds all event or deadlines with that date
 
     bye
+    
 Exits duke
