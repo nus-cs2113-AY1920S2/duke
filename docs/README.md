@@ -32,110 +32,110 @@ it will read from the written text file to pick up where it left off.
 
 ## Usage
 
-### *todo*
+### `todo`
 
-Example of usage: 
+Example of usage:
 
-`todo read book`
-
-Expected outcome:
-
-`Got it. I've added this task:` 
-
-`[T][✘]  read book`
-
-`Now you have 1 tasks in the list.`
-
-### *event*
-
-Example of usage: 
-
-`event concert /at March 23rd`
+*todo read book*
 
 Expected outcome:
 
-`Got it. I've added this task:` 
+*Got it. I've added this task:*
 
-`[E][✘]  concert  (at: March 23rd)`
+*[T][✘]  read book*
 
-`Now you have 2 tasks in the list.`
+*Now you have 1 tasks in the list.*
 
-### *deadline*
-
-Example of usage: 
-
-`deadline return book /by Tuesday`
-
-Expected outcome:
-
-`Got it. I've added this task:` 
-
-`[D][✘]  return book  (by: Tuesday)`
-
-`Now you have 3 tasks in the list.`
-
-### *find*
+### `event`
 
 Example of usage: 
 
-`find book`
+*event concert /at March 23rd*
 
 Expected outcome:
 
-`Here are matching tasks in your list:`
+*Got it. I've added this task:*
 
-`1. [T][✘]  read book`
+*[E][✘]  concert  (at: March 23rd)*
 
-`2. [D][✘]  return book  (by: Tuesday)`
+*Now you have 2 tasks in the list.*
 
-### *done*
+### `deadline`
 
 Example of usage: 
 
-`Done 1`
+*deadline return book /by Tuesday*
 
 Expected outcome:
 
-`Good work! I've marked this task as done!`
+*Got it. I've added this task:*
 
-`1. [T][✓]  read book`
+*[D][✘]  return book  (by: Tuesday)*
 
-### *list*
+*Now you have 3 tasks in the list.*
+
+### `find`
 
 Example of usage: 
 
-`list`
+*find book*
 
 Expected outcome:
 
-`Here are the tasks in your list:`
+*Here are matching tasks in your list:*
 
-`1. [T][✓]  read book`
+*1. [T][✘]  read book*
 
-`2. [E][✘]  concert  (at: March 23rd)`
+*2. [D][✘]  return book  (by: Tuesday)*
 
-`3. [D][✘]  return book  (by: Tuesday)`
-
-### *delete*
+### `done`
 
 Example of usage: 
 
-`delete 3`
+*done 1*
 
 Expected outcome:
 
-`Noted. I've removed this task: `
+*Good work! I've marked this task as done!*
 
-`3. [D][✘]  return book  (by: Tuesday)`
+*1. [T][✓]  read book*
 
-`Now you have 2 tasks in the list.`
-
-### *bye*
+### `list`
 
 Example of usage: 
 
-`bye`
+*list*
 
 Expected outcome:
 
-`Bye! See ya next time :)`
+*Here are the tasks in your list:*
+
+*1. [T][✓]  read book*
+
+*2. [E][✘]  concert  (at: March 23rd)*
+
+*3. [D][✘]  return book  (by: Tuesday)*
+
+### `delete`
+
+Example of usage: 
+
+*delete 3*
+
+Expected outcome:
+
+*Noted. I've removed this task:*
+
+*3. [D][✘]  return book  (by: Tuesday)*
+
+*Now you have 2 tasks in the list.*
+
+### `bye`
+
+Example of usage: 
+
+*bye*
+
+Expected outcome:
+
+*Bye! See ya next time :)*
