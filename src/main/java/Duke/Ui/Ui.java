@@ -23,7 +23,7 @@ public class Ui {
         System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER + BOT_DESC + LINE_DIVIDER);
     }
 
-    public static final void displayAddTask(Task task) {
+    public static final void displayAddedTask(Task task) {
         System.out.println(MESSAGE_ADD + task);
     }
 
@@ -39,22 +39,26 @@ public class Ui {
         System.out.print(COMMAND_HELP_DESC);
     }
 
-    public static final void displayLineDivider() {
-        System.out.println(LINE_DIVIDER);
-    }
-
     public static final void displayNumberOfTasks(ArrayList TaskList) {
         System.out.print("\tNow you have " + TaskList.size() + " tasks in the list.\n");
     }
 
-    public static void echoUserCommand(String userCommand) {
-        System.out.println("\t[Command entered: " + userCommand + "]");
+    public static void displaySearchResults(ArrayList TaskList) {
+        if (!TaskList.isEmpty()) {
+            for (int i = 0; i < TaskList.size(); i++) {
+                System.out.print("\t");
+                System.out.print(i + 1);
+                System.out.print(". ");
+                System.out.println(TaskList.get(i));
+            }
+            displayNumberOfTasksFound(TaskList);
+        } else {
+            System.out.println("\tEMPTY!!");
+        }
     }
 
-
-
-    public static void exitProgram() {
-        displayExitMessage();
+    private static void displayNumberOfTasksFound(ArrayList TaskList) {
+        System.out.print("\tThere are " + TaskList.size() + " items found.\n");
     }
 
     public static void displayTaskList(ArrayList TaskList) {

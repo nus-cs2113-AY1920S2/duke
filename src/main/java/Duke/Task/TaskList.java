@@ -8,6 +8,7 @@ import Duke.Parser.ParserUtil;
 
 import static Duke.Library.Message.*;
 import static Duke.Parser.Parser.getCommandWord;
+import static Duke.Parser.Parser.getWord;
 
 public class TaskList {
 
@@ -15,6 +16,8 @@ public class TaskList {
     public static Command executeCommand(String userInput) throws DukeException, DukeDateParseException {
         String commandWord = getCommandWord(userInput);
         switch (commandWord.toUpperCase()) {
+            case COMMAND_FIND_WORD:
+                return new FindCommand(getWord(userInput));
             case COMMAND_HELP_WORD:
                 return new HelpCommand();
             case COMMAND_BYE_WORD:
