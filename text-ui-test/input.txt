@@ -1,8 +1,0 @@
-todo eat
-todo sleep
-deadline sleep /by tomorrow
-event eat /at Cendana
-list
-done 1
-list
-bye
