@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.IllegalDeleteException;
 import duke.util.TaskList;
 import duke.util.UI;
 import duke.exceptions.IllegalDoneTaskException;
@@ -16,6 +17,15 @@ public class DoneCommand extends Command {
         this.ui = ui;
     }
 
+    /**
+     * Read and print the current task list, for the
+     * user to select a task from that to be mark as done.
+     * The list argument is the current task list.
+     * @param list the current task list
+     * @return task list after marking as done
+     * @throws IllegalDoneTaskException when the task selected is
+     *                                  not within the task list
+     */
     public List<Tasks>  execute(List<Tasks> list) throws IllegalDoneTaskException {
         if (taskNo <= 0) {
             ListCommand.execute(list);

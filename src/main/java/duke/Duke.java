@@ -8,18 +8,23 @@ import java.io.IOException;
 import java.util.List;
 
 public class Duke {
+    /**
+     * Classes used for Ui output and inputs and
+     * current TaskList
+     */
     private UI ui;
     private static List<Tasks> tasks;
     public Duke() throws IOException {
         ui = new UI();
-        duke.util.TaskList tasklist = new TaskList();
+        duke.util.TaskList tasklist = new TaskList(ui);
         tasks = tasklist.getTasks();
     }
 
-    public static void main(String[] args) throws IOException {
-        Duke duke = new Duke();
-        duke.run();
-    }
+    /**
+     * The main run loop for Duke, requesting for user input
+     * and running valid commands. Invalid commands will be
+     * alerted to users.
+     */
     public void run() throws IOException {
         String EXIT_COMMAND = "7";
         ui.printIntro();
@@ -32,5 +37,14 @@ public class Duke {
             exeCommand = ui.getStringInput(); //get the next command
         }
         ui.printExit();
+    }
+
+    /**
+     * Main entry point for Duke
+     * @param args Additional command line parameters, unused.
+     */
+    public static void main(String[] args) throws IOException {
+        Duke duke = new Duke();
+        duke.run();
     }
 }

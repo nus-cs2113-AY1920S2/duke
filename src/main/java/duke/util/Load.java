@@ -7,6 +7,7 @@ import duke.taskmanager.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,15 @@ public class Load {
         file = new File(String.valueOf(path));
     }
 
+    /**
+     * Load the existing task list in designated file
+     * "data/myTasks.txt", and save them into an array list
+     * lines for reference. If the file does not exist,
+     * throws FileNotFoundException.
+     * @throws FileNotFoundException when the file at
+     *                               designated path is
+     *                               not found
+     */
     public void loadData() throws FileNotFoundException {
         String line;
         Scanner readFile = new Scanner(file);
@@ -32,6 +42,17 @@ public class Load {
             lines.add(line);
         }
     }
+
+    /**
+     * Read the array list lines and process the content
+     * line by line, each line contains information for one
+     * task stored in the file, and save the processed task
+     * to a new task list, that is the task list to be used
+     * in the program.
+     * @throws FileNotFoundException when the file at
+     *                               designated path is
+     *                               not found
+     */
     public List<Tasks> readData() throws FileNotFoundException {
         loadData();
         for (String line: lines) {

@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.IllegalDoneTaskException;
 import duke.util.UI;
 import duke.taskmanager.Tasks;
 
@@ -12,11 +13,17 @@ public class FindCommand extends Command {
         this.ui = ui;
     }
 
-    public void execute(List<Tasks> tasks) {
+    /**
+     * Get the user input for keyword to search in the list.
+     * Print the tasks in the task list that contains the
+     * specific keyword entered by the user.
+     * @param list the current task list
+     */
+    public void execute(List<Tasks> list) {
         System.out.println("    Please enter the task that you want to find:");
         String keyword = ui.getStringInput();
         int index = 0;
-        for (Tasks task : tasks) {
+        for (Tasks task : list) {
             if (task.getTask().contains(keyword)) {
                 System.out.println("    "+ index + ": " +
                         task);

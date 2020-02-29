@@ -7,26 +7,36 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UI {
+    /**
+     * Contains the Scanner class, as Ui is where
+     * the scanner object is initialised for user input to be read.
+     * Constant String FORMAT, SPLIT, BLANK_LINE, SPLIT_UPPER_BOUNDARY and SPLIT_LOWER_BOUNDARY
+     * such that line spacing and format is consistent.
+     */
     private static Scanner userInput = new Scanner(System.in);
-    private final String FORMAT = "0O=-             %-60s-=O0%n";
+    public final String FORMAT = "0O=-             %-60s-=O0%n";
 
-    private final String SPLIT = "=============================" +
+    public final String SPLIT = "=============================" +
             "====================================================";
 
-    private final String BLANK_LINE = "0O=-                      " +
+    public final String BLANK_LINE = "0O=-                      " +
             "                                                   -=O0";
 
-    private final String SPLIT_UPPER_BOUNDARY = SPLIT +"\n000000000000000" +
+    public final String SPLIT_UPPER_BOUNDARY = SPLIT +"\n000000000000000" +
             "00000000000000000000000000000000000000000000000000000000000" +
             "0000000\n" + BLANK_LINE;
 
-    private final String SPLIT_LOWER_BOUNDARY = BLANK_LINE + "\n0000000" +
+    public final String SPLIT_LOWER_BOUNDARY = BLANK_LINE + "\n0000000" +
             "00000000000000000000000000000000000000000000000000000000" +
             "000000000000000000\n" + SPLIT;
 
     public UI(){
     }
 
+    /**
+     * Returns a String user input that will be further used in other methods.
+     * @return      the user input at designated place
+     */
     public String getStringInput() {
         return userInput.nextLine();
     }
@@ -48,7 +58,7 @@ public class UI {
     public void printDeleteIntro() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Please select the task that you wish ");
-        System.out.printf(FORMAT, "    to delete (select the no)");
+        System.out.printf(FORMAT, "to delete (select the no)");
         TaskList.showList();
     }
     public void printExit() {
@@ -106,7 +116,7 @@ public class UI {
     public void printErrorMessage() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Wrong command. Please follow instructions.");
-        System.out.println(SPLIT);
+        System.out.println(SPLIT_LOWER_BOUNDARY);
     }
     public void printClearErrorMessage() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
@@ -117,12 +127,22 @@ public class UI {
         System.out.printf(FORMAT, "This is a repeated task.");
     }
 
+    /**
+     * A respond message to a successful mark as done action.
+     * The indexOfTask argument must be in the range of number of tasks
+     * in the task list. The task argument must be the name of the task that
+     * was marked as done.
+     */
     public void printRespondToDoneTask(int indexOfTask, Tasks task) {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Congrats! Task " + indexOfTask + ": " +
         task.getTask() + " has been completed");
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
+    /**
+     * A respond message to a successful add task action.
+     * The task argument must be the name of the task that was added.
+     */
     public void printRespondToAddTask(String task) {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "You have successfully added " + task);
@@ -130,6 +150,10 @@ public class UI {
                 " task(s) now in total");
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
+    /**
+     * A respond message to a successful clear list action.
+     * The list argument is the current task list in the myTask.txt file.
+     */
     public void printRespondToClearTask(List<Tasks> list) throws IllegalClearException {
         if (list.isEmpty()) {
             System.out.println(SPLIT_UPPER_BOUNDARY);

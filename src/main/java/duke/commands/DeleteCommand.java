@@ -15,6 +15,15 @@ public class DeleteCommand extends Command {
         taskNo = TaskList.getSize();
     }
 
+    /**
+     * Read and print the current task list, for the
+     * user to select a task from that to be deleted.
+     * The list argument is the current task list.
+     * @param list the current task list
+     * @return task list after deletion of task
+     * @throws IllegalDeleteException when the task selected is
+     *                                not within the task list
+     */
     public List<Tasks> execute(List<Tasks> list) throws IllegalDeleteException {
         if (taskNo <= 0) {
             ListCommand.execute(list);

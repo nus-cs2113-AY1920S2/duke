@@ -20,6 +20,15 @@ public class Parser {
         Parser.list = list;
     }
 
+    /**
+     * Main parser for user commands, it parses the command to its
+     * corresponding action: add task, print task, mark as done,
+     * delete task, find task or clear task. Then, it carries out the
+     * action. It also print an error message when the user has entered
+     * a wrong command at the main page.
+     * @param  exeCommand   string input command by user
+     * @throws IOException  when writing data to the file fails
+     */
     public void parseCommand(String exeCommand) throws IOException {
         try {
             CommandType[] commandType = CommandType.values();
@@ -78,6 +87,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parser for add command, and checks whether the task
+     * entered was already in the list. It parses the type
+     * of task to get different information from the user
+     * and print an error message when the user has entered
+     * a wrong command when selecting the type.
+     */
     private static void parseAddCommand() {
         String task = Parser.ui.getStringInput();
         TaskType[] taskType = TaskType.values();
@@ -114,6 +130,16 @@ public class Parser {
         }
     }
 
+    /**
+     * This checks repeat for the input task. Returns the
+     * boolean of whether the task entered was already in the
+     * task list. The task argument is a String entered
+     * by the user.
+     * @param task the task name to be checked
+     * @return     <code>true</code> if the task is already present
+     *             in the task list
+     *             <code>false</code> otherwise.
+     */
     private static boolean checkRepeat(String task) {
         if (list!=null && !list.isEmpty()) {
             for (Tasks i : list) {
