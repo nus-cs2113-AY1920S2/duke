@@ -4,6 +4,15 @@ import data.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This class is a list of {@link Task} objects. It acts as an abstract data type, various operations can be
+ * conducted on the TaskList object like adding/removing Tasks or getting the total number of Tasks.
+ * <p></p>
+ * <p>
+ * It can also execute operations on individual Tasks; you can get or change the completion status of a Task.
+ * </p>
+ * @see ArrayList
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 

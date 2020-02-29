@@ -2,6 +2,9 @@ package data;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the TODO subtype of Tasks that can be stored in Duke. It contains a description.
+ */
 public class Todo extends Task {
 
     public static final int TODO_NUMBER_OF_FIELDS = 3;
@@ -16,6 +19,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * This method converts the data for a TODO object into a String array for easy parsing and application.
+     * @return a String array consisting of the initial denoting the Task, its completion status and the description
+     */
     @Override
     public void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
         if (this.getDescription().contains(searchKeyword)) {

@@ -1,5 +1,8 @@
-package data;
+package exceptions;
 
+/**
+ * This custom exception is thrown when the user input has a remarks field but it only contains whitespaces
+ */
 public class NoRemarkException extends Exception {
     private String message;
 

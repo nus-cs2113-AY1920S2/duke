@@ -3,16 +3,23 @@ package common;
 import tasklist.TaskList;
 import data.Task;
 
+/**
+ * This class acts as a container for the error messages and strings that are used by the rest of the classes.
+ * <p></p>
+ * <p>It also holds some generalized methods that can be used to print messages, mainly for the classes involving Task manipulation.</p>
+ */
 public class Messages {
 
-    public static final String UNDERSCORED_DIVIDER = "\t____________________________________________________________";
+    private static final String UNDERSCORED_DIVIDER = "\t____________________________________________________________";
 
     private static final String CURLY_DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
-    /** A platform independent line separator. */
+    /**
+     * A platform independent line separator.
+     */
     public static final String LS = System.lineSeparator();
 
     public static final String SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE = "\tError saving taskList to duke.txt";
@@ -83,7 +90,6 @@ public class Messages {
                 + ".[" + listInput.getTaskStatusIcon(queryNumber - DISPLAYED_INDEX_OFFSET) + "] "
                 + listInput.getTaskDescription(queryNumber - DISPLAYED_INDEX_OFFSET);
     }
-
 
     public static String getTaskAddedMessage(Task newTask, TaskList listInput) {
         return "\tGot it. I've added this task:" + LS + "\t" + newTask.toString() + LS

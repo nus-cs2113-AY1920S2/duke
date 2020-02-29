@@ -2,6 +2,9 @@ package data;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the EVENT subtype of Tasks that can be stored in Duke. It contains a description and a deadline.
+ */
 public class Event extends Task {
 
     public static final int EVENT_NUMBER_OF_FIELDS = 4;
@@ -22,6 +25,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + by + ")";
     }
 
+    /**
+     * This method converts the data for an EVENT object into a String array for easy parsing and application.
+     * @return a String array consisting of the initial denoting the Task, its completion status and the description
+     */
     @Override
     public void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
         if (this.getDescription().contains(searchKeyword) || this.getBy().contains(searchKeyword)) {
