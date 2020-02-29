@@ -12,7 +12,14 @@ import duke.command.WrongCommand;
 import duke.excpetions.DukeException;
 
 public class Parser {
-
+    /**
+     * Returns a command which contains the information extract from the users' input.
+     * If the command given is meaningless or is not in the right format, then it will return a wrong command.
+     *
+     * @param fullCommand The input given by the users.
+     * @return A command.
+     * @throws DukeException If the input gives an unacceptable command.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try{
             if (fullCommand.contains(" ")) {
@@ -21,13 +28,13 @@ public class Parser {
                 case "show":
                     String dateInString=fullCommand.substring(fullCommand.indexOf(" ")+1);
                     LocalDate date = LocalDate.parse(dateInString);
-                    return new ManageCommand(type,-1,date);
+                    return new ManageCommand(type,-1,null,date);
                 case "delete":
                     int index = Integer.parseInt(fullCommand.substring(fullCommand.indexOf(" ")+1));
                     return new DeleteCommand(type,index);
                 case "done":
                     index = Integer.parseInt(fullCommand.substring(fullCommand.indexOf(" ")+1));
-                   return new ManageCommand(type,index,null);
+                   return new ManageCommand(type,index,null,null);
                 case "todo":
                     String description=fullCommand.substring(fullCommand.indexOf(" "));
                     return new AddCommand(type,description,null);
@@ -41,20 +48,20 @@ public class Parser {
                     return new AddCommand(type,description,period);
                 case "find":
                     description = fullCommand.substring(fullCommand.indexOf(" ")+1);
-                    return new ManageCommand(type,-1,description);
+                    return new ManageCommand(type,-1,description,null);
                 default:
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     return new WrongCommand("wrong");
                 }
             }else if(fullCommand.equals("list")){
-                return new ManageCommand(fullCommand,-1,null);
+                return new ManageCommand(fullCommand,-1,null,null);
             }else if (fullCommand.equals("bye")){
                 return new ExitCommand("bye");
             }else{
                 throw new DukeException();
             }
         } catch (DukeException e){
-            System.out.println("The command is not correct.");
+            Ui.showError();
             return new WrongCommand("wrong");
         }
     }
