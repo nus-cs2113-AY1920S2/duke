@@ -105,14 +105,14 @@ public class Ui {
      */
     public void showHelpMessage() {
         System.out.println("\tBelow is what Duke can do for you:");
-        System.out.println("\t  todo task : add a task that needs to do");
-        System.out.println("\t  deadline task /by time(dddd-mm-yy) : add a task that has a certain deadline");
-        System.out.println("\t  event task /at time(dddd-mm-yy) : add a task that happens on a day");
+        System.out.println("\t  todo TASK : add a task that needs to do");
+        System.out.println("\t  deadline TASK /by TIME(yyyy-mm-dd) : add a task that has a certain deadline");
+        System.out.println("\t  event TASK /at TIME(yyyy-mm-dd) : add a task that happens on a day");
         System.out.println("\t  bye : exit the program");
-        System.out.println("\t  check dddd-mm-yy : check deadline/event occuring on that day");
-        System.out.println("\t  delete index : delete a task by its number index");
-        System.out.println("\t  done index : mark a task as done by its number index");
-        System.out.println("\t  find keyword : find a task by its keyword");
+        System.out.println("\t  check yyyy-mm-dd : check deadline/event occuring on that day");
+        System.out.println("\t  delete INDEX : delete a task by its number index");
+        System.out.println("\t  done INDEX : mark a task as done by its number index");
+        System.out.println("\t  find KEYWORD : find a task by its keyword");
         System.out.println("\t  list : list all tasks");
     }
 
