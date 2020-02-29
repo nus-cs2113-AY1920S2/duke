@@ -2,6 +2,12 @@ package duke;
 
 import java.io.FileNotFoundException;
 
+
+/**
+ * The entry point of this task management software.
+ * Finish all initializations first and then interact with user.
+ */
+
 public class Duke {
     private static TaskList tasks;
     protected static Storage storage;
@@ -23,6 +29,7 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /** The program runs until user enters "Bye".*/
     public void run(){
         prepare();
         chooseOneModeAndRun();
@@ -37,6 +44,10 @@ public class Duke {
         Ui.sayBye();
     }
 
+    /** Enter into one mode and execute.
+     * echo mode(mode 1) simply repeats user's input.
+     * command mode(mode 2) deals with tasks.
+     */
     private static void chooseOneModeAndRun() {
         String input = parser.getAndProcessInput();
         boolean isInputValid = false;
@@ -81,6 +92,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Parse user's original input and check which type of command it belongs to.
+     * Execute the command according to its type.
+     * @param input user's input
+     */
     private static void parseAndExecuteCommand(String input,Storage storage) {
         if(parser.isDoneCommand(input)){
             tasks.setTaskAsDoneAndSave(input,storage);

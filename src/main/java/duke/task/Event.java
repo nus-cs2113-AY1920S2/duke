@@ -32,10 +32,18 @@ public class Event extends Task {
         return eventNum;
     }
 
+    /**
+     * Set time description
+     * @param date time description of an event
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * @return time description of an event.
+     * If time description is in standard form, format it pattern "MMM dd yyyy" first.
+     */
     public String getDate(){
         if(isStandardTime) {
             return this.standardTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy",Locale.ENGLISH));
@@ -44,6 +52,9 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * @return detailed information of an event.
+     */
     @Override
     public String showTaskInfo(){
         return super.showTaskInfo()+" (at: "+this.getDate()+")";

@@ -28,6 +28,9 @@ public class Deadline extends Task {
         this.setTaskStatus(taskStatus);
     }
 
+    /**
+     * @return total number of deadlines in the list.
+     */
     public static int getDeadlineNum(){
         return deadlineNum;
     }
@@ -36,6 +39,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * @return time description of a deadline.
+     * If time description is in standard form, format it pattern "MMM dd yyyy" first.
+     */
     public String getBy(){
         if(isStandardTime) {
             return this.standardTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy",Locale.ENGLISH));
@@ -44,6 +51,9 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * @return detailed information of a deadline.
+     */
     @Override
     public String showTaskInfo(){
         return super.showTaskInfo()+" (by: "+this.getBy()+")";

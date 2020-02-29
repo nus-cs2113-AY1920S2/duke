@@ -18,6 +18,10 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * @param taskIndex index of the wanted task.
+     * @return a Task instance.
+     */
     public Task getOneTask(int taskIndex){
         return taskList.get(taskIndex);
     }
@@ -26,15 +30,26 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Append a new task to the tail of a TaskList(tasks).
+     * @param task
+     */
     public void append(Task task){
         taskList.add(task);
     }
 
+    /**
+     * Remove a task from the list with its index.
+     * @param taskIndex the index of the task to be removed.
+     */
     public void remove(int taskIndex){
         taskList.remove(taskIndex-1);
         Task.setTaskNum(Task.getTaskNum()-1);
     }
 
+    /**
+     * Print detailed info of all tasks in the TaskList(tasks).
+     */
     public void printTaskList(){
         int index = 0;
         for(Task task:taskList){
@@ -44,6 +59,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Print all the tasks in the TaskList(tasks) that contain certain keywords.
+     * @param targetWords keywords supplied by user
+     */
     public void showAllRelatedTasks(String targetWords){
         int index = 0;
 
@@ -58,6 +77,13 @@ public class TaskList {
         if(index==0) System.out.println("    No matching tasks found!");
     }
 
+    /**
+     * @param input user's command to add a new task.
+     * @param type  the type of the tobe-added task.
+     * @return description(name) of the new task.
+     * @throws UnknownCommandException if user's command cannot be parsed legally.
+     * @throws InexplicitTimeDescription if Event or Deadline isn't with correct time description.
+     */
     public String newTaskAndReturnName(String input, String type)
             throws UnknownCommandException, InexplicitTimeDescription {
         String newTaskName = "";
@@ -90,6 +116,12 @@ public class TaskList {
         return newTaskName;
     }
 
+    /**
+     * Parse original input and figure out the type of the task to be added.
+     * Add a new task to the TaskList(tasks) and Save changes to the file.
+     * @param input user's command to add a new task
+     * @param storage instance of Storage class, helps to save changes into file.
+     */
     public void addNewTaskAndSave(String input,Storage storage) {
         try {
             String type = parser.parseTaskType(input);
@@ -105,6 +137,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parse user's original input and delete the task according to taskIndex.
+     * Save the modifications to the file.
+     * @param input user's input with the form "delete TASK_INDEX".
+     * @param storage instance of Storage class, helps to save changes into file.
+     */
     public void removeCertainTaskAndSave(String input,Storage storage) {
         try{
             int taskIndex = parser.getTaskIndex(input);
@@ -120,6 +158,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parse original input and get the index of the referred task.
+     * Set the corresponding task in TaskList(tasks) as "Done".
+     * Save changes to the file
+     * @param input user's command to set a task as "Done" with its index;
+     * @param storage instance of Storage class, helps to save changes into file.
+     */
     public void setTaskAsDoneAndSave(String input,Storage storage) {
         try{
             int taskIndex = parser.getTaskIndex(input);
