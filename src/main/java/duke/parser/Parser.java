@@ -17,8 +17,8 @@ import static java.lang.Integer.parseInt;
  * 4) parse() : assigns each command enter by User to the suitable Command class<br>
  */
 public class Parser  {
-    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means :(\n" +
-            "\t Input command is wrong. Enter \"help\" for list of accepted\n\t commands";
+    public static final String WRONG_INPUT="\t OOPS!!! I'm sorry, but I don't know what that means. :(" +
+            " Input command is wrong. Enter \"help\" for list of accepted commands";
     public static final String NO_TASK_NUMBER = "\t Please enter a task number!";
     public static final String MULTIPLE_WHITE_SPACES= "\\s+";
     public static final String WRONG_USAGE_OF_COMMAND = " cannot be used with other commands";
