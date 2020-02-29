@@ -1,5 +1,5 @@
-#User Guide
-##Welcome to Shannon's Duke
+# User Guide
+## Welcome to Shannon's Duke
 **Is this your first time here?**
 
 Shannon's Duke is Shannon's implementation of Duke and it is an online to-do-list tracker.
@@ -15,10 +15,10 @@ These tasks added into the list can also be marked as done when completed. They 
 
 Here are some instructions and introductions to familiarise yourself with using this program.
 
-##Instructions
+## Instructions
 **NOTE:** All commands are case-sensitive, but task descriptions are not case-sensitive.
-####Adding Tasks
-#####Adding a Todo task: `todo`
+#### Adding Tasks
+##### Adding a Todo task: `todo`
 Adds a Todo task into your list
 
 **Format:** `todo <DESCRIPTION>`
@@ -27,7 +27,7 @@ Adds a Todo task into your list
 * `todo buy lunch`
 * `todo finish homework`
 
-#####Adding a Deadline Task: `deadline`
+##### Adding a Deadline Task: `deadline`
 Adds a Deadline task into your list.
 
 **Format:** `deadline <DESCRIPTION> /by <DEADLINE OF TASK>`
@@ -36,7 +36,7 @@ Adds a Deadline task into your list.
 * `deadline submit proposal /by Wednesday 3PM`
 * `deadline make reservations at restaurant /by tonight 7PM`
 
-#####Adding an Event Task: `event`
+##### Adding an Event Task: `event`
 Adds an Event task into your list
 
 **Format:** `event <DESCRIPTION> /at <VENUE/DATE/TIME OF TASK>`
@@ -45,7 +45,7 @@ Adds an Event task into your list
 * `event Secondary School Reunion /at Concorde Hotel, 14th Mar, 7PM`
 * `event Mom's Birthday Celebrations /at Home, 28th Sept, 6PM`
 
-####Removing Tasks: `remove`
+#### Removing Tasks: `remove`
 Removes task at the stated index
 
 **Format:** `remove <INDEX>`
@@ -53,7 +53,7 @@ Removes task at the stated index
 *Example:*
 * `remove 2` - Removes Task at index 2 of the list
 
-####Marking Tasks as Done: `done`
+#### Marking Tasks as Done: `done`
 Marks task at the stated index as done
 
 **Format:** `done <INDEX>`
@@ -63,12 +63,12 @@ Marks task at the stated index as done
 
 Returns the task to be `[1]` rather than `[0]`
 
-####Listing All Tasks: `list`
+#### Listing All Tasks: `list`
 Shows all the tasks inside the list, indexed from the tasks that are added first to the the latest entry.
 
 **Format:** `list`
 
-####Finding Tasks: `find`
+#### Finding Tasks: `find`
 Finds the tasks with containing the keywords
 The command is not case-sensitive.
 
@@ -79,15 +79,15 @@ The command is not case-sensitive.
 
 Returns `homework` and `Work from Home` (assuming these are tasks inside the list)
 
-####Getting Commands for List: `help`
+#### Getting Commands for List: `help`
 Returns a list of all the commands and a description of their usage
 
 **Format:** `help
 `
-####Exiting the Program: `bye`
+#### Exiting the Program: `bye`
 **Format:** `bye`
 
-####Saving the Data
+#### Saving the Data
 Task list data are saved in the hard disk automatically after the program is exited.
 
 There is no need to save manually.
