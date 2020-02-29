@@ -1,2 +1,1 @@
 1|something|T
-0|some new task|T
