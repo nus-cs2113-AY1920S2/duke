@@ -3,6 +3,8 @@ package chatty.ui;
 import chatty.task.Task;
 import chatty.task.TaskList;
 
+import java.time.LocalDate;
+
 import static chatty.util.Constants.ADDED_TASK_CONFIRMATION;
 import static chatty.util.Constants.BOT_NAME;
 import static chatty.util.Constants.DOT_CHARACTER;
@@ -42,6 +44,42 @@ public class Ui {
         }
 
         System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
+            Task task = taskList.getTaskAtIdx(i);
+            System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task);
+        }
+    }
+
+    /**
+     * Prints out all tasks in the list on a certain date.
+     * @param taskList The list of tasks to be printed out.
+     * @param date The date on which the tasks occur.
+     */
+    public void listTasksOnDate(TaskList taskList, LocalDate date) {
+        if (taskList.getTotalTaskNum() == 0) {
+            System.out.println("You have no task on date " + date);
+            return;
+        }
+
+        System.out.println("Here are the tasks on " + date);
+        for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
+            Task task = taskList.getTaskAtIdx(i);
+            System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task);
+        }
+    }
+
+    /**
+     * Prints out all tasks in the list with a certain keyword.
+     * @param taskList The list of tasks to be printed out.
+     * @param date The keyword which the tasks contain.
+     */
+    public void listTasksWithKeyword(TaskList taskList, String keyword) {
+        if (taskList.getTotalTaskNum() == 0) {
+            System.out.println(String.format("There is no task with keyword '%s'", keyword));
+            return;
+        }
+
+        System.out.println(String.format("Here are the tasks with keyword '%s' in your list:", keyword));
         for (int i = 0; i < taskList.getTotalTaskNum(); i++) {
             Task task = taskList.getTaskAtIdx(i);
             System.out.println((i + 1) + DOT_CHARACTER + SPACE_SEPARATOR + task.toString());
@@ -108,8 +146,15 @@ public class Ui {
     }
 
     /**
+     * Sends message to notify user that the input date time does not follow the required format.
+     */ 
+    public void sendWrongDateTimeFormatMessage() {
+        System.out.println("Please use correct date time format: yyyy-mm-dd");
+    }
+
+    /**
      * Sends message to indicate that the application is reading tasks from disk.
-     */
+     */    
     public void sendReadingTaskMessage() {
         System.out.println("Reading tasks from disk...");
     }

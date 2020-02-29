@@ -1,20 +1,25 @@
 package chatty.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class for event task.
  */
 public class Event extends Task {
 
-    private String eventPeriod;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     /**
      * Constructor for event task.
      * @param description Description of the event task.
      * @param eventPeriod Event period of the event task.
      */
-    public Event(String description, String eventPeriod) {
+    public Event(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
-        this.eventPeriod = eventPeriod;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -23,7 +28,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.eventPeriod);
+        return String.format("[E]%s (at: %s to %s)", super.toString(),
+                this.startTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                this.endTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
     /**
@@ -32,6 +39,22 @@ public class Event extends Task {
      */
     @Override
     public String getFileString() {
-        return String.format("E|%s|%s|%s", this.getDoneStatus(), this.getDescription(), this.eventPeriod);
+        return String.format("E|%s|%s|%s to %s", this.isDone, this.description, this.startTime, this.endTime);
+    }
+
+    /**
+     * Gets event start time in the event task.
+     * @return Event start time in the event task.
+     */
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * Gets event end time in the event task.
+     * @return Event end time in the event task.
+     */
+    public LocalDate getEndTime() {
+        return endTime;
     }
 }

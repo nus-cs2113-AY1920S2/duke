@@ -6,9 +6,13 @@ import chatty.task.Task;
 import chatty.task.TaskList;
 import chatty.task.ToDo;
 
+import javax.xml.stream.events.DTD;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -18,6 +22,7 @@ import static chatty.util.Constants.FILE_FIELD_SEPARATOR;
 import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE;
 import static chatty.util.Constants.MINIMUM_FIELD_NUM_FOR_TASK;
 import static chatty.util.Constants.NEW_LINE;
+import static chatty.util.Constants.TO_STRING;
 import static chatty.util.Constants.TRUE_STRING;
 
 /**
@@ -74,8 +79,6 @@ public class Storage {
     public Optional<Task> stringToTask(String taskStr) {
         String[] fields = taskStr.split(FILE_FIELD_SEPARATOR);
         if (fields.length < MINIMUM_FIELD_NUM_FOR_TASK) {
-            System.out.println("Invalid line in input file:");
-            System.out.println(taskStr);
             return Optional.empty();
         }
 
@@ -86,8 +89,6 @@ public class Storage {
         } else if (fields[1].equals(FALSE_STRING)) {
             isDone = false;
         } else {
-            System.out.println("Wrong format - please use true or false to mark task as done or not done");
-            System.out.println(taskStr);
             return Optional.empty();
         }
         String description = fields[2];
@@ -99,25 +100,29 @@ public class Storage {
             break;
         case "E":
             if (fields.length < MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE) {
-                System.out.println("Wrong format for Event in input file:");
-                System.out.println(taskStr);
                 return Optional.empty();
             }
-            String eventPeriod = fields[3];
-            task = new Event(description, eventPeriod);
+            try {
+                String[] times = fields[3].split(TO_STRING);
+                LocalDate startTime = LocalDate.parse(times[0], DateTimeFormatter.ISO_DATE);
+                LocalDate endTime = LocalDate.parse(times[1], DateTimeFormatter.ISO_DATE);
+                task = new Event(description, startTime, endTime);
+            } catch (DateTimeParseException e) {
+                return Optional.empty();
+            }
             break;
         case "D":
             if (fields.length < MINIMUM_FIELD_NUM_FOR_EVENT_AND_DEADLINE) {
-                System.out.println("Wrong format for Deadline in input file:");
-                System.out.println(taskStr);
                 return Optional.empty();
             }
-            String dateTime = fields[3];
-            task = new Deadline(description, dateTime);
+            try {
+                String dateTime = fields[3];
+                task = new Deadline(description, LocalDate.parse(dateTime, DateTimeFormatter.ISO_DATE));
+            } catch (DateTimeParseException e) {
+                return Optional.empty();
+            }
             break;
         default:
-            System.out.println("Task type not specified in input file:");
-            System.out.println(taskStr);
             return Optional.empty();
         }
 

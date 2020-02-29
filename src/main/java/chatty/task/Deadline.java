@@ -1,18 +1,21 @@
 package chatty.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class for deadline task.
  */
 public class Deadline extends Task {
 
-    private String dateTime;
+    private LocalDate dateTime;
 
     /**
      * Constructor for deadline task.
      * @param description Description of the deadline task.
      * @param dateTime Datetime of the deadline.
      */
-    public Deadline(String description, String dateTime) {
+    public Deadline(String description, LocalDate dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
@@ -23,7 +26,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.dateTime);
+        return String.format("[D]%s (by: %s)", super.toString(),
+                this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
     /**
@@ -33,5 +37,13 @@ public class Deadline extends Task {
     @Override
     public String getFileString() {
         return String.format("D|%s|%s|%s", this.getDoneStatus(), this.getDescription(), this.dateTime);
+    }
+
+    /**
+     * Returns the date time of the deadline.
+     * @return Date time of the deadline.
+     */
+    public LocalDate getDateTime() {
+        return dateTime;
     }
 }

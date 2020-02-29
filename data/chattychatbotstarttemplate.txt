@@ -1,7 +1,7 @@
-D|true|write assignment|tomorrow
-E|false|workshop event|May 4th 10-11am
+D|true|write assignment|2019-12-10
+E|false|workshop event|2019-12-01 to 2019-12-02
 T|true|attend lab
-D|false|submit lab|next week Monday
+D|false|submit lab|2019-11-01
 T|invalid task with not enough fields
 E|true|invalid event with not enough fields
-D|not boolean|deadline|next month
+D|not boolean|deadline|2019-12-21

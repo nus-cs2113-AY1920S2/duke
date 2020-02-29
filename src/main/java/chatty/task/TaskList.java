@@ -1,7 +1,10 @@
 package chatty.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static chatty.util.Constants.REGEX_MATCH_ALL_CHARACTER;
 
 /**
  * List of Tasks.
@@ -62,5 +65,42 @@ public class TaskList {
         Task task = tasks.get(idx);
         task.markAsDone();
         return task;
+    }
+
+    /**
+     * Finds the tasks with the specified keyword.
+     * @param keyword The specified keyword.
+     * @return The task list of the found tasks.
+     */
+    public TaskList findTaskWithKeyword(String keyword) {
+        TaskList taskListWithKeyword = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().matches(REGEX_MATCH_ALL_CHARACTER + keyword + REGEX_MATCH_ALL_CHARACTER)) {
+                taskListWithKeyword.addTask(task);
+            }
+        }
+        return taskListWithKeyword;
+    }
+  
+    /**
+     * Finds the tasks on the specified date.
+     * @param date The specified date.
+     * @return The task list of the found tasks.
+     */
+    public TaskList getTasksOnDate(LocalDate date) {
+        TaskList tasksOnDate = new TaskList();
+        for (Task task : tasks) {
+            if (task instanceof Event) {
+                LocalDate startTime = ((Event) task).getStartTime();
+                LocalDate endTime = ((Event) task).getEndTime();
+                if ((startTime.isBefore(date) || startTime.equals(date))
+                        && (endTime.isAfter(date) || endTime.equals(date))) {
+                    tasksOnDate.addTask(task);
+                }
+            } else if (task instanceof Deadline && ((Deadline) task).getDateTime().equals(date)) {
+                tasksOnDate.addTask(task);
+            }
+        }
+        return tasksOnDate;
     }
 }
