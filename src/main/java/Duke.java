@@ -3,7 +3,6 @@ import Tasks.Deadline;
 import Tasks.Events;
 import Tasks.Task;
 import Tasks.ToDo;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,7 +24,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printSeparator();
         System.out.println("Hello! I'm Duke");
-        System.out.println("1. \"list\" to display To Do List\n2. \"done [index]\" to mark as done\n3. \"todo\" or \"deadline /by [date/time]\" or \"event /at [date/time]\" to add to list\n4. \"delete [index]\" to delete\n5. \"bye\" to exit");
+        System.out.println("1. \"list\" to display To Do List\n2. \"done [index]\" to mark as done\n3. \"todo\" or "
+                + "\"deadline /by [date/time]\" or \"event /at [date/time]\" to add to list\n4. \"delete [index]\""
+                + "to delete\n5. \"bye\" to exit");
         printSeparator();
     }
 
@@ -36,7 +37,7 @@ public class Duke {
         Storage storage = new Storage();
         try {
             toDoList = storage.load();
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         do {
@@ -44,8 +45,8 @@ public class Duke {
             userInput = in.nextLine();
             userInput = userInput.trim();
             //user checks list
-            if (userInput.equalsIgnoreCase("list")){
-                if (toDoList.size() > 0 ) {
+            if (userInput.equalsIgnoreCase("list")) {
+                if (toDoList.size() > 0) {
                     printSeparator();
                     System.out.println("Here are the tasks in your list");
                     for (int i = 0; i < toDoList.size(); i++) {
@@ -58,7 +59,7 @@ public class Duke {
                     printSeparator();
                 }
 
-            }else if (userInput.startsWith("done")){
+            } else if (userInput.startsWith("done")) {
                 try {
                     int indexCompleted = Integer.parseInt(userInput.substring(5));
                     toDoList.get(indexCompleted - 1).markAsDone();
@@ -66,16 +67,16 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(toDoList.get(indexCompleted - 1).toString());
                     printSeparator();
-                }catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     printSeparator();
                     System.out.println("You did not enter a number. Try again!!");
                     printSeparator();
-                }catch (IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
                     printSeparator();
                     System.out.println("The index you entered does not exist??? Look at ur list properly lah");
                     printSeparator();
                 }
-            }else if (userInput.startsWith("delete")){
+            } else if (userInput.startsWith("delete")) {
                 try {
                     int indexToDelete = Integer.parseInt(userInput.substring(7));
                     printSeparator();
@@ -83,21 +84,21 @@ public class Duke {
                     System.out.println(toDoList.get(indexToDelete - 1).toString());
                     System.out.println("Now there are " + (todoSize - 1) + " task(s) in your list");
                     printSeparator();
-                    toDoList.remove( indexToDelete - 1);
+                    toDoList.remove(indexToDelete - 1);
                     todoSize--;
-                }catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     printSeparator();
                     System.out.println("You did not enter a number. Try again!!");
                     printSeparator();
-                }catch (IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
                     printSeparator();
                     System.out.println("The index you entered does not exist??? Look at ur list properly lah");
                     printSeparator();
                 }
-            }else if(userInput.startsWith("todo")) {
+            } else if (userInput.startsWith("todo")) {
                 try {
                     userInput = userInput.substring(5);
-                    if (userInput.trim().equals("")){
+                    if (userInput.trim().equals("")) {
                         throw new EmptyStringException();
                     }
                     ToDo t = new ToDo(userInput);
@@ -108,14 +109,14 @@ public class Duke {
                     System.out.println("Now there are " + (todoSize + 1) + " task(s) in your list");
                     printSeparator();
                     todoSize++;
-                } catch (EmptyStringException e){
+                } catch (EmptyStringException e) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-            }else if (userInput.startsWith("deadline")){
+            } else if (userInput.startsWith("deadline")) {
 
                 try {
                     userInput = userInput.substring(9);
-                    if (userInput.trim().equals("")){
+                    if (userInput.trim().equals("")) {
                         throw new EmptyStringException();
                     }
                     Deadline d = new Deadline(userInput);
@@ -127,10 +128,10 @@ public class Duke {
                     System.out.println("Now there are " + (todoSize + 1) + " task(s) in your list");
                     printSeparator();
                     todoSize++;
-                }catch (EmptyStringException e){
+                } catch (EmptyStringException e) {
                     System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
-            }else if (userInput.startsWith("event")){
+            } else if (userInput.startsWith("event")) {
                 try {
                     userInput = userInput.substring(6);
                     if (userInput.trim().equals("")) {
@@ -144,10 +145,10 @@ public class Duke {
                     System.out.println("Now there are " + (todoSize + 1) + " task(s) in your list");
                     printSeparator();
                     todoSize++;
-                }catch (EmptyStringException e){
+                } catch (EmptyStringException e) {
                     System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
                 }
-            }else {
+            } else {
                 printSeparator();
                 System.out.println("OOPS!!! IDGI THAT");
                 printSeparator();
