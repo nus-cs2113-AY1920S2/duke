@@ -55,7 +55,7 @@ public class Storage {
             }.getType());
 
             return newTask;
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Opening a new file");
             return new TaskList();
         }

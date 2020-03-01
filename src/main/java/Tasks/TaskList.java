@@ -48,9 +48,8 @@ public class TaskList {
         return this.tasks.get(i);
     }
 
-    /**
-     * @param userInput
-     * @return
+    /**finds tasks that have String userInput in the description
+     * @param userInput: String that is provided by the user
      */
     public StringBuilder find(String userInput) {
         StringBuilder string = new StringBuilder();
