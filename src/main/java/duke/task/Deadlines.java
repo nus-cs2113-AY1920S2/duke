@@ -22,4 +22,10 @@ public class Deadlines extends Task {
     public String toString() {
         return "[" + super.getTaskType() + "]" + super.toString() + "(by: " + getDueDate() + ")";
     }
+
+    @Override
+    public boolean isSameTask(Task toCheck) {
+        return (toCheck == this) || ( !(toCheck == null) && toCheck.getDescription().equals(this.getDescription())
+                && ((Deadlines) toCheck).getDueDate().equals(this.getDueDate()));
+    }
 }

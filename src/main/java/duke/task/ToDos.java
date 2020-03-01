@@ -13,4 +13,9 @@ public class ToDos extends Task {
     public String toString() {
         return "[" + super.getTaskType() + "]" + super.toString();
     }
+
+    @Override
+    public boolean isSameTask(Task toCheck) {
+        return super.isSameTask(toCheck);
+    }
 }
