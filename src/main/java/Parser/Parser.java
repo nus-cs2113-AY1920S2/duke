@@ -11,7 +11,7 @@ import Command.ExitCommand;
 import Command.FindCommand;
 
 /**
- * Parse user input
+ * Parses user input
  */
 public class Parser {
 
@@ -22,10 +22,10 @@ public class Parser {
     private static final char TASK_DEADLINE = 'D';
 
     /**
-     * Parses input into command for execution
+     * Parses user input into command for execution
      *
-     * @param userCommand user input, including command word and corresponding parameters
-     * @return Command based on user input
+     * @param userCommand user input including command word and parameters
+     * @return  command based on user input
      */
     public static Command parseCommand(String userCommand) {
 
@@ -35,7 +35,6 @@ public class Parser {
             switch (words[0]) {
             case "list":
                 return new ListCommand();
-                //return printList(tasks);
             case "done":
                 return prepareDoneCommand(words[1], wordLength);
 
@@ -59,37 +58,43 @@ public class Parser {
 
             case "bye":
                 return new ExitCommand();
-        }
+
+            default:
+                System.out.println("Command not recognised\n");
+                return new HelpCommand();
+            }
     }
 
     /**
-     * Auxiliary function to validate user input
+     * Auxiliary function for delete command
+     * validates input before parsing
      *
-     * @param wordIndex index of task to be deleted
-     * @param wordLength length of command from user
-     * @return command to be executed
+     * @param wordIndex index of task to be processed
+     * @param wordLength length of user input for validation
+     * @return command to execute
      */
     private static Command prepareDeleteCommand(String wordIndex, int wordLength) {
         if (wordLength != SIZE_DELETE_COMMAND) {
-            String errorMessage = "[Error][Delete]: Wrong format for command \"Delete\"\n";
+            String errorMessage = "Wrong format for command \"Delete\"\n";
             return new FailedCommand(errorMessage);
         }
-        return new DeleteCommand(wordIndex);
+            return new DeleteCommand(wordIndex);
     }
 
     /**
-     * Auxiliary function to validate user input
+     * Auxiliary function for done command
+     * validates input before parsing
      *
-     * @param wordIndex index of task to be set complete
-     * @param wordLength length of command from user
-     * @return command to be executed
+     * @param wordIndex index of task to be processed
+     * @param wordLength length of user input for validation
+     * @return command to execute
      */
     private static Command prepareDoneCommand(String wordIndex, int wordLength) {
         if (wordLength != SIZE_DONE_COMMAND) {
-            String errorMessage = "[Error][Done]: Wrong format for command \"done\"";
+            String errorMessage = "Wrong format for command \"Done\"";
             return new FailedCommand(errorMessage);
         }
-        return new DoneCommand(wordIndex);
+            return new DoneCommand(wordIndex);
     }
 
 }

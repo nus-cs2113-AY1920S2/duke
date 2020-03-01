@@ -12,7 +12,10 @@ import Storage.Storage;
 import java.util.ArrayList;
 
 
-
+/**
+ * Instance of tasks used in program
+ * Contains methods required to modify tasks
+ */
 public class TaskList {
 
     public static final int LENGTH_DEADLINE = 9;
@@ -24,15 +27,23 @@ public class TaskList {
 
     private static ArrayList<Task> tasks;
 
+    /**
+     * Creating new instance of task list
+     */
     public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Updates task status upon completion
+     *
+     * @param indexCompleteTask index of complete task
+     * @return whether update is successful or not
+     */
     public static boolean completeTask(int indexCompleteTask) {
         indexCompleteTask -= 1; // index starts from 0, unlike listing number
         if ( (indexCompleteTask < tasks.size()) || (indexCompleteTask > 0)) { // check if out of bounce
             Task currentTask = tasks.get(indexCompleteTask);
-
             if (currentTask.getStatus()) { // check if already completed
                 System.out.println("Duke.Task already completed!\n");
             } else {
@@ -41,15 +52,19 @@ public class TaskList {
                 System.out.println( "["+ currentTask.getTaskType() + "][" + currentTask.getStatusIcon() + "] " + currentTask.getDescription() + "\n");
                 return true;
             }
-
         } else {
             System.out.println("Error: No such index in use\n");
         }
         return false;
     }
 
+    /**
+     * Deletion of task from task list
+     *
+     * @param taskIndex index of task to be deleted
+     * @throws EmptyListException if task list is empty
+     */
     public static void deleteTask(int taskIndex) throws EmptyListException {
-
         if(tasks.isEmpty()) {
             throw  new EmptyListException("List is currently empty!");
         }
@@ -67,7 +82,16 @@ public class TaskList {
     }
 
 
-
+    /**
+     * Processes task types with date and time fields
+     *
+     * @param taskDescription description of task
+     * @param wordLength    length of user command for parameter validation
+     * @param commandLength length of command word for extraction
+     * @return word array for task fields
+     * @throws NoParameterException
+     * @throws MissingParameterException
+     */
     public static String[] processDatedTasks(String taskDescription, int wordLength, int commandLength)
                                             throws NoParameterException, MissingParameterException {
         if (wordLength <= 1) { // empty parameter
@@ -89,6 +113,13 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Separating date and time from parsed parameter
+     *
+     * @param dateTime parameter from user input task
+     * @return array of size two for date and time
+     * @throws MissingParameterException if either date or time is missing
+     */
     public static String[] formatDatetime(String dateTime) throws MissingParameterException {
         try {
             String[] splitDateTime = dateTime.trim().split(" ");
@@ -108,6 +139,14 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Adding deadline task into task list
+     *
+     * @param userInput user input
+     * @param wordLength length of user input for validation
+     * @throws NoParameterException no parameters given
+     * @throws MissingParameterException not all parameters filled
+     */
     public static void addDeadline(String userInput, int wordLength) throws NoParameterException, MissingParameterException {
         try {
             String[] words = processDatedTasks(userInput, wordLength, LENGTH_DEADLINE);
@@ -124,6 +163,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adding event task into task list
+     *
+     * @param userInput user input
+     * @param wordLength length of user input for validation
+     * @throws NoParameterException no parameters given
+     * @throws MissingParameterException not all parameters filled
+     */
     public static void addEvent(String userInput, int wordLength) throws NoParameterException, MissingParameterException {
         try {
             String[] words = processDatedTasks(userInput, wordLength, LENGTH_EVENT);
@@ -140,6 +187,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adding deadline task into task list
+     *
+     * @param userInput user input
+     * @param wordLength length of user input for validation
+     * @throws NoParameterException no parameters given
+     */
     public static void addTodo(String userInput, int wordLength) throws NoParameterException {
 
         if (wordLength <= 1) { // empty parameter
@@ -155,14 +209,20 @@ public class TaskList {
         Storage.saveTask(newTask);
     }
 
+    /**
+     * Retrieves the current size of task list
+     *
+     * @return number of tasks
+     */
     public static int getTaskListCounter() {
         return tasks.size();
     }
 
-    public static int getTaskIndexCounter() {
-        return tasks.size() - 1;
-    }
-
+    /**
+     * Loading todo task from data file
+     *
+     * @param words entry of task in data file
+     */
     public static void loadFromFileTodo(String[] words) {
         boolean taskStatus = Boolean.parseBoolean(words[1]);
         String taskDescription = words[2];
@@ -173,6 +233,11 @@ public class TaskList {
         tasks.add(newTask);
     }
 
+    /**
+     * Loading deadline task from data file
+     *
+     * @param words entry of task in data file
+     */
     public static void loadFromFileDeadline(String[] words) {
         boolean taskStatus = Boolean.parseBoolean(words[1]);
         String taskDescription = words[2];
@@ -186,6 +251,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Loading event task from data file
+     *
+     * @param words entry of task in data file
+     */
     public static void loadFromFileEvent(String[] words ) {
         boolean taskStatus = Boolean.parseBoolean(words[1]);;
         String taskDescription = words[2];
@@ -198,6 +268,9 @@ public class TaskList {
         tasks.add(newTask);
     }
 
+    /**
+     * Displays the full task list
+     */
     public static void printList() {
         int count = 1;
         System.out.println("Listing tasks below:");
@@ -213,6 +286,9 @@ public class TaskList {
         System.out.println("");
     }
 
+    /**
+     * Retrieves actual task list
+     */
     public static ArrayList<Task> getTaskList() {
         return tasks;
     }

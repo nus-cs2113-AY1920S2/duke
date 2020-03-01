@@ -55,6 +55,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke program
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

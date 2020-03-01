@@ -26,9 +26,9 @@ public class DoneCommand extends Command {
                 storage.rebuildTaskFile(tasks.getTaskList());
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("[Error] Please input a task within the range of: 1 - " + tasks.getTaskListCounter() + "\n");
+            System.out.println("[Error][Done] Please input a task within the range of: 1 - " + tasks.getTaskListCounter() + "\n");
         } catch (NumberFormatException e) {
-            System.out.println("[Error] Please input task number as a number, instead of spelling it out\n");
+            System.out.println("[Error][Done] Please input task number as a number, instead of spelling it out\n");
         }
     }
 }

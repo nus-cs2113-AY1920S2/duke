@@ -11,17 +11,17 @@ public class Ui {
      * Prints the list of operations supported
      */
     public static void printHelp() {
-        System.out.println("Commands: ");
-        System.out.println("List: lists all recorded tasks \nusage: list\n");
-        System.out.println("Done: mark task as completed \nusage: done <task number>\n");
-        System.out.println("Todo: Tasks without date/time \nUsage: todo <task> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Event: Duke.Event including date/time \nUsage: event <task> /<date> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("Deadline: Tasks including date/time \nUsage: deadline <task> /<date> \n(Avoid using other keywords as the first word)\n");
-        System.out.println("");
-    }
-
-    public static void showError(String error) {
-        System.out.println("Error: " + error);
+        String commandList =
+            "Commands: "
+            + "Exit: Exits program \nUsage: bye\n\n"
+            + "List: Lists all recorded tasks \nUsage: list\n\n"
+            + "Done: Mark task as completed \nUsage: done <task number>\n\n"
+            + "Todo: Basic Tasks without date/time \nUsage: todo <task> \n\n"
+            + "Event: Event tasks including date/time \nUsage: event <task> /<YYYY-MM-DD> <HHMM> \n\n"
+            + "Deadline: Deadline tasks including date/time \nUsage: deadline <task> /<YYYY-MM-DD> <HHMM> \n\n"
+            + "Delete: Deletes task from list \nUsage: delete <task number>\n\n"
+            + "Find: Search for task using keyword \nUsage: find <key word>\nnote: Keyword is only one word\n";
+        System.out.println(commandList);
     }
 
     public static void showLine() {
@@ -62,9 +62,4 @@ public class Ui {
 
         System.out.println(welcomeMessage);
     }
-
-    public static void showLoadingError() {
-        System.out.println("Error loading data file");
-    }
-
 }

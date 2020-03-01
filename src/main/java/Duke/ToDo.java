@@ -22,6 +22,12 @@ public class ToDo extends Task {
         return TYPE_TODO;
     }
 
+    /**
+     * Prints details of task upon adding
+     * Default is set for tasks without date
+     *
+     * @param taskCounter current index of task
+     */
     @Override
     public void printListDetails(int taskCounter) {
         System.out.println("["+ getTaskType() + "][" + getStatusIcon() + "] " + taskCounter + ". " + getDescription());

@@ -2,16 +2,12 @@ package Command;
 
 import Exceptions.MissingParameterException;
 import Exceptions.NoParameterException;
+import java.time.format.DateTimeParseException;
 
-<<<<<<< HEAD
 /**
  * Adds a task to the task list.
  * Processes the task based on its task type
  */
-=======
-import java.time.format.DateTimeParseException;
-
->>>>>>> master
 public class AddCommand extends Command {
 
     private static final char TASK_TODO = 'T';
@@ -51,7 +47,6 @@ public class AddCommand extends Command {
                 tasks.addTodo(userInput, wordArrayLength);
                 break;
             default:
-<<<<<<< HEAD
                 System.out.println("[Error][New Task]: Keyword not recognised!\n");
                 System.out.println("Task types:\ntodo\nevent\ndeadline");
             }
@@ -59,19 +54,12 @@ public class AddCommand extends Command {
         } catch (NoParameterException e) {
             System.out.println("[Error][New Task]: Missing parameters");
             System.out.println("Usage:\n{todo} <Details>\n{event or deadline} <Details> / <YYYY-MM-DD> HH");
-=======
-                System.out.println("[Error] Keyword not recognised!\n");
-            }
-
-        } catch (NoParameterException e) {
-            System.out.println("[Error] Missing parameters");
         } catch (MissingParameterException | NullPointerException e) {
-            System.out.println("[Error] Missing Date or Time field");
+            System.out.println("[Error][New Task] Missing Date or Time field");
         } catch (DateTimeParseException e) {
-            System.out.println("[Error] Wrong format for date\nPlease record in YYYY-DD-MM format");
+            System.out.println("[Error][New Task] Wrong format for date\nPlease record in YYYY-DD-MM format");
         } catch (NumberFormatException e) {
-            System.out.println("[Error] time should be all numbers in 24Hr format: HHMM");
->>>>>>> master
+            System.out.println("[Error][New Task] time should be all numbers in 24Hr format: HHMM");
         }
     }
 }

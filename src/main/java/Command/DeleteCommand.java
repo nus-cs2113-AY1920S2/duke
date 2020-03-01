@@ -27,9 +27,9 @@ public class DeleteCommand extends Command {
         } catch (EmptyListException e) {
             System.out.println("[Error][Delete]: " + e.getMessage());
         } catch (NumberFormatException e) {
-            System.out.println("[Error][Delete]: Please input task number as a number, instead of spelling it out\n");
+            System.out.println("[Error][Delete]: Please input task number as a number, instead of spelling it out");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("[Error][Delete]: Please input a task within the range of: 1 - " + tasks.getTaskListCounter() + "\n");
+            System.out.println("[Error][Delete]: Please input a task within the range of: 1 - " + tasks.getTaskListCounter());
         }
     }
 }

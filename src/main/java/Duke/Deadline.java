@@ -21,6 +21,12 @@ public class Deadline extends Task {
         return TYPE_DEADLINE;
     }
 
+    /**
+     * Prints details of task upon adding
+     * Default is set for tasks without date
+     *
+     * @param taskCounter current index of task
+     */
     @Override
     public void printAddDetails(int taskCounter) {
         System.out.println("The following task has been added:\n[" + getTaskType() +"][" +
