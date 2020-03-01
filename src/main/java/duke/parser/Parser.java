@@ -40,9 +40,9 @@ public class Parser {
             throw new InvalidCommandException();
         }
         if (numArguments == 2) {
-            description = inputArray[1];
+            description = inputArray[1].trim();
         }
-        commandPrompt = inputArray[0];
+        commandPrompt = inputArray[0].trim();
     }
 
     /**
@@ -71,13 +71,13 @@ public class Parser {
                 if (numArguments != 2) throw new InvalidDeadlineException();
                 String[] deadlineInfo = description.split("/by ", 2);
                 if (deadlineInfo.length != 2) throw new InvalidDeadlineException();
-                command = new DeadlineCommand(commandPrompt, deadlineInfo[0], deadlineInfo[1]);
+                command = new DeadlineCommand(commandPrompt, deadlineInfo[0].trim(), deadlineInfo[1].trim());
                 break;
             case "event":
                 if (numArguments != 2) throw new InvalidEventException();
                 String[] eventInfo = description.split("/at ", 2);
                 if (eventInfo.length != 2) throw new InvalidEventException();
-                command = new EventCommand(commandPrompt, eventInfo[0], eventInfo[1]);
+                command = new EventCommand(commandPrompt, eventInfo[0].trim(), eventInfo[1].trim());
                 break;
             case "done":
                 if (!description.matches("-?\\d+") || numArguments != 2) throw new InvalidFormatException();
