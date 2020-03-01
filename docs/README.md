@@ -119,6 +119,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 <br/>
+
 ### local data storage
 On start up, if it exists, Duke loads past list from `[project_root]/data/duke.txt`, or else it creates a new one.
 
