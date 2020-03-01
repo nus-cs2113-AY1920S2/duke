@@ -170,12 +170,12 @@ Views **all** the tasks that you have currently in the Task List as a list. The 
 	  ʘᗜʘ Sure! Lumi prints your list!
         +---------+
 	+---| L I S T |---------------------------------------------------------------+
-	|   +---------+                                                               |
-	| 1. [T][✘] watch anime                                                      |
-	| 2. [D][✓] complete math assignment (by: 12/06/2020 08:00AM)                |
-	| 3. [E][✘] meet up with friends for lunch (at: tomorrow 12:30PM)            |
+	    +---------+ 
+	  1. [T][✘] watch anime
+	  2. [D][✓] complete math assignment (by: 12/06/2020 08:00AM)
+	  3. [E][✘] meet up with friends for lunch (at: tomorrow 12:30PM)
 	+-----------------------------------------------------------------------------+
-	| Total: 3 tasks                                                              |
+	  Total: 3 tasks
 	+-----------------------------------------------------------------------------+
 
 > **Note**:  The numbers to the left of each task is referred to as the task's *list number*.
@@ -244,12 +244,12 @@ The *keyword* can contain multiple words and need not be complete words. The Tas
 	  ʘᗜʘ Sure! Lumi searches your list...
 	    +-----------------------+
 	+---| S E A R C H   L I S T |-------------------------------------------------+
-	|   +-----------------------+                                                 |
-	| 1. [D][✓] complete math assignment (by: 12/06/2020 08:00AM)                |
-	| 4. [D][✘] do Computing Assignments (by: 02/03/2020 11:59PM)                |
-	| 5. [E][✘] Group project assignment meeting (at: 05/03/2020 02:00PM)        |
+	    +-----------------------+
+	  1. [D][✓] complete math assignment (by: 12/06/2020 08:00AM)
+	  4. [D][✘] do Computing Assignments (by: 02/03/2020 11:59PM)
+	  5. [E][✘] Group project assignment meeting (at: 05/03/2020 02:00PM)
 	+-----------------------------------------------------------------------------+
-	| Search Total: 3 tasks                                                       |
+	  Search Total: 3 tasks
 	+-----------------------------------------------------------------------------+
 
 <u>No Search Results</u>
@@ -288,12 +288,12 @@ The Task List is then filtered for **Deadline** and **Event** tasks which *date 
 	  ʘᗜʘ Sure! Lumi searches your list...
 	    +-----------------------+
 	+---| S E A R C H   L I S T |-------------------------------------------------+
-	|   +-----------------------+                                                 |
-	| 1. [D][✓] complete math assignment (by: 12/06/2020 08:00AM)                |
-	| 5. [E][✘] Group project assignment meeting (at: 05/03/2020 02:00PM)        |
-	| 6. [E][✘] attend party (at: 12/04/2020 04:00PM)                            |
+	    +-----------------------+ 
+	  1. [D][✓] complete math assignment (by: 12/06/2020 08:00AM)
+	  5. [E][✘] Group project assignment meeting (at: 05/03/2020 02:00PM)
+	  6. [E][✘] attend party (at: 12/04/2020 04:00PM)
 	+-----------------------------------------------------------------------------+
-	| Search Total: 3 tasks                                                       |
+	  Search Total: 3 tasks
 	+-----------------------------------------------------------------------------+
 
 <br><br>
