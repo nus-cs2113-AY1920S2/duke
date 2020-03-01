@@ -136,9 +136,6 @@ public class Duke {
                         for(String word : keywords) {
                             for(int i = 0; i < tasks.size(); i++){
                                 String descrp = tasks.get(i).getDescription();
-                                if(tasks.get(i).getClass(Deadline)){
-
-                                }
                                 if(descrp.contains(word)){
                                     System.out.println(i + "." + tasks.get(i));
                                 }
