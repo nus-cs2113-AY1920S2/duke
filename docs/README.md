@@ -50,7 +50,7 @@ Expected Outcome:
 
     Got it. I have added this task: 
     
-    [T] [✘] eat
+    [T] [x] eat
     
     Now you have 2 item/s in the list`
 
@@ -72,7 +72,7 @@ Expected Outcome
 
     Got it. I have added this task: 
     
-    [D] [✘] eat (by: Jan 2 2019)
+    [D] [x] eat (by: Jan 2 2019)
     
     Now you have 3 item/s in the list
 
@@ -94,7 +94,7 @@ Expected Outcome:
 
     Got it. I have added this task: 
     
-    [E] [✘] eat (at: Jan 5 2019)
+    [E] [x] eat (at: Jan 5 2019)
     
     Now you have 3 item/s in the list 
 
@@ -113,7 +113,7 @@ Examples:
 Expected Outcome
     
     Cool, we will remove the following task:
-    [D] [✘] eat (by: Jan 2 2019)
+    [D] [x] eat (by: Jan 2 2019)
     Now you have 2 items in your list
 ****
 
@@ -128,8 +128,8 @@ Examples:
 
 Expected outcome:
 
-    1. [T] [✘] eat
-    2. [E] [✘] eat (at: Jan 5 2019)
+    1. [T] [x] eat
+    2. [E] [x] eat (at: Jan 5 2019)
 
 
 ****
@@ -147,7 +147,7 @@ Examples:
 
 Expected Outcome:
 
-    2. [E][✓] eat (at: Jan 5 2019)
+    2. [E][v] eat (at: Jan 5 2019)
     Done! We have checked 2!
 
 ****
@@ -164,15 +164,15 @@ Examples:
 Expected Outcome:
     
     Here are the matching tasks in your list:
-    1. [T] [✘] eat
-    2. [E] [✓] eat (at: Jan 5 2019)
+    1. [T] [x] eat
+    2. [E] [v] eat (at: Jan 5 2019)
     
     There were 2 tasks with the "eat" keyword
 ****
 
 #### Clearing the task list : `clear`
 
-* Clears all the tasks in task list. 
+* Clears all the tasks in task list.
 * Format: `clear`
 
 Examples:

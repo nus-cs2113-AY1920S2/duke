@@ -27,7 +27,7 @@ public class Storage {
 
     /** Given the checked or crossed Icon, returns a Bool value */
     public static Boolean convertMarkToBool(String mark){
-        if (mark.equals("\u2713")){
+        if (mark.equals("v")){
             return true;
         }
         else {
@@ -81,22 +81,29 @@ public class Storage {
      */
     public static void saveTaskList(String filePath, ArrayList<Task> taskList) {
         try {
-            for (int i = 0; i < taskList.size(); i++) {
-                Task t = taskList.get(i);
-                String description = t.getDescription();
-                String typeIcon = t.getTypeIcon();
-                String statusIcon = t.getStatusIcon();
-                String stringToAdd = Parser.returnDescription(t, description, typeIcon, statusIcon);
-                if (i == 0){
-                    FileWriter fw = new FileWriter(filePath);
-                    fw.write(stringToAdd);
-                    fw.write("\n");
-                    fw.close();
-                } else {
-                    FileWriter fw = new FileWriter(filePath, true);
-                    fw.write(stringToAdd);
-                    fw.write("\n");
-                    fw.close();
+            if (taskList.size() == 0){
+                FileWriter fw = new FileWriter(filePath);
+                fw.write("");
+                fw.write("\n");
+                fw.close();
+            } else {
+                for (int i = 0; i < taskList.size(); i++) {
+                    Task t = taskList.get(i);
+                    String description = t.getDescription();
+                    String typeIcon = t.getTypeIcon();
+                    String statusIcon = t.getStatusIcon();
+                    String stringToAdd = Parser.returnDescription(t, description, typeIcon, statusIcon);
+                    if (i == 0){
+                        FileWriter fw = new FileWriter(filePath);
+                        fw.write(stringToAdd);
+                        fw.write("\n");
+                        fw.close();
+                    } else {
+                        FileWriter fw = new FileWriter(filePath, true);
+                        fw.write(stringToAdd);
+                        fw.write("\n");
+                        fw.close();
+                    }
                 }
             }
         }

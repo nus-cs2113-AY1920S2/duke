@@ -35,8 +35,8 @@ public abstract class Task {
 
     /** Returns the Status Icon, check mark or cross mark, representing of the task is done.  */
     public String getStatusIcon() {
-        //return tick or X symbols
-        return (isDone ? "\u2713" : "\u2718");
+        //v represents right and x represents wrong
+        return (isDone ? "v" : "x");
     }
 
     /** Represents the icon that represents the task, eg. [T], [E], [D].  */
