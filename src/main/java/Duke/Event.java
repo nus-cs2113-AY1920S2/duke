@@ -1,14 +1,22 @@
 package Duke;
 
-
+/**
+ * Specifies the additional requirements for event type tasks
+ */
 public class Event extends Task {
 
     public static final String TYPE_EVENT = "E";
+
 
     public Event(String description, String date, String time){
         super(description, date, time);
     }
 
+    /**
+     * Retrieve the code for current type of task
+     *
+     * @return deadline task type code
+     */
     @Override
     public String getTaskType(){
         return TYPE_EVENT;

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+D | false | poo | 12-12-12 1200
+E | false | pee | 12-12-12 1200
+D | false | paiaiai | 11
+=======
 E | false | poo  | 2020-12-12 | 1200
 T | false | eat
 E | false | 12121212  | 2020-12-12 | hello
+>>>>>>> master

@@ -1,47 +1,22 @@
 package Duke;
 
 import Command.Command;
-import Exceptions.DukeException;
 import Storage.Storage;
 import Task.TaskList;
 import UI.Ui;
 
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import Parser.Parser;
 
-    /*
-    List of exceptions handled:
-
-    1. General commands
-        a. No recognised command given
-        b. No follow up parameters in command
-
-    2. Done command
-        a. Out of range
-        b. Not integer
-
-    3. Load from data.txt
-        a. Not exist
-        b. Error reading / writing
-
-     */
-
-
 public class Duke {
-
-    public static void getDateTime() {
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        System.out.println(formattedDate);
-    }
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * The Duke program implements an application that simulates is a task scheduler
+     * It allow the saving of tasks to a file and reloading of data when application starts
+     */
 
     public Duke() {
         ui = new Ui();
@@ -57,6 +32,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runner method to read and execute user commands
+     * Loops until "bye" command given
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -67,11 +46,10 @@ public class Duke {
                 c.setCommandVariables(tasks, storage, ui);
                 c.execute();
                 isExit = c.isExit();
-            } catch (Exception e) {
-                System.out.println("ERROR AT RUN\n");
-                ui.showError(e.getMessage());
-                System.out.println(e);
-            } finally {
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("[Error][Input]: Missing parameters detected");
+            }
+            finally {
                 ui.showLine();
             }
         }
