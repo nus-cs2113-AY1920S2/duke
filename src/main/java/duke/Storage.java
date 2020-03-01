@@ -15,7 +15,18 @@ import java.util.Scanner;
 import static duke.Duke.PATH;
 import static duke.Duke.VERTICAL_BAR;
 
+/**
+ * Storage class - Class to deal with loading and saving manipulation
+ * in the lists and save it back to a data file, also created a new file
+ * if the path does not exist
+ */
 public class Storage {
+
+    /**
+     * Method to load data from the data file
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException{
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(PATH); // create a File for the given file path
