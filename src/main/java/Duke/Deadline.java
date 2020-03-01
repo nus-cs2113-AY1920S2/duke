@@ -5,14 +5,9 @@ public class Deadline extends Task {
 
     public static final String TYPE_DEADLINE = "D";
 
-    public Deadline (String description, String date) {
-        super(description, date);
+    public Deadline (String description, String date, String time) {
+        super(description, date, time);
     }
-
-    public void setDate(String date) {
-        super.date = date;
-    }
-
 
     @Override
     public String getTaskType() {
@@ -29,7 +24,7 @@ public class Deadline extends Task {
     @Override
     public void printListDetails(int count) {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
-                            count + ". " + super.description + " (by: " + super.date + ")");
+                            count + ". " + super.description + " (by: " + super.date + " at " + time +")");
     }
 
 

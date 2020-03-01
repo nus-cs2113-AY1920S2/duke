@@ -47,12 +47,12 @@ public class Storage {
     }
 
     private static void writeTaskToFile(Task newTask, FileWriter myWriter) throws IOException {
-        if (newTask.getDate().isEmpty()) {
+        if (newTask instanceof ToDo) {
             myWriter.write(newTask.getTaskType() + " | " + newTask.getStatus() + " | "
                     + newTask.getDescription() + "\n");
         } else {
             myWriter.write(newTask.getTaskType() + " | " + newTask.getStatus() + " | "
-                    + newTask.getDescription() + " | " + newTask.getDate() + "\n");
+                    + newTask.getDescription() + " | " + newTask.getDate().toString() + " | " + newTask.getTime() + "\n");
         }
     }
 
@@ -84,7 +84,8 @@ public class Storage {
 
     public static void processDataFile(String oneLine, TaskList tasks) {
         String[] words = oneLine.split(" \\| ");
-        switch (words[0].charAt(0)) {
+        try {
+            switch (words[0].charAt(0)) {
             case TASK_TODO:
                 tasks.loadFromFileTodo(words);
                 break;
@@ -97,7 +98,9 @@ public class Storage {
             default:
                 // in case user touches txt file and fills with random data
                 System.out.println("Line not added: " + oneLine + "\n");
-                break;
+            }
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println("Corrupted entry detected, skipping entry");
         }
 
     }
