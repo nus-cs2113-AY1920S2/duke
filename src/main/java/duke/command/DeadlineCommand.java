@@ -6,6 +6,8 @@ import duke.task.tasktypes.Deadline;
 import duke.task.TaskManager;
 import duke.task.tasktypes.Task;
 import duke.utility.Messages;
+import java.time.DateTimeException;
+
 
 /**
  * A class representing a command for adding a deadline.
@@ -16,7 +18,7 @@ public class DeadlineCommand extends Command {
     private String userInput;
     private final String BULLET = "\t\t\u2023";
 
-    public final static String USAGE = "deadline [description] /by [date/time]";
+    public final static String USAGE = "deadline [description] /by [dd-mm-yyyy] [hh:mm], 24-hour clock";
 
 
     /**
@@ -60,6 +62,10 @@ public class DeadlineCommand extends Command {
 
         } catch (TaskInvalidDateException e) {
             feedback = String.format(Messages.EMPTY_FIELD, CMD_ADD_DEADLINE, e.toString());
+            feedback += String.format(Messages.PROPER_USAGE, USAGE);
+
+        } catch (DateTimeException e) {
+            feedback = String.format(Messages.EMPTY_FIELD, CMD_ADD_DEADLINE, e.getLocalizedMessage());
             feedback += String.format(Messages.PROPER_USAGE, USAGE);
 
         } finally {
@@ -119,5 +125,7 @@ public class DeadlineCommand extends Command {
 
         return byDate;
     }
+
+
 
 }
