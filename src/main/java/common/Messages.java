@@ -53,6 +53,7 @@ public class Messages {
     public static final String MESSAGE_HELP = "Here are the possible commands: ";
     public static final String TXT_FILE_PATH = "src"+ File.pathSeparator+"main"+File.pathSeparator+"data"+File.pathSeparator+"taskManager.txt";
     public static final String JSON_FILE_PATH = "src"+ File.pathSeparator+"main"+File.pathSeparator+"data"+File.pathSeparator+"taskManager.json";
+    public static final String MESSAGE_NEW_STORAGE = "New stroage is initialized!";
 //    public static final String TXT_FILE_PATH = "."+ File.pathSeparator+"data"+File.pathSeparator+"taskManager.txt";
 //    public static final String JSON_FILE_PATH = "."+ File.pathSeparator+"data"+File.pathSeparator+"taskManager.json";
 

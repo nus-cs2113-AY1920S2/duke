@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import common.Messages;
 import data.task.*;
+import ui.TextUi;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -61,7 +62,7 @@ public class LoadFile {
                 }
             }
         } catch (NullPointerException npex) {
-            npex.printStackTrace();
+            TextUi.showResult(Messages.MESSAGE_NEW_STORAGE);
         } catch (IOException e) {
             e.printStackTrace();
         }
