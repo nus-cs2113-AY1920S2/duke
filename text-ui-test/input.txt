@@ -3,10 +3,12 @@ done 1
 delete 4
 todo read book
 deadline finish project /by November 5th
+find homework
 deadline return book by Sunday
 event project meeting /at Monday 5:00pm
 event orientation
 remove task 1 from the list
+find project
 list
 done 1
 done 2

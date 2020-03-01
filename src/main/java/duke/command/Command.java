@@ -15,6 +15,7 @@ public abstract class Command {
     public static final String CMD_HELP = "help";
     public static final String CMD_CLEAR_WINDOW = "clc";
     public static final String CMD_DELETE = "delete";
+    public static final String CMD_FIND = "find";
 
     protected TaskManager taskManager;
     protected Ui printer;
