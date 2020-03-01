@@ -19,10 +19,7 @@ public class Controller {
      */
     public Serializable readInput(String userInput, TaskList taskListArrayList) {
         String command = parser.getCommand(userInput);
-        String description = "";
-        if (parser.hasDescription(userInput)) {
-            description = parser.getDescription(userInput);
-        }
+
 
         switch (command) {
         case "list":
