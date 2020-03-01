@@ -41,7 +41,10 @@ Expected outcome:
 This command triggers the task management mode.
 Once triggered, the duke programmes awaits task details 
 to be entered and will store the tasks in a list.
+
+
 Caution: Once this command is entered, all inputs will be put through strict checking to avoid illegal inputs. Echo function will be disabled.
+Commands allowed after "add task" are: adding task items, list, delete, find, done, bye.
 
 
 Example of usage: 
