@@ -2,11 +2,13 @@ package duke.ui;
 
 import duke.command.CommandResult;
 
+import static duke.Duke.inDebugMode;
+
 public class Ui {
 
-    public static void greetUser(String[] args) {
+    public static void greetUser() {
 
-        if (args.length >= 1 && args[0].equals("1")) {
+        if (inDebugMode) {
             return;
         }
 

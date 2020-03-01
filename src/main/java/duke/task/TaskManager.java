@@ -9,6 +9,8 @@ import duke.exception.TaskException.TaskOutOfBoundsException;
 import duke.exception.TaskException.TaskListEmptyException;
 import java.util.ArrayList;
 
+import static duke.Duke.inDebugMode;
+
 
 public class TaskManager {
 
@@ -24,8 +26,10 @@ public class TaskManager {
         tasks = new ArrayList<>();
         printer = new Ui();
 
-        recorder = new TaskRecorder(printer);
-        loader = new TaskLoader(printer);
+        if (!inDebugMode) {
+            recorder = new TaskRecorder(printer);
+            loader = new TaskLoader(printer);
+        }
     }
 
     /**
@@ -37,7 +41,9 @@ public class TaskManager {
     public void addTask (Task task) {
         tasks.add(task);
 
-        recorder.recordAllTasks(tasks);
+        if (!inDebugMode) {
+            recorder.recordAllTasks(tasks);
+        }
     }
 
     /**
@@ -62,7 +68,9 @@ public class TaskManager {
 
         tasks.get(taskIndex).setTaskAsDone();
 
-        recorder.recordAllTasks(tasks);
+        if (!inDebugMode) {
+            recorder.recordAllTasks(tasks);
+        }
 
         return tasks.get(taskIndex);
     }
@@ -81,7 +89,9 @@ public class TaskManager {
         tasks.remove(taskIndex);
 
         // Record tasks before returning
-        recorder.recordAllTasks(tasks);
+        if (!inDebugMode) {
+            recorder.recordAllTasks(tasks);
+        }
 
         return toPrint;
     }
@@ -109,7 +119,9 @@ public class TaskManager {
     }
 
     public void loadTasks () {
-        this.tasks = loader.loadTasks();
+        if (!inDebugMode) {
+            this.tasks = loader.loadTasks();
+        }
     }
 
     private boolean taskIndexOutOfBounds (int taskIndex) {

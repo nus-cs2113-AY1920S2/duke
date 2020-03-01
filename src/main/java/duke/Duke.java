@@ -21,11 +21,23 @@ public class Duke {
     /** Handles user input */
     private static Parser parser;
 
+    /** Debug mode for text-ui-test */
+    public static boolean inDebugMode = false;
+
+    private static void setDebugMode (String[] args) {
+        if (args.length >= 1 && args[0].equals("1")) {
+            inDebugMode = true;
+            return;
+        }
+    }
+
     /**
      * Initializes objects to handle the list, display output, and for
      * command information
      */
-    public static void init () {
+    public static void init (String[] args) {
+
+        setDebugMode(args);
 
         taskManager = new TaskManager();
         printer = new Ui();
@@ -38,9 +50,9 @@ public class Duke {
 
     public static void main (String[] args) {
 
-        init();
+        init(args);
 
-        printer.greetUser(args);
+        printer.greetUser();
 
         String userResponse;
 

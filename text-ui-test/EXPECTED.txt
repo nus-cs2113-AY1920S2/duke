@@ -12,32 +12,34 @@
 
   _______________________________________________________________________________
 	Okay! I have added the following task to your list:
-		‣[T][✘] read book
-	Now you have 1 tasks in your list :)
+		‣ [T][✘] read book
+	Now you have 1 task in your list :)
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	Okay! I have added the following task to your list:
-		‣[D][✘] finish project (by: November 5th)
+		‣ [D][✘] finish project (by: November 5th)
 	Now you have 2 tasks in your list :)
   _______________________________________________________________________________
 
   _______________________________________________________________________________
-	Invalid input for adding a deadline. Type help for more information
+	Invalid input for adding a deadline.
+		Expected format: deadline [description] /by [date/time]
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	Okay! I have added the following task to your list:
-		‣[E][✘] project meeting (at: Monday 5:00pm)
+		‣ [E][✘] project meeting (at: Monday 5:00pm)
 	Now you have 3 tasks in your list :)
   _______________________________________________________________________________
 
   _______________________________________________________________________________
-	Invalid input for adding an event. Type help for more information
+	Invalid input for adding a event.
+		Expected format: event [description] /at [date/time]
   _______________________________________________________________________________
 
   _______________________________________________________________________________
-	Invalid command. Please try again
+	Invalid command, type 'help' to find the supported commands.
   _______________________________________________________________________________
 
   _______________________________________________________________________________
@@ -88,6 +90,7 @@
 
   _______________________________________________________________________________
 	Failed to add todo. Reason: missing description
+		Expected format: todo [description]
   _______________________________________________________________________________
 
   _______________________________________________________________________________

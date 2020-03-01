@@ -6,6 +6,8 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+import static duke.Duke.inDebugMode;
+
 public class Parser {
 
     private Scanner input;
@@ -27,7 +29,10 @@ public class Parser {
      * @return input given by the user
      */
     public String getUserInput () {
-        System.out.print(PROMPT_SYMBOL);
+        if (!inDebugMode) {
+            System.out.print(PROMPT_SYMBOL);
+        }
+
         String userInput = input.nextLine();
 
         return userInput.trim();

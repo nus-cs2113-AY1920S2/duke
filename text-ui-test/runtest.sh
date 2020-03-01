@@ -20,7 +20,8 @@ fi
 if ! javac -cp ../lib/gson-2.8.6.jar -Xlint:none -d ../bin ../src/main/java/duke/*.java \
             ../src/main/java/duke/command/*.java ../src/main/java/duke/task/*.java \
             ../src/main/java/duke/ui/*.java ../src/main/java/duke/exception/*.java \
-            ../src/main/java/duke/utility/*.java
+            ../src/main/java/duke/utility/*.java ../src/main/java/duke/task/storage/*.java \
+            ../src/main/java/duke/task/tasktypes/*.java ../src/main/java/duke/parser/*.java
 
 
 then

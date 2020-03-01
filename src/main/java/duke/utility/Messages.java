@@ -16,6 +16,7 @@ public class Messages {
     public final static String DELETE_TASK = "Okay! I've removed the following task from your list :) :" +
             System.lineSeparator() + "\t\t%s" + System.lineSeparator();
     public final static String LIST_IS_EMPTY_NOW = "\tYour list is empty now :O";
+    public final static String EMPTY_DELETE = "Please enter a number to remove a task from the list.";
 
 
     /** Specific to done command */
@@ -23,19 +24,16 @@ public class Messages {
     public final static String DONE_MARKED_BEFORE = "The task:" + System.lineSeparator() + "\t\t\u2023 %s" +
             System.lineSeparator() + "\t" + "has already been marked as done before";
     public final static String DONE_MARKED_SUCCESSFUL = "Okay! Marked this task as done :) :" + System.lineSeparator() + "\t\t%s";
+    public final static String EMPTY_DONE= "Please enter a number to mark a task as done.";
 
 
-    /** Specific to deadline command */
+    /** Specific to adding a task (to do, event, or deadline) */
     public final static String ADDED_TASK = "Okay! I have added the following task to your list:" +
-            System.lineSeparator() + "%s %s " + System.lineSeparator() + "\tNow you have " + "%d %s in your list :)";
+            System.lineSeparator() + "%s %s" + System.lineSeparator() + "\tNow you have " + "%d %s in your list :)";
+    public final static String EMPTY_FIELD = "Failed to add %s. Reason: %s";
 
 
     /** List */
     public final static String EMPTY_LIST = "List is empty";
-
-    public final static String EMPTY_FIELD = "Failed to add %s. Reason: %s";
-
-    public final static String EMPTY_DONE= "Please enter a number to mark a task as done.";
-    public final static String EMPTY_DELETE = "Please enter a number to remove a task from the list.";
 
 }
