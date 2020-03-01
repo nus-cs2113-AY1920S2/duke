@@ -2,9 +2,9 @@ package duke.commands;
 
 import duke.data.TaskList;
 
-import static duke.ui.Messages.completeTaskMessage;
-import static duke.ui.Messages.alreadyCompletedTaskMessage;
 import static duke.exception.ExceptionMessages.INVALID_LIST_NUMBER_MESSAGE;
+import static duke.ui.Messages.alreadyDoneTaskMessage;
+import static duke.ui.Messages.doTaskMessage;
 
 public class DoCommand extends Command {
     public static final String COMMAND_WORD = "done";
@@ -23,9 +23,9 @@ public class DoCommand extends Command {
             boolean isDoing = TaskList.doTask(index);
 
             if (isDoing) {
-                return new CommandResult(completeTaskMessage(index));
+                return new CommandResult(doTaskMessage(index));
             } else {
-                return new CommandResult(alreadyCompletedTaskMessage(index));
+                return new CommandResult(alreadyDoneTaskMessage(index));
             }
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult(INVALID_LIST_NUMBER_MESSAGE, true);
