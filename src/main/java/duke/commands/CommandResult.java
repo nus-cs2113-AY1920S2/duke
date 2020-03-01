@@ -64,4 +64,5 @@ public class CommandResult {
     public ArrayList<Integer> getSearchedIndices() {
         return searchedIndices;
     }
+
 }

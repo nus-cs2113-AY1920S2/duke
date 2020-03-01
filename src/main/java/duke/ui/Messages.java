@@ -20,6 +20,7 @@ public class Messages {
 
     private static final String TAB = createSpaces(4);
     private static final String VERSION = "v5.6.1.4";
+
     private static final String LOGO =
             "  __       _______  _______  ________  _______  _______  _______  ________\n" +
             " |\\_\\     |\\___\\__\\|\\ __\\__\\|\\ ______\\|\\______\\|\\___\\__\\|\\______\\|\\ ______\\\n" +
