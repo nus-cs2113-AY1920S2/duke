@@ -3,6 +3,9 @@ package commands;
 import java.util.ArrayList;
 import tasks.Task;
 
+/**
+ * Represents the helper functions used by commands package
+ */
 public class TaskList {
 
     public TaskList() {}

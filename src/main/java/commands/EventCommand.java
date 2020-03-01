@@ -17,6 +17,8 @@ public class EventCommand extends TaskList {
     protected ArrayList<Task> tasks;
     protected Storage storage;
     protected ErrorMessages errorMessages;
+    protected static final int LENGTH_OF_COMMAND = 5;
+    protected static final String PARAMETER = "/at";
 
     public EventCommand() {
         tasks = new ArrayList<Task>();
@@ -31,8 +33,8 @@ public class EventCommand extends TaskList {
      */
     public void addEventToList(String input, int lengthOfCommand) {
         tasks = storage.loadTasks();
-        String description = getDescription(input,lengthOfCommand);
-        String details = getDetails(input,lengthOfCommand);
+        String description = getDescription(input, lengthOfCommand);
+        String details = getDetails(input, lengthOfCommand);
         Event newEvent = new Event(description, details);
         tasks.add(newEvent);
         System.out.println(" Got it!I've added this task:");
@@ -53,22 +55,20 @@ public class EventCommand extends TaskList {
     public void addEvent(String input) throws EmptyStringException, MissingParameterException,
             MissingDescriptionsException, MissingDetailsException {
         String removeTrailingSpaces = input.trim();
-        int lengthOfCommand = 5;
-        String parameter = "/at";
-        if (removeTrailingSpaces.length() == lengthOfCommand) {
+        if (removeTrailingSpaces.length() == LENGTH_OF_COMMAND) {
             errorMessages.eventErrorMessage();
             throw new EmptyStringException();
-        } else if (!removeTrailingSpaces.contains(parameter)) {
+        } else if (!removeTrailingSpaces.contains(PARAMETER)) {
             errorMessages.eventErrorMessage();
             throw new MissingParameterException();
-        } else if (isEmptyDescription(input, lengthOfCommand)) {
+        } else if (isEmptyDescription(input, LENGTH_OF_COMMAND)) {
             errorMessages.eventErrorMessage();
             throw new MissingDescriptionsException();
-        } else if (isEmptyDetails(input, lengthOfCommand)) {
+        } else if (isEmptyDetails(input, LENGTH_OF_COMMAND)) {
             errorMessages.eventErrorMessage();
             throw new MissingDetailsException();
         } else {
-            addEventToList(input, lengthOfCommand);
+            addEventToList(input, LENGTH_OF_COMMAND);
         }
     }
 }

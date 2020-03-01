@@ -1,7 +1,7 @@
 package ui;
 
 /**
- * Represents messages displayed by Duke.Duke for its user interface
+ * Represents messages displayed by Duke for its user interface
  * A UI object corresponds to greeting message, leaving message and boundary
  */
 public class UI {

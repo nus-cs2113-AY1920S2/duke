@@ -40,7 +40,7 @@ public class ErrorMessages {
     public void deadlineErrorMessage() {
         System.out.println(" deadline: Adds deadline tasks");
         System.out.println(" Parameters: deadline {DESCRIPTION} /by {DATE/TIME}");
-        System.out.println(" Example: deadline return book /by Sunday");
+        System.out.println(" Example: deadline return book /by Sunday 2359");
     }
 
     /**

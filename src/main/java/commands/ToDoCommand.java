@@ -13,6 +13,7 @@ public class ToDoCommand {
     protected ErrorMessages errorMessages;
     protected ArrayList<Task> tasks;
     protected Storage storage;
+    protected static final int LENGTH_OF_COMMAND = 4;
 
     public ToDoCommand() {
         tasks = new ArrayList<Task>();
@@ -27,9 +28,8 @@ public class ToDoCommand {
      */
     public void addToDo(String input) throws MissingDescriptionsException {
         String removeTrailingSpaces = input.trim();
-        int lengthOfCommand = 4;
         tasks = storage.loadTasks();
-        if (removeTrailingSpaces.length() == lengthOfCommand) {
+        if (removeTrailingSpaces.length() == LENGTH_OF_COMMAND) {
             errorMessages.toDoErrorMessage();
             throw new MissingDescriptionsException();
         } else {

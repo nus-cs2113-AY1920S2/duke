@@ -16,6 +16,7 @@ public class DoneCommand extends TaskList{
     protected Storage storage;
     protected ErrorMessages errorMessages;
     protected ArrayList<Task> tasks;
+    protected static final int LENGTH_OF_COMMAND = 4;
 
     public DoneCommand() {
         storage = new Storage();
@@ -24,8 +25,8 @@ public class DoneCommand extends TaskList{
     }
 
     /**
-     * Check exceptions for done command
-     * Mark tasks as done
+     * Checks exceptions for done command
+     * Marks tasks as done
      * @param input String input by user
      * @param numericalIndex String index by user
      * @param isNumber boolean to check if index is number
@@ -43,7 +44,7 @@ public class DoneCommand extends TaskList{
         } else if (!isNumber) {
             errorMessages.doneErrorMessage();
             throw new IndexFormatException();
-        } else if(isOutOfRange(numericalIndex, tasks)) {
+        } else if (isOutOfRange(numericalIndex, tasks)) {
             errorMessages.doneErrorMessage();
             throw new OutOfRangeException();
         } else if (isCompleted(numericalIndex, tasks)){
@@ -68,8 +69,7 @@ public class DoneCommand extends TaskList{
      */
     public void markAsDone(String input) throws IndexFormatException, OutOfRangeException, CompletedTaskException,
             MissingIndexException {
-        int lengthOfCommand = 4;
-        String numericalIndex = getStringIndex(input,lengthOfCommand);
+        String numericalIndex = getStringIndex(input, LENGTH_OF_COMMAND);
         boolean isNumber = isNumeric(numericalIndex);
         tasks = storage.loadTasks();
         checkExceptions(input, numericalIndex, isNumber, tasks);
