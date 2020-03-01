@@ -16,7 +16,11 @@ public class Duke {
 
         importTaskFromFile();
         programStart();
+        loopTillEnd();
+    }
 
+    //Loop the program until "bye" is entered
+    private static void loopTillEnd(){
         Scanner myScanner = new Scanner(System.in);
         boolean flag = true; //Boolean flag for while loop
         String function;
@@ -26,6 +30,7 @@ public class Duke {
                 function = myScanner.next();
 
                 switch (function) {
+                    //add new todo task
                     case "todo":
                         String line = myScanner.nextLine();
                         if(line.equals("")){
@@ -36,6 +41,7 @@ public class Duke {
                         printAddedTask("New To-Do Task added:");
                         break;
 
+                    //add new task with deadline
                     case "deadline":
                         line = myScanner.nextLine();
                         String[] description = line.split("/");
@@ -51,6 +57,7 @@ public class Duke {
                         printAddedTask("New Task with deadline added:");
                         break;
 
+                    //add new event task
                     case "event":
                         line = myScanner.nextLine();
                         String[] eventName = line.split("/");
@@ -66,12 +73,14 @@ public class Duke {
                         printAddedTask("New event added:");
                         break;
 
+                     //exit program
                     case "bye":
                         System.out.println("Bye! Hope to see you again soon!");
                         System.out.println("____________________________________________________________");
                         flag = false;
                         break;
 
+                    //list all task stored
                     case "list":
                         if(tasks.size() != 0) {
                             System.out.println("____________________________________________________________");
@@ -85,6 +94,7 @@ public class Duke {
                         }
                         break;
 
+                    //mark a task as completed
                     case "done":
                         line = myScanner.nextLine();
                         String l = line.replace(" ", "");
@@ -93,7 +103,7 @@ public class Duke {
                         }
                         int taskNumber = Integer.parseInt(l) - 1;
                         if(taskNumber >= tasks.size() || taskNumber < 0){
-                                throw new NullPointerException();
+                            throw new NullPointerException();
                         }
                         tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
                         String str = tasks.get(taskNumber).toString();
@@ -105,6 +115,7 @@ public class Duke {
                         System.out.println("____________________________________________________________");
                         break;
 
+                    //delete a task
                     case "delete":
                         line = myScanner.nextLine();
                         l = line.replace(" ","");
@@ -125,11 +136,14 @@ public class Duke {
                         System.out.println("Now you have " + tasks.size() + " tasks in your list.");
                         System.out.println("____________________________________________________________");
                         break;
+
+                    //delete /data dir and contents and end the program (Bugs)
                     case "reset":
                         deleteDirectory(new File("data"));
                         flag = false;
                         break;
 
+                    //find task with matching descriptions to keyword
                     case "find":
                         boolean found = false;
                         line = myScanner.nextLine().trim();
@@ -156,7 +170,7 @@ public class Duke {
                         break;
                 }
             } catch (MissingDescriptionException e) {
-               e.printDescr();
+                e.printDescr();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS! Error storing date and time!! Please try again.");
             } catch (NullPointerException e) {
@@ -168,33 +182,70 @@ public class Duke {
             }
         }
     }
-    private static void deleteDirectory(File dir){
-        if (dir.isDirectory()) {
-            if (dir.list().length == 0) {
-                dir.delete();
-                System.out.println("Directory is deleted : " + dir.getAbsolutePath());
-            } else {
-                String[] children = dir.list();
-                for (String temp : children) {
-                    File fileDelete = new File(dir, temp);
-                    deleteDirectory(fileDelete);
-                    }
-                }
-                if(dir.list().length==0){
-                    dir.delete();
-                    System.out.println("Directory is deleted : " + dir.getAbsolutePath());
-            }
-        } else{
-            dir.delete();
-            System.out.println("File is deleted : " + dir.getAbsolutePath());
-        }
-    }
 
+    //Run greetings and show table of available functions
     private static void programStart() {
         DisplayUI ui = new DisplayUI();
         ui.showStartMessages();
     }
 
+    //Importing of all task from tasklist.txt to program when first launch
+    private static void importTaskFromFile() {
+        try {
+            Path path = Paths.get("data");
+            if(!Files.exists(path)) {
+                Files.createDirectory(path);
+                File f = new File("data/Tasklist.txt");
+            } else {
+                File f = new File("data/Tasklist.txt");
+                Scanner fileScanner = new Scanner(f);
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    String[] singleTaskDescriptions = line.split("//");
+                    switch (singleTaskDescriptions[0]) {
+                        case "T":
+                            addtask(new Todo(singleTaskDescriptions[2]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+
+                        case "D":
+                            addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+
+                        case "E":
+                            addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred. Please try again!");
+        }
+    }
+
+    // method for printing the last type of task entered
+    public static void printAddedTask(String s) {
+        System.out.println("____________________________________________________________");
+        System.out.println(s);
+        System.out.println("Total number of tasks in the list:  " + tasks.size());
+        System.out.println("____________________________________________________________");
+    }
+
+    //method for adding adding newly created task into tasks array
+    public static void addtask(Task description) {
+        tasks.add(description);
+        size++;
+    }
+
+    //Write new task to tasklist.txt
     private static void writeToFile(String str1, String str2) {
         String filePath = "data/Tasklist.txt";
         try {
@@ -219,6 +270,7 @@ public class Duke {
         }
     }
 
+    //Append tasks in tasklist.txt
     private static void appendToFile(String newLine) throws WhitespaceExceptions {
         String taskSymbol;
         String [] strArr;
@@ -285,6 +337,7 @@ public class Duke {
         }
     }
 
+    //Delete task from tasklist.txt
     private static void deleteToFile(String newLine) throws WhitespaceExceptions {
         String taskSymbol;
         String [] strArr;
@@ -349,59 +402,28 @@ public class Duke {
             }
         }
     }
-    
-    private static void importTaskFromFile() {
-        try {
-            Path path = Paths.get("data");
-            if(!Files.exists(path)) {
-                Files.createDirectory(path);
-                File f = new File("data/Tasklist.txt");
+
+    //Delete /data dir and contents in it
+    private static void deleteDirectory(File dir){
+        if (dir.isDirectory()) {
+            if (dir.list().length == 0) {
+                dir.delete();
+                System.out.println("Directory is deleted : " + dir.getAbsolutePath());
             } else {
-                File f = new File("data/Tasklist.txt");
-                Scanner fileScanner = new Scanner(f);
-                while (fileScanner.hasNextLine()) {
-                    String line = fileScanner.nextLine();
-                    String[] singleTaskDescriptions = line.split("//");
-                    switch (singleTaskDescriptions[0]) {
-                        case "T":
-                            addtask(new Todo(singleTaskDescriptions[2]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
-                            }
-                            break;
-
-                        case "D":
-                            addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
-                            }
-                            break;
-
-                        case "E":
-                            addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
-                            }
-                            break;
-                    }
+                String[] children = dir.list();
+                for (String temp : children) {
+                    File fileDelete = new File(dir, temp);
+                    deleteDirectory(fileDelete);
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Error occurred. Please try again!");
+            if(dir.list().length==0){
+                dir.delete();
+                System.out.println("Directory is deleted : " + dir.getAbsolutePath());
+            }
+        } else{
+            dir.delete();
+            System.out.println("File is deleted : " + dir.getAbsolutePath());
         }
     }
 
-    // method for printing the last type of task entered
-    public static void printAddedTask(String s) {
-        System.out.println("____________________________________________________________");
-        System.out.println(s);
-        System.out.println("Total number of tasks in the list:  " + tasks.size());
-        System.out.println("____________________________________________________________");
-    }
-
-    //method for adding adding newly created task into tasks array
-    public static void addtask(Task description) {
-        tasks.add(description);
-        size++;
-    }
 }
