@@ -1,4 +1,2 @@
-[T]/true/read book/
-[E]/false/commencement/NUS,3pm
-[D]/true/assignment/Sunday,4pm
-[E]/false/submit assignment/NUS SOC office,5pm
+[E]/false/say heloo/NUS,3pm
+[D]/true/submit assignment/Sunday,2359
