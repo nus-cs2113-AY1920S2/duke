@@ -101,8 +101,6 @@ Ends the Duke application.<br>
 Example of usage: <code><strong>bye</strong></code> <br>
 
 ### Saving the task list
-* <code>git clone</code> the master repository into your OS home directory.
-* Rename the folder to <code>duke</code> instead of <code>duke-master</code> for the task list to be saved correctly.
-* Duke automatically saves the task list into the repository folder under <code>/savedTasks.txt</code> <br>
-* Duke automatically loads the task list from previous session if the file <code>/savedTasks.txt</code> exist.
+* Duke automatically saves the task list into your OS home directory under <code>/savedTasks.txt</code> <br>
+* Duke automatically loads the task list from previous session if the file <code>/savedTasks.txt</code> exist in your home directory.
 
