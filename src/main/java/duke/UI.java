@@ -80,21 +80,21 @@ public class UI {
 
     public static void printEmptyTodoExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
-                + "\t ☹ OOPS!!! The description of a todo must contain a duke.task name in this format:\n"
+                + "\t ☹ OOPS!!! The description of a todo must contain a task name in this format:\n"
                 + "\t todo <task name>\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyDoneExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
-                + "\t☹ OOPS!!! The description of a done must contain a duke.task number in this format:\n"
+                + "\t☹ OOPS!!! The description of a done must contain a task number in this format:\n"
                 + "\t done <task number>\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyDeleteExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
-                + "\t☹ OOPS!!! The description of a delete must contain a duke.task number in this format:\n"
+                + "\t☹ OOPS!!! The description of a delete must contain a task number in this format:\n"
                 + "\t delete <task number>\n"
                 + "\t____________________________________________________________\n");
     }
@@ -108,27 +108,33 @@ public class UI {
 
     public static void printEmptyDeadlineExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
-                + "\t ☹ OOPS!!! The description of a deadline must contain a duke.task name and a date in this format:\n"
+                + "\t ☹ OOPS!!! The description of a deadline must contain a task name and a date in this format:\n"
                 + "\t deadline <task name> /by <date>\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyEventExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
-                + "\t ☹ OOPS!!! The description of an event must contain a duke.task name and a location in this format:\n"
+                + "\t ☹ OOPS!!! The description of an event must contain a task name and a location in this format:\n"
                 + "\t event <task name> /at <location>\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printUnknownWordExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
-                + "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                + "\t You can try the following commands instead:\n"
+                + "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        printHelpMessage();
+
+    }
+
+    public static void printHelpMessage() {
+        System.out.println("\t You can try the following commands:\n"
                 + "\t\t list\n"
                 + "\t\t todo <task name>\n"
                 + "\t\t deadline <task name> /by <date>\n"
                 + "\t\t event <task name> /at <location>\n"
                 + "\t\t done <task number>\n"
+                + "\t\t find <word>\n"
                 + "\t\t delete <task number>\n"
                 + "\t\t bye\n"
                 + "\t____________________________________________________________\n");
@@ -143,10 +149,11 @@ public class UI {
     public static void printEmptyTaskListExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! Your task list is empty!\n"
-                + "\t You can try entering a task using the following commands first:\n"
+                + "\t You can try entering a task using the following commands:\n"
                 + "\t\t todo <task name>\n"
                 + "\t\t deadline <task name> /by <date>\n"
-                + "\t\t event <task name> /at <location>\n");
+                + "\t\t event <task name> /at <location>\n"
+                + "\t____________________________________________________________\n");
     }
 
     public static void printIOExceptionMessage() {
@@ -154,4 +161,5 @@ public class UI {
                 + "\t ☹ OOPS!!! File is not found!\n"
                 + "\t____________________________________________________________\n");
     }
+
 }

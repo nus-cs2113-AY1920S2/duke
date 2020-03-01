@@ -9,7 +9,6 @@ import duke.task.Todo;
 import java.util.ArrayList;
 
 
-
 public class Command {
     public static void handleCommand(String line, String[] words, ArrayList<Task> taskList) throws EmptyTaskListException, EmptyDoneException, EmptyDeleteException, EmptyFindException, UnknownWordException, EmptyTodoException, EmptyDeadlineException, EmptyEventException {
         if (line.equals("list")) {
@@ -17,17 +16,25 @@ public class Command {
                 throw new EmptyTaskListException();
             }
             UI.printListMessage(taskList);
+        } else if (line.equals("help")) {
+            System.out.println("\t____________________________________________________________");
+            UI.printHelpMessage();
         } else if (words[0].equals("done")) {
             if (taskList.isEmpty()) {
                 throw new EmptyTaskListException();
             }
-            if (words.length < 2) {
+            if (words.length < 2 || words[1].isBlank()) {
                 throw new EmptyDoneException();
             }
-            int taskNum = Integer.parseInt(words[1]);
-            Task t = taskList.get(taskNum - 1);
-            t.markAsDone();
-            UI.printDoneMessage(t);
+            try {
+                int taskNum = Integer.parseInt(words[1]);
+                Task t = taskList.get(taskNum - 1);
+                t.markAsDone();
+                UI.printDoneMessage(t);
+            } catch (NumberFormatException e){
+                throw new EmptyDoneException();
+            }
+
         } else if (words[0].equals("find")) {
             if (words.length < 2 || words[1].isBlank()) {
                 throw new EmptyFindException();
@@ -52,13 +59,17 @@ public class Command {
             if (taskList.isEmpty()) {
                 throw new EmptyTaskListException();
             }
-            if (words.length < 2) {
+            if (words.length < 2 || words[1].isBlank()) {
                 throw new EmptyDeleteException();
             }
-            int taskNum = Integer.parseInt(words[1]);
-            Task t = taskList.get(taskNum - 1);
-            taskList.remove(t);
-            UI.printDeleteMessage(t, taskList);
+            try {
+                int taskNum = Integer.parseInt(words[1]);
+                Task t = taskList.get(taskNum - 1);
+                taskList.remove(t);
+                UI.printDeleteMessage(t, taskList);
+            } catch (NumberFormatException e){
+                throw new EmptyDoneException();
+            }
         } else if (words[0].equals("todo") || words[0].equals("deadline") || words[0].equals("event")) {
             String taskType = words[0];
             Task t = new Task(line);
