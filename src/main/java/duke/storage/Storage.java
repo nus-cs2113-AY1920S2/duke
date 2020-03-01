@@ -9,6 +9,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.exception.CorruptedFileException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;

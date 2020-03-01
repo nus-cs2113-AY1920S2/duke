@@ -21,6 +21,7 @@ import static duke.exception.ExceptionMessages.INVALID_DATE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DEADLINE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DELETE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
+<<<<<<< HEAD
 import static duke.exception.ExceptionMessages.INVALID_DUE_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
 import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
@@ -31,6 +32,14 @@ import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_SEARCH_WORD_MESSAGE;
 import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
 import static duke.format.DateTimeFormat.stringToDate;
+=======
+import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
+>>>>>>> master
 import static duke.format.DateTimeFormat.stringToDateTime;
 
 public class Parser {
@@ -134,7 +143,11 @@ public class Parser {
             String task = taskDetails[0];
             DateTime dateTime = stringToDateTime(taskDetails[1]);
             return new AddEventCommand(task, dateTime);
+<<<<<<< HEAD
         } catch (MissingParameterException e) {
+=======
+        } catch (MissingTaskDetailException e) {
+>>>>>>> master
             return new InvalidCommand(MISSING_EVENT_INFORMATION_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(INVALID_EVENT_FORMAT_MESSAGE);
