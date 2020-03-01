@@ -43,6 +43,8 @@ public class Parser {
                 taskList.event(restOfUserInput);
             } else if(action.equals("delete")){
                 taskList.delete(restOfUserInput);
+            } else if(action.equals("find")){
+                taskList.find(restOfUserInput);
             } else {
                 throw new DukeException();
             }

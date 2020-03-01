@@ -98,6 +98,27 @@ public class TaskList {
 
     }
 
+    // Executes the find command
+    public void find(String command){
+        ui.printLineSeparator();
+
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        String search = command.trim().toLowerCase();
+        for(Task t: tasks) {
+            String taskDescription = t.description.trim().toLowerCase();
+            if(taskDescription.contains(search)){
+                foundTasks.add(t);
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        int taskNum = 1;
+        for(Task t: foundTasks) {
+            System.out.println((taskNum) + "." + t);
+            taskNum++;
+        }
+        ui.printLineSeparator();
+    }
+
     // Executes the bye command
     public void bye(){
         ui.goodbye();
