@@ -56,7 +56,7 @@ public abstract class Task {
      *
      * @param doneStatus The <i>done status</i> of the task to be set
      */
-    public void setIsDone(boolean doneStatus) {
+    public void setDone(boolean doneStatus) {
         isDone = doneStatus;
     }
 

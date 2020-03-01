@@ -1,11 +1,13 @@
 package duke.format;
 
+import duke.ui.UI;
+
 /**
  * <h3>Text Formatter</h3>
- * The <b>Text Formatter</b> is a utility tool that formats and edits the text displayed by the <b>Ui</b>.
+ * The <b>Text Formatter</b> is a utility tool that formats and edits the text displayed by the <b>UI</b>.
  * It also contains customised emoticon faces that are commonly displayed in the feedback messages to the user.
  *
- * @see duke.ui.Ui
+ * @see UI
  */
 public class TextFormatter {
 
