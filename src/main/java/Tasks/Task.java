@@ -18,5 +18,4 @@ public class Task {
         return this.description;
     }
 
-
 }

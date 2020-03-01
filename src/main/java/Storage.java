@@ -1,16 +1,16 @@
 import Tasks.Task;
+import Tasks.TaskList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Storage {
     private String userDirectory = System.getProperty("user.dir");
 
-    public void save(ArrayList<Task> taskList) {
+    public void save(TaskList taskList) {
         Gson gson = new GsonBuilder()
                 .enableComplexMapKeySerialization()
                 .setPrettyPrinting()
@@ -26,12 +26,12 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public TaskList load() throws FileNotFoundException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        BufferedReader bufferedReader = new BufferedReader(
-                new FileReader(userDirectory + "/taskList.json"));
-        ArrayList<Task> newTask = gson.fromJson(bufferedReader, new TypeToken<ArrayList<Task>>(){}.getType());
+        FileReader fileReader = new FileReader(userDirectory + "/taskList.json");
+        TaskList newTask = gson.fromJson(fileReader, new TypeToken<TaskList>(){}.getType());
+
         return newTask;
     }
 

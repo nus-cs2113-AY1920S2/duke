@@ -29,7 +29,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "src.main.java.Duke"
+    mainClassName = "Duke"
 }
 
 run {
