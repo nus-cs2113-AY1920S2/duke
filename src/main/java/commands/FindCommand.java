@@ -5,6 +5,9 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command class for the Find command.
+ */
 public class FindCommand extends Command {
     private String keyWord;
 
@@ -14,6 +17,9 @@ public class FindCommand extends Command {
         this.keyWord = keyWord.toLowerCase();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.listFoundTasks(tasks.findTasks(this.keyWord));

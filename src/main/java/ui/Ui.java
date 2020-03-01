@@ -6,6 +6,9 @@ import exception.DukeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Boundary class to manage inputs and outputs of the application.
+ */
 public class Ui {
 
     private static final String LS = System.lineSeparator();

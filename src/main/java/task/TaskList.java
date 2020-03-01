@@ -4,6 +4,10 @@ import exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Entity class for the task list.
+ * Contains methods to manage the task list.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks;

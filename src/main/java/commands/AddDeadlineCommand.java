@@ -8,6 +8,9 @@ import ui.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Command class for the AddDeadline command.
+ */
 public class AddDeadlineCommand extends AddCommand {
 
     private String taskDescription;
@@ -20,6 +23,9 @@ public class AddDeadlineCommand extends AddCommand {
         this.deadline = deadline;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline deadlineTask = new Deadline(this.taskDescription, this.deadline);

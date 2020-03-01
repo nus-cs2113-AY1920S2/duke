@@ -8,6 +8,9 @@ import ui.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Command class for the AddEvent command.
+ */
 public class AddEventCommand extends AddCommand {
 
     private String taskDescription;
@@ -20,6 +23,9 @@ public class AddEventCommand extends AddCommand {
         this.dateAndTime = dateAndTime;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event eventTask = new Event(this.taskDescription, this.dateAndTime);

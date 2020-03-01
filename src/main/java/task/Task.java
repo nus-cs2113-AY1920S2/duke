@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Parent entity class for tasks.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

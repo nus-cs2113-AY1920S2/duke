@@ -3,6 +3,10 @@ import exception.DukeException;
 import task.TaskList;
 import ui.Ui;
 import storage.Storage;
+
+/**
+ * Parent command class for the other commands.
+ */
 public class Command {
 
     /** Executes the command. */

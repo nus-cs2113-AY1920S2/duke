@@ -3,6 +3,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Entity class for the Deadline task.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;

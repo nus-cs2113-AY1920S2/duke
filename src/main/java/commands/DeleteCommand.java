@@ -7,6 +7,9 @@ import task.Task;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command class for the Delete command.
+ */
 public class DeleteCommand extends Command {
 
     private int taskNumber;
@@ -17,6 +20,9 @@ public class DeleteCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.displayDeleteTask(tasks, taskNumber);

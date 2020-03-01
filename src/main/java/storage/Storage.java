@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Contains methods to manage storage of the task list.
+ */
 public class Storage {
 
     private final String dataPath;
