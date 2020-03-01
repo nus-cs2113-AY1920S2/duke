@@ -11,7 +11,7 @@ It helps you save todos, events and deadlines.
 ## Quick Start
 
 *  Ensure you have Java `11` or above installed in your Computer.
-*  Download the latest `hiroshi.jar` link:{https://github.com/alaukiknpant/duke}.
+*  Download the latest `hiroshi.jar` [latest reslease here!](https://github.com/alaukiknpant/duke/releases/tag/v0.2).
 *  Copy the file to the folder you want to use as the home folder for your Task tracker.
 *  Go to the directory where the Jar file is stored and type: `java -jar Hiroshi.jar`
 * When the application executes, all possible commands that can help you manage your tasks are shown.
