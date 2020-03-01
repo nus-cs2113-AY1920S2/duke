@@ -17,8 +17,6 @@ public class DeadlineCommand extends TaskList{
     protected ErrorMessages errorMessages;
     protected ArrayList<Task> tasks;
     protected Storage storage;
-    protected static final int LENGTH_OF_COMMAND = 8;
-    protected static final String PARAMETER = "/by";
 
     public DeadlineCommand() {
         tasks = new ArrayList<Task>();
@@ -33,8 +31,8 @@ public class DeadlineCommand extends TaskList{
      */
     public void addDeadlineToList(String input, int lengthOfCommand) {
         tasks = storage.loadTasks();
-        String description = getDescription(input, lengthOfCommand);
-        String details = getDetails(input, lengthOfCommand);
+        String description = getDescription(input,lengthOfCommand);
+        String details = getDetails(input,lengthOfCommand);
         Deadline newDeadline = new Deadline(description, details);
         tasks.add(newDeadline);
         System.out.println(" Got it!I've added this task:");
@@ -54,20 +52,22 @@ public class DeadlineCommand extends TaskList{
     public void addDeadline(String input) throws EmptyStringException, MissingParameterException,
             MissingDescriptionsException, MissingDetailsException {
         String removeTrailingSpaces = input.trim();
-        if (removeTrailingSpaces.length() == LENGTH_OF_COMMAND) {
+        int lengthOfCommand = 8;
+        String parameter = "/by";
+        if (removeTrailingSpaces.length() == lengthOfCommand) {
             errorMessages.deadlineErrorMessage();
             throw new EmptyStringException();
-        } else if (!removeTrailingSpaces.contains(PARAMETER)) {
+        } else if (!removeTrailingSpaces.contains(parameter)) {
             errorMessages.deadlineErrorMessage();
             throw new MissingParameterException();
-        } else if (isEmptyDescription(input, LENGTH_OF_COMMAND)) {
+        } else if (isEmptyDescription(input, lengthOfCommand)) {
             errorMessages.deadlineErrorMessage();
             throw new MissingDescriptionsException();
-        } else if (isEmptyDetails(input, LENGTH_OF_COMMAND)) {
+        } else if (isEmptyDetails(input, lengthOfCommand)) {
             errorMessages.deadlineErrorMessage();
             throw new MissingDetailsException();
         } else {
-            addDeadlineToList(input, LENGTH_OF_COMMAND);
+            addDeadlineToList(input, lengthOfCommand);
         }
     }
 }

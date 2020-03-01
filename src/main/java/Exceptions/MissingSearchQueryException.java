@@ -4,7 +4,6 @@ package exceptions;
  * Represents exception when search query is missing for find command
  */
 public class MissingSearchQueryException extends DukeExceptions {
-
     public MissingSearchQueryException() {
         super();
     }

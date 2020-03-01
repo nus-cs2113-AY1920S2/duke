@@ -15,7 +15,6 @@ public class DeleteCommand extends TaskList{
     protected Storage storage;
     protected ArrayList<Task> tasks;
     protected ErrorMessages errorMessages;
-    protected static final int LENGTH_OF_COMMAND = 6;
 
     public DeleteCommand() {
         storage = new Storage();
@@ -30,7 +29,8 @@ public class DeleteCommand extends TaskList{
      * @throws OutOfRangeException if index <= 0 or index >size of task list
      */
     public void deleteItem(String input) throws IndexFormatException, OutOfRangeException, MissingIndexException {
-        String numericalIndex = getStringIndex(input,LENGTH_OF_COMMAND);
+        int lengthOfCommand = 6;
+        String numericalIndex = getStringIndex(input,lengthOfCommand);
         boolean isNumber = isNumeric(numericalIndex);
         tasks = storage.loadTasks();
         if (numericalIndex.length() == 0) {
@@ -39,7 +39,7 @@ public class DeleteCommand extends TaskList{
         } else if (!isNumber) {
             errorMessages.deleteErrorMessage();
             throw new IndexFormatException();
-        } else if (isOutOfRange(numericalIndex, tasks)) {
+        } else if(isOutOfRange(numericalIndex, tasks)) {
             errorMessages.deleteErrorMessage();
             throw new OutOfRangeException();
         } else {

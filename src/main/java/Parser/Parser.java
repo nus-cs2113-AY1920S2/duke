@@ -27,7 +27,6 @@ public class Parser {
 
     /**
      * Updates String input by user
-     * Updates command that user wants to run
      * @param input String input by user
      */
     public void updateInput(String input) {
