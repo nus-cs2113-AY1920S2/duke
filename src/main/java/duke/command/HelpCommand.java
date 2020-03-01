@@ -57,6 +57,12 @@ public class HelpCommand extends Command {
         msg += System.lineSeparator() + "\t\t" + DeleteCommand.USAGE;
         msg += System.lineSeparator();
 
+        // help for find command
+        msg += System.lineSeparator() + String.format("\t%s: finds the tasks that contain the given pattern. Input" +
+                " must follow the format below,", CMD_FIND);
+        msg += System.lineSeparator() + "\t\t" + FindCommand.USAGE;
+        msg += System.lineSeparator();
+
         // help for clear window
         msg += System.lineSeparator() + String.format("\t%s: clears command window. Input" +
                 " must follow the format below,", CMD_CLEAR_WINDOW);

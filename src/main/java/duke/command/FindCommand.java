@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
 
     private String userInput;
+    public static final String USAGE = "find [pattern]";
 
     public FindCommand (TaskManager manager, String userInput) {
         super(manager);

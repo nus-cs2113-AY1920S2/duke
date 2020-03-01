@@ -1,9 +1,9 @@
 # Duke User Guide
 
 
-1. Introduction <br/>
-2. Quick Start <br/>
-3. Features <br/>
+1. [Introduction](#1-introduction) <br/>
+2. [Quick Start](#2-quick-start) <br/>
+3. [Features](#3-features) <br/>
 &nbsp; &nbsp; &nbsp; 3.1 [Add todo: <code>todo</code>](#31-add-todo-todo)<br/>
 &nbsp; &nbsp; &nbsp; 3.2 [Add deadline: <code>deadline</code>](#32-add-deadline-deadline) <br/>
 &nbsp; &nbsp; &nbsp; 3.3 [Add event: <code>event</code>](#33-add-event-event) <br/>
@@ -13,8 +13,8 @@
 &nbsp; &nbsp; &nbsp; 3.7 [List all tasks: <code>list</code>](#37-list-all-tasks-list) <br/>
 &nbsp; &nbsp; &nbsp; 3.8 [Clear window: <code>clc</code>](#38-clear-window-clc) <br/>
 &nbsp; &nbsp; &nbsp; 3.9 [Exit the program: <code>bye</code>](#39-exit-the-program-bye) <br/>
-4. FAQ <br/>
-5. Command Summary 
+4. [FAQ](#4-faq) <br/>
+5. [Command Summary](#5-command-summary) 
 
 
 ## 1. Introduction
