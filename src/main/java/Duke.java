@@ -5,9 +5,12 @@ import java.util.ArrayList;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<>();
-    static String options = "Here is the list of commands available\n"
-            + "\"bye\": to exit\n\"list\": to show the list of all your tasks\n\"todo\": add a todo\n" +
-            "\"deadline\": add a deadline\n\"event\": add an event\n" +
+    static String commands = "Here is the list of commands available\n"
+            + "\"bye\": to exit\n" +
+            "\"list\": to show the list of all your tasks\n" +
+            "\"todo\": add a todo\n" +
+            "\"deadline\": add a deadline\n" +
+            "\"event\": add an event\n" +
             "\"done\": check off a task on your list";
 
     public static void printTasks() {
@@ -19,12 +22,12 @@ public class Duke {
         }
         try (PrintWriter printer = new PrintWriter("out.txt")) {
             printer.println(output);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (FileNotFoundException exception) {
+            System.out.println(exception.getMessage());
         }
     }
 
-    public static void inputChecker(String userInput) throws IndexOutOfBoundsException, IllegalArgumentException {
+    public static void checkInput(String userInput) throws IndexOutOfBoundsException, IllegalArgumentException {
         if (userInput.startsWith("list")) {
             printTasks();
         } else if (userInput.startsWith("done")) {
@@ -63,7 +66,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(options);
+        System.out.println(commands);
     }
 
     public static void main(String[] args) {
@@ -72,14 +75,14 @@ public class Duke {
         String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {
             try {
-                inputChecker(userInput);
-            } catch (IndexOutOfBoundsException e) {
+                checkInput(userInput);
+            } catch (IndexOutOfBoundsException exception) {
                 System.out.println("You have given the wrong number of arguments\n" +
                         "Please try again or input \"bye\" to exit");
-                System.out.println(e.getMessage());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Sorry I don't understand that command.\n" + options);
-                System.out.println(e.getMessage());
+                System.out.println(exception.getMessage());
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Sorry I don't understand that command.\n" + commands);
+                System.out.println(exception.getMessage());
             }
             userInput = scan.nextLine();
         }
