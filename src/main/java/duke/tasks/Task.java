@@ -1,51 +1,46 @@
 package duke.tasks;
 
+
+/**
+ * Abstract class for Task.
+ */
 public class Task {
+
     protected String description;
     protected boolean isDone;
-    private static int listCount = 0;
-
-
     protected String taskDescription;
 
+    /**
+     * Constructor for abstract Task class.
+     * @param description String for description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         taskDescription = "task";
-        listCount += 1;
     }
 
+    /**
+     * To update and set isDone to true when task is marked done.
+     */
     public void updateIsDone (){
         this.isDone = true;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-
+    /**
+     * To indicate if task is done.
+     * @return Tick symbol if done else Cross not done.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public String getAtDescription() {
-        return null;
-    }
-
-    public String getByDescription() {
-        return null;
-    }
-
+    /**
+     * Formats tasks to display task messages to user.
+     * @return String containing status and description of tasks.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
-
 }

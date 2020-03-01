@@ -3,8 +3,17 @@ package duke;
 import duke.commands.*;
 import duke.exceptions.InvalidCommandException;
 
+/**
+ * Parser class to parse user inputs and identify user commands.
+ */
 public class Parser {
 
+    /**
+     * Processes user inputs and execute respective commands.
+     * @param userData String of user input.
+     * @return ExecuteCommand object given by user.
+     * @throws InvalidCommandException If command is invalid.
+     */
     public static ExecuteCommand parse (String userData) throws InvalidCommandException {
         String[] newData = userData.split(" ");
 

@@ -4,12 +4,18 @@ import duke.commands.ExecuteCommand;
 import duke.exceptions.*;
 import java.io.FileNotFoundException;
 
+/**
+ * Task manager to manage tasks like Todos, Events and Deadlines.
+ */
 public class Duke {
 
     private Ui ui;
-    private TaskList tasks;
     private Storage storage;
+    private TaskList tasks;
 
+    /**
+     * Constructor for Ui, Storage and TaskList classes.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("output.txt");
@@ -21,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts and runs program.
+     */
     public void startDuke() {
         ui.greeting();
         boolean isExit = false;

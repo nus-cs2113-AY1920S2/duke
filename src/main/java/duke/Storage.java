@@ -12,14 +12,26 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Storage class to get/load and store data.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     * @param filePath String of filepath for stored data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Gets the saved data from text file.
+     * @return ArrayList Contains data from saved text file
+     * @throws FileNotFoundException If file from file path does not exists.
+     */
      public ArrayList<Task> getData() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -61,44 +73,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves and stores the tasks in ArrayList into a text file.
+     * @param tasks TaskList class object that handles all ArrayList of Tasks command.
+     */
     public void saveData(TaskList tasks) {
-        /*try {
-            FileWriter fw = new FileWriter("output.txt");
-
-            for (Task task : duke.tasks){
-                String addData;
-                switch (task.getTaskDescription()) {
-                case "todo":
-                    if (task.isDone()) {
-                        addData = "T |" + " 1 | " + task.getDescription();
-                    } else {
-                        addData = "T |" + " 0 | " + task.getDescription();
-                    }
-                    fw.write(addData + System.lineSeparator());
-                    break;
-                case "event":
-                    if (task.isDone()) {
-                        addData = "E |" + " 1 | " + task.getDescription() + task.getAtDescription();
-                    } else {
-                        addData = "E |" + " 0 | " + task.getDescription() + task.getAtDescription();
-                    }
-                    fw.write(addData + System.lineSeparator());
-                    break;
-                case "deadline":
-                    if (task.isDone()) {
-                        addData = "D |" + " 1 | " + task.getDescription() + task.getByDescription();
-                    } else {
-                        addData = "D |" + " 0 | " + task.getDescription() + task.getByDescription();
-                    }
-                    fw.write(addData + System.lineSeparator());
-                    break;
-                }
-            }
-            fw.close();
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
-    }*/
         try {
             FileWriter fw = new FileWriter("output.txt");
             for (Task task : tasks.getTaskArray()) {
