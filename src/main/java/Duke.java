@@ -5,10 +5,83 @@ import java.io.*;
 
 public class Duke {
 
+    private Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+
+    }
+
+    public void run() {
+
+        ArrayList<Task> taskList = new ArrayList<Task>();
+
+        File file = new File("data/duke.txt");
+        try {
+            file.createNewFile();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        String filePath = file.getAbsolutePath();
+
+        try {
+            loadFile(filePath, taskList);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        String[] validCommands = {"todo", "deadline", "event", "done", "list", "delete"};
+
+        ui.showWelcome();
+        //boolean isExit = false;
+
+        String fullCommand = ui.readCommand();
+
+        while (checkLoop(fullCommand)) {
+            ui.showLine(); // show the divider line ("_______")
+            //Command c = Parser.parse(fullCommand);
+            String[] words =  fullCommand.split(" ", 2);
+            String command = words[0].toLowerCase();
+
+            try {
+                checkValidCommand(command, validCommands);
+            } catch (DukeException e) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                //line = in.nextLine();
+                fullCommand = ui.readCommand();
+                continue;
+            }
+
+            if (command.equals("list")) {
+                displayList(taskList);
+            } else {
+                determineTask(command, fullCommand, taskList);
+            }
+            //c.execute(tasks, ui, storage);
+            //isExit = c.isExit();
+
+            ui.showLine();
+
+            fullCommand = ui.readCommand();
+
+        }
+
+        try {
+            saveFile(filePath, taskList);
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+        }
+
+        ui.showGoodbye();
+
+    }
 
     public static void main(String[] args) {
 
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        new Duke().run();
+
+        /*ArrayList<Task> taskList = new ArrayList<Task>();
 
         File file = new File("data/duke.txt");
         try {
@@ -31,6 +104,7 @@ public class Duke {
 
         System.out.println("Hello! I'm Isabella" + System.lineSeparator() + "What can I do for you?");
         line = in.nextLine();
+
 
         while (checkLoop(line)) {
 
@@ -59,7 +133,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");*/
     }
 
 
