@@ -1,5 +1,22 @@
-# Setting up
+# Using duke task manager
 
+**Functions available**
+
+* `todo [task]`   --- store a new todo task
+* `deadline [task]`   --- store a new task with deadline
+* `event [task]`  --- store a new event task
+* `list` --- list all task stored
+* `done [tasknumber]` --- mark a task as completed
+* `delete [tasknumber]` --- delete task
+* `find [keyword]` --- find task with the keyword in the descriptions
+* `bye` --- exit program
+* `reset` --- delete data directory and Tasklist.txt
+* `help` --- call up the functions table (TBC)
+**===================================================================**
+
+
+# (Original ReadME)
+# Setting up
 
 **Prerequisites**
 
