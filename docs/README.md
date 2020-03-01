@@ -153,7 +153,7 @@ Explanation:
 `[task number]` is the nth position in the task list of the task to be marked as completed.
 Example of usage: 
 
-######To mark the 2nd task in the task list as completed
+To mark the 2nd task in the task list as completed
 <pre>
 done 2
 </pre>
@@ -192,7 +192,7 @@ Explanation:
 
 Example of usage: 
 
-######To delete the 3rd task in the task list
+To delete the 3rd task in the task list
 <pre>
 delete 3
 </pre>
