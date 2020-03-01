@@ -25,7 +25,7 @@ public class UI {
                 + "\t Here are the tasks in your list:");
         int i = 0;
         for (Task t : taskList) {
-            System.out.println("\t " + (i + 1) + " " + t.toString());
+            System.out.println("\t " + (i + 1) + ". " + t.toString());
             i++;
         }
         System.out.println("\t____________________________________________________________\n");
@@ -35,6 +35,21 @@ public class UI {
         System.out.println("\t____________________________________________________________\n"
                 + "\t Nice! I've marked this task as done:\n"
                 + "\t\t" + t.toString() + "\n"
+                + "\t____________________________________________________________\n");
+    }
+
+    public static void printFoundMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t Here are the matching tasks in your list:");
+    }
+
+    public static void printFoundTask(Task t, int findCount){
+        System.out.println("\t " + findCount + ". " + t.toString());
+    }
+
+    public static void printNotFoundMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t ☹ OOPS!!! There are no matching tasks in your list.\n"
                 + "\t____________________________________________________________\n");
     }
 
@@ -78,6 +93,13 @@ public class UI {
         System.out.println("\t____________________________________________________________\n"
                 + "\t☹ OOPS!!! The description of a delete must contain a duke.task number in this format:\n"
                 + "\t delete <task number>\n"
+                + "\t____________________________________________________________\n");
+    }
+
+    public static void printEmptyFindExceptionMessage() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\t☹ OOPS!!! The description of a find must contain a word in this format:\n"
+                + "\t find <word>\n"
                 + "\t____________________________________________________________\n");
     }
 

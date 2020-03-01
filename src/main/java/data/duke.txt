@@ -1,0 +1,2 @@
+T,✘,bottle
+E,✘,shopping,market

@@ -46,6 +46,8 @@ public class Duke {
                 myUI.printEmptyDoneExceptionMessage();
             } catch (EmptyDeleteException e) {
                 myUI.printEmptyDeleteExceptionMessage();
+            } catch (EmptyFindException e) {
+                myUI.printEmptyFindExceptionMessage();
             } catch (UnknownWordException e) {
                 myUI.printUnknownWordExceptionMessage();
             } catch (EmptyTodoException e) {
