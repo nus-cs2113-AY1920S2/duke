@@ -11,7 +11,7 @@ It helps you save todos, events and deadlines.
 ## Quick Start
 
 *  Ensure you have Java `11` or above installed in your Computer.
-*  Download the latest `hiroshi.jar` link:{https://github.com/alaukiknpant/duke}/releases[here].
+*  Download the latest `hiroshi.jar` link:{https://github.com/alaukiknpant/duke}.
 *  Copy the file to the folder you want to use as the home folder for your Task tracker.
 *  Go to the directory where the Jar file is stored and type: `java -jar Hiroshi.jar`
 * When the application executes, all possible commands that can help you manage your tasks are shown.
@@ -205,7 +205,7 @@ Expected Ourcome:
 ## FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Copy the file that has saved your task list into the folder in which you store the application in your new computer.
+*A*: Copy the text file called "files" that has saved your task list into the directory from which you will run the application in your new computer. You are then set to go!
 
 ## Command Summary
 * *Todo*  : `todo TASK`; 

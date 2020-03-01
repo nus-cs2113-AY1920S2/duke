@@ -8,6 +8,7 @@ import hiroshi.ui.Ui;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.File;
 
 /**
  * Parses user input.
@@ -194,5 +195,16 @@ public class Parser {
             stringToAdd = typeIcon + " | " + statusIcon + " | " + description + " | " + date;
         }
         return stringToAdd;
+    }
+
+    public static String returnFilePath(String defaultFilePath){
+        String curFilePath = defaultFilePath;
+        File curDir = new File(curFilePath);
+        boolean exists = curDir.exists();
+        if (!exists){
+            final String NEW_FILE_PATH = System.getProperty("user.dir") + "/files";
+            curFilePath = NEW_FILE_PATH;
+        }
+        return curFilePath;
     }
 }

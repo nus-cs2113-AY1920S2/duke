@@ -104,7 +104,7 @@ public class Ui {
     }
 
     public static void markLoadingError(){
-        System.out.println("File does not have the correct data format. We cannot read the data, we will create a fresh task list for you!");
+        System.out.println("File does not have the correct data format or file does not exist. We cannot read the data, we will create a fresh task list and/or file for you!");
         Ui.printStraightLine();
     }
 

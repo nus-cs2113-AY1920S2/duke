@@ -6,8 +6,10 @@ import hiroshi.storage.Storage;
 import hiroshi.tasklist.TaskList;
 import hiroshi.tasks.Task;
 import hiroshi.ui.Ui;
+import hiroshi.parser.Parser;
 
 import java.util.ArrayList;
+
 
 /**
  * <h1>Hiroshi Nagai Task Tracker Chatbot</h1>
@@ -56,6 +58,7 @@ public class Hiroshi {
     }
 
     public static void main(String[] args) {
-        new Hiroshi("files/TaskList.txt");
+        String filePath = Parser.returnFilePath("files/TaskList.txt");
+        new Hiroshi(filePath);
        }
 }
