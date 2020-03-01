@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 /**
  * Task item class of the Duke project
- * Extends Task class
+ * Extends Task class contains fields: name by
  */
 public class Deadlines extends Task {
 
