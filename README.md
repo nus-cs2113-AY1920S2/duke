@@ -137,7 +137,7 @@ Filters tasks based on a given DATE.
 
 <a name="complete"></a>
 
-### 3.6 Complete a task: `complete`
+### 3.6 Complete a task: `done`
 
 Marks a task as completed at the specified INDEX.
 
@@ -150,7 +150,7 @@ Marks a task as completed at the specified INDEX.
 
 <a name="exit"></a>
 
-### 3.7 Exiting the program: `exit`
+### 3.7 Exiting the program: `bye`
 
 Exits the program.
 
@@ -186,7 +186,7 @@ Exits the program.
     * e.g. `filter 2019-01-01`
 * Delete: `delete INDEX`
     * e.g. `delete 2`
-* Done: `done INDEX`
+* Complete: `done INDEX`
     * e.g. `done 1`
    
 * Exit: `bye`
