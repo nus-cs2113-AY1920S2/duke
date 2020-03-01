@@ -8,6 +8,8 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+
+
 public class Command {
     public static void handleCommand(String line, String[] words, ArrayList<Task> taskList) throws EmptyTaskListException, EmptyDoneException, EmptyDeleteException, EmptyFindException, UnknownWordException, EmptyTodoException, EmptyDeadlineException, EmptyEventException {
         if (line.equals("list")) {
