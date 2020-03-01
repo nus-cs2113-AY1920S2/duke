@@ -43,8 +43,16 @@ A todo task just needs to be a string but cannot be empty.
 
 Examples:
 
-* `todo Run beside Clementi Park.`
-* `todo Cook for mom.`
+    todo eat
+
+
+Expected Outcome:
+
+    Got it. I have added this task: 
+    
+    [T] [✘] eat
+    
+    Now you have 2 item/s in the list`
 
 ****
 
@@ -58,8 +66,15 @@ A deadline task must necessarily have a date mentioned.
 
 Examples:
 
-* `deadline Homework 5 \by 2020-01-01`
-* `deadline Problem Set 2 \by 2020-01-02`
+    deadline eat /by 2019-01-02
+
+Expected Outcome
+
+    Got it. I have added this task: 
+    
+    [D] [✘] eat (by: Jan 2 2019)
+    
+    Now you have 3 item/s in the list
 
 ****
 
@@ -73,12 +88,19 @@ A event task must necessarily have a date mentioned.
 
 Examples:
 
-* `event Marathon \at 2020-01-01`
-* `event Garden Beats \by 2020-01-02`
+    event eat /at 2019-01-05
+
+Expected Outcome:
+
+    Got it. I have added this task: 
+    
+    [E] [✘] eat (at: Jan 5 2019)
+    
+    Now you have 3 item/s in the list 
 
 ****
 
-#### Deleting a person : `delete`
+#### Deleting a task : `delete`
 
 * Deletes the task at the specified `TASK_NUMBER`. 
 * When a task is deleted, all subsequest tasks in the task list will have their index reduced by 1.
@@ -86,9 +108,13 @@ Examples:
 
 Examples:
 
-* `delete 2`
+     delete 2
 
-
+Expected Outcome
+    
+    Cool, we will remove the following task:
+    [D] [✘] eat (by: Jan 2 2019)
+    Now you have 2 items in your list
 ****
 
 #### Listing all tasks in the tasklist : `list`
@@ -98,7 +124,13 @@ Examples:
 
 Examples:
 
-* `list` 
+    list
+
+Expected outcome:
+
+    1. [T] [✘] eat
+    2. [E] [✘] eat (at: Jan 5 2019)
+
 
 ****
 
@@ -111,8 +143,12 @@ Examples:
 
 Examples:
 
-* `done 2`
+    done 2
 
+Expected Outcome:
+
+    2. [E][✓] eat (at: Jan 5 2019)
+    Done! We have checked 2!
 
 ****
 
@@ -123,9 +159,15 @@ Examples:
 
 Examples:
 
-* `find eat` 
+    find eat 
 
-
+Expected Outcome:
+    
+    Here are the matching tasks in your list:
+    1. [T] [✘] eat
+    2. [E] [✓] eat (at: Jan 5 2019)
+    
+    There were 2 tasks with the "eat" keyword
 ****
 
 #### Clearing the task list : `clear`
@@ -135,7 +177,11 @@ Examples:
 
 Examples:
 
-* `clear` 
+    clear
+
+Expected Ourcome:
+
+    TaskList is now Empty
 
 ****
 
@@ -148,6 +194,12 @@ Examples:
 
 * `bye` 
 
+Expected Ourcome:
+
+    Bye. Hope to see you again soon!
+    
+    ****--****--****--****--****--****--****--****--****--****--****--****--****--***
+
 ****
 
 ## FAQ
@@ -156,18 +208,18 @@ Examples:
 *A*: Copy the file that has saved your task list into the folder in which you store the application in your new computer.
 
 ## Command Summary
-* *Todo*  : `todo TASK` +
+* *Todo*  : `todo TASK`; 
 e.g. `todo Run beside Clementi Park.`
-* *Deadline* : `deadline TASK /by DATE` +
+* *Deadline* : `deadline TASK /by DATE`;
 eg. `deadline Problem Set 2 \by 2020-01-02`
-* *Event* : `event TASK /at DATE` +
+* *Event* : `event TASK /at DATE`;
 eg. `event Marathon \at 2020-01-01`
 * *List* : `list`
-* *Done* : `done TASK_NUMBER`+
+* *Done* : `done TASK_NUMBER`;
 eg. `done 2`
-* *Delete* : `delete TASK_NUMBER`+
+* *Delete* : `delete TASK_NUMBER`;
 e.g. `delete 3`
-* *Find* : `find KEYWORD` +
+* *Find* : `find KEYWORD`;
 e.g. `find eat`
 * *Clear* : `clear`
 * *Exit* : `bye`

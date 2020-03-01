@@ -94,7 +94,6 @@ public class Ui {
         if (line.toUpperCase().equals("BYE")){
             scanner.close();
         }
-        printStraightLine();
         return line;
     }
 
