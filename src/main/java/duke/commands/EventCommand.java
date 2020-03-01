@@ -20,6 +20,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasklist, UI ui, Storage storage) {
         Event event = new Event(this.description, this.at);
         tasklist.addTask(event);
+        storage.writeFileLine(event);
         ui.displayAddEventMessage(event, tasklist.getTaskList());
     }
 }

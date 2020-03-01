@@ -24,6 +24,7 @@ public class ClearCommand extends Command {
         if (confirmation.equals("Y")) {
             tasklist.clearList();
             ui.displayListClearMessage();
+            storage.clearFile();
         } else {
             ui.displayListNotClearedMessage();
         }

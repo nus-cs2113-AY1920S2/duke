@@ -7,10 +7,6 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Duke {
 
     public static void main(String[] args) {

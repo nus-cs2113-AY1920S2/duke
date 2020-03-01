@@ -7,7 +7,6 @@ import duke.ui.UI;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class DeadlineCommand extends Command {
 
@@ -32,6 +31,7 @@ public class DeadlineCommand extends Command {
             deadline = new Deadline(this.description, this.by);
         }
         tasklist.addTask(deadline);
+        storage.writeFileLine(deadline);
         ui.displayAddDeadlineMessage(deadline, tasklist.getTaskList());
     }
 }

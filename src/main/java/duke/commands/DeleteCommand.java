@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
         if (taskIndex >= tasklist.getLength()) throw new IndexOutOfBoundsException();
         Task deleteTask = tasklist.getTaskList().get(taskIndex);
         tasklist.removeTask(deleteTask);
+        storage.rewriteFile();
         ui.displayDeleteTaskMessage(deleteTask);
     }
 }

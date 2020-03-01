@@ -3,11 +3,11 @@ package duke.tasks;
 public class ToDo extends Task {
 
     public ToDo(String description) {
-        super(description);
+        super("[T]", description);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.toString();
     }
 }

@@ -18,6 +18,7 @@ public class ToDoCommand extends Command {
     public void execute(TaskList tasklist, UI ui, Storage storage) {
         ToDo todo = new ToDo(this.description);
         tasklist.addTask(todo);
+        storage.writeFileLine(todo);
         ui.displayAddToDoMessage(todo, tasklist.getTaskList());
     }
 }
