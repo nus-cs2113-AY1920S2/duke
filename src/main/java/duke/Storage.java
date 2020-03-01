@@ -53,6 +53,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Method to save the changes in the task lists after adjustment from
+     * users and create new file if it does not exist yet
+     *
+     * @param tasks the list of tasks that is passed after adjustmenr
+     * @throws IOException in case exception in file
+     */
     public void save(TaskList tasks) throws IOException{
         Path directoryPath = Paths.get("data");
         boolean isFileExists = Files.exists(directoryPath);
