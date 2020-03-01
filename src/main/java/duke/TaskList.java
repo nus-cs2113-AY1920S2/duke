@@ -161,11 +161,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to find certain tasks with certain key words in the task list and
+     * list them with indexes started from 1
+     *
+     * @param keyWord words that is typed in to find the tasks with the key words
+     */
     public void findTask(String keyWord) {
         keyWord = keyWord.trim().toLowerCase();
         ArrayList<Task> key = new ArrayList<>();
         for (Task t : tasks) {
-            if (t.getDescription().trim().toLowerCase().contains(keyWord)) {
+            boolean isMatched = t.getDescription().trim().toLowerCase().contains(keyWord);
+            if (isMatched) {
                 key.add(t);
             }
         }
