@@ -24,7 +24,7 @@ public class Ui {
 
     public static void showNonExistentInputError() {
         System.out.println("    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                 "    ____________________________________________________________");
     }
 
@@ -49,13 +49,13 @@ public class Ui {
 
     public static void showEmptyParametersError(String field){
         System.out.println("    ____________________________________________________________\n"
-                + "     ☹ OOPS!!! The description of " + field + " cannot be empty.\n"
+                + "     OOPS!!! The description of " + field + " cannot be empty.\n"
                 + "    ____________________________________________________________\n");
     }
 
     public static void showIncompleteParametersError(String parameters){
         System.out.println("    ____________________________________________________________\n"
-                + "     ☹ OOPS!!! You forgot to add \"" + parameters + " [insert time]\"\n"
+                + "     OOPS!!! You forgot to add \"" + parameters + " [insert time]\"\n"
                 + "    ____________________________________________________________\n");
     }
 
