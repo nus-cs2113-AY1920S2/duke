@@ -43,4 +43,13 @@ public class FindCommand extends Command {
         }
         return false;
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        System.out.println(Messages.DIVIDER);
+        if (isQualifiedTasksEmpty()) return new CommandResult(MESSAGE_EMPTY_LIST);
+        System.out.println(Messages.DIVIDER);
+        qualifiedTasks.clear();
+        return new CommandResult(taskListMessage);
+    }
 }

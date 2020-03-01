@@ -35,4 +35,17 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
+    public CommandResult executeForGUI() {
+        try {
+            final Task target = getTargetTask();
+            taskManager.removeTask(target);
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, target.getTaskDescription()));
+        } catch (IndexOutOfBoundsException ie) {
+            return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        } catch (TaskNotFoundException tnfe) {
+            return new CommandResult(Messages.MESSAGE_TASK_NOT_IN_TASKLIST);
+        }
+    }
+
 }

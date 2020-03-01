@@ -54,4 +54,5 @@ public abstract class Command {
 
     public abstract CommandResult execute () ;
 
+    public abstract CommandResult executeForGUI();
 }

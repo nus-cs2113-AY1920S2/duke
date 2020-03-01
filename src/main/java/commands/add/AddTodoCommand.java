@@ -29,4 +29,15 @@ public class AddTodoCommand extends AddCommand {
                 toDoTask.getChar(),
                 toDoTask.getTaskDescription()));
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        taskManager.addTask(toDoTask);
+        return new CommandResult(String.format(
+                Messages.MESSAGE_TODO_SUCCESS,
+                toDoTask.getTaskIndex()+Messages.LIST_INDEX_OFFSET,
+                COMMAND_TYPE,
+                toDoTask.getChar(),
+                toDoTask.getTaskDescription()));
+    }
 }

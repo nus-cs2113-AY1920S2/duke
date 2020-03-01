@@ -32,4 +32,18 @@ public class AddEventCommand extends AddCommand {
                 eventTask.getTaskDescription(),
                 eventTask.getTaskStartTime()));
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        if (eventTask == null) {
+            return new CommandResult("Invalid Command Format");
+        }
+        taskManager.addTask(eventTask);
+        return new CommandResult(String.format(
+                Messages.MESSAGE_EVENT_SUCCESS+Messages.LIST_INDEX_OFFSET,
+                COMMAND_TYPE,
+                eventTask.getChar(),
+                eventTask.getTaskDescription(),
+                eventTask.getTaskStartTime()));
+    }
 }

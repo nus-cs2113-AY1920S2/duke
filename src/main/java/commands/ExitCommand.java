@@ -21,6 +21,11 @@ public class ExitCommand extends Command {
         return new CommandResult(String.format(Messages.MESSAGE_FAREWELL));
     }
 
+    @Override
+    public CommandResult executeForGUI() {
+        return new CommandResult(String.format(Messages.MESSAGE_FAREWELL));
+    }
+
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
     }

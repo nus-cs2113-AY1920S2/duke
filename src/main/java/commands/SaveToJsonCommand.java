@@ -20,4 +20,14 @@ public class SaveToJsonCommand extends Command{
         }
         return new CommandResult(MESSAGE_DONE);
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        try {
+            StorageFile.saveJson(taskManager);
+        } catch (StorageOperationException soe) {
+            System.out.println(soe);
+        }
+        return new CommandResult(MESSAGE_DONE);
+    }
 }

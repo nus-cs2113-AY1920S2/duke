@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import ui.TextUi;
 
 /**
@@ -31,4 +32,16 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        System.out.println(Messages.DIVIDER);
+        if (taskManager.getTaskList().getInternalList().size()>0){
+            taskListMessage = Messages.printAllTasks(taskManager.getTaskList());
+            return new CommandResult((taskListMessage));
+        } else {
+            return new CommandResult(MESSAGE_EMPTY_LIST);
+        }
+    }
+
 }

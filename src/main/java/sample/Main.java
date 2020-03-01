@@ -73,7 +73,7 @@ public class Main  {
             // if there is no file to load or the file is empty, setData will initialize a new taskManager system
             command.setData(taskManager);
             // Execute according to the command itself
-            commandResult = command.execute();
+            commandResult = command.executeForGUI();
             // save the taskManager to a file
             taskManager.getStorager().save(taskManager);
             StorageFile.saveJson(taskManager);

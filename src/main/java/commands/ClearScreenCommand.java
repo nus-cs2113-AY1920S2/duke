@@ -12,4 +12,10 @@ public class ClearScreenCommand extends Command {
         TextUi.clearScreen();
         return null;
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        TextUi.clearScreen();
+        return null;
+    }
 }

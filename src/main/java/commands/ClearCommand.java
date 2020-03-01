@@ -15,4 +15,10 @@ public class ClearCommand extends Command {
         taskManager.clear();
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        taskManager.clear();
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
 }

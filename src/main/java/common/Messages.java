@@ -1,4 +1,7 @@
 package common;
+
+import data.task.*;
+
 /**
  * Container for user visible messages.
  */
@@ -48,4 +51,57 @@ public class Messages {
     public static final String MESSAGE_EVENT_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_HELP = "Here are the possible commands: ";
 
+    //public static StringBuilder taskListMessage = new StringBuilder();
+
+    /**
+     * Print all tasks in the task list
+     */
+    public static String printAllTasks(TaskList tasklist){
+        String taskMessage = "";
+        taskListMessage = new StringBuilder(taskMessage);
+        for (int i = 1; i <= tasklist.getInternalList().size() ; i++) {
+            Task task = tasklist.getInternalList().get(i-1);
+            if (task instanceof TodoTask) {
+                taskMessage = printTodoTask((TodoTask) task, i);
+            } else if (task instanceof DeadlineTask) {
+                taskMessage = printDeadlineTask((DeadlineTask) task, i);
+            } else if( task instanceof EventTask) {
+                taskMessage = printEventTask((EventTask) task, i);
+            }
+            taskListMessage = taskListMessage.append(taskMessage).append("\n");
+        }
+        return taskListMessage.toString();
+    }
+
+    public static String printTodoTask(TodoTask todoTask, int index){
+        return String.format(
+                MESSAGE_TODO_LIST,
+                index,
+                todoTask.getTaskIndex(),
+                todoTask.getTaskType(),
+                todoTask.getChar(),
+                todoTask.getTaskDescription());
+    }
+
+    public static String printDeadlineTask(DeadlineTask deadlineTask, int index){
+        return String.format(
+                MESSAGE_DEADLINE_LIST,
+                index,
+                deadlineTask.getTaskIndex(),
+                deadlineTask.getTaskType(),
+                deadlineTask.getChar(),
+                deadlineTask.getTaskDescription(),
+                deadlineTask.getTaskDeadline());
+    }
+
+    public static String printEventTask(EventTask eventTask, int index){
+        return String.format(
+                MESSAGE_EVENT_LIST,
+                index,
+                eventTask.getTaskIndex(),
+                eventTask.getTaskType(),
+                eventTask.getChar(),
+                eventTask.getTaskDescription(),
+                eventTask.getTaskStartTime());
+    }
 }

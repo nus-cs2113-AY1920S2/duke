@@ -31,4 +31,19 @@ public class AddDeadlineCommand extends AddCommand {
                 deadlineTask.getTaskDescription(),
                 deadlineTask.getTaskStartTime()));
     }
+
+    @Override
+    public CommandResult executeForGUI() {
+        if (deadlineTask == null) {
+            return new CommandResult("Invalid Command Format");
+        }
+        taskManager.addTask(deadlineTask);
+        //according to the data format
+        return new CommandResult(String.format(
+                Messages.MESSAGE_DEADLINE_SUCCESS+Messages.LIST_INDEX_OFFSET,
+                COMMAND_TYPE,
+                deadlineTask.getChar(),
+                deadlineTask.getTaskDescription(),
+                deadlineTask.getTaskStartTime()));
+    }
 }
