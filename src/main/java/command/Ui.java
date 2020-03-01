@@ -17,14 +17,16 @@ public class Ui {
     public static final String LINE_SEPARATOR = "----------------------------------------------";
     public static final String HELP = "1. \"list\" to display To Do List\n"
             + "2. \"done [index]\" to mark as done\n"
-            + "3. \"todo\" or \"deadline [string] /by [date/time]\" or \"event [string] /at [date/time]\" to add to list\n"
+            + "3. \"todo\" or \"deadline [string] /by [date/time]\" "
+            + "or \"event [string] /at [date/time]\" to add to list\n"
             + "4. \"delete [index]\"to delete\n"
             + "5. \"help\" to look at possible commands\n"
             + "6. \"find [string]\" to find in your list\n"
             + "7. \"clear\" to clear the list\n"
             + "8. \"bye\" to exit";
     public static final String EMPTY_LIST = LINE_SEPARATOR + "\nYour list is empty bruhh\n" + LINE_SEPARATOR;
-    public static final String NO_NUMBER = LINE_SEPARATOR + "\nYou did not enter a number. Try again!!\n" + LINE_SEPARATOR;
+    public static final String NO_NUMBER = LINE_SEPARATOR
+            + "\nYou did not enter a number. Try again!!\n" + LINE_SEPARATOR;
     public static final String OUT_OF_INDEX = LINE_SEPARATOR
             + "\nThe index you entered does not exist??? Look at ur list properly lah\n" + LINE_SEPARATOR;
     public static final String EMPTY_STRING = "☹ OOPS!!! The description cannot be empty.";
@@ -59,7 +61,8 @@ public class Ui {
         System.out.println("Hello! I'm Duke, your personal assistant");
         System.out.println("1. \"list\" to display To Do List\n"
                 + "2. \"done [index]\" to mark as done\n"
-                + "3. \"todo\" or \"deadline [string] /by [date/time]\" or \"event [string] /at [date/time]\" to add to list\n"
+                + "3. \"todo\" or \"deadline [string] /by [date/time]\" "
+                + "or \"event [string] /at [date/time]\" to add to list\n"
                 + "4. \"delete [index]\"to delete\n"
                 + "5. \"help\" to look at possible commands\n"
                 + "6. \"find [string]\" to find in your list\n"

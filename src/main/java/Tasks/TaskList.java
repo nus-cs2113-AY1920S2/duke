@@ -51,19 +51,20 @@ public class TaskList {
         return this.tasks.get(i);
     }
 
-    /**finds tasks that have String userInput in the description
-     * @param userInput: String that is provided by the user
+    /**
+     * finds tasks that have String userInput in the description.
+     * @param userInput : String that is provided by the user.
      */
     public Serializable find(String userInput) {
         StringBuilder string = new StringBuilder();
         int numberOfSimilarStrings = 0;
         for (int i = 0; i < this.getLength(); i++) {
             if (this.tasks.get(i).containsString(userInput)) {
-                string.append(i+1).append(". ").append(this.tasks.get(i).toString()).append("\n");
+                string.append(i + 1).append(". ").append(this.tasks.get(i).toString()).append("\n");
                 numberOfSimilarStrings++;
             }
         }
-        if (numberOfSimilarStrings==0){
+        if (numberOfSimilarStrings == 0) {
             return Ui.NO_SIMILAR_LIST;
         }
         return string;
