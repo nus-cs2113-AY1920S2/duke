@@ -294,22 +294,25 @@ public class Command {
 
     /**
      * This method searches the Tasks in the {@link TaskList} object input for a keyword. It filters out
-     * Tasks containing the search keyword and prints them.
+     * Tasks containing the search keyword and prints them, following their index in the original TaskList.
      * @param listInput the TaskList object to be searched
      * @param uiInput helps to display filtered Tasks
      * @param searchQuery the keyword to be searched for in Tasks
      */
     private void findTasksByKeyword(TaskList listInput, Ui uiInput, String searchQuery) {
-        int resultNumber = 1;
-        ArrayList<Task> searchResults = listInput.findSearchResults(listInput.getTaskList(), searchQuery);
+        int resultIndex = 0;
+        ArrayList<Integer> searchResultIndexes = new ArrayList<>();
+        ArrayList<Task> searchResults = listInput.findSearchResults(listInput.getTaskList(),
+                searchQuery, searchResultIndexes);
 
         if (Integer.valueOf(searchResults.size()).equals(Integer.valueOf(0))) {
             uiInput.displayMessage(NO_MATCHING_SEARCH_RESULTS_MESSAGE);
         } else {
             String searchOutput = MATCHING_SEARCH_RESULTS_INTRO_MESSAGE + LS;
             for (Task result : searchResults) {
-                searchOutput += "\t"+ Integer.toString(resultNumber) + "." + result.toString() + LS;
-                resultNumber++;
+                searchOutput += "\t"+ Integer.toString(Integer.valueOf(searchResultIndexes.get(resultIndex))
+                                + DISPLAYED_INDEX_OFFSET) + "." + result.toString() + LS;
+                resultIndex++;
             }
             uiInput.displayMessage(searchOutput);
         }

@@ -50,13 +50,17 @@ public class Deadline extends Task {
      * field contains the keyword.
      * <p></p>
      * <p>This method is primarily used for the FIND command.</p>
+     * @return a boolean value indicating true if the Task was added.
      * @param searchResults a list of Tasks containing the search keyword
      * @param searchKeyword the keyword to be searched for in this Deadline object
      */
     @Override
-    public void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
+    public boolean addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword) {
         if (this.getDescription().contains(searchKeyword) || this.getBy().contains(searchKeyword)) {
             searchResults.add(this);
+            return true;
+        } else {
+            return false;
         }
     }
 }

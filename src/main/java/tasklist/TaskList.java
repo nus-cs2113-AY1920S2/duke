@@ -56,10 +56,23 @@ public class TaskList {
         return this.tasks.remove(taskNumber);
     }
 
-    public ArrayList<Task> findSearchResults(ArrayList<Task> taskListToSearch, String searchKeyword) {
+    /**
+     * This methods iterates through a TaskList and finds the Tasks containing a given search keyword.
+     * It is used primarily in the findTasksByKeyword method of the FIND command.
+     * @param taskListToSearch the TaskList to be searched
+     * @param searchKeyword the keyword to be searched for
+     * @param searchResultIndexInput if a Task is added, the index of that Task in the actual input is stored in this ArrayList of Integers.
+     * @return the ArrayList of Tasks containing the search keyword.
+     * @see command.Command#findTasksByKeyword
+     */
+    public ArrayList<Task> findSearchResults(ArrayList<Task> taskListToSearch,
+                                             String searchKeyword, ArrayList<Integer> searchResultIndexInput) {
         ArrayList<Task> matchingResults = new ArrayList<>();
         for (Task task : taskListToSearch) {
-            task.addIfContainsKeyword(matchingResults, searchKeyword);
+            boolean doesTaskContainSearchValue = task.addIfContainsKeyword(matchingResults, searchKeyword);
+            if (doesTaskContainSearchValue) {
+                searchResultIndexInput.add(taskListToSearch.indexOf(task));
+            }
         }
         return matchingResults;
     }

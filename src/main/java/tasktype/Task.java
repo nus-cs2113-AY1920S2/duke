@@ -58,10 +58,11 @@ public abstract class Task {
      * <p></p>
      * <p>This method is primarily used for the FIND command.</p>
      * <p>View the subclasses to see how the method is overridden.</p>
+     * @return a boolean value indicating true if the Task was added.
      * @param searchResults a list of Tasks containing the search keyword
      * @param searchKeyword the keyword to be searched for in the Task
      */
-    public abstract void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword);
+    public abstract boolean addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword);
 
 
 }

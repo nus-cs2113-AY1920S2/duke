@@ -84,7 +84,7 @@ Format:
  
 - Adds an event and its' event time and/or place to the list
  
-- Text that follows "_/" ( _ denoting a whitespace) will be placed in the remarks section of the event.
+- Text that follows the **first instance of "_/"** ( _ denoting a whitespace) will be placed in the remarks section of the event.
  
 - Valid `<Remark>` formats include:
     + Any String value (e.g. **Mon 4pm**) 
@@ -107,7 +107,7 @@ Format:
  
 - Adds a deadline and its' event time and/or place to the list
  
-- Text that follows **"_/"** ( _ denoting a whitespace) will be placed in the remarks section of the event.
+- Text that follows the **first instance of "_/"** ( _ denoting a whitespace) will be placed in the remarks section of the event.
  
 - Valid `<Remark>` formats include:
     + Any String value (e.g. **Mon 4pm**) 
@@ -173,7 +173,9 @@ Expected outcome (if task list is empty):
  
 ### 4.4 `find` - Find tasks that match keyword
 
-This command shows you a list of all Tasks containing a search keyword.
+This command, given a search keyword, shows you a sub-list of all Tasks containing that keyword.
+
+**NOTE:** The index of the tasks in this sub-list follows it's index in the original task list.
 
 Format:
  `find <Keyword>`
