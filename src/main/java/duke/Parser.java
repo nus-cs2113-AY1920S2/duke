@@ -18,6 +18,8 @@ public class Parser {
             return new EventCommand(userData);
         } else if (newData[0].toLowerCase().equals("todo")) {
             return new TodoCommand(userData);
+        } else if (newData[0].toLowerCase().equals("find")) {
+            return new FindCommand(userData);
         } else if(newData[0].toLowerCase().equals("delete")){
             return new DeleteCommand(userData);
         } else if(newData[0].toLowerCase().equals("bye")) {
