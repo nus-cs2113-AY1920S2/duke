@@ -1,4 +1,3 @@
-
 # **Duke User Guide**
 
 <br>
