@@ -54,7 +54,7 @@ public class Messages {
     //public static StringBuilder taskListMessage = new StringBuilder();
 
     /**
-     * Print all tasks in the task list
+     * Print all tasks in the task list for GUI
      */
     public static String printAllTasks(TaskList tasklist){
         String taskMessage = "";
@@ -77,7 +77,6 @@ public class Messages {
         return String.format(
                 MESSAGE_TODO_LIST,
                 index,
-                todoTask.getTaskIndex(),
                 todoTask.getTaskType(),
                 todoTask.getChar(),
                 todoTask.getTaskDescription());
@@ -87,7 +86,6 @@ public class Messages {
         return String.format(
                 MESSAGE_DEADLINE_LIST,
                 index,
-                deadlineTask.getTaskIndex(),
                 deadlineTask.getTaskType(),
                 deadlineTask.getChar(),
                 deadlineTask.getTaskDescription(),
@@ -98,7 +96,6 @@ public class Messages {
         return String.format(
                 MESSAGE_EVENT_LIST,
                 index,
-                eventTask.getTaskIndex(),
                 eventTask.getTaskType(),
                 eventTask.getChar(),
                 eventTask.getTaskDescription(),
