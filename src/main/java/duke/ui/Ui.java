@@ -43,6 +43,21 @@ public class Ui {
         return input;
     }
 
+    /** Displays all the valid commands to the user. */
+    public void displayHelpMessage() {
+        System.out.println("Here are all the commands that you can use in Duke:");
+        System.out.println("todo TASK : add a task into the list;");
+        System.out.println("deadline Task /by yyyy-mm-dd : add a deadline into the list;");
+        System.out.println("event Task /by yyyy-mm-dd : add an event into the list;");
+        System.out.println("list : list all tasks in the list;");
+        System.out.println("done TASK_NUMBER : mark a task as done");
+        System.out.println("delete TASK_NUMBER: delete a task");
+        System.out.println("check /on yyyy-mm-dd : search for all tasks on a certain date;");
+        System.out.println("find KEYWORD : search for all tasks containing the KEYWORD;");
+        System.out.println("clear : delete all tasks in the list;");
+        System.out.println("bye : exit the Duke chatbox;");
+    }
+
     /**
      * Lists all the tasks inside the given task list.
      * 

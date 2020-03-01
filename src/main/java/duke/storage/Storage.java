@@ -58,15 +58,14 @@ public class Storage {
         if (!f.exists()) {
             f.createNewFile();
         }
+
+        System.out.println("Tasks in the existing list: ");
         
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
-
         
         if (!s.hasNext()) { // empty list
             throw new ChatboxException();
         }
-
-        System.out.println("Tasks on the list: ");
 
         while (s.hasNext()) {
             String taskLine = s.nextLine();

@@ -32,7 +32,15 @@ public class CheckCommand extends Command {
         this.taskList = new TaskList();
         this.marker = CHECK_MARKER;
     }
-    
+
+    /**
+     * Executes command "check".
+     * Displays all tasks on a specific date.
+     *
+     * @param tasks Task list that stores all the existing tasks.
+     * @param ui Interaction with users.
+     * @param storage Files related operation object.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatboxException{
         if (!description.contains(CHECK_MARKER)) {

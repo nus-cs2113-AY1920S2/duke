@@ -4,16 +4,7 @@ import duke.commands.*;
 import duke.exceptions.CommandNotFoundException;
 import duke.exceptions.EmptyDescriptionException;
 
-import static duke.utils.Constants.LIST_COMMAND;
-import static duke.utils.Constants.BYE_COMMAND;
-import static duke.utils.Constants.DONE_COMMAND;
-import static duke.utils.Constants.DELETE_COMMAND;
-import static duke.utils.Constants.TODO_COMMAND;
-import static duke.utils.Constants.DEADLINE_COMMAND;
-import static duke.utils.Constants.EVENT_COMMAND;
-import static duke.utils.Constants.CHECK_COMMAND;
-import static duke.utils.Constants.CLEAR_COMMAND;
-import static duke.utils.Constants.FIND_COMMAND;
+import static duke.utils.Constants.*;
 
 /**
  * Deals with making sense of the user command
@@ -32,18 +23,20 @@ public class Parser {
         
         try {
             switch (command) {
-            case LIST_COMMAND:
-                return new ListCommand();
-            case DONE_COMMAND:
-                return new DoneCommand(Integer.parseInt(split[1].trim()));
-            case DELETE_COMMAND:
-                return new DeleteCommand(Integer.parseInt(split[1].trim()));
+            case HELP_COMMAND:
+                return new HelpCommand();
             case TODO_COMMAND:
                 return new TodoCommand(split[1].trim());
             case DEADLINE_COMMAND:
                 return new DeadlineCommand(split[1].trim());
             case EVENT_COMMAND:
                 return new EventCommand(split[1].trim());
+            case LIST_COMMAND:
+                return new ListCommand();
+            case DONE_COMMAND:
+                return new DoneCommand(Integer.parseInt(split[1].trim()));
+            case DELETE_COMMAND:
+                return new DeleteCommand(Integer.parseInt(split[1].trim()));
             case CHECK_COMMAND:
                 return new CheckCommand(split[1].trim());
             case FIND_COMMAND:
