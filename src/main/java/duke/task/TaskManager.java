@@ -129,10 +129,10 @@ public class TaskManager {
         for (int i = 0; i < tasks.size(); i++) {
 
             if (i == tasks.size() - 1) {
-                msg += "\t" + (i + 1) + "." + tasks.get(i);
+                msg += "\t\t" + (i + 1) + "." + tasks.get(i);
                 continue;
             }
-            msg += "\t" + (i + 1) + "." + tasks.get(i) + System.lineSeparator();
+            msg += "\t\t" + (i + 1) + "." + tasks.get(i) + System.lineSeparator();
 
         }
 
@@ -147,6 +147,22 @@ public class TaskManager {
         if (!inDebugMode) {
             this.tasks = loader.loadTasks();
         }
+    }
+
+
+    public ArrayList<Task> findTasks (String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+
+        String pattern = keyword.trim().toLowerCase();
+
+        for (Task task : tasks) {
+            String description = task.getDescription().toLowerCase();
+            if (description.contains(pattern)) {
+                foundTasks.add(task);
+            }
+        }
+
+        return foundTasks;
     }
 
 

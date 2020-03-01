@@ -41,4 +41,8 @@ public class Messages {
     /** Specific to list command */
     public final static String EMPTY_LIST = "List is empty";
 
+
+    /** Find */
+    public final static String FOUND_TASKS = "%d %s found with the keyword %s";
+    public static final String EMPTY_FIND = "Failed to execute find. Reason: enter a valid keyword";
 }

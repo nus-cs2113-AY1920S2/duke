@@ -86,6 +86,9 @@ public class Parser {
         } else if (cmd.equals(Command.CMD_DELETE)) {
             return new DeleteCommand(taskManager, userResponse);
 
+        } else if (cmd.equals(Command.CMD_FIND)) {
+            return new FindCommand(taskManager, printer, userResponse);
+
         } else {
             return new InvalidCommand();
         }
