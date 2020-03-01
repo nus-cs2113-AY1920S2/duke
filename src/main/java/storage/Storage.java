@@ -1,7 +1,9 @@
-import data.Deadline;
-import data.Event;
-import data.Task;
-import data.Todo;
+package storage;
+
+import tasktype.Deadline;
+import tasktype.Event;
+import tasktype.Task;
+import tasktype.Todo;
 import tasklist.TaskList;
 
 import java.io.File;
@@ -20,7 +22,13 @@ import static common.Messages.TASKLIST_SAVE_PIPE_DELIMITER;
  */
 public class Storage {
 
+
     private String filePath;
+    private static final String TASK_NOTATION = "T";
+    private static final String EVENT_NOTATION = "E";
+    private static final String DEADLINE_NOTATION = "D";
+    protected final String TASK_DONE_NOTATION = "1";
+    private static final String PIPE_NOTATION = " | ";
 
     public Storage(String filePathInput) {
         this.filePath = filePathInput;
@@ -31,8 +39,8 @@ public class Storage {
      * <p></p>
      * <p>If there is no saved data present, this will throw a {@link FileNotFoundException} which
      * creates an empty TaskList. Else, it will load the saved tasks to a TaskList </p>
-     * @return an ArrayList<Task> containing the tasks. If there is no existing save file, an empty ArrayList is returned instead.
-     * @throws FileNotFoundException this exception occurs if no local save file is found. Handled by the Duke class which creates a new empty ArrayList<Task>
+     * @return an ArrayList<Task> containing the tasks
+     * @throws FileNotFoundException this exception occurs if no local save file is found. Handled by the data.Duke class which creates a new empty TaskList<Task>
      */
     public ArrayList<Task> loadFileToTaskList() throws FileNotFoundException {
         File f = new File(this.filePath);
@@ -61,21 +69,20 @@ public class Storage {
             String[] tokenizedTaskString = taskString.split(TASKLIST_SAVE_PIPE_DELIMITER);
             Task newTaskToLoad;
             switch(tokenizedTaskString[0].toUpperCase()) {
-            case ("T"):
+            case (TASK_NOTATION):
                 newTaskToLoad = new Todo(tokenizedTaskString[2]);
                 break;
-            case ("E"):
+            case (EVENT_NOTATION):
                 newTaskToLoad = new Event(tokenizedTaskString[2], tokenizedTaskString[3]);
                 break;
-            case ("D"):
+            case (DEADLINE_NOTATION):
                 newTaskToLoad = new Deadline(tokenizedTaskString[2], tokenizedTaskString[3]);
                 break;
             default:
-                //print invalid task loaded error message
                 return null;
             }
             //if task was previously marked done already, make sure to mark it as done when loading to taskList
-            if (tokenizedTaskString[1].equals("1")) {
+            if (tokenizedTaskString[1].equals(TASK_DONE_NOTATION)) {
                 newTaskToLoad.markAsDone();
             }
             taskListToReturn.add(newTaskToLoad);
@@ -103,11 +110,14 @@ public class Storage {
         for (int i=0; i < taskList.getTaskCount(); i++) {
             Task newTaskData = taskList.getTaskList().get(i);
             if (newTaskData instanceof Todo) {
-                newTaskString = newTaskData.getTaskData()[0] + " | " + newTaskData.getTaskData()[1] + " | "
+                newTaskString = newTaskData.getTaskData()[0] + PIPE_NOTATION
+                        + newTaskData.getTaskData()[1] + PIPE_NOTATION
                         + newTaskData.getTaskData()[2] + System.lineSeparator();
             } else {
-                newTaskString = newTaskData.getTaskData()[0] + " | " + newTaskData.getTaskData()[1] + " | "
-                        + newTaskData.getTaskData()[2] + " | " + newTaskData.getTaskData()[3] + System.lineSeparator();
+                newTaskString = newTaskData.getTaskData()[0] + PIPE_NOTATION
+                        + newTaskData.getTaskData()[1] + PIPE_NOTATION
+                        + newTaskData.getTaskData()[2] + PIPE_NOTATION
+                        + newTaskData.getTaskData()[3] + System.lineSeparator();
             }
             fw.write(newTaskString);
 

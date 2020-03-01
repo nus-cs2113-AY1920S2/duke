@@ -1,8 +1,17 @@
-import data.*;
+package command;
+
+import storage.Storage;
+import ui.Ui;
+import tasktype.Task;
+import tasktype.Todo;
+import tasktype.Event;
+import tasktype.Deadline;
 import common.Messages;
-import exceptions.*;
+import exceptions.IllegalKeywordException;
+import exceptions.NumberFieldException;
 import tasklist.TaskList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static common.Messages.*;
@@ -20,47 +29,58 @@ public class Command {
     private String[] tokenizedInput;
     private String[] taskDescriptionRemarksFieldsInput;
     private String query;
+    private Storage storage;
 
-    //for list and bye
+    /**
+     * Constructor for LIST, HELP and BYE command.
+     * @param keyword the respective command keyword, indicates the operation to be executed
+     */
     public Command(String keyword) {
         this.keyword = keyword;
     }
 
-    //for done, delete and find
+    /**
+     * Constructor for DONE, DELETE and FIND command.
+     * @param keyword the respective command keyword, indicates the operation to be executed
+     * @param queryInput this input is a number index (for DONE and DELETE) or a search keyword (for FIND)
+     */
     public Command(String keyword, String queryInput) {
         this.keyword = keyword;
         this.query = queryInput;
     }
 
-    //for todo, event and deadline
+    /**
+     * Constructor for TODO, EVENT or DEADLINE command.
+     * @param keyword the respective command keyword, indicates the operation to be executed
+     * @param tokenizedInput a string array of the original user input string, delimited by whitespaces
+     * @param processedUserInput a string array of the description and remarks fields in the original user input.
+     */
     public Command(String keyword, String[] tokenizedInput, String[] processedUserInput) {
         this.keyword = keyword;
         this.tokenizedInput = tokenizedInput;
         this.taskDescriptionRemarksFieldsInput = processedUserInput;
     }
 
-    //TODO
     /**
      * This method parses the keyword attribute of the {@link Command} object, and carries out the operation corresponding to the keyword on a {@link TaskList} list.
      * <p></p>
      * <p>
      * If any exception is encountered during the operation, they will be thrown and caught by the exception handler
-     * in the main class ({@link Duke})
+     * in the main class ({@link data.Duke})
      * </p>
      *
-     * @param taskListInput         the list of tasks
-     * @param uiInput           for displaying Ui elements
-     * @throws MissingParameterException
+     * @param taskListInput the list of tasks
+     * @param uiInput for displaying ui.Ui elements
+     * @param storageInput for saving updated tasklist to local save file
      * @throws NumberFieldException an exception thrown in DONE and DELETE command operations; when the task number given is not a number, or outside the range of existing tasks
-     * @throws NoRemarkException an exception thrown in EVENT and DEADLINE command operations; when the new task does not contain a remarks field
      * @throws IllegalKeywordException an exception thrown when the command keyword is not recognized as a valid command
-     * @throws NoDescriptionException an exception thrown in TODO, EVENT and DEADLINE command operations; when the new task does not contain a description field
      * @see TaskList
      * @see NumberFieldException
      * @see Ui
      */
-    public void execute(TaskList taskListInput, Ui uiInput) throws MissingParameterException,
-            NumberFieldException, NoRemarkException, IllegalKeywordException, NoDescriptionException {
+    public void execute(TaskList taskListInput, Ui uiInput, Storage storageInput) throws NumberFieldException,
+            IllegalKeywordException {
+        this.storage = storageInput;
         switch (keyword.toLowerCase()) {
         case (BYE_COMMAND):
             break;
@@ -68,16 +88,19 @@ public class Command {
             printTaskList(taskListInput, uiInput);
             break;
         case (DONE_COMMAND):
-            updateTaskDone(taskListInput, uiInput, query);
+            updateTaskDone(taskListInput, uiInput, query, storage);
             break;
         case (DELETE_COMMAND):
-            deleteTask(taskListInput, uiInput, query);
+            deleteTask(taskListInput, uiInput, query, storage);
             break;
         case (FIND_COMMAND):
             findTasksByKeyword(taskListInput, uiInput, query);
             break;
+        case (HELP_COMMAND):
+            printHelpList(uiInput);
+            break;
         default:
-            insertNewTask(taskListInput, uiInput, tokenizedInput);
+            insertNewTask(taskListInput, uiInput, tokenizedInput, storage);
             break;
         }
     }
@@ -91,7 +114,7 @@ public class Command {
      * </p>
      *
      * @param listInput         the list of Tasks
-     * @param uiInput           for displaying Ui elements
+     * @param uiInput           for displaying ui.Ui elements
      * @see TaskList
      * @see Ui
      * @see Todo
@@ -125,18 +148,19 @@ public class Command {
      *
      * @param listInput         the list of tasks
      * @param taskNumberInput   the task number of the task to be marked as done
-     * @param uiInput           for displaying Ui elements
+     * @param uiInput           for displaying ui.Ui elements
+     * @param storageInput for saving updated tasklist to local save file
      * @throws NumberFieldException the exception thrown when the task number given is not a number, or outside the range of existing tasks
      * @see TaskList
      * @see NumberFieldException
      * @see Ui
      */
-    public void updateTaskDone(TaskList listInput, Ui uiInput, String taskNumberInput) throws NumberFieldException {
+    public void updateTaskDone(TaskList listInput, Ui uiInput, String taskNumberInput, Storage storageInput)
+            throws NumberFieldException {
         int queryNumber;
         try {
             queryNumber = Integer.parseInt(taskNumberInput);
         } catch (NumberFormatException e) {
-            //throw NumberFieldException if taskNumber is a string eg. "remove foo" OR whitespaces only
             throw new NumberFieldException(INVALID_TASK_NUMBER_ERROR_MESSAGE);
         }
         boolean isOutOfRange = queryNumber < 1 || queryNumber > listInput.getTaskCount();
@@ -157,9 +181,13 @@ public class Command {
 
         String taskDoneMessage = messageContainer.getTaskDoneMessage(queryNumber, listInput);
         uiInput.displayMessage(taskDoneMessage);
+        try {
+            storageInput.saveTaskListToFile(listInput);
+        } catch (IOException e) {
+            uiInput.displayMessage(SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE);
+        }
     }
 
-    //TODO
     /**
      * This method constructs a new {@link Task} from the attributes of the {@link Command} object, and inserts it into a given {@link TaskList} list.
      * <p></p>
@@ -169,17 +197,13 @@ public class Command {
      *
      * @param listInput         the list of Tasks
      * @param uiInput           for displaying Ui elements
-     * @throws MissingParameterException
-     * @throws NumberFieldException the exception thrown when the task number given is not a number, or outside the range of existing tasks
-     * @throws NoRemarkException
-     * @throws IllegalKeywordException
-     * @throws NoDescriptionException
+     * @param storageInput for saving updated tasklist to local save file
+     * @throws IllegalKeywordException occurs when the command keyword is an unknown type (not TODO, DEADLINE or EVENT)
      * @see TaskList
-     * @see NumberFieldException
      * @see Ui
      */
-    private void insertNewTask(TaskList listInput, Ui uiInput, String[] tokenizedInput) throws
-    IllegalKeywordException, NoDescriptionException, NoRemarkException {
+    private void insertNewTask(TaskList listInput, Ui uiInput, String[] tokenizedInput, Storage storageInput) throws
+            IllegalKeywordException {
         Task newTask;
         switch (tokenizedInput[0]) {
         case (TODO_COMMAND):
@@ -193,12 +217,16 @@ public class Command {
             break;
         default:
             throw new IllegalKeywordException(INVALID_COMMAND_ERROR_MESSAGE);
-            //break;
         }
 
         listInput.addTask(newTask);
         String taskAddedMessage = messageContainer.getTaskAddedMessage(newTask, listInput);
         uiInput.displayMessage(taskAddedMessage);
+        try {
+            storageInput.saveTaskListToFile(listInput);
+        } catch (IOException e) {
+            uiInput.displayMessage(SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE);
+        }
     }
 
     /**
@@ -209,14 +237,16 @@ public class Command {
      * </p>
      *
      * @param listInput         the list of Tasks
-     * @param uiInput           for displaying Ui elements
+     * @param uiInput           for displaying ui.Ui elements
      * @param taskNumberInput   the task number of the task to be deleted
+     * @param storageInput for saving updated tasklist to local save file
      * @throws NumberFieldException the exception thrown when the task number given is not an integer, or outside the range of existing tasks
      * @see TaskList
      * @see NumberFieldException
      * @see Ui
      */
-    private void deleteTask(TaskList listInput, Ui uiInput, String taskNumberInput) throws NumberFieldException {
+    private void deleteTask(TaskList listInput, Ui uiInput, String taskNumberInput, Storage storageInput)
+            throws NumberFieldException {
         int taskNumberForRemoval;
         try {
             taskNumberForRemoval = Integer.parseInt(taskNumberInput);
@@ -233,8 +263,20 @@ public class Command {
 
         String taskRemovedMessage = messageContainer.getTaskRemovedMessage(removedTask, listInput);
         uiInput.displayMessage(taskRemovedMessage);
+        try {
+            storageInput.saveTaskListToFile(listInput);
+        } catch (IOException e) {
+            uiInput.displayMessage(SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE);
+        }
     }
 
+    /**
+     * This method searches the Tasks in the {@link TaskList} object input for a keyword. It filters out
+     * Tasks containing the search keyword and prints them.
+     * @param listInput the TaskList object to be searched
+     * @param uiInput helps to display filtered Tasks
+     * @param searchQuery the keyword to be searched for in Tasks
+     */
     private void findTasksByKeyword(TaskList listInput, Ui uiInput, String searchQuery) {
         int resultNumber = 1;
         ArrayList<Task> searchResults = listInput.findSearchResults(listInput.getTaskList(), searchQuery);
@@ -242,13 +284,17 @@ public class Command {
         if (Integer.valueOf(searchResults.size()).equals(Integer.valueOf(0))) {
             uiInput.displayMessage(NO_MATCHING_SEARCH_RESULTS_MESSAGE);
         } else {
-            String searchOutput = "\tHere are the search results: " + LS;
+            String searchOutput = MATCHING_SEARCH_RESULTS_INTRO_MESSAGE + LS;
             for (Task result : searchResults) {
                 searchOutput += "\t"+ Integer.toString(resultNumber) + "." + result.toString() + LS;
                 resultNumber++;
             }
             uiInput.displayMessage(searchOutput);
         }
+    }
+
+    private void printHelpList(Ui uiInput) {
+        uiInput.displayMessage(HELP_COMMAND_LIST);
     }
 
 }

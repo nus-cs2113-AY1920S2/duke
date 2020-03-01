@@ -1,12 +1,19 @@
+package ui;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 import common.Messages;
 
-import static common.Messages.*;
+import static common.Messages.START_MESSAGE;
+import static common.Messages.FIRST_EXIT_MESSAGE;
+import static common.Messages.SECOND_EXIT_MESSAGE;
+import static common.Messages.USER_INPUT_ARROWHEAD_DISPLAY;
+import static common.Messages.EMPTY_COMMAND_ERROR_MESSAGE;
+import static common.Messages.DUKE_LOGO;
 
 /**
- * This class is the UI that allows the user to interact with Duke. It contains methods to take in user input and display messages.
+ * This class is the UI that allows the user to interact with data.Duke. It contains methods to take in user input and display messages.
  */
 public class Ui {
 
@@ -27,6 +34,7 @@ public class Ui {
      * This method produces the introductory message on program startup.
      */
     public void sayIntro(){
+        out.println(DUKE_LOGO);
         out.println(messageContainer.addCurlyBorders(START_MESSAGE));
     }
 

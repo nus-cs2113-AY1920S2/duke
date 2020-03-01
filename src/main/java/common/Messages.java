@@ -1,7 +1,7 @@
 package common;
 
 import tasklist.TaskList;
-import data.Task;
+import tasktype.Task;
 
 /**
  * This class acts as a container for the error messages and strings that are used by the rest of the classes.
@@ -25,7 +25,16 @@ public class Messages {
     public static final String SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE = "\tError saving taskList to duke.txt";
 
     public static final String START_MESSAGE = "Hello! I'm Duke" + LS
-            + "What can I do for you?";
+            + "What can I do for you?" + LS + LS
+            + "Type \'help\' to see the list of commands you can use!";
+
+    public static final String DUKE_LOGO = " ______   _____  _____  ___  ____   ________ " + LS
+            + "|_   _ `.|_   _||_   _||_  ||_  _| |_   __  |" + LS
+            + "  | | `. \\ | |    | |    | |_/ /     | |_ \\_|" + LS
+            + "  | |  | | | '    ' |    |  __'.     |  _| _  "+ LS
+            + " _| |_.' /  \\ \\__/ /    _| |  \\ \\_  _| |__/ |"+ LS
+            + "|______.'    `.__.'    |____||____||________|" + LS + LS
+            + "\tyour friendly task manager";
 
     public static final String FIRST_EXIT_MESSAGE = "Bye! Hope to see you again soon" + LS;
 
@@ -49,20 +58,24 @@ public class Messages {
 
     public static final String EVENT_COMMAND = "event";
 
+    public static final String HELP_COMMAND = "help";
+
     public static final String WHITESPACE_DELIMITER = " ";
 
     public static final String REMARKS_DELIMITER = " /";
 
-    public static final String TASKLIST_SAVE_DIRECTORY = "data";
+    public static final String TASKLIST_SAVE_DIRECTORY = "savefile";
 
-    public static final String TASKLIST_SAVE_FILEPATH = "data/duke.txt";
+    public static final String TASKLIST_SAVE_FILEPATH = "savefile/duke.txt";
 
     public static final String TASKLIST_SAVE_PIPE_DELIMITER = " \\| ";
 
     public static final String NO_MATCHING_SEARCH_RESULTS_MESSAGE =
             "\tNo tasks containing the search keyword were found.";
+    public static final String MATCHING_SEARCH_RESULTS_INTRO_MESSAGE =
+            "\tHere are the search results: ";
 
-    public static final String EMPTY_COMMAND_ERROR_MESSAGE = "\t\u2639 !!ERROR!! Command cannot be whitespaces.";
+    public static final String EMPTY_COMMAND_ERROR_MESSAGE = "\t\u2639 !!ERROR!! command.Command cannot be whitespaces.";
 
     public static final String INVALID_TASK_NUMBER_ERROR_MESSAGE =
             "\t\u2639 !!ERROR!! The task number you have provided is not valid.";
@@ -76,6 +89,24 @@ public class Messages {
 
     public static final String TODO_HAS_REMARK_SECTION_ERROR_MESSAGE =
             "\t\u2639 !!ERROR!! task command should not have a remarks section.";
+
+    public static final String HELP_COMMAND_LIST = "\tThis is a list of all valid commands for Duke:" + LS + LS
+            + "\t1. todo - adds a Todo task to list of tasks" + LS
+            + "\tUsage: \'todo <description> \'" + LS + LS
+            + "\t2. event - adds an Event task to list of tasks" + LS
+            + "\tUsage: \'event <description> /<remark>\'" + LS + LS
+            + "\t3. deadline - adds a Deadline task to list of tasks" + LS
+            + "\tUsage: \'deadline <description> /<remark>\'" + LS + LS
+            + "\t4. list - prints out current list of tasks" + LS
+            + "\tUsage: \'list\'" + LS + LS
+            + "\t5. done - marks a task as completed" + LS
+            + "\tUsage: \'done <task index>\'" + LS + LS
+            + "\t6. find - finds tasks containing a specific keyword" + LS
+            + "\tUsage: \'find <keyword>\'" + LS + LS
+            + "\t7. delete - deletes a specific task from the current task list" + LS
+            + "\tUsage: \'delete <task index>\'" + LS + LS
+            + "\t8. bye - saves current task list and exits Duke" + LS
+            + "\tUsage: \'bye\'";
 
     public String addUnderscoreBorders(String inputText) {
         return UNDERSCORED_DIVIDER + LS + inputText + LS + UNDERSCORED_DIVIDER;

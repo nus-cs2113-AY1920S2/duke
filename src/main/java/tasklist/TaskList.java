@@ -1,6 +1,7 @@
 package tasklist;
 
-import data.Task;
+import tasktype.Task;
+import data.Duke;
 
 import java.util.ArrayList;
 

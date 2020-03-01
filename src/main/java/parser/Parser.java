@@ -1,8 +1,29 @@
+package parser;
+
+import ui.Ui;
+import command.Command;
 import common.Messages;
-import exceptions.*;
+import exceptions.IllegalKeywordException;
+import exceptions.MissingParameterException;
+import exceptions.NoDescriptionException;
+import exceptions.NoRemarkException;
+import exceptions.NumberFieldException;
 import tasklist.TaskList;
 
-import static common.Messages.*;
+import static common.Messages.BYE_COMMAND;
+import static common.Messages.LIST_COMMAND;
+import static common.Messages.HELP_COMMAND;
+import static common.Messages.DONE_COMMAND;
+import static common.Messages.DELETE_COMMAND;
+import static common.Messages.FIND_COMMAND;
+import static common.Messages.TODO_COMMAND;
+import static common.Messages.EVENT_COMMAND;
+import static common.Messages.DEADLINE_COMMAND;
+import static common.Messages.INVALID_COMMAND_ERROR_MESSAGE;
+import static common.Messages.REMARKS_DELIMITER;
+import static common.Messages.WHITESPACE_DELIMITER;
+import static common.Messages.TODO_HAS_REMARK_SECTION_ERROR_MESSAGE;
+import static common.Messages.executeCommandInsufficientParameterErrorMessage;
 
 /**
  * This class parses the user input. It helps to process and convert input into a {@link Command} object.
@@ -27,7 +48,7 @@ public class Parser {
      * an exception will be thrown with an error message informing the user of the inconsistency and advice for proper usage.
      * </p>
      * @param userInput a String containing the processed command input provided by the user
-     * @return a Command object that can be used to execute the intended operation for the user
+     * @return a command.Command object that can be used to execute the intended operation for the user
      * @throws NumberFieldException an exception thrown in DONE and DELETE command operations; when the task number given is not a number, or outside the range of existing tasks
      * @throws NoRemarkException an exception thrown in EVENT and DEADLINE command operations; when the new task does not contain a remarks field
      * @throws IllegalKeywordException an exception thrown when the command keyword is not recognized as a valid command
@@ -44,6 +65,7 @@ public class Parser {
         switch (commandKeyword.toLowerCase()) {
         case (BYE_COMMAND):
         case (LIST_COMMAND):
+        case (HELP_COMMAND):
             if (commandKeyword.equals(BYE_COMMAND)) {
                 isExitCommandInvoked = true;
             }
@@ -55,7 +77,6 @@ public class Parser {
             try {
                 newCommand = new Command(commandKeyword, tokenizedInput[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                //throw MissingParameterException if any of the commands given without additional par
                 throw new MissingParameterException(
                         messageContainer.executeCommandInsufficientParameterErrorMessage(commandKeyword));
             }
@@ -120,13 +141,12 @@ public class Parser {
             // get description part of userInput without the command word
             String[] separatedSections = originalInput.split(WHITESPACE_DELIMITER);
             String commandWord = separatedSections[0].split(WHITESPACE_DELIMITER, 2)[0];
-            //only the keyword input
             if (Integer.valueOf(separatedSections.length).equals(Integer.valueOf(1))) {
                 throw new MissingParameterException(messageContainer.executeCommandInsufficientParameterErrorMessage(commandWord));
             }
             //similar to above, event and deadline should not be missing a description section
             if (commandWord.toLowerCase().equals(EVENT_COMMAND) || commandWord.toLowerCase().equals(DEADLINE_COMMAND)) {
-                throw new IllegalKeywordException(/*event or deadline should have remarks section msg*/messageContainer.splitInputEventOrDeadlineMissingRemarksErrorMessage(commandWord));
+                throw new IllegalKeywordException(messageContainer.splitInputEventOrDeadlineMissingRemarksErrorMessage(commandWord));
             }
             returnValue[0] = originalInput.trim().split(WHITESPACE_DELIMITER, 2)[1];
 

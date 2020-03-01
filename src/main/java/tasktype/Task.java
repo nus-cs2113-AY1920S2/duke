@@ -1,11 +1,11 @@
-package data;
+package tasktype;
 
 import java.util.ArrayList;
 
 /**
- * This class is the superclass of all tasks that can be stored in Duke.
+ * This class is the superclass of all tasks that can be stored in data.Duke.
  * <p></p>
- * <p>This superclass is made abstract so the tasks stored in Duke will definitely be one of the subclasses of tasks</p>
+ * <p>This superclass is made abstract so the tasks stored in data.Duke will definitely be one of the subclasses of tasks</p>
  */
 public abstract class Task {
     protected String description;
@@ -19,7 +19,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.isDone ? "/" : " "); //return tick or X symbols
     }
 
     public String getDescription(){
@@ -39,10 +39,10 @@ public abstract class Task {
     }
 
     /**
-     * This abstract method is overridden in the Task subclasses. It converts the data for Task objects into
+     * This abstract method is overridden in the subclasses of Task. It converts the data for Task objects into
      * a String array for easy parsing and application.
      * <p></p>
-     * <p>This data is used primarily by the Storage class when saving the task into the local save file.</p>
+     * <p>This data is used primarily by the storage.Storage class when saving the task into the local save file.</p>
      * <p></p>
      * <p>View the subclasses to see how the method is overridden.</p>
      * @return the subclass will return its respective task information
@@ -52,6 +52,15 @@ public abstract class Task {
      */
     public abstract String[] getTaskData();
 
+    /**
+     * This abstract method is overridden in the subclasses of Task. It adds the current Task object to a searchResults
+     * ArrayList if the Task's description or field contains the keyword.
+     * <p></p>
+     * <p>This method is primarily used for the FIND command.</p>
+     * <p>View the subclasses to see how the method is overridden.</p>
+     * @param searchResults a list of Tasks containing the search keyword
+     * @param searchKeyword the keyword to be searched for in the Task
+     */
     public abstract void addIfContainsKeyword(ArrayList<Task> searchResults, String searchKeyword);
 
 
