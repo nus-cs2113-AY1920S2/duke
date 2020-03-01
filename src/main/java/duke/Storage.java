@@ -1,7 +1,9 @@
-import commands.Task;
-import commands.Todo;
-import commands.Deadline;
-import commands.Event;
+package duke;
+
+import tasks.Task;
+import tasks.Todo;
+import tasks.Deadline;
+import tasks.Event;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -59,8 +61,8 @@ public class Storage {
         return tasks;
     }
 
-    public void saveData(ArrayList<Task> tasks) {
-        try {
+    public void saveData(TaskList tasks) {
+        /*try {
             FileWriter fw = new FileWriter("output.txt");
 
             for (Task task : tasks){
@@ -91,6 +93,16 @@ public class Storage {
                     fw.write(addData + System.lineSeparator());
                     break;
                 }
+            }
+            fw.close();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }*/
+        try {
+            FileWriter fw = new FileWriter("output.txt");
+            for (Task task : tasks.getTaskArray()) {
+                fw.write(task.toString() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException err) {

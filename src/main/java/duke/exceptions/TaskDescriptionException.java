@@ -1,9 +1,9 @@
-package exceptions;
+package duke.exceptions;
 
-public class EventDateException extends DukeException {
+public class TaskDescriptionException extends DukeException {
     private String error;
 
-    public EventDateException(String error) {
+    public TaskDescriptionException(String error) {
         this.error = error;
     }
 

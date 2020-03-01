@@ -1,9 +1,9 @@
-package exceptions;
+package duke.exceptions;
 
-public class EmptyListException extends DukeException {
+public class DeadlineDateException extends DukeException {
     private String error;
 
-    public EmptyListException(String error) {
+    public DeadlineDateException(String error) {
         this.error = error;
     }
 

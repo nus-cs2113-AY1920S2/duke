@@ -1,9 +1,9 @@
-package exceptions;
+package duke.exceptions;
 
-public class InvalidCommandException extends DukeException {
+public class EmptyListException extends DukeException {
     private String error;
 
-    public InvalidCommandException(String error) {
+    public EmptyListException(String error) {
         this.error = error;
     }
 

@@ -1,2 +1,4 @@
-T | 0 | rihfre f
-D | 0 | deadline (by: ceiufhce)
+[D][✘] deadline (by: ceiufhce)
+[E][✓] event kjrf (at: djfne)
+[E][✘] event (at: rgj)
+[D][✘] deadline fifj (by: fyv)

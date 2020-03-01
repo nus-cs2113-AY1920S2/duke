@@ -1,9 +1,9 @@
-package exceptions;
+package duke.exceptions;
 
-public class TaskNumberException extends DukeException {
+public class InvalidCommandException extends DukeException {
     private String error;
 
-    public TaskNumberException(String errorMsg) {
+    public InvalidCommandException(String error) {
         this.error = error;
     }
 

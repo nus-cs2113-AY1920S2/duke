@@ -1,9 +1,9 @@
-package exceptions;
+package duke.exceptions;
 
-public class DeadlineDateException extends DukeException {
+public class TaskNumberException extends DukeException {
     private String error;
 
-    public DeadlineDateException(String error) {
+    public TaskNumberException(String errorMsg) {
         this.error = error;
     }
 
