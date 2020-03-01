@@ -19,7 +19,7 @@ is located at.
 
 ## Features 
 All possible input commands at any stage while running the application 
-will be showed by a instruction list. When selecting the instructions, 
+will be showed on a instruction list. When selecting the instructions, 
 you should key in the respective number assigned to your desired 
 instruction in the list. 
 
