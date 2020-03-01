@@ -1,4 +1,1 @@
-[D][✘] deadline (by: ceiufhce)
-[E][✓] event kjrf (at: djfne)
-[E][✘] event (at: rgj)
-[D][✘] deadline fifj (by: fyv)
+[T][✘] read book
