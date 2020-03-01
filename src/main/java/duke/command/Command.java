@@ -5,7 +5,8 @@ import duke.task.TaskManager;
 /**
  * A class representing a user command. It could be either a {@link ClearCommand}, a {@link DeadlineCommand},
  * a {@link DeleteCommand}, a {@link DoneCommand}, an {@link EventCommand}, an {@link ExitCommand},
- * a {@link HelpCommand}, an {@link InvalidCommand}, a {@link ListCommand}, or a {@link TodoCommand}.
+ * a {@link HelpCommand}, an {@link InvalidCommand}, a {@link ListCommand}, a {@link TodoCommand}, or
+ * a {@link FindCommand}.
  */
 public abstract class Command {
 

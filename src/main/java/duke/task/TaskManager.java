@@ -150,6 +150,13 @@ public class TaskManager {
     }
 
 
+    /**
+     * Finds all the tasks containing the 'keyword' in their
+     * descriptions
+     *
+     * @param keyword Pattern to look for.
+     * @return The list of tasks containing the given keyword.
+     */
     public ArrayList<Task> findTasks (String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
 
@@ -189,7 +196,14 @@ public class TaskManager {
         String singularNoun = "task";
         String pluralNoun = "tasks";
 
-        return (tasks.size() > 1) ? pluralNoun: singularNoun;
+        return (tasks.size() == 1) ? singularNoun: pluralNoun;
+    }
+
+    public String getTaskListNoun (ArrayList<Task> tasks) {
+        String singularNoun = "task";
+        String pluralNoun = "tasks";
+
+        return (tasks.size() == 1) ? singularNoun: pluralNoun;
     }
 
     /**

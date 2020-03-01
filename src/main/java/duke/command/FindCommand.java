@@ -2,17 +2,19 @@ package duke.command;
 
 import duke.task.TaskManager;
 import duke.task.tasktypes.Task;
-import duke.ui.Ui;
 import duke.utility.Messages;
 
 import java.util.ArrayList;
 
+/**
+ * A class representing the find command.
+ */
 public class FindCommand extends Command {
 
     private String userInput;
 
-    public FindCommand (TaskManager manager, Ui printer, String userInput) {
-        super(manager, printer);
+    public FindCommand (TaskManager manager, String userInput) {
+        super(manager);
         this.userInput = userInput.trim();
     }
 
@@ -24,7 +26,7 @@ public class FindCommand extends Command {
 
         ArrayList<Task> tasks = taskManager.findTasks(userInput);
 
-        String heading = String.format(Messages.FOUND_TASKS, tasks.size(), taskManager.getTaskListNoun(), userInput.trim()) +
+        String heading = String.format(Messages.FOUND_TASKS, tasks.size(), taskManager.getTaskListNoun(tasks), userInput.trim()) +
                 System.lineSeparator() + System.lineSeparator();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -37,5 +39,7 @@ public class FindCommand extends Command {
 
         return new CommandResult(heading);
     }
+
+
 
 }

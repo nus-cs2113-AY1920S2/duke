@@ -3,11 +3,15 @@ package duke.utility;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-
+/**
+ * A class representing a date and time for a task.
+ */
 public class DateFormatter {
 
 
     private String rawInput;
+
+    /** Date information, date and time, given by the user */
     private String[] dateInfo;
 
     private LocalDate date;
@@ -17,7 +21,10 @@ public class DateFormatter {
     private boolean isValidDate = false;
     private boolean isValidTime = false;
 
+    /** Maximum length is for day + month + year */
     private final int DATE_LENGTH = 3;
+
+    /** Maximum length is for date + time */
     private final int DATE_INFO_MAX_LENGTH = 2;
 
     enum Midday {
@@ -35,6 +42,12 @@ public class DateFormatter {
         checkForException();
     }
 
+    /**
+     * Checks if the given date information is valid or not. A valid date
+     * can be just a time, just a date, or both a time and a date.
+     *
+     * @throws DateTimeException If either date and/or time are invalid
+     */
     private void checkForException() throws DateTimeException {
 
         if (!isValidTime && !isValidDate) {
@@ -51,6 +64,10 @@ public class DateFormatter {
 
     }
 
+
+    /**
+     * Creates a LocalDate object if the given date is valid.
+     */
     private void initDate () {
 
         try {
@@ -77,6 +94,9 @@ public class DateFormatter {
 
     }
 
+    /**
+     * Creates a String representation of time if the format is correct.
+     */
     private void initTime () {
 
         try {
@@ -118,6 +138,14 @@ public class DateFormatter {
 
     }
 
+
+    /**
+     * Converts hour from 24-hour cycle to 12-hour cycle and determines
+     * if time is before/after midday
+     *
+     * @param rawHour Raw hour given by the user.
+     * @return The hour converted to 12-hour cycle.
+     */
     private int getHour (int rawHour) {
 
         if (rawHour >= 0 && rawHour <= 11) {
@@ -139,6 +167,11 @@ public class DateFormatter {
         }
     }
 
+    /**
+     * Gets the String representation of time.
+     *
+     * @return The time of the date.
+     */
     public String getTime () {
 
         if (isValidTime) {
@@ -148,6 +181,12 @@ public class DateFormatter {
         return "";
     }
 
+
+    /**
+     * Gets the LocalDate object.
+     *
+     * @return The LocalDate object.
+     */
     public String getDate () {
 
         if (isValidDate) {
@@ -164,6 +203,13 @@ public class DateFormatter {
         return "";
     }
 
+    /**
+     * Formats the month from the raw input to display the same
+     * month in a different format.
+     *
+     * @param rawMonth Month in uppercase.
+     * @return The first three characters of the month formatted.
+     */
     private String getMonth (String rawMonth) {
         String month = rawMonth.substring(0, 3).toLowerCase();
         month = month.substring(0, 1).toUpperCase() + month.substring(1);
@@ -171,10 +217,20 @@ public class DateFormatter {
         return month;
     }
 
+    /**
+     * Gets the validity of the date.
+     *
+     * @return True if the date has correct day, month, and year.
+     */
     public boolean hasValidDate () {
         return isValidDate;
     }
 
+    /**
+     * Gets the validity of the time.
+     *
+     * @return True if the time is within the 24-hour cycle bound.
+     */
     public boolean hasValidTime () {
         return isValidTime;
     }

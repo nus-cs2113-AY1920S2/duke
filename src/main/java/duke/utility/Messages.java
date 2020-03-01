@@ -42,7 +42,7 @@ public class Messages {
     public final static String EMPTY_LIST = "List is empty";
 
 
-    /** Find */
+    /** Specific to find command */
     public final static String FOUND_TASKS = "%d %s found with the keyword %s";
     public static final String EMPTY_FIND = "Failed to execute find. Reason: enter a valid keyword";
 }
