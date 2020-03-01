@@ -90,8 +90,8 @@ public class Storage {
             if (dukeData.createNewFile()) {
                 System.out.println(CREATE_NEW_FILE_MESSAGE + dukeData.getName());
             } else {
-                System.out.println(LOAD_EXISTING_FILE_MESSAGE + dukeData.getName());
                 this.readFile();
+                System.out.println(LOAD_EXISTING_FILE_MESSAGE + dukeData.getName());
             }
         } catch (IOException e) {
             ui.displayErrorMessage();

@@ -28,6 +28,7 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(TaskList tasklist, UI ui, Storage storage) {
+        storage.rewriteFile();
         ui.displayGoodbyeMessage();
         ui.setExitStatus(true);
     }

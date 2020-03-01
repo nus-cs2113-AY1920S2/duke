@@ -41,6 +41,7 @@ public class DoneCommand extends Command {
         if (taskIndex >= tasklist.getLength()) throw new IndexOutOfBoundsException();
         Task doneTask = tasklist.getTaskList().get(taskIndex);
         doneTask.setDone(true);
+        storage.rewriteFile();
         ui.displayDoneTaskMessage(doneTask);
     }
 }
