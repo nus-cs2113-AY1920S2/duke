@@ -1,4 +1,8 @@
-import Exceptions.*;
+import exceptions.*;
+import task.Deadline;
+import task.Events;
+import task.Task;
+import task.Todo;
 
 import java.util.Scanner;
 import java.util.ArrayList;

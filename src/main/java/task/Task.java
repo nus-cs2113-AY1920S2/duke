@@ -1,3 +1,5 @@
+package task;
+
 import javax.print.DocFlavor;
 
 /**
@@ -21,6 +23,10 @@ public abstract class Task {
 
     public static int getNumberOfTasksInList() {
         return numberOfTasksInList;
+    }
+
+    public static void reduceNumberOfTaskInList() {
+        numberOfTasksInList--;
     }
 
     /**
@@ -55,4 +61,12 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
+
+    public String isDone() {
+        return (isDone ? "[Y]" : "[N]");
+    }
+
+    public abstract String getEventType();
+
+    public abstract String getTaskTime();
 }

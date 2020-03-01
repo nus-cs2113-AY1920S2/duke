@@ -1,3 +1,5 @@
+package task;
+
 public class Todo extends Task {
     protected String eventType;
 
@@ -6,8 +8,14 @@ public class Todo extends Task {
         this.eventType = "[T]";
     }
 
+    @Override
     public String getEventType() {
         return eventType;
+    }
+
+    @Override
+    public String getTaskTime() {
+        return null;
     }
 
     @Override

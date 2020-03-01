@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class MissingItemIndexException extends DukeException {
     private String errorMessage;

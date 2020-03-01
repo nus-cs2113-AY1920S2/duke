@@ -1,3 +1,5 @@
+package task;
+
 public class Events extends Task {
     protected String eventTime;
     protected String eventType;
@@ -8,24 +10,26 @@ public class Events extends Task {
         this.eventType = "[E]";
     }
 
-    public String getEventTime() {
-        return String.format("(%s)", this.eventTime);
-    }
-
+    @Override
     public String getEventType() {
         return eventType;
     }
 
     @Override
+    public String getTaskTime() {
+        return String.format("(%s)", this.eventTime);
+    }
+
+    @Override
     public String toString() {
         return String.format("%s%s %s%s", getEventType(),
-                super.getStatusIcon(), super.getDescription(), getEventTime());
+                super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 
     @Override
     public String getDoneResponseMessage(int itemIndexRequested) {
         return String.format("[%d. %s%s %s%s] is marked done!", itemIndexRequested, getEventType(),
-                super.getStatusIcon(), super.getDescription(), getEventTime());
+                super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 
 }

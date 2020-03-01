@@ -1,4 +1,6 @@
-public class Deadline extends Task{
+package task;
+
+public class Deadline extends Task {
     protected String deadline;
     protected String eventType;
 
@@ -7,24 +9,24 @@ public class Deadline extends Task{
         this.deadline = deadline;
         this.eventType = "[D]";
     }
-
+    @Override
     public String getEventType() {
         return this.eventType;
     }
-
-    public String getDeadline() {
+    @Override
+    public String getTaskTime() {
         return String.format("(%s)", this.deadline);
     }
 
     @Override
     public String toString() {
         return String.format("%s%s %s%s", getEventType(),
-                super.getStatusIcon(), super.getDescription(), getDeadline());
+                super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 
     @Override
     public String getDoneResponseMessage(int itemIndexRequested) {
         return String.format("[%d. %s%s %s%s] is marked done!", itemIndexRequested, getEventType(),
-                super.getStatusIcon(), super.getDescription(), getDeadline());
+                super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 }

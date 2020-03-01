@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class MissingDescriptionException extends DukeException{
     private String errorMessage;
