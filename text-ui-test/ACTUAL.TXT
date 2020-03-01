@@ -17,20 +17,19 @@
   _______________________________________________________________________________
 
   _______________________________________________________________________________
-	Okay! I have added the following task to your list:
-		‣ [D][✘] finish project (by: November 5th)
-	Now you have 2 tasks in your list :)
+	Failed to add deadline. Reason: Invalid time and date: [November 5th]
+		Expected format: deadline [description] /by [dd-mm-yyyy] [hh:mm], 24-hour clock
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	Invalid input for adding a deadline.
-		Expected format: deadline [description] /by [date/time]
+		Expected format: deadline [description] /by [dd-mm-yyyy] [hh:mm], 24-hour clock
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	Okay! I have added the following task to your list:
 		‣ [E][✘] project meeting (at: Monday 5:00pm)
-	Now you have 3 tasks in your list :)
+	Now you have 2 tasks in your list :)
   _______________________________________________________________________________
 
   _______________________________________________________________________________
@@ -46,8 +45,7 @@
 	Here is your list so far:
 
 	1.[T][✘] read book
-	2.[D][✘] finish project (by: November 5th)
-	3.[E][✘] project meeting (at: Monday 5:00pm)
+	2.[E][✘] project meeting (at: Monday 5:00pm)
   _______________________________________________________________________________
 
   _______________________________________________________________________________
@@ -57,31 +55,29 @@
 
   _______________________________________________________________________________
 	Okay! Marked this task as done :) :
-		[D][✓] finish project (by: November 5th)
+		[E][✓] project meeting (at: Monday 5:00pm)
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	The task:
-		‣ [D][✓] finish project (by: November 5th)
+		‣ [E][✓] project meeting (at: Monday 5:00pm)
 	has already been marked as done before
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	Okay! I've removed the following task from your list :) :
 		[T][✓] read book
-	Now you have 2 tasks in your list
-  _______________________________________________________________________________
-
-  _______________________________________________________________________________
-	Okay! I've removed the following task from your list :) :
-		[D][✓] finish project (by: November 5th)
 	Now you have 1 task in your list
   _______________________________________________________________________________
 
   _______________________________________________________________________________
 	Okay! I've removed the following task from your list :) :
-		[E][✘] project meeting (at: Monday 5:00pm)
+		[E][✓] project meeting (at: Monday 5:00pm)
 	Your list is empty now :O
+  _______________________________________________________________________________
+
+  _______________________________________________________________________________
+	Your list is empty... I cannot delete something that doesn't exist
   _______________________________________________________________________________
 
   _______________________________________________________________________________
