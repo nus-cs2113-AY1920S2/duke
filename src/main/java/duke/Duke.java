@@ -47,11 +47,11 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke chatBot = new Duke();
-        AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall(); // External library for text formatting; install for use
 
         chatBot.runChat();
 
-        AnsiConsole.systemUninstall();
+        AnsiConsole.systemUninstall(); // Uninstall external library
     }
 
     /**

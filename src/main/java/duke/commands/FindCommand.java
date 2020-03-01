@@ -8,15 +8,15 @@ import static duke.ui.Messages.FIND_MESSAGE;
 
 /**
  * <h3>Find Command</h3>
- * A <b>Command</b> to show a filtered <b>Task List</b> to the user based on the <i>keyword</i> provided. Filtering is
- * done in a <b>non-case-sensitive</b> manner. The <i>filtered list</i> contains <i>tasks</i> that have the
- * <i>keyword</i> in their <i>task descriptions</i>.
+ * A <b>Command</b> to show a filtered <b>Task List</b> to the user based on the <i>keyword(s)</i> provided. Filtering
+ * is done in a <b>non-case-sensitive</b> manner. The <i>filtered list</i> contains <i>tasks</i> that have the
+ * <i>keyword(s)</i> in their <i>task descriptions</i>.
  * @see Command
  * @see TaskList
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    public static final String FORMAT = "find <search word(s)>";
+    public static final String FORMAT = "find <keyword>";
 
     private String searchWord;
 

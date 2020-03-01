@@ -23,7 +23,7 @@ import static duke.ui.Messages.UNKNOWN_TIME_SPECIFIER_MESSAGE;
  */
 public class DueCommand extends Command {
     public static final String COMMAND_WORD = "due";
-    public static final String FORMAT = "due (on/before/after) <date/time-term>";
+    public static final String FORMAT = "due (on/before/after) <date>";
 
     private LocalDate searchDate;
     private String timeSpecifier;

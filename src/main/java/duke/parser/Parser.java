@@ -1,36 +1,12 @@
 package duke.parser;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoCommand;
-import duke.commands.DueCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.InvalidCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.exception.InvalidFormatException;
 import duke.format.DateTime;
 import duke.format.DateTimeFormat;
 import duke.ui.UI;
 
-import static duke.exception.ExceptionMessages.ILLEGAL_LIST_NUMBER_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DATETIME_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DATE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DEADLINE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DELETE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_DUE_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_DATE_FILTER_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_SEARCH_WORD_MESSAGE;
-import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
+import static duke.exception.ExceptionMessages.*;
 import static duke.format.DateTimeFormat.stringToDate;
 
 import static duke.format.DateTimeFormat.stringToDateTime;
@@ -102,6 +78,9 @@ public class Parser {
 
         case DueCommand.COMMAND_WORD:
             return createDueCommand(parameters);
+
+        case HelpCommand.COMMAND_WORD:
+            return createHelpCommand(parameters);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -297,6 +276,47 @@ public class Parser {
         } else {
             throw new ExcessParameterException();
         }
+    }
+
+    /**
+     * Creates the <b>Help Command</b> to be executed based on the <code>parameters</code> in the user input.
+     * <br> Returns an <b>Invalid Command</b> if the parameters provided are invalid.
+     *
+     * @param parameters The parameters provided in the user input
+     * @return The <b>Help Command</b> to be executed
+     * @see DueCommand
+     * @see InvalidCommand
+     */
+    private Command createHelpCommand(String parameters) {
+        try {
+            String helpWord = extractHelpWord(parameters);
+            return new HelpCommand(helpWord);
+        } catch (MissingParameterException e) {
+            return new InvalidCommand(MISSING_HELP_WORD_MESSAGE);
+        } catch (ExcessParameterException e) {
+            return new InvalidCommand(INVALID_HELP_FORMAT_MESSAGE);
+        }
+    }
+
+    /**
+     * Returns the <i>help word</i> that the user wants to query.
+     *
+     * @param parameters The parameters provided in the user input
+     * @return The <i>help word</i> provided by the user
+     * @throws MissingParameterException If no <i>help word</i> is given
+     * @throws ExcessParameterException If more than one <i>help word</i> is given
+     */
+    private String extractHelpWord(String parameters) throws MissingParameterException, ExcessParameterException {
+        if (parameters.isEmpty()) {
+            throw new MissingParameterException();
+        }
+
+        // Checks if there is more than one parameter
+        if (parameters.contains(" ")) {
+            throw new ExcessParameterException();
+        }
+
+        return parameters;
     }
 
     /**

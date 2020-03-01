@@ -126,4 +126,14 @@ public class ExceptionMessages {
             SHOCK_FACE + "Oops!! Lumi cannot understand this " + toItalic("DELETE")  + " command...\n" +
             "Lumi needs you to follow this format:\n" + TAB +
             toBoldAndItalic(DeleteCommand.FORMAT) + "\n";
+
+    public static final String MISSING_HELP_WORD_MESSAGE =
+            THINKING_FACE + "Hmm... Lumi also needs you to enter something for Lumi to help you with.\n" +
+            "These are all Lumi can help you with:\n" +
+            TAB + "add, todo, deadline, event, done, list, delete, find, due, exit, datetime, date, time, timespec\n";
+
+    public static final String INVALID_HELP_FORMAT_MESSAGE =
+            SHOCK_FACE + "Whops! Lumi is not able to provide help for that...\n" +
+            "These are all Lumi can help you with:\n" +
+            TAB + "add, todo, deadline, event, done, list, delete, find, due, exit, datetime, date, time, timespec\n";
 }

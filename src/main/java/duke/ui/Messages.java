@@ -155,6 +155,9 @@ public class Messages {
             toBoldAndItalic(DueCommand.FORMAT) + "\n";
 
 
+    /* Help messages */
+    public static final String HELP_MESSAGE = HAPPY_FACE + "Lumi is here to help after receiving your SOS!!\n\n";
+
     /* Exit messages */
     public static final String PROMPT_VALID_EXIT_CONFIRMATION_MESSAGE =
             THINKING_FACE + "Uh... Lumi needs you to enter either " +

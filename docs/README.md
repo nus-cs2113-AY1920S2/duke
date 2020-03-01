@@ -133,7 +133,7 @@ Marks a specified task as *done*.
 
 #### Format  
 `done <list number>`  
-- `list number` -- The *list number* of the task to be marked as done.
+- `list number` -- The *list number* of the task to be marked as done
   
   > You may find the *list number* of the task by [viewing the list](#3-view-all-your-tasks).
 
@@ -226,8 +226,8 @@ Filter tasks from your Task List either by a specified *keyword*, or by a specif
 
 ### <u>Usage </u>
 #### a. `find` -- Filter tasks from your Task List by a Specified Keyword
-Filters tasks from your Task List that contains a specified *keyword*. 
-The *keyword* can contain multiple words and need not be complete words. The Task List is then filtered for tasks which *task description* matches the keyword. Filtering is done in a **non-case-sensitive** manner.
+Filters tasks from your Task List that contains a specified *keyword*.  
+The *keyword* can contain multiple words and need not be complete words. The Task List is then filtered for tasks which *task description* matches the keyword. Filtering is done in a **non-case-sensitive** manner.  
 **All matched** tasks will be shown as a *Search List*. The total number of tasks will be shown at the bottom of the list.
 > **Note**: The list is arranged according to the order in which you have added your tasks. 
 
@@ -330,7 +330,7 @@ Here are the following *date time* formats.
 ### Date Formats
 There are **two** types *date* formats allowed.
 
-#### 1. **Words**
+#### 1. Words
 You may enter **only** the following *date* words.
 - `today` or `tdy` -- represents the <u>current</u> date
 - `tomorrow` or `tmr` -- represents the <u>next</u> date
@@ -356,7 +356,7 @@ An **exhaustive** list of the standard *date* formats is given below for your re
 ```
 
 ### Time Formats
-The **LumiChat** program accepts most time typical time formats that are represented with **numbers**, **delimiter symbols** and <u>optional</u> **am-pm markers**.  
+The **LumiChat** program accepts most time formats that are represented with **numbers**, **delimiter symbols** and <u>optional</u> **am-pm markers**.  
   
 The *time* should be in the order of  **hour**, then **minute**. The **seconds** attribute of *time* should **not** be given. The **minute** attribute must be a **double** digit *(i.e. single digits must be padded with a 0 in front)*. The **minute** attribute is also <u>optional</u>, and should it be omitted, the **LumiChat** program will automatically set the **minute** to be 0. Both the **12-h** format and the **24-h** format are valid *time* formats for this program.  
   
