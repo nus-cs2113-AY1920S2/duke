@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * Represents the Duke task manager.
+ */
 public class Duke {
 
     public static final String GREETING =

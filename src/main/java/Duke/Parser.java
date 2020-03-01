@@ -80,6 +80,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if index supplied is out of bounds.
+     * @param lastShownList the last shown list from 'list' or 'find' commands.
+     * @param index the index supplied by user input from 'delete' or 'done' commands
+     * @return true if out of bounds and false if it is within bounds.
+     */
     private static boolean checkOutOfBounds(ArrayList<Task> lastShownList, int index) {
         if (index >= lastShownList.size()) {
             System.out.println("Sorry, the task does not exist. Please use the 'list' or 'find' command for an updated list of tasks.\n");
@@ -89,9 +95,16 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Checks if the task to be marked as done or deleted still exists as the last shown list may not be the most updated.
+     * For example, the user may have deleted and added new tasks since the last time the list or find command was called.
+     * @param taskArray the task array to check if it contains the chosen task extracted from the last shown list.
+     * @param requestedTask the task from the last shown list chosen by referencing its index
+     * @return true if the task is no longer valid and false if it is valid
+     */
     public static boolean checkInvalidTask (TaskList taskArray, Task requestedTask) {
         if (taskArray.taskExists(requestedTask) == false) {
-            System.out.println("Sorry the task no longer exists.\n");
+            System.out.println("Sorry the task no longer exists. Please use 'list' or 'find' for an updated list\n");
             return true;
         }
         return false;
