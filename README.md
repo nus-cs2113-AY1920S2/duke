@@ -30,7 +30,6 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
-
 #### 1.2 Adding New Events: ```event```
 - Adds a new event to the task list.
 - Format: ```event NAME_OF_EVENT /at DATE_OF_EVENT```
