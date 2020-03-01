@@ -159,9 +159,11 @@ public class TaskList {
                 if (isNoTaskYetFound(index)) {
                     System.out.println("Here are the matching tasks in your list:");
                 }
+
                 System.out.println(String.format("%d. %s", index++, task.toString()));
             }
         }
+
         if (isNoTaskYetFound(index)) {
             System.out.println("There are no matching results");
         }
