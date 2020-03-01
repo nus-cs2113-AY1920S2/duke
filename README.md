@@ -25,7 +25,7 @@ By: `Wang Qin` Since: `Feb 2019`
 
 ##  1. Introduction
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/59989652/75109414-a9446300-565d-11ea-938e-8bcc5e3c0bc7.PNG">
+  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.33.27 PM.png">
 </p>
 
 
