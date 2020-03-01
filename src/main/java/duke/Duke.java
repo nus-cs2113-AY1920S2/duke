@@ -81,6 +81,7 @@ public class Duke {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
+                ui.showNextLine();
             }
         }
     }

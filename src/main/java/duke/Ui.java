@@ -32,6 +32,13 @@ public class Ui {
     }
 
     /**
+     * Method to print an empty next line
+     */
+    public void showNextLine() {
+        System.out.println("");
+    }
+
+    /**
      * Method to read command from the user and pass it back to Parser for dealing
      * with it
      *
