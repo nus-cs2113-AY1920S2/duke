@@ -1,4 +1,3 @@
-
 # **Duke User Guide**
 
 <br>
@@ -308,6 +307,7 @@ In the event that you ever forget the usage of a command, you can look it up wit
 Below is the **exhaustive** list of words recognised by the program for you to query:  
  `add`,  `todo`, `deadline`, `event`, `done`, `list`, `delete`, `find`, `due`, `bye` or `exit`, `datetime`, `date`, `time`, `timespecifier` or `timespec`
 
+<br>
 
 ## Exiting the LumiChat Program
 Exiting the **LumiChat** program is simple. Simply enter `bye` to exit.
