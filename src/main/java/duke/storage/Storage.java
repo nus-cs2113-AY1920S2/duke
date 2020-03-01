@@ -1,12 +1,16 @@
 package duke.storage;
 
 import duke.data.TaskList;
+import duke.format.DateTime;
+import duke.format.DateTimeFormat;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.exception.CorruptedFileException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -14,10 +18,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import static duke.format.DateTimeFormat.stringToDate;
+import static duke.format.DateTimeFormat.stringToTime;
+
 public class Storage {
     private static final String TASK_LIST_PATH = "./data/taskList.txt";
 
-    public void loadTaskList() throws FileNotFoundException, CorruptedFileException {
+    public void loadTaskList()
+            throws FileNotFoundException, CorruptedFileException,
+            DateTimeFormat.InvalidTimeException, DateTimeFormat.InvalidDateException {
         File taskListFile = new File(TASK_LIST_PATH);
         ArrayList<Task> decodedList = decode(taskListFile);
 
@@ -55,7 +64,9 @@ public class Storage {
         }
     }
 
-    private ArrayList<Task> decode(File filePath) throws CorruptedFileException, FileNotFoundException {
+    private ArrayList<Task> decode(File filePath)
+            throws CorruptedFileException, FileNotFoundException,
+            DateTimeFormat.InvalidDateException, DateTimeFormat.InvalidTimeException {
         ArrayList<Task> list = new ArrayList<>();
 
         Scanner fileScanner = new Scanner(filePath);
@@ -67,11 +78,13 @@ public class Storage {
                 break;
             }
 
-            String[] taskInformation = line.split("__", 4);
-            String taskType = taskInformation[0];
-            String doneStatus = taskInformation[1];
-            String taskDescription = taskInformation[2];
-            String taskDateTime = taskInformation[3];
+            String[] taskData = line.split("__", 5);
+            String taskType = taskData[0];
+            String doneStatus = taskData[1];
+            String taskDescription = taskData[2];
+            LocalDate taskDate = stringToDate(taskData[3]);
+            LocalTime taskTime = stringToTime(taskData[4]);
+            DateTime taskDateTime = new DateTime(taskDate, taskTime);
 
             if (!doneStatus.equals("1") && !doneStatus.equals("0")) {
                 throw new CorruptedFileException();
@@ -107,9 +120,10 @@ public class Storage {
         String taskType = getTaskType(task);
         String doneStatus = task.getIsDone() ? "1" : "0";
         String taskDescription = task.getTask();
-        String taskDetail = task.getDateTime();
+        String taskDate = task.getDateTime().getDate();
+        String taskTime = task.getDateTime().getTime();
 
-        return String.join("__", new String[]{taskType, doneStatus, taskDescription, taskDetail});
+        return String.join("__", new String[]{taskType, doneStatus, taskDescription, taskDate, taskTime});
     }
 
     private String getTaskType(Task task) throws IOException{

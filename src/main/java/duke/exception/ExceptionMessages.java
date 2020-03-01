@@ -5,6 +5,7 @@ import duke.commands.AddToDoCommand;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.DeleteCommand;
+import duke.format.DateTime;
 
 import static duke.format.TextFormatter.ANGRY_FACE;
 import static duke.format.TextFormatter.SHOCK_FACE;
@@ -84,6 +85,21 @@ public class ExceptionMessages {
             THINKING_FACE + "Hmm... Lumi senses missing information...\n" +
             "Lumi needs you to put in either a " + toBold("task description") + " or a " +
             toBold("duration") + "!\n";
+
+    public final static String INVALID_DATETIME_FORMAT_MESSAGE =
+            SHOCK_FACE + "Em... Lumi cannot understand this " + toBold("datetime")  + " given...\n" +
+            "Lumi needs you to follow this datetime format:\n" + TAB +
+            toBoldAndItalic(DateTime.FORMAT) + "\n";
+
+    public final static String INVALID_DATE_FORMAT_MESSAGE =
+            SHOCK_FACE + "Em... Lumi cannot understand this " + toBold("date")  + " given...\n" +
+                    "Lumi needs you to follow this datetime format:\n" + TAB +
+                    toBoldAndItalic(DateTime.FORMAT) + "\n";
+
+    public final static String INVALID_TIME_FORMAT_MESSAGE =
+            SHOCK_FACE + "Em... Lumi cannot understand this " + toBold("time")  + " given...\n" +
+                    "Lumi needs you to follow this datetime format:\n" + TAB +
+                    toBoldAndItalic(DateTime.FORMAT) + "\n";
 
     public final static String INVALID_DELETE_FORMAT_MESSAGE =
             SHOCK_FACE + "Oops!! Lumi cannot understand this " + toItalic("DELETE")  + " command...\n" +

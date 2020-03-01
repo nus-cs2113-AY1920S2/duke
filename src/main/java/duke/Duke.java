@@ -4,6 +4,7 @@ import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.commands.ExitCommand;
 import duke.exception.CorruptedFileException;
+import duke.format.DateTimeFormat;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -65,7 +66,8 @@ public class Duke {
         } catch (FileNotFoundException e) {
             ui.showSystemMessage(FILE_NOT_FOUND_MESSAGE);
             storage.createTaskListFile(); // Create new task list file
-        } catch (CorruptedFileException | IndexOutOfBoundsException e) {
+        } catch (CorruptedFileException | IndexOutOfBoundsException |
+                DateTimeFormat.InvalidTimeException | DateTimeFormat.InvalidDateException e) {
             ui.showSystemMessage(CORRUPTED_FILE_MESSAGE);
 
             boolean canCreateNewFile =
