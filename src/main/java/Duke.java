@@ -40,12 +40,11 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
-
     }
 
     /**
      * Takes in input string from terminal and calls various
-     * functions according to different keywords.
+     * functions according to different keywords.This function uses recursion.
      *
      * @throws IOException or DukeException If input does not match format.
      */
@@ -88,7 +87,7 @@ public class Duke {
     }
 
     /**
-     * Takes a string pre-processed
+     * Takes a string pre-processed from other functions
      * and turns it into a LocalDate object
      *
      * @param input A string from the duke.txt file
