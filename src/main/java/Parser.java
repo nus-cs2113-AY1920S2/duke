@@ -27,43 +27,47 @@ public class Parser {
      * @throws DukeException from TaskList exceptions
      */
     protected static void runParser(String userCmd) throws DukeException {
-        // end program
-        if (userCmd.toLowerCase().equals("bye")) {
-            System.out.println("Bye. Hope to see you again!");
-            System.exit(0);
+
+        try {
+            // end program
+            if (userCmd.toLowerCase().equals("bye")) {
+                System.out.println("Bye. Hope to see you again!");
+                System.exit(0);
+            }
+            // List commands
+            else if (userCmd.toLowerCase().equals("list")) {
+                currTasks.listTasks();
+            }
+            // Mark task as done
+            else if (userCmd.contains("done")) {
+                currTasks.markTaskDone(userCmd);
+            }
+            // Add task type todos (normal tasks)
+            else if (userCmd.contains("todo")) {
+                currTasks.addTask(userCmd);
+            }
+            // Add task type deadline
+            else if (userCmd.contains("deadline")) {
+                currTasks.addDeadline(userCmd);
+            }
+            // Add task type events
+            else if (userCmd.contains("event")) {
+                currTasks.addEvent(userCmd);
+            }
+            // Help command
+            else if (userCmd.contains("help")) {
+                UI.printHelp();
+            } else if (userCmd.contains("delete")) {
+                currTasks.deleteTask(userCmd);
+            } else if (userCmd.contains("find")) {
+                currTasks.findTask(userCmd);
+            } else {
+                System.out.println("Wrong syntax!");
+                UI.printHelp();
+            }
         }
-        // List commands
-        else if (userCmd.toLowerCase().equals("list")) {
-            currTasks.listTasks();
-        }
-        // Mark task as done
-        else if (userCmd.contains("done")) {
-            currTasks.markTaskDone(userCmd);
-        }
-        // Add task type todos (normal tasks)
-        else if (userCmd.contains("todo")) {
-            currTasks.addTask(userCmd);
-        }
-        // Add task type deadline
-        else if (userCmd.contains("deadline")) {
-            currTasks.addDeadline(userCmd);
-        }
-        // Add task type events
-        else if (userCmd.contains("event")) {
-            currTasks.addEvent(userCmd);
-        }
-        // Help command
-        else if (userCmd.contains("help")) {
-            UI.printHelp();
-        }
-        else if (userCmd.contains("delete")) {
-            currTasks.deleteTask(userCmd);
-        }
-        else if (userCmd.contains("find")) {
-            currTasks.findTask(userCmd);
-        }else {
-            System.out.println("Wrong syntax!");
-            UI.printHelp();
+        catch (DukeException e){
+            System.out.println(e +"\nPlease try again");
         }
     }
 }
