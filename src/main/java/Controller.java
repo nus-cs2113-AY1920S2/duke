@@ -20,7 +20,6 @@ public class Controller {
     public Serializable readInput(String userInput, TaskList taskListArrayList) {
         String command = parser.getCommand(userInput);
 
-
         switch (command) {
         case "list":
             if (taskListArrayList.isEmpty()) {
