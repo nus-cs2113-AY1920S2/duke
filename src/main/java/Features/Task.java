@@ -22,7 +22,7 @@ public abstract class Task {
     }
     public String getTimeToComplete() {
        if (dateToCompleteLocalDate != null) {
-           return Integer.toString(dateToCompleteLocalDate.getMonthValue()) + " " + dateToCompleteLocalDate.getMonth() + " " +
+           return dateToCompleteLocalDate.getMonthValue() + " " + dateToCompleteLocalDate.getMonth() + " " +
                    dateToCompleteLocalDate.getYear() + ", " + dateToCompleteLocalDate.getDayOfWeek() + " " + timeToComplete;
        } else {
            return dateToCompleteString + " " + timeToComplete;
