@@ -29,16 +29,16 @@ This application is for people who are *able to type fast* and *prefer keep trac
  
 ## 2. Features
 
-####Keep track of your tasks
+#### Keep track of your tasks
 Duke helps you to keep track of various kinds of tasks (Todos, Events and Deadlines) and display them.
 
-####Marking your tasks as done
+#### Marking your tasks as done
 Duke can help you mark your tasks as complete through the `done` Command so that you can keep track of the completion status of various tasks.
 
-####View all your tasks
+#### View all your tasks
 The `list` command that Duke provides can display all the tasks that you are currently tracking.
 
-####Auto-save and store your tasks
+#### Auto-save and store your tasks
 Duke has an auto-save feature which stores your tasks every time you add or modify them. 
 With this feature, your tasks will be saved every time you leave the application. They will still be there when you come back subsequently.
 
@@ -53,7 +53,7 @@ A valid input would be `event Project meeting /Mon 4pm`.
 
 &nbsp;
 
-##4. Command Usage
+## 4. Command Usage
  
 ### 4.1 Add a task
 Duke allows you to add 3 different types of tasks: todo, deadline and event. Refer to the subheaders below for more information on each of the task subtypes.
@@ -172,6 +172,7 @@ Expected outcome (if task list empty):
  
 ### 4.4 `find` - Find tasks that match keyword
 
+This command shows you a list of all Tasks containing a search keyword.
 
 Format:
  `find <Keyword>`
@@ -238,7 +239,7 @@ Example of usage:
  
 Expected outcome:
  
-<img src #"images/help.PNG" width# "400">
+<img src #"images/help-eg.PNG" width# "400">
  
 &nbsp;
  
