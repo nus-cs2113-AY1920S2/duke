@@ -1,10 +1,10 @@
-import Commands.Command;
-import Exceptions.DukeException;
-import Exceptions.HardDiskCorruptedException;
-import Parser.Parser;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import commands.Command;
+import exceptions.DukeException;
+import exceptions.HardDiskCorruptedException;
+import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 import java.io.FileNotFoundException;
 
