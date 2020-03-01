@@ -97,8 +97,8 @@ The *date time* provided consists of an <u>optional</u> *date* and a *time*. If 
 
 <br>
 
-#### c. `event` -- Add a Event task to your Task List  
-Adds a **Event** task to your Task List.  
+#### c. `event` -- Add an Event task to your Task List  
+Adds an **Event** task to your Task List.  
 The *date time* provided consists of an <u>optional</u> *date* and a *time*. If the *date* is omitted, the **LumiChat** program will automatically assume it to be the **current date**.  
   
 #### Format  
