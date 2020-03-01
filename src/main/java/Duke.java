@@ -1,12 +1,4 @@
-import Exceptions.EmptyListException;
-import Exceptions.DukeException;
-import Exceptions.MissingItemIndexException;
-import Exceptions.MissingDescriptionException;
-import Exceptions.UnknownCommandException;
-import Task.Task;
-import Task.Deadline;
-import Task.Events;
-import Task.Todo;
+import Exceptions.*;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -117,7 +109,7 @@ public class Duke {
         } else {
             String parsedUserInput = removeFirstWord(commands);
             myList.add(new Todo(parsedUserInput.trim()));
-            // gets last newly added Task.Task
+            // gets last newly added Task
             printSuccessfulAddMessage(myList.get(Task.getNumberOfTasksInList() - 1).toString());
         }
     }
@@ -178,7 +170,7 @@ public class Duke {
     /**
      * Returns the user input in a String format without the first command
      * @param command the Array of split commands entered
-     * @return description of Task.Task as a String
+     * @return description of Task as a String
      */
     private static String removeFirstWord(String[] command) {
         // parsing userInput, remove first word

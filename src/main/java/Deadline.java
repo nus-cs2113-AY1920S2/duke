@@ -1,6 +1,4 @@
-package Task;
-
-public class Deadline extends Task {
+public class Deadline extends Task{
     protected String deadline;
     protected String eventType;
 
