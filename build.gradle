@@ -3,8 +3,8 @@ plugins {
     id 'application'
 }
 
-group 'seedu.duke'
-version '0.1.0'
+group 'duke'
+version '0.2.0'
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 run {
