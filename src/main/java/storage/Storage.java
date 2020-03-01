@@ -23,6 +23,10 @@ public class Storage {
         this.dataPath = dataPath;
     }
 
+    /**
+     * Loads the data into the application.
+     * @return The list of tasks loaded.
+     */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(dataPath);
         try {
@@ -59,6 +63,7 @@ public class Storage {
         return LocalDateTime.parse(dateAndTime);
     }
 
+    /** Saves the updated task list into the application. */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(dataPath);
