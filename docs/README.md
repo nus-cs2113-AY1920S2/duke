@@ -106,7 +106,7 @@ The *date time* provided consists of an <u>optional</u> *date* and a *time*. If 
 `event <task description> /at <date> <time>`  
 - `task description` -- The *description* of the **Event** task
 - `date` -- The *date* of the event
-- `time` - -The *time* of the event
+- `time` -- The *time* of the event
 
 > **Note**: The `date` and `time` provided must adhere to the set of accepted [Date Time formats](#date-time-formats).
 
@@ -189,7 +189,7 @@ Delete a task from your Task List.
 
 ### <u>Usage </u>
 #### `delete` -- Delete a task from your Task List
-Deletes a specified task from your Task List.  To avoid *accidental* deletion of tasks. you will receive an additional prompt to **confirm** your deletion.
+Deletes a specified task from your Task List.  To avoid *accidental* deletion of tasks, you will receive an additional prompt to **confirm** your deletion.
 
 #### Format  
 `delete <list number>`  
@@ -223,7 +223,7 @@ Deletes a specified task from your Task List.  To avoid *accidental* deletion of
 <br><br>
 
 ## 5. Filter Tasks from your Task List
-Filter tasks from your Task List either by a specified *keyword*, or by a specified *date time period*.
+Filter tasks from your Task List either by a specified *keyword*, or by a specified *time period*.
 
 ### <u>Usage </u>
 #### a. `find` -- Filter tasks from your Task List by a Specified Keyword
@@ -343,6 +343,7 @@ You may enter **only** the following *date* words.
 - `today` or `tdy` -- represents the <u>current</u> date
 - `tomorrow` or `tmr` -- represents the <u>next</u> date
 - `yesterday` or `yst` -- represents the <u>previous</u> date
+
 > **Note**: All dates are taken with reference to the current date on your device.
   
 #### 2. Standard Date Format
