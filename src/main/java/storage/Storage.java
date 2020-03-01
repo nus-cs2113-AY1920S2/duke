@@ -74,14 +74,16 @@ public class Storage {
                         taskArrayList.add(todo);
                         break;
                     case DEADLINE:
-                        Deadline deadline = new Deadline(taskDescription, parseLine[3]);
+                        String deadlineTime = parseLine[3];
+                        Deadline deadline = new Deadline(taskDescription, deadlineTime);
                         if (isDone(isDone)) {
                             deadline.markAsDone();
                         }
                         taskArrayList.add(deadline);
                         break;
                     case EVENT:
-                        Events event = new Events(taskDescription, parseLine[3]);
+                        String eventTime = parseLine[3];
+                        Events event = new Events(taskDescription, eventTime);
                         if (isDone(isDone)) {
                             event.markAsDone();
                         }

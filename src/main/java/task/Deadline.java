@@ -32,7 +32,7 @@ public class Deadline extends Task {
      * @return String containing the date
      */
     public String getTaskTime() {
-        return String.format("by: %s", this.deadline);
+        return this.deadline;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s%s %s(%s)", getEventType(),
+        return String.format("%s%s %s(by: %s)", getEventType(),
                 super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 
@@ -52,7 +52,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDoneResponseMessage(int itemIndexRequested) {
-        return String.format("[%d. %s%s %s(%s)] is marked done!", itemIndexRequested, getEventType(),
+        return String.format("[%d. %s%s %s(by: %s)] is marked done!", itemIndexRequested, getEventType(),
                 super.getStatusIcon(), super.getDescription(), getTaskTime());
     }
 }
