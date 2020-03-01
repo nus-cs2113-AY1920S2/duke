@@ -1,5 +1,7 @@
+/**
+ * This class contains methods that handle the parsing of user input.
+ */
 public class Parser {
-
     public static final String INVALID_TASK_INDEX = "The task index you've entered is invalid.";
     public static final String EMPTY_TASK_INDEX = "The task index cannot be empty.";
     public static final String EMPTY_TODO = "The description of the todo cannot be empty.";
@@ -9,6 +11,13 @@ public class Parser {
     public static final String INVALID_DEADLINE = "The description of a deadline must be in this format: \n\t deadline <task name> /by <date/time>";
     public static final String EMPTY_FIND = "The keyword for the search cannot be empty.";
 
+    /**
+     * Returns actual task index based on user input.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @param taskListSize Size of the current task list.
+     * @return Actual task index in task list.
+     * @throws DukeException If task index is invalid (not within the range of indexes in the task list).
+     */
     public int parseTaskIndex(String[] words, int taskListSize) throws DukeException {
         String taskString = words[1];
         int taskIndex = Integer.parseInt(taskString) - 1;
@@ -18,6 +27,12 @@ public class Parser {
         return taskIndex;
     }
 
+    /**
+     * Returns description of To-do task to be added to the task list based on user input.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @return Description of To-do task entered by user.
+     * @throws DukeException If the description entered by the user is empty.
+     */
     public String parseToDo(String[] words) throws DukeException {
         if (words.length < 2 || words[1].replaceAll("\\s+","").length() == 0) {
             throw new DukeException(EMPTY_TODO);
@@ -25,6 +40,13 @@ public class Parser {
         return words[1];
     }
 
+    /**
+     * Returns <code>Array</code> of words of Event task to be added to the task list based on user input.
+     * The <code>Array</code> contains the description and date/time of the Event task to be added.
+     * @param words String <code>Array</code> of words entered by the user.
+     * @return Description and date/time of Event task entered by user.
+     * @throws DukeException If the description entered by the user does not contain the keyword "/at" or is empty.
+     */
     public String[] parseEvent(String[] words) throws DukeException {
         if ((words.length < 2) || !words[1].contains(" /at ")) {
             throw new DukeException(INVALID_EVENT);
@@ -36,6 +58,13 @@ public class Parser {
         return eventWords;
     }
 
+    /**
+     * Returns <code>Array</code> of words of Deadline task to be added to the task list based on user input.
+     * The <code>Array</code> contains the description and date/time of the Deadline task to be added.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @return Description and date/time of Deadline task entered by user.
+     * @throws DukeException If the description entered by the user does not contain the keyword "/at" or is empty.
+     */
     public String[] parseDeadline(String[] words) throws DukeException{
         if ((words.length < 2) || !words[1].contains(" /by ")) {
             throw new DukeException(INVALID_DEADLINE);
@@ -48,18 +77,34 @@ public class Parser {
         return deadlineWords;
     }
 
+    /**
+     * Processes the task index of the task to be set done based on user input.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @throws DukeException If the task index entered by user is empty.
+     */
     public void parseDone(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(EMPTY_TASK_INDEX);
         }
     }
 
+    /**
+     * Processes the task index of the task to be deleted based on user input.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @throws DukeException If the task index entered by user is empty.
+     */
     public void parseDelete(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(EMPTY_TASK_INDEX);
         }
     }
 
+    /**
+     * Returns keyword <code>String</code> to be searched based on user input.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @return Keyword <code>String</code> to be searched.
+     * @throws DukeException If the keyword entered by user is empty.
+     */
     public String parseFind(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(EMPTY_FIND);

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Main control class of the application.
+ * It has a UI, storage file, task list and parser.
+ */
+
 public class Duke {
     public static final String INVALID_COMMAND = "I'm sorry, but I don't know what that means :-( \n\t Type 'help' for the list of commands available.";
     public static final String OOPS = "\t OOPS!!! ";
@@ -15,6 +20,13 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
+    /**
+     * Class constructor of <code>Duke</code> class.
+     * Initialises user's UI, storage file and parser.
+     * Loads the previous task list from file with <code>Storage</code> object if file already exists.
+     *
+     * @param filePath The location of the text file which contains task list from the previous session.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,9 +39,12 @@ public class Duke {
         }
     }
 
-    public void run() throws IOException {
+    /**
+     * Main running loop of the bot.
+     * Takes in user input until user inputs "bye".
+     */
+    public void run() {
         ui.printWelcomeMessage();
-        storage.loadFromFile();
         Scanner in = new Scanner(System.in);
         String input = in.nextLine(); // Get string input
 
@@ -54,10 +69,20 @@ public class Duke {
         in.close();
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Main function of the application
+     * Creates a new <code>Duke</code> object and runs it.
+     * @param args Command line arguments (not used in this application).
+     */
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Handles the user commands and executes them.
+     * @param words <code>String</code> <code>Array</code> of words entered by the user.
+     * @throws DukeException If user enters an invalid command.
+     */
     private void manageCommand(String[] words) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         int taskListSize = 0;
