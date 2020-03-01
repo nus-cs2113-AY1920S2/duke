@@ -196,7 +196,7 @@ public class Parser  {
             case "help":
             case "list":
                 if(userCommand.length>1){
-                throw new IllegalDukeException("Command " + userCommand[0] + WRONG_USAGE_OF_COMMAND);
+                throw new IllegalDukeException("\t Command " + userCommand[0] + WRONG_USAGE_OF_COMMAND);
                 }
                 break;
             case "done":

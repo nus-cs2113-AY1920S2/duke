@@ -18,6 +18,12 @@ public class DeleteCommand extends Command  {
     public static final String INDEX_OUT_OF_RANGE = "\t Task number provided is not valid. Press \"list\" to see" +
             " available list of task numbers";
     public static final String ALL_TASKS_ALREADY_DELETED ="\t List is already empty!";
+    public static final String DELETE_ALL_ACKNOWLEDGEMENT = "\t All tasks have been deleted!";
+    public static final String DELETE_ALL_CONFIRMATION = "\t Are you sure that you want ALL tasks to be deleted? " +
+            "Type Y for Yes and N for No";
+    public static final String IGNORE_DELETE_ALL = "\t List was not modified! Enter \"list\" to ensure all tasks are" +
+            " still in the list!";
+    public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
     /**
      * This constructor creates a DeleteCommand.<br>
      * @param fullCommand This is the input entered by user that has<br>
@@ -38,21 +44,21 @@ public class DeleteCommand extends Command  {
                 throw new IllegalDukeException(ALL_TASKS_ALREADY_DELETED);
             }else {
                 if (this.isAll) {
-                    ui.confirmDeleteAll();
+                    ui.promptUser(DELETE_ALL_CONFIRMATION);
                     ui.printLine();
                     String confirmation = ui.getUserIn().toLowerCase();
                     ui.printLine();
                     while (!confirmation.equals("y") && !confirmation.equals("n")) {
-                        ui.printYesOrNoOnly();
+                        ui.promptUser(YES_OR_NO_ONLY);
                         ui.printLine();
                         confirmation = ui.getUserIn().toLowerCase();
                         ui.printLine();
                     }
                     if (confirmation.equals("y")) {
                         l1.clear();
-                        ui.printDeleteAll();
-                    } else if (confirmation.equals("n")) {
-                        ui.ignoreDeleteAll();
+                        ui.promptUser(DELETE_ALL_ACKNOWLEDGEMENT);
+                    } else {
+                        ui.promptUser(IGNORE_DELETE_ALL);
                     }
                 } else {
                     if (this.index >= l1.size()) {

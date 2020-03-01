@@ -11,24 +11,19 @@ import java.util.StringTokenizer;
  * This class handles with the interaction with User.<br>
  */
 public class Ui  {
-    public static final int MAX_LINE_LENGTH= 58;
+    public static final int MAX_LINE_LENGTH= 56;
     public static final String LINE = "\t__________________________________________________________";
     public static final String LIST_EMPTY= "\t Oops! No task has been assigned yet! Please enter a task!";
     public static final String MISSING_FILE = "Data file \"data.txt\" is missing!";
     public static final String MATCHING_TASK= "\t Here are the matching tasks in your list!";
     public static final String NO_MATCHING_TASK = "\t Oops! No such task can be found!";
-    public static final String YES_OR_NO_ONLY = "\t I'm sorry but the options are only Y for YES or N for NO!";
     public static final String TASK_ADDED = "\t Got it. I've added this task:";
     public static final String AVAILABLE_TASKS = "\t Here are the tasks in your list:\n";
     public static final String GOODBYE_MESSAGE = "\t Bye.Hope to see you again soon!";
     public static final String REMOVE_ACKNOWLEDGEMENT = "\t Noted. I've removed this task: ";
     public static final String DONE_ACKNOWLEDGEMENT = "\t Nice! I've marked this task as done:";
     public static final String DONE_ALL_ACKNOWLEDGEMENT = "\t All tasks have been marked as done!";
-    public static final String DELETE_ALL_ACKNOWLEDGEMENT = "\t All tasks have been deleted!";
-    public static final String DELETE_ALL_CONFIRMATION = "\t Are you sure that you want ALL tasks to be deleted? " +
-            "Type Y for Yes and N for No";
-    public static final String IGNORE_DELETE_ALL = "\t List was not modified! Enter \"list\" to ensure all tasks are" +
-            " still in the list!";
+
     public static final String DAB= "\t ``````````````````````````````````````````````````````````\n" +
             "\t ````````````````````````````````:v(v'`````````````````````\n" +
             "\t ```````````````````````````,)4|ex` `L}````````````````````\n" +
@@ -201,31 +196,6 @@ public class Ui  {
     public void printDoneAll(ArrayList<Task> l1){
         out.println(DONE_ALL_ACKNOWLEDGEMENT);
         printList(l1);
-    }
-    /**
-     * This method informs User that all Tasks has been deleted.<br>
-     */
-    public void printDeleteAll(){
-        out.println(DELETE_ALL_ACKNOWLEDGEMENT);
-    }
-    /**
-     * This method confirms with User if they want all Tasks to be deleted.<br>
-     */
-    public void confirmDeleteAll(){
-        out.println(formatMessage(DELETE_ALL_CONFIRMATION));
-    }
-    /**
-     * This method informs User that the delete ALL command is ignored.<br>
-     */
-    public void ignoreDeleteAll(){
-        out.println(formatMessage(IGNORE_DELETE_ALL));
-    }
-    /**
-     * This method informs User that command entered needs to be only Y for Yes or<br>
-     * N for No.<br>
-     */
-    public void printYesOrNoOnly(){
-        out.println(YES_OR_NO_ONLY);
     }
     /**
      * This method lists the supported commands for User.<br>
