@@ -36,6 +36,18 @@ public class DateTime {
         return time.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 
+    public boolean isOn(LocalDate date) {
+        return this.date.isEqual(date);
+    }
+
+    public boolean isBefore(LocalDate date) {
+        return this.date.isBefore(date);
+    }
+
+    public boolean isAfter(LocalDate date) {
+        return this.date.isAfter(date);
+    }
+
     private boolean hasTime() {
         return time != null;
     }
@@ -45,7 +57,7 @@ public class DateTime {
     }
 
     private boolean isTomorrow() {
-        return this.date.plusDays(1).isEqual(LocalDate.now());
+        return this.date.minusDays(1).isEqual(LocalDate.now());
     }
 
     private boolean isDue() {
