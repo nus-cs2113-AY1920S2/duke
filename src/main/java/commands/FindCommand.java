@@ -29,7 +29,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws MissingDescriptionException {
         try {
-            String[] splitCommands = removeCommandWord(super.rawUserInput);
+            String[] splitCommands = removeCommandWord(rawUserInput);
             taskList.findTask(splitCommands[1]);
         } catch (MissingDescriptionException e) {
             ui.printErrorMessage("Missing keywords to search for! Please provide a keyword to search!");

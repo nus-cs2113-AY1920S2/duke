@@ -11,10 +11,10 @@ import ui.Ui;
 public class ToDoCommand extends Command {
     /**
      * Constructs a Todo Command object
-     * @param rawUserInput String provided by user
+     * @param userInput
      */
-    public ToDoCommand(String rawUserInput) {
-        super(rawUserInput);
+    public ToDoCommand(String userInput) {
+        super(userInput);
     }
 
     /**
@@ -27,7 +27,7 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws MissingDescriptionException {
-        String[] splitCommands = removeCommandWord(super.rawUserInput);
+        String[] splitCommands = removeCommandWord(rawUserInput);
         taskList.addNewToDo(splitCommands[1]);
         storage.saveToHardDisk(taskList);
     }

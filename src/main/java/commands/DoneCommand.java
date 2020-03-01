@@ -13,10 +13,10 @@ import ui.Ui;
 public class DoneCommand extends Command {
     /**
      * Constructs a Done Command object
-     * @param rawUserInput unedited String from user
+     * @param userInput unedited String object from user
      */
-    public DoneCommand(String rawUserInput) {
-        super(rawUserInput);
+    public DoneCommand(String userInput) {
+        super(userInput);
     }
 
     /**
@@ -33,12 +33,12 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws MissingItemIndexException
             , TaskAlreadyDoneException {
         try {
-            String[] splitCommands = removeCommandWord(super.rawUserInput);
+            String[] splitCommands = removeCommandWord(rawUserInput);
             int itemIndex = Integer.parseInt(splitCommands[1]) - 1;
             taskList.markTaskAsDone(itemIndex);
             storage.saveToHardDisk(taskList);
         } catch (MissingDescriptionException e) {
-            throw new MissingItemIndexException(super.rawUserInput);
+            throw new MissingItemIndexException(rawUserInput);
         } catch (NumberFormatException e) {
             ui.printErrorMessage("Please enter an integer to be marked done");
         }

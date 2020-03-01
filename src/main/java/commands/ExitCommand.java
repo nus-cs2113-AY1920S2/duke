@@ -10,10 +10,10 @@ import ui.Ui;
 public class ExitCommand extends Command {
     /**
      * Constructs a Exit Command object and sets boolean isExit to true
-     * @param rawUserInput String from user input
+     * @param userInput String from user input
      */
-    public ExitCommand(String rawUserInput) {
-        super(rawUserInput);
+    public ExitCommand(String userInput) {
+        super(userInput);
         super.setExitTrue();
     }
 
