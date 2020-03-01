@@ -18,15 +18,19 @@ public class DateTimeFormat {
 
     /* An exhaustive list of date formats accepted by the LumiChat program */
     private static final String[] ALL_DATE_FORMATS = {
-            "dd/MM[/yyyy]", "d/MM[/yyyy]", "dd/M[/yyyy]", "d/M[/yyyy]", "dd/MM[/yy]", "d/MM[/yy]", "dd/M[/yy]",
-            "d/M[/yy]", "dd-MM[-yyyy]", "d-MM[-yyyy]", "dd-M[-yyyy]", "d-M[-yyyy]", "dd-MM[-yy]", "d-MM[-yy]",
-            "dd-M[-yy]", "d-M[-yy]", "ddMMyyyy", "ddMMyy"
+            "dd/MM[/yyyy]", "d/MM[/yyyy]", "dd/M[/yyyy]", "d/M[/yyyy]",
+            "dd/MM[/yy]", "d/MM[/yy]", "dd/M[/yy]", "d/M[/yy]",
+            "dd-MM[-yyyy]", "d-MM[-yyyy]", "dd-M[-yyyy]", "d-M[-yyyy]",
+            "dd-MM[-yy]", "d-MM[-yy]", "dd-M[-yy]", "d-M[-yy]",
+            "ddMMyyyy", "ddMMyy"
     };
 
     /* An exhaustive list of time formats accepted by the LumiChat program */
     private static final String[] ALL_TIME_FORMATS = {
-            "hh:mma", "h:mma", "HH:mma", "HH:mm", "H:mm", "hh.mma", "h.mma", "HH.mma", "HH.mm", "H.mm",
-            "HHmm", "Hmm", "Hmma", "hha", "ha", "HHa", "Ha", "H"
+            "h:mma", "H:mma", "H:mm",
+            "h.mma", "H.mma", "H.mm",
+            "hmma", "Hmma", "Hmm",
+            "ha", "Ha", "H"
     };
 
     private static final int CURRENT_YEAR = LocalDate.now().getYear();

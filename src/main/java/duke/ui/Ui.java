@@ -100,12 +100,12 @@ public class UI {
 
         final String LIST_TOP =
                 "    +---------+\n" +
-                        "+---| L I S T |----------------------------------------------------------+\n" +
-                        "|   +---------+                                                          |\n";
+                        "+---| L I S T |---------------------------------------------------------------+\n" +
+                        "|   +---------+                                                               |\n";
         final String LIST_LEFT = "| ";
         final String LIST_RIGHT = " |";
-        final String LIST_BOTTOM = "+------------------------------------------------------------------------+\n";
-        final int LIST_LENGTH = 70;
+        final String LIST_BOTTOM = "+-----------------------------------------------------------------------------+\n";
+        final int LIST_LENGTH = 75;
 
         StringBuilder list = new StringBuilder(LIST_TOP);
 
@@ -153,12 +153,12 @@ public class UI {
 
         final String LIST_TOP =
                 "    +-----------------------+\n" +
-                "+---| S E A R C H   L I S T |--------------------------------------------+\n" +
-                "|   +-----------------------+                                            |\n";
+                "+---| S E A R C H   L I S T |-------------------------------------------------+\n" +
+                "|   +-----------------------+                                                 |\n";
         final String LIST_LEFT = "| ";
         final String LIST_RIGHT = " |";
-        final String LIST_BOTTOM = "+------------------------------------------------------------------------+\n";
-        final int LIST_LENGTH = 70;
+        final String LIST_BOTTOM = "+-----------------------------------------------------------------------------+\n";
+        final int LIST_LENGTH = 75;
 
         StringBuilder list = new StringBuilder(LIST_TOP);
 

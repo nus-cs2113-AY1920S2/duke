@@ -1,7 +1,6 @@
-T__0__run__null__null
-D__1__eat__12/04/2020__08:00PM
-E__0__go home__04/12/2020__06:30AM
-D__0__swim__12/03/2020__03:00PM
-E__0__Do javaDoc__29/02/2020__10:00AM
-E__0__go exchange__01/06/2021__11:59PM
-D__0__guess__12/04/2020__03:00AM
+D__1__complete math assignment__12/06/2020__08:00AM
+E__0__meet up with friends for lunch__01/03/2020__12:30PM
+T__0__learn to speak Korean__null__null
+D__0__do Computing Assignments__02/03/2020__11:59PM
+E__0__Group project assignment meeting__05/03/2020__02:00PM
+E__0__attend party__12/04/2020__04:00PM

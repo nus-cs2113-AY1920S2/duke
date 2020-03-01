@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  * @see duke.commands.DueCommand
  */
 public class DateTime {
-    public static final String FORMAT = "<date dd/mm/yyyy> <time hh:mm>";
+    public static final String FORMAT = "<date dd/mm/yyyy> <time hh:mma>";
     private static final String DATE_FORMAT = "dd/MM/yyyy"; // Date format to be displayed
     private static final String TIME_FORMAT = "hh:mma"; // Time format to be displayed
 

@@ -15,7 +15,7 @@ import static duke.ui.Messages.addTaskMessage;
  */
 public class AddDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
-    public static final String FORMAT = "deadline <task description> /at <date> <time>";
+    public static final String FORMAT = "deadline <task description> /by <date> <time>";
 
     private final String task;
     private final DateTime deadline;

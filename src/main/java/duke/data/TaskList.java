@@ -92,7 +92,7 @@ public class TaskList {
         ArrayList<Integer> indexList = new ArrayList<>();
 
         for (int i = 0; i < taskList.size(); ++i) {
-            String task = taskList.get(i).getTask();
+            String task = taskList.get(i).getTask().toLowerCase();
             if (task.contains(searchWord)) {
                 indexList.add(i);
             }
