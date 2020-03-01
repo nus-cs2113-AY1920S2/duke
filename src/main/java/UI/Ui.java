@@ -1,14 +1,15 @@
 package UI;
 
-import Duke.Task;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Text UI of the application
+ */
 public class Ui {
 
-
-
+    /**
+     * Prints the list of operations supported
+     */
     public static void printHelp() {
         System.out.println("Commands: ");
         System.out.println("List: lists all recorded tasks \nusage: list\n");
@@ -27,6 +28,11 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Prompts user for input
+     *
+     * @return String containing user command for parsing
+     */
     public static String readCommand() {
         System.out.print("> ");
         Scanner input = new Scanner(System.in);
@@ -53,10 +59,6 @@ public class Ui {
                                 + "____________________________________________________________\n"
                                 + "Everyday is a sunny day!\n"
                                 + "____________________________________________________________\n";
-        /*
-        System.out.println("____________________________________________________________\n\nCurrent time: ");
-        getDateTime(); // due to testing purposes, will fail when comparing timestamps
-        */
 
         System.out.println(welcomeMessage);
     }

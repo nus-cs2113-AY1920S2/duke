@@ -1,6 +1,8 @@
 package Duke;
 
-
+/**
+ * Specifies the additional requirements for deadline type tasks
+ */
 public class Deadline extends Task {
 
     public static final String TYPE_DEADLINE = "D";
@@ -9,11 +11,11 @@ public class Deadline extends Task {
         super(description, date);
     }
 
-    public void setDate(String date) {
-        super.date = date;
-    }
-
-
+    /**
+     * Retrieve the code for current type of task
+     *
+     * @return deadline task type code
+     */
     @Override
     public String getTaskType() {
         return TYPE_DEADLINE;

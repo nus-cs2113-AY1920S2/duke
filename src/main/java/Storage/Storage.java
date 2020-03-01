@@ -1,22 +1,18 @@
 package Storage;
 
-import Duke.Deadline;
-import Duke.Event;
 import Duke.Task;
-import Duke.ToDo;
-
 import Task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Represents the fle to store task data
+ */
 public class Storage {
 
     private static final char TASK_TODO = 'T';
@@ -26,8 +22,12 @@ public class Storage {
     private static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke");
     private static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
 
+    /**
+     * Locate folder location and check availability
+     * If missing create folder
+     */
     public static void checkFolderPath() {
-        // Locate folder location, if missing create folder
+
         boolean directoryExists = java.nio.file.Files.exists(FOLDER_PATH);
         try {
             if (!directoryExists) {
@@ -41,11 +41,23 @@ public class Storage {
         }
     }
 
+    /**
+     * Check whether data file has is present in directory
+     *
+     * @return status of file availability
+     */
     public static boolean checkFileExists() {
         boolean fileExists = java.nio.file.Files.exists(FILE_PATH);
         return fileExists;
     }
 
+    /**
+     * Writes newly created task to data file
+     *
+     * @param newTask newly created task
+     * @param myWriter FileWriter object to operate on task
+     * @throws IOException if error writing to file
+     */
     private static void writeTaskToFile(Task newTask, FileWriter myWriter) throws IOException {
         if (newTask.getDate().isEmpty()) {
             myWriter.write(newTask.getTaskType() + " | " + newTask.getStatus() + " | "
@@ -56,12 +68,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Parser method for task objects to call when requires saving
+     * Sets up environment for writing to file
+     *
+     * @param newTask newly created task
+     */
     public static void saveTask(Task newTask) {
-        // Append new task to file
         try {
             File file = new File(String.valueOf(FILE_PATH));
             FileWriter myWriter = new FileWriter(file, true);
-
             writeTaskToFile(newTask, myWriter);
             myWriter.close();
             System.out.println("Successfully updated data file!\n");
@@ -70,6 +86,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads in entries from data file line by line
+     *
+     * @param tasks instance of the list of tasks
+     */
     public static void populateList(TaskList tasks) {
         try {
             List<String> allLines = Files.readAllLines(Paths.get(String.valueOf(FILE_PATH)));
@@ -82,6 +103,12 @@ public class Storage {
 
     }
 
+    /**
+     * Parse entry in datafile according to data type
+     *
+     * @param oneLine current entry in data file
+     * @param tasks instance of the list of tasks
+     */
     public static void processDataFile(String oneLine, TaskList tasks) {
         String[] words = oneLine.split(" \\| ");
         switch (words[0].charAt(0)) {
@@ -102,9 +129,13 @@ public class Storage {
 
     }
 
+    /**
+     * Updates the entire task file after delete or complete command is given
+     *
+     * @param tasks instance of the list of tasks
+     */
     public static void rebuildTaskFile(ArrayList<Task> tasks) {
         // replace current list with new updated list
-
         try {
             File file = new File(String.valueOf(FILE_PATH));
             FileWriter myWriter = new FileWriter(file, false);

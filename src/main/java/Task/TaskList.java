@@ -18,6 +18,7 @@ public class TaskList {
     public static final int LENGTH_EVENT = 6;
     public static final int LENGTH_TODO = 5;
     public static final int LIST_TO_INDEX = 1;
+    public static final String TASK_INCORRECT_PARAMETERS_DETECTED = "[Error][New Task]: Incorrect Parameters detected";
 
     private static ArrayList<Task> tasks;
 
@@ -48,7 +49,7 @@ public class TaskList {
     public static void deleteTask(int taskIndex) throws EmptyListException {
 
         if(tasks.isEmpty()) {
-            throw  new EmptyListException();
+            throw  new EmptyListException("List is currently empty!");
         }
         taskIndex -= LIST_TO_INDEX;
         if ( (taskIndex < tasks.size()) || (taskIndex > 0)) { // check if out of bounce
@@ -67,21 +68,21 @@ public class TaskList {
 
     public static String[] processDatedTasks(String taskDescription, int wordLength, int commandLength) throws NoParameterException {
         if (wordLength <= 1) { // empty parameter
-            throw new NoParameterException();
+            throw new NoParameterException("[Error][New Task]: Incorrect Parameters detected");
         }
         try {
             String itemName = taskDescription.substring(commandLength);
             String[] words = itemName.split("/"); // potential problem is not accepting date format with '/' inside, throw err if more than 2 len
             for (int i = 0; i < words.length; i++) { // checking for blank tasks, including one char of space
                 if (words[i].isBlank()){
-                    throw new NoParameterException();
+                    throw new NoParameterException(TASK_INCORRECT_PARAMETERS_DETECTED);
                 }
             }
             return words;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input the date using the specified format");
         }
-        System.out.println("Ugh null");
+        System.out.println("[Error]: Incorrect input found");
         return null;
     }
 
@@ -113,11 +114,11 @@ public class TaskList {
     public static void addTodo(String userInput, int wordLength) throws NoParameterException {
 
         if (wordLength <= 1) { // empty parameter
-            throw new NoParameterException();
+            throw new NoParameterException(TASK_INCORRECT_PARAMETERS_DETECTED);
         }
         String itemName = userInput.substring(LENGTH_TODO);
         if (itemName.isBlank()) { // task is a space/blank char
-            throw new NoParameterException();
+            throw new NoParameterException(TASK_INCORRECT_PARAMETERS_DETECTED);
         }
         Task newTask = new ToDo(itemName.trim());
         tasks.add(newTask);

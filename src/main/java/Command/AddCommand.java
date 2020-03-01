@@ -1,10 +1,11 @@
 package Command;
 
 import Exceptions.NoParameterException;
-import Storage.Storage;
-import Task.TaskList;
-import UI.Ui;
 
+/**
+ * Adds a task to the task list.
+ * Processes the task based on its task type
+ */
 public class AddCommand extends Command {
 
     private static final char TASK_TODO = 'T';
@@ -15,6 +16,13 @@ public class AddCommand extends Command {
     int wordArrayLength;
     char taskType;
 
+    /**
+     * Convenience constructor using raw values
+     *
+     * @param userCommand full user input, including command and task descriptions
+     * @param wordArrayLength number of parameters supplied for command
+     * @param taskType type of task to be processed
+     */
     public AddCommand(String userCommand, int wordArrayLength, char taskType) {
         this.userInput = userCommand;
         this.wordArrayLength  = wordArrayLength;
@@ -37,11 +45,13 @@ public class AddCommand extends Command {
                 tasks.addTodo(userInput, wordArrayLength);
                 break;
             default:
-                System.out.println("Keyword not recognised!\n");
+                System.out.println("[Error][New Task]: Keyword not recognised!\n");
+                System.out.println("Task types:\ntodo\nevent\ndeadline");
             }
 
         } catch (NoParameterException e) {
-            System.out.println("Missing parameters");
+            System.out.println("[Error][New Task]: Missing parameters");
+            System.out.println("Usage:\n{todo} <Details>\n{event or deadline} <Details> / <YYYY-MM-DD> HH");
         }
     }
 }

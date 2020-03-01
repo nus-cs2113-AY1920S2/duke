@@ -1,7 +1,9 @@
 package Duke;
 
 
-
+/**
+ * Specifies the additional requirements for todo type tasks
+ */
 public class ToDo extends Task {
 
     public static final String TYPE_TODO = "T";
@@ -10,6 +12,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Retrieve the code for current type of task
+     *
+     * @return deadline task type code
+     */
     @Override
     public String getTaskType(){
         return TYPE_TODO;

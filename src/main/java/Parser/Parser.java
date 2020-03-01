@@ -9,12 +9,9 @@ import Command.AddCommand;
 import Command.DeleteCommand;
 import Command.ExitCommand;
 
-import Exceptions.NoParameterException;
-import Exceptions.EmptyListException;
-import org.w3c.dom.ls.LSOutput;
-
-import java.security.spec.RSAOtherPrimeInfo;
-
+/**
+ * Parse user input
+ */
 public class Parser {
 
     private static final int SIZE_DONE_COMMAND = 2;
@@ -23,101 +20,69 @@ public class Parser {
     private static final char TASK_EVENT = 'E';
     private static final char TASK_DEADLINE = 'D';
 
+    /**
+     * Parses input into command for execution
+     *
+     * @param userCommand user input, including command word and corresponding parameters
+     * @return Command based on user input
+     */
     public static Command parseCommand(String userCommand) {
 
-            String[] words = userCommand.split(" ");
-            int wordLength = words.length;
+        String[] words = userCommand.split(" ");
+        int wordLength = words.length;
 
-            switch (words[0]) {
-            case "list":
-                return new ListCommand();
-                //return printList(tasks);
-            case "done":
-                return prepareDoneCommand(words[1], wordLength);
+        switch (words[0]) {
+        case "list":
+            return new ListCommand();
+        case "done":
+            return prepareDoneCommand(words[1], wordLength);
+        case "help":
+            return new HelpCommand();
+        case "delete":
+            return prepareDeleteCommand(words[1], wordLength);
+        case "todo":
+            return new AddCommand(userCommand, wordLength, TASK_TODO);
+        case "event":
+            return new AddCommand(userCommand, wordLength, TASK_EVENT);
+        case "deadline":
+            return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
+        case "bye":
+            return new ExitCommand();
+        default:
+            System.out.println("[Error]: Command not recognised\n");
+            return new HelpCommand();
 
-            case "help":
-                return new HelpCommand();
-
-            case "delete":
-                return prepareDeleteCommand(words[1], wordLength);
-
-            case "todo":
-                return new AddCommand(userCommand, wordLength, TASK_TODO);
-               // break;
-            case "event":
-                return new AddCommand(userCommand, wordLength, TASK_EVENT);
-                /*
-                try {
-                    int taskCounter = tasks.size() + 1;
-                    addEvent(tasks, userCommand, taskCounter, wordLength);
-                } catch (NoParameterException e){
-                    System.out.println("Missing Parameters detected!\n");
-                }
-                break;
-
-                 */
-
-            case "deadline":
-                return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
-                /*
-                try {
-                    int taskCounter = tasks.size() + 1;
-                    addDeadline(tasks, userCommand, taskCounter, wordLength);
-                } catch (NoParameterException e){
-                    System.out.println("Missing Parameters detected!\n");
-                }
-                break;
-
-                 */
-            case "bye":
-                return new ExitCommand();
-
-            default:
-                System.out.println("Command not recognised\n");
-                return new HelpCommand();
-            }
+        }
     }
 
-    private static Command prepareDeleteCommand(String word, int wordLength) {
+    /**
+     * Auxiliary function to validate user input
+     *
+     * @param wordIndex index of task to be deleted
+     * @param wordLength length of command from user
+     * @return command to be executed
+     */
+    private static Command prepareDeleteCommand(String wordIndex, int wordLength) {
         if (wordLength != SIZE_DELETE_COMMAND) {
-            String errorMessage = "Wrong format for command \"Delete\"\n";
+            String errorMessage = "[Error][Delete]: Wrong format for command \"Delete\"\n";
             return new FailedCommand(errorMessage);
         }
-        //try {
-            int index = Integer.parseInt(word);
-            return new DeleteCommand(index);
-            /*
-        } catch (NumberFormatException e) {
-            String errorMessage = "Please input a valid number\n";
-            return new FailedCommand(errorMessage);
-        } catch (IndexOutOfBoundsException e) {
-            String errorMessage = "Task not found, please try again\n";
-            return new FailedCommand(errorMessage);
-        } catch (EmptyListException e) {
-            String errorMessage = "List is empty";
-            return new FailedCommand(errorMessage);
-        }
-             */
+        return new DeleteCommand(wordIndex);
     }
 
-    private static Command prepareDoneCommand(String word, int wordLength) {
+    /**
+     * Auxiliary function to validate user input
+     *
+     * @param wordIndex index of task to be set complete
+     * @param wordLength length of command from user
+     * @return command to be executed
+     */
+    private static Command prepareDoneCommand(String wordIndex, int wordLength) {
         if (wordLength != SIZE_DONE_COMMAND) {
-            String errorMessage = "Wrong format for command \"done\"";
+            String errorMessage = "[Error][Done]: Wrong format for command \"done\"";
             return new FailedCommand(errorMessage);
         }
-       // try {
-            int index = Integer.parseInt(word);
-            return new DoneCommand(index);
-            /*
-        } catch (NumberFormatException e) {
-            String errorMessage = "Please input a valid number\n";
-            return new FailedCommand(errorMessage);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            String errorMessage = "Duke.Task not found, please try again";
-            return new FailedCommand(errorMessage);
-        }
-
-             */
+        return new DoneCommand(wordIndex);
     }
 
 }
