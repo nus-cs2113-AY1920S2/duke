@@ -41,6 +41,8 @@ Expected outcome:
 This command triggers the task management mode.
 Once triggered, the duke programmes awaits task details 
 to be entered and will store the tasks in a list.
+Caution: Once this command is entered, all inputs will be put through strict checking to avoid illegal inputs. Echo function will be disabled.
+
 
 Example of usage: 
 
@@ -139,3 +141,8 @@ Expected outcome:
 
 <br />`Tasks are being saved now`
 <br />`Bye. Hope to see you again soon!`
+
+## Matters needing attention
+For the first time the programme is run, it displays a message saying file not found. 
+This is normal and does not require attention. Once a new file is created by the
+programme, please do not move the file into other folders.
