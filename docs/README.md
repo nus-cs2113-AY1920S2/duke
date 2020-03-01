@@ -64,8 +64,8 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
   * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
   Note that you have to add 'T' between the date and the time.
   
-* For an event task, an event start and end date and time MUST be added right after the TASK_DESCRIPTION  
-  by using /on.
+* For an event task, an event start and end date and time MUST be added 
+  right after the TASK_DESCRIPTION by using /on.
   * e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` 
          such as 2020-01-12T10:00 to 2020-01-12T11:00`.
   Note that you have to add 'T' between the date and the time.    
