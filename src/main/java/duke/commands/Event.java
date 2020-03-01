@@ -13,8 +13,8 @@ public class Event extends Command {
      * @throws DukeException If command is incomplete or empty
      */
     public Event(String input) throws DukeException {
-        super("[E][✗] "
-                + input.replaceFirst("/at","(at:").trim() + ")");
+        super("[E][ ] "
+                + input.replaceFirst("\\s*/at\\s*"," (at: ").trim() + ")");
         if (input.replaceFirst("/at(.*)","").matches("\\s*")){
             throw new DukeException("event", 1);
         }

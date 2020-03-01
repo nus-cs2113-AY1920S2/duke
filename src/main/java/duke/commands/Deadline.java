@@ -12,8 +12,8 @@ public class Deadline extends Command {
      * @throws DukeException If command is incomplete or empty
      */
     public Deadline(String input) throws DukeException {
-        super("[D][✗] "
-                + input.replaceFirst("/by","(by:").trim() + ")");
+        super("[D][ ] "
+                + input.replaceFirst("\\s*/by\\s*"," (by: ").trim() + ")");
         if (input.replaceFirst("/by(.*)","").matches("\\s*")){
             throw new DukeException("deadline",1);
         }

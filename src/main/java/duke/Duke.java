@@ -6,13 +6,9 @@ import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 
-// unicode-character reference list: \u2717 = ✗, \u2713 ✓
-
 /**
  * Main chat bot class.
  */
-
-
 public class Duke {
     public static Storage storage;
     public static TaskList tasks;

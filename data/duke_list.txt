@@ -1,4 +1,0 @@
-[T][✓] Wash the dishes
-[E][✗] Attend interview for the News (at: 1 March 1pm)
-[E][✗] Watch the News (at: 1am)
-[D][✓] Submit 1st draft for Joker 2 (by: 1st March 5pm)

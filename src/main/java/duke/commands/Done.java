@@ -17,7 +17,7 @@ public class Done extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage){
         try {
             int index = Integer.parseInt(command.replaceAll("[^\\d]", ""))-1;
-            tasks.list.get(index).command = tasks.list.get(index).command.replace("✗", "✓");
+            tasks.list.get(index).command = tasks.list.get(index).command.replace("[ ]", "[1]");
             ui.showDoneOutput(tasks.list.get(index).command);
             storage.updateListDataOnDisk(tasks.list);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {

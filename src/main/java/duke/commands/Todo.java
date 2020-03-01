@@ -12,7 +12,7 @@ public class Todo extends Command {
      * @throws DukeException If command is incomplete or empty
      */
     public Todo (String input) throws DukeException {
-        super("[T][✗] " + input.trim());
+        super("[T][ ] " + input.trim());
         if (input.matches("\\s*")) {
             throw new DukeException("todo", 1);
         }
