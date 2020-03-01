@@ -1,7 +1,5 @@
 package task;
 
-import javax.print.DocFlavor;
-
 /**
  * Represents a Task in the list kept by Duke
  */
@@ -10,10 +8,10 @@ public abstract class Task {
     protected boolean isDone;
     private static int numberOfTasksInList;
     /**
-     * Creates a new Task with the given description
+     * Creates a new Task
      * Default value for isDone is false
-     *
-     * @param description of the Task created
+     * Increments the total number of Task in the list
+     * @param description description of Task provided by user
      */
     public Task(String description) {
         this.description = description;
@@ -21,17 +19,23 @@ public abstract class Task {
         numberOfTasksInList++;
     }
 
+    /**
+     * Return the current total number of Task in the TaskList
+     * @return number of task in the list
+     */
     public static int getNumberOfTasksInList() {
         return numberOfTasksInList;
     }
 
-    public static void reduceNumberOfTaskInList() {
+    /**
+     * Decrement the number of Tasks in List
+     */
+    public static void reduceNumberOfTaskInList(){
         numberOfTasksInList--;
     }
 
     /**
-     * Get the status of isDone of the Task and returns an icon
-     *
+     * Returns an icon corresponding to the status of Task
      * @return tick or cross icon
      */
     public String getStatusIcon() {
@@ -39,34 +43,31 @@ public abstract class Task {
     }
 
     /**
-     * Changes the boolean isDone to true
+     * Sets the boolean isDone to true
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
-    @Override
-    public abstract String toString();
-
     /**
-     * Print done response message
-     */
-    public abstract String getDoneResponseMessage(int itemIndexRequested);
-
-    /**
-     * get description of Task
-     *
+     * Returns the description of Task
      * @return description of Task
      */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns String representing the boolean isDone
+     * @return string representing boolean isDone
+     */
     public String isDone() {
-        return (isDone ? "[Y]" : "[N]");
+        return (isDone ? "Y" : "N");
     }
 
+    @Override
+    public abstract String toString();
     public abstract String getEventType();
-
     public abstract String getTaskTime();
+    public abstract String getDoneResponseMessage(int itemIndexRequested);
 }

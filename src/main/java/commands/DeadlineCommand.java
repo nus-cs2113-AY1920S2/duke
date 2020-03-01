@@ -12,10 +12,10 @@ import ui.Ui;
 public class DeadlineCommand extends Command {
     /**
      * Constructs a Deadline Object
-     * @param userInput unedited String object provided by user
+     * @param rawUserInput unedited String provided by user
      */
-    public DeadlineCommand(String userInput) {
-        super(userInput);
+    public DeadlineCommand(String rawUserInput) {
+        super(rawUserInput);
     }
 
     /**
@@ -31,7 +31,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws IndexOutOfBoundsException, MissingDescriptionException, MissingDateException {
-        String[] splitCommands = removeCommandWord(rawUserInput);
+        String[] splitCommands = removeCommandWord(super.rawUserInput);
         String[] deadlineSplit = splitDate(splitCommands[1]);
         taskList.addNewDeadline(deadlineSplit[0].trim(), deadlineSplit[1].trim());
         storage.saveToHardDisk(taskList);

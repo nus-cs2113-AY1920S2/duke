@@ -83,6 +83,12 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Returns boolean true if string is empty
+     * otherwise returns false
+     * @param myString string to check if empty
+     * @return true if string is empty otherwise, false
+     */
     private boolean isEmptyString(String myString) {
         return (myString.length() == 0);
     }

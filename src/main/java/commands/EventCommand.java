@@ -12,10 +12,10 @@ import ui.Ui;
 public class EventCommand extends Command {
     /**
      * Constructs a Event Command object
-     * @param userInput String provided by user
+     * @param rawUserInput String provided by user
      */
-    public EventCommand(String userInput) {
-        super(userInput);
+    public EventCommand(String rawUserInput) {
+        super(rawUserInput);
     }
 
     /**
@@ -30,7 +30,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws MissingDescriptionException, MissingDateException {
-        String[] splitCommands = removeCommandWord(rawUserInput);
+        String[] splitCommands = removeCommandWord(super.rawUserInput);
         String[] eventSplit = splitDate(splitCommands[1]);
         taskList.addNewEvent(eventSplit[0].trim(), eventSplit[1].trim());
         storage.saveToHardDisk(taskList);

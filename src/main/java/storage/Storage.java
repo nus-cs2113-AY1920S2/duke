@@ -29,7 +29,6 @@ public class Storage {
     /**
      * Construct Storage object
      * Creates directory if not found
-     * Creates data file if not found
      */
     public Storage() {
         this.filePath = "duke.txt";
@@ -101,7 +100,7 @@ public class Storage {
         return taskArrayList;
     }
 
-    public boolean isDone(String isDone) {
+    private boolean isDone(String isDone) {
         return isDone.equals("Y");
     }
 
@@ -154,6 +153,4 @@ public class Storage {
     private boolean isEvent(Task task) {
         return task.getEventType().equals("[E]");
     }
-
-
 }
