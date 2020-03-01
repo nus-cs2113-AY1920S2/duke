@@ -1,4 +1,4 @@
 package duke.exception;
 
-public class CorruptedFileException extends Exception {
-}
+/** Signals that the file is corrupted, resulting in a error in saving or loading the file */
+public class CorruptedFileException extends Exception {}

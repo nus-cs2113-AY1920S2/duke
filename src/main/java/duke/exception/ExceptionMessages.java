@@ -7,6 +7,8 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoCommand;
 import duke.commands.DueCommand;
 import duke.format.DateTime;
+import duke.ui.UI;
+
 
 import static duke.format.TextFormatter.ANGRY_FACE;
 import static duke.format.TextFormatter.SHOCK_FACE;
@@ -16,6 +18,10 @@ import static duke.format.TextFormatter.toBold;
 import static duke.format.TextFormatter.toBoldAndItalic;
 import static duke.format.TextFormatter.toItalic;
 
+/**
+ * Collection of <code>Exception</code> messages to be displayed by the {@link UI}.
+ * @see UI
+ */
 public class ExceptionMessages {
     private static final String TAB = createSpaces(4);
 
