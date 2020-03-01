@@ -28,6 +28,9 @@ public class Task {
         return (isDone ? "Done" : "Not Done");
     }
 
+    /**
+     * Updates task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -37,6 +40,7 @@ public class Task {
         return String.format("[" + getStatus() + "]  " + this.description);
     }
 
+    /** Converts task to data format. */
     public String convertToData() {
         int isDoneAsInt = isDone ? 1 : 0;
         return String.format(isDoneAsInt + "|" + this.description);

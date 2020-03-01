@@ -5,11 +5,19 @@ import ui.Ui;
 import commands.Command;
 import parser.Parser;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and interacts with the user
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes the user interface and loads data into the application
+     * @param dataPath path of the data file
+     */
     private Duke(String dataPath) {
         ui = new Ui();
         storage = new Storage(dataPath);
@@ -21,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads the user's commands and executes them until the user issues the exit command.
+     */
     private void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -39,6 +50,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the application
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
