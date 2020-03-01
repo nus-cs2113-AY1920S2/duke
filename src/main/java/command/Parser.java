@@ -3,7 +3,7 @@ package command;
 public class Parser {
 
     public String getCommand(String input) {
-        return input.split(" ")[0];
+        return input.split(" ")[0].toLowerCase();
     }
 
     public String getDescription(String input) {
