@@ -33,6 +33,8 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         File f = new File(dataPath);
         try {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
             Scanner s = new Scanner(f);
             ArrayList<Task> tasks = new ArrayList<>();
 
@@ -58,6 +60,8 @@ public class Storage {
 
             return tasks;
         } catch (FileNotFoundException e) {
+            throw new DukeException("File not found.");
+        } catch (IOException e) {
             throw new DukeException("File not found.");
         }
     }
