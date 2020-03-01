@@ -11,21 +11,72 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Storage is the public class responsible for creating and managing the data files generated from the application.
+ */
+
 public class Storage {
 
+    /**
+     * The object containing the list containing all current tasks.
+     */
+
     private TaskList tasklist;
+
+    /**
+     * The object containing user interface functions.
+     */
+
     private UI ui;
+
+    /**
+     * The file path of the data file that contains tasklist information.
+     */
+
     private static String FILE_PATH = "data" + File.separator + "duke.txt";
+
+    /**
+     * The file path of the directory that contains the data file.
+     */
+
     private static String DIRECTORY_PATH = "data";
+
+    /**
+     * Message to notify user that a new directory is created.
+     */
+
     private static String CREATE_DIRECTORY_MESSAGE = "New Directory created: ";
+
+    /**
+     * Message to notify user that there is no existing data file and that a new data file is created.
+     */
+
     private static String CREATE_NEW_FILE_MESSAGE = "No existing file is found, new file created: ";
+
+    /**
+     * Message to notify user that there is an existing data file and that it is loaded into the tasklist.
+     */
+
     private static String LOAD_EXISTING_FILE_MESSAGE = "File already exists. Existing data loaded from: ";
+
+    /**
+     * Constructs the Storage object.
+     * @param tasklist the object containing the list containing all current tasks.
+     * @param ui the object containing user interface functions.
+     */
 
     public Storage(TaskList tasklist, UI ui) {
         this.tasklist = tasklist;
         this.ui = ui;
         this.loadFile();
     }
+
+    /**
+     * Firstly, searches for the data directory, if absent, creates a new directory. <br>
+     * Secondly, searches for the data file in the directory, if absent, creates a new data file. <br>
+     * If data file is present, loads the existing data from the file into the tasklist
+     * such that it is accessible by the user.
+     */
 
     public void loadFile() {
         this.ui.displayLineSeparator();
@@ -47,6 +98,11 @@ public class Storage {
         }
         this.ui.displayLineSeparator();
     }
+
+    /**
+     * Reads the data file and parses the existing data in the file, converting it into tasks which is added into
+     * the tasklist such that it is accessible by the user.
+     */
 
     public void readFile() {
         try {
@@ -90,6 +146,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears all content in the data file.
+     */
+
     public void clearFile() {
         try {
             PrintWriter pw = new PrintWriter(FILE_PATH);
@@ -98,6 +158,10 @@ public class Storage {
             ui.displayErrorMessage();
         }
     }
+
+    /**
+     * Rewrites the data file to reflect the current data in the tasklist.
+     */
 
     public void rewriteFile() {
         try {
@@ -110,6 +174,10 @@ public class Storage {
             ui.displayErrorMessage();
         }
     }
+
+    /**
+     * Appends a new line of data into the data file.
+     */
 
     public void writeFileLine(Task task) {
         try {

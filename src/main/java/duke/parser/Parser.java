@@ -3,11 +3,35 @@ package duke.parser;
 import duke.commands.*;
 import duke.exceptions.*;
 
+/**
+ * Parser is the public class responsible for parsing user input and generating the relevant commands.
+ */
+
 public class Parser {
 
+    /**
+     * The command prompt entered by the user.
+     */
+
     private static String commandPrompt;
+
+    /**
+     * The description of the command entered by the user.
+     */
+
     private static String description;
+
+    /**
+     * The number of relevant arguments in the command entered by the user.
+     */
+
     private static int numArguments;
+
+    /**
+     * Parses the user input and prepares it to be analysed and used to generate commands.
+     * @param input the user input.
+     * @throws InvalidCommandException if user input has too few arguments.
+     */
 
     public static void prepareInput(String input) throws InvalidCommandException {
         String[] inputArray = input.trim().toLowerCase().split(" ", 2);
@@ -20,6 +44,17 @@ public class Parser {
         }
         commandPrompt = inputArray[0];
     }
+
+    /**
+     * Analyses the user input and generates the relevant command.
+     * @param input the user input.
+     * @return  the command generated from the user input.
+     * @throws InvalidCommandException if command is not supported by application.
+     * @throws InvalidDeadlineException if format for creating new deadline is wrong.
+     * @throws InvalidEventException if format for creating new event is wrong.
+     * @throws InvalidToDoException if format for creating new to-do is wrong.
+     * @throws InvalidFormatException if format for command is wrong.
+     */
 
     public static Command parseInput(String input) throws InvalidCommandException, InvalidDeadlineException, InvalidEventException, InvalidToDoException, InvalidFormatException {
         prepareInput(input);
