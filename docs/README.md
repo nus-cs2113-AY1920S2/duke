@@ -305,7 +305,7 @@ The Task List is then filtered for **Deadline** and **Event** tasks which *date 
 ## Help
 In the event that you ever forget the usage of a command, you can look it up within the **LumiChat** program itself. All you need to do is to enter the *keyword* `help`, followed by the command you wish to query.   
   
-Below is the **exhaustive** list of words recognised by the program for you to query:
+Below is the **exhaustive** list of words recognised by the program for you to query:  
  `add`,  `todo`, `deadline`, `event`, `done`, `list`, `delete`, `find`, `due`, `bye` or `exit`, `datetime`, `date`, `time`, `timespecifier` or `timespec`
 
 
