@@ -98,14 +98,10 @@ public class Duke {
     public static void main(String[] args) {
         java.util.Properties properties = System.getProperties();
         String home = properties.get("user.home").toString();
-        // get Operating System separator
-        String separator = properties.get("file.separator").toString();
-        // your directory name
-        String directoryName = "duke";
         // your file name
         String fileName = "savedTasks.txt";
 
-        File dir = new File(home + separator + directoryName);
+        File dir = new File(home);
         File f = new File(dir, fileName);
         new Duke(f).run();
     }
