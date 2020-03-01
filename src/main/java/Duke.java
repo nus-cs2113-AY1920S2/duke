@@ -37,7 +37,7 @@ public class Duke {
             parser.doUserCommand(response);
         }
     }
-    
+
     public static void main(String[] args) throws DukeException {
         new Duke().run();
     }
