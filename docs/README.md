@@ -19,31 +19,32 @@
 
  Duke is a personal text-based chat-bot application used for managing tasks.
  Duke is capable of handling 3 different types of tasks:
- * _**ToDo**_ (Consists of a short description)
- * _**Deadline**_ (Consists of a short description and task deadline details)
- * _**Event**_ (Consists of a short description and task location details)
+ * _**ToDo**_ (Consists of a short description) <br>
+ * _**Deadline**_ (Consists of a short description and task deadline details) <br>
+ * _**Event**_ (Consists of a short description and task location details) <br>
 
 ## 2. Download
  
- * Ensure that you have Java 11 or above installed in your Computer.
- * Download the latest version of duke.jar [here](https://github.com/dejunnn/duke/releases).
- * Open and run the duke.jar file.
- * Duke will store task list data as a "duke.txt" file in the "data" directory.
+ * Ensure that you have Java 11 or above installed in your Computer. <br>
+ * Download the latest version of duke.jar [here](https://github.com/dejunnn/duke/releases). <br>
+ * Open and run the duke.jar file. <br>
+ * Duke will store task list data as a "duke.txt" file in the "data" directory. <br>
+ 
 
-If there is no directory present, Duke will create one upon startup. Duke will also create an empty duke.txt file.
+If there is no directory present, Duke will create one upon startup. Duke will also create an empty duke.txt file. <br>
      
      __________________________________________________________________________________________
      New Directory created: data
      No existing file is found, new file created: duke.txt
      __________________________________________________________________________________________
 
-If there is an existing directory and duke.txt file present, Duke will load existing data from the file.
+If there is an existing directory and duke.txt file present, Duke will load existing data from the file. <br>
     
     __________________________________________________________________________________________
     File already exists. Existing data loaded from: duke.txt
     __________________________________________________________________________________________
 
-The following text-based user interface should be displayed:
+The following text-based user interface should be displayed: <br>
     
     __________________________________________________________________________________________
      ____        _        
