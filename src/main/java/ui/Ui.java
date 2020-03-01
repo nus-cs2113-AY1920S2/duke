@@ -1,7 +1,9 @@
 package ui;
+import task.Task;
 import task.TaskList;
 import exception.DukeException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -40,6 +42,17 @@ public class Ui {
         System.out.println(LINE_PREFIX + "Here are your tasks:");
         for (int j = 0; j < tasks.getSize(); j++) {
             System.out.println(LINE_PREFIX + (j+1) + ". " + tasks.getTask(j));
+        }
+    }
+
+    public void listFoundTasks(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            System.out.println(LINE_PREFIX + "There is no matching task with the given keyword.");
+            return;
+        }
+        System.out.println(LINE_PREFIX + "Here are the matching tasks in your list:");
+        for (int j = 0; j < tasks.size(); j++) {
+            System.out.println(LINE_PREFIX + (j+1) + ". " + tasks.get(j));
         }
     }
 

@@ -51,4 +51,14 @@ public class TaskList {
     public void doneTask(int index) throws DukeException {
         this.getTask(index).markAsDone();
     }
+
+    public ArrayList<Task> findTasks(String keyWord) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.toLowerCase().contains(keyWord)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
 }
