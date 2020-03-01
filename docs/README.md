@@ -48,6 +48,9 @@ Example of usage:
 
 <br />`add task`
 <br />`todo meeting`
+<br />`deadline call david/by 2020-04-01`
+<br />`event party/at 2020-04-02 1800`
+
 
 Expected outcome:
 
@@ -55,6 +58,17 @@ Expected outcome:
 <br />`Got it. I've added this task: meeting`
 <br />`added : [T][✘]meeting`
 <br />`Now you have 1 tasks in the list`
+<br />`Got it. I've added this task: call david`
+<br />`added : [D][✘]call david (by: 2020-04-01)`
+<br />`Now you have 2 tasks in the list`
+<br />`Got it. I've added this task: party`
+<br />`added : [E][✘]party (at: 2020-04-02 1800)`
+<br />`Now you have 3 tasks in the list`
+
+Format for task items:
+`todo [DISCRIPITION]`
+`deadline [DISCRIPITION]/by [DATE IN YYYY_MM_DD]`
+`event [DISCRIPITION]/at [DATE IN YYYY_MM_DD] [TIME IN HH_MM]`
 
 ### `list` -List the current tasks
 
