@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * Class representing a command to find task by keyword
  */
 public class FindCommand extends Command {
+
+    // keyword to be search
     private String keyword;
     /**
      * Creates a new FindCommand with the given keyword.
