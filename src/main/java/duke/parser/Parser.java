@@ -92,7 +92,7 @@ public class Parser  {
         boolean flip = false;
         if(fullCommand[0].equals("todo")){
             for(int i=1; i<fullCommand.length; i++){
-                action.append(fullCommand[i]).append(" ");
+                action.append(fullCommand[i]).append(SPACE);
             }
         }else {
             for (int i = 1; i < (fullCommand.length); i++) {
