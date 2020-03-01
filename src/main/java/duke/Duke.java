@@ -47,10 +47,7 @@ public class Duke {
         taskManager.loadTasks();
     }
 
-
-    public static void main (String[] args) {
-
-        init(args);
+    public static void run () {
 
         printer.greetUser();
 
@@ -64,6 +61,13 @@ public class Duke {
 
             printer.displayFeedback(userFeedback);
         }
+
+    }
+
+    public static void main (String[] args) {
+
+        init(args);
+        run();
 
     }
 
