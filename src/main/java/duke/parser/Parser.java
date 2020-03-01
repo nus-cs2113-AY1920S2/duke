@@ -21,10 +21,6 @@ public class Parser {
         commandPrompt = inputArray[0];
     }
 
-    public static String simpleParse(String input) {
-        return input.trim().toLowerCase();
-    }
-
     public static Command parseInput(String input) throws InvalidCommandException, InvalidDeadlineException, InvalidEventException, InvalidToDoException, InvalidFormatException {
         prepareInput(input);
         Command command;

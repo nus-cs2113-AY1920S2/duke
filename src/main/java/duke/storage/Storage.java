@@ -17,6 +17,9 @@ public class Storage {
     private UI ui;
     private static String FILE_PATH = "data" + File.separator + "duke.txt";
     private static String DIRECTORY_PATH = "data";
+    private static String CREATE_DIRECTORY_MESSAGE = "New Directory created: ";
+    private static String CREATE_NEW_FILE_MESSAGE = "No existing file is found, new file created: ";
+    private static String LOAD_EXISTING_FILE_MESSAGE = "File already exists. Existing data loaded from: ";
 
     public Storage(TaskList tasklist, UI ui) {
         this.tasklist = tasklist;
@@ -30,18 +33,17 @@ public class Storage {
             Path directoryPath = Paths.get(DIRECTORY_PATH);
             if (!Files.exists(directoryPath)) {
                 Files.createDirectory(directoryPath);
-                System.out.println("New Directory created: " + directoryPath.getFileName());
+                System.out.println(CREATE_DIRECTORY_MESSAGE + directoryPath.getFileName());
             }
             File dukeData = new File(FILE_PATH);
             if (dukeData.createNewFile()) {
-                System.out.println("No existing file is found, new file created: " + dukeData.getName());
+                System.out.println(CREATE_NEW_FILE_MESSAGE + dukeData.getName());
             } else {
-                System.out.println("File already exists. Existing data loaded from: " + dukeData.getName());
+                System.out.println(LOAD_EXISTING_FILE_MESSAGE + dukeData.getName());
                 this.readFile();
             }
         } catch (IOException e) {
             ui.displayErrorMessage();
-            e.printStackTrace();
         }
         this.ui.displayLineSeparator();
     }
@@ -52,18 +54,25 @@ public class Storage {
             Scanner myReader = new Scanner(dukeData);
             while (myReader.hasNextLine()) {
                 String dataLine = myReader.nextLine();
-                String[] dataLineArray = dataLine.trim().split(" ");
+                String[] dataLineArray = dataLine.trim().split(" ", 3);
                 String taskType = dataLineArray[0];
                 Task task;
                 switch (taskType) {
                     case "[T]":
-                        task = new ToDo(dataLineArray[2]);
+                        String todoDesc = dataLineArray[2];
+                        task = new ToDo(todoDesc);
                         break;
                     case "[E]":
-                        task = new Event(dataLineArray[2], dataLineArray[3]);
+                        String[] eventInfo = dataLineArray[2].split("at:", 2);
+                        String eventDesc = eventInfo[0].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                        String eventAt = eventInfo[1].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                        task = new Event(eventDesc, eventAt);
                         break;
                     case "[D]":
-                        task = new Deadline(dataLineArray[2], dataLineArray[3]);
+                        String[] deadlineInfo = dataLineArray[2].split("by:", 2);
+                        String deadlineDesc = deadlineInfo[0].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                        String deadlineBy = deadlineInfo[1].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                        task = new Deadline(deadlineDesc, deadlineBy);
                         break;
                     default:
                         throw new InvalidDataException();
@@ -78,7 +87,6 @@ public class Storage {
             myReader.close();
         } catch (FileNotFoundException | InvalidDataException e) {
             ui.displayErrorMessage();
-            e.printStackTrace();
         }
     }
 
@@ -88,7 +96,6 @@ public class Storage {
             pw.close();
         } catch (FileNotFoundException e) {
             ui.displayErrorMessage();
-            e.printStackTrace();
         }
     }
 
@@ -101,7 +108,6 @@ public class Storage {
             myWriter.close();
         } catch (IOException e) {
             ui.displayErrorMessage();
-            e.printStackTrace();
         }
     }
 
@@ -110,10 +116,8 @@ public class Storage {
             BufferedWriter myWriter = new BufferedWriter(new FileWriter(FILE_PATH, true));
             myWriter.write(task.toString() + MessageBank.NEW_LINE);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             ui.displayErrorMessage();
-            e.printStackTrace();
         }
     }
 

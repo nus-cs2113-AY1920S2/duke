@@ -15,8 +15,4 @@ public class ByeCommand extends Command {
         ui.displayGoodbyeMessage();
         ui.setExitStatus(true);
     }
-    @Override
-    public String toString() {
-        return null;
-    }
 }

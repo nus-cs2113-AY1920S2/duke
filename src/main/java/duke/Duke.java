@@ -36,7 +36,6 @@ public class Duke {
                 ui.displayInvalidIndexMessage();
             }
         }
-
     }
 
 }

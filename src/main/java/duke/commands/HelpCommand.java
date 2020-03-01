@@ -7,8 +7,6 @@ import duke.ui.UI;
 
 public class HelpCommand extends Command {
 
-    protected String description;
-
     public HelpCommand(String command) {
         super(command);
     }
