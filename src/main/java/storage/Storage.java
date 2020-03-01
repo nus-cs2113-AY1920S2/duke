@@ -1,12 +1,17 @@
 package storage;
 
 import exception.DukeException;
-import task.*;
+import task.Task;
+import task.Deadline;
+import task.Event;
+import task.Todo;
+import task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,10 +39,10 @@ public class Storage {
                     tasks.add(new Todo(details[2], isDone));
                     break;
                 case "D":
-                    tasks.add(new Deadline(details[2], details[3], isDone));
+                    tasks.add(new Deadline(details[2], parseToDateAndTime(details[3]), isDone));
                     break;
                 case "E":
-                    tasks.add(new Event(details[2], details[3], isDone));
+                    tasks.add(new Event(details[2], parseToDateAndTime(details[3]), isDone));
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! Problem loading data.");
@@ -48,6 +53,10 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found.");
         }
+    }
+
+    private LocalDateTime parseToDateAndTime(String dateAndTime) {
+        return LocalDateTime.parse(dateAndTime);
     }
 
     public void saveTasks(TaskList tasks) throws DukeException {
