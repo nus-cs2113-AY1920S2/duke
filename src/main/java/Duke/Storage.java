@@ -38,7 +38,8 @@ public class Storage {
                 break;
             }
         }
-        System.out.println("Previous tasks has been loaded successfully:");
+        System.out.print("Previous tasks has been loaded successfully:\n" +
+                "____________________________________________________________\n");
     }
 
     /**
