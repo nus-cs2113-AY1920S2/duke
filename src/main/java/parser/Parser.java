@@ -8,6 +8,7 @@ import commands.Command;
 import commands.DoneCommand;
 import commands.ListCommand;
 import commands.ExitCommand;
+import commands.FindCommand;
 
 import exception.DukeException;
 
@@ -38,6 +39,9 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             return prepareDoneTask(arguments);
+
+        case FindCommand.COMMAND_WORD:
+            return prepareFindTask(arguments);
 
         default:
             throw new DukeException("Invalid Command.");
@@ -124,5 +128,13 @@ public class Parser {
         } catch (NumberFormatException  e) {
             throw new DukeException("The task item has to be an integer.");
         }
+    }
+
+    private static Command prepareFindTask (String[] arguments) throws DukeException {
+        if (arguments.length < 2) {
+            throw new DukeException("The keyword has to be indicated.");
+        }
+
+        return new FindCommand(arguments[1]);
     }
 }
