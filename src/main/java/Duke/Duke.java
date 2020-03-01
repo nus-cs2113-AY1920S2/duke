@@ -1,9 +1,17 @@
+package duke;
+
 import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
-import duke.*;
-import ui.*;
-import Exceptions.*;
+
+import duke.exceptions.MissingDescriptionException;
+import duke.exceptions.WhitespaceExceptions;
+import duke.taskManager.Deadline;
+import duke.taskManager.Events;
+import duke.taskManager.Task;
+import duke.taskManager.Todo;
+import duke.ui.*;
+
 import java.util.ArrayList;
 import java.nio.file.*;
 import java.io.BufferedReader;

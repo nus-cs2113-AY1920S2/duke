@@ -1,4 +1,4 @@
-package duke;
+package duke.taskManager;
 
 public class Deadline extends Task {
     private String by;

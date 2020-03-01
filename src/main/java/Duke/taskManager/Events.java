@@ -1,4 +1,4 @@
-package duke;
+package duke.taskManager;
 
 public class Events extends Task {
     private String at;

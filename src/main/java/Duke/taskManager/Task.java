@@ -1,5 +1,4 @@
-package duke;
-import java.nio.charset.*;
+package duke.taskManager;
 
 public class Task {
     private String description;
