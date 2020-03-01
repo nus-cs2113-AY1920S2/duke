@@ -1,3 +1,4 @@
+
 # **Duke User Guide**
 
 <br>
@@ -16,6 +17,7 @@
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a. Filter tasks from your Task List by a Specified Keyword [&#10149;](#a-find--filter-tasks-from-your-task-list-by-a-specified-keyword)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b. Filter tasks from your Task List by a Specified Time Period [&#10149;](#b-due--filter-tasks-from-your-task-list-by-a-specified-time-period)  
 ### **Miscellaneous Information** [&#10149;](#miscellaneous-information)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; &#8226; **Help** [&#10149;](#help)
 #### &nbsp; &nbsp; &nbsp; &nbsp; &#8226; **Exiting the LumiChat Program** [&#10149;](#exiting-the-lumichat-program)
 #### &nbsp; &nbsp; &nbsp; &nbsp; &#8226; **Loading and Saving** [&#10149;](#loading-and-saving)
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9702; Loading [&#10149;](#loading)  
@@ -299,6 +301,12 @@ The Task List is then filtered for **Deadline** and **Event** tasks which *date 
 <br><br>
 
 # Miscellaneous Information
+
+## Help
+In the event that you ever forget the usage of a command, you can look it up within the **LumiChat** program itself. All you need to do is to enter the *keyword* `help`, followed by the command you wish to query.   
+  
+Below is the **exhaustive** list of words recognised by the program for you to query:
+ `add`,  `todo`, `deadline`, `event`, `done`, `list`, `delete`, `find`, `due`, `bye` or `exit`, `datetime`, `date`, `time`, `timespecifier` or `timespec`
 
 
 ## Exiting the LumiChat Program
