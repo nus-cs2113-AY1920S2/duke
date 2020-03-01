@@ -13,6 +13,7 @@ import tasklist.TaskList;
 import static common.Messages.BYE_COMMAND;
 import static common.Messages.LIST_COMMAND;
 import static common.Messages.HELP_COMMAND;
+import static common.Messages.CLEAR_COMMAND;
 import static common.Messages.DONE_COMMAND;
 import static common.Messages.DELETE_COMMAND;
 import static common.Messages.FIND_COMMAND;
@@ -66,6 +67,7 @@ public class Parser {
         case (BYE_COMMAND):
         case (LIST_COMMAND):
         case (HELP_COMMAND):
+        case (CLEAR_COMMAND):
             if (commandKeyword.equals(BYE_COMMAND)) {
                 isExitCommandInvoked = true;
             }
@@ -108,7 +110,7 @@ public class Parser {
             NoDescriptionException, NoRemarkException, IllegalKeywordException {
         String[] returnValue = new String[MAX_SUBSTRING_FIELDS];
         if (originalInput.contains(REMARKS_DELIMITER)){
-            String[] separatedSections = originalInput.split(REMARKS_DELIMITER);
+            String[] separatedSections = originalInput.split(REMARKS_DELIMITER,2);
             String commandWord = separatedSections[0].split(WHITESPACE_DELIMITER, 2)[0];
             //todo should not have a remark section
             if (commandWord.toLowerCase().equals(TODO_COMMAND)) {

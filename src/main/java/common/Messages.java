@@ -60,6 +60,8 @@ public class Messages {
 
     public static final String HELP_COMMAND = "help";
 
+    public static final String CLEAR_COMMAND = "clear";
+
     public static final String WHITESPACE_DELIMITER = " ";
 
     public static final String REMARKS_DELIMITER = " /";
@@ -72,10 +74,13 @@ public class Messages {
 
     public static final String NO_MATCHING_SEARCH_RESULTS_MESSAGE =
             "\tNo tasks containing the search keyword were found.";
+
     public static final String MATCHING_SEARCH_RESULTS_INTRO_MESSAGE =
             "\tHere are the search results: ";
 
-    public static final String EMPTY_COMMAND_ERROR_MESSAGE = "\t\u2639 !!ERROR!! command.Command cannot be whitespaces.";
+    public static final String TASKLIST_CLEARED_MESSAGE = "\tAll tasks in the list have been cleared.";
+
+    public static final String EMPTY_COMMAND_ERROR_MESSAGE = "\t\u2639 !!ERROR!! Command cannot be whitespaces.";
 
     public static final String INVALID_TASK_NUMBER_ERROR_MESSAGE =
             "\t !!ERROR!! The task number you have provided is not valid.";
@@ -101,11 +106,15 @@ public class Messages {
             + "\tUsage: \'list\'" + LS + LS
             + "\t5. done - marks a task as completed" + LS
             + "\tUsage: \'done <task index>\'" + LS + LS
-            + "\t6. find - finds tasks containing a specific keyword" + LS
+            + "\t6. find - returns a list of existing tasks containing a specific keyword" + LS
             + "\tUsage: \'find <keyword>\'" + LS + LS
             + "\t7. delete - deletes a specific task from the current task list" + LS
             + "\tUsage: \'delete <task index>\'" + LS + LS
-            + "\t8. bye - saves current task list and exits Duke" + LS
+            + "\t8. clear - clears all tasks from the current task list" + LS
+            + "\tUsage: \'clear\'" + LS + LS
+            + "\t9. help - provides a list of all valid commands" + LS
+            + "\tUsage: \'help\'" + LS + LS
+            + "\t10. bye - saves current task list and exits Duke" + LS
             + "\tUsage: \'bye\'";
 
     public String addUnderscoreBorders(String inputText) {

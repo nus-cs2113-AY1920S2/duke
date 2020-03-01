@@ -15,8 +15,9 @@
     + [4.3. Display all tasks](#43-list---displays-all-tasks-in-list)
     + [4.4. Find task by keyword](#44-find---find-tasks-that-match-keyword)
     + [4.5. Delete tasks](#45-delete---deletes-task-from-list)
-    + [4.6. Viewing Help](#46-help---displays-a-help-list)
-    + [4.7. Exiting Duke](#47-bye---exits-the-program)
+    + [4.6. Clear all tasks](#46-clear---clears-all-existing-tasks)
+    + [4.7. Viewing Help](#47-help---displays-a-help-list)
+    + [4.8. Exiting Duke](#48-bye---exits-the-program)
 - [5. Command Summary](#5-command-summary)       
      
  
@@ -83,7 +84,7 @@ Format:
  
 - Adds an event and its' event time and/or place to the list
  
-- Text that follows **"_/"** ( _ denoting a whitespace) will be placed in the remarks section of the event.
+- Text that follows "_/" ( _ denoting a whitespace) will be placed in the remarks section of the event.
  
 - Valid `<Remark>` formats include:
     + Any String value (e.g. **Mon 4pm**) 
@@ -160,11 +161,11 @@ Format:
 Example of usage:
 `list`
  
-Expected outcome (if task list non-empty):
+Expected outcome (if task list is non-empty):
  
 <img src = "images/list-eg.PNG" width = "400">
 
-Expected outcome (if task list empty):
+Expected outcome (if task list is empty):
  
 <img src = "images/list-eg-empty.PNG" width = "400">
  
@@ -219,7 +220,7 @@ Assuming this is our existing list:
  
 Expected outcome:
  
-<img src = "images/delete-eg.PNG" width "400">
+<img src= "images/delete-eg.PNG" width = "400">
 
 The resulting list:
 
@@ -227,8 +228,32 @@ The resulting list:
  
 &nbsp;
 
-### 4.6 `help` - Displays a help list
-The help list contains information about all accepted commands.
+### 4.6 `clear` - clears all existing tasks
+This command removes all tasks from the task list.
+ 
+Format:
+ `clear`
+ 
+ 
+Example of usage:
+`clear`
+
+Assuming this is our existing list:
+
+<img src= "images/clear-listbefore-eg.PNG" width = "400">
+ 
+Expected outcome:
+ 
+<img src= "images/clear-eg.PNG" width = "400">
+
+The resulting list:
+
+<img src= "images/clear-listafter-eg.PNG" width = "400">
+ 
+&nbsp;
+
+### 4.7 `help` - Displays a help list
+This command contains help information about all accepted commands.
  
 Format:
  `help`
@@ -239,13 +264,13 @@ Example of usage:
  
 Expected outcome:
  
-<img src #"images/help-eg.PNG" width# "400">
+<img src= "images/help-eg.PNG" width = "400">
  
 &nbsp;
  
  
-### 4.7 `bye` - Exits the program
-Saves task list to a local storage file in the computer and exits program.
+### 4.8 `bye` - Exits the program
+Saves the task list to a local storage file in the computer and exits program.
  
  
 Format:
@@ -261,7 +286,7 @@ Expected outcome:
  
 &nbsp;
  
-##5. Command Summary 
+## 5. Command Summary 
  
 * *Todo* : `todo <Description>` \
 e.g. `todo read book`
@@ -283,6 +308,8 @@ e.g. `find book`
  
 * *Delete* : `delete <Index>` \
 e.g. `delete 1`
+ 
+* *Clear* : `clear`
  
 * *Help* : `help`
  

@@ -14,8 +14,27 @@ import tasklist.TaskList;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static common.Messages.*;
-
+import static common.Messages.BYE_COMMAND;
+import static common.Messages.LIST_COMMAND;
+import static common.Messages.HELP_COMMAND;
+import static common.Messages.CLEAR_COMMAND;
+import static common.Messages.DONE_COMMAND;
+import static common.Messages.DELETE_COMMAND;
+import static common.Messages.FIND_COMMAND;
+import static common.Messages.TODO_COMMAND;
+import static common.Messages.DEADLINE_COMMAND;
+import static common.Messages.EVENT_COMMAND;
+import static common.Messages.EMPTY_LIST_ERROR_MESSAGE;
+import static common.Messages.LS;
+import static common.Messages.INVALID_TASK_NUMBER_ERROR_MESSAGE;
+import static common.Messages.TASK_ALREADY_COMPLETED_ERROR_MESSAGE;
+import static common.Messages.DISPLAYED_INDEX_OFFSET;
+import static common.Messages.SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE;
+import static common.Messages.INVALID_COMMAND_ERROR_MESSAGE;
+import static common.Messages.NO_MATCHING_SEARCH_RESULTS_MESSAGE;
+import static common.Messages.MATCHING_SEARCH_RESULTS_INTRO_MESSAGE;
+import static common.Messages.HELP_COMMAND_LIST;
+import static common.Messages.TASKLIST_CLEARED_MESSAGE;
 
 /**
  * This class represents an individual command. The call for command execution is done through here. It also executes the relevant
@@ -87,6 +106,12 @@ public class Command {
         case (LIST_COMMAND):
             printTaskList(taskListInput, uiInput);
             break;
+        case (HELP_COMMAND):
+            printHelpList(uiInput);
+            break;
+        case (CLEAR_COMMAND):
+            clearTaskList(taskListInput, uiInput, storage);
+            break;
         case (DONE_COMMAND):
             updateTaskDone(taskListInput, uiInput, query, storage);
             break;
@@ -95,9 +120,6 @@ public class Command {
             break;
         case (FIND_COMMAND):
             findTasksByKeyword(taskListInput, uiInput, query);
-            break;
-        case (HELP_COMMAND):
-            printHelpList(uiInput);
             break;
         default:
             insertNewTask(taskListInput, uiInput, tokenizedInput, storage);
@@ -293,8 +315,25 @@ public class Command {
         }
     }
 
+    /**
+     * This method prints out a help message listing all the commands and their proper usages.
+     * @param uiInput helps to display the help message
+     */
     private void printHelpList(Ui uiInput) {
         uiInput.displayMessage(HELP_COMMAND_LIST);
     }
 
+    /**
+     * This method clears all existing tasks in the current task list.
+     * @param listInput the {@link TaskList} object containing all tasks
+     */
+    private void clearTaskList(TaskList listInput, Ui uiInput, Storage storageInput) {
+        listInput.getTaskList().clear();
+        uiInput.displayMessage(TASKLIST_CLEARED_MESSAGE);
+        try {
+            storageInput.saveTaskListToFile(listInput);
+        } catch (IOException e) {
+            uiInput.displayMessage(SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE);
+        }
+    }
 }
