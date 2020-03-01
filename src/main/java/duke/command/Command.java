@@ -19,7 +19,7 @@ public abstract class Command {
      * An abstract method to execute a command.
      *
      * @param tasks The task list where the execution will be done.
-     * @throws DukeException If there is something wrong when executing the command.
+     * @throws DukeException If some command which are not acceptable are sent to execute.
      */
     abstract public void execute(TaskList tasks) throws DukeException;
 

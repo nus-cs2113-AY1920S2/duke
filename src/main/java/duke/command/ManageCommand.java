@@ -3,6 +3,7 @@ package duke.command;
 import java.time.LocalDate;
 
 import duke.TaskList;
+import duke.Ui;
 import duke.excpetions.DukeException;
 
 /**
@@ -36,7 +37,7 @@ public class ManageCommand extends Command{
      * Execute a management command which do some operations on the current tasks.
      *
      * @param tasks The task list where the execution will be done.
-     * @throws DukeException If something goes wrong during the execution.
+     * @throws DukeException If some command which are not acceptable are sent to execute.
      */
     @Override
     public void execute(TaskList tasks) throws DukeException{
@@ -52,6 +53,9 @@ public class ManageCommand extends Command{
             break;
         case "show":
             tasks.showOneDayTasks(this);
+            break;
+        case "help":
+            Ui.showHelpMessage();
             break;
         default:
             throw new DukeException();

@@ -28,10 +28,11 @@ public class Ui {
     /**
      * Shows welcome message at the beginning and ask for users' command.
      */
-    public static void showWelcome() {
+    public static void showWelcomeMessage() {
         showLine();
-        System.out.println("Hello! I'm Momo");
+        System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+        System.out.println("If you are a new user. Please type 'help' to view how to give a  correct command.");
         showLine();
     }
 
@@ -46,6 +47,25 @@ public class Ui {
     }
 
     /**
+     * Prints out help message to show users the format of all kinds of commands.
+     */
+    public static void showHelpMessage(){
+        System.out.println("There are 10 types of commands；todo, deadline, event, " +
+                "list, find, show, done, delete, help and exit");
+        System.out.println("Followings are examples of commands:");
+        System.out.println("todo : todo borrow books");
+        System.out.println("deadline : deadline return books /by 2020-03-02T11:00:00");
+        System.out.println("event : event group meeting /at 2020-03-03T14:00:00");
+        System.out.println("list: list");
+        System.out.println("find: find books");
+        System.out.println("show : show 2020-03-02");
+        System.out.println("done : done 2");
+        System.out.println("delete : delete 1");
+        System.out.println("help : help");
+        System.out.println("exit : bye");
+    }
+
+    /**
      * An error message which will come out when there is some problem in the process of loading.
      */
     public void showLoadingError(){
@@ -56,6 +76,6 @@ public class Ui {
      * An error message that reminds the users the command is not acceptable by Duke.
      */
     public static void showError() {
-        System.out.println("The command given is not acceptable.");
+        System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

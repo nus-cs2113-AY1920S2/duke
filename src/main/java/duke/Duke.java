@@ -39,7 +39,7 @@ public class Duke {
      * It will give an error message when the command is not acceptable.
      */
     public void run(){
-        Ui.showWelcome();
+        Ui.showWelcomeMessage();
         boolean isExit = false;
         while(!isExit){
             try{

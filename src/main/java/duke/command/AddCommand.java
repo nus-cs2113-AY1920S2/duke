@@ -31,7 +31,7 @@ public class AddCommand extends Command {
      *  This methods executes the add command that will add a respective type task to the type list.
      *
      * @param tasks The task list where the execution will be done.
-     * @throws DukeException If there is anything wrong when trying to add a new task.
+     * @throws DukeException If some command which are not acceptable are sent to execute.
      */
     @Override
     public void execute(TaskList tasks) throws DukeException {
