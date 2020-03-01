@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Storage {
 
     /** Default file path used. */
-    public static final String DEFAULT_PATH = "C:\\repos\\IP\\data\\duke.txt";
+    public static final String DEFAULT_PATH  = "duke.txt";
 
     /**
      * Saves the {@code TaskList} data to the storage file.
@@ -22,7 +22,10 @@ public class Storage {
      * @throws IOException if there is a failure in saving of the file.
      */
     public static void save(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(DEFAULT_PATH,false);
+        File file = new File("duke.txt");
+        file.createNewFile();
+        FileWriter fw = new FileWriter("duke.txt", false);
+
         for (Task i : tasks.getTaskArray()) {
             fw.write(i.saveTask());
             fw.write(System.lineSeparator());
@@ -37,7 +40,12 @@ public class Storage {
      * @throws FileNotFoundException if the default path is invalid.
      */
     public static void retrieve(TaskList tasks) throws FileNotFoundException {
-        File f = new File(DEFAULT_PATH); // create a File for the given file path
+        File f = new File("duke.txt");
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Data cannot be saved.");
+        }
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String input = s.nextLine();
