@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.commands.DueCommand;
 import duke.data.TaskList;
 
 import static duke.format.TextFormatter.ANGRY_FACE;
@@ -110,6 +111,11 @@ public class Messages {
     public static final String FIND_MESSAGE = HAPPY_FACE + "Sure! Lumi searches your list...";
 
     public static final String NO_MATCHES_MESSAGE = THINKING_FACE + "Huh? Lumi is not able to find anything...\n";
+
+    public static final String UNKNOWN_TIME_SPECIFIER_MESSAGE =
+            SHOCK_FACE + "Yikes! Lumi does not recognise that " + toBold("time specifier") + "...\n" +
+            "Lumi needs you to follow this format:\n" + TAB +
+            toBoldAndItalic(DueCommand.FORMAT) + "\n";
 
 
     /* Exit messages */

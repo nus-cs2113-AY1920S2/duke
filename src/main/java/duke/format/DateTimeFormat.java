@@ -37,12 +37,28 @@ public class DateTimeFormat {
             return LocalDate.now();
         }
 
-        for (String format : ALL_DATE_FORMATS) {
-            try {
-                return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
-            } catch (DateTimeParseException e) {}
+        switch (date) {
+
+        case "today":
+        case "tdy":
+            return LocalDate.now();
+
+        case "yesterday":
+        case "yst":
+            return LocalDate.now().minusDays(1);
+
+        case "tomorrow":
+        case "tmr":
+            return LocalDate.now().plusDays(1);
+
+        default:
+            for (String format : ALL_DATE_FORMATS) {
+                try {
+                    return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
+                } catch (DateTimeParseException e) {}
+            }
+            throw new InvalidDateException();
         }
-        throw new InvalidDateException();
     }
 
     public static LocalTime stringToTime(String time) throws InvalidTimeException {

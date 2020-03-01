@@ -36,6 +36,18 @@ public class DateTime {
         return time.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 
+    public boolean isOn(LocalDate date) {
+        return this.date.isEqual(date);
+    }
+
+    public boolean isBefore(LocalDate date) {
+        return this.date.isBefore(date);
+    }
+
+    public boolean isAfter(LocalDate date) {
+        return this.date.isAfter(date);
+    }
+
     private boolean hasTime() {
         return time != null;
     }
