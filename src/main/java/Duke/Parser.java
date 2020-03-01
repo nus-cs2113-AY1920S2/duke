@@ -3,10 +3,19 @@ package Duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the object which parses user input to relevant functions for the execution of commands.
+ */
 public class Parser {
 
-    public static void parseUserCommands(TaskList taskArray, ArrayList<Task> lastShownList, Scanner scanner) {
-        boolean lastShownListOutdated = false;
+    /**
+     * Parses user commands to relevant functions to complete it while checking for user input errors.
+     * @param taskArray the task list of the current session to be parsed to relevant command methods
+     * @param lastShownList a  of tasks shown previously when the list or find command has been called
+     * @param scanner a scanner object that takes in user input
+     */
+    public static void parseUserCommands(TaskList taskArray, Scanner scanner) {
+        ArrayList<Task> lastShownList = (ArrayList<Task>) taskArray.tasks.clone();
         boolean exit = false;
         while (exit == false) {
             String userInput = scanner.nextLine();
@@ -23,37 +32,32 @@ public class Parser {
                 String keyword = tokenizedInputs[1];
                 lastShownList.clear();
                 Ui.displayMatchingTasks(taskArray, lastShownList, keyword);
-                lastShownListOutdated = false;
                 break;
             case "list":
                 Ui.printTasks(taskArray);
                 lastShownList.clear();
                 lastShownList = (ArrayList<Task>) taskArray.tasks.clone();
-                lastShownListOutdated = false;
                 break;
             case "done":
-                if (checkOutdatedIndex(lastShownListOutdated)) break;
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 int taskDone = Integer.valueOf(tokenizedInputs[1]) - 1;
-                //to do more error handling here for index out of bounds
+                if (checkOutOfBounds(lastShownList, taskDone)) break;
+                if (checkInvalidTask(taskArray, lastShownList.get(taskDone))) break;
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(lastShownList.get(taskDone).markAsDone());
-                lastShownListOutdated = true;
                 break;
             case "delete":
-                if (checkOutdatedIndex(lastShownListOutdated)) break;
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 int taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
-                //to do more error handling here for index out of bounds
+                if (checkOutOfBounds(lastShownList, taskToDelete)) break;
+                if (checkInvalidTask(taskArray, lastShownList.get(taskToDelete))) break;
                 Ui.respondDeleteSuccess(taskArray.size-1, lastShownList.get(taskToDelete));
                 taskArray.deleteTask(lastShownList.get(taskToDelete));
-                lastShownListOutdated = true;
                 break;
             case "todo":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 taskArray.addTask(new ToDo(tokenizedInputs[1]));
                 Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
-                lastShownListOutdated = true;
                 break;
             case "deadline":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
@@ -61,7 +65,6 @@ public class Parser {
                 if (checkDateEntered(deadlineInfo)) break;
                 taskArray.addTask(new Deadline(deadlineInfo[0], deadlineInfo[1]));
                 Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
-                lastShownListOutdated = true;
                 break;
             case "event":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
@@ -69,7 +72,6 @@ public class Parser {
                 if (checkDateEntered(eventInfo)) break;
                 taskArray.addTask(new Event(eventInfo[0], eventInfo[1]));
                 Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
-                lastShownListOutdated = true;
                 break;
             default:
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -78,10 +80,18 @@ public class Parser {
         }
     }
 
-    private static boolean checkOutdatedIndex(boolean lastShownListOutdated) {
-        if (lastShownListOutdated == true) {
-            System.out.println("Sorry, the list index has been modified, please use 'list' or 'find' command to get" +
-                    " updated indexes before proceeding.\n");
+    private static boolean checkOutOfBounds(ArrayList<Task> lastShownList, int index) {
+        if (index >= lastShownList.size()) {
+            System.out.println("Sorry, the task does not exist. Please use the 'list' or 'find' command for an updated list of tasks.\n");
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkInvalidTask (TaskList taskArray, Task requestedTask) {
+        if (taskArray.taskExists(requestedTask) == false) {
+            System.out.println("Sorry the task no longer exists.\n");
             return true;
         }
         return false;

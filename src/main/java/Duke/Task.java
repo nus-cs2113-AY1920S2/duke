@@ -1,5 +1,8 @@
 package Duke;
 
+/**
+ * Represents a task object that the user can mark as done when completed.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

@@ -2,6 +2,10 @@ package Duke;
 
 import java.util.ArrayList;
 
+
+/**
+ * Represents the interface between the application and the user where messages are printed to the terminal.
+ */
 public class Ui {
 
     /**

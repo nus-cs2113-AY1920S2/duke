@@ -1,5 +1,8 @@
 package Duke;
 
+/**
+ * Represents a deadline object which is a task with a deadline date associated with it.
+ */
 public class Deadline extends Task {
     protected String by;
 
@@ -14,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for deadlines that are read from a saved file.
+     * Constructor for deadlines that are read from a storage file.
      * @param description description of the deadline
      * @param by date of the deadline
      * @param status status of the deadline

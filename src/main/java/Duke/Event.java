@@ -1,5 +1,8 @@
 package Duke;
 
+/**
+ * Represents an event-based task happening at a specific date.
+ */
 public class Event extends Task {
     protected String at;
 
@@ -14,7 +17,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for an event that is read from a saved file.
+     * Constructor for an event that is read from a storage file.
      * @param description description of the event
      * @param at date of the event
      * @param status status of the event

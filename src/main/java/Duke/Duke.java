@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-    // ### IMPORTANT BUG TO FIX... IF YOU MODIFY THE LIST AND AND DELETE/MARK DONE WITHOUT LISTING,
-    // IT WONT WORK CUZ LAST SHOWN LIST DONT GET UPDATED.
     public static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
     public static final String FILEPATH = "saved/data.txt";
@@ -26,10 +24,9 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("No saved file available");
         }
-        ArrayList<Task> lastShownList = (ArrayList<Task>) taskArray.tasks.clone();
 
         Scanner scanner = new Scanner(System.in);
 
-        Parser.parseUserCommands(taskArray, lastShownList, scanner);
+        Parser.parseUserCommands(taskArray, scanner);
     }
 }

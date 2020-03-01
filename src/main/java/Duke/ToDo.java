@@ -1,5 +1,8 @@
 package Duke;
 
+/**
+ * Represents a task object with an item that needs to be done, but does not have a specific date to be completed by.
+ */
 public class ToDo extends Task {
 
     /**

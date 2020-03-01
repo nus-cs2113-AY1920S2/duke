@@ -2,6 +2,10 @@ package Duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks (todos, events and deadlines) relevant to the current user session.
+ * Provides methods to add tasks, delete tasks and retrieve tasks in the list.
+ */
 public class TaskList {
     ArrayList<Task> tasks;
     int size;
@@ -33,13 +37,24 @@ public class TaskList {
     }
 
     /**
-     * Provides the task located in index i of the array.
-     * @param i the index of the task being queried
-     * @return the task located at index i
+     * Provides the task located in index index of the array.
+     * @param index the index of the task being queried
+     * @return the task located at index index
      */
-    public Task get (int i) {
-        return tasks.get(i);
+    public Task get (int index) {
+        return tasks.get(index);
     }
 
-
+    /**
+     * Checks if a task exists in the list.
+     * @param task the task to check
+     * @return true if tasks exists in the list, false if it doesn't
+     */
+    public boolean taskExists (Task task) {
+        if (tasks.contains(task) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

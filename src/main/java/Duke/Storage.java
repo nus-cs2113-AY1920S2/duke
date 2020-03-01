@@ -7,7 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the interface between the application and the storage files. Provides methods to update and retrieve tasks
+ * from storage files.
+ */
 public class Storage {
+    /**
+     * Loads the task list for the current session with tasks located in a previously saved storage file.
+     * @param filePath the location of the storage file
+     * @param taskArray the task list to populate with tasks
+     * @throws FileNotFoundException
+     */
     public static void loadFileContents(String filePath, TaskList taskArray) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -34,7 +44,7 @@ public class Storage {
     /**
      * Creates a new save file overwriting the existing one.
      *
-     * @param filePath destination for the new save file
+     * @param filePath destination for the new storage file
      * @param textToAdd the pre-formatted text string to be written to the file
      * @throws IOException
      */
@@ -45,7 +55,7 @@ public class Storage {
     }
 
     /**
-     * Appends task to a pre-existing save file without overwriting.
+     * Appends task to a pre-existing storage file without overwriting.
      *
      * @param filePath file of the existing save file to be appended to
      * @param textToAppend the pre-formatted text string to append to the file
@@ -58,7 +68,7 @@ public class Storage {
     }
 
     /**
-     * Saves the current state of the task list to a save file.
+     * Saves the current state of the task list to a storage file.
      *
      * @param filePath the destination file path where the file will be stored
      * @param taskArray the list of tasks to be saved in the file
