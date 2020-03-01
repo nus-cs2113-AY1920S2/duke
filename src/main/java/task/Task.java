@@ -20,12 +20,12 @@ public class Task {
     }
 
     /**
-     * Returns tick or X symbols
+     * Returns Done or Not Done status
      *
-     * @return symbol
+     * @return status
      */
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+    public String getStatus() {
+        return (isDone ? "Done" : "Not Done");
     }
 
     public void markAsDone() {
@@ -34,7 +34,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[" + getStatusIcon() + "]  " + this.description);
+        return String.format("[" + getStatus() + "]  " + this.description);
     }
 
     public String convertToData() {

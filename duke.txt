@@ -1,2 +1,4 @@
-T|0| aaa
-E|0| g |g
+T|1| aaa
+E|1| g |g
+E|0|birthday |2pm
+D|0|ip |mar 2
