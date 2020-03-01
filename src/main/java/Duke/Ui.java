@@ -40,8 +40,7 @@ public class Ui {
     public void list (TaskList tasks) {
         if (tasks.getSize() == 0) {
             printMessage("There are no tasks in your list.");
-        }
-        else {
+        } else {
             printMessage("Here are the tasks in your list");
             for (int i = 0; i < tasks.getSize(); i++) { //unsure of getSize()
                 printMessage(i+1 + "." + tasks.getTasks().get(i).toString());
