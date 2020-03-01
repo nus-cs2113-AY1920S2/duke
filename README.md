@@ -45,6 +45,9 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 *   5. Choose the platform you desired for Kuri, graphical user interface (GUI) or command line user interface (CLI). 
         Type `1` for GUI and `2` for CLI. 
+<p align="center">
+  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.33.41 PM.png">
+</p>
 *   6. For CLI, type in a command and press `ENTER` to execute it. For e.g. typing `list` and pressing enter will list all your current tasks.
 *   7. Some other commands you can try:
     *  `todo return book`: adds a todo task to return a book
@@ -55,6 +58,13 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 *   7. Refer to [_Section 3, "Features"_](#features) for more details of each command.
 
 For GUI, simply type in the command and click `Enter` button. 
+<p align="center">
+  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.33.55 PM.png">
+</p>
+
+<p align="center">
+  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.34.00 PM.png">
+</p>
 
 PS: 
    * Since most of the GUI functions and CLI functions are very similar, the following feature list are mainly focused on CLI, but also applied for GUI.  
@@ -173,6 +183,15 @@ Exits the program.
 
 **Format**: `bye`
 
+### 3.11 Warnings: 
+
+Shown as "Alert!"
+
+<p align="center">
+  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.45.47 PM.png">
+</p>
+
+**Format**: `bye`
 
 <a name="faq"></a>
 
