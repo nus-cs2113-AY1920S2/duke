@@ -13,5 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# storage Files
-/data/*.txt
+# Storage Files
+/data/duke.txt
