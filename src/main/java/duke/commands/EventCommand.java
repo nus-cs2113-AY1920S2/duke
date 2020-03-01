@@ -6,7 +6,6 @@ import duke.exceptions.TaskException;
 import duke.exceptions.EventDateException;
 
 
-
 public class EventCommand extends ExecuteCommand {
 
     public EventCommand(String userData) {
