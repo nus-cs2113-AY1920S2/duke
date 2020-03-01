@@ -19,7 +19,7 @@ manages the list of Tasks, refer to the *Features* section below.
 
 * Ensure you have at least Java 11 or above to run the Jar file.
 * Ensure you have downloaded the Jar file successfully.
-	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Release/duke.jar) for Jar file)
+	* (Click [here](https://github.com/NizarMohd/duke/releases/download/A-Release/Nini.Jar.Root.Folder.zip) for Jar file)
 * Navigate through command prompt to the directory that the Jar 
   file has been downloaded into.
 * Type {java -jar duke.jar} to start using *Nini*
