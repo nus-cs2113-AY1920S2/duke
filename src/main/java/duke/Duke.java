@@ -9,6 +9,11 @@ import java.io.IOException;
 import duke.task.Task;
 import duke.exception.*;
 
+/**
+ * A bot that helps users to manage their tasks.
+ * It has a UI, a storage file and a task list.
+ */
+
 public class Duke {
 
     private static Storage myStorage;
@@ -16,6 +21,13 @@ public class Duke {
     private static UI myUI;
 
 
+    /**
+     * Class constructor of the Duke class.
+     * Creates user's UI, storage file and task list.
+     *
+     * @param f  file object that is used as storage file
+     *           to write and load tasks
+     */
     public Duke(File f) {
         myUI = new UI();
         myStorage = new Storage(f);
@@ -26,6 +38,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main running loop of the bot that takes in user input and
+     * handles the command.
+     * Loops ends with the command "bye".
+     */
     public void run(){
 
         myUI.printIntroMessage();
@@ -64,6 +81,10 @@ public class Duke {
         myUI.printGoodbyeMessage();
     }
 
+    /**
+     * Creates file path for storage file if it does not exist.
+     * Calls the Duke class constructor to create a bot, then run it.
+     */
     public static void main(String[] args) {
         String folderName = "data";
         String fileName = "duke.txt";

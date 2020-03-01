@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads and writes the bot's tasks from and to a storage file.
+ * Contains a File object as the storage file.
+ */
+
 public class Storage {
     private static File storageFile;
 
@@ -20,6 +25,13 @@ public class Storage {
         this.storageFile = file;
     }
 
+    /**
+     * Loads tasks from the storage file into a task list
+     * and returns the task list.
+     *
+     * @throws FileNotFoundException .
+     * @return stored task list.
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
         Scanner s = new Scanner(this.storageFile);
         ArrayList<Task> storedTaskList = new ArrayList<>();
@@ -47,6 +59,12 @@ public class Storage {
         return storedTaskList;
     }
 
+    /**
+     * Writes tasks from the given task list to the storage file.
+     *
+     * @param taskList task list that contains tasks to be written.
+     * @throws IOException .
+     */
     public void writeToFile(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(storageFile);
         fw.close();

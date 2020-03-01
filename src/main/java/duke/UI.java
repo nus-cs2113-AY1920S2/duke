@@ -4,8 +4,11 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class UI {
+/**
+ * Prompts input commands from users and displays exception messages.
+ */
 
+public class UI {
 
     public static void printIntroMessage() {
         String logo = " ____        _        \n"
