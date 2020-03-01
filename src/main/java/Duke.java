@@ -87,7 +87,7 @@ public class Duke {
     }
 
     /**
-     * Takes a string pre-processed
+     * Takes a string pre-processed from other functions
      * and turns it into a LocalDate object
      *
      * @param input A string from the duke.txt file
