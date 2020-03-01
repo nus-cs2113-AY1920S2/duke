@@ -5,6 +5,11 @@ import duke.ui.Ui;
 import duke.Exception.DukeException;
 import duke.storage.Storage;
 
+/**
+ * Represents the list of all Tasks and the commands the user execute on them. This class
+ * represents all the operations the user can have on the list, e.g 'list' shows all the
+ * tasks in the list.
+ */
 public class TaskList {
 
     public static ArrayList<Task> tasks;

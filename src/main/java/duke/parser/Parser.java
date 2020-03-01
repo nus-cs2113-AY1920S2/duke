@@ -5,6 +5,11 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.Exception.DukeException;
 
+/**
+ * Represents a Scanner object that is created from the user's input/response with
+ * the program. This class handles the user response and tells the program what commands to execute.
+ * A parser object corresponds to user's response e.g, 'todo return book'
+ */
 public class Parser {
 
     public static Scanner userInput;

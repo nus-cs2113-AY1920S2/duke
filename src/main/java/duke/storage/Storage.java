@@ -5,6 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import duke.task.TaskList;
 
+/**
+ * Represents the location of text file where tasks are saved/loaded to.
+ * This class ensures that tasks are initially loaded and tasks are saved after any change. 
+ */
 
 public class Storage {
 
