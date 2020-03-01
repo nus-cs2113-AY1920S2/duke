@@ -4,10 +4,9 @@ import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.commands.ExitCommand;
 import duke.exception.CorruptedFileException;
-import duke.format.DateTimeFormat;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 import static duke.ui.Messages.WELCOME_MESSAGE;
 import static duke.ui.Messages.LOAD_MESSAGE;
@@ -27,35 +26,18 @@ import static duke.exception.ExceptionMessages.IO_ERROR_MESSAGE;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
-/**
- * <h2>LumiChat</h2>
- * This Duke program is a Chat Box application named <b>LumiChat</b> that manages a list of user-created tasks.
- * <p></p>
- * User interacts with the application via the command line, and performs various actions like adding, deleting and
- * viewing tasks.
- *
- * @author iceclementi
- * @version 5.6.1.4
- * @since 2020, January
- */
 public class Duke {
 
     private Storage storage;
-    private UI ui;
+    private Ui ui;
 
     public static void main(String[] args) {
         Duke chatBot = new Duke();
         chatBot.runChat();
     }
 
-    /**
-     * Prints welcome message, initialises task list and runs program until termination.
-     * <p></p>
-     * <b>Note:</b> Program exits if task list initialisation fails.
-     */
     private void runChat() {
-        this.ui = new UI();
+        this.ui = new Ui();
         this.storage = new Storage();
 
         ui.showSystemMessage(WELCOME_MESSAGE);
@@ -76,14 +58,6 @@ public class Duke {
         ui.showSystemMessage(EXIT_MESSAGE);
     }
 
-    /**
-     * Initialises the program by loading up the task list saved in the storage file.
-     * <p></p>
-     * If file is corrupted, user will be prompted whether to allow file to be overwritten by a new <b>empty</b> file.
-     *
-     * @return <code>TRUE</code> if task list is successfully initialised, or <code>FALSE</code> otherwise
-     * @throws IOException If there is a error accessing or creating the task list file
-     */
     private boolean initialiseChat() throws IOException {
         ui.showSystemMessage(LOAD_MESSAGE);
         try {
@@ -91,8 +65,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             ui.showSystemMessage(FILE_NOT_FOUND_MESSAGE);
             storage.createTaskListFile(); // Create new task list file
-        } catch (CorruptedFileException | IndexOutOfBoundsException |
-                DateTimeFormat.InvalidTimeException | DateTimeFormat.InvalidDateException e) {
+        } catch (CorruptedFileException | IndexOutOfBoundsException e) {
             ui.showSystemMessage(CORRUPTED_FILE_MESSAGE);
 
             boolean canCreateNewFile =
@@ -108,18 +81,12 @@ public class Duke {
         return true;
     }
 
-    /**
-     *  Reads user input from the command line until an <b><i>exit</i></b> command is given.
-     *  Each user input is converted into a command by the <b>Parser</b> and executed. The <b>UI</b> then displays
-     *  any feedback message or necessary information to the user.
-     * @see Parser
-     * @see UI
-     */
     private void readInputUntilExit() {
+        Command command = null;
         do {
             String input = ui.getInput();
             try {
-                Command command = new Parser().parseInput(input);
+                command = new Parser().parseInput(input);
                 CommandResult result = command.execute();
                 ui.showResult(result);
             } catch (Parser.InputLengthExceededException e) {
@@ -129,6 +96,6 @@ public class Duke {
             } catch (Parser.InvalidCommandException e) {
                 System.out.println(INVALID_ACTION_MESSAGE);
             }
-        } while (!ExitCommand.isExit());
+        } while (!ExitCommand.isExit(command));
     }
 }
