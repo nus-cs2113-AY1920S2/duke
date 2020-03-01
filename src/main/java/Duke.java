@@ -1,7 +1,7 @@
 import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
-import Duke.*;
+import duke.*;
 import ui.*;
 import Exceptions.*;
 import java.util.ArrayList;
@@ -129,6 +129,24 @@ public class Duke {
                         deleteDirectory(new File("data"));
                         flag = false;
                         break;
+
+                    case "find":
+                        line = myScanner.nextLine().trim();
+                        String[] keywords = line.split("\\s+");
+                        for(String word : keywords) {
+                            for(int i = 0; i < tasks.size(); i++){
+                                String descrp = tasks.get(i).getDescription();
+                                if(tasks.get(i).getClass(Deadline)){
+
+                                }
+                                if(descrp.contains(word)){
+                                    System.out.println(i + "." + tasks.get(i));
+                                }
+                            }
+                        }
+                        break;
+
+
 
                     default:
                         System.out.println("Please key in a valid function"); //loop till valid function entered

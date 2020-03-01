@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 import java.nio.charset.*;
 
 public class Task {
