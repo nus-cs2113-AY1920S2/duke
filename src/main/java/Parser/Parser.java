@@ -8,6 +8,7 @@ import Command.HelpCommand;
 import Command.AddCommand;
 import Command.DeleteCommand;
 import Command.ExitCommand;
+import Command.FindCommand;
 
 /**
  * Parse user input
@@ -28,30 +29,36 @@ public class Parser {
      */
     public static Command parseCommand(String userCommand) {
 
-        String[] words = userCommand.split(" ");
-        int wordLength = words.length;
+            String[] words = userCommand.split(" ");
+            int wordLength = words.length;
 
-        switch (words[0]) {
-        case "list":
-            return new ListCommand();
-        case "done":
-            return prepareDoneCommand(words[1], wordLength);
-        case "help":
-            return new HelpCommand();
-        case "delete":
-            return prepareDeleteCommand(words[1], wordLength);
-        case "todo":
-            return new AddCommand(userCommand, wordLength, TASK_TODO);
-        case "event":
-            return new AddCommand(userCommand, wordLength, TASK_EVENT);
-        case "deadline":
-            return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
-        case "bye":
-            return new ExitCommand();
-        default:
-            System.out.println("[Error]: Command not recognised\n");
-            return new HelpCommand();
+            switch (words[0]) {
+            case "list":
+                return new ListCommand();
+                //return printList(tasks);
+            case "done":
+                return prepareDoneCommand(words[1], wordLength);
 
+            case "help":
+                return new HelpCommand();
+
+            case "delete":
+                return prepareDeleteCommand(words[1], wordLength);
+
+            case "todo":
+                return new AddCommand(userCommand, wordLength, TASK_TODO);
+
+            case "event":
+                return new AddCommand(userCommand, wordLength, TASK_EVENT);
+
+            case "deadline":
+                return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
+
+            case "find":
+                return new FindCommand(words[1]);
+
+            case "bye":
+                return new ExitCommand();
         }
     }
 
