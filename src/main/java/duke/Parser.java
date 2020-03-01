@@ -1,27 +1,32 @@
 package duke;
 
-import duke.task.Task;
-
-import java.util.ArrayList;
-
 import static duke.Duke.*;
 
+/**
+ * Parser class - A class to handle the input of users and pass it to
+ * Command class for implementing
+ */
 public class Parser {
     public static final String SPACE = " ";
-    public static final String BYE_MESSAGE = "\tBye. Hope to see you again soon!";
 
     protected TaskList tasks;
 
+    /**
+     * Empty Parser constructor to initialize an empty task list
+     */
     public Parser() {
         this.tasks = new TaskList();
     }
 
-    public Parser(TaskList tasks) {
-        this.tasks = tasks;
-    }
-
+    /**
+     * a method to deal with user's input by extracting it and pass it
+     * for the Command to process each indivdual's task
+     *
+     * @param fullCommand user's input
+     * @return Command each user's input could provide different types
+     * of tasks to process
+     */
     public Command parse(String fullCommand) {
-        //String[] commandSplitter = fullCommand.trim().split(SPACE);
         String commandReformatted = fullCommand.toLowerCase().trim();
         if (commandReformatted.equals("bye")) {
             return new ExitCommand();
