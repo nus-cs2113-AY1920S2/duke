@@ -223,3 +223,6 @@ e.g. `delete 3`
 e.g. `find eat`
 * *Clear* : `clear`
 * *Exit* : `bye`
+
+## Acknowledgement
+My UserGuide has been heavily inspired by the superb format of the AddressBook user guide that we were given access to for this course.
