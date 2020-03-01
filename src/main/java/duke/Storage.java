@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.Task;
-import tasks.Todo;
-import tasks.Deadline;
-import tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -65,7 +65,7 @@ public class Storage {
         /*try {
             FileWriter fw = new FileWriter("output.txt");
 
-            for (Task task : tasks){
+            for (Task task : duke.tasks){
                 String addData;
                 switch (task.getTaskDescription()) {
                 case "todo":

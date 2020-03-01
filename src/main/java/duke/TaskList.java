@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 import duke.exceptions.EmptyListException;
 import java.util.ArrayList;
 
@@ -35,6 +35,24 @@ public class TaskList {
                 + "You now have " + tasks.size() + " task(s) in the list.");
     }
 
+    public void findCommand(String taskToFind) {
+        ArrayList<Integer> resultsList = new ArrayList<>();
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            if (tasks.get(i-1).toString().contains(taskToFind)) {
+                resultsList.add(i);
+            }
+        }
+        if (resultsList.size() > 0) {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < resultsList.size(); i++) {
+                String index = resultsList.get(i).toString();
+                System.out.println(index + "." + tasks.get(resultsList.get(i) - 1));
+            }
+        } else {
+            System.out.println("Sorry! There are no tasks matching your search.");
+        }
+    }
+
     public void eventTask(String eventToAdd, String at){
         Event event = new Event(eventToAdd, at);
         tasks.add(event);
@@ -54,12 +72,12 @@ public class TaskList {
     public void listCommand() throws EmptyListException {
         int sizeOfList = tasks.size();
         if (sizeOfList != 0) {
-            System.out.println("Here are the tasks in your list:");
+            System.out.println("Here are the duke.tasks in your list:");
             for (int i = 0; i < sizeOfList ; i += 1) {
                 System.out.println(i + 1 + ". " + tasks.get(i));
             }
         } else {
-            throw new EmptyListException("No tasks in the list.");
+            throw new EmptyListException("No duke.tasks in the list.");
         }
     }
 
