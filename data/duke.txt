@@ -1,2 +1,2 @@
-[T][✘] clean house
-[T][✘] prepare food
+[T][✘] create stuff
+[E][✘] music (at: hall)
