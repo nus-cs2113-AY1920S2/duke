@@ -1,15 +1,17 @@
 package duke.task;
 
-public class Event extends Task {
-    protected String duration;
+import duke.format.DateTime;
 
-    public Event(String task, String duration) {
+public class Event extends Task {
+    protected DateTime duration;
+
+    public Event(String task, DateTime duration) {
         super(task);
         this.duration = duration;
     }
 
     @Override
-    public String getDateTime() {
+    public DateTime getDateTime() {
         return duration;
     }
 

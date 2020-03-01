@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.format.DateTime;
+
 public abstract class Task {
     protected String task;
     protected boolean isDone;
@@ -17,7 +19,7 @@ public abstract class Task {
         return isDone;
     }
 
-    public abstract String getDateTime();
+    public abstract DateTime getDateTime();
 
     public void setIsDone(boolean status) {
         isDone = status;
