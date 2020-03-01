@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 public class Command {
-    public static void handleCommand(String line, String[] words, ArrayList<Task> taskList) throws EmptyTaskListException, EmptyDoneException, EmptyDeleteException, UnknownWordException, EmptyTodoException, EmptyDeadlineException, EmptyEventException {
+    public static void handleCommand(String line, String[] words, ArrayList<Task> taskList) throws EmptyTaskListException, EmptyDoneException, EmptyDeleteException, EmptyFindException, UnknownWordException, EmptyTodoException, EmptyDeadlineException, EmptyEventException {
         if (line.equals("list")) {
             if (taskList.isEmpty()) {
                 throw new EmptyTaskListException();
@@ -28,6 +28,26 @@ public class Command {
             Task t = taskList.get(taskNum - 1);
             t.markAsDone();
             UI.printDoneMessage(t);
+        } else if (words[0].equals("find")) {
+            if (words.length < 2 || words[1].isBlank()) {
+                throw new EmptyFindException();
+            }
+            int findCount = 0;
+            for (Task t : taskList) {
+                String taskDescription = t.getDescription();
+                if(t.toString().toLowerCase().contains(words[1].toLowerCase())){
+                    findCount++;
+                    if(findCount==1){
+                        UI.printFoundMessage();
+                    }
+                    UI.printFoundTask(t, findCount);
+                }
+            }
+            if(findCount==0){
+                UI.printNotFoundMessage();
+            }else{
+                System.out.println("\t____________________________________________________________\n");
+            }
         } else if (words[0].equals("delete")) {
             if (taskList.isEmpty()) {
                 throw new EmptyTaskListException();

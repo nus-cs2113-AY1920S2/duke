@@ -24,6 +24,8 @@ public class Task {
      *
      * @return tick or X symbols.
      */
+    public String getDescription() {return this.description;}
+
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
     }
