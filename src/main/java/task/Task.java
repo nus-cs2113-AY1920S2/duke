@@ -1,4 +1,4 @@
-package duke.task;
+package task;
 
 /**
  * A base class for 3 task types: Todo, Deadline and Event

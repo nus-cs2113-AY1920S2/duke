@@ -1,4 +1,4 @@
-package duke.task;
+package task;
 
 /**
  * A sub-class of the Task class for deadlines.

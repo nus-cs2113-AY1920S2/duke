@@ -1,7 +1,3 @@
-package duke;
-
-import duke.task.Task;
-
 /**
  * Makes sense of user commands by splitting a string of words
  * with the appropriate delimiter.

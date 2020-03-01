@@ -1,4 +1,4 @@
-package duke.exception;
+package exception;
 
 public class EmptyDeadlineException extends Exception {
 

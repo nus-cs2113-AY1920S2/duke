@@ -1,4 +1,4 @@
-package duke.exception;
+package exception;
 
 public class EmptyDoneException extends Exception {
 

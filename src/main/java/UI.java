@@ -1,6 +1,4 @@
-package duke;
-
-import duke.task.Task;
+import task.Task;
 
 import java.util.ArrayList;
 
@@ -28,7 +26,7 @@ public class UI {
                 + "\t Here are the tasks in your list:");
         int i = 0;
         for (Task t : taskList) {
-            System.out.println("\t " + (i + 1) + ". " + t.toString());
+            System.out.println("\t " + (i + 1) + " " + t.toString());
             i++;
         }
         System.out.println("\t____________________________________________________________\n");
@@ -47,7 +45,7 @@ public class UI {
     }
 
     public static void printFoundTask(Task t, int findCount){
-        System.out.println("\t " + findCount + ". " + t.toString());
+        System.out.println("\t " + findCount + " " + t.toString());
     }
 
     public static void printNotFoundMessage() {
@@ -81,42 +79,42 @@ public class UI {
     public static void printEmptyTodoExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! The description of a todo must contain a task name in this format:\n"
-                + "\t todo <task name>\n"
+                + "\t todo [task name]\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyDoneExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t☹ OOPS!!! The description of a done must contain a task number in this format:\n"
-                + "\t done <task number>\n"
+                + "\t done [task number]\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyDeleteExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t☹ OOPS!!! The description of a delete must contain a task number in this format:\n"
-                + "\t delete <task number>\n"
+                + "\t delete [task number]\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyFindExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t☹ OOPS!!! The description of a find must contain a word in this format:\n"
-                + "\t find <word>\n"
+                + "\t find [keyword]\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyDeadlineExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! The description of a deadline must contain a task name and a date in this format:\n"
-                + "\t deadline <task name> /by <date>\n"
+                + "\t deadline [task name] /by [date]\n"
                 + "\t____________________________________________________________\n");
     }
 
     public static void printEmptyEventExceptionMessage() {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! The description of an event must contain a task name and a location in this format:\n"
-                + "\t event <task name> /at <location>\n"
+                + "\t event [task name] /at [location]\n"
                 + "\t____________________________________________________________\n");
     }
 
@@ -130,12 +128,12 @@ public class UI {
     public static void printHelpMessage() {
         System.out.println("\t You can try the following commands:\n"
                 + "\t\t list\n"
-                + "\t\t todo <task name>\n"
-                + "\t\t deadline <task name> /by <date>\n"
-                + "\t\t event <task name> /at <location>\n"
-                + "\t\t done <task number>\n"
-                + "\t\t find <word>\n"
-                + "\t\t delete <task number>\n"
+                + "\t\t todo [task name]\n"
+                + "\t\t deadline [task name] /by [date]\n"
+                + "\t\t event [task name] /at [location]\n"
+                + "\t\t done [task number]\n"
+                + "\t\t find [keyword]\n"
+                + "\t\t delete [task number]\n"
                 + "\t\t bye\n"
                 + "\t____________________________________________________________\n");
     }
@@ -150,9 +148,9 @@ public class UI {
         System.out.println("\t____________________________________________________________\n"
                 + "\t ☹ OOPS!!! Your task list is empty!\n"
                 + "\t You can try entering a task using the following commands:\n"
-                + "\t\t todo <task name>\n"
-                + "\t\t deadline <task name> /by <date>\n"
-                + "\t\t event <task name> /at <location>\n"
+                + "\t\t todo [task name]\n"
+                + "\t\t deadline [task name] /by [date]\n"
+                + "\t\t event [task name] /at [location]\n"
                 + "\t____________________________________________________________\n");
     }
 

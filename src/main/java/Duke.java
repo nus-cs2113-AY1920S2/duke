@@ -1,13 +1,12 @@
-package duke;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
-import duke.task.Task;
-import duke.exception.*;
+import task.Task;
+import exception.*;
+import exception.*;
 
 /**
  * A bot that helps users to manage their tasks.
