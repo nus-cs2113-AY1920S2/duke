@@ -8,7 +8,7 @@ public class Parser {
         return input.split(" ")[1];
     }
 
-    public boolean hasDescription(String input){
+    public boolean hasDescription(String input) {
         return input.split(" ").length > 1;
     }
 
