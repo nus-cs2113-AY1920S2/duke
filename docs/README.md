@@ -27,7 +27,7 @@ this application, go to the [quick start](#2-quick-start) to get started.
 2. Download the latest version of **Zapato** [here](https://github.com/rsanchez-macias/duke/releases).
 3. Choose a home folder to keep your application.
 4. From the command prompt or terminal window, execute the following:
-`java -jar duke iP.jar`
+`java -jar iP.jar`
 5. Type help to find out about the supported commands.
 6. Head to section 3 to learn about all the [features](#3-features).
 
@@ -39,21 +39,25 @@ Command format:
 
 #### 3.1. Add todo: `todo`
 Adds a todo task to the task list <br/> 
+
 Format: `todo [description]` <br/>
 Example: `todo return book`
 
 #### 3.2. Add deadline: `deadline`
 Adds a deadline task to the task list. It can be given either a time (24-cycle), date, or both. <br/> 
+
 Format: `deadline [description] /by [dd-mm-yyyy] [hh:mm]` <br/>
 Example: `deadline submit tax form /by 15-04-2020 23:59`
 
 #### 3.3. Add event: `event`
 Adds an event task to the task list <br/> 
+
 Format: `event [description /at [place/time]` <br/>
 Example: `event project meeting /at COM1`
 
 #### 3.4. Mark a task as done: `done`
 Marks a task as done <br/> 
+
 Format: `done [task #]` <br/>
 Example: 
 * `done 3` <br />
@@ -61,6 +65,7 @@ Marks the third task as done
 
 #### 3.5. Delete a task: `delete`
 Removes a task from the task list <br/> 
+
 Format: `delete [task #]` <br/>
 Example: 
 * `delete 1` <br/>
@@ -68,6 +73,7 @@ deletes the first person from the list
 
 #### 3.6. Find tasks: `find`
 Finds the tasks with the given pattern found in their description <br/> 
+
 Format: `find [pattern]` <br/>
 Example: 
 * `find homework` <br/>
@@ -75,14 +81,17 @@ Lists all the tasks that contain the keyword "homework" in their description
 
 #### 3.7. List all tasks: `list`
 Lists all the tasks in the task list <br/> 
+
 Format: `list` <br/>
 
 #### 3.8. Clear window: `clc`
 Clears the terminal or command prompt window <br/>
+
 Format: `clc` 
 
 #### 3.9. Exit the program: `bye`
 Exits the program at any point <br/>
+
 Format: `bye`
 
 ## 4. FAQ
