@@ -7,7 +7,7 @@
    del ACTUAL.TXT
 
    REM compile the code into the bin folder
-   javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\task\*.java
+   javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\data\task\*.java ..\src\main\java\duke\data\exception\*.java ..\src\main\java\duke\parser\*.java ..\src\main\java\duke\commands\*.java ..\src\main\java\duke\common\*.java ..\src\main\java\duke\ui\*.java ..\src\main\java\duke\storage\*.java
    IF ERRORLEVEL 1 (
        echo ********** BUILD FAILURE **********
        exit /b 1
