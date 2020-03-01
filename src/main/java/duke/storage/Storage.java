@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Represents the file used to store duke data.
  */
 public class Storage {
-    public static final String FILE_PATH = "C:\\Users\\nyanw\\Documents\\y2s2\\2113T\\duke\\data\\duke.txt";
+    public static final String FILE_PATH = "duke.txt";
 
     /**
      * Saves the {@code duke} data to the storage file.
@@ -24,7 +24,7 @@ public class Storage {
      */
     public void save(ArrayList<Task> tasks) throws IOException {
         try {
-            File file = new File("duke.txt");
+            File file = new File(FILE_PATH);
             file.createNewFile();
             FileWriter fw = new FileWriter(FILE_PATH, false);
 
