@@ -3,6 +3,11 @@ package duke.ui;
 import duke.task.TaskList;
 import duke.task.Task;
 
+/**
+ * Represents the interactions the program has with the user e.g, greetings, goodbyes, and
+ * current status of list etc. This class displays messages and other interactions to the user
+ * as it uses the program, e.g, "Error! Invalid command" 
+ */
 public class Ui {
     protected String lineSeparator = "--------------------------------------------";
     protected String logo = " ____        _        \n"

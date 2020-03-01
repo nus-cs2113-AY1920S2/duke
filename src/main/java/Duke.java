@@ -5,6 +5,11 @@ import duke.storage.Storage;
 import duke.Exception.DukeException;
 import duke.parser.Parser;
 
+/**
+ * Represents an command-line organization program that keeps track of tasks that either the user inputs
+ * or have been loaded from a previous text file. The user is able to keep track of tasks, add, delete, search,
+ * and mark some as completed by typing the appropriate command into the command line.
+ */
 public class Duke {
 
     private static TaskList taskLists;
@@ -32,7 +37,6 @@ public class Duke {
             parser.doUserCommand(response);
         }
     }
-
 
     public static void main(String[] args) throws DukeException {
         new Duke().run();
