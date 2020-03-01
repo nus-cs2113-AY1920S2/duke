@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Customs Exception object for failed reading of hard disk
@@ -15,7 +15,7 @@ public class HardDiskCorruptedException extends DukeException {
     }
 
     /**
-     * Returns a formatted string object
+     * Returns a formatted string
      * @return String formatting the error message
      */
     @Override

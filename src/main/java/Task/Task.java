@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * Represents a Task in the list kept by Duke

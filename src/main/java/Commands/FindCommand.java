@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Exceptions.MissingDescriptionException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import exceptions.MissingDescriptionException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Command object that handles a find operation
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
             String[] splitCommands = removeCommandWord(rawUserInput);
             taskList.findTask(splitCommands[1]);
         } catch (MissingDescriptionException e) {
-            System.out.println("Missing keywords to search for! Please provide a keyword to search!");
+            ui.printErrorMessage("Missing keywords to search for! Please provide a keyword to search!");
         }
     }
 }

@@ -1,16 +1,16 @@
-package Parser;
+package parser;
 
-import Commands.Command;
-import Commands.FindCommand;
-import Commands.EventCommand;
-import Commands.ToDoCommand;
-import Commands.DoneCommand;
-import Commands.DeleteCommand;
-import Commands.DeadlineCommand;
-import Commands.ListCommand;
-import Commands.ExitCommand;
+import commands.Command;
+import commands.FindCommand;
+import commands.EventCommand;
+import commands.ToDoCommand;
+import commands.DoneCommand;
+import commands.DeleteCommand;
+import commands.DeadlineCommand;
+import commands.ListCommand;
+import commands.ExitCommand;
 
-import Exceptions.UnknownCommandException;
+import exceptions.UnknownCommandException;
 
 /**
  * Parser that parses user input and returns the appropriate Command object that

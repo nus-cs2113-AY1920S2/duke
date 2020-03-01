@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Custom Exceptions for when user fails to provide description
@@ -15,7 +15,7 @@ public class MissingDescriptionException extends DukeException {
     }
 
     /**
-     * Returns a formatted string object
+     * Returns a formatted string
      * @return String formatting the error message
      */
     @Override

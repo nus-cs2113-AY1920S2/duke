@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Custom Exception for when user fails to provide an integer index
@@ -15,7 +15,7 @@ public class MissingItemIndexException extends DukeException {
     }
 
     /**
-     * Returns a formatted string object
+     * Returns a formatted string
      * @return String formatting the error message
      */
     @Override

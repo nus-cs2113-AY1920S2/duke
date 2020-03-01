@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * abstract class for custom exceptions

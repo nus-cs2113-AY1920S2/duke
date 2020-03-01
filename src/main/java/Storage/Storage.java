@@ -1,11 +1,11 @@
-package Storage;
+package storage;
 
-import Exceptions.HardDiskCorruptedException;
-import Task.Task;
-import Task.Todo;
-import Task.Deadline;
-import Task.Events;
-import TaskList.TaskList;
+import exceptions.HardDiskCorruptedException;
+import task.Task;
+import task.Todo;
+import task.Deadline;
+import task.Events;
+import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileReader;
@@ -19,6 +19,9 @@ import java.util.ArrayList;
  * Manages the loading and saving of all data
  */
 public class Storage {
+    private static final String TODO = "[T]";
+    private static final String DEADLINE = "[D]";
+    private static final String EVENT = "[E]";
     protected String filePath;
     protected String dirPath;
     protected File file;
@@ -64,21 +67,21 @@ public class Storage {
                     String taskDescription = parseLine[2];
 
                     switch (taskType) {
-                    case "[T]":
+                    case TODO:
                         Todo todo = new Todo(taskDescription);
                         if (isDone(isDone)) {
                             todo.markAsDone();
                         }
                         taskArrayList.add(todo);
                         break;
-                    case "[D]":
+                    case DEADLINE:
                         Deadline deadline = new Deadline(taskDescription, parseLine[3]);
                         if (isDone(isDone)) {
                             deadline.markAsDone();
                         }
                         taskArrayList.add(deadline);
                         break;
-                    case "[E]":
+                    case EVENT:
                         Events event = new Events(taskDescription, parseLine[3]);
                         if (isDone(isDone)) {
                             event.markAsDone();

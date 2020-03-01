@@ -1,10 +1,10 @@
-package Commands;
+package commands;
 
-import Exceptions.MissingDescriptionException;
-import Exceptions.MissingItemIndexException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import exceptions.MissingDescriptionException;
+import exceptions.MissingItemIndexException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Command object that handles deleting a Task
@@ -12,7 +12,7 @@ import Ui.Ui;
 public class DeleteCommand extends Command {
     /**
      * Constructs a Delete Command object
-     * @param rawUserInput unedited String object from System.in
+     * @param rawUserInput unedited String from user
      */
     public DeleteCommand(String rawUserInput) {
         super(rawUserInput);
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         } catch (MissingDescriptionException e) {
             throw new MissingItemIndexException(rawUserInput);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter an integer to be marked done");
+            ui.printErrorMessage("Please enter an integer to be marked done");
         }
     }
 }

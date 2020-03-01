@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Custom Exceptions that throws when user marks a Task that is already done
@@ -15,11 +15,11 @@ public class TaskAlreadyDoneException extends DukeException {
     }
 
     /**
-     * Returns a formatted string object
+     * Returns a formatted string
      * @return String formatting the error message
      */
     @Override
     public String toString() {
-        return String.format("Task has already marked done before! Try another task!");
+        return String.format("Task has already been marked done before! Try another task!");
     }
 }

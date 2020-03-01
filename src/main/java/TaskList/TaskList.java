@@ -1,11 +1,11 @@
-package TaskList;
+package tasklist;
 
-import Exceptions.EmptyListException;
-import Exceptions.TaskAlreadyDoneException;
-import Task.Task;
-import Task.Todo;
-import Task.Deadline;
-import Task.Events;
+import exceptions.EmptyListException;
+import exceptions.TaskAlreadyDoneException;
+import task.Task;
+import task.Todo;
+import task.Deadline;
+import task.Events;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class TaskList {
 
     /**
      * Constructs TaskList object for an existing TaskList
-     * @param taskList
+     * @param taskList existing TaskList loaded from saved file data
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -60,20 +60,23 @@ public class TaskList {
      * @throws IndexOutOfBoundsException throws when index provided by user is out of bounds of list
      * @throws TaskAlreadyDoneException throws when user tries to mark done a Task that is already done
      */
-    public void markTaskAsDone(int itemIndex) throws IndexOutOfBoundsException {
+    public void markTaskAsDone(int itemIndex) throws IndexOutOfBoundsException, TaskAlreadyDoneException {
         int listIndex = itemIndex + 1;
         try {
-            if (taskList.get(itemIndex).isDone().equals("Y")) {
+            if (isAlreadyDone(taskList.get(itemIndex))) {
                 throw new TaskAlreadyDoneException("Task already done");
             } else {
                 taskList.get(itemIndex).markAsDone();
                 System.out.println(taskList.get(itemIndex).getDoneResponseMessage(listIndex));
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("You don't have that many items in the list. Please try a number within range!");
-        } catch (TaskAlreadyDoneException e) {
-            System.out.println(e);
+            System.out.println("You don't have that many items in the list. " +
+                    "Please try a number within range!");
         }
+    }
+
+    private boolean isAlreadyDone(Task task) {
+        return task.isDone().equals("Y");
     }
 
     /**
@@ -87,7 +90,8 @@ public class TaskList {
             taskList.remove(itemIndex);
             printSuccessfulDeletion(taskDetails);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("You don't have that many items in the list. Please try a number within range!");
+            System.out.println("You don't have that many items in the list. " +
+                    "Please try a number within range!");
         }
     }
 
@@ -152,14 +156,20 @@ public class TaskList {
         int index = 1;
         for (Task task : taskList) {
             if (task.toString().contains(keyword)) {
-                if (index == 1) {
+                if (isNoTaskYetFound(index)) {
                     System.out.println("Here are the matching tasks in your list:");
                 }
+
                 System.out.println(String.format("%d. %s", index++, task.toString()));
             }
         }
-        if (index == 1) {
+
+        if (isNoTaskYetFound(index)) {
             System.out.println("There are no matching results");
         }
+    }
+
+    private boolean isNoTaskYetFound(int index) {
+        return index == 1;
     }
 }

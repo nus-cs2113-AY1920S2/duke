@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Exceptions.MissingDescriptionException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import exceptions.MissingDescriptionException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Command Object that handles creating a new ToDo

@@ -1,10 +1,10 @@
-package Commands;
+package commands;
 
-import Exceptions.MissingDateException;
-import Exceptions.MissingDescriptionException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import exceptions.MissingDateException;
+import exceptions.MissingDescriptionException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Command object that handles creating a new Event

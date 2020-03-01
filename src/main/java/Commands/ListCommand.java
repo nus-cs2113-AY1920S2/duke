@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Exceptions.EmptyListException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import exceptions.EmptyListException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Command object to handle listing out Task in the Task List

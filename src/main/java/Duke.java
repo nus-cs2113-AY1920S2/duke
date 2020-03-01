@@ -54,7 +54,7 @@ public class Duke {
     }
 
     /**
-     * Creates Duke object and runs the process
+     * Creates a new Duke object and runs the process
      * @param args unused arguments
      */
     public static void main(String[] args) {
