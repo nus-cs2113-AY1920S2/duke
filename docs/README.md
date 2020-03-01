@@ -323,7 +323,7 @@ Should there be an *unfortunate* error in saving your Task List, an option will 
 
 ## Date Time Formats
 Any *date time* data that you provide has to adhere to certain formats pre-defined by the **LumiChat** program. Failure to do so will likely result in the program to be unable to recognise your input command, and a warning will be shown.  
-Instances when you may need to enter a *date time* will be when [adding a **Deadline**](#b-deadline--add-a-deadline-task-to-your-task-list) or [**Event**](#c-event--add-a-event-task-to-your-task-list) task, or [filtering the Task List by a *time period*](#b-due--filter-tasks-from-your-task-list-by-a-specified-time-period).
+Instances when you may need to enter a *date time* will be when [adding a **Deadline**](#b-deadline--add-a-deadline-task-to-your-task-list) or an [**Event**](#c-event--add-an-event-task-to-your-task-list) task, or [filtering the Task List by a *time period*](#b-due--filter-tasks-from-your-task-list-by-a-specified-time-period).
   
 Here are the following *date time* formats.
   
