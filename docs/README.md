@@ -32,14 +32,14 @@ Duke is a Command Line Interface (CLI) bot that helps you to store and manage yo
 7. Refer to Section 3, “Usage” for details of each command.
 
 ## 3. Usage
-####Command Format:  
+Command Format:  
 Items in square brackets are the parameters to be supplied by the user. For example, in `todo [task name]`,  `[task name]` can be replaced with "exercise" in `todo exercise`.
 ### 3.1. Viewing help: `help`
-####Format:
+Format:
 <pre>
 help
 </pre>
-####Expected outcome:
+Expected outcome:
 ```
 ____________________________________________________________
  You can try the following commands:
@@ -54,11 +54,11 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 ### 3.2. Listing all tasks: `list`
-####Format:
+Format:
 <pre>
 list
 </pre>
-####Expected outcome (example):
+Expected outcome (example):
 ```
 ____________________________________________________________
  Here are the tasks in your list:
@@ -74,16 +74,16 @@ Format:
 todo [task name]
 </pre>
 
-####Explanation: 
+Explanation: 
 
 `[task name]` is the name of the todo task.
 
-####Example of usage: 
+Example of usage: 
 <pre>
 todo buy groceries
 </pre>
 
-####Expected outcome:
+Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
@@ -98,17 +98,17 @@ Format:
 deadline [task name] /by [date]
 </pre>
 
-####Explanation: 
+Explanation: 
 
 `[task name]` is the name of the deadline task. `[date]` is the due date of the deadline task.
 
 
-####Example of usage: 
+Example of usage: 
 <pre>
 deadline pay bills /by 2/4/2020
 </pre>
 
-####Expected outcome:
+Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
@@ -118,21 +118,21 @@ ____________________________________________________________
 ```
 ### 3.5. Adding an event task: `event`
 
-####Format:
+Format:
 <pre>
 event [task name]​ /at [location]
 </pre>
 
-####Explanation: 
+Explanation: 
 
 `[task name]` is the name of the event task. `[location]` is the location of the event task.
 
-####Example of usage: 
+Example of usage: 
 <pre>
 event party /at Ben’s house
 </pre>
 
-####Expected outcome:
+Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
@@ -142,23 +142,22 @@ ____________________________________________________________
 ```
 ### 3.6. Marking a task as completed: `done`
 
-####Format:
+Format:
 <pre>
 done [task number]
 </pre>
 
-####Explanation: 
+Explanation: 
 
 `[task number]` is the nth position in the task list of the task to be marked as completed.
-
-####Example of usage: 
+Example of usage: 
 
 ######To mark the 2nd task in the task list as completed
 <pre>
 done 2
 </pre>
 
-####Expected outcome:
+Expected outcome:
 
 
 ```
@@ -181,23 +180,23 @@ ____________________________________________________________
 ```
 ### 3.7. Deleting a task: `delete`
 
-####Format:
+Format:
 <pre>
 delete [task number]
 </pre>
 
-####Explanation: 
+Explanation: 
 
 `[task number]` is the nth position in the task list of the task to be deleted.
 
-####Example of usage: 
+Example of usage: 
 
 ######To delete the 3rd task in the task list
 <pre>
 delete 3
 </pre>
 
-####Expected outcome:
+Expected outcome:
 
 
 ```
@@ -220,23 +219,23 @@ ____________________________________________________________
 ```
 ### 3.8. Finding a keyword: `find`
 
-####Format:
+Format:
 <pre>
 find [keyword]
 </pre>
 
-####Explanation: 
+Explanation: 
 
 `find [keyword]` lists all tasks that contain the word or phrase `[keyword]`.
 
-####Example of usage: 
+Example of usage: 
 
 To list tasks with the word “meet”
 <pre>
 find meet
 </pre>
 
-####Expected outcome:
+Expected outcome:
 
 ```
 list
@@ -257,11 +256,11 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 ### 3.9. Exiting the program: `bye`
-####Format:
+Format:
 <pre>
 bye
 </pre>
-####Expected outcome:
+Expected outcome:
 ```
 ____________________________________________________________
  Bye. Hope to see you again soon!
