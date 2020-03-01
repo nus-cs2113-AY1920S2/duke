@@ -4,6 +4,7 @@ import Duke.Deadline;
 import Duke.Event;
 import Duke.Task;
 import Duke.ToDo;
+import Exceptions.MissingParameterException;
 import Exceptions.NoParameterException;
 import Exceptions.EmptyListException;
 import Storage.Storage;
@@ -19,6 +20,7 @@ public class TaskList {
     public static final int LENGTH_TODO = 5;
     public static final int LIST_TO_INDEX = 1;
     public static final String TASK_INCORRECT_PARAMETERS_DETECTED = "[Error][New Task]: Incorrect Parameters detected";
+    public static final int DATETIME_PARAMETER_SIZE = 2;
 
     private static ArrayList<Task> tasks;
 
@@ -66,7 +68,8 @@ public class TaskList {
 
 
 
-    public static String[] processDatedTasks(String taskDescription, int wordLength, int commandLength) throws NoParameterException {
+    public static String[] processDatedTasks(String taskDescription, int wordLength, int commandLength)
+                                            throws NoParameterException, MissingParameterException {
         if (wordLength <= 1) { // empty parameter
             throw new NoParameterException("[Error][New Task]: Incorrect Parameters detected");
         }
@@ -86,10 +89,33 @@ public class TaskList {
         return null;
     }
 
-    public static void addDeadline(String userInput, int wordLength) throws NoParameterException {
+    public static String[] formatDatetime(String dateTime) throws MissingParameterException {
+        try {
+            String[] splitDateTime = dateTime.trim().split(" ");
+
+            if (splitDateTime.length != DATETIME_PARAMETER_SIZE) {
+                throw new NullPointerException();
+            }
+            for (int i = 0; i < splitDateTime.length; i++) { // checking for blank tasks, including one char of space
+                if (splitDateTime[i].isBlank()){
+                    throw new MissingParameterException();
+                }
+            }
+            return splitDateTime;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please input the date using the specified format");
+        }
+        return null;
+    }
+
+    public static void addDeadline(String userInput, int wordLength) throws NoParameterException, MissingParameterException {
         try {
             String[] words = processDatedTasks(userInput, wordLength, LENGTH_DEADLINE);
-            Task newTask = new Deadline(words[0].trim(), words[1].trim());
+            String[] splitDateTime = formatDatetime(words[1]);
+            if (splitDateTime.length != DATETIME_PARAMETER_SIZE) {
+                throw new MissingParameterException();
+            }
+            Task newTask = new Deadline(words[0], splitDateTime[0], splitDateTime[1]);
             tasks.add(newTask);
             newTask.printAddDetails(getTaskListCounter());
             Storage.saveTask(newTask);
@@ -98,11 +124,14 @@ public class TaskList {
         }
     }
 
-    public static void addEvent(String userInput, int wordLength) throws NoParameterException {
-
+    public static void addEvent(String userInput, int wordLength) throws NoParameterException, MissingParameterException {
         try {
             String[] words = processDatedTasks(userInput, wordLength, LENGTH_EVENT);
-            Task newTask = new Event(words[0].trim(), words[1].trim());
+            String[] splitDateTime = formatDatetime(words[1]);
+            if (splitDateTime.length != DATETIME_PARAMETER_SIZE) {
+                throw new MissingParameterException();
+            }
+            Task newTask = new Event(words[0], splitDateTime[0], splitDateTime[1]);
             tasks.add(newTask);
             newTask.printAddDetails(getTaskListCounter());
             Storage.saveTask(newTask);
@@ -145,11 +174,11 @@ public class TaskList {
     }
 
     public static void loadFromFileDeadline(String[] words) {
-        System.out.println("Word: " + words[2]);
         boolean taskStatus = Boolean.parseBoolean(words[1]);
         String taskDescription = words[2];
         String taskDate = words[3];
-        Task newTask = new Deadline(taskDescription, taskDate);
+        String taskTime = words[4];
+        Task newTask = new Deadline(taskDescription, taskDate, taskTime);
         if (taskStatus) {
             newTask.markAsDone();
         }
@@ -161,7 +190,8 @@ public class TaskList {
         boolean taskStatus = Boolean.parseBoolean(words[1]);;
         String taskDescription = words[2];
         String taskDate = words[3];
-        Task newTask = new Event(taskDescription, taskDate);
+        String taskTime = words[4];
+        Task newTask = new Event(taskDescription, taskDate, taskTime);
         if (taskStatus) {
             newTask.markAsDone();
         }

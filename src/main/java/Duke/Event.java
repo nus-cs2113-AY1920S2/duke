@@ -7,8 +7,9 @@ public class Event extends Task {
 
     public static final String TYPE_EVENT = "E";
 
-    public Event(String description, String date){
-        super(description, date);
+
+    public Event(String description, String date, String time){
+        super(description, date, time);
     }
 
     /**
@@ -24,7 +25,7 @@ public class Event extends Task {
     @Override
     public void printAddDetails(int taskCounter) {
         System.out.println("The following task has been added:\n[" + getTaskType() +"][" +
-                            getStatusIcon() + "] " + super.description + " (at: " + super.date + ")\n");
+                            getStatusIcon() + "] " + super.description + " (by: " + super.date + " at " + time +")");
 
         System.out.println("You've got " + taskCounter + " task(s) in the list!\n");
     }
@@ -32,7 +33,7 @@ public class Event extends Task {
     @Override
     public void printListDetails(int count) {
         System.out.println("["+ getTaskType() + "][" + super.getStatusIcon() + "] " +
-                            count + ". " + super.description + " (by: " + super.date + ")");
+                            count + ". " + super.description + " (by: " + super.date + " at " + time +")");
     }
 
 }
