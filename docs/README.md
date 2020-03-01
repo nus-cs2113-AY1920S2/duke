@@ -8,7 +8,7 @@
 #### &nbsp; &nbsp; &nbsp; &nbsp; **1. Add a Task to your Task List** [&#10149;](#1-add-a-task-to-your-task-list)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a. Add a To Do task to your Task List [&#10149;](#a-todo--add-a-to-do-task-to-your-task-list)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b. Add a Deadline task to your Task List [&#10149;](#b-deadline--add-a-deadline-task-to-your-task-list)  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c. Add an Event task to your Task List [&#10149;](#c-event--add-a-event-task-to-your-task-list)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c. Add an Event task to your Task List [&#10149;](#c-event--add-an-event-task-to-your-task-list)  
 #### &nbsp; &nbsp; &nbsp; &nbsp; **2. Mark a Task as Done** [&#10149;](#2-mark-a-task-as-done)  
 #### &nbsp; &nbsp; &nbsp; &nbsp; **3. View all your Tasks** [&#10149;](#3-view-all-your-tasks)  
 #### &nbsp; &nbsp; &nbsp; &nbsp; **4. Delete a Task from your Task List** [&#10149;](#4-delete-a-task-from-your-task-list)  
