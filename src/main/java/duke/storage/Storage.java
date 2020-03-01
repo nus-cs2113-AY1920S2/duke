@@ -24,6 +24,8 @@ public class Storage {
      */
     public void save(ArrayList<Task> tasks) throws IOException {
         try {
+            File file = new File("duke.txt");
+            file.createNewFile();
             FileWriter fw = new FileWriter(FILE_PATH, false);
 
             for (Task i : tasks) {
