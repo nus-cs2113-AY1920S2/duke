@@ -29,26 +29,22 @@
  * Download the latest version of duke.jar [here](https://github.com/dejunnn/duke/releases).
  * Open and run the duke.jar file.
  * Duke will store task list data as a "duke.txt" file in the "data" directory.
- * If there is no directory present, Duke will create one upon startup. Duke will also create an empty duke.txt file.
-     
+
+If there is no directory present, Duke will create one upon startup. Duke will also create an empty duke.txt file.
      
      __________________________________________________________________________________________
      New Directory created: data
      No existing file is found, new file created: duke.txt
      __________________________________________________________________________________________
 
- * If there is an existing directory and duke.txt file present, Duke will load existing data from the file.
-    
+If there is an existing directory and duke.txt file present, Duke will load existing data from the file.
     
     __________________________________________________________________________________________
     File already exists. Existing data loaded from: duke.txt
     __________________________________________________________________________________________
 
-
-
- * The following text-based user interface should be displayed:
-
-
+The following text-based user interface should be displayed:
+    
     __________________________________________________________________________________________
      ____        _        
     |  _ \ _   _| | _____ 
