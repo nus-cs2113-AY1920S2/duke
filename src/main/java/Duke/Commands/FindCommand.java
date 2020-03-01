@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
-    protected String keyword;
+    // keyword to be search
+    private String keyword;
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
