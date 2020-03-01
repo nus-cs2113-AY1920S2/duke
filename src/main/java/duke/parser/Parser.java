@@ -8,25 +8,34 @@ import java.util.Scanner;
 
 import static duke.Duke.inDebugMode;
 
+/**
+ * A class representing a mechanism to get and process user input.
+ */
 public class Parser {
+
 
     private Scanner input;
     private TaskManager taskManager;
-    private Ui printer;
 
     private final String PROMPT_SYMBOL = "> ";
 
-    public Parser(TaskManager taskManager, Ui printer) {
+
+    /**
+     * Creates a parser to process user input.
+     *
+     * @param taskManager Task manager to edit and/or view the task list.
+     */
+    public Parser(TaskManager taskManager) {
         input = new Scanner(System.in);
         this.taskManager = taskManager;
-        this.printer = printer;
     }
+
 
     /**
      * Gets the command from the user and handles it so that it is
-     * ready for processing
+     * ready for processing.
      *
-     * @return input given by the user
+     * @return Input given by the user
      */
     public String getUserInput () {
         if (!inDebugMode) {
@@ -40,10 +49,10 @@ public class Parser {
 
 
     /**
-     * Checks the type of command received, if any. Redirects
-     * path to specific execute function to process the user's input
+     * Checks the type of command received, if any. Instantiates the
+     * corresponding command to be ready to execute.
      *
-     * @param userResponse Raw input as entered by the user
+     * @param userResponse Raw input containing the command.
      */
     public Command getCommandFromInput (String userResponse) {
 
@@ -51,37 +60,37 @@ public class Parser {
         userResponse = userResponse.replace(cmd, "");
 
         if (cmd.equals(Command.CMD_EXIT)) {
-            return new ExitCommand(printer);
+            return new ExitCommand(new Ui());
 
         } else if (cmd.equals(Command.CMD_HELP)) {
-            return new HelpCommand(printer);
+            return new HelpCommand();
 
         } else if (cmd.equals(Command.CMD_LIST)) {
             return new ListCommand(taskManager);
 
         } else if (cmd.equals(Command.CMD_DONE)) {
-            return new DoneCommand(taskManager, printer, userResponse);
+            return new DoneCommand(taskManager, userResponse);
 
         } else if (cmd.equals(Command.CMD_ADD_DEADLINE)) {
-            return new DeadlineCommand(taskManager, printer, userResponse);
+            return new DeadlineCommand(taskManager, userResponse);
 
         } else if (cmd.equals(Command.CMD_ADD_EVENT)) {
-            return new EventCommand(taskManager, printer, userResponse);
+            return new EventCommand(taskManager, userResponse);
 
         } else if (cmd.equals(Command.CMD_ADD_TODO)) {
-            return new TodoCommand(taskManager, printer, userResponse);
+            return new TodoCommand(taskManager, userResponse);
 
         } else if (cmd.equals(Command.CMD_CLEAR_WINDOW)) {
             return new ClearCommand();
 
         } else if (cmd.equals(Command.CMD_DELETE)) {
-            return new DeleteCommand(taskManager, printer, userResponse);
+            return new DeleteCommand(taskManager, userResponse);
 
         } else if (cmd.equals(Command.CMD_FIND)) {
             return new FindCommand(taskManager, printer, userResponse);
 
         } else {
-            return new InvalidCommand(printer);
+            return new InvalidCommand();
         }
 
     }

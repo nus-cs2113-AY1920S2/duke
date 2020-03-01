@@ -4,25 +4,33 @@ import duke.exception.TaskException.TaskEmptyDescriptionException;
 import duke.task.TaskManager;
 import duke.task.tasktypes.Task;
 import duke.task.tasktypes.Todo;
-import duke.ui.Ui;
 import duke.utility.Messages;
 
+
+/**
+ * A class representing a command to add a todo.
+ */
 public class TodoCommand extends Command {
+
 
     private String userInput;
     private final String BULLET = "\t\t\u2023";
 
     public final static String USAGE = "todo [description]";
 
-    public TodoCommand (TaskManager manager, Ui printer, String userInput) {
-        super(manager, printer);
+
+    /**
+     * Creates a Todo command.
+     *
+     * @param manager Task manager to add todo to the list.
+     * @param userInput Raw user input containing the todo description.
+     */
+    public TodoCommand (TaskManager manager, String userInput) {
+        super(manager);
         this.userInput = userInput;
     }
 
-    /**
-     * Executes the to do command and adds the corresponding task
-     * to the list
-     */
+
     @Override
     public CommandResult execute() {
 
@@ -47,6 +55,14 @@ public class TodoCommand extends Command {
 
     }
 
+
+    /**
+     * Gets todo description from raw user input.
+     *
+     * @param userInput Raw user input.
+     * @return Todo description.
+     * @throws TaskEmptyDescriptionException If taskDescription is empty.
+     */
     private String getDescription (String userInput) throws TaskEmptyDescriptionException {
 
         String taskDescription = userInput.trim();
@@ -58,6 +74,14 @@ public class TodoCommand extends Command {
         return taskDescription;
     }
 
+
+    /**
+     * Formats the message to be displayed in case the todo is added
+     * successfully
+     *
+     * @param toPrint Task added to the task list.
+     * @return Message to display
+     */
     private String getAddedTaskSuccessfullyMsg (Task toPrint) {
         return String.format(Messages.ADDED_TASK, BULLET, toPrint, taskManager.getListSize(),
                 taskManager.getTaskListNoun());

@@ -1,12 +1,14 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.utility.Messages;
 
+/**
+ * A class representing an invalid command.
+ */
 public class InvalidCommand extends Command {
 
-    public InvalidCommand (Ui printer) {
-        super(null, printer);
+    public InvalidCommand () {
+        super(null);
     }
 
     @Override

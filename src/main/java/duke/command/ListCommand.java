@@ -4,17 +4,24 @@ import duke.exception.TaskException.TaskListEmptyException;
 import duke.task.TaskManager;
 import duke.utility.Messages;
 
+/**
+ * A class representing a command to list the user tasks.
+ */
 public class ListCommand extends Command {
 
     public final static String USAGE = "list";
 
-    public ListCommand (TaskManager manager) {
-        super(manager, null);
-    }
 
     /**
-     *  Prints the tasks that are currently in the list
+     * Initializes the objects to execute the list command
+     *
+     * @param manager Task manager to list the current tasks.
      */
+    public ListCommand (TaskManager manager) {
+        super(manager);
+    }
+
+    @Override
     public CommandResult execute () {
 
         String feedback = "";

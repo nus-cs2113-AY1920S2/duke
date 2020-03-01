@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * A class to load tasks from the data file.
+ */
 public class TaskLoader {
 
     private Scanner input;
@@ -20,6 +24,7 @@ public class TaskLoader {
     private String filepath;
     private Gson gson;
 
+    /** Different task types */
     private final String EVENT = "E";
     private final String TODO = "T";
     private final String DEADLINE = "D";
@@ -33,7 +38,11 @@ public class TaskLoader {
         file = new File(filepath);
     }
 
-
+    /**
+     * Loads all the Json objects containing the Task objects.
+     *
+     * @return A list containing all the Task objects.
+     */
     public ArrayList<Task> loadTasks () {
 
         ArrayList<Task> savedTasks = new ArrayList<>();
@@ -67,6 +76,12 @@ public class TaskLoader {
         return savedTasks;
     }
 
+    /**
+     * Creates a Task object from a given Json object.
+     *
+     * @param obj Json object containing the Task object.
+     * @return Task object based on task type.
+     */
     private Task createClassFromJson (JsonObject obj) {
 
         String taskType = obj.get("taskType").toString();

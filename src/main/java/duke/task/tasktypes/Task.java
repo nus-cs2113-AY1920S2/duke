@@ -1,22 +1,26 @@
 package duke.task.tasktypes;
 
+/**
+ * A class representing a Task. It can either a {@link Todo}, a {@link Deadline}, or
+ * an {@link Event}.
+ */
 public abstract class Task {
 
     /** Check and cross markers */
     private static final String checkMark = "\u2713";
     private static final String crossMark = "\u2718";
 
-    /** Completion status for the task **/
+    /** Completion status for the task */
     protected boolean isDone;
 
-    /** duke.task.tasktype.Task description given by the user**/
+    /** Description given by the user */
     protected String description;
+
+    protected TaskType taskType;
 
     public enum TaskType {
         E, T, D;
     }
-
-    protected TaskType taskType;
 
     public Task (String description) {
         this.description = description;
@@ -25,9 +29,9 @@ public abstract class Task {
     }
 
     /**
-     * Gets the status icon for the task
+     * Gets the status icon for the task.
      *
-     * @return Label with a cross or check mark
+     * @return Label with a cross or check mark.
      */
     protected String getStatusIcon () {
         return "[" + (isDone ? checkMark : crossMark) + "]";

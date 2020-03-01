@@ -1,15 +1,18 @@
 package duke.command;
 
+/**
+ * A class representing a command to clear the terminal.
+ */
 public class ClearCommand extends Command {
 
     public final static String USAGE = "clc";
 
     public ClearCommand () {
-        super(null, null);
+        super(null);
     }
 
     /**
-     * Prints new lines to make it look like the command window was cleared
+     * Clears the terminal by printing new lines.
      */
     @Override
     public CommandResult execute () {

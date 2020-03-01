@@ -1,12 +1,14 @@
 package duke.task.tasktypes;
 
-
 import duke.utility.DateFormatter;
-
 import java.time.DateTimeException;
 
+/**
+ * A class representing a deadline task.
+ */
 public class Deadline extends Task {
 
+    /** Date to complete deadline by */
     private String by;
     private DateFormatter dateInfo;
 
@@ -22,7 +24,6 @@ public class Deadline extends Task {
     public String getBy () {
         return by;
     }
-
 
 
     @Override

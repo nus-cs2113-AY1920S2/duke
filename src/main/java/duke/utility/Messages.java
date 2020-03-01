@@ -1,7 +1,12 @@
 package duke.utility;
 
+
+/**
+ * Container for user messages.
+ */
 public class Messages {
 
+    private static final String BULLET = "\t\t\u2023";
 
     /** General messages */
     public final static String INVALID_FORMAT = "Invalid input for adding a %s.";
@@ -21,7 +26,7 @@ public class Messages {
 
     /** Specific to done command */
     public final static String DONE_EMPTY_LIST = "Your list is empty... I cannot mark something that doesn't exist as done >:(";
-    public final static String DONE_MARKED_BEFORE = "The task:" + System.lineSeparator() + "\t\t\u2023 %s" +
+    public final static String DONE_MARKED_BEFORE = "The task:" + System.lineSeparator() + BULLET + " %s" +
             System.lineSeparator() + "\t" + "has already been marked as done before";
     public final static String DONE_MARKED_SUCCESSFUL = "Okay! Marked this task as done :) :" + System.lineSeparator() + "\t\t%s";
     public final static String EMPTY_DONE= "Please enter a number to mark a task as done.";
@@ -33,7 +38,7 @@ public class Messages {
     public final static String EMPTY_FIELD = "Failed to add %s. Reason: %s";
 
 
-    /** List */
+    /** Specific to list command */
     public final static String EMPTY_LIST = "List is empty";
 
 

@@ -6,24 +6,28 @@ import duke.task.TaskManager;
 import duke.ui.Ui;
 import duke.parser.Parser;
 
-
+/**
+ * Entry point to Duke application. Initializes the state of the
+ * program and starts running the application.
+ */
 public class Duke {
 
-    /** Printer contains methods to print messages for the user */
     private static Ui printer;
 
-    /** duke.command.Command contains the names of each command */
     private static Command command;
 
-    /** Manages the lists of tasks */
     private static TaskManager taskManager;
 
-    /** Handles user input */
     private static Parser parser;
 
     /** Debug mode for text-ui-test */
     public static boolean inDebugMode = false;
 
+    /**
+     * Sets the debug mode for the text-ui-test.
+     *
+     * @param args Flag for debug mode.
+     */
     private static void setDebugMode (String[] args) {
         if (args.length >= 1 && args[0].equals("1")) {
             inDebugMode = true;
@@ -32,7 +36,7 @@ public class Duke {
     }
 
     /**
-     * Initializes objects to handle the list, display output, and for
+     * Initializes objects to handle the list, to display output, and for
      * command information
      */
     public static void init (String[] args) {
@@ -42,7 +46,7 @@ public class Duke {
         taskManager = new TaskManager();
         printer = new Ui();
 
-        parser = new Parser(taskManager, printer);
+        parser = new Parser(taskManager);
 
         taskManager.loadTasks();
     }

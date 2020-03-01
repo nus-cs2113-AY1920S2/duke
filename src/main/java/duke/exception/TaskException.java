@@ -2,9 +2,6 @@ package duke.exception;
 
 import duke.task.tasktypes.Task;
 
-import java.lang.reflect.Executable;
-import java.security.cert.Extension;
-
 public class TaskException extends Exception {
 
     public TaskException (String e) {
@@ -17,6 +14,9 @@ public class TaskException extends Exception {
     }
 
 
+    /**
+     * This exception is raised when the index is out of bounds.
+     */
     public static class TaskOutOfBoundsException extends Exception {
 
         private int targetIndex;
@@ -31,8 +31,16 @@ public class TaskException extends Exception {
 
     }
 
+
+    /**
+     * This exception is raised when the task list is empty.
+     */
     public static class TaskListEmptyException extends Exception {}
 
+
+    /**
+     * This exception is raised when the deadline/event details are missing
+     */
     public static class TaskInvalidDateException extends Exception {
 
         public TaskInvalidDateException () {
@@ -46,6 +54,9 @@ public class TaskException extends Exception {
     }
 
 
+    /**
+     * This exception is raised when the task description is empty
+     */
     public static class TaskEmptyDescriptionException extends Exception {
 
         public TaskEmptyDescriptionException () {
@@ -59,6 +70,10 @@ public class TaskException extends Exception {
 
     }
 
+
+    /**
+     * This exception is raised when a task has already been marked as done before.
+     */
     public static class TaskAlreadyMarkedException extends Exception {
 
         private Task task;
