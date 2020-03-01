@@ -1,9 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
 
     public static String lineSeparator = "--------------------------------------------";
-    public static Task[] tasks = new Task[100];
-    public static int numOfTasks = 0;
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static Scanner userInput = new Scanner(System.in);
 
     public static void main(String[] args) throws DukeException {
@@ -36,6 +36,8 @@ public class Duke {
                     doDeadlineCommand(restOfUserInput);
                 } else if (action.equals("event")) {
                     doEventCommand(restOfUserInput);
+                } else if (action.equals("delete")){
+                    doDeleteCommand(restOfUserInput);
                 } else {
                     throw new DukeException();
 
@@ -80,16 +82,17 @@ public class Duke {
     // Helper function to print out message when task gets added to list
     public static void printTask() {
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[numOfTasks-1]);
-        System.out.println("Now you have " + numOfTasks + " tasks in the list. ");
+        System.out.println(tasks.get(tasks.size()-1));
+        System.out.println("Now you have " + tasks.size() + " tasks in the list. ");
     }
 
     // Helper function that executes command for 'list'
     public static void doListCommand() {
         printLineSeparator();
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < numOfTasks; i++){
-            System.out.println((i+1) + "." + tasks[i]);
+        // OPTIMIZE THIS FOR LOOP
+        for(int i = 0; i < tasks.size(); i++){
+            System.out.println((i+1) + "." + tasks.get(i));
         }
         printLineSeparator();
     }
@@ -98,9 +101,9 @@ public class Duke {
     public static void doDoneCommand(String command){
         printLineSeparator();
         int taskNum = Integer.parseInt(command) - 1;
-        tasks[taskNum].markAsDone();
+        tasks.get(taskNum).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks[taskNum]);
+        System.out.println(tasks.get(taskNum));
         printLineSeparator();
     }
 
@@ -110,8 +113,7 @@ public class Duke {
         if (command.isEmpty()){
             throw new DukeException();
         } else{
-            tasks[numOfTasks] = new Todo(command);
-            numOfTasks++;
+            tasks.add(new Todo(command));
             printTask();
             printLineSeparator();
         }
@@ -124,8 +126,7 @@ public class Duke {
         String[] taskList = command.split(" /by ");
         String task = taskList[0];
         String by = taskList[1];
-        tasks[numOfTasks] = new Deadline(task, by);
-        numOfTasks++;
+        tasks.add(new Deadline(task, by));
         printTask();
         printLineSeparator();
     }
@@ -136,9 +137,19 @@ public class Duke {
         String[] taskList = command.split(" /at ");
         String task = taskList[0];
         String at = taskList[1];
-        tasks[numOfTasks] = new Event(task, at);
-        numOfTasks++;
+        tasks.add(new Event(task, at));
         printTask();
+        printLineSeparator();
+    }
+
+    // Helper function that executes command for 'delete'
+    public static void doDeleteCommand(String command){
+        printLineSeparator();
+        int taskNum = Integer.parseInt(command) - 1;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(tasks.get(taskNum));
+        tasks.remove(tasks.get(taskNum));
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         printLineSeparator();
     }
 }
