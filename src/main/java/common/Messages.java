@@ -78,17 +78,17 @@ public class Messages {
     public static final String EMPTY_COMMAND_ERROR_MESSAGE = "\t\u2639 !!ERROR!! command.Command cannot be whitespaces.";
 
     public static final String INVALID_TASK_NUMBER_ERROR_MESSAGE =
-            "\t\u2639 !!ERROR!! The task number you have provided is not valid.";
+            "\t !!ERROR!! The task number you have provided is not valid.";
 
     public static final String INVALID_COMMAND_ERROR_MESSAGE =
-            "\t\u2639 !!ERROR!! I'm sorry, but I don't know what that means :-(";
+            "\t !!ERROR!! I'm sorry, but I don't know what that means :-(";
 
     public static final String EMPTY_LIST_ERROR_MESSAGE = "\tThe list is empty.";
 
     public static final String TASK_ALREADY_COMPLETED_ERROR_MESSAGE = "\tThis task has already been marked completed.";
 
     public static final String TODO_HAS_REMARK_SECTION_ERROR_MESSAGE =
-            "\t\u2639 !!ERROR!! task command should not have a remarks section.";
+            "\t !!ERROR!! task command should not have a remarks section.";
 
     public static final String HELP_COMMAND_LIST = "\tThis is a list of all valid commands for Duke:" + LS + LS
             + "\t1. todo - adds a Todo task to list of tasks" + LS
@@ -134,19 +134,19 @@ public class Messages {
     }
 
     public static String addTaskEmptyDescriptionErrorMessage(String taskType) {
-        return "\t\u2639 !!ERROR!! The description of a " + taskType + " cannot be empty.";
+        return "\t !!ERROR!! The description of a " + taskType + " cannot be empty.";
     }
 
     public static String addTaskEmptyRemarksErrorMessage(String taskType) {
-        return "\t\u2639 !!ERROR!! The remarks section of a " + taskType + " cannot be empty.";
+        return "\t !!ERROR!! The remarks section of a " + taskType + " cannot be empty.";
     }
 
     public static String executeCommandInsufficientParameterErrorMessage(String taskType) {
-        return "\t\u2639 !!ERROR!! " + taskType + " command is missing additional parameters.";
+        return "\t !!ERROR!! " + taskType + " command is missing additional parameters.";
     }
 
     public static String splitInputEventOrDeadlineMissingRemarksErrorMessage(String taskType) {
-        return "\t\u2639 !!ERROR!! " + taskType + " command should have a remarks section.";
+        return "\t !!ERROR!! " + taskType + " command should have a remarks section.";
     }
 
 }

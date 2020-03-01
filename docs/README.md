@@ -9,8 +9,8 @@
 * [4. Command Usage](#4-command-usage)
     + [4.1. Add tasks](#41-add-a-task)
         + [4.1.1 Todos](#411-todo---adds-a-todo-task)
-        + [4.1.2 Events](#412-deadline---adds-a-deadline-task)
-        + [4.1.3 Deadlines](#413-event---adds-an-event-task)
+        + [4.1.2 Events](#412-event---adds-an-event-task)
+        + [4.1.3 Deadlines](#413-deadline---adds-a-deadline-task)
     + [4.2. Mark task as done](#42-done---mark-task-as-done)
     + [4.3. Display all tasks](#43-list---displays-all-tasks-in-list)
     + [4.4. Find task by keyword](#44-find---find-tasks-that-match-keyword)
@@ -74,7 +74,7 @@ Expected outcome:
  
 &nbsp;
 
-#### 4.1.3 `event` - Adds an event task
+#### 4.1.2 `event` - Adds an event task
  
 This command adds an event task to the current task list. Events contain a description and a remark (usually the event date and time).
  
@@ -97,7 +97,7 @@ Expected outcome:
  
 &nbsp;
  
-#### 4.1.2 `deadline` - Adds a deadline task
+#### 4.1.3 `deadline` - Adds a deadline task
  
 This command adds a deadline task to the current task list. Like events, deadlines contain a description and a remark (usually the event date and time).
  
@@ -198,7 +198,7 @@ Expected outcome (if no matching results):
 &nbsp;
  
 ### 4.5 `delete` - Deletes task from list
-Deletes specified task from list.
+This command removes a specified task from the list of existing tasks.
  
 Format:
  `delete <Index>`
@@ -218,7 +218,7 @@ Assuming this is our existing list:
  
 Expected outcome:
  
-<img src = "images/delete-eg.png" width "400">
+<img src = "images/delete-eg.PNG" width "400">
 
 The resulting list:
 
@@ -280,7 +280,7 @@ e.g. `done 1`
 * *Find* : `find <Keyword>` \
 e.g. `find book`
  
-* *Delete* : `delete <Index>` 
+* *Delete* : `delete <Index>` \
 e.g. `delete 1`
  
 * *Help* : `help`
