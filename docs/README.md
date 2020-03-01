@@ -9,10 +9,10 @@
 - [Adds a deadline item](#deadline---adds-a-deadline-item-at-a-specified-time)
 - [Marks an item as done](#done---marks-an-item-as-done)
 - [Deletes an item](#delete---deletes-an-item)
-- [Find an item](#find---find-all-matching-tasks)
+- [Find an item](#find---finds-all-matching-tasks)
 - [Exits program](#bye---exits-program)
-- [Local data storage](#Local-data-storage)
- 
+- [Local data storage](#local-data-storage)
+ <br/>
  
 ## Usage :memo:	
  
@@ -118,7 +118,8 @@ ____________________________________________________________
  Bye. Hope to see you again soon!
 ____________________________________________________________
 ```
- 
-### Local data storage
-On start up, if it exists, Duke loads past list from `[project_root]/data/duke.txt`, or else it creates one.
+<br/>
+### local data storage
+On start up, if it exists, Duke loads past list from `[project_root]/data/duke.txt`, or else it creates a new one.
+
 On exit, Duke saves the created list in the same location.
