@@ -131,22 +131,25 @@ public class Duke {
                         break;
 
                     case "find":
+                        boolean found = false;
                         line = myScanner.nextLine().trim();
                         String[] keywords = line.split("\\s+");
+                        System.out.println("Here are the matching tasks in your list:");
+                        System.out.println("____________________________________________________________");
                         for(String word : keywords) {
                             for(int i = 0; i < tasks.size(); i++){
                                 String descrp = tasks.get(i).getDescription();
-                                if(tasks.get(i).getClass(Deadline)){
-
-                                }
                                 if(descrp.contains(word)){
-                                    System.out.println(i + "." + tasks.get(i));
+                                    System.out.println(i + 1 + "." + tasks.get(i));
+                                    found = true;
                                 }
                             }
                         }
+                        if(!found){
+                            System.out.println("Sorry! There are no task with descriptions matching your keyword! Please try again!");
+                            System.out.println("____________________________________________________________");
+                        }
                         break;
-
-
 
                     default:
                         System.out.println("Please key in a valid function"); //loop till valid function entered
