@@ -1,5 +1,8 @@
 package Tasks;
 
+import command.Ui;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -51,14 +54,17 @@ public class TaskList {
     /**finds tasks that have String userInput in the description
      * @param userInput: String that is provided by the user
      */
-    public StringBuilder find(String userInput) {
+    public Serializable find(String userInput) {
         StringBuilder string = new StringBuilder();
         int numberOfSimilarStrings = 0;
-        for (Task task : this.tasks) {
-            if (task.containsString(userInput)) {
-                string.append(++numberOfSimilarStrings).append(". ").append(task.toString()).append("\n");
-                ;
+        for (int i = 0; i < this.getLength(); i++) {
+            if (this.tasks.get(i).containsString(userInput)) {
+                string.append(i+1).append(". ").append(this.tasks.get(i).toString()).append("\n");
+                numberOfSimilarStrings++;
             }
+        }
+        if (numberOfSimilarStrings==0){
+            return Ui.NO_SIMILAR_LIST;
         }
         return string;
     }

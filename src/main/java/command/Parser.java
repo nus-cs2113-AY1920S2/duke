@@ -1,3 +1,5 @@
+package command;
+
 public class Parser {
 
     public String getCommand(String input) {

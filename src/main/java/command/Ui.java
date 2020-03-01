@@ -1,3 +1,5 @@
+package command;
+
 import Tasks.Task;
 import Tasks.TaskList;
 
@@ -15,20 +17,22 @@ public class Ui {
     public static final String LINE_SEPARATOR = "----------------------------------------------";
     public static final String HELP = "1. \"list\" to display To Do List\n"
             + "2. \"done [index]\" to mark as done\n"
-            + "3. \"todo\" or \"deadline /by [date/time]\" or \"event /at [date/time]\" to add to list\n"
+            + "3. \"todo\" or \"deadline [string] /by [date/time]\" or \"event [string] /at [date/time]\" to add to list\n"
             + "4. \"delete [index]\"to delete\n"
             + "5. \"help\" to look at possible commands\n"
             + "6. \"find [string]\" to find in your list\n"
-            + "7. \"bye\" to exit";
+            + "7. \"clear\" to clear the list\n"
+            + "8. \"bye\" to exit";
     public static final String EMPTY_LIST = LINE_SEPARATOR + "\nYour list is empty bruhh\n" + LINE_SEPARATOR;
-    public static final String NO_NUMBER = LINE_SEPARATOR + "You did not enter a number. Try again!!" + LINE_SEPARATOR;
+    public static final String NO_NUMBER = LINE_SEPARATOR + "\nYou did not enter a number. Try again!!\n" + LINE_SEPARATOR;
     public static final String OUT_OF_INDEX = LINE_SEPARATOR
-            + "The index you entered does not exist??? Look at ur list properly lah" + LINE_SEPARATOR;
+            + "\nThe index you entered does not exist??? Look at ur list properly lah\n" + LINE_SEPARATOR;
     public static final String EMPTY_STRING = "☹ OOPS!!! The description cannot be empty.";
     public static final String DEFAULT = LINE_SEPARATOR + "\nOOPS!!! I don't understand that, type help for help\n"
             + LINE_SEPARATOR;
     public static final String CLEAR_LIST = LINE_SEPARATOR + "\nYour list has been cleared\n" + LINE_SEPARATOR;
-
+    public static final String NO_SIMILAR_LIST = LINE_SEPARATOR
+            + "\nI'm unable to find what you are looking for :O\n" + LINE_SEPARATOR;
 
     public static String addTaskMessage(String userInput, TaskList taskListArrayList, Task t) {
         return "Okie dokes, \"" + userInput + "\" has been added to your to do list:\n"
@@ -41,8 +45,8 @@ public class Ui {
      * @param taskListArrayList : TaskList that contains all the tasks.
      */
     public static String deleteTaskMessage(String userInput, TaskList taskListArrayList) {
-        return LINE_SEPARATOR + "Noted with thanks. This task is deleted liao: "
-                + userInput + "\nNow there are " + taskListArrayList.getLength() + " task(s) in your list"
+        return LINE_SEPARATOR + "\nNoted with thanks. This task is deleted liao: "
+                + userInput + "\nNow there are " + taskListArrayList.getLength() + " task(s) in your list\n"
                 + LINE_SEPARATOR;
     }
 
@@ -55,11 +59,12 @@ public class Ui {
         System.out.println("Hello! I'm Duke, your personal assistant");
         System.out.println("1. \"list\" to display To Do List\n"
                 + "2. \"done [index]\" to mark as done\n"
-                + "3. \"todo\" or \"deadline /by [date/time]\" or \"event /at [date/time]\" to add to list\n"
+                + "3. \"todo\" or \"deadline [string] /by [date/time]\" or \"event [string] /at [date/time]\" to add to list\n"
                 + "4. \"delete [index]\"to delete\n"
                 + "5. \"help\" to look at possible commands\n"
                 + "6. \"find [string]\" to find in your list\n"
-                + "7. \"bye\" to exit");
+                + "7. \"clear\" to clear the list\n"
+                + "8. \"bye\" to exit");
         System.out.println(LINE_SEPARATOR);
     }
 
@@ -72,7 +77,7 @@ public class Ui {
      */
     public static void printBye() {
         System.out.println(LINE_SEPARATOR);
-        System.out.println("Bye. I hope to see u again soon ^^");
+        System.out.println("\nBye. I hope to see u again soon ^^\n");
         System.out.println(LINE_SEPARATOR);
     }
 

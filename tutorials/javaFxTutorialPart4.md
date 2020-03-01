@@ -92,7 +92,7 @@ Create the following files in `src/main/resources/view`:
 1. On the left accordion, you can see that we have set the controller class to `MainWindow`. 
 We will get to that later.
  
-   ![Controller for MainWindow](assets/MainWindowController.png)
+   ![command.Controller for MainWindow](assets/MainWindowController.png)
 
 1. Let’s repeat the process for `DialogBox`.
    The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
@@ -116,7 +116,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;import src.main.java.Duke;
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * command.Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML

@@ -1,3 +1,5 @@
+package command;
+
 import Exceptions.DukeException;
 import Tasks.Deadline;
 import Tasks.Events;
