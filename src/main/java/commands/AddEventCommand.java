@@ -6,14 +6,16 @@ import task.Event;
 import task.TaskList;
 import ui.Ui;
 
+import java.time.LocalDateTime;
+
 public class AddEventCommand extends AddCommand {
 
     private String taskDescription;
-    private String dateAndTime;
+    private LocalDateTime dateAndTime;
 
     public static final String COMMAND_WORD = "event";
 
-    public AddEventCommand(String taskDescription, String dateAndTime) {
+    public AddEventCommand(String taskDescription, LocalDateTime dateAndTime) {
         this.taskDescription = taskDescription;
         this.dateAndTime = dateAndTime;
     }
