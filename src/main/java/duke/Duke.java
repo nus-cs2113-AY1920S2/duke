@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
+/**
+ * Duke class - the main class for Duke project
+ */
 public class Duke {
     public static final int TASK_LIMIT = 100;
     public static final String TAB_SPACE = "\t";
@@ -44,6 +47,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor of the main class Duke
+     * @see Duke
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -55,14 +62,18 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-//
+
+    /**
+     * Method to run a Duke program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                // show the divider line ("_______")
+                ui.showLine();
                 Command c = parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -74,6 +85,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function of the Duke program
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

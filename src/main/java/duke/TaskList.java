@@ -11,22 +11,43 @@ import java.util.ArrayList;
 
 import static duke.Duke.*;
 
+/**
+ * TaskList - class to store different types of tasks such as Todo, Deadline, Event
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private int index;
 
+    /**
+     * Constructor of TaskList to initialize an empty array list
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor of TaskList to pass an existed tasks array list
+     * to the TaskList class
+     *
+     * @param tasks an array list of tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Method to get the list of all tasks contained in the TaskList
+     *
+     * @return tasks List of tasks
+     */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 
+    /**
+     * Method to print list of tasks contained in the TaskList with index
+     * started from 1
+     */
     public void printList() {
         System.out.println(TASK_LISTING);
         for (int i = 0; i < tasks.size(); i++) {
@@ -34,6 +55,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to delete a certain task in the list with certain index(started from 1)
+     * and save it back to the data file
+     *
+     * @param index index of the task that needs to be deleted (started from 1)
+     * @param storage pass the storage object to use method to save file after
+     *                deleting
+     * @throws IOException if something wrong with input
+     */
     public void delete(int index, Storage storage) throws IOException{
         try {
             System.out.println(TASK_REMOVED_MESSAGE);
@@ -49,6 +79,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to mark a task in the list as done with certain index (started from
+     * 1) and save it back to the data file
+     *
+     * @param index index of the task that needs to be deleted (started from 1)
+     * @param storage pass the storage object to use method to save file after
+     *      *                marking
+     * @throws IOException if something wrong with input
+     */
     public void markAsDone(int index, Storage storage) throws IOException{
         try {
             if (index >= tasks.size()) {
@@ -66,6 +105,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to add a certain task with description (and maybe date and time)
+     * depending on certain prefixes in the command and store it back to the data file
+     * after adding
+     *
+     * @param storage pass the storage object to use method to save file after
+     *      *      *                adding
+     * @param command pass the whole command into the function
+     * @param prefix first word in the command describing which type of task to be added
+     * @throws DateTimeParseException when the date and time is in the wrong format
+     */
     public void addTask(Storage storage, String command, String prefix) throws DateTimeParseException {
         try {
             int splitIndex = command.indexOf("/");
