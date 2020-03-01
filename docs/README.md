@@ -20,16 +20,17 @@ Duke is a Command Line Interface (CLI) bot that helps you to store and manage yo
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest Duke.jar.
+2. Download the latest Duke.jar jar file.
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open the command prompt on your Computer. Navigate to your Duke home folder.
-5. Type the command in the command box and press Enter to execute it.
-6. Here are some example commands you can try:
+5. Enter "java -jar Duke.jar" to run the jar file.
+6. Type the command in the command box and press Enter to execute it.
+7. Here are some example commands you can try:
 <br>`list` : lists all tasks
 <br>`todo shopping` : adds a todo task named shopping to the task list.
 <br>`delete 3` : deletes the 3rd task shown in the current list
 <br>`exit` : exits the app. 
-7. Refer to Section 3, “Usage” for details of each command.
+8. Refer to Section 3, “Usage” for details of each command.
 
 ## 3. Usage
 Command Format:  
