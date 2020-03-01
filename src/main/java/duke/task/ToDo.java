@@ -25,6 +25,7 @@ public class ToDo extends Task{
      */
     public ToDo(AddCommand addCommand){
         super(addCommand);
+        this.category="todo";
     }
 
     @Override

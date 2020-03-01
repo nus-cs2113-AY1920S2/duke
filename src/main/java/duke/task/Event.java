@@ -31,6 +31,7 @@ public class Event extends Task {
     public Event(AddCommand addCommand){
         super(addCommand);
         this.period = LocalDateTime.parse(addCommand.getTimeNotes());
+        this.period=period;
     }
 
     /**

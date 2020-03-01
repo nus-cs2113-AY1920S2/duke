@@ -76,7 +76,9 @@ public class Storage {
             fr.close();
             return tasks;
         }catch(FileNotFoundException e){
-            throw new DukeException();
+            System.out.println("There is not a file to load.");
+            TaskList tasks = new TaskList();
+            return tasks.getTasks();
         }catch(IOException e){
             throw new DukeException();
         }

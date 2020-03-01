@@ -31,6 +31,7 @@ public class Deadline extends Task {
     public Deadline(AddCommand addCommand){
         super(addCommand);
         this.by = LocalDateTime.parse(addCommand.getTimeNotes());
+        this.category="deadline";
     }
 
     /**
