@@ -106,6 +106,7 @@ public class Duke {
             ui.displayMessage(SAVE_TASKLIST_TO_FILE_FAILURE_MESSAGE);
         }
 
+        ui.closeScanner();
         ui.sayGoodbye();
         System.exit(0);
     }

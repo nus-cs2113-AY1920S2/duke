@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 import common.Messages;
+import data.Duke;
 
 import static common.Messages.START_MESSAGE;
 import static common.Messages.FIRST_EXIT_MESSAGE;
@@ -65,6 +66,14 @@ public class Ui {
         }
 
         return userInput;
+    }
+
+    /**
+     * This method closes the Scanner object.
+     * Is used only when Duke executes {@link Duke#runExit()}
+     */
+    public void closeScanner() {
+        this.in.close();
     }
 
     /**
