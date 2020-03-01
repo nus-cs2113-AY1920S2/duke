@@ -71,7 +71,7 @@ ____________________________________________________________
 - Expected Output:
 ```
 list
-1.[T][✘] CS2113 Homework
+1.[T][✓] CS2113 Homework
 2.[E][✘] Career Fair (at: 26-02-2020)
 3.[D][✘] English Essay (by: 26 Feb)
 ```
@@ -109,7 +109,7 @@ Nice! I've marked this task as done:
 [✓] CS2113 Homework
 ```
 
-## 5.	Deleting Tasks: ```done```
+## 5.	Deleting Tasks: ```delete```
 - Delete specified tasks from the list. 
 - Specified index of the task will be its index of the entire task list by default, unless the ```list``` or ```find``` command has been called. In which case, it will be the index of the item as shown in the last shown list.
 - Format: ```done INDEX```
