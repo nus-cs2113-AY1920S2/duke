@@ -1,7 +1,7 @@
 package src.main.java.duke.task;
 
 public class Task {
-    static int totalNumberOfTask = 0;
+    protected static int totalNumberOfTask = 0;
     protected String description;
     protected String taskType;
     protected boolean isDone;
@@ -14,9 +14,8 @@ public class Task {
 
     public static int getTotalNumberOfTask() { return totalNumberOfTask; }
 
-    public static int reduceTotalNumberOfTask() {
+    public static void reduceTotalNumberOfTask() {
         totalNumberOfTask -= 1;
-        return totalNumberOfTask;
     }
 
     public String getStatusIcon() {
@@ -35,7 +34,7 @@ public class Task {
 
     public String writeInFile() {
         String taskStatus = (isDone ? "1" : "0");
-        String s = taskType + " | " + taskStatus + " | " + description;
-        return s; }
+        return taskType + " | " + taskStatus + " | " + description;
+    }
 }
 
