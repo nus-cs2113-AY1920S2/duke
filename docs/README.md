@@ -89,8 +89,16 @@ This should be done **before** running duke.
 *Example of usage:*
 > **bye**
  
-*Expected outcome*  
+*Expected outcome:*  
 > Bye. Hope to see you again!   
+
+### Feature 9
+Open the text file to see the saved tasks in the following  
+format.
+ 
+*Expected outcome:*  
+> T | 0 | Buy eggs  
+> D | 0 | Project Sep 6 2020 2359
 
 
 ## Usage
