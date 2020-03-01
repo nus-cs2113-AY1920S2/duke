@@ -56,7 +56,7 @@ public class DukeExecution {
         try {
             if (parser.isList()) {
                 list.printList();
-            } else if(parser.isDone()) {
+            } else if (parser.isDone()) {
                 done.markAsDone(input);
             } else if (parser.isToDo()) {
                 todo.addToDo(input);

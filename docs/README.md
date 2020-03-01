@@ -5,7 +5,7 @@ how to set up duke and how use the basic features of duke.
 ## Setting Up
 1. Extract the jar folder into an empty folder
 2. Enter your preferred terminal and move to the location of the folder
-3. Run the Command-Line interface(CLI) with `java -jar duke.duke.jar` in your terminal
+3. Run the Command-Line interface(CLI) with `java -jar duke.jar` in your terminal
 ![Setting up duke](/images/startup.JPG)
 
 ### Features
