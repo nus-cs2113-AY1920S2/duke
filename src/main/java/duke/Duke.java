@@ -12,7 +12,12 @@ public class Duke {
     /**
      * Line that divides text
      */
-    private static final String BAR = "____________________________________";
+    public static final String BAR = "____________________________________";
+
+    /**
+     * Indent for printing
+     */
+    public static final String INDENT = "    ";
 
     /**
      * File path for saving and loading
@@ -34,40 +39,40 @@ public class Duke {
                 try {
                     doneCommand(input, f);
                 } catch (DukeException e) {
-                    System.out.println("    You must include the number of the completed task!");
+                    System.out.println(INDENT + "You must include the number of the completed task!");
                 }
             } else if (cWord.equals("todo")) {
                 try {
                     todoCommand(task, f);
                 } catch (DukeException e) {
-                    System.out.println("    You must include what needs to be done!");
+                    System.out.println(INDENT + "You must include what needs to be done!");
                 }
             } else if (cWord.equals("deadline")) {
                 try {
                     deadlineCommand(task, f);
                 } catch (DukeException e) {
-                    System.out.println("    You must specify when the deadline is by!");
+                    System.out.println(INDENT + "You must specify when the deadline is by!");
                 }
             } else if (cWord.equals("event")) {
                 try {
                     eventCommand(task, f);
                 } catch (DukeException e) {
-                    System.out.println("    You must specify when the event is at!");
+                    System.out.println(INDENT + "You must specify when the event is at!");
                 }
             } else if (cWord.equals("delete")) {
                try {
                    deleteCommand(input, f);
                } catch (DukeException e) {
-                   System.out.println("    You must include the number of deleted task!");
+                   System.out.println(INDENT + "You must include the number of deleted task!");
                }
             } else if (cWord.equals("find")) {
                 try {
                     findCommand(task);
                 } catch (DukeException e) {
-                    System.out.println("    You must include a keyword!");
+                    System.out.println(INDENT + "You must include a keyword!");
                 }
             } else {
-                System.out.println("    I'm sorry! I don't know what that means :( ");
+                System.out.println(INDENT + "I'm sorry! I don't know what that means :( ");
             }
             System.out.println(BAR);
             input = Parser.getInput();
@@ -132,11 +137,11 @@ public class Duke {
         }
         int taskDoneNum = Integer.parseInt(splitTask2[1]);
         if (taskDoneNum - 1 >= TaskList.getNumTasks() || taskDoneNum <= 0) {
-            System.out.println("    You haven't done that many tasks yet!");
+            System.out.println(INDENT + "You haven't done that many tasks yet!");
         } else {
             TaskList.getTaskList()[taskDoneNum - 1].setDone(true);
-            System.out.println("    Good work! I've marked this task as done!");
-            System.out.println("    " + TaskList.getTaskList()[taskDoneNum - 1].toString());
+            System.out.println(INDENT + "Good work! I've marked this task as done!");
+            System.out.println(INDENT +  TaskList.getTaskList()[taskDoneNum - 1].toString());
         }
         Storage.saveChanges(f);
     }
@@ -154,12 +159,12 @@ public class Duke {
         }
         int taskDeleteNum = Integer.parseInt(splitTask2[1]);
         if (taskDeleteNum - 1 >= TaskList.getNumTasks() || taskDeleteNum <= 0) {
-            System.out.println("    You haven't done that many tasks yet!");
+            System.out.println(INDENT + "You haven't done that many tasks yet!");
         } else {
-            System.out.println("    Noted. I've removed this task: ");
-            System.out.println("    " + TaskList.getTaskList()[taskDeleteNum - 1].toString());
+            System.out.println(INDENT + "Noted. I've removed this task: ");
+            System.out.println(INDENT + TaskList.getTaskList()[taskDeleteNum - 1].toString());
             TaskList.setTaskList(TaskList.deleteIndex(TaskList.getTaskList(), taskDeleteNum - 1));
-            System.out.println("    Now you have " + TaskList.getNumTasks() + " tasks in the list.");
+            System.out.println(INDENT + "Now you have " + TaskList.getNumTasks() + " tasks in the list.");
         }
         Storage.saveChanges(f);
     }
@@ -182,9 +187,9 @@ public class Duke {
                 counter++;
             }
         }
-        System.out.println("    Here are matching tasks in your list:");
+        System.out.println(INDENT + "Here are matching tasks in your list:");
         for (int k = 0; k < counter; k++) {
-            System.out.print("    " + (k + 1) + ".");
+            System.out.print(INDENT + (k + 1) + ".");
             System.out.println(temp[k].toString());
         }
     }
@@ -198,6 +203,14 @@ public class Duke {
         TaskList.addTask(t);
         Ui.printTask(t);
         Storage.saveChanges(f);
+    }
+
+    /**
+     * Get filepath
+     * @return filepath
+     */
+     static String getFilePath() {
+        return FILE_PATH;
     }
 
 }

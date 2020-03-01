@@ -12,11 +12,6 @@ import java.util.Scanner;
 public class Storage {
 
     /**
-     * File path for saving and loading
-     */
-    private static final String FILE_PATH = "./duke.txt";
-
-    /**
      * Write a single task to file
      * @param t task
      * @param fr fileWriter
@@ -53,7 +48,7 @@ public class Storage {
      * @throws FileNotFoundException exception
      */
     static File loadFile() throws FileNotFoundException {
-        File f = new File(FILE_PATH);
+        File f = new File(Duke.getFilePath());
         if (f.length() != 0) {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
