@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import static duke.format.TextFormatter.toBold;
+
 /**
  * <h3>Date Time</h3>
  * A <b>Date Time</b> contains both <i>date</i> and <i>time</i> information. This is used to hold the <i>datetime</i>
@@ -147,6 +149,6 @@ public class DateTime {
     @Override
     public String toString() {
         String toShow = dateToString() + " " + timeToString();
-        return (isDue()) ? toShow + " [OVER!!]" : toShow;
+        return (isDue()) ? toShow + toBold(" [OVER!!]") : toShow;
     }
 }

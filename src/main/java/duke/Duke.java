@@ -8,6 +8,7 @@ import duke.format.DateTimeFormat;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.UI;
+import org.fusesource.jansi.AnsiConsole;
 
 import static duke.ui.Messages.WELCOME_MESSAGE;
 import static duke.ui.Messages.LOAD_MESSAGE;
@@ -46,7 +47,11 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke chatBot = new Duke();
+        AnsiConsole.systemInstall();
+
         chatBot.runChat();
+
+        AnsiConsole.systemUninstall();
     }
 
     /**
@@ -110,7 +115,7 @@ public class Duke {
 
     /**
      *  Reads user input from the command line until an <b><i>exit</i></b> command is given.
-     *  Each user input is converted into a command by the <b>Parser</b> and executed. The <b>UI</b> then displays
+     *  Each user input is converted into a command by the <b>Parser</b> and executed. The <b>UI.java</b> then displays
      *  any feedback message or necessary information to the user.
      * @see Parser
      * @see UI

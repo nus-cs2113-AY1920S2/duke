@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.format.DateTime;
 
+import static duke.format.TextFormatter.CHECK_ICON;
+import static duke.format.TextFormatter.CROSS_ICON;
+
 /**
  * <h3>Task</h3>
  * A task is defined by the user and is categorised into 3 types: <b>To Do</b>, <b>Deadline</b> and <b>Event</b> tasks.
@@ -67,7 +70,7 @@ public abstract class Task {
      * @return The task status of the task
      */
     public String getTaskStatus() {
-        String statusIcon = isDone ? "\u2713" : "\u2718";
+        String statusIcon = isDone ? CHECK_ICON : CROSS_ICON;
         return ("[" + statusIcon + "] " + task);
     }
 }

@@ -26,7 +26,7 @@ public class UI {
     /** Constructs the <code>UI</code>. */
     public UI() {
         in = new Scanner(System.in);
-        out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+        out = new PrintStream(System.out);
     }
 
     /**
@@ -100,28 +100,22 @@ public class UI {
 
         final String LIST_TOP =
                 "    +---------+\n" +
-                        "+---| L I S T |----------------------------------------------------------+\n" +
-                        "|   +---------+                                                          |\n";
-        final String LIST_LEFT = "| ";
-        final String LIST_RIGHT = " |";
-        final String LIST_BOTTOM = "+------------------------------------------------------------------------+\n";
-        final int LIST_LENGTH = 70;
+                        "+---| L I S T |---------------------------------------------------------------+\n" +
+                        "    +---------+\n";
+        final String LIST_BOTTOM = "+-----------------------------------------------------------------------------+\n";
 
         StringBuilder list = new StringBuilder(LIST_TOP);
 
         // Append list items
         for (int i = 0; i < TaskList.size(); i++) {
             String listItem = formatListItem(i);
-            String spaces = createSpaces(LIST_LENGTH-listItem.length()-1);
-
-            list.append(String.format("%s%s%s%s\n", LIST_LEFT, listItem, spaces, LIST_RIGHT));
+            list.append(String.format("%s%s\n", INDENT, listItem));
         }
         list.append(LIST_BOTTOM);
 
         // Append task count
         String totalTaskString = "Total: " + TaskList.size() + (TaskList.size() == 1 ? " task" : " tasks");
-        String spaces = createSpaces(LIST_LENGTH-totalTaskString.length());
-        list.append(String.format("%s%s%s%s\n%s", LIST_LEFT, totalTaskString, spaces, LIST_RIGHT, LIST_BOTTOM));
+        list.append(String.format("%s%s\n%s", INDENT, totalTaskString, LIST_BOTTOM));
 
         return list.toString();
     }
@@ -153,29 +147,24 @@ public class UI {
 
         final String LIST_TOP =
                 "    +-----------------------+\n" +
-                "+---| S E A R C H   L I S T |--------------------------------------------+\n" +
-                "|   +-----------------------+                                            |\n";
-        final String LIST_LEFT = "| ";
-        final String LIST_RIGHT = " |";
-        final String LIST_BOTTOM = "+------------------------------------------------------------------------+\n";
-        final int LIST_LENGTH = 70;
+                "+---| S E A R C H   L I S T |-------------------------------------------------+\n" +
+                "    +-----------------------+\n";
+        final String LIST_BOTTOM = "+-----------------------------------------------------------------------------+\n";
+        final int LIST_LENGTH = 75;
 
         StringBuilder list = new StringBuilder(LIST_TOP);
 
         // Append list items
         for (Integer index : searchedTaskIndices) {
             String listItem = formatListItem(index);
-            String spaces = createSpaces(LIST_LENGTH-listItem.length()-1);
-
-            list.append(String.format("%s%s%s%s\n", LIST_LEFT, listItem, spaces, LIST_RIGHT));
+            list.append(String.format("%s%s\n", INDENT, listItem));
         }
         list.append(LIST_BOTTOM);
 
         // Append task count
         String totalTaskString = "Search Total: " +
                 searchedTaskIndices.size() + (searchedTaskIndices.size() == 1 ? " task" : " tasks");
-        String spaces = createSpaces(LIST_LENGTH-totalTaskString.length());
-        list.append(String.format("%s%s%s%s\n%s", LIST_LEFT, totalTaskString, spaces, LIST_RIGHT, LIST_BOTTOM));
+        list.append(String.format("%s%s\n%s", INDENT, totalTaskString, LIST_BOTTOM));
 
         return list.toString();
     }

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 /**
  * <h3>Command Result</h3>
  * The <b>Command Result</b> is the result after executing a <b>Command</b>. It contains the feedback message to the
- * user, as well as instruction for the <b>UI</b> to show the full <i>or</i> filtered <b>Task List</b> to the user if 
+ * user, as well as instruction for the <b>UI.java</b> to show the full <i>or</i> filtered <b>Task List</b> to the user if
  * necessary.
  * @see Command
  * @see duke.data.TaskList
  */
 public class CommandResult {
     private final String message;
-    private final boolean isShowList; // Checks if it is an instruction for the UI to show the list
+    private final boolean isShowList; // Checks if it is an instruction for the UI.java to show the list
     private ArrayList<Integer> searchedIndices; // Contains the indices referencing to the filtered tasks in the task list
 
     public CommandResult(String message) {

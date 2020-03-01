@@ -37,7 +37,7 @@ import static duke.format.DateTimeFormat.stringToDateTime;
 
 /**
  * <h3>Parser</h3>
- * The <b>Parser</b> interprets the user input that is read by the <b>UI</b>.
+ * The <b>Parser</b> interprets the user input that is read by the <b>UI.java</b>.
  * The <b>Parser</b> then converts the input into a <b>Command</b> to be executed by the <b>LumiChat</b> program.
  * @see UI
  * @see Command
@@ -48,13 +48,13 @@ public class Parser {
     private static final String EVENT_PREFIX = "/at";
 
     /**
-     * Parses the input string read by the <b>UI</b> and converts the string into a specific <b>Command</b>, which is
+     * Parses the input string read by the <b>UI.java</b> and converts the string into a specific <b>Command</b>, which is
      * to be executed by the <b>LumiChat</b> program.
      * <p></p>
      * <b>Note</b>: The user input has to start with a certain keyword (i.e. <i>command word</i>), otherwise an
      * <i>Invalid Command Exception</i> will be thrown.
      *
-     * @param input The user input read by the <b>UI</b>
+     * @param input The user input read by the <b>UI.java</b>
      * @return The <b>corresponding</b> command to be executed
      * @throws EmptyInputException If user input is empty
      * @throws InputLengthExceededException If the length of the user input > {@value MAX_INPUT_LENGTH}

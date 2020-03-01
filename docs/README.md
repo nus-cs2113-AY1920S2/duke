@@ -1,30 +1,33 @@
-# User Guide  
+# **Duke User Guide**
+
+<br>
    
 # Table of Contents
-- ### Introduction
-- ### Features
-  1. Add a Task to your Task List  
-    a. Add a To Do task to your Task List  
-    b. Add a Deadline task to your Task List  
-    c. Add an Event task to your Task List  
-  **2. Mark a Task as Done**  
-  **3. View all your Tasks**  
-  **4. Delete a Task from your Task List**  
-  **5. Filter Tasks from your Task List**  
-    a. Filter tasks from your Task List by a Specified Keyword  
-    b. Filter tasks from your Task List by a Specified Time Period  
-- ### Miscellaneous Information
-  - Exiting the LumiChat Program
-  - Loading and Saving
-    - Loading
-    - Saving
-  - Date Time Formats
-    - Date Formats
-    - Time Formats
-    - Time Specifier Formats
+### **Introduction** [&#10149;](#introduction)  
+### **Features** [&#10149;](#features)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; **1. Add a Task to your Task List** [&#10149;](#1-add-a-task-to-your-task-list)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a. Add a To Do task to your Task List [&#10149;](#a-todo--add-a-to-do-task-to-your-task-list)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b. Add a Deadline task to your Task List [&#10149;](#b-deadline--add-a-deadline-task-to-your-task-list)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c. Add an Event task to your Task List [&#10149;](#c-event--add-an-event-task-to-your-task-list)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; **2. Mark a Task as Done** [&#10149;](#2-mark-a-task-as-done)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; **3. View all your Tasks** [&#10149;](#3-view-all-your-tasks)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; **4. Delete a Task from your Task List** [&#10149;](#4-delete-a-task-from-your-task-list)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; **5. Filter Tasks from your Task List** [&#10149;](#5-filter-tasks-from-your-task-list) 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a. Filter tasks from your Task List by a Specified Keyword [&#10149;](#a-find--filter-tasks-from-your-task-list-by-a-specified-keyword)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b. Filter tasks from your Task List by a Specified Time Period [&#10149;](#b-due--filter-tasks-from-your-task-list-by-a-specified-time-period)  
+### **Miscellaneous Information** [&#10149;](#miscellaneous-information)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; &#8226; **Exiting the LumiChat Program** [&#10149;](#exiting-the-lumichat-program)
+#### &nbsp; &nbsp; &nbsp; &nbsp; &#8226; **Loading and Saving** [&#10149;](#loading-and-saving)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9702; Loading [&#10149;](#loading)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9702; Saving [&#10149;](#saving)  
+#### &nbsp; &nbsp; &nbsp; &nbsp; &#8226; **Date Time Formats** [&#10149;](#date-time-formats)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9702; Date Formats [&#10149;](#date-formats)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9702; Time Formats [&#10149;](#time-formats)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9702; Time Specifier Formats [&#10149;](#time-specifier-formats)  
+
+<br>
 
 # Introduction
- 
 This Duke program is a Chat Box program named **LumiChat** that manages a list of user-created tasks.
   
 You will be interacting with the application via the command line with a virtual character called **Lumi**. Through the **LumiChat** program, you will be able to perform various operations to manage your tasks like adding, deleting and viewing tasks in a Task List.
@@ -32,11 +35,12 @@ You will be interacting with the application via the command line with a virtual
 There are 3 different types of tasks in the **LumiChat** program.
 
 #### <u>Types of tasks</u>
-| Task Type    | Description                                                             |  
-|:-------------|:------------------------------------------------------------------------|  
-| **To Do**    | A task that the you want to do with <u>no</u> *date time* restrictions. |  
-| **Deadline** | A task that you want to do <u>by</u> a certain *date time*              |  
-| **Event**    | A task that you want to do <u>at</u> a certain *date time*              |  
+
+| Task Type    | Description                                                             |
+|--------------|-------------------------------------------------------------------------|
+| **To Do**    | A task that the you want to do with <u>no</u> *date time* restrictions. |
+| **Deadline** | A task that you want to do <u>by</u> a certain *date time*              |
+| **Event**    | A task that you want to do <u>at</u> a certain *date time*              |
 
 This should cover most of the common task types in a normal daily life.
   
@@ -93,8 +97,8 @@ The *date time* provided consists of an <u>optional</u> *date* and a *time*. If 
 
 <br>
 
-#### c. `event` -- Add a Event task to your Task List  
-Adds a **Event** task to your Task List.  
+#### c. `event` -- Add an Event task to your Task List  
+Adds an **Event** task to your Task List.  
 The *date time* provided consists of an <u>optional</u> *date* and a *time*. If the *date* is omitted, the **LumiChat** program will automatically assume it to be the **current date**.  
   
 #### Format  
@@ -126,7 +130,7 @@ Marks a **previously undone** task as *done*.
 #### `done` -- Mark a task as done
 Marks a specified task as *done*.
   > **Note**: If you try to mark an already done task as *done*, you will receive a **warning** message from **Lumi**.
-  > 
+
 #### Format  
 `done <list number>`  
 - `list number` -- The *list number* of the task to be marked as done.
@@ -190,7 +194,7 @@ Deletes a specified task from your Task List.  To avoid *accidental* deletion of
 `delete <list number>`  
 - `list number` -- The *list number* of the task to be deleted
   
-  > You may find the *list number* of the task by [viewing the list](#view-all-your-tasks).
+  > You may find the *list number* of the task by [viewing the list](#3-view-all-your-tasks).
 
 #### Example Usage  
 	 delete 1
@@ -221,7 +225,7 @@ Deletes a specified task from your Task List.  To avoid *accidental* deletion of
 Filter tasks from your Task List either by a specified *keyword*, or by a specified *date time period*.
 
 ### <u>Usage </u>
-#### `a. find` -- Filter tasks from your Task List by a Specified Keyword
+#### a. `find` -- Filter tasks from your Task List by a Specified Keyword
 Filters tasks from your Task List that contains a specified *keyword*. 
 The *keyword* can contain multiple words and need not be complete words. The Task List is then filtered for tasks which *task description* matches the keyword. Filtering is done in a **non-case-sensitive** manner.
 **All matched** tasks will be shown as a *Search List*. The total number of tasks will be shown at the bottom of the list.
@@ -253,11 +257,11 @@ The *keyword* can contain multiple words and need not be complete words. The Tas
 	  ʘᗜʘ Sure! Lumi searches your list...
 	  ʘoʘ? Huh? Lumi is not able to find anything...
 
-> **Note**: This may occur due to a mistype in the *keyword*. To confirm that no such tasks with the specified *keyword* exists, you may want to [view all your tasks](#view-all-your-tasks) to check.
+> **Note**: This may occur due to a mistype in the *keyword*. To confirm that no such tasks with the specified *keyword* exists, you may want to [view all your tasks](#3-view-all-your-tasks) to check.
 
 <br>
 
-#### `b. due` - Filter tasks from your Task List by a Specified Time Period
+#### b. `due` -- Filter tasks from your Task List by a Specified Time Period
 Filters tasks from your Task List according to a specified *time period*.  
 A *time period* is defined by an <u>optional</u> *time specifier (e.g. on, before, after)* and a *date*. If the *time specifier* is left out, the *time period* is set to be **on** the *date* itself.
 The Task List is then filtered for **Deadline** and **Event** tasks which *date time* information matches the specified *time period*.  
@@ -265,18 +269,18 @@ The Task List is then filtered for **Deadline** and **Event** tasks which *date 
 > **Note**: The list is arranged according to the order in which you have added your tasks. 
 
 #### Format  
-`due (<time specifier>) <date>`  
-- `time specifier` - The  <u>optional</u> *time specifier* to define the *time period* to filter the Task List
-- `date` - The *date* to define the *time period* to filter the Task List
+`due <time specifier> <date>`  
+- `time specifier` -- The  <u>optional</u> *time specifier* to define the *time period* to filter the Task List
+- `date` -- The *date* to define the *time period* to filter the Task List
 
 > **Note**: The `time specifier` and `date` provided must adhere to the set of accepted [Date Time formats](#date-time-formats).
 
 #### Example Usage  
-<u>With *time specifier*</u>
+<u>With <i>time specifier</i></u>
 
 	 due after tmr
 
-<u>Without *time specifier*</u>
+<u>Without <i>time specifier</i></u>
 
 	 due today
 	 
@@ -319,7 +323,7 @@ Should there be an *unfortunate* error in saving your Task List, an option will 
 
 ## Date Time Formats
 Any *date time* data that you provide has to adhere to certain formats pre-defined by the **LumiChat** program. Failure to do so will likely result in the program to be unable to recognise your input command, and a warning will be shown.  
-Instances when you may need to enter a *date time* will be when [adding a **Deadline**](#b-deadline---add-a-deadline-task-to-your-task-list) or [**Event**](#c-event---add-a-event-task-to-your-task-list) task, or [filtering the Task List by a *time period*](#b-due---filter-tasks-from-your-task-list-by-a-specified-time-period).
+Instances when you may need to enter a *date time* will be when [adding a **Deadline**](#b-deadline--add-a-deadline-task-to-your-task-list) or an [**Event**](#c-event--add-an-event-task-to-your-task-list) task, or [filtering the Task List by a *time period*](#b-due--filter-tasks-from-your-task-list-by-a-specified-time-period).
   
 Here are the following *date time* formats.
   
@@ -334,11 +338,11 @@ You may enter **only** the following *date* words.
 > **Note**: All dates are taken with reference to the current date on your device.
   
 #### 2. Standard Date Format
-This refers to the typical dates that are represented with numbers and delimiter symbols.  
+This refers to the typical dates that are represented with **numbers** and **delimiter symbols**.  
   
 In this **LumiChat**  program, *dates* should be in the order of **day**, **month**, then an <u>optional</u> **year**. If the **year** is not provided, the program will automatically assume it to be the **current year**.  Also, the **day**, **month** and **year** should only be entered as **numbers** and not words *(e.g. January is not accepted for the **month** attribute)*.
   
-Regarding delimiters, the program will **only** consider '/' and '-' as valid delimiters for *dates*.  Delimiters are <u>optional</u> and may be omitted provided you include the **year** of the *date* *(e.g. 1/1/20, 1/1 and 010120 are accepted, but not 0101).*
+Regarding **delimiters**, the program will **only** consider '/' and '-' as valid delimiters for *dates*.  Delimiters are <u>optional</u> and may be omitted provided you include the **year** of the *date* *(e.g. 1/1/20, 1/1 and 010120 are accepted, but not 0101).*
 
 An **exhaustive** list of the standard *date* formats is given below for your reference.
 ```
@@ -352,13 +356,13 @@ An **exhaustive** list of the standard *date* formats is given below for your re
 ```
 
 ### Time Formats
-The **LumiChat** program accepts most time typical time formats that are represented with numbers, delimiter symbols and <u>optional</u> am-pm markers.  
+The **LumiChat** program accepts most time typical time formats that are represented with **numbers**, **delimiter symbols** and <u>optional</u> **am-pm markers**.  
   
 The *time* should be in the order of  **hour**, then **minute**. The **seconds** attribute of *time* should **not** be given. The **minute** attribute must be a **double** digit *(i.e. single digits must be padded with a 0 in front)*. The **minute** attribute is also <u>optional</u>, and should it be omitted, the **LumiChat** program will automatically set the **minute** to be 0. Both the **12-h** format and the **24-h** format are valid *time* formats for this program.  
   
-Regarding delimiters, the program will **only** consider ':' and '.' as valid delimiters for *time*.  Delimiters are <u>optional</u> and may be omitted.
+Regarding **delimiters**, the program will **only** consider ':' and '.' as valid delimiters for *time*.  Delimiters are <u>optional</u> and may be omitted.
 
-Lastly, the am-pm marker is an <u>optional</u> attribute, and should it be omitted, the **LumiChat** program will automatically assume the *time* to follow the **24-h** format.
+Lastly, the **am-pm marker** is an <u>optional</u> attribute, and should it be omitted, the **LumiChat** program will automatically assume the *time* to follow the **24-h** format.
 
 An **exhaustive** list of the *time* formats is given below for your reference.
 ```
@@ -369,7 +373,7 @@ An **exhaustive** list of the *time* formats is given below for your reference.
 ```
 
 ### Time Specifier Formats
-The *time specifier* is used in conjunction with a *date* to define the *time period* to [filter tasks in the Task List](#b-due---filter-tasks-from-your-task-list-by-a-specified-time-period). The following words are considered valid *time specifiers* in the **LumiChat** program.
+The *time specifier* is used in conjunction with a *date* to define the *time period* to [filter tasks in the Task List](#b-due--filter-tasks-from-your-task-list-by-a-specified-time-period). The following words are considered valid *time specifiers* in the **LumiChat** program.
 - `on` -- <u>on</u> the specified *date*
 - `after` or `a` -- <u>after</u> the specified *date*
 - `before` or `b` -- <u>before</u> the specified *date*
