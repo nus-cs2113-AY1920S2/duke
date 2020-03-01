@@ -1,4 +1,7 @@
+import javax.imageio.IIOException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 public class Duke {
 
     public static String lineSeparator = "--------------------------------------------";
@@ -102,6 +105,7 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks[taskNum]);
         printLineSeparator();
+        saveTasks();
     }
 
     // Helper function that executes command for 'todo'
@@ -114,6 +118,7 @@ public class Duke {
             numOfTasks++;
             printTask();
             printLineSeparator();
+            saveTasks();
         }
 
     }
@@ -128,6 +133,7 @@ public class Duke {
         numOfTasks++;
         printTask();
         printLineSeparator();
+        saveTasks();
     }
 
     // Helper function that executes command for 'event'
@@ -140,6 +146,29 @@ public class Duke {
         numOfTasks++;
         printTask();
         printLineSeparator();
+        saveTasks();
+    }
+
+    // Helper function that saves files to hard disk
+    public static void saveTasks(){
+        try {
+            String filepath = "./data/duke.txt";
+            FileWriter fw = new FileWriter(filepath);
+            String textToAdd = TasktoString();
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e){
+            System.out.println("There was an error trying to save file. Check if file exists!");
+        }
+    }
+
+    // Helper function that turns content of Task into String
+    public static String TasktoString(){
+        String taskString = "";
+        for(int i = 0; i < numOfTasks; i++){
+            taskString += tasks[i].toString() + "\n";
+        }
+        return taskString;
     }
 }
 
