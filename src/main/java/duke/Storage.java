@@ -23,9 +23,10 @@ import static duke.Duke.VERTICAL_BAR;
 public class Storage {
 
     /**
-     * Method to load data from the data file
-     * @return
-     * @throws FileNotFoundException
+     * Method to load data from the data file by processing the data and add
+     * them to the task list
+     * @return tasks the newly created task list
+     * @throws FileNotFoundException if there is no file to load
      */
     public ArrayList<Task> load() throws FileNotFoundException{
         ArrayList<Task> tasks = new ArrayList<>();
