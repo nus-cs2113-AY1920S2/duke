@@ -73,6 +73,28 @@ public class Main  {
             // if there is no file to load or the file is empty, setData will initialize a new taskManager system
             command.setData(taskManager);
             // Execute according to the command itself
+            commandResult = command.execute();
+            // save the taskManager to a file
+            taskManager.getStorager().save(taskManager);
+            StorageFile.saveJson(taskManager);
+        } catch (Exception ex) {
+            // the out layer exception handler
+            System.out.println(ex);
+        }
+        return commandResult;
+    }
+
+    /**
+     * initialize the taskManager system, execute command and save the list to the file
+     * @param command the parsed Command object
+     * @return commandResult that contains the execute output information
+     */
+    private CommandResult executeCommandForGUI(Command command) throws StorageOperationException {
+        try {
+            // supplies the data the command will operate on.
+            // if there is no file to load or the file is empty, setData will initialize a new taskManager system
+            command.setData(taskManager);
+            // Execute according to the command itself
             commandResult = command.executeForGUI();
             // save the taskManager to a file
             taskManager.getStorager().save(taskManager);
@@ -93,6 +115,18 @@ public class Main  {
         Command command;
         command = new Parser().parseCommand(taskManager, input);
         commandResult = executeCommand(command);
+        return commandResult.feedbackToUser;
+    }
+
+    /**
+     * @param input the full length of user input
+     * @return commandResult.feedbackToUser
+     */
+    public String getResponseForGUI(String input) throws StorageOperationException {
+        //construct a command from user input
+        Command command;
+        command = new Parser().parseCommand(taskManager, input);
+        commandResult = executeCommandForGUI(command);
         return commandResult.feedbackToUser;
     }
 }

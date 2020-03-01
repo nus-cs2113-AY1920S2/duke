@@ -1,3 +1,0 @@
-T|N| read a book
-D|N| return book |by Sunday
-E|N| project meeting |at Mon 2-4pmat Mon 2-4pm

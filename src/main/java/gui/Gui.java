@@ -128,7 +128,7 @@ public class Gui extends Application {
         Label userText = new Label(userInput.getText());
         //taskManager response
         //construct a label with the response
-        Label dukeText = new Label(new Main().getResponse(userInput.getText()));
+        Label dukeText = new Label(new Main().getResponseForGUI(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userPng)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukePng))

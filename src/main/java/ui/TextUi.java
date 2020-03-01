@@ -102,7 +102,9 @@ public class TextUi {
      * print a divider
      */
     public static void printDivider(){
-        System.out.println( ansi().bold().fg(SYSTEM_COLOR_DIVIDER).a(Messages.MESSAGE_SPLITTER).reset() );
+        AnsiConsole.systemInstall();
+        System.out.println( ansi().bold().fg(SYSTEM_COLOR_DIVIDER).a(DIVIDER).reset() );
+        AnsiConsole.systemUninstall();
     }
 
     public static void alertToAddDuplicateTask(Task toCheck){

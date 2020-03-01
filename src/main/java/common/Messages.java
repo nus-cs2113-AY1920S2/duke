@@ -2,6 +2,8 @@ package common;
 
 import data.task.*;
 
+import java.io.File;
+
 /**
  * Container for user visible messages.
  */
@@ -18,9 +20,8 @@ public class Messages {
     public static final char DEADLINE_TYPE = 'D';
     public static final char DONE = 'D';
     public static final char notDONE = 'N';
-    public static final String DIVIDER = "----------------------------------------------------";
-    public static final String MESSAGE_SPLITTER = "=============================" +
-            "====================================================";
+    public static final String DIVIDER = "---------------------------------------------------------------------------------";
+    public static final String MESSAGE_SPLITTER = "=================================================================================";
     public static final String MESSAGE_WELCOME_1 = "Welcome to KURI Task Management System?";
     public static final String MESSAGE_WELCOME_2 = "What can I do for you?";
     public static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
@@ -50,6 +51,8 @@ public class Messages {
     public static final String MESSAGE_DEADLINE_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_HELP = "Here are the possible commands: ";
+    public static final String TXT_FILE_PATH = "."+ File.pathSeparator+"data"+File.pathSeparator+"taskManager.txt";
+    public static final String JSON_FILE_PATH = "."+ File.pathSeparator+"data"+File.pathSeparator+"taskManager.json";
 
     //public static StringBuilder taskListMessage = new StringBuilder();
 

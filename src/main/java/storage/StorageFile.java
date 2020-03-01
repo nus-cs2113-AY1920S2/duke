@@ -20,8 +20,8 @@ import java.util.List;
 public class StorageFile {
 
     /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "taskManager.txt";
-    public static final String DEFAULT_STORAGE_JSON_FILEPATH = "taskManager.json";
+    public static final String DEFAULT_STORAGE_FILEPATH = Messages.TXT_FILE_PATH;
+    public static final String DEFAULT_STORAGE_JSON_FILEPATH = Messages.JSON_FILE_PATH;
     private static String jsonFilePath = DEFAULT_STORAGE_JSON_FILEPATH;
     private Path filePath;
 

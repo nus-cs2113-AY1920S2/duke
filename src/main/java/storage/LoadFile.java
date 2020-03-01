@@ -2,6 +2,7 @@ package storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import common.Messages;
 import data.task.*;
 
 import java.io.BufferedReader;
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 public class LoadFile {
 
     /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "taskManager.txt";
-    public static final String DEFAULT_STORAGE_JSON_FILEPATH = "taskManager.json";
+    public static final String DEFAULT_STORAGE_FILEPATH = Messages.TXT_FILE_PATH;
+    public static final String DEFAULT_STORAGE_JSON_FILEPATH = Messages.JSON_FILE_PATH;
     private static String jsonFilePath = DEFAULT_STORAGE_JSON_FILEPATH;
     private Path filePath;
     public  ArrayList<Task> taskArrayList;
@@ -60,7 +61,7 @@ public class LoadFile {
                 }
             }
         } catch (NullPointerException npex) {
-            System.out.println("ww");
+            npex.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

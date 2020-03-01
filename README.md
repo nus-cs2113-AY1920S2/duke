@@ -28,7 +28,8 @@ By: `Wang Qin` Since: `Feb 2019`
   <img src="https://user-images.githubusercontent.com/59989652/75109414-a9446300-565d-11ea-938e-8bcc5e3c0bc7.PNG">
 </p>
 
-Duke is for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is **optimized for those who prefer to work with a Command Line Interface (CLI)**. 
+
+Kuri is an app with both graphic user interface and commandline user interface, for those who prefer to use a desktop app to keep track of their to-do lists. More importantly, Duke is **optimized for those who prefer to work with a Command Line Interface (CLI)**. 
 Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 
@@ -39,10 +40,12 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 *   1. Ensure that `Java 11` or above is installed in your Computer.
 *   2. Download the latest `kuri.jar` [_here_](https://github.com/JosephLimWeiJie/duke/releases/download/v0.2.0/duke.jar).
 *   3. Copy the file to the folder you want to use as the home folder for your Duke.
-*   4. Double-click on `kuri.jar` to start the app. It should appear in a few seconds.
+*   4. Use the `java -jar + absolute file location` command to run the app.  It should appear in a few seconds. For example, `java -jar /Users/wangqin/Documents/year2/cs2113T/ip/build/libs/kuri-v1.1.jar`
+
+
 *   5. Choose the platform you desired for Kuri, graphical user interface (GUI) or command line user interface (CLI). 
         Type `1` for GUI and `2` for CLI. 
-*   6. For CLI, type in a command and press `ENTER` to execute it. For e.g. typing `list` and                         pressing enter will list all your current tasks.
+*   6. For CLI, type in a command and press `ENTER` to execute it. For e.g. typing `list` and pressing enter will list all your current tasks.
 *   7. Some other commands you can try:
     *  `todo return book`: adds a todo task to return a book
     *   `deadline Finish a movie /by 2019-12-01T10:00`: adds a deadline task to finish a movie by 1 Dec 2019 at 1000 hrs.
@@ -53,32 +56,16 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 For GUI, simply type in the command and click `Enter` button. 
 
-PS: Since most of the GUI functions and CLI functions are very similar, the following feature list are mainly focused on CLI, but also applied for GUI.  
+PS: 
+   * Since most of the GUI functions and CLI functions are very similar, the following feature list are mainly focused on CLI, but also applied for GUI.  
+
+   * The app is optimized to run in full-screen-size commandline window.
+
 <a name="features"></a>
+
 
 ## 3. Features
 
-**Command Format**
-
-```javascript
-* Words in `UPPER_CASE` are the parameters to be supplied by the user. 
-  * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
-    to specify a task's description.
-
-* For a general todo task, a task description MUST be added
-  * e.g. in `todo TASK_DESCRIPTION`.
-
-* For a deadline task, a date MUST be added right after the TASK_DESCRIPTION by using /by. 
-  * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
-  Note that you have to add 'T' between the date and the time.
-  
-* For an event task, an event start and end date and time MUST be added 
-  right after the TASK_DESCRIPTION by using /on.
-  * e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` 
-         such as 2020-01-12T10:00 to 2020-01-12T11:00`.
-  Note that you have to add 'T' between the date and the time.    
-
-```
 
 <a name="addtask"></a>
 
