@@ -20,9 +20,49 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int size = 0;
 
-    public static void main(String[] args) {
+    //Importing of all task from Tasklist.txt to program when first launch
+    public Duke() {
+        try {
+            Path path = Paths.get("data");
+            if(!Files.exists(path)) {
+                Files.createDirectory(path);
+                File f = new File("data/Tasklist.txt");
+            } else {
+                File f = new File("data/Tasklist.txt");
+                Scanner fileScanner = new Scanner(f);
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    String[] singleTaskDescriptions = line.split("//");
+                    switch (singleTaskDescriptions[0]) {
+                        case "T":
+                            addtask(new Todo(singleTaskDescriptions[2]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
 
-        importTaskFromFile();
+                        case "D":
+                            addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+
+                        case "E":
+                            addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
+                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
+                                tasks.get(size - 1).importDone();
+                            }
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred. Please try again!");
+        }
+    }
+
+    public static void main(String[] args) {
         programStart();
         loopTillEnd();
     }
@@ -195,48 +235,6 @@ public class Duke {
     private static void programStart() {
         DisplayUI ui = new DisplayUI();
         ui.showStartMessages();
-    }
-
-    //Importing of all task from tasklist.txt to program when first launch
-    private static void importTaskFromFile() {
-        try {
-            Path path = Paths.get("data");
-            if(!Files.exists(path)) {
-                Files.createDirectory(path);
-                File f = new File("data/Tasklist.txt");
-            } else {
-                File f = new File("data/Tasklist.txt");
-                Scanner fileScanner = new Scanner(f);
-                while (fileScanner.hasNextLine()) {
-                    String line = fileScanner.nextLine();
-                    String[] singleTaskDescriptions = line.split("//");
-                    switch (singleTaskDescriptions[0]) {
-                        case "T":
-                            addtask(new Todo(singleTaskDescriptions[2]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
-                            }
-                            break;
-
-                        case "D":
-                            addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
-                            }
-                            break;
-
-                        case "E":
-                            addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
-                            }
-                            break;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error occurred. Please try again!");
-        }
     }
 
     // method for printing the last type of task entered
