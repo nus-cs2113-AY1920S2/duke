@@ -1,9 +1,10 @@
-package duke;
+package duke.task;
+
+import java.time.LocalDate;
 
 public class Task {
     protected String description;
     protected boolean isDone;
-    private String time;
 
     public Task(String description) {
         this.description = description;
@@ -34,7 +35,11 @@ public class Task {
         }
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
+        return LocalDate.parse("1998-01-16");
+    }
+
+    public String getTimeFormatted() {
         return "";
     }
 
