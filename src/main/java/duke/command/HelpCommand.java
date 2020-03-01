@@ -1,17 +1,16 @@
 package duke.command;
 
-import duke.ui.Ui;
-
+/**
+ * A class representing a command to display help information.
+ */
 public class HelpCommand extends Command {
 
 
-    public HelpCommand (Ui printer) {
-        super(null, printer);
+    public HelpCommand () {
+        super(null);
     }
 
-    /**
-     * Prints the descriptions on how to use each one of the supported commands
-     */
+
     public CommandResult execute() {
 
         String msg = "Below are descriptions of the supported commands:" + System.lineSeparator();

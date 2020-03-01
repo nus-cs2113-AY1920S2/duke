@@ -1,11 +1,15 @@
 package duke.command;
 
 import duke.task.TaskManager;
-import duke.ui.Ui;
 
+/**
+ * A class representing a user command. It could be either a {@link ClearCommand}, a {@link DeadlineCommand},
+ * a {@link DeleteCommand}, a {@link DoneCommand}, an {@link EventCommand}, an {@link ExitCommand},
+ * a {@link HelpCommand}, an {@link InvalidCommand}, a {@link ListCommand}, or a {@link TodoCommand}.
+ */
 public abstract class Command {
 
-    /** User commands available to the user */
+    /** Commands available to the user */
     public static final String CMD_ADD_TODO = "todo";
     public static final String CMD_ADD_DEADLINE = "deadline";
     public static final String CMD_ADD_EVENT = "event";
@@ -17,13 +21,16 @@ public abstract class Command {
     public static final String CMD_DELETE = "delete";
 
     protected TaskManager taskManager;
-    protected Ui printer;
 
-    public Command (TaskManager taskManager, Ui printer) {
+    public Command (TaskManager taskManager) {
         this.taskManager = taskManager;
-        this.printer = printer;
     }
 
+    /**
+     * Executes the command based on its type.
+     *
+     * @return User feedback about the execution of the command.
+     */
     public abstract CommandResult execute ();
 
 }

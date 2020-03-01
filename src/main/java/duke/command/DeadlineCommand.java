@@ -5,25 +5,32 @@ import duke.exception.TaskException.TaskInvalidDateException;
 import duke.task.tasktypes.Deadline;
 import duke.task.TaskManager;
 import duke.task.tasktypes.Task;
-import duke.ui.Ui;
 import duke.utility.Messages;
 
+/**
+ * A class representing a command for adding a deadline.
+ */
 public class DeadlineCommand extends Command {
+
 
     private String userInput;
     private final String BULLET = "\t\t\u2023";
 
     public final static String USAGE = "deadline [description] /by [date/time]";
 
-    public DeadlineCommand (TaskManager manager, Ui printer, String userInput) {
-        super(manager, printer);
+
+    /**
+     * Initializes the required objects to execute deadline command
+     *
+     * @param manager Task manager to add the deadline to the list
+     * @param userInput Raw input containing the deadline information
+     */
+    public DeadlineCommand (TaskManager manager, String userInput) {
+        super(manager);
         this.userInput = userInput;
     }
 
-    /**
-     * Executes the add deadline command by checking for the correct
-     * format
-     */
+
     @Override
     public CommandResult execute () {
 
@@ -61,11 +68,28 @@ public class DeadlineCommand extends Command {
         }
     }
 
+
+    /**
+     * Formats the message to be displayed in case the deadline is added
+     * successfully
+     *
+     * @param toPrint Task added to the task list.
+     * @return Message to display
+     */
     private String getAddedTaskSuccessfullyMsg (Task toPrint) {
         return String.format(Messages.ADDED_TASK, BULLET, toPrint, taskManager.getListSize(),
                 taskManager.getTaskListNoun());
     }
 
+
+    /**
+     * Gets deadline description from raw user input.
+     *
+     * @param userInput Raw user input.
+     * @param indexOfBy Index of the '/by' separator
+     * @return Deadline description.
+     * @throws TaskEmptyDescriptionException If taskDescription is empty.
+     */
     private String getDescription (String userInput, int indexOfBy) throws TaskEmptyDescriptionException {
 
         String taskDescription = userInput.substring(0, indexOfBy).trim();
@@ -77,6 +101,15 @@ public class DeadlineCommand extends Command {
         return taskDescription;
     }
 
+
+    /**
+     * Gets deadline date from raw user input.
+     *
+     * @param userInput Raw user input.
+     * @param indexOfBy Index of the '/by' separator
+     * @return The deadline date.
+     * @throws TaskInvalidDateException If byDate is empty
+     */
     private String getDate (String userInput, int indexOfBy) throws TaskInvalidDateException {
         String byDate = userInput.substring(indexOfBy + 3).trim();
 

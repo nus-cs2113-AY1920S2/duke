@@ -4,8 +4,14 @@ import duke.command.CommandResult;
 
 import static duke.Duke.inDebugMode;
 
+/**
+ * A class representing the Text UI application
+ */
 public class Ui {
 
+    /**
+     * Displays welcome message.
+     */
     public static void greetUser() {
 
         if (inDebugMode) {
@@ -24,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Prints logo for the bot.
+     * Displays application logo.
      */
     private static void printLogo() {
 
@@ -42,7 +48,7 @@ public class Ui {
 
 
     /**
-     * Repeats whatever message it receives.
+     * Repeats whatever message it receives but formatted.
      *
      * @param msg Message to print.
      */
@@ -54,7 +60,7 @@ public class Ui {
     }
 
     /**
-     * Prints horizontal line for chat bot.
+     * Prints horizontal line.
      */
     private static void printHorizontalLine(boolean hasNewline) {
         System.out.println("  _______________________________________________________________________________");
@@ -71,7 +77,11 @@ public class Ui {
         displayMessage("Bye! Hope to see you soon :)");
     }
 
-
+    /**
+     * Displays the command execution results.
+     *
+     * @param userFeedback Feedback given by the execution of a command.
+     */
     public void displayFeedback(CommandResult userFeedback) {
 
         String feedback = userFeedback.getUserFeedback();

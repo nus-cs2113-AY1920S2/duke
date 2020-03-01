@@ -5,22 +5,30 @@ import duke.exception.TaskException.TaskListEmptyException;
 import duke.exception.TaskException.TaskAlreadyMarkedException;
 import duke.task.TaskManager;
 import duke.task.tasktypes.Task;
-import duke.ui.Ui;
 import duke.utility.Messages;
 
+/**
+ * A class representing a command to mark a task as done.
+ */
 public class DoneCommand extends Command {
+
 
     private String userInput;
     public final static String USAGE = "done [task number]";
 
-    public DoneCommand (TaskManager manager, Ui printer, String userInput) {
-        super(manager, printer);
+
+    /**
+     * Creates a done command.
+     *
+     * @param manager Task manager to mark task as done.
+     * @param userInput Raw input containing the index of the task.
+     */
+    public DoneCommand (TaskManager manager, String userInput) {
+        super(manager);
         this.userInput = userInput;
     }
 
-    /**
-     * Processes user input and marks the task as done
-     */
+
     @Override
     public CommandResult execute () {
 
@@ -58,15 +66,37 @@ public class DoneCommand extends Command {
         }
     }
 
+
+    /**
+     * Formats the user feedback to be displayed when the given index is
+     * out of bounds.
+     *
+     * @param targetIndex Index of the task to mark as done
+     * @return Feedback to be displayed
+     */
     private String getTaskOutOfBoundsMsg (int targetIndex) {
         return String.format(Messages.TASK_OUT_OF_BOUNDS, targetIndex + 1, taskManager.getTaskListNounDescriptor(),
                 taskManager.getListSize(), taskManager.getTaskListNoun());
     }
 
+
+    /**
+     * Formats feedback in case the task is already marked as done.
+     *
+     * @param task Task specified by the user.
+     * @return Feedback to be displayed.
+     */
     private String getTaskAlreadyDone (Task task) {
         return String.format(Messages.DONE_MARKED_BEFORE, task);
     }
 
+
+    /**
+     * Formats feedback in case the task is marked successfully.
+     *
+     * @param toPrint Task that is marked as done.
+     * @return Feedback to be displayed.
+     */
     private String getMarkedSuccessfullyMsg (Task toPrint) {
         String msg = String.format(Messages.DONE_MARKED_SUCCESSFUL, toPrint);
 

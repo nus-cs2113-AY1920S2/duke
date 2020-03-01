@@ -5,16 +5,25 @@ import duke.exception.TaskException.TaskListEmptyException;
 
 import duke.task.TaskManager;
 import duke.task.tasktypes.Task;
-import duke.ui.Ui;
 import duke.utility.Messages;
 
+
+/**
+ * A class representing a command to delete a task.
+ */
 public class DeleteCommand extends Command {
 
     private String userInput;
     public final static String USAGE = "delete [task number]";
 
-    public DeleteCommand (TaskManager manager, Ui printer, String userInput) {
-        super(manager, printer);
+    /**
+     * Initializes the required objects to execute command.
+     *
+     * @param manager Task manager to remove task from list.
+     * @param userInput Raw user input containing the index of the task to remove.
+     */
+    public DeleteCommand (TaskManager manager, String userInput) {
+        super(manager);
         this.userInput = userInput;
     }
 
@@ -52,6 +61,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Formats the feedback to be displayed when a task is deleted
+     * successfully
+     *
+     * @param toPrint Task that has been removed
+     * @return Feedback to be displayed.
+     */
     private String getTaskRemovedMsg (Task toPrint) {
 
         int size = taskManager.getListSize();
@@ -66,6 +82,13 @@ public class DeleteCommand extends Command {
         return msg;
     }
 
+    /**
+     * Formats the user feedback to be displayed when the given index is
+     * out of bounds.
+     *
+     * @param targetIndex Index of the task to remove
+     * @return Feedback to be displayed
+     */
     private String getTaskOutOfBoundsMsg (int targetIndex) {
         return String.format(Messages.TASK_OUT_OF_BOUNDS, targetIndex + 1, taskManager.getTaskListNounDescriptor(),
                 taskManager.getListSize(), taskManager.getTaskListNoun());

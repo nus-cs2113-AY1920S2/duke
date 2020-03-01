@@ -1,7 +1,11 @@
 package duke.task.tasktypes;
 
+/**
+ * A class representing an event task
+ */
 public class Event extends Task {
 
+    /** Event details such as place, time, etc. */
     private String eventDate;
 
     public Event (String description, String eventDate) {
@@ -9,14 +13,6 @@ public class Event extends Task {
         this.eventDate = eventDate;
 
         this.taskType = TaskType.E;
-    }
-
-    public String getEventDate () {
-        return eventDate;
-    }
-
-    public String setEventDate () {
-        return eventDate;
     }
 
     @Override

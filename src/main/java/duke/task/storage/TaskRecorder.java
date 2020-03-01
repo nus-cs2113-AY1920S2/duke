@@ -9,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class to save all the tasks in the tasks list.
+ */
 public class TaskRecorder {
 
     private Gson gson;
@@ -31,7 +34,11 @@ public class TaskRecorder {
         file = new File(fileDirectory);
     }
 
-
+    /**
+     * Saves all the Task objects as Json objects in the data file.
+     *
+     * @param tasks Tasks currently in the list.
+     */
     public void recordAllTasks (ArrayList<Task> tasks) {
 
         if (!file.exists()) {

@@ -1,7 +1,11 @@
 package duke.task.tasktypes;
 
+/**
+ * A class representing a deadline task.
+ */
 public class Deadline extends Task {
 
+    /** Date to complete deadline by */
     private String by;
 
     public Deadline (String description, String by) {
@@ -13,10 +17,6 @@ public class Deadline extends Task {
 
     public String getBy () {
         return by;
-    }
-
-    public void setBy () {
-        this.by = by;
     }
 
     @Override

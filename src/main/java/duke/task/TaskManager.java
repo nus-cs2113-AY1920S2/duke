@@ -11,7 +11,10 @@ import java.util.ArrayList;
 
 import static duke.Duke.inDebugMode;
 
-
+/**
+ * A class representing a task manager. It works with {@link Task} instances
+ * to add, remove, list, find, load, save, or mark tasks.
+ */
 public class TaskManager {
 
     /** List with all the tasks in the program */
@@ -19,6 +22,8 @@ public class TaskManager {
 
     /** Helps display the output to the user */
     private Ui printer;
+
+    /** Deal with storage of tasks (both loading and recording tasks) */
     private TaskRecorder recorder;
     private TaskLoader loader;
 
@@ -33,10 +38,9 @@ public class TaskManager {
     }
 
     /**
-     * Adds a new task to the list
+     * Adds a new task to the list.
      *
-     * @param task The object already created based on the
-     *             command type
+     * @param task The object already created based on the command type.
      */
     public void addTask (Task task) {
         tasks.add(task);
@@ -47,9 +51,13 @@ public class TaskManager {
     }
 
     /**
-     * Marks a task as done if possible
+     * Marks a task as done if possible.
      *
-     * @param taskIndex The list number of the task to mark as done
+     * @param taskIndex The list number of the task to mark as done.
+     * @return Task marked as done.
+     * @throws TaskListEmptyException If list tasks is empty.
+     * @throws TaskOutOfBoundsException If taskIndex is out of bounds.
+     *
      */
     public Task markTaskAsDone (int taskIndex) throws TaskListEmptyException, TaskOutOfBoundsException,
             TaskAlreadyMarkedException {
@@ -75,6 +83,15 @@ public class TaskManager {
         return tasks.get(taskIndex);
     }
 
+
+    /**
+     * Removes a task from the tasks list.
+     *
+     * @param taskIndex Index of the task to remove.
+     * @return Task removed from the list.
+     * @throws TaskOutOfBoundsException If taskIndex is out of bounds.
+     * @throws TaskListEmptyException If tasks list is empty.
+     */
     public Task removeTask (int taskIndex) throws TaskOutOfBoundsException, TaskListEmptyException {
 
         if (tasks.isEmpty()) {
@@ -96,8 +113,12 @@ public class TaskManager {
         return toPrint;
     }
 
+
     /**
-     * Lists all the user tasks in the program
+     * Constructs a list of all tasks to be displayed.
+     *
+     * @return Constructed string containing all tasks.
+     * @throws TaskListEmptyException If tasks list is empty.
      */
     public String listTasks () throws TaskListEmptyException {
         if (tasks.isEmpty()) {
@@ -118,12 +139,23 @@ public class TaskManager {
         return msg;
     }
 
+
+    /**
+     * Loads tasks, if any, from the data file.
+     */
     public void loadTasks () {
         if (!inDebugMode) {
             this.tasks = loader.loadTasks();
         }
     }
 
+
+    /**
+     * Checks if the given taskIndex is within bounds.
+     *
+     * @param taskIndex Task index given by the user.
+     * @return Boolean to tell whether task is within bounds.
+     */
     private boolean taskIndexOutOfBounds (int taskIndex) {
         return (taskIndex >= tasks.size() || taskIndex < 0);
     }
@@ -132,11 +164,27 @@ public class TaskManager {
         return tasks.size();
     }
 
+    /**
+     * Gets the list noun, 'task' or 'tasks', based on the list size.
+     *
+     * @return Tasks list noun.
+     */
     public String getTaskListNoun () {
-        return (tasks.size() > 1) ? "tasks": "task";
+        String singularNoun = "task";
+        String pluralNoun = "tasks";
+
+        return (tasks.size() > 1) ? pluralNoun: singularNoun;
     }
 
+    /**
+     * Gets the task list noun description, 'is' or 'are', based on the list size.
+     *
+     * @return Noun descriptor.
+     */
     public String getTaskListNounDescriptor () {
-        return (tasks.size() > 1) ? "are": "is";
+        String singularDescriptor = "is";
+        String pluralDescriptor = "are";
+
+        return (tasks.size() > 1) ? pluralDescriptor: singularDescriptor;
     }
 }
