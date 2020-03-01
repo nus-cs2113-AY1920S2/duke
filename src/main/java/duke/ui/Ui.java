@@ -63,7 +63,7 @@ public class Ui {
      * Prints horizontal line.
      */
     private static void printHorizontalLine(boolean hasNewline) {
-        System.out.println("  _______________________________________________________________________________");
+        System.out.println("  ____________________________________________________________________________________________________");
 
         if (hasNewline) {
             System.out.println();

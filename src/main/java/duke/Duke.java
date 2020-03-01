@@ -36,10 +36,21 @@ public class Duke {
     }
 
     /**
+     * Disables warning given by Gson in terminal window
+     * From: https://stackoverflow.com/questions/46454995/how-to-hide-warning-illegal-reflective-access-in-java-9-without-jvm-argument
+     */
+    public static void disableWarning() {
+        System.err.close();
+        System.setErr(System.out);
+    }
+
+    /**
      * Initializes objects to handle the list, to display output, and for
      * command information
      */
     public static void init (String[] args) {
+
+        disableWarning();
 
         setDebugMode(args);
 
