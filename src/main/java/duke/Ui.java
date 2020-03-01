@@ -22,9 +22,7 @@ public class Ui {
      * Shows exit message when users type "bye", the exit command.
      */
     public static void exitMessage() {
-        showLine();
         System.out.println("Bye. Hope to see you again soon!");
-        showLine();
     }
 
     /**
