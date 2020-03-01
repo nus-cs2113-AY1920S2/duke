@@ -14,7 +14,6 @@ public class Storage {
 
     public Storage() {
     }
-
     /**
      * Write the current task list to designated file
      * path "data/myTasks.txt". If the file exists, rewrite

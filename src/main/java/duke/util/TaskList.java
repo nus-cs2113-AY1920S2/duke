@@ -2,8 +2,6 @@ package duke.util;
 
 import duke.taskmanager.Tasks;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,24 +10,25 @@ public class TaskList {
      * Task list where active tasks are stored.
      */
     public static List<Tasks> tasks = new ArrayList<>();
-    private static UI ui;
+    public static String FORMAT = Split.FORMAT.getSplit();
+    public static String SPLIT_UPPER_BOUNDARY = Split.SPLIT_UPPER_BOUNDARY.getSplit();
+    public static String SPLIT_LOWER_BOUNDARY = Split.SPLIT_LOWER_BOUNDARY.getSplit();
 
-    public TaskList(UI ui) throws IOException {
-        TaskList.ui = ui;
+    public TaskList() {
         tasks = new ArrayList<>();
-        Load load = new Load(Paths.get("data/myTasks.txt"));
+        Load load = new Load();
         tasks = load.readData();
     }
 
 
     public static void printIntro() {
-        System.out.printf(ui.FORMAT, "Your current task list:");
+        System.out.printf(FORMAT, "Your current task list:");
     }
 
     public static void printEmpty() {
-        System.out.println(ui.SPLIT_UPPER_BOUNDARY);
-        System.out.printf(ui.FORMAT, "You have no ongoing task.");
-        System.out.println(ui.SPLIT_LOWER_BOUNDARY);
+        System.out.println(SPLIT_UPPER_BOUNDARY);
+        System.out.printf(FORMAT, "You have no ongoing task.");
+        System.out.println(SPLIT_LOWER_BOUNDARY);
     }
 
     /**
@@ -79,10 +78,10 @@ public class TaskList {
         } else {
             int index = 0;
             for (Tasks task : tasks) {
-                System.out.printf(ui.FORMAT, index + ". "+ task.toString());
+                System.out.printf(FORMAT, index + ". "+ task.toString());
                 index++;
             }
-            System.out.println(ui.SPLIT_LOWER_BOUNDARY);
+            System.out.println(SPLIT_LOWER_BOUNDARY);
         }
     }
 }

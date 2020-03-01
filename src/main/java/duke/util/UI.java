@@ -10,25 +10,13 @@ public class UI {
     /**
      * Contains the Scanner class, as Ui is where
      * the scanner object is initialised for user input to be read.
-     * Constant String FORMAT, SPLIT, BLANK_LINE, SPLIT_UPPER_BOUNDARY and SPLIT_LOWER_BOUNDARY
-     * such that line spacing and format is consistent.
      */
+
     private static Scanner userInput = new Scanner(System.in);
-    public final String FORMAT = "0O=-             %-60s-=O0%n";
 
-    public final String SPLIT = "=============================" +
-            "====================================================";
-
-    public final String BLANK_LINE = "0O=-                      " +
-            "                                                   -=O0";
-
-    public final String SPLIT_UPPER_BOUNDARY = SPLIT +"\n000000000000000" +
-            "00000000000000000000000000000000000000000000000000000000000" +
-            "0000000\n" + BLANK_LINE;
-
-    public final String SPLIT_LOWER_BOUNDARY = BLANK_LINE + "\n0000000" +
-            "00000000000000000000000000000000000000000000000000000000" +
-            "000000000000000000\n" + SPLIT;
+    public String FORMAT = Split.FORMAT.getSplit();
+    public String SPLIT_UPPER_BOUNDARY = Split.SPLIT_UPPER_BOUNDARY.getSplit();
+    public String SPLIT_LOWER_BOUNDARY = Split.SPLIT_LOWER_BOUNDARY.getSplit();
 
     public UI(){
     }
@@ -86,9 +74,9 @@ public class UI {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(format, "Which category does your task belong to?");
         System.out.printf(format, "1. ToDos: tasks without any date/time attached to it ");
-        System.out.printf(format, "   (e.g., visit new theme park)\n");
+        System.out.printf(format, "   (e.g., visit new theme park)");
         System.out.printf(format, "2. Deadlines: tasks that need to be done before a specific");
-        System.out.printf(format, "   date/time (e.g., submit report by 11/10/2019 5pm)\n");
+        System.out.printf(format, "   date/time (e.g., submit report by 11/10/2019 5pm)");
         System.out.printf(format, "3. Events: tasks that start at a specific time and ends");
         System.out.printf(format, "   at a specific time(e.g., team project meeting on 2/10/2019 2-4pm)");
         System.out.println(SPLIT_LOWER_BOUNDARY);

@@ -1,28 +1,32 @@
 package duke.commands;
 
 import duke.taskmanager.Tasks;
-import duke.util.UI;
+import duke.util.Split;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListCommand extends Command {
-    private static UI ui;
-    public ListCommand(UI ui) {
-        ListCommand.ui = ui;
+    public static List<Tasks> tasks = new ArrayList<>();
+    public static String FORMAT = Split.FORMAT.getSplit();
+    public static String SPLIT_UPPER_BOUNDARY = Split.SPLIT_UPPER_BOUNDARY.getSplit();
+    public static String SPLIT_LOWER_BOUNDARY = Split.SPLIT_LOWER_BOUNDARY.getSplit();
+
+    public ListCommand() {
     }
 
     public static void printIntro() {
-        System.out.println(ui.SPLIT_UPPER_BOUNDARY);
-        System.out.printf(ui.FORMAT, "Your current task list:");
+        System.out.println(SPLIT_UPPER_BOUNDARY);
+        System.out.printf(FORMAT, "Your current task list:");
     }
 
     /**
      * Message print when the current task list is empty.
      */
     public static void printEmpty() {
-        System.out.println(ui.SPLIT_UPPER_BOUNDARY);
-        System.out.printf(ui.FORMAT, "You have no ongoing task.");
-        System.out.println(ui.SPLIT_LOWER_BOUNDARY);
+        System.out.println(SPLIT_UPPER_BOUNDARY);
+        System.out.printf(FORMAT, "You have no ongoing task.");
+        System.out.println(SPLIT_LOWER_BOUNDARY);
     }
 
     /**
@@ -39,10 +43,10 @@ public class ListCommand extends Command {
         } else {
             int index = 0;
             for (Tasks task : list) {
-                System.out.printf(ui.FORMAT, index + ". "+ task.toString());
+                System.out.printf(FORMAT, index + ". "+ task.toString());
                 index++;
             }
-            System.out.println(ui.SPLIT_LOWER_BOUNDARY);
+            System.out.println(SPLIT_LOWER_BOUNDARY);
         }
     }
 }

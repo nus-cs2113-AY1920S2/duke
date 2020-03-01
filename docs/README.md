@@ -80,5 +80,5 @@ At the main page, key in `6` to clear all tasks in the list.
 At the main page, key in `7` to safely close the application.  
 
 ##Feedback, Bug Reports
-* If you have feedback or encountered any problems when using
+If you have feedback or encountered any problems when using
 Duke, please contact me at e0322837@u.nus.edu.  

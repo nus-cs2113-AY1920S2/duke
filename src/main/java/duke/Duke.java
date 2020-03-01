@@ -14,10 +14,10 @@ public class Duke {
      */
     private UI ui;
     private static List<Tasks> tasks;
-    public Duke() throws IOException {
+    public Duke() {
         ui = new UI();
-        duke.util.TaskList tasklist = new TaskList(ui);
-        tasks = tasklist.getTasks();
+        duke.util.TaskList taskList = new TaskList();
+        tasks = taskList.getTasks();
     }
 
     /**
