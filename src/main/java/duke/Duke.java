@@ -33,11 +33,13 @@ public class Duke {
      * @param args String[] args in main.
      */
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        int taskCount = getFileTask(FILE_PATH, tasks, 0);
+        Ui ui = new Ui();
+        Storage storage = new Storage(FILE_PATH);
+        ArrayList<Task> tasks = storage.load();
+        int taskCount = tasks.size();
         boolean isBye = false;
         Scanner sc = new Scanner(System.in);
-        greetUser();
+        ui.greetUser();
         while (!isBye) {
             System.out.println();
             String string = sc.nextLine();
@@ -70,7 +72,7 @@ public class Duke {
                     findCommand(tasks, taskCount, string);
                     break;
                 case "help":
-                    helpCommand();
+                    ui.helpCommand();
                 default:
                     throw new DukeNullException("     :( OOPS!!! Command does not exist.");
                 }
@@ -132,40 +134,6 @@ public class Duke {
         FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write(taskToAdd);
         fileWriter.close();
-    }
-
-    /**
-     * Open file from file directory if any and convert the string into the respective Task at the
-     * start of the programs launch.
-     * @param filePath File directory path.
-     * @param tasks ArrayList containing all the Task.
-     * @param taskCount Total number of Task stored.
-     * @return Total number of Task stored or 0 if the file does not exists.
-     */
-    public static int getFileTask(String filePath, ArrayList<Task> tasks, int taskCount) {
-        try {
-            File file = new File(filePath); // create a File for the given file path
-            Scanner fileScanner = new Scanner(file); // create a Scanner using the File as the source
-            while (fileScanner.hasNext()) {
-                String[] existingTask = fileScanner.nextLine().split(" \\| ");
-                if (existingTask[0].equals("T")) {
-                    tasks.add(new Todo(existingTask[2]));
-                }
-                if (existingTask[0].equals("D")) {
-                    tasks.add(new Deadline(existingTask[2], existingTask[3]));
-                }
-                if (existingTask[0].equals("E")) {
-                    tasks.add(new Event(existingTask[2], existingTask[3]));
-                }
-                if (existingTask[1].equals("1")) {
-                    tasks.get(taskCount).markAsDone();
-                }
-                taskCount++;
-            }
-            return taskCount;
-        } catch (FileNotFoundException e) {
-            return taskCount;
-        }
     }
 
     /**
@@ -365,45 +333,5 @@ public class Duke {
                 System.out.println("     " + (i + 1) + "." + tasks.get(i).toString());
             }
         }
-    }
-
-    /**
-     * Print the Welcome message and call commandList method to List out all the possible command
-     * the user can execute.
-     */
-    public static void greetUser() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm duke.Duke");
-        helpCommand();
-        System.out.println("    What can I do for you?");
-        System.out.println("    ____________________________________________________________");
-    }
-
-    /**
-     * Print out all the possible command the user can execute.
-     */
-    public static void helpCommand() {
-        System.out.println("    Here is the list of commands that are available:");
-        System.out.println("+---------------------------------------------------------------+");
-        System.out.println("| Index | Input            | Command                            |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 01    | todo j           | Add a task(j) without dateline     |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 02    | dateline j /by d | Add a task(j) with due date d      |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 03    | event j /at d    | Add a task(j) that start at date d |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 04    | list             | List out all the stored task       |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 05    | done i           | Mark task i as done                |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 06    | delete i         | Delete task(i)                     |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 07    | find j           | Find all task with description j   |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 08    | help             | List out all the commands          |");
-        System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 09    | bye              | Terminate the program              |");
-        System.out.println("|---------------------------------------------------------------|");
     }
 }
