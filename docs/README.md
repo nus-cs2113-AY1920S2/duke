@@ -11,6 +11,7 @@ Nyan chat bot allows users to take down their notes.
     - [Remove a task in the list](https://github.com/NyanWunPaing/duke/tree/master/docs#remove-a-task-in-the-list)
     - [List all tasks](https://github.com/NyanWunPaing/duke/tree/master/docs#list-all-tasks)
     - [Mark tasks as done](https://github.com/NyanWunPaing/duke/tree/master/docs#marks-tasks-as-done)
+    - [Exit](https://github.com/NyanWunPaing/duke/tree/master/docs#exit)
 
 # Requirements 
 Java 11 or later.
@@ -135,3 +136,23 @@ Mark the `4`th task in the task list as completed.
     Nice! I've marked this task as done:
       [T][✓] read book
     ===================================================
+    
+
+### Exit
+Exit Nyan Chatbot and save task list.
+
+##### Usage example:
+`bye`
+
+###### Example: 
+
+- `bye`
+
+Exit and print bye text.
+
+ ***Expected outcome:***
+
+    ===================================================
+    Bye. Hope to see you soon!
+    ===================================================
+
