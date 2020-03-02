@@ -3,6 +3,7 @@ import duke.command.Command;
 import duke.command.CommandToDo;
 import duke.command.CommandEvent;
 import duke.command.CommandDeadline;
+import duke.command.CommandFind;
 import duke.command.CommandDone;
 import duke.command.CommandDelete;
 import duke.command.CommandList;
@@ -88,6 +89,9 @@ public class Parser {
 
             return new CommandClear();
 
+        } else if (commandWord.equals("find")){
+
+            return new CommandFind(arguments);
         } else {
             return new FalseCommand(TRY_AGAIN);
         }
