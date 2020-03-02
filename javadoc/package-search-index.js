@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"duke"},{"l":"duke.command"},{"l":"duke.parser"},{"l":"duke.storage"},{"l":"duke.task"},{"l":"duke.ui"}]
