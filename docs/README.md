@@ -84,6 +84,17 @@ list
    - ```find CS2113```
    - ```find CS```
 
+- Expected Output:
+```
+find English
+____________________________________________________________
+     Here are the matching tasks in your list:
+
+1.[D][✘] English Essay (by: 26 Feb)
+2.[T][✘] English quiz
+____________________________________________________________
+```
+
 ## 4.	Marking Tasks as Done: ```done```
 - Marks specified tasks as done. 
 - Specified index of the task will be its index of the entire task list by default, unless the ```list``` or ```find``` command has been called. In which case, it will be the index of the item as shown in the last shown list.
@@ -106,6 +117,7 @@ Nice! I've marked this task as done:
    - ```delete 1```
    - ```delete 2```
 - Expected Output:
+
 ```
 delete 1
 ____________________________________________________________
@@ -127,4 +139,3 @@ ____________________________________________________________
 bye
 Bye. Hope to see you again soon!
 ```
-test
