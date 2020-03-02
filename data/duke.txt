@@ -1,8 +1,6 @@
 [T][✘] buy book
-[T][✘] read book
 [E][✘] book (at: 8pm)
 [E][✘] eat (at: 9pm)
-[T][✘] eat bread
 [E][✘] eat (at: my house)
 [E][✘] eat (at: lunch)
-[T][✘] hehe
+[T][✓] hehe

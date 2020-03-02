@@ -117,11 +117,14 @@ public class TaskList {
             throw new DukeException();
         } else {
             int taskNum = Integer.parseInt(command) - 1;
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(tasks.get(taskNum));
-            tasks.remove(tasks.get(taskNum));
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            storage.save();
+            if(taskNum < 0 || taskNum > tasks.size()){
+                throw new DukeException();
+            } else {
+                Task toDelete = tasks.get(taskNum);
+                tasks.remove(toDelete);
+                ui.printDeleted(toDelete);
+                storage.save();
+            }
         }
     }
 
@@ -130,12 +133,13 @@ public class TaskList {
      * Function that lists all the tasks is taskList
      */
     public void listTasks() {
-        System.out.println("Here are the tasks in your list:");
-        int taskCounter = 1;
-        for(Task t: tasks) {
-            System.out.println((taskCounter) + "." + t);
-            taskCounter++;
+        if(!tasks.isEmpty()){
+            System.out.println("Here are the tasks in your list:");
+            ui.printList(tasks);
+        } else {
+            ui.printEmptyList();
         }
+
     }
 
 
@@ -149,12 +153,15 @@ public class TaskList {
             throw new DukeException();
         } else {
             int taskNum = Integer.parseInt(command) - 1;
-            tasks.get(taskNum).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.get(taskNum));
-            storage.save();
+            if(taskNum < 0 || taskNum > tasks.size()){
+                throw new DukeException();
+            } else {
+                Task markDone = tasks.get(taskNum);
+                markDone.markAsDone();
+                ui.printMarkedDone(markDone);
+                storage.save();
+            }
         }
-
     }
 
 
@@ -176,11 +183,11 @@ public class TaskList {
                     foundTasks.add(t);
                 }
             }
-            System.out.println("Here are the matching tasks in your list:");
-            int taskNum = 1;
-            for (Task t : foundTasks) {
-                System.out.println((taskNum) + "." + t);
-                taskNum++;
+            if (!foundTasks.isEmpty()){
+                System.out.println("Here are the matching tasks in your list:");
+                ui.printList(foundTasks);
+            } else {
+                ui.printEmptyList();
             }
         }
     }

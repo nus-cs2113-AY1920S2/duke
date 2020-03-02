@@ -3,6 +3,8 @@ package duke.ui;
 import duke.task.TaskList;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 /**
  * Represents the interactions the program has with the user e.g, greetings, goodbyes, and
  * current status of list etc. This class displays messages and other interactions to the user
@@ -73,6 +75,40 @@ public class Ui {
     }
 
     /**
+     * Function that prints out the task that was deleted from the taskList
+     * @param t
+     */
+    public void printDeleted(Task t) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(t);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public void printMarkedDone(Task t) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(t);
+    }
+
+    /**
+     * Function that prints all the tasks of a taskList
+     * @param tasks - array of the tasks to be printed
+     */
+    public void printList(ArrayList<Task> tasks){
+        int taskCounter = 1;
+        for(Task t: tasks) {
+            System.out.println((taskCounter) + "." + t);
+            taskCounter++;
+        }
+    }
+
+    /**
+     * Function that prints out message in case of empty list
+     */
+    public void printEmptyList(){
+        System.out.println("The list is empty!");
+    }
+
+    /**
      * Function that prints out that the command the user typed is not valid
      */
     public void invalidCommand(){
@@ -86,7 +122,7 @@ public class Ui {
      * @param commandType type of command that is invalid
      */
     public void invalidCommand(String commandType) {
-        System.out.println("Invalid " + commandType + " command. Make sure there is a description!");
+        System.out.println("Invalid " + commandType + " command. Make sure there is a correct description!");
     }
 
 
