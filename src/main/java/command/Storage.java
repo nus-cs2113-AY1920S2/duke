@@ -7,6 +7,7 @@ import Tasks.TaskList;
 import Tasks.ToDo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
@@ -59,6 +60,10 @@ public class Storage {
             return newTask;
         } catch (FileNotFoundException e) {
             System.out.println("Opening a new file");
+            return new TaskList();
+        } catch (JsonParseException e) {
+            System.out.println("It seems like your file is corrupted. "
+                    + "I have re-written over it to make a new one.");
             return new TaskList();
         }
     }
