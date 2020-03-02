@@ -130,7 +130,7 @@ ____________________________________________________________
 - Loading of tasks will be done automatically upon starting the application when there is a saved file present in the same directory of the Duke application. The file has the name ```data.txt```.
 
 ## 7. Saving Tasks: ```bye```
-- Saving the state of the task list is done automatically when the program is exited using the ```bye`` command.
+- Saving the state of the task list is done automatically when the program is exited using the ```bye``` command.
 - Format: ```bye```
 - Expected Output:
 
