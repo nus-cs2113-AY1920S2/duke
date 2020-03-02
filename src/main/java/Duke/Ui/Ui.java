@@ -88,7 +88,7 @@ public class Ui {
 
     public String readCommand() {
         sc = new Scanner(System.in);
-        return sc.nextLine();
+        return sc.nextLine().strip();
     }
 
 
