@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * 
+=======
+ * A class that is the foundation where all the Commands extends from.
+>>>>>>> JavaDocs
  */
 
 public class Command {
@@ -9,6 +13,11 @@ public class Command {
     public Command() {
         this.command = "";
     }
+
+    /**
+     * Constructor for Command object.
+     * @param command the command inputted by the user, with trailing and leading white spaces removed.
+     */
 
     public Command(String command) {
         this.command = command;

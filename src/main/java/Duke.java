@@ -4,7 +4,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
+<<<<<<< HEAD
  * Duke is a project that keeps a list of the tasks that need to be completed.
+=======
+ * Project Duke.
+ * Keeps a record of the tasks that the user has, which can be saved into and loaded from a hard disk.
+>>>>>>> JavaDocs
  */
 
 public class Duke {
@@ -17,7 +22,8 @@ public class Duke {
     static TextUi textUi = new TextUi();
 
     /**
-     * Contains all the objects needed to run the project.
+     * Contains all the necessary objects to keep track of the tasks.
+     * @param args
      */
 
     public static void main(String[] args) {

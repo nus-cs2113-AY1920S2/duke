@@ -1,8 +1,16 @@
-public class TextUi {
-    private boolean isUserDone;
+/**
+ * Stores instructions to print frequently displayed messages.
+ */
 
+public class TextUi {
+
+    //private boolean isUserDone;
+
+    /**
+     * Constructor for TextUi.
+     */
     public TextUi() {
-        this.isUserDone = false;
+        //this.isUserDone = false;
     }
 
     public void printWelcomeMessage() {
