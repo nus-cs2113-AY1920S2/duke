@@ -3,7 +3,6 @@ package duke;
 import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
-
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.WhitespaceExceptions;
 import duke.taskManager.Deadline;
@@ -11,7 +10,6 @@ import duke.taskManager.Events;
 import duke.taskManager.Task;
 import duke.taskManager.Todo;
 import duke.ui.*;
-
 import java.util.ArrayList;
 import java.nio.file.*;
 import java.io.BufferedReader;
@@ -67,6 +65,12 @@ public class Duke {
         loopTillEnd();
     }
 
+    //Run greetings and show table of available functions
+    private static void programStart() {
+        DisplayUI ui = new DisplayUI();
+        ui.showStartMessages();
+    }
+
     //Loop the program until "bye" is entered
     private static void loopTillEnd(){
         Scanner myScanner = new Scanner(System.in);
@@ -80,48 +84,21 @@ public class Duke {
                 switch (function) {
                     //add new todo task
                     case "todo":
-                        String line = myScanner.nextLine();
-                        if(line.equals("")){
-                            throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
-                        }
-                        addtask(new Todo(line));
-                        writeToFile(function,line);
-                        printAddedTask("New To-Do Task added:");
+                        todoCommand(myScanner, function);
+                        String line;
                         break;
 
                     //add new task with deadline
                     case "deadline":
-                        line = myScanner.nextLine();
-                        String[] description = line.split("/");
-                        if(description[0].equals("")){
-                            throw new MissingDescriptionException("☹ OOPS!!! The deadline description cannot be empty!!");
-                        }
-                        String[] deadLine = description[1].split("by ");
-                        if(description[0] == null){
-                            throw new ArrayIndexOutOfBoundsException();
-                        }
-                        addtask(new Deadline(description[0], deadLine[1]));
-                        writeToFile(function,line);
-                        printAddedTask("New Task with deadline added:");
+                        deadlineCommand(myScanner, function);
                         break;
 
                     //add new event task
                     case "event":
-                        line = myScanner.nextLine();
-                        String[] eventName = line.split("/");
-                        if(eventName[0].equals("")){
-                            throw new MissingDescriptionException("☹ OOPS!!! The event description cannot be empty!!");
-                        }
-                        String[] event = eventName[1].split("at ");
-                        if(event[0].equals(null)){
-                            throw new ArrayIndexOutOfBoundsException();
-                        }
-                        addtask(new Events(eventName[0], event[1]));
-                        writeToFile(function,line);
-                        printAddedTask("New event added:");
+                        eventCommand(myScanner, function);
                         break;
 
-                     //exit program
+                    //exit program
                     case "bye":
                         System.out.println("Bye! Hope to see you again soon!");
                         System.out.println("____________________________________________________________");
@@ -130,59 +107,17 @@ public class Duke {
 
                     //list all task stored
                     case "list":
-                        if(tasks.size() != 0) {
-                            System.out.println("____________________________________________________________");
-                            System.out.println("Here are your task(s) currently in your planner:");
-                            for (int i = 0; i < tasks.size(); i++) {
-                                System.out.println(i + 1 + "." + tasks.get(i));
-                            }
-                            System.out.println("____________________________________________________________");
-                        } else {
-                            System.out.println("Wow! your planner is empty currently! Try adding some tasks first!");
-                        }
+                        listCommand();
                         break;
 
                     //mark a task as completed
                     case "done":
-                        line = myScanner.nextLine();
-                        String l = line.replace(" ", "");
-                        if(l == ""){
-                            throw new IllegalArgumentException();
-                        }
-                        int taskNumber = Integer.parseInt(l) - 1;
-                        if(taskNumber >= tasks.size() || taskNumber < 0){
-                            throw new NullPointerException();
-                        }
-                        tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
-                        String str = tasks.get(taskNumber).toString();
-                        String str2 = str.substring(6,str.length());
-                        appendToFile(str2);
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Great job! I've marked this task as done in your planner:");
-                        System.out.println(tasks.get(taskNumber));
-                        System.out.println("____________________________________________________________");
+                        doneCommand(myScanner);
                         break;
 
                     //delete a task
                     case "delete":
-                        line = myScanner.nextLine();
-                        l = line.replace(" ","");
-                        taskNumber = Integer.parseInt(l) - 1;
-                        if(l == ""){
-                            throw new IllegalArgumentException();
-                        }
-                        if(taskNumber >= tasks.size() || taskNumber < 0){
-                            throw new NullPointerException();
-                        }
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println(tasks.get(taskNumber));
-                        str = tasks.get(taskNumber).toString();
-                        str2 = str.substring(6,str.length());
-                        deleteToFile(str2);
-                        tasks.remove(taskNumber);
-                        System.out.println("Now you have " + tasks.size() + " tasks in your list.");
-                        System.out.println("____________________________________________________________");
+                        deleteCommand(myScanner);
                         break;
 
                     //delete /data dir and contents and end the program (Bugs)
@@ -193,25 +128,9 @@ public class Duke {
 
                     //find task with matching descriptions to keyword
                     case "find":
-                        boolean found = false;
-                        line = myScanner.nextLine().trim();
-                        String[] keywords = line.split("\\s+");
-                        System.out.println("Here are the matching tasks in your list:");
-                        System.out.println("____________________________________________________________");
-                        for(String word : keywords) {
-                            for(int i = 0; i < tasks.size(); i++){
-                                String descrp = tasks.get(i).getDescription();
-                                if(descrp.contains(word)){
-                                    System.out.println(i + 1 + "." + tasks.get(i));
-                                    found = true;
-                                }
-                            }
-                        }
-                        if(!found){
-                            System.out.println("Sorry! There are no task with descriptions matching your keyword! Please try again!");
-                            System.out.println("____________________________________________________________");
-                        }
+                        findCommand(myScanner);
                         break;
+                    //Display help functions table
                     case "help":
                         DisplayUI ui = new DisplayUI();
                         ui.showFunctionList();
@@ -235,10 +154,136 @@ public class Duke {
         }
     }
 
-    //Run greetings and show table of available functions
-    private static void programStart() {
-        DisplayUI ui = new DisplayUI();
-        ui.showStartMessages();
+    // method for finding task
+    private static void findCommand(Scanner myScanner) {
+        String line;
+        boolean found = false;
+        line = myScanner.nextLine().trim();
+        String[] keywords = line.split("\\s+");
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println("____________________________________________________________");
+        for(String word : keywords) {
+            for(int i = 0; i < tasks.size(); i++){
+                String descrp = tasks.get(i).getDescription();
+                if(descrp.contains(word)){
+                    System.out.println(i + 1 + "." + tasks.get(i));
+                    found = true;
+                }
+            }
+        }
+        if(!found){
+            System.out.println("Sorry! There are no task with descriptions matching your keyword! Please try again!");
+            System.out.println("____________________________________________________________");
+        }
+    }
+
+    // method for marking task as done
+    private static void doneCommand(Scanner myScanner) throws WhitespaceExceptions {
+        String line;
+        line = myScanner.nextLine();
+        String l = line.replace(" ", "");
+        if(l == ""){
+            throw new IllegalArgumentException();
+        }
+        int taskNumber = Integer.parseInt(l) - 1;
+        if(taskNumber >= tasks.size() || taskNumber < 0){
+            throw new NullPointerException();
+        }
+        tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
+        String str = tasks.get(taskNumber).toString();
+        String str2 = str.substring(6,str.length());
+        appendToFile(str2);
+        System.out.println("____________________________________________________________");
+        System.out.println("Great job! I've marked this task as done in your planner:");
+        System.out.println(tasks.get(taskNumber));
+        System.out.println("____________________________________________________________");
+    }
+
+    // method for deleting task
+    private static void deleteCommand(Scanner myScanner) throws WhitespaceExceptions {
+        String line;
+        String l;
+        int taskNumber;
+        String str;
+        String str2;
+        line = myScanner.nextLine();
+        l = line.replace(" ","");
+        taskNumber = Integer.parseInt(l) - 1;
+        if(l == ""){
+            throw new IllegalArgumentException();
+        }
+        if(taskNumber >= tasks.size() || taskNumber < 0){
+            throw new NullPointerException();
+        }
+        System.out.println("____________________________________________________________");
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(tasks.get(taskNumber));
+        str = tasks.get(taskNumber).toString();
+        str2 = str.substring(6,str.length());
+        deleteToFile(str2);
+        tasks.remove(taskNumber);
+        System.out.println("Now you have " + tasks.size() + " tasks in your list.");
+        System.out.println("____________________________________________________________");
+        return;
+    }
+
+    // method for listing all task
+    private static void listCommand() {
+        if(tasks.size() != 0) {
+            System.out.println("____________________________________________________________");
+            System.out.println("Here are your task(s) currently in your planner:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + 1 + "." + tasks.get(i));
+            }
+            System.out.println("____________________________________________________________");
+        } else {
+            System.out.println("Wow! your planner is empty currently! Try adding some tasks first!");
+        }
+    }
+
+    // method for adding event task
+    private static void eventCommand(Scanner myScanner, String function) throws MissingDescriptionException {
+        String line;
+        line = myScanner.nextLine();
+        String[] eventName = line.split("/");
+        if(eventName[0].equals("")){
+            throw new MissingDescriptionException("☹ OOPS!!! The event description cannot be empty!!");
+        }
+        String[] event = eventName[1].split("at ");
+        if(event[0].equals(null)){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        addtask(new Events(eventName[0], event[1]));
+        writeToFile(function,line);
+        printAddedTask("New event added:");
+    }
+
+    // method for adding task with deadline
+    private static void deadlineCommand(Scanner myScanner, String function) throws MissingDescriptionException {
+        String line;
+        line = myScanner.nextLine();
+        String[] description = line.split("/");
+        if(description[0].equals("")){
+            throw new MissingDescriptionException("☹ OOPS!!! The deadline description cannot be empty!!");
+        }
+        String[] deadLine = description[1].split("by ");
+        if(description[0] == null){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        addtask(new Deadline(description[0], deadLine[1]));
+        writeToFile(function,line);
+        printAddedTask("New Task with deadline added:");
+    }
+
+    // method for adding todo task
+    private static void todoCommand(Scanner myScanner, String function) throws MissingDescriptionException {
+        String line = myScanner.nextLine();
+        if(line.equals("")){
+            throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
+        }
+        addtask(new Todo(line));
+        writeToFile(function,line);
+        printAddedTask("New To-Do Task added:");
     }
 
     // method for printing the last type of task entered
