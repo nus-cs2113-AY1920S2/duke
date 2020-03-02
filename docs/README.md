@@ -5,7 +5,7 @@ Kesin chat bot allows users to easily organise their tasks.
 ## Table of Contents
 
 
-- [Requirements](https://github.com/itskesin/duke/tree/master/docs#requirements)
+- [Requirements](https://github.com/itskesin/duke/tree/master/docs#quick-start)
 - [Features](https://github.com/itskesin/duke/tree/master/docs#features)
     
     - [Add a new task](https://github.com/itskesin/duke/tree/master/docs#add-a-new-task)
@@ -13,9 +13,13 @@ Kesin chat bot allows users to easily organise their tasks.
     - [Deletes a task in the list](https://github.com/itskesin/duke/tree/master/docs#deletes-a-task-in-the-list)
     - [View all tasks](https://github.com/itskesin/duke/tree/master/docs#view-all-tasks)
     - [Marks tasks as done](https://github.com/itskesin/duke/tree/master/docs#marks-tasks-as-done)
+    - [Save and Exit](https://github.com/itskesin/duke/tree/master/docs#save-and-exit)
 
-## Requirements 
-Java 11 or later.
+## Quick Start 
+    1. Ensure 'Java 11' or later is installed on the computer
+    2. Download [DUKE v0.2](https://github.com/itskesin/duke/releases)
+    3. Open the 'JAR file' download on the computer
+    4. Enter `java -jar IP.jar` to start up the program
 
 ## Features
 
@@ -137,3 +141,17 @@ Mark the `3`rd task in the task list as completed.
 > 
 >     Nice! I've marked this task as done:
 >     [D][✓] return book (by: Monday)
+
+### Save and Exit
+Save the user input and quit the program.
+
+##### Example:
+`bye`
+
+> ***Expected outcome:***
+> 
+>     Bye, [user name]. Hope to see you again soon!
+
+
+
+
