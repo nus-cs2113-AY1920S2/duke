@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command {
 
 
     private String userInput;
-    private final String BULLET = "\t\t\u2023";
+    private final String BULLET = "\t\t-";
 
     public final static String USAGE = "deadline [description] /by [dd-mm-yyyy] [hh:mm], 24-hour clock";
 

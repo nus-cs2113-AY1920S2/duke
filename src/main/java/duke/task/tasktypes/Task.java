@@ -7,8 +7,8 @@ package duke.task.tasktypes;
 public abstract class Task {
 
     /** Check and cross markers */
-    private static final String checkMark = "\u2713";
-    private static final String crossMark = "\u2718";
+    private static final String checkMark = "Y";
+    private static final String crossMark = "X";
 
     /** Completion status for the task */
     protected boolean isDone;

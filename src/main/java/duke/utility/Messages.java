@@ -6,7 +6,7 @@ package duke.utility;
  */
 public class Messages {
 
-    private static final String BULLET = "\t\t\u2023";
+    private static final String BULLET = "\t\t-";
 
     /** General messages */
     public final static String INVALID_FORMAT = "Invalid input for adding a %s.";

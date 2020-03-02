@@ -15,7 +15,7 @@ public class EventCommand extends Command {
 
 
     private String userInput;
-    private final String BULLET = "\t\t\u2023";
+    private final String BULLET = "\t\t-";
 
     public final static String USAGE = "event [description] /at [date/time]";
 
