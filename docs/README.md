@@ -1,6 +1,6 @@
 # User Guide
 ## About Duke
-Duke is a personal assistant chat bot to manage all your upcoming tasks
+Duke is a personal assistant chat bot with a **command line interface** to manage all your upcoming tasks
 
 
 ## Quick Guide
@@ -25,49 +25,56 @@ Refer to the next section [Features](#features) for details of each command.
 - [Saving](#feature-9-saving-information)
 
 ### Feature 1. Create new Todo: `Todo`
-Adds a new Todo to the TaskList 
+Adds a new Todo to the TaskList
 
-Example of usage:
+###### Syntax: todo DESCRIPTION
+
+###### Example of usage:
 
     todo buy lunch
     
-Expected outcome:
+###### Expected outcome:
 
         1. [T][N] buy lunch
     
 ### Feature 2. Create new Deadline: `Deadline`
 Adds a new deadline to the TaskList
 
+###### Syntax: deadline DESCRIPTION /by DATE
 
-Example of usage:
+###### Example of usage:
 
     deadline complete CS1010 Assignment \by 10-03-2022
     
-Expected outcome:
+###### Expected outcome:
 
         2. [D][N] complete CS1010 Assignment ( by: 10-03-2022 ) 
 
 ### Feature 3. Create new Event: `Event` 
 Adds a new event to the TaskList.
                                
-Example of usage:
+###### Syntax: event DESCRIPTION /at DATE                        
+                               
+###### Example of usage:
 
     event attend cousin wedding \at 01-04-2022
 
-Expected outcome:
+###### Expected outcome:
 
         3. [E][N] attend cousin wedding  ( at: 01-04-2022 ) 
         
 ### Feature 4. List all tasks: `List`
 List out all the existing tasks in the TaskList
 
+###### Syntax: List
+
 ##### If there are existing tasks
 
-Example of usage:
+###### Example of usage:
 
     list
 
-Expected outcome:
+###### Expected outcome:
 
         1. [T][N] buy lunch
         2. [D][N] complete CS1010 Assignment ( by: 10-03-2022 ) 
@@ -77,87 +84,94 @@ Expected outcome:
     
 ##### If there are no existing tasks
 
-Example of usage:
+###### Example of usage:
 
     list
 
-Expected outcome:
+###### Expected outcome:
 
         Empty!
 
 ### Feature 5. Mark existing tasks: `Mark`
 Marks an existing task in the TaskList
 
+###### Syntax: mark INDEX
 
 ##### If there are existing tasks
 
-Example of usage:
+###### Example of usage:
 
     mark 1
 
-Expected outcome:
+###### Expected outcome:
 
         You have marked -- [T][Y] buy lunch
 
 ##### If there are no existing tasks
 
-Example of usage:
+###### Example of usage:
 
     mark 1
 
-Expected outcome:
+###### Expected outcome:
 
         Out of Bound!
     
 ### Feature 6. Delete existing tasks: `Delete`
 Deletes an existing task in the TaskList
 
+###### Syntax: delete INDEX
+
 ##### If there are existing tasks
 
-Example of usage:
+###### Example of usage:
 
     delete 1
 
-Expected outcome:
+###### Expected outcome:
 
         You have deleted -- [T][Y] buy lunch
 
 ##### If there are no existing tasks
 
-Example of usage:
+###### Example of usage:
 
     delete 1
 
-Expected outcome:
+###### Expected outcome:
 
         Out of Bound!
     
 ### Feature 7. Find existing tasks: `Find`
 Find an item using a keyword in the TaskList
 
+###### Syntax: find KEYWORD
+
 ##### If there are existing tasks
 
-Example of usage:
+###### Example of usage:
 
     find lunch
 
-Expected outcome:
+###### Expected outcome:
 
         1. [T][N]buy lunch
         There are 1 items found.
 
 ##### If there are no existing tasks
 
-Example of usage:
+###### Example of usage:
 
         find boy
-Expected outcome:
+###### Expected outcome:
 
         Item not found!!!
 
 
 ### Feature 8. Exit the program: `Exit`
 Exits the program
+
+###### Syntax: bye
 
 Example of usage:
 
