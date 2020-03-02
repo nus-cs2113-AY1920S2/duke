@@ -1,0 +1,215 @@
+_________________________________________________
+This is
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+How can I help you today?
+_________________________________________________
+> You have no tasks right now though
+_________________________________________________
+> Task added:
+  [T][X] borrow book
+You have 1 task in the list
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][X] borrow book
+_________________________________________________
+> Task added:
+  [D][X] return book (by: Thu 12 Mar 2020 18:45)
+You have 2 tasks in the list
+_________________________________________________
+> Task added:
+  [E][X] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+You have 3 tasks in the list
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][X] borrow book
+  2. [D][X] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][X] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+_________________________________________________
+> Well, that's one task down
+  [D][O] return book (by: Thu 12 Mar 2020 18:45)
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][X] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][X] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+_________________________________________________
+> Well, that's one task down
+  [T][O] borrow book
+_________________________________________________
+> Well, that's one task down
+  [E][O] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+_________________________________________________
+> Task added:
+  [D][X] finish reading book (by: Sun 01 Mar 2020 00:00)
+You have 4 tasks in the list
+_________________________________________________
+> Task added:
+  [T][X] i want to write a slash here /by doing sth like this
+You have 5 tasks in the list
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+  4. [D][X] finish reading book (by: Sun 01 Mar 2020 00:00)
+  5. [T][X] i want to write a slash here /by doing sth like this
+_________________________________________________
+> ☹ OOPS!!! That task is already done
+_________________________________________________
+> Well, that's one task down
+  [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+_________________________________________________
+> Well, that's one task down
+  [T][O] i want to write a slash here /by doing sth like this
+_________________________________________________
+> ☹ OOPS!!! Please specify a task number between 1 and 5
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+  4. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+  5. [T][O] i want to write a slash here /by doing sth like this
+_________________________________________________
+> ☹ OOPS!!! The description of a todo cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of a deadline cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of a deadline cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of a deadline cannot be empty
+_________________________________________________
+> Task added:
+  [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
+You have 6 tasks in the list
+_________________________________________________
+> ☹ OOPS!!! Please specify the date and time using the format DD/MM/YY HHMM
+_________________________________________________
+> ☹ OOPS!!! The description and date of an event cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of an event cannot be empty
+_________________________________________________
+> ☹ OOPS!!! The description and date of an event cannot be empty
+_________________________________________________
+> Task added:
+  [E][X] to-trim event (at: Sat 22 Feb 2020 20:20 - 20:40)
+You have 7 tasks in the list
+_________________________________________________
+> Task added:
+  [E][X] no space between start end time dash (at: Wed 12 Dec 2012 23:45 - 23:59)
+You have 8 tasks in the list
+_________________________________________________
+> ☹ OOPS!!! Please specify the starting and ending date and time using the format DD/MM/YY HHMM - HHMM
+_________________________________________________
+> ☹ OOPS!!! Please specify the starting and ending date and time using the format DD/MM/YY HHMM - HHMM
+_________________________________________________
+> ☹ OOPS!!! The starting time should be before the ending time
+_________________________________________________
+> Task added:
+  [T][X] 9
+You have 9 tasks in the list
+_________________________________________________
+> Task added:
+  [T][X] 10
+You have 10 tasks in the list
+_________________________________________________
+> Quite a few tasks you got there
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [E][O] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+  4. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+  5. [T][O] i want to write a slash here /by doing sth like this
+  6. [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
+  7. [E][X] to-trim event (at: Sat 22 Feb 2020 20:20 - 20:40)
+  8. [E][X] no space between start end time dash (at: Wed 12 Dec 2012 23:45 - 23:59)
+  9. [T][X] 9
+ 10. [T][X] 10
+_________________________________________________
+> Are these what you're looking for?
+  1. [T][O] borrow book
+  2. [D][O] return book (by: Thu 12 Mar 2020 18:45)
+  3. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+_________________________________________________
+> Are these what you're looking for?
+  1. [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
+  2. [E][X] to-trim event (at: Sat 22 Feb 2020 20:20 - 20:40)
+_________________________________________________
+> ☹ OOPS!!! Please specify a string to search for
+_________________________________________________
+> Hmm... Seems like no tasks matched your query
+_________________________________________________
+> Are these what you're looking for?
+  1. [T][O] i want to write a slash here /by doing sth like this
+_________________________________________________
+> Are these what you're looking for?
+  1. [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+_________________________________________________
+> ☹ OOPS!!! Please specify a task number between 1 and 10
+_________________________________________________
+> Well, that's one task down
+  [T][O] 10
+_________________________________________________
+> ☹ OOPS!!! Please specify a task number between 1 and 10
+_________________________________________________
+> Task deleted:
+  [T][O] 10
+You have 9 tasks in the list
+_________________________________________________
+> Task deleted:
+  [D][O] return book (by: Thu 12 Mar 2020 18:45)
+You have 8 tasks in the list
+_________________________________________________
+> Task deleted:
+  [E][O] project meeting (at: Fri 28 Feb 2020 10:00 - 12:00)
+You have 7 tasks in the list
+_________________________________________________
+> Task deleted:
+  [D][O] finish reading book (by: Sun 01 Mar 2020 00:00)
+You have 6 tasks in the list
+_________________________________________________
+> Task deleted:
+  [T][O] i want to write a slash here /by doing sth like this
+You have 5 tasks in the list
+_________________________________________________
+> Task deleted:
+  [D][X] to-trim deadline (by: Sat 22 Feb 2020 20:20)
+You have 4 tasks in the list
+_________________________________________________
+> Task deleted:
+  [E][X] to-trim event (at: Sat 22 Feb 2020 20:20 - 20:40)
+You have 3 tasks in the list
+_________________________________________________
+> Task deleted:
+  [E][X] no space between start end time dash (at: Wed 12 Dec 2012 23:45 - 23:59)
+You have 2 tasks in the list
+_________________________________________________
+> Task deleted:
+  [T][O] borrow book
+You have 1 task in the list
+_________________________________________________
+> Task deleted:
+  [T][X] 9
+You have 0 tasks in the list
+_________________________________________________
+> You have no tasks right now though
+_________________________________________________
+> You have no tasks right now though
+_________________________________________________
+> ☹ OOPS!!! I'm not very sure what that means...
+_________________________________________________
+> ☹ OOPS!!! Please specify an integer for the task number
+_________________________________________________
+> ☹ OOPS!!! Please specify an integer for the task number
+_________________________________________________
+> Bye then
+_________________________________________________

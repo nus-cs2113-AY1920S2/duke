@@ -1,0 +1,61 @@
+delete 1
+todo borrow book
+list
+deadline return book /by 12/03/20 1845
+event project meeting /at 28/02/20 1000 - 1200
+list
+done 2
+list
+done 1
+done 3
+list
+deadline finish reading book /by 01/03/20 0000
+todo i want to write a slash here /by doing sth like this
+list
+done 3
+done 4
+done 5
+delete 8
+list
+todo
+deadline
+deadline   /by 01/01/01 0101
+deadline  hello /by
+deadline    to-trim deadline      /by    22/02/20    2020
+deadline wrong date format test /by 30-02-20 1234
+event
+event   /at  01/01/01 0101 - 1010
+event  yes  no  /at
+event       to-trim event    /at   22/02/20      2020    -     2040
+event no space between start end time dash /at 12/12/12 2345-2359
+event no date test /at 2345-2359
+event wrong date format test /at 31/6/20 1234 - 2345
+event wrong start end time test /at 12/12/12 2359 - 0000
+todo 9
+todo 10
+list
+find book
+find o-t
+find
+find qwerty
+find /by
+find sh r
+done 11
+done 10
+delete 11
+delete 10
+delete 2
+delete 2
+delete 2
+delete 2
+delete 2
+delete 2
+delete 2
+delete 1
+delete 1
+list
+delete 5
+sssp
+done abc
+delete eeee
+bye
