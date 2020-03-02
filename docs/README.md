@@ -49,6 +49,7 @@ Command: Terminate the program and automatically help you store the Task into yo
 **Note:** Duke will help you take care of creating a folder and txt file if one does not already exist.
 
 ## Summary of Commands
+
 | Index | Input | Command |  
 | ----- | ----- | --------------- |  
 | 01 | list | List out all the stored task |  
