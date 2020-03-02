@@ -22,6 +22,7 @@ Refer to the next section [Features](#features) for details of each command.
 - [Delete task](#feature-6-delete-existing-tasks-delete)
 - [Find task](#feature-7-find-existing-tasks-find)
 - [Exit Duke](#feature-8-exit-the-program-exit)
+- [Saving](#feature-9-saving-information)
 
 ### Feature 1. Create new Todo: `Todo`
 Adds a new Todo to the TaskList 
@@ -156,7 +157,7 @@ Expected outcome:
 
 
 ### Feature 8. Exit the program: `Exit`
-Exits the programme
+Exits the program
 
 Example of usage:
 
@@ -165,3 +166,8 @@ Example of usage:
 Expected outcome:
 
         Bye. Hope to see you again soon!
+        
+### Feature 9. Saving information
+* Duke automatically saves the task list into your OS home directory under <code>/Duke.txt</code> <br>
+* Duke automatically loads the task list from previous session if the file <code>/Duke.txt</code> exist in your home directory.
+* If the file <code>/Duke.txt</code> does not exist in your home directory, Duke automatically creates a new <code>/Duke.txt</code> in your home directory.
