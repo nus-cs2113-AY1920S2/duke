@@ -19,10 +19,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
+/**
+ * Duke is a chatbot that manages Task for user.
+ * @author Lam Yue Wei
+ * @version CS2113 AY19/20 Sem 2 Duke
+ */
 public class Duke {
 
     public static final String FILE_PATH = "data/duke.txt";
 
+    /**
+     * Main method for Duke.
+     * @param args String[] args in main.
+     */
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         int taskCount = getFileTask(FILE_PATH, tasks, 0);
@@ -77,12 +86,26 @@ public class Duke {
         }
     }
 
+    /**
+     * Open the file directory based on the filePath, add Task for storage into hard disk and close file.
+     * @param filePath File directory path.
+     * @param taskToAdd Sting containing Task information to store into file.
+     * @throws IOException If input or output operation failed.
+     */
     public static void writeFileTask(String filePath, String taskToAdd) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write(taskToAdd);
         fileWriter.close();
     }
 
+    /**
+     * Open file from file directory if any and convert the string into the respective Task at the
+     * start of the programs launch.
+     * @param filePath File directory path.
+     * @param tasks ArrayList containing all the Task.
+     * @param taskCount Total number of Task stored.
+     * @return Total number of Task stored or 0 if the file does not exists.
+     */
     public static int getFileTask(String filePath, ArrayList<Task> tasks, int taskCount) {
         try {
             File file = new File(filePath); // create a File for the given file path
@@ -109,8 +132,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Delete a Task given an index.
+     * @param tasks ArrayList containing all the Task.
+     * @param stringSplit User input that is split by spacing.
+     * @param taskCount Total number of Task stored.
+     * @return Total number of Task stored.
+     * @throws DukeArgumentException If missing parameter for index.
+     * @throws DukeIndexException If index provided is out of range.
+     */
     public static int deleteCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
-            DukeArgumentException {
+            DukeArgumentException, DukeIndexException {
         int deletedTask;
         if (stringSplit.length == 1) {
             throw new DukeArgumentException("     :( OOPS!!! Missing index for delete.");
@@ -127,6 +159,14 @@ public class Duke {
         return taskCount;
     }
 
+    /**
+     * Add event Task given a description and a time of occurrence.
+     * @param tasks ArrayList containing all the Task.
+     * @param taskCount Total number of Task stored.
+     * @param string User input.
+     * @return Total number of Task stored.
+     * @throws DukeArgumentException If missing parameter for description or date.
+     */
     public static int eventCommand(ArrayList<Task> tasks, int taskCount, String string) throws
             DukeArgumentException {
         if (string.length() == 5) {
@@ -148,6 +188,14 @@ public class Duke {
         return taskCount;
     }
 
+    /**
+     * Add deadline Task given a description and a due date.
+     * @param tasks ArrayList containing all the Task.
+     * @param taskCount Total number of Task stored.
+     * @param string User input.
+     * @return Total number of Task stored.
+     * @throws DukeArgumentException If missing parameter for description or date.
+     */
     public static int deadlineCommand(ArrayList<Task> tasks, int taskCount, String string) throws
             DukeArgumentException {
         if (string.length() == 8) {
@@ -169,6 +217,14 @@ public class Duke {
         return taskCount;
     }
 
+    /**
+     * Add todo Task given a description.
+     * @param tasks ArrayList containing all the Task.
+     * @param stringSplit User input that is split by spacing.
+     * @param taskCount Total number of Task stored.
+     * @return Total number of Task stored.
+     * @throws DukeArgumentException If missing parameter for index.
+     */
     public static int todoCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
             DukeArgumentException {
         if (stringSplit.length == 1) {
@@ -185,6 +241,15 @@ public class Duke {
         return taskCount;
     }
 
+    /**
+     * Store all the Task into the hard disk and exit the program.
+     * @param stringSplit User input that is split by spacing.
+     * @param taskCount Total number of Task stored.
+     * @param tasks ArrayList containing all the Task.
+     * @return true to indicate to the program to end.
+     * @throws DukeArgumentException If additional parameter is provided.
+     * @throws IOException If input or output operation failed.
+     */
     public static boolean byeCommand(String[] stringSplit, int taskCount, ArrayList<Task> tasks) throws
             DukeArgumentException, IOException {
         if (stringSplit.length > 1) {
@@ -218,6 +283,14 @@ public class Duke {
         return true;
     }
 
+    /**
+     * Mark a Task as done.
+     * @param tasks ArrayList containing all the Task.
+     * @param stringSplit User input that is split by spacing.
+     * @param taskCount Total number of Task stored.
+     * @throws DukeArgumentException If missing parameter for index.
+     * @throws DukeIndexException If index provided is out of range.
+     */
     public static void doneCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
             DukeArgumentException, DukeIndexException {
         int completedTask;
@@ -234,7 +307,15 @@ public class Duke {
         System.out.println("       " + tasks.get(completedTask).toString());
     }
 
-    public static void listCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws DukeArgumentException {
+    /**
+     * List all the Task stored.
+     * @param tasks ArrayList containing all the Task.
+     * @param stringSplit User input that is split by spacing.
+     * @param taskCount Total number of Task stored.
+     * @throws DukeArgumentException If additional parameter is provided.
+     */
+    public static void listCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
+            DukeArgumentException {
         if (stringSplit.length > 1) {
             throw new DukeArgumentException("     :( OOPS!!! Description not required for list.");
         }
@@ -249,6 +330,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Print the Welcome message and call commandList method to List out all the possible command
+     * the user can execute.
+     */
     public static void greetUser() {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Hello! I'm duke.Duke");
@@ -257,6 +342,9 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Print out all the possible command the user can execute.
+     */
     public static void commandList() {
         System.out.println("    Here is the list of commands that are available:");
         System.out.println("+---------------------------------------------------------------+");
