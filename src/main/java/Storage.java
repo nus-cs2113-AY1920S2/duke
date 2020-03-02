@@ -12,16 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**Return task list by reading in specified text file from specified file path and
- * matching it to the related Task class.
- * <p>
- * Write task list into specified text file
- *
- * @param filePath  The specified relative file path of duke.txt
- * @param savedTaskDetails  the descriptions and/or date of task from text file
- * @throws FileNotFoundException  if duke.txt is not found in specified file path
- * @throws UnknownLineFromSavedFileException  if line read in from text file does not fall under any Task classes
- */
 public class Storage {
 
     private String filePath;
@@ -73,15 +63,14 @@ public class Storage {
         }
     }
 
-    /*write task list inside of text file*/
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        StringBuilder fileText = new StringBuilder();
+        String fileText = "";
         for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
-            fileText.append(tasks.getTaskFromList(i).writeInFile());
-            fileText.append(System.lineSeparator());
+            fileText += tasks.getTaskFromList(i).writeInFile();
+            fileText += System.lineSeparator();
         }
-        fw.write(fileText.toString());
+        fw.write(fileText);
         fw.close();
     }
 }

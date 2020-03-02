@@ -7,12 +7,6 @@ import src.main.java.duke.task.Deadline;
 
 import java.io.IOException;
 
-/**Instantiate new Deadline class to insert into TaskList
- *
- * @param taskDescription  Name of task
- * @param date  due date and and time of task
- *
- */
 public class AddDeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";

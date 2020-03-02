@@ -9,12 +9,6 @@ import src.main.java.duke.task.Task;
 
 import java.io.IOException;
 
-/**Mark specified task from Task List as done and display completed task to user
- *
- * @param taskNumber  ArrayList index of specified task
- * @throw InvalidDoneException  if taskNumber == 0 or taskNumber >= Total Number of Task in Task List
- * @throw AlreadyDoneException  if specified task isDone == true before command is executed
- */
 public class DoneCommand extends Command{
 
     public static final String COMMAND_WORD = "done";
