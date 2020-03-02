@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (getIsDone() ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (getIsDone() ? "Y" : "N");
     }
 
     // Not immutable version

@@ -58,7 +58,7 @@ public class Duke {
                     taskCount = deleteCommand(tasks, stringSplit, taskCount);
                     break;
                 default:
-                    throw new DukeNullException("     \u2639 OOPS!!! Command does not exist.");
+                    throw new DukeNullException("     :( OOPS!!! Command does not exist.");
                 }
             } catch (DukeArgumentException | DukeIndexException e) {
                 System.out.println(e.getMessage());
@@ -66,7 +66,7 @@ public class Duke {
                 System.out.println(e.getMessage());
                 commandList();
             } catch (NumberFormatException e) {
-                System.out.println("     \u2639 OOPS!!! " + e.getMessage().substring(18) + " is not number!");
+                System.out.println("     :( OOPS!!! " + e.getMessage().substring(18) + " is not number!");
             } catch (FileNotFoundException e) {
                 System.out.println("Folder does not exist yet" + e.getMessage());
             } catch (IOException e) {
@@ -113,11 +113,11 @@ public class Duke {
             DukeArgumentException {
         int deletedTask;
         if (stringSplit.length == 1) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing index for delete.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing index for delete.");
         }
         deletedTask = Integer.parseInt(stringSplit[1]) - 1; // Might throw NumberFormatException
         if (deletedTask >= taskCount | deletedTask < 0) {
-            throw new DukeIndexException("     \u2639 OOPS!!! Invalid index for delete.");
+            throw new DukeIndexException("     :( OOPS!!! Invalid index for delete.");
         }
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + tasks.get(deletedTask));
@@ -130,10 +130,10 @@ public class Duke {
     public static int eventCommand(ArrayList<Task> tasks, int taskCount, String string) throws
             DukeArgumentException {
         if (string.length() == 5) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing description for event.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for event.");
         }
         if (!string.contains("/at")) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing date for event.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing date for event.");
         }
 
         String description;
@@ -151,10 +151,10 @@ public class Duke {
     public static int deadlineCommand(ArrayList<Task> tasks, int taskCount, String string) throws
             DukeArgumentException {
         if (string.length() == 8) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing description for deadline.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for deadline.");
         }
         if (!string.contains("/by")) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing date for deadline.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing date for deadline.");
         }
 
         String description;
@@ -172,7 +172,7 @@ public class Duke {
     public static int todoCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
             DukeArgumentException {
         if (stringSplit.length == 1) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing description for todo.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for todo.");
         }
 
         String description;
@@ -188,7 +188,7 @@ public class Duke {
     public static boolean byeCommand(String[] stringSplit, int taskCount, ArrayList<Task> tasks) throws
             DukeArgumentException, IOException {
         if (stringSplit.length > 1) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Description not required for bye.");
+            throw new DukeArgumentException("     :( OOPS!!! Description not required for bye.");
         }
         Path path = Paths.get("data");
         if(!Files.exists(path)) {
@@ -222,12 +222,12 @@ public class Duke {
             DukeArgumentException, DukeIndexException {
         int completedTask;
         if (stringSplit.length == 1) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Missing index for done.");
+            throw new DukeArgumentException("     :( OOPS!!! Missing index for done.");
         }
 
         completedTask = Integer.parseInt(stringSplit[1]) - 1; // Might throw NumberFormatException
         if (completedTask >= taskCount || completedTask < 0) {
-            throw new DukeIndexException("     \u2639 OOPS!!! Invalid index for done.");
+            throw new DukeIndexException("     :( OOPS!!! Invalid index for done.");
         }
         tasks.get(completedTask).markAsDone();
         System.out.println("     Nice! I've marked this task as done:");
@@ -236,7 +236,7 @@ public class Duke {
 
     public static void listCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws DukeArgumentException {
         if (stringSplit.length > 1) {
-            throw new DukeArgumentException("     \u2639 OOPS!!! Description not required for list.");
+            throw new DukeArgumentException("     :( OOPS!!! Description not required for list.");
         }
 
         if (taskCount == 0) {

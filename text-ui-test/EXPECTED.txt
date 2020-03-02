@@ -27,191 +27,191 @@
 
     ____________________________________________________________
      Got it. I've added this task:
-       [T][✘] read book
+       [T][N] read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] read book
+     1.[T][N] read book
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][✘] return book (by: June 6th)
+       [D][N] return book (by: June 6th)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] read book
-     2.[D][✘] return book (by: June 6th)
+     1.[T][N] read book
+     2.[D][N] return book (by: June 6th)
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][✘] project meeting (at: Aug 6th 2-4pm)
+       [E][N] project meeting (at: Aug 6th 2-4pm)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] read book
-     2.[D][✘] return book (by: June 6th)
-     3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+     1.[T][N] read book
+     2.[D][N] return book (by: June 6th)
+     3.[E][N] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][✓] read book
+       [T][Y] read book
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] read book
-     2.[D][✘] return book (by: June 6th)
-     3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+     1.[T][Y] read book
+     2.[D][N] return book (by: June 6th)
+     3.[E][N] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [E][✓] project meeting (at: Aug 6th 2-4pm)
+       [E][Y] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] read book
-     2.[D][✘] return book (by: June 6th)
-     3.[E][✓] project meeting (at: Aug 6th 2-4pm)
+     1.[T][Y] read book
+     2.[D][N] return book (by: June 6th)
+     3.[E][Y] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [T][✘] join sports club
+       [T][N] join sports club
      Now you have 4 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][✘] return book (by: Sunday)
+       [D][N] return book (by: Sunday)
      Now you have 5 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][✘] project meeting (at: Mon 2-4pm)
+       [E][N] project meeting (at: Mon 2-4pm)
      Now you have 6 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][✘] do homework (by: no idea :-p)
+       [D][N] do homework (by: no idea :-p)
      Now you have 7 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] read book
-     2.[D][✘] return book (by: June 6th)
-     3.[E][✓] project meeting (at: Aug 6th 2-4pm)
-     4.[T][✘] join sports club
-     5.[D][✘] return book (by: Sunday)
-     6.[E][✘] project meeting (at: Mon 2-4pm)
-     7.[D][✘] do homework (by: no idea :-p)
+     1.[T][Y] read book
+     2.[D][N] return book (by: June 6th)
+     3.[E][Y] project meeting (at: Aug 6th 2-4pm)
+     4.[T][N] join sports club
+     5.[D][N] return book (by: Sunday)
+     6.[E][N] project meeting (at: Mon 2-4pm)
+     7.[D][N] do homework (by: no idea :-p)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [D][✓] do homework (by: no idea :-p)
+       [D][Y] do homework (by: no idea :-p)
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] read book
-     2.[D][✘] return book (by: June 6th)
-     3.[E][✓] project meeting (at: Aug 6th 2-4pm)
-     4.[T][✘] join sports club
-     5.[D][✘] return book (by: Sunday)
-     6.[E][✘] project meeting (at: Mon 2-4pm)
-     7.[D][✓] do homework (by: no idea :-p)
+     1.[T][Y] read book
+     2.[D][N] return book (by: June 6th)
+     3.[E][Y] project meeting (at: Aug 6th 2-4pm)
+     4.[T][N] join sports club
+     5.[D][N] return book (by: Sunday)
+     6.[E][N] project meeting (at: Mon 2-4pm)
+     7.[D][Y] do homework (by: no idea :-p)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][✓] join sports club
+       [T][Y] join sports club
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] read book
-     2.[D][✘] return book (by: June 6th)
-     3.[E][✓] project meeting (at: Aug 6th 2-4pm)
-     4.[T][✓] join sports club
-     5.[D][✘] return book (by: Sunday)
-     6.[E][✘] project meeting (at: Mon 2-4pm)
-     7.[D][✓] do homework (by: no idea :-p)
+     1.[T][Y] read book
+     2.[D][N] return book (by: June 6th)
+     3.[E][Y] project meeting (at: Aug 6th 2-4pm)
+     4.[T][Y] join sports club
+     5.[D][N] return book (by: Sunday)
+     6.[E][N] project meeting (at: Mon 2-4pm)
+     7.[D][Y] do homework (by: no idea :-p)
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [D][✓] do homework (by: no idea :-p)
+       [D][Y] do homework (by: no idea :-p)
      Now you have 6 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing index for delete.
+     :( OOPS!!! Missing index for delete.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! "a" is not number!
+     :( OOPS!!! "a" is not number!
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Invalid index for delete.
+     :( OOPS!!! Invalid index for delete.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Invalid index for delete.
+     :( OOPS!!! Invalid index for delete.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Description not required for list.
+     :( OOPS!!! Description not required for list.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing index for done.
+     :( OOPS!!! Missing index for done.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Invalid index for done.
+     :( OOPS!!! Invalid index for done.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Description not required for bye.
+     :( OOPS!!! Description not required for bye.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing description for todo.
+     :( OOPS!!! Missing description for todo.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing description for deadline.
+     :( OOPS!!! Missing description for deadline.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing date for deadline.
+     :( OOPS!!! Missing date for deadline.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing description for event.
+     :( OOPS!!! Missing description for event.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Missing date for event.
+     :( OOPS!!! Missing date for event.
     ____________________________________________________________
 
     ____________________________________________________________
-     ☹ OOPS!!! Command does not exist.
+     :( OOPS!!! Command does not exist.
     Here is the list of commands that are available:
 +---------------------------------------------------------------+
 | Index | Input            | Command                            |
