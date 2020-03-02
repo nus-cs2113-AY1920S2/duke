@@ -177,6 +177,7 @@ public class Storage {
 
     /**
      * Appends a new line of data into the data file.
+     * @param task The task to be written to the file.
      */
 
     public void writeFileLine(Task task) {

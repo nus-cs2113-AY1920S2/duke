@@ -28,6 +28,7 @@ public class Duke {
      * <p>Exceptions caused by improper input and other errors are caught
      * and managed by the application.
      * </p>
+     * @param args the user input.
      */
 
     public static void main(String[] args) {

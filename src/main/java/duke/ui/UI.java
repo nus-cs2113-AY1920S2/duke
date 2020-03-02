@@ -84,6 +84,8 @@ public class UI {
 
     /**
      * Prints the add to-do message for the user.
+     * @param task the task added to the tasklist.
+     * @param taskList the tasklist containing all the tasks.
      */
 
     public void displayAddToDoMessage(Task task, List<Task> taskList) {
@@ -95,6 +97,8 @@ public class UI {
 
     /**
      * Prints the add deadline message for the user.
+     * @param task the task added to the tasklist.
+     * @param taskList the tasklist containing all the tasks.
      */
 
     public void displayAddDeadlineMessage(Task task, List<Task> taskList) {
@@ -106,6 +110,8 @@ public class UI {
 
     /**
      * Prints the add event message for the user.
+     * @param task the task added to the tasklist.
+     * @param taskList the tasklist containing all the tasks.
      */
 
     public void displayAddEventMessage(Task task, List<Task> taskList) {
@@ -117,6 +123,7 @@ public class UI {
 
     /**
      * Prints the display list message and the tasks in the tasklist for the user.
+     * @param taskList the tasklist containing all the tasks.
      */
 
     public void displayShowListMessage(List<Task> taskList) {
@@ -136,6 +143,7 @@ public class UI {
 
     /**
      * Prints the done task message for the user.
+     * @param task the task marked as done.
      */
 
     public void displayDoneTaskMessage(Task task) {
@@ -146,6 +154,7 @@ public class UI {
 
     /**
      * Prints the display found task message and all the tasks found in the tasklist for the user.
+     * @param foundList the list of tasks found using the substring entered by the user.
      */
 
     public void displayFoundTaskMessage(List<Task> foundList) {
@@ -201,6 +210,7 @@ public class UI {
 
     /**
      * Prints the size of list message for the user.
+     * @param taskList the tasklist containing all the tasks.
      */
 
     public void displayListSizeMessage(List<Task> taskList) {
@@ -209,6 +219,7 @@ public class UI {
 
     /**
      * Prints the task deleted message for the user.
+     * @param task the task deleted from the tasklist.
      */
 
     public void displayDeleteTaskMessage(Task task) {
