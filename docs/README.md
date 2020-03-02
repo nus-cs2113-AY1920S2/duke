@@ -1,5 +1,5 @@
-#User Guide for Duke
-##Introduction
+# User Guide for Duke
+## Introduction
 Duke is your personal chatbot who is capable of managing your task.
 
 Some of the task that Duke can manage are *Todo*, *Deadline* and *Event*.
@@ -8,7 +8,7 @@ Some of the task that Duke can manage are *Todo*, *Deadline* and *Event*.
 * **Deadline:** A Task with description of what needs to be done along with the due date and time.
 * **Event:** A Task with description of what needs to be done along with the date and time that the task will occur.
 
-##Features
+## Features
 Below are the list of command that you can key in to interact with Duke.
 1. Add Task
     1. Input: todo j\
@@ -48,7 +48,7 @@ Input: bye\
 Command: Terminate the program and automatically help you store the Task into your hard disk with directory ../data/Duke.txt\
 **Note:** Duke will help you take care of creating a folder and txt file if one does not already exist.
 
-##Summary of Commands
+## Summary of Commands
 Index | Input | Command
 ---|-------------------------------------------|-----------------------------------------------
 01 | list                                      | List out all the stored task
