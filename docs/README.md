@@ -1,5 +1,5 @@
 # User Guide
-## Table of content
+# Table of content
 <!-- TOC -->
 - [Introduction](#introduction)
 - [Features](#features)
