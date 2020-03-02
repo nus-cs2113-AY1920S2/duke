@@ -22,7 +22,7 @@
     - [`bye`](#bye)
 <!-- /TOC -->
 
-##1. Introduction
+## 1. Introduction
     ____________________________________________________________
 	Hello! I'm Duke
 	It seems like you are needing some help.
@@ -45,32 +45,32 @@ Remember to set path for Java beforehand or you can simply set a permanent path 
 At first there will be a warning that there is a data file `data/duke.txt` that has not existed and it will create a 
 new directory and save them after terminating the program
 
-##2. Pre-requisites
+## 2. Pre-requisites
 
 JDK 11 and above, you could set up the framework online at 
 https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
 
-##3. Features 
+## 3. Features 
 
-###i. Add Task 
+### i. Add Task 
 Add a task in 1 of these 3 types (Todo , Deadline, Event)
 
-###ii. List Task
+### ii. List Task
 List all the tasks available from the data
 
-###iii. Mark Task As Done
+### iii. Mark Task As Done
 When you finish a task, you could mark them as done so as not to refer to it next time
 
-###iv. Delete Task
+### iv. Delete Task
 Delete a task that is not necessary anymore
 
-###v. Find Task
+### v. Find Task
 Find tasks with containing certain key words from the task's descriptions
 
-###vi. Exit Program
+### vi. Exit Program
 The program will be terminated and your data will be saved
 
-##4. Usage
+## 4. Usage
 
 ### `todo [description]`
 
