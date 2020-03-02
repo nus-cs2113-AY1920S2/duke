@@ -66,6 +66,9 @@ public class Duke {
                 case "delete":
                     taskCount = deleteCommand(tasks, stringSplit, taskCount);
                     break;
+                case "find":
+                    findCommand(tasks, taskCount, string);
+                    break;
                 default:
                     throw new DukeNullException("     :( OOPS!!! Command does not exist.");
                 }
@@ -83,6 +86,37 @@ public class Duke {
             } finally {
                 System.out.println("    ____________________________________________________________");
             }
+        }
+    }
+
+    /**
+     * Find all Task with description that matches a key word or phrase.
+     * @param tasks ArrayList containing all the Task.
+     * @param taskCount Total number of Task stored.
+     * @param string User input.
+     * @throws DukeArgumentException If missing parameter for description.
+     */
+    public static void findCommand(ArrayList<Task> tasks, int taskCount, String string) throws
+            DukeArgumentException {
+        int deletedTask;
+        if (string.length() == 4) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for find.");
+        }
+        String description = string.substring(5);
+        boolean containDescription = false;
+        int matchNumber = 1;
+        for (int i = 0; i < taskCount; i++) {
+            if (tasks.get(i).getDescription().contains(description)) {
+                if (!containDescription) {
+                    System.out.println("     Here are the matching tasks in your list:");
+                    containDescription = true;
+                }
+                System.out.println("     " + matchNumber + "." + tasks.get(i).toString());
+                matchNumber++;
+            }
+        }
+        if (!containDescription) {
+            System.out.println("     There is no matching tasks");
         }
     }
 
@@ -363,6 +397,8 @@ public class Duke {
         System.out.println("| 06    | event j /at d    | Add a task(j) that start at date d |");
         System.out.println("|-------+------------------+------------------------------------|");
         System.out.println("| 07    | delete j         | Delete task(j)                     |");
+        System.out.println("|-------+------------------+------------------------------------|");
+        System.out.println("| 08    | find j           | Find all task with description j   |");
         System.out.println("|---------------------------------------------------------------|");
     }
 }
