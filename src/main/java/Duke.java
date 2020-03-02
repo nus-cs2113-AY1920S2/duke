@@ -2,11 +2,23 @@ package src.main.java;
 
 import src.main.java.duke.command.Command;
 import src.main.java.duke.exceptions.*;
-import src.main.java.duke.task.Task;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Duke program implements an application that manage a task list by using specific commands.
+ * User can use commands to create, mark and delete tasks inside the task list.
+ * <p>
+ * The program can read text file that contains a task list from specified file path.
+ * Updates made to the task list by the user is written inside the same text file
+ * from the specified file path or written in a new text file if no text file is found
+ * in the specified file path.
+ *
+ * @author  Benny Chann
+ * @version 1.0
+ * @since   2020-03-02
+ */
 public class Duke {
 
     private Storage storage;
