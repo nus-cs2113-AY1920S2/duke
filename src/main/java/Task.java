@@ -66,9 +66,9 @@ public class Task {
         return isDone;
     }
 
-    /*public String getTaskName() {
+    public String getTaskName() {
         return taskName;
-    }*/
+    }
 
     /**
      * Gives the total number of tasks that the user has inputted so far.
