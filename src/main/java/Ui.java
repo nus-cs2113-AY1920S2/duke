@@ -3,6 +3,9 @@ package src.main.java;
 import src.main.java.duke.task.Task;
 import java.util.Scanner;
 
+/**Messages that are printed to the user from different commands
+ *
+ */
 public class Ui {
 
     private static final String DIVIDER = "_________________________________________________";
