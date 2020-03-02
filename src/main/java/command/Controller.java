@@ -20,7 +20,7 @@ public class Controller {
      * @return : returns the updated ArrayList.
      */
     public Serializable readInput(String userInput, TaskList taskListArrayList) {
-        String command = parser.getCommand(userInput);
+        String command = parser.getCommand(userInput).toLowerCase();
 
         switch (command) {
         case "list":
