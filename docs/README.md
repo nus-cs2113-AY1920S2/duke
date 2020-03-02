@@ -1,5 +1,13 @@
 # Using duke task manager
 
+**Starting Up**
+* Install `Java 11 or higher` in your computer
+* Download the most updated `duke.jar` from release page. Current version : `Duke v1.5`
+* Copy the jar file to any folder that you wish to run from.
+* Launch terminal on your OS / CMD for window users --- `Win Key + R and type cmd, hit enter`
+* Navigate to the folder where duke.jar is in. -- `cd filepath`
+* Type the command `java -jar duke.jar` to launch the program.
+
 **Functions available**
 
 * `todo [task]`   --- store a new todo task
@@ -12,7 +20,12 @@
 * `bye` --- exit program
 * `reset` --- delete data directory and Tasklist.txt
 * `help` --- call up the functions table (TBC)
-**===================================================================**
+**============================================================================================**
+
+
+
+
+
 
 
 # (Original ReadME)
