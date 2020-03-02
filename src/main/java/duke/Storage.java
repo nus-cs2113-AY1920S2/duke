@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Storage {
 
     private String filePath;
+    private String homePath;
 
     /**
      * Constructor for Storage.
@@ -38,20 +39,21 @@ public class Storage {
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNext()) {
+            System.out.println("testinggg");
             String userData = scanner.nextLine();
-            char taskType = userData.charAt(0);
+            char taskType = userData.charAt(1);
             char isDone = userData.charAt(4);
 
             switch (taskType) {
             case 'T':
-                Task todo = new Todo(userData.substring(8));
+                Task todo = new Todo(userData.substring(7));
                 if (isDone == '1') {
                     todo.updateIsDone();
                 }
                 tasks.add(todo);
                 break;
             case 'E': {
-                String[] description = userData.substring(8).split(" \\(at: ");
+                String[] description = userData.substring(7).split(" \\(at: ");
                 Task event = new Event(description[0], description[1].substring(0, description[1].length() - 1));
                 if (isDone == '1') {
                     event.updateIsDone();
@@ -60,7 +62,7 @@ public class Storage {
                 break;
             }
             case 'D': {
-                String[] description = userData.substring(8).split(" \\(by: ");
+                String[] description = userData.substring(7).split(" \\(by: ");
                 Task deadline = new Deadline(description[0], description[1].substring(0, description[1].length() - 1));
                 if (isDone == '1') {
                     deadline.updateIsDone();
@@ -70,6 +72,7 @@ public class Storage {
             }
             }
         }
+         System.out.println(tasks);
         return tasks;
     }
 

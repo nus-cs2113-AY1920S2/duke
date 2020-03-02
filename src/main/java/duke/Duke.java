@@ -20,6 +20,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage("output.txt");
         try {
+
             tasks = new TaskList(storage.getData());
         } catch (FileNotFoundException err) {
             ui.errorMessage(err.toString());
