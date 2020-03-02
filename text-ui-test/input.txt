@@ -1,23 +1,24 @@
 list
 todo read book
 list
-deadline return book /by 2020-10-06 19:30
+deadline return book /by June 6th
 list
-event project meeting /at 2021-05-29 03:20
+event project meeting /at Aug 6th 2-4pm
 list
 done 1
 list
 done 3
 list
 todo join sports club
-event exams /at 2020-05-03 16:00
-deadline do homework /by 2020-04-25 11:45
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
 list
-done 6
+done 7
 list
 done 4
 list
-delete 6
+delete 7
 find book
 find everything
 find

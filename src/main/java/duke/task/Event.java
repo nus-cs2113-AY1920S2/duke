@@ -1,9 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * The Event class is a Task with specified description and date of occurrence.
  * Event class extends from Task class.
@@ -11,21 +7,16 @@ import java.time.format.DateTimeFormatter;
  * @version CS2113 AY19/20 Sem 2 Duke
  */
 public class Event extends Task {
-    String dateTime;
-    LocalDate date;
-    LocalTime time;
-
+    String date;
 
     /**
      * Public constructor for Event.
      * @param description Description of the Event Task.
-     * @param dateTime Date of occurrence and time of the Event Task.
+     * @param date Date of occurrence of the Event Task.
      */
-    public Event(String description, String dateTime) {
+    public Event(String description, String date) {
         super(description);
-        this.dateTime = dateTime;
-        date = LocalDate.parse(dateTime.split(" ")[0]);
-        time = LocalTime.parse(dateTime.split(" ")[1]);
+        this.date = date;
     }
 
     /**
@@ -33,22 +24,14 @@ public class Event extends Task {
      * @return Date of occurrence.
      */
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
-    /**
-     * Getter method for the time of occurrence.
-     * @return Time of occurrence.
-     */
-    public String getTime() {
-        return this.time.toString();
+        return this.date;
     }
 
     /**
      * Return a String representation of this Event.
-     * @return The Event's icon, followed by the Task's toString, followed by the date and time of occurrence.
+     * @return The Event's icon, followed by the Task's toString, followed by the date of occurrence.
      */
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getDate() + ", " + getTime() + ")";
+        return "[E]" + super.toString() + " (at: " + this.date + ")";
     }
 }
