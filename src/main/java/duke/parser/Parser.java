@@ -18,6 +18,7 @@ public class Parser {
 
     public Parser(TaskList taskList){
         userInput = new Scanner(System.in);
+        this.ui = new Ui(taskList);
         this.taskList = taskList;
     }
 
@@ -29,13 +30,12 @@ public class Parser {
     }
 
     public void doUserCommand(String userResponse){
-        // INSERT LINE SEPARATOR
         String action = userResponse.split(" ")[0];
         String restOfUserInput = userResponse.replace(action, "").trim();
-
+        ui.printLineSeparator();
         try {
             if(action.equals("bye")){
-                taskList.bye();
+                ui.goodbye();
             } else if(action.equals("list")){
                 taskList.listTasks();
             } else if(action.equals("done")){
@@ -56,7 +56,7 @@ public class Parser {
         } catch (DukeException e) {
             ui.invalidCommand();
         }
-        // INSERT LINE SEPARATOR
+        ui.printLineSeparator();
     }
 
 

@@ -39,6 +39,7 @@ public class Ui {
     public void goodbye() {
         System.out.println("Bye. Hope to see you again soon!");
         printLineSeparator();
+        System.exit(0);
     }
 
     // Prints out error loading message
@@ -56,8 +57,6 @@ public class Ui {
 
     // Prints error invalid command message
     public void invalidCommand(){
-        printLineSeparator();
         System.out.println("Invalid command. Please try again! ");
-        printLineSeparator();
     }
 }

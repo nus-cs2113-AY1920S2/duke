@@ -5,4 +5,9 @@ package duke.Exception;
  * of the Exception class for Java.
  */
 public class DukeException extends Exception{
+
+    public DukeException(){
+        super();
+    }
+
 }

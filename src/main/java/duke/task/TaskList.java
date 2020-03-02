@@ -42,97 +42,96 @@ public class TaskList {
 
     // Executes the todo command
     public void todo(String command) throws DukeException{
-        ui.printLineSeparator();
         if(command.isEmpty()){
             throw new DukeException();
         } else {
             Task t = new Todo(command);
             addTask(t);
-            ui.printLineSeparator();
         }
     }
 
     // Executes the deadline command
-    public void deadline(String command) {
-        ui.printLineSeparator();
-        String task = command.split(" /by ")[0];
-        String by = command.split(" /by ")[1];
-        Task d = new Deadline(task, by);
-        addTask(d);
-        ui.printLineSeparator();
+    public void deadline(String command) throws DukeException{
+        if(command.isEmpty()){
+            throw new DukeException();
+        } else {
+            String task = command.split(" /by ")[0];
+            String by = command.split(" /by ")[1];
+            Task d = new Deadline(task, by);
+            addTask(d);
+        }
     }
 
     // Executes the event command
-    public void event(String command){
-        ui.printLineSeparator();
-        String task = command.split(" /at ")[0];
-        String at = command.split(" /at ")[1];
-        Task e = new Event(task, at);
-        addTask(e);
-        ui.printLineSeparator();
+    public void event(String command) throws DukeException{
+        if(command.isEmpty()){
+            throw new DukeException();
+        } else {
+            String task = command.split(" /at ")[0];
+            String at = command.split(" /at ")[1];
+            Task e = new Event(task, at);
+            addTask(e);
+        }
     }
 
     // Executes the delete command
-    public void delete(String command){
-        ui.printLineSeparator();
-        int taskNum = Integer.parseInt(command) - 1;
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(taskNum));
-        tasks.remove(tasks.get(taskNum));
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        storage.save();
-        ui.printLineSeparator();
+    public void delete(String command) throws DukeException {
+        if (command.isEmpty()) {
+            throw new DukeException();
+        } else {
+            int taskNum = Integer.parseInt(command) - 1;
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(tasks.get(taskNum));
+            tasks.remove(tasks.get(taskNum));
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            storage.save();
+        }
     }
 
    // Executes the list command
     public void listTasks() {
-        ui.printLineSeparator();
         System.out.println("Here are the tasks in your list:");
         int taskCounter = 1;
         for(Task t: tasks) {
             System.out.println((taskCounter) + "." + t);
             taskCounter++;
         }
-        ui.printLineSeparator();
     }
 
     // Executes the done command
-    public void done(String command) {
-        ui.printLineSeparator();
-        int taskNum = Integer.parseInt(command) - 1;
-        tasks.get(taskNum).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.get(taskNum));
-        storage.save();
-        ui.printLineSeparator();
+    public void done(String command) throws DukeException{
+        if(command.isEmpty()){
+            throw new DukeException();
+        } else {
+            int taskNum = Integer.parseInt(command) - 1;
+            tasks.get(taskNum).markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(tasks.get(taskNum));
+            storage.save();
+        }
 
     }
 
     // Executes the find command
-    public void find(String command){
-        ui.printLineSeparator();
-
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        String search = command.trim().toLowerCase();
-        for(Task t: tasks) {
-            String taskDescription = t.description.trim().toLowerCase();
-            if(taskDescription.contains(search)){
-                foundTasks.add(t);
+    public void find(String command) throws DukeException {
+        if (command.isEmpty()) {
+            throw new DukeException();
+        } else {
+            ArrayList<Task> foundTasks = new ArrayList<>();
+            String search = command.trim().toLowerCase();
+            for (Task t : tasks) {
+                String taskDescription = t.description.trim().toLowerCase();
+                if (taskDescription.contains(search)) {
+                    foundTasks.add(t);
+                }
+            }
+            System.out.println("Here are the matching tasks in your list:");
+            int taskNum = 1;
+            for (Task t : foundTasks) {
+                System.out.println((taskNum) + "." + t);
+                taskNum++;
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
-        int taskNum = 1;
-        for(Task t: foundTasks) {
-            System.out.println((taskNum) + "." + t);
-            taskNum++;
-        }
-        ui.printLineSeparator();
-    }
-
-    // Executes the bye command
-    public void bye(){
-        ui.goodbye();
-        System.exit(0);
     }
 
 }
