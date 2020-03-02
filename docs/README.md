@@ -43,6 +43,10 @@ Input: find j
 Example: find Homework  
 Command: Find all the task with description that contains the word/phrase j.
 
+1. Help  
+Input: help  
+Command: List out all the commands
+
 1. Exit  
 Input: bye  
 Command: Terminate the program and automatically help you store the Task into your hard disk with directory ../data/Duke.txt  
@@ -52,11 +56,12 @@ Command: Terminate the program and automatically help you store the Task into yo
 
 | Index | Input | Command |  
 | ----- | ----- | --------------- |  
-| 01 | list | List out all the stored task |  
-| 02 | done index | Mark task index as done |  
-| 03 | bye | Terminate the program and store all Task into hard disk |  
-| 04 | todo description | Add a todo task with description |  
-| 05 | dateline description /by YYYY-MM-DD HH:MM | Add a deadline task description and due date |  
-| 06 | event description /at YYYY-MM-DD HH:MM | Add a event task description and due date |  
-| 07 | delete index | Delete task index |  
-| 08 | find description | Find all task containing the description |  
+| 01 | todo description | Add a todo task with description |  
+| 02 | dateline description /by YYYY-MM-DD HH:MM | Add a deadline task description and due date |  
+| 03 | event description /at YYYY-MM-DD HH:MM | Add a event task description and due date |  
+| 04 | list | List out all the stored task |  
+| 05 | done index | Mark task index as done |  
+| 06 | delete index | Delete task index |  
+| 07 | find description | Find all task containing the description |  
+| 08 | help | List out all the commands |  
+| 09 | bye | Terminate the program and store all Task into hard disk |  
