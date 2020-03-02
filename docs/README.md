@@ -57,6 +57,6 @@ Command: Terminate the program and automatically help you store the Task into yo
 | 03 | bye | Terminate the program and store all Task into hard disk |  
 | 04 | todo description | Add a todo task with description |  
 | 05 | dateline description /by YYYY-MM-DD HH:MM | Add a deadline task description and due date |  
-| 06 | event description /by YYYY-MM-DD HH:MM | Add a event task description and due date |  
+| 06 | event description /at YYYY-MM-DD HH:MM | Add a event task description and due date |  
 | 07 | delete index | Delete task index |  
 | 08 | find description | Find all task containing the description |  
