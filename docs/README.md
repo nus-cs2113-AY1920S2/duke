@@ -12,7 +12,7 @@ By: `Wang Qin` Since: `Feb 2019`
     + [3.4. Deleting a task:](#delete) `delete`
     + [3.5. Delete all tasks in the Kuri task list](#clear) `clear`
     + [3.6. Complete a task:](#complete) `done`
-    + [3.7. Clear the screen:](#clear) `clear`
+    + [3.7. Clear the screen:](#clr) `clr`
     + [3.8. List all possible functions:](#help) `help`
     + [3.9. Save task list to Json:](#save_json) `save_json`
     + [3.10. Exiting the program:](#exit) `bye`
@@ -126,7 +126,7 @@ Deletes a specified task from Duke.
     * The index must be a positive number 1,2,3,...
 ```
 
-<a name="filter"></a>
+<a name="clear"></a>
 
 ### 3.5 Delete all tasks in the Kuri task list: `clear`
 Filters tasks based on a given DATE.
@@ -147,7 +147,7 @@ Marks a task as completed at the specified INDEX.
 * The index refers to the index number shown on the displayed task list.
 * The index must be a positive number 1,2,3,..
 ```
-<a name="exit"></a>
+<a name="clr"></a>
 
 ### 3.7 Clear the screen: `clr`
 
@@ -156,7 +156,7 @@ Clear the screen.
 **Format**: `clr`
 
 
-<a name="exit"></a>
+<a name="help"></a>
 
 ### 3.8. List all possible functions: `help`
 
@@ -166,7 +166,7 @@ An interesting fact is not only `help` can make `Kuri` list all possible functio
 **Format**: `help`
 
 
-<a name="exit"></a>
+<a name="save_json"></a>
 
 ### 3.9. Save task list to Json: `save_json`
 
