@@ -11,12 +11,21 @@ import duke.task.Todo;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class Duke {
+
+    public static final String FILE_PATH = "data/duke.txt";
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
-        //Task[] tasks = new Task[100];
-        int taskCount = 0;
+        int taskCount = getFileTask(FILE_PATH, tasks, 0);
         boolean isBye = false;
         Scanner sc = new Scanner(System.in);
         greetUser();
@@ -34,7 +43,7 @@ public class Duke {
                     doneCommand(tasks, stringSplit, taskCount);
                     break;
                 case "bye":
-                    isBye = byeCommand(stringSplit);
+                    isBye = byeCommand(stringSplit, taskCount, tasks);
                     break;
                 case "todo":
                     taskCount = todoCommand(tasks, stringSplit, taskCount);
@@ -58,9 +67,45 @@ public class Duke {
                 commandList();
             } catch (NumberFormatException e) {
                 System.out.println("     \u2639 OOPS!!! " + e.getMessage().substring(18) + " is not number!");
+            } catch (FileNotFoundException e) {
+                System.out.println("Folder does not exist yet" + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             } finally {
                 System.out.println("    ____________________________________________________________");
             }
+        }
+    }
+
+    public static void writeFileTask(String filePath, String taskToAdd) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(taskToAdd);
+        fileWriter.close();
+    }
+
+    public static int getFileTask(String filePath, ArrayList<Task> tasks, int taskCount) {
+        try {
+            File file = new File(filePath); // create a File for the given file path
+            Scanner fileScanner = new Scanner(file); // create a Scanner using the File as the source
+            while (fileScanner.hasNext()) {
+                String[] existingTask = fileScanner.nextLine().split(" \\| ");
+                if (existingTask[0].equals("T")) {
+                    tasks.add(new Todo(existingTask[2]));
+                }
+                if (existingTask[0].equals("D")) {
+                    tasks.add(new Deadline(existingTask[2], existingTask[3]));
+                }
+                if (existingTask[0].equals("E")) {
+                    tasks.add(new Event(existingTask[2], existingTask[3]));
+                }
+                if (existingTask[1].equals("1")) {
+                    tasks.get(taskCount).markAsDone();
+                }
+                taskCount++;
+            }
+            return taskCount;
+        } catch (FileNotFoundException e) {
+            return taskCount;
         }
     }
 
@@ -140,11 +185,35 @@ public class Duke {
         return taskCount;
     }
 
-    public static boolean byeCommand(String[] stringSplit) throws DukeArgumentException {
+    public static boolean byeCommand(String[] stringSplit, int taskCount, ArrayList<Task> tasks) throws
+            DukeArgumentException, IOException {
         if (stringSplit.length > 1) {
             throw new DukeArgumentException("     \u2639 OOPS!!! Description not required for bye.");
         }
-
+        Path path = Paths.get("data");
+        if(!Files.exists(path)) {
+            Files.createDirectory(path);
+        }
+        String taskToAdd = "";
+        for (int i = 0; i < taskCount; i++) {
+            if ( tasks.get(i) instanceof Todo) {
+                Todo todo = (Todo) tasks.get(i);
+                taskToAdd = taskToAdd + "T | " + (todo.getIsDone() ? 1 : 0) + " | ";
+                taskToAdd = taskToAdd + todo.getDescription();
+            }
+            if ( tasks.get(i) instanceof Deadline) {
+                Deadline deadline = (Deadline) tasks.get(i);
+                taskToAdd = taskToAdd + "D | " + (deadline.getIsDone() ? 1 : 0) + " | ";
+                taskToAdd = taskToAdd + deadline.getDescription() + " | " + deadline.getDate();
+            }
+            if ( tasks.get(i) instanceof Event) {
+                Event event = (Event) tasks.get(i);
+                taskToAdd = taskToAdd + "E | " + (event.getIsDone() ? 1 : 0) + " | ";
+                taskToAdd = taskToAdd + event.getDescription() + " | " + event.getDate();
+            }
+            taskToAdd += "\n";
+        }
+        writeFileTask(FILE_PATH, taskToAdd);
         System.out.println("    Bye. Hope to see you again soon!");
         return true;
     }
