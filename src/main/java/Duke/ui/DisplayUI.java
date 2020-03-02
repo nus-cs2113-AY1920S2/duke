@@ -28,6 +28,7 @@ public class DisplayUI {
                                              + "|   event      |                Create an event task                | (eg. event Meeting /at Library, 12PM) |\n"
                                              + "|   list       |                List all the task in your planner   |                                       |\n"
                                              + "|   done       |                Mark a task as completed            |                                       |\n"
+                                             + "|   find       |                Find task with keyword              |(eg. find book)                        |\n"
                                              + "|   bye        |                Exit Planner                        |                                       |\n"
                                              + "|______________|____________________________________________________|_______________________________________|\n"
                                              + "LEGEND:   [O] ---- DONE | [X] ---- NOT DONE \n"
@@ -41,6 +42,11 @@ public class DisplayUI {
                 DIVIDER,
                 MESSAGE_WELCOME,
                 DIVIDER,
+                FUNCTION_LIST);
+    }
+
+    public void showFunctionList(){
+        printToUser(
                 FUNCTION_LIST);
     }
 

@@ -212,6 +212,10 @@ public class Duke {
                             System.out.println("____________________________________________________________");
                         }
                         break;
+                    case "help":
+                        DisplayUI ui = new DisplayUI();
+                        ui.showFunctionList();
+                        break;
 
                     default:
                         System.out.println("Please key in a valid function"); //loop till valid function entered
