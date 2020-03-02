@@ -12,7 +12,10 @@ public class Ui {
      */
     public static void printHelp() {
         String commandList =
-            "Commands: "
+            "Legend:\n"
+            + "[Y]: Task is completed\n"
+            + "[N]: Task is not completed\n\n"
+            + "Commands: "
             + "Exit: Exits program \nUsage: bye\n\n"
             + "List: Lists all recorded tasks \nUsage: list\n\n"
             + "Done: Mark task as completed \nUsage: done <task number>\n\n"

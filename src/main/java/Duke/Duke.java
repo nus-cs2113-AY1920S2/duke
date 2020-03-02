@@ -4,9 +4,12 @@ import Command.Command;
 import Storage.Storage;
 import Task.TaskList;
 import UI.Ui;
-
 import Parser.Parser;
 
+/**
+ * The Duke program implements an application that simulates is a task scheduler
+ * It allow the saving of tasks to a file and reloading of data when application starts
+ */
 public class Duke {
 
     private Storage storage;
@@ -14,18 +17,14 @@ public class Duke {
     private Ui ui;
 
     /**
-     * The Duke program implements an application that simulates is a task scheduler
-     * It allow the saving of tasks to a file and reloading of data when application starts
+     * Main Duke constructor to set up required classes and check for data file
      */
-
     public Duke() {
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList();
-
         // search for folder, create if not found
         storage.checkFolderPath();
-
         // populate if data file is found
         if (storage.checkFileExists()) {
             storage.populateList(tasks);
@@ -63,6 +62,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().run();
     }
-
-
 }

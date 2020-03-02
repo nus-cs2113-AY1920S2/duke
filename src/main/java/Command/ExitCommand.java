@@ -17,6 +17,5 @@ public class ExitCommand extends Command {
     @Override
     public void execute() {
         System.out.println("LISA: Bye, hope to see you again!");
-        // make use of the tasks and print out number of left over items
     }
 }

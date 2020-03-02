@@ -7,14 +7,19 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
 
-    public static final String TICK = "✓";
-    public static final String CROSS = "✘";
+    /*
+    Symbols do not work on windows
+    public static final char TICK = '\u2713';
+    public static final char CROSS = '\u2718';
+    */
+
+    public static final char TICK = 'Y'; //Yes
+    public static final char CROSS = 'N'; //No
 
     protected String description;
-    //protected String date;
     protected LocalDate date;
     protected boolean isDone;
-    protected Integer time;
+    protected String time;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -41,7 +46,7 @@ public abstract class Task {
         this.description = description;
         this.date = LocalDate.parse(date, formatter);
         this.isDone = false;
-        this.time = Integer.parseInt(time);
+        this.time = time;
     }
 
     public LocalDate getDate() {
@@ -57,7 +62,7 @@ public abstract class Task {
      *
      * @return tick for done, cross for not done
      */
-    public String getStatusIcon() {
+    public char getStatusIcon() {
         return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 
@@ -73,7 +78,7 @@ public abstract class Task {
         return null;
     }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 

@@ -38,7 +38,6 @@ public class AddCommand extends Command {
             switch (taskType) {
             case TASK_DEADLINE:
                 tasks.addDeadline(userInput, wordArrayLength);
-
                 break;
             case TASK_EVENT:
                 tasks.addEvent(userInput, wordArrayLength);
@@ -50,16 +49,15 @@ public class AddCommand extends Command {
                 System.out.println("[Error][New Task]: Keyword not recognised!\n");
                 System.out.println("Task types:\ntodo\nevent\ndeadline");
             }
-
         } catch (NoParameterException e) {
             System.out.println("[Error][New Task]: Missing parameters");
             System.out.println("Usage:\n{todo} <Details>\n{event or deadline} <Details> / <YYYY-MM-DD> HH");
         } catch (MissingParameterException | NullPointerException e) {
-            System.out.println("[Error][New Task] Missing Date or Time field");
+            System.out.println("[Error][New Task]: Missing Date or Time field");
         } catch (DateTimeParseException e) {
-            System.out.println("[Error][New Task] Wrong format for date\nPlease record in YYYY-DD-MM format");
+            System.out.println("[Error][New Task]: Wrong format for date\nPlease record in YYYY-DD-MM format");
         } catch (NumberFormatException e) {
-            System.out.println("[Error][New Task] time should be all numbers in 24Hr format: HHMM");
+            System.out.println("[Error][New Task]: time should be all numbers in 24Hr format: HHMM");
         }
     }
 }
