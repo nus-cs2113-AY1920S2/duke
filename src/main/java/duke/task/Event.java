@@ -1,18 +1,30 @@
 package duke.task;
 
-public class Event extends Task {
-    String date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String date) {
+public class Event extends Task {
+    String dateTime;
+    LocalDate date;
+    LocalTime time;
+
+    public Event(String description, String dateTime) {
         super(description);
-        this.date = date;
+        this.dateTime = dateTime;
+        date = LocalDate.parse(dateTime.split(" ")[0]);
+        time = LocalTime.parse(dateTime.split(" ")[1]);
     }
 
     public String getDate() {
-        return this.date;
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String getTime() {
+        return this.time.toString();
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date + ")";
+        return "[E]" + super.toString() + " (at: " + getDate() + ", " + getTime() + ")";
     }
 }

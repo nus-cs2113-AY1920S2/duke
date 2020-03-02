@@ -137,10 +137,10 @@ public class Duke {
         }
 
         String description;
-        String date;
+        String dateTime;
         description = string.substring(0, string.indexOf(" /at")).replace("event ", "");
-        date = string.substring(string.indexOf("/at ")).replace("/at ", "");
-        tasks.add(new Event(description, date));
+        dateTime = string.substring(string.indexOf("/at ")).replace("/at ", "");
+        tasks.add(new Event(description, dateTime));
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + tasks.get(taskCount).toString());
         taskCount++;
@@ -158,10 +158,11 @@ public class Duke {
         }
 
         String description;
-        String date;
+        String dateTime;
         description = string.substring(0, string.indexOf(" /by")).replace("deadline ", "");
-        date = string.substring(string.indexOf("/by ")).replace("/by ", "");
-        tasks.add(new Deadline(description, date));
+        dateTime = string.substring(string.indexOf("/by ")).replace("/by ", "");
+
+        tasks.add(new Deadline(description, dateTime));
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + tasks.get(taskCount).toString());
         taskCount++;
