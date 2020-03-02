@@ -13,17 +13,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class that manages duke.storage of duke.Duke data in local duke.storage.
+ */
 public class Storage {
     private String filePath;
     private ArrayList<Task> tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Storage object that contains duke.tasks and duke.storage related operations.
+     * Mainly save duke.tasks and get duke.tasks.
+     *
+     * @param filePath The filepath to the txt file.
+     * @param ui The user interface displaying events on the task list.
+     */
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
         read();
     }
 
+    /**
+     * Reads duke.tasks from filepath. Creates empty duke.tasks if file cannot be read.
+     */
     private void read() {
         ArrayList<Task> newTasks = new ArrayList<>();
         try {
@@ -39,11 +52,15 @@ public class Storage {
             }
             s.close();
         } catch (DukeException | FileNotFoundException e) {
-            Ui.displayError(e.getMessage());
+            Ui.displayError(ErrorMessage.FILE_NOT_FOUND);
+            Ui.displayError(ErrorMessage.NEW_FILE_CREATED);
         }
         tasks = newTasks;
     }
 
+    /**
+     * Writes the duke.tasks into a file of the given filepath.
+     */
     public void write() {
         try {
             FileWriter writer = new FileWriter(filePath);
@@ -51,13 +68,14 @@ public class Storage {
                 writer.write(ParserStorage.toStorageString(task) + "\n");
             }
             writer.close();
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             Ui.displayError(ErrorMessage.FILE_NOT_SAVE);
-        } catch (DukeException e) {
-            Ui.displayError(e.getMessage());
         }
     }
 
+    /**
+     * Retrieves the existing tasks
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

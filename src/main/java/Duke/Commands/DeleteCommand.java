@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     public void execute(Ui ui, Storage storage) throws DukeException {
         try {
             Task task = storage.getTasks().remove(index);
-            Ui.displayDeleteTask(task);
+            Ui.displayDeletedTask(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ErrorMessage.OUT_OF_BOUNDS);
         }

@@ -5,7 +5,6 @@ import Duke.Exception.DukeException;
 import Duke.Storage.Storage;
 import Duke.Ui.Ui;
 
-
 /**
  * Class representing a command to add a new task.
  * Types of task that can be created - Todo, Deadline, Event
@@ -32,7 +31,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws DukeException {
         storage.getTasks().add(task);
-        Ui.displayAddTask(task);
+        Ui.displayAddedTask(task);
         storage.write();
     }
 }

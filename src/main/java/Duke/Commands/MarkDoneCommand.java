@@ -10,8 +10,8 @@ import Duke.Ui.Ui;
  * Class representing a command to mark an existing task.
  */
 public class MarkDoneCommand extends Command {
-    private int index;
 
+    private int index;
     /**
      * Creates a new MarkDoneCommand with the given task.
      *
@@ -30,8 +30,12 @@ public class MarkDoneCommand extends Command {
     public void execute(Ui ui, Storage storage) throws DukeException {
         try {
             Task task = storage.getTasks().get(index);
-            task.setDone(true);
-            ui.displayMarkDone(task);
+            if (!task.isDone()) {
+                task.setDone(true);
+                ui.displayMarkDone(task);
+            } else {
+                ui.displayDone(task);
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ErrorMessage.OUT_OF_BOUNDS);
         }
