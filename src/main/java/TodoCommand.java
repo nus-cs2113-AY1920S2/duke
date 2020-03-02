@@ -1,5 +1,20 @@
+/**
+ * Extends from Command. Gives instructions on how to proceed when a ToDo task is added.
+ */
+
 public class TodoCommand extends Command {
+
+    /**
+     * Creates a new ToDo task as requested by the user.
+     */
+
     private ToDo todo;
+
+    /**
+     * Constructor for TodoCommand.
+     * @param command the command that the user typed in.
+     * @throws IndexOutOfBoundsException throws IndexOutOfBoundsException when there are invalid arguments.
+     */
 
     public TodoCommand(String command) throws IndexOutOfBoundsException {
         super(command);
@@ -8,9 +23,3 @@ public class TodoCommand extends Command {
         Duke.tasks.add(todo);
     }
 }
-
-
-/*
-Task task = new ToDo(userInput.substring(5));
-            tasks.add(task);
- */
