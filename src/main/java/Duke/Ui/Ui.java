@@ -38,12 +38,20 @@ public class Ui {
         System.out.println(MESSAGE_EXIT);
     }
 
+    public static final void displayMarkDone(Task task) {
+        System.out.println(MESSAGE_MARK + task);
+    }
+
     public static final void displayHelpMenu() {
         System.out.println(COMMAND_HELP_DESC);
     }
 
     public static final void displayNumberOfTasks(ArrayList TaskList) {
         System.out.print("\tNow you have " + TaskList.size() + " tasks in the list.\n");
+    }
+
+    public void displayDone(Task task) {
+        System.out.println("It is already marked!");
     }
 
     public static void displaySearchResults(ArrayList TaskList) {
@@ -83,7 +91,6 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void displayMarkDone(Task task) {
-        System.out.print(MESSAGE_MARK + task);
-    }
+
+
 }

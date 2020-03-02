@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public class FindCommand extends Command {
 
-    // keyword to be search
     private String keyword;
     /**
      * Creates a new FindCommand with the given keyword.

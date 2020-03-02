@@ -39,7 +39,7 @@ public class ParserUtil {
         if (eventDetails[0].strip().isEmpty()) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
-        return new Event(eventDetails[1].strip(), eventDetails[1].strip());
+        return new Event(eventDetails[0].strip(), eventDetails[1].strip());
     }
 
 

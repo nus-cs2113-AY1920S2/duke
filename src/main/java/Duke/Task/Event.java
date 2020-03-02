@@ -3,10 +3,10 @@ package Duke.Task;
  * Class representing an Event Task.
  */
 public class Event extends Task {
-    protected String by;
-    public Event(String description, String by)  {
+    protected String event;
+    public Event(String description, String event)  {
         super(description);
-        this.by = by;
+        this.event = event;
     }
     public String getEvent(){
         return description;
@@ -14,9 +14,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (by.equals("")) {
+        if (event.equals("")) {
             return "[E]" + super.toString();
         }
-        return "[E]" + super.toString() + "( at: " + by + " )";
+        return "[E]" + super.toString() + "( at: " + event + " )";
     }
 }
