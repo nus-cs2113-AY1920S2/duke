@@ -134,6 +134,7 @@ ____________________________________________________________
 - Saving the state of the task list is done automatically when the program is exited using the ```bye`` command.
 - Format: ```bye```
 - Expected Output:
+
 ```
 bye
 Bye. Hope to see you again soon!
