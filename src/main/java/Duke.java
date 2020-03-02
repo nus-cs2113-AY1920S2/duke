@@ -22,12 +22,12 @@ public class Duke {
         ui = new Ui(taskLists);
         storage = new Storage(taskLists);
         parser = new Parser(taskLists);
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (DukeException e ) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
+        try {
+            taskLists = new TaskList(storage.load());
+        } catch (DukeException e ) {
+            ui.showLoadingError();
+            taskLists = new TaskList();
+        }
     }
 
     public void run() {

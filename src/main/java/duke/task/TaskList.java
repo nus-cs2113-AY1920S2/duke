@@ -23,6 +23,11 @@ public class TaskList {
         this.storage = new Storage(this);
     }
 
+    // Constructor that takes in loaded task message
+    public TaskList(ArrayList<Task> taskList){
+        this.tasks = taskList;
+    }
+
     //Helper function to get size of taskList
     public Integer size(){
         return tasks.size();
