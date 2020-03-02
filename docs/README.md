@@ -5,7 +5,7 @@ Kesin chat bot allows users to easily organise their tasks.
 ## Table of Contents
 
 
-- [Requirements](https://github.com/itskesin/duke/tree/master/docs#quick-start)
+- [Quick Start](https://github.com/itskesin/duke/tree/master/docs#quick-start)
 - [Features](https://github.com/itskesin/duke/tree/master/docs#features)
     
     - [Add a new task](https://github.com/itskesin/duke/tree/master/docs#add-a-new-task)
@@ -16,10 +16,14 @@ Kesin chat bot allows users to easily organise their tasks.
     - [Save and Exit](https://github.com/itskesin/duke/tree/master/docs#save-and-exit)
 
 ## Quick Start 
-    1. Ensure 'Java 11' or later is installed on the computer
-    2. Download [DUKE v0.2](https://github.com/itskesin/duke/releases)
-    3. Open the 'JAR file' download on the computer
-    4. Enter `java -jar IP.jar` to start up the program
+
+  1. Ensure `Java 11` or later is installed on the computer
+    
+  2. Download [DUKE v0.2](https://github.com/itskesin/duke/releases)
+    
+  3. Open the `JAR file` download on the computer
+    
+  4. Enter `java -jar IP.jar` to start up the program
 
 ## Features
 
@@ -151,7 +155,3 @@ Save the user input and quit the program.
 > ***Expected outcome:***
 > 
 >     Bye, [user name]. Hope to see you again soon!
-
-
-
-
