@@ -12,10 +12,10 @@ Other functions includes `list`,`delete`, `find` and mark task as `done`.
 2. `cd` to the folder which `Duke.jar`'s directory
 
 3. Type the following command to run `Duke.jar`
-    - For Window: `java -jar "Duke.jar"`
-    - For Mac: `java -jar Duke.jar`
+ ````
+ java -jar Duke.jar
+ ````
 <br><br>
-
 **Load and Save the Task List**
 - Duke will automatically load up duke.txt from designated file path upon program start up.
 
@@ -51,7 +51,7 @@ Example : <code>todo **CS Tutorial**</code>
 Outcome :  
 ````
 Got it . I've added this task:   
-  [T][✘] CS Tutorial   
+  [T][x] CS Tutorial   
 Now you have 1 tasks in the list. 
 ````
 ___
@@ -63,7 +63,7 @@ Example : <code>event **NUS open house** /at **28-02-2020 2pm**</code>
 Outcome :  
 ````
 Got it . I've added this task:
-  [E][✘] NUS open house (at: 28-02-2020 2pm)   
+  [E][x] NUS open house (at: 28-02-2020 2pm)   
 Now you have 2 tasks in the list. 
 ````
 ___
@@ -74,7 +74,7 @@ Example : <code>event **CS2113 iP** /by **02-03-2020 12pm**</code>
 Outcome :  
 ````
 Got it . I've added this task:
-  [D][✘] CS2113 iP (by: 02-03-2020 12pm)   
+  [D][x] CS2113 iP (by: 02-03-2020 12pm)   
 Now you have 3 tasks in the list. 
 ````
 ___
@@ -85,7 +85,7 @@ Example : done **2** /at **28-02-2020 2pm**</code>
 Outcome :  
 ````
 Nice! I've marked this task as done:
-  [E][✓] NUS open house (at: 28-02-2020 2pm)
+  [E][/] NUS open house (at: 28-02-2020 2pm)
 ````
 ___
 ####`list` : Display all Saved Tasks
@@ -95,9 +95,9 @@ Example : <code>**list**</code>
 Outcome :  
 ````
 Here are the tasks in your list:
-1.[T][✘] CS Tutorial
-2.[E][✓] NUS open house (at: 28-02-2020 2pm)
-3.[D][✘] CS2113 iP (by: 02-03-2020 12pm)
+1.[T][x] CS Tutorial
+2.[E][/] NUS open house (at: 28-02-2020 2pm)
+3.[D][x] CS2113 iP (by: 02-03-2020 12pm)
 ````
 ___
 ####`delete` : Delete Task
@@ -107,7 +107,7 @@ Example : <code>delete **2**</code>
 Outcome :  
 ````
 Noted. I've removed this task:
-  [E][✓] NUS open house (at: 28-02-2020 2pm)  
+  [E][/] NUS open house (at: 28-02-2020 2pm)  
 Now you have 2 tasks in the list. 
 ````
 ___
@@ -118,8 +118,8 @@ Example : <code>find **cS**</code>
 Outcome :  
 ````
 Here are the matching tasks in your list:
-1.[T][✘] CS Tutorial
-2.[D][✘] CS2113 iP (by: 02-03-2020 12pm)
+1.[T][x] CS Tutorial
+2.[D][x] CS2113 iP (by: 02-03-2020 12pm)
 ````
 ___
 

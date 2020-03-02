@@ -16,7 +16,7 @@ import java.io.IOException;
  * in the specified file path.
  *
  * @author  Benny Chann
- * @version 1.0
+ * @version 0.2
  * @since   2020-03-02
  */
 public class Duke {
