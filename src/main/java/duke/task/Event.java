@@ -8,6 +8,10 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public String getDate() {
+        return this.date;
+    }
+
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date + ")";
     }
