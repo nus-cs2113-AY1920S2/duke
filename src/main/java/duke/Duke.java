@@ -57,6 +57,9 @@ public class Duke {
                 case "delete":
                     taskCount = deleteCommand(tasks, stringSplit, taskCount);
                     break;
+                case "find":
+                    findCommand(tasks, taskCount, string);
+                    break;
                 default:
                     throw new DukeNullException("     :( OOPS!!! Command does not exist.");
                 }
@@ -74,6 +77,30 @@ public class Duke {
             } finally {
                 System.out.println("    ____________________________________________________________");
             }
+        }
+    }
+
+    public static void findCommand(ArrayList<Task> tasks, int taskCount, String string) throws
+            DukeArgumentException {
+        int deletedTask;
+        if (string.length() == 4) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for find.");
+        }
+        String description = string.substring(5);
+        boolean containDescription = false;
+        int matchNumber = 1;
+        for (int i = 0; i < taskCount; i++) {
+            if (tasks.get(i).getDescription().contains(description)) {
+                if (!containDescription) {
+                    System.out.println("     Here are the matching tasks in your list:");
+                    containDescription = true;
+                }
+                System.out.println("     " + matchNumber + "." + tasks.get(i).toString());
+                matchNumber++;
+            }
+        }
+        if (!containDescription) {
+            System.out.println("     There is no matching tasks");
         }
     }
 
