@@ -12,6 +12,7 @@
     - [Mark as done: `done`](#done---marks-a-task-in-the-list-as-done)
     - [Find specific task: `find`](#find---finds-all-tasks-that-contains-keyword)
     - [Exit duke: `bye`](#bye---exits-the-application)
+<!-- TOC -->
 
 ## Introduction
 Duke is a personal task manager that assist the user to keep track of their schedule. Running on a command line interface,
