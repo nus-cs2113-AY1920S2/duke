@@ -1,8 +1,9 @@
-2
+mode 2
 todo read book
 event wash clothes /at tonight
 deadline push my repo /by Monday
-event something
+event write something
+deadline finish homework /by 2020-03-02
 haha blah
 list
 done 1
@@ -11,6 +12,5 @@ done 3
 done 4
 done
 list
-deadline improve code quality /by Tuseday
-list
+find homework
 Bye

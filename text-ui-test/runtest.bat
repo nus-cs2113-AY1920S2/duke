@@ -7,7 +7,7 @@ REM delete output from previous run
 del OUTPUT.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java ..\src\main\java\duke.exception\*.java ..\src\main\java\duke.task\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\exception\*.java ..\src\main\java\duke\task\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1

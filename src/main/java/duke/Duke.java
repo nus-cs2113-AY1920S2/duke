@@ -96,6 +96,7 @@ public class Duke {
      * Parse user's original input and check which type of command it belongs to.
      * Execute the command according to its type.
      * @param input user's input
+     * @param storage instance of Storage
      */
     private static void parseAndExecuteCommand(String input,Storage storage) {
         if(parser.isDoneCommand(input)){

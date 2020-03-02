@@ -1,30 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    Hello from
+     ____        _        
+    |  _ \ _   _| | _____ 
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
 
-________________________________
-Hello,I'm little pepper. Your personal sweetheart.
-What can I do for you? You can choose two model:
-1.echo mode
-2.command mode
-________________________________
+    ________________________________
+    Hello,I'm little pepper. Your personal sweetheart.
+    What can I do for you? You can choose two model:
+    1.echo mode
+    2.command mode
+    ________________________________
+    ________________________________
+    Now you are in command mode!
+    ________________________________
     ________________________________
     added: read book
-    Now you have 1 tasks in the list
+    Now there are totally 1 tasks in the list
     ________________________________
     ________________________________
     added: wash clothes
-    Now you have 2 tasks in the list
+    Now there are totally 2 tasks in the list
     ________________________________
     ________________________________
     added: push my repo
-    Now you have 3 tasks in the list
+    Now there are totally 3 tasks in the list
     ________________________________
     ________________________________
     Invalid input!!! Please use '/' to split task name and its time description
+    ________________________________
+    ________________________________
+    added: finish homework
+    Now there are totally 4 tasks in the list
     ________________________________
     ________________________________
     OOPS!!! I'm sorry, but I don't know what that means :-(
@@ -32,7 +39,8 @@ ________________________________
     ________________________________
     1.[T][¡Á] read book
     2.[E][¡Á] wash clothes (at: tonight)
-    3.[D][¡Á] push my repo (by: monday)
+    3.[D][¡Á] push my repo (by: Monday)
+    4.[D][¡Á] finish homework (by: Mar 02 2020)
     ________________________________
     ________________________________
     Congratulations! You have just finished this task:
@@ -44,29 +52,24 @@ ________________________________
     ________________________________
     ________________________________
     Congratulations! You have just finished this task:
-    [D][¡Ì] push my repo (by: monday)
+    [D][¡Ì] push my repo (by: Monday)
     ________________________________
     ________________________________
-    Reffered task doesn't exist!!!
-    There are totally 3 tasks in the taskList
+    Congratulations! You have just finished this task:
+    [D][¡Ì] finish homework (by: Mar 02 2020)
     ________________________________
     ________________________________
-    You have to point out which task to mark as done!!!
-    ________________________________
-    ________________________________
-    1.[T][¡Ì] read book
-    2.[E][¡Ì] wash clothes (at: tonight)
-    3.[D][¡Ì] push my repo (by: monday)
-    ________________________________
-    ________________________________
-    added: improve code quality
-    Now you have 4 tasks in the list
+    You have to point out clearly which task to mark as done or delete!!!
     ________________________________
     ________________________________
     1.[T][¡Ì] read book
     2.[E][¡Ì] wash clothes (at: tonight)
-    3.[D][¡Ì] push my repo (by: monday)
-    4.[D][¡Á] improve code quality (by: tuseday)
+    3.[D][¡Ì] push my repo (by: Monday)
+    4.[D][¡Ì] finish homework (by: Mar 02 2020)
+    ________________________________
+    ________________________________
+    Here are the matching tasks in your list:
+    1.[D][¡Ì] finish homework (by: Mar 02 2020)
     ________________________________
     ________________________________
     Don't leave me alone! Please come back soon!
