@@ -16,19 +16,31 @@ public class Parser {
     public static Ui ui;
     public static TaskList taskList;
 
+    /**
+     * Constructor for the Parser class
+     * @param taskList a pointer/reference to the tasklist
+     */
     public Parser(TaskList taskList){
         userInput = new Scanner(System.in);
         this.ui = new Ui(taskList);
         this.taskList = taskList;
     }
 
-    // Function that gets the response from the user
+
+    /**
+     * Returns a trimmed String representation of the response from the user
+     * @return trimmed String user response.
+     */
     public String getUserResponse(){
         String userResponse = userInput.nextLine();
         return userResponse.trim();
-
     }
 
+    /**
+     * Function that parses through the user response and tells the program which
+     * command it should execute.
+     * @param userResponse trimmed String of user response
+     */
     public void doUserCommand(String userResponse){
         String action = userResponse.split(" ")[0];
         String restOfUserInput = userResponse.replace(action, "").trim();
@@ -58,7 +70,6 @@ public class Parser {
         }
         ui.printLineSeparator();
     }
-
 
 }
 

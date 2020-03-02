@@ -6,6 +6,9 @@ package duke.Exception;
  */
 public class DukeException extends Exception{
 
+    /**
+     * Constructor for DukeException class
+     */
     public DukeException(){
         super();
     }

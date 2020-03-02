@@ -19,43 +19,62 @@ public class Ui {
 
     private TaskList taskList;
 
+    /**
+     * Constructor for the Ui class
+     * @param taskList reference/pointer to the taskList
+     */
     public Ui(TaskList taskList) {
         this.taskList = taskList;
-
     }
 
-    // Helper function for printing line separator
+    /**
+     * Represents a line that separates the user's response from the program's output
+     * Used for GUI purposes.
+     */
     public void printLineSeparator(){
         System.out.println(lineSeparator);
     }
 
-    // Prints out greeting for user
+    /**
+     * A function that prints out the initial greeting and logo for Duke
+     */
     public void greeting(){
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
         printLineSeparator();
     }
 
-    // Prints out goodbye message for user
+    /**
+     * A function that prints out the goodbye message when the user wants
+     * to exit the program.
+     */
     public void goodbye() {
         System.out.println("Bye. Hope to see you again soon!");
         printLineSeparator();
         System.exit(0);
     }
 
-    // Prints out error loading message
+    /**
+     * Function that prints out error message if unable to load tasks.
+     */
     public void showLoadingError(){
         System.out.println("Error loading from task list. Creating new task list.");
     }
 
-    // Function that prints task
+
+    /**
+     * Function that prints out the current task and that has been added into
+     * the taskList and the new size of the taskList.
+     * @param t the task that will be printed and added to taskList.
+     */
     public void printTask(Task t){
         System.out.println("Got it. I've added this task:");
         System.out.println(t);
         System.out.println("Now you have " + taskList.size() + " tasks in the list. ");
     }
 
-
-    // Prints error invalid command message
+    /**
+     * Function that prints out that the command the user typed is not valid
+     */
     public void invalidCommand(){
         System.out.println("Invalid command. Please try again! ");
     }

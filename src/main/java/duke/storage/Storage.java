@@ -27,6 +27,10 @@ public class Storage {
     public static File file;
     private static TaskList taskList;
 
+    /**
+     * The constructor for the Storage class
+     * @param taskList pointer to taskList for save/load functions
+     */
 
     public Storage(TaskList taskList){
         this.filePath = "./data/duke.txt";
@@ -34,7 +38,10 @@ public class Storage {
         this.taskList = taskList;
     }
 
-    // Helper function that turns content of Task into String
+    /**
+     * Helper function that turns all the tasks in taskList into String format
+     * @return string representation of all tasks
+     */
     public static String tasksToString(){
         StringBuilder taskString = new StringBuilder();
         for(int i = 0; i < taskList.size(); i++) {
@@ -43,7 +50,10 @@ public class Storage {
         return taskString.toString();
     }
 
-    // Function that saves tasks to files
+
+    /**
+     * Function that saves all tasks onto text file
+     */
     public void save(){
         File file = new File(fileDir);
         // create a directory if not made
@@ -63,7 +73,11 @@ public class Storage {
 
     }
 
-    // Function that loads tasks from file
+    /**
+     * Returns an ArrayList of tasks that is taken from the text file
+     * @return an ArrayList type Task
+     * @throws DukeException if unable to load contents from textfile
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> loadedTasks = new ArrayList<>();
         try {
