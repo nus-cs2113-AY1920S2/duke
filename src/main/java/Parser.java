@@ -2,18 +2,14 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    protected String fullCommand;
     protected String[] validCommands = {"todo", "deadline", "event", "done", "list", "delete", "bye"};
     protected static final String LIST_COMMAND = "list";
     protected static final String DONE_COMMAND = "done";
     protected static final String DELETE_COMMAND = "delete";
     protected static final String EXIT_COMMAND = "bye";
 
-    public Parser(String fullCommand) {
-        this.fullCommand = fullCommand;
-    }
-
-    public String getCommand () {
+    public String getCommand (String fullCommand) {
+        fullCommand.trim();
         String[] separatedCommand = fullCommand.split(" ", 2);
         return separatedCommand[0].toLowerCase();
     }
@@ -30,30 +26,32 @@ public class Parser {
         }
     }
 
-    public Command parse() {
-        String command = getCommand();
+    public Command parse(String fullCommand) {
+        String command = getCommand(fullCommand);
         try {
             checkValidCommand(command);
         } catch (DukeException e) {
             Ui.showInvalidCommandError();
         }
+        Command newCommand;
         switch (command) {
             case LIST_COMMAND:
-                return new ListCommand();
+                newCommand = new ListCommand();
             case DONE_COMMAND:
-                return new DoneCommand();
+                newCommand = new DoneCommand(fullCommand);
             case DELETE_COMMAND:
-                return new DeleteCommand();
+                newCommand = new DeleteCommand(fullCommand);
             case EXIT_COMMAND:
-                return new ExitCommand();
+                newCommand = new ExitCommand();
             default:
-                return new AddCommand(command);
+                newCommand = new AddCommand(command, fullCommand);
         }
+        return newCommand;
     }
 
 
 
-    public static void determineTask(String command, String taskDescription, ArrayList<Task> taskList) {
+    /*public static void determineTask(String command, String taskDescription, ArrayList<Task> taskList) {
         String action, date;
         try {
             checkMissingDescription(command, taskDescription, taskList);
@@ -68,7 +66,7 @@ public class Parser {
             return;
         }
 
-    }
+    }*/
 
 
 

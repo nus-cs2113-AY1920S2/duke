@@ -1,4 +1,9 @@
-package PACKAGE_NAME;
+public class ImproperDescriptionsException extends DukeException {
+    protected String command;
 
-public class EmptyActionDescriptionException {
+    public ImproperDescriptionsException(String command) {
+        this.command = command;
+    }
+
+    if (command)
 }

@@ -2,17 +2,8 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Ui {
-
-    protected static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-    protected static final String DIVIDER = "————————————————————————————————————————-———————";
-
     protected Scanner in;
-    protected static PrintStream out;
+    protected PrintStream out;
 
     public Ui(){
         this.in = new Scanner(System.in);
@@ -20,35 +11,44 @@ public class Ui {
     }
 
     public void showWelcome() {
-        out.println(DIVIDER + "\nHello I'm\n" + LOGO
-                + "\nWhat can I do for you?\n" + DIVIDER);
+        out.println(Messages.WELCOME_MESSAGE);
     }
 
     public void showGoodbye() {
-        out.println(DIVIDER + "\nBye. Hope to see you again soon!\n"
-                + DIVIDER);
+        out.println(Messages.GOODBYE_MESSAGE);
     }
 
     public String readCommand () {
-        out.println("Enter command: ");
+        out.println(Messages.MESSAGE_ENTER_COMMAND);
         String line = in.nextLine();
         return line;
     }
 
     public void showLine () {
-        out.println(DIVIDER);
+        out.println(Messages.DIVIDER);
     }
 
-    public void showError(String message) {
-        out.println("Something went wrong: " + message);
+    public void showError(String errorMessage) {
+        out.println(Messages.MESSAGE_UNKNOWN_ERROR + errorMessage);
     }
 
     public void showLoadingError() {
-        out.println("File not found");
+        out.println(Messages.MESSAGE_LOAD_ERROR);
     }
 
     public static void showInvalidCommandError() {
-        out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        out.println(Messages.MESSAGE_INVALID_COMMAND);
     }
+
+    /*public static void showExecutionSuccess(String s) {
+        out.println(s);
+    }
+
+    public static void showInvalidDescriptionError(String s) {
+        out.println(s);
+    }*/
+
+
+
 
 }

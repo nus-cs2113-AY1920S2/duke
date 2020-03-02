@@ -27,4 +27,11 @@ public class TaskList {
     public static Task fetchTask(int i) {
         return taskList.get(i);
     }
+
+    public static String checkSingular() {
+        if (getSize() == 1) {
+            return "";
+        }
+        return "s";
+    }
 }

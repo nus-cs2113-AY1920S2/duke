@@ -2,13 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
 
-    protected String filepath;
+    protected static String filepath;
     protected static final String FILE_DIVIDER = "|";
     protected static final int TASK_TYPE_PART = 0;
     protected static final int TASK_DONE_PART = 1;
@@ -39,7 +37,7 @@ public class Storage {
         return t;
     }
 
-    public void load(ArrayList<Task> taskList) throws FileNotFoundException {
+    public void load() throws FileNotFoundException {
         File f = new File(filepath);
         try {
             f.createNewFile();
@@ -50,7 +48,7 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.nextLine();
             Task t = createTask(line);
-            taskList.add(t);
+            TaskList.addTask(t);
         }
     }
 
@@ -74,7 +72,7 @@ public class Storage {
         return t.date;
     }
 
-    public String getLineInSavedFile (Task t) {
+    public String getLineInSavedFile(Task t) {
         String lineInSavedFile;
         lineInSavedFile = getTaskType(t) + FILE_DIVIDER + getTaskComplete(t)
                 + FILE_DIVIDER + getAction(t);
@@ -85,26 +83,26 @@ public class Storage {
         return lineInSavedFile;
     }
 
-    public void saveEmptyFile () throws IOException {
+    public void saveEmptyFile() throws IOException {
         FileWriter fw = new FileWriter(filepath);
         fw.write("");
         fw.close();
     }
 
     //save taskList to text file before end program
-    public void save (ArrayList<Task> taskList) throws IOException {
-        if (taskList.isEmpty()) {
+    public void save() throws IOException {
+        if (TaskList.getSize() == 0) {
             saveEmptyFile();
             return;
         }
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < TaskList.getSize(); i++) {
             FileWriter fw;
             if (i == 0) {
                 fw = new FileWriter(filepath);
             } else {
                 fw = new FileWriter(filepath, true);
             }
-            String lineInTextFile = getLineInSavedFile(taskList.get(i));
+            String lineInTextFile = getLineInSavedFile(TaskList.fetchTask(i));
             fw.write(lineInTextFile);
             fw.close();
         }

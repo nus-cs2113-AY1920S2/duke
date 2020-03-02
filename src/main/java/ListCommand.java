@@ -1,9 +1,10 @@
 import java.text.MessageFormat;
 
-public class ListCommand extends Command {
+public abstract class ListCommand extends Command {
 
     protected static final String EMPTY_LIST_MESSAGE = "There is nothing on the list.";
     protected static final String LIST_HEADER_MESSAGE = "Here are the tasks in your list: ";
+
 
     public String displayTask (int i, Task t) {
         int number = i + 1;
