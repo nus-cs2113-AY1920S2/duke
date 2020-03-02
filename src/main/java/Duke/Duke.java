@@ -3,6 +3,7 @@ package duke;
 import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
+
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.WhitespaceExceptions;
 import duke.taskManager.Deadline;
@@ -10,19 +11,26 @@ import duke.taskManager.Events;
 import duke.taskManager.Task;
 import duke.taskManager.Todo;
 import duke.ui.*;
+
 import java.util.ArrayList;
 import java.nio.file.*;
 import java.io.BufferedReader;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
-    private static int size = 0;
+
+    public static void main(String[] args) throws IOException {
+
+        importTaskFromFile();
+        programStart();
+        loopTillEnd();
+    }
 
     //Importing of all task from Tasklist.txt to program when first launch
-    public Duke() {
+    private static void importTaskFromFile() {
         try {
             Path path = Paths.get("data");
-            if(!Files.exists(path)) {
+            if (!Files.exists(path)) {
                 Files.createDirectory(path);
                 File f = new File("data/Tasklist.txt");
             } else {
@@ -34,22 +42,22 @@ public class Duke {
                     switch (singleTaskDescriptions[0]) {
                         case "T":
                             addtask(new Todo(singleTaskDescriptions[2]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
+                            if (Integer.parseInt(singleTaskDescriptions[1]) == 1) {
+                                tasks.get(tasks.size() - 1).importDone();
                             }
                             break;
 
                         case "D":
                             addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
+                            if (Integer.parseInt(singleTaskDescriptions[1]) == 1) {
+                                tasks.get(tasks.size() - 1).importDone();
                             }
                             break;
 
                         case "E":
                             addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if(Integer.parseInt(singleTaskDescriptions[1]) == 1){
-                                tasks.get(size - 1).importDone();
+                            if (Integer.parseInt(singleTaskDescriptions[1]) == 1) {
+                                tasks.get(tasks.size() - 1).importDone();
                             }
                             break;
                     }
@@ -60,11 +68,6 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        programStart();
-        loopTillEnd();
-    }
-
     //Run greetings and show table of available functions
     private static void programStart() {
         DisplayUI ui = new DisplayUI();
@@ -72,9 +75,10 @@ public class Duke {
     }
 
     //Loop the program until "bye" is entered
-    private static void loopTillEnd(){
+    private static boolean loopTillEnd() {
         Scanner myScanner = new Scanner(System.in);
         boolean flag = true; //Boolean flag for while loop
+
         String function;
         while (flag == true) {
 
@@ -85,7 +89,7 @@ public class Duke {
                     //add new todo task
                     case "todo":
                         todoCommand(myScanner, function);
-                        String line;
+                        //String line;
                         break;
 
                     //add new task with deadline
@@ -137,7 +141,9 @@ public class Duke {
                         break;
 
                     default:
-                        System.out.println("Please key in a valid function"); //loop till valid function entered
+                        //loop till valid function entered
+                        String redundant = myScanner.nextLine();
+                        System.out.println("Please key in a valid function");
                         break;
                 }
             } catch (MissingDescriptionException e) {
@@ -152,6 +158,8 @@ public class Duke {
                 System.out.println("Error while appending to file. Please check your white spaces and symbols.");
             }
         }
+
+        return false;
     }
 
     // method for finding task
@@ -162,16 +170,16 @@ public class Duke {
         String[] keywords = line.split("\\s+");
         System.out.println("Here are the matching tasks in your list:");
         System.out.println("____________________________________________________________");
-        for(String word : keywords) {
-            for(int i = 0; i < tasks.size(); i++){
+        for (String word : keywords) {
+            for (int i = 0; i < tasks.size(); i++) {
                 String descrp = tasks.get(i).getDescription();
-                if(descrp.contains(word)){
-                    System.out.println(i + 1 + "." + tasks.get(i));
+                if (descrp.contains(word)) {
+                    System.out.println("    " + i + 1 + "." + tasks.get(i));
                     found = true;
                 }
             }
         }
-        if(!found){
+        if (!found) {
             System.out.println("Sorry! There are no task with descriptions matching your keyword! Please try again!");
             System.out.println("____________________________________________________________");
         }
@@ -182,20 +190,20 @@ public class Duke {
         String line;
         line = myScanner.nextLine();
         String l = line.replace(" ", "");
-        if(l == ""){
+        if (l == "") {
             throw new IllegalArgumentException();
         }
         int taskNumber = Integer.parseInt(l) - 1;
-        if(taskNumber >= tasks.size() || taskNumber < 0){
+        if (taskNumber >= tasks.size() || taskNumber < 0) {
             throw new NullPointerException();
         }
         tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
         String str = tasks.get(taskNumber).toString();
-        String str2 = str.substring(6,str.length());
+        String str2 = str.substring(6, str.length());
         appendToFile(str2);
         System.out.println("____________________________________________________________");
         System.out.println("Great job! I've marked this task as done in your planner:");
-        System.out.println(tasks.get(taskNumber));
+        System.out.println("    " + tasks.get(taskNumber));
         System.out.println("____________________________________________________________");
     }
 
@@ -207,19 +215,19 @@ public class Duke {
         String str;
         String str2;
         line = myScanner.nextLine();
-        l = line.replace(" ","");
+        l = line.replace(" ", "");
         taskNumber = Integer.parseInt(l) - 1;
-        if(l == ""){
+        if (l == "") {
             throw new IllegalArgumentException();
         }
-        if(taskNumber >= tasks.size() || taskNumber < 0){
+        if (taskNumber >= tasks.size() || taskNumber < 0) {
             throw new NullPointerException();
         }
         System.out.println("____________________________________________________________");
         System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(taskNumber));
+        System.out.println("    " + tasks.get(taskNumber));
         str = tasks.get(taskNumber).toString();
-        str2 = str.substring(6,str.length());
+        str2 = str.substring(6, str.length());
         deleteToFile(str2);
         tasks.remove(taskNumber);
         System.out.println("Now you have " + tasks.size() + " tasks in your list.");
@@ -229,7 +237,7 @@ public class Duke {
 
     // method for listing all task
     private static void listCommand() {
-        if(tasks.size() != 0) {
+        if (tasks.size() != 0) {
             System.out.println("____________________________________________________________");
             System.out.println("Here are your task(s) currently in your planner:");
             for (int i = 0; i < tasks.size(); i++) {
@@ -246,16 +254,16 @@ public class Duke {
         String line;
         line = myScanner.nextLine();
         String[] eventName = line.split("/");
-        if(eventName[0].equals("")){
+        if (eventName[0].equals("")) {
             throw new MissingDescriptionException("☹ OOPS!!! The event description cannot be empty!!");
         }
         String[] event = eventName[1].split("at ");
-        if(event[0].equals(null)){
+        if (event[0].equals(null)) {
             throw new ArrayIndexOutOfBoundsException();
         }
         addtask(new Events(eventName[0], event[1]));
-        writeToFile(function,line);
-        printAddedTask("New event added:");
+        writeToFile(function, line);
+        printAddedTask(tasks.get(tasks.size() - 1));
     }
 
     // method for adding task with deadline
@@ -263,33 +271,34 @@ public class Duke {
         String line;
         line = myScanner.nextLine();
         String[] description = line.split("/");
-        if(description[0].equals("")){
+        if (description[0].equals("")) {
             throw new MissingDescriptionException("☹ OOPS!!! The deadline description cannot be empty!!");
         }
         String[] deadLine = description[1].split("by ");
-        if(description[0] == null){
+        if (description[0] == null) {
             throw new ArrayIndexOutOfBoundsException();
         }
         addtask(new Deadline(description[0], deadLine[1]));
-        writeToFile(function,line);
-        printAddedTask("New Task with deadline added:");
+        writeToFile(function, line);
+        printAddedTask(tasks.get(tasks.size() - 1));
     }
 
     // method for adding todo task
     private static void todoCommand(Scanner myScanner, String function) throws MissingDescriptionException {
         String line = myScanner.nextLine();
-        if(line.equals("")){
+        if (line.equals("")) {
             throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
         }
         addtask(new Todo(line));
-        writeToFile(function,line);
-        printAddedTask("New To-Do Task added:");
+        writeToFile(function, line);
+        printAddedTask(tasks.get(tasks.size() - 1));
     }
 
     // method for printing the last type of task entered
-    public static void printAddedTask(String s) {
-        System.out.println("____________________________________________________________");
-        System.out.println(s);
+    public static void printAddedTask(Task t) {
+        System.out.println("\n____________________________________________________________");
+        System.out.println("New task added:");
+        System.out.println("    " + t);
         System.out.println("Total number of tasks in the list:  " + tasks.size());
         System.out.println("____________________________________________________________");
     }
@@ -297,7 +306,6 @@ public class Duke {
     //method for adding adding newly created task into tasks array
     public static void addtask(Task description) {
         tasks.add(description);
-        size++;
     }
 
     //Write new task to tasklist.txt
@@ -315,7 +323,7 @@ public class Duke {
                 fw.write("D//0//" + newLineFormatted[0].trim() + "//" + newLineFormatted[1].trim() + System.lineSeparator());
                 fw.close();
             }
-            if (str1.contains("event")){
+            if (str1.contains("event")) {
                 String[] newLineFormatted = str2.split("/at");
                 fw.write("E//0//" + newLineFormatted[0].trim() + "//" + newLineFormatted[1].trim() + System.lineSeparator());
                 fw.close();
@@ -328,32 +336,32 @@ public class Duke {
     //Append tasks in tasklist.txt
     private static void appendToFile(String newLine) throws WhitespaceExceptions {
         String taskSymbol;
-        String [] strArr;
+        String[] strArr;
         String description;
         String timeDate;
-    //    System.out.println("input:"+newLine);
-        if(newLine.contains("(by:")){
+        //    System.out.println("input:"+newLine);
+        if (newLine.contains("(by:")) {
             String newline2 = newLine.replace("(by:", ":");
             strArr = newline2.split(":");
             description = strArr[0].trim();
             System.out.println(description);
-            timeDate = strArr[1].replace(")","").trim();
+            timeDate = strArr[1].replace(")", "").trim();
             taskSymbol = "D//";
-         //   System.out.println("D Formatted: " + description + timeDate);
+            //   System.out.println("D Formatted: " + description + timeDate);
         } else if (newLine.contains("(at:")) {
             String newline2 = newLine.replace("(at:", ":");
             strArr = newline2.split(":");
             description = strArr[0].trim();
-            timeDate = strArr[1].replace(")","").trim();
+            timeDate = strArr[1].replace(")", "").trim();
             taskSymbol = "E//";
-         //   System.out.println(" E Formatted: " + description + timeDate);
+            //   System.out.println(" E Formatted: " + description + timeDate);
         } else {
             description = newLine.trim();
             timeDate = "";
             taskSymbol = "T//";
-         //   System.out.println("T Formatted: " + description);
+            //   System.out.println("T Formatted: " + description);
         }
-        if(description.isBlank()){
+        if (description.isBlank()) {
             throw new WhitespaceExceptions();
         }
 
@@ -369,7 +377,7 @@ public class Duke {
             String newString = null;
 
             while (currentReadingLine != null) {
-                if(currentReadingLine.contains(description)){
+                if (currentReadingLine.contains(description)) {
                     oldString = currentReadingLine;
                     newString = taskSymbol + 1 + "//" + description + "//" + timeDate;
                 }
@@ -386,7 +394,7 @@ public class Duke {
             try {
                 reader.close();
                 writer.close();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -395,31 +403,31 @@ public class Duke {
     //Delete task from tasklist.txt
     private static void deleteToFile(String newLine) throws WhitespaceExceptions {
         String taskSymbol;
-        String [] strArr;
+        String[] strArr;
         String description;
         String timeDate;
-    //    System.out.println("input:"+newLine);
-        if(newLine.contains("(by:")){
+        //    System.out.println("input:"+newLine);
+        if (newLine.contains("(by:")) {
             String newline2 = newLine.replace("(by:", ":");
             strArr = newline2.split(":");
             description = strArr[0].trim();
-            timeDate = strArr[1].replace(")","").trim();
+            timeDate = strArr[1].replace(")", "").trim();
             taskSymbol = "D//";
-         //   System.out.println("D Formatted: " + description + timeDate);
+            //   System.out.println("D Formatted: " + description + timeDate);
         } else if (newLine.contains("(at:")) {
             String newline2 = newLine.replace("(at:", ":");
             strArr = newline2.split(":");
             description = strArr[0].trim();
-            timeDate = strArr[1].replace(")","").trim();
+            timeDate = strArr[1].replace(")", "").trim();
             taskSymbol = "E//";
-         //   System.out.println(" E Formatted: " + description + timeDate);
+            //   System.out.println(" E Formatted: " + description + timeDate);
         } else {
             description = newLine.trim();
             timeDate = "";
             taskSymbol = "T//";
-         //   System.out.println("T Formatted: " + description);
+            //   System.out.println("T Formatted: " + description);
         }
-        if(description.isBlank()){
+        if (description.isBlank()) {
             throw new WhitespaceExceptions();
         }
 
@@ -435,7 +443,7 @@ public class Duke {
             String newString = null;
 
             while (currentReadingLine != null) {
-                if(currentReadingLine.contains(description)){
+                if (currentReadingLine.contains(description)) {
                     oldString = currentReadingLine;
                     newString = "";
                 }
@@ -452,33 +460,24 @@ public class Duke {
             try {
                 reader.close();
                 writer.close();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
     //Delete /data dir and contents in it
-    private static void deleteDirectory(File dir){
+    private static boolean deleteDirectory(File dir) {
         if (dir.isDirectory()) {
-            if (dir.list().length == 0) {
-                dir.delete();
-                System.out.println("Directory is deleted : " + dir.getAbsolutePath());
-            } else {
-                String[] children = dir.list();
-                for (String temp : children) {
-                    File fileDelete = new File(dir, temp);
-                    deleteDirectory(fileDelete);
+            File[] children = dir.listFiles();
+            for (File temp : children) {
+                boolean success = deleteDirectory(temp);
+                if (!success) {
+                    return false;
                 }
             }
-            if(dir.list().length==0){
-                dir.delete();
-                System.out.println("Directory is deleted : " + dir.getAbsolutePath());
-            }
-        } else{
-            dir.delete();
-            System.out.println("File is deleted : " + dir.getAbsolutePath());
         }
+        System.out.println("removing file or directory: " + dir.getName());
+        return dir.delete();
     }
-
 }
