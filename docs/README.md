@@ -83,16 +83,6 @@ list
    - ```find Math```
    - ```find CS2113```
    - ```find CS```
-- Expected Output:
-```
-find CS
-____________________________________________________________
-     Here are the matching tasks in your list:
-
-1.[T][✘] CS2113 Homework
-2.[D][✘] CS2105 Assignment (by: next week)
-____________________________________________________________
-```
 
 ## 4.	Marking Tasks as Done: ```done```
 - Marks specified tasks as done. 
