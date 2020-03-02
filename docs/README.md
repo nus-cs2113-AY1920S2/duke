@@ -21,7 +21,7 @@ Kesin chat bot allows users to easily organise their tasks.
     
   2. Download [DUKE v0.2](https://github.com/itskesin/duke/releases)
     
-  3. Open the `JAR file` download on the computer
+  3. Open the `JAR file` downloaded on the computer
     
   4. Enter `java -jar IP.jar` to start up the program
 
