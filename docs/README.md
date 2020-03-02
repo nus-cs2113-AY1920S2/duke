@@ -25,7 +25,7 @@ By: `Wang Qin` Since: `Feb 2019`
 
 ##  1. Introduction
 <p align="center">
-  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.33.27 PM.png">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/Screenshot%202020-03-01%20at%209.33.27%20PM.png">
 </p>
 
 
@@ -46,7 +46,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 *   5. Choose the platform you desired for Kuri, graphical user interface (GUI) or command line user interface (CLI). 
         Type `1` for GUI and `2` for CLI. 
 <p align="center">
-  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.33.41 PM.png">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/Screenshot%202020-03-01%20at%209.33.41%20PM.png">
 </p>
 *   6. For CLI, type in a command and press `ENTER` to execute it. For e.g. typing `list` and pressing enter will list all your current tasks.
 *   7. Some other commands you can try:
@@ -59,11 +59,11 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 For GUI, simply type in the command and click `Enter` button. 
 <p align="center">
-  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.33.55 PM.png">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/Screenshot%202020-03-01%20at%209.33.55%20PM.png">
 </p>
 
 <p align="center">
-  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.34.00 PM.png">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/Screenshot%202020-03-01%20at%209.34.00%20PM.png">
 </p>
 
 PS: 
@@ -188,7 +188,7 @@ Exits the program.
 Shown as "Alert!"
 
 <p align="center">
-  <img src="src/main/resources/images/Screenshot 2020-03-01 at 9.45.47 PM.png">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/Screenshot%202020-03-01%20at%209.45.47%20PM.png">
 </p>
 
 **Format**: `bye`
