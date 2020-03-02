@@ -82,6 +82,19 @@ PS:
 ### 3.1 Adding a task: `add`
 
 Adds a task into Duke.
+If the task is already existed in the task list, an alert message will pop out.
+<p align="center">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/alert%20for%20duplicate.png">
+</p>
+
+To force to add a duplicate task, enter 'y'. All other key will discard the task. 
+<p align="center">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/confirm%20to%20add%20duplicate.png">
+</p>
+
+<p align="center">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/dup%20not%20added.png">
+</p>
 
 
 * **Format**: 
@@ -165,6 +178,10 @@ An interesting fact is not only `help` can make `Kuri` list all possible functio
 
 **Format**: `help`
 
+<p align="center">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/list%20of%20help.png">
+</p>
+
 
 <a name="save_json"></a>
 
@@ -174,6 +191,10 @@ Save the current task list in `Kuri` system  to a Json file.
 It is designed similar as save functions in other editors to avoid unexpected siturations, such as running  out battery, program shut down, or even computer shut down.
 
 **Format**: `save_json`
+
+<p align="center">
+  <img src="https://github.com/wangqinNick/duke/blob/master/src/main/resources/images/data%20saved.png">
+</p>
 
 <a name="exit"></a>
 
