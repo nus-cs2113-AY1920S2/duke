@@ -1,5 +1,5 @@
 # User Guide
-##Table of content
+## Table of content
 <!-- TOC -->
 - [Introduction](#introduction)
 - [Features](#features)
@@ -13,7 +13,7 @@
     - [Find specific task: `find`](#find---finds-all-tasks-that-contains-keyword)
     - [Exit duke: `bye`](#bye---exits-the-application)
 
-##Introduction
+## Introduction
 Duke is a personal task manager that assist the user to keep track of their schedule. Running on a command line interface,
 duke is designed for users who type fast and prefers a CLI interface as opposed to a GUI. 
 ## Features 
