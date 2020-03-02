@@ -27,9 +27,11 @@ public class DisplayUI {
                                              + "|   deadline   |                Create a task with a deadline       | (eg. deadline bathe /by 9PM)          |\n"
                                              + "|   event      |                Create an event task                | (eg. event Meeting /at Library, 12PM) |\n"
                                              + "|   list       |                List all the task in your planner   |                                       |\n"
-                                             + "|   done       |                Mark a task as completed            |                                       |\n"
-                                             + "|   find       |                Find task with keyword              |(eg. find book)                        |\n"
+                                             + "|   done       |                Mark a task as completed            | (eg. done 2)                          |\n"
+                                             + "|   find       |                Find task with keyword              | (eg. find book)                       |\n"
+                                             + "|   reset      |                reset program and Tasklist.txt      |                                       |\n"
                                              + "|   bye        |                Exit Planner                        |                                       |\n"
+                                             + "|   help       |                Show this table                     |                                       |\n"
                                              + "|______________|____________________________________________________|_______________________________________|\n"
                                              + "LEGEND:   [O] ---- DONE | [X] ---- NOT DONE \n"
                                              + "Please key in your command: ";
