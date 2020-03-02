@@ -5,8 +5,6 @@ import src.main.java.TaskList;
 import src.main.java.Ui;
 import src.main.java.duke.task.Task;
 
-/** Print out all task contained in Task List to user
-*/
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";

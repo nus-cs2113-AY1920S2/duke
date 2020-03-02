@@ -3,10 +3,6 @@ package src.main.java;
 import src.main.java.duke.task.Task;
 import java.util.ArrayList;
 
-/**Contains ArrayList of Task class for program and methods to
- * make tasks within Task list
- *
- */
 public class TaskList {
 
     private ArrayList<Task> taskList;

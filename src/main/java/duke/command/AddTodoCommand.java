@@ -7,10 +7,6 @@ import src.main.java.duke.task.Todo;
 
 import java.io.IOException;
 
-/**Instantiate new Todo class to insert into TaskList
- *
- * @param taskDescription  Name of task
- */
 public class AddTodoCommand extends Command {
 
     public static final String COMMAND_WORD = "todo";
