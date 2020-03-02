@@ -2,16 +2,16 @@
 
 # Table of content
 <!-- TOC -->
-- [Introduction](#introduction)
-- [Pre-requisites](#pre-requisites)
-- [Features](#features)
-    - [Add task](#add-task)
-    - [List task](#list-task)
-    - [Mark task as done](#mark-task-as-done)
-    - [Delete task](#delete-task)
-    - [Find task](#find-task)
-    - [Exit Program](#exit-program)
-- [Usage](#usage)
+1. [Introduction](#1-introduction)
+1. [Pre-requisites](#2-pre-requisites)
+1. [Features](#3-features)
+    1. [Add task](#i-add-task)
+    1. [List task](#ii-list-task)
+    1. [Mark task as done](#iii-mark-task-as-done)
+    1. [Delete task](#iv-delete-task)
+    1. [Find task](#v-find-task)
+    1. [Exit Program](#vi-exit-program)
+1. [Usage](#4-usage)
     - [`todo [description]`](#todo-description)
     - [`deadline [description] /by [yyyy-mm-dd]`](#deadline-description-by-yyyy-mm-dd)
     - [`event [description] /at [yyyy-mm-dd]`](#event-description-at-yyyy-mm-dd)
@@ -22,7 +22,7 @@
     - [`bye`](#bye)
 <!-- /TOC -->
 
-## Introduction
+##1. Introduction
     ____________________________________________________________
 	Hello! I'm Duke
 	It seems like you are needing some help.
@@ -45,32 +45,32 @@ Remember to set path for Java beforehand or you can simply set a permanent path 
 At first there will be a warning that there is a data file `data/duke.txt` that has not existed and it will create a 
 new directory and save them after terminating the program
 
-## Pre-requisites
+##2. Pre-requisites
 
 JDK 11 and above, you could set up the framework online at 
 https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
 
-## Features 
+##3. Features 
 
-### Add Task 
+###i. Add Task 
 Add a task in 1 of these 3 types (Todo , Deadline, Event)
 
-### List Task
+###ii. List Task
 List all the tasks available from the data
 
-### Mark Task As Done
+###iii. Mark Task As Done
 When you finish a task, you could mark them as done so as not to refer to it next time
 
-### Delete Task
+###iv. Delete Task
 Delete a task that is not necessary anymore
 
-### Find Task
+###v. Find Task
 Find tasks with containing certain key words from the task's descriptions
 
-### Exit Program
+###vi. Exit Program
 The program will be terminated and your data will be saved
 
-## Usage
+##4. Usage
 
 ### `todo [description]`
 
