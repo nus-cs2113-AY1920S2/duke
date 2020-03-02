@@ -84,11 +84,11 @@ List out all the existing tasks in the TaskList
     
 #### If there are no existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
     list
 
-#### Expected outcome:
+##### Expected outcome:
 
         Empty!
 
@@ -99,21 +99,21 @@ Marks an existing task in the TaskList
 
 #### If there are existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
     mark 1
 
-#### Expected outcome:
+##### Expected outcome:
 
         You have marked -- [T][Y] buy lunch
 
 #### If there are no existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
     mark 1
 
-#### Expected outcome:
+##### Expected outcome:
 
         Out of Bound!
     
@@ -124,21 +124,21 @@ Deletes an existing task in the TaskList
 
 #### If there are existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
     delete 1
 
-#### Expected outcome:
+##### Expected outcome:
 
         You have deleted -- [T][Y] buy lunch
 
 #### If there are no existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
     delete 1
 
-#### Expected outcome:
+##### Expected outcome:
 
         Out of Bound!
     
@@ -149,22 +149,22 @@ Find an item using a keyword in the TaskList
 
 #### If there are existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
     find lunch
 
-#### Expected outcome:
+##### Expected outcome:
 
         1. [T][N]buy lunch
         There are 1 items found.
 
 #### If there are no existing tasks
 
-#### Example of usage:
+##### Example of usage:
 
         find boy
         
-#### Expected outcome:
+##### Expected outcome:
 
         Item not found!!!
 

@@ -15,6 +15,13 @@ import static Duke.Parser.Parser.getWord;
  */
 public class TaskList {
 
+    /**
+     * Reads the userInput and return a Command object.
+     *
+     * @param userInput
+     * @return
+     * @throws DukeException
+     */
     public static Command executeCommand(String userInput) throws DukeException {
 
         String commandWord = getCommandWord(userInput);

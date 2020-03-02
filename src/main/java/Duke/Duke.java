@@ -9,8 +9,9 @@ import Duke.Ui.Ui;
 import static Duke.Task.TaskList.executeCommand;
 
 /**
- * This Duke program, Edith, is a Personal Assistant Chatbot
- * that helps a person to keep track of various things in a list format.
+ * This Duke program, Edith, is a Personal Assistant Chat Bot
+ * that helps a person to keep track of various task in a list format.
+ * Duke program uses a command line interface,.
  *
  * @author  Benchan911
  */

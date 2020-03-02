@@ -21,12 +21,22 @@ public class Storage {
     private ArrayList<Task> tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Storage object that contains duke.tasks and duke.storage related operations.
+     * Mainly save duke.tasks and get duke.tasks.
+     *
+     * @param filePath The filepath to the txt file.
+     * @param ui The user interface displaying events on the task list.
+     */
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
         read();
     }
 
+    /**
+     * Reads duke.tasks from filepath. Creates empty duke.tasks if file cannot be read.
+     */
     private void read() {
         ArrayList<Task> newTasks = new ArrayList<>();
         try {
@@ -48,6 +58,9 @@ public class Storage {
         tasks = newTasks;
     }
 
+    /**
+     * Writes the duke.tasks into a file of the given filepath.
+     */
     public void write() {
         try {
             FileWriter writer = new FileWriter(filePath);
@@ -60,6 +73,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves the existing tasks
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

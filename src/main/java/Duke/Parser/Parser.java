@@ -9,10 +9,19 @@ import Duke.Library.ErrorMessage;
  */
 public class Parser {
 
+    /**
+     * @param userInput
+     * @return
+     */
     public static String getCommandWord(String userInput) {
         return userInput.strip().split(" ")[0];
     }
 
+    /**
+     * @param userInput
+     * @return
+     * @throws DukeException
+     */
     public static String getWord(String userInput) throws DukeException {
         try {
             return userInput.strip().split(" ")[1];
@@ -21,6 +30,11 @@ public class Parser {
         }
     }
 
+    /**
+     * @param userInput
+     * @return
+     * @throws DukeException
+     */
     public static int getIndex(String userInput) throws DukeException {
         try {
             int index = Integer.parseInt(userInput.replaceAll("\\D+", ""));
