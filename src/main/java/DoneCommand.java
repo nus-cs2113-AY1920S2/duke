@@ -10,7 +10,6 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String command) {
         super(command);
-        Duke.tasks.get(Integer.parseInt(Character.toString(
-                command.charAt(command.length() - 1))) - 1).setDone();
+        Duke.tasks.get(Integer.parseInt(command.substring(5)) - 1).setDone();
     }
 }

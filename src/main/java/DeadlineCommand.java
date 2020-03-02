@@ -18,7 +18,7 @@ public class DeadlineCommand extends Command {
     public DeadlineCommand(String command) throws IndexOutOfBoundsException {
         super(command);
         deadline = new Deadline(command.substring(9));
-        textUi.printDeadlineMessage(deadline);
         Duke.tasks.add(deadline);
+        textUi.printDeadlineMessage(deadline);
     }
 }

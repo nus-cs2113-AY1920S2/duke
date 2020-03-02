@@ -32,17 +32,17 @@ public class TextUi {
 
     public void printTodoMessage(Task task) {
         System.out.println("Got it. I've added this task:\n  " + task.toString()
-                + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
+                + String.format("\nNow you have %d tasks in the list.", Duke.tasks.size()));
     }
 
     public void printDeadlineMessage(Task task) {
         System.out.println("Got it. I've added this task:\n  " + task.toString()
-                + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
+                + String.format("\nNow you have %d tasks in the list.", Duke.tasks.size()));
     }
 
     public void printEventMessage(Task task) {
         System.out.println("Got it. I've added this task:\n  " + task.toString()
-                + String.format("\nNow you have %d tasks in the list.", Task.getTotalNumOfTasks()));
+                + String.format("\nNow you have %d tasks in the list.", Duke.tasks.size()));
     }
 
     public void printDeleteMessage(Task task, int numOfTasksLeft) {
