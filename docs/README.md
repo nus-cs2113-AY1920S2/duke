@@ -1,17 +1,17 @@
 # User Guide
 # Table of content
 <!-- TOC -->
-    - [Introduction](#introduction)
-    - [Features](#features)
-    - [Usage](#usage)
-        - [View help: `help`](#help---prints-the-entire-list-of-command)
-        - [Add todo task: `todo`](#todo---adds-a-todo-command-to-the-list)
-        - [Add event task: `event`](#event---adds-a-event-task-to-the-list)
-        - [Add deadline task: `deadline`](#deadline---adds-a-deadline-task-to-the-list)
-        - [View list: `list`](#list---prints-the-entire-list-of-tasks-added)
-        - [Mark as done: `done`](#done---marks-a-task-in-the-list-as-done)
-        - [Find specific task: `find`](#find---finds-all-tasks-that-contains-keyword)
-        - [Exit duke: `bye`](#bye---exits-the-application)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Usage](#usage)
+    - [View help: `help`](#help---prints-the-entire-list-of-command)
+    - [Add todo task: `todo`](#todo---adds-a-todo-command-to-the-list)
+    - [Add event task: `event`](#event---adds-a-event-task-to-the-list)
+    - [Add deadline task: `deadline`](#deadline---adds-a-deadline-task-to-the-list)
+    - [View list: `list`](#list---prints-the-entire-list-of-tasks-added)
+    - [Mark as done: `done`](#done---marks-a-task-in-the-list-as-done)
+    - [Find specific task: `find`](#find---finds-all-tasks-that-contains-keyword)
+    - [Exit duke: `bye`](#bye---exits-the-application)
 <!-- TOC -->
 
 ## Introduction
