@@ -9,22 +9,22 @@
 * Type the command `java -jar duke.jar` to launch the program.
 
  <br/><br/>
-**Functions available**
-**=========================================================**
- <br/><br/>
-
-Functions             | Example
-----------------------|---------------------------------------------
-`todo [task]`         | store a new todo task                      
-`deadline [task]`     | store a new task with deadline
-`event [task]`        | store a new event task
-`list`                | list all task stored
-`done [tasknumber]`   | mark a task as completed
-`delete [tasknumber]` | delete task
-`find [keyword]`      | find task with the keyword in the descriptions
-`bye`                 | exit program
-`reset`               | delete data directory and Tasklist.txt
-`help`                | call up the functions table (TBC)
+**Functions available**  
+**=========================================================** 
+  
+|Functions             | Example                                        |
+|----------------------|------------------------------------------------|
+|`todo [task]`         | store a new todo task                          |         
+|`deadline [task]`     | store a new task with deadline                 |
+|`event [task]`        | store a new event task                         |
+|`list`                | list all task stored                           |
+|`done [tasknumber]`   | mark a task as completed                       |
+|`delete [tasknumber]` | delete task                                    |
+|`find [keyword]`      | find task with the keyword in the descriptions |
+|`bye`                 | exit program                                   |
+|`reset`               | delete data directory and Tasklist.txt         |
+|`help`                | call up the functions table (TBC)              |
+  
 **=========================================================**
 
 # Feedback, Bug Reports
