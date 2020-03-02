@@ -12,8 +12,8 @@ Tasks in the existing list:
 Empty List.
 Here are all the commands that you can use in Duke:
 todo TASK : add a task into the list;
-deadline Task /by yyyy-mm-dd : add a deadline into the list;
-event Task /by yyyy-mm-dd : add an event into the list;
+deadline TASK /by yyyy-mm-dd : add a deadline into the list;
+event TASK /at yyyy-mm-dd : add an event into the list;
 list : list all tasks in the list;
 done TASK_NUMBER : mark a task as done
 delete TASK_NUMBER: delete a task

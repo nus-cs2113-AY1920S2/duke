@@ -47,8 +47,8 @@ public class Ui {
     public void displayHelpMessage() {
         System.out.println("Here are all the commands that you can use in Duke:");
         System.out.println("todo TASK : add a task into the list;");
-        System.out.println("deadline Task /by yyyy-mm-dd : add a deadline into the list;");
-        System.out.println("event Task /by yyyy-mm-dd : add an event into the list;");
+        System.out.println("deadline TASK /by yyyy-mm-dd : add a deadline into the list;");
+        System.out.println("event TASK /at yyyy-mm-dd : add an event into the list;");
         System.out.println("list : list all tasks in the list;");
         System.out.println("done TASK_NUMBER : mark a task as done");
         System.out.println("delete TASK_NUMBER: delete a task");
