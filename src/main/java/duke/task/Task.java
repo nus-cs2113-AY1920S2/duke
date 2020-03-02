@@ -23,7 +23,7 @@ public class Task {
     }
 
     public void completedTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public String toString() {
@@ -36,5 +36,7 @@ public class Task {
         String taskStatus = (isDone ? "1" : "0");
         return taskType + " | " + taskStatus + " | " + description;
     }
+
+    public String getDescription() { return description; }
 }
 

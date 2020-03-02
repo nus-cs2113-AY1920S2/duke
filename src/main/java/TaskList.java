@@ -32,5 +32,8 @@ public class TaskList {
     }
 
     public void removeTaskFromList(int taskNumber) {
-        taskList.remove(taskNumber); }
+        taskList.remove(taskNumber);
+    }
+
+    public ArrayList<Task> getTaskList() { return taskList; }
 }

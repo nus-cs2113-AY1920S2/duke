@@ -37,14 +37,17 @@ public class Parser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+                
+            case FindCommand.COMMAND_WORD:
+                return new FindCommand(userCommand[1]);
 
             default:
                 throw new InvalidCommandException();
         }
     }
 
-    private static String[] readTaskDetails(String s, String s2) throws InvalidDateException {
-        String[] taskDetails = s.split(s2, 2);
+    private static String[] readTaskDetails(String taskDescription, String delimiter) throws InvalidDateException {
+        String[] taskDetails = taskDescription.split(delimiter, 2);
         if (taskDetails.length == 1) {
             throw new InvalidDateException();
         }

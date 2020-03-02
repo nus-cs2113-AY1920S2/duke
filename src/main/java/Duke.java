@@ -48,7 +48,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | IOException e) {
+            } catch (DukeException | IOException | NumberFormatException e) {
                 ui.showError(e.getMessage());
             }
         }
