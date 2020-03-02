@@ -31,6 +31,8 @@ public class Ui {
 
     private static final String END_MESSAGE = "Bye. Hope to see you again soon!";
 
+    private static final String FOUND_MESSAGE = "Here are the matching tasks in your list:";
+
     static String readCommand(){
         String userInput;
         Scanner scan = new Scanner(System.in);
@@ -81,6 +83,12 @@ public class Ui {
     public static void listTasks(String fullList) {
         showToUser(LIST_TASK,
                 fullList,
+                DIVIDER);
+    }
+
+    public static void listFoundTasks(String foundTasks) {
+        showToUser(FOUND_MESSAGE,
+                foundTasks,
                 DIVIDER);
     }
 

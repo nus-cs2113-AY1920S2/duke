@@ -14,6 +14,6 @@ public class ListCommand extends Command {
         for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
             fullList.append(i + 1).append(".").append(tasks.getTaskFromList(i).toString()).append(System.lineSeparator());
         }
-        ui.listTasks(fullList.toString());
+        ui.listTasks(fullList.toString().trim());
     }
 }
