@@ -5,7 +5,7 @@ public class Messages {
             "\"todo\": add a todo\n" +
             "\"deadline\": add a deadline\n" +
             "\"event\": add an event\n" +
-            "\"done\": check off a task on your list";
+            "\"done\": check off a task on your list\n";
     public static String EXIT_MESSAGE = "Bye la you";
     public static String LOGO = " ____        _        \n" +
             "|  _ \\\\ _   _| | __ __ \n" +
