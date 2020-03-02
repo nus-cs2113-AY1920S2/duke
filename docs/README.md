@@ -6,8 +6,8 @@ By: `A11riseforme`      Since: `Feb 2020`      Licence: `MIT`      Course: `CS21
 * [3. Features](#features)
     + [3.1 View the help message:](#help)`help`
     + [3.2. Add a Todo task:](#todo) `todo`/`td`
-    + [3.3. Add a Deadline task:](#todo) `todo`/`td`
-    + [3.4. Add a Event task:](#todo) `todo`/`td`
+    + [3.3. Add a Deadline task:](#deadline) `todo`/`td`
+    + [3.4. Add a Event task:](#event) `todo`/`td`
     + [3.5. List all tasks:](#list) `list`/`ls`
     + [3.6. Mark a task as done:](#done) `done`
     + [3.7. Delete a task:](#delete) `delete`/`del`
