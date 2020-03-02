@@ -18,6 +18,11 @@ done 7
 list
 done 4
 list
+delete 7
+delete
+delete a
+delete -3
+delete 10
 list all
 done
 done 10
