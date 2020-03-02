@@ -78,4 +78,47 @@ public class Ui {
     public void invalidCommand(){
         System.out.println("Invalid command. Please try again! ");
     }
+
+    /**
+     * Function that prints out an error message for the todo command
+     */
+    public void invalidTodo() {
+        System.out.println("Invalid todo command. Make sure there is a description!");
+    }
+
+    /**
+     * Function that prints out an error message for the deadline command
+     */
+    public void invalidDeadline(){
+        System.out.println("Invalid deadline command. Make sure there is a description!");
+    }
+
+    /**
+     * Function that prints out an error message for the event command
+     */
+    public void invalidEvent(){
+        System.out.println("Invalid event command. Make sure there is a description!");
+    }
+
+    /**
+     * Function that prints out an error message for the done command
+     */
+    public void invalidDone(){
+        System.out.println("Invalid done command. Make sure there is a description!");
+    }
+
+    /**
+     * Function that prints out an error message for the done command
+     */
+    public void invalidDelete(){
+        System.out.println("Invalid delete command. Make sure there is a description!");
+    }
+
+    /**
+     * Function that prints out an error message for the find command
+     */
+    public void invalidFind(){
+        System.out.println("Invalid find command. Make sure there is a description!");
+    }
+
 }
