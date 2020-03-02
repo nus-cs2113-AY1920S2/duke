@@ -83,7 +83,6 @@ list
    - ```find Math```
    - ```find CS2113```
    - ```find CS```
-
 - Expected Output:
 ```
 find CS
