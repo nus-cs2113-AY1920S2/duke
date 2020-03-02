@@ -8,9 +8,3 @@ public class TodoCommand extends Command {
         Duke.tasks.add(todo);
     }
 }
-
-
-/*
-Task task = new ToDo(userInput.substring(5));
-            tasks.add(task);
- */

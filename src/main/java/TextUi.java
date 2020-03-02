@@ -15,12 +15,11 @@ public class TextUi {
 
     public void printIndexOutOfBoundsExceptionMessage(Exception exception) {
         System.out.println("You have given the wrong number of arguments or the wrong set of arguments\n" +
-                "Please try again or input \"bye\" to exit" + exception.getMessage());
+                "Please try again or input \"bye\" to exit");
     }
 
     public void printIllegalArgumentExceptionMessage(Exception exception) {
-        System.out.println("Sorry I don't understand that command.\n" + Messages.LIST_OF_COMMANDS +
-                exception.getMessage());
+        System.out.println("Sorry I don't understand that command.\n" + Messages.LIST_OF_COMMANDS);
     }
 
     public void printTodoMessage(Task task) {
@@ -41,5 +40,9 @@ public class TextUi {
     public void printDeleteMessage(Task task, int numOfTasksLeft) {
         System.out.println("I have removed this task:\n" + task.toString() +
                 String.format("\nYou only have %d tasks left to do. 加油!", numOfTasksLeft));
+    }
+
+    public void printFindMessage(String command) {
+        System.out.println("The following may be relevant to what you are looking for:");
     }
 }
