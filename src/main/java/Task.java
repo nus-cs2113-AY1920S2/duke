@@ -59,7 +59,7 @@ public class Task {
 
     /**
      * Gives the status of completion of the task.
-     * @return status of completino of the task.
+     * @return status of completion of the task.
      */
 
     public boolean isDone() {
