@@ -8,6 +8,14 @@ import src.main.java.duke.task.Task;
 
 import java.util.ArrayList;
 
+
+/**Read in keyword from user and compare it to task descriptions of
+ * all the Task in taskList. All comparisons are not case-sensitive
+ * Stored all Task with task descriptions which contains keyword inside
+ * a separate ArrayList<Task> to print in a list format
+ *
+ * @param keyword  Word from user to find
+ */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
