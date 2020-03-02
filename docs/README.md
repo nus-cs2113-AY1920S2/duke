@@ -86,11 +86,11 @@ list
 
 - Expected Output:
 ```
-delete 1
+find CS
 ____________________________________________________________
-Noted. I've removed this task:
-[T][✓] CS2113 Homework
-Now you have 3 tasks in the list.
+Here are the matching tasks in your list:
+1.[D][✘] CS2105 Assignment (by: next week)
+2.[T][✘] CS2113 Assignment
 ____________________________________________________________
 ```
 
