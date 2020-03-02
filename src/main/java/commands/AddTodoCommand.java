@@ -6,6 +6,9 @@ import task.TaskList;
 import task.Todo;
 import ui.Ui;
 
+/**
+ * Command class for the AddTodo command.
+ */
 public class AddTodoCommand extends AddCommand {
 
     private String taskDescription;
@@ -16,6 +19,9 @@ public class AddTodoCommand extends AddCommand {
         this.taskDescription = taskDescription;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Todo todoTask = new Todo(this.taskDescription);

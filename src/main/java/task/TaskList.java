@@ -4,6 +4,10 @@ import exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Entity class for the task list.
+ * Contains methods to manage the task list.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks;
@@ -58,5 +62,15 @@ public class TaskList {
     /** Sets a task at the given index as done. */
     public void doneTask(int index) throws DukeException {
         this.getTask(index).markAsDone();
+    }
+
+    public ArrayList<Task> findTasks(String keyWord) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.toLowerCase().contains(keyWord)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
     }
 }

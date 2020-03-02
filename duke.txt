@@ -1,4 +1,3 @@
-T|1| aaa
-E|1| g |g
-E|0|birthday |2pm
-D|0|ip |mar 2
+T|1|Buy present
+D|0|Finish iP |2020-03-02T12:00
+

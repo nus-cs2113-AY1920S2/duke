@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Entity class for the Todo task.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
