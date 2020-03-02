@@ -13,7 +13,7 @@ By: `A11riseforme`      Since: `Feb 2020`      Licence: `MIT`      Course: `CS21
     + [3.7. Delete a task:](#delete) `delete`/`del`
     + [3.8. Search for specific tasks by keywords:](#find) `find`
     + [3.9. Exit the program:](#exit) `bye`
-    + [3.9. Save the data:](#save)
+    + [3.10. Save the data:](#save)
 * [4. Command Summary](#command-summary)
 
 <a name="introduction"></a>
