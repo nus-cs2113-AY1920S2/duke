@@ -1,5 +1,27 @@
 # Duke's User Guide
 
+# Table of content
+<!-- TOC -->
+- [Introduction](#introduction)
+- [Pre-requisites](#pre-requisites)
+- [Features](#features)
+    - [Add task](#add-task)
+    - [List task](#list-task)
+    - [Mark task as done](#mark-task-as-done)
+    - [Delete task](#delete-task)
+    - [Find task](#find-task)
+    - [Exit Program](#exit-program)
+- [Usage](#usage)
+    - [`todo [description]`](#todo-description)
+    - [`deadline [description] /by [yyyy-mm-dd]`](#deadline-description-by-yyyy-mm-dd)
+    - [`event [description] /at [yyyy-mm-dd]`](#event-description-at-yyyy-mm-dd)
+    - [`list`](#list)
+    - [`done [index_of_task]`](#done-index_of_task)
+    - [`delete [index_of_task]`](#delete-index_of_task)
+    - [`find [key_words]`](#find-key_words)
+    - [`bye`](#bye)
+<!-- /TOC -->
+
 ## Introduction
     ____________________________________________________________
 	Hello! I'm Duke
