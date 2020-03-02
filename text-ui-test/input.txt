@@ -18,6 +18,9 @@ list
 done 4
 list
 delete 6
+find book
+find everything
+find
 delete
 delete a
 delete -3
