@@ -13,34 +13,56 @@ import duke.storage.Storage;
 public class TaskList {
 
     public static ArrayList<Task> tasks;
-    protected Storage storage;
+    protected Storage storage = new Storage(this);
     protected Ui ui;
 
-
+    /**
+     * Constructor for the TaskList class that declares new taskList, Ui, and
+     * Storage objects.
+     */
     public TaskList(){
         this.tasks = new ArrayList<>();
         this.ui = new Ui(this);
-        this.storage = new Storage(this);
     }
 
     // Constructor that takes in loaded task message
+
+    /**
+     * Second Constructor for the TaskList class that takes in
+     * an ArrayList of tasks from the loaded text file instead of
+     * creating a new empty list.
+     * @param taskList
+     */
     public TaskList(ArrayList<Task> taskList){
         this.tasks = taskList;
+        this.ui = new Ui(this);
     }
 
-    //Helper function to get size of taskList
+    /**
+     * Returns an integer representation of the size/length of the taskList
+     */
     public Integer size(){
         return tasks.size();
     }
 
-    // Helper function that adds and saves task to list
+
+    /**
+     * Function that adds any type of task to the list.
+     * It also saves the updated taskList to a text file
+     * @param t Task t to be added to taskList
+     */
     public void addTask(Task t){
         tasks.add(t);
         storage.save();
         ui.printTask(t);
     }
 
-    // Executes the todo command
+    /**
+     * Function that creates a new todo task and
+     * adds to the taskList
+     * @param command decription for todo
+     * @throws DukeException is the user does not give description
+     */
     public void todo(String command) throws DukeException{
         if(command.isEmpty()){
             throw new DukeException();
@@ -50,7 +72,13 @@ public class TaskList {
         }
     }
 
-    // Executes the deadline command
+
+    /**
+     * Function that creates a new deadline task and
+     * adds it to the taskList
+     * @param command description for the task
+     * @throws DukeException if no description is given.
+     */
     public void deadline(String command) throws DukeException{
         if(command.isEmpty()){
             throw new DukeException();
@@ -62,7 +90,12 @@ public class TaskList {
         }
     }
 
-    // Executes the event command
+    /**
+     * Function that creates a new event task and
+     * adds it to the taskList
+     * @param command description for the task
+     * @throws DukeException if no description is given.
+     */
     public void event(String command) throws DukeException{
         if(command.isEmpty()){
             throw new DukeException();
@@ -74,7 +107,11 @@ public class TaskList {
         }
     }
 
-    // Executes the delete command
+    /**
+     * Function that deletes a designated task from the taskList
+     * @param command user response of which command to delete
+     * @throws DukeException no response is given by user
+     */
     public void delete(String command) throws DukeException {
         if (command.isEmpty()) {
             throw new DukeException();
@@ -88,7 +125,10 @@ public class TaskList {
         }
     }
 
-   // Executes the list command
+
+    /**
+     * Function that lists all the tasks is taskList
+     */
     public void listTasks() {
         System.out.println("Here are the tasks in your list:");
         int taskCounter = 1;
@@ -98,7 +138,12 @@ public class TaskList {
         }
     }
 
-    // Executes the done command
+
+    /**
+     * Function that marks a designated task as done in the taskList
+     * @param command the response from the user that is used to choose which task is marked as done
+     * @throws DukeException if no response is given
+     */
     public void done(String command) throws DukeException{
         if(command.isEmpty()){
             throw new DukeException();
@@ -112,7 +157,13 @@ public class TaskList {
 
     }
 
-    // Executes the find command
+
+    /**
+     * Function that finds a certain keyword within the taskList and prints out
+     * the list where the keyword is found
+     * @param command
+     * @throws DukeException
+     */
     public void find(String command) throws DukeException {
         if (command.isEmpty()) {
             throw new DukeException();
