@@ -86,12 +86,11 @@ list
 
 - Expected Output:
 ```
-find English
+delete 1
 ____________________________________________________________
-     Here are the matching tasks in your list:
-
-1.[D][✘] English Essay (by: 26 Feb)
-2.[T][✘] English quiz
+Noted. I've removed this task:
+[T][✓] CS2113 Homework
+Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
 
