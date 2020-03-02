@@ -8,13 +8,11 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-     //   System.out.println("Hello from\n" + logo);
 
     protected static final String DIVIDER = "————————————————————————————————————————-———————";
 
-
     protected Scanner in;
-    protected PrintStream out;
+    protected static PrintStream out;
 
     public Ui(){
         this.in = new Scanner(System.in);
@@ -43,6 +41,14 @@ public class Ui {
 
     public void showError(String message) {
         out.println("Something went wrong: " + message);
+    }
+
+    public void showLoadingError() {
+        out.println("File not found");
+    }
+
+    public static void showInvalidCommandError() {
+        out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 }

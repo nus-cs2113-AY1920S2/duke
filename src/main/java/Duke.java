@@ -5,31 +5,24 @@ import java.io.*;
 
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
     private Ui ui;
 
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
+        storage = new Storage(filePath);
 
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public void run() {
 
-        ArrayList<Task> taskList = new ArrayList<Task>();
-
-        File file = new File("data/duke.txt");
-        try {
-            file.createNewFile();
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-
-        String filePath = file.getAbsolutePath();
-
-        try {
-            loadFile(filePath, taskList);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
 
         String[] validCommands = {"todo", "deadline", "event", "done", "list", "delete"};
 
@@ -54,9 +47,9 @@ public class Duke {
             }
 
             if (command.equals("list")) {
-                displayList(taskList);
+                displayList(tasks);
             } else {
-                determineTask(command, fullCommand, taskList);
+                determineTask(command, fullCommand, tasks);
             }
             //c.execute(tasks, ui, storage);
             //isExit = c.isExit();
@@ -79,7 +72,7 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        new Duke().run();
+        new Duke("data/tasks.txt").run();
 
         /*ArrayList<Task> taskList = new ArrayList<Task>();
 
@@ -140,7 +133,7 @@ public class Duke {
 
 
     //read text file to load previously saved taskList
-    private static void loadFile (String filePath, ArrayList<Task> taskList) throws FileNotFoundException {
+    /*private static void loadFile (String filePath, ArrayList<Task> taskList) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -209,7 +202,7 @@ public class Duke {
             fw.close();
 
         }
-    }
+    }*/
 
 
     public static boolean checkLoop(String line) {
@@ -299,8 +292,8 @@ public class Duke {
         System.out.println("☹ OOPS!!! The description of " + commandType + " cannot be empty" + addition);
     }
 
-    public static void displayList(ArrayList<Task> taskList) {
-        if (taskList.size() == 0) {
+    public static void displayList(TaskList tasks) {
+        if (tasks.size() == 0) {
             System.out.println("There is nothing on the list.");
             return;
         }

@@ -7,7 +7,7 @@ public class Task {
     public Task(String action) {
         this.action = action;
         this.isDone = false;
-        this.taskType = "T";
+        this.taskType = null;
         this.date = null;
     }
 
