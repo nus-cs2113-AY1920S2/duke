@@ -7,6 +7,12 @@ import src.main.java.duke.task.Event;
 
 import java.io.IOException;
 
+/**Instantiate new Event class to insert into TaskList
+ *
+ * @param taskDescription  Name of event
+ * @param date  date and time of Event
+ *
+ */
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";

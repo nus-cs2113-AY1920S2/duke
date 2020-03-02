@@ -4,6 +4,12 @@ import src.main.java.duke.command.*;
 import src.main.java.duke.exceptions.InvalidCommandException;
 import src.main.java.duke.exceptions.InvalidDateException;
 
+/** Return Commands based on user commands written in Command line.
+ *
+ * @param fullCommand  commands written by user
+ * @param userCommand  command that are split up from @param fullCommand
+ * @param taskDetails  description and date of task from @userCommand
+ */
 public class Parser {
 
     static Command parse(String fullCommand) throws InvalidCommandException, InvalidDateException {
