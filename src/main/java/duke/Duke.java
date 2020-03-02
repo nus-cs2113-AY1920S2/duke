@@ -95,7 +95,7 @@ public class Duke {
     /**
      * Main function of the Duke program
      *
-     * @param args
+     * @param args main's arguments
      */
     public static void main(String[] args) {
         new Duke().run();

@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Deadline constructor with given description and date
-     * @param description
+     * @param description description of the task
      * @param time date that task needs to be done by
      */
     public Deadline(String description, String time) {

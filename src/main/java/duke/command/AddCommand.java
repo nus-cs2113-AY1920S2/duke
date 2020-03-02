@@ -13,6 +13,9 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for an AddCommand given its command and prefix
+     *
+     * @param fullCommand user's input
+     * @param prefix the prefix that tells what to execute
      */
     public AddCommand(String fullCommand, String prefix) {
         this.fullCommand = fullCommand;

@@ -12,7 +12,7 @@ public class Event extends Task {
 
     /**
      * Event constructor with given description and date
-     * @param description
+     * @param description description of the task
      * @param time date that event happens
      */
     public Event(String description, String time) {
