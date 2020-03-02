@@ -16,6 +16,13 @@ Nyan chat bot allows users to take down their notes.
 # Requirements 
 Java 11 or later.
 
+# Quick Start 
+1. Ensure that you have `Java 11` or later installed in your computer
+1. Download `DUKE v0.2` [here](https://github.com/NyanWunPaing/duke/releases/tag/v0.2)
+1. Move `duke.jar` onto your Desktop
+1. Navigate to your Desktop folder and open Terminal or Command Prompt
+1. Enter `java -jar duke.jar` to start up the program
+
 # Features
 
 ### Add a new task 
