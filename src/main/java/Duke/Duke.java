@@ -3,7 +3,6 @@ package duke;
 import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
-
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.WhitespaceExceptions;
 import duke.taskManager.Deadline;
@@ -20,10 +19,14 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) throws IOException {
+        boolean reset;
 
         importTaskFromFile();
         programStart();
-        loopTillEnd();
+        reset = loopTillEnd();
+        if(reset){
+            resetProgram();
+        }
     }
 
     //Importing of all task from Tasklist.txt to program when first launch
@@ -78,7 +81,6 @@ public class Duke {
     private static boolean loopTillEnd() {
         Scanner myScanner = new Scanner(System.in);
         boolean flag = true; //Boolean flag for while loop
-
         String function;
         while (flag == true) {
 
@@ -126,9 +128,9 @@ public class Duke {
 
                     //delete /data dir and contents and end the program (Bugs)
                     case "reset":
-                        deleteDirectory(new File("data"));
-                        flag = false;
-                        break;
+                        return true;
+//                        flag = false;
+//                        break;
 
                     //find task with matching descriptions to keyword
                     case "find":
@@ -158,7 +160,6 @@ public class Duke {
                 System.out.println("Error while appending to file. Please check your white spaces and symbols.");
             }
         }
-
         return false;
     }
 
@@ -466,18 +467,41 @@ public class Duke {
         }
     }
 
+    //reset Program
+    private static void resetProgram() throws IOException {
+        FileInputStream fi = null;
+        FileOutputStream fio = null;
+        try {
+            fi = new FileInputStream("data/Tasklist.txt");
+            fio = new FileOutputStream("data/Tasklist.txt");
+        } catch (IOException e) {
+            System.out.println("Error Closing File");
+        } finally {
+            fi.close();
+            fio.close();
+        }
+        deleteDirectory(new File("data"));
+    }
+
     //Delete /data dir and contents in it
-    private static boolean deleteDirectory(File dir) {
+    private static void deleteDirectory(File dir) {
         if (dir.isDirectory()) {
-            File[] children = dir.listFiles();
-            for (File temp : children) {
-                boolean success = deleteDirectory(temp);
-                if (!success) {
-                    return false;
+            if (dir.list().length == 0) {
+                dir.delete();
+                System.out.println("Deleting folder : " + dir.getAbsolutePath());
+            } else {
+                File[] children = dir.listFiles();
+                for (File temp : children) {
+                    deleteDirectory(temp);
                 }
             }
+            if (dir.list().length == 0) {
+                dir.delete();
+                System.out.println("Deleting folder : " + dir.getAbsolutePath());
+            } else {
+                dir.delete();
+                System.out.println("Deleting File  : " + dir.getAbsolutePath());
+            }
         }
-        System.out.println("removing file or directory: " + dir.getName());
-        return dir.delete();
     }
 }
