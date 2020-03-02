@@ -1,10 +1,14 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * ShowCommand class extended from Command class to deal with printing the list
  * of tasks that is saved by user
  */
-public class ShowCommand extends Command{
+public class ShowCommand extends Command {
     /** Override abstract method of Command Class.
      * execute a ShowCommand in TaskList class
      *

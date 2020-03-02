@@ -1,4 +1,7 @@
-package duke;
+package duke.parser;
+
+import duke.task.TaskList;
+import duke.command.*;
 
 import static duke.Duke.*;
 

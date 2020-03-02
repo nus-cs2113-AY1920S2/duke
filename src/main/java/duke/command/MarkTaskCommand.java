@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -6,7 +10,7 @@ import java.io.IOException;
  * MarkTaskCommand class extended from Command class to deal with marking
  * tasks that are done by user
  */
-public class MarkTaskCommand extends Command{
+public class MarkTaskCommand extends Command {
     private int index;
 
     /** Constructor for a DoneCommand with given index (started from 1)

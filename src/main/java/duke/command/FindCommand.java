@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -6,7 +10,7 @@ import java.io.IOException;
  * FindCommand extended from the Command class to deal with the execution of the find
  * function to find tasks with certain key words
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String keyWord;
 
     /**

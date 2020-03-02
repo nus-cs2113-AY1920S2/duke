@@ -1,10 +1,14 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * ExitCommand extended from the Command class to deal with the
  * termination of the program
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Override method isExit in the Command class
      * Method to set exit to true in order to terminate the program

@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * AddCommand class - A class to process the execution of adding a task to the list
