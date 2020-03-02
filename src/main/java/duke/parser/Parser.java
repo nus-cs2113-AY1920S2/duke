@@ -54,37 +54,37 @@ public class Parser {
                 try {
                     taskList.done(restOfUserInput);
                 } catch (DukeException e) {
-                    ui.invalidDone();
+                    ui.invalidCommand("done");
                 }
             } else if(action.equals("todo")){
                 try {
                     taskList.todo(restOfUserInput);
                 } catch (DukeException e) {
-                    ui.invalidTodo();
+                    ui.invalidCommand("todo");
                 }
             } else if(action.equals("deadline")){
                 try {
                     taskList.deadline(restOfUserInput);
                 } catch (DukeException e) {
-                    ui.invalidDeadline();
+                    ui.invalidCommand("deadline");
                 }
             } else if(action.equals("event")){
                 try {
                     taskList.event(restOfUserInput);
                 } catch (DukeException e) {
-                    ui.invalidEvent();
+                    ui.invalidCommand("event");
                 }
             } else if(action.equals("delete")){
                 try {
                     taskList.delete(restOfUserInput);
                 } catch (DukeException e) {
-                    ui.invalidDelete();
+                    ui.invalidCommand("delete");
                 }
             } else if(action.equals("find")){
                 try {
                     taskList.find(restOfUserInput);
                 } catch (DukeException e) {
-                    ui.invalidFind();
+                    ui.invalidCommand("find");
                 }
             } else {
                 throw new DukeException();
