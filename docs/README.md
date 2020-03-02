@@ -58,12 +58,14 @@ Expected of usage: `done 2`
 Lists all the tasks in the list. 
 
 Format: `list`
+
 Expected of usage: `list`
 
 ### Bye 
 Exists the program 
 
 Format: `bye`
+
 Expected of usage: `bye`
 
 
