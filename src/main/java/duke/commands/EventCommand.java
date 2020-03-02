@@ -40,7 +40,8 @@ public class EventCommand extends ExecuteCommand {
             if (newData.length == 1) {
                 throw new EventDateException("Please specify a date after \'/at\'!");
             }
-            tasks.eventTask(newData[0], newData[1]);
+            String[] remove = newData[0].split(" ", 2);
+            tasks.eventTask(remove[1], newData[1]);
             storage.saveData(tasks);
         } else {
             throw new TaskException("Add a task behind 'event', task cannot be left empty.");

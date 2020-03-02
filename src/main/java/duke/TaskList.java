@@ -117,7 +117,7 @@ public class TaskList {
                 System.out.println(i + 1 + ". " + tasks.get(i));
             }
         } else {
-            throw new EmptyListException("No duke.tasks in the list.");
+            throw new EmptyListException("No tasks in the list.");
         }
     }
 

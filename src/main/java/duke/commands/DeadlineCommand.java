@@ -38,7 +38,8 @@ public class DeadlineCommand extends ExecuteCommand {
             if (newData.length == 1) {
                 throw new DeadlineDateException("Please specify a date after \'/by\'!");
             }
-            tasks.deadlineTask(newData[0], newData[1]);
+            String[] remove = newData[0].split(" ", 2);
+            tasks.deadlineTask(remove[1], newData[1]);
             storage.saveData(tasks);
         } else {
             throw new DeadlineTaskException("Add a task behind 'deadline', task cannot be left empty.");
