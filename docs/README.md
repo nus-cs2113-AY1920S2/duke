@@ -17,6 +17,7 @@ Duke is for those who prefer to use a desktop application for organizing, managi
 Adds todo to the list of tasks. 
 
 Format: `todo (description)`
+
 Expected of usage: `todo clean house`
 
 ### Deadline 
