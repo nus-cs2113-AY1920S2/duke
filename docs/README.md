@@ -14,13 +14,13 @@ Refer to the next section [Features](#features) for details of each command.
 
 
 ## Features 
-- [Add a todo](#feature-1-create-new-todo-todo)
-- [Add a deadline](#feature-2-create-new-deadline-deadline)
-- [Add an event](#feature-3-create-new-event-event)
+- [Create a todo](#feature-1-create-new-todo-todo)
+- [Create a deadline](#feature-2-create-new-deadline-deadline)
+- [Create an event](#feature-3-create-new-event-event)
 - [List all tasks](#feature-4-list-all-tasks-list)
-- [Mark task as complete](#feature-5-mark-existing-tasks-mark)
-- [Delete a task](#feature-6-delete-existing-tasks-delete)
-- [Find a task](#feature-7-find-existing-tasks-find)
+- [Mark task](#feature-5-mark-existing-tasks-mark)
+- [Delete task](#feature-6-delete-existing-tasks-delete)
+- [Find task](#feature-7-find-existing-tasks-find)
 - [Exit Duke](#feature-8-exit-the-program-exit)
 
 ### Feature 1. Create new Todo: `Todo`
@@ -35,7 +35,7 @@ Expected outcome:
         1. [T][N] buy lunch
     
 ### Feature 2. Create new Deadline: `Deadline`
-Adds a new deadline to the TaskList.
+Adds a new deadline to the TaskList
 
 
 Example of usage:
@@ -49,7 +49,6 @@ Expected outcome:
 ### Feature 3. Create new Event: `Event` 
 Adds a new event to the TaskList.
                                
-
 Example of usage:
 
     event attend cousin wedding \at 01-04-2022
@@ -61,7 +60,8 @@ Expected outcome:
 ### Feature 4. List all tasks: `List`
 List out all the existing tasks in the TaskList
 
-####If there are existing tasks:
+##### If there are existing tasks
+
 Example of usage:
 
     list
@@ -74,7 +74,8 @@ Expected outcome:
         Now you have 3 tasks in the list.
     
     
-#### If there are no existing tasks:
+##### If there are no existing tasks
+
 Example of usage:
 
     list
@@ -84,9 +85,10 @@ Expected outcome:
         Empty!
 
 ### Feature 5. Mark existing tasks: `Mark`
+Marks an existing task in the TaskList
 
 
-####If there are existing tasks
+##### If there are existing tasks
 
 Example of usage:
 
@@ -96,7 +98,8 @@ Expected outcome:
 
         You have marked -- [T][Y] buy lunch
 
-####If there are no existing tasks
+##### If there are no existing tasks
+
 Example of usage:
 
     mark 1
@@ -106,8 +109,9 @@ Expected outcome:
         Out of Bound!
     
 ### Feature 6. Delete existing tasks: `Delete`
+Deletes an existing task in the TaskList
 
-####If there are existing tasks
+##### If there are existing tasks
 
 Example of usage:
 
@@ -117,7 +121,8 @@ Expected outcome:
 
         You have deleted -- [T][Y] buy lunch
 
-####If there are no existing tasks
+##### If there are no existing tasks
+
 Example of usage:
 
     delete 1
@@ -127,8 +132,9 @@ Expected outcome:
         Out of Bound!
     
 ### Feature 7. Find existing tasks: `Find`
+Find an item using a keyword in the TaskList
 
-####If there are existing tasks
+##### If there are existing tasks
 
 Example of usage:
 
@@ -139,7 +145,8 @@ Expected outcome:
         1. [T][N]buy lunch
         There are 1 items found.
 
-####If there are no existing tasks
+##### If there are no existing tasks
+
 Example of usage:
 
         find boy
@@ -149,6 +156,7 @@ Expected outcome:
 
 
 ### Feature 8. Exit the program: `Exit`
+Exits the programme
 
 Example of usage:
 
