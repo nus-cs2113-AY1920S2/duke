@@ -20,7 +20,7 @@ Other functions includes `list`,`delete`, `find` and mark task as `done`.
 - Duke will automatically load up duke.txt from designated file path upon program start up.
 
 - All changes made to Task List will automatically saved into duke.txt
-<br></br>  
+<br>  
 **_Note: First-Time User or Missing duke.txt_**  
 ````
 Unable to find File
@@ -43,12 +43,12 @@ Command|Command Action
 [find](#find)|Find Task
 [bye](#bye)|Exit Program
 
-<br></br>
+<br>
 
 <h4 id="todo"><code>todo</code> : Add new Todo</h4>
 Create new `Todo` and adds task into Task List  
-**Format** : <code>todo **task name**</code>  
-Example : <code>todo **CS Tutorial**</code>  
+**Format** : <code>todo <b>task name</b></code>  
+Example : <code>todo <b>CS Tutorial</b></code>  
 Outcome :  
 ````
 Got it . I've added this task:   
@@ -59,8 +59,8 @@ ___
 
 <h4 id="event"><code>event</code> : Add new Event</h4>
 Create new `Event` and adds it into Task List  
-**Format** : <code>event **event name** /at **date and time**</code>  
-Example : <code>event **NUS open house** /at **28-02-2020 2pm**</code>  
+**Format** : <code>event <b>event name</b> /at <b>date and time</b></code>  
+Example : <code>event <b>NUS open house</b> /at <b>28-02-2020 2pm</b></code>  
 Outcome :  
 ````
 Got it . I've added this task:
@@ -70,8 +70,8 @@ Now you have 2 tasks in the list.
 ___
 <h4 id="deadline"><code>deadline</code> : Add new Deadline</h4>
 Create new `Deadline` and adds it into Task List  
-**Format** : <code>deadline **task name** /by **deadline**</code>  
-Example : <code>event **CS2113 iP** /by **02-03-2020 12pm**</code>  
+**Format** : <code>deadline <b>task name</b> /by <b>deadline</b></code>  
+Example : <code>event <b>CS2113 iP</b> /by <b>02-03-2020 12pm</b></code>  
 Outcome :  
 ````
 Got it . I've added this task:
@@ -82,8 +82,8 @@ ___
 <h4 id="done"><code>done</code> : Mark Task as done</h4>
 Find the corresponding task at given `Index` and mark it as `done`  
 Task Status Box: [x] -Incomplete | [ / ] Completed  
-**Format** : <code>done **Index**</code>  
-Example : done **2**</code>  
+**Format** : <code>done <b>Index</b></code>  
+Example : done <b>2</b></code>  
 Outcome :  
 ````
 Nice! I've marked this task as done:
@@ -92,8 +92,8 @@ Nice! I've marked this task as done:
 ___
 <h4 id="list"><code>list</code> : Display all Saved Tasks</h4>
 `List` out all tasks stored and its task indexes from the Task List  
-**Format** : <code>**list**</code>  
-Example : <code>**list**</code>  
+**Format** : <code><b>list</b></code>  
+Example : <code><b>list</b></code>  
 Outcome :  
 ````
 Here are the tasks in your list:
@@ -104,8 +104,8 @@ Here are the tasks in your list:
 ___
 <h4 id="delete"><code>delete</code> : Delete Task</h4>
 Remove the corresponding task at given `Index` from Task List  
-**Format** : <code>delete **Index** </code>  
-Example : <code>delete **2**</code>  
+**Format** : <code>delete <b>Index</b> </code>  
+Example : <code>delete <b>2</b></code>  
 Outcome :  
 ````
 Noted. I've removed this task:
@@ -117,8 +117,8 @@ ___
 `Find` and list out task from Task List that contains the `Keyword`  
 Note: keyword is non-case sensitive.  
 E.g. "TuToRiAL" will get the same result as "tutorial"  
-**Format** : <code>find **keyword**</code>  
-Example : <code>find **cS**</code>  
+**Format** : <code>find <b>keyword</b></code>  
+Example : <code>find <b>cS</b></code>  
 Outcome :  
 ````
 Here are the matching tasks in your list:
@@ -129,8 +129,8 @@ ___
 
 <h4 id="bye"><code>bye</code> : Exit Program</h4>
 Process will terminate and exit the program  
-**Format** : <code>**bye**</code>  
-Example : <code>**bye**</code>  
+**Format** : <code><b>bye</b></code>  
+Example : <code><b>bye</b></code>  
 Outcome :  
 ````
 Bye. Hope to see you again soon!
