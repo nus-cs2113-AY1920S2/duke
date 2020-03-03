@@ -7,7 +7,7 @@ how to set up duke and how use the basic features of duke.
 2. Enter your preferred terminal and move to the location of the folder
 3. Run the Command-Line interface(CLI) with `java -jar duke.jar` in your terminal
 ![Setting up duke](/images/startup.JPG)
-
+<p></p>
 ### Features
 + [ToDo](#todo)
 + [Deadline](#deadline)
@@ -18,21 +18,19 @@ how to set up duke and how use the basic features of duke.
 + [Find](#find)
 + [Help](#help)
 + [Bye](#bye)
-
+<p></p>
 ### Command Format
 Words enclosed by `{` and `}` are parameters that are supplied by you.
-
+<p></p>
 ### Task types
 ```
 To-Dos (Represented by [T])
 Event (Represented by [E])
 Deadline (Represented by [D])
 ```
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
 ## Usage
-&nbsp;
+<p></p>
 ### <a id="todo"></a> `todo` - Adds a todo task to your list
 
 Syntax: 
@@ -46,8 +44,8 @@ Example of usage:
 Expected outcome:
 
 ![Adding ToDo task](images/todo.JPG)
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="deadline"></a> `deadline` - Adds a deadline task to your list
 
 Syntax:
@@ -61,9 +59,8 @@ Example of usage:
 Expected outcome:
 
 ![Adding Deadline task](images/deadline.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="event"></a> `event` - Adds an Event task to your list
 
 Syntax: 
@@ -77,9 +74,8 @@ Example of usage:
 Expected outcome:
 
 ![Adding Event task](images/event.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="list"></a> `list` - Displays all your tasks
 
 Syntax: 
@@ -89,10 +85,8 @@ Syntax:
 Expected outcome:
 
 ![Listing all tasks](images/list.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="done"></a> `done` - Marks task as completed based on specified index
 
 Syntax: 
@@ -106,9 +100,8 @@ Example of usage:
 Expected outcome:
 
 ![Marking tasks as completed](images/done.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="delete"></a> `delete` - Deletes task from list based on specified index
 
 Syntax: 
@@ -122,9 +115,8 @@ Example of usage:
 Expected outcome:
 
 ![Deleting tasks](images/delete.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="find"></a> `find` - Finds task from list based on search query
 
 Syntax: 
@@ -138,9 +130,8 @@ Example of usage:
 Expected outcome:
 
 ![Finding tasks](images/find.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="help"></a> `help` - Displays all the commands
 
 Syntax: 
@@ -151,9 +142,8 @@ Syntax:
 Expected outcome:
 
 ![help](images/help.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
+<p></p>
+<p></p>
 ### <a id="bye"></a> `bye` - Terminates program
 
 Syntax: 
