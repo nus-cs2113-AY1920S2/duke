@@ -141,6 +141,7 @@ Expected outcome:
 &nbsp;
 &nbsp;
 &nbsp;
+
 ### <a id="help"></a> `help` - Displays all the commands
 
 Syntax: 
@@ -151,6 +152,8 @@ Syntax:
 Expected outcome:
 
 ![help](images/help.JPG)
+&nbsp;
+&nbsp;
 &nbsp;
 &nbsp;
 &nbsp;
