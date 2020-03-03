@@ -7,15 +7,6 @@ import duke.tasks.Task;
 import java.util.List;
 
 public class Printer {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
 
     public static void printIndentation() {
         System.out.print("    ");
@@ -38,15 +29,14 @@ public class Printer {
         printIndentation();
 
         if (isReturnUser) {
-            System.out.println("Hello! I'm Duke (￣▽￣*)ゞ");
+            System.out.println("Hello! I'm Duke :>");
             printIndentation();
             System.out.println("What can I do for you?");
             printIndentation();
-            System.out.println("Type " + ANSI_BLUE + "help" + ANSI_RESET + " to see what I can do! " +
-                    "(ﾉ>ω<)ﾉ :｡･:*:･ﾟ’★,｡･:*:･ﾟ’☆");
+            System.out.println("Type help to see what I can do! :>");
 
         } else {
-            System.out.println("Welcome back ! ~ I missed you (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)");
+            System.out.println("Welcome back ! ~ I missed you ;_;");
         }
     }
 
@@ -57,18 +47,18 @@ public class Printer {
     }
 
     public static void printBye() {
-        System.out.println("Bye ~ Hope to see you again soon! o(〒﹏〒)o");
+        System.out.println("Bye ~ Hope to see you again soon! T_T");
     }
 
     public static void printTasks(List<Task> myList) {
         printLines();
         printIndentation();
         if (myList.isEmpty()) {
-            System.out.println("List is empty (°ロ°) !");
+            System.out.println("List is empty o.o !");
             printLines();
             return;
         }
-        System.out.println("Here's your list (◕‿◕)♡ ~ ");
+        System.out.println("Here's your list ;3");
         printList(myList);
         printLines();
     }
@@ -77,11 +67,11 @@ public class Printer {
         printLines();
         printIndentation();
         if (myList.isEmpty()) {
-            System.out.println("There are no matching tasks in your list (°ロ°) !");
+            System.out.println("There are no matching tasks in your list :o !");
             printLines();
             return;
         }
-        System.out.println("Here's what I found (◕‿◕)♡ ~ ");
+        System.out.println("Here's what I found :3 ~ ");
         printList(myList);
         printLines();
     }
@@ -100,13 +90,13 @@ public class Printer {
 
         switch (command) {
         case "done":
-            System.out.printf("Nice! I've marked this task as done ヽ(・∀・)ﾉ :\n");
+            System.out.printf("Nice! I've marked this task as done ^-^ :\n");
             printIndentation();
             System.out.printf("  %s\n", task);
             break;
 
         case "delete":
-            System.out.printf("Ok! I have deleted this task ヽ(・∀・)ﾉ :\n");
+            System.out.printf("Ok! I have deleted this task ^-^ :\n");
             printIndentation();
             System.out.printf("  %s\n", task);
             printIndentation();
@@ -114,7 +104,7 @@ public class Printer {
             break;
 
         case "todo":
-            System.out.println("Got it! I've added this task ＠＾◡＾) :");
+            System.out.println("Got it! I've added this task ^-^ :");
             printIndentation();
             System.out.println("  " + task);
             printIndentation();
@@ -122,7 +112,7 @@ public class Printer {
             break;
 
         case "deadline":
-            System.out.println("Oh a deadline huh! Don't worry, I have added this task <(￣︶￣)> :");
+            System.out.println("Oh a deadline huh! Don't worry, I have added this task ~.~ :");
             printIndentation();
             System.out.println("  " + task);
             printIndentation();
@@ -130,7 +120,7 @@ public class Printer {
             break;
 
         case "event":
-            System.out.println("Huuu what a busy guy! I have marked this in your list~ <(￣︶￣)> :");
+            System.out.println("Huuu what a busy guy! I have marked this in your list~ ~.~ :");
             printIndentation();
             System.out.println("  " + task);
             printIndentation();
@@ -143,66 +133,64 @@ public class Printer {
     public static void printError() {
         printLines();
         printIndentation();
-        System.out.println("Error.. ٩(× ×)۶");
+        System.out.println("Error.. x.x");
         printLines();
     }
 
     public static void printEmptyDescriptionError(String command) {
         printLines();
         printIndentation();
-        System.out.println("Σ(°ロ°) The description of " + command + " cannot be empty!~ ٩(× ×)۶ ");
+        System.out.println("The description of " + command + " cannot be empty!~ X.X");
     }
 
     public static void printFormatError(String command) {
         printLines();
         printIndentation();
-        System.out.println("Σ(°ロ°) There seems to be some problem with the format of " + ANSI_BLUE + command + ANSI_RESET
-                + " !~ ٩(× ×)۶ ");
+        System.out.println("X.X There seems to be some problem with the format of " + command + " !~ X.X ");
     }
 
     public static void printHint(String command) {
         printIndentation();
-        System.out.printf("Here's a hint on how %s%s%s works:\n\n", ANSI_BLUE, command, ANSI_RESET);
+        System.out.printf("Here's a hint on how %s works:\n\n", command);
 
         printIndentation();
         printIndentation();
 
         switch (command) {
         case "event":
-            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>(space)/at(space)<at>");
+            System.out.println(command + "(space)<task>(space)/at(space)<at>");
             printIndentation();
             printIndentation();
-            System.out.println("Example: " + ANSI_BLUE + "event" + ANSI_RESET + " team meeting /at 2 August 2-4pm");
+            System.out.println("Example: event team meeting /at 2 August 2-4pm");
             break;
 
         case "find":
         case "todo":
-            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>");
+            System.out.println(command + "(space)<task>");
             printIndentation();
             printIndentation();
-            System.out.println("Example: " + ANSI_BLUE + command + ANSI_RESET + " read book");
+            System.out.println("Example: " + command + " read book");
             break;
 
         case "deadline":
-            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<task>(space)/by(space)<date>");
+            System.out.println(command + "(space)<task>(space)/by(space)<date>");
             printIndentation();
             printIndentation();
-            System.out.println("Example: " + ANSI_BLUE + "deadline" + ANSI_RESET + " read book /by Sunday");
+            System.out.println("Example: deadline read book /by Sunday");
             break;
 
         case "done":
-            System.out.println(ANSI_RED + "Please ensure that the index supplied exists in the list (．．)" + ANSI_RESET);
+            System.out.println("Please ensure that the index supplied exists in the list @_@");
             System.out.println();
             printIndentation();
             printIndentation();
-            System.out.println(ANSI_BLUE + command + ANSI_RESET + "(space)<index>");
+            System.out.println(command + "(space)<index>");
             printIndentation();
             printIndentation();
-            System.out.println("Example: " + ANSI_BLUE + command + ANSI_RESET + " 1");
+            System.out.println("Example: " + command + " 1");
             break;
 
         default :
-            System.out.println("Havent code yet");
             break;
         }
 
@@ -212,14 +200,14 @@ public class Printer {
     public static void printUnknownCommandError(String command) {
         printLines();
         printIndentation();
-        System.out.printf("I'm sorry I don't understand this command: %s%s%s *(>д<)*\n", ANSI_RED, command, ANSI_RESET);
+        System.out.printf("I'm sorry I don't understand this command: %s *(>_<)*\n", command);
         printLines();
     }
 
     public static void printHelp() {
         printLines();
         printIndentation();
-        System.out.println("Here is what I can do (◕‿◕✿)");
+        System.out.println("Here is what I can do ^-^/");
         for (String command : Command.COMMAND_LIST) {
             printIndentation();
             printIndentation();
