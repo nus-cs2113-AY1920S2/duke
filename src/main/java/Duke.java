@@ -72,6 +72,8 @@ public class Duke {
                 }
             } catch (NoDescriptionException m) {
                 System.out.println("\t \u2639 OOPS!!! The description of a " + taskType + " cannot be empty.");
+            } catch (NumberFormatException m) {
+                System.out.println("\t \u2639 OOPS!!! Index is not provided.");
             } catch (IllegalArgumentException m) {
                 System.out.println("\t \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (IndexOutOfBoundsException m) {
