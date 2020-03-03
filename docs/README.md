@@ -4,6 +4,7 @@ Nyan chat bot allows users to take down their notes.
 # Table of Contents
 
 - [Requirements](#requirements)
+- [Quick Start](#quick-start)
 - [Features](#features)
     
     - [Add a new task](#add-a-new-task)
