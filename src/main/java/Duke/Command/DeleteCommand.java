@@ -1,4 +1,9 @@
-import java.text.MessageFormat;
+package Duke.Command;
+import Duke.UI.*;
+import Duke.Tasks.*;
+import Duke.TaskList;
+import Duke.Storage;
+import Duke.DukeException;
 
 public class DeleteCommand extends Command {
 
@@ -15,7 +20,7 @@ public class DeleteCommand extends Command {
         this.editType = "removed";
     }
 
-    public Task removeTask() throws DukeException{
+    public Task removeTask() throws DukeException {
         int number = Integer.parseInt(fullCommand.substring(7));
         if (number > TaskList.getSize()) {
             throw new DukeException();

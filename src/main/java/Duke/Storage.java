@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Tasks.*;
+import Duke.UI.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,29 +24,36 @@ public class Storage {
     }
 
     public void checkTaskDone(Task t, String num){
-        if (num == "1") {
+        if (num.equals("1")) {
             t.markAsDone();
         }
     }
 
+
     public Task createTask(String lineInTextFile) {
-        String[] taskParts = lineInTextFile.split(FILE_DIVIDER);
-        Task t;
-        if (taskParts[TASK_TYPE_PART] == "T") {
-            t = new Todo(taskParts[ACTION_PART]);
-        } else if (taskParts[TASK_TYPE_PART] == "D") {
-            t = new Deadline(taskParts[ACTION_PART], taskParts[DATE_PART]);
-        } else {
-            t = new Event(taskParts[ACTION_PART], taskParts[DATE_PART]);
+        String[] taskParts = lineInTextFile.split("\\|");
+        if (taskParts.length == 4) {
+            if (taskParts[TASK_TYPE_PART].equals("D")) {
+                Task t = new Deadline(taskParts[ACTION_PART], taskParts[DATE_PART]);
+                checkTaskDone(t, taskParts[TASK_DONE_PART]);
+                return t;
+            } else {
+                Task t = new Event(taskParts[ACTION_PART], taskParts[DATE_PART]);
+                checkTaskDone(t, taskParts[TASK_DONE_PART]);
+                return t;
+            }
         }
+        Task t = new Todo(taskParts[ACTION_PART]);
         checkTaskDone(t, taskParts[TASK_DONE_PART]);
         return t;
     }
 
     public ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<Task>();
         File f = new File(filepath);
         try {
             f.createNewFile();
+            Ui.out.println(filepath);
         } catch (Exception e) {
             throw new DukeException();
         }
@@ -54,9 +66,9 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.nextLine();
             Task t = createTask(line);
-            TaskList.addTask(t);
+            tasks.add(t);
         }
-        return TaskList.taskList;
+        return tasks;
     }
 
     public String getTaskType (Task t){
@@ -83,7 +95,7 @@ public class Storage {
         String lineInSavedFile;
         lineInSavedFile = getTaskType(t) + FILE_DIVIDER + getTaskComplete(t)
                 + FILE_DIVIDER + getAction(t);
-        if (t instanceof Deadline || t instanceof Event) {
+        if (getTaskType(t).equals("D") || getTaskType(t).equals("E")) {
             lineInSavedFile += (FILE_DIVIDER + getDate(t));
         }
         lineInSavedFile += "\n";

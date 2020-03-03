@@ -1,5 +1,6 @@
+package Duke.Tasks;
+
 public class Event extends Task {
-    //protected String at;
 
     public Event(String action, String at) {
         super(action);

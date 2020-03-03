@@ -1,5 +1,6 @@
+package Duke.Tasks;
+
 public class Deadline extends Task {
-    //protected String by;
 
     public Deadline(String action, String by) {
         super(action);

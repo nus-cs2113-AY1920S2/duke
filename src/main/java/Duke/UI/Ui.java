@@ -1,9 +1,11 @@
+package Duke.UI;
+
 import java.util.Scanner;
 import java.io.*;
 
 public class Ui {
     protected Scanner in;
-    protected static PrintStream out;
+    public static PrintStream out;
 
     public Ui(){
         this.in = new Scanner(System.in);

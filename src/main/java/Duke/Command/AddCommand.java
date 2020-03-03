@@ -1,12 +1,15 @@
-import java.text.MessageFormat;
-import java.util.ArrayList;
+package Duke.Command;
+import Duke.UI.*;
+import Duke.Tasks.*;
+import Duke.TaskList;
+import Duke.Storage;
+import Duke.DukeException;
 
 public class AddCommand extends Command {
 
     protected String addType;
     protected String fullCommand;
     protected String editType;
-    protected String additionalErrorMessage;
 
     public AddCommand (String command, String fullCommand) {
         this.addType = command;
@@ -38,17 +41,24 @@ public class AddCommand extends Command {
         return fullCommand.substring(indexOfDate);
     }
 
+    public String getAdditionalErrorMessage () {
+        if (addType.equals("todo")) {
+            return Messages.TODO_ERROR_MESSAGE;
+        } else if (addType.equals("deadline")) {
+            return String.format(Messages.DEADLINE_EVENT_ERROR_MESSAGE, "/by");
+        } else {
+            return String.format(Messages.DEADLINE_EVENT_ERROR_MESSAGE, "/at");
+        }
+    }
+
     public Task addToList() {
         Task t;
         if (addType.equals("todo")) {
             t = new Todo(getAction());
-            additionalErrorMessage = Messages.TODO_ERROR_MESSAGE;
         } else if (addType.equals("deadline")) {
             t = new Deadline(getAction(), getDate());
-            additionalErrorMessage = String.format(Messages.DEADLINE_EVENT_ERROR_MESSAGE, "/by");
         } else {
             t = new Event(getAction(), getDate());
-            additionalErrorMessage = String.format(Messages.DEADLINE_EVENT_ERROR_MESSAGE, "/at");
         }
         TaskList.addTask(t);
         return t;
@@ -62,7 +72,7 @@ public class AddCommand extends Command {
                     editType, t, tasks.getSize(), tasks.checkSingular()));
         } catch (IndexOutOfBoundsException e) {
             ui.out.println(String.format(Messages.MESSAGE_INVALID_DESCRIPTION,
-                    addType, additionalErrorMessage));
+                    addType, getAdditionalErrorMessage()));
         }
     }
 

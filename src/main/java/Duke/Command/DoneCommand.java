@@ -1,5 +1,9 @@
-import java.text.MessageFormat;
-import java.util.regex.MatchResult;
+package Duke.Command;
+import Duke.UI.*;
+import Duke.Tasks.*;
+import Duke.TaskList;
+import Duke.Storage;
+import Duke.DukeException;
 
 public class DoneCommand extends Command {
 
@@ -14,7 +18,7 @@ public class DoneCommand extends Command {
                 command, Messages.DONE_DELETE_ERROR_MESSAGE);
     }
 
-    public Task doneTask() throws DukeException{
+    public Task doneTask() throws DukeException {
         int number = Integer.parseInt(fullCommand.substring(5));
         if (number > TaskList.getSize()) {
             throw new DukeException();
