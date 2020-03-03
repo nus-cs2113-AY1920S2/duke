@@ -6,7 +6,7 @@ different types of tasks (todo, event and deadline).
 It is simple to use, and comes with a save function to 
 remember your
 
-##2. Quick Start
+## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer
 
 1. Download the latest duke.jar
