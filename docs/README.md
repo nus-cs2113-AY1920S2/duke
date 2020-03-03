@@ -24,6 +24,8 @@ Refer to the next section [Features](#features) for details of each command.
 - [Exit Duke](#feature-8-exit-the-program-exit)
 - [Saving](#feature-9-saving-information)
 
+-----
+
 ### Feature 1. Create new Todo: `Todo`
 Adds a new Todo to the TaskList
 
