@@ -110,7 +110,7 @@ The task at the specified index will be deleted from the list.
     delete 3
     __________________________________________________________________________________________
     Got it! The following task has been successfully deleted:
-    [E] [X] project-meeting  (at: 2020-05-10)
+    [E] [X] project-meeting  (at: nus-clb)
     __________________________________________________________________________________________
 
 ### Mark task as done
