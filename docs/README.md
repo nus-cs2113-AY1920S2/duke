@@ -4,13 +4,13 @@
 ## Features :notebook:
  
 - [List all items in your todo list](#list---list-all-items-in-your-todo-list)
-- [Adds a todo item](#todo---adds-a-general-todo-item)
-- [Adds an event item](#event---adds-an-event-item-at-a-specified-time)
-- [Adds a deadline item](#deadline---adds-a-deadline-item-at-a-specified-time)
-- [Marks an item as done](#done---marks-an-item-as-done)
-- [Deletes an item](#delete---deletes-an-item)
+- [Add a todo item](#todo---adds-a-general-todo-item)
+- [Add an event item](#event---adds-an-event-item-at-a-specified-time)
+- [Add a deadline item](#deadline---adds-a-deadline-item-at-a-specified-time)
+- [Mark an item as done](#done---marks-an-item-as-done)
+- [Delete an item](#delete---deletes-an-item)
 - [Find an item](#find---finds-all-matching-tasks)
-- [Exits program](#bye---exits-program)
+- [Exit program](#bye---exits-program)
 - [Local data storage](#local-data-storage)
  <br/>
  
