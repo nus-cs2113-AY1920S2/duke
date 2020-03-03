@@ -1,10 +1,6 @@
 import java.text.MessageFormat;
 
-public abstract class ListCommand extends Command {
-
-    protected static final String EMPTY_LIST_MESSAGE = "There is nothing on the list.";
-    protected static final String LIST_HEADER_MESSAGE = "Here are the tasks in your list: ";
-
+public class ListCommand extends Command {
 
     public String displayTask (int i, Task t) {
         int number = i + 1;
@@ -12,20 +8,26 @@ public abstract class ListCommand extends Command {
     }
 
     public String displayList() {
-        String message;
+        String printedList;
         if (TaskList.getSize() == 0) {
-            message = EMPTY_LIST_MESSAGE;
+             printedList = Messages.EMPTY_LIST_MESSAGE;
         } else {
-            message = LIST_HEADER_MESSAGE;
+            printedList = Messages.LIST_HEADER_MESSAGE;
             for (int i = 0; i < TaskList.getSize(); i++) {
-                message += displayTask(i, TaskList.fetchTask(i));
+                printedList += (displayTask(i, TaskList.fetchTask(i)) + "\n");
             }
         }
-        return message;
+        return printedList;
     }
 
     @Override
-    public String toString() {
-        return displayList();
+    public void execute (TaskList tasks, Ui ui, Storage storage) {
+        ui.out.println(displayList());
     }
+
+    @Override
+    public boolean isExit(){
+        return false;
+    };
+
 }

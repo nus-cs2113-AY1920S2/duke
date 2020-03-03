@@ -1,37 +1,48 @@
 import java.text.MessageFormat;
 
-public abstract class DeleteCommand extends Command {
+public class DeleteCommand extends Command {
 
-    public DeleteCommand(String fullCommand) {
-        this.editWord = "removed";
-        this.fullCommand =  fullCommand;
+    protected String command;
+    protected String fullCommand;
+    protected String errorMessage;
+    protected String editType;
+
+    public DeleteCommand(String command, String fullCommand) {
+        this.command = command;
+        this.fullCommand = fullCommand;
+        this.errorMessage = String.format(Messages.MESSAGE_INVALID_DESCRIPTION,
+                command, Messages.DONE_DELETE_ERROR_MESSAGE);
+        this.editType = "removed";
     }
 
-    public Task removeTask () {
+    public Task removeTask() throws DukeException{
         int number = Integer.parseInt(fullCommand.substring(7));
+        if (number > TaskList.getSize()) {
+            throw new DukeException();
+        }
         Task t = TaskList.fetchTask(number-1);
         TaskList.deleteTask(t);
         return t;
     }
 
     @Override
-    public String toString() {
-        return MessageFormat.format("Got it. I''ve {0} this task: \n{1}\n Now you have {2} task{3} in the list.",
-                editWord, removeTask(), TaskList.getSize(), checkSingular());
+    public void execute (TaskList tasks, Ui ui, Storage storage) {
+        try {
+            Task t = removeTask();
+            ui.out.println(String.format(Messages.MESSAGE_ADD_DELETE_SUCCESS,
+                    editType, t, tasks.getSize(), tasks.checkSingular()));
+        } catch (NumberFormatException e) {
+            ui.out.println(errorMessage);
+        } catch (IndexOutOfBoundsException e) {
+            ui.out.println(errorMessage);
+        } catch (DukeException e) {
+            ui.out.println(errorMessage);
+        }
     }
 
-    /*@Override
-    public Ui execute() {
-        try {
-            final Person target = getTargetPerson();
-            personBook.removePerson(target);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
-
-        } catch (IndexOutOfBoundsException ie) {
-            return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        } catch (PersonNotFoundException pnfe) {
-            return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_PERSONBOOK);
-        }
-    }*/
+    @Override
+    public boolean isExit(){
+        return false;
+    }
 
 }

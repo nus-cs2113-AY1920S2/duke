@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Ui {
     protected Scanner in;
-    protected PrintStream out;
+    protected static PrintStream out;
 
     public Ui(){
         this.in = new Scanner(System.in);
@@ -32,23 +32,8 @@ public class Ui {
         out.println(Messages.MESSAGE_UNKNOWN_ERROR + errorMessage);
     }
 
-    public void showLoadingError() {
-        out.println(Messages.MESSAGE_LOAD_ERROR);
+    public void showLoadingError(String errorMessage) {
+        out.println(Messages.MESSAGE_LOAD_ERROR + errorMessage);
     }
-
-    public static void showInvalidCommandError() {
-        out.println(Messages.MESSAGE_INVALID_COMMAND);
-    }
-
-    /*public static void showExecutionSuccess(String s) {
-        out.println(s);
-    }
-
-    public static void showInvalidDescriptionError(String s) {
-        out.println(s);
-    }*/
-
-
-
 
 }

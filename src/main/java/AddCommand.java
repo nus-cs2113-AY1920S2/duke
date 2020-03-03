@@ -2,18 +2,16 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class AddCommand extends Command {
+
     protected String addType;
     protected String fullCommand;
+    protected String editType;
     protected String additionalErrorMessage;
-    public static final String TODO_ERROR_MESSAGE = ".";
-    public static final String DEADLINE_EVENT_ERROR_MESSAGE =
-            "and needs a date indicated by \"%1$s \".";
-
 
     public AddCommand (String command, String fullCommand) {
-        super();
         this.addType = command;
         this.fullCommand = fullCommand;
+        this.editType = "added";
     }
 
     public String getAction() throws IndexOutOfBoundsException{
@@ -44,24 +42,24 @@ public class AddCommand extends Command {
         Task t;
         if (addType.equals("todo")) {
             t = new Todo(getAction());
-            additionalErrorMessage = TODO_ERROR_MESSAGE;
+            additionalErrorMessage = Messages.TODO_ERROR_MESSAGE;
         } else if (addType.equals("deadline")) {
             t = new Deadline(getAction(), getDate());
-            additionalErrorMessage = String.format(DEADLINE_EVENT_ERROR_MESSAGE, "/by");
+            additionalErrorMessage = String.format(Messages.DEADLINE_EVENT_ERROR_MESSAGE, "/by");
         } else {
             t = new Event(getAction(), getDate());
-            additionalErrorMessage = String.format(DEADLINE_EVENT_ERROR_MESSAGE, "/at");
+            additionalErrorMessage = String.format(Messages.DEADLINE_EVENT_ERROR_MESSAGE, "/at");
         }
         TaskList.addTask(t);
         return t;
     }
 
     @Override
-    public void execute (TaskList tasks, Ui ui) {
+    public void execute (TaskList tasks, Ui ui, Storage storage) {
         try {
             Task t = addToList();
-            ui.out.println(String.format(Messages.MESSAGE_ADD_SUCCESS,
-                    t, tasks.getSize(), tasks.checkSingular()));
+            ui.out.println(String.format(Messages.MESSAGE_ADD_DELETE_SUCCESS,
+                    editType, t, tasks.getSize(), tasks.checkSingular()));
         } catch (IndexOutOfBoundsException e) {
             ui.out.println(String.format(Messages.MESSAGE_INVALID_DESCRIPTION,
                     addType, additionalErrorMessage));
@@ -73,32 +71,4 @@ public class AddCommand extends Command {
         return false;
     };
 
-
 }
-
-    /*public static void checkMissingDescription() throws DukeException {
-
-        int index = 0;
-        if (action.trim().isEmpty()) {
-            throw new EmptyActionDescriptionException();
-        }
-        if (command.equals("deadline")) {
-            index = taskDescription.indexOf("/by ");
-            if (action.startsWith("/by")) {
-                index = -1;
-            }
-        } else if (command.equals("event")) {
-            index = taskDescription.indexOf("/at ");
-            if (action.startsWith("/at")) {
-                index = -1;
-            }
-        } else if (command.equals("done") || command.equals("delete")) {
-            int listNumber = Integer.parseInt(action);
-            if (listNumber > taskList.size()) {
-                index = -1;
-            }
-        }
-        if ((action.length() == 0) || (index == -1)) {
-            throw new DukeException();
-        }
-    }*/
