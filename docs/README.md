@@ -1,5 +1,5 @@
 # [Project Duke] (https://www.github.com/A11riseforme/duke) - User Guide
-By: `A11riseforme`      Since: `Feb 2020`      Licence: `MIT`      Course: `CS2113`
+By: `A11riseforme`      Since: `Feb 2020`      Licence: `MIT`      Course: `CS2113T`
 
 * [1. Introduction](#introduction)
 * [2. Quick Start](#quick-start)
@@ -44,7 +44,7 @@ Duke is a *task management system* which aims to help you to keep track of vario
 **Command Format**
 
 - Words in the format of `<UPPER_CASE>` are the parameters to be supplied by the user e.g. in `todo <TASK_DESCRIPTION>`, `<TASK_DESCRIPTION>` is a parameter which can be used as `todo revise cs3230`.
-- Items in square brackets are optional e.g., `help <COMMAND_WORD>`can be used as`help <COMMAND_WORD>` or `help`.
+- Items in square brackets are optional e.g., `help [<COMMAND_WORD>]`can be used as`help <COMMAND_WORD>` or `help`.
 
 <a name="help"></a>
 ### 3.1 View the help message: `help`
@@ -61,19 +61,19 @@ Format: `todo <TASK_DESCRIPTION>` or `td <TASK_DESCRIPTION>`
 
 Format: `deadline <TASK_DESCRIPTION> /by <DEADLINE_DATE>` or `ddl <TASK_DESCRIPTION> /by <DEADLINE_DATE>`
 
-*note that the `<DEADLINE_DATE>` should be in the form of yyyy-mm-dd (e.g., 2020-12-29).*
+*note that the `<DEADLINE_DATE>` should be in the form of yyyy-mm-dd (e.g., 2020-02-29).*
 
 <a name="event"></a>
 ### 3.4 Add a Event task: `event` or `evt`
 
 Format: `event <TASK_DESCRIPTION> /at <EVENT_DATE>` or `evt <TASK_DESCRIPTION> /at <EVENT_DATE>`
 
-*note that the `<EVENT_DATE>` should be in the form of yyyy-mm-dd (e.g., 2020-12-29).*
+*note that the `<EVENT_DATE>` should be in the form of yyyy-mm-dd (e.g., 2020-02-29).*
 
 <a name="list"></a>
 ### 3.5 List all tasks: `list` or `ls`
 
-Format: `list`
+Format: `list` or `ls`
 
 <a name="done"></a>
 ### 3.6 Mark a task as done: `done`
