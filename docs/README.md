@@ -69,9 +69,9 @@ Expected outcome:
 <br />`Now you have 3 tasks in the list`
 
 Format for task items:
-`todo [DISCRIPITION]`
-`deadline [DISCRIPITION]/by [DATE IN YYYY_MM_DD]`
-`event [DISCRIPITION]/at [DATE IN YYYY_MM_DD] [TIME IN HH_MM]`
+<br />`todo [DISCRIPITION]`
+<br />`deadline [DISCRIPITION]/by [DATE IN YYYY_MM_DD]`
+<br />`event [DISCRIPITION]/at [DATE IN YYYY_MM_DD] [TIME IN HH_MM]`
 
 ### `list` -List the current tasks
 
