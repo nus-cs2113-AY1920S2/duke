@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Sets the type of task, using a single character
+     * Sets the type of task, using a single character.
      * @param type a single character that explains the type of the task
      */
     protected void setType(char type) {
@@ -26,7 +26,7 @@ public class Task {
     }
 
     /**
-     * Returns the description of task
+     * Returns the description of task.
      * @return the description of task
      */
     public String getDescription() {
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Sets the description of task
+     * Sets the description of task.
      * @param s the description of task
      */
     protected void setDescription(String s) {
@@ -42,7 +42,7 @@ public class Task {
     }
 
     /**
-     * Returns if the task is completed
+     * Returns if the task is completed.
      * @return {@code \u2713} or {@code \u2717}
      */
     public char getDone() {
@@ -51,7 +51,7 @@ public class Task {
     }
 
     /**
-     * Returns if the task is completed
+     * Returns if the task is completed.
      * @return {@code true} or {@code false}
      */
     public boolean getDoneInBoolean() {
@@ -59,7 +59,7 @@ public class Task {
     }
 
     /**
-     * Sets the progression of task as {@code true} or {@code false}
+     * Sets the progression of task as {@code true} or {@code false}.
      * @param status the progression of task, {@code true} or {@code false}
      */
     public void setDone(boolean status) {
@@ -68,9 +68,9 @@ public class Task {
 
     @Override
     public String toString() {
-        String output = "[" + getType() + "]" +
-            "[" + getDone() + "] " +
-            getDescription();
+        String output = "[" + getType() + "]"
+                + "[" + getDone() + "] "
+                + getDescription();
         return output;
     }
 }

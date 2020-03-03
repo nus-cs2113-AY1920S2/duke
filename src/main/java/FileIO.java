@@ -8,7 +8,7 @@ public class FileIO {
     private FileReader fileToReadFrom;
     private FileWriter fileToWriteTo;
 
-    public FileIO (String directory, TaskList tasks) {
+    public FileIO(String directory, TaskList tasks) {
         File f = new File(directory);
         ensurePathExist(f);
 
@@ -50,11 +50,15 @@ public class FileIO {
 
         Scanner s = new Scanner(fileToReadFrom);
         // load content to tasks
-        while(s.hasNext()) {
+        while (s.hasNext()) {
             rawCommand = s.nextLine();
             breakdown = rawCommand.split(",");
-            task = parseCommand(breakdown);
-            tasks.add(task);
+            try {
+                task = parseCommand(breakdown);
+                tasks.add(task);
+            } catch (IllegalArgumentException m) {
+                System.out.println("Task type invalid, someone edited the file?");
+            }
         }
 
         s.close();
@@ -65,7 +69,7 @@ public class FileIO {
      * @param breakdown An array of command arguments from storage file
      * @return The task to be created
      */
-    private Task parseCommand(String[] breakdown) {
+    private Task parseCommand(String[] breakdown) throws IllegalArgumentException {
         String taskType = breakdown[0];
         boolean taskIsDone = Boolean.parseBoolean(breakdown[1]);
         String taskDescription = breakdown[2];
@@ -88,6 +92,8 @@ public class FileIO {
             task = new Event(taskDescription, taskDescriptionArg);
             task.setDone(taskIsDone);
             break;
+        default:
+            throw new IllegalArgumentException();
         }
 
         return task;

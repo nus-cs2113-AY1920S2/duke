@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Prints all tasks which contain the specified keyword
+     * Prints all tasks which contain the specified keyword.
      * @param name the specified keyword to search from the list
      * @return number of tasks found
      */
@@ -52,8 +52,8 @@ public class TaskList {
      * @param task task to be removed from this list, if present
      * @return {@code true} if this list contained the specified task
      */
-    public void removeByTask(Task task) {
-        tasks.remove(task);
+    public boolean removeByTask(Task task) {
+        return tasks.remove(task);
     }
 
     /**
@@ -81,7 +81,7 @@ public class TaskList {
      */
     public void list() {
         for (int i = 0; i < this.size(); ++i) {
-            System.out.printf("\t%d.%s", i+1, this.getByIndex(i));
+            System.out.printf("\t%d.%s", i + 1, this.getByIndex(i));
             System.out.println();
         }
     }

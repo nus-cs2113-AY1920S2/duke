@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Parser {
     private Scanner reader;
 
-    public Parser () {
+    public Parser() {
         this.reader = new Scanner(System.in);
     }
 
@@ -14,7 +14,7 @@ public class Parser {
 
     /**
      * Split first word from the rest of String.
-     * @param input: one-line string
+     * @param input one-line string
      * @return array of 2 String, [0]: first word, [1]: subsequent words.
      */
     private String[] inputProcessing(String input) {

@@ -90,7 +90,7 @@ public class Duke {
     }
 
     /**
-     * Split a string (by /) into tokens
+     * Split a string (by /) into tokens.
      * @param s input string
      * @return An array of tokens
      */

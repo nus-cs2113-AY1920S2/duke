@@ -12,14 +12,14 @@ public class Storage {
     }
 
     /**
-     * Load all content to tasks
+     * Load all content to tasks.
      */
     public void load() {
         file.readAll(tasks);
     }
 
     /**
-     * Store all content from tasks
+     * Store all content from tasks.
      */
     public void store() throws IOException {
         file.writeAll(tasks);

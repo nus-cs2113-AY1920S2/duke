@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * Print messages related to command "bye"
+     * Print messages related to command "bye".
      */
     public void bye() {
         System.out.println("\tBye. Hope to see you again soon!");
