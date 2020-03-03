@@ -44,7 +44,7 @@ Command|Command Action
 [bye](#bye)|Exit Program
 <br>
     
-<h4 id="todo">`todo` : Add new Todo</h4>
+<h4 id="todo"><code>todo</code> : Add new Todo</h4>
 Create new `Todo` and adds task into Task List  
 **Format** : <code>todo **task name**</code>  
 Example : <code>todo **CS Tutorial**</code>  
@@ -56,7 +56,7 @@ Now you have 1 tasks in the list.
 ````
 ___
 
-####`event` : Add new Event
+<h4 id="event"><code>event</code> : Add new Event</h4>
 Create new `Event` and adds it into Task List  
 **Format** : <code>event **event name** /at **date and time**</code>  
 Example : <code>event **NUS open house** /at **28-02-2020 2pm**</code>  
@@ -67,7 +67,7 @@ Got it . I've added this task:
 Now you have 2 tasks in the list. 
 ````
 ___
-####`deadline` : Add new Deadline
+<h4 id="deadline"><code>deadline</code> : Add new Deadline</h4>
 Create new `Deadline` and adds it into Task List  
 **Format** : <code>deadline **task name** /by **deadline**</code>  
 Example : <code>event **CS2113 iP** /by **02-03-2020 12pm**</code>  
@@ -78,7 +78,7 @@ Got it . I've added this task:
 Now you have 3 tasks in the list. 
 ````
 ___
-####`done` : Mark Task as done
+<h4 id="done"><code>done</code> : Mark Task as done</h4>
 Find the corresponding task at given `Index` and mark it as `done`  
 Task Status Box: [x] -Incomplete | [ / ] Completed  
 **Format** : <code>done **Index**</code>  
@@ -89,7 +89,7 @@ Nice! I've marked this task as done:
   [E][/] NUS open house (at: 28-02-2020 2pm)
 ````
 ___
-####`list` : Display all Saved Tasks
+<h4 id="list"><code>list</code> : Display all Saved Tasks</h4>
 `List` out all tasks stored and its task indexes from the Task List  
 **Format** : <code>**list**</code>  
 Example : <code>**list**</code>  
@@ -101,7 +101,7 @@ Here are the tasks in your list:
 3.[D][x] CS2113 iP (by: 02-03-2020 12pm)
 ````
 ___
-####`delete` : Delete Task
+<h4 id="delete"><code>delete</code> : Delete Task</h4>
 Remove the corresponding task at given `Index` from Task List  
 **Format** : <code>delete **Index** </code>  
 Example : <code>delete **2**</code>  
@@ -112,7 +112,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list. 
 ````
 ___
-####`find` : Find Task
+<h4 id="find"><code>find</code> : Find Task</h4>
 `Find` and list out task from Task List that contains the `Keyword`  
 Note: keyword is non-case sensitive.  
 E.g. "TuToRiAL" will get the same result as "tutorial"  
@@ -126,7 +126,7 @@ Here are the matching tasks in your list:
 ````
 ___
 
-####`bye` : Exit Program
+<h4 id="bye"><code>bye</code> : Exit Program</h4>
 Process will terminate and exit the program  
 **Format** : <code>**bye**</code>  
 Example : <code>**bye**</code>  
