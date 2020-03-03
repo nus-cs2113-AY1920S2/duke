@@ -87,10 +87,10 @@ The respective tasks will be created and added to the task list.
     [D] [X] project-report  (by: 18 May 2020)
     You now have 2 tasks in the list.
     __________________________________________________________________________________________
-    event project-meeting /at NUS CLB
+    event project-meeting /at nus-clb
     __________________________________________________________________________________________
     Noted! I have added a new event.
-    [E] [X] project-meeting  (at: NUS CLB)
+    [E] [X] project-meeting  (at: nus-clb)
     You now have 3 tasks in the list.
     __________________________________________________________________________________________
 

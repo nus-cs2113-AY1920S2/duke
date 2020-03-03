@@ -35,7 +35,7 @@ public class Parser {
      */
 
     public static void prepareInput(String input) throws InvalidCommandException {
-        String[] inputArray = input.trim().toLowerCase().split(" ", 2);
+        String[] inputArray = input.trim().split(" ", 2);
         numArguments = inputArray.length;
         if (numArguments == 0) {
             throw new InvalidCommandException();
@@ -43,7 +43,7 @@ public class Parser {
         if (numArguments == 2) {
             description = inputArray[1].trim();
         }
-        commandPrompt = inputArray[0].trim();
+        commandPrompt = inputArray[0].trim().toLowerCase();
     }
 
     /**
