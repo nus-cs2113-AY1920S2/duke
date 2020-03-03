@@ -33,18 +33,18 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 ## 2. Quick Start
 
-*   1. Ensure that `Java 11` or above is installed in your Computer.
-*   2. Download the latest `duke.jar` [_here_](https://github.com/JosephLimWeiJie/duke/releases/download/v0.2.0/duke.jar).
-*   3. Copy the file to the folder you want to use as the home folder for your Duke.
-*   4. Double-click on `duke.jar` to start the app. It should appear in a few seconds.
-*   5. Type in a command and press `ENTER` to execute it. For e.g. typing `list` and                         pressing enter will list all your current tasks.
-*   6. Some other commands you can try:
+* 1. Ensure that `Java 11` or above is installed in your Computer.
+* 2. Download the latest `duke.jar` [_here_](https://github.com/JosephLimWeiJie/duke/releases/download/v0.2.0/duke.jar).
+* 3. Copy the file to the folder you want to use as the home folder for your Duke.
+* 4. Double-click on `duke.jar` to start the app. It should appear in a few seconds.
+* 5. Type in a command and press `ENTER` to execute it. For e.g. typing `list` and                         pressing enter will list all your current tasks.
+* 6. Some other commands you can try:
     *  `todo return book`: adds a todo task to return a book
     *   `deadline Finish a movie /by 2019-12-01T10:00`: adds a deadline task to finish a movie by 1 Dec 2019 at 1000 hrs.
     *   `event Midnight Party /on 2019-12-01T22:00 to 2019-12-01T23:59`: adds an event task to attend a midnight party on 1 Dec 2019  at 2200 hrs to 2359 hrs.
     *   `done 1`: Mark the first task as done shown in the current list.
     *   `bye`: Exits the app
-*   7. Refer to [_Section 3, "Features"_](#features) for more details of each command.
+* 7. Refer to [_Section 3, "Features"_](#features) for more details of each command.
 
 <a name="features"></a>
 
@@ -52,7 +52,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 **Command Format**
 
-``` python
+``` 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. 
     * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
     to specify a task's description.    
