@@ -36,6 +36,8 @@ Adds a new Todo to the TaskList
 #### Expected outcome:
 
         1. [T][N] buy lunch
+            
+-----
     
 ### Feature 2. Create new Deadline: `Deadline`
 Adds a new deadline to the TaskList
@@ -49,6 +51,8 @@ Adds a new deadline to the TaskList
 #### Expected outcome:
 
         2. [D][N] complete CS1010 Assignment ( by: 10-03-2022 ) 
+        
+-----
 
 ### Feature 3. Create new Event: `Event` 
 Adds a new event to the TaskList.
@@ -63,6 +67,8 @@ Adds a new event to the TaskList.
 
         3. [E][N] attend cousin wedding  ( at: 01-04-2022 ) 
         
+-----
+
 ### Feature 4. List all tasks: `List`
 List out all the existing tasks in the TaskList
 
@@ -92,6 +98,8 @@ List out all the existing tasks in the TaskList
 
         Empty!
 
+-----
+
 ### Feature 5. Mark existing tasks: `Mark`
 Marks an existing task in the TaskList
 
@@ -116,6 +124,8 @@ Marks an existing task in the TaskList
 ##### Expected outcome:
 
         Out of Bound!
+
+-----
     
 ### Feature 6. Delete existing tasks: `Delete`
 Deletes an existing task in the TaskList
@@ -141,6 +151,8 @@ Deletes an existing task in the TaskList
 ##### Expected outcome:
 
         Out of Bound!
+    
+-----
     
 ### Feature 7. Find existing tasks: `Find`
 Find an item using a keyword in the TaskList
@@ -168,6 +180,7 @@ Find an item using a keyword in the TaskList
 
         Item not found!!!
 
+-----
 
 ### Feature 8. Exit the program: `Exit`
 Exits the program
@@ -181,6 +194,8 @@ Exits the program
 #### Expected outcome:
 
         Bye. Hope to see you again soon!
+     
+-----
         
 ### Feature 9. Saving information
 * Duke automatically saves the task list into your OS home directory under <code>/Duke.txt</code> <br>
