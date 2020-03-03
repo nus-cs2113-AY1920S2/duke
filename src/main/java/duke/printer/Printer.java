@@ -165,6 +165,7 @@ public class Printer {
             break;
 
         case "find":
+            //Fallthrough
         case "todo":
             System.out.println(command + "(space)<task>");
             printIndentation();
@@ -179,6 +180,8 @@ public class Printer {
             System.out.println("Example: deadline read book /by Sunday");
             break;
 
+        case "delete":
+            //Fallthrough
         case "done":
             System.out.println("Please ensure that the index supplied exists in the list @_@");
             System.out.println();

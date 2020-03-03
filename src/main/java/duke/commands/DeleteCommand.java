@@ -42,7 +42,8 @@ public class DeleteCommand extends Command {
             Printer.printConfirmationMessage(command, taskDelete);
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            Printer.printError(); //TODO add custom error message when accessing OFB index
+            Printer.printFormatError(command);
+            Printer.printHint(command);//TODO add custom error message when accessing OFB index
         }
     }
 }
