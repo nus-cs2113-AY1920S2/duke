@@ -65,10 +65,10 @@ Duke uses UTF-8 unicode characters, which some command prompt might not support.
     ![font selection](font.PNG)
     4. After which, click `Ok`. The command prompt should look like this now:
     ![new font](NewFont.PNG)
-- Once this is done, run duke using this command in command prompt instead:
+    5.Once this is done, run duke using this command in command prompt instead:
     
-`$ java -Dfile.encoding=UTF-8 -jar duke-0.2.jar`.
-    
+   `$ java -Dfile.encoding=UTF-8 -jar duke-0.2.jar`.
+  
 If all goes well, you should see this in command prompt:
 ![Success](Success.PNG)
 
