@@ -1,5 +1,2 @@
-T|0|run
-D|1|duke |2359
-E|1|dinner |9pm
-D|0|week 7 |2359
-T|0|jump up and down
+D|1|buy dinner |7pm
+E|0|dinner |Friday 7pm
