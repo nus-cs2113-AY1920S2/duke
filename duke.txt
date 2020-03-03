@@ -1,0 +1,4 @@
+T | 0 | say hello
+D | 1 | say hello twice | today
+E | 0 | say hello thrice | home
+D | 0 | do work | Sat and Sun
