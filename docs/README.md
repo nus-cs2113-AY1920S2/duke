@@ -46,7 +46,7 @@ ____________________________________________________________
  
 ### `event` - adds an event item at a specified time
 Example of usage: 
-`event Watch the News /at 1am`
+`event Watch the news /at 1am`
 
 Expected outcome:
 ```
