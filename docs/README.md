@@ -52,7 +52,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 **Command Format**
 
-```javascript
+``` javascript
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. 
   * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
     to specify a task's description.
