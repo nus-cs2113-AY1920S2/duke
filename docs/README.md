@@ -52,6 +52,7 @@ Format: `todo TASK`<br/>
 Examples:<br/>
 * `todo read book`
 * `todo join sports club`<br/>
+
 ### 3.3. Adding a "Deadline" task: `deadline`
 Adds a task with a deadline to the task list.<br/>
 Format: `deadline TASK /by yyyy-mm-dd`<br/>
@@ -60,6 +61,7 @@ Reminder: The deadline date format must be **yyyy-mm-dd**.<br/>
 Examples:<br/>
 * `deadline return book /by 2020-06-06`
 * `deadline CS2113 iP project /by 2020-03-01`<br/>
+
 ### 3.4. Adding a "Event" task: `event`
 Adds an event task on a specific date to the task list.<br/>
 Format: `event TASK /at yyyy-mm-dd`<br/>
@@ -67,6 +69,7 @@ Format: `event TASK /at yyyy-mm-dd`<br/>
 Reminder: The deadline date format must be **yyyy-mm-dd**.<br/>
 Examples:<br/>
 * `event project meeting /at 2020-03-01`<br/>
+
 ### 3.5. Listing all tasks: `list`
 Shows a list of all tasks in the Duke task list.<br/>
 Format: `list`<br/>
@@ -77,6 +80,7 @@ Format: `done TASK_NUMBER`<br/>
 Examples:<br/>
 * `done 1`
 * `done 4`<br/>
+
 ### 3.7. Deleting a task: `delete`
 Deletes the specified task from the Duke task list.<br/>
 Format: `delete TASK_NUMBER`<br/>
@@ -84,18 +88,21 @@ Format: `delete TASK_NUMBER`<br/>
 Example:<br/>
 * `delete 1`
 * `delete 4`<br/>
+
 ### 3.8. Checking tasks on a date: `check`
 Displays all the tasks on a specified date.<br/>
 Format: `check /on yyyy-mm-dd`<br/>
 Reminder: The deadline date format must be **yyyy-mm-dd**.<br/>
 Example:<br/>
 * `check /on 2020-03-03`<br/>
+
 ### 3.9. Finding tasks via keyword: `find`
 Finds tasks whose names contain the given keyword.<br/>
 Format: `find KEYWORD`
 Example:<br/>  
 * `find book`
 * `find basketball`<br/>
+
 ### 3.10. Clearing all entries: `clear`
 Clears all entries from the Duke task list.<br/>
 Format: `clear`
