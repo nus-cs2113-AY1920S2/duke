@@ -3,7 +3,7 @@ Duke is program which manages a task list
 Users can add 3 types of task  to the task list: `todo`,`event`,`deadline`  
 Other functions includes `list`,`delete`, `find` and mark task as `done`.
 
-##Starting up
+<h2>Starting up</h2>
 
 
 **Using Command Line**
@@ -83,7 +83,7 @@ ___
 Find the corresponding task at given `Index` and mark it as `done`  
 Task Status Box: [x] -Incomplete | [ / ] Completed  
 **Format** : <code>done <b>Index</b></code>  
-Example : done <b>2</b></code>  
+Example : <code>done <b>2</b></code>  
 Outcome :  
 ````
 Nice! I've marked this task as done:
