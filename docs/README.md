@@ -32,8 +32,8 @@ to save all new tasks and changes made.
 
 ## Features 
 
-|Command|Command Action| 
-| :---: |:---:|
+Command|Command Action
+:---: |:---:
 [todo](#todo)|Add new Todo
 [event](#event)|Add new Event
 [deadline](#deadline)|Add new Deadline
