@@ -77,14 +77,14 @@ There are three types of tasks users can add
 1. Search for specific keyword: `find class`
     * Expected outcome: displays the above two tasks since they contain keyword "class" in description
     
- ## 5. FAQ
+## 5. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Duke`
         * Default file name: `data.txt`
  
- ## 6. Command Summary
+## 6. Command Summary
  * **Add**:
     1. `todo <description>`
     1. `event <description> / <date> <time>`
