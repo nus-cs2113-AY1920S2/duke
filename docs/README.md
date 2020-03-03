@@ -55,6 +55,8 @@ To run Duke, run this command in terminal:
 ## Prerequisites
 Duke's system requirements
 1. JDK 11
+2. Able to output unicode characters in command prompt
+    - Run `$ chcp 65001` in console to allow the command prompt to display UTF-8 unicode characters 
 
 
 ## Features
