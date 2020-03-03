@@ -62,13 +62,13 @@ ____________________________________________________________
  
 ### `deadline` - adds a deadline item at a specified time
 Example of usage: 
-`deadline Submit 1st draft for Joker 2 /by: 1st March 5pm`
+`deadline Submit draft for Joker 2 /by: 1st March 5pm`
 
 Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] Submit 1st draft for Joker 2 (by: 1st March 5pm)
+   [D][ ] Submit draft for Joker 2 (by: 1st March 5pm)
  Now you have 5 tasks in the list.
 ____________________________________________________________
 ```
