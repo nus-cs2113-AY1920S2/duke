@@ -12,7 +12,7 @@
 - [Find an item](#find---finds-all-matching-tasks)
 - [Exit program](#bye---exits-program)
 - [Local data storage](#local-data-storage)
- <br/>
+ <br/><br/>
  
 ## Usage :memo:	
  
@@ -30,6 +30,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ```
+<br/>
  
 ### `todo` - adds a general todo item
 Example of usage: 
@@ -43,7 +44,8 @@ ____________________________________________________________
  Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
- 
+<br/>
+
 ### `event` - adds an event item at a specified time
 Example of usage: 
 `event Watch the news /at 1am`
@@ -56,6 +58,7 @@ ____________________________________________________________
  Now you have 4 tasks in the list.
  ____________________________________________________________
 ```
+<br/>
  
 ### `deadline` - adds a deadline item at a specified time
 Example of usage: 
@@ -69,6 +72,7 @@ ____________________________________________________________
  Now you have 5 tasks in the list.
 ____________________________________________________________
 ```
+<br/>
  
 ### `done` - marks an item as done
 Example of usage: 
@@ -81,6 +85,7 @@ ____________________________________________________________
    [T][1] Practice coding
 ____________________________________________________________
 ```
+<br/>
  
 ### `delete` - deletes an item
 Example of usage: 
@@ -94,6 +99,7 @@ ____________________________________________________________
  Now you have 4 tasks in the list.
 ____________________________________________________________
 ```
+<br/>
  
 ### `find` - finds all matching tasks
 Example of usage: 
@@ -107,6 +113,7 @@ ____________________________________________________________
  3.[E][ ] Watch the news (at: 1am)
 ____________________________________________________________
 ```
+<br/>
  
 ### `bye` - exits program
 Example of usage: 
