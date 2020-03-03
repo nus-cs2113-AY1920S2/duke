@@ -5,13 +5,15 @@
 - [Features](#features)
 - [Usage](#usage)
     - [View help: `help`](#help---prints-the-entire-list-of-command)
+    - [Exit duke: `bye`](#bye---exits-the-application)
     - [Add todo task: `todo`](#todo---adds-a-todo-command-to-the-list)
     - [Add event task: `event`](#event---adds-a-event-task-to-the-list)
     - [Add deadline task: `deadline`](#deadline---adds-a-deadline-task-to-the-list)
     - [View list: `list`](#list---prints-the-entire-list-of-tasks-added)
     - [Mark as done: `done`](#done---marks-a-task-in-the-list-as-done)
     - [Find specific task: `find`](#find---finds-all-tasks-that-contains-keyword)
-    - [Exit duke: `bye`](#bye---exits-the-application)
+    - [Delete specific task: `delete`](#delete---delete-a-task-from-the-list)
+    
 <!-- TOC -->
 
 ## Introduction
@@ -187,4 +189,21 @@ Expected outcome:
 * If no matches
 
     ![](find_no_match.PNG)
+    
+### `delete` - Delete a task from the list
+
+Deletes a task at the specified index of the list
+
+Upon successful mark, a confirmation message will be printed.
+
+An error message will be printed if the task does not exist
+
+Example of usage:
+
+* Correct format example: `delete 1`
+* Incorrect format example: `delete 100000000000`
+
+Expected outcome:
+* If successful: ![](delete_successful.PNG)
+* If unsuccessful ![](delete_unsuccessful.PNG)
     
