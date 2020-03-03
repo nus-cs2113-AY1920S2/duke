@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             Printer.printFormatError(command);
-            Printer.printHint(command);//TODO add custom error message when accessing OFB index
+            Printer.printHint(command);
         }
     }
 }

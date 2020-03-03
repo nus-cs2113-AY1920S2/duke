@@ -218,4 +218,12 @@ public class Printer {
         }
         printLines();
     }
+
+    public static void printFileNotFile() {
+        System.out.println("File not found");
+    }
+
+    public static void printFileCorrupted() {
+        System.out.print("Save file corrupted, please check your file");
+    }
 }

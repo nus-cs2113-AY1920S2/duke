@@ -1,6 +1,7 @@
 package duke.filemanager;
 
 import duke.main.Duke;
+import duke.printer.Printer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,10 +65,10 @@ public class FileSaver {
             fw.write("T | 0 | " + description + System.lineSeparator());
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found"); //TODO move to printer class
+            Printer.printFileNotFile();
 
         } catch (IOException e) {
-            System.out.println("nani"); //TODO move to printer class
+            Printer.printError();
         }
     }
 
@@ -92,10 +93,10 @@ public class FileSaver {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found"); //TODO move to printer class
+            Printer.printFileNotFile();
 
         } catch (IOException e) {
-            System.out.println("nani"); //TODO move to printer class
+            Printer.printError();
         }
     }
 

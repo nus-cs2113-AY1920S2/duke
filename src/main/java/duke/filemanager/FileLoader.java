@@ -1,6 +1,7 @@
 package duke.filemanager;
 
 import duke.parser.Parser;
+import duke.printer.Printer;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -14,6 +15,11 @@ import java.util.Scanner;
  * Loads from the save file into storage
  */
 public class FileLoader {
+    public static final int TASK_TYPE_INDEX = 0;
+    public static final int DESCRIPTION_INDEX = 2;
+    public static final int IS_DONE_INDEX = 1;
+    public static final int DEADLINE_INDEX = 3;
+    public static final int EVENT_AT_INDEX = 3;
 
     /**
      * Loads and store from the save file to the storage
@@ -28,9 +34,9 @@ public class FileLoader {
                 String sentence = s.nextLine();
                 List<String> parsedSentence = Parser.parseFile(sentence);
 
-                String taskType = parsedSentence.get(0); //TODO get rid of magic numbers
-                String description = parsedSentence.get(2); //TODO get rid of magic numbers
-                int isDone = Integer.parseInt(parsedSentence.get(1)); //TODO get rid of magic numbers
+                String taskType = parsedSentence.get(TASK_TYPE_INDEX);
+                String description = parsedSentence.get(DESCRIPTION_INDEX);
+                int isDone = Integer.parseInt(parsedSentence.get(IS_DONE_INDEX));
 
                 switch (taskType) {
                 case "T":
@@ -39,24 +45,24 @@ public class FileLoader {
                     continue;
 
                 case "D":
-                    String dateline = parsedSentence.get(3); // TODO get rid of magic numbers
+                    String dateline = parsedSentence.get(DEADLINE_INDEX);
                     Deadline deadlineTask = new Deadline(isDone, description, dateline);
                     myTasks.storeTasks(deadlineTask);
                     continue;
 
                 case "E":
-                    String EventAt = parsedSentence.get(3); //TODO get rid of magic numbers
+                    String EventAt = parsedSentence.get(EVENT_AT_INDEX);
                     Event eventTask = new Event(isDone, description, EventAt);
                     myTasks.storeTasks(eventTask);
                     continue;
 
                 default:
-                    throw new Exception(); //TODO throw custom exception
+                    throw new Exception();
                 }
             }
 
         } catch (Exception e) {
-            System.out.print("Save file corrupted, please check your file"); //TODO shift print statement to printer
+            Printer.printFileCorrupted();
             System.exit(1);
         }
     }

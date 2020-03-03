@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
 
             int index = Integer.parseInt(indexAsString);
             Task taskDone = myTasks.getTask(index);
-            taskDone.markAsDone(); //TODO QUESTION: How come.. this works?.. is it because its static?
+            taskDone.markAsDone();
 
             FileSaver.updateFile(saveFile, index);
 
