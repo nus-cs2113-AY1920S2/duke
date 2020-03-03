@@ -1,21 +1,23 @@
-package Duke.Task;
+package duke.task;
+
 /**
  * Class representing an Event Task.
  */
+
 public class Event extends Task {
 
     protected String event;
 
-    public Event(String description, String event)  {
+    public Event(String description, String event) {
         super(description);
         this.event = event;
     }
 
     /**
-     * Retrieves the Event Description
+     * Retrieves the Event Description.
      * @return description
      */
-    public String getEvent(){
+    public String getEvent() {
         return description;
     }
 

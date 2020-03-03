@@ -1,4 +1,4 @@
-package Duke.Task;
+package duke.task;
 
 /**
  * Class representing a Deadline Task.
@@ -13,10 +13,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves the Deadline Description
+     * Retrieves the Deadline Description.
      * @return description
      */
-    public String getDeadline(){
+    public String getDeadline() {
         return description;
     }
 

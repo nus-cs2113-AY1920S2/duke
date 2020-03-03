@@ -1,13 +1,13 @@
-package Duke.Parser;
+package duke.parser;
 
-import Duke.Exception.DukeException;
-import Duke.Library.ErrorMessage;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.Todo;
+import duke.exception.DukeException;
+import duke.library.ErrorMessage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
-import static Duke.Library.ErrorMessage.CORRUPTED_TASK;
+import static duke.library.ErrorMessage.CORRUPTED_TASK;
 
 /**
  * Parser for Storage related operations.
@@ -22,9 +22,9 @@ public class ParserStorage {
             String description = taskParts[2].strip();
             Task task;
             if (type.equals("D")) {
-                    task = new Deadline(description, taskParts[3].strip());
+                task = new Deadline(description, taskParts[3].strip());
             } else if (type.equals("E")) {
-                    task = new Event(description, taskParts[3].strip());
+                task = new Event(description, taskParts[3].strip());
             } else {
                 task = new Todo(description);
             }

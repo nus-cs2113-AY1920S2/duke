@@ -1,9 +1,9 @@
-package Duke.Commands;
+package duke.command;
 
-import Duke.Task.Task;
-import Duke.Exception.DukeException;
-import Duke.Storage.Storage;
-import Duke.Ui.Ui;
+import duke.task.Task;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Class representing a command to add a new task.
@@ -18,6 +18,7 @@ public class AddCommand extends Command {
      *
      * @param task The task to add.
      */
+
     public AddCommand(Task task) {
         this.task = task;
     }
@@ -28,6 +29,7 @@ public class AddCommand extends Command {
      * @param ui The user interface displaying events on the task list.
      * @param storage The duke.storage object containing task list.
      */
+
     @Override
     public void execute(Ui ui, Storage storage) throws DukeException {
         storage.getTasks().add(task);

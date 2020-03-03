@@ -1,11 +1,11 @@
-package Duke.Commands;
+package duke.command;
 
-import Duke.Exception.DukeException;
-import Duke.Storage.Storage;
-import Duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
- * Abstract class for all commands
+ * Abstract class for all commands.
  */
 public abstract class Command {
     /**

@@ -1,10 +1,10 @@
-package Duke.Storage;
+package duke.storage;
 
-import Duke.Exception.DukeException;
-import Duke.Library.ErrorMessage;
-import Duke.Parser.ParserStorage;
-import Duke.Task.Task;
-import Duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.library.ErrorMessage;
+import duke.parser.ParserStorage;
+import duke.task.Task;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Retrieves the existing tasks
+     * Retrieves the existing tasks.
      */
     public ArrayList<Task> getTasks() {
         return tasks;

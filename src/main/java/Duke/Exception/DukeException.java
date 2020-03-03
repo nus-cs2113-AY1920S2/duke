@@ -1,4 +1,4 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
  * Represents an error during operation of duke.Duke.

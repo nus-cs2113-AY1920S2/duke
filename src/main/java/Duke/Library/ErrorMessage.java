@@ -1,4 +1,4 @@
-package Duke.Library;
+package duke.library;
 
 /**
  * Error Messages used by duke.Duke.

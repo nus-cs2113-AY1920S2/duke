@@ -1,13 +1,13 @@
-package Duke.Commands;
+package duke.command;
 
-import Duke.Exception.DukeException;
-import Duke.Storage.Storage;
-import Duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
- * Class representing a command to display existing task.
+ * Class representing a command to display Help Menu.
  */
-public class ListCommand extends Command {
+public class HelpCommand extends Command {
     /**
      * Executes this command on the given task list and user interface.
      *
@@ -16,6 +16,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws DukeException {
-        Ui.displayTaskList(storage.getTasks());
+        Ui.displayHelpMenu();
     }
 }

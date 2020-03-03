@@ -1,10 +1,10 @@
-package Duke.Parser;
+package duke.parser;
 
-import Duke.Exception.DukeException;
-import Duke.Library.ErrorMessage;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Todo;
+import duke.exception.DukeException;
+import duke.library.ErrorMessage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Parser for utility functions.

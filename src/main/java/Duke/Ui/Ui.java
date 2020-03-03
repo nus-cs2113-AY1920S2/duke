@@ -1,36 +1,54 @@
-package Duke.Ui;
+package duke.ui;
 
-import Duke.Task.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static Duke.Library.Message.*;
 
 /**
  * Class that handles user input and messages shown to user of this application.
  */
 public class Ui {
 
+    public static final String BOT_NAME = "E.D.I.T.H.";
+    public static final String BOT_LOGO = "\n"
+            + " _______         ______           _________        __________          __     __                \n"
+            + "|   ____|       |    _  |         |__    __|      |___    ___|        |  |   |  |               \n"
+            + "|   |___        |   | |  |           |  |             |  |            |  |___|  |               \n"
+            + "|    ___|       |   | |  |           |  |             |  |            |   ___   |               \n"
+            + "|   |___    _   |   |_|  |   _     __|  |__     _     |  |       _    |  |   |  |    _          \n"
+            + "|_______|  |_|  |_______/   |_|   |________|   |_|    |__|      |_|   |__|   |__|   |_|         \n";
+    public static final String BOT_DESC = "\n"
+            + "\tHi There! My Name is E.D.I.T.H, your personal assistant\n";
+    public static final String MESSAGE_WELCOME = "\n\tHello! I'm " + BOT_NAME + "\n\tWhat can I do for you?";
+    public static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
+    public static final String MESSAGE_ADD = "\tGot it. I've added this ";
+    public static final String MESSAGE_MARK = "\tYou have marked -- ";
+    public static final String MESSAGE_DELETE = "\tYou have deleted --";
+    public static final String LINE_DIVIDER = "\n"
+            + "\t___________________________________________________________________";
+    public static final String MESSAGE_HELP_DESC = "\tFor more information, please read the user guide!";
+
     private Scanner sc;
 
-    public Ui (){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
-    public static final void displayError(String Error){
-        System.out.println(Error);
+    public static final void displayError(String error) {
+        System.out.println(error);
     }
 
     public static final void displayWelcomeMessage() {
-        System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER + BOT_DESC + LINE_DIVIDER);
+        System.out.println("\n" + LINE_DIVIDER + MESSAGE_WELCOME
+                + LINE_DIVIDER + BOT_LOGO + LINE_DIVIDER + BOT_DESC + LINE_DIVIDER);
     }
 
     public static final void displayAddedTask(Task task) {
         System.out.println(MESSAGE_ADD + task);
     }
 
-    public static final void displayDeletedTask(Task task){
+    public static final void displayDeletedTask(Task task) {
         System.out.println(MESSAGE_DELETE + task);
     }
 
@@ -43,44 +61,44 @@ public class Ui {
     }
 
     public static final void displayHelpMenu() {
-        System.out.println(COMMAND_HELP_DESC);
+        System.out.println(MESSAGE_HELP_DESC);
     }
 
-    public static final void displayNumberOfTasks(ArrayList TaskList) {
-        System.out.print("\tNow you have " + TaskList.size() + " tasks in the list.\n");
+    public static final void displayNumberOfTasks(ArrayList tasklist) {
+        System.out.print("\tNow you have " + tasklist.size() + " tasks in the list.\n");
     }
 
     public void displayDone(Task task) {
         System.out.println("It is already marked!");
     }
 
-    public static void displaySearchResults(ArrayList TaskList) {
-        if (!TaskList.isEmpty()) {
-            for (int i = 0; i < TaskList.size(); i++) {
+    public static void displaySearchResults(ArrayList tasklist) {
+        if (!tasklist.isEmpty()) {
+            for (int i = 0; i < tasklist.size(); i++) {
                 System.out.print("\t");
                 System.out.print(i + 1);
                 System.out.print(". ");
-                System.out.println(TaskList.get(i));
+                System.out.println(tasklist.get(i));
             }
-            displayNumberOfTasksFound(TaskList);
+            displayNumberOfTasksFound(tasklist);
         } else {
             System.out.println("\tItem not found!!!");
         }
     }
 
-    private static void displayNumberOfTasksFound(ArrayList TaskList) {
-        System.out.print("\tThere are " + TaskList.size() + " items found.\n");
+    private static void displayNumberOfTasksFound(ArrayList tasklist) {
+        System.out.print("\tThere are " + tasklist.size() + " items found.\n");
     }
 
-    public static void displayTaskList(ArrayList TaskList) {
-        if (!TaskList.isEmpty()) {
-            for (int i = 0; i < TaskList.size(); i++) {
+    public static void displayTaskList(ArrayList tasklist) {
+        if (!tasklist.isEmpty()) {
+            for (int i = 0; i < tasklist.size(); i++) {
                 System.out.print("\t");
                 System.out.print(i + 1);
                 System.out.print(". ");
-                System.out.println(TaskList.get(i));
+                System.out.println(tasklist.get(i));
             }
-            displayNumberOfTasks(TaskList);
+            displayNumberOfTasks(tasklist);
         } else {
             System.out.println("\tEMPTY!!");
         }
@@ -90,7 +108,4 @@ public class Ui {
         sc = new Scanner(System.in);
         return sc.nextLine().strip();
     }
-
-
-
 }

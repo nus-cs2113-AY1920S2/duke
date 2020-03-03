@@ -1,13 +1,13 @@
-package Duke.Commands;
+package duke.command;
 
-import Duke.Exception.DukeException;
-import Duke.Storage.Storage;
-import Duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
- * Class representing a command to exit the program.
+ * Class representing a command to display existing task.
  */
-public class ExitCommand extends Command {
+public class ListCommand extends Command {
     /**
      * Executes this command on the given task list and user interface.
      *
@@ -16,6 +16,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws DukeException {
-        Ui.displayExitMessage();
+        Ui.displayTaskList(storage.getTasks());
     }
 }
