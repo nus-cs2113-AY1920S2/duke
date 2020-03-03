@@ -54,7 +54,7 @@ public class TaskList {
         return this.tasks;
     }
     
-    /** Find all tasks in the List<Task> containing a given keyword and display to user. */
+    /** Finds all tasks in the List<Task> containing a given keyword and display to user. */
     public void findTask(String keyword) {
         System.out.println(MESSAGE_FIND_COMMAND_TASK);
         
@@ -67,7 +67,7 @@ public class TaskList {
     }
     
     /** 
-     * Filter tasks based on a given date. As each type of task contains optional
+     * Filters tasks based on a given date. As each type of task contains optional
      * parameters, there are 2 rounds of filter. The first round of filter filters
      * away tasks that contains empty parameters. The second round of filter filters
      * away tasks whose date does not match the required given date. Then, display
@@ -113,7 +113,7 @@ public class TaskList {
         }       
     }
     
-    /** List all tasks currently in the List<Task> and display to the user. */
+    /** Lists all tasks currently in the List<Task> and display to the user. */
     public void listTask() {
         System.out.println(MESSAGE_COMMAND_LIST_TASK);
         
@@ -145,7 +145,7 @@ public class TaskList {
         reorderTask();
     }
     
-    /** Reorder the tasks within List<Task> according to ascending task IDs. */
+    /** Reorders the tasks within List<Task> according to ascending task IDs. */
     private void reorderTask() {
         int newIndex = 1;
         List<Task> newTasks = new ArrayList<>();
@@ -194,7 +194,7 @@ public class TaskList {
         TaskList.taskIdCounter++;       
     }
     
-    /** Silent loads a task from the storage file into the List<Task>. */
+    /** Silently loads a task from the storage file into the List<Task>. */
     public void loadTask(Task task) {    
         this.tasks.add(task);
         TaskList.taskIdCounter++;       
