@@ -48,15 +48,32 @@ Duke is a personal chatbot that helps the user to store tasks such as todos, eve
 When Duke starts, it loads the list of tasks from `data\duke.txt` if it exist. Likewise, upon exit, it save the task
  into `data\duke.txt` too.
  
-To run Duke, run this command in terminal:
+Duke uses UTF-8 unicode characters, which some command prompt might not support.
+
+- If your command prompt supports UTF-8 natively, to run duke, type this into command prompt
 
 `$ java -jar duke-0.2.jar`
 
+- If your command prompt does not support UTF-8 natively, you could try the following method (for windows user):
+    1. Right click on the title bar of the command prompt and click on `properties`
+    ![right click picture](rightclick.PNG)
+    2. Under `Font`, choose `NSimSun`  (by default, Window's command prompt font is `Consolas`).
+    ![font selection](font.PNG)
+    3. After which, click `Ok`. The command prompt should look like this now:
+    ![new font](NewFont.PNG)
+    4. Once this is done, run duke using this command in command prompt instead:
+
+`$ java -Dfile.encoding=UTF-8 -jar duke-0.2.jar`.
+    
+If all goes well, you should see this in command prompt:
+![Success](Success.PNG)
+
+   
+    
 ## Prerequisites
 Duke's system requirements
 1. JDK 11
 2. Able to output unicode characters in command prompt
-    - Run `$ chcp 65001` in console to allow the command prompt to display UTF-8 unicode characters 
 
 
 ## Features
