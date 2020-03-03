@@ -124,7 +124,7 @@ Example outcome:
 
 **[T][Complete] writeReadme**
 
-### `delete (index)`- Deletes the task at the specified index as done.
+### `delete (index)`- Deletes the task at the specified index.
 
 Example of usage: **delete 1**
 
@@ -144,7 +144,7 @@ Example outcome:
 
 **All tasks removed successfully!**
  
-### `find (keyword)`- Filters the list according to the keyword.
+### `find (keyword)`- Filters the list according to the keyword. Returns the full list if no keyword is specified.
 
 Example of usage: **find sleep**
 
