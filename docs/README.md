@@ -1,19 +1,13 @@
 # duke - User Guide
 duke is a personal task tracker that stores and records your to-dos, deadlines and events.This user guide demonstrates
 how to set up duke and how use the basic features of duke.
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
 ## Setting Up
 1. Extract the jar folder into an empty folder
 2. Enter your preferred terminal and move to the location of the folder
 3. Run the Command-Line interface(CLI) with `java -jar duke.jar` in your terminal
 ![Setting up duke](/images/startup.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
 ### Features
 + [ToDo](#todo)
 + [Deadline](#deadline)
@@ -24,16 +18,10 @@ how to set up duke and how use the basic features of duke.
 + [Find](#find)
 + [Help](#help)
 + [Bye](#bye)
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
 ### Command Format
 Words enclosed by `{` and `}` are parameters that are supplied by you.
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
 ### Task types
 ```
 To-Dos (Represented by [T])
@@ -44,6 +32,7 @@ Deadline (Represented by [D])
 &nbsp;
 &nbsp;
 ## Usage
+&nbsp;
 ### <a id="todo"></a> `todo` - Adds a todo task to your list
 
 Syntax: 
@@ -133,9 +122,6 @@ Example of usage:
 Expected outcome:
 
 ![Deleting tasks](images/delete.JPG)
-&nbsp;
-&nbsp;
-&nbsp;
 &nbsp;
 &nbsp;
 &nbsp;
