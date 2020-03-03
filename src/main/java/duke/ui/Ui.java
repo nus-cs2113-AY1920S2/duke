@@ -1,11 +1,9 @@
 package duke.ui;
 
-import duke.Duke;
-
 import java.util.Scanner;
 
-import static duke.Duke.BYE_MESSAGE;
-import static duke.Duke.DIVIDER;
+import static duke.constant.Constant.*;
+
 
 /**
  * Ui class to interact with users by giving some informed sentences
@@ -22,7 +20,7 @@ public class Ui {
      * Method to print the welcome message for user
      */
     public void showWelcome() {
-        String greeting = Duke.DIVIDER + Duke.HELLO_MESSAGE + Duke.HELP_MESSAGE + Duke.DIVIDER;
+        String greeting = DIVIDER + HELLO_MESSAGE + HELP_MESSAGE + DIVIDER;
         System.out.println(greeting);
     }
 
@@ -30,7 +28,7 @@ public class Ui {
      * Method to print divider for user
      */
     public void showLine() {
-        System.out.print(Duke.DIVIDER);
+        System.out.print(DIVIDER);
     }
 
     /**
@@ -74,9 +72,9 @@ public class Ui {
      * @return error message string
      */
     public String showError(String errorMessage) {
-        return Duke.DIVIDER
+        return DIVIDER
                 + ("☹ OOPS!!! I'm sorry, but there is an error :-(")
                 + (errorMessage)
-                + Duke.DIVIDER;
+                + DIVIDER;
     }
 }

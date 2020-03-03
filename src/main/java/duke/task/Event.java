@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import static duke.constant.Constant.*;
+
 /**
  * Event class extend from Task class to deal with Event
  */
@@ -20,7 +22,7 @@ public class Event extends Task {
         try {
             this.time = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            System.out.println("\tPlease input the correct date format");
+            System.out.println(DATE_FORMAT_MESSAGE);
         }
     }
 
@@ -61,6 +63,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getTimeFormatted() + ")";
+        return EVENT_TYPE + super.toString() + " (at: " + this.getTimeFormatted() + ")";
     }
 }

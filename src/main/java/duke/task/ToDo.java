@@ -1,5 +1,7 @@
 package duke.task;
 
+import static duke.constant.Constant.*;
+
 /**
  * Todo class extend from Task class to deal with Todo
  */
@@ -31,6 +33,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TODO_TYPE + super.toString();
     }
 }

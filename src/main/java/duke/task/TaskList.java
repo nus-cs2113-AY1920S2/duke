@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import static duke.Duke.*;
+import static duke.constant.Constant.*;
+
 
 /**
  * TaskList - class to store different types of tasks such as Todo, Deadline, Event
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private int index;
 
     /**
      * Constructor of TaskList to initialize an empty array list
@@ -48,7 +48,8 @@ public class TaskList {
     public void printList() {
         System.out.println(TASK_LISTING);
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(TAB_SPACE + (i + 1) + "." + tasks.get(i));
+            String taskListingMessage = TAB_SPACE + (i + 1) + "." + tasks.get(i);
+            System.out.println(taskListingMessage);
         }
     }
 
@@ -64,8 +65,9 @@ public class TaskList {
     public void delete(int index, Storage storage) throws IOException{
         try {
             System.out.println(TASK_REMOVED_MESSAGE);
-            System.out.println("\t" + tasks.get(index - 1));
-            tasks.remove(tasks.get(index - 1));
+            Task taskGetting = tasks.get(index - 1);
+            System.out.println("\t" + taskGetting);
+            tasks.remove(taskGetting);
             storage.save(this);
             String printTaskCount = "\tNow you have " + tasks.size() + " tasks in the list.";
             System.out.println(printTaskCount);
@@ -90,11 +92,12 @@ public class TaskList {
             if (index >= tasks.size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            tasks.get(index - 1).markAsDone();
+            Task taskGetting = tasks.get(index - 1);
+            taskGetting.markAsDone();
             storage.save(this);
             System.out.println(TASK_MARKING_MESSAGE);
             String printTask = "\t%s\n";
-            System.out.printf(printTask, tasks.get(index - 1));
+            System.out.printf(printTask, taskGetting);
         } catch (NumberFormatException e) {
             System.out.println(WRONG_NUMBER_FORMAT_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -115,7 +118,9 @@ public class TaskList {
      */
     public void addTask(Storage storage, String command, String prefix) throws DateTimeParseException {
         try {
-            int splitIndex = command.indexOf("/");
+            int splitIndex = command.indexOf(SLASH_SEPARATOR);
+
+            //adding different types of Task based on their prefixes
             switch (prefix) {
             case EMPTY_STRING:
                 throw new NullPointerException();
@@ -140,11 +145,14 @@ public class TaskList {
             if (tasks.size() > TASK_LIMIT) {
                 throw new ArrayIndexOutOfBoundsException();
             }
+
+            //printing the messages to users
             System.out.println(ADDED_TASK_MESSAGE);
             String printTask = "\t" + tasks.get(tasks.size() - 1);
             System.out.println(printTask);
             String printTaskCount = "\tNow you have " + tasks.size() + " tasks in the list.";
             System.out.println(printTaskCount);
+
         } catch (NullPointerException e) {
             System.out.println(EMPTY_INPUT_MESSAGE);
         } catch (StringIndexOutOfBoundsException e) {
@@ -166,16 +174,18 @@ public class TaskList {
      */
     public void findTask(String keyWord) {
         keyWord = keyWord.trim().toLowerCase();
-        ArrayList<Task> key = new ArrayList<>();
+        ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task t : tasks) {
-            boolean isMatched = t.getDescription().trim().toLowerCase().contains(keyWord);
+            String taskToLowerCase = t.getDescription().trim().toLowerCase();
+            boolean isMatched = taskToLowerCase.contains(keyWord);
             if (isMatched) {
-                key.add(t);
+                matchedTasks.add(t);
             }
         }
-        System.out.println("\tHere are the matching tasks in your list:");
-        for (int i = 0; i < key.size(); i++) {
-            System.out.println("\t" + (i + 1) + ": " + key.get(i));
+        System.out.println(THE_MATCHING_TASKS_IN_YOUR_LIST);
+        for (int i = 0; i < matchedTasks.size(); i++) {
+            String taskListingMessage = TAB_SPACE + (i + 1) + ": " + matchedTasks.get(i);
+            System.out.println(taskListingMessage);
         }
     }
 }
