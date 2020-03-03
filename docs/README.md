@@ -23,11 +23,13 @@ There are three types of tasks users can add
 ##### Todo:
 * Basic tasks for quick noting down, no date or time required 
 * **Usage**: `todo <description>`
+
 ##### Event:
 * Event type tasks, _date and time required_ 
 * **Usage**: `event <description> / <date> <time>`
     * date format: YYYY-MM-DD
     * time format: HHMM  
+    
 ##### Deadline:
 * Tasks with a deadline, _date and time required_ 
 * **Usage**: `deadline <description> / <date> <time>`
