@@ -93,6 +93,7 @@ Expected outcome:
 &nbsp;
 &nbsp;
 &nbsp;
+&nbsp;
 ### <a id="done"></a> `done` - Marks task as completed based on specified index
 
 Syntax: 
