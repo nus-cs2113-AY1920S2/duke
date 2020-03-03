@@ -104,7 +104,7 @@ public class FileSaver {
         try {
             temp.createNewFile();
         } catch (IOException e) {
-            System.out.println("nani"); //TODO
+            Printer.printError();
         }
     }
 
