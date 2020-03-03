@@ -32,7 +32,8 @@ There are three types of tasks users can add
 * Tasks with a deadline, _date and time required_ 
 * **Usage**: `deadline <description> / <date> <time>`
     * date format: YYYY-MM-DD
-    * time format: HHMM  
+    * time format: HHMM 
+     
 ### 3.2 - List
 * Lists all tasks
 * **Usage**: `list`
