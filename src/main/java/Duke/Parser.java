@@ -11,7 +11,6 @@ public class Parser {
     /**
      * Parses user commands to relevant functions to complete it while checking for user input errors.
      * @param taskArray the task list of the current session to be parsed to relevant command methods
-     * @param lastShownList a  of tasks shown previously when the list or find command has been called
      * @param scanner a scanner object that takes in user input
      */
     public static void parseUserCommands(TaskList taskArray, Scanner scanner) {
@@ -29,6 +28,7 @@ public class Parser {
                 Storage.saveTasks(Duke.FILEPATH, taskArray);
                 break;
             case "find":
+                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
                 String keyword = tokenizedInputs[1];
                 lastShownList.clear();
                 Ui.displayMatchingTasks(taskArray, lastShownList, keyword);
