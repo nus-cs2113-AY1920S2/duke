@@ -97,7 +97,7 @@ public class Messages {
 
     public static final String HELP_COMMAND_LIST = "\tThis is a list of all valid commands for Duke:" + LS + LS
             + "\t1. todo - adds a Todo task to list of tasks" + LS
-            + "\tUsage: \'todo <description> \'" + LS + LS
+            + "\tUsage: \'todo <description>\'" + LS + LS
             + "\t2. event - adds an Event task to list of tasks" + LS
             + "\tUsage: \'event <description> /<remark>\'" + LS + LS
             + "\t3. deadline - adds a Deadline task to list of tasks" + LS

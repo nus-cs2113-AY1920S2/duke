@@ -25,6 +25,14 @@
  
 Duke is a CLI-based application that helps you keep track of your tasks. 
 This application is for people who are *able to type fast* and *prefer keep tracking of tasks on their desktops using a Command-Line Interface.*
+
+####Quick Start Guide
+1. Ensure you have JDK 11 installed on your computer. You can download the installer for your OS from [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+2. Download the latest .jar file release from [GitHub](https://github.com/brandoncjh/duke/releases).
+3. Move the .jar to en empty directory.
+4. Open Command Prompt.
+5. In Command Prompt, change your current working directory to the folder containing the .jar using `cd <Path of folder containing .jar>`
+6. Run the .jar using `java -jar duke-1.0.1.jar`
  
 &nbsp;
  
