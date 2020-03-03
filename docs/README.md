@@ -17,9 +17,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I''ve added this task:
-[T][✘] buy dinner
-Now you have 1 task in the list.`
+`Got it. I''ve added this task:`   
+`[T][✘] buy dinner`   
+`Now you have 1 task in the list.`
 
 ### `DEADLINE` 
 
@@ -30,10 +30,10 @@ Example of usage:
 `Deadline buy dinner /by 7pm`
 
 Expected outcome:
-
-`Got it. I''ve added this task: 
-[D][✘] buy dinner (by: 7pm)
-Now you have 2 tasks in the list.`
+   
+`Got it. I''ve added this task:`    
+`[D][✘] buy dinner (by: 7pm)`   
+`Now you have 2 tasks in the list.`
 
 ### `EVENT` 
 
@@ -45,9 +45,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I''ve added this task: 
-[E][✘] dinner (at: Friday 7pm)
-Now you have 3 tasks in the list.`
+`Got it. I''ve added this task:`   
+`[E][✘] dinner (at: Friday 7pm)`  
+`Now you have 3 tasks in the list.`
  
 ### 2. Delete Task  
 Delete tasks from the list.
@@ -64,9 +64,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I''ve removed this task: 
-[T][✘] buy dinner
-Now you have 2 tasks in the list.`
+`Got it. I''ve removed this task:`   
+`[T][✘] buy dinner`  
+`Now you have 2 tasks in the list.`
  
 ### 3. Done Task  
 Mark tasks as done.
@@ -83,8 +83,8 @@ Example of usage:
  
 Expected outcome:
 
-`Nice! I've marked this task as done: 
-[D][✓] buy dinner (by: 7pm)`
+`Nice! I've marked this task as done:`   
+`[D][✓] buy dinner (by: 7pm)`
   
 ### 4. List Tasks  
 View all the tasks current in your list.
@@ -101,9 +101,9 @@ Example of usage:
  
 Expected outcome:
 
-`Here are the tasks in your list: 
- 1.[D][✓] buy dinner (by: 7pm)
- 2.[E][✘] dinner (at: Friday 7pm)`
+`Here are the tasks in your list:`  
+` 1.[D][✓] buy dinner (by: 7pm)`   
+` 2.[E][✘] dinner (at: Friday 7pm)`
   
 ### 5. Find Tasks  
 Search for that contain the specified keyword.
@@ -120,8 +120,8 @@ Example of usage:
  
 Expected outcome:
 
-`Here are the matching tasks in your list: `
-`1. [D][✓] buy dinner (by: 7pm) `
+`Here are the matching tasks in your list: `   
+`1. [D][✓] buy dinner (by: 7pm) `  
 `2. [E][✘] dinner (at: Friday 7pm)`
  
 ### 6. Exit Program  

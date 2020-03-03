@@ -1,7 +1,6 @@
-package Duke;
-
 import Duke.Command.Command;
 import Duke.UI.Ui;
+import Duke.*;
 
 public class Duke {
 

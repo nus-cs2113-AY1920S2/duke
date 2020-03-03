@@ -1,6 +1,4 @@
 package Duke.Command;
-import Duke.UI.*;
-import Duke.Duke;
 import Duke.Tasks.*;
 import Duke.TaskList;
 import Duke.Storage;
@@ -8,7 +6,6 @@ import Duke.DukeException;
 import Duke.UI.Messages;
 import Duke.UI.Ui;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
