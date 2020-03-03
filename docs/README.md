@@ -6,7 +6,7 @@ By: `JosephLimWeiJie` Since: `Feb 2019`
 * [1. Introduction](#introduction)
 * [2. Quick Start](#quick-start)
 * [3. Features](#features)
-    + [3.1. Adding a task:](#addtask) `add`
+    + [3.1. Adding a task:](#addtask) `todo, deadline, event`
     + [3.2. Listing all tasks:](#list) `list`
     + [3.3. Finding a task:](#find) `find`
     + [3.4. Deleting a task:](#delete) `delete`
@@ -41,7 +41,7 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 *   6. Some other commands you can try:
     *  `todo return book`: adds a todo task to return a book
     *   `deadline Finish a movie /by 2019-12-01T10:00`: adds a deadline task to finish a movie by 1 Dec 2019 at 1000 hrs.
-    *   `event Midnight Party /at Marina Bay Sands`: adds an event task to attend a midnight party at Marina Bay Sands
+    *   `event Midnight Party /on 2019-12-01T10:00 to 2019-12-01T23:59`: adds an event task to attend a midnight party at Marina Bay Sands
     *   `done 1`: Mark the first task as done shown in the current list.
     *   `bye`: Exits the app
 *   7. Refer to [_Section 3, "Features"_](#features) for more details of each command.
@@ -54,29 +54,28 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 
 ``` javascript
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. 
-  * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
-    to specify a task's description.
+    * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
+    to specify a task's description.    
 
 * For a general todo task, a task description MUST be added
-  * e.g. in `todo TASK_DESCRIPTION`.
+    * e.g. in `todo TASK_DESCRIPTION`.
 
 * For a deadline task, a date MUST be added right after the TASK_DESCRIPTION by using /by. 
-  * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
-  Note that you have to add 'T' between the date and the time.
+    * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
+    Note that you have to add 'T' between the date and the time.  
   
 * For an event task, an event start and end date and time MUST be added 
   right after the TASK_DESCRIPTION by using /on.
-  * e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` 
+    * e.g. in `event TASK_DESCRIPTION /on YYYY-MM-DDTHH:mm to YYYY-MM-DDTHH:mm` 
          such as 2020-01-12T10:00 to 2020-01-12T11:00`.
-  Note that you have to add 'T' between the date and the time.    
-
+    Note that you have to add 'T' between the date and the time.     
 ```
 
 <a name="addtask"></a>
 
-### 3.1 Adding a task: `add`
+### 3.1 Adding a task: `todo, deadline, event`
 
-Adds a task into Duke.
+Adds a todo, deadline or an event task into Duke.
 
 
 * **Format**: 
