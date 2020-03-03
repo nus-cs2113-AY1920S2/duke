@@ -9,6 +9,7 @@ import static duke.constant.Constant.*;
  * Ui class to interact with users by giving some informed sentences
  */
 public class Ui {
+
     /**
      * Empty Ui constructor
      */
@@ -54,7 +55,7 @@ public class Ui {
      * Method to print the error that the file has not been created
      */
     public void showLoadingError() {
-        System.out.println(DIVIDER + "\tThe directory does not exist, currently creating a new one"
+        System.out.println(DIVIDER + DIRECTORY_DOES_NOT_EXIST
         + DIVIDER);
     }
 
@@ -73,7 +74,7 @@ public class Ui {
      */
     public String showError(String errorMessage) {
         return DIVIDER
-                + ("☹ OOPS!!! I'm sorry, but there is an error :-(")
+                + ERROR_MESSAGE
                 + (errorMessage)
                 + DIVIDER;
     }

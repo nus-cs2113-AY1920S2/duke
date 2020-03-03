@@ -46,6 +46,9 @@ public final class Constant {
     public static final String THE_MATCHING_TASKS_IN_YOUR_LIST = "\tHere are the matching tasks in your list:";
     public static final String DIRECTORY_PATH = "data";
     public static final String SLASH_SEPARATOR = "/";
+    public static final String ERROR_MESSAGE = "☹ OOPS!!! I'm sorry, but there is an error :-(";
+    public static final String DIRECTORY_DOES_NOT_EXIST = "\tThe directory does not exist,"
+                                                        + "currently creating a new one\n";
 
     private Constant() {
 
