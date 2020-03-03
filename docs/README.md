@@ -20,7 +20,7 @@ Other functions includes `list`,`delete`, `find` and mark task as `done`.
 - Duke will automatically load up duke.txt from designated file path upon program start up.
 
 - All changes made to Task List will automatically saved into duke.txt
-<br><br>
+<br></br>  
 **_Note: First-Time User or Missing duke.txt_**  
 ````
 Unable to find File
@@ -33,7 +33,7 @@ to save all new tasks and changes made.
 ## Features 
 
 Command|Command Action
-:---: |:---:
+:---:|:---:
 [todo](#todo)|Add new Todo
 [event](#event)|Add new Event
 [deadline](#deadline)|Add new Deadline
@@ -42,8 +42,9 @@ Command|Command Action
 [delete](#delete)|Delete Task
 [find](#find)|Find Task
 [bye](#bye)|Exit Program
-<br>
-    
+
+<br></br>
+
 <h4 id="todo"><code>todo</code> : Add new Todo</h4>
 Create new `Todo` and adds task into Task List  
 **Format** : <code>todo **task name**</code>  
