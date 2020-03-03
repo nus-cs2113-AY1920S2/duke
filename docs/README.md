@@ -5,7 +5,7 @@ Kesin chat bot allows users to easily organise their tasks.
 ## Table of Contents
 
 
-- [Quick Start](https://github.com/itskesin/duke/tree/master/docs#quick-start)
+- [Quick Start](#quick-start)
 - [Features](https://github.com/itskesin/duke/tree/master/docs#features)
     
     - [Add a new task](https://github.com/itskesin/duke/tree/master/docs#add-a-new-task)
