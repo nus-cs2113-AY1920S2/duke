@@ -58,6 +58,7 @@ Duke uses UTF-8 unicode characters, which some command prompt might not support.
     1. Enter this command into command prompt:
 
     `$ chcp 65001`
+    
     2. Right click on the title bar of the command prompt and click on `properties`
     ![right click picture](rightclick.PNG)
     3. Under `Font`, choose `NSimSun`  (by default, Window's command prompt font is `Consolas`).
