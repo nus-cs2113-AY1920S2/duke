@@ -33,5 +33,8 @@ public class Messages {
     public static final String EMPTY_LIST_MESSAGE = "There is nothing on the list.\n";
     public static final String LIST_HEADER_MESSAGE = "Here are the tasks in your list: \n";
 
+    public static final String MESSAGE_FIND_SUCCESS = "Here are the matching tasks in your list:\n";
+    public static final String FIND_ERROR_MESSAGE = "I'm sorry but none of the tasks contain this keyword.\n";
+
 }
 
