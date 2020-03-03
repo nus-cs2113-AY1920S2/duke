@@ -1,5 +1,5 @@
 # Duke User Guide
-
+* Note: You may need to zoom out to properly view the side bar
 ## Features 
 
 ### List All Tasks
