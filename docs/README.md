@@ -2,17 +2,17 @@
 DUKE is a chat bot that helps users manage their tasks.
 
 ## Table of Contents
-- [Quick Start](https://github.com/sitinadiah25/duke/tree/master/docs#quick-start)
-- [Features](https://github.com/sitinadiah25/duke/tree/master/docs#features)
+- [Quick Start](#quick-start)
+- [Features](#features)
     
-    - [Add a new task](https://github.com/sitinadiah25/duke/tree/master/docs#add-a-new-task)
-    - [Find tasks](https://github.com/sitinadiah25/duke/tree/master/docs#find-task)
-    - [Delete task](https://github.com/sitinadiah25/duke/tree/master/docs#delete-task)
-    - [List tasks](https://github.com/sitinadiah25/duke/tree/master/docs#list-tasks)
-    - [Mark task as done](https://github.com/sitinadiah25/duke/tree/master/docs#mark-task-as-done)
-    - [Exit program](https://github.com/sitinadiah25/duke/tree/master/docs#exit-program)
+    - [Add a new task](#add-a-new-task)
+    - [Find tasks](#find-task)
+    - [Delete task](#delete-task)
+    - [List tasks](#list-tasks)
+    - [Mark task as done](#mark-task-as-done)
+    - [Exit program](#exit-program)
 
-- [Feedback](https://github.com/sitinadiah25/duke/tree/master/docs#feedback) 
+- [Feedback](#feedback) 
 
 ## Quick Start 
 
