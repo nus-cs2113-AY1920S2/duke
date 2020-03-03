@@ -46,8 +46,6 @@ Expected outcome:
 
 ![Adding ToDo task](images/todo.JPG)
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 ### <a id="deadline"></a> `deadline` - Adds a deadline task to your list
 
 Syntax:
