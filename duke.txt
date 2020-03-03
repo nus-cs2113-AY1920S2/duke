@@ -1,0 +1,4 @@
+T | 1 | buy food
+T | 1 | miss Sheena
+T | 0 | love Sheena forever
+T | 0 | I love you Coco
