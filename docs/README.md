@@ -41,8 +41,7 @@ Expected outcome:
 
 <code>Welcome to the Help Page<br/>
 Here is a list of valid commands and formats:<br/>
-&nbsp;&nbsp;1) todo <task description>  -  adds a todo task<br/>
-&nbsp;&nbsp;... ...</code>
+&nbsp;&nbsp;1) todo <task description>  -  adds a todo task</code>
 
 #### `todo` - Adds a todo task
 
