@@ -70,7 +70,7 @@ This command creates a new task and adds it to the task list.
 **Example of usage:** <br>
 > `todo project` <br>
 > `deadline project-report /by 2020-05-18` <br>
-> `event project-meeting /at 2020-05-10` <br>
+> `event project-meeting /at nus-clb` <br>
 
 **Expected outcome:** <br>
 The respective tasks will be created and added to the task list.
