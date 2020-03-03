@@ -72,6 +72,12 @@ public class Ui {
         System.out.println("It is already marked!");
     }
 
+    /**
+     * Display tasks that match the keyword.
+     *
+     * @param tasklist The tasklist that contains tasks that match the keyword.
+     */
+
     public static void displaySearchResults(ArrayList tasklist) {
         if (!tasklist.isEmpty()) {
             for (int i = 0; i < tasklist.size(); i++) {
@@ -86,10 +92,20 @@ public class Ui {
         }
     }
 
+    /**
+     * Display the number of tasks.
+     *
+     * @param tasklist The existing tasklist.
+     */
     private static void displayNumberOfTasksFound(ArrayList tasklist) {
         System.out.print("\tThere are " + tasklist.size() + " items found.\n");
     }
 
+    /**
+     * Display the existing tasks.
+     *
+     * @param tasklist The existing tasklist.
+     */
     public static void displayTaskList(ArrayList tasklist) {
         if (!tasklist.isEmpty()) {
             for (int i = 0; i < tasklist.size(); i++) {

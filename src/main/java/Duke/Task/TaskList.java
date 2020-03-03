@@ -30,6 +30,13 @@ import static duke.parser.Parser.getWord;
  */
 public class TaskList {
 
+    /**
+     * Execute the command from userInput.
+     *
+     * @param userInput The userInput from the Ui.
+     * @return The command object.
+     * @throws DukeException If the command is undefined.
+     */
     public static Command executeCommand(String userInput) throws DukeException {
         String commandWord = getCommandWord(userInput);
         switch (commandWord.toUpperCase()) {

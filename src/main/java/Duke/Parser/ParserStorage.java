@@ -14,6 +14,14 @@ import static duke.library.ErrorMessage.CORRUPTED_TASK;
  */
 public class ParserStorage {
 
+    /**
+     * Parses a task from String format back to task.
+     *
+     * @param line description of the task.
+     * @return The corresponding task object.
+     * @throws DukeException If the line is corrupted.
+     */
+
     public static Task createTaskFromStorage(String line) throws DukeException {
         String[] taskParts = line.split("\\|");
         try {
@@ -34,6 +42,13 @@ public class ParserStorage {
             throw new DukeException(CORRUPTED_TASK);
         }
     }
+
+    /**
+     * Parses a task from task to String format.
+     *
+     * @param task The task.
+     * @return The corresponding String format of the task object.
+     */
 
     public static String toStorageString(Task task) throws DukeException {
         if (task instanceof Deadline) {

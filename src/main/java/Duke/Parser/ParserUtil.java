@@ -11,6 +11,14 @@ import duke.task.Todo;
  */
 public class ParserUtil {
 
+    /**
+     * Create a todo task.
+     *
+     * @param userInput The userInput from Ui.
+     * @return Todo Object.
+     * @throws DukeException If the userInput is undefined.
+     */
+
     public static Todo createTodo(String userInput) throws DukeException {
         String description = userInput.substring("todo".length()).strip();
         if (description.isEmpty()) {
@@ -18,6 +26,14 @@ public class ParserUtil {
         }
         return new Todo(description);
     }
+
+    /**
+     * Create a deadline task.
+     *
+     * @param userInput The userInput from Ui.
+     * @return Deadline Object.
+     * @throws DukeException If the userInput is undefined.
+     */
 
     public static Deadline createDeadline(String userInput) throws DukeException {
         String[] deadlineDetails = userInput.substring("deadline".length()).strip().split("/by");
@@ -29,6 +45,14 @@ public class ParserUtil {
         }
         return new Deadline(deadlineDetails[0].strip(),deadlineDetails[1].strip());
     }
+
+    /**
+     * Create an event task.
+     *
+     * @param userInput The userInput from Ui.
+     * @return Event Object.
+     * @throws DukeException If the userInput is undefined.
+     */
 
     public static Event createEvent(String userInput) throws DukeException {
         String[] eventDetails = userInput.substring("event".length()).strip().split("/at");

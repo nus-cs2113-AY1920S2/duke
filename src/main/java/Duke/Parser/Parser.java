@@ -9,9 +9,24 @@ import duke.library.ErrorMessage;
  */
 public class Parser {
 
+    /**
+     * Get Command word from userInput.
+     *
+     * @param userInput The userInput read by Ui.
+     * @return The Command word.
+     */
+
     public static String getCommandWord(String userInput) {
         return userInput.strip().split(" ")[0];
     }
+
+    /**
+     * Get word from userInput.
+     *
+     * @param userInput The userInput read by Ui.
+     * @return The word.
+     * @throws DukeException If userInput is undefined.
+     */
 
     public static String getWord(String userInput) throws DukeException {
         try {
@@ -20,6 +35,14 @@ public class Parser {
             throw new DukeException(ErrorMessage.INVALID_FORMAT);
         }
     }
+
+    /**
+     * Get index from userInput.
+     *
+     * @param userInput The userInput read by Ui.
+     * @return The index.
+     * @throws DukeException If userInput is undefined.
+     */
 
     public static int getIndex(String userInput) throws DukeException {
         try {
