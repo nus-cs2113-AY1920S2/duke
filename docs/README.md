@@ -33,7 +33,6 @@ Deadline (Represented by [D])
 &nbsp;
 ## Usage
 &nbsp;
-&nbsp;
 ### <a id="todo"></a> `todo` - Adds a todo task to your list
 
 Syntax: 
