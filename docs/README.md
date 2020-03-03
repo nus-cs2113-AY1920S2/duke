@@ -62,7 +62,7 @@ Noted: If the users input a time in the format of `yyyy-mm-dd`, Duke can recogni
 
 Add event task into task list
 
-Format:​ ```event TASK_NAME /by TIME```
+Format:​ ```event TASK_NAME /at TIME```
 
 Noted: If the users input a time in the format of `yyyy-mm-dd`, Duke can recognize the input time string as a real time.
 
@@ -86,7 +86,7 @@ Format: ​`list`
 
 ### 2.5 `Find` Tasks
 
-Users can find all the tasks which contains a certain keyword(Case sensitive).
+Users can find all the tasks which contains a certain keyword (Case sensitive).
 
 Format: ​`find KEYWORD`
 
