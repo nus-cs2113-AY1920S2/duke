@@ -26,7 +26,7 @@
 Duke is a CLI-based application that helps you keep track of your tasks. 
 This application is for people who are *able to type fast* and *prefer keep tracking of tasks on their desktops using a Command-Line Interface.*
 
-####Quick Start Guide
+#### Quick Start Guide
 1. Ensure you have JDK 11 installed on your computer. You can download the installer for your OS from [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 2. Download the latest .jar file release from [GitHub](https://github.com/brandoncjh/duke/releases).
 3. Move the .jar to en empty directory.
@@ -298,26 +298,20 @@ Expected outcome:
  
 ## 5. Command Summary 
  
-* *Todo* : `todo <Description>` \
-e.g. `todo read book`
+* *Todo* : `todo <Description>` e.g. `todo read book`
 
-* *Event* : `event <Description> /<Remark>` \
-e.g. `event Justin's 21st /Justin's house Sat 8pm`
+* *Event* : `event <Description> /<Remark>` e.g. `event Justin's 21st /Justin's house Sat 8pm`
  
  
-* *Deadline* : `deadline <Description> /<Remark>` \
-e.g. `deadline CS2113 iP submission /2nd Mar 12pm`
+* *Deadline* : `deadline <Description> /<Remark>` e.g. `deadline CS2113 iP submission /2nd Mar 12pm`
  
-* *Mark as Done* : `done <Index>` \
-e.g. `done 1`
+* *Mark as Done* : `done <Index>` e.g. `done 1`
  
 * *List* : `list` 
  
-* *Find* : `find <Keyword>` \
-e.g. `find book`
+* *Find* : `find <Keyword>` e.g. `find book`
  
-* *Delete* : `delete <Index>` \
-e.g. `delete 1`
+* *Delete* : `delete <Index>` e.g. `delete 1`
  
 * *Clear* : `clear`
  
