@@ -111,7 +111,7 @@ Deletes the `task` in the `task` list corresponding to the `index` supplied
 
 #### Usage
 Example of usage:
->`delete 2>
+>`delete 2`
 
 Expected outcome:
 >`Removed the task:`\
