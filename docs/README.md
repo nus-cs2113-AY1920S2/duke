@@ -6,14 +6,14 @@ Kesin chat bot allows users to easily organise their tasks.
 
 
 - [Quick Start](#quick-start)
-- [Features](https://github.com/itskesin/duke/tree/master/docs#features)
+- [Features](#features)
     
-    - [Add a new task](https://github.com/itskesin/duke/tree/master/docs#add-a-new-task)
-    - [Find your tasks](https://github.com/itskesin/duke/tree/master/docs#find-your-tasks)
-    - [Deletes a task in the list](https://github.com/itskesin/duke/tree/master/docs#deletes-a-task-in-the-list)
-    - [View all tasks](https://github.com/itskesin/duke/tree/master/docs#view-all-tasks)
-    - [Marks tasks as done](https://github.com/itskesin/duke/tree/master/docs#marks-tasks-as-done)
-    - [Save and Exit](https://github.com/itskesin/duke/tree/master/docs#save-and-exit)
+    - [Add a new task](#add-a-new-task)
+    - [Find your tasks](#find-your-tasks)
+    - [Deletes a task in the list](#deletes-a-task-in-the-list)
+    - [View all tasks](#view-all-tasks)
+    - [Marks tasks as done](#marks-tasks-as-done)
+    - [Save and Exit](#save-and-exit)
 
 ## Quick Start 
 
