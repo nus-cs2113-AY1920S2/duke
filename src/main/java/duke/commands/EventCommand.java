@@ -25,22 +25,24 @@ public class EventCommand extends Command {
 
     /**
      * Constructs the EventCommand object.
-     * @param command the command prompt entered by the user.
+     *
+     * @param command     the command prompt entered by the user.
      * @param description the description of the event entered by the user.
-     * @param at the location of the event entered by the user.
+     * @param at          the location of the event entered by the user.
      */
 
     public EventCommand(String command, String description, String at) {
         super(command);
         this.description = description;
-        this.at =at;
+        this.at = at;
     }
 
     /**
      * Executes the EventCommand and creates a new event task in the tasklist.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

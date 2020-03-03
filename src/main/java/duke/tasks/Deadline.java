@@ -14,8 +14,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs the Deadline object.
+     *
      * @param description the description of the deadline entered by the user.
-     * @param by the deadline/date entered by the user.
+     * @param by          the deadline/date entered by the user.
      */
 
     public Deadline(String description, String by) {
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the information related to the Deadline object.
+     *
      * @return the information related to the Deadline object.
      */
 

@@ -22,7 +22,8 @@ public class FindCommand extends Command {
 
     /**
      * Constructs the FindCommand object.
-     * @param command the command prompt entered by the user.
+     *
+     * @param command   the command prompt entered by the user.
      * @param substring the substring used to find matching tasks entered by the user.
      */
 
@@ -34,9 +35,10 @@ public class FindCommand extends Command {
     /**
      * Executes the FindCommand and searches for tasks with descriptions matching the substring,
      * displaying these tasks in an ordered list.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

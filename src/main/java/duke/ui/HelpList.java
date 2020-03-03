@@ -75,6 +75,7 @@ public class HelpList {
 
     /**
      * Message displayed when user opens the help menu.
+     *
      * @return the help menu message.
      */
 

@@ -28,9 +28,10 @@ public class DeadlineCommand extends Command {
 
     /**
      * Constructs the DeadlineCommand object.
-     * @param command the command prompt entered by the user.
+     *
+     * @param command     the command prompt entered by the user.
      * @param description the description of the deadline entered by the user.
-     * @param by the deadline/date entered by the user.
+     * @param by          the deadline/date entered by the user.
      */
 
     public DeadlineCommand(String command, String description, String by) {
@@ -41,9 +42,10 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the DeadlineCommand and creates a new deadline task in the tasklist.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

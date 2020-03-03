@@ -26,7 +26,8 @@ public class Task {
 
     /**
      * Constructs the Task object.
-     * @param taskType the type of task entered by the user.
+     *
+     * @param taskType    the type of task entered by the user.
      * @param description the description of the task entered by the user.
      */
 
@@ -38,6 +39,7 @@ public class Task {
 
     /**
      * Update the done status of the task.
+     *
      * @param update the updated done status of the task.
      */
 
@@ -47,6 +49,7 @@ public class Task {
 
     /**
      * Returns the done status of the task.
+     *
      * @return the done status of the task.
      */
 
@@ -56,6 +59,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return the description of the task.
      */
 
@@ -65,6 +69,7 @@ public class Task {
 
     /**
      * Returns the type of the task.
+     *
      * @return the type of the task.
      */
 
@@ -74,6 +79,7 @@ public class Task {
 
     /**
      * Returns the done status icon of the task.
+     *
      * @return the done status icon of the task.
      */
 
@@ -83,6 +89,7 @@ public class Task {
 
     /**
      * Returns the information related to the Task object.
+     *
      * @return the information related to the Task object.
      */
 
@@ -90,5 +97,5 @@ public class Task {
     public String toString() {
         return getTaskType() + " " + getStatusIcon() + " " + this.description;
     }
-    
+
 }

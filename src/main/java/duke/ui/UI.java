@@ -27,6 +27,7 @@ public class UI {
 
     /**
      * Returns the exit status.
+     *
      * @return the exit status.
      */
 
@@ -36,6 +37,7 @@ public class UI {
 
     /**
      * Updates the exit status.
+     *
      * @param update the updated exit status.
      */
 
@@ -45,6 +47,7 @@ public class UI {
 
     /**
      * Returns the next line of user input.
+     *
      * @return the next line of user input.
      */
 
@@ -84,7 +87,8 @@ public class UI {
 
     /**
      * Prints the add to-do message for the user.
-     * @param task the task added to the tasklist.
+     *
+     * @param task     the task added to the tasklist.
      * @param taskList the tasklist containing all the tasks.
      */
 
@@ -97,7 +101,8 @@ public class UI {
 
     /**
      * Prints the add deadline message for the user.
-     * @param task the task added to the tasklist.
+     *
+     * @param task     the task added to the tasklist.
      * @param taskList the tasklist containing all the tasks.
      */
 
@@ -110,7 +115,8 @@ public class UI {
 
     /**
      * Prints the add event message for the user.
-     * @param task the task added to the tasklist.
+     *
+     * @param task     the task added to the tasklist.
      * @param taskList the tasklist containing all the tasks.
      */
 
@@ -123,6 +129,7 @@ public class UI {
 
     /**
      * Prints the display list message and the tasks in the tasklist for the user.
+     *
      * @param taskList the tasklist containing all the tasks.
      */
 
@@ -143,6 +150,7 @@ public class UI {
 
     /**
      * Prints the done task message for the user.
+     *
      * @param task the task marked as done.
      */
 
@@ -154,6 +162,7 @@ public class UI {
 
     /**
      * Prints the display found task message and all the tasks found in the tasklist for the user.
+     *
      * @param foundList the list of tasks found using the substring entered by the user.
      */
 
@@ -210,6 +219,7 @@ public class UI {
 
     /**
      * Prints the size of list message for the user.
+     *
      * @param taskList the tasklist containing all the tasks.
      */
 
@@ -219,6 +229,7 @@ public class UI {
 
     /**
      * Prints the task deleted message for the user.
+     *
      * @param task the task deleted from the tasklist.
      */
 

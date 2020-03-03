@@ -14,8 +14,9 @@ public class Event extends Task {
 
     /**
      * Constructs the Event object.
+     *
      * @param description the description of the event entered by the user.
-     * @param at the location of the event entered by the user.
+     * @param at          the location of the event entered by the user.
      */
 
     public Event(String description, String at) {
@@ -25,6 +26,7 @@ public class Event extends Task {
 
     /**
      * Returns the information related to the Event object.
+     *
      * @return the information related to the Event object.
      */
 

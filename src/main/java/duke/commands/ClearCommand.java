@@ -14,6 +14,7 @@ public class ClearCommand extends Command {
 
     /**
      * Constructs the ClearCommand object.
+     *
      * @param command the command prompt entered by the user.
      */
 
@@ -23,9 +24,10 @@ public class ClearCommand extends Command {
 
     /**
      * Executes the ClearCommand and clears the task list.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

@@ -13,6 +13,7 @@ public class HelpCommand extends Command {
 
     /**
      * Constructs the HelpCommand object.
+     *
      * @param command the command prompt entered by the user.
      */
 
@@ -22,9 +23,10 @@ public class HelpCommand extends Command {
 
     /**
      * Executes the HelpCommand and displays the help menu.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

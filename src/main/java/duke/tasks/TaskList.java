@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Returns the tasklist.
+     *
      * @return the tasklist.
      */
 
@@ -36,6 +37,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the tasklist.
+     *
      * @param task the new task added to the tasklist.
      */
 
@@ -45,6 +47,7 @@ public class TaskList {
 
     /**
      * Removes an existing task from the tasklist.
+     *
      * @param task the task removed from the tasklist.
      */
 
@@ -54,6 +57,7 @@ public class TaskList {
 
     /**
      * Returns the length of the tasklist.
+     *
      * @return the length of the tasklist.
      */
 

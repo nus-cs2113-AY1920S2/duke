@@ -19,8 +19,9 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs the DoneCommand object.
+     *
      * @param command the command prompt entered by the user.
-     * @param index the index of the task to be marked as done entered by the user.
+     * @param index   the index of the task to be marked as done entered by the user.
      */
 
     public DoneCommand(String command, String index) {
@@ -30,9 +31,10 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the DoneCommand and marks the task as done.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

@@ -8,6 +8,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs the to-do object.
+     *
      * @param description the description of the to-do entered by the user.
      */
 
@@ -17,6 +18,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the information related to the to-do object.
+     *
      * @return the information related to the to-do object.
      */
 

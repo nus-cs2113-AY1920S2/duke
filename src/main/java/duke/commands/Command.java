@@ -21,6 +21,7 @@ public abstract class Command {
 
     /**
      * Constructs the Command object.
+     *
      * @param command the command prompt entered by the user.
      */
 
@@ -30,6 +31,7 @@ public abstract class Command {
 
     /**
      * Returns the command prompt entered by the user.
+     *
      * @return the command prompt entered by the user.
      */
 
@@ -39,9 +41,10 @@ public abstract class Command {
 
     /**
      * Abstract method to execute the Command.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     public abstract void execute(TaskList tasklist, UI ui, Storage storage);

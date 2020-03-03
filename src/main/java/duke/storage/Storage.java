@@ -61,8 +61,9 @@ public class Storage {
 
     /**
      * Constructs the Storage object.
+     *
      * @param tasklist the object containing the list containing all current tasks.
-     * @param ui the object containing user interface functions.
+     * @param ui       the object containing user interface functions.
      */
 
     public Storage(TaskList tasklist, UI ui) {
@@ -114,24 +115,24 @@ public class Storage {
                 String taskType = dataLineArray[0];
                 Task task;
                 switch (taskType) {
-                    case "[T]":
-                        String todoDesc = dataLineArray[2];
-                        task = new ToDo(todoDesc);
-                        break;
-                    case "[E]":
-                        String[] eventInfo = dataLineArray[2].split("at:", 2);
-                        String eventDesc = eventInfo[0].replaceAll("[\\\\[\\\\](){}]", "").trim();
-                        String eventAt = eventInfo[1].replaceAll("[\\\\[\\\\](){}]", "").trim();
-                        task = new Event(eventDesc, eventAt);
-                        break;
-                    case "[D]":
-                        String[] deadlineInfo = dataLineArray[2].split("by:", 2);
-                        String deadlineDesc = deadlineInfo[0].replaceAll("[\\\\[\\\\](){}]", "").trim();
-                        String deadlineBy = deadlineInfo[1].replaceAll("[\\\\[\\\\](){}]", "").trim();
-                        task = new Deadline(deadlineDesc, deadlineBy);
-                        break;
-                    default:
-                        throw new InvalidDataException();
+                case "[T]":
+                    String todoDesc = dataLineArray[2];
+                    task = new ToDo(todoDesc);
+                    break;
+                case "[E]":
+                    String[] eventInfo = dataLineArray[2].split("at:", 2);
+                    String eventDesc = eventInfo[0].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                    String eventAt = eventInfo[1].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                    task = new Event(eventDesc, eventAt);
+                    break;
+                case "[D]":
+                    String[] deadlineInfo = dataLineArray[2].split("by:", 2);
+                    String deadlineDesc = deadlineInfo[0].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                    String deadlineBy = deadlineInfo[1].replaceAll("[\\\\[\\\\](){}]", "").trim();
+                    task = new Deadline(deadlineDesc, deadlineBy);
+                    break;
+                default:
+                    throw new InvalidDataException();
                 }
                 if (dataLineArray[1].equals("[/]")) {
                     task.setDone(true);
@@ -177,6 +178,7 @@ public class Storage {
 
     /**
      * Appends a new line of data into the data file.
+     *
      * @param task The task to be written to the file.
      */
 

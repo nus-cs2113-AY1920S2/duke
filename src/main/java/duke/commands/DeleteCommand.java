@@ -19,8 +19,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs the DeleteCommand object.
+     *
      * @param command the command prompt entered by the user.
-     * @param index the index of the task to be deleted entered by the user.
+     * @param index   the index of the task to be deleted entered by the user.
      */
 
     public DeleteCommand(String command, String index) {
@@ -30,9 +31,10 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the DeleteCommand and deletes the task from the tasklist.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override

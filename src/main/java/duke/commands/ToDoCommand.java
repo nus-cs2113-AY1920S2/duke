@@ -19,7 +19,8 @@ public class ToDoCommand extends Command {
 
     /**
      * Constructs the ToDoCommand object.
-     * @param command the command prompt entered by the user.
+     *
+     * @param command     the command prompt entered by the user.
      * @param description the description of the to-do entered by the user.
      */
 
@@ -30,9 +31,10 @@ public class ToDoCommand extends Command {
 
     /**
      * Executes the ToDoCommand and creates a new to-do task in the tasklist.
+     *
      * @param tasklist the list containing all current tasks.
-     * @param ui the object containing user interface functions.
-     * @param storage the object containing storage functions.
+     * @param ui       the object containing user interface functions.
+     * @param storage  the object containing storage functions.
      */
 
     @Override
