@@ -1,28 +1,42 @@
 # User Guide
+# Table of content
+<!-- TOC -->
+- [Introduction](#introduction)
+- [Features](#features)
+- [Usage](#usage)
+    - [View help: `help`](#help---prints-the-entire-list-of-command)
+    - [Add todo task: `todo`](#todo---adds-a-todo-command-to-the-list)
+    - [Add event task: `event`](#event---adds-a-event-task-to-the-list)
+    - [Add deadline task: `deadline`](#deadline---adds-a-deadline-task-to-the-list)
+    - [View list: `list`](#list---prints-the-entire-list-of-tasks-added)
+    - [Mark as done: `done`](#done---marks-a-task-in-the-list-as-done)
+    - [Find specific task: `find`](#find---finds-all-tasks-that-contains-keyword)
+    - [Exit duke: `bye`](#bye---exits-the-application)
+<!-- TOC -->
 
+## Introduction
+Duke is a personal task manager that assist the user to keep track of their schedule. Running on a command line interface,
+duke is designed for users who type fast and prefers a CLI interface as opposed to a GUI. 
 ## Features 
 
-### View help
-Shows the entire command list of Duke. 
+#### View help
+Duke allows you to view its available commands within the application.  
 
-### Add todo task
-Adds a todo task.
- 
-### Add event task
-Adds a event task.
- 
-### Add deadline task
-Adds a deadline task.
- 
-### View list
-Shows a list of task that has been added previously.
- 
-### Mark as done
-Mark a specific task as done. 
- 
-### Find specific task
-Finds a task by searching for a keyword. 
+#### Keeps track of your tasks
+With Duke, you can keep track of various tasks such as Todo, Event and Deadline tasks.
 
+#### View all your tasks
+Want to see what tasks you have done (or not yet done)? Duke can show you all your tasks you are currently tracking. 
+ 
+#### Mark your task as done
+Done with a task? Duke allows you to mark a specific task as done. 
+ 
+#### Finding a specific task
+Can't remember what task you've added? Duke allows you to filter tasks by searching for a keyword. 
+
+#### Auto-saves 
+Duke auto saves after any modifications to your tasks. So you do not have to worry about random 
+[crashes](https://en.wikipedia.org/wiki/Crash_(computing)) anymore!
 
 ## Usage
 

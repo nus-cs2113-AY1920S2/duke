@@ -48,6 +48,7 @@ public class Duke {
      * The supplied param is where the save file will be at.
      * @param saveFile the file object of the save file.
      */
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run(File saveFile) {
         while (true) {
             String fullCommand = ui.readFromUser();
@@ -55,6 +56,7 @@ public class Duke {
             String command = commands.get(DUKE_COMMAND);
             try {
                 Command c = Parser.whatCommand(command);
+                assert c != null;
                 c.execute(myTasks, saveFile, commands, command);
             } catch (UnknownCommandException e) {
                 Printer.printUnknownCommandError(command);
