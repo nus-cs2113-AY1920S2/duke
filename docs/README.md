@@ -79,7 +79,8 @@ Now you have 3 tasks in the list.
 ````
 ___
 ####`done` : Mark Task as done
-Find the corresponding task at given `Index` and mark it as `done`.  
+Find the corresponding task at given `Index` and mark it as `done`  
+Task Status Box: [x] -Incomplete | [ / ] Completed  
 **Format** : <code>done **Index**</code>  
 Example : done **2**</code>  
 Outcome :  
