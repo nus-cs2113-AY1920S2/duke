@@ -40,7 +40,13 @@ public class Parser {
                 break;
             case "done":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
-                int taskDone = Integer.valueOf(tokenizedInputs[1]) - 1;
+                int taskDone = 0;
+                try {
+                    taskDone = Integer.valueOf(tokenizedInputs[1]) - 1;
+                } catch (Exception e){
+                    System.out.println("Sorry, invalid index entered.\n");
+                    break;
+                }
                 if (checkOutOfBounds(lastShownList, taskDone)) break;
                 if (checkInvalidTask(taskArray, lastShownList.get(taskDone))) break;
                 System.out.println("Nice! I've marked this task as done: ");
@@ -48,7 +54,13 @@ public class Parser {
                 break;
             case "delete":
                 if (checkEmptyDescription(tokenizedInputs, instruction)) break;
-                int taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
+                int taskToDelete = 0;
+                try {
+                    taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
+                } catch (Exception e){
+                    System.out.println("Sorry, invalid index entered.\n");
+                    break;
+                }
                 if (checkOutOfBounds(lastShownList, taskToDelete)) break;
                 if (checkInvalidTask(taskArray, lastShownList.get(taskToDelete))) break;
                 Ui.respondDeleteSuccess(taskArray.size-1, lastShownList.get(taskToDelete));
@@ -92,6 +104,10 @@ public class Parser {
             return true;
         }
 
+        if (index < 0) {
+            System.out.println("Sorry, invalid index entered.\n");
+            return true;
+        }
         return false;
     }
 
