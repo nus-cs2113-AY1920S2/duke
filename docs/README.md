@@ -26,7 +26,7 @@ New tasks can be added by typing the command relevant to the type of task that i
 todo CS2113 Homework
 ____________________________________________________________
 Got it. I've added this task:
-[T][✘] CS2113 Homework
+[T][X] CS2113 Homework
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
@@ -43,7 +43,7 @@ ____________________________________________________________
 event Career Fair /at 26-02-2020
 ____________________________________________________________
 Got it. I've added this task:
-[E][✘] Career Fair (at: 26-02-2020)
+[E][X] Career Fair (at: 26-02-2020)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
@@ -60,7 +60,7 @@ ____________________________________________________________
 deadline English Essay /by 26 Feb
 ____________________________________________________________
 Got it. I've added this task:
-[D][✘] English Essay (by: 26 Feb)
+[D][X] English Essay (by: 26 Feb)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ```
@@ -71,9 +71,9 @@ ____________________________________________________________
 - Expected Output:
 ```
 list
-1.[T][✓] CS2113 Homework
-2.[E][✘] Career Fair (at: 26-02-2020)
-3.[D][✘] English Essay (by: 26 Feb)
+1.[T][O] CS2113 Homework
+2.[E][X] Career Fair (at: 26-02-2020)
+3.[D][X] English Essay (by: 26 Feb)
 ```
 
 ## 3. Finding Tasks by Keyword: ```find```
@@ -89,8 +89,9 @@ list
 find CS
 ____________________________________________________________
 Here are the matching tasks in your list:
-1.[D][✘] CS2105 Assignment (by: next week)
-2.[T][✘] CS2113 Assignment
+
+1.[T][X] CS2113 Homework
+2.[D][X] CS2105 Assignment (by: next week)
 ____________________________________________________________
 ```
 
@@ -105,7 +106,7 @@ ____________________________________________________________
 ```
 done 1
 Nice! I've marked this task as done: 
-[✓] CS2113 Homework
+[O] CS2113 Homework
 ```
 
 ## 5.	Deleting Tasks: ```delete```
@@ -116,21 +117,29 @@ Nice! I've marked this task as done:
    - ```delete 1```
    - ```delete 2```
 - Expected Output:
-
 ```
 delete 1
 ____________________________________________________________
 Noted. I've removed this task:
-[T][✓] CS2113 Homework
+[T][O] CS2113 Homework
 Now you have 3 tasks in the list.
 ____________________________________________________________
+
 ```
 
 ## 6. Loading Tasks from File
 - Loading of tasks will be done automatically upon starting the application when there is a saved file present in the same directory of the Duke application. The file has the name ```data.txt```.
+- Expected Output:
+```
+Previous tasks has been loaded successfully:
+____________________________________________________________
+1.[E][X] Career Fair (at: 26-02-2020)
+2.[D][X] English Essay (by: 26 Feb)
+3.[D][X] CS2105 Assignment (by: next week)
+```
 
 ## 7. Saving Tasks: ```bye```
-- Saving the state of the task list is done automatically when the program is exited using the ```bye``` command.
+- Saving the state of the task list is done automatically when the program is exited using the ```bye`` command.
 - Format: ```bye```
 - Expected Output:
 
