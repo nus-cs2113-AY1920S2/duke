@@ -81,7 +81,7 @@ ___
 ####`done` : Mark Task as done
 Find the corresponding task at given `Index` and mark it as `done`.  
 **Format** : <code>done **Index**</code>  
-Example : done **2** /at **28-02-2020 2pm**</code>  
+Example : done **2**</code>  
 Outcome :  
 ````
 Nice! I've marked this task as done:
@@ -113,6 +113,8 @@ Now you have 2 tasks in the list.
 ___
 ####`find` : Find Task
 `Find` and list out task from Task List that contains the `Keyword`  
+Note: keyword is non-case sensitive.  
+E.g. "TuToRiAL" will get the same result as "tutorial"  
 **Format** : <code>find **keyword**</code>  
 Example : <code>find **cS**</code>  
 Outcome :  
