@@ -125,6 +125,9 @@ Expected outcome:
 &nbsp;
 &nbsp;
 &nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 ### <a id="find"></a> `find` - Finds task from list based on search query
 
 Syntax: 
