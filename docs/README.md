@@ -1,5 +1,8 @@
 # User Guide
 
+## About the program
+This is a lightweight command-line interface (CLI) program for managing your tasks. 
+
 ## Running the program
 1. Make sure your computer has Java 11.
 
@@ -11,39 +14,37 @@
 
 ## Features 
 
-### 1. List
-Show the current list of tasks.
+### 1. Task management
+Tasks can be added, removed and marked as done.
 
-### 2. Add task
-Three types of tasks can be added: a todo, a deadline, or an event.
+### 2. Search 
+Find tasks by searching for a keyword in the task description.
 
-### 3. Mark task as done
-Tasks can be marked as done.
+### 3. Auto-load
+Tasks are loaded from a file called `duke.txt` in a directory called `data` upon start-up.
+If no such file or directory exists, they are created.
 
-### 4. Delete task
-Any task in the list can be deleted.
-
-### 5. Clear list
-The entire list can be cleared to allow the user to start over with a clean slate.
-
-### 6. Find task
-Find tasks using a keyword. 
+### 4. Auto-save
+Any change to the tasks in memory results in a save to the `duke.txt` file.
 
 ## Commands
 
-### 1. **help** - Displays a list of commands
+### 1. help  
+#### Displays a list of commands  
+&nbsp;
 
-
-### 2. **list** - Shows the current tasks in the list
+### 2. list 
+#### Shows the current tasks in the list
 Example outcome:
 
     Here are the tasks in your list:
         1.[T][0] read book
         2.[D][0] return book (by: 1 March)
         3.[E][0] meeting (at: 4 March)
+&nbsp;
 
-    
-### 3. **todo <description>** - Adds a todo to the list
+### 3. todo \<description> 
+#### Adds a todo to the list
 Example usage: `todo read book`
 
 Example outcome:
@@ -51,9 +52,10 @@ Example outcome:
     Got it. I've added this task:
       [T][0] read book
     Now you have 1 tasks in the list.
+&nbsp;
 
-
-### 4. **deadline <description> /by <deadline>** - Adds a deadline to the list
+### 4. deadline \<description> /by \<deadline> 
+#### Adds a deadline to the list
 Example usage: `deadline return book /by 1 March`
 
 Example outcome:
@@ -61,9 +63,10 @@ Example outcome:
     Got it. I've added this task:
       [D][0] return book (by: 1 March)
     Now you have 2 tasks in the list.
+&nbsp;
 
-
-### 5. **event <description> /at <timeslot>** - Adds an event to the list
+### 5. event \<description> /at \<timeslot> 
+#### Adds an event to the list
 Example usage: `event meeting /at 4 March`
 
 Example outcome:
@@ -71,18 +74,20 @@ Example outcome:
     Got it. I've added this task:
       [E][0] meeting (at: 4 March)
     Now you have 3 tasks in the list.
+&nbsp;
 
-
-### 6. **done <task index>** - Mark a task as done
+### 6. done \<task index> 
+#### Mark a task as done
 Example usage: `done 1`
 
 Example outcome:
 
     Nice! I've marked this task as done:
       [T][1] read book
-      
+&nbsp;
 
-### 7. **delete <task index>** - Delete a task
+### 7. delete \<task index> 
+#### Delete a task
 Example usage: `delete 1`
 
 Example outcome:
@@ -90,9 +95,10 @@ Example outcome:
     Noted. I've removed this task:
       [T][1] read book
     Now you have 2 tasks in the list.
+&nbsp;
 
-
-### 8. **find <keyword>** - Search for tasks using a keyword
+### 8. find \<keyword> 
+#### Search for tasks using a keyword
 Example usage: `find book`
 
 Example outcome:
@@ -100,12 +106,15 @@ Example outcome:
     Here are the matching tasks in your list:
     1.[D][0] return book (by: 1 March)
     3.[T][0] read textbook
+&nbsp;
 
+### 9. clear 
+#### Delete all tasks, after confirmation by user
+&nbsp;
 
-### 9. **clear** - Delete all tasks, after confirmation by user
+### 10. thanks
+#### If you're feeling thankful
+&nbsp;
 
-
-### 10. **thanks** - If you're feeling thankful
-
-
-### 11. **bye** - Exit program
+### 11. bye 
+#### Exit program
