@@ -31,78 +31,81 @@ Find tasks using a keyword.
 
 ## Commands
 
-- ### `help` - Displays a list of commands
+### 1. **help** - Displays a list of commands
 
-- ### `list` - Shows the current tasks in the list
 
-Example of outcome:
+### 2. **list** - Shows the current tasks in the list
+Example outcome:
 
     Here are the tasks in your list:
         1.[T][0] read book
         2.[D][0] return book (by: 1 March)
         3.[E][0] meeting (at: 4 March)
+
     
-- ### `todo <description>` - Adds a todo to the list
+### 3. **todo <description>** - Adds a todo to the list
+Example usage: `todo read book`
 
-Example of usage: `todo read book`
-
-Example of outcome:
+Example outcome:
 
     Got it. I've added this task:
       [T][0] read book
     Now you have 1 tasks in the list.
 
-- ### `deadline <description> /by <deadline>` - Adds a deadline to the list
 
-Example of usage: `deadline return book /by 1 March`
+### 4. **deadline <description> /by <deadline>** - Adds a deadline to the list
+Example usage: `deadline return book /by 1 March`
 
-Example of outcome:
+Example outcome:
 
     Got it. I've added this task:
       [D][0] return book (by: 1 March)
     Now you have 2 tasks in the list.
 
-- ### `event <description> /at <timeslot>` - Adds an event to the list
 
-Example of usage: `event meeting /at 4 March`
+### 5. **event <description> /at <timeslot>** - Adds an event to the list
+Example usage: `event meeting /at 4 March`
 
-Example of outcome:
+Example outcome:
 
     Got it. I've added this task:
       [E][0] meeting (at: 4 March)
     Now you have 3 tasks in the list.
 
-- ### `done <task index>` - Mark a task as done
 
-Example of usage: `done 1`
+### 6. **done <task index>** - Mark a task as done
+Example usage: `done 1`
 
-Example of outcome:
+Example outcome:
 
     Nice! I've marked this task as done:
       [T][1] read book
       
-- ### `delete <task index>` - Delete a task
 
-Example of usage: `delete 1`
+### 7. **delete <task index>** - Delete a task
+Example usage: `delete 1`
 
-Example of outcome:
+Example outcome:
 
     Noted. I've removed this task:
       [T][1] read book
     Now you have 2 tasks in the list.
 
-- ### `find <keyword>` - Search for tasks using a keyword
 
-Example of usage: `find book`
+### 8. **find <keyword>** - Search for tasks using a keyword
+Example usage: `find book`
 
-Example of outcome:
+Example outcome:
 
     Here are the matching tasks in your list:
     1.[D][0] return book (by: 1 March)
     3.[T][0] read textbook
 
-- ### `clear` - Delete all tasks
 
-- ### `thanks` - If you're feeling thankful
+### 9. **clear** - Delete all tasks, after confirmation by user
 
-- ### `bye` - Exit program
+
+### 10. **thanks** - If you're feeling thankful
+
+
+### 11. **bye** - Exit program
