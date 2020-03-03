@@ -55,13 +55,13 @@ Jump to [_Section 2, "Quick Start"_](#quick-start) to get started.
 ``` 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. 
     * e.g. in `todo TASK_DESCRIPTION`, TASK_DESCRIPTION is a parameter
-    to specify a task's description.    
+      to specify a task's description.    
 
 * For a general todo task, a task description MUST be added
-    * e.g. in `todo TASK_DESCRIPTION`.
+    * e.g. `todo TASK_DESCRIPTION`.
 
 * For a deadline task, a date MUST be added right after the TASK_DESCRIPTION by using /by. 
-    * e.g. `deadline complete homework /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
+    * e.g. `deadline TASK_DESCRIPTION /by YYYY-MM-DDTHH:mm` such as 2020-01-12T23:59. 
     * Note that you have to add 'T' between the date and the time.  
   
 * For an event task, an event start and end date and time MUST be added 
