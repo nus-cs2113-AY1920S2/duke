@@ -28,7 +28,7 @@ public class Parser {
                 Storage.saveTasks(Duke.FILEPATH, taskArray);
                 break;
             case "find":
-                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                if (isDescriptionEmpty(tokenizedInputs, instruction)) break;
                 String keyword = tokenizedInputs[1];
                 lastShownList.clear();
                 Ui.displayMatchingTasks(taskArray, lastShownList, keyword);
@@ -39,7 +39,7 @@ public class Parser {
                 lastShownList = (ArrayList<Task>) taskArray.tasks.clone();
                 break;
             case "done":
-                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                if (isDescriptionEmpty(tokenizedInputs, instruction)) break;
                 int taskDone = 0;
                 try {
                     taskDone = Integer.valueOf(tokenizedInputs[1]) - 1;
@@ -47,13 +47,13 @@ public class Parser {
                     System.out.println("Sorry, invalid index entered.\n");
                     break;
                 }
-                if (checkOutOfBounds(lastShownList, taskDone)) break;
-                if (checkInvalidTask(taskArray, lastShownList.get(taskDone))) break;
+                if (isOutOfBounds(lastShownList, taskDone)) break;
+                if (isInvalidTask(taskArray, lastShownList.get(taskDone))) break;
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(lastShownList.get(taskDone).markAsDone());
                 break;
             case "delete":
-                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                if (isDescriptionEmpty(tokenizedInputs, instruction)) break;
                 int taskToDelete = 0;
                 try {
                     taskToDelete = Integer.valueOf(tokenizedInputs[1]) - 1;
@@ -61,27 +61,27 @@ public class Parser {
                     System.out.println("Sorry, invalid index entered.\n");
                     break;
                 }
-                if (checkOutOfBounds(lastShownList, taskToDelete)) break;
-                if (checkInvalidTask(taskArray, lastShownList.get(taskToDelete))) break;
+                if (isOutOfBounds(lastShownList, taskToDelete)) break;
+                if (isInvalidTask(taskArray, lastShownList.get(taskToDelete))) break;
                 Ui.respondDeleteSuccess(taskArray.size-1, lastShownList.get(taskToDelete));
                 taskArray.deleteTask(lastShownList.get(taskToDelete));
                 break;
             case "todo":
-                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                if (isDescriptionEmpty(tokenizedInputs, instruction)) break;
                 taskArray.addTask(new ToDo(tokenizedInputs[1]));
                 Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
                 break;
             case "deadline":
-                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                if (isDescriptionEmpty(tokenizedInputs, instruction)) break;
                 String[] deadlineInfo = tokenizedInputs[1].split(" /by ");
-                if (checkDateEntered(deadlineInfo)) break;
+                if (isDateEmpty(deadlineInfo)) break;
                 taskArray.addTask(new Deadline(deadlineInfo[0], deadlineInfo[1]));
                 Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
                 break;
             case "event":
-                if (checkEmptyDescription(tokenizedInputs, instruction)) break;
+                if (isDescriptionEmpty(tokenizedInputs, instruction)) break;
                 String[] eventInfo = tokenizedInputs[1].split(" /at ");
-                if (checkDateEntered(eventInfo)) break;
+                if (isDateEmpty(eventInfo)) break;
                 taskArray.addTask(new Event(eventInfo[0], eventInfo[1]));
                 Ui.respondAddedSuccess(taskArray.size, taskArray.get(taskArray.size-1));
                 break;
@@ -98,7 +98,7 @@ public class Parser {
      * @param index the index supplied by user input from 'delete' or 'done' commands
      * @return true if out of bounds and false if it is within bounds.
      */
-    private static boolean checkOutOfBounds(ArrayList<Task> lastShownList, int index) {
+    private static boolean isOutOfBounds(ArrayList<Task> lastShownList, int index) {
         if (index >= lastShownList.size()) {
             System.out.println("Sorry, the task does not exist. Please use the 'list' or 'find' command for an updated list of tasks.\n");
             return true;
@@ -118,7 +118,7 @@ public class Parser {
      * @param requestedTask the task from the last shown list chosen by referencing its index
      * @return true if the task is no longer valid and false if it is valid
      */
-    public static boolean checkInvalidTask (TaskList taskArray, Task requestedTask) {
+    public static boolean isInvalidTask(TaskList taskArray, Task requestedTask) {
         if (taskArray.taskExists(requestedTask) == false) {
             System.out.println("Sorry the task no longer exists. Please use 'list' or 'find' for an updated list\n");
             return true;
@@ -132,7 +132,7 @@ public class Parser {
      *                    portions.
      * @return true if the date portion is empty and false if the date portion is valid
      */
-    static boolean checkDateEntered(String[] information) {
+    static boolean isDateEmpty(String[] information) {
         if (information.length == 1) {
             System.out.println("☹ OOPS!!! You did not enter a date");
             return true;
@@ -147,7 +147,7 @@ public class Parser {
      * @param instruction the instruction requested
      * @return true if the description is empty and false if it is not empty
      */
-    static boolean checkEmptyDescription(String[] tokens, String instruction) {
+    static boolean isDescriptionEmpty(String[] tokens, String instruction) {
         if (tokens.length == 1) {
             System.out.println("☹ OOPS!!! The description of a " + instruction + " cannot be empty.");
             return true;
