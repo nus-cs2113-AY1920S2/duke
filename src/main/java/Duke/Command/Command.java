@@ -13,9 +13,9 @@ public abstract class Command {
     /**
      * Executes commands depending on input from user.
      *
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks object of TaskList class containing list of tasks in the program.
+     * @param ui object of Ui class handling printing output to the user.
+     * @param storage object of Storage class for saving program to file.
      * @throws DukeException if error specific to Duke program.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

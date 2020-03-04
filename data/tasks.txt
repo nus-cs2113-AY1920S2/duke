@@ -1,2 +1,3 @@
 D|1|buy dinner |7pm
 E|0|dinner |Friday 7pm
+E|1|cross handover |7pm

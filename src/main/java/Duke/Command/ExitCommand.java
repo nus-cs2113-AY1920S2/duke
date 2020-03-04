@@ -11,11 +11,11 @@ import java.io.IOException;
 public class ExitCommand extends Command {
 
     /**
-     * Saves the current program and prints the goodbye message.
+     * Executes the command.
      *
-     * @param tasks The object class containing list of tasks in the program.
-     * @param ui The object class handling printing output to the user.
-     * @param storage The object class for saving program to file.
+     * @param tasks object of TaskList class containing list of tasks in the program.
+     * @param ui object of Ui class handling printing output to the user.
+     * @param storage object of Storage class for saving program to file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
