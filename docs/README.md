@@ -1,6 +1,16 @@
 # User Guide
+Welcome to Duke/NUSBOT! This is a minimal command-line task list manager that can be used to keep track of your tasks.
+
+## Prerequisites
+- Java Development Kit (JDK) >= 11
+
+## Installation
+1. Download the `duke.jar` file from the [latest release](https://github.com/rdimaio/duke/releases/tag/v0.2.1)
+2. Place the `duke.jar` in the folder of your choice (data will be saved to the `/data/` subfolder)
+3. Run `java -jar duke.jar`
 
 ## Features 
+
 
 ### Todo
 Add a simple task that can be marked as done.
