@@ -1,13 +1,22 @@
 package Duke.Command;
-import Duke.UI.*;
-import Duke.Tasks.*;
+
+import Duke.UI.Ui;
 import Duke.TaskList;
 import Duke.Storage;
-import Duke.DukeException;
 import java.io.IOException;
 
+/**
+ * Command that saves the current task list in the program and terminates the program.
+ */
 public class ExitCommand extends Command {
 
+    /**
+     * Saves the current program and prints the goodbye message.
+     *
+     * @param tasks The object class containing list of tasks in the program.
+     * @param ui The object class handling printing output to the user.
+     * @param storage The object class for saving program to file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         try {
@@ -18,6 +27,11 @@ public class ExitCommand extends Command {
         }
     }
 
+    /**
+     * Indicates program ready to exit.
+     *
+     * @return isExit() is true and program should terminate.
+     */
     @Override
     public boolean isExit() {
         return true;

@@ -1,10 +1,15 @@
 package Duke.Command;
-import Duke.UI.*;
-import Duke.Tasks.*;
+
+import Duke.UI.Ui;
+import Duke.UI.Messages;
+import Duke.Tasks.Task;
 import Duke.TaskList;
 import Duke.Storage;
 import Duke.DukeException;
 
+/**
+ * Command that removes task of the number specified from the list.
+ */
 public class DeleteCommand extends Command {
 
     protected String command;
@@ -12,6 +17,12 @@ public class DeleteCommand extends Command {
     protected String errorMessage;
     protected String editType;
 
+    /**
+     * Constructor of DeleteCommand.
+     *
+     * @param command "delete" command specified by user.
+     * @param fullCommand entire input from user.
+     */
     public DeleteCommand(String command, String fullCommand) {
         this.command = command;
         this.fullCommand = fullCommand;
@@ -20,6 +31,12 @@ public class DeleteCommand extends Command {
         this.editType = "removed";
     }
 
+    /**
+     * Determines the task specified by number in the list and removes that task from the list.
+     *
+     * @return The task being removed.
+     * @throws DukeException if the user did not specify a number in the list.
+     */
     public Task removeTask() throws DukeException {
         int number = Integer.parseInt(fullCommand.substring(7));
         if (number > TaskList.getSize()) {
@@ -30,6 +47,13 @@ public class DeleteCommand extends Command {
         return t;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks The object class containing list of tasks in the program.
+     * @param ui The object class handling printing output to the user.
+     * @param storage The object class for saving program to file.
+     */
     @Override
     public void execute (TaskList tasks, Ui ui, Storage storage) {
         try {
@@ -45,6 +69,11 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Indicates program not ready to exit.
+     *
+     * @return isExit() is false and program should continue running.
+     */
     @Override
     public boolean isExit(){
         return false;
