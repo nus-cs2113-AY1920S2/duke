@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
 
@@ -78,7 +79,7 @@ public class Duke {
                 printTaskList(tasks, numberOfIncompleteTasks);
                 break;
             case COMMAND_FIND_TASK:
-                taskDetails = input.nextLine();
+                taskDetails = input.nextLine().trim();
                 findTasks(tasks, taskDetails);
                 break;
             case COMMAND_END_PROGRAM:
@@ -175,11 +176,13 @@ public class Duke {
         System.out.println("Here are the relevant tasks in your list:");
         int taskIndex = 1;
         for (Task task: tasks) {
-
-            if (task.taskDetails.contains(input)) {
-                System.out.println(taskIndex + ". ");
-                task.printListMessage();
-                ++taskIndex;
+            String[] details = task.taskDetails.split(" ");
+            for (String detail: details) {
+                if (detail.equals(input)) {
+                    System.out.print(taskIndex + ". ");
+                    task.printListMessage();
+                    ++taskIndex;
+                }
             }
         }
     }
