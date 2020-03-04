@@ -36,6 +36,9 @@ public class DisplayUI {
                                              + "LEGEND:   [O] ---- DONE | [X] ---- NOT DONE \n"
                                              + "Please key in your command: ";
 
+    /**
+     * Print greeting message when program is launched
+     */
     public void showStartMessages(){
         printToUser(
                 DIVIDER,
@@ -47,11 +50,18 @@ public class DisplayUI {
                 FUNCTION_LIST);
     }
 
+    /**
+     * Show the help functions table
+     */
     public void showFunctionList(){
         printToUser(
                 FUNCTION_LIST);
     }
 
+    /**
+     * A printer to print the String of message
+     * @param message String of message to be printed
+     */
     public void printToUser(String... message){
         for(String m : message){
             out.println(m);
