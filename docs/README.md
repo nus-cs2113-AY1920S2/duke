@@ -39,9 +39,11 @@ Example of usage:
 
 Expected outcome:
 
-<code>Welcome to the Help Page<br/>
-Here is a list of valid commands and formats:<br/>
-&nbsp;&nbsp;1) todo <task description>  -  adds a todo task</code>
+```
+Welcome to the Help Page
+Here is a list of valid commands and formats:
+  1) todo <task description>  -  adds a todo task
+```
 
 #### `todo` - Adds a todo task
 
