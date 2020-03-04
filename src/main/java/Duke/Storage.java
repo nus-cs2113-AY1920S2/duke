@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class handling loading of task list saved from previous execution of the Duke program
+ * before starting current run of program and saving the most updated task list back to
+ * the text file before termination of Duke program.
+ */
 public class Storage {
 
     protected static String filepath;
@@ -23,13 +28,24 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Checks if the task if done.
+     *
+     * @param t the task.
+     * @param num number in the file, "1" indicates task done and "0" indicates not.
+     */
     public void checkTaskDone(Task t, String num){
         if (num.equals("1")) {
             t.markAsDone();
         }
     }
 
-
+    /**
+     * Creates the task by parsing each line of String in the text file.
+     *
+     * @param lineInTextFile line of String from text file.
+     * @return the task created.
+     */
     public Task createTask(String lineInTextFile) {
         String[] taskParts = lineInTextFile.split("\\|");
         if (taskParts.length == 4) {
@@ -48,6 +64,13 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Creates a new list of tasks that matches the one saved
+     * in the previous execution by reading from text file.
+     *
+     * @return list of tasks saved in previous execution.
+     * @throws DukeException if an error occurs in file operations.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         File f = new File(filepath);
@@ -91,6 +114,13 @@ public class Storage {
         return t.date;
     }
 
+    /**
+     * Formats information of a task in the task list to
+     * a line of String to be saved in the text file.
+     *
+     * @param t current task in task list.
+     * @return the line of String containing information about the task.
+     */
     public String getLineInSavedFile(Task t) {
         String lineInSavedFile;
         lineInSavedFile = getTaskType(t) + FILE_DIVIDER + getTaskComplete(t)
@@ -102,13 +132,22 @@ public class Storage {
         return lineInSavedFile;
     }
 
+    /**
+     * Saves an empty file if the list of tasks is empty.
+     *
+     * @throws IOException if error in file write operation.
+     */
     public void saveEmptyFile() throws IOException {
         FileWriter fw = new FileWriter(filepath);
         fw.write("");
         fw.close();
     }
 
-    //save taskList to text file before end program
+    /**
+     * Saves all the tasks in the task list into the text file line by line.
+     *
+     * @throws IOException if error in file operations.
+     */
     public void save() throws IOException {
         if (TaskList.getSize() == 0) {
             saveEmptyFile();
