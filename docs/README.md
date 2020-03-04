@@ -1,7 +1,7 @@
 # Using duke task manager  
   
-######Duke BAPE is a task manager built specially for you to store your daily task. With export function built-in, you will be able to transfer all your task easily between machines.  
-  
+Duke BAPE is a task manager built specially for you to store your daily task. With export function built-in, you will be able to transfer all your task easily between machines.  
+    
 **Starting Up**
 * Install `Java 11 or higher` in your computer
 * Download the most updated `duke.jar` from release page. Current version : `Duke v1.5`
