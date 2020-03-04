@@ -1,22 +1,17 @@
 public class TodoTask extends Task {
 
-    public TodoTask(String input, int taskNumber) {
-        super(input, taskNumber);
+    public TodoTask(TaskType taskType, boolean isDone, String taskDetails) {
+        super(taskType, isDone, taskDetails);
     }
 
     @Override
-    public void printCreateMessage(int pendingTaskNumber) {
+    public void printCreateMessage() {
         System.out.println("The following task has been created:");
-        System.out.println(this.taskNumber+1 + ".[T][Not Done] " + this.taskName);
-        System.out.println("Total number of incomplete tasks: " + pendingTaskNumber);
+        System.out.println("[" + this.taskType  + "]" + "[" + convertToCheckMark(this.isDone) + "]"+ this.taskDetails);
     }
 
     @Override
     public void printListMessage() {
-        if (isDone == false) {
-            System.out.println(this.taskNumber+1 + ".[T][Not Done] " + this.taskName);
-        } else {
-            System.out.println(this.taskNumber+1 + ".[T][Done] " + this.taskName);
-        }
+        System.out.println("[" + this.taskType  + "]" + "[" + convertToCheckMark(this.isDone) + "]"+ this.taskDetails);
     }
 }
