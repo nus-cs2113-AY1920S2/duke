@@ -10,11 +10,11 @@ public class EventTask extends Task{
     @Override
     public void printCreateMessage() {
         System.out.println("The following task has been created:");
-        System.out.println("[" + this.taskType  + "]" + "[" + convertToCheckMark(this.isDone)  + "]"+ this.taskDetails + " (at: " + this.taskDate + " " + this.taskTime + ")");
+        System.out.println("[" + this.taskType  + "]" + "[" + convertToCheckMark(this.isDone)  + "] "+ this.taskDetails + " (at: " + this.taskDate + " " + this.taskTime + ")");
     }
 
     @Override
     public void printListMessage() {
-        System.out.println("[" + this.taskType  + "]" + "[" + convertToCheckMark(this.isDone)  + "]"+ this.taskDetails + " (at: " + this.taskDate + " " + this.taskTime + ")");
+        System.out.println("[" + this.taskType  + "]" + "[" + convertToCheckMark(this.isDone)  + "] "+ this.taskDetails + " (at: " + this.taskDate + " " + this.taskTime + ")");
     }
 }

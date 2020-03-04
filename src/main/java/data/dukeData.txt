@@ -1,3 +1,3 @@
-T|Y| hello
-D|N|cure cancer|:|19991221
-T|N| hi
+T|N|read book
+T|N|write book
+T|N|burn book
