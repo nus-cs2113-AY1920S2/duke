@@ -74,9 +74,12 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         File f = new File(filepath);
+        boolean isFileExist = f.exists();
         try {
+            if (!isFileExist) {
+                f.getParentFile().mkdirs();
+            }
             f.createNewFile();
-            Ui.out.println(filepath);
         } catch (Exception e) {
             throw new DukeException();
         }
@@ -148,7 +151,14 @@ public class Storage {
      *
      * @throws IOException if error in file operations.
      */
-    public void save() throws IOException {
+    public void save() throws IOException, DukeException {
+        File f = new File(filepath);
+        /*try {
+            f.getParentFile() .mkdirs();
+            f.createNewFile();
+        } catch (Exception e) {
+            throw new DukeException();
+        }*/
         if (TaskList.getSize() == 0) {
             saveEmptyFile();
             return;

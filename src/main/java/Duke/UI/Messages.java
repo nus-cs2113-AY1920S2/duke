@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_INVALID_DESCRIPTION = "☹ OOPS!!! The description of %s cannot be empty%s";
 
-    public static final String MESSAGE_ADD_DELETE_SUCCESS = "Got it. I''ve %s this task: \n%s\n " +
+    public static final String MESSAGE_ADD_DELETE_SUCCESS = "Got it. I''ve %s this task: \n%s\n" +
             "Now you have %s task%s in the list.";
     public static final String TODO_ERROR_MESSAGE = ".";
     public static final String DEADLINE_EVENT_ERROR_MESSAGE = " and needs a date indicated by \"%s \".";

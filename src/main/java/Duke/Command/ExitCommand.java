@@ -1,5 +1,6 @@
 package Duke.Command;
 
+import Duke.DukeException;
 import Duke.UI.Ui;
 import Duke.TaskList;
 import Duke.Storage;
@@ -23,6 +24,8 @@ public class ExitCommand extends Command {
             storage.save();
             ui.showGoodbye();
         } catch (IOException e) {
+            ui.showError(e.getMessage());
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
     }
