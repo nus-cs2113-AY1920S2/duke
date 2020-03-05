@@ -50,6 +50,7 @@ public class Messages {
     public static final String MESSAGE_TODO_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s";
     public static final String MESSAGE_DEADLINE_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
     public static final String MESSAGE_EVENT_SUCCESS = "Got it. I've added this task: [ID:%d][%c][%c] %s (%s)";
+    public static final String MESSAGE_INVALID = "Invalid command! ";
     public static final String MESSAGE_HELP = "Here are the possible commands: ";
     public static final String TXT_FILE_PATH = "src"+ File.pathSeparator+"main"+File.pathSeparator+"data"+File.pathSeparator+"taskManager.txt";
     public static final String JSON_FILE_PATH = "src"+ File.pathSeparator+"main"+File.pathSeparator+"data"+File.pathSeparator+"taskManager.json";

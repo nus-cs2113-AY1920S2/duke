@@ -253,6 +253,10 @@ public class TextUi {
         }
     }
 
+    public static void printInvalidCommandMessage() {
+        TextUi.printAlert();
+        TextUi.printMessage(YELLOW, MESSAGE_INVALID);
+    }
 
     public static void printHelpMessage() {
         TextUi.printMessage(YELLOW, MESSAGE_HELP);

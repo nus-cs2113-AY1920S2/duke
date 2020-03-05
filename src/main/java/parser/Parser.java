@@ -19,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static ui.TextUi.printInvalidCommandMessage;
 
 
 /**
@@ -99,7 +100,9 @@ public class Parser {
             return new ClearScreenCommand();
         //help and default
         case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
         default:
+            printInvalidCommandMessage();
             return new HelpCommand();
         }
     }
