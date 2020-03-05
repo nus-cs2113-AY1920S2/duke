@@ -101,9 +101,9 @@ Example of usage:
  
 Expected outcome:
 
-`Here are the tasks in your list:`  
-` 1.[D][✓] buy dinner (by: 7pm)`   
-` 2.[E][✘] dinner (at: Friday 7pm)`
+`Here are the tasks in your list:`      
+`1.[D][✓] buy dinner (by: 7pm)`    
+`2.[E][✘] dinner (at: Friday 7pm)`
   
 ### 5. Find Tasks  
 Search for that contain the specified keyword.
