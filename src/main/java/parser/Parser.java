@@ -128,7 +128,6 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException aiobex){
 
-            aiobex.printStackTrace();
         }
         return new AddEventCommand(new EventTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
     }
@@ -173,7 +172,6 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException aiobex){
 
-            aiobex.printStackTrace();
         }
         return new AddDeadlineCommand(new DeadlineTask(nextTaskIndex, temp[DESCRIPTION_INDEX],temp[TIME_INDEX]));
 }
@@ -216,7 +214,6 @@ public class Parser {
             }
         } catch (NullPointerException npex) {
 
-            npex.printStackTrace();
         }
         return new AddTodoCommand(new TodoTask(nextTaskIndex, commandDescription));
     }

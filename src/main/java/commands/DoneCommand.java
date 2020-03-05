@@ -6,7 +6,7 @@ import data.task.Task;
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
-    public static final String MESSAGE_DONE = "  Nice! I've marked this task as done: \n"+"  [D] %s";
+    public static final String MESSAGE_DONE = "  Nice! I've marked this task as done:  [D] %s";
 
     public DoneCommand(int toDoneIndex) {
         super(toDoneIndex);
