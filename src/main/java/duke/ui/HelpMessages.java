@@ -42,7 +42,7 @@ public class HelpMessages {
             "<task description> - The description of the Deadline task\n" +
             "<date> - The date of the deadline\n" +
             "<time> - The time of the deadline\n" +
-            "NOTE: <date> and <time> must adhere to a certain set of date time formats. \nTo find out about the specific" +
+            "NOTE: <date> and <time> must adhere to a certain set of date time formats. \nTo find out about the specific " +
             "date time formats allowed, enter:\n" +
             TAB + "help datetime" + NEW_PARAGRAPH +
             "Example Usage:\n" +
@@ -59,7 +59,7 @@ public class HelpMessages {
             "<task description> - The description of the Event task\n" +
             "<date> - The date of the event\n" +
             "<time> - The time of the event\n" +
-            "NOTE: <date> and <time> must adhere to a certain set of date time formats. \nTo find out about the specific" +
+            "NOTE: <date> and <time> must adhere to a certain set of date time formats. \nTo find out about the specific " +
             "date time formats allowed, enter:\n" +
             TAB + "help datetime" + NEW_PARAGRAPH +
             "Example Usage:\n" +
@@ -196,9 +196,9 @@ public class HelpMessages {
             "There are two types of date formats allowed:\n" +
             "1. Words\n" +
             "You may enter only the following date words.\n" +
-            TAB + "today or tdy – represents the current date\n" +
-            TAB + "tomorrow or tmr – represents the next date\n" +
-            TAB + "yesterday or yst – represents the previous date" + NEW_PARAGRAPH +
+            TAB + "today or tdy - represents the current date\n" +
+            TAB + "tomorrow or tmr - represents the next date\n" +
+            TAB + "yesterday or yst - represents the previous date" + NEW_PARAGRAPH +
             "2. Standard Date Formats\n" +
             "This refers to the typical dates that are represented with numbers and delimiter symbols.\n" +
             "\n" +
@@ -206,7 +206,7 @@ public class HelpMessages {
             "program will automatically assume it to be the current year. \nAlso, the day, month and year should only " +
             "be entered as numbers and not words (e.g. January is not accepted for the month attribute).\n" +
             "\n" +
-            "Regarding delimiters, the program will only consider ‘/’ and ‘-‘ as valid delimiters for dates. \n" +
+            "Regarding delimiters, the program will only consider \'/\' and \'-\' as valid delimiters for dates. \n" +
             "Delimiters are optional and may be omitted provided you include the year of the date (e.g. 1/1/20, " +
             "1/1 and 010120 are accepted, but not 0101).\n" +
             "\n" +
@@ -229,7 +229,7 @@ public class HelpMessages {
             "minute attribute is also optional, and should it be omitted, it will automatically set the minute to " +
             "be 0. \nBoth the 12-h format and the 24-h format are valid time formats for this program.\n" +
             "\n" +
-            "Regarding delimiters, the program will only consider ‘:’ and ‘.’ as valid delimiters for time.\n" +
+            "Regarding delimiters, the program will only consider \':\' and \'.\' as valid delimiters for time.\n" +
             "Delimiters are optional and may be omitted.\n" +
             "\n" +
             "Lastly, the am-pm marker is an optional attribute.\nShould it be omitted, it will automatically " +

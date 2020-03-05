@@ -351,7 +351,7 @@ This refers to the typical dates that are represented with **numbers** and **del
   
 In this **LumiChat**  program, *dates* should be in the order of **day**, **month**, then an <u>optional</u> **year**. If the **year** is not provided, the program will automatically assume it to be the **current year**.  Also, the **day**, **month** and **year** should only be entered as **numbers** and not words *(e.g. January is not accepted for the **month** attribute)*.
   
-Regarding **delimiters**, the program will **only** consider '/' and '-' as valid delimiters for *dates*.  Delimiters are <u>optional</u> and may be omitted provided you include the **year** of the *date* *(e.g. 1/1/20, 1/1 and 010120 are accepted, but not 0101).*
+Regarding **delimiters**, the program will **only** consider `/` and `-` as valid delimiters for *dates*.  Delimiters are <u>optional</u> and may be omitted provided you include the **year** of the *date* *(e.g. 1/1/20, 1/1 and 010120 are accepted, but not 0101).*
 
 An **exhaustive** list of the standard *date* formats is given below for your reference.
 ```
@@ -369,7 +369,7 @@ The **LumiChat** program accepts most time formats that are represented with **n
   
 The *time* should be in the order of  **hour**, then **minute**. The **seconds** attribute of *time* should **not** be given. The **minute** attribute must be a **double** digit *(i.e. single digits must be padded with a 0 in front)*. The **minute** attribute is also <u>optional</u>, and should it be omitted, the **LumiChat** program will automatically set the **minute** to be 0. Both the **12-h** format and the **24-h** format are valid *time* formats for this program.  
   
-Regarding **delimiters**, the program will **only** consider ':' and '.' as valid delimiters for *time*.  Delimiters are <u>optional</u> and may be omitted.
+Regarding **delimiters**, the program will **only** consider `:` and `.` as valid delimiters for *time*.  Delimiters are <u>optional</u> and may be omitted.
 
 Lastly, the **am-pm marker** is an <u>optional</u> attribute, and should it be omitted, the **LumiChat** program will automatically assume the *time* to follow the **24-h** format.
 
