@@ -1,7 +1,7 @@
 package Duke.UI;
 
 import java.util.Scanner;
-import java.io.*;
+import java.io.PrintStream;
 
 public class Ui {
     protected Scanner in;

@@ -1,6 +1,12 @@
 package Duke;
 
-import Duke.Command.*;
+import Duke.Command.Command;
+import Duke.Command.AddCommand;
+import Duke.Command.DeleteCommand;
+import Duke.Command.FindCommand;
+import Duke.Command.DoneCommand;
+import Duke.Command.ListCommand;
+import Duke.Command.ExitCommand;
 import Duke.UI.Messages;
 
 /**

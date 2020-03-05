@@ -1,7 +1,9 @@
 package Duke;
 
-import Duke.Tasks.*;
-import Duke.UI.*;
+import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -153,12 +155,7 @@ public class Storage {
      */
     public void save() throws IOException, DukeException {
         File f = new File(filepath);
-        /*try {
-            f.getParentFile() .mkdirs();
-            f.createNewFile();
-        } catch (Exception e) {
-            throw new DukeException();
-        }*/
+
         if (TaskList.getSize() == 0) {
             saveEmptyFile();
             return;

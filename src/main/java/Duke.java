@@ -1,6 +1,9 @@
 import Duke.Command.Command;
 import Duke.UI.Ui;
-import Duke.*;
+import Duke.TaskList;
+import Duke.Storage;
+import Duke.DukeException;
+import Duke.Parser;
 
 public class Duke {
 

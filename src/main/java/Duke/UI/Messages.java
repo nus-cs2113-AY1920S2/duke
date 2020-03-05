@@ -1,7 +1,5 @@
 package Duke.UI;
 
-import java.text.MessageFormat;
-
 public class Messages {
 
     public static final String LOGO = " ____        _        \n"
