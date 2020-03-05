@@ -1,12 +1,39 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoCommand;
+import duke.commands.DueCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
 import duke.exception.InvalidFormatException;
 import duke.format.DateTime;
 import duke.format.DateTimeFormat;
 import duke.ui.UI;
 
-import static duke.exception.ExceptionMessages.*;
+import static duke.exception.ExceptionMessages.ILLEGAL_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DATETIME_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DATE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DEADLINE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DELETE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DONE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_DUE_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_EVENT_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_HELP_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.INVALID_TIME_FORMAT_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_DATE_FILTER_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_DEADLINE_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_EVENT_INFORMATION_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_HELP_WORD_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_LIST_NUMBER_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_SEARCH_WORD_MESSAGE;
+import static duke.exception.ExceptionMessages.MISSING_TODO_DESCRIPTION_MESSAGE;
 import static duke.format.DateTimeFormat.stringToDate;
 
 import static duke.format.DateTimeFormat.stringToDateTime;
@@ -246,7 +273,7 @@ public class Parser {
         } catch (ExcessParameterException e) {
             return new InvalidCommand(INVALID_DUE_FORMAT_MESSAGE);
         } catch (DateTimeFormat.InvalidDateException e) {
-            return new InvalidCommand(INVALID_DATETIME_FORMAT_MESSAGE);
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
         }
     }
 

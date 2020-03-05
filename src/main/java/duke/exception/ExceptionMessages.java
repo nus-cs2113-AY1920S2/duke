@@ -114,13 +114,13 @@ public class ExceptionMessages {
 
     public final static String INVALID_DATE_FORMAT_MESSAGE =
             SHOCK_FACE + "Em... Lumi cannot understand this " + toBold("date")  + " given...\n" +
-            "Lumi needs you to follow this datetime format:\n" + TAB +
-            toBoldAndItalic(DateTime.FORMAT) + "\n";
+            "Lumi needs you to follow this date format:\n" + TAB +
+            toBoldAndItalic("<" + DateTime.DATE_FORMAT + ">") + "\n";
 
     public final static String INVALID_TIME_FORMAT_MESSAGE =
             SHOCK_FACE + "Em... Lumi cannot understand this " + toBold("time")  + " given...\n" +
-            "Lumi needs you to follow this datetime format:\n" + TAB +
-            toBoldAndItalic(DateTime.FORMAT) + "\n";
+            "Lumi needs you to follow this time format:\n" + TAB +
+            toBoldAndItalic("<" + DateTime.TIME_FORMAT + ">") + "\n";
 
     public final static String INVALID_DELETE_FORMAT_MESSAGE =
             SHOCK_FACE + "Oops!! Lumi cannot understand this " + toItalic("DELETE")  + " command...\n" +

@@ -15,9 +15,9 @@ import static duke.format.TextFormatter.toBold;
  * @see duke.commands.DueCommand
  */
 public class DateTime {
-    public static final String FORMAT = "<date dd/mm/yyyy> <time hh:mm>";
-    private static final String DATE_FORMAT = "dd/MM/yyyy"; // Date format to be displayed
-    private static final String TIME_FORMAT = "hh:mma"; // Time format to be displayed
+    public static final String FORMAT = "<date dd/mm/yyyy> <time hh:mma>";
+    public static final String DATE_FORMAT = "dd/MM/yyyy"; // Date format to be displayed
+    public static final String TIME_FORMAT = "hh:mma"; // Time format to be displayed
 
     private LocalDate date;
     private LocalTime time;
