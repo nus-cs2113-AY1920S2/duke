@@ -24,7 +24,7 @@ public class Data {
         todos = new ArrayList<Todo>();
         final Parser dataParser = new Parser();
 
-        try {
+    try {
             File f = new File(path);
             if (f.createNewFile()) {
                 System.out.println("data.txt is not found. It has been generated for you.");
