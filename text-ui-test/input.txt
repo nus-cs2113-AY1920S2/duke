@@ -1,0 +1,7 @@
+todo add pie crust
+deadline complete homework /now
+event tutorial /Tuesday 2pm
+list
+done 2
+list
+bye

@@ -22,9 +22,10 @@
 
 # Tutorials 
 
-Duke Increment | Tutorial
+Duke.Duke Increment | Tutorial
 ---------------|---------------
 `A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
+
 
 
 # Feedback, Bug Reports
