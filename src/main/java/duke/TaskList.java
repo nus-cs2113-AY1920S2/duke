@@ -45,10 +45,9 @@ public class TaskList {
         if (str.equals("delete")) {
             new DukeException("OOPS!!! The index cannot be empty.");
         } else {
-            int dividerPosition = str.indexOf(" ");
-            String index = str.substring(dividerPosition + 1);
+            String index = str.replace(" ","").substring(6);
             int i = Integer.parseInt(index);
-            if (i == 0) {
+            if (i <= 0 ) {
                 new DukeException("OOPS!!!Invalid input index");
             } else if (i > taskList.size()) {
                 new DukeException("OOPS!!!Index out of range");
@@ -72,8 +71,7 @@ public class TaskList {
         if (str.equals("done")) {
             new DukeException("OOPS!!! The index cannot be empty.");
         }else {
-            int dividerPosition = str.indexOf(" ");
-            String index = str.substring(dividerPosition + 1);
+            String index = str.replace(" ","").substring(4);
             int i = Integer.parseInt(index);
             if (i == 0) {
                 new DukeException("OOPS!!!Invalid input index");
@@ -113,7 +111,7 @@ public class TaskList {
         System.out.println("____________________________________________________________");
         System.out.println(" Here are the matching tasks in your list:");
         ArrayList<Task> searchResult = new ArrayList<>();
-        String keyword = input.substring(5);
+        String keyword = input.replace(" ","").substring(4);
         for(Task task: taskList){
             if(task.description.contains(keyword)){
                 searchResult.add(task);

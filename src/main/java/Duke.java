@@ -39,6 +39,7 @@ public class Duke {
             conversation();
         } else if (str.equals("add task")) {
             System.out.println("____________________________________________________________");
+            System.out.println("Task Management Mode has been activated");
             addTaskScreen();
         } else if (str.equals("list")) {
             taskListOp.listTask();
@@ -65,8 +66,6 @@ public class Duke {
      */
     public static void addTaskScreen() throws IOException, DukeException {
         System.out.println("____________________________________________________________");
-        System.out.println("Please add tasks");
-        System.out.println("____________________________________________________________");
         String str = parser.readCommand();
 
         if (str.equals("bye")) {
@@ -87,8 +86,7 @@ public class Duke {
                 if (b) {
                     new DukeException("OOPS!!! The description cannot be empty.");
                 } else {
-                    int dividerPosition = str.indexOf(" ");
-                    String task = str.substring(dividerPosition + 1);
+                    String task = str.replace(" ","").substring(4);
                     ToDos newTask = new ToDos(task);
                     taskListOp.addTask(newTask);
                 }
@@ -96,17 +94,21 @@ public class Duke {
             } else if ((str.contains("deadline"))) {
                 if (b) {
                     new DukeException("OOPS!!! The description cannot be empty.");
-                } else if (!str.contains("/")) {
+                }else if (!str.contains("/")) {
                     new DukeException("OOPS!!!Please specify more details");
-                } else {
-                    int dividerPosition = str.indexOf(" ");
+                }else if(str.replace(" ", "").equals("deadline/")) {
+                    new DukeException("OOPS!!!Please specify more details");
+                }else if(str.endsWith("/")) {
+                    new DukeException("OOPS!!!Please specify more details");
+                }else{
                     int dividerPositionSlash = str.indexOf("/");
-                    String task = str.substring(dividerPosition + 1, dividerPositionSlash);
-                    if (str.substring(dividerPositionSlash + 1).trim().equals("by")) {
+                    String task = str.replace(" ","").substring(8, dividerPositionSlash);
+                    if (str.substring(dividerPositionSlash + 1).trim().equals("by")||
+                            str.substring(dividerPositionSlash + 1).trim().contains("at")) {
                         new DukeException("OOPS!!!Please specify more details");
                     } else {
-                        String date = str.substring(dividerPositionSlash + 4);
-                        Deadlines newTask = new Deadlines(task, date);
+                        String date = str.replace(" ","").substring(dividerPositionSlash + 2);
+                        Deadlines newTask = new Deadlines(task, date.replace(" ",""));
                         taskListOp.addTask(newTask);
                     }
                 }
@@ -116,15 +118,19 @@ public class Duke {
                     new DukeException("OOPS!!! The description cannot be empty.");
                 } else if (!str.contains("/")) {
                     new DukeException("OOPS!!!Please specify more details");
-                } else {
-                    int dividerPosition = str.indexOf(" ");
+                } else if(str.replace(" ", "").equals("event/")) {
+                    new DukeException("OOPS!!!Please specify more details");
+                }else if(str.endsWith("/")) {
+                    new DukeException("OOPS!!!Please specify more details");
+                }else{
                     int dividerPositionSlash = str.indexOf("/");
-                    String task = str.substring(dividerPosition + 1, dividerPositionSlash);
-                    if (str.substring(dividerPositionSlash + 1).trim().equals("at")) {
+                    String task = str.replace(" ","").substring(5, dividerPositionSlash);
+                    if (str.substring(dividerPositionSlash + 1).trim().equals("at") ||
+                            str.substring(dividerPositionSlash + 1).trim().contains("by")){
                         new DukeException("OOPS!!!Please specify more details");
                     } else {
-                        String date = str.substring(dividerPositionSlash + 4);
-                        Events newTask = new Events(task, date);
+                        String date = str.replace(" ","").substring(dividerPositionSlash + 2);
+                        Events newTask = new Events(task, date.replace(" ",""));
                         taskListOp.addTask(newTask);
                     }
                 }
@@ -134,6 +140,7 @@ public class Duke {
                 addTaskScreen();
             } else {
                 new DukeException("OOPS!!!Wrong input format.");
+                addTaskScreen();
             }
         }
     }
