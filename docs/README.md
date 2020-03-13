@@ -70,8 +70,8 @@ Expected outcome:
 
 Format for task items:
 <br />`todo [DISCRIPITION]`
-<br />`deadline [DISCRIPITION]/by [DATE IN YYYY_MM_DD]`
-<br />`event [DISCRIPITION]/at [DATE IN YYYY_MM_DD] [TIME IN HH_MM]`
+<br />`deadline [DISCRIPITION]/by [DATE IN YYYY-MM-DD]`
+<br />`event [DISCRIPITION]/at [DATE IN YYYY-MM-DD]-[TIME IN HH-MM]`
 
 ### `list` -List the current tasks
 

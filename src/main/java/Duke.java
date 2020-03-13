@@ -92,45 +92,47 @@ public class Duke {
                 }
                 addTaskScreen();
             } else if ((str.contains("deadline"))) {
+                String input = str.replace(" ","");
                 if (b) {
                     new DukeException("OOPS!!! The description cannot be empty.");
-                }else if (!str.contains("/")) {
+                }else if (!input.contains("/") || !input.contains("by")) {
+                    new DukeException("OOPS!!!Wrong format");
+                }else if(input.contains("deadline/")) {
                     new DukeException("OOPS!!!Please specify more details");
-                }else if(str.replace(" ", "").equals("deadline/")) {
-                    new DukeException("OOPS!!!Please specify more details");
-                }else if(str.endsWith("/")) {
+                }else if(input.endsWith("/")) {
                     new DukeException("OOPS!!!Please specify more details");
                 }else{
-                    int dividerPositionSlash = str.indexOf("/");
-                    String task = str.replace(" ","").substring(8, dividerPositionSlash);
-                    if (str.substring(dividerPositionSlash + 1).trim().equals("by")||
-                            str.substring(dividerPositionSlash + 1).trim().contains("at")) {
+                    int dividerPositionSlash = input.indexOf("/");
+                    String task = input.substring(8, dividerPositionSlash);
+                    if (input.substring(dividerPositionSlash + 1).equals("by")||
+                            input.substring(dividerPositionSlash + 1).contains("at")) {
                         new DukeException("OOPS!!!Please specify more details");
                     } else {
-                        String date = str.replace(" ","").substring(dividerPositionSlash + 2);
-                        Deadlines newTask = new Deadlines(task, date.replace(" ",""));
+                        String date = input.substring(dividerPositionSlash + 3);
+                        Deadlines newTask = new Deadlines(task, date);
                         taskListOp.addTask(newTask);
                     }
                 }
                 addTaskScreen();
             } else if ((str.contains("event"))) {
+                String input = str.replace(" ","");
                 if (b) {
                     new DukeException("OOPS!!! The description cannot be empty.");
-                } else if (!str.contains("/")) {
+                } else if (!input.contains("/") || !input.contains("at")) {
+                    new DukeException("OOPS!!!Wrong format");
+                } else if(input.contains("event/")) {
                     new DukeException("OOPS!!!Please specify more details");
-                } else if(str.replace(" ", "").equals("event/")) {
-                    new DukeException("OOPS!!!Please specify more details");
-                }else if(str.endsWith("/")) {
+                }else if(input.endsWith("/")) {
                     new DukeException("OOPS!!!Please specify more details");
                 }else{
-                    int dividerPositionSlash = str.indexOf("/");
-                    String task = str.replace(" ","").substring(5, dividerPositionSlash);
-                    if (str.substring(dividerPositionSlash + 1).trim().equals("at") ||
-                            str.substring(dividerPositionSlash + 1).trim().contains("by")){
+                    int dividerPositionSlash = input.indexOf("/");
+                    String task = input.substring(5, dividerPositionSlash);
+                    if (input.substring(dividerPositionSlash + 1).equals("at") ||
+                            input.substring(dividerPositionSlash + 1).contains("by")){
                         new DukeException("OOPS!!!Please specify more details");
                     } else {
-                        String date = str.replace(" ","").substring(dividerPositionSlash + 2);
-                        Events newTask = new Events(task, date.replace(" ",""));
+                        String date = input.substring(dividerPositionSlash + 3);
+                        Events newTask = new Events(task, date);
                         taskListOp.addTask(newTask);
                     }
                 }
