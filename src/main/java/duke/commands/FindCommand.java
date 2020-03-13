@@ -8,6 +8,7 @@ import java.util.List;
 public class FindCommand extends Command {
     private static UI ui = new UI();
     private static boolean isFound = false;
+
     public FindCommand() {
     }
 

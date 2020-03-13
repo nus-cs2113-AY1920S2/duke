@@ -15,6 +15,7 @@ import java.util.List;
 public class Parser {
     private static UI ui;
     private static List<Task> list;
+
     public Parser(UI ui, List<Task> list) {
         Parser.ui = ui;
         Parser.list = list;
@@ -129,11 +130,16 @@ public class Parser {
      */
     private static boolean checkRepeat(String task) {
         if (list!=null && !list.isEmpty()) {
-            for (Task i : list) {
-                if (i != null && i.task.equals(task)) {
-                    Parser.ui.printRepeatMessage();
-                    return true;
-                }
+            return executeCheckRepeat(task);
+        }
+        return false;
+    }
+
+    private static boolean executeCheckRepeat(String task) {
+        for (Task i : list) {
+            if (i != null && i.task.equals(task)) {
+                Parser.ui.printRepeatMessage();
+                return true;
             }
         }
         return false;

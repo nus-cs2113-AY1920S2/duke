@@ -13,6 +13,7 @@ public class DoneCommand extends Command {
     public static UI ui = new UI();
     public static int taskNo;
     public static String task;
+
     public DoneCommand() {
         taskNo = TaskList.getSize();
     }

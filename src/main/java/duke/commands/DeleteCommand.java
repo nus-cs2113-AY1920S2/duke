@@ -12,6 +12,7 @@ import java.util.List;
 public class DeleteCommand extends Command {
     public static UI ui = new UI();
     public static int taskNo;
+
     public DeleteCommand ()  {
         taskNo = TaskList.getSize();
     }
