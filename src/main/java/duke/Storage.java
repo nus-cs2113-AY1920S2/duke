@@ -101,7 +101,7 @@ public class Storage {
         if (raw.contains("[T]")) {
             String taskDescription = raw.substring(6);
             ToDos newTask = new ToDos(taskDescription);
-            if (raw.contains("\u2713")) {
+            if (raw.contains("DONE")) {
                 newTask.isDone = true;
             }
             taskListOp.taskList.add(newTask);
@@ -111,7 +111,7 @@ public class Storage {
             String taskDescription = raw.substring(6, timeSectionStart - 1);
             String timePeriod = raw.substring(timeSectionStart + 5, timeSectionEnd);
             Deadlines newTask = new Deadlines(taskDescription,timePeriod);
-            if (raw.contains("\u2713")) {
+            if (raw.contains("DONE")) {
                 newTask.isDone = true;
             }
             taskListOp.taskList.add(newTask);
@@ -121,7 +121,7 @@ public class Storage {
             String taskDescription = raw.substring(6, timeSectionStart - 1);
             String timePeriod = raw.substring(timeSectionStart + 5, timeSectionEnd);
             Events newTask = new Events(taskDescription, timePeriod);
-            if (raw.contains("\u2713")) {
+            if (raw.contains("DONE")) {
                 newTask.isDone = true;
             }
             taskListOp.taskList.add(newTask);
