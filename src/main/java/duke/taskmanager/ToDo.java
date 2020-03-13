@@ -1,10 +1,9 @@
 package duke.taskmanager;
 
-public class ToDo extends Tasks {
-    protected boolean isDone;
+public class ToDo extends Task {
     public ToDo(String task) {
         super(task);
-        this.isDone = false;
+        isDone = false;
     }
 
     @Override

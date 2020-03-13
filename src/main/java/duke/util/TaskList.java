@@ -1,6 +1,6 @@
 package duke.util;
 
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ public class TaskList {
     /**
      * Task list where active tasks are stored.
      */
-    public static List<Tasks> tasks = new ArrayList<>();
+    public static List<Task> tasks = new ArrayList<>();
     public static String FORMAT = Split.FORMAT.getSplit();
     public static String SPLIT_UPPER_BOUNDARY = Split.SPLIT_UPPER_BOUNDARY.getSplit();
     public static String SPLIT_LOWER_BOUNDARY = Split.SPLIT_LOWER_BOUNDARY.getSplit();
@@ -35,7 +35,7 @@ public class TaskList {
      * Return the task list retrieved from file.
      * @return tasks, the task list retrieved from file
      */
-    public List<Tasks> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
@@ -44,7 +44,7 @@ public class TaskList {
      * @param index an integer representing the index of task selected
      * @return      the Tasks at tasks[index]
      */
-    public static Tasks getTask(int index) {
+    public static Task getTask(int index) {
         return tasks.get(index);
     }
 
@@ -52,7 +52,7 @@ public class TaskList {
      * Add a Tasks to the current task list, List<Tasks>.
      * @param task the Tasks to be added to tasks
      */
-    public static void add(Tasks task) {
+    public static void add(Task task) {
         tasks.add(task);
     }
 
@@ -77,7 +77,7 @@ public class TaskList {
             printEmpty();
         } else {
             int index = 0;
-            for (Tasks task : tasks) {
+            for (Task task : tasks) {
                 System.out.printf(FORMAT, index + ". "+ task.toString());
                 index++;
             }

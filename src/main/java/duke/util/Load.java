@@ -2,7 +2,7 @@ package duke.util;
 
 import duke.taskmanager.Deadline;
 import duke.taskmanager.Event;
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 import duke.taskmanager.ToDo;
 
 import java.io.File;
@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class Load {
     public static String path;
-    public static List<Tasks> list = new ArrayList<>();
+    public static List<Task> list = new ArrayList<>();
     public static List<String> lines = new ArrayList<>();
     public static UI ui;
     public static File file;
@@ -22,6 +22,7 @@ public class Load {
     public Load() {
         path = "./data/myTasks.txt";
     }
+
     /**
      * Load the existing task list in designated file
      * "data/myTasks.txt", and save them into an array list
@@ -55,7 +56,7 @@ public class Load {
      * to a new task list, that is the task list to be used
      * in the program.
      */
-    public List<Tasks> readData() {
+    public List<Task> readData() {
         loadData();
         for (String line: lines) {
             if(line != null) {

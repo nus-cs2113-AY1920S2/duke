@@ -1,7 +1,7 @@
 package duke.util;
 
 import duke.exceptions.IllegalClearException;
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 
 import java.util.List;
 import java.util.Scanner;
@@ -37,18 +37,21 @@ public class UI {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("    Hello from\n" + logo);
     }
+
     public void printDoneIntro() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Please select the task that you have ");
         System.out.printf(FORMAT, "    completed (select the no)");
         TaskList.showList();
     }
+
     public void printDeleteIntro() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Please select the task that you wish ");
         System.out.printf(FORMAT, "to delete (select the no)");
         TaskList.showList();
     }
+
     public void printExit() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Bye. Hope to see you again soon!");
@@ -82,17 +85,20 @@ public class UI {
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
 
-    public void printTaskDeleted(int index, Tasks task) {
+    public void printTaskDeleted(int index, Task task) {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Task " + index + ": " +
                 task + " has been deleted!");
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
-    public void printTaskInstruction(String type) {
+
+    public String printTaskInstruction(String type) {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Please enter the " + type + "of your task:");
         System.out.println(SPLIT_LOWER_BOUNDARY);
+        return getStringInput();
     }
+
     public void printExceptionInstruction() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "An error has occurred." +
@@ -101,16 +107,19 @@ public class UI {
         System.out.printf(FORMAT, "2. No");
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
+
     public void printErrorMessage() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Wrong command. Please follow instructions.");
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
+
     public void printClearErrorMessage() {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "An error has occurred in the clearing process.");
         System.out.println(SPLIT_LOWER_BOUNDARY);
     }
+
     public void printRepeatMessage() {
         System.out.printf(FORMAT, "This is a repeated task.");
     }
@@ -121,7 +130,7 @@ public class UI {
      * in the task list. The task argument must be the name of the task that
      * was marked as done.
      */
-    public void printRespondToDoneTask(int indexOfTask, Tasks task) {
+    public void printRespondToDoneTask(int indexOfTask, Task task) {
         System.out.println(SPLIT_UPPER_BOUNDARY);
         System.out.printf(FORMAT, "Congrats! Task " + indexOfTask + ": " +
         task.getTask() + " has been completed");
@@ -142,7 +151,7 @@ public class UI {
      * A respond message to a successful clear list action.
      * The list argument is the current task list in the myTask.txt file.
      */
-    public void printRespondToClearTask(List<Tasks> list) throws IllegalClearException {
+    public void printRespondToClearTask(List<Task> list) throws IllegalClearException {
         if (list.isEmpty()) {
             System.out.println(SPLIT_UPPER_BOUNDARY);
             System.out.printf(FORMAT, "You have successfully cleared your task list!");

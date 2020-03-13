@@ -1,17 +1,18 @@
 package duke.commands;
 
+import duke.util.Parser;
 import duke.util.TaskList;
 import duke.util.UI;
 import duke.exceptions.IllegalDeleteException;
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 
+import java.io.IOException;
 import java.util.List;
 
 public class DeleteCommand extends Command {
-    public UI ui;
+    public static UI ui = new UI();
     public static int taskNo;
-    public DeleteCommand (UI ui)  {
-        this.ui = ui;
+    public DeleteCommand ()  {
         taskNo = TaskList.getSize();
     }
 
@@ -24,7 +25,7 @@ public class DeleteCommand extends Command {
      * @throws IllegalDeleteException when the task selected is
      *                                not within the task list
      */
-    public List<Tasks> execute(List<Tasks> list) throws IllegalDeleteException {
+    public List<Task> execute(List<Task> list) throws IllegalDeleteException {
         if (taskNo <= 0) {
             ListCommand.execute(list);
             return list;
@@ -32,12 +33,20 @@ public class DeleteCommand extends Command {
         ui.printDeleteIntro();
         int index = Integer.parseInt(ui.getStringInput());
         if (index < TaskList.getSize() && index >= 0) {
-            Tasks task = TaskList.getTask(index);
+            Task task = TaskList.getTask(index);
             list.remove(index);
             ui.printTaskDeleted(index, task);
             return list;
         } else {
             throw new IllegalDeleteException();
+        }
+    }
+
+    public static void retry() throws IOException {
+        ui.printExceptionInstruction();
+        String deleteExceptionInput = ui.getStringInput();
+        if (deleteExceptionInput.equals("1") || deleteExceptionInput.equals("Yes")) {
+            Parser.parseCommand("3");
         }
     }
 }

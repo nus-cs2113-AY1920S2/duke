@@ -1,10 +1,11 @@
 package duke.taskmanager;
 
-public class Event extends Tasks {
+public class Event extends Task {
     protected String by;
     public Event(String task, String by) {
         super(task);
         this.by = by;
+        isDone = false;
     }
 
     @Override

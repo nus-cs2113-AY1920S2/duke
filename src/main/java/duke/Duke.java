@@ -2,7 +2,7 @@ package duke;
 
 import duke.util.*;
 import duke.util.TaskList;
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Duke {
      * current TaskList
      */
     private UI ui;
-    private static List<Tasks> tasks;
+    private static List<Task> tasks;
     public Duke() {
         ui = new UI();
         duke.util.TaskList taskList = new TaskList();

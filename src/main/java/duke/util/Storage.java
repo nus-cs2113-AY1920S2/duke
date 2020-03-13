@@ -1,6 +1,6 @@
 package duke.util;
 
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,10 +24,10 @@ public class Storage {
      *                     to the file at designated
      *                     path fails
      */
-    public static void writeData(List<Tasks> taskList) throws IOException {
+    public static void writeData(List<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(String.valueOf(path));
         List<String> store = new ArrayList<>();
-        for (Tasks temp : taskList) {
+        for (Task temp : taskList) {
             store.add(temp.contentToFile());
         }
         for(String str: store) {

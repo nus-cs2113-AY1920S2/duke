@@ -1,13 +1,13 @@
 package duke.commands;
 
-import duke.taskmanager.Tasks;
+import duke.taskmanager.Task;
 import duke.util.Split;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListCommand extends Command {
-    public static List<Tasks> tasks = new ArrayList<>();
+    public static List<Task> tasks = new ArrayList<>();
     public static String FORMAT = Split.FORMAT.getSplit();
     public static String SPLIT_UPPER_BOUNDARY = Split.SPLIT_UPPER_BOUNDARY.getSplit();
     public static String SPLIT_LOWER_BOUNDARY = Split.SPLIT_LOWER_BOUNDARY.getSplit();
@@ -36,13 +36,13 @@ public class ListCommand extends Command {
      * the current task list and print it on the screen.
      * @param list the current task list
      */
-    public static void execute(List<Tasks> list) {
+    public static void execute(List<Task> list) {
         printIntro();
         if (list.size() == 0){
             printEmpty();
         } else {
             int index = 0;
-            for (Tasks task : list) {
+            for (Task task : list) {
                 System.out.printf(FORMAT, index + ". "+ task.toString());
                 index++;
             }
