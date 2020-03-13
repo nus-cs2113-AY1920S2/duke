@@ -24,6 +24,6 @@ Command | Description
 `deadline [item] /by [datetime]` | Creates a new to-do task that has a deadline, hence to be completed by a specific date time.
 `event [item] /at [datetime]` | Creates an event type task that will take place at a specific date time.
 
-# Feedback, Bug Reports
+## Feedback, Bug Reports
 
 * If you have feedback or bug reports, please email me at e0318725@u.nus.edu.
