@@ -17,10 +17,5 @@ public class ToDos extends  Task{
         return "[T]" + super.toString() ;
     }
 
-
-    @Override
-    public String showSearch() {
-        return "[T]" + super.toString() ;
-    }
 }
 

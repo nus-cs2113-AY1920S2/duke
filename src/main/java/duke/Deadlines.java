@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadlines extends Task {
 
-    protected LocalDate by;
+    protected String by;
 
-    public Deadlines(String description, LocalDate by) {
+    public Deadlines(String description, String by) {
         super(description);
         this.by = by;
     }
@@ -20,8 +20,4 @@ public class Deadlines extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
-    @Override
-    public String showSearch() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
 }

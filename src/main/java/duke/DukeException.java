@@ -4,13 +4,10 @@ package duke;
  * prints a error message
  */
 public class DukeException extends Exception {
-    private String errorMessage;
-    public DukeException () {
-        super ();
-    }
+    private String message;
 
-    public DukeException (String errorMessage) {
-        super (errorMessage);
-        System.out.println(errorMessage);
+    public DukeException(String message) {
+        this.message = message;
+        System.out.println(message);
     }
 }
