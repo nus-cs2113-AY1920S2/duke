@@ -23,7 +23,7 @@ public class Storage {
      * @return ArrayList of Task stored in the file if it exist.
      */
     public ArrayList<Task> load() {
-        ArrayList<Task> taskArray = new ArrayList<>();
+        ArrayList<Task> tasksStored = new ArrayList<>();
         int taskCount = 0;
         try {
             File file = new File(filePath); // create a File for the given file path
@@ -31,22 +31,22 @@ public class Storage {
             while (fileScanner.hasNext()) {
                 String[] existingTask = fileScanner.nextLine().split(" \\| ");
                 if (existingTask[0].equals("T")) {
-                    taskArray.add(new Todo(existingTask[2]));
+                    tasksStored.add(new Todo(existingTask[2]));
                 }
                 if (existingTask[0].equals("D")) {
-                    taskArray.add(new Deadline(existingTask[2], existingTask[3]));
+                    tasksStored.add(new Deadline(existingTask[2], existingTask[3]));
                 }
                 if (existingTask[0].equals("E")) {
-                    taskArray.add(new Event(existingTask[2], existingTask[3]));
+                    tasksStored.add(new Event(existingTask[2], existingTask[3]));
                 }
                 if (existingTask[1].equals("1")) {
-                    taskArray.get(taskCount).markAsDone();
+                    tasksStored.get(taskCount).markAsDone();
                 }
                 taskCount++;
             }
-            return taskArray;
+            return tasksStored;
         } catch (FileNotFoundException e) {
-            return taskArray;
+            return tasksStored;
         }
     }
 }

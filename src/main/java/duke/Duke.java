@@ -8,10 +8,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,16 +33,14 @@ public class Duke {
      */
     public static void main(String[] args) {
         Ui ui = new Ui();
+        TaskList taskList;
         Storage storage = new Storage(FILE_PATH);
         ArrayList<Task> tasks = storage.load();
         int taskCount = tasks.size();
         boolean isBye = false;
-        Scanner sc = new Scanner(System.in);
         ui.greetUser();
         while (!isBye) {
-            System.out.println();
-            String string = sc.nextLine();
-            System.out.println("    ____________________________________________________________");
+            String string = ui.getUserCommand();
             String[] stringSplit = string.split(" ");
             try {
                 switch (stringSplit[0]) {
@@ -69,7 +66,7 @@ public class Duke {
                     taskCount = deleteCommand(tasks, stringSplit, taskCount);
                     break;
                 case "find":
-                    findCommand(tasks, taskCount, string);
+                    findCommand(tasks, string);
                     break;
                 case "help":
                     ui.helpCommand();
@@ -87,6 +84,8 @@ public class Duke {
                 System.out.println("Folder does not exist yet" + e.getMessage());
             } catch (IOException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("     :( OOPS!!! Please enter a valid date and time");
             } finally {
                 System.out.println("    ____________________________________________________________");
             }
@@ -96,20 +95,18 @@ public class Duke {
     /**
      * Find all Task with description that matches a key word or phrase.
      * @param tasks ArrayList containing all the Task.
-     * @param taskCount Total number of Task stored.
      * @param string User input.
      * @throws DukeArgumentException If missing parameter for description.
      */
-    public static void findCommand(ArrayList<Task> tasks, int taskCount, String string) throws
+    public static void findCommand(ArrayList<Task> tasks, String string) throws
             DukeArgumentException {
-        int deletedTask;
         if (string.length() == 4) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for find.");
         }
         String description = string.substring(5);
         boolean containDescription = false;
         int matchNumber = 1;
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(description)) {
                 if (!containDescription) {
                     System.out.println("     Here are the matching tasks in your list:");

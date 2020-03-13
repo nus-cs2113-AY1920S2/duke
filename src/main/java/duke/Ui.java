@@ -1,7 +1,31 @@
 package duke;
 
+import java.util.Scanner;
+
+/**
+ * The Deadline class is an Object that deals with interaction with the user.
+ * @author Lam Yue Wei
+ * @version CS2113 AY19/20 Sem 2 Duke
+ */
 public class Ui {
+    private Scanner sc = new Scanner(System.in);
+
+    /**
+     * Empty constructor for Ui object.
+     */
     public Ui() {
+    }
+
+    /**
+     * Scan the user input into a String and return it.
+     * @return User input.
+     */
+    public String getUserCommand() {
+        String userCommand;
+        System.out.println();
+        userCommand = sc.nextLine();
+        System.out.println("    ____________________________________________________________");
+        return userCommand;
     }
 
     /**
@@ -26,7 +50,7 @@ public class Ui {
         System.out.println("|-------+------------------+------------------------------------|");
         System.out.println("| 01    | todo j           | Add a task(j) without dateline     |");
         System.out.println("|-------+------------------+------------------------------------|");
-        System.out.println("| 02    | dateline j /by d | Add a task(j) with due date d      |");
+        System.out.println("| 02    | deadline j /by d | Add a task(j) with due date d      |");
         System.out.println("|-------+------------------+------------------------------------|");
         System.out.println("| 03    | event j /at d    | Add a task(j) that start at date d |");
         System.out.println("|-------+------------------+------------------------------------|");
