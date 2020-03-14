@@ -3,10 +3,7 @@ package duke;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeNullException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.*;
 
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -33,10 +30,10 @@ public class Duke {
      */
     public static void main(String[] args) {
         Ui ui = new Ui();
-        TaskList taskList;
+        Command command;
         Storage storage = new Storage(FILE_PATH);
         ArrayList<Task> tasks = storage.load();
-        int taskCount = tasks.size();
+        TaskList taskList = new TaskList(tasks); //Use this to replace tasks
         boolean isBye = false;
         ui.greetUser();
         while (!isBye) {
@@ -45,31 +42,40 @@ public class Duke {
             try {
                 switch (stringSplit[0]) {
                 case "list":
-                    listCommand(tasks, stringSplit, taskCount);
+                    listCommand(tasks, stringSplit);
+                    command = new ListCommand();
+                    command.execute(taskList, ui,storage);
                     break;
                 case "done":
-                    doneCommand(tasks, stringSplit, taskCount);
+                    doneCommand(tasks, stringSplit);
+                    taskList.doneTask(Integer.parseInt(stringSplit[1]) - 1);
                     break;
                 case "bye":
-                    isBye = byeCommand(stringSplit, taskCount, tasks);
+                    isBye = byeCommand(stringSplit, tasks);
                     break;
                 case "todo":
-                    taskCount = todoCommand(tasks, stringSplit, taskCount);
+                    todoCommand(tasks, stringSplit);
+                    taskList.addTask(new Todo(String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length))));
                     break;
                 case "deadline":
-                    taskCount = deadlineCommand(tasks, taskCount, string);
+                    deadlineCommand(tasks, string);
+                    taskList.addTask(new Deadline(string.substring(0, string.indexOf(" /by")).replace("deadline ", ""), string.substring(string.indexOf("/by ")).replace("/by ", "")));
                     break;
                 case "event":
-                    taskCount = eventCommand(tasks, taskCount, string);
+                    eventCommand(tasks, string);
+                    taskList.addTask(new Event(string.substring(0, string.indexOf(" /at")).replace("event ", ""), string.substring(string.indexOf("/at ")).replace("/at ", "")));
                     break;
                 case "delete":
-                    taskCount = deleteCommand(tasks, stringSplit, taskCount);
+                    deleteCommand(tasks, stringSplit);
+                    taskList.deleteTask(Integer.parseInt(stringSplit[1]) - 1);
                     break;
                 case "find":
                     findCommand(tasks, string);
                     break;
                 case "help":
-                    ui.helpCommand();
+                    command = new HelpCommand();
+                    command.execute(taskList, ui, storage);
+                    break;
                 default:
                     throw new DukeNullException("     :( OOPS!!! Command does not exist.");
                 }
@@ -137,14 +143,13 @@ public class Duke {
      * Delete a Task given an index.
      * @param tasks ArrayList containing all the Task.
      * @param stringSplit User input that is split by spacing.
-     * @param taskCount Total number of Task stored.
-     * @return Total number of Task stored.
      * @throws DukeArgumentException If missing parameter for index.
      * @throws DukeIndexException If index provided is out of range.
      */
-    public static int deleteCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
+    public static void deleteCommand(ArrayList<Task> tasks, String[] stringSplit) throws
             DukeArgumentException, DukeIndexException {
         int deletedTask;
+        int taskCount = tasks.size();
         if (stringSplit.length == 1) {
             throw new DukeArgumentException("     :( OOPS!!! Missing index for delete.");
         }
@@ -157,18 +162,15 @@ public class Duke {
         tasks.remove(deletedTask);
         taskCount--;
         System.out.println("     Now you have " + taskCount + " tasks in the list.");
-        return taskCount;
     }
 
     /**
      * Add event Task given a description and a time of occurrence.
      * @param tasks ArrayList containing all the Task.
-     * @param taskCount Total number of Task stored.
      * @param string User input.
-     * @return Total number of Task stored.
      * @throws DukeArgumentException If missing parameter for description or date.
      */
-    public static int eventCommand(ArrayList<Task> tasks, int taskCount, String string) throws
+    public static void eventCommand(ArrayList<Task> tasks, String string) throws
             DukeArgumentException {
         if (string.length() == 5) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for event.");
@@ -179,6 +181,7 @@ public class Duke {
 
         String description;
         String dateTime;
+        int taskCount = tasks.size();
         description = string.substring(0, string.indexOf(" /at")).replace("event ", "");
         dateTime = string.substring(string.indexOf("/at ")).replace("/at ", "");
         tasks.add(new Event(description, dateTime));
@@ -186,18 +189,15 @@ public class Duke {
         System.out.println("       " + tasks.get(taskCount).toString());
         taskCount++;
         System.out.println("     Now you have " + taskCount + " tasks in the list.");
-        return taskCount;
     }
 
     /**
      * Add deadline Task given a description and a due date.
      * @param tasks ArrayList containing all the Task.
-     * @param taskCount Total number of Task stored.
      * @param string User input.
-     * @return Total number of Task stored.
      * @throws DukeArgumentException If missing parameter for description or date.
      */
-    public static int deadlineCommand(ArrayList<Task> tasks, int taskCount, String string) throws
+    public static void deadlineCommand(ArrayList<Task> tasks, String string) throws
             DukeArgumentException {
         if (string.length() == 8) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for deadline.");
@@ -208,6 +208,7 @@ public class Duke {
 
         String description;
         String dateTime;
+        int taskCount = tasks.size();
         description = string.substring(0, string.indexOf(" /by")).replace("deadline ", "");
         dateTime = string.substring(string.indexOf("/by ")).replace("/by ", "");
 
@@ -216,43 +217,39 @@ public class Duke {
         System.out.println("       " + tasks.get(taskCount).toString());
         taskCount++;
         System.out.println("     Now you have " + taskCount + " tasks in the list.");
-        return taskCount;
     }
 
     /**
      * Add todo Task given a description.
      * @param tasks ArrayList containing all the Task.
      * @param stringSplit User input that is split by spacing.
-     * @param taskCount Total number of Task stored.
-     * @return Total number of Task stored.
      * @throws DukeArgumentException If missing parameter for index.
      */
-    public static int todoCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
+    public static void todoCommand(ArrayList<Task> tasks, String[] stringSplit) throws
             DukeArgumentException {
         if (stringSplit.length == 1) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for todo.");
         }
 
         String description;
+        int taskCount = tasks.size();
         description = String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length));
         tasks.add(new Todo(description));
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + tasks.get(taskCount).toString());
         taskCount++;
         System.out.println("     Now you have " + taskCount + " tasks in the list.");
-        return taskCount;
     }
 
     /**
      * Store all the Task into the hard disk and exit the program.
      * @param stringSplit User input that is split by spacing.
-     * @param taskCount Total number of Task stored.
      * @param tasks ArrayList containing all the Task.
      * @return true to indicate to the program to end.
      * @throws DukeArgumentException If additional parameter is provided.
      * @throws IOException If input or output operation failed.
      */
-    public static boolean byeCommand(String[] stringSplit, int taskCount, ArrayList<Task> tasks) throws
+    public static boolean byeCommand(String[] stringSplit, ArrayList<Task> tasks) throws
             DukeArgumentException, IOException {
         if (stringSplit.length > 1) {
             throw new DukeArgumentException("     :( OOPS!!! Description not required for bye.");
@@ -262,7 +259,7 @@ public class Duke {
             Files.createDirectory(path);
         }
         String taskToAdd = "";
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             if ( tasks.get(i) instanceof Todo) {
                 Todo todo = (Todo) tasks.get(i);
                 taskToAdd = taskToAdd + "T | " + (todo.getIsDone() ? 1 : 0) + " | ";
@@ -289,11 +286,10 @@ public class Duke {
      * Mark a Task as done.
      * @param tasks ArrayList containing all the Task.
      * @param stringSplit User input that is split by spacing.
-     * @param taskCount Total number of Task stored.
      * @throws DukeArgumentException If missing parameter for index.
      * @throws DukeIndexException If index provided is out of range.
      */
-    public static void doneCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
+    public static void doneCommand(ArrayList<Task> tasks, String[] stringSplit) throws
             DukeArgumentException, DukeIndexException {
         int completedTask;
         if (stringSplit.length == 1) {
@@ -301,7 +297,7 @@ public class Duke {
         }
 
         completedTask = Integer.parseInt(stringSplit[1]) - 1; // Might throw NumberFormatException
-        if (completedTask >= taskCount || completedTask < 0) {
+        if (completedTask >= tasks.size() || completedTask < 0) {
             throw new DukeIndexException("     :( OOPS!!! Invalid index for done.");
         }
         tasks.get(completedTask).markAsDone();
@@ -313,22 +309,21 @@ public class Duke {
      * List all the Task stored.
      * @param tasks ArrayList containing all the Task.
      * @param stringSplit User input that is split by spacing.
-     * @param taskCount Total number of Task stored.
      * @throws DukeArgumentException If additional parameter is provided.
      */
-    public static void listCommand(ArrayList<Task> tasks, String[] stringSplit, int taskCount) throws
+    public static void listCommand(ArrayList<Task> tasks, String[] stringSplit) throws
             DukeArgumentException {
         if (stringSplit.length > 1) {
             throw new DukeArgumentException("     :( OOPS!!! Description not required for list.");
         }
 
-        if (taskCount == 0) {
+        /*if (tasks.size() == 0) {
             System.out.println("     There are currently no tasks in your list");
         } else {
             System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < taskCount; i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 System.out.println("     " + (i + 1) + "." + tasks.get(i).toString());
             }
-        }
+        }*/
     }
 }

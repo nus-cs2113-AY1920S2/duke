@@ -10,9 +10,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class is the class handles the loading of Task from a specified filePath and
+ * storing of Task into the filePath.
+ * @author Lam Yue Wei
+ * @version CS2113 AY19/20 Sem 2 Duke
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Public constructor for Storage.
+     * @param filePath File path where the Tasks will be loaded from or stored into.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -23,7 +33,7 @@ public class Storage {
      * @return ArrayList of Task stored in the file if it exist.
      */
     public ArrayList<Task> load() {
-        ArrayList<Task> tasksStored = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         int taskCount = 0;
         try {
             File file = new File(filePath); // create a File for the given file path
@@ -31,22 +41,22 @@ public class Storage {
             while (fileScanner.hasNext()) {
                 String[] existingTask = fileScanner.nextLine().split(" \\| ");
                 if (existingTask[0].equals("T")) {
-                    tasksStored.add(new Todo(existingTask[2]));
+                    tasks.add(new Todo(existingTask[2]));
                 }
                 if (existingTask[0].equals("D")) {
-                    tasksStored.add(new Deadline(existingTask[2], existingTask[3]));
+                    tasks.add(new Deadline(existingTask[2], existingTask[3]));
                 }
                 if (existingTask[0].equals("E")) {
-                    tasksStored.add(new Event(existingTask[2], existingTask[3]));
+                    tasks.add(new Event(existingTask[2], existingTask[3]));
                 }
                 if (existingTask[1].equals("1")) {
-                    tasksStored.get(taskCount).markAsDone();
+                    tasks.get(taskCount).markAsDone();
                 }
                 taskCount++;
             }
-            return tasksStored;
+            return tasks;
         } catch (FileNotFoundException e) {
-            return tasksStored;
+            return tasks;
         }
     }
 }

@@ -1,6 +1,6 @@
 T | 0 | read book
-D | 0 | return book | 2020-10-06 19:30
-E | 1 | project meeting | 2021-05-29 03:20
+D | 0 | return book | Oct 6 2020
+E | 1 | project meeting | May 29 2021
 T | 0 | join sports club
-E | 0 | exams | 2020-05-03 16:00
-D | 1 | do homework | 2020-04-25 11:45
+E | 0 | exams | May 3 2020
+D | 1 | do homework | Apr 25 2020

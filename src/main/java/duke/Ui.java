@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * The Deadline class is an Object that deals with interaction with the user.
+ * The Ui class is an Object that deals with interaction with the user.
  * @author Lam Yue Wei
  * @version CS2113 AY19/20 Sem 2 Duke
  */
@@ -11,7 +11,7 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Empty constructor for Ui object.
+     * Empty constructor for Ui.
      */
     public Ui() {
     }
@@ -35,7 +35,7 @@ public class Ui {
     public void greetUser() {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Hello! I'm duke.Duke");
-        helpCommand();
+        printAvailableCommand();
         System.out.println("    What can I do for you?");
         System.out.println("    ____________________________________________________________");
     }
@@ -43,7 +43,7 @@ public class Ui {
     /**
      * Print out all the possible command the user can execute.
      */
-    public void helpCommand() {
+    public void printAvailableCommand() {
         System.out.println("    Here is the list of commands that are available:");
         System.out.println("+---------------------------------------------------------------+");
         System.out.println("| Index | Input            | Command                            |");
