@@ -3,17 +3,20 @@ package duke;
 import java.io.*;
 import java.lang.NullPointerException;
 import java.util.Scanner;
+
+import duke.exceptions.MissingDateTimeException;
 import duke.exceptions.MissingDescriptionException;
+import duke.exceptions.MissingLocationException;
 import duke.exceptions.WhitespaceExceptions;
+import duke.taskList.TaskList;
 import duke.taskManager.Deadline;
 import duke.taskManager.Events;
 import duke.taskManager.Task;
 import duke.taskManager.Todo;
 import duke.ui.*;
-
 import java.util.ArrayList;
-import java.nio.file.*;
 import java.io.BufferedReader;
+import duke.storage.*;
 
 /**
  * Duke is a a chatbot with task managing functions.
@@ -23,72 +26,29 @@ import java.io.BufferedReader;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
-
+    public static final String FILE_PATH = "data/Tasklist.txt";
     /**
      * Main method for Duke.
      * @param args String[] args in main.
      */
     public static void main(String[] args) throws IOException {
         boolean reset;
-
-        importTaskFromFile();
-        programStart();
-        reset = loopTillEnd();
+        DisplayUI ui = new DisplayUI();
+        Storage storage = new Storage(FILE_PATH);
+        TaskList taskList = new TaskList();
+        tasks = storage.importTaskFromFile();
+        programStart(ui, storage, taskList);
+        reset = loopTillEnd(ui, storage, taskList);
         if(reset){
             resetProgram();
         }
     }
 
-    /**
-     * Importing of all task from Tasklist.txt to program when first launch
-     * @throws IOException if error in importing task from .txt file due to formatting
-     */
-    private static void importTaskFromFile() {
-        try {
-            Path path = Paths.get("data");
-            if (!Files.exists(path)) {
-                Files.createDirectory(path);
-                File f = new File("data/Tasklist.txt");
-            } else {
-                File f = new File("data/Tasklist.txt");
-                Scanner fileScanner = new Scanner(f);
-                while (fileScanner.hasNextLine()) {
-                    String line = fileScanner.nextLine();
-                    String[] singleTaskDescriptions = line.split("\\|");
-                    switch (singleTaskDescriptions[0]) {
-                        case "T":
-                            addtask(new Todo(singleTaskDescriptions[2]));
-                            if (Integer.parseInt(singleTaskDescriptions[1]) == 1) {
-                                tasks.get(tasks.size() - 1).importDone();
-                            }
-                            break;
-
-                        case "D":
-                            addtask(new Deadline(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if (Integer.parseInt(singleTaskDescriptions[1]) == 1) {
-                                tasks.get(tasks.size() - 1).importDone();
-                            }
-                            break;
-
-                        case "E":
-                            addtask(new Events(singleTaskDescriptions[2], singleTaskDescriptions[3]));
-                            if (Integer.parseInt(singleTaskDescriptions[1]) == 1) {
-                                tasks.get(tasks.size() - 1).importDone();
-                            }
-                            break;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error occurred. Please try again!");
-        }
-    }
 
     /**
      * Run greetings and show table of available functions
      */
-    private static void programStart() {
-        DisplayUI ui = new DisplayUI();
+    private static void programStart(DisplayUI ui, Storage storage, TaskList taskList) {
         ui.showStartMessages();
     }
 
@@ -96,7 +56,7 @@ public class Duke {
      * Loop the program until "bye" is entered
      * @return true if reset is keyed in function else false
      */
-    private static boolean loopTillEnd() {
+    private static boolean loopTillEnd(DisplayUI ui, Storage storage, TaskList taskList) {
         Scanner myScanner = new Scanner(System.in);
         boolean flag = true; //Boolean flag for while loop
         String function;
@@ -106,57 +66,44 @@ public class Duke {
                 function = myScanner.next();
 
                 switch (function) {
-                    //add new todo task
                     case "todo":
-                        todoCommand(myScanner, function);
-                        //String line;
+                        todoCommand(myScanner, function, ui, storage, taskList);
                         break;
 
-                    //add new task with deadline
                     case "deadline":
-                        deadlineCommand(myScanner, function);
+                        deadlineCommand(myScanner, function, ui, storage, taskList);
                         break;
 
-                    //add new event task
                     case "event":
-                        eventCommand(myScanner, function);
+                        eventCommand(myScanner, function, ui, storage, taskList);
                         break;
 
-                    //exit program
                     case "bye":
                         System.out.println("Bye! Hope to see you again soon!");
                         System.out.println("____________________________________________________________");
                         flag = false;
                         break;
 
-                    //list all task stored
                     case "list":
-                        listCommand();
+                        listCommand(ui, storage, taskList);
                         break;
 
-                    //mark a task as completed
                     case "done":
-                        doneCommand(myScanner);
+                        doneCommand(myScanner, ui, storage, taskList);
                         break;
 
-                    //delete a task
                     case "delete":
-                        deleteCommand(myScanner);
+                        deleteCommand(myScanner, ui, storage, taskList);
                         break;
 
-                    //delete /data dir and contents and end the program (Bugs)
                     case "reset":
                         return true;
-//                        flag = false;
-//                        break;
 
-                    //find task with matching descriptions to keyword
                     case "find":
-                        findCommand(myScanner);
+                        findCommand(myScanner, ui, storage, taskList);
                         break;
-                    //Display help functions table
+
                     case "help":
-                        DisplayUI ui = new DisplayUI();
                         ui.showFunctionList();
                         break;
 
@@ -176,6 +123,10 @@ public class Duke {
                 System.out.println("☹ OOPS! Missing command! Please try command: done [task number] ");
             } catch (WhitespaceExceptions e) {
                 System.out.println("Error while appending to file. Please check your white spaces and symbols.");
+            } catch (MissingDateTimeException e) {
+                e.printDescr();
+            } catch (MissingLocationException e) {
+                e.printDescr();
             }
         }
         return false;
@@ -185,7 +136,7 @@ public class Duke {
      * Method for finding task
      * @param myScanner
      */
-    private static void findCommand(Scanner myScanner) {
+    private static void findCommand(Scanner myScanner, DisplayUI ui, Storage storage, TaskList taskList) {
         String line;
         boolean found = false;
         line = myScanner.nextLine().trim();
@@ -212,7 +163,7 @@ public class Duke {
      * @param myScanner
      * @throws WhitespaceExceptions
      */
-    private static void doneCommand(Scanner myScanner) throws WhitespaceExceptions {
+    private static void doneCommand(Scanner myScanner, DisplayUI ui, Storage storage, TaskList taskList) throws WhitespaceExceptions {
         String line;
         line = myScanner.nextLine();
         String l = line.replace(" ", "");
@@ -226,7 +177,7 @@ public class Duke {
         tasks.get(taskNumber).markAsDone(tasks.get(taskNumber));
         String str = tasks.get(taskNumber).toString();
         String str2 = str.substring(6, str.length());
-        appendToFile(str2);
+        storage.appendToFile(str2);
         System.out.println("____________________________________________________________");
         System.out.println("Great job! I've marked this task as done in your planner:");
         System.out.println("    " + tasks.get(taskNumber));
@@ -238,7 +189,7 @@ public class Duke {
      * @param myScanner
      * @throws WhitespaceExceptions
      */
-    private static void deleteCommand(Scanner myScanner) throws WhitespaceExceptions {
+    private static void deleteCommand(Scanner myScanner, DisplayUI ui, Storage storage, TaskList taskList) throws WhitespaceExceptions {
         String line;
         String l;
         int taskNumber;
@@ -258,7 +209,7 @@ public class Duke {
         System.out.println("    " + tasks.get(taskNumber));
         str = tasks.get(taskNumber).toString();
         str2 = str.substring(6, str.length());
-        deleteToFile(str2);
+        storage.deleteToFile(str2);
         tasks.remove(taskNumber);
         System.out.println("Now you have " + tasks.size() + " tasks in your list.");
         System.out.println("____________________________________________________________");
@@ -268,7 +219,7 @@ public class Duke {
     /**
      * Method for listing all task in the Array List
      */
-    private static void listCommand() {
+    private static void listCommand(DisplayUI ui, Storage storage, TaskList taskList) {
         if (tasks.size() != 0) {
             System.out.println("____________________________________________________________");
             System.out.println("Here are your task(s) currently in your planner:");
@@ -287,19 +238,19 @@ public class Duke {
      * @param function function name to throw into writeToFile method
      * @throws MissingDescriptionException if descriptions is missing in the input
      */
-    private static void eventCommand(Scanner myScanner, String function) throws MissingDescriptionException {
+    private static void eventCommand(Scanner myScanner, String function, DisplayUI ui, Storage storage, TaskList taskList)
+            throws MissingDescriptionException, MissingLocationException {
         String line;
         line = myScanner.nextLine();
-        String[] eventName = line.split("/");
+        String[] eventName = line.split("/at");
         if (eventName[0].equals("")) {
-            throw new MissingDescriptionException("☹ OOPS!!! The event description cannot be empty!!");
+            throw new MissingDescriptionException("The event description cannot be empty! PLease try again");
         }
-        String[] event = eventName[1].split("at ");
-        if (event[0].equals(null)) {
-            throw new ArrayIndexOutOfBoundsException();
+        if (eventName[1].equals(null)) {
+            throw new MissingLocationException("Location not found! Please try again or type 'help' to check input format.");
         }
-        addtask(new Events(eventName[0], event[1]));
-        writeToFile(function, line);
+        tasks.add(new Events(eventName[0], eventName[1]));
+        storage.writeToFile(function, line);
         printAddedTask(tasks.get(tasks.size() - 1));
     }
 
@@ -309,19 +260,19 @@ public class Duke {
      * @param function name to throw into writeToFile method
      * @throws MissingDescriptionException if descriptions is missing in the input
      */
-    private static void deadlineCommand(Scanner myScanner, String function) throws MissingDescriptionException {
+    private static void deadlineCommand(Scanner myScanner, String function, DisplayUI ui, Storage storage, TaskList taskList)
+            throws MissingDescriptionException, MissingDateTimeException {
         String line;
         line = myScanner.nextLine();
-        String[] description = line.split("/");
+        String[] description = line.split("/by");
         if (description[0].equals("")) {
-            throw new MissingDescriptionException("☹ OOPS!!! The deadline description cannot be empty!!");
+            throw new MissingDescriptionException("The deadline description cannot be empty! Please try again");
         }
-        String[] deadLine = description[1].split("by ");
-        if (description[0] == null) {
-            throw new ArrayIndexOutOfBoundsException();
+        if (description[1].equals("")) {
+            throw new MissingDateTimeException("Date/time not found! Please try again or type 'help' to check input format.");
         }
-        addtask(new Deadline(description[0], deadLine[1]));
-        writeToFile(function, line);
+        tasks.add(new Deadline(description[0], description[1]));
+        storage.writeToFile(function, line);
         printAddedTask(tasks.get(tasks.size() - 1));
     }
 
@@ -331,14 +282,15 @@ public class Duke {
      * @param function name to throw into writeToFile method
      * @throws MissingDescriptionException if descriptions is missing in the input
      */
-    private static void todoCommand(Scanner myScanner, String function) throws MissingDescriptionException {
+    private static void todoCommand(Scanner myScanner, String function, DisplayUI ui, Storage storage, TaskList taskList)
+            throws MissingDescriptionException {
         String line = myScanner.nextLine();
         if (line.equals("")) {
-            throw new MissingDescriptionException("☹ OOPS!!! The todo description cannot be empty!!");
+            throw new MissingDescriptionException("The todo description is empty. Please try again or type 'help' to check input formats");
         }
-        addtask(new Todo(line));
-        writeToFile(function, line);
-        printAddedTask(tasks.get(tasks.size() - 1));
+        taskList.addTask(line, tasks);
+        storage.writeToFile(function, line);
+        taskList.printAddedTask(tasks.get(tasks.size() - 1), tasks);
     }
 
     /**
@@ -347,188 +299,12 @@ public class Duke {
      */
     public static void printAddedTask(Task t) {
         System.out.println("\n____________________________________________________________");
-        System.out.println("New task added:");
+        System.out.println("    New task added:");
         System.out.println("    " + t);
-        System.out.println("Total number of tasks in the list:  " + tasks.size());
+        System.out.println("    Total number of tasks in the list:  " + tasks.size());
         System.out.println("____________________________________________________________");
     }
 
-    /**
-     * Function to add a newly created task into the tasks array
-     * @param description A string description of the task
-     */
-    public static void addtask(Task description) {
-        tasks.add(description);
-    }
-
-    /**
-     * Write new task created to Tasklist.txt
-     * @param str1 function name of the current action
-     * @param str2 A String description of the task
-     */
-    private static void writeToFile(String str1, String str2) {
-        String filePath = "data/Tasklist.txt";
-        try {
-            FileWriter fw = new FileWriter(filePath, true);
-            if (str1.contains("todo")) {
-                String newLineFormatted = str2.stripLeading();
-                fw.write("T|0|" + newLineFormatted + System.lineSeparator());
-                fw.close();
-            }
-            if (str1.contains("deadline")) {
-                String[] newLineFormatted = str2.split("/by");
-                fw.write("D|0|" + newLineFormatted[0].trim() + "|" + newLineFormatted[1].trim() + System.lineSeparator());
-                fw.close();
-            }
-            if (str1.contains("event")) {
-                String[] newLineFormatted = str2.split("/at");
-                fw.write("E|0|" + newLineFormatted[0].trim() + "|" + newLineFormatted[1].trim() + System.lineSeparator());
-                fw.close();
-            }
-        } catch (IOException e) {
-            System.out.println("Error while writing into file. Please try again");
-        }
-    }
-
-    /**
-     * Append to a task in Tasklist.txt
-     * @param newLine String description of task from the txt file
-     * @throws WhitespaceExceptions If there is undefined or additional whitespaces in the txt file
-     */
-    private static void appendToFile(String newLine) throws WhitespaceExceptions {
-        String taskSymbol;
-        String[] strArr;
-        String description;
-        String timeDate;
-        if (newLine.contains("(by:")) {
-            String newline2 = newLine.replace("(by:", ":");
-            strArr = newline2.split(":");
-            description = strArr[0].trim();
-            System.out.println(description);
-            timeDate = strArr[1].replace(")", "").trim();
-            taskSymbol = "D|";
-            //   System.out.println("D Formatted: " + description + timeDate);
-        } else if (newLine.contains("(at:")) {
-            String newline2 = newLine.replace("(at:", ":");
-            strArr = newline2.split(":");
-            description = strArr[0].trim();
-            timeDate = strArr[1].replace(")", "").trim();
-            taskSymbol = "E|";
-            //   System.out.println(" E Formatted: " + description + timeDate);
-        } else {
-            description = newLine.trim();
-            timeDate = "";
-            taskSymbol = "T|";
-            //   System.out.println("T Formatted: " + description);
-        }
-        if (description.isBlank()) {
-            throw new WhitespaceExceptions();
-        }
-
-        String filePath = "data/Tasklist.txt";
-        File fileToBeModified = new File(filePath);
-        String originalFileContent = "";
-        BufferedReader reader = null;
-        FileWriter writer = null;
-        try {
-            reader = new BufferedReader(new FileReader(fileToBeModified));
-            String currentReadingLine = reader.readLine();
-            String oldString = null;
-            String newString = null;
-
-            while (currentReadingLine != null) {
-                if (currentReadingLine.contains(description)) {
-                    oldString = currentReadingLine;
-                    newString = taskSymbol + 1 + "|" + description + "|" + timeDate;
-                }
-                originalFileContent += currentReadingLine + System.lineSeparator();
-                currentReadingLine = reader.readLine();
-            }
-            String newFileContent = originalFileContent.replace(oldString, newString);
-            writer = new FileWriter(fileToBeModified);
-            writer.write(newFileContent);
-
-        } catch (IOException e) {
-            System.out.println("Error appending to file! Please try again!");
-        } finally {
-            try {
-                reader.close();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     *Delete a task from Tasklist.txt
-     * @param newLine String description of task from the txt file
-     * @throws WhitespaceExceptions If there is undefined or additional whitespaces in the txt file
-     */
-    private static void deleteToFile(String newLine) throws WhitespaceExceptions {
-        String taskSymbol;
-        String[] strArr;
-        String description;
-        String timeDate;
-        //    System.out.println("input:"+newLine);
-        if (newLine.contains("(by:")) {
-            String newline2 = newLine.replace("(by:", ":");
-            strArr = newline2.split(":");
-            description = strArr[0].trim();
-            timeDate = strArr[1].replace(")", "").trim();
-            taskSymbol = "D|";
-            //   System.out.println("D Formatted: " + description + timeDate);
-        } else if (newLine.contains("(at:")) {
-            String newline2 = newLine.replace("(at:", ":");
-            strArr = newline2.split(":");
-            description = strArr[0].trim();
-            timeDate = strArr[1].replace(")", "").trim();
-            taskSymbol = "E|";
-            //   System.out.println(" E Formatted: " + description + timeDate);
-        } else {
-            description = newLine.trim();
-            timeDate = "";
-            taskSymbol = "T|";
-            //   System.out.println("T Formatted: " + description);
-        }
-        if (description.isBlank()) {
-            throw new WhitespaceExceptions();
-        }
-
-        String filePath = "data/Tasklist.txt";
-        File fileToBeModified = new File(filePath);
-        String originalFileContent = "";
-        BufferedReader reader = null;
-        FileWriter writer = null;
-        try {
-            reader = new BufferedReader(new FileReader(fileToBeModified));
-            String currentReadingLine = reader.readLine();
-            String oldString = null;
-            String newString = null;
-
-            while (currentReadingLine != null) {
-                if (currentReadingLine.contains(description)) {
-                    oldString = currentReadingLine;
-                    newString = "";
-                }
-                originalFileContent += currentReadingLine + System.lineSeparator();
-                currentReadingLine = reader.readLine();
-            }
-            String newFileContent = originalFileContent.replace(oldString, newString);
-            writer = new FileWriter(fileToBeModified);
-            writer.write(newFileContent);
-
-        } catch (IOException e) {
-            System.out.println("Error appending to file! Please try again!");
-        } finally {
-            try {
-                reader.close();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * Clean the Tasklist.txt file in /data dir and reset the program

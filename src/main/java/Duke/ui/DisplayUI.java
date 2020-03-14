@@ -6,6 +6,19 @@ import java.util.Scanner;
 
 public class DisplayUI {
 
+    private final Scanner in;
+
+    private final PrintStream out;
+
+    public DisplayUI() {
+        this(System.in, System.out);
+    }
+
+    public DisplayUI(InputStream in, PrintStream out) {
+        this.in = new Scanner(in);
+        this.out = out;
+    }
+
     public static final String VERSION = "TASK MANAGER - Version 1.1";
 
     private static final String DIVIDER = "=============================================================================================================";
@@ -66,18 +79,6 @@ public class DisplayUI {
         for(String m : message){
             out.println(m);
         }
-    }
-
-    private final Scanner in;
-    private final PrintStream out;
-
-    public DisplayUI() {
-        this(System.in, System.out);
-    }
-
-    public DisplayUI(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
     }
 }
 

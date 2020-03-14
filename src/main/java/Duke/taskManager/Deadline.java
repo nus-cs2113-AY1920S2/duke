@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + getDeadline() + ")" ;
+        return "[D]" + super.toString() + "(by:" + getDeadline() + ")" ;
     }
 
 }
