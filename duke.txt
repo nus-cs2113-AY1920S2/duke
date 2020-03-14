@@ -1,0 +1,8 @@
+[E][DONE]ppp (at: well       )
+[T][UNDONE]lol
+[T][UNDONE]llll
+[D][UNDONE]ppp (by: 2020-11-11)
+[E][UNDONE]iiooo (at: 2020-12-31 800     )
+[E][UNDONE]ppp (at: mon  )
+[E][UNDONE]ppp (at: 2020-11-11-1800  )
+[T][UNDONE]sleep
