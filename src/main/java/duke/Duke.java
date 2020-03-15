@@ -88,20 +88,20 @@ public class Duke {
                     taskList.addTask(new Event(userCommand.substring(0, userCommand.indexOf(" /at")).replace("event ", ""), userCommand.substring(userCommand.indexOf("/at ")).replace("/at ", "")));
                     break;
                 case "delete":
-                    deleteCommand(tasks, stringSplit);
-                    taskList.deleteTask(Integer.parseInt(stringSplit[1]) - 1);
+                    command = parser.parseCommand(userCommand);
+                    command.execute(taskList, ui, storage);
+                    int deleteIndex = Integer.parseInt(stringSplit[1]) - 1;
+                    if (!(deleteIndex >= tasks.size() || deleteIndex < 0)) {
+                        tasks.remove(Integer.parseInt(stringSplit[1]) - 1);
+                    }
                     break;
-                /*case "find":
-                    findCommand(tasks, userCommand);
-                    break;*/
                 default:
-                    throw new DukeNullException("     :( OOPS!!! Command does not exist.");
+                    String message = "     :( OOPS!!! Command does not exist.\n";
+                    message += "     To view the list of commands available use the command: help";
+                    throw new DukeNullException(message);
                 }
-            } catch (DukeArgumentException | DukeIndexException | DukeDateTimeException e) {
+            } catch (DukeArgumentException | DukeIndexException | DukeDateTimeException | DukeNullException e) {
                 System.out.println(e.getMessage());
-            } catch (DukeNullException e) {
-                System.out.println(e.getMessage());
-                System.out.println("     To view the list of commands available use the command: help");
             } catch (NumberFormatException e) {
                 System.out.println("     :( OOPS!!! " + e.getMessage().substring(18) + " is not number!");
             } catch (FileNotFoundException e) {
@@ -127,32 +127,6 @@ public class Duke {
         FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write(taskToAdd);
         fileWriter.close();
-    }
-
-    /**
-     * Delete a Task given an index.
-     *
-     * @param tasks       ArrayList containing all the Task.
-     * @param stringSplit User input that is split by spacing.
-     * @throws DukeArgumentException If missing parameter for index.
-     * @throws DukeIndexException    If index provided is out of range.
-     */
-    public static void deleteCommand(ArrayList<Task> tasks, String[] stringSplit) throws
-            DukeArgumentException, DukeIndexException {
-        int deletedTask;
-        int taskCount = tasks.size();
-        if (stringSplit.length == 1) {
-            throw new DukeArgumentException("     :( OOPS!!! Missing index for delete.");
-        }
-        deletedTask = Integer.parseInt(stringSplit[1]) - 1; // Might throw NumberFormatException
-        if (deletedTask >= taskCount | deletedTask < 0) {
-            throw new DukeIndexException("     :( OOPS!!! Invalid index for delete.");
-        }
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + tasks.get(deletedTask));
-        tasks.remove(deletedTask);
-        taskCount--;
-        System.out.println("     Now you have " + taskCount + " tasks in the list.");
     }
 
     /**
@@ -272,102 +246,4 @@ public class Duke {
         System.out.println("    Bye. Hope to see you again soon!");
         return true;
     }
-
-    /**
-     * Mark a Task as done.
-     *
-     * @param tasks       ArrayList containing all the Task.
-     * @param stringSplit User input that is split by spacing.
-     * @throws DukeArgumentException If missing parameter for index.
-     * @throws DukeIndexException    If index provided is out of range.
-     */
-    /*public static void doneCommand(ArrayList<Task> tasks, String[] stringSplit) throws
-            DukeArgumentException, DukeIndexException {
-        int completedTask;
-        if (stringSplit.length == 1) {
-            throw new DukeArgumentException("     :( OOPS!!! Missing index for done.");
-        }
-
-        try {
-            completedTask = Integer.parseInt(stringSplit[1]) - 1; // Might throw NumberFormatException
-            if (completedTask >= tasks.size() || completedTask < 0) {
-                throw new DukeIndexException("     :( OOPS!!! Invalid index for done.");
-            }
-            tasks.get(completedTask).markAsDone();
-            //System.out.println("     Nice! I've marked this task as done:");
-            //System.out.println("       " + tasks.get(completedTask).toString());
-        } catch (NumberFormatException e) {
-            throw new DukeIndexException("     :( OOPS!!! " + e.getMessage().substring(18) + " is not number!");
-        }
-    }*/
-
-    /**
-     * List all the Task stored.
-     * @param tasks ArrayList containing all the Task.
-     * @param stringSplit User input that is split by spacing.
-     * @throws DukeArgumentException If additional parameter is provided.
-     * @return ListCommand Object that provides the stored tasks.
-     */
-    /*public static ListCommand listCommand(ArrayList<Task> tasks, String[] stringSplit) throws
-            DukeArgumentException {
-        if (stringSplit.length > 1) {
-            throw new DukeArgumentException("     :( OOPS!!! Description not required for list.");
-        }
-        return new ListCommand();
-    }*/
-
-    /**
-     * Add todo Task given a description.
-     *
-     * @param tasks       ArrayList containing all the Task.
-     * @param stringSplit User input that is split by spacing.
-     * @return TodoCommand which adds Todo Task into the TaskList.
-     * @throws DukeArgumentException If missing parameter for index.
-     */
-    /*public static TodoCommand todoCommand(ArrayList<Task> tasks, String[] stringSplit) throws
-            DukeArgumentException {
-        if (stringSplit.length == 1) {
-            throw new DukeArgumentException("     :( OOPS!!! Missing description for todo.");
-        }
-
-        String description;
-        description = String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length));
-        tasks.add(new Todo(description));
-        int taskCount = tasks.size();
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + tasks.get(taskCount).toString());
-        taskCount++;
-        System.out.println("     Now you have " + taskCount + " tasks in the list.");
-        return new TodoCommand(description);
-    }*/
-
-    /**
-     * Find all Task with description that matches a key word or phrase.
-     *
-     * @param tasks  ArrayList containing all the Task.
-     * @param string User input.
-     * @throws DukeArgumentException If missing parameter for description.
-     */
-    /*public static void findCommand(ArrayList<Task> tasks, String string) throws
-            DukeArgumentException {
-        if (string.length() == 4) {
-            throw new DukeArgumentException("     :( OOPS!!! Missing description for find.");
-        }
-        String description = string.substring(5);
-        boolean containDescription = false;
-        int matchNumber = 1;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(description)) {
-                if (!containDescription) {
-                    System.out.println("     Here are the matching tasks in your list:");
-                    containDescription = true;
-                }
-                System.out.println("     " + matchNumber + "." + tasks.get(i).toString());
-                matchNumber++;
-            }
-        }
-        if (!containDescription) {
-            System.out.println("     There is no matching tasks");
-        }
-    }*/
 }

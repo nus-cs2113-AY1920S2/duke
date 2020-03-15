@@ -14,7 +14,7 @@ public class DoneCommand implements Command {
     private int doneIndex;
 
     /**
-     * Public constructor for TodoCommand.
+     * Public constructor for DoneCommand.
      * @param doneIndex Index of Task that is completed.
      */
     public DoneCommand(int doneIndex) {
