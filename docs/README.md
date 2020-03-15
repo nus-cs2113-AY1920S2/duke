@@ -30,7 +30,8 @@ Duke BAPE is a task manager built specially for you to store your daily task. Wi
 **=========================================================**
   
 1. Todo : Creating and storing a todo task.  
-Eg: `todo borrow book` will create a new task with description `borrow book` and store in the Array of task.
+Eg: `todo borrow book` will create a new task with description `borrow book` and store in the Array of task.  
+Please adhere to the spacing after todo, otherwise it will result in `invalid function`.
 
 2. deadline : Creating and storing a task with a deadline in it.  
 Eg: `deadline return book /by 1200` will create a new deadline task with description `return book` and `/by` will be the escaping keyword.  
@@ -43,10 +44,13 @@ Anything after `\at` will be part of the location stored into the task.
 3. list : Will list out all task stored in the array list.  
 
 4. reset : This function will clear and reset the Tasklist.txt file in the /data dir. After completion, the program will exit.  
-Launch the program again to start storing new task. 
+Launch the program again to start storing new task.  
+Use this function when there are unknown errors to the Tasklist.txt file when using program.
+
+5. help : Type `help` to access the help table again and follow the example format given for input.
 
 
 # Feedback, Bug Reports
 
-* If you have feedback or bug reports, please ignore it :)
+* If you have feedback or bug reports, PLEASE IGNORE IT because it will be minor :)
 * We welcome pull requests too.
