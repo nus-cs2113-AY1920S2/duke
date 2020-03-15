@@ -1,7 +1,10 @@
 package duke.ui;
 
+import duke.taskManager.Task;
+
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DisplayUI {
@@ -49,6 +52,31 @@ public class DisplayUI {
                                              + "LEGEND:   [O] ---- DONE | [X] ---- NOT DONE \n"
                                              + "Please key in your command: ";
 
+    public static final String LINE_DIVIDER = "____________________________________________________________";
+
+    public static final String INDENT = "    ";
+
+    public static final String EMPTY_LINE = "\n";
+
+    public static final String TASK_DELETED_MESSAGE = "____________________________________________________________\n"
+                                                    + "\n    Noted. I've removed this task:";
+
+    public static final String TASKNUMBER_LEFT_MESSAGE = "    Total number of tasks in your list: ";
+
+    public static final String TASK_DONE_MESSAGE = "    Great job! I've marked this task as done in your planner: ";
+
+    public static final String TASK_LEFT_MESSAGE = "    Here are your task(s) currently in your planner:";
+
+    public static final String EMPTY_TASKS_MESSAGE = "    Your planner is empty currently! Try adding some tasks first!";
+
+    public static  final String TASK_ADDED_MESSAGE = "    New task added:";
+
+    public static  final String MATCHING_TASK_MESSAGE = "    Here are the matching tasks in your list:\n";
+
+    public static  final String NO_MATCH_MESSAGE = "    Sorry! There are no task with descriptions matching your keyword! Please try again!\n";
+
+    public static  final String BYE_MESSAGE = "    Bye! Hope to see you again soon!\n";
+
     /**
      * Print greeting message when program is launched
      */
@@ -69,6 +97,51 @@ public class DisplayUI {
     public void showFunctionList(){
         printToUser(
                 FUNCTION_LIST);
+    }
+
+    public void showDeletedTasks(ArrayList<Task> tasks, int tasksNumber){
+        printToUser(
+                TASK_DELETED_MESSAGE,
+                INDENT + tasks.get(tasksNumber),
+                TASKNUMBER_LEFT_MESSAGE + (tasks.size() - 1),
+                EMPTY_LINE,
+                LINE_DIVIDER);
+    }
+
+    public void showDoneTask(ArrayList<Task> tasks, int taskNumber){
+        printToUser(
+                LINE_DIVIDER,
+                EMPTY_LINE,
+                TASK_DONE_MESSAGE,
+                INDENT + tasks.get(taskNumber),
+                EMPTY_LINE,
+                LINE_DIVIDER);
+    }
+
+    public void showAllTask(){
+        printToUser(
+                LINE_DIVIDER,
+                EMPTY_LINE,
+                TASK_LEFT_MESSAGE);
+    }
+
+    public void showAddedTask(Task addedTask, ArrayList<Task> tasks){
+        printToUser(
+                LINE_DIVIDER,
+                EMPTY_LINE,
+                TASK_ADDED_MESSAGE + addedTask,
+                TASKNUMBER_LEFT_MESSAGE + tasks.size(),
+                EMPTY_LINE,
+                LINE_DIVIDER);
+    }
+
+    public void showEmptyTaskList(){
+        printToUser(
+                LINE_DIVIDER,
+                EMPTY_LINE,
+                EMPTY_TASKS_MESSAGE,
+                EMPTY_LINE,
+                LINE_DIVIDER);
     }
 
     /**
