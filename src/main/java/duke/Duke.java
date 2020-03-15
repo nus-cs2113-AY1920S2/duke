@@ -1,5 +1,9 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeNullException;
@@ -31,19 +35,26 @@ public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();
         Command command;
+        Parser parser = new Parser();
         Storage storage = new Storage(FILE_PATH);
-        ArrayList<Task> tasks = storage.load();
+        ArrayList<Task> tasks;
+        try {
+            tasks = storage.load();
+        } catch (DateTimeParseException e) {
+            System.out.println("     :( OOPS!!! Please enter a valid date and time");
+            tasks = new ArrayList<>();
+        }
         TaskList taskList = new TaskList(tasks); //Use this to replace tasks
         boolean isBye = false;
         ui.greetUser();
         while (!isBye) {
-            String string = ui.getUserCommand();
-            String[] stringSplit = string.split(" ");
+            String userCommand = ui.getUserCommand();
+            String[] stringSplit = userCommand.split(" ");
             try {
                 switch (stringSplit[0]) {
                 case "list":
-                    listCommand(tasks, stringSplit);
-                    command = new ListCommand();
+                case "help":
+                    command = parser.parseCommand(userCommand);
                     command.execute(taskList, ui,storage);
                     break;
                 case "done":
@@ -54,27 +65,23 @@ public class Duke {
                     isBye = byeCommand(stringSplit, tasks);
                     break;
                 case "todo":
-                    todoCommand(tasks, stringSplit);
-                    taskList.addTask(new Todo(String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length))));
+                    command = todoCommand(tasks, stringSplit);
+                    command.execute(taskList, ui, storage);
                     break;
                 case "deadline":
-                    deadlineCommand(tasks, string);
-                    taskList.addTask(new Deadline(string.substring(0, string.indexOf(" /by")).replace("deadline ", ""), string.substring(string.indexOf("/by ")).replace("/by ", "")));
+                    deadlineCommand(tasks, userCommand);
+                    taskList.addTask(new Deadline(userCommand.substring(0, userCommand.indexOf(" /by")).replace("deadline ", ""), userCommand.substring(userCommand.indexOf("/by ")).replace("/by ", "")));
                     break;
                 case "event":
-                    eventCommand(tasks, string);
-                    taskList.addTask(new Event(string.substring(0, string.indexOf(" /at")).replace("event ", ""), string.substring(string.indexOf("/at ")).replace("/at ", "")));
+                    eventCommand(tasks, userCommand);
+                    taskList.addTask(new Event(userCommand.substring(0, userCommand.indexOf(" /at")).replace("event ", ""), userCommand.substring(userCommand.indexOf("/at ")).replace("/at ", "")));
                     break;
                 case "delete":
                     deleteCommand(tasks, stringSplit);
                     taskList.deleteTask(Integer.parseInt(stringSplit[1]) - 1);
                     break;
                 case "find":
-                    findCommand(tasks, string);
-                    break;
-                case "help":
-                    command = new HelpCommand();
-                    command.execute(taskList, ui, storage);
+                    findCommand(tasks, userCommand);
                     break;
                 default:
                     throw new DukeNullException("     :( OOPS!!! Command does not exist.");
@@ -224,21 +231,23 @@ public class Duke {
      * @param tasks ArrayList containing all the Task.
      * @param stringSplit User input that is split by spacing.
      * @throws DukeArgumentException If missing parameter for index.
+     * @return TodoCommand which adds Todo Task into the TaskList.
      */
-    public static void todoCommand(ArrayList<Task> tasks, String[] stringSplit) throws
+    public static TodoCommand todoCommand(ArrayList<Task> tasks, String[] stringSplit) throws
             DukeArgumentException {
         if (stringSplit.length == 1) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for todo.");
         }
 
         String description;
-        int taskCount = tasks.size();
         description = String.join(" ", Arrays.copyOfRange(stringSplit, 1, stringSplit.length));
         tasks.add(new Todo(description));
+        /*int taskCount = tasks.size();
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + tasks.get(taskCount).toString());
         taskCount++;
-        System.out.println("     Now you have " + taskCount + " tasks in the list.");
+        System.out.println("     Now you have " + taskCount + " tasks in the list.");*/
+        return new TodoCommand(description);
     }
 
     /**
@@ -310,20 +319,13 @@ public class Duke {
      * @param tasks ArrayList containing all the Task.
      * @param stringSplit User input that is split by spacing.
      * @throws DukeArgumentException If additional parameter is provided.
+     * @return ListCommand Object that provides the stored tasks.
      */
-    public static void listCommand(ArrayList<Task> tasks, String[] stringSplit) throws
+    /*public static ListCommand listCommand(ArrayList<Task> tasks, String[] stringSplit) throws
             DukeArgumentException {
         if (stringSplit.length > 1) {
             throw new DukeArgumentException("     :( OOPS!!! Description not required for list.");
         }
-
-        /*if (tasks.size() == 0) {
-            System.out.println("     There are currently no tasks in your list");
-        } else {
-            System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("     " + (i + 1) + "." + tasks.get(i).toString());
-            }
-        }*/
-    }
+        return new ListCommand();
+    }*/
 }

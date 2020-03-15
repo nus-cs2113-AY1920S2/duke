@@ -1,6 +1,5 @@
-package duke.task;
+package duke.command;
 
-import duke.Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
