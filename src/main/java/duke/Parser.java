@@ -1,13 +1,9 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 import duke.exception.DukeArgumentException;
+import duke.exception.DukeIndexException;
 import duke.exception.DukeNullException;
-
-import java.util.Arrays;
 
 /**
  * The Parser class is in charged of parsing user input into a Command Object.
@@ -27,38 +23,25 @@ public class Parser {
      * @param userCommand User input.
      * @return Command Object if command keyword, description and date is valid or DukeNullException otherwise.
      */
-    public Command parseCommand(String userCommand) throws DukeArgumentException, DukeNullException {
+    public Command parseCommand(String userCommand) throws DukeArgumentException, DukeNullException, DukeIndexException {
         String commandKeyWord = getCommandKeyWord(userCommand);
-        Command command;
         switch (commandKeyWord) {
-        case "list":
-            return parseListCommand(userCommand);
-        /*case "done":
-            //doneCommand(tasks, stringSplit);
-            //taskList.doneTask(Integer.parseInt(stringSplit[1]) - 1);
-            break;
-        case "bye":
-            //isBye = byeCommand(stringSplit, tasks);
-            break;*/
         case "todo":
             return parseTodoCommand(userCommand);
-        /*case "deadline":
-            //deadlineCommand(tasks, userCommand);
-            //taskList.addTask(new Deadline(userCommand.substring(0, userCommand.indexOf(" /by")).replace("deadline ", ""), userCommand.substring(userCommand.indexOf("/by ")).replace("/by ", "")));
-            break;
-        case "event":
-            //eventCommand(tasks, userCommand);
-            //taskList.addTask(new Event(userCommand.substring(0, userCommand.indexOf(" /at")).replace("event ", ""), userCommand.substring(userCommand.indexOf("/at ")).replace("/at ", "")));
-            break;
-        case "delete":
-            //deleteCommand(tasks, stringSplit);
-            //taskList.deleteTask(Integer.parseInt(stringSplit[1]) - 1);
-            break;
+        case "list":
+            return parseListCommand(userCommand);
+        case "done":
+            return parseDoneCommand(userCommand);
         case "find":
-            //findCommand(tasks, userCommand);
-            break;*/
+            return parseFindCommand(userCommand);
         case "help":
             return parseHelpCommand(userCommand);
+
+        /*case "deadline":
+        case "event":
+        case "delete":
+        case "bye":
+            break;*/
         default:
             throw new DukeNullException("     :( OOPS!!! Command does not exist.");
         }
@@ -115,6 +98,40 @@ public class Parser {
             throw new DukeArgumentException("     :( OOPS!!! Description not required for list.");
         }
         return new ListCommand();
+    }
+
+    /**
+     * Parse userCommand as DoneCommand that marks a Task as done.
+     * @param userCommand User input.
+     * @return DoneCommand Object that marks a Task as done.
+     * @throws DukeArgumentException If missing parameter for index.
+     * @throws DukeIndexException If index provided has incorrect format.
+     * @return DoneCommand Object that marks a Task as done.
+     */
+    public DoneCommand parseDoneCommand(String userCommand) throws DukeArgumentException, DukeIndexException {
+        if (getDescription(userCommand).length() == 0) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing index for done.");
+        }
+
+        try {
+            int doneTask = Integer.parseInt(getDescription(userCommand)) - 1; // Might throw NumberFormatException
+            return new DoneCommand(doneTask);
+        } catch (NumberFormatException e) {
+            throw new DukeIndexException("     :( OOPS!!! " + e.getMessage().substring(18) + " is not number!");
+        }
+    }
+
+    /**
+     * Parse userCommand as FindCommand that find all Task with description that matches a key word or phrase.
+     * @param userCommand User input.
+     * @throws DukeArgumentException If missing parameter for description.
+     * @return FindCommand Object that find all Task with description that matches a key word or phrase.
+     */
+    public Command parseFindCommand(String userCommand) throws DukeArgumentException {
+        if (userCommand.length() == 4) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for find.");
+        }
+        return new FindCommand(getDescription(userCommand));
     }
 
     /**
