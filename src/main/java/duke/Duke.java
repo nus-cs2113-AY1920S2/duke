@@ -5,10 +5,13 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeArgumentException;
+import duke.exception.DukeDateTimeException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeNullException;
 import duke.task.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -65,8 +68,9 @@ public class Duke {
                     isBye = byeCommand(stringSplit, tasks);
                     break;
                 case "todo":
-                    command = todoCommand(tasks, stringSplit);
-                    command.execute(taskList, ui, storage);
+                    todoCommand(tasks, stringSplit);
+                    command = parser.parseCommand(userCommand);
+                    command.execute(taskList, ui,storage);
                     break;
                 case "deadline":
                     deadlineCommand(tasks, userCommand);
@@ -86,7 +90,7 @@ public class Duke {
                 default:
                     throw new DukeNullException("     :( OOPS!!! Command does not exist.");
                 }
-            } catch (DukeArgumentException | DukeIndexException e) {
+            } catch (DukeArgumentException | DukeIndexException | DukeDateTimeException e) {
                 System.out.println(e.getMessage());
             } catch (DukeNullException e) {
                 System.out.println(e.getMessage());
@@ -178,7 +182,7 @@ public class Duke {
      * @throws DukeArgumentException If missing parameter for description or date.
      */
     public static void eventCommand(ArrayList<Task> tasks, String string) throws
-            DukeArgumentException {
+            DukeArgumentException, DukeDateTimeException {
         if (string.length() == 5) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for event.");
         }
@@ -191,6 +195,16 @@ public class Duke {
         int taskCount = tasks.size();
         description = string.substring(0, string.indexOf(" /at")).replace("event ", "");
         dateTime = string.substring(string.indexOf("/at ")).replace("/at ", "");
+
+        LocalDate date;
+        LocalTime time;
+        try {
+            date = LocalDate.parse(dateTime.split(" ")[0]);
+            time = LocalTime.parse(dateTime.split(" ")[1]);
+        } catch(DateTimeParseException e) {
+            throw new DukeDateTimeException("     :( OOPS!!! Please enter a valid date and time");
+        }
+
         tasks.add(new Event(description, dateTime));
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + tasks.get(taskCount).toString());
@@ -205,7 +219,7 @@ public class Duke {
      * @throws DukeArgumentException If missing parameter for description or date.
      */
     public static void deadlineCommand(ArrayList<Task> tasks, String string) throws
-            DukeArgumentException {
+            DukeArgumentException, DukeDateTimeException {
         if (string.length() == 8) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for deadline.");
         }
@@ -218,6 +232,15 @@ public class Duke {
         int taskCount = tasks.size();
         description = string.substring(0, string.indexOf(" /by")).replace("deadline ", "");
         dateTime = string.substring(string.indexOf("/by ")).replace("/by ", "");
+
+        LocalDate date;
+        LocalTime time;
+        try {
+            date = LocalDate.parse(dateTime.split(" ")[0]);
+            time = LocalTime.parse(dateTime.split(" ")[1]);
+        } catch(DateTimeParseException e) {
+            throw new DukeDateTimeException("     :( OOPS!!! Please enter a valid date and time");
+        }
 
         tasks.add(new Deadline(description, dateTime));
         System.out.println("     Got it. I've added this task:");
