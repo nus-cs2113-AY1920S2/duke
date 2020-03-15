@@ -11,8 +11,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Reset command to delete all tasks stored and exit program
+ */
 public class ResetCommand implements Command {
 
+    /**
+     * This command will delete all stored tasks from tasklist.txt and exit the program once completed.
+     *
+     * @param function String containing "reset"
+     * @param ui       ui object for printing statements
+     * @param storage  Storage object for accessing and modifying tasklist.txt
+     * @param taskList Array of tasks stored (Not in use currently)
+     * @param tasks    Array of tasks stored (In Use)
+     * @return boolean false to main function
+     * * @throws IOException When there's error in closing filestream and filewriter
+     */
     public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks) throws IOException {
         FileInputStream fi = null;
         FileOutputStream fio = null;

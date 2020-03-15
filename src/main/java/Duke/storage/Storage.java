@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Import task from file when program starts loading
+     *
      * @return taskArray
      */
     public ArrayList<Task> importTaskFromFile() {
@@ -66,6 +67,7 @@ public class Storage {
 
     /**
      * Write new task created to Tasklist.txt
+     *
      * @param str1 function name of the current action
      * @param str2 A String description of the task
      */
@@ -95,6 +97,7 @@ public class Storage {
 
     /**
      * Append to a task in Tasklist.txt
+     *
      * @param line String description of task from the txt file
      * @throws WhitespaceExceptions If there is undefined or additional whitespaces in the txt file
      */
@@ -139,7 +142,8 @@ public class Storage {
     }
 
     /**
-     *Delete a task from Tasklist.txt
+     * Delete a task from Tasklist.txt
+     *
      * @param line String description of task from the txt file
      * @throws WhitespaceExceptions If there is undefined or additional whitespaces in the txt file
      */

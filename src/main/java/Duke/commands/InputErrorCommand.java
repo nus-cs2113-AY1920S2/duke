@@ -8,14 +8,14 @@ import duke.ui.DisplayUI;
 import java.util.ArrayList;
 
 /**
- * A help command object to print the help table
+ * Command to print error message for wrong input
  */
-public class HelpCommand implements Command {
+public class InputErrorCommand implements Command {
 
     /**
-     * Help command to show the help table to user
+     * Command object to print an error message for wrong input
      *
-     * @param function String containing "help"
+     * @param function String containing unknown function input
      * @param ui       ui object for printing statements
      * @param storage  Storage object for accessing and modifying tasklist.txt
      * @param taskList Array of tasks stored (Not in use currently)
@@ -23,7 +23,7 @@ public class HelpCommand implements Command {
      * @return boolean true to main function
      */
     public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks) {
-        ui.showFunctionList();
+        ui.showErrorInput();
         return true;
     }
 }

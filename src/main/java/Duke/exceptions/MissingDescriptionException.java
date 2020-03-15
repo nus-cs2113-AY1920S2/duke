@@ -1,14 +1,22 @@
 package duke.exceptions;
 
-public class MissingDescriptionException extends Exception{
+public class MissingDescriptionException extends Exception {
 
     String errorDescriptions;
 
-    public MissingDescriptionException(String errorDescriptions){
+    /**
+     * Exceptions for inputs missing descriptions
+     *
+     * @param errorDescriptions String containing the error message
+     */
+    public MissingDescriptionException(String errorDescriptions) {
         this.errorDescriptions = errorDescriptions;
     }
 
-    public void printDescr(){
+    /**
+     * Print error message
+     */
+    public void printDescr() {
         System.out.println(errorDescriptions);
     }
 }

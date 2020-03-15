@@ -1,15 +1,24 @@
 package duke.parser;
 
 import duke.commands.*;
-import duke.exceptions.MissingDateTimeException;
 import duke.exceptions.MissingDescriptionException;
-import duke.exceptions.MissingLocationException;
-import duke.exceptions.WhitespaceExceptions;
+
+import static duke.constants.Constants.DESCRIPTIONS_MISSING;
+import static duke.constants.Constants.TASK_NUM_DELETED;
+import static duke.constants.Constants.TASK_NUM_COMPLETED;
+import static duke.constants.Constants.FIND_DESCRIPTIONS;
 
 import java.util.Scanner;
 
 public class Parser {
 
+    /**
+     * A parser method to take in user input and return a command object
+     *
+     * @param myScanner Scanner for reading in user input
+     * @param function  String containing the different command function
+     * @return a command object to main
+     */
     public Command parse(Scanner myScanner, String function) {
         Command command = null;
         String restOfInput;
@@ -17,16 +26,25 @@ public class Parser {
             switch (function) {
                 case "todo":
                     restOfInput = myScanner.nextLine();
+                    if (restOfInput.isEmpty()) {
+                        throw new MissingDescriptionException(DESCRIPTIONS_MISSING);
+                    }
                     command = new TodoCommand(restOfInput);
                     break;
 
                 case "deadline":
                     restOfInput = myScanner.nextLine();
+                    if (restOfInput.isEmpty()) {
+                        throw new MissingDescriptionException(DESCRIPTIONS_MISSING);
+                    }
                     command = new DeadlineCommand(restOfInput);
                     break;
 
                 case "event":
                     restOfInput = myScanner.nextLine();
+                    if (restOfInput.isEmpty()) {
+                        throw new MissingDescriptionException(DESCRIPTIONS_MISSING);
+                    }
                     command = new EventCommand(restOfInput);
                     break;
 
@@ -40,11 +58,17 @@ public class Parser {
 
                 case "done":
                     restOfInput = myScanner.nextLine();
+                    if (restOfInput.isEmpty()) {
+                        throw new MissingDescriptionException(TASK_NUM_COMPLETED);
+                    }
                     command = new DoneCommand(restOfInput);
                     break;
 
                 case "delete":
                     restOfInput = myScanner.nextLine();
+                    if (restOfInput.isEmpty()) {
+                        throw new MissingDescriptionException(TASK_NUM_DELETED);
+                    }
                     command = new DeleteCommand(restOfInput);
                     break;
 
@@ -54,6 +78,9 @@ public class Parser {
 
                 case "find":
                     restOfInput = myScanner.nextLine();
+                    if (restOfInput.isEmpty()) {
+                        throw new MissingDescriptionException(FIND_DESCRIPTIONS);
+                    }
                     command = new FindCommand(restOfInput);
                     break;
 
@@ -62,17 +89,11 @@ public class Parser {
                     break;
 
                 default:
-                    //loop till valid function entered
-                    //String redundant = myScanner.nextLine();
-                    System.out.println("Please key in a valid function");
+                    command = new InputErrorCommand();
                     break;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("OOPS! Error storing date and time!! Please try again.");
-        } catch (NullPointerException e) {
-            System.out.println("OH NO! task number is missing!! Please try storing a task first.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("OOPS! Missing command! Please try command: done [task number] ");
+        } catch (MissingDescriptionException e) {
+            e.printDescr();
         }
 
         return command;

@@ -3,16 +3,15 @@ package duke.taskManager;
 /**
  * The Deadline class is a Task with specified String description and String dateTime.
  * Deadline class extends from Task class.
- * @author Lim Yu Xiang
- * @version CS2113 AY19/20 Sem 2 Duke
  */
 public class Deadline extends Task {
     private String by;
 
     /**
      * Public constructor for Deadline Task
+     *
      * @param description Description of task
-     * @param by Time of Task
+     * @param by          Time of Task
      */
     public Deadline(String description, String by) {
         super(description);
@@ -21,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Getter for the Time of the task
+     *
      * @return Time of the task
      */
     public String getDeadline() {
@@ -29,11 +29,12 @@ public class Deadline extends Task {
 
     /**
      * Return a string representation of the task
+     *
      * @return [taskStatus] followed by the description
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + getDeadline() + ")" ;
+        return "[D]" + super.toString() + "(by:" + getDeadline() + ")";
     }
 
 }

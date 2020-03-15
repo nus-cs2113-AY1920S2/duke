@@ -1,4 +1,3 @@
-Potatochips
 deadline return book /by Sunday
 list
 todo borrow book list
@@ -9,6 +8,7 @@ done 1
 list
 done 2
 list
+find mo
 done 3
 list
 delete 3
@@ -17,4 +17,5 @@ delete 1
 list
 delete 1
 list
+help
 bye
