@@ -33,7 +33,15 @@ bye there
 todo
 deadline
 deadline complete ip coding
+deadline ip round 1 /by abc
+deadline ip round 2 /by 2020-20-20 16:30
+deadline ip round 3 /by 20-11-22 abc123
+deadline ip round 4 /by 2020-11-22 12:24 to 12:27
 event
 event complete ip coding
+event ip round 1 /at abc
+event ip round 2 /at 2020-20-20 16:30
+event ip round 3 /at 20-11-22 abc123
+event ip round 4 /at 2020-11-22 12:24 to 12:27
 complete everything
 bye

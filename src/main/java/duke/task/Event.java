@@ -19,13 +19,26 @@ public class Event extends Task {
     /**
      * Public constructor for Event.
      * @param description Description of the Event Task.
-     * @param dateTime Date of occurrence and time of the Event Task.
+     * @param dateTime Date and time of occurrence of the Event Task.
      */
     public Event(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;
         date = LocalDate.parse(dateTime.split(" ")[0]);
         time = LocalTime.parse(dateTime.split(" ")[1]);
+    }
+
+    /**
+     * Public constructor for Event using LocalDate and LocalTime.
+     * @param description Description of the Event Task.
+     * @param date Date of occurrence of the Event Task.
+     * @param time Time of occurrence of the Event Task.
+     */
+    public Event(String description, LocalDate date, LocalTime time) {
+        super(description);
+        this.date= date;
+        this.time = time;
+        this.dateTime = date.toString() + " " + time.toString();
     }
 
     /**

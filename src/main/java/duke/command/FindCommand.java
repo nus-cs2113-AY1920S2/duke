@@ -45,4 +45,13 @@ public class FindCommand implements Command {
             System.out.println("     There is no matching tasks");
         }
     }
+
+    /**
+     * Boolean result indicate to the program if it should be exited.
+     * @return False since command keyword does not match "bye".
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

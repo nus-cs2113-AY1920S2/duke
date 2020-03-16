@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /**
  * The Command Interface is an Interface that provides the platform for various Command to be executed.
@@ -16,5 +17,11 @@ public interface Command {
      * @param ui Ui Object that deals with interaction with the user.
      * @param storage Storage Object that deals with the loading and Storing of Tasks.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+
+    /**
+     * Abstract method that other Command Object has to override to indicate to the program if it should be exited.
+     * @return True if user input bye, false otherwise.
+     */
+    public abstract boolean isExit();
 }

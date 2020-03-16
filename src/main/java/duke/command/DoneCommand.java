@@ -37,4 +37,13 @@ public class DoneCommand implements Command {
             System.out.println("       " + taskList.getTask(doneIndex).toString());
         }
     }
+
+    /**
+     * Boolean result indicate to the program if it should be exited.
+     * @return False since command keyword does not match "bye".
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

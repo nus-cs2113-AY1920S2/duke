@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.DukeIndexException;
 
 /**
  * The DeleteCommand class is the Object that delete a Task from the TaskList.
@@ -38,5 +37,14 @@ public class DeleteCommand implements Command {
             taskList.deleteTask(deleteIndex);
             System.out.println("     Now you have " + taskList.getTaskCount() + " tasks in the list.");
         }
+    }
+
+    /**
+     * Boolean result indicate to the program if it should be exited.
+     * @return False since command keyword does not match "bye".
+     */
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

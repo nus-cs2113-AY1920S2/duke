@@ -30,6 +30,19 @@ public class Deadline extends Task {
     }
 
     /**
+     * Public constructor for Deadline using LocalDate and LocalTime.
+     * @param description Description of the Deadline Task.
+     * @param date Due date of the Deadline Task.
+     * @param time Due time of the Deadline Task.
+     */
+    public Deadline(String description, LocalDate date, LocalTime time) {
+        super(description);
+        this.date= date;
+        this.time = time;
+        this.dateTime = date.toString() + " " + time.toString();
+    }
+
+    /**
      * Getter method for the date.
      * @return Due date.
      */

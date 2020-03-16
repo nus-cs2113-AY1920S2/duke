@@ -13,6 +13,13 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
+     * Empty constructor for TaskList. Used when there are no existing Tasks stored yet.
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
      * Public constructor for TaskList.
      * @param tasks ArrayList of Tasks to be stored.
      */

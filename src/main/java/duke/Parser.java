@@ -2,11 +2,15 @@ package duke;
 
 import duke.command.*;
 import duke.exception.DukeArgumentException;
+import duke.exception.DukeDateTimeException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeNullException;
-import duke.task.Task;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
+import static duke.Constant.*;
 
 /**
  * The Parser class is in charged of parsing user input into a Command Object.
@@ -26,29 +30,32 @@ public class Parser {
      * @param userCommand User input.
      * @return Command Object if command keyword, description and date is valid or DukeNullException otherwise.
      */
-    public Command parseCommand(String userCommand) throws DukeArgumentException, DukeNullException, DukeIndexException {
+    public Command parseCommand(String userCommand) throws DukeArgumentException, DukeNullException,
+            DukeIndexException, DukeDateTimeException {
         String commandKeyWord = getCommandKeyWord(userCommand);
         switch (commandKeyWord) {
-        case "todo":
+        case TODO_COMMAND_KEYWORD:
             return parseTodoCommand(userCommand);
-        case "list":
+        case DEADLINE_COMMAND_KEYWORD:
+            return parseDeadlineCommand(userCommand);
+        case EVENT_COMMAND_KEYWORD:
+            return parseEventCommand(userCommand);
+        case LIST_COMMAND_KEYWORD:
             return parseListCommand(userCommand);
-        case "done":
+        case DONE_COMMAND_KEYWORD:
             return parseDoneCommand(userCommand);
-        case "delete":
+        case DELETE_COMMAND_KEYWORD:
             return parseDeleteCommand(userCommand);
-        case "find":
+        case FIND_COMMAND_KEYWORD:
             return parseFindCommand(userCommand);
-        case "help":
+        case HELP_COMMAND_KEYWORD:
             return parseHelpCommand(userCommand);
-
-        /*case "deadline":
-        case "event":
-
-        case "bye":
-            break;*/
+        case BYE_COMMAND_KEYWORD:
+            return parseByeCommand(userCommand);
         default:
-            throw new DukeNullException("     :( OOPS!!! Command does not exist.");
+            String message = "     :( OOPS!!! Command does not exist.\n";
+            message += "     To view the list of commands available use the command: help";
+            throw new DukeNullException(message);
         }
     }
 
@@ -69,12 +76,78 @@ public class Parser {
      */
     public String getDescription(String userCommand) {
         String userCommandKeyWord = getCommandKeyWord(userCommand);
-        if (userCommand.equals("deadline")) {
-            return "To be edited in parser class";
-        } else if (userCommand.equals("event")) {
-            return "Edit Parser class";
-        }
         return userCommand.substring(userCommandKeyWord.length()).strip();
+    }
+
+    /**
+     * Extract and return the description from the user input using the delimiter.
+     * @param userCommand User input.
+     * @param delimiter Delimiter used to split the user input.
+     * @return String representation of the description for the command to process.
+     */
+    public String getDescription(String userCommand, String delimiter) {
+        String userCommandKeyWord = getCommandKeyWord(userCommand);
+        return userCommand.substring(userCommandKeyWord.length(), userCommand.indexOf(delimiter)).strip();
+    }
+
+    /**
+     * Extract and return the Date and Time as a String Array from the user input. String representation of date
+     * and time is found in index 0 and 1 respectively.
+     * @param userCommand User input.
+     * @param delimiter Delimiter used to split the user input.
+     * @return String Array representation of the Date and Time from the user input.
+     * @throws DukeArgumentException If missing date and/or time is found or if additional parameter is found.
+     */
+    public String[] getDateTime(String userCommand, String delimiter) throws DukeArgumentException {
+        String[] dateTime;
+        String userCommandKeyword = getCommandKeyWord(userCommand);
+        dateTime = userCommand.substring(userCommand.indexOf(delimiter)).replace(delimiter, "")
+                .strip().split( " ");
+        if (dateTime.length == 0 || dateTime.length == 1) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing Date or Time for " + userCommandKeyword + ".");
+        }
+        if (dateTime.length > 2) {
+            throw new DukeArgumentException("     :( OOPS!!! Extra arguments found for " + userCommandKeyword + ".");
+        }
+        return dateTime;
+    }
+
+    /**
+     * Handles the parsing of user command into a LocalDate Object.
+     * @param userCommand User input.
+     * @param delimiter Delimiter used to split the user input.
+     * @return LocalDate Object of the date of the Task.
+     * @throws DukeArgumentException If missing date and/or time is found or if additional parameter is found.
+     * @throws DukeDateTimeException If date provided has incorrect format.
+     */
+    public LocalDate getDate(String userCommand, String delimiter) throws DukeArgumentException, DukeDateTimeException {
+        String[] dateTime = getDateTime(userCommand, delimiter);
+        try {
+            return LocalDate.parse(dateTime[0]);
+        } catch (DateTimeParseException e) {
+            String message = "     :( OOPS!!! Please enter a valid date and time\n"
+                    + "     Date and time format: YYYY-MM-DD HH:MM";
+            throw new DukeDateTimeException(message);
+        }
+    }
+
+    /**
+     * Handles the parsing of user command into a LocalTime Object.
+     * @param userCommand User input.
+     * @param delimiter Delimiter used to split the user input.
+     * @return LocalTime Object of the time of the Task.
+     * @throws DukeArgumentException If missing date and/or time is found or if additional parameter is found.
+     * @throws DukeDateTimeException If time provided has incorrect format.
+     */
+    public LocalTime getTime(String userCommand, String delimiter) throws DukeArgumentException, DukeDateTimeException {
+        String[] dateTime = getDateTime(userCommand, delimiter);
+        try {
+            return LocalTime.parse(dateTime[1]);
+        } catch (DateTimeParseException e) {
+            String message = "     :( OOPS!!! Please enter a valid date and time\n"
+                    + "     Date and time format: YYYY-MM-DD HH:MM";
+            throw new DukeDateTimeException(message);
+        }
     }
 
     /**
@@ -89,6 +162,50 @@ public class Parser {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for todo.");
         }
         return new TodoCommand(description);
+    }
+
+    /**
+     * Parse userCommand as DeadlineCommand that add deadline Task given a description and a due date and time.
+     * @param userCommand User input.
+     * @return DeadlineCommand which add deadline Task given a description and a due date.
+     * @throws DukeArgumentException If there are missing description, if missing date and/or time is found or
+     * if additional parameter is found.
+     * @throws DukeDateTimeException If date or time provided has incorrect format.
+     */
+    public DeadlineCommand parseDeadlineCommand(String userCommand) throws DukeArgumentException, DukeDateTimeException {
+        if (getDescription(userCommand).length() == 0) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for deadline.");
+        }
+        if (!userCommand.contains(DEADLINE_COMMAND_DELIMITER)) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing date and time for deadline.");
+        }
+
+        String description = getDescription(userCommand, DEADLINE_COMMAND_DELIMITER);
+        LocalDate date = getDate(userCommand, DEADLINE_COMMAND_DELIMITER);
+        LocalTime time = getTime(userCommand, DEADLINE_COMMAND_DELIMITER);
+        return new DeadlineCommand(description, date, time);
+    }
+
+    /**
+     * Parse userCommand as EventCommand that add event Task given a description and a date and time of occurrence.
+     * @param userCommand User input.
+     * @return EventCommand which add event Task given a description and a date and time of occurrence.
+     * @throws DukeArgumentException If there are missing description, if missing date and/or time is found or
+     * if additional parameter is found.
+     * @throws DukeDateTimeException If date or time provided has incorrect format.
+     */
+    public EventCommand parseEventCommand(String userCommand) throws DukeArgumentException, DukeDateTimeException {
+        if (getDescription(userCommand).length() == 0) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for event.");
+        }
+        if (!userCommand.contains(EVENT_COMMAND_DELIMITER)) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing date and time for event.");
+        }
+
+        String description = getDescription(userCommand, EVENT_COMMAND_DELIMITER);
+        LocalDate date = getDate(userCommand, EVENT_COMMAND_DELIMITER);
+        LocalTime time = getTime(userCommand, EVENT_COMMAND_DELIMITER);
+        return new EventCommand(description, date, time);
     }
 
     /**
@@ -150,7 +267,7 @@ public class Parser {
      * @throws DukeArgumentException If missing parameter for description.
      */
     public FindCommand parseFindCommand(String userCommand) throws DukeArgumentException {
-        if (userCommand.length() == 4) {
+        if (getDescription(userCommand).length() == 0) {
             throw new DukeArgumentException("     :( OOPS!!! Missing description for find.");
         }
         return new FindCommand(getDescription(userCommand));
@@ -167,5 +284,18 @@ public class Parser {
             throw new DukeArgumentException("     :( OOPS!!! Description not required for help.");
         }
         return new HelpCommand();
+    }
+
+    /**
+     * Parse userCommand as ByeCommand that store all the Task into the hard disk and exit the program.
+     * @param userCommand User input.
+     * @return ByeCommand Object that store all the Task into the hard disk and exit the program.
+     * @throws DukeArgumentException If additional parameter is provided.
+     */
+    public ByeCommand parseByeCommand(String userCommand) throws DukeArgumentException {
+        if (getDescription(userCommand).length() > 0) {
+            throw new DukeArgumentException("     :( OOPS!!! Description not required for bye.");
+        }
+        return new ByeCommand();
     }
 }

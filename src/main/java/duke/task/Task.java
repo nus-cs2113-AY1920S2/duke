@@ -27,7 +27,6 @@ public class Task {
     }
 
     // Not immutable version
-
     /**
      * Mark the task as done by setting isDone to true.
      */
