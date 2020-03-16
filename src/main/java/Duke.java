@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import parser.ParserUser;
 import task.Task;
 import storage.Storage;
-import task.Task;
 import task.TaskType;
 import ui.Ui;
 
@@ -64,36 +63,46 @@ public class Duke {
                 }
                 break;
             case COMMAND_CREATE_DEADLINE_TASK: //Create a task with Deadline taskType
-                taskDetails =  input.nextLine();
-                if (taskDetails == null || taskDetails.isEmpty()) {
-                    System.out.println("Details of the task cannot be left Empty!");
-                } else {
+                try {
+                    taskDetails = input.nextLine();
+                    if (taskDetails == null || taskDetails.isEmpty()) {
+                        throw new RuntimeException("Input cannot take in a null or empty string");
+                    }
                     parsedTaskDetails = new ParserUser(taskDetails);
                     taskType = TaskType.D;
                     parsedTaskDetails.userInput(taskType, tasks);
                     ++numberOfIncompleteTasks;
+                } catch (RuntimeException e) {
+                    System.out.println("The task details cannot be left empty!");
                 }
                 break;
             case COMMAND_CREATE_EVENT_TASK: //Create a task with Event taskType
-                taskDetails =  input.nextLine();
-                if (taskDetails == null || taskDetails.isEmpty()) {
-                    System.out.println("Details of the task cannot be left Empty!");
-                } else {
+                try {
+                    taskDetails = input.nextLine();
+                    if (taskDetails == null || taskDetails.isEmpty()) {
+                        throw new RuntimeException("Input cannot take in a null or empty string");
+                    }
                     taskType = TaskType.E;
                     parsedTaskDetails = new ParserUser(taskDetails);
                     parsedTaskDetails.userInput(taskType, tasks);
                     ++numberOfIncompleteTasks;
+
+                } catch (RuntimeException e) {
+                    System.out.println("The task details cannot be left empty!");
                 }
                 break;
             case COMMAND_CREATE_TODO_TASK: //Create a task with Todo taskType
-                taskDetails =  input.nextLine();
-                if (taskDetails == null || taskDetails.isEmpty()) {
-                    System.out.println("Details of the task cannot be left Empty!");
-                } else {
+                try {
+                    taskDetails = input.nextLine();
+                    if (taskDetails == null || taskDetails.isEmpty()) {
+                        throw new RuntimeException("Input cannot take in a null or empty string");
+                    }
                     parsedTaskDetails = new ParserUser(taskDetails);
                     taskType = TaskType.T;
                     parsedTaskDetails.userInput(taskType, tasks);
                     ++numberOfIncompleteTasks;
+                } catch (RuntimeException e) {
+                    System.out.println("The task details cannot be left empty!");
                 }
                 break;
             case COMMAND_DISPLAY_HELP: //Display the available commands for user to refer to
@@ -103,8 +112,15 @@ public class Duke {
                 printTaskList(tasks, numberOfIncompleteTasks);
                 break;
             case COMMAND_FIND_TASK: //Find a task based on the search term entered
-                taskDetails = input.nextLine().trim();
-                findTasks(tasks, taskDetails);
+                try {
+                    taskDetails = input.nextLine().trim();
+                    if(taskDetails == null || taskDetails.isEmpty()) {
+                        throw new RuntimeException("Input cannot take in a null or empty string");
+                    }
+                    findTasks(tasks, taskDetails);
+                } catch (RuntimeException e) {
+                    System.out.println("The search term cannot be left empty!");
+                }
                 break;
             case COMMAND_END_PROGRAM: //Terminate Duke
                 System.out.println("Would you like to save your changes? (Y/N)");
@@ -116,10 +132,11 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break loop;
             case COMMAND_MARK_AS_DONE: //Mark the task as done based on its index number shown in the "list" command
-                taskIndex = input.next();
-                if(taskIndex == null || taskIndex.isEmpty()) {
-                    System.out.println("The task index number cannot be left empty!");
-                } else {
+                try {
+                    taskIndex = input.next();
+                    if(taskIndex == null || taskIndex.isEmpty()) {
+                        throw new RuntimeException("Input cannot take in a null or empty string");
+                    }
                     int doneTaskIndex = Integer.parseInt(taskIndex) - 1;
                     if (!tasks.get(doneTaskIndex).isDone()) {
                         --numberOfIncompleteTasks;
@@ -127,22 +144,27 @@ public class Duke {
                     } else {
                         System.out.println(tasks.get(doneTaskIndex).getTaskDetails() + " is already done!");
                     }
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("The task index number does not exist!");
+                } catch (RuntimeException e) {
+                    System.out.println("The task index number cannot be left empty!");
                 }
                 break;
             case COMMAND_DELETE_TASK: //Delete the task based on its index number shown in the "list" command
-                taskIndex = input.next();
-                if(taskIndex == null || taskIndex.isEmpty()) {
-                    System.out.println("The task index number cannot be left empty!");
-                } else {
-                    int deleteTaskIndex = Integer.parseInt(taskIndex) - 1;
-                    if (tasks.size() > deleteTaskIndex || deleteTaskIndex < 0) {
-                        if (!tasks.get(deleteTaskIndex).isDone()) {
-                            --numberOfIncompleteTasks;
-                        }
-                        deleteTask(tasks, deleteTaskIndex);
-                    } else {
-                        System.out.println("The task does not exist!");
+                try {
+                    taskIndex = input.next();
+                    if (taskIndex == null || taskIndex.isEmpty()) {
+                        throw new RuntimeException("Input cannot take in a null or empty string");
                     }
+                    int deleteTaskIndex = Integer.parseInt(taskIndex) - 1;
+                    if (!tasks.get(deleteTaskIndex).isDone()) {
+                        --numberOfIncompleteTasks;
+                    }
+                    deleteTask(tasks, deleteTaskIndex);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("The task index number does not exist!");
+                } catch (RuntimeException e) {
+                    System.out.println("The task index number cannot be left empty!");
                 }
                 break;
             case COMMAND_SAVE_FILE: //Write the current ArrayList into the memory file
@@ -216,6 +238,7 @@ public class Duke {
                 }
             }
         }
+
     }
 
     /**
