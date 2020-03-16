@@ -59,6 +59,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Getter method for String representation of the date and time.
+     * @return String representation of the date and time
+     */
+    public String getDateTime() {
+        return this.dateTime;
+    }
+
+    /**
      * Return a String representation of this Deadline.
      * @return The Deadline's icon, followed by the Task's toString, followed by the due date and time.
      */

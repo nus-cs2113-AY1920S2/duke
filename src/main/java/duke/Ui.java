@@ -23,7 +23,7 @@ public class Ui {
     public String getUserCommand() {
         String userCommand;
         System.out.println();
-        userCommand = sc.nextLine();
+        userCommand = sc.nextLine().strip();
         System.out.println("    ____________________________________________________________");
         return userCommand;
     }

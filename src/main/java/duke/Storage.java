@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeDateTimeException;
 import duke.exception.DukeFileException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +42,7 @@ public class Storage {
      * start of the programs launch.
      * @return ArrayList of Task stored in the file if it exist.
      */
-    public ArrayList<Task> load() throws DukeFileException {
+    public ArrayList<Task> load() throws DukeFileException, DukeDateTimeException {
         ArrayList<Task> tasks = new ArrayList<>();
         int taskCount = 0;
         try {
@@ -66,6 +68,8 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeFileException("     File does not exist. Launching new TaskList.");
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeException("     Error loading Date/Time. Launching new TaskList.");
         }
     }
 
@@ -102,12 +106,12 @@ public class Storage {
             if (taskList.getTask(i) instanceof Deadline) {
                 Deadline deadline = (Deadline) taskList.getTask(i);
                 taskToAdd = taskToAdd + "D | " + (deadline.getIsDone() ? 1 : 0) + " | ";
-                taskToAdd = taskToAdd + deadline.getDescription() + " | " + deadline.getDate();
+                taskToAdd = taskToAdd + deadline.getDescription() + " | " + deadline.getDateTime();
             }
             if (taskList.getTask(i) instanceof Event) {
                 Event event = (Event) taskList.getTask(i);
                 taskToAdd = taskToAdd + "E | " + (event.getIsDone() ? 1 : 0) + " | ";
-                taskToAdd = taskToAdd + event.getDescription() + " | " + event.getDate();
+                taskToAdd = taskToAdd + event.getDescription() + " | " + event.getDateTime();
             }
             taskToAdd += "\n";
         }

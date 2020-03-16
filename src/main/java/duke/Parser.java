@@ -179,6 +179,9 @@ public class Parser {
         if (!userCommand.contains(DEADLINE_COMMAND_DELIMITER)) {
             throw new DukeArgumentException("     :( OOPS!!! Missing date and time for deadline.");
         }
+        if (getDescription(userCommand, DEADLINE_COMMAND_DELIMITER).length() == 0) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for deadline.");
+        }
 
         String description = getDescription(userCommand, DEADLINE_COMMAND_DELIMITER);
         LocalDate date = getDate(userCommand, DEADLINE_COMMAND_DELIMITER);
@@ -200,6 +203,9 @@ public class Parser {
         }
         if (!userCommand.contains(EVENT_COMMAND_DELIMITER)) {
             throw new DukeArgumentException("     :( OOPS!!! Missing date and time for event.");
+        }
+        if (getDescription(userCommand, EVENT_COMMAND_DELIMITER).length() == 0) {
+            throw new DukeArgumentException("     :( OOPS!!! Missing description for event.");
         }
 
         String description = getDescription(userCommand, EVENT_COMMAND_DELIMITER);
