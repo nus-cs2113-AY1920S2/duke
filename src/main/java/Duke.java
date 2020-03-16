@@ -225,7 +225,7 @@ public class Duke {
     public static void clearTasks(ArrayList<Task> tasks) {
         int size = tasks.size();
         for (int i = 0; i < size; ++i) {
-            deleteTask(tasks, 1);
+            deleteTask(tasks, 0);
         }
     }
 }
