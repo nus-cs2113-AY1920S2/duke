@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import duke.command.*;
 import duke.exception.DukeArgumentException;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import static duke.Constant.*;
+import static duke.constant.Constant.*;
 
 /**
  * The Parser class is in charged of parsing user input into a Command Object.

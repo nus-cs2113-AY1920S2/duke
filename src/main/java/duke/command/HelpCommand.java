@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.data.TaskList;
+import duke.ui.Ui;
 
 /**
  * The HelpCommand class is the Object that provides the user with help by showing the list of available commands.

@@ -1,5 +1,6 @@
-package duke;
+package duke.storage;
 
+import duke.data.TaskList;
 import duke.exception.DukeDateTimeException;
 import duke.exception.DukeFileException;
 import duke.task.Deadline;
@@ -18,7 +19,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static duke.Constant.FILE_NAME;
+import static duke.constant.Constant.FILE_NAME;
 
 /**
  * The Storage class is the class handles the loading of Task from a specified filePath and

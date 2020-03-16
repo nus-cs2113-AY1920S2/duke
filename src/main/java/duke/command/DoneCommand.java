@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.data.TaskList;
+import duke.ui.Ui;
 
 /**
  * The DoneCommand class is the Object that mark a Task in the TaskList as completed.

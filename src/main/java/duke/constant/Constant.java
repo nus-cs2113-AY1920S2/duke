@@ -1,4 +1,4 @@
-package duke;
+package duke.constant;
 
 /**
  * The Constant class is the class that keeps a record of all the constants used across all Duke package.

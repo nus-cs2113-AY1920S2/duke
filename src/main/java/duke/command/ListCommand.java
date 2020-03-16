@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.data.TaskList;
+import duke.ui.Ui;
 
 /**
  * The ListCommand class is the Object that provides the user with the list of Tasks stored.

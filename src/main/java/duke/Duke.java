@@ -1,9 +1,13 @@
 package duke;
 
 import duke.command.Command;
+import duke.data.TaskList;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
-import static duke.Constant.FILE_PATH;
+import static duke.constant.Constant.FILE_PATH;
 
 /**
  * Duke is a chatbot that manages Task for user.

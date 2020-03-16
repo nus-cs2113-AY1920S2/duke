@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.data.TaskList;
+import duke.ui.Ui;
 
 /**
  * The DeleteCommand class is the Object that delete a Task from the TaskList.
