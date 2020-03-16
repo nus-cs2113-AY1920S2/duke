@@ -85,7 +85,7 @@ public class Storage {
      * Convert the tasks in TaskList into a suitable String for saving and pass this String to writeFileTask method
      * to write it into an external file for storage.
      * @param taskList Task manager that deals with getting and setting Task Object.
-     * @throws IOException
+     * @throws IOException If input or output operation failed.
      */
     public void saveTask(TaskList taskList) throws IOException {
         Path path = Paths.get(FILE_NAME);

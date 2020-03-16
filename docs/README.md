@@ -57,7 +57,7 @@ Command: Terminate the program and automatically help you store the Task into yo
 | Index | Input | Command |  
 | ----- | ----- | --------------- |  
 | 01 | todo description | Add a todo task with description |  
-| 02 | dateline description /by YYYY-MM-DD HH:MM | Add a deadline task description and due date |  
+| 02 | deadline description /by YYYY-MM-DD HH:MM | Add a deadline task description and due date |  
 | 03 | event description /at YYYY-MM-DD HH:MM | Add a event task description and due date |  
 | 04 | list | List out all the stored task |  
 | 05 | done index | Mark task index as done |  

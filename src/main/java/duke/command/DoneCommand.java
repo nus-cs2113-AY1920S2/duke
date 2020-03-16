@@ -32,7 +32,7 @@ public class DoneCommand implements Command {
         if (doneIndex >= taskList.getTaskCount() || doneIndex < 0) {
             System.out.println("     :( OOPS!!! Invalid index for done.");
         } else {
-            taskList.getTask(doneIndex).markAsDone();
+            taskList.doneTask(doneIndex);
             System.out.println("     Nice! I've marked this task as done:");
             System.out.println("       " + taskList.getTask(doneIndex).toString());
         }
