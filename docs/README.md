@@ -48,7 +48,7 @@ Adds a new deadline to the TaskList
 
 #### Example of usage:
 
-    deadline complete CS1010 Assignment \by 10-03-2022
+    deadline complete CS1010 Assignment /by 10-03-2022
     
 #### Expected outcome:
 
@@ -63,7 +63,7 @@ Adds a new event to the TaskList.
                                
 #### Example of usage:
 
-    event attend cousin wedding \at 01-04-2022
+    event attend cousin wedding /at 01-04-2022
 
 #### Expected outcome:
 
