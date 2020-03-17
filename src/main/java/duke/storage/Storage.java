@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    File f;
+    File file;
 
     /**
      * Constructor specifying file path.
@@ -20,7 +21,7 @@ public class Storage {
      * @throws FileNotFoundException If file is not found
      */
     public Storage (String filePath) throws FileNotFoundException {
-        f = new File("data/duke_list.txt");
+        file = new File("data/duke_list.txt");
     }
 
     /**
@@ -30,13 +31,17 @@ public class Storage {
      *
      * @param list
      */
-    public void updateListDataOnDisk(ArrayList<Command> list){
+    public void updateListDataOnDisk(ArrayList<Command> list) {
         try {
             Files.createDirectory(Paths.get("data"));
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+            //ignored as error would mean that directory exists, thus no action needed
+        }
         try {
             Files.createFile(Paths.get("data/duke_list.txt"));
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+            //ignored as error would mean that file exists, thus no action needed
+        }
         try {
             FileWriter fw = new FileWriter("data/duke_list.txt");
             list.forEach((n) -> {
@@ -59,12 +64,22 @@ public class Storage {
      * @return list from hard drive
      * @throws FileNotFoundException If file is not found
      */
-    public ArrayList <Command> loadListDataFromDisk() throws FileNotFoundException {
+    public ArrayList <Command> loadListDataFromDisk() throws FileNotFoundException, DukeException {
         ArrayList<Command> list = new ArrayList<Command>();
-        Scanner reader = new Scanner(f);
+        checkIntegrity();
+        Scanner reader = new Scanner(file);
         while (reader.hasNext()) {
             list.add(new Loader(reader.nextLine()));
         }
         return list;
+    }
+
+    private void checkIntegrity() throws FileNotFoundException, DukeException {
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) {
+            if (!reader.nextLine().matches("\\[(T|E|D)]\\[(\\s|1)].*")) {
+                throw new DukeException("corrupted", 5);
+            }
+        }
     }
 }
