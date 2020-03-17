@@ -4,6 +4,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Extension of <>Command</> class to handle non-existing classes.
+ */
 public class NonExistent extends Command {
     public NonExistent() {}
 

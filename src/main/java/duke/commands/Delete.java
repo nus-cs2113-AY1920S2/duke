@@ -4,6 +4,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Extension of <>Command</> class specifying the <>Delete</> command.
+ */
 public class Delete extends Command {
     public Delete(String commandDetails) {
         super(commandDetails);

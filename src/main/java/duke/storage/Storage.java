@@ -12,6 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to handle loading and storing of data.
+ */
 public class Storage {
     File file;
 
@@ -74,6 +77,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Checks previously written data file if it follows syntax of Duke.
+     *
+     * @throws FileNotFoundException
+     * @throws DukeException
+     */
     private void checkIntegrity() throws FileNotFoundException, DukeException {
         Scanner reader = new Scanner(file);
         while (reader.hasNext()) {

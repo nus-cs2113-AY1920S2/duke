@@ -5,9 +5,10 @@ import duke.commands.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ *  Ui class to handle CLI text displays for user interaction.
+ */
 public class Ui {
-
     public static void showWelcome() {
         System.out.println("    ____________________________________________________________\n"
                 + "     Hello! I'm Duke, your personal task genie :D\n"

@@ -4,6 +4,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Abstract command class.
+ */
 public abstract class Command {
     public String command;
 

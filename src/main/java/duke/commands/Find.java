@@ -4,6 +4,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Extension of <>Command</> class specifying the <>Find</> command.
+ */
 public class Find extends Command {
     private String target;
 

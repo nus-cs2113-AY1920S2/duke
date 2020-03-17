@@ -4,6 +4,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Extension of <>Command</> class specifying the <>Todo</> command.
+ */
 public class Todo extends Command {
 
     /**

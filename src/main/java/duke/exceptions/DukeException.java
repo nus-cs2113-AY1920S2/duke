@@ -2,6 +2,9 @@ package duke.exceptions;
 
 import duke.ui.Ui;
 
+/**
+ * Extension of Exception class for handling custom exceptions.
+ */
 public class DukeException extends Exception {
     public int exceptionCode;
     public String commandType;
@@ -14,7 +17,12 @@ public class DukeException extends Exception {
     final int EXCEPTION_CODE_CORRUPTED = 5;
 
 
-
+    /**
+     * Constructor that specifies commandType and its reference number.
+     *
+     * @param commandType
+     * @param exceptionCode
+     */
     public DukeException(String commandType, int exceptionCode) {
         this.exceptionCode = exceptionCode;
         this.commandType = commandType;

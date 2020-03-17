@@ -3,6 +3,9 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Extension of <>Command</> class specifying the <>Bye</> command.
+ */
 public class Bye extends Command {
 
     /**

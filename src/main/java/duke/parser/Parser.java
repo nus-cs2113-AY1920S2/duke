@@ -3,8 +3,10 @@ package duke.parser;
 import duke.commands.*;
 import duke.exceptions.DukeException;
 
+/**
+ *  Parser class that processes command information.
+ */
 public class Parser {
-
 
     public static Command parseInput(String userInput) throws DukeException {
         String[] inputSegments = (userInput.trim() + " ").split(" ",2);

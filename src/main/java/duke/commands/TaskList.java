@@ -2,6 +2,9 @@ package duke.commands;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList class that contains the list of command tasks.
+ */
 public class TaskList {
     public static ArrayList<Command> list = new ArrayList<Command>();
 
@@ -17,10 +20,10 @@ public class TaskList {
     }
 
     /**
-     * @param c the command to be added
+     * @param command the command to be added
      */
-    public void addTask(Command c) {
-        list.add(c);
+    public void addTask(Command command) {
+        list.add(command);
     }
 
     /**
