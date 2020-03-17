@@ -1,7 +1,5 @@
 package duke.commands;
 
-import duke.commands.Command;
-
 import java.util.ArrayList;
 
 public class TaskList {

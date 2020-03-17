@@ -2,7 +2,6 @@ package duke.storage;
 
 import duke.commands.Command;
 import duke.commands.TaskList;
-import duke.storage.Storage;
 import duke.ui.Ui;
 
 public class Loader extends Command {

@@ -8,11 +8,10 @@ public class Parser {
 
     public static Command parseInput(String userInput) throws DukeException {
         String[] inputSegments = (userInput.trim() + " ").split(" ",2);
-        String commandWord = inputSegments[0];
+        String commandWord = inputSegments[0].toLowerCase();
         String commandDetails = inputSegments[1];
 
-
-        switch (commandWord){
+        switch (commandWord) {
         case "bye":
             return prepareBye();
         case "done":

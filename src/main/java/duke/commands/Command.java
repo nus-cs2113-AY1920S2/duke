@@ -7,7 +7,7 @@ import duke.ui.Ui;
 public abstract class Command {
     public String command;
 
-    public Command(String input){
+    public Command(String input) {
         this.command = input;
     }
 

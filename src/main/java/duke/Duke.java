@@ -3,7 +3,6 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
 import java.io.FileNotFoundException;
 
 /**
@@ -26,6 +25,9 @@ public class Duke {
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } catch (DukeException e) {
+            e.getMessage();
+            tasks = new TaskList();
         }
     }
 
@@ -39,7 +41,7 @@ public class Duke {
             try {
                 String userInput = Ui.readInput();
                 Command c = Parser.parseInput(userInput);
-                c.execute(tasks, ui, storage); //add to taskList list, show ui, add to storage /////////////////
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 e.getMessage();

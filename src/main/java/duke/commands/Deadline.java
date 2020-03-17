@@ -17,7 +17,7 @@ public class Deadline extends Command {
         if (input.replaceFirst("/by(.*)","").matches("\\s*")){
             throw new DukeException("deadline",1);
         }
-        if (!input.matches(".*/by\\s+\\w+.*")){
+        if (!input.matches(".*/by\\s+\\w+.*")) {
             throw new DukeException("deadline", 2);
         }
     }
@@ -26,10 +26,9 @@ public class Deadline extends Command {
      * @param tasks     the tasks that will be augmented
      * @param ui        the messages that will be displayed
      * @param storage   the storage to be added into
-     * @throws DukeException Relays exceptions from methods
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
             tasks.addTask(this);
             ui.showListIncrementOutput(command,tasks.list.size());
             storage.updateListDataOnDisk(tasks.list);

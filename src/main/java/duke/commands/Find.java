@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-public class Find extends Command{
+public class Find extends Command {
     private String target;
 
     public Find (String target) {
@@ -13,7 +13,7 @@ public class Find extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (target.matches("\\s*")){
+        if (target.matches("\\s*")) {
             throw new DukeException("find", 1);
         }
         ui.showFindOutput(target);
