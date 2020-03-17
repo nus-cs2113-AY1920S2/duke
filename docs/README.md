@@ -4,15 +4,15 @@
 ## Features :notebook:
  
 - [List all items in your todo list](#list---list-all-items-in-your-todo-list)
-- [Adds a todo item](#todo---adds-a-general-todo-item)
-- [Adds an event item](#event---adds-an-event-item-at-a-specified-time)
-- [Adds a deadline item](#deadline---adds-a-deadline-item-at-a-specified-time)
-- [Marks an item as done](#done---marks-an-item-as-done)
-- [Deletes an item](#delete---deletes-an-item)
+- [Add a todo item](#todo---adds-a-general-todo-item)
+- [Add an event item](#event---adds-an-event-item-at-a-specified-time)
+- [Add a deadline item](#deadline---adds-a-deadline-item-at-a-specified-time)
+- [Mark an item as done](#done---marks-an-item-as-done)
+- [Delete an item](#delete---deletes-an-item)
 - [Find an item](#find---finds-all-matching-tasks)
-- [Exits program](#bye---exits-program)
+- [Exit program](#bye---exits-program)
 - [Local data storage](#local-data-storage)
- <br/>
+ <br/><br/>
  
 ## Usage :memo:	
  
@@ -30,6 +30,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ```
+<br/>
  
 ### `todo` - adds a general todo item
 Example of usage: 
@@ -43,10 +44,11 @@ ____________________________________________________________
  Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
- 
+<br/>
+
 ### `event` - adds an event item at a specified time
 Example of usage: 
-`event Watch the News /at 1am`
+`event Watch the news /at 1am`
 
 Expected outcome:
 ```
@@ -56,19 +58,21 @@ ____________________________________________________________
  Now you have 4 tasks in the list.
  ____________________________________________________________
 ```
+<br/>
  
 ### `deadline` - adds a deadline item at a specified time
 Example of usage: 
-`deadline Submit 1st draft for Joker 2 /by: 1st March 5pm`
+`deadline Submit draft for Joker 2 /by: 1st March 5pm`
 
 Expected outcome:
 ```
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] Submit 1st draft for Joker 2 (by: 1st March 5pm)
+   [D][ ] Submit draft for Joker 2 (by: 1st March 5pm)
  Now you have 5 tasks in the list.
 ____________________________________________________________
 ```
+<br/>
  
 ### `done` - marks an item as done
 Example of usage: 
@@ -81,6 +85,7 @@ ____________________________________________________________
    [T][1] Practice coding
 ____________________________________________________________
 ```
+<br/>
  
 ### `delete` - deletes an item
 Example of usage: 
@@ -94,6 +99,7 @@ ____________________________________________________________
  Now you have 4 tasks in the list.
 ____________________________________________________________
 ```
+<br/>
  
 ### `find` - finds all matching tasks
 Example of usage: 
@@ -107,6 +113,7 @@ ____________________________________________________________
  3.[E][ ] Watch the news (at: 1am)
 ____________________________________________________________
 ```
+<br/>
  
 ### `bye` - exits program
 Example of usage: 
