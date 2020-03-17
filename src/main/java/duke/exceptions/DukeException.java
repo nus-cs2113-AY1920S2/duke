@@ -1,22 +1,21 @@
-/* Exception code list:
- * 0 - Exception for Find command
- * 1 - Empty parameter
- * 2 - Incomplete parameter
- *
- */
-
 package duke.exceptions;
 
 import duke.ui.Ui;
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     public int exceptionCode;
     public String commandType;
     public String parameters;
+    final int EXCEPTION_CODE_FIND = 0;
+    final int EXCEPTION_CODE_EMPTY = 1;
+    final int EXCEPTION_CODE_INCOMPLETE = 2;
+    final int EXCEPTION_CODE_DONE = 3;
+    final int EXCEPTION_CODE_NEGATIVE = 4;
+    final int EXCEPTION_CODE_CORRUPTED = 5;
 
 
 
-    public DukeException(String commandType, int exceptionCode){
+    public DukeException(String commandType, int exceptionCode) {
         this.exceptionCode = exceptionCode;
         this.commandType = commandType;
         switch (commandType) {
@@ -26,26 +25,33 @@ public class DukeException extends Exception{
         case "event":
             parameters = "/at";
             break;
-        case "find":
-            break;
         default:
-            System.out.println("Undefined exception command type.");
+            //no action required by default
             break;
         }
     }
 
 
     @Override
-    public String getMessage(){
+    public String getMessage() {
         switch (exceptionCode) {
-        case 0:
+        case EXCEPTION_CODE_FIND:
             Ui.showInvalidFindError();
             break;
-        case 1:
+        case EXCEPTION_CODE_EMPTY:
             Ui.showEmptyParametersError(commandType);
             break;
-        case 2:
+        case EXCEPTION_CODE_INCOMPLETE:
             Ui.showIncompleteParametersError(parameters);
+            break;
+        case EXCEPTION_CODE_DONE:
+            Ui.showAlreadyDone();
+            break;
+        case EXCEPTION_CODE_NEGATIVE:
+            Ui.showNegativeError();
+            break;
+        case EXCEPTION_CODE_CORRUPTED:
+            Ui.showTamperedFile();
             break;
         default:
             System.out.println("None existent exception code.");

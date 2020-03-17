@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -14,14 +15,24 @@ public class Done extends Command {
      * @param storage   the storage to be added into
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int index = Integer.parseInt(command.replaceAll("[^\\d]", ""))-1;
+            int index = Integer.parseInt(command.replaceAll("[^\\d]", "")) - 1;
+            if (tasks.list.get(index).command.contains("[1]")) {
+                throw new DukeException("done", 3);
+            }
+            if (command.matches(".*-(\\d).*")) {
+                throw new DukeException("negative", 4);
+            }
             tasks.list.get(index).command = tasks.list.get(index).command.replace("[ ]", "[1]");
             ui.showDoneOutput(tasks.list.get(index).command);
             storage.updateListDataOnDisk(tasks.list);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            ui.showNonExistentTaskInList();
+        } catch (IndexOutOfBoundsException e) {
+            ui.showDoneOutOfBound(tasks.list.size());
+        } catch (NumberFormatException e) {
+            ui.showErrorInput();
+        } catch (DukeException e) {
+            e.getMessage();
         }
     }
 

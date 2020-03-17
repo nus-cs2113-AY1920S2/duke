@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -16,12 +17,19 @@ public class Delete extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            if (command.matches(".*-(\\d).*")) {
+                throw new DukeException("negative", 4);
+            }
             int index = Integer.parseInt(command.replaceAll("[^\\d]",""))-1;
             ui.showDeleteOutput(tasks.list.get(index).command,tasks.list.size()-1);
             tasks.removeTask(index);
             storage.updateListDataOnDisk(tasks.list);
-        } catch (NumberFormatException | IndexOutOfBoundsException e){
-            ui.showNonExistentTaskInList();
+        } catch (IndexOutOfBoundsException e) {
+            ui.showDoneOutOfBound(tasks.list.size());
+        } catch (NumberFormatException e) {
+            ui.showErrorInput();
+        } catch (DukeException e) {
+            e.getMessage();
         }
     }
 
