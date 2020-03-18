@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 import duke.commands.Command;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.taskManager.Task;
-import duke.ui.*;
 
 import java.util.ArrayList;
 
-import duke.storage.*;
+import duke.ui.DisplayUI;
 
 /**
  * Duke is a a chatbot with task managing functions.
@@ -19,8 +19,8 @@ import duke.storage.*;
  * @version CS2113 AY19/20 Sem 2 Duke
  */
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<Task>();
-    public static final String FILE_PATH = "data/Tasklist.txt";
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    public static final String FILE_PATH = "data/tasklist.txt";
 
     /**
      * Main method in duke
@@ -66,10 +66,7 @@ public class Duke {
                 function = myScanner.next();
                 Command command = parser.parse(myScanner, function);
                 flag = command.execute(function, ui, storage, taskList, tasks);
-            } catch (NullPointerException e) {
-                flag = true;
-            } catch (Exception e) {
-                flag = true;
+            } catch ( NullPointerException e) {
             }
         }
     }

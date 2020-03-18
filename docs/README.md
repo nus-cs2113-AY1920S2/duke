@@ -49,6 +49,10 @@ Use this function when there are unknown errors to the Tasklist.txt file when us
 
 5. help : Type `help` to access the help table again and follow the example format given for input.
 
+6. (IMPT) Do not use more than one escaping datetime or location keyword in a task.  
+Eg : `deadline Complete CS2113 /by 2359 /by Friday`  
+Eg: `event CFG /at /at NUS Utown`  
+Doing so will result in data lost. (Fixing in progress)  
 
 # Feedback, Bug Reports
 

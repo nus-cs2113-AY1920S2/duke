@@ -33,8 +33,7 @@ public class DeleteCommand implements Command {
      * @return boolean true to main function
      * @throws WhitespaceExceptions
      */
-    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks)
-            throws WhitespaceExceptions {
+    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks) {
         int taskNumber;
         String str;
         try {

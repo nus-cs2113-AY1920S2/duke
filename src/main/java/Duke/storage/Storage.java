@@ -3,11 +3,19 @@ package duke.storage;
 import duke.exceptions.WhitespaceExceptions;
 import duke.taskManager.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
+import static duke.Duke.FILE_PATH;
 
 public class Storage {
     ArrayList<Task> tasksArray = new ArrayList<>();
@@ -23,45 +31,59 @@ public class Storage {
      * @return taskArray
      */
     public ArrayList<Task> importTaskFromFile() {
+        Path filePath = Paths.get("data");
         try {
-            Path filePath = Paths.get(pathName);
             if (!Files.exists(filePath)) {
-                Files.createDirectory(filePath);
-                File f = new File("data/Tasklist.txt");
-            } else {
-                File f = new File("data/Tasklist.txt");
-                Scanner fileScanner = new Scanner(f);
-                while (fileScanner.hasNextLine()) {
-                    String line = fileScanner.nextLine();
-                    String[] TaskDescriptions = line.split("\\|");
-                    switch (TaskDescriptions[0]) {
-                        case "T":
-                            tasksArray.add(new Todo(TaskDescriptions[2]));
-                            if (Integer.parseInt(TaskDescriptions[1]) == 1) {
-                                tasksArray.get(tasksArray.size() - 1).importDone();
-                            }
-                            break;
-
-                        case "D":
-                            tasksArray.add(new Deadline(TaskDescriptions[2], TaskDescriptions[3]));
-                            if (Integer.parseInt(TaskDescriptions[1]) == 1) {
-                                tasksArray.get(tasksArray.size() - 1).importDone();
-                            }
-                            break;
-
-                        case "E":
-                            tasksArray.add(new Events(TaskDescriptions[2], TaskDescriptions[3]));
-                            if (Integer.parseInt(TaskDescriptions[1]) == 1) {
-                                tasksArray.get(tasksArray.size() - 1).importDone();
-                            }
-                            break;
-                    }
-                }
+                createNewDirectories(filePath);
             }
+            scanFromFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found exception");
         } catch (IOException e) {
-            System.out.println("Error occurred. Please try again!");
+            e.printStackTrace();
+            System.out.println("\n\n    Error occurred while loading file. Please try again!\n\n");
         }
         return tasksArray;
+    }
+
+    private void scanFromFile() throws FileNotFoundException {
+        File file = new File(pathName);
+        Scanner fileScanner = new Scanner(file);
+        while (fileScanner.hasNextLine()) {
+            String line = fileScanner.nextLine();
+            String[] TaskDescriptions = line.split("\\|");
+            switch (TaskDescriptions[0]) {
+                case "T":
+                    tasksArray.add(new Todo(TaskDescriptions[2]));
+                    if (Integer.parseInt(TaskDescriptions[1]) == 1) {
+                        tasksArray.get(tasksArray.size() - 1).importDone();
+                    }
+                    break;
+
+                case "D":
+                    tasksArray.add(new Deadline(TaskDescriptions[2], TaskDescriptions[3]));
+                    if (Integer.parseInt(TaskDescriptions[1]) == 1) {
+                        tasksArray.get(tasksArray.size() - 1).importDone();
+                    }
+                    break;
+
+                case "E":
+                    tasksArray.add(new Events(TaskDescriptions[2], TaskDescriptions[3]));
+                    if (Integer.parseInt(TaskDescriptions[1]) == 1) {
+                        tasksArray.get(tasksArray.size() - 1).importDone();
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void createNewDirectories(Path filePath) throws IOException {
+        Files.createDirectory(filePath);
+        System.out.println("path created!");
+        FileWriter fileWriter = new FileWriter(pathName);
+        fileWriter.write("");
+        fileWriter.close();
+        System.out.println("tasklist.txt created!");
     }
 
 
@@ -75,7 +97,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(pathName, true);
             if (str1.contains("todo")) {
-                String newLineFormatted = str2.stripLeading();
+                String newLineFormatted = str2.trim();
                 fw.write("T|0|" + newLineFormatted + System.lineSeparator());
                 fw.close();
             }
@@ -90,7 +112,7 @@ public class Storage {
                 fw.close();
             }
         } catch (IOException e) {
-            System.out.println("Error while writing into file. Please try again");
+            System.out.println("Error while writing into file. Please try again! Your task is not saved in tasklist.txt!");
         }
         return tasksArray;
     }
@@ -101,12 +123,15 @@ public class Storage {
      * @param line String description of task from the txt file
      * @throws WhitespaceExceptions If there is undefined or additional whitespaces in the txt file
      */
-    public ArrayList<Task> appendToFile(String line) throws WhitespaceExceptions {
+    public ArrayList<Task> appendToFile(String line) {
         FormatDescriptions newLine = new FormatDescriptions();
-        newLine.format(line);
+        try {
+            newLine.format(line);
+        } catch (WhitespaceExceptions e) {
+            e.printStackTrace();
+        }
 
-        String filePath = "data/Tasklist.txt";
-        File fileToBeModified = new File(filePath);
+        File fileToBeModified = new File(pathName);
         String originalFileContent = "";
         BufferedReader reader = null;
         FileWriter writer = null;
@@ -147,12 +172,14 @@ public class Storage {
      * @param line String description of task from the txt file
      * @throws WhitespaceExceptions If there is undefined or additional whitespaces in the txt file
      */
-    public ArrayList<Task> deleteToFile(String line) throws WhitespaceExceptions {
+    public ArrayList<Task> deleteToFile(String line) {
         FormatDescriptions newLine = new FormatDescriptions();
-        newLine.format(line);
-
-        String filePath = "data/Tasklist.txt";
-        File fileToBeModified = new File(filePath);
+        try {
+            newLine.format(line);
+        } catch (WhitespaceExceptions e) {
+            e.printStackTrace();
+        }
+        File fileToBeModified = new File(pathName);
         String originalFileContent = "";
         BufferedReader reader = null;
         FileWriter writer = null;

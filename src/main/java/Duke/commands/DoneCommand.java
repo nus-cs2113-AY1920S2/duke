@@ -33,11 +33,12 @@ public class DoneCommand implements Command {
      * @return boolean true to main function
      * @throws WhitespaceExceptions
      */
-    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks)
-            throws WhitespaceExceptions {
+    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks) {
         try {
             String l = line.replace(" ", "");
-
+            if(l.length() > 1) {
+                throw new DukeException(NOT_INTEGER);
+            }
             int taskNumber = Integer.parseInt(l) - 1;
             if (taskNumber >= tasks.size() || taskNumber < 0) {
                 throw new DukeException(INDEX_OUT_OF_BOUND);

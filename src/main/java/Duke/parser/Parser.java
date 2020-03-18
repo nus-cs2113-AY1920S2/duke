@@ -21,11 +21,10 @@ public class Parser {
      */
     public Command parse(Scanner myScanner, String function) {
         Command command = null;
-        String restOfInput;
         try {
+            String restOfInput = myScanner.nextLine().trim();
             switch (function) {
                 case "todo":
-                    restOfInput = myScanner.nextLine();
                     if (restOfInput.isEmpty()) {
                         throw new MissingDescriptionException(DESCRIPTIONS_MISSING);
                     }
@@ -33,7 +32,6 @@ public class Parser {
                     break;
 
                 case "deadline":
-                    restOfInput = myScanner.nextLine();
                     if (restOfInput.isEmpty()) {
                         throw new MissingDescriptionException(DESCRIPTIONS_MISSING);
                     }
@@ -41,7 +39,6 @@ public class Parser {
                     break;
 
                 case "event":
-                    restOfInput = myScanner.nextLine();
                     if (restOfInput.isEmpty()) {
                         throw new MissingDescriptionException(DESCRIPTIONS_MISSING);
                     }
@@ -57,7 +54,6 @@ public class Parser {
                     break;
 
                 case "done":
-                    restOfInput = myScanner.nextLine();
                     if (restOfInput.isEmpty()) {
                         throw new MissingDescriptionException(TASK_NUM_COMPLETED);
                     }
@@ -65,7 +61,6 @@ public class Parser {
                     break;
 
                 case "delete":
-                    restOfInput = myScanner.nextLine();
                     if (restOfInput.isEmpty()) {
                         throw new MissingDescriptionException(TASK_NUM_DELETED);
                     }
@@ -77,7 +72,6 @@ public class Parser {
                     break;
 
                 case "find":
-                    restOfInput = myScanner.nextLine();
                     if (restOfInput.isEmpty()) {
                         throw new MissingDescriptionException(FIND_DESCRIPTIONS);
                     }

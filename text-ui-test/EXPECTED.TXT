@@ -1,0 +1,103 @@
+ __     __ __________ __     __ _________       _________       ___        _________  __     __ 
+|  |   |  |   ____   |  |   |  |   ___   |     |   ___   \     /   \      |   ___   \|  |   |  |
+|  |   |  |  |    |  |  |   |  |  |   |  |     |  |   |  |    /  _  \     |  |   |  ||  |   |  |
+|  |___|  |  |    |  |  |   |  |  |___|  |     |  |___|  |   /  /_\  \    |  |___|  ||  |___|  |
+|______   |  |    |  |  |   |  |   ___   |     |   ___   |  /  _____  \   |   ___   ||______   |
+       |  |  |    |  |  |   |  |  |   \  \     |  |   |  | /  /     \  \  |  |   |  |       |  |
+ ______|  |  |____|  |  |___|  |  |    \  \    |  |___|  |/  /       \  \ |  |___|  | ______|  |
+|_________|__________|_________|__|     \__\   |_________/__/         \__\|_________/|_________|
+
+____________________________________________________________
+Hey there! I am AI Scheduler, YOURBABY
+Please enter your username: 
+Hi deadline return book /by Sunday! What can i do for you?
+ ___________________________________________________________________________________________________________
+|  Functions:  |                 Descriptions:                      |               Example:                |
+|______________|____________________________________________________|_______________________________________|
+|   todo       |                Create a To-do task                 | (eg. todo borrow books)               |
+|   deadline   |                Create a task with a deadline       | (eg. deadline bathe /by 9PM)          |
+|   event      |                Create an event task                | (eg. event Meeting /at Library, 12PM) |
+|   list       |                List all the task in your planner   |                                       |
+|   done       |                Mark a task as completed            |                                       |
+|   bye        |                Exit Planner                        |                                       |
+|______________|____________________________________________________|_______________________________________|
+Please key in your command: 
+____________________________________________________________
+Here are your task(s) currently in your planner:
+____________________________________________________________
+____________________________________________________________
+New To-Do Duke.Duke.Task added:
+[T][✘] borrow book list
+Total number of tasks in the list:  1
+____________________________________________________________
+____________________________________________________________
+New To-Do Duke.Duke.Task added:
+[T][✘] watch movie
+Total number of tasks in the list:  2
+____________________________________________________________
+____________________________________________________________
+New event added:
+[E][✘] project meeting (at: Mon 2-4pm)
+Total number of tasks in the list:  3
+____________________________________________________________
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✘] borrow book list
+2.[T][✘] watch movie
+3.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Great job! I've marked this task as done in your planner:
+[T][✓] borrow book list
+____________________________________________________________
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✓] borrow book list
+2.[T][✘] watch movie
+3.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Great job! I've marked this task as done in your planner:
+[T][✓] watch movie
+____________________________________________________________
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✓] borrow book list
+2.[T][✓] watch movie
+3.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Please key in a valid function
+____________________________________________________________
+Great job! I've marked this task as done in your planner:
+[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✓] borrow book list
+2.[T][✓] watch movie
+3.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Please key in a valid function
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✓] borrow book list
+2.[T][✓] watch movie
+3.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Please key in a valid function
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✓] borrow book list
+2.[T][✓] watch movie
+3.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Please key in a valid function
+____________________________________________________________
+Here are your task(s) currently in your planner:
+1.[T][✓] borrow book list
+2.[T][✓] watch movie
+3.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Please key in a valid function
+Bye deadline return book /by Sunday! Hope to see you again soon!
+____________________________________________________________

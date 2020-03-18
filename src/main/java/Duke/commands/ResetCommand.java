@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static duke.Duke.FILE_PATH;
+
 /**
  * Reset command to delete all tasks stored and exit program
  */
@@ -27,23 +29,28 @@ public class ResetCommand implements Command {
      * @return boolean false to main function
      * * @throws IOException When there's error in closing filestream and filewriter
      */
-    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks) throws IOException {
+    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks) {
         FileInputStream fi = null;
         FileOutputStream fio = null;
         try {
-            fi = new FileInputStream("data/Tasklist.txt");
-            fio = new FileOutputStream("data/Tasklist.txt");
+            fi = new FileInputStream("taskList.txt");
+            fio = new FileOutputStream("tasklist.txt");
         } catch (IOException e) {
             System.out.println("Error Closing File");
         } finally {
-            fi.close();
-            fio.close();
+            try {
+                fi.close();
+                fio.close();
+            } catch (IOException e) {
+                ui.printToUser("IO EXCEPTION! Pls try again");
+            }
         }
         deleteDirectory(new File("data"));
         return false;
     }
 
     private static void deleteDirectory(File dir) {
+        boolean flag = false;
         if (dir.isDirectory()) {
             if (dir.list().length == 0) {
                 dir.delete();
@@ -54,13 +61,17 @@ public class ResetCommand implements Command {
                     deleteDirectory(temp);
                 }
             }
-            if (dir.list().length == 0) {
-                dir.delete();
-                System.out.println("Deleting folder : " + dir.getAbsolutePath());
-            } else {
-                dir.delete();
-                System.out.println("Deleting File  : " + dir.getAbsolutePath());
+        } else {
+            if(dir.delete()){
+                flag = true;
+                System.out.println(flag);
             }
+            System.out.println("Deleting File  : " + dir.getAbsolutePath());
+        }
+        if (dir.isDirectory()) {
+            dir.delete();
+            System.out.println("Deleting folder : " + dir.getAbsolutePath());
+            System.out.println(flag);
         }
     }
 }

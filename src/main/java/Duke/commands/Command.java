@@ -15,7 +15,6 @@ import java.util.ArrayList;
  */
 public interface Command {
 
-    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks)
-            throws MissingDescriptionException, WhitespaceExceptions, IOException;
+    public boolean execute(String function, DisplayUI ui, Storage storage, TaskList taskList, ArrayList<Task> tasks);
 
 }
