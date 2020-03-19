@@ -5,10 +5,11 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class to handle non-existing classes.
+ * Extension of <code>Command</code> class to handle non-existing classes.
  */
 public class NonExistent extends Command {
-    public NonExistent() {}
+    public NonExistent() {
+    }
 
     /**
      * @param tasks     the tasks that will be augmented
@@ -24,7 +25,7 @@ public class NonExistent extends Command {
      * @return false, since this is not a "bye" command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 

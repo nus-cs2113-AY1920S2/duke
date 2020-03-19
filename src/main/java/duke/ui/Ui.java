@@ -30,22 +30,22 @@ public class Ui {
     }
 
     public static void showNonExistentInputError() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     OOPS! I'm sorry, but I don't know what that means :-(\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "     OOPS! I'm sorry, but I don't know what that means :-(\n"
+                + "    ____________________________________________________________");
     }
 
     public static void showInvalidFindError() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     There is no such item in the list, try again!\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "     There is no such item in the list, try again!\n"
+                + "    ____________________________________________________________");
 
     }
 
     public static void showAlreadyDone() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     This task is already completed! Good job :D\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "     This task is already completed! Good job :D\n"
+                + "    ____________________________________________________________");
     }
 
     public static void showNegativeError() {
@@ -56,15 +56,15 @@ public class Ui {
     }
 
     public static void showTamperedFile() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Past records are corrupted, let's make a new one!\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Past records are corrupted, let's make a new one!\n"
+                + "    ____________________________________________________________");
     }
 
     public void showLoadingError() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Looks like there is no past records, let's make a new one!\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Looks like there is no past records, let's make a new one!\n"
+                + "    ____________________________________________________________");
     }
 
     public static void showEmptyParametersError(String field) {
@@ -96,7 +96,7 @@ public class Ui {
                             + "     Here are the matching tasks in your list:");
                     printCheck++;
                 }
-                System.out.println("     "+ (i+1) + "." + TaskList.list.get(i).command);
+                System.out.println("     " + (i + 1) + "." + TaskList.list.get(i).command);
             }
         }
         if (printCheck == 1) {
@@ -109,13 +109,14 @@ public class Ui {
     public void showDeleteOutput(String m, int size) {
         System.out.println("    ____________________________________________________________\n"
                 + "     Noted. I've removed this task: \n" + "       " + m
-                + "\n     Now you have " + size + (size>1?" tasks":" task") + " in the list.\n"
+                + "\n     Now you have " + size + (size > 1 ? " tasks" : " task") + " in the list.\n"
                 + "    ____________________________________________________________");
     }
 
     public void showDoneOutput(String m) {
         System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n       " + m
+                + "     Nice! I've marked this task as done:\n       "
+                + m
                 + "\n    ____________________________________________________________");
     }
 
@@ -128,12 +129,12 @@ public class Ui {
 
     public void showList(ArrayList<Command> list) {
         try {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + list.get(i).command);
-        }
-        System.out.print("    ____________________________________________________________\n");
+            System.out.println("    ____________________________________________________________\n"
+                    + "     Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + list.get(i).command);
+            }
+            System.out.print("    ____________________________________________________________\n");
         } catch (NullPointerException e) {
             System.out.println("    ____________________________________________________________\n"
                     + "     List is empty!\n"

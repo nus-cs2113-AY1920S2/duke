@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Deadline</> command.
+ * Extension of <code>Command</code> class specifying the <code>Deadline</code> command.
  */
 public class Deadline extends Command {
 
@@ -17,7 +17,7 @@ public class Deadline extends Command {
     public Deadline(String input) throws DukeException {
         super("[D][ ] "
                 + input.replaceFirst("\\s*/by\\s*"," (by: ").trim() + ")");
-        if (input.replaceFirst("/by(.*)","").matches("\\s*")){
+        if (input.replaceFirst("/by(.*)","").matches("\\s*")) {
             throw new DukeException("deadline",1);
         }
         if (!input.matches(".*/by\\s+\\w+.*")) {
@@ -32,16 +32,16 @@ public class Deadline extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-            tasks.addTask(this);
-            ui.showListIncrementOutput(command,tasks.list.size());
-            storage.updateListDataOnDisk(tasks.list);
+        tasks.addTask(this);
+        ui.showListIncrementOutput(command,tasks.list.size());
+        storage.updateListDataOnDisk(tasks.list);
     }
 
     /**
      * @return false, since this is not a "bye" command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 

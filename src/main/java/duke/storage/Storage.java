@@ -23,16 +23,15 @@ public class Storage {
      * @param filePath the file path to store on hard drive
      * @throws FileNotFoundException If file is not found
      */
-    public Storage (String filePath) throws FileNotFoundException {
+    public Storage(String filePath) throws FileNotFoundException {
         file = new File("data/duke_list.txt");
     }
 
     /**
      * Update list onto hard drive.
-     *
      * Creates the file and directory if they do not exist.
      *
-     * @param list
+     * @param list the list of items
      */
     public void updateListDataOnDisk(ArrayList<Command> list) {
         try {
@@ -67,7 +66,7 @@ public class Storage {
      * @return list from hard drive
      * @throws FileNotFoundException If file is not found
      */
-    public ArrayList <Command> loadListDataFromDisk() throws FileNotFoundException, DukeException {
+    public ArrayList<Command> loadListDataFromDisk() throws FileNotFoundException, DukeException {
         ArrayList<Command> list = new ArrayList<Command>();
         checkIntegrity();
         Scanner reader = new Scanner(file);

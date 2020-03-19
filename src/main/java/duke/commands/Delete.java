@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Delete</> command.
+ * Extension of <code>Command</code> class specifying the <code>Delete</code> command.
  */
 public class Delete extends Command {
     public Delete(String commandDetails) {
@@ -23,8 +23,8 @@ public class Delete extends Command {
             if (command.matches(".*-(\\d).*")) {
                 throw new DukeException("negative", 4);
             }
-            int index = Integer.parseInt(command.replaceAll("[^\\d]",""))-1;
-            ui.showDeleteOutput(tasks.list.get(index).command,tasks.list.size()-1);
+            int index = Integer.parseInt(command.replaceAll("[^\\d]","")) - 1;
+            ui.showDeleteOutput(tasks.list.get(index).command,tasks.list.size() - 1);
             tasks.removeTask(index);
             storage.updateListDataOnDisk(tasks.list);
         } catch (IndexOutOfBoundsException e) {
@@ -40,7 +40,7 @@ public class Delete extends Command {
      * @return false, since this is not a "bye" command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 

@@ -14,7 +14,8 @@ public abstract class Command {
         this.command = input;
     }
 
-    public Command() {}
+    public Command() {
+    }
 
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Todo</> command.
+ * Extension of <code>Command</code> class specifying the <code>todo</code> command.
  */
 public class Todo extends Command {
 
@@ -14,7 +14,7 @@ public class Todo extends Command {
      * @param input the user input string
      * @throws DukeException If command is incomplete or empty
      */
-    public Todo (String input) throws DukeException {
+    public Todo(String input) throws DukeException {
         super("[T][ ] " + input.trim());
         if (input.matches("\\s*")) {
             throw new DukeException("todo", 1);
@@ -37,7 +37,7 @@ public class Todo extends Command {
      * @return false, since this is not a "bye" command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 

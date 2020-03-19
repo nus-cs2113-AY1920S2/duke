@@ -13,9 +13,12 @@ public class Loader extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {}
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    }
 
     @Override
-    public boolean isExit() {return false;}
+    public boolean isExit() {
+        return false;
+    }
 
 }

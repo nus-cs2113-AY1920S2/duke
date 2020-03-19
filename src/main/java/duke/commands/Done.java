@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Done</> command.
+ * Extension of <code>Command</code> class specifying the <code>Done</code> command.
  */
 public class Done extends Command {
     public Done(String commandDetails) {
@@ -43,7 +43,7 @@ public class Done extends Command {
      * @return false, since this is not a "bye" command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

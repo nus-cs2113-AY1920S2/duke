@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Bye</> command.
+ * Extension of <code>Command</code> class specifying the <code>Bye</code> command.
  */
 public class Bye extends Command {
 
@@ -14,7 +14,7 @@ public class Bye extends Command {
      * @param storage   the storage to be added into
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showBye();
     }
 
@@ -23,7 +23,7 @@ public class Bye extends Command {
      * @return true, since this command would mean to exit the program.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 

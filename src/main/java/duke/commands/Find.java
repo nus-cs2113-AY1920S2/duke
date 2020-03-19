@@ -5,12 +5,12 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Find</> command.
+ * Extension of <code>Command</code> class specifying the <code>Find</code> command.
  */
 public class Find extends Command {
     private String target;
 
-    public Find (String target) {
+    public Find(String target) {
         this.target = target;
     }
 

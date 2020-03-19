@@ -16,7 +16,7 @@ public class Duke {
     /**
      * Duke constructor specifying filepath to load from.
      *
-     * @param filePath
+     * @param filePath filepath of duke_list.txt where the data will be stored and retrieved
      */
     public Duke(String filePath) {
         try {
@@ -31,7 +31,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     *  Main method.
+     */
     public static void main(String[] args) {
         Ui.showWelcome();
         new Duke("data/duke_list.txt");

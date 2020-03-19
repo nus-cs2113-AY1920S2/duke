@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Extension of <>Command</> class specifying the <>Event</> command.
+ * Extension of <code>Command</code> class specifying the <code>Event</code> command.
  */
 public class Event extends Command {
 
@@ -18,10 +18,10 @@ public class Event extends Command {
     public Event(String input) throws DukeException {
         super("[E][ ] "
                 + input.replaceFirst("\\s*/at\\s*"," (at: ").trim() + ")");
-        if (input.replaceFirst("/at(.*)","").matches("\\s*")){
+        if (input.replaceFirst("/at(.*)","").matches("\\s*")) {
             throw new DukeException("event", 1);
         }
-        if (!input.matches(".*/at\\s+\\w+.*")){
+        if (!input.matches(".*/at\\s+\\w+.*")) {
             throw new DukeException("event", 2);
         }
     }
@@ -43,7 +43,7 @@ public class Event extends Command {
      * @return false, since this is not a "bye" command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 
