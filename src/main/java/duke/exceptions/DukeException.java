@@ -20,8 +20,8 @@ public class DukeException extends Exception {
     /**
      * Constructor that specifies commandType and its reference number.
      *
-     * @param commandType
-     * @param exceptionCode
+     * @param commandType the type of command received
+     * @param exceptionCode the type of exception handled
      */
     public DukeException(String commandType, int exceptionCode) {
         this.exceptionCode = exceptionCode;

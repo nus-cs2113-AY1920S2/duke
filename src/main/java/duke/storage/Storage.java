@@ -80,8 +80,8 @@ public class Storage {
     /**
      * Checks previously written data file if it follows syntax of Duke.
      *
-     * @throws FileNotFoundException
-     * @throws DukeException
+     * @throws FileNotFoundException If file is not found
+     * @throws DukeException If corrupted data file
      */
     private void checkIntegrity() throws FileNotFoundException, DukeException {
         Scanner reader = new Scanner(file);
