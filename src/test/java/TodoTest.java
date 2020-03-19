@@ -3,6 +3,7 @@ import duke.commands.Todo;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -40,5 +41,11 @@ public class TodoTest {
     @Test
     public void execute_addTask_countCorrect() {
         assertEquals(1,tasks.list.size());
+    }
+
+    @AfterAll
+    static void cleanUp() {
+        tasks.removeTask(0);
+        storage.updateListDataOnDisk(tasks.list);
     }
 }
