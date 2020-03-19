@@ -12,8 +12,8 @@ public class Event extends Command {
     /**
      * Constructor specifying user input.
      *
-     * @param input the user input string
-     * @throws DukeException If command is incomplete or empty
+     * @param input User input string.
+     * @throws DukeException If command is incomplete or empty.
      */
     public Event(String input) throws DukeException {
         super("[E][ ] "
@@ -27,10 +27,12 @@ public class Event extends Command {
     }
 
     /**
-     * @param tasks     the tasks that will be augmented
-     * @param ui        the messages that will be displayed
-     * @param storage   the storage to be added into
-     * @throws DukeException Relays exceptions from methods
+     * Executes tasks for Event command.
+     *
+     * @param tasks Tasks that will be augmented.
+     * @param ui Messages that will be displayed.
+     * @param storage Storage to be added into.
+     * @throws DukeException Relays exceptions from methods.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -40,7 +42,7 @@ public class Event extends Command {
     }
 
     /**
-     * @return false, since this is not a "bye" command.
+     * @return False, since this is not a "bye" command.
      */
     @Override
     public boolean isExit() {

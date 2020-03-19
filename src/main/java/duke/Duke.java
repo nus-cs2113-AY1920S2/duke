@@ -16,7 +16,7 @@ public class Duke {
     /**
      * Duke constructor specifying filepath to load from.
      *
-     * @param filePath filepath of duke_list.txt where the data will be stored and retrieved
+     * @param filePath Filepath of duke_list.txt where the data will be stored and retrieved.
      */
     public Duke(String filePath) {
         try {

@@ -20,8 +20,8 @@ public class Storage {
 
     /**
      * Constructor specifying file path.
-     * @param filePath the file path to store on hard drive
-     * @throws FileNotFoundException If file is not found
+     * @param filePath File path to store on hard drive.
+     * @throws FileNotFoundException If file is not found.
      */
     public Storage(String filePath) throws FileNotFoundException {
         file = new File("data/duke_list.txt");
@@ -31,7 +31,7 @@ public class Storage {
      * Update list onto hard drive.
      * Creates the file and directory if they do not exist.
      *
-     * @param list the list of items
+     * @param list List of items.
      */
     public void updateListDataOnDisk(ArrayList<Command> list) {
         try {
@@ -63,8 +63,8 @@ public class Storage {
     /**
      * Loads file from hard drive on start of program.
      *
-     * @return list from hard drive
-     * @throws FileNotFoundException If file is not found
+     * @return List from hard drive.
+     * @throws FileNotFoundException If file is not found.
      */
     public ArrayList<Command> loadListDataFromDisk() throws FileNotFoundException, DukeException {
         ArrayList<Command> list = new ArrayList<Command>();
@@ -79,8 +79,8 @@ public class Storage {
     /**
      * Checks previously written data file if it follows syntax of Duke.
      *
-     * @throws FileNotFoundException If file is not found
-     * @throws DukeException If corrupted data file
+     * @throws FileNotFoundException If file is not found.
+     * @throws DukeException If corrupted data file.
      */
     private void checkIntegrity() throws FileNotFoundException, DukeException {
         Scanner reader = new Scanner(file);

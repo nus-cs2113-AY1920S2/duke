@@ -14,9 +14,11 @@ public class List extends Command {
     }
 
     /**
-     * @param tasks     the tasks that will be augmented
-     * @param ui        the messages that will be displayed
-     * @param storage   the storage to be added into
+     * Executes tasks for List command.
+     *
+     * @param tasks Tasks that will be augmented.
+     * @param ui Messages that will be displayed.
+     * @param storage Storage to be added into.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -25,7 +27,7 @@ public class List extends Command {
 
 
     /**
-     * @return false, since this is not a "bye" command.
+     * @return False, since this is not a "bye" command.
      */
     @Override
     public boolean isExit() {

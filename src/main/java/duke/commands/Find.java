@@ -14,6 +14,14 @@ public class Find extends Command {
         this.target = target;
     }
 
+    /**
+     * Executes tasks for Find command.
+     *
+     * @param tasks Tasks that will be augmented.
+     * @param ui Messages that will be displayed.
+     * @param storage Storage to be added into.
+     * @throws DukeException Relays exceptions from methods.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (target.matches("\\s*")) {
