@@ -31,6 +31,7 @@ public class Parser {
         case "find":
             return prepareFind(commandDetails);
         default:
+            //When an unrecognized command is given
             return prepareNonExistent();
         }
     }

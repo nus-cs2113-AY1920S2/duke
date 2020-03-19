@@ -20,11 +20,12 @@ public class Storage {
 
     /**
      * Constructor specifying file path.
+     *
      * @param filePath File path to store on hard drive.
      * @throws FileNotFoundException If file is not found.
      */
     public Storage(String filePath) throws FileNotFoundException {
-        file = new File("data/duke_list.txt");
+        file = new File(filePath);
     }
 
     /**
