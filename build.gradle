@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClassName = "chatty.ChattyChatBot"
+}
+
+run {
+    standardInput = System.in
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = "chattychatbot"
+    archiveVersion = "v0.2.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
