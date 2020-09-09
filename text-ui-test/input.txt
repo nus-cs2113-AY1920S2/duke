@@ -1,0 +1,8 @@
+list
+todo read book
+deadline review code /by tomorrow
+event visit friend /at friend's house
+list
+done 2
+list
+bye

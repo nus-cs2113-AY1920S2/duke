@@ -1,0 +1,71 @@
+Welcome to
+  __       _______  _______  ________  _______  _______  _______  ________
+ |\_\     |\___\__\|\ __\__\|\ ______\|\______\|\___\__\|\______\|\ ______\
+ | | |    | |  |  || |  |  | \|__   _|| |  ___|| |  |  || |     | \|__   _|
+ | | |    | |  |  || |  |  |   | | |  | | |    | |  |  || |  |  |   | | |
+ | | |__  | |  |  || |     | __| | |_ | | |___ | |     || |     |   | | |
+ | | |__\ | |     || | | | ||\__\| |_\| | |___\| |  |  || |  |  |   | | |
+  \|_____| \|_____| \|_|_|_| \|______| \|_____| \|__|__| \|__|__|    \|_|
+
+Initializing LumiChat v5.6.1.4...
+
+No existing task list found! Starting a new empty task list...
+
+LumiChat is now ready.
+  ʘᗜʘ Hey I'm Lumi!
+  How may Lumi assist you today?
+
+  ʘᗜʘ Sure! Lumi prints your list!
+    +---------+
++---| L I S T |---------------------------------------------------------------+
+|   +---------+                                                               |
++-----------------------------------------------------------------------------+
+| Total: 0 tasks                                                              |
++-----------------------------------------------------------------------------+
+
+  ʘᗜʘ Alright, Lumi has added: read book!
+      [T][✘] read book
+  You now have 1 task in Lumi's list!
+  
+  ʘᗩʘ" Em... Lumi cannot understand this [1mtime[0m given...
+  Lumi needs you to follow this datetime format:
+      [1m[3m<date dd/mm/yyyy> <time hh:mm>[0m
+  
+  ʘᗩʘ" Em... Lumi cannot understand this [1mdate[0m given...
+  Lumi needs you to follow this datetime format:
+      [1m[3m<date dd/mm/yyyy> <time hh:mm>[0m
+  
+  ʘᗜʘ Sure! Lumi prints your list!
+    +---------+
++---| L I S T |---------------------------------------------------------------+
+|   +---------+                                                               |
+| 1. [T][✘] read book                                                        |
++-----------------------------------------------------------------------------+
+| Total: 1 task                                                               |
++-----------------------------------------------------------------------------+
+
+  ʘᗩʘ" Whoops!! Lumi's list does not seem to have that number!
+  Lumi shall print the list for you to check again...
+    +---------+
++---| L I S T |---------------------------------------------------------------+
+|   +---------+                                                               |
+| 1. [T][✘] read book                                                        |
++-----------------------------------------------------------------------------+
+| Total: 1 task                                                               |
++-----------------------------------------------------------------------------+
+
+  ʘᗜʘ Sure! Lumi prints your list!
+    +---------+
++---| L I S T |---------------------------------------------------------------+
+|   +---------+                                                               |
+| 1. [T][✘] read book                                                        |
++-----------------------------------------------------------------------------+
+| Total: 1 task                                                               |
++-----------------------------------------------------------------------------+
+
+  ʘᗜʘ Lumi saves your task list successfully!
+  ಥ-ಥ Goodbye! Lumi will miss you!
+  
+Aborting LumiChat program...
+LumiChat program has ended.
+
