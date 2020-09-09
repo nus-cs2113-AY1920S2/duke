@@ -1,10 +1,63 @@
+import commands.Command;
+import exceptions.DukeException;
+import exceptions.HardDiskCorruptedException;
+import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
+
+import java.io.FileNotFoundException;
+
+/**
+ * Class representing a command line task manager
+ */
 public class Duke {
+    private Storage storage;
+    private Ui ui;
+    private TaskList taskList;
+
+    /**
+     * Constructs Duke object and instantiate Ui, Storage and TaskList objects
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage();
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.printHardDiskNotFound();
+            taskList = new TaskList();
+        } catch (HardDiskCorruptedException e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Starts the Duke process
+     */
+    public void run() {
+        ui.printWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String rawUserInput = ui.readCommand();
+                ui.printDivider();
+                Command command = Parser.parse(rawUserInput);
+                command.execute(taskList, ui, storage);
+                isExit = command.isExit();
+            } catch (DukeException e) {
+                ui.printErrorMessage(e.toString());
+            } finally {
+                ui.printDivider();
+            }
+        }
+    }
+
+    /**
+     * Creates a new Duke object and runs the process
+     * @param args unused arguments
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke().run();
     }
 }
