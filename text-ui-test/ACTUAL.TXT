@@ -1,0 +1,193 @@
+____________________________________________________________
+Hello! I'm Duke
+What can i do for you?
+____________________________________________________________
+Saved Data (if any) have been preloaded below:
+____________________________________________________________
+Enter a command: Command entered: help
+____________________________________________________________
+help: Shows the program command line interface instructions
+	Example: help
+
+list: Displays all the tasks in the list with index numbers.
+	Example: list
+
+todo: Adds a task to the list.
+	Parameter(s): TASK
+	Example: todo read book
+
+deadline: Adds a task to the list.
+	Parameter(s): TASK /by DAY
+	Example: deadline return book /by Sunday
+
+event: Adds a task to the list.
+	Parameter(s): TASK /by DAY_AND_TIME
+	Example: event project meeting /at Mon 2-4pm
+
+done: Marks the task done in the list.
+	Parameter(s): INDEX NUMBER
+	Example: done 1
+
+delete: Deletes the task from the list.
+	Parameter(s): INDEX NUMBER
+	Example: delete 1
+
+bye: Exits the program.
+	Example: bye
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+	The list is empty!
+____________________________________________________________
+Enter a command: Command entered: todo read book
+____________________________________________________________
+Got it. I've added this task:
+	[T][✘] read book
+Now you have 1 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✘] read book
+____________________________________________________________
+Enter a command: Command entered: deadline return book /by Sunday
+____________________________________________________________
+Got it. I've added this task:
+	[D][✘] return book (by: Sunday)
+Now you have 2 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: event project meeting /at Mon 2-4pm
+____________________________________________________________
+Got it. I've added this task:
+	[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 3 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✘] read book
+2.[D][✘] return book (by: Sunday)
+3.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Enter a command: Command entered: done 4
+____________________________________________________________
+Invalid Index
+____________________________________________________________
+Enter a command: Command entered: done 2
+____________________________________________________________
+	Nice! I've marked this task as done:
+	[D][✓] return book (by: Sunday)
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✘] read book
+2.[D][✓] return book (by: Sunday)
+3.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Enter a command: Command entered: done 1
+____________________________________________________________
+	Nice! I've marked this task as done:
+	[T][✓] read book
+____________________________________________________________
+Enter a command: Command entered: done 3
+____________________________________________________________
+	Nice! I've marked this task as done:
+	[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✓] return book (by: Sunday)
+3.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Enter a command: Command entered: todo
+____________________________________________________________
+OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: deadline
+____________________________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: event
+____________________________________________________________
+OOPS!!! The description of a event cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: deadline return book
+____________________________________________________________
+OOPS!!! The date of a deadline cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: event read book
+____________________________________________________________
+OOPS!!! The date of a event cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: done 5
+____________________________________________________________
+Invalid Index
+____________________________________________________________
+Enter a command: Command entered: TODO
+____________________________________________________________
+OOPS!!! The description of a TODO cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: DEADLINE
+____________________________________________________________
+OOPS!!! The description of a DEADLINE cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: EVENT
+____________________________________________________________
+OOPS!!! The description of a EVENT cannot be empty.
+____________________________________________________________
+Enter a command: Command entered: command
+____________________________________________________________
+Invalid Command, please try another command
+type "help" in the command line console for instructions
+____________________________________________________________
+Enter a command: Command entered: delete 1
+____________________________________________________________
+Noted. I've removed this task:
+	[T][✓] read book
+Now you have 2 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: delete 1
+____________________________________________________________
+Noted. I've removed this task:
+	[D][✓] return book (by: Sunday)
+Now you have 1 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+Here are the tasks in your list:
+1.[E][✓] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+Enter a command: Command entered: delete 2
+____________________________________________________________
+Invalid Index
+____________________________________________________________
+Enter a command: Command entered: todo fill water
+____________________________________________________________
+Got it. I've added this task:
+	[T][✘] fill water
+Now you have 2 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: delete 2
+____________________________________________________________
+Noted. I've removed this task:
+	[T][✘] fill water
+Now you have 1 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: delete 1
+____________________________________________________________
+Noted. I've removed this task:
+	[E][✓] project meeting (at: Mon 2-4pm)
+Now you have 0 task(s) in the list.
+____________________________________________________________
+Enter a command: Command entered: list
+____________________________________________________________
+	The list is empty!
+____________________________________________________________
+Enter a command: Command entered: bye
+____________________________________________________________
+You are Exiting Duke at your Request :)
+	Bye. Hope to see you again soon!
+____________________________________________________________

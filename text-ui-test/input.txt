@@ -1,0 +1,32 @@
+help
+list
+todo read book
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+done 4
+done 2
+list
+done 1
+done 3
+list
+todo
+deadline
+event
+deadline return book
+event read book
+done 5
+TODO
+DEADLINE
+EVENT
+command
+delete 1
+delete 1
+list
+delete 2
+todo fill water
+delete 2
+delete 1
+list
+bye
