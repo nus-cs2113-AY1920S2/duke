@@ -18,7 +18,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
    `File` > `Project Structure` > `Libraries` > `+` > `Java` > `{JAVAFX_HOME}/lib`
 
-1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `main` classes.
+1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `duke` classes.
 
    `--module-path {JAVAFX_HOME}/lib --add-modules javafx.controls,javafx.fxml`<br>
    e.g., `--module-path C:/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml`
@@ -27,18 +27,25 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
 Update your `build.gradle` to include the following lines:
 ```groovy
-plugins {
-    id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
-}
-
 repositories {
     mavenCentral()
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+dependencies {
+    String javaFxVersion = '11'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 ```
 
@@ -79,7 +86,7 @@ import javafx.application.Application;
  * A launcher class to workaround classpath issues.
  */
 public class Launcher {
-    public static void main(String[] args) {
+    public static void duke(String[] args) {
         Application.launch(Duke.class, args);
     }
 }
