@@ -1,10 +1,183 @@
+import java.io.IOException;
+
+/**
+ * Implements a chat bot named Duke that helps the user keep track
+ * of various things with its different functions.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    static String currDir = System.getProperty("user.dir");
+    private final static String filePath = currDir + "/data.txt";
+
+    private Storage storage;
+    private TaskList tasks;
+    private static Ui ui;
+    private Parser parser;
+
+    /**
+     * Represents a constructor for the Duke Object. The constructor
+     * helps to initialise other object classes that is useful to the
+     * execution of the program.
+     * @param filepath relative filepath to store the data.txt file.
+     */
+    public Duke(String filepath) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(filepath);
+        try {
+            tasks = new TaskList(storage.loadFile());
+        } catch (IOException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
+
+    /**
+     * Waits for user input to determine the command to execute.
+     * Terminates the program only when the command 'bye' is received.
+     */
+    public void run() {
+        ui.showWelcomeMessage();
+        while (true) {
+            String line = parser.getInput();
+            String command;
+            try {
+                command = parser.getCommand(line);
+            } catch (InvalidCommandException c) {
+                parser.handleInvalidCommand();
+                continue;
+            }
+            runCommand(line, command);
+        }
+    }
+
+    /**
+     * Method to execute the right command from the available list of commands.
+     * @param line a string that provides relevant information to the execution of the command.
+     * @param command a string that represents the command requested by the user.
+     */
+    private void runCommand(String line, String command) {
+        switch (command) {
+        case "bye":
+            ui.exitFromApp();
+            break;
+        case "list":
+            tasks.listAllTasks();
+            break;
+        case "done":
+            handleDoneCommand(line);
+            break;
+        case "delete":
+            handleDeleteCommand(line);
+            break;
+        case "find":
+            handleFindCommand(line);
+            break;
+        default:
+            handleAddCommands(line, command);
+            break;
+        }
+    }
+
+    /**
+     * Method to handle command that involves finding a task
+     * from the task list based on a keyword.
+     * @param line a string that gives information on the task to find.
+     */
+    private void handleFindCommand(String line) {
+        try {
+            parser.getKeyWord(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds("find");
+            return;
+        }
+        tasks.findTask(line);
+    }
+
+    /**
+     * Method to handle commands that involves adding tasks to the task list.
+     * @param line a string that describes the task and its information.
+     * @param command a string that represents the type of the task.
+     */
+    private void handleAddCommands(String line, String command) {
+        String taskInformation;
+        try {
+            taskInformation = parser.getTaskInformation(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds(command);
+            return;
+        }
+        try {
+            tasks.storeTaskIntoList(taskInformation, command);
+        } catch (InvalidCommandException c) {
+            parser.handleInvalidDescription();
+        }
+        try {
+            storage.saveToFile(tasks);
+        } catch (IOException e) {
+            ui.showLoadingError();
+        }
+    }
+
+    /**
+     * Method to handle deleting tasks from the task list.
+     * @param line a string that gives information on the task to delete.
+     */
+    private void handleDeleteCommand(String line) {
+        String taskNumber;
+        try {
+            taskNumber = parser.getTaskNumber(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds("delete");
+            return;
+        }
+        try {
+            tasks.checkIfNumberExists(taskNumber);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleInvalidIndex();
+            return;
+        }
+        tasks.deleteTask(line);
+        try {
+            storage.saveToFile(tasks);
+        } catch (IOException e) {
+            ui.showLoadingError();
+        }
+    }
+
+    /**
+     * Method to set a task as done in the task list.
+     * @param line a string that gives information on the task done.
+     */
+    private void handleDoneCommand(String line) {
+        String taskNumber;
+        try {
+            taskNumber = parser.getTaskNumber(line);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleIndexOutOfBounds("done");
+            return;
+        }
+        try {
+            tasks.checkIfNumberExists(taskNumber);
+        } catch (IndexOutOfBoundsException b) {
+            parser.handleInvalidIndex();
+            return;
+        }
+        tasks.markTaskAsDone(line);
+        try {
+            storage.saveToFile(tasks);
+        } catch (IOException e) {
+            ui.showLoadingError();
+        }
+    }
+
+    /**
+     * Point of entry for the Duke program.
+     * @param args unused.
+     */
+    public static void main(String[] args) {
+        new Duke(filePath).run();
+    }
+
+
 }
