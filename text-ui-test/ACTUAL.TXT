@@ -1,0 +1,96 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm Duke
+What can I do for you?
+
+Tasks in the existing list: 
+Empty List.
+Here are all the commands that you can use in Duke:
+todo TASK : add a task into the list;
+deadline TASK /by yyyy-mm-dd : add a deadline into the list;
+event TASK /at yyyy-mm-dd : add an event into the list;
+list : list all tasks in the list;
+done TASK_NUMBER : mark a task as done
+delete TASK_NUMBER: delete a task
+check /on yyyy-mm-dd : search for all tasks on a certain date;
+find KEYWORD : search for all tasks containing the KEYWORD;
+clear : delete all tasks in the list;
+bye : exit the Duke chatbox;
+Got it. I've added this task:
+  [T][✘] read book
+Now you have 1 tasks in the list.
+The marker is missing~ The marker for this command is /by.
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The marker is missing~ The marker for this command is /by.
+Got it. I've added this task:
+  [D][✘] return book (by: Jun 06 2020)
+Now you have 2 tasks in the list.
+OOPS!!! The description of a event cannot be empty.
+The marker is missing~ The marker for this command is /at.
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The marker is missing~ The marker for this command is /at.
+Got it. I've added this task:
+  [E][✘] project meeting (at: Mar 01 2020)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] read book
+2.[D][✘] return book (by: Jun 06 2020)
+3.[E][✘] project meeting (at: Mar 01 2020)
+OOPS!!! I'm sorry, but I don't know what that means :-(
+Nice! I've marked this task as done:
+  [T][✓] read book
+Please enter a valid task number~
+Please enter a valid task number~
+Nice! I've marked this task as done:
+  [D][✓] return book (by: Jun 06 2020)
+Got it. I've added this task:
+  [T][✘] join sports club
+Now you have 4 tasks in the list.
+OOPS!!! The description of a todo cannot be empty.
+Got it. I've added this task:
+  [T][✘] borrow book
+Now you have 5 tasks in the list.
+Nice! I've marked this task as done:
+  [T][✓] join sports club
+Got it. I've added this task:
+  [D][✘] CS2113 iP project (by: Mar 01 2020)
+Now you have 6 tasks in the list.
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✓] return book (by: Jun 06 2020)
+3.[E][✘] project meeting (at: Mar 01 2020)
+4.[T][✓] join sports club
+5.[T][✘] borrow book
+6.[D][✘] CS2113 iP project (by: Mar 01 2020)
+Noted. I've removed this task: 
+  [T][✓] join sports club
+Now you have 5 tasks in the list.
+Please enter a valid task number~
+Please enter a valid task number~
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✓] return book (by: Jun 06 2020)
+3.[E][✘] project meeting (at: Mar 01 2020)
+4.[T][✘] borrow book
+5.[D][✘] CS2113 iP project (by: Mar 01 2020)
+Here are the tasks matching "book" in your list:
+1.[T][✓] read book
+2.[D][✓] return book (by: Jun 06 2020)
+3.[T][✘] borrow book
+Here are the tasks matching "basketball" in your list:
+Empty List.
+The time format is wrong. Please follow: yyyy-mm-dd, thank you!
+The marker is missing~ The marker for this command is /on.
+Here are the tasks on Mar 03 2020:
+Empty List.
+All tasks cleared.
+Here are the tasks in your list:
+Empty List.
+Bye. Hope to see you again soon!
