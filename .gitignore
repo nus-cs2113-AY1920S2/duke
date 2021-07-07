@@ -1,3 +1,12 @@
+# Java build files
+*.class
+
+# Text-UI-Testing files
+text-ui-test/ACTUAL.TXT
+
+# Data files
+data/data.csv
+
 # IDEA files
 /.idea/
 /out/
@@ -6,7 +15,7 @@
 # Gradle build files
 /.gradle/
 /build/
-src/main/resources/docs/
+data/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store

@@ -1,0 +1,35 @@
+Hello from
+    )       (           )
+ ( /(       )\ )  (  ( /(   *   )
+ )\())   ( (()/(( )\ )\())` )  /(
+((_)\    )\ /(_))((_|(_)\  ( )(_))
+ _((_)_ ((_|_))((_)_  ((_)(_(_())
+| \| | | | / __|| _ )/ _ \|_   _|
+| .` | |_| \__ \| _ \ (_) | | |
+|_|\_|\___/|___/|___/\___/  |_|
+
+
+Type 'bye' to leave at any time.
+What can I do for you?
+----------
+Added todo: borrow book
+----------
+You have 1 task/s. (type 'list' to list your tasks)
+Anything else? Remember that you can leave by typing 'bye'.
+----------
+Added task:  return book | deadline: by Sunday
+----------
+You have 2 task/s. (type 'list' to list your tasks)
+Anything else? Remember that you can leave by typing 'bye'.
+----------
+Added event:  project meeting | on/at: at Mon 2-4pm
+----------
+You have 3 task/s. (type 'list' to list your tasks)
+Anything else? Remember that you can leave by typing 'bye'.
+----------
+1. [T][?]  borrow book
+2. [D][?]  return book  (by: by Sunday)
+3. [E][?]  project meeting  (at: at Mon 2-4pm)
+----------
+You have 3 task/s. (type 'list' to list your tasks)
+Anything else? Remember that you can leave by typing 'bye'.
