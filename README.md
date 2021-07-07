@@ -22,9 +22,11 @@
 
 # Tutorials 
 
-Duke Increment | Tutorial
+duke.Duke Increment | Tutorial
 ---------------|---------------
 `A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
+`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for duke.Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+
 
 
 # Feedback, Bug Reports
